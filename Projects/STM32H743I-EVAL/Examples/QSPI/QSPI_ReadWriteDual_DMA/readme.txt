@@ -1,0 +1,103 @@
+/**
+  @page QSPI_ReadWriteDual_DMA QSPI Read/Write in DMA mode example
+  
+  @verbatim
+  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  * @file    QSPI/QSPI_ReadWriteDual_DMA/readme.txt 
+  * @author  MCD Application Team
+  * @brief   Description of the QSPI Read/Write in DMA mode example.
+  ******************************************************************************
+  * @attention
+  *
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics.
+  * All rights reserved.</center></h2>
+  *
+  * This software component is licensed by ST under BSD 3-Clause license,
+  * the "License"; You may not use this file except in compliance with the
+  * License. You may obtain a copy of the License at:
+  *                        opensource.org/licenses/BSD-3-Clause
+  *
+  ******************************************************************************
+  @endverbatim
+
+@par Example Description
+
+This example describes how to use QSPI interface in dual mode. It erases part of the QSPI memory, 
+writes data in DMA mode, reads data in DMA mode and compares the result in a forever loop.
+In dual-flash mode,two Quad-SPI Flash memories are accessed simultaneously.
+Each of the Flash memories use the same CLK and optionally the same nCS signals, but
+each have separate IO0, IO1, IO2, and IO3 signals.
+
+At the beginning of the main program the HAL_Init() function is called to reset 
+all the peripherals, initialize the Flash interface and the systick.
+The SystemClock_Config() function is used to configure the system clock for STM32H743xx Devices :
+The CPU at 400MHz 
+The HCLK for D1 Domain AXI and AHB3 peripherals , D2 Domain AHB1/AHB2 peripherals and D3 Domain AHB4  peripherals at 200MHz.
+The APB clock dividers for D1 Domain APB3 peripherals, D2 Domain APB1 and APB2 peripherals and D3 Domain APB4 peripherals to  run at 100MHz.
+
+LED1 toggles each time a new comparison is good
+LED2 is on as soon as a comparison error occurs
+LED3 is on as soon as an error is returned by HAL API
+
+This example uses the QSPI memory in dual mode. You may need to power Off/Power On the board after flashing 
+this example if the previous setting of the QSPI memory is single mode.
+
+
+@note Care must be taken when using HAL_Delay(), this function provides accurate delay (in milliseconds)
+      based on variable incremented in SysTick ISR. This implies that if HAL_Delay() is called from
+      a peripheral ISR process, then the SysTick interrupt must have higher priority (numerically lower)
+      than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
+      To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
+      
+@note The example need to ensure that the SysTick time base is always set to 1 millisecond
+      to have correct HAL operation.
+
+@par Keywords
+
+Memory, QSPI, Erase, Read, Write, DMA
+
+
+
+@Note If the  application is using the DTCM/ITCM memories (@0x20000000/ 0x0000000: not cacheable and only accessible
+      by the Cortex M7 and the  MDMA), no need for cache maintenance when the Cortex M7 and the MDMA access these RAMs.
+      If the application needs to use DMA(or other masters) based access or requires more RAM, then  the user has to:
+              - Use a non TCM SRAM. (example : D1 AXI-SRAM @ 0x24000000)
+              - Add a cache maintenance mechanism to ensure the cache coherence between CPU and other masters(DMAs,DMA2D,LTDC,MDMA).
+              - The addresses and the size of cacheable buffers (shared between CPU and other masters)
+                must be	properly defined to be aligned to L1-CACHE line size (32 bytes). 
+ 
+@Note It is recommended to enable the cache and maintain its coherence.
+      Depending on the use case it is also possible to configure the cache attributes using the MPU.
+      Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
+      Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
+
+@par Directory contents 
+
+  - QSPI/QSPI_ReadWrite_DMA/Inc/stm32h7xx_hal_conf.h HAL configuration file
+  - QSPI/QSPI_ReadWrite_DMA/Inc/stm32h7xx_it.h       Interrupt handlers header file
+  - QSPI/QSPI_ReadWrite_DMA/Inc/main.h               Header for main.c module  
+  - QSPI/QSPI_ReadWrite_DMA/Src/stm32h7xx_it.c       Interrupt handlers
+  - QSPI/QSPI_ReadWrite_DMA/Src/main.c               Main program
+  - QSPI/QSPI_ReadWrite_DMA/Src/system_stm32h7xx.c   STM32H7xx system source file
+  - QSPI/QSPI_ReadWrite_DMA/Src/stm32h7xx_hal_msp.c  HAL MSP file    
+
+
+@par Hardware and Software environment
+
+  - This example runs on STM32H743xx devices.
+    
+  - This example has been tested with STM32H743I-EVAL board and can be
+    easily tailored to any other supported device and development board.
+
+  - STM32H743I-EVAL Set-up :
+    - Board is configured by default to access DUAL QSPI memory
+
+@par How to use it ? 
+
+In order to make the program work, you must do the following :
+ - Open your preferred toolchain
+ - Rebuild all files and load your image into target memory
+ - Run the example
+
+ * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
+ */

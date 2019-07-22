@@ -1,0 +1,163 @@
+/**
+  ******************************************************************************
+  * @file    FreeRTOS/FreeRTOS_AMP_RTOS_BareMetal/CM4/Src/main.c
+  * @author  MCD Application Team
+  *          This is the main program for Cortex-M4 
+  ******************************************************************************
+  * @attention
+  *
+  * <h2><center>&copy; Copyright (c) 2018 STMicroelectronics.
+  * All rights reserved.</center></h2>
+  *
+  * This software component is licensed by ST under Ultimate Liberty license
+  * SLA0044, the "License"; You may not use this file except in compliance with
+  * the License. You may obtain a copy of the License at:
+  *                             www.st.com/SLA0044
+  *
+  ******************************************************************************
+  */
+
+/* Includes ------------------------------------------------------------------*/
+#include "main.h"
+/* Standard includes. */
+#include "stdio.h"
+#include "string.h"
+
+/* FreeRTOS includes. */
+#include "FreeRTOS.h"
+#include "task.h"
+#include "message_buffer.h"
+#include "MessageBufferAMP.h"
+
+/* Private typedef -----------------------------------------------------------*/
+/* Private define ------------------------------------------------------------*/
+#define HSEM_ID_0 (0U) /* HW semaphore 0*/
+
+/* Private function prototypes -----------------------------------------------*/
+static void Error_Handler(void);
+/* Private functions ---------------------------------------------------------*/
+/**
+  * @brief  Main program
+  * @param  None
+  * @retval None
+  */
+int main(void)
+{
+  size_t xReceivedBytes;
+  uint32_t ulNextValue = 0;
+  char cExpectedString[ 12 ]; 
+  char cReceivedString[ 12 ];
+  
+ /*HW semaphore Clock enable*/
+  __HAL_RCC_HSEM_CLK_ENABLE();
+ 
+ /* Activate HSEM notification for Cortex-M4*/
+  HAL_HSEM_ActivateNotification(__HAL_HSEM_SEMID_TO_MASK(HSEM_ID_0));
+  
+  /* 
+    Domain D2 goes to STOP mode (Cortex-M4 in deep-sleep) waiting for Cortex-M7 to
+    perform system initialization (system clock config, external memory configuration.. )   
+  */
+  HAL_PWREx_ClearPendingEvent();
+  HAL_PWREx_EnterSTOPMode(PWR_MAINREGULATOR_ON, PWR_STOPENTRY_WFE, PWR_D2_DOMAIN);
+
+  /* Clear HSEM flag */
+  __HAL_HSEM_CLEAR_FLAG(__HAL_HSEM_SEMID_TO_MASK(HSEM_ID_0));
+
+ /* STM32H7xx HAL library initialization:
+       - Systick timer is configured by default as source of time base, but user 
+         can eventually implement his proper time base source (a general purpose 
+         timer for example or other time source), keeping in mind that Time base 
+         duration should be kept 1ms since PPP_TIMEOUT_VALUEs are defined and 
+         handled in milliseconds basis.
+       - Set NVIC Group Priority to 4
+       - Low Level Initialization
+     */
+  HAL_Init();
+  
+  BSP_LED_Init(LED1);
+  BSP_LED_Init(LED2);
+  
+  if( xCoreMessageBuffer == NULL )
+  {
+    Error_Handler();
+  }
+
+  for (;;)
+  {
+    memset( cExpectedString, 0x00, sizeof( cExpectedString ) );
+    sprintf( cExpectedString, "%lu", ( unsigned long ) ulNextValue );
+    memset( cReceivedString, 0x00, sizeof( cReceivedString ) );
+    
+    /* Receive message from core 1 */
+    do
+    {
+      xReceivedBytes = xMessageBufferReceive( xCoreMessageBuffer, cReceivedString, sizeof( cReceivedString ), 0);
+    }while ( xReceivedBytes == 0 );
+    
+    /* Check the received string */
+    if( strcmp( cExpectedString, cReceivedString ) == 0 )
+    {
+      /* Expected message received */
+      BSP_LED_Toggle(LED1);
+      ulNextValue++;
+    }
+    else
+    {
+      /* Application fail */
+      BSP_LED_Off(LED1);
+      BSP_LED_On(LED2);
+      while(1)
+      {}
+    }
+  }
+}
+
+
+
+/**
+  * @brief  This function is executed in case of error occurrence.
+  * @param  None
+  * @retval None
+  */
+static void Error_Handler(void)
+{
+  /* Application fail */
+  BSP_LED_Off(LED1);
+  BSP_LED_On(LED2);
+  /* User may add here some code to deal with this error */
+  while(1)
+  {
+  }
+}
+
+#ifdef  USE_FULL_ASSERT
+
+/**
+  * @brief  Reports the name of the source file and the source line number
+  *         where the assert_param error has occurred.
+  * @param  file: pointer to the source file name
+  * @param  line: assert_param error line source number
+  * @retval None
+  */
+void assert_failed(uint8_t* file, uint32_t line)
+{
+  /* User can add his own implementation to report the file name and line number,
+     ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
+
+  /* Infinite loop */
+  while (1)
+  {
+  }
+}
+#endif
+
+/**
+  * @}
+  */
+
+/**
+  * @}
+  */
+
+/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

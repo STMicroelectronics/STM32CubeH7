@@ -1,0 +1,196 @@
+/**
+  @page CDC_Standalone USB Host Communication Class (CDC) application
+
+  @verbatim
+  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  * @file    USB_Host/CDC_Standalone/readme.txt
+  * @author  MCD Application Team
+  * @brief   Description of the USB Host CDC application.
+  ******************************************************************************
+  * @attention
+  *
+  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.</center></h2>
+  *
+  * This software component is licensed by ST under Ultimate Liberty license
+  * SLA0044, the "License"; You may not use this file except in compliance with
+  * the License. You may obtain a copy of the License at:
+  *                             www.st.com/SLA0044
+  *
+  ******************************************************************************
+  @endverbatim
+
+@par Application Description
+
+This application is a part of the USB Host Library package using STM32Cube firmware. It describes how to use
+USB host application based on the Communication Class (CDC) on the stm32h7xx devices.
+
+This is a typical application on how to use the stm32h7xx USB OTG Host peripheral to operate with an USB
+CDC device application based on the two CDC transfer directions with a dynamic serial configuration:
+
+At the beginning of the main program the HAL_Init() function is called to reset
+all the peripherals, initialize the Flash interface and the systick.
+The SystemClock_Config() function is used to set the Flash latency and  to configure the system clock :
+  - The Cortex-M7 at 400MHz
+  - Cortex-M4 at 200MHz.
+  - The HCLK for D1 Domain AXI/AHB3 peripherals , D2 Domain AHB1/AHB2 peripherals
+    and D3 Domain AHB4  peripherals at 200MHz.
+  - The APB clock dividers for D1 Domain APB3 peripherals, D2 Domain APB1/APB2 peripherals
+    and D3 Domain APB4 peripherals to run at 100MHz.
+
+CPU1 (Cortex-M7) and CPU2 (Cortex-M4) are booting at once (with respect to configured boot Flash options)
+
+System Init, System clock, voltage scaling and L1-Cache configuration are done by CPU1 (Cortex-M7).
+In the meantime Domain D2 is put in STOP mode (CPU2: Cortex-M4 in deep sleep mode) to save power consumption.
+When system initialization is finished, CPU1 (Cortex-M7) could release CPU2 (Cortex-M4) when needed
+by means of HSEM notification or by any D2 Domain wakeup source (SEV,EXTI..).
+
+The above will guarantee that CPU2 (Cortex-M4) code execution starts after system initialization :
+(system clock config, external memory configuration..).
+
+After Domain D2 wakeup, if  CPU1 attempts to use any resource from such a domain,
+the access will not be safe until “clock ready flag” of such a domain is set (by hardware).
+The check could be done using this macro : __HAL_RCC_GET_FLAG(RCC_FLAG_D2CKRDY).
+
+ - Transmission:
+   The user can select in the Host board, using the menu, a file among the ones available on the SD
+   and send it to the Device board. The content of the file could be visualized through the Hyperterminal
+   (the link configuration is imposed initially by the device and could be checked using the
+   configuration menu). Data to be transmitted is stored in CDC_TX_Buffer buffer.
+
+ - Reception:
+   The data entered by the user using the Hyperterminal in ASCII format are transferred by the device
+   board to the Host board and displayed on its LCD screen. The CDC_RX_Buffer is the buffer used for
+   data reception.
+
+At the beginning of the main program the HAL_Init() function is called to reset
+all the peripherals, initialize the Flash interface and the systick.
+The SystemClock_Config() function is used to configure the system clock for STM32H743xx Devices :
+The CPU at 400MHz
+The HCLK for D1 Domain AXI and AHB3 peripherals , D2 Domain AHB1/AHB2 peripherals and D3 Domain AHB4  peripherals at 200MHz.
+The APB clock dividers for D1 Domain APB3 peripherals, D2 Domain APB1 and APB2 peripherals and D3 Domain APB4 peripherals to  run at 100MHz.
+
+The Full Speed (FS) USB module uses
+internally a 48-MHz clock which is coming from PLL3.
+In the High Speed (HS) mode the USB clock (60 MHz) is driven by the ULPI.
+
+When the application is started, the connected USB CDC device is detected in CDC mode and gets
+initialized. The STM32 MCU behaves as a CDC Host, it enumerates the device and extracts VID, PID,
+manufacturer name, Serial no and product name information and displays it on the LCD screen.
+
+A menu is displayed and the user can select any operation from the menu using the Joystick buttons:
+ - "Send Data" operation starts the Data Transmission.
+ - "Receive Data" operation starts the Data Reception.
+ - "Configuration" operation defines the desired Host CDC configuration (Baudrate,Parity, DataBit and StopBit)
+   The baudrate comes with a default value of 115,2 kbps (BAUDRATE = 115200).
+ - "Re-Enumerate" operation performs a new Enumeration of the device.
+
+@note Care must be taken when using HAL_Delay(), this function provides accurate delay (in milliseconds)
+      based on variable incremented in SysTick ISR. This implies that if HAL_Delay() is called from
+      a peripheral ISR process, then the SysTick interrupt must have higher priority (numerically lower)
+      than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
+      To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
+
+@note The application needs to ensure that the SysTick time base is always set to 1 millisecond
+      to have correct HAL operation.
+
+For more details about the STM32Cube USB Host library, please refer to UM1720
+"STM32Cube USB Host library".
+
+
+@par USB Library Configuration
+
+To select the appropriate USB Core to work with, user must add the following macro defines within the
+compiler preprocessor (already done in the preconfigured projects provided with this application):
+      - "USE_USB_HS" when using USB High Speed (HS) Core
+      - "USE_USB_FS" when using USB Full Speed (FS) Core
+
+It is possible to fine tune needed USB Host features by modifying defines values in USBH configuration
+file “usbh_conf.h” available under the project includes directory, in a way to fit the application
+requirements, such as:
+- Level of debug: USBH_DEBUG_LEVEL
+                  0: No debug messages
+                  1: Only User messages are shown
+                  2: User and Error messages are shown
+                  3: All messages and internal debug messages are shown
+   By default debug messages are displayed on the debugger IO terminal; to redirect the Library
+   messages on the LCD screen, lcd_log.c driver need to be added to the application sources.
+
+
+@par Keywords
+
+Connectivity, USB Host, Full Speed, High Speed, CDC, PSTN, HyperTerminal, VCP, Com port,
+
+
+
+@Note If the  application is using the DTCM/ITCM memories (@0x20000000/ 0x0000000: not cacheable and only accessible
+      by the Cortex M7 and the  MDMA), no need for cache maintenance when the Cortex M7 and the MDMA access these RAMs.
+      If the application needs to use DMA(or other masters) based access or requires more RAM, then  the user has to:
+              - Use a non TCM SRAM. (example : D1 AXI-SRAM @ 0x24000000)
+              - Add a cache maintenance mechanism to ensure the cache coherence between CPU and other masters(DMAs,DMA2D,LTDC,MDMA).
+              - The addresses and the size of cacheable buffers (shared between CPU and other masters)
+                must be	properly defined to be aligned to L1-CACHE line size (32 bytes).
+ 
+@Note It is recommended to enable the cache and maintain its coherence.
+      Depending on the use case it is also possible to configure the cache attributes using the MPU.
+      Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
+      Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
+
+@par Directory contents
+
+  - USB_Host/CDC_Standalone/CM7/Src/main.c                  Main program
+  - USB_Host/CDC_Standalone/Common/Src/system_stm32h7xx.c   stm32h7xx system clock configuration file
+  - USB_Host/CDC_Standalone/CM7/Src/stm32h7xx_it.c          Interrupt handlers
+  - USB_Host/CDC_Standalone/CM7/Src/menu.c                  CDC State Machine
+  - USB_Host/CDC_Standalone/CM7/Src/usbh_conf.c             General low level driver configuration
+  - USB_Host/CDC_Standalone/CM7/Src/explorer.c              Explore the uSD content
+  - USB_Host/CDC_Standalone/CM7/Src/cdc_configuration.c     CDC settings State Machine
+  - USB_Host/CDC_Standalone/CM7/Src/cdc_receive.c           CDC Receive State Machine
+  - USB_Host/CDC_Standalone/CM7/Src/cdc_send.c              CDC Send State Machine
+  - USB_Host/CDC_Standalone/CM7/Inc/main.h                  Main program header file
+  - USB_Host/CDC_Standalone/CM7/Inc/stm32h7xx_it.h          Interrupt handlers header file
+  - USB_Host/CDC_Standalone/CM7/Inc/lcd_log_conf.h          LCD log configuration file
+  - USB_Host/CDC_Standalone/CM7/Inc/usbh_conf.h             USB Host driver Configuration file
+  - USB_Host/CDC_Standalone/CM7/Inc/stm32h7xx_hal_conf.h    HAL configuration file
+  - USB_Host/CDC_Standalone/CM7/Inc/ffconf.h                FAT file system module configuration file
+
+  - USB_Host/CDC_Standalone/CM4/Inc/stm32h7xx_hal_conf.h    HAL configuration file for Cortex-M4
+  - USB_Host/CDC_Standalone/CM4/Inc/stm32h7xx_it.h          Interrupt handlers header file for Cortex-M4
+  - USB_Host/CDC_Standalone/CM4/Inc/main.h                  Main configuration file for Cortex-M4
+  - USB_Host/CDC_Standalone/M4/Src/stm32h7xx_it.c          Interrupt handlers for Cortex-M4
+  - USB_Host/CDC_Standalone/CM4/Src/main.c                  Main program  for Cortex-M4
+
+@par Hardware and Software environment
+
+  - This application runs on stm32h7xx devices.
+
+  - This application has been tested with STMicroelectronics STM32H747I_EVAL RevB
+    evaluation boards and can be easily tailored to any other supported device
+    and development board.
+
+  - STM32H747I_EVAL Set-up
+    - Insert a microSD card into the STM32H747I_EVAL uSD slot (CN13)
+    - Plug the CDC device into the STM32H747I_EVAL board through 'USB micro A-Male
+      to B-Male' cable to the connector:
+      - CN14 : to use USB High Speed (HS)
+      - CN18: to use USB Full Speed (FS)
+        @note Make sure that :
+         - jumper JP2 must be removed when using USB OTG FS
+
+@par How to use it ?
+
+In order to make the program work, you must do the following :
+  - Open your preferred toolchain.
+ - For CM4 target configuration (STM32H747I-Eval_CM4) :
+     - Rebuild all files
+     - Load image into target memory
+
+ - For CM7 target configuration :
+ - Rebuild all files and load your image into target memory
+ - In the workspace toolbar select the project configuration:
+   - STM32H747I_EVAL_USBH-HS: to configure the project for stm32h7xx devices using USB OTG HS peripheral
+   - STM32H747I_EVAL_USBH-FS: to configure the project for stm32h7xx devices using USB OTG FS peripheral
+ - Run the application
+
+ * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
+ */

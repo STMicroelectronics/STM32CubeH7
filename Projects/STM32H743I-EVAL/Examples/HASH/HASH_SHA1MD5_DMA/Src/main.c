@@ -1,0 +1,311 @@
+/**
+  ******************************************************************************
+  * @file    HASH/HASH_SHA1MD5_DMA/Src/main.c
+  * @author  MCD Application Team
+  * @brief   This example provides a short description of HASH digest calculation
+  *          using SHA1 and MD5 example.
+  ******************************************************************************
+  * @attention
+  *
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics.
+  * All rights reserved.</center></h2>
+  *
+  * This software component is licensed by ST under BSD 3-Clause license,
+  * the "License"; You may not use this file except in compliance with the
+  * License. You may obtain a copy of the License at:
+  *                        opensource.org/licenses/BSD-3-Clause
+  *
+  ******************************************************************************
+  */
+
+/* Includes ------------------------------------------------------------------*/
+#include "main.h"
+
+/** @addtogroup STM32H7xx_HAL_Examples
+  * @{
+  */
+
+/** @addtogroup HASH_SHA1MD5_DMA
+  * @{
+  */
+
+/* Private typedef -----------------------------------------------------------*/
+/* Private define ------------------------------------------------------------*/
+/* Private macro -------------------------------------------------------------*/
+/* Private variables ---------------------------------------------------------*/
+/* HASH handler declaration */
+HASH_HandleTypeDef     HashHandle;
+__ALIGN_BEGIN const uint8_t Input[] __ALIGN_END = "The STM32 H7 series is the result of a perfect symbiosis of the real-time control capabilities of an MCU and the signal processing performance of a DSP, and thus complements the STM32 portfolio with a new class of devices, digital signal controllers (DSC).";
+
+__ALIGN_BEGIN const uint8_t ExpectMD5Digest[16] __ALIGN_END = {0x30, 0xa4, 0x08, 0xbb, 0x21, 0x42, 0xc7, 0x18,
+                                                               0xbd, 0x67, 0xd2, 0xb1, 0xfb, 0x7c, 0xcf, 0x14};
+
+__ALIGN_BEGIN const uint8_t ExpectSHA1Digest[20] __ALIGN_END = {0xc6, 0xe4, 0x95, 0x2f, 0x84, 0x87, 0x32, 0xc3,
+                                                                0xe6, 0x12, 0x86, 0xfc, 0x3a, 0xdd, 0x1c, 0xec,
+                                                                0xdd, 0x97, 0xe3, 0xf9};
+
+/* Digest Buffer location should aligned to cache line size (32 bytes) */
+ALIGN_32BYTES (static uint8_t Digest[20])={0};  
+
+/* Private function prototypes -----------------------------------------------*/
+static void SystemClock_Config(void);
+static void CPU_CACHE_Enable(void);
+static void Error_Handler(void);
+
+/* Private functions ---------------------------------------------------------*/
+
+/**
+  * @brief  Main program
+  * @param  None
+  * @retval None
+  */
+int main(void)
+{
+  /* Enable the CPU Cache */
+  CPU_CACHE_Enable();
+  
+  /* STM32H7xx HAL library initialization:
+       - Systick timer is configured by default as source of time base, but user 
+         can eventually implement his proper time base source (a general purpose 
+         timer for example or other time source), keeping in mind that Time base 
+         duration should be kept 1ms since PPP_TIMEOUT_VALUEs are defined and 
+         handled in milliseconds basis.
+       - Set NVIC Group Priority to 4
+       - Low Level Initialization
+     */
+  HAL_Init();
+
+  /* Configure the system clock to 400 MHz */
+  SystemClock_Config();
+
+  /* Since MFX is used, LED init is done after clock config */
+  /* Configure LED1, LED3 and LED4 */
+  BSP_LED_Init(LED1);
+  BSP_LED_Init(LED3);
+  BSP_LED_Init(LED4);
+
+  /******************************** SHA1 **************************************/
+
+  if(HAL_HASH_DeInit(&HashHandle) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  HashHandle.Init.DataType = HASH_DATATYPE_8B;
+
+  if (HAL_HASH_Init(&HashHandle) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /* Start HASH computation using DMA transfer */
+  if (HAL_HASH_SHA1_Start_DMA(&HashHandle, (uint8_t *)Input, strlen((char const *)Input)) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /* Get the computed digest value */
+  if (HAL_HASH_SHA1_Finish(&HashHandle, Digest, 0xFF) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /* Compare computed digest with expected one */
+  if (memcmp(Digest, ExpectSHA1Digest, sizeof(ExpectSHA1Digest) / sizeof(ExpectSHA1Digest[0])) != 0)
+  {
+    BSP_LED_On(LED3);
+  }
+  else
+  {
+    BSP_LED_On(LED1);
+  }
+
+
+  /******************************** MD5 ***************************************/
+  /* CPU Data Cache maintenance :
+    It is recommended to clean the CPU Data cache before starting the  DMA transfer. 
+    As the source buffer may be prepared by the CPU, this guarantees that the source buffer 
+    (if located in the D1 AXI-SRAM which is cacheable) will be up to date before starting the transfer.
+  */
+  SCB_CleanDCache_by_Addr((uint32_t *)Digest, 16); 
+  
+  if(HAL_HASH_DeInit(&HashHandle) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  HashHandle.Init.DataType = HASH_DATATYPE_8B;
+  
+  if (HAL_HASH_Init(&HashHandle) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /* Start HASH computation using DMA transfer */
+  if (HAL_HASH_MD5_Start_DMA(&HashHandle, (uint8_t *)Input, strlen((char const *)Input)) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  
+  /* CPU Data Cache maintenance :  
+    It is recommended to invalidate the CPU Data cache after the DMA transfer. 
+    As the destination buffer may be used by the CPU, this guarantees Up-to-date data when CPU access 
+    to the destination buffer located in the D1 AXI-SRAM (which is cacheable).
+  */ 
+  SCB_InvalidateDCache_by_Addr((uint32_t *)Digest, 16); 
+  
+  /* Get the computed digest value */
+  if (HAL_HASH_MD5_Finish(&HashHandle,Digest, 0xFF) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  
+  /* Compare computed digest with expected one */
+  if (memcmp(Digest, ExpectMD5Digest, sizeof(ExpectMD5Digest) / sizeof(ExpectMD5Digest[0])) != 0)
+  {
+    Error_Handler();
+  }
+  else
+  {
+    BSP_LED_On(LED4);
+  }
+  while (1)
+  {
+  }
+}
+
+/**
+  * @brief  System Clock Configuration
+  *         The system Clock is configured as follow : 
+  *            System Clock source            = PLL (HSE)
+  *            SYSCLK(Hz)                     = 400000000 (CPU Clock)
+  *            HCLK(Hz)                       = 200000000 (AXI and AHBs Clock)
+  *            AHB Prescaler                  = 2
+  *            D1 APB3 Prescaler              = 2 (APB3 Clock  100MHz)
+  *            D2 APB1 Prescaler              = 2 (APB1 Clock  100MHz)
+  *            D2 APB2 Prescaler              = 2 (APB2 Clock  100MHz)
+  *            D3 APB4 Prescaler              = 2 (APB4 Clock  100MHz)
+  *            HSE Frequency(Hz)              = 25000000
+  *            PLL_M                          = 5
+  *            PLL_N                          = 160
+  *            PLL_P                          = 2
+  *            PLL_Q                          = 4
+  *            PLL_R                          = 2
+  *            VDD(V)                         = 3.3
+  *            Flash Latency(WS)              = 4
+  * @param  None
+  * @retval None
+  */
+static void SystemClock_Config(void)
+{
+  RCC_ClkInitTypeDef RCC_ClkInitStruct;
+  RCC_OscInitTypeDef RCC_OscInitStruct;
+  HAL_StatusTypeDef ret = HAL_OK;
+  
+  /*!< Supply configuration update enable */
+  HAL_PWREx_ConfigSupply(PWR_LDO_SUPPLY);
+
+  /* The voltage scaling allows optimizing the power consumption when the device is
+     clocked below the maximum system frequency, to update the voltage scaling value
+     regarding system frequency refer to product datasheet.  */
+  __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
+
+  while(!__HAL_PWR_GET_FLAG(PWR_FLAG_VOSRDY)) {}
+  
+  /* Enable HSE Oscillator and activate PLL with HSE as source */
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
+  RCC_OscInitStruct.HSEState = RCC_HSE_ON;
+  RCC_OscInitStruct.HSIState = RCC_HSI_OFF;
+  RCC_OscInitStruct.CSIState = RCC_CSI_OFF;
+  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
+  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
+
+  RCC_OscInitStruct.PLL.PLLM = 5;
+  RCC_OscInitStruct.PLL.PLLN = 160;
+  RCC_OscInitStruct.PLL.PLLFRACN = 0;
+  RCC_OscInitStruct.PLL.PLLP = 2;
+  RCC_OscInitStruct.PLL.PLLR = 2;
+  RCC_OscInitStruct.PLL.PLLQ = 4;
+
+  RCC_OscInitStruct.PLL.PLLVCOSEL = RCC_PLL1VCOWIDE;
+  RCC_OscInitStruct.PLL.PLLRGE = RCC_PLL1VCIRANGE_2;
+  ret = HAL_RCC_OscConfig(&RCC_OscInitStruct);
+  if(ret != HAL_OK)
+  {
+    Error_Handler();
+  }
+  
+/* Select PLL as system clock source and configure  bus clocks dividers */
+  RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_D1PCLK1 | RCC_CLOCKTYPE_PCLK1 | \
+                                 RCC_CLOCKTYPE_PCLK2  | RCC_CLOCKTYPE_D3PCLK1);
+
+  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
+  RCC_ClkInitStruct.SYSCLKDivider = RCC_SYSCLK_DIV1;
+  RCC_ClkInitStruct.AHBCLKDivider = RCC_HCLK_DIV2;
+  RCC_ClkInitStruct.APB3CLKDivider = RCC_APB3_DIV2;  
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_APB1_DIV2; 
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_APB2_DIV2; 
+  RCC_ClkInitStruct.APB4CLKDivider = RCC_APB4_DIV2; 
+  ret = HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_4);
+  if(ret != HAL_OK)
+  {
+    Error_Handler();
+  }
+}
+
+/**
+  * @brief  CPU L1-Cache enable.
+  * @param  None
+  * @retval None
+  */
+static void CPU_CACHE_Enable(void)
+{
+  /* Enable I-Cache */
+  SCB_EnableICache();
+
+  /* Enable D-Cache */
+  SCB_EnableDCache();
+}
+
+/**
+  * @brief  This function is executed in case of error occurrence.
+  * @param  None
+  * @retval None
+  */
+static void Error_Handler(void)
+{
+  /* Turn LED3 on */
+  BSP_LED_On(LED3);
+  while (1)
+  {
+  } 
+}
+
+#ifdef  USE_FULL_ASSERT
+
+/**
+  * @brief  Reports the name of the source file and the source line number
+  *         where the assert_param error has occurred.
+  * @param  file: pointer to the source file name
+  * @param  line: assert_param error line source number
+  * @retval None
+  */
+void assert_failed(uint8_t *file, uint32_t line)
+{
+  /* User can add his own implementation to report the file name and line number,
+     ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
+
+  /* Infinite loop */
+  while (1)
+  {
+  }
+}
+#endif
+
+/**
+  * @}
+  */
+
+/**
+  * @}
+  */
+
+/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

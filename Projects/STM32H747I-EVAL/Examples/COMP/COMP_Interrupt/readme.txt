@@ -1,0 +1,129 @@
+/**
+  @page COMP_Interrupt COMP Interrupt example
+  
+  @verbatim
+  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  * @file    COMP/COMP_Interrupt/readme.txt 
+  * @author  MCD Application Team
+  * @brief   Description of the COMP Interrupt example.
+  ******************************************************************************
+  * @attention
+  *
+  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.</center></h2>
+  *
+  * This software component is licensed by ST under BSD 3-Clause license,
+  * the "License"; You may not use this file except in compliance with the
+  * License. You may obtain a copy of the License at:
+  *                        opensource.org/licenses/BSD-3-Clause
+  *
+  ******************************************************************************
+  @endverbatim
+
+@par Example Description 
+
+This example shows how to configure the COMP peripheral to compare the external
+voltage applied on a specific pin with the Internal Voltage Reference.
+
+CPU1 (Cortex-M7) and CPU2 (Cortex-M4) are booting at once (with respect to configured boot Flash options)
+System Init, System clock, voltage scaling and L1-Cache configuration are done by CPU1 (Cortex-M7).
+In the meantime Domain D2 is put in STOP mode (CPU2: Cortex-M4 in deep sleep mode) to save power consumption.
+
+When system initialization is finished, CPU1 (Cortex-M7) will configure the comparator to generate an interrupt and 
+LED 1 will be on.
+CPU2 (Cortex-M4) will exit from STOP mode when the input crosses (rising edge) the internal reference voltage VREFINT (1.22V).
+
+The above will guarantee that CPU2 (Cortex-M4) wakes up and LED4 is on after being triggered by the comparator interrupt.
+
+In this example, the comparator input is connected on the pin PB.00 the user 
+shall apply a voltage on and when the comparator input crosses VREFINT,CPU2 is awake and LED4 is ON.
+
+If LED3 is toggling continuously without any voltage update, it indicates that the system 
+generated an error.
+
+
+
+This projects is configured for STM32H747xx devices using STM32CubeH7 HAL and running on 
+STM32H747I-EVAL board from STMicroelectronics.
+
+The SystemClock_Config() function is used to set the Flash latency and  to configure the system clock :
+  - The Cortex-M7 at 400MHz 
+  - Cortex-M4 at 200MHz.
+  - The HCLK for D1 Domain AXI/AHB3 peripherals , D2 Domain AHB1/AHB2 peripherals 
+    and D3 Domain AHB4  peripherals at 200MHz.
+  - The APB clock dividers for D1 Domain APB3 peripherals, D2 Domain APB1/APB2 peripherals 
+    and D3 Domain APB4 peripherals to run at 100MHz.
+
+
+@note For Cortex-M7, Some code parts (for instance ISR routines, vector table, critical routines )
+      can be executed from the ITCM-RAM (64 KB) allowing zero wait state access.
+      Which decreases critical task execution time compared to code execution from internal Flash memory. 
+      This configuratuion can be done using '#pragma location = ".itcmram"' to be placed above function declaration, 
+      or using the toolchain GUI (file options) to execute a whole source file in the ITCM-RAM.
+      For fast data access, critical variables, application RAM, heap, stack could be put as well in the DTCM-RAM (128 KB).
+
+@Note For the Cortex-M7, if the application is using the DTCM/ITCM memories (@0x20000000/ 0x0000000: not cacheable and only accessible
+      by the Cortex-M7 and the  MDMA), no need for cache maintenance when the Cortex M7 and the MDMA access these RAMs.
+      If the application needs to use DMA(or other masters) based access or requires more RAM, then  the user has to:
+              - Use a non TCM SRAM. (example : D1 AXI-SRAM @ 0x24000000)
+              - Add a cache maintenance mechanism to ensure the cache coherence between CPU and other masters(DMAs,DMA2D,LTDC,MDMA).
+              - The addresses and the size of cacheable buffers (shared between CPU and other masters)
+                must be properly defined to be aligned to L1-CACHE line size (32 bytes). 
+ 
+@Note It is recommended to enable the cache and maintain its coherence.
+      Depending on the use case it is also possible to configure the cache attributes using the MPU.
+      Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
+      Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
+ 
+
+@note Care must be taken when using HAL_Delay(), this function provides accurate delay (in milliseconds)
+      based on variable incremented in SysTick ISR. This implies that if HAL_Delay() is called from
+      a peripheral ISR process, then the SysTick interrupt must have higher priority (numerically lower)
+      than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
+      To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
+      
+@note The application needs to ensure that the SysTick time base is always set to 1 millisecond
+      to have correct HAL operation.
+
+@par Directory contents 
+
+  - COMP/COMP_Interrupt/Common/Src/system_stm32h7xx.c     STM32H7xx system configuration file
+  - COMP/COMP_Interrupt/CM7/Src/main.c                 Main program for Cortex-M7
+  - COMP/COMP_Interrupt/CM7/Src/stm32h7xx_it.c         Interrupt handlers for Cortex-M7
+  - COMP/COMP_Interrupt/CM7/Src/stm32h7xx_hal_msp.c    HAL MSP module for Cortex-M7
+  - COMP/COMP_Interrupt/CM7/Inc/main.h                 Main program header file for Cortex-M7  
+  - COMP/COMP_Interrupt/CM7/Inc/stm32h7xx_hal_conf.h   HAL Configuration file for Cortex-M7
+  - COMP/COMP_Interrupt/CM7/Inc/stm32h7xx_it.h         Interrupt handlers header file for Cortex-M7
+
+  - COMP/COMP_Interrupt/CM4/Src/main.c                 Main program for Cortex-M4
+  - COMP/COMP_Interrupt/CM4/Src/stm32h7xx_it.c         Interrupt handlers for Cortex-M4
+  - COMP/COMP_Interrupt/CM4/Src/stm32h7xx_hal_msp.c    HAL MSP module for Cortex-M4
+  - COMP/COMP_Interrupt/CM4/Inc/main.h                 Main program header file for Cortex-M4  
+  - COMP/COMP_Interrupt/CM4/Inc/stm32h7xx_hal_conf.h   HAL Configuration file for Cortex-M4
+  - COMP/COMP_Interrupt/CM4/Inc/stm32h7xx_it.h         Interrupt handlers header file for Cortex-M4
+
+
+@par Hardware and Software environment 
+
+  - This example runs on STM32H747xx devices.
+
+  - This example has been tested with STM32H747I-EVAL rev.E board with SMPS (SD Convertor) power supply 
+   config and can be easily tailored to any other supported device and development board.
+
+  - STM32H747I-EVAL Set-up
+
+     - Apply an external variable voltage on PB.00 (connected on pin 29 on CN6) with average voltage 1.22V.
+
+
+@par How to use it ? 
+
+In order to make the program work, you must do the following :
+ - Open your preferred toolchain 
+ - For each target configuartion (STM32H747_EVAL_CM7 and STM32H747_EVAL_CM4) : 
+     - Rebuild all files 
+     - Load images into target memory
+ - After loading the two images, you have to reset the board in order to boot (Cortex-M7) and CPU2 (Cortex-M4) at once.
+ - Run the example
+
+ * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
+ */

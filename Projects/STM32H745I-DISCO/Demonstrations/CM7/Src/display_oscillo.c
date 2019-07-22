@@ -1,0 +1,379 @@
+/**
+  ******************************************************************************
+  * @file    Demonstration/STM32H745-Discovery_Demo/CM7/Src/display.c
+  * @author  MCD Application Team
+  * @brief   Signals Generator , display module file.
+  ******************************************************************************
+  * @attention
+  *
+  * <h2><center>&copy; Copyright (c) 2018 STMicroelectronics.
+  * All rights reserved.</center></h2>
+  *
+  * This software component is licensed by ST under Ultimate Liberty license
+  * SLA0044, the "License"; You may not use this file except in compliance with
+  * the License. You may obtain a copy of the License at:
+  *                             www.st.com/SLA0044
+  *
+  ******************************************************************************
+  */
+
+/* Includes ------------------------------------------------------------------*/
+#include "display.h"
+    
+/** @addtogroup STM32H7xx_HAL_Demonstration
+  * @{
+  */
+
+/** @addtogroup Oscilloscope_SignalsGenerator
+  * @{
+  */
+
+/* Private typedef -----------------------------------------------------------*/
+/* Private define ------------------------------------------------------------*/
+
+/* Private macro -------------------------------------------------------------*/
+
+
+
+/* Private variables ---------------------------------------------------------*/ 
+extern LTDC_HandleTypeDef hltdc_discovery;
+DMA2D_HandleTypeDef       DMA2D_Handle;
+__IO uint32_t pending_buffer = 0;
+
+/* Private function prototypes -----------------------------------------------*/
+void LCD_BlendImage(uint32_t *pSrc, uint32_t *pDst, uint32_t Xpos, uint32_t Ypos, uint32_t Width, uint32_t Height, uint32_t ColorMode, uint32_t InputOffset);
+/* Exported functions ---------------------------------------------------------*/
+/**
+  * @brief  Initialize the Display
+  * @param  None
+  * @retval None
+  */
+void SG_InitDisplay(void)
+{  
+  /* Initialize the LCD */
+  BSP_LCD_Init();
+  
+  BSP_LCD_LayerDefaultInit(0, LCD_FB_START_ADDRESS); 
+  
+  /* Set LCD Foreground Layer  */
+  BSP_LCD_SelectLayer(0);
+  
+  BSP_LCD_SetBrightness(100);
+  BSP_LCD_DisplayOn();
+  
+  /* Set LCD Font  */
+  BSP_LCD_SetFont(&Font16);
+  
+  /* Clear the LCD */
+  BSP_LCD_Clear(0x00000000);
+  BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
+  
+  /* Enable IRQ */
+  HAL_NVIC_SetPriority(LTDC_IRQn, 0x0F, 0x0F); 
+  HAL_NVIC_EnableIRQ(LTDC_IRQn); 	
+  HAL_NVIC_SetPriority(DMA2D_IRQn, 0x0F, 0x0F);  
+  HAL_NVIC_EnableIRQ(DMA2D_IRQn); 	
+}
+
+/**
+  * @brief  Display a switch button on the screen
+  * @param  None
+  * @retval None
+  */
+void SG_DisplaySwitchButton(SG_SwitchButtonWidgetTypeDef *pButton,uint32_t *pDst, uint8_t ButtonState)
+{  
+  uint32_t *pSrc;
+  uint32_t inputOffset;
+  uint32_t X_size;
+  
+  X_size = BSP_LCD_GetXSize();
+  inputOffset =  X_size - pButton->buttonParams.Width;
+
+  pSrc = (uint32_t *)((ButtonState == BUTTON_STATE_OFF) ? pButton->Off_FrameBuffer : pButton->On_FrameBuffer);
+  
+  /* Blend switch buttons image on the Screen */
+  LCD_BlendImage(pSrc, pDst, pButton->buttonParams.Xpos, pButton->buttonParams.Ypos, pButton->buttonParams.Width, pButton->buttonParams.Height, pButton->buttonParams.ColorMode, inputOffset);
+
+}
+
+/**
+  * @brief  Display button on the screen
+  * @param  None
+  * @retval None
+  */
+void SG_DisplayButton(ButtonWidgetTypeDef *pButton, uint32_t *pDst)
+{   
+  uint32_t inputOffset;
+  uint32_t X_size;
+  
+  X_size = BSP_LCD_GetXSize();
+  inputOffset =  X_size - pButton->buttonParams.Width;
+  
+  /* Blend switch buttons image on the Screen */
+  LCD_BlendImage((uint32_t*)pButton->FrameBuffer, pDst, pButton->buttonParams.Xpos, pButton->buttonParams.Ypos, pButton->buttonParams.Width, pButton->buttonParams.Height, pButton->buttonParams.ColorMode, inputOffset);
+}
+
+
+
+void SG_DisplayWaveButtons(SG_SwitchButtonWidgetTypeDef *pButton, uint32_t buttonsNumber)
+{
+  uint8_t buttonIndex;
+  uint32_t Y_size;
+  uint32_t buttonYPosition;
+  
+  Y_size = BSP_LCD_GetYSize(); 
+  
+  /* Set the buttons Y positions */
+  buttonYPosition = (Y_size /4);
+  
+  /* Display the waves buttons */
+  for(buttonIndex = 0; buttonIndex < buttonsNumber; buttonIndex++)
+  {
+    if((buttonIndex == 0) || (buttonIndex == 2) || (buttonIndex == 4))
+    {
+      pButton[buttonIndex].buttonParams.Xpos = SG_WAVE_BUTTON_XPOSITION;
+      pButton[buttonIndex].buttonParams.Ypos = (buttonYPosition + ((pButton[buttonIndex].buttonParams.Height + pButton[buttonIndex].buttonParams.Height /2) * buttonIndex/2));
+      pButton[buttonIndex].State = BUTTON_STATE_OFF;
+    }
+    else
+    {
+      pButton[buttonIndex].buttonParams.Xpos = SG_WAVE_BUTTON_XPOSITION*2 + pButton[buttonIndex].buttonParams.Width;
+      pButton[buttonIndex].buttonParams.Ypos = (buttonYPosition + ((pButton[buttonIndex].buttonParams.Height + pButton[buttonIndex].buttonParams.Height /2) * (buttonIndex -1)/2));
+      pButton[buttonIndex].State = BUTTON_STATE_OFF;
+    }
+    SG_DisplaySwitchButton(&pButton[buttonIndex],(uint32_t *)LCD_FRAME_BUFFER, pButton[buttonIndex].State); 
+  }
+  BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
+  BSP_LCD_SetBackColor(LCD_COLOR_LIGHTGRAY);
+
+  BSP_LCD_SetFont(&Font16);
+  BSP_LCD_DisplayStringAt(SG_WAVE_BUTTON_XPOSITION-2, 45,(uint8_t *)" Signal Type ", LEFT_MODE);
+  BSP_LCD_DrawRect(SG_WAVE_BUTTON_XPOSITION-4, 41, pButton[1].buttonParams.Xpos + 70, 160);
+  BSP_LCD_DrawRect(SG_WAVE_BUTTON_XPOSITION-3, 42, pButton[1].buttonParams.Xpos + 68, 158);
+
+  BSP_LCD_DisplayStringAt(SG_WAVE_BUTTON_XPOSITION+160, 45,(uint8_t *) " Signal Params ", LEFT_MODE);
+  BSP_LCD_DrawRect(SG_WAVE_BUTTON_XPOSITION+150, 41, 190, 160);
+  BSP_LCD_DrawRect(SG_WAVE_BUTTON_XPOSITION+150+1, 42, 188, 158);
+  
+  BSP_LCD_DisplayStringAt(SG_WAVE_BUTTON_XPOSITION+360, 45,(uint8_t *) "  Status ", LEFT_MODE);
+  BSP_LCD_DrawRect(SG_WAVE_BUTTON_XPOSITION+350, 41, 120, 160);
+  BSP_LCD_DrawRect(SG_WAVE_BUTTON_XPOSITION+351, 42, 118, 158);
+}   
+
+
+void SG_DisplayGenericButtons(ButtonWidgetTypeDef *pButton, uint32_t buttonsNumber)
+{
+  uint8_t buttonIndex;
+  
+  /* Display the waves buttons */
+  for(buttonIndex = 0; buttonIndex < buttonsNumber; buttonIndex++)
+  {
+    SG_DisplayButton(&pButton[buttonIndex],(uint32_t *)LCD_FRAME_BUFFER); 
+  }
+
+} 
+
+
+/**
+  * @brief  Display up down buttons on the screen
+  * @param  None
+  * @retval None
+  */
+void SG_DisplayUpDownButtons(ButtonWidgetTypeDef *pButton, uint32_t buttonsNumber)
+{
+  uint8_t buttonIndex;
+  
+  /* Display the waves buttons */
+  for(buttonIndex = 0; buttonIndex < buttonsNumber; buttonIndex++)
+  {
+    SG_DisplayButton(&pButton[buttonIndex], (uint32_t *)LCD_FRAME_BUFFER); 
+  }
+}   
+
+/**
+  * @brief  Display frequency icon on the screen
+  * @param  None
+  * @retval None
+  */
+void SG_DisplayFrequencyIcon(uint32_t Xpos, uint32_t Ypos, uint32_t Width, uint32_t Height, uint8_t *Frequency)
+{
+  BSP_LCD_SetFont(&Font16);
+  BSP_LCD_SetTextColor(LCD_COLOR_DARKGRAY); 
+  BSP_LCD_FillRect(Xpos, Ypos, Width, Height);  
+  BSP_LCD_SetTextColor(LCD_COLOR_ORANGE);
+  BSP_LCD_SetBackColor(LCD_COLOR_DARKGRAY);
+  BSP_LCD_DisplayStringAt(Xpos + Width/4-6, Ypos+5,(uint8_t *) "FREQUENCY", LEFT_MODE);
+  BSP_LCD_DisplayStringAt(Xpos+ Width/4-10, Ypos+Height/2+4, Frequency, LEFT_MODE);
+  
+}   
+
+/**
+  * @brief  Display amplitude icon on the screen
+  * @param  None
+  * @retval None
+  */
+void SG_DisplayAmplitudeIcon(uint32_t Xpos, uint32_t Ypos, uint32_t Width, uint32_t Height, uint8_t *Amplitude)
+{
+  BSP_LCD_SetFont(&Font16);
+  BSP_LCD_SetTextColor(LCD_COLOR_DARKGRAY); 
+  BSP_LCD_FillRect(Xpos, Ypos, Width, Height);  
+  BSP_LCD_SetTextColor(LCD_COLOR_ORANGE);
+  BSP_LCD_SetBackColor(LCD_COLOR_DARKGRAY);
+  BSP_LCD_DisplayStringAt(Xpos + Width/4-6, Ypos+5, (uint8_t *)"AMPLITUDE", LEFT_MODE);
+  BSP_LCD_DisplayStringAt(Xpos+ Width/4+10, Ypos+Height/2+4, Amplitude, LEFT_MODE);
+}   
+
+/**
+  * @brief  Switch a button state on the screen
+  * @param  None
+  * @retval None
+  */
+void SG_SwitchWaveButtonState(SG_SwitchButtonWidgetTypeDef *pButton, uint32_t buttonIndex, uint32_t buttonsNumber)
+{
+  uint32_t i;
+  
+  /* Display the waves buttons */
+  for(i = 0; i < buttonsNumber; i++)
+  {
+    if(pButton[i].ButtonIndex != buttonIndex)
+    {
+      pButton[i].State = BUTTON_STATE_OFF;
+      SG_DisplaySwitchButton(&pButton[i],(uint32_t *)LCD_FRAME_BUFFER, pButton[i].State); 
+    }
+    else
+    {
+      (pButton[i].State == BUTTON_STATE_ON) ? (pButton[i].State = BUTTON_STATE_OFF) : (pButton[i].State = BUTTON_STATE_ON);
+      SG_DisplaySwitchButton(&pButton[i],(uint32_t *)LCD_FRAME_BUFFER, pButton[i].State); 
+    }  
+  }
+}
+
+/**
+  * @brief  Display the background image on the screen
+  * @param  None
+  * @retval None
+  */
+void SG_DisplayBackgroundImage(BackgroundWidgetTypeDef *pImage,uint32_t buttonsNumber)
+{
+  uint32_t i;
+
+  pending_buffer = 1;
+  /* Set LTDC Line Event  */
+  HAL_LTDC_ProgramLineEvent(&hltdc_discovery, BSP_LCD_GetYSize()/2);  
+  while(pending_buffer != 0)
+  {
+  }
+
+  /* Display the waves buttons */
+  for(i = 0; i < buttonsNumber; i++)
+  {  
+    /* Copy background image on the Screen */
+    LCD_CopyImage((uint32_t*)(pImage[i].FrameBuffer),(uint32_t *)LCD_FRAME_BUFFER, pImage[i].imageParams.Xpos, pImage[i].imageParams.Ypos, pImage[i].imageParams.Width, pImage[i].imageParams.Height, pImage[i].imageParams.ColorMode, 0);
+  }
+ 
+}
+
+/* Private functions ---------------------------------------------------------*/
+
+void LCD_BlendImage(uint32_t *pSrc, uint32_t *pDst, uint32_t Xpos, uint32_t Ypos, uint32_t Width, uint32_t Height, uint32_t ColorMode, uint32_t InputOffset)
+{
+  uint32_t destination;
+  uint32_t X_size;
+  
+  X_size = BSP_LCD_GetXSize();
+  
+  pending_buffer = 1;
+  /* Set LTDC Line Event  */
+  HAL_LTDC_ProgramLineEvent(&hltdc_discovery, 0);  
+  while(pending_buffer != 0) {}
+
+  /* Init DMA2D */
+  /*##-1- Configure the DMA2D Mode, Color Mode and output offset #############*/ 
+  DMA2D_Handle.Init.Mode         = DMA2D_M2M_BLEND;
+  DMA2D_Handle.Init.ColorMode    = DMA2D_OUTPUT_ARGB8888;
+  DMA2D_Handle.Init.OutputOffset = InputOffset;
+
+  /*##-2- DMA2D Callbacks Configuration ######################################*/
+  DMA2D_Handle.XferCpltCallback  = NULL;
+
+  /*##-3- Foreground Configuration ###########################################*/
+  DMA2D_Handle.LayerCfg[1].AlphaMode = DMA2D_NO_MODIF_ALPHA;
+  DMA2D_Handle.LayerCfg[1].InputAlpha = 0xFF;
+  DMA2D_Handle.LayerCfg[1].InputColorMode = ColorMode;
+  DMA2D_Handle.LayerCfg[1].InputOffset = 0;
+
+  /*##-3- Background Configuration ###########################################*/
+  DMA2D_Handle.LayerCfg[0].AlphaMode = DMA2D_NO_MODIF_ALPHA;
+  DMA2D_Handle.LayerCfg[0].InputAlpha = 0xFF;
+  DMA2D_Handle.LayerCfg[0].InputColorMode = DMA2D_INPUT_ARGB8888;
+  DMA2D_Handle.LayerCfg[0].InputOffset = InputOffset;
+
+  DMA2D_Handle.Instance          = DMA2D; 
+
+  /*##-4- DMA2D Initialization     ###########################################*/
+  HAL_DMA2D_Init(&DMA2D_Handle);
+  HAL_DMA2D_ConfigLayer(&DMA2D_Handle, 1);     
+  HAL_DMA2D_ConfigLayer(&DMA2D_Handle, 0); 
+
+  /*##-1- calculate the destination transfer address  ############*/ 
+  destination = (uint32_t)pDst + (Ypos * X_size + Xpos) * 4;
+
+  HAL_DMA2D_BlendingStart(&DMA2D_Handle, (uint32_t)pSrc, destination, destination, Width, Height);
+  HAL_DMA2D_PollForTransfer(&DMA2D_Handle, 100);
+}
+
+void LCD_CopyImage(uint32_t *pSrc,uint32_t *pDst, uint32_t Xpos, uint32_t Ypos, uint32_t Width, uint32_t Height, uint32_t ColorMode, uint32_t InputOffset)
+{
+  uint32_t destination;
+  uint32_t X_size;
+  
+  X_size = BSP_LCD_GetXSize();
+  pending_buffer = 1;
+  /* Set LTDC Line Event  */
+  HAL_LTDC_ProgramLineEvent(&hltdc_discovery, 0);  
+  while(pending_buffer != 0) {}
+  
+  
+  /* Init DMA2D */
+  /*##-1- Configure the DMA2D Mode, Color Mode and output offset #############*/ 
+  DMA2D_Handle.Init.Mode         = DMA2D_M2M_PFC;
+  DMA2D_Handle.Init.ColorMode    = DMA2D_OUTPUT_ARGB8888;
+  DMA2D_Handle.Init.OutputOffset = X_size - Width;     
+  
+  /*##-2- DMA2D Callbacks Configuration ######################################*/
+  DMA2D_Handle.XferCpltCallback  = NULL;
+  
+  /*##-3- Foreground Configuration ###########################################*/
+  DMA2D_Handle.LayerCfg[1].AlphaMode = DMA2D_REPLACE_ALPHA;
+  DMA2D_Handle.LayerCfg[1].InputAlpha = 0xFF;
+  DMA2D_Handle.LayerCfg[1].InputColorMode = ColorMode;
+  DMA2D_Handle.LayerCfg[1].InputOffset = InputOffset;
+  
+  DMA2D_Handle.Instance          = DMA2D; 
+  
+  /*##-4- DMA2D Initialization     ###########################################*/
+  HAL_DMA2D_Init(&DMA2D_Handle);
+  HAL_DMA2D_ConfigLayer(&DMA2D_Handle, 1);     
+  
+  /*##-1- calculate the destination transfer address  ############*/ 
+  
+  destination = (uint32_t)pDst + (Ypos * X_size + Xpos) * 4;
+  
+  HAL_DMA2D_Start(&DMA2D_Handle, (uint32_t)pSrc, destination, Width, Height);
+  HAL_DMA2D_PollForTransfer(&DMA2D_Handle, 100);
+}
+
+void HAL_LTDC_LineEventCallback(LTDC_HandleTypeDef *hltdc)
+{
+  pending_buffer = 0;    
+}
+
+/**
+  * @}
+  */
+
+/**
+  * @}
+  */
+/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+

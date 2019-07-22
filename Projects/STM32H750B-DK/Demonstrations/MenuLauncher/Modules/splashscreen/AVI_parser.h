@@ -1,0 +1,270 @@
+/**
+  ******************************************************************************
+  * @file    JPEG/MJPEG_VideoDecodingFromQSPI/Inc//AVI_parser.h
+  * @author  MCD Application Team
+  * @version V0.5.0
+  * @date    18-February-2017  
+  * @brief   Header for AVI_parser.c file
+  ******************************************************************************
+  * @attention
+  *
+  * <h2><center>&copy; Copyright © 2017 STMicroelectronics International N.V. 
+  * All rights reserved.</center></h2>
+  *
+  * Redistribution and use in source and binary forms, with or without 
+  * modification, are permitted, provided that the following conditions are met:
+  *
+  * 1. Redistribution of source code must retain the above copyright notice, 
+  *    this list of conditions and the following disclaimer.
+  * 2. Redistributions in binary form must reproduce the above copyright notice,
+  *    this list of conditions and the following disclaimer in the documentation
+  *    and/or other materials provided with the distribution.
+  * 3. Neither the name of STMicroelectronics nor the names of other 
+  *    contributors to this software may be used to endorse or promote products 
+  *    derived from this software without specific written permission.
+  * 4. This software, including modifications and/or derivative works of this 
+  *    software, must execute solely and exclusively on microcontroller or
+  *    microprocessor devices manufactured by or for STMicroelectronics.
+  * 5. Redistribution and use of this software other than as permitted under 
+  *    this license is void and will automatically terminate your rights under 
+  *    this license. 
+  *
+  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS" 
+  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT 
+  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
+  * PARTICULAR PURPOSE AND NON-INFRINGEMENT OF THIRD PARTY INTELLECTUAL PROPERTY
+  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT 
+  * SHALL STMICROELECTRONICS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+  * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, 
+  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
+  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
+  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  *
+  ******************************************************************************
+  */
+
+/* Define to prevent recursive inclusion -------------------------------------*/
+
+#ifndef  __GUI_AVI_H
+#define  __GUI_AVI_H
+
+#include "main.h"
+#include <string.h>
+    
+#if defined(__cplusplus)
+extern "C" {     /* Make sure we have C-declarations in C++ programs */
+#endif
+
+/* Exported variables --------------------------------------------------------*/
+/* Exported constants --------------------------------------------------------*/
+#define MAX_CHUNK_SIZE    ((uint32_t)(180 * 64)) /* 30 * YCBCR_420_BLOCK_SIZE */
+// #define MAX_CHUNK_SIZE    ((uint32_t)(1024 * 64))
+
+#define AVI_RIFF_ID			  0x46464952
+#define AVI_AVI_ID			  0x20495641
+#define AVI_LIST_ID			  0x5453494C
+#define AVI_HDRL_ID			  0x6C726468
+#define AVI_MOVI_ID			  0x69766F6D
+#define AVI_STRL_ID			  0x6C727473
+
+#define AVI_AVIH_ID       0x68697661
+#define AVI_STRH_ID			  0x68727473
+#define AVI_STRF_ID			  0x66727473
+#define AVI_STRD_ID			  0x64727473
+
+#define AVI_VIDS_STREAM   0x73646976
+#define AVI_AUDS_STREAM   0x73647561
+
+#define AVI_VIDS_FLAG     0x6463
+#define AVI_AUDS_FLAG     0x7762
+
+#define AVI_FORMAT_MJPG   0x47504A4D
+
+#define  AVI_END_FILE     0
+#define  AVI_VIDEO_FRAME  1
+#define  AVI_AUDIO_FRAME  2
+#define  AVI_ERROR        3
+  
+/* Exported macro ------------------------------------------------------------*/
+#define	 AVI_MAKEWORD(ptr)	(uint16_t)(((uint16_t)*((uint8_t*)(ptr))<<8)|(uint16_t)*(uint8_t*)((ptr)+1))
+#define  AVI_MAKEDWORD(ptr)	(uint32_t)(((uint16_t)*(uint8_t*)(ptr)|(((uint16_t)*(uint8_t*)(ptr+1))<<8)|\
+						(((uint16_t)*(uint8_t*)(ptr+2))<<16)|(((uint16_t)*(uint8_t*)(ptr+3))<<24)))   
+/* Exported types ------------------------------------------------------------*/  
+typedef enum {
+  AVI_OK   =0,			
+  AVI_RIFF_ERR,			
+  AVI_AVI_ERR,			
+  AVI_LIST_ERR,			
+  AVI_HDRL_ERR,			
+  AVI_AVIH_ERR,			
+  AVI_STRL_ERR,			
+  AVI_STRH_ERR,			
+  AVI_STRF_ERR,			
+  AVI_MOVI_ERR,			
+  AVI_FORMAT_ERR,			
+  AVI_STREAM_ERR,			
+}AVISTATUS;
+
+
+typedef struct  
+{	
+  uint32_t RiffID;			
+  uint32_t FileSize;			
+  uint32_t AviID;			
+}AVI_HEADER;
+
+typedef struct
+{	
+  uint32_t FrameID;			
+  uint32_t FrameSize;			
+}FRAME_HEADER;
+
+typedef struct
+{	
+  uint32_t ListID;			
+  uint32_t BlockSize;			
+  uint32_t ListType;			
+}LIST_HEADER;
+
+typedef struct
+{	
+  uint32_t BlockID;		
+  uint32_t BlockSize;		
+  uint32_t SecPerFrame;	
+  uint32_t MaxByteSec; 	
+  uint32_t PaddingGranularity; 
+  uint32_t Flags;		
+  uint32_t TotalFrame;		
+  uint32_t InitFrames;  	
+  uint32_t Streams;		
+  uint32_t RefBufSize;		
+  uint32_t Width;		
+  uint32_t Height;		
+  uint32_t Reserved[4];	
+}AVIH_HEADER;
+
+
+typedef struct
+{	
+  uint32_t BlockID;			
+  uint32_t BlockSize;			
+  uint32_t StreamType;			
+  uint32_t Handler;			
+  uint32_t Flags;  			
+  uint16_t Priority;			
+  uint16_t Language;			
+  uint32_t InitFrames;  		
+  uint32_t Scale;			
+  uint32_t Rate; 			
+  uint32_t Start;			
+  uint32_t Length;			
+  uint32_t RefBufSize;  		
+  uint32_t Quality;			
+  uint32_t SampleSize;			
+  struct				
+  {				
+    uint16_t  Left;
+    uint16_t  Top;
+    uint16_t  Right;
+    uint16_t  Bottom;
+  }Frame;				
+}STRH_HEADER;
+
+
+typedef struct
+{
+  uint32_t     BmpSize;		
+  uint32_t     Width;			
+  uint32_t     Height;			
+  uint16_t     Planes;			
+  uint16_t     BitCount;			
+  uint32_t     Compression;		
+  uint32_t     SizeImage;			
+  uint32_t     XpixPerMeter;		
+  uint32_t     YpixPerMeter;		
+  uint32_t     ClrUsed;			
+  uint32_t     ClrImportant;		
+}BMP_HEADER;
+
+
+typedef struct 
+{
+  uint8_t  rgbBlue;			
+  uint8_t  rgbGreen; 			
+  uint8_t  rgbRed; 			
+  uint8_t  rgbReserved;		
+}AVIRGBQUAD;
+
+typedef struct 
+{
+  uint32_t BlockID;		
+  uint32_t BlockSize;		
+  BMP_HEADER bmiHeader;  	
+  AVIRGBQUAD bmColors[1];	
+}STRF_BMPHEADER;  
+
+
+typedef struct 
+{
+  uint32_t BlockID;			
+  uint32_t BlockSize;			
+  uint16_t FormatTag;			
+  uint16_t Channels;	  		
+  uint32_t SampleRate; 		
+  uint32_t BaudRate;   		
+  uint16_t BlockAlign; 		
+  uint16_t Size;			
+}STRF_WAVHEADER;
+
+
+#if defined (__GNUC__)
+typedef struct  __attribute__((packed))
+#else
+typedef __packed struct
+#endif
+{	  
+  uint32_t  SecPerFrame;		
+  uint32_t  TotalFrame;
+  uint32_t  FrameRate;
+  uint32_t  Width;			
+  uint32_t  Height;			
+  uint32_t  SampleRate; 		
+  uint16_t  Channels;	  		
+  uint16_t  AudioBufSize;		
+  uint16_t  AudioType;	  		
+  uint16_t  StreamID;			
+  uint32_t  StreamSize;			
+  uint8_t*  VideoFLAG;			
+  uint8_t*  AudioFLAG;			
+}AVI_INFO;
+
+typedef struct
+{
+  AVI_INFO  aviInfo;       
+  uint32_t  CurrentImage;              
+  uint32_t  FrameSize;
+  uint8_t   *pVideoBuffer;  
+  uint8_t   *pAudioBuffer;    
+  uint32_t  FileSize;
+  uint32_t  AVIFileAddress;
+  uint32_t Offset;
+  
+} AVI_CONTEXT;
+
+
+
+
+/* Exported functions ------------------------------------------------------- */  
+uint32_t AVI_ParserInit(AVI_CONTEXT * pavi, uint32_t AVI_FileAddress);
+uint32_t AVI_GetFrame(AVI_CONTEXT * pavi);
+
+
+#if defined(__cplusplus)
+}
+#endif
+
+#endif   
+
+/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

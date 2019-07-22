@@ -1,0 +1,25 @@
+; *************************************************************
+; *** scatter file for OSCILO CM7 ***
+; *************************************************************
+
+LR_IROM1 0x08120000 0x000A0000  {    ; load region size_region
+  ER_IROM1 0x08120000 0x000A0000  {  ; load address = execution address
+   *.o (RESET, +First)
+   *(InRoot$$Sections)
+   .ANY (+RO)
+  }
+  RW_IRAM1 0x24000000 0x00010000  {  ; RW data
+   .ANY (+RW +ZI)
+  }
+}
+
+LR_IROM2 0x081C0000 0x00040000  {
+  ER_IROM2 0x081C0000 0x00040000  {  ; load address = execution address
+    cm4_code.o (+RO)
+  }
+}
+LR_QSPI 0x91000000 0x2000000  {
+	ER_QSPI 0x91000000 0x2000000 {
+	*.o (.ExtQSPIFlashSection)
+ }
+}
