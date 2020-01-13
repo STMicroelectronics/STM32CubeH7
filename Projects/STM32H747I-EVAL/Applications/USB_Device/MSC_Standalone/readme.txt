@@ -121,7 +121,7 @@ compiler preprocessor (already done in the preconfigured projects provided with 
 
   - This application runs on STM32H747xx devices.
     
-  - This application has been tested with STMicroelectronics STM32H747I-EVAL RevB 
+  - This application has been tested with STMicroelectronics STM32H747I-EVAL  
     evaluation boards and can be easily tailored to any other supported device 
     and development board.
 

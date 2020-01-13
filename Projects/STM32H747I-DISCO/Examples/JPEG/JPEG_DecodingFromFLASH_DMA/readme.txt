@@ -126,7 +126,7 @@ Display, Graphic, JPEG, Decoding, Flash memory, DSI, LTDC, DMA, MDMA, DMA2D, DSI
 
   - This example runs on STM32H747xx/STM32H757xx devices.
     
-  - This example has been tested with STMicroelectronics STM32H747I-DISCO revD 
+  - This example has been tested with STMicroelectronics STM32H747I-DISCO  
     discovery boards and can be easily tailored to any other supported device 
     and development board.
     

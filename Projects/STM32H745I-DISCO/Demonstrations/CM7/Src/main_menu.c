@@ -65,6 +65,9 @@ static uint32_t DisplyMainMenu;
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 pFunction JumpToApplication;
+TS_Init_t hTS;
+TS_State_t  TS_State = {0};
+  
 /* Private variable ------------------------------------------------------------*/
 BackgroundWidgetTypeDef MenuImages[9] = 
 {
@@ -182,7 +185,8 @@ uint32_t * Coremark_signature = (uint32_t *)SIGNATURE_COREMARK_LOCATION;
   */
 int main(void)
 {  
-  
+  BSP_QSPI_Init_t qspi_init ;
+
   /*After Wakeup from Standby Mode , return to Oscilloscope Demo */
   if(__HAL_PWR_GET_FLAG(PWR_FLAG_SB_D1) != 0)
   {
@@ -220,41 +224,49 @@ int main(void)
 
   /* Initialize LED1 */
   BSP_LED_Init(LED1);
-  BSP_LED_On(LED1);
+  BSP_LED_On(LED1);  
 
-  BSP_QSPI_Init();
-  BSP_QSPI_EnableMemoryMappedMode();
+  qspi_init.InterfaceMode=MT25TL01G_QPI_MODE;
+  qspi_init.TransferRate= MT25TL01G_DTR_TRANSFER ;
+  qspi_init.DualFlashMode= MT25TL01G_DUALFLASH_ENABLE;
+
+  BSP_QSPI_DisableMemoryMappedMode(0);
+  BSP_QSPI_DeInit(0);
+
+  BSP_QSPI_Init(0, &qspi_init);
+  BSP_QSPI_EnableMemoryMappedMode(0);
   DisplyMainMenu = 0; 
   InitMainMenu();
+  
   /* Infinite loop */
   while (1)
   {
     if (DisplyMainMenu == 1)
     {
       /* Clear the LCD */
-      BSP_LCD_Clear(LCD_COLOR_BLACK);
+      GUI_Clear(GUI_COLOR_BLACK);
       
-      BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
-      BSP_LCD_FillRect(0,0,480,60);
+      GUI_SetTextColor(GUI_COLOR_WHITE);
+      GUI_FillRect(0,0,480,60, GUI_COLOR_WHITE);
       /* Display background image */
       DisplayMenuImages(MenuImages,4); 
       /* Display Demo title */
       
-      BSP_LCD_SetTextColor(LCD_COLOR_LIGHTBLUE);
-      BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
-      BSP_LCD_SetFont(&Font24);
-      BSP_LCD_DisplayStringAt(30, 16,(uint8_t *) "STM32H745", LEFT_MODE);
+      GUI_SetTextColor(GUI_COLOR_LIGHTBLUE);
+      GUI_SetBackColor(GUI_COLOR_WHITE);
+      GUI_SetFont(&Font24);
+      GUI_DisplayStringAt(30, 16,(uint8_t *) "STM32H745", LEFT_MODE);
 
-      BSP_LCD_SetTextColor(LCD_COLOR_DARKBLUE);
-      BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
-      BSP_LCD_SetFont(&Font16);
-      BSP_LCD_DisplayStringAt(32, 36,(uint8_t *) "Discovery Kit", LEFT_MODE);
+      GUI_SetTextColor(GUI_COLOR_DARKBLUE);
+      GUI_SetBackColor(GUI_COLOR_WHITE);
+      GUI_SetFont(&Font16);
+      GUI_DisplayStringAt(32, 36,(uint8_t *) "Discovery Kit", LEFT_MODE);
       
-      BSP_LCD_SetTextColor(LCD_COLOR_GRAY);
-      BSP_LCD_SetBackColor(LCD_COLOR_BLACK);
+      GUI_SetTextColor(GUI_COLOR_GRAY);
+      GUI_SetBackColor(GUI_COLOR_BLACK);
 
-      BSP_LCD_SetFont(&Font12);
-      BSP_LCD_DisplayStringAt(2, 256,(uint8_t *) "Copyright (c) STMicroelectronics 2018", RIGHT_MODE);
+      GUI_SetFont(&Font12);
+      GUI_DisplayStringAt(2, 256,(uint8_t *) "Copyright (c) STMicroelectronics 2018", RIGHT_MODE);
       DisplyMainMenu = 0;
     }
 
@@ -272,57 +284,66 @@ int main(void)
 static void InitMainMenu(void)
 {
 
-  /* Init the touch screen */
-  /* Touchscreen initialization */
-  BSP_TS_Init(BSP_LCD_GetXSize(), BSP_LCD_GetYSize());
-
-
+  uint32_t x_size;
+  uint32_t y_size;
+  
   /* Init the Display */  
   InitMenuDisplay();
   
-  BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
-  BSP_LCD_FillRect(0,0,480,60);  
+  BSP_LCD_GetXSize(0, &x_size);
+  BSP_LCD_GetYSize(0, &y_size);
+
+  /* Init the touch screen */
+  /* Touchscreen initialization */
+  hTS.Width = x_size;
+  hTS.Height = y_size;
+  hTS.Orientation =TS_SWAP_XY ;
+  hTS.Accuracy = 5;
+
+  BSP_TS_Init(0, &hTS);
+
+
+  GUI_SetTextColor(GUI_COLOR_WHITE);
+  GUI_FillRect(0,0,480,60, GUI_COLOR_WHITE);  
 
   /* Display background image */
   DisplayMenuImages(MenuImages,4); 
   /* Display Demo title */
 
-  BSP_LCD_SetTextColor(LCD_COLOR_LIGHTBLUE);
-  BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
-  BSP_LCD_SetFont(&Font24);
-  BSP_LCD_DisplayStringAt(30, 16,(uint8_t *) "STM32H745", LEFT_MODE);
+  GUI_SetTextColor(GUI_COLOR_LIGHTBLUE);
+  GUI_SetBackColor(GUI_COLOR_WHITE);
+  GUI_SetFont(&Font24);
+  GUI_DisplayStringAt(30, 16,(uint8_t *) "STM32H745", LEFT_MODE);
   
-  BSP_LCD_SetTextColor(LCD_COLOR_DARKBLUE);
-  BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
-  BSP_LCD_SetFont(&Font16);
-  BSP_LCD_DisplayStringAt(32, 36,(uint8_t *) "Discovery Kit", LEFT_MODE);
+  GUI_SetTextColor(GUI_COLOR_DARKBLUE);
+  GUI_SetBackColor(GUI_COLOR_WHITE);
+  GUI_SetFont(&Font16);
+  GUI_DisplayStringAt(32, 36,(uint8_t *) "Discovery Kit", LEFT_MODE);
 
-  BSP_LCD_SetTextColor(LCD_COLOR_GRAY);
-  BSP_LCD_SetBackColor(LCD_COLOR_BLACK);
+  GUI_SetTextColor(GUI_COLOR_GRAY);
+  GUI_SetBackColor(GUI_COLOR_BLACK);
   
-  BSP_LCD_SetFont(&Font12);
-  BSP_LCD_DisplayStringAt(2, 256,(uint8_t *) "Copyright (c) STMicroelectronics 2018", RIGHT_MODE);
+  GUI_SetFont(&Font12);
+  GUI_DisplayStringAt(2, 256,(uint8_t *) "Copyright (c) STMicroelectronics 2018", RIGHT_MODE);
  
 }
 
 
 void MenuSelection(void)
 {
-  uint16_t x, y;
-  TS_StateTypeDef  TS_State = {0};
-  
+  uint16_t x, y;  
   
   /* Check the touch screen coordinates */
-  BSP_TS_GetState(&TS_State);
+  BSP_TS_GetState(0, &TS_State);
   
-  if(TS_State.touchDetected)
+  if(TS_State.TouchDetected)
   {
     /* One or dual touch have been detected          */
     /* Only take into account the first touch so far */
     
     /* Get X and Y position of the first touch post calibrated */
-    x = TS_State.touchX[0];
-    y = TS_State.touchY[0];
+    x = TS_State.TouchX;
+    y = TS_State.TouchY;
     
     if ((x > 320) && (x < 430) && (y > 110) && (y < 200) )
     {
@@ -336,7 +357,12 @@ void MenuSelection(void)
       if ( (*Oscillo_signature & SIGNATURE_OSCILLO_MASK) == SIGNATURE_OSCILLO_VALUE)
       {
         /* go to demo 1 (Oscillo) */
-        BSP_LCD_DeInit();
+        BSP_QSPI_DisableMemoryMappedMode(0);
+        BSP_QSPI_DeInit(0);
+        BSP_LCD_DeInit(0);
+        BSP_SDRAM_DeInit(0);
+        BSP_TS_DeInit(0);
+
         CPU_CACHE_Disable();
         
         /* Initialize user application's Stack Pointer & Jump to user application */
@@ -346,11 +372,11 @@ void MenuSelection(void)
       }
       else
       {
-        BSP_LCD_SetTextColor(LCD_COLOR_RED);
-        BSP_LCD_SetBackColor(LCD_COLOR_BLACK);
+        GUI_SetTextColor(GUI_COLOR_RED);
+        GUI_SetBackColor(GUI_COLOR_BLACK);
         
-        BSP_LCD_SetFont(&Font12);
-        BSP_LCD_DisplayStringAt(0, 50, (uint8_t *)" Please Load Oscilloscope binary! ", CENTER_MODE);
+        GUI_SetFont(&Font12);
+        GUI_DisplayStringAt(0, 50, (uint8_t *)" Please Load Oscilloscope binary! ", CENTER_MODE);
       }
    
     }
@@ -359,7 +385,12 @@ void MenuSelection(void)
       if ( (*Coremark_signature & SIGNATURE_COREMARK_MASK) == SIGNATURE_COREMARK_VALUE)
       {
         /* go to demo 2 (CoreMark)*/
-        BSP_LCD_DeInit();
+        BSP_QSPI_DisableMemoryMappedMode(0);
+        BSP_QSPI_DeInit(0);
+        BSP_LCD_DeInit(0);
+        BSP_SDRAM_DeInit(0);
+        BSP_TS_DeInit(0);
+   
         CPU_CACHE_Disable();
         /* Initialize user application's Stack Pointer & Jump to user application */
         JumpToApplication = (pFunction) (*(__IO uint32_t*) (DEMO_COREMARK_ADDRESS + 4));
@@ -368,11 +399,11 @@ void MenuSelection(void)
       }
       else
       {
-        BSP_LCD_SetTextColor(LCD_COLOR_RED);
-        BSP_LCD_SetBackColor(LCD_COLOR_BLACK);
+        GUI_SetTextColor(GUI_COLOR_RED);
+        GUI_SetBackColor(GUI_COLOR_BLACK);
         
-        BSP_LCD_SetFont(&Font12);
-        BSP_LCD_DisplayStringAt(0, 50,(uint8_t *) "   Please Load Coremark binary!   ", CENTER_MODE);
+        GUI_SetFont(&Font12);
+        GUI_DisplayStringAt(0, 50,(uint8_t *) "   Please Load Coremark binary!   ", CENTER_MODE);
 
       }
     }    
@@ -382,33 +413,31 @@ void MenuSelection(void)
 
 void SystemInformationsSlide(void)
 {
-  
-  TS_StateTypeDef  TS_State = {0};
   /* Clear the LCD */
-  BSP_LCD_Clear(0x00000000);
+  GUI_Clear(GUI_COLOR_BLACK);
   
   /* Display background image */
   DisplayMenuImages(&MenuImages[4],5); 
   
   /* Display Slide title */
-  BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
-  BSP_LCD_SetBackColor(LCD_COLOR_BLACK);
+  GUI_SetTextColor(GUI_COLOR_WHITE);
+  GUI_SetBackColor(GUI_COLOR_BLACK);
   
-  BSP_LCD_SetFont(&Font24);
-  BSP_LCD_DisplayStringAt(0, 16,(uint8_t *) "System Information", CENTER_MODE);
+  GUI_SetFont(&Font24);
+  GUI_DisplayStringAt(0, 16,(uint8_t *) "System Information", CENTER_MODE);
   
-  BSP_LCD_SetTextColor(LCD_COLOR_GRAY);
-  BSP_LCD_SetBackColor(LCD_COLOR_BLACK);
+  GUI_SetTextColor(GUI_COLOR_GRAY);
+  GUI_SetBackColor(GUI_COLOR_BLACK);
   
-  BSP_LCD_SetFont(&Font12);
-  BSP_LCD_DisplayStringAt(2, 256,(uint8_t *) "Copyright (c) STMicroelectronics 2018", RIGHT_MODE);
+  GUI_SetFont(&Font12);
+  GUI_DisplayStringAt(2, 256,(uint8_t *) "Copyright (c) STMicroelectronics 2018", RIGHT_MODE);
   
-  BSP_TS_GetState(&TS_State);
+  BSP_TS_GetState(0, &TS_State);
   
-  while((TS_State.touchDetected == 0) || ((TS_State.touchX[0]<430)||(TS_State.touchY[0] > 50)) )
+  while((TS_State.TouchDetected == 0) || ((TS_State.TouchX<430)||(TS_State.TouchY > 50)) )
   {
-    TS_State.touchDetected = 0;
-    BSP_TS_GetState(&TS_State);
+    TS_State.TouchDetected = 0;
+    BSP_TS_GetState(0, &TS_State);
     HAL_Delay(10);
   }
   DisplyMainMenu = 1; 
@@ -655,7 +684,7 @@ static void MPU_Config(void)
 
   /* Configure the MPU attributes as WT for SRAM */
   MPU_InitStruct.Enable = MPU_REGION_ENABLE;
-  MPU_InitStruct.BaseAddress = SDRAM_DEVICE_ADDR;
+  MPU_InitStruct.BaseAddress = LCD_FRAME_BUFFER;
   MPU_InitStruct.Size = MPU_REGION_SIZE_512KB;
   MPU_InitStruct.AccessPermission = MPU_REGION_FULL_ACCESS;
   MPU_InitStruct.IsBufferable = MPU_ACCESS_NOT_BUFFERABLE;

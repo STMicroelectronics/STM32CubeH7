@@ -116,11 +116,11 @@ compiler preprocessor (already done in the preconfigured projects provided with 
 
   - This application runs on STM32H747xx devices.
     
-  - This application has been tested with STMicroelectronics STM32H747I-DISCO RevC 
+  - This application has been tested with STMicroelectronics STM32H747I-DISCO  
     Discovery boards and can be easily tailored to any other supported device 
     and development board.
 
-  - STM32H747I-Discovery RevC Set-up
+  - STM32H747I-Discovery  Set-up
     - Connect the STM32H747I-DISCO board to the PC through 'USB micro A-Male 
       to A-Male' cable to the connector:
       - CN1 : to use USB High Speed (HS)

@@ -34,13 +34,14 @@
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 uint8_t CM7_Message[]="This Message is from CM7 Core \n\r";
-
 #if defined ( __ICCARM__ )
 #pragma location = 0x38001100 /* Uart handle should be ina shared memory in order to
                                 to be inherited by the second core */
 UART_HandleTypeDef UartHandle;
+
 #elif defined ( __CC_ARM )
 UART_HandleTypeDef UartHandle __attribute__((at(0x38001100)));
+
 
 #elif defined ( __GNUC__ )
 UART_HandleTypeDef UartHandle __attribute__((section(".UartHandle_section")));
@@ -58,6 +59,7 @@ static void ResMgrCallback (uint32_t id, uint32_t msg);
 static void CustomIPC_RecievedMessage (uint32_t id, uint32_t msg);
 static void Error_Handler_Default(void);
 static void Error_Handler(void);
+static void USART1_MspInit(void);
 /* Private functions ---------------------------------------------------------*/
 
 /**
@@ -141,6 +143,10 @@ int main(void)
   BSP_LED_Init(LED1);
   BSP_LED_Init(LED3);
   /* Uart Pre-Initialization*/
+  
+  USART1_MspInit();
+  
+  UartHandle.Instance          = USART1;
   UartHandle.Init.BaudRate   = 115200;
   UartHandle.Init.WordLength = UART_WORDLENGTH_8B;
   UartHandle.Init.StopBits   = UART_STOPBITS_1;
@@ -176,10 +182,13 @@ int main(void)
     
     BSP_LED_On(LED1);
     /* De-initialize the resource */
-    BSP_COM_DeInit(COM1, &UartHandle);
+    if(HAL_UART_DeInit( &UartHandle) != HAL_OK)
+    {
+      Error_Handler();
+    }
     /* Initialize the resource */
-    BSP_COM_Init(COM1, &UartHandle);
-    HAL_UART_Transmit(&UartHandle,CM7_Message,sizeof(CM7_Message),0xff);
+    HAL_UART_Init(&UartHandle);
+    HAL_UART_Transmit(&UartHandle,CM7_Message,sizeof(CM7_Message),0xff); 
     HAL_Delay(1000); /* To simutate the use of the resource*/
     /* We should not de-initialize the resource, it will be used by the second core */
     ResMgr_Release(RESMGR_ID_USART1,RESMGR_FLAGS_CPU1);
@@ -206,7 +215,36 @@ static void CustomIPC_RecievedMessage (uint32_t id, uint32_t msg)
   ResoucreID = id;
 }
 
+/**
+  * @brief  Initializes UART MSP.
+  * @param  huart UART handle
+  * @retval None
+  */
+static void USART1_MspInit(void)
+{
+  GPIO_InitTypeDef gpio_init_structure;
 
+  /* Enable GPIO clock */
+  COM1_TX_GPIO_CLK_ENABLE();
+  COM1_RX_GPIO_CLK_ENABLE();
+
+  /* Enable USART clock */
+  COM1_CLK_ENABLE();
+
+  /* Configure USART Tx as alternate function */
+  gpio_init_structure.Pin = COM1_TX_PIN;
+  gpio_init_structure.Mode = GPIO_MODE_AF_PP;
+  gpio_init_structure.Speed = GPIO_SPEED_FREQ_HIGH;
+  gpio_init_structure.Pull = GPIO_PULLUP;
+  gpio_init_structure.Alternate = COM1_TX_AF;
+  HAL_GPIO_Init(COM1_TX_GPIO_PORT, &gpio_init_structure);
+
+  /* Configure USART Rx as alternate function */
+  gpio_init_structure.Pin = COM1_RX_PIN;
+  gpio_init_structure.Mode = GPIO_MODE_AF_PP;
+  gpio_init_structure.Alternate = COM1_RX_AF;
+  HAL_GPIO_Init(COM1_RX_GPIO_PORT, &gpio_init_structure);
+}
 /**
   * @brief  System Clock Configuration
   *         The system Clock is configured as follow :

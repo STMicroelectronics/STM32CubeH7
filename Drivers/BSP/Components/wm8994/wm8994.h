@@ -2,46 +2,29 @@
   ******************************************************************************
   * @file    wm8994.h
   * @author  MCD Application Team
-  * @version V2.1.0
-  * @date    22-February-2016
   * @brief   This file contains all the functions prototypes for the 
   *          wm8994.c driver.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; Copyright (c) 2014 STMicroelectronics.
+  * All rights reserved.</center></h2>
   *
-  * Redistribution and use in source and binary forms, with or without modification,
-  * are permitted provided that the following conditions are met:
-  *   1. Redistributions of source code must retain the above copyright notice,
-  *      this list of conditions and the following disclaimer.
-  *   2. Redistributions in binary form must reproduce the above copyright notice,
-  *      this list of conditions and the following disclaimer in the documentation
-  *      and/or other materials provided with the distribution.
-  *   3. Neither the name of STMicroelectronics nor the names of its contributors
-  *      may be used to endorse or promote products derived from this software
-  *      without specific prior written permission.
-  *
-  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-  * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
-  * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-  * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-  * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-  * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  * This software component is licensed by ST under BSD 3-Clause license,
+  * the "License"; You may not use this file except in compliance with the
+  * License. You may obtain a copy of the License at:
+  *                        opensource.org/licenses/BSD-3-Clause
   *
   ******************************************************************************
   */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __WM8994_H
-#define __WM8994_H
+#ifndef WM8994_H
+#define WM8994_H
 
 /* Includes ------------------------------------------------------------------*/
-#include "../Common/audio.h"
+#include "wm8994_reg.h"
+#include <stddef.h>
 
 /** @addtogroup BSP
   * @{
@@ -50,93 +33,156 @@
 /** @addtogroup Component
   * @{
   */ 
-  
+
 /** @addtogroup WM8994
   * @{
   */
-
-/** @defgroup WM8994_Exported_Types
+  
+/** @defgroup WM8994_Exported_Types Exported Types
   * @{
-  */
+  */   
+typedef int32_t (*WM8994_Init_Func)    (void);
+typedef int32_t (*WM8994_DeInit_Func)  (void);
+typedef int32_t (*WM8994_GetTick_Func) (void);
+typedef int32_t (*WM8994_Delay_Func)   (uint32_t);
+typedef int32_t (*WM8994_WriteReg_Func)(uint16_t, uint16_t, uint8_t*, uint16_t);
+typedef int32_t (*WM8994_ReadReg_Func) (uint16_t, uint16_t, uint8_t*, uint16_t);
 
+typedef struct
+{
+  WM8994_Init_Func          Init;
+  WM8994_DeInit_Func        DeInit;
+  uint16_t                  Address;  
+  WM8994_WriteReg_Func      WriteReg;
+  WM8994_ReadReg_Func       ReadReg; 
+  WM8994_GetTick_Func       GetTick; 
+} WM8994_IO_t;
+
+ 
+typedef struct
+{
+  WM8994_IO_t         IO;
+  wm8994_ctx_t        Ctx;   
+  uint8_t             IsInitialized;
+} WM8994_Object_t;
+
+typedef struct
+{
+  uint32_t   InputDevice;
+  uint32_t   OutputDevice;
+  uint32_t   Frequency;
+  uint32_t   Resolution;
+  uint32_t   Volume;  
+} WM8994_Init_t;
+
+ typedef struct
+{
+  int32_t ( *Init                 ) ( WM8994_Object_t *, WM8994_Init_t* );
+  int32_t ( *DeInit               ) ( WM8994_Object_t * );
+  int32_t ( *ReadID               ) ( WM8994_Object_t *, uint32_t * ); 
+  int32_t ( *Play                 ) ( WM8994_Object_t * );
+  int32_t ( *Pause                ) ( WM8994_Object_t * );
+  int32_t ( *Resume               ) ( WM8994_Object_t * );
+  int32_t ( *Stop                 ) ( WM8994_Object_t *, uint32_t );
+  int32_t ( *SetFrequency         ) ( WM8994_Object_t *, uint32_t );
+  int32_t ( *GetFrequency         ) ( WM8994_Object_t *, uint32_t*);  
+  int32_t ( *SetVolume            ) ( WM8994_Object_t *, uint32_t, uint8_t );
+  int32_t ( *GetVolume            ) ( WM8994_Object_t *, uint32_t, uint8_t*);  
+  int32_t ( *SetMute              ) ( WM8994_Object_t *, uint32_t );
+  int32_t ( *SetOutputMode        ) ( WM8994_Object_t *, uint32_t ); 
+  int32_t ( *SetResolution        ) ( WM8994_Object_t *, uint32_t );
+  int32_t ( *GetResolution        ) ( WM8994_Object_t *, uint32_t*);  
+  int32_t ( *SetProtocol          ) ( WM8994_Object_t *, uint32_t );
+  int32_t ( *GetProtocol          ) ( WM8994_Object_t *, uint32_t*);  
+  int32_t ( *Reset                ) ( WM8994_Object_t * );
+} WM8994_Drv_t;
 /**
   * @}
-  */
+  */ 
 
-/** @defgroup WM8994_Exported_Constants
+/** @defgroup WM8994_Exported_Constants Exported Constants
   * @{
   */ 
+#define WM8994_OK                (0)
+#define WM8994_ERROR             (-1)
 
 /******************************************************************************/
 /***************************  Codec User defines ******************************/
 /******************************************************************************/
-/* Codec output DEVICE */
-#define OUTPUT_DEVICE_SPEAKER                 ((uint16_t)0x0001)
-#define OUTPUT_DEVICE_HEADPHONE               ((uint16_t)0x0002)
-#define OUTPUT_DEVICE_BOTH                    ((uint16_t)0x0003)
-#define OUTPUT_DEVICE_AUTO                    ((uint16_t)0x0004)
-#define INPUT_DEVICE_DIGITAL_MICROPHONE_1     ((uint16_t)0x0100)
-#define INPUT_DEVICE_DIGITAL_MICROPHONE_2     ((uint16_t)0x0200)
-#define INPUT_DEVICE_INPUT_LINE_1             ((uint16_t)0x0300)
-#define INPUT_DEVICE_INPUT_LINE_2             ((uint16_t)0x0400)
-#define INPUT_DEVICE_DIGITAL_MIC1_MIC2        ((uint16_t)0x0800)
+/* Audio Input Device */
+#define WM8994_IN_NONE           0x00U 
+#define WM8994_IN_MIC1           0x01U
+#define WM8994_IN_MIC2           0x02U
+#define WM8994_IN_LINE1          0x03U
+#define WM8994_IN_LINE2          0x04U
+#define WM8994_IN_MIC1_MIC2      0x05U
 
-/* Volume Levels values */
-#define DEFAULT_VOLMIN                0x00
-#define DEFAULT_VOLMAX                0xFF
-#define DEFAULT_VOLSTEP               0x04
-
-#define AUDIO_PAUSE                   0
-#define AUDIO_RESUME                  1
-
-/* Codec POWER DOWN modes */
-#define CODEC_PDWN_HW                 1
-#define CODEC_PDWN_SW                 2
-
-/* MUTE commands */
-#define AUDIO_MUTE_ON                 1
-#define AUDIO_MUTE_OFF                0
+/* Audio Output Device */
+#define WM8994_OUT_NONE          0x00U
+#define WM8994_OUT_SPEAKER       0x01U
+#define WM8994_OUT_HEADPHONE     0x02U
+#define WM8994_OUT_BOTH          0x03U
+#define WM8994_OUT_AUTO          0x04U
 
 /* AUDIO FREQUENCY */
-#define AUDIO_FREQUENCY_192K          ((uint32_t)192000)
-#define AUDIO_FREQUENCY_96K           ((uint32_t)96000)
-#define AUDIO_FREQUENCY_48K           ((uint32_t)48000)
-#define AUDIO_FREQUENCY_44K           ((uint32_t)44100)
-#define AUDIO_FREQUENCY_32K           ((uint32_t)32000)
-#define AUDIO_FREQUENCY_22K           ((uint32_t)22050)
-#define AUDIO_FREQUENCY_16K           ((uint32_t)16000)
-#define AUDIO_FREQUENCY_11K           ((uint32_t)11025)
-#define AUDIO_FREQUENCY_8K            ((uint32_t)8000)  
+#define WM8994_FREQUENCY_192K    192000
+#define WM8994_FREQUENCY_176K    176400
+#define WM8994_FREQUENCY_96K     96000
+#define WM8994_FREQUENCY_88K     88200  
+#define WM8994_FREQUENCY_48K     48000
+#define WM8994_FREQUENCY_44K     44100
+#define WM8994_FREQUENCY_32K     32000
+#define WM8994_FREQUENCY_22K     22050
+#define WM8994_FREQUENCY_16K     16000
+#define WM8994_FREQUENCY_11K     11025
+#define WM8994_FREQUENCY_8K      8000  
 
-#define VOLUME_CONVERT(Volume)        (((Volume) > 100)? 100:((uint8_t)(((Volume) * 63) / 100)))
-#define VOLUME_IN_CONVERT(Volume)     (((Volume) >= 100)? 239:((uint8_t)(((Volume) * 240) / 100)))
+/* AUDIO RESOLUTION */
+#define WM8994_RESOLUTION_16b    0x00U
+#define WM8994_RESOLUTION_20b    0x01U
+#define WM8994_RESOLUTION_24b    0x02U
+#define WM8994_RESOLUTION_32b    0x03U
 
-/******************************************************************************/
-/****************************** REGISTER MAPPING ******************************/
-/******************************************************************************/
+/* Codec stop options */
+#define WM8994_PDWN_HW           0x00U
+#define WM8994_PDWN_SW           0x01U
+
+/* Volume Input Output selection */
+#define VOLUME_INPUT                  0U
+#define VOLUME_OUTPUT                 1U
+
+/* MUTE commands */
+#define WM8994_MUTE_ON                1U
+#define WM8994_MUTE_OFF               0U
+
+/* AUDIO PROTOCOL */
+#define WM8994_PROTOCOL_R_JUSTIFIED    ((uint16_t)0x0000)
+#define WM8994_PROTOCOL_L_JUSTIFIED    ((uint16_t)0x0001)
+#define WM8994_PROTOCOL_I2S            ((uint16_t)0x0002)
+#define WM8994_PROTOCOL_DSP            ((uint16_t)0x0003)
+
+#define VOLUME_OUT_INVERT(Volume)     ((uint8_t)(((Volume) * 100) / 63))
+#define VOLUME_IN_INVERT(Volume)      ((uint8_t)(((Volume) * 100) / 239))
+
 /** 
   * @brief  WM8994 ID  
   */  
-#define  WM8994_ID    0x8994
-
-/**
-  * @brief Device ID Register: Reading from this register will indicate device 
-  *                            family ID 8994h
-  */
-#define WM8994_CHIPID_ADDR                  0x00
+#define  WM8994_ID    0x8994U
 
 /**
   * @}
   */ 
-
-/** @defgroup WM8994_Exported_Macros
+  
+/** @addtogroup WM8994_Exported_Variables
   * @{
   */ 
+/* Audio driver structure */
+extern WM8994_Drv_t WM8994_Driver;  
 /**
   * @}
   */ 
 
-/** @defgroup WM8994_Exported_Functions
+/** @addtogroup WM8994_Exported_Functions
   * @{
   */
     
@@ -144,34 +190,31 @@
                            Audio Codec functions 
 ------------------------------------------------------------------------------*/
 /* High Layer codec functions */
-uint32_t wm8994_Init(uint16_t DeviceAddr, uint16_t OutputInputDevice, uint8_t Volume, uint32_t AudioFreq);
-void     wm8994_DeInit(void);
-uint32_t wm8994_ReadID(uint16_t DeviceAddr);
-uint32_t wm8994_Play(uint16_t DeviceAddr, uint16_t* pBuffer, uint16_t Size);
-uint32_t wm8994_Pause(uint16_t DeviceAddr);
-uint32_t wm8994_Resume(uint16_t DeviceAddr);
-uint32_t wm8994_Stop(uint16_t DeviceAddr, uint32_t Cmd);
-uint32_t wm8994_SetVolume(uint16_t DeviceAddr, uint8_t Volume);
-uint32_t wm8994_SetMute(uint16_t DeviceAddr, uint32_t Cmd);
-uint32_t wm8994_SetOutputMode(uint16_t DeviceAddr, uint8_t Output);
-uint32_t wm8994_SetFrequency(uint16_t DeviceAddr, uint32_t AudioFreq);
-uint32_t wm8994_Reset(uint16_t DeviceAddr);
-
-/* AUDIO IO functions */
-void    AUDIO_IO_Init(void);
-void    AUDIO_IO_DeInit(void);
-void    AUDIO_IO_Write(uint8_t Addr, uint16_t Reg, uint16_t Value);
-uint8_t AUDIO_IO_Read(uint8_t Addr, uint16_t Reg);
-void    AUDIO_IO_Delay(uint32_t Delay);
-
-/* Audio driver structure */
-extern AUDIO_DrvTypeDef   wm8994_drv;
-
-#endif /* __WM8994_H */
-
+int32_t WM8994_RegisterBusIO (WM8994_Object_t *pObj, WM8994_IO_t *pIO);
+int32_t WM8994_Init(WM8994_Object_t *pObj, WM8994_Init_t *pInit);
+int32_t WM8994_DeInit(WM8994_Object_t *pObj);
+int32_t WM8994_ReadID(WM8994_Object_t *pObj, uint32_t *Id);
+int32_t WM8994_Play(WM8994_Object_t *pObj);
+int32_t WM8994_Pause(WM8994_Object_t *pObj);
+int32_t WM8994_Resume(WM8994_Object_t *pObj);
+int32_t WM8994_Stop(WM8994_Object_t *pObj, uint32_t CodecPdwnMode);
+int32_t WM8994_SetVolume(WM8994_Object_t *pObj, uint32_t InputOutput, uint8_t Volume);
+int32_t WM8994_GetVolume(WM8994_Object_t *pObj, uint32_t InputOutput, uint8_t *Volume);
+int32_t WM8994_SetMute(WM8994_Object_t *pObj, uint32_t Cmd);
+int32_t WM8994_SetOutputMode(WM8994_Object_t *pObj, uint32_t Output);
+int32_t WM8994_SetResolution(WM8994_Object_t *pObj, uint32_t Resolution);
+int32_t WM8994_GetResolution(WM8994_Object_t *pObj, uint32_t *Resolution);
+int32_t WM8994_SetProtocol(WM8994_Object_t *pObj, uint32_t Protocol);
+int32_t WM8994_GetProtocol(WM8994_Object_t *pObj, uint32_t *Protocol);
+int32_t WM8994_SetFrequency(WM8994_Object_t *pObj, uint32_t AudioFreq);
+int32_t WM8994_GetFrequency(WM8994_Object_t *pObj, uint32_t *AudioFreq);
+int32_t WM8994_Reset(WM8994_Object_t *pObj);
 /**
   * @}
   */ 
+
+#endif /* WM8994_H */
+
 
 /**
   * @}

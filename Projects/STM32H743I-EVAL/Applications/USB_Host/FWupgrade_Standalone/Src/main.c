@@ -118,9 +118,6 @@ int main(void)
   */
 static void FW_InitApplication(void)
 {
-  /* Initialize IO expander */
-  BSP_IO_Init();
-
   /* Configure LED1, LED2, LED3 and LED4 */
   BSP_LED_Init(LED1);
   BSP_LED_Init(LED2);
@@ -266,7 +263,32 @@ void SystemClock_Config(void)
   /* Enables the I/O Compensation Cell */
   HAL_EnableCompensationCell();
 }
-
+/**
+  * @brief  Clock Config.
+  * @param  hltdc: LTDC handle
+  * @note   This API is called by BSP_LCD_Init()
+  * @retval None
+  */
+HAL_StatusTypeDef MX_LTDC_ClockConfig(LTDC_HandleTypeDef *hltdc)
+{
+  /* In case of double layers the bandwidth is arround 80MBytesPerSec => 20MHz (<25MHz) */
+  /* so the PLL3R is configured to provide this clock */
+  /* AMPIRE640480 LCD clock configuration */
+  /* PLL3_VCO Input = HSE_VALUE/PLL3M = 1 Mhz */
+  /* PLL3_VCO Output = PLL3_VCO Input * PLL3N = 336 Mhz */
+  /* PLLLCDCLK = PLL3_VCO Output/PLL3R = 336/16 = 21Mhz */
+  /* LTDC clock frequency = PLLLCDCLK = 21 Mhz */
+  /* USB uses same pll3 as clock frequency and PLL3Q as devider: USB clock frequency = 48 Mhz */
+  RCC_PeriphCLKInitTypeDef periph_clk_init_struct;
+  periph_clk_init_struct.PLL3.PLL3R = 16;
+  periph_clk_init_struct.PeriphClockSelection = RCC_PERIPHCLK_LTDC;
+  periph_clk_init_struct.PLL3.PLL3M = 25;
+  periph_clk_init_struct.PLL3.PLL3N = 336;
+  periph_clk_init_struct.PLL3.PLL3FRACN = 0;
+  periph_clk_init_struct.PLL3.PLL3P = 2;
+  periph_clk_init_struct.PLL3.PLL3Q = 7;
+  return HAL_RCCEx_PeriphCLKConfig(&periph_clk_init_struct);
+}
 /**
   * @brief  CPU L1-Cache enable.
   * @param  None

@@ -26,11 +26,14 @@
 #include "usbh_core.h"
 #include "stm32h747i_eval.h"
 #include "stm32h747i_eval_io.h"
-#include "lcd_log.h"
 #include "usbh_msc.h"
 #include "ff.h"
 #include "ff_gen_drv.h"
 #include "usbh_diskio.h"
+#include "lcd_trace.h"
+#include "utilities_conf.h"
+#include "basic_gui.h"
+
 /* Exported types ------------------------------------------------------------*/
 typedef enum {
   MSC_DEMO_IDLE = 0,

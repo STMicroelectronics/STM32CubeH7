@@ -198,7 +198,7 @@
                 </option>
                 <option>
                     <name>DSPExtension</name>
-                    <state>0</state>
+                    <state>1</state>
                 </option>
                 <option>
                     <name>TrustZone</name>
@@ -352,9 +352,9 @@
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\CMSIS\Include</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\CMSIS\Device\ST\STM32H7xx\Include</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Inc</state>
-                    <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32H747I-Discovery</state>
+                    <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32H747I-DISCO</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\Components\Common</state>
-                    <state>$PROJ_DIR$\..\..\..\..\..\..\Utilities\Log</state>
+                    <state>$PROJ_DIR$\..\..\..\..\..\..\Utilities\Basic_GUI</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Utilities\Fonts</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Utilities\CPU</state>
                 </option>
@@ -1096,7 +1096,7 @@
                 </option>
                 <option>
                     <name>OGLastSavedByProductVersion</name>
-                    <state>7.80.4.12487</state>
+                    <state>8.20.2.14834</state>
                 </option>
                 <option>
                     <name>GeneralEnableMisra</name>
@@ -1228,7 +1228,7 @@
                 </option>
                 <option>
                     <name>DSPExtension</name>
-                    <state>0</state>
+                    <state>1</state>
                 </option>
                 <option>
                     <name>TrustZone</name>
@@ -1382,9 +1382,9 @@
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\CMSIS\Include</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\CMSIS\Device\ST\STM32H7xx\Include</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Inc</state>
-                    <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32H747I-Discovery</state>
+                    <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32H747I-DISCO</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\Components\Common</state>
-                    <state>$PROJ_DIR$\..\..\..\..\..\..\Utilities\Log</state>
+                    <state>$PROJ_DIR$\..\..\..\..\..\..\Utilities\Basic_GUI</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Utilities\Fonts</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Utilities\CPU</state>
                 </option>
@@ -2074,7 +2074,19 @@
             <group>
                 <name>Components</name>
                 <file>
+                    <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\Components\is42s32800j\is42s32800j.c</name>
+                    <excluded>
+                        <configuration>STM32H747I_DISCO_CM4</configuration>
+                    </excluded>
+                </file>
+                <file>
                     <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\Components\otm8009a\otm8009a.c</name>
+                    <excluded>
+                        <configuration>STM32H747I_DISCO_CM4</configuration>
+                    </excluded>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\Components\otm8009a\otm8009a_reg.c</name>
                     <excluded>
                         <configuration>STM32H747I_DISCO_CM4</configuration>
                     </excluded>
@@ -2083,16 +2095,19 @@
             <group>
                 <name>STM32H747I_DISCO</name>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32H747I-Discovery\stm32h747i_discovery.c</name>
+                    <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32H747I-DISCO\stm32h747i_discovery.c</name>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32H747I-Discovery\stm32h747i_discovery_lcd.c</name>
+                    <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32H747I-DISCO\stm32h747i_discovery_bus.c</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32H747I-DISCO\stm32h747i_discovery_lcd.c</name>
                     <excluded>
                         <configuration>STM32H747I_DISCO_CM4</configuration>
                     </excluded>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32H747I-Discovery\stm32h747i_discovery_sdram.c</name>
+                    <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32H747I-DISCO\stm32h747i_discovery_sdram.c</name>
                     <excluded>
                         <configuration>STM32H747I_DISCO_CM4</configuration>
                     </excluded>
@@ -2243,5 +2258,11 @@
                 <name>Common</name>
             </group>
         </group>
+    </group>
+    <group>
+        <name>Utilities</name>
+        <file>
+            <name>$PROJ_DIR$\..\..\..\..\..\..\Utilities\Basic_GUI\basic_gui.c</name>
+        </file>
     </group>
 </project>

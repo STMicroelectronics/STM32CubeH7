@@ -1,9 +1,9 @@
 /**
   ******************************************************************************
-  * @file    FPU/FPU_Fractal/Src/stm32h7xx_it.c 
+  * @file    FPU/FPU_Fractal/Src/stm32h7xx_it.c
   * @author  MCD Application Team
   * @brief   Main Interrupt Service Routines.
-  *          This file provides exceptions handler and 
+  *          This file provides exceptions handler and
   *          peripherals interrupt service routine.
   ******************************************************************************
   * @attention
@@ -138,9 +138,9 @@ void PendSV_Handler(void)
 void SysTick_Handler(void)
 {
   HAL_IncTick();
-  
+
 }
-  
+
 /**
   * @brief  This function handles External lines 9_5 interrupt request.
   * @param  None
@@ -148,7 +148,7 @@ void SysTick_Handler(void)
   */
 void EXTI9_5_IRQHandler(void)
 {
-  HAL_GPIO_EXTI_IRQHandler(MFX_IRQOUT_PIN); 
+  BSP_TS_IRQHandler(0);
 }
 
 /**
@@ -158,7 +158,7 @@ void EXTI9_5_IRQHandler(void)
   */
 void EXTI15_10_IRQHandler(void)
 {
-  HAL_GPIO_EXTI_IRQHandler(TAMPER_BUTTON_PIN);
+  BSP_PB_IRQHandler(BUTTON_TAMPER);
 }
 
 /******************************************************************************/
@@ -180,7 +180,7 @@ void EXTI15_10_IRQHandler(void)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}

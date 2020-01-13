@@ -8,47 +8,47 @@
 HallwayScreenViewBase::HallwayScreenViewBase() :
     buttonCallback(this, &HallwayScreenViewBase::buttonCallbackHandler)
 {
-    CanvasWidgetRenderer::setupBuffer(canvasBuffer, CANVAS_BUFFER_SIZE);
+    touchgfx::CanvasWidgetRenderer::setupBuffer(canvasBuffer, CANVAS_BUFFER_SIZE);
 
     windowBg.setXY(109, 35);
-    windowBg.setBitmap(Bitmap(BITMAP_WINDOW_BG_ID));
+    windowBg.setBitmap(touchgfx::Bitmap(BITMAP_WINDOW_BG_ID));
 
     cloudContainer.setPosition(0, 42, 1440, 90);
 
     cloud3.setXY(0, 0);
-    cloud3.setBitmap(Bitmap(BITMAP_SKY_BG_REVERSE_ID));
+    cloud3.setBitmap(touchgfx::Bitmap(BITMAP_SKY_BG_REVERSE_ID));
     cloudContainer.add(cloud3);
 
     cloud2.setXY(480, 0);
-    cloud2.setBitmap(Bitmap(BITMAP_SKY_BG_ID));
+    cloud2.setBitmap(touchgfx::Bitmap(BITMAP_SKY_BG_ID));
     cloudContainer.add(cloud2);
 
     cloud1.setXY(960, 0);
-    cloud1.setBitmap(Bitmap(BITMAP_SKY_BG_REVERSE_ID));
+    cloud1.setBitmap(touchgfx::Bitmap(BITMAP_SKY_BG_REVERSE_ID));
     cloudContainer.add(cloud1);
 
     hallback.setXY(0, 0);
-    hallback.setBitmap(Bitmap(BITMAP_ST_HOUSEDEMO_UI_BG_ID));
+    hallback.setBitmap(touchgfx::Bitmap(BITMAP_ST_HOUSEDEMO_UI_BG_ID));
 
     buttonAbout.setXY(207, 42);
-    buttonAbout.setBitmaps(Bitmap(BITMAP_INFOBUTTON_ID), Bitmap(BITMAP_INFOBUTTON_ID));
+    buttonAbout.setBitmaps(touchgfx::Bitmap(BITMAP_INFOBUTTON_ID), touchgfx::Bitmap(BITMAP_INFOBUTTON_ID));
     buttonAbout.setAction(buttonCallback);
 
     buttonBathrrom.setXY(58, 83);
     buttonBathrrom.setVisible(false);
-    buttonBathrrom.setBitmaps(Bitmap(BITMAP_BATHROOM_NORMAL_ID), Bitmap(BITMAP_BATHROOM_PRESSED_ID));
+    buttonBathrrom.setBitmaps(touchgfx::Bitmap(BITMAP_BATHROOM_NORMAL_ID), touchgfx::Bitmap(BITMAP_BATHROOM_PRESSED_ID));
     buttonBathrrom.setAction(buttonCallback);
     buttonBathrrom.setAlpha(0);
 
     buttonKitchen.setXY(254, 83);
     buttonKitchen.setVisible(false);
-    buttonKitchen.setBitmaps(Bitmap(BITMAP_KITCHEN_NORMAL_ID), Bitmap(BITMAP_KITCHEN_PRESSED_ID));
+    buttonKitchen.setBitmaps(touchgfx::Bitmap(BITMAP_KITCHEN_NORMAL_ID), touchgfx::Bitmap(BITMAP_KITCHEN_PRESSED_ID));
     buttonKitchen.setAction(buttonCallback);
     buttonKitchen.setAlpha(0);
 
     demoIntro.setXY(0, 0);
     demoIntro.setVisible(false);
-    demoIntro.setBitmap(Bitmap(BITMAP_ST_HOUSEDEMO_UI_INTRO_ID));
+    demoIntro.setBitmap(touchgfx::Bitmap(BITMAP_ST_HOUSEDEMO_UI_INTRO_ID));
 
     circlePressed.setPosition(200, 121, 80, 80);
     circlePressed.setCenter(40, 40);

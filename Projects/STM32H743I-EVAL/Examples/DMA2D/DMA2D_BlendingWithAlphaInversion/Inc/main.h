@@ -26,6 +26,7 @@
 #include "stm32h743i_eval_lcd.h"
 #include "stm32h743i_eval_sdram.h"
 #include "stm32h743i_eval_io.h"
+#include "basic_gui.h"
 
 
 #define LCD_FRAME_BUFFER  0xD0000000

@@ -35,7 +35,7 @@ void MemManage_Handler(void);
 void BusFault_Handler(void);
 void UsageFault_Handler(void);
 void DebugMon_Handler(void);
-
+void AUDIO_OUT_SAIx_DMAx_IRQHandler(void);
 #ifdef __cplusplus
 }
 #endif

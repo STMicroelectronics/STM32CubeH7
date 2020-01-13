@@ -349,10 +349,12 @@
                 <option>
                     <name>CCIncludePath2</name>
                     <state>$PROJ_DIR$\..\CM7\Inc</state>
+                    <state>$PROJ_DIR$\..\Common\Inc</state>
                     <state>$PROJ_DIR$\..\..\..\..\Drivers\CMSIS\Include</state>
                     <state>$PROJ_DIR$\..\..\..\..\Drivers\CMSIS\Device\ST\STM32H7xx\Include</state>
                     <state>$PROJ_DIR$\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Inc</state>
-                    <state>$PROJ_DIR$\..\..\..\..\Drivers\BSP\STM32H7xx_Nucleo_144</state>
+                    <state>$PROJ_DIR$\..\..\..\..\Drivers\BSP\STM32H7xx_Nucleo</state>
+                    <state>$PROJ_DIR$\..\..\..\..\Utilities\Basic_GUI</state>
                     <state>$PROJ_DIR$\..\..\..\..\Drivers\BSP\Adafruit_Shield</state>
                     <state>$PROJ_DIR$\..\..\..\..\Drivers\BSP\Components\st7735</state>
                     <state>$PROJ_DIR$\..\..\..\..\Drivers\BSP\Components\Common</state>
@@ -1380,10 +1382,11 @@
                 <option>
                     <name>CCIncludePath2</name>
                     <state>$PROJ_DIR$\..\CM4\Inc</state>
+                    <state>$PROJ_DIR$\..\Common\Inc</state>
                     <state>$PROJ_DIR$\..\..\..\..\Drivers\CMSIS\Include</state>
                     <state>$PROJ_DIR$\..\..\..\..\Drivers\CMSIS\Device\ST\STM32H7xx\Include</state>
                     <state>$PROJ_DIR$\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Inc</state>
-                    <state>$PROJ_DIR$\..\..\..\..\Drivers\BSP\STM32H7xx_Nucleo_144</state>
+                    <state>$PROJ_DIR$\..\..\..\..\Drivers\BSP\STM32H7xx_Nucleo</state>
                     <state>$PROJ_DIR$\..\..\..\..\Drivers\BSP\Adafruit_Shield</state>
                     <state>$PROJ_DIR$\..\..\..\..\Drivers\BSP\Components\st7735</state>
                     <state>$PROJ_DIR$\..\..\..\..\Drivers\BSP\Components\Common</state>
@@ -2106,9 +2109,9 @@
                 <file>
                     <name>$PROJ_DIR$\..\CM7\Src\stm32h7xx_it.c</name>
                 </file>
-            </group>
-            <group>
-                <name>Common</name>
+                <file>
+                    <name>$PROJ_DIR$\..\CM7\Src\stm32h7xx_nucleo_bus.c</name>
+                </file>
             </group>
         </group>
     </group>
@@ -2124,29 +2127,29 @@
             <name>BSP</name>
             <group>
                 <name>Adafruit_Shield</name>
-                <excluded>
-                    <configuration>STM32H745ZI_Nucleo_CM4</configuration>
-                </excluded>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\..\Drivers\BSP\Adafruit_Shield\stm32_adafruit_lcd.c</name>
+                    <name>$PROJ_DIR$\..\..\..\..\Drivers\BSP\Adafruit_Shield\adafruit_802.c</name>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\..\Drivers\BSP\Adafruit_Shield\stm32_adafruit_sd.c</name>
+                    <name>$PROJ_DIR$\..\..\..\..\Drivers\BSP\Adafruit_Shield\adafruit_802_lcd.c</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\..\..\..\..\Drivers\BSP\Adafruit_Shield\adafruit_802_sd.c</name>
                 </file>
             </group>
             <group>
                 <name>Components</name>
-                <excluded>
-                    <configuration>STM32H745ZI_Nucleo_CM4</configuration>
-                </excluded>
                 <file>
                     <name>$PROJ_DIR$\..\..\..\..\Drivers\BSP\Components\st7735\st7735.c</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\..\..\..\..\Drivers\BSP\Components\st7735\st7735_reg.c</name>
                 </file>
             </group>
             <group>
                 <name>STM32H7xx_Nucleo_SMPS</name>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\..\Drivers\BSP\STM32H7xx_Nucleo_144\stm32h7xx_nucleo_144.c</name>
+                    <name>$PROJ_DIR$\..\..\..\..\Drivers\BSP\STM32H7xx_Nucleo\stm32h7xx_nucleo.c</name>
                 </file>
             </group>
         </group>
@@ -2177,6 +2180,9 @@
                 <name>$PROJ_DIR$\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_dma_ex.c</name>
             </file>
             <file>
+                <name>$PROJ_DIR$\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_exti.c</name>
+            </file>
+            <file>
                 <name>$PROJ_DIR$\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_flash.c</name>
             </file>
             <file>
@@ -2205,6 +2211,9 @@
             </file>
             <file>
                 <name>$PROJ_DIR$\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_spi_ex.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_uart.c</name>
             </file>
         </group>
     </group>
@@ -2237,5 +2246,11 @@
                 </file>
             </group>
         </group>
+    </group>
+    <group>
+        <name>Utilities</name>
+        <file>
+            <name>$PROJ_DIR$\..\..\..\..\Utilities\Basic_GUI\basic_gui.c</name>
+        </file>
     </group>
 </project>

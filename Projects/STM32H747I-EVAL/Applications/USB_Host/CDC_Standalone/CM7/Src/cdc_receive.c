@@ -56,9 +56,9 @@ void CDC_Handle_Receive_Menu(void)
     CDC_SelectItem(DEMO_RECEIVE_menu, 0);
     CdcDemo.select = 0; 
     USBH_CDC_Stop(&hUSBHost);
-    BSP_LCD_SetTextColor(LCD_COLOR_GREEN); 
-    BSP_LCD_DisplayStringAtLine(14, (uint8_t *)"                                          ");
-    BSP_LCD_DisplayStringAtLine(15, (uint8_t *)"Use [Buttons Left/Right] to scroll up/down");
+    GUI_SetTextColor(GUI_COLOR_GREEN); 
+    GUI_DisplayStringAtLine(14, (uint8_t *)"                                          ");
+    GUI_DisplayStringAtLine(15, (uint8_t *)"Use [Buttons Left/Right] to scroll up/down");
     break;
     
   case CDC_RECEIVE_WAIT:
@@ -72,10 +72,10 @@ void CDC_Handle_Receive_Menu(void)
         switch(CdcDemo.select & 0x7F)
         {
         case 0: 
-          BSP_LCD_SetTextColor(LCD_COLOR_WHITE); 
+          GUI_SetTextColor(GUI_COLOR_WHITE); 
           /* Start Reception */
           LCD_ClearTextZone();
-          BSP_LCD_DisplayStringAtLine(3, (uint8_t *)"Receiving data ...");
+          GUI_DisplayStringAtLine(3, (uint8_t *)"Receiving data ...");
           xPos = 0;
           yLinePos = 4;
           memset(CDC_RX_Buffer, 0, RX_BUFF_SIZE); 
@@ -84,7 +84,7 @@ void CDC_Handle_Receive_Menu(void)
           break;
 
         case 1: 
-          BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
+          GUI_SetTextColor(GUI_COLOR_WHITE);
           USBH_CDC_Stop(&hUSBHost);
           ReturnFromReceiveMenu();
           break;
@@ -114,7 +114,7 @@ static void ReturnFromReceiveMenu(void)
   
   /* Restore main menu */
   LCD_ClearTextZone();
-  LCD_LOG_UpdateDisplay();
+  UTIL_LCD_TRACE_UpdateDisplay();
   Menu_Init();  
 }
 
@@ -139,19 +139,22 @@ static void DumpReceivedData(void)
   uint16_t size;
   uint8_t *ptr = CDC_RX_Buffer;
   
+    
+  uint32_t Xsize = 0;
+  
   size = USBH_CDC_GetLastReceivedDataSize(&hUSBHost);
-  BSP_LCD_SetTextColor(LCD_COLOR_YELLOW);
+  GUI_SetTextColor(GUI_COLOR_YELLOW);
   while(size--)
   {
     if((*ptr != '\n') && (*ptr != '\r'))
     { 
       if(*ptr == '\t')
       {
-         BSP_LCD_DisplayChar(xPos, LINE(yLinePos), ' ');
+         GUI_DisplayChar(xPos, LINE(yLinePos), ' ');
       }
       else
       {
-        BSP_LCD_DisplayChar(xPos, LINE(yLinePos), *ptr);
+        GUI_DisplayChar(xPos, LINE(yLinePos), *ptr);
       }
       xPos += 7;
     }
@@ -163,7 +166,8 @@ static void DumpReceivedData(void)
     
     ptr++;
     
-    if(xPos > (BSP_LCD_GetXSize() - 7))
+    BSP_LCD_GetXSize(0, &Xsize);
+    if(xPos > (Xsize - 7))
     {
       xPos = 0;
       yLinePos++;
@@ -171,8 +175,8 @@ static void DumpReceivedData(void)
     
     if(yLinePos > 13)
     {
-      BSP_LCD_SetTextColor(LCD_COLOR_GREEN); 
-      BSP_LCD_DisplayStringAtLine(15, (uint8_t *)"Use [User Tamper] to see more data");
+      GUI_SetTextColor(GUI_COLOR_GREEN); 
+      GUI_DisplayStringAtLine(15, (uint8_t *)"Use [User Tamper] to see more data");
       /* TAmper Button in polling */
       while(BSP_PB_GetState(BUTTON_TAMPER) != RESET)
       {
@@ -180,9 +184,9 @@ static void DumpReceivedData(void)
       }
       
       LCD_ClearTextZone();
-      BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
-      BSP_LCD_DisplayStringAtLine(3, (uint8_t *)"Receiving data ...");
-      BSP_LCD_SetTextColor(LCD_COLOR_YELLOW);
+      GUI_SetTextColor(GUI_COLOR_WHITE);
+      GUI_DisplayStringAtLine(3, (uint8_t *)"Receiving data ...");
+      GUI_SetTextColor(GUI_COLOR_YELLOW);
       xPos = 0;
       yLinePos = 4;
     }

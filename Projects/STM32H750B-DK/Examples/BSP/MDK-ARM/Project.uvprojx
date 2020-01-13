@@ -16,7 +16,7 @@
         <TargetCommonOption>
           <Device>STM32H750XBHx</Device>
           <Vendor>STMicroelectronics</Vendor>
-          <PackID>Keil.STM32H7xx_DFP.2.2.3</PackID>
+          <PackID>Keil.STM32H7xx_DFP.2.2.6</PackID>
           <PackURL>http://www.keil.com/pack</PackURL>
           <Cpu>IRAM(0x20000000,0x00020000) IRAM2(0x24000000,0x00080000) IROM(0x08000000,0x00020000) XRAM(0x30000000,0x00048000) XRAM2(0x38000000,0x00010000) XRAM3(0x00000000,0x00010000) CPUTYPE("Cortex-M7") FPU3(DFPU) CLOCK(12000000) ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
@@ -283,18 +283,18 @@
               </OCR_RVCT5>
               <OCR_RVCT6>
                 <Type>0</Type>
-                <StartAddress>0x0</StartAddress>
-                <Size>0x0</Size>
+                <StartAddress>0x30000000</StartAddress>
+                <Size>0x48000</Size>
               </OCR_RVCT6>
               <OCR_RVCT7>
                 <Type>0</Type>
-                <StartAddress>0x0</StartAddress>
-                <Size>0x0</Size>
+                <StartAddress>0x38000000</StartAddress>
+                <Size>0x10000</Size>
               </OCR_RVCT7>
               <OCR_RVCT8>
                 <Type>0</Type>
                 <StartAddress>0x0</StartAddress>
-                <Size>0x0</Size>
+                <Size>0x10000</Size>
               </OCR_RVCT8>
               <OCR_RVCT9>
                 <Type>0</Type>
@@ -337,7 +337,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER, STM32H750xx,USE_STM32H750B_DISCO,TS_MULTI_TOUCH_SUPPORTED,APPLICATION_ADDRESS=0x90000000</Define>
               <Undefine></Undefine>
-              <IncludePath>../Common/Inc;../Inc;../../../../../Drivers/CMSIS/Include;../../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../../../../../Middlewares/ST/STM32_Audio/Addons/PDM/Inc;../../../../../Drivers/STM32H7xx_HAL_Driver/Inc;../../../../../Drivers/BSP/STM32H750B-Discovery;../../../../../Drivers/BSP/Components/Common;../../../../../Utilities/Log;../../../../../Utilities/Fonts;../../../../../Utilities/CPU</IncludePath>
+              <IncludePath>../Common/Inc;../Inc;../../../../../Drivers/CMSIS/Include;../../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../../../../../Middlewares/ST/STM32_Audio/Addons/PDM/Inc;../../../../../Drivers/STM32H7xx_HAL_Driver/Inc;../../../../../Drivers/BSP/STM32H750B-DK;../../../../../Drivers/BSP/Components/Common;../../../../../Utilities/Basic_GUI;../../../../../Utilities/Fonts;../../../../../Utilities/CPU</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -401,6 +401,21 @@
               <FileType>1</FileType>
               <FilePath>../../../../../Drivers/BSP/Components/wm8994/wm8994.c</FilePath>
             </File>
+            <File>
+              <FileName>ft5336_reg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\Drivers\BSP\Components\ft5336\ft5336_reg.c</FilePath>
+            </File>
+            <File>
+              <FileName>wm8994_reg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\Drivers\BSP\Components\wm8994\wm8994_reg.c</FilePath>
+            </File>
+            <File>
+              <FileName>mt48lc4m32b2.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\Drivers\BSP\Components\mt48lc4m32b2\mt48lc4m32b2.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -409,37 +424,37 @@
             <File>
               <FileName>stm32h750b_discovery.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../Drivers/BSP/STM32H750B-Discovery/stm32h750b_discovery.c</FilePath>
+              <FilePath>..\..\..\..\..\Drivers\BSP\STM32H750B-DK\stm32h750b_discovery.c</FilePath>
             </File>
             <File>
               <FileName>stm32h750b_discovery_audio.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../Drivers/BSP/STM32H750B-Discovery/stm32h750b_discovery_audio.c</FilePath>
+              <FilePath>..\..\..\..\..\Drivers\BSP\STM32H750B-DK\stm32h750b_discovery_audio.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32h750b_discovery_bus.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\Drivers\BSP\STM32H750B-DK\stm32h750b_discovery_bus.c</FilePath>
             </File>
             <File>
               <FileName>stm32h750b_discovery_lcd.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../Drivers/BSP/STM32H750B-Discovery/stm32h750b_discovery_lcd.c</FilePath>
+              <FilePath>..\..\..\..\..\Drivers\BSP\STM32H750B-DK\stm32h750b_discovery_lcd.c</FilePath>
             </File>
             <File>
               <FileName>stm32h750b_discovery_mmc.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../Drivers/BSP/STM32H750B-Discovery/stm32h750b_discovery_mmc.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32h750b_discovery_qspi.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../../../../../Drivers/BSP/STM32H750B-Discovery/stm32h750b_discovery_qspi.c</FilePath>
+              <FilePath>..\..\..\..\..\Drivers\BSP\STM32H750B-DK\stm32h750b_discovery_mmc.c</FilePath>
             </File>
             <File>
               <FileName>stm32h750b_discovery_sdram.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../Drivers/BSP/STM32H750B-Discovery/stm32h750b_discovery_sdram.c</FilePath>
+              <FilePath>..\..\..\..\..\Drivers\BSP\STM32H750B-DK\stm32h750b_discovery_sdram.c</FilePath>
             </File>
             <File>
               <FileName>stm32h750b_discovery_ts.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../Drivers/BSP/STM32H750B-Discovery/stm32h750b_discovery_ts.c</FilePath>
+              <FilePath>..\..\..\..\..\Drivers\BSP\STM32H750B-DK\stm32h750b_discovery_ts.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -626,6 +641,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_adc_ex.c</FilePath>
             </File>
+            <File>
+              <FileName>stm32h7xx_hal_exti.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_exti.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -652,16 +672,6 @@
               <FilePath>../Src/audio_record.c</FilePath>
             </File>
             <File>
-              <FileName>lcd.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../Src/lcd.c</FilePath>
-            </File>
-            <File>
-              <FileName>log.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../Src/log.c</FilePath>
-            </File>
-            <File>
               <FileName>main.c</FileName>
               <FileType>1</FileType>
               <FilePath>../Src/main.c</FilePath>
@@ -677,16 +687,6 @@
               <FilePath>../Src/sdram.c</FilePath>
             </File>
             <File>
-              <FileName>sdram_dma.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../Src/sdram_dma.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32h7xx_hal_msp.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../Src/stm32h7xx_hal_msp.c</FilePath>
-            </File>
-            <File>
               <FileName>stm32h7xx_it.c</FileName>
               <FileType>1</FileType>
               <FilePath>../Src/stm32h7xx_it.c</FilePath>
@@ -696,15 +696,20 @@
               <FileType>1</FileType>
               <FilePath>../Src/touchscreen.c</FilePath>
             </File>
+            <File>
+              <FileName>lcd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Src\lcd.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
           <GroupName>Utilities</GroupName>
           <Files>
             <File>
-              <FileName>lcd_log.c</FileName>
+              <FileName>basic_gui.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../Utilities/Log/lcd_log.c</FilePath>
+              <FilePath>..\..\..\..\..\Utilities\Basic_GUI\basic_gui.c</FilePath>
             </File>
           </Files>
         </Group>

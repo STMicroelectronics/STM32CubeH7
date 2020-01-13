@@ -77,17 +77,20 @@ Middleware, Display, STemWin, HelloWorld, LCD, GUI
 
 @par Directory contents 
 
+  - STemWin/STemWin_HelloWorld/Common/Src/system_stm32h7xx.c            STM32H7xx system file
+
   - STemWin/STemWin_HelloWorld/CM7/Inc/GUIConf.h                        Header for GUIConf.c
   - STemWin/STemWin_HelloWorld/CM7/Inc/LCDConf.h                        Header for LCDConf*.c
   - STemWin/STemWin_HelloWorld/CM7/Inc/main.h                           Main program header file
   - STemWin/STemWin_HelloWorld/CM7/Inc/stm32h7xx_hal_conf.h             Library Configuration file
+  - STemWin/STemWin_HelloWorld/CM7/Inc/mt48lc4m32b2_conf.h              Configuration file for mt48lc4m32b2
   - STemWin/STemWin_HelloWorld/CM7/Inc/stm32h7xx_it.h                   Interrupt handlers header file
   - STemWin/STemWin_HelloWorld/CM7/Src/BASIC_HelloWorld.c               Simple demo drawing "Hello world"
   - STemWin/STemWin_HelloWorld/CM7/Src/GUIConf.c                        Display controller initialization
   - STemWin/STemWin_HelloWorld/CM7/Src/LCDConf.c                        Configuration file for the GUI library
   - STemWin/STemWin_HelloWorld/CM7/Src/main.c                           Main program file
   - STemWin/STemWin_HelloWorld/CM7/Src/stm32h7xx_it.c                   STM32H7xx Interrupt handlers
-  - STemWin/STemWin_HelloWorld/Common/Src/system_stm32h7xx.c            STM32H7xx system file
+  
  
   - STemWin/STemWin_HelloWorld/CM4/Inc/main.h                           CM4 Main program header file 
   - STemWin/STemWin_HelloWorld/CM4/Inc/stm32h7xx_hal_conf.h             CM4 HAL configuration file

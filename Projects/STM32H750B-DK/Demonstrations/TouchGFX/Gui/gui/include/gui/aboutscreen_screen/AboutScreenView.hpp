@@ -3,7 +3,7 @@
 
 #include <gui_generated/aboutscreen_screen/AboutScreenViewBase.hpp>
 #include <gui/aboutscreen_screen/AboutScreenPresenter.hpp>
-#include <widgets/mjpegreader.hpp>
+#include <widgets/MJPEGReader.hpp>
 #include <gui/containers/FpsMcuLoad.hpp>
 #include <touchgfx/mixins/FadeAnimator.hpp>
 

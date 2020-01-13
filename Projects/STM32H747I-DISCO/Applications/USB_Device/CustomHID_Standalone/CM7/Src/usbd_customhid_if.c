@@ -322,7 +322,7 @@ static int8_t CustomHID_OutEvent(uint8_t event_idx, uint8_t state)
   */
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
-  if (GPIO_Pin == WAKEUP_BUTTON_PIN)
+  if (GPIO_Pin == BUTTON_WAKEUP_PIN)
   {
     SendBuffer[0] = KEY_REPORT_ID;
 

@@ -70,8 +70,6 @@ int main(void)
   /* Configure the System clock to have a frequency of 400 Mhz */
   SystemClock_Config();
 
-  /* Initialize IO expander */
-  BSP_IO_Init();
 
   /* Init Dual Core Application */
   DUAL_InitApplication();
@@ -114,28 +112,19 @@ static void DUAL_InitApplication(void)
 {
   /* Configure Tamper Button */
   BSP_PB_Init(BUTTON_TAMPER, BUTTON_MODE_GPIO);
-
+  
   /* Configure Joystick in EXTI mode */
-  BSP_JOY_Init(JOY_MODE_EXTI);
-
+  BSP_JOY_Init(JOY1, JOY_MODE_EXTI, JOY_ALL);
+  
   /* Initialize the LCD */
-  BSP_LCD_Init();
-
-  /* LCD Layer Initialization */
-  BSP_LCD_LayerDefaultInit(1, LCD_FB_START_ADDRESS);
-
-  /* Selects the LCD Layer */
-  BSP_LCD_SelectLayer(1);
-
-  /* Enables the display */
-  BSP_LCD_DisplayOn();
-
+  BSP_LCD_Init(0, LCD_ORIENTATION_LANDSCAPE);
+  GUI_SetFuncDriver(&LCD_Driver);
   /* Init the LCD Log module */
-  LCD_LOG_Init();
+  UTIL_LCD_TRACE_Init();
 
-  LCD_LOG_SetHeader((uint8_t *)" USB OTG DualCore Host");
+  UTIL_LCD_TRACE_SetHeader((uint8_t *)" USB OTG DualCore Host");
 
-  LCD_UsrLog("USB Host library started.\n");
+  LCD_UsrTrace("USB Host library started.\n");
 
   /* Start DualCore Interface */
   USBH_UsrLog("Initializing hardware....");
@@ -186,11 +175,11 @@ static void USBH_HS_UserProcess(USBH_HandleTypeDef *phost, uint8_t id)
     Appli_HS_state = APPLICATION_HS_DISCONNECT;
     if(f_mount(NULL, "", 0) != FR_OK)
     {
-      LCD_ErrLog("ERROR : Cannot DeInitialize FatFs! \n");
+      LCD_ErrTrace("ERROR : Cannot DeInitialize FatFs! \n");
     }
     if (FATFS_UnLinkDriver(USBDISKPath) != 0)
     {
-      LCD_ErrLog("ERROR : Cannot UnLink USB FatFS Driver! \n");
+      LCD_ErrTrace("ERROR : Cannot UnLink USB FatFS Driver! \n");
     }
     break;
 
@@ -204,7 +193,7 @@ static void USBH_HS_UserProcess(USBH_HandleTypeDef *phost, uint8_t id)
     {
       if (f_mount(&USBH_fatfs, "", 0) != FR_OK)
       {
-        LCD_ErrLog("ERROR : Cannot Initialize FatFs! \n");
+        LCD_ErrTrace("ERROR : Cannot Initialize FatFs! \n");
       }
     }
     break;
@@ -317,48 +306,25 @@ void SystemClock_Config(void)
   * @note   This API is called by BSP_LCD_Init()
   * @retval None
   */
-void BSP_LCD_ClockConfig(LTDC_HandleTypeDef *hltdc, void *Params)
+HAL_StatusTypeDef MX_LTDC_ClockConfig(LTDC_HandleTypeDef *hltdc)
 {
-  static RCC_PeriphCLKInitTypeDef  periph_clk_init_struct;
-
-  if(stmpe811_ts_drv.ReadID(TS_I2C_ADDRESS) == STMPE811_ID)
-  {
-    /* AMPIRE480272 LCD clock configuration */
-    /* LCD clock configuration */
-    /* PLL3_VCO Input = HSE_VALUE/PLL3M = 1 Mhz */
-    /* PLL3_VCO Output = PLL3_VCO Input * PLL3N = 336 Mhz */
-    /* PLLLCDCLK = PLL3_VCO Output/PLL3R = 336/37 = 9.08 Mhz */
-    /* LTDC clock frequency = PLLLCDCLK = 9.08 Mhz */
-    /* USB uses same pll3 as clock frequency and PLL3Q as devider: USB clock frequency = 48 Mhz */
-    periph_clk_init_struct.PeriphClockSelection = RCC_PERIPHCLK_LTDC;
-    periph_clk_init_struct.PLL3.PLL3M = 25;
-    periph_clk_init_struct.PLL3.PLL3N = 336;
-    periph_clk_init_struct.PLL3.PLL3FRACN = 0;
-    periph_clk_init_struct.PLL3.PLL3P = 2;
-    periph_clk_init_struct.PLL3.PLL3Q = 7;
-    periph_clk_init_struct.PLL3.PLL3R = 37;
-    HAL_RCCEx_PeriphCLKConfig(&periph_clk_init_struct);
-  }
-  else
-  {
-
-    /* In case of double layers the bandwidth is arround 80MBytesPerSec => 20MHz (<25MHz) */
-    /* so the PLL3R is configured to provide this clock */
-    /* AMPIRE640480 LCD clock configuration */
-    /* PLL3_VCO Input = HSE_VALUE/PLL3M = 1 Mhz */
-    /* PLL3_VCO Output = PLL3_VCO Input * PLL3N = 336 Mhz */
-    /* PLLLCDCLK = PLL3_VCO Output/PLL3R = 336/16 = 21Mhz */
-    /* LTDC clock frequency = PLLLCDCLK = 21 Mhz */
-    /* USB uses same pll3 as clock frequency and PLL3Q as devider: USB clock frequency = 48 Mhz */
-    periph_clk_init_struct.PLL3.PLL3R = 16;
-    periph_clk_init_struct.PeriphClockSelection = RCC_PERIPHCLK_LTDC;
-    periph_clk_init_struct.PLL3.PLL3M = 25;
-    periph_clk_init_struct.PLL3.PLL3N = 336;
-    periph_clk_init_struct.PLL3.PLL3FRACN = 0;
-    periph_clk_init_struct.PLL3.PLL3P = 2;
-    periph_clk_init_struct.PLL3.PLL3Q = 7;
-    HAL_RCCEx_PeriphCLKConfig(&periph_clk_init_struct);
-  }
+  /* In case of double layers the bandwidth is arround 80MBytesPerSec => 20MHz (<25MHz) */
+  /* so the PLL3R is configured to provide this clock */
+  /* AMPIRE640480 LCD clock configuration */
+  /* PLL3_VCO Input = HSE_VALUE/PLL3M = 1 Mhz */
+  /* PLL3_VCO Output = PLL3_VCO Input * PLL3N = 336 Mhz */
+  /* PLLLCDCLK = PLL3_VCO Output/PLL3R = 336/16 = 21Mhz */
+  /* LTDC clock frequency = PLLLCDCLK = 21 Mhz */
+  /* USB uses same pll3 as clock frequency and PLL3Q as devider: USB clock frequency = 48 Mhz */
+  RCC_PeriphCLKInitTypeDef periph_clk_init_struct;
+  periph_clk_init_struct.PLL3.PLL3R = 16;
+  periph_clk_init_struct.PeriphClockSelection = RCC_PERIPHCLK_LTDC;
+  periph_clk_init_struct.PLL3.PLL3M = 25;
+  periph_clk_init_struct.PLL3.PLL3N = 336;
+  periph_clk_init_struct.PLL3.PLL3FRACN = 0;
+  periph_clk_init_struct.PLL3.PLL3P = 2;
+  periph_clk_init_struct.PLL3.PLL3Q = 7;
+  return HAL_RCCEx_PeriphCLKConfig(&periph_clk_init_struct);
 }
 
 /**

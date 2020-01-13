@@ -38,6 +38,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm32h7xx_hal.h"
 #include "stm32h750b_discovery.h"
+#include "stm32h750b_discovery_ts.h"
 
 #include "cmsis_os.h"
 
@@ -150,7 +151,7 @@ void SysTick_Handler(void)
   */
 void EXTI15_10_IRQHandler(void)
 {
-  HAL_GPIO_EXTI_IRQHandler(USER_BUTTON_PIN);
+  HAL_GPIO_EXTI_IRQHandler(BUTTON_USER_PIN);
 }
 
 #if defined(USE_TS_INT)
@@ -161,7 +162,7 @@ void EXTI15_10_IRQHandler(void)
   */
 void EXTI2_IRQHandler(void)
 {
-  HAL_GPIO_EXTI_IRQHandler(TS_INT_PIN);
+  BSP_TS_IRQHandler(0);
 }
 #endif /* USE_TS_INT */
 

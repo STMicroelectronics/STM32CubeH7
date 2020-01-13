@@ -15,18 +15,18 @@
 **  Target      : STMicroelectronics STM32
 **
 **
-**  Distribution: The file is distributed as is, without any warranty
-**                of any kind.
-**
-**  (c)Copyright Ac6.
-**  You may use this file as-is or modify it according to the needs of your
-**  project. Distribution of this file (unmodified or modified) is not
-**  permitted. Ac6 permit registered System Workbench for MCU users the
-**  rights to distribute the assembled, compiled & linked contents of this
-**  file as part of an application binary file, provided that it is built
-**  using the System Workbench for MCU toolchain.
-**
 *****************************************************************************
+** @attention
+**
+** Copyright (c) 2019 STMicroelectronics.
+** All rights reserved.
+**
+** This software component is licensed by ST under BSD 3-Clause license,
+** the "License"; You may not use this file except in compliance with the
+** License. You may obtain a copy of the License at:
+**                        opensource.org/licenses/BSD-3-Clause
+**
+****************************************************************************
 */
 
 /* Entry Point */

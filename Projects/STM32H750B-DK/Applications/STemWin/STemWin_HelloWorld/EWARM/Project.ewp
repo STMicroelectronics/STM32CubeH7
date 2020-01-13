@@ -350,7 +350,7 @@
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\CMSIS\Include</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\CMSIS\Device\ST\STM32H7xx\Include</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Inc</state>
-                    <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32H750B-Discovery</state>
+                    <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32H750B-DK</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\Components\Common</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\Components</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\ST\STemWin\inc</state>
@@ -1062,12 +1062,18 @@
         <group>
             <name>BSP</name>
             <group>
+                <name>Components</name>
+                <file>
+                    <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\Components\mt48lc4m32b2\mt48lc4m32b2.c</name>
+                </file>
+            </group>
+            <group>
                 <name>STM32H750B-Discovery</name>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32H750B-Discovery\stm32h750b_discovery.c</name>
+                    <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32H750B-DK\stm32h750b_discovery.c</name>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32H750B-Discovery\stm32h750b_discovery_sdram.c</name>
+                    <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32H750B-DK\stm32h750b_discovery_sdram.c</name>
                 </file>
             </group>
         </group>

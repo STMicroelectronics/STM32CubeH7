@@ -29,6 +29,7 @@ extern "C" {
 #include "stm32h7xx_hal.h"
 #include "stm32h747i_eval.h"
 #include "res_mgr.h"
+#include <stdio.h>
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/

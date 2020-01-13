@@ -33,14 +33,11 @@
 
 
 /* Private typedef -----------------------------------------------------------*/
-extern LTDC_HandleTypeDef            hltdc_discovery;
+extern LTDC_HandleTypeDef            hlcd_ltdc;
 static DMA2D_HandleTypeDef           hdma2d;
 
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
-
-#define LAYER0_ADDRESS               (LCD_FB_START_ADDRESS)
-
 /* Private variables ---------------------------------------------------------*/
 static __IO int32_t  front_buffer   = 0;
 static __IO int32_t  pend_buffer   = -1;
@@ -113,21 +110,21 @@ int main(void)
   BSP_LED_Init(LED3);
 
    /* Initialize the LCD   */
-  if(BSP_LCD_Init() != LCD_OK)
+  if(BSP_LCD_Init(0, LCD_ORIENTATION_LANDSCAPE) != BSP_ERROR_NONE)
   {
     Error_Handler();
   } 
   
-  BSP_LCD_LayerDefaultInit(0, LAYER0_ADDRESS);     
-  BSP_LCD_SelectLayer(0); 
+  GUI_SetFuncDriver(&LCD_Driver);
+  GUI_SetLayer(0);
 
+   /* Get the LCD Width and Height*/
+  BSP_LCD_GetXSize(0, &LCD_X_Size);
+  BSP_LCD_GetYSize(0, &LCD_Y_Size);  
 
-  /* Get the LCD Width and Height*/
-  LCD_X_Size = BSP_LCD_GetXSize();
-  LCD_Y_Size = BSP_LCD_GetYSize();  
   
   /* Set LTDC Line Event  */
-  HAL_LTDC_ProgramLineEvent(&hltdc_discovery, 0);
+  HAL_LTDC_ProgramLineEvent(&hlcd_ltdc, 0);
   
   /* Display example brief   */
   LCD_BriefDisplay();
@@ -280,15 +277,15 @@ static void SystemClock_Config(void)
   */
 static void LCD_BriefDisplay(void)
 {
-  BSP_LCD_Clear(LCD_COLOR_WHITE);
-  BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-  BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
-  BSP_LCD_FillRect(0, 0, LCD_X_Size, 112);  
-  BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
-  BSP_LCD_DisplayStringAt(0,LINE(2) , (uint8_t *)"LCD_DSI_VideoMode_DoubleBuffering", CENTER_MODE);
-  BSP_LCD_SetFont(&Font16);
-  BSP_LCD_DisplayStringAt(0,LINE(5), (uint8_t *)"This example shows how to display images on LCD DSI", CENTER_MODE);
-  BSP_LCD_DisplayStringAt(0,LINE(6), (uint8_t *)"using two buffers one for display and the other for draw", CENTER_MODE);   
+  GUI_Clear(GUI_COLOR_WHITE);
+  GUI_SetBackColor(GUI_COLOR_BLUE);
+  GUI_SetTextColor(GUI_COLOR_BLUE);
+  GUI_FillRect(0, 0, LCD_X_Size, 112, GUI_COLOR_BLUE);    
+  GUI_SetTextColor(GUI_COLOR_WHITE);
+  GUI_DisplayStringAt(0,LINE(2) , (uint8_t *)"LCD_DSI_VideoMode_DoubleBuffering", CENTER_MODE);
+  GUI_SetFont(&Font16);
+  GUI_DisplayStringAt(0,LINE(5), (uint8_t *)"This example shows how to display images on LCD DSI", CENTER_MODE);
+  GUI_DisplayStringAt(0,LINE(6), (uint8_t *)"using two buffers one for display and the other for draw", CENTER_MODE);   
   
 }
 

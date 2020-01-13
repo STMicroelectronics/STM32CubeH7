@@ -57,14 +57,14 @@
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 MDMA_HandleTypeDef     MDMA_Handle;
-extern LTDC_HandleTypeDef  hltdc_eval;
+extern LTDC_HandleTypeDef  hlcd_ltdc;
 
 DMA_HandleTypeDef DMA_Handlel1;
 DMA_HandleTypeDef DMA_Handlel2;
 LPTIM_HandleTypeDef  LptimHandle;
 
 /* ARGB8888 Default Color used to clear the LCD */
-uint32_t LCD_Fill_Color = LCD_COLOR_BLACK;
+uint32_t LCD_Fill_Color = GUI_COLOR_BLACK;
 
 __IO uint32_t MDMA_TransferErrorDetected = 0;
 
@@ -145,15 +145,15 @@ int main(void)
   BSP_LED_Init(LED3);
     
    /* Initialize the LCD   */
-  BSP_LCD_Init();
+  BSP_LCD_Init(0, LCD_ORIENTATION_LANDSCAPE);
   
-  BSP_LCD_LayerDefaultInit(0, LCD_FRAME_BUFFER);
-  BSP_LCD_SelectLayer(0);   
-  BSP_LCD_Clear(LCD_COLOR_BLACK);  
+  GUI_SetFuncDriver(&LCD_Driver);
+  GUI_SetLayer(0);   
+  GUI_Clear(GUI_COLOR_BLACK);  
   
   /* Get the LCD Width and Height */
-  LCD_X_Size = BSP_LCD_GetXSize();  
-  LCD_Y_Size = BSP_LCD_GetYSize(); 
+   BSP_LCD_GetXSize(0, &LCD_X_Size);  
+   BSP_LCD_GetYSize(0, &LCD_Y_Size); 
   
   /* LCD Offset calculatd versus the image width */  
   LCD_Offset = (LCD_X_Size - IMAGE_WIDTH) * ARGB8888_BYTES_PER_PIXEL;
@@ -195,7 +195,7 @@ int main(void)
   
 
   /*##-4- Config The LTDC Line Interrupt to LCD height/2 ###*/   
-  HAL_LTDC_ProgramLineEvent(&hltdc_eval, LCD_Y_Size/2);  
+  HAL_LTDC_ProgramLineEvent(&hlcd_ltdc, LCD_Y_Size/2);  
 
   
   /* Start MDMA transfer in Repeat Block to clear the LCD frame buffer with default color 

@@ -67,6 +67,7 @@ The SystemClock_Config() function is used to set the Flash latency and  to confi
   - FLASH/FLASH_CoreConfiguration/CM7/Inc/main.h                 Main program header file for Cortex-M7
   - FLASH/FLASH_CoreConfiguration/CM7/Inc/stm32h7xx_hal_conf.h   HAL Configuration file for Cortex-M7
   - FLASH/FLASH_CoreConfiguration/CM7/Inc/stm32h7xx_it.h         Interrupt handlers header file for Cortex-M7
+  - FLASH/FLASH_CoreConfiguration/CM7/Inc/mt48lc4m32b2_conf.h    Configuration file for mt48lc4m32b2
 
   - FLASH/FLASH_CoreConfiguration/CM4/Src/main.c                 Main program for Cortex-M4
   - FLASH/FLASH_CoreConfiguration/CM4/Src/stm32h7xx_it.c         Interrupt handlers for Cortex-M4
@@ -80,7 +81,7 @@ The SystemClock_Config() function is used to set the Flash latency and  to confi
 
   - This example runs on STM32H745xx devices.
 
-  - This example has been tested with STM32H745I-Discovery rev.A board with SMPS (SD Convertor) power supply config and can be
+  - This example has been tested with STM32H745I-Discovery  board with SMPS (SD Convertor) power supply config and can be
     easily tailored to any other supported device and development board.
   - LED1 toggle when process  is complete.
   - In case of error, LED2 is toggling each 100 ms.

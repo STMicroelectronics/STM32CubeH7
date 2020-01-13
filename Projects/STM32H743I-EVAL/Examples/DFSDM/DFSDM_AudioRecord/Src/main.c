@@ -40,7 +40,9 @@ DFSDM_Channel_HandleTypeDef  DfsdmRightChannelHandle;
 DFSDM_Filter_HandleTypeDef   DfsdmLeftFilterHandle;
 DFSDM_Filter_HandleTypeDef   DfsdmRightFilterHandle;
 SAI_HandleTypeDef            SaiHandle;
-AUDIO_DrvTypeDef            *audio_drv;
+AUDIO_Drv_t                  *Audio_Drv = NULL;
+void *Audio_CompObj = NULL;
+WM8994_Init_t codec_init;
 
 /*Buffer location and size should aligned to cache line size (32 bytes) */
 ALIGN_32BYTES(int32_t                      LeftRecBuff[2048]);
@@ -57,6 +59,7 @@ static void SystemClock_Config(void);
 static void DFSDM_Init(void);
 static void Playback_Init(void);
 static void CPU_CACHE_Enable(void);
+static int32_t WM8994_Probe(void);
 
 /* Private functions ---------------------------------------------------------*/
 
@@ -68,6 +71,7 @@ static void CPU_CACHE_Enable(void);
 int main(void)
 {
   uint32_t i;
+  WM8994_Init_t codec_init; 
 
   
   /* Enable the CPU Cache */
@@ -123,7 +127,24 @@ int main(void)
       
       if(PlaybackStarted == 0)
       {
-        if(0 != audio_drv->Play(AUDIO_I2C_ADDRESS, (uint16_t *) &PlayBuff[0], 4096))
+        codec_init.Resolution   = 0;
+        
+        /* Fill codec_init structure */
+        codec_init.Frequency    = 16000;
+        codec_init.InputDevice  = WM8994_IN_NONE;
+        codec_init.OutputDevice = AUDIO_OUT_DEVICE_HEADPHONE;
+        
+        /* Convert volume before sending to the codec */
+        codec_init.Volume       = VOLUME_OUT_CONVERT(100);
+        
+        /* Initialize the codec internal registers */
+        if(Audio_Drv->Init(Audio_CompObj, &codec_init) != 0)
+        {
+          Error_Handler();
+        }
+        
+        /* Start the playback */
+        if(Audio_Drv->Play(Audio_CompObj) < 0)
         {
           Error_Handler();
         }
@@ -397,17 +418,62 @@ static void Playback_Init(void)
   /* Enable SAI to generate clock used by audio driver */
   __HAL_SAI_ENABLE(&SaiHandle);
   
-  /* Initialize audio driver */
-  if(WM8994_ID != wm8994_drv.ReadID(AUDIO_I2C_ADDRESS))
+  if(WM8994_Probe() != BSP_ERROR_NONE)
   {
     Error_Handler();
   }
-  audio_drv = &wm8994_drv;
-  audio_drv->Reset(AUDIO_I2C_ADDRESS);  
-  if(0 != audio_drv->Init(AUDIO_I2C_ADDRESS, OUTPUT_DEVICE_HEADPHONE, 100, AUDIO_FREQUENCY_44K))
+  
+  if(Audio_Drv->Init(Audio_CompObj, &codec_init)!=0)
   {
     Error_Handler();
   }
+}
+
+/**
+  * @brief  Register Bus IOs if component ID is OK
+  * @retval error status
+  */
+static int32_t WM8994_Probe(void)
+{
+  int32_t ret = BSP_ERROR_NONE;
+  WM8994_IO_t              IOCtx;
+  static WM8994_Object_t   WM8994Obj;
+  uint32_t id;
+
+  /* Configure the audio driver */
+  IOCtx.Address     = AUDIO_I2C_ADDRESS;
+  IOCtx.Init        = BSP_I2C1_Init;
+  IOCtx.DeInit      = BSP_I2C1_DeInit;
+  IOCtx.ReadReg     = BSP_I2C1_ReadReg16;
+  IOCtx.WriteReg    = BSP_I2C1_WriteReg16;
+  IOCtx.GetTick     = BSP_GetTick;
+
+  if(WM8994_RegisterBusIO (&WM8994Obj, &IOCtx) != WM8994_OK)
+  {
+    ret = BSP_ERROR_BUS_FAILURE;
+  }
+  else
+  {
+    /* Reset the codec */
+    if(WM8994_Reset(&WM8994Obj) != WM8994_OK)
+    {
+      ret = BSP_ERROR_COMPONENT_FAILURE;
+    }
+    else if(WM8994_ReadID(&WM8994Obj, &id) != WM8994_OK)
+    {
+      ret = BSP_ERROR_COMPONENT_FAILURE;
+    }
+    else if(id != WM8994_ID)
+    {
+      ret = BSP_ERROR_UNKNOWN_COMPONENT;
+    }
+    else
+    {
+      Audio_Drv = (AUDIO_Drv_t *) &WM8994_Driver;
+      Audio_CompObj = &WM8994Obj;
+    }
+  }
+  return ret;
 }
 
 /**

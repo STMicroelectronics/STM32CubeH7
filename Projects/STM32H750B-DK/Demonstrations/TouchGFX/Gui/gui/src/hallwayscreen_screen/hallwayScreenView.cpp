@@ -1,4 +1,4 @@
-#include <gui/hallwayscreen_screen/HallwayScreenView.hpp>
+#include <gui/hallwayscreen_screen/hallwayScreenView.hpp>
 #include <gui/common/Defines.hpp>
 #include <BitmapDatabase.hpp>
 #include <touchgfx/Color.hpp>

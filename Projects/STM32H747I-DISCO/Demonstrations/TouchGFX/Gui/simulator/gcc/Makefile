@@ -307,7 +307,7 @@ endif
 _assets_: BitmapDatabase $(asset_texts_output)/include/texts/TextKeysAndLanguages.hpp
 
 alpha_dither ?= no
-dither_algorith ?= 2
+dither_algorithm ?= 2
 remap_identical_texts ?= yes
 
 .PHONY: BitmapDatabase

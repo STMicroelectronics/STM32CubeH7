@@ -44,9 +44,6 @@ extern SAI_HandleTypeDef               haudio_in_sai;
 DFSDM_Filter_HandleTypeDef             hAudioInLeftFilter;
 DFSDM_Filter_HandleTypeDef             hAudioInRightFilter;
 extern RTC_HandleTypeDef               RtcHandle;
-#if defined(USE_SDCARD)
-extern SD_HandleTypeDef                uSdHandle;
-#endif /* USE_SDCARD */
 #if defined(USE_USB_FS) || defined(USE_USB_HS)
 extern HCD_HandleTypeDef               hhcd;
 #endif /* USE_USB_FS | USE_USB_HS */
@@ -163,7 +160,7 @@ void HSEM1_IRQHandler(void)
   */
 void EXTI15_10_IRQHandler(void)
 {
-  HAL_GPIO_EXTI_IRQHandler(WAKEUP_BUTTON_PIN);
+  HAL_GPIO_EXTI_IRQHandler(BUTTON_WAKEUP_PIN);
 }
 
 /**
@@ -223,7 +220,7 @@ void AUDIO_DFSDMx_DMAx_RIGHT_IRQHandler(void)
 /* SAI Audio OUT DMA2_Stream1 */
 void AUDIO_OUT_SAIx_DMAx_IRQHandler(void)
 {
-  HAL_DMA_IRQHandler(haudio_out_sai.hdmatx);
+  BSP_AUDIO_OUT_IRQHandler(0);
 }
 
 /* SAI Audio IN DMA2_Stream4 */
@@ -253,7 +250,7 @@ void MDMA_IRQHandler(void)
 */
 void SDMMC1_IRQHandler(void)
 {
-  HAL_SD_IRQHandler(&uSdHandle);
+  BSP_SD_IRQHandler(0);
 }
 #endif /* USE_SDCARD */
 

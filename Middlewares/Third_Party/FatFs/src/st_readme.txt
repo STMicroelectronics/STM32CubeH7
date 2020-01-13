@@ -19,6 +19,41 @@
   ******************************************************************************
   @endverbatim
 
+### V2.1.4/18-10-2019 ###
+============================
++ Fix wrong usage of the "memcpy" in the SD_Write() function
+  - drivers/sd_diskio_dma_template_bspv1.c
+  - drivers/sd_diskio_dma_template_bspv2.c
+  - drivers/sd_diskio_dma_rtos_template_bspv1.c
+  - drivers/sd_diskio_dma_rtos_template_bspv2.c
+
++ correct the usage of the "_USE_MUTEX" config flag
+  - syscall.c
+
+### V2.1.3/26-07-2019 ###
+============================
++ add new BSPv2 templates:
+  - drivers/sd_diskio_dma_rtos_template_bspv2.c
+  - drivers/sd_diskio_dma_template_bspv2.c
+  - drivers/sd_diskio_template_bspv2.c
+  - drivers/sdram_diskio_template_bspv2.c
+
++ rename old template to "xxxx_diskio_template_bspv1.c":
+  - drivers/sd_diskio_dma_rtos_template_bspv1.c
+  - drivers/sd_diskio_dma_template_bspv1.c
+  - drivers/sd_diskio_template_bspv1.c
+  - drivers/sdram_diskio_template_bspv1.c
+
++ Add CMSIS-OSv2 support in templates, syscall.c and ff_conf_template.h
+  - syscall.c
+  - ff_conf_template.h
+  - drivers/sd_diskio_dma_rtos_template_bspv2.c
+
++ support usage of "osMutex" alongside "osSemaphore" as _SYNC_t type in fatfs
+  - syscall.c
+  - ff_conf_template.h
+
+
 ### V2.1.2/29-03-2019 ###
 ============================
 + add st_license.txt in the root directory

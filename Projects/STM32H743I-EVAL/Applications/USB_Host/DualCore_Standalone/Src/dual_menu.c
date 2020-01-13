@@ -46,13 +46,13 @@ DEMO_StateMachine demo;
 void DUAL_MenuInit(void)
 {
   /* Start HID Interface */
-  LCD_UsrLogY("USB Host Full speed initialized.\n");
+  LCD_UsrTrace("USB Host Full speed initialized.\n");
   /* Start MSC Interface */
-  LCD_UsrLogY("USB Host High speed initialized.\n");
+  LCD_UsrTrace("USB Host High speed initialized.\n");
 
-  BSP_LCD_SetTextColor(LCD_COLOR_GREEN);
-  BSP_LCD_DisplayStringAtLine(17, (uint8_t *)"Use [Joystick Left/Right] to scroll up/down");
-  BSP_LCD_DisplayStringAtLine(18, (uint8_t *)"Use [Joystick Up/Down] to scroll DUAL menu");
+  GUI_SetTextColor(GUI_COLOR_GREEN);
+  GUI_DisplayStringAtLine(17, (uint8_t *)"Use [Joystick Left/Right] to scroll up/down");
+  GUI_DisplayStringAtLine(18, (uint8_t *)"Use [Joystick Up/Down] to scroll DUAL menu");
   Demo_SelectItem(DEMO_main_menu, 0);
 }
 
@@ -67,9 +67,9 @@ void DUAL_MenuProcess(void)
   {
   case DEMO_IDLE:
     Demo_SelectItem(DEMO_main_menu, 0);
-    BSP_LCD_SetTextColor(LCD_COLOR_GREEN);
-    BSP_LCD_DisplayStringAtLine(17, (uint8_t *)"Use [Joystick Left/Right] to scroll up/down");
-    LCD_UsrLog("Select an operation to continue.\n");
+    GUI_SetTextColor(GUI_COLOR_GREEN);
+    GUI_DisplayStringAtLine(17, (uint8_t *)"Use [Joystick Left/Right] to scroll up/down");
+    LCD_UsrTrace("Select an operation to continue.\n");
     demo.state = DEMO_WAIT;
     demo.select = 0;
     break;
@@ -119,7 +119,7 @@ void DUAL_MenuProcess(void)
     }
     else
     {
-      LCD_ErrLog("No Mass storage device connected.\n");
+      LCD_ErrTrace("No Mass storage device connected.\n");
       demo.state = DEMO_WAIT;
     }
     break;
@@ -133,7 +133,7 @@ void DUAL_MenuProcess(void)
     }
     else
     {
-      LCD_ErrLog("No HID device connected.\n");
+      LCD_ErrTrace("No HID device connected.\n");
       demo.state = DEMO_WAIT;
     }
     break;
@@ -147,15 +147,15 @@ void DUAL_MenuProcess(void)
     break;
 
   case DEMO_MSC_REENUMERATE: /* Re-Enumeration MSC */
-    LCD_DbgLog("Starting Enumeration MSC....");
-    LCD_DbgLog("\n");
+    LCD_DbgTrace("Starting Enumeration MSC....");
+    LCD_DbgTrace("\n");
     USBH_ReEnumerate(&hUSBHost_HS);
     demo.state = DEMO_WAIT;
     break;
 
   case DEMO_HID_REENUMERATE: /* Re-Enumeration HID */
-    LCD_DbgLog("Starting Enumeration HID....");
-    LCD_DbgLog("\n");
+    LCD_DbgTrace("Starting Enumeration HID....");
+    LCD_DbgTrace("\n");
     USBH_ReEnumerate(&hUSBHost_FS);
     demo.state = DEMO_WAIT;
     break;
@@ -167,8 +167,8 @@ void DUAL_MenuProcess(void)
   if(Appli_FS_state == APPLICATION_FS_DISCONNECT)
   {
     Appli_FS_state = APPLICATION_IDLE;
-    LCD_LOG_ClearTextZone();
-    LCD_ErrLog("device FS disconnected!\n");
+    UTIL_LCD_TRACE_ClearTextZone();
+    LCD_ErrTrace("device FS disconnected!\n");
     demo.state = DEMO_IDLE;
     demo.select = 0;
   }
@@ -176,8 +176,8 @@ void DUAL_MenuProcess(void)
   if(Appli_HS_state == APPLICATION_HS_DISCONNECT)
   {
     Appli_HS_state = APPLICATION_IDLE;
-    LCD_LOG_ClearTextZone();
-    LCD_ErrLog("device HS disconnected!\n");
+    UTIL_LCD_TRACE_ClearTextZone();
+    LCD_ErrTrace("device HS disconnected!\n");
     demo.state = DEMO_IDLE;
     demo.select = 0;
   }
@@ -188,7 +188,7 @@ void DUAL_MenuProcess(void)
   * @param  state: Joystick state
   * @retval None
   */
-void Demo_ProbeKey(JOYState_TypeDef state)
+void Demo_ProbeKey(uint32_t state)
 {
   if((state == JOY_UP) && (demo.select > 0))
   {
@@ -214,52 +214,52 @@ void Demo_ProbeKey(JOYState_TypeDef state)
   */
 void Demo_SelectItem(uint8_t **menu, uint8_t item)
 {
-  BSP_LCD_ClearStringLine(19);
-  BSP_LCD_ClearStringLine(20);
-  BSP_LCD_ClearStringLine(21);
-  BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
+  GUI_ClearStringLine(19);
+  GUI_ClearStringLine(20);
+  GUI_ClearStringLine(21);
+  GUI_SetTextColor(GUI_COLOR_WHITE);
 
   switch(item)
   {
   case 0:
-    BSP_LCD_SetBackColor(LCD_COLOR_MAGENTA);
-    BSP_LCD_DisplayStringAtLine(19, menu[0]);
-    BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-    BSP_LCD_DisplayStringAtLine(20, menu[1]);
-    BSP_LCD_DisplayStringAtLine(21, menu[2]);
+    GUI_SetBackColor(GUI_COLOR_MAGENTA);
+    GUI_DisplayStringAtLine(19, menu[0]);
+    GUI_SetBackColor(GUI_COLOR_BLUE);
+    GUI_DisplayStringAtLine(20, menu[1]);
+    GUI_DisplayStringAtLine(21, menu[2]);
     break;
 
   case 1:
-    BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-    BSP_LCD_DisplayStringAtLine(19, menu[0]);
-    BSP_LCD_SetBackColor(LCD_COLOR_MAGENTA);
-    BSP_LCD_DisplayStringAtLine(20, menu[1]);
-    BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-    BSP_LCD_DisplayStringAtLine(21, menu[2]);
+    GUI_SetBackColor(GUI_COLOR_BLUE);
+    GUI_DisplayStringAtLine(19, menu[0]);
+    GUI_SetBackColor(GUI_COLOR_MAGENTA);
+    GUI_DisplayStringAtLine(20, menu[1]);
+    GUI_SetBackColor(GUI_COLOR_BLUE);
+    GUI_DisplayStringAtLine(21, menu[2]);
     break;
 
   case 2:
-    BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-    BSP_LCD_DisplayStringAtLine(19, menu[0]);
-    BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-    BSP_LCD_DisplayStringAtLine(20, menu[1]);
-    BSP_LCD_SetBackColor(LCD_COLOR_MAGENTA);
-    BSP_LCD_DisplayStringAtLine(21, menu[2]);
+    GUI_SetBackColor(GUI_COLOR_BLUE);
+    GUI_DisplayStringAtLine(19, menu[0]);
+    GUI_SetBackColor(GUI_COLOR_BLUE);
+    GUI_DisplayStringAtLine(20, menu[1]);
+    GUI_SetBackColor(GUI_COLOR_MAGENTA);
+    GUI_DisplayStringAtLine(21, menu[2]);
     break;
 
   case 3:
-    BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-    BSP_LCD_DisplayStringAtLine(19, menu[1]);
-    BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-    BSP_LCD_DisplayStringAtLine(20, menu[2]);
-    BSP_LCD_SetBackColor(LCD_COLOR_MAGENTA);
-    BSP_LCD_DisplayStringAtLine(21, menu[3]);
+    GUI_SetBackColor(GUI_COLOR_BLUE);
+    GUI_DisplayStringAtLine(19, menu[1]);
+    GUI_SetBackColor(GUI_COLOR_BLUE);
+    GUI_DisplayStringAtLine(20, menu[2]);
+    GUI_SetBackColor(GUI_COLOR_MAGENTA);
+    GUI_DisplayStringAtLine(21, menu[3]);
     break;
 
   default:
     break;
   }
-  BSP_LCD_SetBackColor(LCD_COLOR_BLACK);
+  GUI_SetBackColor(GUI_COLOR_BLACK);
 }
 
 /**
@@ -267,48 +267,27 @@ void Demo_SelectItem(uint8_t **menu, uint8_t item)
   * @param  GPIO_Pin: Specifies the pins connected EXTI line
   * @retval None
   */
-void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+void BSP_JOY_Callback(JOY_TypeDef JOY, JOYPin_TypeDef JoyPin)
 {
-  static JOYState_TypeDef JoyState = JOY_NONE;
-
-  if(GPIO_Pin == MFX_IRQOUT_PIN)
+  Demo_ProbeKey(JoyPin);
+  
+  if(demo.state != DEMO_HID)
   {
-    /* The different functionalities of MFX (TS, Joystick, SD detection, etc. )
-    can be configured in exti mode to generate an IRQ on given events.
-    The MFX IRQ_OUT pin is unique and common to all functionalities, so if several
-    functionalities are configured in exit mode, the MCU has to enquire MFX about
-    the IRQ source (see BSP_IO_ITGetStatus). Communication with Mfx is done by I2C.
-    Often the sw requires ISRs (irq service routines) to be quick while communication
-    with I2C can be considered relatively long (hundreds of usec depending on I2C clk).
-    In order to avoid to use "blocking I2C communication" on interrupt service routines
-    it's suggested (as alternative to this implementation) to use dedicated semaphore*/
-
-    /* Get the Joystick State */
-    JoyState = BSP_JOY_GetState();
-    HAL_Delay(200);
-
-    Demo_ProbeKey(JoyState);
-
-    if(demo.state != DEMO_HID)
+    switch (JoyPin)
     {
-      switch (JoyState)
-      {
-      case JOY_LEFT:
-        LCD_LOG_ScrollBack();
-        break;
-
-      case JOY_RIGHT:
-        LCD_LOG_ScrollForward();
-        break;
-
-      default:
-        break;
-      }
+    case JOY_LEFT:
+      UTIL_LCD_TRACE_ScrollBack();
+      break;
+      
+    case JOY_RIGHT:
+      UTIL_LCD_TRACE_ScrollForward();
+      break;
+      
+    default:
+      break;
     }
-
-    /* Clear joystick interrupt pending bits */
-    BSP_IO_ITClear();
   }
+  HAL_Delay(400);
 }
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

@@ -28,7 +28,8 @@ USBD_HandleTypeDef USBD_Device_HS;
 USBD_HandleTypeDef USBD_Device_FS;
 __IO uint8_t HID_SendReport = 0, JoyButtonInitialized = 0;
 uint8_t HID_Buffer[4];
-
+BSP_IO_Init_t init;
+static uint32_t JoyState = JOY_NONE;
 /* Private function prototypes -----------------------------------------------*/
 static void SystemClock_Config(void);
 static void Toggle_Leds(void);
@@ -68,13 +69,15 @@ int main(void)
   BSP_LED_Init(LED_BLUE);
 
   /* Initialize IO expander */
-  BSP_IO_Init();
+  BSP_IO_Init(0, &init);
 
-  /* Initialize Joystick */
+  /* Initialize Joystick 
   if (BSP_JOY_Init(JOY_MODE_GPIO) == 0)
   {
     JoyButtonInitialized = 1;
-  }
+  }*/
+  
+  BSP_JOY_Init(JOY1, JOY_MODE_GPIO, JOY_ALL);
 
   /* Init CDC Application */
   USBD_Init(&USBD_Device_HS, &VCP_Desc, 1);
@@ -120,11 +123,11 @@ int main(void)
   */
 static void GetPointerData(uint8_t *pbuf)
 {
-  int8_t  x = 0, y = 0 ;
-
-  if(JoyButtonInitialized == 1)
-  {
-    switch(BSP_JOY_GetState())
+    int8_t  x = 0, y = 0 ;
+    
+    JoyState = BSP_JOY_GetState(JOY1);
+    
+    switch(JoyState)
     {
     case JOY_LEFT:
       x -= CURSOR_STEP;
@@ -145,7 +148,6 @@ static void GetPointerData(uint8_t *pbuf)
     default:
       break;
     }
-  }
   pbuf[0] = 0;
   pbuf[1] = x;
   pbuf[2] = y;

@@ -88,25 +88,30 @@ Connectivity, LwIP, Ethernet, TFTP Server, TCP/IP, DHCP, send, receive, SD Card,
 
 @par Directory contents
 
-    - LwIP/LwIP_TFTP_Server/Inc/app_ethernet.h           header of app_ethernet.c file
-    - LwIP/LwIP_TFTP_Server/Inc/ethernetif.h             header for ethernetif.c file
-    - LwIP/LwIP_TFTP_Server/Inc/lcd_log_conf.h           LCD Log configuration file
-    - LwIP/LwIP_TFTP_Server/Inc/ffconf.h                 FAT file system module configuration file
-    - LwIP/LwIP_TFTP_Server/Inc/main.h                   Main program header file
-    - LwIP/LwIP_TFTP_Server/Inc/lwipopts.h               LwIP stack configuration options
-    - LwIP/LwIP_TFTP_Server/Inc/stm32h7xx_hal_conf.h     HAL Configuration file
-    - LwIP/LwIP_TFTP_Server/Inc/stm32h7xx_it.h           header for stm32h7xx_it.c
-    - LwIP/LwIP_TFTP_Server/Inc/tftpserver.h             header for tftpserver.c
-    - LwIP/LwIP_TFTP_Server/Inc/tftputils.h              header for tftputils.c
-    - LwIP/LwIP_TFTP_Server/Inc/sd_diskio.f              SD Disk IO header file
-    - LwIP/LwIP_TFTP_Server/Src/app_ethernet.c           Ethernet specific module
-    - LwIP/LwIP_TFTP_Server/Src/main.c                   Main program  
-    - LwIP/LwIP_TFTP_Server/Src/ethernetif.c             Interfacing LwIP to ETH driver
-    - LwIP/LwIP_TFTP_Server/Src/system_stm32h7xx.c       STM32 system configuration file
-    - LwIP/LwIP_TFTP_Server/Src/stm32h7xx_it.c           Interrupt handlers
-    - LwIP/LwIP_TFTP_Server/Src/tftpserver.c             tftp server application
-    - LwIP/LwIP_TFTP_Server/Src/tftputils.c              tftp server utilities functions
-    - LwIP/LwIP_TFTP_Server/Src/sd_diskio.c              SD Disk IO driver
+    - LwIP/LwIP_TFTP_Server/Inc/app_ethernet.h          header of app_ethernet.c file
+    - LwIP/LwIP_TFTP_Server/Inc/ethernetif.h            header for ethernetif.c file
+    - LwIP/LwIP_TFTP_Server/Inc/utilities_conf.h        Utilities configuration file
+    - LwIP/LwIP_TFTP_Server/Inc/exc7200_conf.h          EXC7200 TS component configuration file
+    - LwIP/LwIP_TFTP_Server/Inc/is42s32800g_conf.h      IS42S32800G SDRAM configuration file
+    - LwIP/LwIP_TFTP_Server/Inc/stmpe811_conf.h         STMPE811 IO expander component configuration file
+    - LwIP/LwIP_TFTP_Server/Inc/ts3510_conf.h           TS3510 TS component configuration file
+    - LwIP/LwIP_TFTP_Server/Inc/stm32h743i_eval_conf.h  STM32H743I-EVAL configuration file  
+    - LwIP/LwIP_TFTP_Server/Inc/ffconf.h                FAT file system module configuration file
+    - LwIP/LwIP_TFTP_Server/Inc/main.h                  Main program header file
+    - LwIP/LwIP_TFTP_Server/Inc/lwipopts.h              LwIP stack configuration options
+    - LwIP/LwIP_TFTP_Server/Inc/stm32h7xx_hal_conf.h    HAL Configuration file
+    - LwIP/LwIP_TFTP_Server/Inc/stm32h7xx_it.h          header for stm32h7xx_it.c
+    - LwIP/LwIP_TFTP_Server/Inc/tftpserver.h            header for tftpserver.c
+    - LwIP/LwIP_TFTP_Server/Inc/tftputils.h             header for tftputils.c
+    - LwIP/LwIP_TFTP_Server/Inc/sd_diskio.f             SD Disk IO header file
+    - LwIP/LwIP_TFTP_Server/Src/app_ethernet.c          Ethernet specific module
+    - LwIP/LwIP_TFTP_Server/Src/main.c                  Main program  
+    - LwIP/LwIP_TFTP_Server/Src/ethernetif.c            Interfacing LwIP to ETH driver
+    - LwIP/LwIP_TFTP_Server/Src/system_stm32h7xx.c      STM32 system configuration file
+    - LwIP/LwIP_TFTP_Server/Src/stm32h7xx_it.c          Interrupt handlers
+    - LwIP/LwIP_TFTP_Server/Src/tftpserver.c            tftp server application
+    - LwIP/LwIP_TFTP_Server/Src/tftputils.c             tftp server utilities functions
+    - LwIP/LwIP_TFTP_Server/Src/sd_diskio.c             SD Disk IO driver
 
 
 @par Hardware and Software environment

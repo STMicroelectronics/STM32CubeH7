@@ -69,10 +69,10 @@ void DS_MenuProcess(void)
   if (Appli_state == APPLICATION_DISCONNECT)
   {
     Appli_state = APPLICATION_IDLE;
-    LCD_ErrLog("USB device disconnected!\n");
+    LCD_ErrTrace("USB device disconnected!\n");
     Menu_Init();
 
-    LCD_UsrLog("Plug your device To Continue...\n");
+    LCD_UsrTrace("Plug your device To Continue...\n");
   }
 }
 
@@ -81,61 +81,59 @@ void DS_MenuProcess(void)
   * @param  GPIO_Pin: Specifies the pins connected EXTI line
   * @retval None
   */
-void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+void BSP_JOY_Callback(JOY_TypeDef JOY, JOYPin_TypeDef JoyPin)
 {
-  static JOYState_TypeDef JoyState = JOY_NONE;
-  static uint32_t debounce_time = 0;
-
-  if(GPIO_Pin == MFX_IRQOUT_PIN)
-  {
-    /* Get the Joystick State */
-    JoyState = BSP_JOY_GetState();
-    HAL_Delay(200);
-
+ 
     if(Appli_state == APPLICATION_MSC)
     {
-      MSC_DEMO_ProbeKey(JoyState);
+      MSC_DEMO_ProbeKey(JoyPin);
     }
     else if(Appli_state == APPLICATION_HID)
     {
-      HID_DEMO_ProbeKey(JoyState);
+      HID_DEMO_ProbeKey(JoyPin);
     }
     else if(Appli_state == APPLICATION_AUDIO)
     {
       if(audio_select_mode == AUDIO_SELECT_MENU)
       {
-        AUDIO_MenuProbeKey(JoyState);
+        AUDIO_MenuProbeKey(JoyPin);
       }
       else if(audio_select_mode == AUDIO_PLAYBACK_CONTROL)
       {
-        AUDIO_PlaybackProbeKey(JoyState);
+        AUDIO_PlaybackProbeKey(JoyPin);
       }
     }
 
     if(Appli_state != APPLICATION_HID)
     {
-      switch(JoyState)
+      switch(JoyPin)
       {
       case JOY_LEFT:
-        LCD_LOG_ScrollBack();
+        UTIL_LCD_TRACE_ScrollBack();
         break;
 
       case JOY_RIGHT:
-        LCD_LOG_ScrollForward();
+        UTIL_LCD_TRACE_ScrollForward();
         break;
 
       default:
         break;
       }
     }
-
-    /* Clear joystick interrupt pending bits */
-    BSP_IO_ITClear();
-  }
+   HAL_Delay(400); 
+}   
+/**
+  * @brief  Button Callback
+  * @param  Button Specifies the pin connected EXTI line
+  * @retval None
+  */
+void BSP_PB_Callback(Button_TypeDef Button)
+{
+   static uint32_t debounce_time = 0;
 
   if(audio_demo.state == AUDIO_DEMO_PLAYBACK)
   {
-    if(GPIO_Pin == TAMPER_BUTTON_PIN)
+    if(Button == BUTTON_TAMPER)
     {
       /* Prevent debounce effect for user Tamper */
       if((HAL_GetTick() - debounce_time) > 50)

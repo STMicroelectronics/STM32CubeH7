@@ -152,7 +152,7 @@ Middleware, USB Device, Audio, Streaming, SAI, Full speed, PCM
     evaluation boards and can be easily tailored to any other supported device
     and development board.
 
-  - STM32H747I-EVAL Rev.E Set-up
+  - STM32H747I-EVAL  Set-up
     - Connect the STM32H747I-EVAL board to the PC through 'USB micro A-Male
       to A-Male' cable to the connector:
       - CN18: to use USB Full Speed (FS)

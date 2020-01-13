@@ -32,7 +32,7 @@
 /* Private macro ------------------------------------------------------------- */
 /* Private variables --------------------------------------------------------- */
 extern PCD_HandleTypeDef hpcd;
-extern SD_HandleTypeDef uSdHandle;
+extern SD_HandleTypeDef hsd_sdmmc[SD_INSTANCES_NBR];
 /* Private function prototypes ----------------------------------------------- */
 #ifdef USE_USB_FS
 void OTG_FS_IRQHandler(void);
@@ -164,7 +164,7 @@ void OTG_HS_IRQHandler(void)
   */
 void SDMMC1_IRQHandler(void)
 {
-  HAL_SD_IRQHandler(&uSdHandle);
+  HAL_SD_IRQHandler(&hsd_sdmmc[0]);
 }
 
 /**

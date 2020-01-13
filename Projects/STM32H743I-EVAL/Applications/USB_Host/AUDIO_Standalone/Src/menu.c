@@ -68,17 +68,17 @@ void AUDIO_MenuProcess(void)
   switch (audio_demo.state)
   {
   case AUDIO_DEMO_IDLE:
-    BSP_LCD_SetTextColor(LCD_COLOR_GREEN);
-    BSP_LCD_DisplayStringAtLine(16,
+    GUI_SetTextColor(GUI_COLOR_GREEN);
+    GUI_DisplayStringAtLine(16,
                                 (uint8_t *)
                                 "                                                 ");
-    BSP_LCD_DisplayStringAtLine(17,
+    GUI_DisplayStringAtLine(17,
                                 (uint8_t *)
                                 "Use [Joystick Left/Right] to scroll up/down       ");
-    BSP_LCD_DisplayStringAtLine(18,
+    GUI_DisplayStringAtLine(18,
                                 (uint8_t *)
                                 "Use [Joystick Up/Down] to scroll audio menu      ");
-    BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
+    GUI_SetTextColor(GUI_COLOR_WHITE);
 
     AUDIO_MenuSelectItem(AUDIO_main_menu, 0);
     audio_demo.state = AUDIO_DEMO_WAIT;
@@ -104,17 +104,17 @@ void AUDIO_MenuProcess(void)
 
         case 1:
           /* Display HMI messages */
-          BSP_LCD_SetTextColor(LCD_COLOR_GREEN);
-          BSP_LCD_DisplayStringAtLine(14,
+          GUI_SetTextColor(GUI_COLOR_GREEN);
+          GUI_DisplayStringAtLine(14,
                                       (uint8_t *)
                                       "                                             ");
-          BSP_LCD_DisplayStringAtLine(15,
+          GUI_DisplayStringAtLine(15,
                                       (uint8_t *)
                                       "                                             ");
-          BSP_LCD_DisplayStringAtLine(16,
+          GUI_DisplayStringAtLine(16,
                                       (uint8_t *)
                                       "Use [User Tamper] To Stop and return from player");
-          BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
+          GUI_SetTextColor(GUI_COLOR_WHITE);
 
           /* Set PLAYBACK state and start playing 1st file */
           audio_state = AUDIO_STATE_IDLE;
@@ -138,7 +138,7 @@ void AUDIO_MenuProcess(void)
     {
       if (Audio_ShowWavFiles() > 0)
       {
-        LCD_ErrLog("There is no WAV file on the microSD.\n");
+        LCD_ErrTrace("There is no WAV file on the microSD.\n");
         Audio_ChangeSelectMode(AUDIO_SELECT_MENU);
       }
       else
@@ -161,14 +161,14 @@ void AUDIO_MenuProcess(void)
         }
         else
         {
-          BSP_LCD_SetTextColor(LCD_COLOR_YELLOW);
-          BSP_LCD_DisplayStringAtLine(10, (uint8_t *) "[  UP   ] : Volume +");
-          BSP_LCD_DisplayStringAtLine(11, (uint8_t *) "[ DOWN  ] : Volume -");
-          BSP_LCD_DisplayStringAtLine(12, (uint8_t *) "[ LEFT  ] : Previous");
-          BSP_LCD_DisplayStringAtLine(13, (uint8_t *) "[ RIGHT ] : Next");
-          BSP_LCD_DisplayStringAtLine(14,
+          GUI_SetTextColor(GUI_COLOR_YELLOW);
+          GUI_DisplayStringAtLine(10, (uint8_t *) "[  UP   ] : Volume +");
+          GUI_DisplayStringAtLine(11, (uint8_t *) "[ DOWN  ] : Volume -");
+          GUI_DisplayStringAtLine(12, (uint8_t *) "[ LEFT  ] : Previous");
+          GUI_DisplayStringAtLine(13, (uint8_t *) "[ RIGHT ] : Next");
+          GUI_DisplayStringAtLine(14,
                                       (uint8_t *) "[  SEL  ] : Pause/Resume");
-          BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
+          GUI_SetTextColor(GUI_COLOR_WHITE);
         }
       }
       else                      /* Not idle */
@@ -206,43 +206,43 @@ void AUDIO_MenuProcess(void)
   */
 void AUDIO_MenuSelectItem(uint8_t ** menu, uint8_t item)
 {
-  BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
+  GUI_SetTextColor(GUI_COLOR_WHITE);
 
   switch (item)
   {
   case 0:
-    BSP_LCD_SetBackColor(LCD_COLOR_MAGENTA);
-    BSP_LCD_DisplayStringAtLine(19, menu[0]);
-    BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-    BSP_LCD_DisplayStringAtLine(20, menu[1]);
-    BSP_LCD_DisplayStringAtLine(21, menu[2]);
+    GUI_SetBackColor(GUI_COLOR_MAGENTA);
+    GUI_DisplayStringAtLine(19, menu[0]);
+    GUI_SetBackColor(GUI_COLOR_BLUE);
+    GUI_DisplayStringAtLine(20, menu[1]);
+    GUI_DisplayStringAtLine(21, menu[2]);
     break;
 
   case 1:
-    BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-    BSP_LCD_DisplayStringAtLine(19, menu[0]);
-    BSP_LCD_SetBackColor(LCD_COLOR_MAGENTA);
-    BSP_LCD_DisplayStringAtLine(20, menu[1]);
-    BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-    BSP_LCD_DisplayStringAtLine(21, menu[2]);
+    GUI_SetBackColor(GUI_COLOR_BLUE);
+    GUI_DisplayStringAtLine(19, menu[0]);
+    GUI_SetBackColor(GUI_COLOR_MAGENTA);
+    GUI_DisplayStringAtLine(20, menu[1]);
+    GUI_SetBackColor(GUI_COLOR_BLUE);
+    GUI_DisplayStringAtLine(21, menu[2]);
     break;
 
   case 2:
-    BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-    BSP_LCD_DisplayStringAtLine(19, menu[0]);
-    BSP_LCD_DisplayStringAtLine(20, menu[1]);
-    BSP_LCD_SetBackColor(LCD_COLOR_MAGENTA);
-    BSP_LCD_DisplayStringAtLine(21, menu[2]);
+    GUI_SetBackColor(GUI_COLOR_BLUE);
+    GUI_DisplayStringAtLine(19, menu[0]);
+    GUI_DisplayStringAtLine(20, menu[1]);
+    GUI_SetBackColor(GUI_COLOR_MAGENTA);
+    GUI_DisplayStringAtLine(21, menu[2]);
     break;
 
   default:
-    BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-    BSP_LCD_DisplayStringAtLine(19, menu[0]);
-    BSP_LCD_DisplayStringAtLine(20, menu[1]);
-    BSP_LCD_DisplayStringAtLine(21, menu[2]);
+    GUI_SetBackColor(GUI_COLOR_BLUE);
+    GUI_DisplayStringAtLine(19, menu[0]);
+    GUI_DisplayStringAtLine(20, menu[1]);
+    GUI_DisplayStringAtLine(21, menu[2]);
     break;
   }
-  BSP_LCD_SetBackColor(LCD_COLOR_BLACK);
+  GUI_SetBackColor(GUI_COLOR_BLACK);
 }
 
 /**
@@ -250,7 +250,7 @@ void AUDIO_MenuSelectItem(uint8_t ** menu, uint8_t item)
   * @param  state: Joystick state
   * @retval None
   */
-void AUDIO_MenuProbeKey(JOYState_TypeDef state)
+void AUDIO_MenuProbeKey(uint32_t state)
 {
   /* Handle Joystick inputs */
   if (audio_select_mode == AUDIO_SELECT_MENU)
@@ -275,59 +275,43 @@ void AUDIO_MenuProbeKey(JOYState_TypeDef state)
   }
 }
 
-/**
-  * @brief  EXTI line detection callbacks.
-  * @param  GPIO_Pin: Specifies the pins connected EXTI line
-  * @retval None
-  */
-void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+void BSP_JOY_Callback(JOY_TypeDef JOY, JOYPin_TypeDef JoyPin)
 {
-  static __IO JOYState_TypeDef JoyState = JOY_NONE;
-  static __IO JOYState_TypeDef newJoyState = JOY_NONE;
-  static uint32_t debounce_time = 0;
-
-  if (GPIO_Pin == MFX_IRQOUT_PIN)
+  if (audio_select_mode == AUDIO_SELECT_MENU)
   {
-    /* Get the Joystick State */
-    newJoyState = BSP_JOY_GetState();
-    if(newJoyState != JOY_NONE)
-    {
-      JoyState = newJoyState;
-    }
-
-    /* Clear joystick interrupt pending bits */
-    BSP_IO_ITClear();
+    AUDIO_MenuProbeKey(JoyPin);
     
-    if(newJoyState == JOY_NONE)
+    switch (JoyPin)
     {
-      if (audio_select_mode == AUDIO_SELECT_MENU)
-      {
-        AUDIO_MenuProbeKey(JoyState);
-        
-        switch (JoyState)
-        {
-        case JOY_LEFT:
-          LCD_LOG_ScrollBack();
-          break;
-          
-        case JOY_RIGHT:
-          LCD_LOG_ScrollForward();
-          break;
-          
-        default:
-          break;
-        }
-      }
-      else if (audio_select_mode == AUDIO_PLAYBACK_CONTROL)
-      {
-        AUDIO_PlaybackProbeKey(JoyState);
-      }
+    case JOY_LEFT:
+      UTIL_LCD_TRACE_ScrollBack();
+      break;
+      
+    case JOY_RIGHT:
+      UTIL_LCD_TRACE_ScrollForward();
+      break;
+      
+    default:
+      break;
     }
   }
-
-  if (audio_demo.state == AUDIO_DEMO_PLAYBACK)
+  else if (audio_select_mode == AUDIO_PLAYBACK_CONTROL)
   {
-    if (GPIO_Pin == TAMPER_BUTTON_PIN)
+    AUDIO_PlaybackProbeKey(JoyPin);
+  }
+}
+
+/**
+  * @brief  Button Callback
+  * @param  Button Specifies the pin connected EXTI line
+  * @retval None
+  */
+void BSP_PB_Callback(Button_TypeDef Button)
+{
+  static uint32_t debounce_time = 0;
+  if(Button == BUTTON_TAMPER)
+  {
+    if (audio_demo.state == AUDIO_DEMO_PLAYBACK)
     {
       /* Prevent debounce effect for user Tamper button */
       if ((HAL_GetTick() - debounce_time) > 50)
@@ -338,7 +322,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
       {
         return;
       }
-
+      
       /* Change the selection type */
       if (audio_select_mode == AUDIO_SELECT_MENU)
       {
@@ -348,6 +332,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
       {
         Audio_ChangeSelectMode(AUDIO_SELECT_MENU);
       }
+      
     }
   }
 }
@@ -363,7 +348,7 @@ static void Audio_ChangeSelectMode(AUDIO_DEMO_SelectMode select_mode)
   {
     AUDIO_MenuSelectItem(AUDIO_main_menu, 0x00);
     LCD_ClearTextZone();
-    LCD_LOG_UpdateDisplay();
+    UTIL_LCD_TRACE_UpdateDisplay();
     audio_demo.state = AUDIO_DEMO_IDLE;
     AUDIO_Stop();
   }
@@ -386,10 +371,10 @@ static uint8_t Audio_ShowWavFiles(void)
   uint8_t i = 0;
   uint8_t line_idx = 0;
 
-  if ((FileList.ptr > 0) && (BSP_SD_IsDetected()))
+  if ((FileList.ptr > 0) && (BSP_SD_IsDetected(0)))
   {
-    BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
-    LCD_UsrLog("audio file(s) [ROOT]:\n\n");
+    GUI_SetTextColor(GUI_COLOR_WHITE);
+    LCD_UsrTrace("audio file(s) [ROOT]:\n\n");
 
     for (i = 0; i < FileList.ptr; i++)
     {
@@ -397,7 +382,7 @@ static uint8_t Audio_ShowWavFiles(void)
       if (line_idx > 9)
       {
         line_idx = 0;
-        LCD_UsrLog("> Press [Tamper] To Continue.\n");
+        LCD_UsrTrace("> Press [Tamper] To Continue.\n");
 
         /* Tamper Button in polling */
         while (BSP_PB_GetState(BUTTON_TAMPER) != SET)
@@ -405,12 +390,12 @@ static uint8_t Audio_ShowWavFiles(void)
           /* Wait for User Input */
         }
       }
-      LCD_DbgLog("   |__");
-      LCD_DbgLog((char *)FileList.file[i].name);
-      LCD_DbgLog("\n");
+      LCD_DbgTrace("   |__");
+      LCD_DbgTrace((char *)FileList.file[i].name);
+      LCD_DbgTrace("\n");
     }
-    BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
-    LCD_UsrLog("\nEnd of files list.\n");
+    GUI_SetTextColor(GUI_COLOR_WHITE);
+    LCD_UsrTrace("\nEnd of files list.\n");
     return 0;
   }
   else
@@ -430,7 +415,7 @@ static void LCD_ClearTextZone(void)
 
   for (i = 0; i < 12; i++)
   {
-    BSP_LCD_ClearStringLine(i + 3);
+    GUI_ClearStringLine(i + 3);
   }
 }
 

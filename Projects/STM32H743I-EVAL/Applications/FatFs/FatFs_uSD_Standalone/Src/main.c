@@ -39,6 +39,7 @@ static void CPU_CACHE_Enable(void);
 static void FS_FileOperations(void);
 static void SD_Initialize(void);
 static void Error_Handler(void);
+BSP_IO_Init_t init;
 
 static uint8_t isInitialized = 0;
 uint8_t workBuffer[_MAX_SS];
@@ -65,7 +66,7 @@ int main(void)
   /* Configure the system clock to 400 MHz */
   SystemClock_Config();
   
-  BSP_IO_Init();
+  BSP_IO_Init(0, &init);
   
   /* Configure LED1 and LED3 */
   BSP_LED_Init(LED_GREEN);
@@ -83,7 +84,7 @@ int main(void)
     /* Make sure that the SD detecion IT has a lower priority than the Systick */
     HAL_NVIC_SetPriority(SysTick_IRQn, 0x0E ,0);
     
-    if(BSP_SD_IsDetected())
+    if(BSP_SD_IsDetected(0))
     {
       FRESULT res;
       
@@ -137,7 +138,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
   if(MFX_IRQOUT_PIN == GPIO_Pin)
   {
-    if(BSP_SD_IsDetected())
+    if(BSP_SD_IsDetected(0))
     {
       Appli_state = APPLICATION_RUNNING;
 
@@ -318,10 +319,9 @@ static void SD_Initialize(void)
 {
   if (isInitialized == 0)
   {
-    BSP_SD_Init();
-    BSP_SD_ITConfig();
-
-    if(BSP_SD_IsDetected())
+    BSP_SD_Init(0);
+    
+    if(BSP_SD_IsDetected(0))
     {
       isInitialized = 1;
     }

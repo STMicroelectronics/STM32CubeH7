@@ -101,7 +101,7 @@ static DSTATUS MMC_CheckStatus(BYTE lun)
   {
   }
 
-  if((BSP_MMC_GetCardState() == MMC_TRANSFER_OK))
+  if((BSP_MMC_GetCardState(0) == BSP_ERROR_NONE))
   {
     Stat &= ~STA_NOINIT;
   }
@@ -124,7 +124,7 @@ DSTATUS MMC_initialize(BYTE lun)
   {
   }
 
-  if(BSP_MMC_Init() == MMC_OK)
+  if(BSP_MMC_Init(0) == BSP_ERROR_NONE)
   {
     HAL_HSEM_Release(EMMC_HSEM_ID, 0);
     Stat = MMC_CheckStatus(lun);
@@ -168,11 +168,11 @@ DRESULT MMC_read(BYTE lun, BYTE *buff, DWORD sector, UINT count)
   }
 
 
-  if(BSP_MMC_ReadBlocks((uint32_t*)buff,
+  if(BSP_MMC_ReadBlocks(0, (uint32_t*)buff,
                         (uint32_t) (sector),
-                        count, MMC_TIMEOUT) == MMC_OK)
+                        count) == BSP_ERROR_NONE)
   {
-    while(BSP_MMC_GetCardState() != MMC_TRANSFER_OK)
+    while(BSP_MMC_GetCardState(0) != BSP_ERROR_NONE)
     {
     }
       res = RES_OK;
@@ -217,11 +217,11 @@ DRESULT MMC_write(BYTE lun, const BYTE *buff, DWORD sector, UINT count)
   while (HAL_HSEM_FastTake(EMMC_HSEM_ID) != HAL_OK)
   {
   }
-  if(BSP_MMC_WriteBlocks((uint32_t*)buff,
+  if(BSP_MMC_WriteBlocks(0, (uint32_t*)buff,
                             (uint32_t)(sector),
-                            count, MMC_TIMEOUT) == MMC_OK)
+                            count) == BSP_ERROR_NONE)
   {
-    while(BSP_MMC_GetCardState() != MMC_TRANSFER_OK)
+    while(BSP_MMC_GetCardState(0) != BSP_ERROR_NONE)
     {
     }
     res = RES_OK;
@@ -260,21 +260,21 @@ DRESULT MMC_ioctl(BYTE lun, BYTE cmd, void *buff)
 
   /* Get number of sectors on the disk (DWORD) */
   case GET_SECTOR_COUNT :
-    BSP_MMC_GetCardInfo(&CardInfo);
+    BSP_MMC_GetCardInfo(0, &CardInfo);
     *(DWORD*)buff = CardInfo.LogBlockNbr;
     res = RES_OK;
     break;
 
   /* Get R/W sector size (WORD) */
   case GET_SECTOR_SIZE :
-    BSP_MMC_GetCardInfo(&CardInfo);
+    BSP_MMC_GetCardInfo(0, &CardInfo);
     *(WORD*)buff = CardInfo.LogBlockSize;
     res = RES_OK;
     break;
 
   /* Get erase block size in unit of sector (DWORD) */
   case GET_BLOCK_SIZE :
-    BSP_MMC_GetCardInfo(&CardInfo);
+    BSP_MMC_GetCardInfo(0, &CardInfo);
     *(DWORD*)buff = CardInfo.LogBlockSize / MMC_DEFAULT_BLOCK_SIZE;
 	res = RES_OK;
     break;
@@ -283,7 +283,7 @@ DRESULT MMC_ioctl(BYTE lun, BYTE cmd, void *buff)
     res = RES_PARERR;
   }
 
-  while(BSP_MMC_GetCardState() != MMC_TRANSFER_OK)
+  while(BSP_MMC_GetCardState(0) != BSP_ERROR_NONE)
   {
   }
 

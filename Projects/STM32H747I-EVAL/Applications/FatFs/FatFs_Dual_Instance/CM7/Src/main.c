@@ -84,8 +84,6 @@ int main(void)
   SystemClock_Config();
 
 
-  BSP_IO_Init();
-
   /* When system initialization is finished, Cortex-M7 will release Cortex-M4  by means of
      HSEM notification */
 
@@ -118,7 +116,7 @@ int main(void)
 
     /* Create FAT volume */
 
-    if(BSP_SD_IsDetected())
+    if(BSP_SD_IsDetected(0))
     {
       FRESULT res;
 
@@ -158,7 +156,7 @@ int main(void)
       break;
 
       case APPLICATION_STATUS_CHANGED:
-        if(BSP_SD_IsDetected())
+        if(BSP_SD_IsDetected(0))
         {
           Appli_state = APPLICATION_RUNNING;
         }
@@ -412,10 +410,10 @@ static void SD_Initialize(void)
 {
   if (isInitialized == 0)
   {
-    BSP_SD_Init();
-    BSP_SD_ITConfig();
+    BSP_SD_Init(0);
+    BSP_SD_DetectITConfig(0);
 
-    if(BSP_SD_IsDetected())
+    if(BSP_SD_IsDetected(0))
     {
       isInitialized = 1;
     }

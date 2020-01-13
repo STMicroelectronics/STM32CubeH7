@@ -86,7 +86,7 @@ void HID_MenuProcess(void)
         case 1:
           demo.state = DEMO_IDLE;
           demo.select = 0;
-          LCD_UsrLogY("> HID application closed.\n");
+          LCD_UsrTrace("> HID application closed.\n");
           break;
           
         default:
@@ -112,7 +112,7 @@ void HID_MenuProcess(void)
     }
     else
     {
-      LCD_ErrLog("No supported HID device!\n");
+      LCD_ErrTrace("No supported HID device!\n");
       demo.hid_state = APPLI_HID_WAIT;
     }
     break;

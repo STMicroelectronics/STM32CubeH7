@@ -41,14 +41,11 @@ void DebugMon_Handler(void);
 void PendSV_Handler(void);
 void SysTick_Handler(void);
 void EXTI15_10_IRQHandler(void);
-void BSP_LCD_LTDC_IRQHandler(void);
-void BSP_LCD_LTDC_ER_IRQHandler(void);
 void AUDIO_OUT_SAIx_DMAx_IRQHandler(void);
 void AUDIO_IN_SAIx_DMAx_IRQHandler(void);
 void AUDIO_IN_SAI_PDMx_DMAx_IRQHandler(void);
 void MDMA_IRQHandler(void);
-void SDMMC1_IRQHandler(void);
-
+void BDMA_Channel1_IRQHandler(void);
 #ifdef __cplusplus
 }
 #endif

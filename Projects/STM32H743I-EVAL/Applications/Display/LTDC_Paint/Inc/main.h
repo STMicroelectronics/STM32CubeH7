@@ -31,11 +31,10 @@
 /* FatFs includes component */
 #include "ff_gen_drv.h"
 #include "usbh_diskio.h"
+#include "basic_gui.h"
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
-#define LCD_FRAME_BUFFER_LAYER0                  0xD0130000
-#define LCD_FRAME_BUFFER_LAYER1                  0xD0000000
 #define CONVERTED_LINE_BUFFER                    0x24000000
 
 /* Exported macro ------------------------------------------------------------*/
@@ -44,7 +43,6 @@ void Touchscreen_Calibration (void);
 uint16_t Calibration_GetX(uint16_t x);
 uint16_t Calibration_GetY(uint16_t y);
 uint8_t IsCalibrationDone(void);
-
 #endif /* __MAIN_H */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

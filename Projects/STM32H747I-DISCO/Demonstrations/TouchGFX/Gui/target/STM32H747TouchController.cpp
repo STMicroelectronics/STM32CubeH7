@@ -7,8 +7,10 @@ extern "C"
 {
 #ifdef USE_STM32H747I_DISCO
 #include "stm32h747i_discovery_ts.h"
+#include "stm32h747i_discovery_bus.h"
 #else
 #include "stm32h747i_eval_ts.h"
+#include "stm32h747i_eval_bus.h"
 #endif
 uint32_t LCD_GetXSize();
 uint32_t LCD_GetYSize();
@@ -18,17 +20,25 @@ using namespace touchgfx;
 
 void STM32H747TouchController::init()
 {
-    BSP_TS_Init(LCD_GetXSize(), LCD_GetYSize());
+  TS_Init_t hTS;
+  hTS.Width = 800;
+  hTS.Height = 480;
+  hTS.Orientation = TS_SWAP_XY | TS_SWAP_Y;
+  hTS.Accuracy = 5;
+  
+  /* Touchscreen initialization */
+  BSP_TS_Init(0, &hTS);
+ 
 }
 
 bool STM32H747TouchController::sampleTouch(int32_t& x, int32_t& y)
 {
-    TS_StateTypeDef state = { 0 };
-    BSP_TS_GetState(&state);
-    if (state.touchDetected)
+    TS_State_t state = { 0 };
+    BSP_TS_GetState(0,&state);
+    if (state.TouchDetected)
     {
-        x = state.touchX[0];
-        y = state.touchY[0];
+        x = state.TouchX;
+        y = state.TouchY;
 
         return true;
     }

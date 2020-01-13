@@ -152,7 +152,7 @@ void SysTick_Handler(void)
   */
 void EXTI15_10_IRQHandler(void)
 {
-  HAL_GPIO_EXTI_IRQHandler(TAMPER_BUTTON_PIN);
+  HAL_GPIO_EXTI_IRQHandler(BUTTON_TAMPER_PIN);
 }
 
 /**

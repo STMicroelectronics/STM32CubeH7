@@ -1,10 +1,10 @@
 /**
   ******************************************************************************
-  * @file    LwIP/LwIP_TFTP_Server/Src/main.c 
+  * @file    LwIP/LwIP_TFTP_Server/Src/main.c
   * @author  MCD Application Team
-  * @brief   This sample code implements a http server application based on LwIP 
-  *          Raw API of LwIP stack. This application uses the STM32Cube ETH HAL  
-  *          API to transmit and receive data. 
+  * @brief   This sample code implements a http server application based on LwIP
+  *          Raw API of LwIP stack. This application uses the STM32Cube ETH HAL
+  *          API to transmit and receive data.
   *          The communication is done with a web browser of a remote PC.
   ******************************************************************************
   * @attention
@@ -26,7 +26,7 @@
 #include "netif/etharp.h"
 #include "lwip/netif.h"
 #include "lwip/timeouts.h"
-#if LWIP_DHCP 
+#if LWIP_DHCP
 #include "lwip/dhcp.h"
 #endif
 #include "ethernetif.h"
@@ -34,7 +34,7 @@
 #include "app_ethernet.h"
 #include "tftpserver.h"
 #ifdef USE_LCD
-#include "Log/lcd_log.h"
+#include "lcd_trace.h"
 #endif
 
 /* Private typedef -----------------------------------------------------------*/
@@ -64,56 +64,56 @@ int main(void)
 {
   /* Configure the MPU attributes as Device memory for ETH DMA descriptors */
   MPU_Config();
-  
+
   /* Enable the CPU Cache */
   CPU_CACHE_Enable();
-  
+
   /* STM32H7xx HAL library initialization:
        - Configure the SysTick to generate an interrupt each 1 msec
        - Set NVIC Group Priority to 4
        - Low Level Initialization
      */
-  HAL_Init();  
-  
+  HAL_Init();
+
   /* Configure the system clock to 400 MHz */
-  SystemClock_Config(); 
-  
+  SystemClock_Config();
+
   /* Configure the LCD, LEDs, ...*/
   BSP_Config();
-    
+
   /* Initialize the LwIP stack */
   lwip_init();
-  
+
   /* Configure the Network interface */
   Netif_Config();
 
   /* Initialize the TFTP server */
   tftpd_init();
-  
+
   /* Link the SD Card disk I/O driver */
   if(FATFS_LinkDriver(&SD_Driver, SD_Path) != 0)
   {
     while(1);
   }
-	
+
   /* Infinite loop */
   while (1)
-  { 
-    /* Read a received packet from the Ethernet buffers and send it 
+  {
+    /* Read a received packet from the Ethernet buffers and send it
        to the lwIP for handling */
     ethernetif_input(&gnetif);
 
     /* Handle timeouts */
     sys_check_timeouts();
 
-#if LWIP_NETIF_LINK_CALLBACK     
+#if LWIP_NETIF_LINK_CALLBACK
     Ethernet_Link_Periodic_Handle(&gnetif);
 #endif
-    
-#if LWIP_DHCP   
+
+#if LWIP_DHCP
     DHCP_Periodic_Handle(&gnetif);
-#endif    
-  } 
+#endif
+  }
 }
 
 static void BSP_Config(void)
@@ -122,29 +122,27 @@ static void BSP_Config(void)
   BSP_LED_Init(LED2);
   BSP_LED_Init(LED3);
   BSP_LED_Init(LED4);
-  
-  BSP_IO_Init();
-  BSP_SD_Init();
-  
-#ifdef USE_LCD
-  
-  /* Initialize the LCD */
-  BSP_LCD_Init();
 
-  BSP_LCD_LayerDefaultInit(0, LCD_FB_START_ADDRESS);
-  
+  BSP_SD_Init(0);
+
+#ifdef USE_LCD
+
+  /* Initialize the LCD */
+  BSP_LCD_Init(0, LCD_ORIENTATION_LANDSCAPE);
+  GUI_SetFuncDriver(&LCD_Driver);
+
   /* Initialize LCD Log module */
-  LCD_LOG_Init();  
+  UTIL_LCD_TRACE_Init();
 
   /* Show Header and Footer texts */
-  LCD_LOG_SetHeader((uint8_t *)"TFTP Server Application");
-  LCD_LOG_SetFooter((uint8_t *)"STM32H743I-EVAL board");
-  
-  LCD_UsrLog("  State: Ethernet Initialization ...\n");
+  UTIL_LCD_TRACE_SetHeader((uint8_t *)"TFTP Server Application");
+  UTIL_LCD_TRACE_SetFooter((uint8_t *)"STM32H743I-EVAL board");
+
+  LCD_UsrTrace("  State: Ethernet Initialization ...\n");
 
 #else
   BSP_LED_Init(LED1);
-  BSP_LED_Init(LED2);  
+  BSP_LED_Init(LED2);
 #endif
 }
 
@@ -158,36 +156,36 @@ static void Netif_Config(void)
   ip_addr_t ipaddr;
   ip_addr_t netmask;
   ip_addr_t gw;
-	
-#if LWIP_DHCP 
+
+#if LWIP_DHCP
   ip_addr_set_zero_ip4(&ipaddr);
   ip_addr_set_zero_ip4(&netmask);
-  ip_addr_set_zero_ip4(&gw);	
-#else	
+  ip_addr_set_zero_ip4(&gw);
+#else
 
   /* IP address default setting */
   IP4_ADDR(&ipaddr, IP_ADDR0, IP_ADDR1, IP_ADDR2, IP_ADDR3);
   IP4_ADDR(&netmask, NETMASK_ADDR0, NETMASK_ADDR1 , NETMASK_ADDR2, NETMASK_ADDR3);
-  IP4_ADDR(&gw, GW_ADDR0, GW_ADDR1, GW_ADDR2, GW_ADDR3); 
-	
+  IP4_ADDR(&gw, GW_ADDR0, GW_ADDR1, GW_ADDR2, GW_ADDR3);
+
 #endif
-  
-  /* add the network interface */    
+
+  /* add the network interface */
   netif_add(&gnetif, &ipaddr, &netmask, &gw, NULL, &ethernetif_init, &ethernet_input);
-  
+
   /*  Registers the default network interface */
   netif_set_default(&gnetif);
-  
+
   ethernet_link_status_updated(&gnetif);
-  
-#if LWIP_NETIF_LINK_CALLBACK  
+
+#if LWIP_NETIF_LINK_CALLBACK
   netif_set_link_callback(&gnetif, ethernet_link_status_updated);
 #endif
 }
 
 /**
   * @brief  System Clock Configuration
-  *         The system Clock is configured as follow : 
+  *         The system Clock is configured as follow :
   *            System Clock source            = PLL (HSE)
   *            SYSCLK(Hz)                     = 400000000 (CPU Clock)
   *            HCLK(Hz)                       = 200000000 (AXI and AHBs Clock)
@@ -212,7 +210,7 @@ static void SystemClock_Config(void)
   RCC_ClkInitTypeDef RCC_ClkInitStruct;
   RCC_OscInitTypeDef RCC_OscInitStruct;
   HAL_StatusTypeDef ret = HAL_OK;
-  
+
   /*!< Supply configuration update enable */
   HAL_PWREx_ConfigSupply(PWR_LDO_SUPPLY);
 
@@ -222,10 +220,10 @@ static void SystemClock_Config(void)
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
 
   while(!__HAL_PWR_GET_FLAG(PWR_FLAG_VOSRDY)) {}
-  
+
   /* Enable D2 domain SRAM3 Clock (0x30040000 AXI)*/
   __HAL_RCC_D2SRAM3_CLK_ENABLE();
-  
+
   /* Enable HSE Oscillator and activate PLL with HSE as source */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
@@ -248,7 +246,7 @@ static void SystemClock_Config(void)
   {
     while(1){ ; }
   }
-  
+
   /* Select PLL as system clock source and configure  bus clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_D1PCLK1 | RCC_CLOCKTYPE_PCLK1 | \
                                  RCC_CLOCKTYPE_PCLK2  | RCC_CLOCKTYPE_D3PCLK1);
@@ -256,39 +254,39 @@ static void SystemClock_Config(void)
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.SYSCLKDivider = RCC_SYSCLK_DIV1;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_HCLK_DIV2;
-  RCC_ClkInitStruct.APB3CLKDivider = RCC_APB3_DIV2;  
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_APB1_DIV2; 
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_APB2_DIV2; 
-  RCC_ClkInitStruct.APB4CLKDivider = RCC_APB4_DIV2; 
+  RCC_ClkInitStruct.APB3CLKDivider = RCC_APB3_DIV2;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_APB1_DIV2;
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_APB2_DIV2;
+  RCC_ClkInitStruct.APB4CLKDivider = RCC_APB4_DIV2;
   ret = HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_4);
   if(ret != HAL_OK)
   {
     while(1){ ; }
   }
 
-  /*activate CSI clock mondatory for I/O Compensation Cell*/  
+  /*activate CSI clock mondatory for I/O Compensation Cell*/
   __HAL_RCC_CSI_ENABLE() ;
-    
+
   /* Enable SYSCFG clock mondatory for I/O Compensation Cell */
   __HAL_RCC_SYSCFG_CLK_ENABLE() ;
-  
-  /* Enables the I/O Compensation Cell */    
-  HAL_EnableCompensationCell();  
+
+  /* Enables the I/O Compensation Cell */
+  HAL_EnableCompensationCell();
 }
 
 /**
-  * @brief  Configure the MPU attributes 
+  * @brief  Configure the MPU attributes
   * @param  None
   * @retval None
   */
 static void MPU_Config(void)
 {
   MPU_Region_InitTypeDef MPU_InitStruct;
-  
+
   /* Disable the MPU */
   HAL_MPU_Disable();
 
-  /* Configure the MPU attributes as Device not cacheable 
+  /* Configure the MPU attributes as Device not cacheable
      for ETH DMA descriptors */
   MPU_InitStruct.Enable = MPU_REGION_ENABLE;
   MPU_InitStruct.BaseAddress = 0x30040000;
@@ -303,7 +301,7 @@ static void MPU_Config(void)
   MPU_InitStruct.DisableExec = MPU_INSTRUCTION_ACCESS_ENABLE;
 
   HAL_MPU_ConfigRegion(&MPU_InitStruct);
-  
+
   /* Configure the MPU attributes as Normal Non Cacheable
      for LwIP RAM heap which contains the Tx buffers */
   MPU_InitStruct.Enable = MPU_REGION_ENABLE;
@@ -319,9 +317,9 @@ static void MPU_Config(void)
   MPU_InitStruct.DisableExec = MPU_INSTRUCTION_ACCESS_ENABLE;
 
   HAL_MPU_ConfigRegion(&MPU_InitStruct);
-  
+
 #ifdef USE_LCD
-  /* Configure the MPU attributes as WT for SDRAM */  
+  /* Configure the MPU attributes as WT for SDRAM */
   MPU_InitStruct.Enable = MPU_REGION_ENABLE;
   MPU_InitStruct.BaseAddress = SDRAM_DEVICE_ADDR;
   MPU_InitStruct.Size = MPU_REGION_SIZE_32MB;
@@ -333,7 +331,7 @@ static void MPU_Config(void)
   MPU_InitStruct.TypeExtField = MPU_TEX_LEVEL0;
   MPU_InitStruct.SubRegionDisable = 0x00;
   MPU_InitStruct.DisableExec = MPU_INSTRUCTION_ACCESS_ENABLE;
-  
+
   HAL_MPU_ConfigRegion(&MPU_InitStruct);
 #endif
 

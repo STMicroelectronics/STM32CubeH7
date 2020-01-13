@@ -96,7 +96,12 @@ Connectivity, LwIP, Ethernet, TCP/IP, DHCP, UDP echo client
   - LwIP/LwIP_UDP_Echo_Client/Inc/stm32h7xx_it.h          STM32 interrupt handlers header file
   - LwIP/LwIP_UDP_Echo_Client/Inc/main.h                  Main program header file
   - LwIP/LwIP_UDP_Echo_Client/Inc/lwipopts.h              LwIP stack configuration options
-  - LwIP/LwIP_UDP_Echo_Client/Inc/lcd_log_conf.h          LCD Log configuration file
+  - LwIP/LwIP_UDP_Echo_Client/Inc/utilities_conf.h        Utilities configuration file
+  - LwIP/LwIP_UDP_Echo_Client/Inc/exc7200_conf.h          EXC7200 TS component configuration file
+  - LwIP/LwIP_UDP_Echo_Client/Inc/is42s32800g_conf.h      IS42S32800G SDRAM configuration file
+  - LwIP/LwIP_UDP_Echo_Client/Inc/stmpe811_conf.h         STMPE811 IO expander component configuration file
+  - LwIP/LwIP_UDP_Echo_Client/Inc/ts3510_conf.h           TS3510 TS component configuration file
+  - LwIP/LwIP_UDP_Echo_Client/Inc/stm32h743i_eval_conf.h  STM32H743I-EVAL configuration file  
   - LwIP/LwIP_UDP_Echo_Client/Inc/udp_echoclient.h        Header for UDP echoclient application
   - LwIP/LwIP_UDP_Echo_Client/Src/app_ethernet.c          Ethernet specific module
   - LwIP/LwIP_UDP_Echo_Client/Src/stm32h7xx_it.c          STM32 interrupt handlers

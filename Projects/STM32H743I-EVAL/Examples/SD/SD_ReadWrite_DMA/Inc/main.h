@@ -25,6 +25,8 @@
 #include "stm32h7xx_hal.h"
 #include "stm32h743i_eval.h"
 #include "stm32h743i_eval_io.h"
+#include "stm32h743i_eval_sd.h"
+#include "stm32h743i_eval_bus.h"
 #include "stdio.h"
 
 /* Exported types ------------------------------------------------------------*/

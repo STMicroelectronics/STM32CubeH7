@@ -34,6 +34,7 @@
 
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
+uint32_t LCD_X_Size = 0, LCD_Y_Size = 0;
 FDCAN_HandleTypeDef hfdcan;
 FDCAN_FilterTypeDef sFilterConfig;
 uint32_t idx = 0;
@@ -350,7 +351,7 @@ static void Config_FDCAN(void)
   */
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
-  if (GPIO_Pin == USER_BUTTON_PIN)
+  if (GPIO_Pin == BUTTON_USER_PIN)
   {
     /* Report User push button event to main program */
     UserButtonClickEvent = SET;
@@ -384,12 +385,12 @@ static void Flush_Rx_Buffers(void)
   */
 static void DMA2D_CopyBuffer(uint32_t *pSrc, uint32_t *pDst, uint16_t x, uint16_t y, uint16_t xsize, uint16_t ysize)
 {
-  uint32_t destination = 0; 
-
+  uint32_t destination = 0;
+  BSP_LCD_GetXSize(0, &LCD_X_Size);
   /*##-1- Configure the DMA2D Mode, Color Mode and output offset #############*/ 
   DMA2D_Handle.Init.Mode         = DMA2D_M2M_PFC;
   DMA2D_Handle.Init.ColorMode    = DMA2D_OUTPUT_ARGB8888;
-  DMA2D_Handle.Init.OutputOffset = BSP_LCD_GetXSize() - xsize; 
+  DMA2D_Handle.Init.OutputOffset = LCD_X_Size - xsize; 
   DMA2D_Handle.Init.AlphaInverted = DMA2D_REGULAR_ALPHA;  /* No Output Alpha Inversion*/  
   DMA2D_Handle.Init.RedBlueSwap   = DMA2D_RB_REGULAR;     /* No Output Red & Blue swap */  
 
@@ -412,7 +413,7 @@ static void DMA2D_CopyBuffer(uint32_t *pSrc, uint32_t *pDst, uint16_t x, uint16_
   HAL_DMA2D_ConfigLayer(&DMA2D_Handle, 1);
 
   /*##-5- Copy the new decoded frame to the LCD Frame buffer #################*/
-  destination = (uint32_t)pDst + ((y * BSP_LCD_GetXSize()) + x) * 4;
+  destination = (uint32_t)pDst + ((y * LCD_X_Size) + x) * 4;
 
   HAL_DMA2D_Start(&DMA2D_Handle, (uint32_t)pSrc, destination, xsize, ysize);
   HAL_DMA2D_PollForTransfer(&DMA2D_Handle, 25);  /* wait for the previous DMA2D transfer to end */
@@ -425,41 +426,41 @@ static void DMA2D_CopyBuffer(uint32_t *pSrc, uint32_t *pDst, uint16_t x, uint16_
   */
 static void Display_Init(uint32_t step)
 {
+  BSP_LCD_GetXSize(0, &LCD_X_Size);
   if(step == FIRST_RUN)
   {
     /* Initialize and configure the LCD */
-    BSP_LCD_Init();
-    BSP_LCD_LayerDefaultInit(1, LCD_FRAME_BUFFER);
-    BSP_LCD_SelectLayer(1);
-    BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
-    BSP_LCD_Clear(LCD_COLOR_WHITE);
+    BSP_LCD_Init(1, LCD_ORIENTATION_LANDSCAPE);
+    GUI_SetFuncDriver(&LCD_Driver);       
+    GUI_SetLayer(1);
+    GUI_SetBackColor(GUI_COLOR_WHITE);
+    GUI_Clear(GUI_COLOR_WHITE);
   }
 
   /* Set description */
-  BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
-  BSP_LCD_FillRect(0, 0, BSP_LCD_GetXSize(), 23);
-  BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
-  BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-  BSP_LCD_SetFont(&Font20);
-  BSP_LCD_DisplayStringAt(0, 2, (uint8_t *)"FDCAN image transmission", CENTER_MODE);
+  GUI_FillRect(0, 0, LCD_X_Size, 23, GUI_COLOR_BLUE);
+  GUI_SetTextColor(GUI_COLOR_WHITE);
+  GUI_SetBackColor(GUI_COLOR_BLUE);
+  GUI_SetFont(&Font20);
+  GUI_DisplayStringAt(0, 2, (uint8_t *)"FDCAN image transmission", CENTER_MODE);
 
-  BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
-  BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
-  BSP_LCD_SetFont(&Font12);
+  GUI_SetTextColor(GUI_COLOR_BLUE);
+  GUI_SetBackColor(GUI_COLOR_WHITE);
+  GUI_SetFont(&Font12);
 
   if(step == FIRST_RUN)
   {
-    BSP_LCD_DisplayStringAt(359, 75, (uint8_t *)"Press User push-button", CENTER_MODE);
-    BSP_LCD_DisplayStringAt(359, 105, (uint8_t *)"to request image transmission", CENTER_MODE);
-    BSP_LCD_SetTextColor(LCD_COLOR_RED);
-    BSP_LCD_DisplayStringAt(359, 135, (uint8_t *)"Without Bit Rate Switching", CENTER_MODE);
+    GUI_DisplayStringAt(359, 75, (uint8_t *)"Press User push-button", CENTER_MODE);
+    GUI_DisplayStringAt(359, 105, (uint8_t *)"to request image transmission", CENTER_MODE);
+    GUI_SetTextColor(GUI_COLOR_RED);
+    GUI_DisplayStringAt(359, 135, (uint8_t *)"Without Bit Rate Switching", CENTER_MODE);
   }
   else if(step == SECOND_RUN)
   {
-    BSP_LCD_DisplayStringAt(122, 75, (uint8_t *)"Press again User push-button to", CENTER_MODE);
-    BSP_LCD_DisplayStringAt(122, 105, (uint8_t *)"request image transmission with", CENTER_MODE);
-    BSP_LCD_SetTextColor(LCD_COLOR_DARKGREEN);
-    BSP_LCD_DisplayStringAt(122, 135, (uint8_t *)"Bit Rate Switching activated", CENTER_MODE);
+    GUI_DisplayStringAt(122, 75, (uint8_t *)"Press again User push-button to", CENTER_MODE);
+    GUI_DisplayStringAt(122, 105, (uint8_t *)"request image transmission with", CENTER_MODE);
+    GUI_SetTextColor(GUI_COLOR_DARKGREEN);
+    GUI_DisplayStringAt(122, 135, (uint8_t *)"Bit Rate Switching activated", CENTER_MODE);
   }
 }
 
@@ -475,30 +476,30 @@ static void Display_PropagationTime(uint32_t step)
   if(step == FIRST_RUN)
   {
     Xpos = 360;
-    Color = LCD_COLOR_RED;
+    Color = GUI_COLOR_RED;
   }
   else
   {
     Xpos = 120;
-    Color = LCD_COLOR_DARKGREEN;
+    Color = GUI_COLOR_DARKGREEN;
   }
 
-  BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
-  BSP_LCD_SetFont(&Font16);
-  BSP_LCD_SetTextColor(Color);
-  BSP_LCD_DisplayStringAt(Xpos, 205, (uint8_t *)message, CENTER_MODE);
+  GUI_SetBackColor(GUI_COLOR_WHITE);
+  GUI_SetFont(&Font16);
+  GUI_SetTextColor(Color);
+  GUI_DisplayStringAt(Xpos, 205, (uint8_t *)message, CENTER_MODE);
 
   if(step == FIRST_RUN)
   {
-    BSP_LCD_SetTextColor(LCD_COLOR_LIGHTGRAY);
-    BSP_LCD_FillRect(0, 225, BSP_LCD_GetXSize(), 47);
-    BSP_LCD_SetTextColor(LCD_COLOR_DARKGRAY);
-    BSP_LCD_SetBackColor(LCD_COLOR_LIGHTGRAY);
-    BSP_LCD_SetFont(&Font12);
+    BSP_LCD_GetXSize(0, &LCD_X_Size);
+    GUI_FillRect(0, 225, LCD_X_Size, 47, GUI_COLOR_LIGHTGRAY);
+    GUI_SetTextColor(GUI_COLOR_DARKGRAY);
+    GUI_SetBackColor(GUI_COLOR_LIGHTGRAY);
+    GUI_SetFont(&Font12);
 
-    BSP_LCD_DisplayStringAt(0, 227, (uint8_t *)"The communication process includes :", CENTER_MODE);
-    BSP_LCD_DisplayStringAt(02, 243, (uint8_t *)"Adding messages to TxFIFO, Message propagation, Retrieving messages", LEFT_MODE);
-    BSP_LCD_DisplayStringAt(02, 259, (uint8_t *)"from RxFIFO and Synchronization (sending request every 16 messages)", LEFT_MODE);
+    GUI_DisplayStringAt(0, 227, (uint8_t *)"The communication process includes :", CENTER_MODE);
+    GUI_DisplayStringAt(02, 243, (uint8_t *)"Adding messages to TxFIFO, Message propagation, Retrieving messages", LEFT_MODE);
+    GUI_DisplayStringAt(02, 259, (uint8_t *)"from RxFIFO and Synchronization (sending request every 16 messages)", LEFT_MODE);
   }
 }
 

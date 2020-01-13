@@ -154,7 +154,7 @@ void SysTick_Handler(void)
   */
 void SDMMC1_IRQHandler(void)
 {
-  BSP_MMC_IRQHandler();
+  BSP_MMC_IRQHandler(0);
 }
 
 /**

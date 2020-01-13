@@ -262,8 +262,12 @@
 /      lock control is independent of re-entrancy. */
 
 #define _FS_REENTRANT  0
+
+#if _FS_REENTRANT
+#include "cmsis_os.h"
 #define _FS_TIMEOUT    1000
-#define  _SYNC_t                 NULL
+#define	_SYNC_t         osSemaphoreId
+#endif
 /* The option _FS_REENTRANT switches the re-entrancy (thread safe) of the FatFs
 /  module itself. Note that regardless of this option, file access to different
 /  volume is always re-entrant and volume control functions, f_mount(), f_mkfs()
@@ -283,11 +287,17 @@
 
 /* #include <windows.h>  // O/S definitions  */
 
-/* define the ff_malloc ff_free macros as standard malloc free */
-#if !defined(ff_malloc) && !defined(ff_free)
+#if _USE_LFN == 3
+#if !defined(ff_malloc) || !defined(ff_free)
 #include <stdlib.h>
-#define ff_malloc  malloc
-#define ff_free  free
 #endif
 
+#if !defined(ff_malloc)
+#define ff_malloc  malloc
+#endif
+
+#if !defined(ff_free)
+#define ff_free free
+#endif
+#endif
 /*--- End of configuration options ---*/

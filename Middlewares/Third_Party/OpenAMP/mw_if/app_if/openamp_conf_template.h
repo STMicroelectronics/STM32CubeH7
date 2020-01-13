@@ -27,7 +27,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #if defined (__LOG_TRACE_IO_) || defined(__LOG_UART_IO_)
-#include "log.h"
+#include "openamp_log.h"
 #endif
 
  /* ########################## Mailbox Interface Selection ############################## */

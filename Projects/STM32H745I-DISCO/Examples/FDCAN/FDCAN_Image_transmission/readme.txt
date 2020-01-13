@@ -137,6 +137,8 @@ If an error is encountered LED2 is turned ON.
 @par Directory contents 
 
   - FDCAN/FDCAN_Image_transmission/Common/Src/system_stm32h7xx.c  STM32H7xx system configuration file
+  - FDCAN/FDCAN_Image_transmission/Common/Src/ft5336_conf.h       Configurations file for ft5336
+  - FDCAN/FDCAN_Image_transmission/Common/Inc/mt48lc4m32b2_conf.h Configurations file for mt48lc4m32b2
 
   - FDCAN/FDCAN_Image_transmission/CM7/Src/main.c                 Main program for Cortex-M7
   - FDCAN/FDCAN_Image_transmission/CM7/Src/stm32h7xx_it.c         Interrupt handlers for Cortex-M7
@@ -144,13 +146,15 @@ If an error is encountered LED2 is turned ON.
   - FDCAN/FDCAN_Image_transmission/CM7/Inc/main.h                 Main program header file for Cortex-M7  
   - FDCAN/FDCAN_Image_transmission/CM7/Inc/stm32h7xx_hal_conf.h   HAL Configuration file for Cortex-M7
   - FDCAN/FDCAN_Image_transmission/CM7/Inc/stm32h7xx_it.h         Interrupt handlers header file for Cortex-M7
-
+  
   - FDCAN/FDCAN_Image_transmission/CM4/Src/main.c                 Main program for Cortex-M4
   - FDCAN/FDCAN_Image_transmission/CM4/Src/stm32h7xx_it.c         Interrupt handlers for Cortex-M4
   - FDCAN/FDCAN_Image_transmission/CM4/Src/stm32h7xx_hal_msp.c    HAL MSP module for Cortex-M4
   - FDCAN/FDCAN_Image_transmission/CM4/Inc/main.h                 Main program header file for Cortex-M4  
   - FDCAN/FDCAN_Image_transmission/CM4/Inc/stm32h7xx_hal_conf.h   HAL Configuration file for Cortex-M4
   - FDCAN/FDCAN_Image_transmission/CM4/Inc/stm32h7xx_it.h         Interrupt handlers header file for Cortex-M4
+  
+
 
 @par Hardware and Software environment  
 

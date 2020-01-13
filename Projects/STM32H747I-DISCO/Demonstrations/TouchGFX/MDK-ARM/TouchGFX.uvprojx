@@ -16,8 +16,8 @@
         <TargetCommonOption>
           <Device>STM32H747XIHx:CM7</Device>
           <Vendor>STMicroelectronics</Vendor>
-          <PackID>Keil.STM32H7xx_DFP.2.2.5</PackID>
-          <PackURL>http://www.ST.com/</PackURL>
+          <PackID>Keil.STM32H7xx_DFP.2.2.6</PackID>
+          <PackURL>http://www.keil.com/pack</PackURL>
           <Cpu>IROM(0x08000000-0x81FFFFF) IROM_ML(0x08000000-0x803FFFF) IROM_STEW(0x08040000-0x80FFFFF) IROM_EWIZ(0x080A0000-0x80FFFFF) IROM_FW(0x08100000-0x813FFFF) IROM_TGFX(0x08140000-0x81DFFFF) IROM_CUC(0x081E0000-0x81FFFFF) IRAM2(0x00000000-0xFFFF) IRAM(0x20000000-0x2001FFFF) IRAM(0x24000000-0x2407FFFF) CLOCK(12000000) FPU3(DFPU) CPUTYPE("Cortex-M7") ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile></StartupFile>
@@ -337,7 +337,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32H747xx,USE_STM32H747I_DISCO,BSP_USE_CMSIS_OS,CORE_CM7,USE_BPP=24,ST,USE_FLOATING_POINT,USE_USB_HS</Define>
               <Undefine></Undefine>
-              <IncludePath>../Gui/generated/images/include;../Gui/generated/fonts/include;../Gui/generated/texts/include;../Gui/gui/include;../Gui/gui/include/gui/audio_player_screen;../../../../../Middlewares/ST/TouchGFX/touchgfx/framework/include;../../../../../Drivers/STM32H7xx_HAL_Driver/Inc;../../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../../../../../Drivers/BSP/STM32H747I-Discovery;../../../../../Utilities/JPEG;../../../../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS;../../../../../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1;../../../../../Middlewares/Third_Party/FreeRTOS/Source/include;../../../../../Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Inc;../../../../../Middlewares/ST/STM32_USB_Host_Library/Core/Inc;../../../../../Middlewares/Third_Party/FatFs/src;../../../../../Middlewares/Third_Party/FatFs/src/drivers;../../../../../Middlewares/Third_Party/LibJPEG/include;../Config;../Core/Inc;../../../../../Drivers/CMSIS/Include;..;../Gui/target;../../../../../Middlewares/ST/STM32_Audio/Addons/PDM/Inc;../../STFirmware/Common/Inc</IncludePath>
+              <IncludePath>../Gui/generated/images/include;../Gui/generated/fonts/include;../Gui/generated/texts/include;../Gui/gui/include;../Gui/gui/include/gui/audio_player_screen;../../../../../Middlewares/ST/TouchGFX/touchgfx/framework/include;../../../../../Drivers/STM32H7xx_HAL_Driver/Inc;../../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../../../../../Drivers/BSP/STM32H747I-DISCO;../../../../../Utilities/JPEG;../../../../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS;../../../../../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1;../../../../../Middlewares/Third_Party/FreeRTOS/Source/include;../../../../../Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Inc;../../../../../Middlewares/ST/STM32_USB_Host_Library/Core/Inc;../../../../../Middlewares/Third_Party/FatFs/src;../../../../../Middlewares/Third_Party/FatFs/src/drivers;../../../../../Middlewares/Third_Party/LibJPEG/include;../Config;../Core/Inc;../../../../../Drivers/CMSIS/Include;..;../Gui/target;../../../../../Middlewares/ST/STM32_Audio/Addons/PDM/Inc;../../STFirmware/Common/Inc;../../../../../Drivers/BSP/Components/Common</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -469,402 +469,422 @@
             <File>
               <FileName>ApplicationFontProvider.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/ApplicationFontProvider.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\ApplicationFontProvider.cpp</FilePath>
             </File>
             <File>
-              <FileName>Font_Asap_Bold_otf_20_4bpp.cpp</FileName>
+              <FileName>CachedFont.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Font_Asap_Bold_otf_20_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\CachedFont.cpp</FilePath>
             </File>
             <File>
-              <FileName>Font_Asap_Bold_otf_27_4bpp.cpp</FileName>
+              <FileName>Font_Asap_Bold_otf_20_4bpp_0.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Font_Asap_Bold_otf_27_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Font_Asap_Bold_otf_20_4bpp_0.cpp</FilePath>
             </File>
             <File>
-              <FileName>Font_Asap_Regular_13_4bpp.cpp</FileName>
+              <FileName>Font_Asap_Bold_otf_27_4bpp_0.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Font_Asap_Regular_13_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Font_Asap_Bold_otf_27_4bpp_0.cpp</FilePath>
             </File>
             <File>
-              <FileName>Font_Asap_Regular_18_4bpp.cpp</FileName>
+              <FileName>Font_Asap_Regular_18_4bpp_0.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Font_Asap_Regular_18_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Font_Asap_Regular_18_4bpp_0.cpp</FilePath>
             </File>
             <File>
-              <FileName>Font_Asap_Regular_20_4bpp.cpp</FileName>
+              <FileName>Font_Asap_Regular_20_4bpp_0.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Font_Asap_Regular_20_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Font_Asap_Regular_20_4bpp_0.cpp</FilePath>
             </File>
             <File>
-              <FileName>Font_Asap_Regular_21_4bpp.cpp</FileName>
+              <FileName>Font_Asap_Regular_21_4bpp_0.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Font_Asap_Regular_21_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Font_Asap_Regular_21_4bpp_0.cpp</FilePath>
             </File>
             <File>
-              <FileName>Font_Asap_Regular_28_4bpp.cpp</FileName>
+              <FileName>Font_Asap_Regular_28_4bpp_0.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Font_Asap_Regular_28_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Font_Asap_Regular_28_4bpp_0.cpp</FilePath>
             </File>
             <File>
-              <FileName>Font_Asap_Regular_42_4bpp.cpp</FileName>
+              <FileName>Font_Asap_Regular_42_4bpp_0.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Font_Asap_Regular_42_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Font_Asap_Regular_42_4bpp_0.cpp</FilePath>
             </File>
             <File>
-              <FileName>Font_NotoSans_Regular_22_4bpp.cpp</FileName>
+              <FileName>Font_NotoSans_Regular_22_4bpp_0.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Font_NotoSans_Regular_22_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Font_NotoSans_Regular_22_4bpp_0.cpp</FilePath>
             </File>
             <File>
-              <FileName>Font_Roboto_Bold_22_4bpp.cpp</FileName>
+              <FileName>Font_Roboto_Bold_22_4bpp_0.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Font_Roboto_Bold_22_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Font_Roboto_Bold_22_4bpp_0.cpp</FilePath>
             </File>
             <File>
-              <FileName>Font_Roboto_Medium_30_4bpp.cpp</FileName>
+              <FileName>Font_Roboto_Medium_30_4bpp_0.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Font_Roboto_Medium_30_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Font_Roboto_Medium_30_4bpp_0.cpp</FilePath>
             </File>
             <File>
-              <FileName>Font_RobotoCondensed_Bold_20_4bpp.cpp</FileName>
+              <FileName>Font_RobotoCondensed_Bold_20_4bpp_0.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Font_RobotoCondensed_Bold_20_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Font_RobotoCondensed_Bold_20_4bpp_0.cpp</FilePath>
             </File>
             <File>
-              <FileName>Font_RobotoCondensed_Bold_22_4bpp.cpp</FileName>
+              <FileName>Font_RobotoCondensed_Bold_22_4bpp_0.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Font_RobotoCondensed_Bold_22_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Font_RobotoCondensed_Bold_22_4bpp_0.cpp</FilePath>
             </File>
             <File>
-              <FileName>Font_RobotoCondensed_Bold_30_4bpp.cpp</FileName>
+              <FileName>Font_RobotoCondensed_Bold_22_4bpp_4.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Font_RobotoCondensed_Bold_30_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Font_RobotoCondensed_Bold_22_4bpp_4.cpp</FilePath>
             </File>
             <File>
-              <FileName>Font_RobotoCondensed_Bold_32_4bpp.cpp</FileName>
+              <FileName>Font_RobotoCondensed_Bold_30_4bpp_0.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Font_RobotoCondensed_Bold_32_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Font_RobotoCondensed_Bold_30_4bpp_0.cpp</FilePath>
             </File>
             <File>
-              <FileName>Font_RobotoCondensed_Bold_42_4bpp.cpp</FileName>
+              <FileName>Font_RobotoCondensed_Bold_32_4bpp_0.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Font_RobotoCondensed_Bold_42_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Font_RobotoCondensed_Bold_32_4bpp_0.cpp</FilePath>
             </File>
             <File>
-              <FileName>Font_RobotoCondensed_Bold_56_4bpp.cpp</FileName>
+              <FileName>Font_RobotoCondensed_Bold_42_4bpp_0.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Font_RobotoCondensed_Bold_56_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Font_RobotoCondensed_Bold_42_4bpp_0.cpp</FilePath>
             </File>
             <File>
-              <FileName>Font_RobotoCondensed_Bold_60_4bpp.cpp</FileName>
+              <FileName>Font_RobotoCondensed_Bold_56_4bpp_0.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Font_RobotoCondensed_Bold_60_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Font_RobotoCondensed_Bold_56_4bpp_0.cpp</FilePath>
             </File>
             <File>
-              <FileName>Font_RobotoCondensed_Bold_90_4bpp.cpp</FileName>
+              <FileName>Font_RobotoCondensed_Bold_60_4bpp_0.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Font_RobotoCondensed_Bold_90_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Font_RobotoCondensed_Bold_60_4bpp_0.cpp</FilePath>
             </File>
             <File>
-              <FileName>Font_RobotoCondensed_Regular_110_4bpp.cpp</FileName>
+              <FileName>Font_RobotoCondensed_Bold_90_4bpp_0.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Font_RobotoCondensed_Regular_110_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Font_RobotoCondensed_Bold_90_4bpp_0.cpp</FilePath>
             </File>
             <File>
-              <FileName>Font_RobotoCondensed_Regular_18_4bpp.cpp</FileName>
+              <FileName>Font_RobotoCondensed_Regular_18_4bpp_0.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Font_RobotoCondensed_Regular_18_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Font_RobotoCondensed_Regular_18_4bpp_0.cpp</FilePath>
             </File>
             <File>
-              <FileName>Font_RobotoCondensed_Regular_20_4bpp.cpp</FileName>
+              <FileName>Font_RobotoCondensed_Regular_18_4bpp_4.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Font_RobotoCondensed_Regular_20_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Font_RobotoCondensed_Regular_18_4bpp_4.cpp</FilePath>
             </File>
             <File>
-              <FileName>Font_RobotoCondensed_Regular_22_4bpp.cpp</FileName>
+              <FileName>Font_RobotoCondensed_Regular_20_4bpp_0.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Font_RobotoCondensed_Regular_22_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Font_RobotoCondensed_Regular_20_4bpp_0.cpp</FilePath>
             </File>
             <File>
-              <FileName>Font_RobotoCondensed_Regular_38_4bpp.cpp</FileName>
+              <FileName>Font_RobotoCondensed_Regular_20_4bpp_4.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Font_RobotoCondensed_Regular_38_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Font_RobotoCondensed_Regular_20_4bpp_4.cpp</FilePath>
             </File>
             <File>
-              <FileName>Font_RobotoCondensed_Regular_40_4bpp.cpp</FileName>
+              <FileName>Font_RobotoCondensed_Regular_22_4bpp_0.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Font_RobotoCondensed_Regular_40_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Font_RobotoCondensed_Regular_22_4bpp_0.cpp</FilePath>
             </File>
             <File>
-              <FileName>Font_RobotoCondensed_Regular_54_4bpp.cpp</FileName>
+              <FileName>Font_RobotoCondensed_Regular_38_4bpp_0.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Font_RobotoCondensed_Regular_54_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Font_RobotoCondensed_Regular_38_4bpp_0.cpp</FilePath>
             </File>
             <File>
-              <FileName>FontGetters.cpp</FileName>
+              <FileName>Font_RobotoCondensed_Regular_40_4bpp_0.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/FontGetters.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Font_RobotoCondensed_Regular_40_4bpp_0.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Font_RobotoCondensed_Regular_54_4bpp_0.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Gui\generated\fonts\src\Font_RobotoCondensed_Regular_54_4bpp_0.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Font_RobotoCondensed_Regular_110_4bpp_0.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Gui\generated\fonts\src\Font_RobotoCondensed_Regular_110_4bpp_0.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>FontCache.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Gui\generated\fonts\src\FontCache.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>GeneratedFont.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Gui\generated\fonts\src\GeneratedFont.cpp</FilePath>
             </File>
             <File>
               <FileName>Kerning_Asap_Bold_otf_20_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Kerning_Asap_Bold_otf_20_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Kerning_Asap_Bold_otf_20_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Kerning_Asap_Bold_otf_27_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Kerning_Asap_Bold_otf_27_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Kerning_Asap_Bold_otf_27_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Kerning_Asap_Regular_13_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Kerning_Asap_Regular_13_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Kerning_Asap_Regular_13_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Kerning_Asap_Regular_18_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Kerning_Asap_Regular_18_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Kerning_Asap_Regular_18_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Kerning_Asap_Regular_20_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Kerning_Asap_Regular_20_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Kerning_Asap_Regular_20_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Kerning_Asap_Regular_21_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Kerning_Asap_Regular_21_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Kerning_Asap_Regular_21_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Kerning_Asap_Regular_28_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Kerning_Asap_Regular_28_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Kerning_Asap_Regular_28_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Kerning_Asap_Regular_42_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Kerning_Asap_Regular_42_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Kerning_Asap_Regular_42_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Kerning_NotoSans_Regular_22_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Kerning_NotoSans_Regular_22_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Kerning_NotoSans_Regular_22_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Kerning_Roboto_Bold_22_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Kerning_Roboto_Bold_22_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Kerning_Roboto_Bold_22_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Kerning_Roboto_Medium_30_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Kerning_Roboto_Medium_30_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Kerning_Roboto_Medium_30_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Kerning_RobotoCondensed_Bold_20_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Kerning_RobotoCondensed_Bold_20_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Kerning_RobotoCondensed_Bold_20_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Kerning_RobotoCondensed_Bold_22_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Kerning_RobotoCondensed_Bold_22_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Kerning_RobotoCondensed_Bold_22_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Kerning_RobotoCondensed_Bold_30_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Kerning_RobotoCondensed_Bold_30_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Kerning_RobotoCondensed_Bold_30_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Kerning_RobotoCondensed_Bold_32_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Kerning_RobotoCondensed_Bold_32_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Kerning_RobotoCondensed_Bold_32_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Kerning_RobotoCondensed_Bold_42_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Kerning_RobotoCondensed_Bold_42_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Kerning_RobotoCondensed_Bold_42_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Kerning_RobotoCondensed_Bold_56_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Kerning_RobotoCondensed_Bold_56_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Kerning_RobotoCondensed_Bold_56_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Kerning_RobotoCondensed_Bold_60_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Kerning_RobotoCondensed_Bold_60_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Kerning_RobotoCondensed_Bold_60_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Kerning_RobotoCondensed_Bold_90_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Kerning_RobotoCondensed_Bold_90_4bpp.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Kerning_RobotoCondensed_Regular_110_4bpp.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Kerning_RobotoCondensed_Regular_110_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Kerning_RobotoCondensed_Bold_90_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Kerning_RobotoCondensed_Regular_18_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Kerning_RobotoCondensed_Regular_18_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Kerning_RobotoCondensed_Regular_18_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Kerning_RobotoCondensed_Regular_20_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Kerning_RobotoCondensed_Regular_20_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Kerning_RobotoCondensed_Regular_20_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Kerning_RobotoCondensed_Regular_22_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Kerning_RobotoCondensed_Regular_22_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Kerning_RobotoCondensed_Regular_22_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Kerning_RobotoCondensed_Regular_38_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Kerning_RobotoCondensed_Regular_38_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Kerning_RobotoCondensed_Regular_38_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Kerning_RobotoCondensed_Regular_40_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Kerning_RobotoCondensed_Regular_40_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Kerning_RobotoCondensed_Regular_40_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Kerning_RobotoCondensed_Regular_54_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Kerning_RobotoCondensed_Regular_54_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Kerning_RobotoCondensed_Regular_54_4bpp.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Kerning_RobotoCondensed_Regular_110_4bpp.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Gui\generated\fonts\src\Kerning_RobotoCondensed_Regular_110_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Table_Asap_Bold_otf_20_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Table_Asap_Bold_otf_20_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Table_Asap_Bold_otf_20_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Table_Asap_Bold_otf_27_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Table_Asap_Bold_otf_27_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Table_Asap_Bold_otf_27_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Table_Asap_Regular_13_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Table_Asap_Regular_13_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Table_Asap_Regular_13_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Table_Asap_Regular_18_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Table_Asap_Regular_18_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Table_Asap_Regular_18_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Table_Asap_Regular_20_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Table_Asap_Regular_20_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Table_Asap_Regular_20_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Table_Asap_Regular_21_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Table_Asap_Regular_21_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Table_Asap_Regular_21_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Table_Asap_Regular_28_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Table_Asap_Regular_28_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Table_Asap_Regular_28_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Table_Asap_Regular_42_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Table_Asap_Regular_42_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Table_Asap_Regular_42_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Table_NotoSans_Regular_22_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Table_NotoSans_Regular_22_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Table_NotoSans_Regular_22_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Table_Roboto_Bold_22_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Table_Roboto_Bold_22_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Table_Roboto_Bold_22_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Table_Roboto_Medium_30_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Table_Roboto_Medium_30_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Table_Roboto_Medium_30_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Table_RobotoCondensed_Bold_20_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Table_RobotoCondensed_Bold_20_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Table_RobotoCondensed_Bold_20_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Table_RobotoCondensed_Bold_22_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Table_RobotoCondensed_Bold_22_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Table_RobotoCondensed_Bold_22_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Table_RobotoCondensed_Bold_30_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Table_RobotoCondensed_Bold_30_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Table_RobotoCondensed_Bold_30_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Table_RobotoCondensed_Bold_32_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Table_RobotoCondensed_Bold_32_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Table_RobotoCondensed_Bold_32_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Table_RobotoCondensed_Bold_42_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Table_RobotoCondensed_Bold_42_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Table_RobotoCondensed_Bold_42_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Table_RobotoCondensed_Bold_56_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Table_RobotoCondensed_Bold_56_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Table_RobotoCondensed_Bold_56_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Table_RobotoCondensed_Bold_60_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Table_RobotoCondensed_Bold_60_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Table_RobotoCondensed_Bold_60_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Table_RobotoCondensed_Bold_90_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Table_RobotoCondensed_Bold_90_4bpp.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Table_RobotoCondensed_Regular_110_4bpp.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Table_RobotoCondensed_Regular_110_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Table_RobotoCondensed_Bold_90_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Table_RobotoCondensed_Regular_18_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Table_RobotoCondensed_Regular_18_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Table_RobotoCondensed_Regular_18_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Table_RobotoCondensed_Regular_20_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Table_RobotoCondensed_Regular_20_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Table_RobotoCondensed_Regular_20_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Table_RobotoCondensed_Regular_22_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Table_RobotoCondensed_Regular_22_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Table_RobotoCondensed_Regular_22_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Table_RobotoCondensed_Regular_38_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Table_RobotoCondensed_Regular_38_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Table_RobotoCondensed_Regular_38_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Table_RobotoCondensed_Regular_40_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Table_RobotoCondensed_Regular_40_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Table_RobotoCondensed_Regular_40_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Table_RobotoCondensed_Regular_54_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Table_RobotoCondensed_Regular_54_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Table_RobotoCondensed_Regular_54_4bpp.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Table_RobotoCondensed_Regular_110_4bpp.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Gui\generated\fonts\src\Table_RobotoCondensed_Regular_110_4bpp.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -2862,34 +2882,44 @@
           <GroupName>Drivers/BSP</GroupName>
           <Files>
             <File>
+              <FileName>stm32h747i_discovery_bus.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\Drivers\BSP\STM32H747I-DISCO\stm32h747i_discovery_bus.c</FilePath>
+            </File>
+            <File>
               <FileName>stm32h747i_discovery.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../Drivers/BSP/STM32H747I-Discovery/stm32h747i_discovery.c</FilePath>
+              <FilePath>..\..\..\..\..\Drivers\BSP\STM32H747I-DISCO\stm32h747i_discovery.c</FilePath>
             </File>
             <File>
               <FileName>stm32h747i_discovery_audio.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../Drivers/BSP/STM32H747I-Discovery/stm32h747i_discovery_audio.c</FilePath>
+              <FilePath>..\..\..\..\..\Drivers\BSP\STM32H747I-DISCO\stm32h747i_discovery_audio.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32h747i_discovery_lcd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\Drivers\BSP\STM32H747I-DISCO\stm32h747i_discovery_lcd.c</FilePath>
             </File>
             <File>
               <FileName>stm32h747i_discovery_qspi.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../Drivers/BSP/STM32H747I-Discovery/stm32h747i_discovery_qspi.c</FilePath>
+              <FilePath>..\..\..\..\..\Drivers\BSP\STM32H747I-DISCO\stm32h747i_discovery_qspi.c</FilePath>
             </File>
             <File>
               <FileName>stm32h747i_discovery_sd.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../Drivers/BSP/STM32H747I-Discovery/stm32h747i_discovery_sd.c</FilePath>
+              <FilePath>..\..\..\..\..\Drivers\BSP\STM32H747I-DISCO\stm32h747i_discovery_sd.c</FilePath>
             </File>
             <File>
               <FileName>stm32h747i_discovery_sdram.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../Drivers/BSP/STM32H747I-Discovery/stm32h747i_discovery_sdram.c</FilePath>
+              <FilePath>..\..\..\..\..\Drivers\BSP\STM32H747I-DISCO\stm32h747i_discovery_sdram.c</FilePath>
             </File>
             <File>
               <FileName>stm32h747i_discovery_ts.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../Drivers/BSP/STM32H747I-Discovery/stm32h747i_discovery_ts.c</FilePath>
+              <FilePath>..\..\..\..\..\Drivers\BSP\STM32H747I-DISCO\stm32h747i_discovery_ts.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -2910,6 +2940,41 @@
               <FileName>wm8994.c</FileName>
               <FileType>1</FileType>
               <FilePath>../../../../../Drivers/BSP/Components/wm8994/wm8994.c</FilePath>
+            </File>
+            <File>
+              <FileName>mt25tl01g.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\Drivers\BSP\Components\mt25tl01g\mt25tl01g.c</FilePath>
+            </File>
+            <File>
+              <FileName>ft6x06_reg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\Drivers\BSP\Components\ft6x06\ft6x06_reg.c</FilePath>
+            </File>
+            <File>
+              <FileName>is42s32800j.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\Drivers\BSP\Components\is42s32800j\is42s32800j.c</FilePath>
+            </File>
+            <File>
+              <FileName>wm8994_reg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\Drivers\BSP\Components\wm8994\wm8994_reg.c</FilePath>
+            </File>
+            <File>
+              <FileName>otm8009a_reg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\Drivers\BSP\Components\otm8009a\otm8009a_reg.c</FilePath>
+            </File>
+            <File>
+              <FileName>adv7533.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\Drivers\BSP\Components\adv7533\adv7533.c</FilePath>
+            </File>
+            <File>
+              <FileName>adv7533_reg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\Drivers\BSP\Components\adv7533\adv7533_reg.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -3128,19 +3193,9 @@
               <FilePath>../../../../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_i2c.c</FilePath>
             </File>
             <File>
-              <FileName>stm32h7xx_hal_i2c_ex.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../../../../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_i2c_ex.c</FilePath>
-            </File>
-            <File>
               <FileName>stm32h7xx_hal_i2s.c</FileName>
               <FileType>1</FileType>
               <FilePath>../../../../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_i2s.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32h7xx_hal_i2s_ex.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../../../../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_i2s_ex.c</FilePath>
             </File>
             <File>
               <FileName>stm32h7xx_hal_irda.c</FileName>
@@ -3436,6 +3491,67 @@
               <FileName>stm32h7xx_ll_usb.c</FileName>
               <FileType>1</FileType>
               <FilePath>../../../../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_usb.c</FilePath>
+              <FileOption>
+                <CommonProperty>
+                  <UseCPPCompiler>2</UseCPPCompiler>
+                  <RVCTCodeConst>0</RVCTCodeConst>
+                  <RVCTZI>0</RVCTZI>
+                  <RVCTOtherData>0</RVCTOtherData>
+                  <ModuleSelection>0</ModuleSelection>
+                  <IncludeInBuild>2</IncludeInBuild>
+                  <AlwaysBuild>2</AlwaysBuild>
+                  <GenerateAssemblyFile>2</GenerateAssemblyFile>
+                  <AssembleAssemblyFile>2</AssembleAssemblyFile>
+                  <PublicsOnly>2</PublicsOnly>
+                  <StopOnExitCode>11</StopOnExitCode>
+                  <CustomArgument></CustomArgument>
+                  <IncludeLibraryModules></IncludeLibraryModules>
+                  <ComprImg>1</ComprImg>
+                </CommonProperty>
+                <FileArmAds>
+                  <Cads>
+                    <interw>2</interw>
+                    <Optim>1</Optim>
+                    <oTime>2</oTime>
+                    <SplitLS>2</SplitLS>
+                    <OneElfS>2</OneElfS>
+                    <Strict>2</Strict>
+                    <EnumInt>2</EnumInt>
+                    <PlainCh>2</PlainCh>
+                    <Ropi>2</Ropi>
+                    <Rwpi>2</Rwpi>
+                    <wLevel>0</wLevel>
+                    <uThumb>2</uThumb>
+                    <uSurpInc>2</uSurpInc>
+                    <uC99>2</uC99>
+                    <uGnu>2</uGnu>
+                    <useXO>2</useXO>
+                    <v6Lang>0</v6Lang>
+                    <v6LangP>0</v6LangP>
+                    <vShortEn>2</vShortEn>
+                    <vShortWch>2</vShortWch>
+                    <v6Lto>2</v6Lto>
+                    <v6WtE>2</v6WtE>
+                    <v6Rtti>2</v6Rtti>
+                    <VariousControls>
+                      <MiscControls></MiscControls>
+                      <Define></Define>
+                      <Undefine></Undefine>
+                      <IncludePath></IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+            <File>
+              <FileName>stm32h7xx_hal_exti.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_exti.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32h7xx_hal_i2c_ex.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_i2c_ex.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -3811,8 +3927,8 @@
         <TargetCommonOption>
           <Device>STM32H747XIHx:CM7</Device>
           <Vendor>STMicroelectronics</Vendor>
-          <PackID>Keil.STM32H7xx_DFP.2.2.5</PackID>
-          <PackURL>http://www.ST.com/</PackURL>
+          <PackID>Keil.STM32H7xx_DFP.2.2.6</PackID>
+          <PackURL>http://www.keil.com/pack</PackURL>
           <Cpu>IROM(0x08000000-0x81FFFFF) IROM_ML(0x08000000-0x803FFFF) IROM_STEW(0x08040000-0x80FFFFF) IROM_EWIZ(0x080A0000-0x80FFFFF) IROM_FW(0x08100000-0x813FFFF) IROM_TGFX(0x08140000-0x81DFFFF) IROM_CUC(0x081E0000-0x81FFFFF) IRAM2(0x00000000-0xFFFF) IRAM(0x20000000-0x2001FFFF) IRAM(0x24000000-0x2407FFFF) CLOCK(12000000) FPU3(DFPU) CPUTYPE("Cortex-M7") ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile></StartupFile>
@@ -4132,7 +4248,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32H747xx,USE_STM32H747I_DISCO,BSP_USE_CMSIS_OS,CORE_CM7,USE_BPP=24,ST,USE_FLOATING_POINT,USE_USB_HS,USE_PWR_LDO_SUPPLY__N</Define>
               <Undefine></Undefine>
-              <IncludePath>../Gui/generated/images/include;../Gui/generated/fonts/include;../Gui/generated/texts/include;../Gui/gui/include;../Gui/gui/include/gui/audio_player_screen;../../../../../Middlewares/ST/TouchGFX/touchgfx/framework/include;../../../../../Drivers/STM32H7xx_HAL_Driver/Inc;../../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../../../../../Drivers/BSP/STM32H747I-Discovery;../../../../../Utilities/JPEG;../../../../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS;../../../../../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1;../../../../../Middlewares/Third_Party/FreeRTOS/Source/include;../../../../../Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Inc;../../../../../Middlewares/ST/STM32_USB_Host_Library/Core/Inc;../../../../../Middlewares/Third_Party/FatFs/src;../../../../../Middlewares/Third_Party/FatFs/src/drivers;../../../../../Middlewares/Third_Party/LibJPEG/include;../Config;../Core/Inc;../../../../../Drivers/CMSIS/Include;..;../Gui/target;../../../../../Middlewares/ST/STM32_Audio/Addons/PDM/Inc</IncludePath>
+              <IncludePath>../Gui/generated/images/include;../Gui/generated/fonts/include;../Gui/generated/texts/include;../Gui/gui/include;../Gui/gui/include/gui/audio_player_screen;../../../../../Middlewares/ST/TouchGFX/touchgfx/framework/include;../../../../../Drivers/STM32H7xx_HAL_Driver/Inc;../../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../../../../../Drivers/BSP/STM32H747I-DISCO;../../../../../Utilities/JPEG;../../../../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS;../../../../../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1;../../../../../Middlewares/Third_Party/FreeRTOS/Source/include;../../../../../Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Inc;../../../../../Middlewares/ST/STM32_USB_Host_Library/Core/Inc;../../../../../Middlewares/Third_Party/FatFs/src;../../../../../Middlewares/Third_Party/FatFs/src/drivers;../../../../../Middlewares/Third_Party/LibJPEG/include;../Config;../Core/Inc;../../../../../Drivers/CMSIS/Include;..;../Gui/target;../../../../../Middlewares/ST/STM32_Audio/Addons/PDM/Inc;../../../../../Drivers/BSP/Components/Common</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -4315,402 +4431,422 @@
             <File>
               <FileName>ApplicationFontProvider.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/ApplicationFontProvider.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\ApplicationFontProvider.cpp</FilePath>
             </File>
             <File>
-              <FileName>Font_Asap_Bold_otf_20_4bpp.cpp</FileName>
+              <FileName>CachedFont.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Font_Asap_Bold_otf_20_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\CachedFont.cpp</FilePath>
             </File>
             <File>
-              <FileName>Font_Asap_Bold_otf_27_4bpp.cpp</FileName>
+              <FileName>Font_Asap_Bold_otf_20_4bpp_0.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Font_Asap_Bold_otf_27_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Font_Asap_Bold_otf_20_4bpp_0.cpp</FilePath>
             </File>
             <File>
-              <FileName>Font_Asap_Regular_13_4bpp.cpp</FileName>
+              <FileName>Font_Asap_Bold_otf_27_4bpp_0.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Font_Asap_Regular_13_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Font_Asap_Bold_otf_27_4bpp_0.cpp</FilePath>
             </File>
             <File>
-              <FileName>Font_Asap_Regular_18_4bpp.cpp</FileName>
+              <FileName>Font_Asap_Regular_18_4bpp_0.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Font_Asap_Regular_18_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Font_Asap_Regular_18_4bpp_0.cpp</FilePath>
             </File>
             <File>
-              <FileName>Font_Asap_Regular_20_4bpp.cpp</FileName>
+              <FileName>Font_Asap_Regular_20_4bpp_0.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Font_Asap_Regular_20_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Font_Asap_Regular_20_4bpp_0.cpp</FilePath>
             </File>
             <File>
-              <FileName>Font_Asap_Regular_21_4bpp.cpp</FileName>
+              <FileName>Font_Asap_Regular_21_4bpp_0.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Font_Asap_Regular_21_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Font_Asap_Regular_21_4bpp_0.cpp</FilePath>
             </File>
             <File>
-              <FileName>Font_Asap_Regular_28_4bpp.cpp</FileName>
+              <FileName>Font_Asap_Regular_28_4bpp_0.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Font_Asap_Regular_28_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Font_Asap_Regular_28_4bpp_0.cpp</FilePath>
             </File>
             <File>
-              <FileName>Font_Asap_Regular_42_4bpp.cpp</FileName>
+              <FileName>Font_Asap_Regular_42_4bpp_0.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Font_Asap_Regular_42_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Font_Asap_Regular_42_4bpp_0.cpp</FilePath>
             </File>
             <File>
-              <FileName>Font_NotoSans_Regular_22_4bpp.cpp</FileName>
+              <FileName>Font_NotoSans_Regular_22_4bpp_0.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Font_NotoSans_Regular_22_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Font_NotoSans_Regular_22_4bpp_0.cpp</FilePath>
             </File>
             <File>
-              <FileName>Font_Roboto_Bold_22_4bpp.cpp</FileName>
+              <FileName>Font_Roboto_Bold_22_4bpp_0.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Font_Roboto_Bold_22_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Font_Roboto_Bold_22_4bpp_0.cpp</FilePath>
             </File>
             <File>
-              <FileName>Font_Roboto_Medium_30_4bpp.cpp</FileName>
+              <FileName>Font_Roboto_Medium_30_4bpp_0.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Font_Roboto_Medium_30_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Font_Roboto_Medium_30_4bpp_0.cpp</FilePath>
             </File>
             <File>
-              <FileName>Font_RobotoCondensed_Bold_20_4bpp.cpp</FileName>
+              <FileName>Font_RobotoCondensed_Bold_20_4bpp_0.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Font_RobotoCondensed_Bold_20_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Font_RobotoCondensed_Bold_20_4bpp_0.cpp</FilePath>
             </File>
             <File>
-              <FileName>Font_RobotoCondensed_Bold_22_4bpp.cpp</FileName>
+              <FileName>Font_RobotoCondensed_Bold_22_4bpp_0.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Font_RobotoCondensed_Bold_22_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Font_RobotoCondensed_Bold_22_4bpp_0.cpp</FilePath>
             </File>
             <File>
-              <FileName>Font_RobotoCondensed_Bold_30_4bpp.cpp</FileName>
+              <FileName>Font_RobotoCondensed_Bold_22_4bpp_4.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Font_RobotoCondensed_Bold_30_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Font_RobotoCondensed_Bold_22_4bpp_4.cpp</FilePath>
             </File>
             <File>
-              <FileName>Font_RobotoCondensed_Bold_32_4bpp.cpp</FileName>
+              <FileName>Font_RobotoCondensed_Bold_30_4bpp_0.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Font_RobotoCondensed_Bold_32_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Font_RobotoCondensed_Bold_30_4bpp_0.cpp</FilePath>
             </File>
             <File>
-              <FileName>Font_RobotoCondensed_Bold_42_4bpp.cpp</FileName>
+              <FileName>Font_RobotoCondensed_Bold_32_4bpp_0.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Font_RobotoCondensed_Bold_42_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Font_RobotoCondensed_Bold_32_4bpp_0.cpp</FilePath>
             </File>
             <File>
-              <FileName>Font_RobotoCondensed_Bold_56_4bpp.cpp</FileName>
+              <FileName>Font_RobotoCondensed_Bold_42_4bpp_0.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Font_RobotoCondensed_Bold_56_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Font_RobotoCondensed_Bold_42_4bpp_0.cpp</FilePath>
             </File>
             <File>
-              <FileName>Font_RobotoCondensed_Bold_60_4bpp.cpp</FileName>
+              <FileName>Font_RobotoCondensed_Bold_56_4bpp_0.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Font_RobotoCondensed_Bold_60_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Font_RobotoCondensed_Bold_56_4bpp_0.cpp</FilePath>
             </File>
             <File>
-              <FileName>Font_RobotoCondensed_Bold_90_4bpp.cpp</FileName>
+              <FileName>Font_RobotoCondensed_Bold_60_4bpp_0.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Font_RobotoCondensed_Bold_90_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Font_RobotoCondensed_Bold_60_4bpp_0.cpp</FilePath>
             </File>
             <File>
-              <FileName>Font_RobotoCondensed_Regular_110_4bpp.cpp</FileName>
+              <FileName>Font_RobotoCondensed_Bold_90_4bpp_0.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Font_RobotoCondensed_Regular_110_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Font_RobotoCondensed_Bold_90_4bpp_0.cpp</FilePath>
             </File>
             <File>
-              <FileName>Font_RobotoCondensed_Regular_18_4bpp.cpp</FileName>
+              <FileName>Font_RobotoCondensed_Regular_18_4bpp_0.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Font_RobotoCondensed_Regular_18_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Font_RobotoCondensed_Regular_18_4bpp_0.cpp</FilePath>
             </File>
             <File>
-              <FileName>Font_RobotoCondensed_Regular_20_4bpp.cpp</FileName>
+              <FileName>Font_RobotoCondensed_Regular_18_4bpp_4.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Font_RobotoCondensed_Regular_20_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Font_RobotoCondensed_Regular_18_4bpp_4.cpp</FilePath>
             </File>
             <File>
-              <FileName>Font_RobotoCondensed_Regular_22_4bpp.cpp</FileName>
+              <FileName>Font_RobotoCondensed_Regular_20_4bpp_0.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Font_RobotoCondensed_Regular_22_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Font_RobotoCondensed_Regular_20_4bpp_0.cpp</FilePath>
             </File>
             <File>
-              <FileName>Font_RobotoCondensed_Regular_38_4bpp.cpp</FileName>
+              <FileName>Font_RobotoCondensed_Regular_20_4bpp_4.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Font_RobotoCondensed_Regular_38_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Font_RobotoCondensed_Regular_20_4bpp_4.cpp</FilePath>
             </File>
             <File>
-              <FileName>Font_RobotoCondensed_Regular_40_4bpp.cpp</FileName>
+              <FileName>Font_RobotoCondensed_Regular_22_4bpp_0.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Font_RobotoCondensed_Regular_40_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Font_RobotoCondensed_Regular_22_4bpp_0.cpp</FilePath>
             </File>
             <File>
-              <FileName>Font_RobotoCondensed_Regular_54_4bpp.cpp</FileName>
+              <FileName>Font_RobotoCondensed_Regular_38_4bpp_0.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Font_RobotoCondensed_Regular_54_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Font_RobotoCondensed_Regular_38_4bpp_0.cpp</FilePath>
             </File>
             <File>
-              <FileName>FontGetters.cpp</FileName>
+              <FileName>Font_RobotoCondensed_Regular_40_4bpp_0.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/FontGetters.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Font_RobotoCondensed_Regular_40_4bpp_0.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Font_RobotoCondensed_Regular_54_4bpp_0.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Gui\generated\fonts\src\Font_RobotoCondensed_Regular_54_4bpp_0.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Font_RobotoCondensed_Regular_110_4bpp_0.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Gui\generated\fonts\src\Font_RobotoCondensed_Regular_110_4bpp_0.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>FontCache.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Gui\generated\fonts\src\FontCache.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>GeneratedFont.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Gui\generated\fonts\src\GeneratedFont.cpp</FilePath>
             </File>
             <File>
               <FileName>Kerning_Asap_Bold_otf_20_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Kerning_Asap_Bold_otf_20_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Kerning_Asap_Bold_otf_20_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Kerning_Asap_Bold_otf_27_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Kerning_Asap_Bold_otf_27_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Kerning_Asap_Bold_otf_27_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Kerning_Asap_Regular_13_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Kerning_Asap_Regular_13_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Kerning_Asap_Regular_13_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Kerning_Asap_Regular_18_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Kerning_Asap_Regular_18_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Kerning_Asap_Regular_18_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Kerning_Asap_Regular_20_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Kerning_Asap_Regular_20_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Kerning_Asap_Regular_20_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Kerning_Asap_Regular_21_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Kerning_Asap_Regular_21_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Kerning_Asap_Regular_21_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Kerning_Asap_Regular_28_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Kerning_Asap_Regular_28_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Kerning_Asap_Regular_28_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Kerning_Asap_Regular_42_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Kerning_Asap_Regular_42_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Kerning_Asap_Regular_42_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Kerning_NotoSans_Regular_22_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Kerning_NotoSans_Regular_22_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Kerning_NotoSans_Regular_22_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Kerning_Roboto_Bold_22_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Kerning_Roboto_Bold_22_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Kerning_Roboto_Bold_22_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Kerning_Roboto_Medium_30_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Kerning_Roboto_Medium_30_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Kerning_Roboto_Medium_30_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Kerning_RobotoCondensed_Bold_20_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Kerning_RobotoCondensed_Bold_20_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Kerning_RobotoCondensed_Bold_20_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Kerning_RobotoCondensed_Bold_22_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Kerning_RobotoCondensed_Bold_22_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Kerning_RobotoCondensed_Bold_22_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Kerning_RobotoCondensed_Bold_30_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Kerning_RobotoCondensed_Bold_30_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Kerning_RobotoCondensed_Bold_30_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Kerning_RobotoCondensed_Bold_32_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Kerning_RobotoCondensed_Bold_32_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Kerning_RobotoCondensed_Bold_32_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Kerning_RobotoCondensed_Bold_42_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Kerning_RobotoCondensed_Bold_42_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Kerning_RobotoCondensed_Bold_42_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Kerning_RobotoCondensed_Bold_56_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Kerning_RobotoCondensed_Bold_56_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Kerning_RobotoCondensed_Bold_56_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Kerning_RobotoCondensed_Bold_60_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Kerning_RobotoCondensed_Bold_60_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Kerning_RobotoCondensed_Bold_60_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Kerning_RobotoCondensed_Bold_90_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Kerning_RobotoCondensed_Bold_90_4bpp.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Kerning_RobotoCondensed_Regular_110_4bpp.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Kerning_RobotoCondensed_Regular_110_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Kerning_RobotoCondensed_Bold_90_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Kerning_RobotoCondensed_Regular_18_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Kerning_RobotoCondensed_Regular_18_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Kerning_RobotoCondensed_Regular_18_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Kerning_RobotoCondensed_Regular_20_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Kerning_RobotoCondensed_Regular_20_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Kerning_RobotoCondensed_Regular_20_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Kerning_RobotoCondensed_Regular_22_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Kerning_RobotoCondensed_Regular_22_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Kerning_RobotoCondensed_Regular_22_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Kerning_RobotoCondensed_Regular_38_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Kerning_RobotoCondensed_Regular_38_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Kerning_RobotoCondensed_Regular_38_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Kerning_RobotoCondensed_Regular_40_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Kerning_RobotoCondensed_Regular_40_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Kerning_RobotoCondensed_Regular_40_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Kerning_RobotoCondensed_Regular_54_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Kerning_RobotoCondensed_Regular_54_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Kerning_RobotoCondensed_Regular_54_4bpp.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Kerning_RobotoCondensed_Regular_110_4bpp.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Gui\generated\fonts\src\Kerning_RobotoCondensed_Regular_110_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Table_Asap_Bold_otf_20_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Table_Asap_Bold_otf_20_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Table_Asap_Bold_otf_20_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Table_Asap_Bold_otf_27_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Table_Asap_Bold_otf_27_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Table_Asap_Bold_otf_27_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Table_Asap_Regular_13_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Table_Asap_Regular_13_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Table_Asap_Regular_13_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Table_Asap_Regular_18_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Table_Asap_Regular_18_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Table_Asap_Regular_18_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Table_Asap_Regular_20_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Table_Asap_Regular_20_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Table_Asap_Regular_20_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Table_Asap_Regular_21_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Table_Asap_Regular_21_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Table_Asap_Regular_21_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Table_Asap_Regular_28_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Table_Asap_Regular_28_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Table_Asap_Regular_28_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Table_Asap_Regular_42_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Table_Asap_Regular_42_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Table_Asap_Regular_42_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Table_NotoSans_Regular_22_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Table_NotoSans_Regular_22_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Table_NotoSans_Regular_22_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Table_Roboto_Bold_22_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Table_Roboto_Bold_22_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Table_Roboto_Bold_22_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Table_Roboto_Medium_30_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Table_Roboto_Medium_30_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Table_Roboto_Medium_30_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Table_RobotoCondensed_Bold_20_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Table_RobotoCondensed_Bold_20_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Table_RobotoCondensed_Bold_20_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Table_RobotoCondensed_Bold_22_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Table_RobotoCondensed_Bold_22_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Table_RobotoCondensed_Bold_22_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Table_RobotoCondensed_Bold_30_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Table_RobotoCondensed_Bold_30_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Table_RobotoCondensed_Bold_30_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Table_RobotoCondensed_Bold_32_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Table_RobotoCondensed_Bold_32_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Table_RobotoCondensed_Bold_32_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Table_RobotoCondensed_Bold_42_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Table_RobotoCondensed_Bold_42_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Table_RobotoCondensed_Bold_42_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Table_RobotoCondensed_Bold_56_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Table_RobotoCondensed_Bold_56_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Table_RobotoCondensed_Bold_56_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Table_RobotoCondensed_Bold_60_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Table_RobotoCondensed_Bold_60_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Table_RobotoCondensed_Bold_60_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Table_RobotoCondensed_Bold_90_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Table_RobotoCondensed_Bold_90_4bpp.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Table_RobotoCondensed_Regular_110_4bpp.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Table_RobotoCondensed_Regular_110_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Table_RobotoCondensed_Bold_90_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Table_RobotoCondensed_Regular_18_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Table_RobotoCondensed_Regular_18_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Table_RobotoCondensed_Regular_18_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Table_RobotoCondensed_Regular_20_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Table_RobotoCondensed_Regular_20_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Table_RobotoCondensed_Regular_20_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Table_RobotoCondensed_Regular_22_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Table_RobotoCondensed_Regular_22_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Table_RobotoCondensed_Regular_22_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Table_RobotoCondensed_Regular_38_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Table_RobotoCondensed_Regular_38_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Table_RobotoCondensed_Regular_38_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Table_RobotoCondensed_Regular_40_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Table_RobotoCondensed_Regular_40_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Table_RobotoCondensed_Regular_40_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Table_RobotoCondensed_Regular_54_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../Gui/generated/fonts/src/Table_RobotoCondensed_Regular_54_4bpp.cpp</FilePath>
+              <FilePath>..\Gui\generated\fonts\src\Table_RobotoCondensed_Regular_54_4bpp.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Table_RobotoCondensed_Regular_110_4bpp.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Gui\generated\fonts\src\Table_RobotoCondensed_Regular_110_4bpp.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -6708,34 +6844,44 @@
           <GroupName>Drivers/BSP</GroupName>
           <Files>
             <File>
+              <FileName>stm32h747i_discovery_bus.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\Drivers\BSP\STM32H747I-DISCO\stm32h747i_discovery_bus.c</FilePath>
+            </File>
+            <File>
               <FileName>stm32h747i_discovery.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../Drivers/BSP/STM32H747I-Discovery/stm32h747i_discovery.c</FilePath>
+              <FilePath>..\..\..\..\..\Drivers\BSP\STM32H747I-DISCO\stm32h747i_discovery.c</FilePath>
             </File>
             <File>
               <FileName>stm32h747i_discovery_audio.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../Drivers/BSP/STM32H747I-Discovery/stm32h747i_discovery_audio.c</FilePath>
+              <FilePath>..\..\..\..\..\Drivers\BSP\STM32H747I-DISCO\stm32h747i_discovery_audio.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32h747i_discovery_lcd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\Drivers\BSP\STM32H747I-DISCO\stm32h747i_discovery_lcd.c</FilePath>
             </File>
             <File>
               <FileName>stm32h747i_discovery_qspi.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../Drivers/BSP/STM32H747I-Discovery/stm32h747i_discovery_qspi.c</FilePath>
+              <FilePath>..\..\..\..\..\Drivers\BSP\STM32H747I-DISCO\stm32h747i_discovery_qspi.c</FilePath>
             </File>
             <File>
               <FileName>stm32h747i_discovery_sd.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../Drivers/BSP/STM32H747I-Discovery/stm32h747i_discovery_sd.c</FilePath>
+              <FilePath>..\..\..\..\..\Drivers\BSP\STM32H747I-DISCO\stm32h747i_discovery_sd.c</FilePath>
             </File>
             <File>
               <FileName>stm32h747i_discovery_sdram.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../Drivers/BSP/STM32H747I-Discovery/stm32h747i_discovery_sdram.c</FilePath>
+              <FilePath>..\..\..\..\..\Drivers\BSP\STM32H747I-DISCO\stm32h747i_discovery_sdram.c</FilePath>
             </File>
             <File>
               <FileName>stm32h747i_discovery_ts.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../Drivers/BSP/STM32H747I-Discovery/stm32h747i_discovery_ts.c</FilePath>
+              <FilePath>..\..\..\..\..\Drivers\BSP\STM32H747I-DISCO\stm32h747i_discovery_ts.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -6756,6 +6902,41 @@
               <FileName>wm8994.c</FileName>
               <FileType>1</FileType>
               <FilePath>../../../../../Drivers/BSP/Components/wm8994/wm8994.c</FilePath>
+            </File>
+            <File>
+              <FileName>mt25tl01g.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\Drivers\BSP\Components\mt25tl01g\mt25tl01g.c</FilePath>
+            </File>
+            <File>
+              <FileName>ft6x06_reg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\Drivers\BSP\Components\ft6x06\ft6x06_reg.c</FilePath>
+            </File>
+            <File>
+              <FileName>is42s32800j.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\Drivers\BSP\Components\is42s32800j\is42s32800j.c</FilePath>
+            </File>
+            <File>
+              <FileName>wm8994_reg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\Drivers\BSP\Components\wm8994\wm8994_reg.c</FilePath>
+            </File>
+            <File>
+              <FileName>otm8009a_reg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\Drivers\BSP\Components\otm8009a\otm8009a_reg.c</FilePath>
+            </File>
+            <File>
+              <FileName>adv7533.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\Drivers\BSP\Components\adv7533\adv7533.c</FilePath>
+            </File>
+            <File>
+              <FileName>adv7533_reg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\Drivers\BSP\Components\adv7533\adv7533_reg.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -6923,19 +7104,9 @@
               <FilePath>../../../../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_i2c.c</FilePath>
             </File>
             <File>
-              <FileName>stm32h7xx_hal_i2c_ex.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../../../../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_i2c_ex.c</FilePath>
-            </File>
-            <File>
               <FileName>stm32h7xx_hal_i2s.c</FileName>
               <FileType>1</FileType>
               <FilePath>../../../../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_i2s.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32h7xx_hal_i2s_ex.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../../../../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_i2s_ex.c</FilePath>
             </File>
             <File>
               <FileName>stm32h7xx_hal_irda.c</FileName>
@@ -7231,6 +7402,67 @@
               <FileName>stm32h7xx_ll_usb.c</FileName>
               <FileType>1</FileType>
               <FilePath>../../../../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_usb.c</FilePath>
+              <FileOption>
+                <CommonProperty>
+                  <UseCPPCompiler>2</UseCPPCompiler>
+                  <RVCTCodeConst>0</RVCTCodeConst>
+                  <RVCTZI>0</RVCTZI>
+                  <RVCTOtherData>0</RVCTOtherData>
+                  <ModuleSelection>0</ModuleSelection>
+                  <IncludeInBuild>2</IncludeInBuild>
+                  <AlwaysBuild>2</AlwaysBuild>
+                  <GenerateAssemblyFile>2</GenerateAssemblyFile>
+                  <AssembleAssemblyFile>2</AssembleAssemblyFile>
+                  <PublicsOnly>2</PublicsOnly>
+                  <StopOnExitCode>11</StopOnExitCode>
+                  <CustomArgument></CustomArgument>
+                  <IncludeLibraryModules></IncludeLibraryModules>
+                  <ComprImg>1</ComprImg>
+                </CommonProperty>
+                <FileArmAds>
+                  <Cads>
+                    <interw>2</interw>
+                    <Optim>1</Optim>
+                    <oTime>2</oTime>
+                    <SplitLS>2</SplitLS>
+                    <OneElfS>2</OneElfS>
+                    <Strict>2</Strict>
+                    <EnumInt>2</EnumInt>
+                    <PlainCh>2</PlainCh>
+                    <Ropi>2</Ropi>
+                    <Rwpi>2</Rwpi>
+                    <wLevel>0</wLevel>
+                    <uThumb>2</uThumb>
+                    <uSurpInc>2</uSurpInc>
+                    <uC99>2</uC99>
+                    <uGnu>2</uGnu>
+                    <useXO>2</useXO>
+                    <v6Lang>0</v6Lang>
+                    <v6LangP>0</v6LangP>
+                    <vShortEn>2</vShortEn>
+                    <vShortWch>2</vShortWch>
+                    <v6Lto>2</v6Lto>
+                    <v6WtE>2</v6WtE>
+                    <v6Rtti>2</v6Rtti>
+                    <VariousControls>
+                      <MiscControls></MiscControls>
+                      <Define></Define>
+                      <Undefine></Undefine>
+                      <IncludePath></IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+            <File>
+              <FileName>stm32h7xx_hal_exti.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_exti.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32h7xx_hal_i2c_ex.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_i2c_ex.c</FilePath>
             </File>
           </Files>
         </Group>

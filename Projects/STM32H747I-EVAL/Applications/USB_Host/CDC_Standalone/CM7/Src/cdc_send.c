@@ -85,7 +85,7 @@ void CDC_Handle_Send_Menu(void)
           {
           case 0:
             memset(CDC_TX_Buffer, 0x5A, TX_BUFF_SIZE);
-            LCD_DbgLog("Sending data ...\n"); 
+            LCD_DbgTrace("Sending data ...\n"); 
             USBH_CDC_Transmit(&hUSBHost, CDC_TX_Buffer, TX_BUFF_SIZE);
             use_file = 0;
             break;
@@ -107,7 +107,7 @@ void CDC_Handle_Send_Menu(void)
             }
             else
             {
-             LCD_ErrLog("No file on the microSD\n"); 
+             LCD_ErrTrace("No file on the microSD\n"); 
             }
             break;
             
@@ -138,11 +138,11 @@ void CDC_Handle_Send_Menu(void)
       break;
       
     case CDC_SEND_TRANSMIT_FILE: 
-      LCD_DbgLog("Sending file ...\n");
+      LCD_DbgTrace("Sending file ...\n");
       use_file = 1;
       CDC_SendFile(FilePos);
       CDC_ChangeSelectMode(CDC_SELECT_MENU);
-      LCD_LOG_UpdateDisplay();
+      UTIL_LCD_TRACE_UpdateDisplay();
       CdcDemo.Send_state = CDC_SEND_WAIT;
       break;
       
@@ -181,7 +181,7 @@ void CDC_Handle_Send_Menu(void)
   * @param  state: Joystick state
   * @retval None
   */
-void CDC_SendFile_ProbeKey(JOYState_TypeDef state)
+void CDC_SendFile_ProbeKey(uint32_t state)
 {
   /* Handle File List Selection */ 
   if((state == JOY_UP) && (FilePos > 0))
@@ -207,10 +207,10 @@ void CDC_SendFile_ProbeKey(JOYState_TypeDef state)
 
 static void SendFileMenu_Init(void)
 {
-  BSP_LCD_SetTextColor(LCD_COLOR_GREEN); 
-  BSP_LCD_DisplayStringAtLine(14, (uint8_t *)"                                           ");  
-  BSP_LCD_DisplayStringAtLine(15, (uint8_t *)"[User Tamper] to switch menu                  ");
-  BSP_LCD_DisplayStringAtLine(16, (uint8_t *)"[Joystick Up/Down] to change settings items");
+  GUI_SetTextColor(GUI_COLOR_GREEN); 
+  GUI_DisplayStringAtLine(14, (uint8_t *)"                                           ");  
+  GUI_DisplayStringAtLine(15, (uint8_t *)"[User Tamper] to switch menu                  ");
+  GUI_DisplayStringAtLine(16, (uint8_t *)"[Joystick Up/Down] to change settings items");
   CDC_ChangeSelectMode(CDC_SELECT_FILE);
 }
 
@@ -226,7 +226,7 @@ static void ReturnFromSendMenu(void)
   
   /* Restore main menu */
   LCD_ClearTextZone();
-  LCD_LOG_UpdateDisplay();
+  UTIL_LCD_TRACE_UpdateDisplay();
   Menu_Init();  
 }
 
@@ -254,12 +254,12 @@ static void CDC_SendFile(uint8_t fileidx)
     }
     else
     {
-      LCD_ErrLog("Cannot open %s file\n", FileList.file[0].name);
+      LCD_ErrTrace("Cannot open %s file\n", FileList.file[0].name);
     }
   }
   else
   {
-    LCD_ErrLog("No file on the microSD\n");
+    LCD_ErrTrace("No file on the microSD\n");
   }
 }
 
@@ -274,19 +274,19 @@ static void CDC_ShowFiles(uint8_t offset, uint8_t select)
   
   if(offset < FileList.ptr)
   {
-    BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
+    GUI_SetTextColor(GUI_COLOR_WHITE);
     for (i = 4; i < 14; i++)
     {
-      BSP_LCD_SetBackColor(LCD_COLOR_BLACK);
-      BSP_LCD_DisplayStringAtLine(i, BLANK_LINE);
+      GUI_SetBackColor(GUI_COLOR_BLACK);
+      GUI_DisplayStringAtLine(i, BLANK_LINE);
       
       if((i - 4) < FileList.ptr - offset)
       {
         if(i == (select + 4))
         {
-          BSP_LCD_SetBackColor(LCD_COLOR_MAGENTA);
+          GUI_SetBackColor(GUI_COLOR_MAGENTA);
         }
-        BSP_LCD_DisplayStringAtLine(i, FileList.file[i-4 + offset].name);    
+        GUI_DisplayStringAtLine(i, FileList.file[i-4 + offset].name);    
       }
     }
   }
@@ -306,7 +306,7 @@ void USBH_CDC_TransmitCallback(USBH_HandleTypeDef *phost)
     if (f_tell(&MyFile) == f_size(&MyFile))
     {
       f_close(&MyFile);
-      LCD_DbgLog(">> File sent\n");
+      LCD_DbgTrace(">> File sent\n");
       use_file = 0;
     }
     else
@@ -319,7 +319,7 @@ void USBH_CDC_TransmitCallback(USBH_HandleTypeDef *phost)
   }
   else
   {
-    LCD_DbgLog(">> Data sent\n");
+    LCD_DbgTrace(">> Data sent\n");
   }
 }
 

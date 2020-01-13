@@ -113,7 +113,7 @@ Graphic, Display, LCD, DMA2D, DSI, MIPI Alliance, Video mode, Double buffering, 
 
   - This example runs on STM32H747xx/STM32H757xx devices.
 
-  - This example has been tested with STM32H747I_EVAL rev.E board with SMPS (SD Convertor) power supply config and can be
+  - This example has been tested with STM32H747I_EVAL  board with SMPS (SD Convertor) power supply config and can be
     easily tailored to any other supported device and development board.
 
 @par How to use it ?
@@ -123,7 +123,7 @@ In order to make the program work, you must do the following :
  - For each target configuartion (STM32H747I_EVAL_CM4 first then STM32H747I_EVAL_CM7) : 
      - Rebuild all files 
      - Load images into target memory
- - Mount either the KoD LCD pannel (Board MB1166 rev.A) or the DSI-HDMI bridge(Board MB1232 Rev.A)
+ - Mount either the KoD LCD pannel (Board MB1166 ) or the DSI-HDMI bridge(Board MB1232 )
    to the DSI connector (CN15). 
  - if using the DSI-HDMI bridge then connect a HDMI monitor using a HDMI cable to the 
    MB1232 board.  

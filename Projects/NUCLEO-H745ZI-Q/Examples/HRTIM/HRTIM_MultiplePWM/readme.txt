@@ -109,7 +109,7 @@ The PWM waveforms can be displayed using an oscilloscope.
 
   - This example runs on STM32H745xx devices.
 
-  - This example has been tested with STM32H745I_NUCLEO rev.A board with SMPS (SD Convertor) power supply config and can be
+  - This example has been tested with STM32H745I_NUCLEO  board with SMPS (SD Convertor) power supply config and can be
     easily tailored to any other supported device and development board.
 
   - NUCLEO-H745ZI-Q Set-up

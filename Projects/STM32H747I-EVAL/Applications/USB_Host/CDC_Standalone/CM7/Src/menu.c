@@ -45,10 +45,10 @@ uint8_t *CDC_main_menu[] =
 */
 void Menu_Init(void)
 {
-  BSP_LCD_SetTextColor(LCD_COLOR_GREEN);
-  BSP_LCD_DisplayStringAtLine(14, (uint8_t *)"                                          ");
-  BSP_LCD_DisplayStringAtLine(15, (uint8_t *)"Use [Buttons Left/Right] to scroll up/down");
-  BSP_LCD_DisplayStringAtLine(16, (uint8_t *)"Use [Joystick Up/Down] to scroll CDC menu ");
+  GUI_SetTextColor(GUI_COLOR_GREEN);
+  GUI_DisplayStringAtLine(14, (uint8_t *)"                                          ");
+  GUI_DisplayStringAtLine(15, (uint8_t *)"Use [Buttons Left/Right] to scroll up/down");
+  GUI_DisplayStringAtLine(16, (uint8_t *)"Use [Joystick Up/Down] to scroll CDC menu ");
   
   CdcDemo.state = CDC_DEMO_IDLE;
   CDC_MenuProcess();
@@ -59,7 +59,7 @@ void Menu_Init(void)
 * @param  state: Joystick state
 * @retval None
 */
-static void CDC_DEMO_ProbeKey(JOYState_TypeDef state)
+static void CDC_DEMO_ProbeKey(uint32_t state)
 {
   /* Handle Joystick inputs */
   if (CdcSelectMode == CDC_SELECT_MENU)
@@ -195,8 +195,8 @@ void CDC_MenuProcess(void)
   if (Appli_state == APPLICATION_DISCONNECT)
   {
     Appli_state = APPLICATION_IDLE;
-    LCD_LOG_ClearTextZone();
-    LCD_ErrLog("CDC device disconnected!\n");
+    UTIL_LCD_TRACE_ClearTextZone();
+    LCD_ErrTrace("CDC device disconnected!\n");
     CDC_ChangeSelectMode(CDC_SELECT_MENU);
     CdcDemo.state = CDC_DEMO_IDLE;
     CdcDemo.select = 0;
@@ -211,62 +211,62 @@ void CDC_MenuProcess(void)
 */
 void CDC_SelectItem(uint8_t ** menu, uint8_t item)
 {
-  BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
+  GUI_SetTextColor(GUI_COLOR_WHITE);
 
   switch (item)
   {
   case 0:
-    BSP_LCD_SetBackColor(LCD_COLOR_MAGENTA);
-    BSP_LCD_DisplayStringAtLine(19, menu[0]);
-    BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-    BSP_LCD_DisplayStringAtLine(20, menu[1]);
-    BSP_LCD_DisplayStringAtLine(21, menu[2]);
+    GUI_SetBackColor(GUI_COLOR_MAGENTA);
+    GUI_DisplayStringAtLine(19, menu[0]);
+    GUI_SetBackColor(GUI_COLOR_BLUE);
+    GUI_DisplayStringAtLine(20, menu[1]);
+    GUI_DisplayStringAtLine(21, menu[2]);
     break;
 
   case 1:
-    BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-    BSP_LCD_DisplayStringAtLine(19, menu[0]);
-    BSP_LCD_SetBackColor(LCD_COLOR_MAGENTA);
-    BSP_LCD_DisplayStringAtLine(20, menu[1]);
-    BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-    BSP_LCD_DisplayStringAtLine(21, menu[2]);
+    GUI_SetBackColor(GUI_COLOR_BLUE);
+    GUI_DisplayStringAtLine(19, menu[0]);
+    GUI_SetBackColor(GUI_COLOR_MAGENTA);
+    GUI_DisplayStringAtLine(20, menu[1]);
+    GUI_SetBackColor(GUI_COLOR_BLUE);
+    GUI_DisplayStringAtLine(21, menu[2]);
     break;
 
   case 2:
-    BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-    BSP_LCD_DisplayStringAtLine(19, menu[0]);
-    BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-    BSP_LCD_DisplayStringAtLine(20, menu[1]);
-    BSP_LCD_SetBackColor(LCD_COLOR_MAGENTA);
-    BSP_LCD_DisplayStringAtLine(21, menu[2]);
+    GUI_SetBackColor(GUI_COLOR_BLUE);
+    GUI_DisplayStringAtLine(19, menu[0]);
+    GUI_SetBackColor(GUI_COLOR_BLUE);
+    GUI_DisplayStringAtLine(20, menu[1]);
+    GUI_SetBackColor(GUI_COLOR_MAGENTA);
+    GUI_DisplayStringAtLine(21, menu[2]);
     break;
 
   case 3:
-    BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-    BSP_LCD_DisplayStringAtLine(19, menu[1]);
-    BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-    BSP_LCD_DisplayStringAtLine(20, menu[2]);
-    BSP_LCD_SetBackColor(LCD_COLOR_MAGENTA);
-    BSP_LCD_DisplayStringAtLine(21, menu[3]);
+    GUI_SetBackColor(GUI_COLOR_BLUE);
+    GUI_DisplayStringAtLine(19, menu[1]);
+    GUI_SetBackColor(GUI_COLOR_BLUE);
+    GUI_DisplayStringAtLine(20, menu[2]);
+    GUI_SetBackColor(GUI_COLOR_MAGENTA);
+    GUI_DisplayStringAtLine(21, menu[3]);
     break;
 
   case 4:
-    BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-    BSP_LCD_DisplayStringAtLine(19, menu[2]);
-    BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-    BSP_LCD_DisplayStringAtLine(20, menu[3]);
-    BSP_LCD_SetBackColor(LCD_COLOR_MAGENTA);
-    BSP_LCD_DisplayStringAtLine(21, menu[4]);
+    GUI_SetBackColor(GUI_COLOR_BLUE);
+    GUI_DisplayStringAtLine(19, menu[2]);
+    GUI_SetBackColor(GUI_COLOR_BLUE);
+    GUI_DisplayStringAtLine(20, menu[3]);
+    GUI_SetBackColor(GUI_COLOR_MAGENTA);
+    GUI_DisplayStringAtLine(21, menu[4]);
     break;
 
   default:
-    BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-    BSP_LCD_DisplayStringAtLine(19, menu[0]);
-    BSP_LCD_DisplayStringAtLine(20, menu[1]);
-    BSP_LCD_DisplayStringAtLine(21, menu[2]);
+    GUI_SetBackColor(GUI_COLOR_BLUE);
+    GUI_DisplayStringAtLine(19, menu[0]);
+    GUI_DisplayStringAtLine(20, menu[1]);
+    GUI_DisplayStringAtLine(21, menu[2]);
     break;
   }
-  BSP_LCD_SetBackColor(LCD_COLOR_BLACK);
+  GUI_SetBackColor(GUI_COLOR_BLACK);
 }
 
 /**
@@ -305,49 +305,40 @@ void CDC_ChangeSelectMode(CDC_DEMO_SelectMode select_mode)
   CdcDemo.select = 0;
 }
 
-/**
-* @brief  EXTI line detection callbacks.
-* @param  GPIO_Pin: Specifies the pins connected EXTI line
-* @retval None
-*/
-void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
-{
-  static JOYState_TypeDef JoyState = JOY_NONE;
-  static uint32_t debounce_time = 0;
 
-  if(GPIO_Pin == GPIO_PIN_8)
-  {    
-    /* Get the Joystick State */
-    JoyState = BSP_JOY_GetState();
-    
-    CDC_DEMO_ProbeKey(JoyState); 
-    
-    /* Clear joystick interrupt pending bits */
-    BSP_IO_ITClear();
-    
-    if((CdcSelectMode == CDC_SELECT_MENU) && (CdcDemo.state != CDC_DEMO_RECEIVE))
+void BSP_JOY_Callback(JOY_TypeDef JOY, JOYPin_TypeDef JoyPin)
+{
+  CDC_DEMO_ProbeKey(JoyPin); 
+  if((CdcSelectMode == CDC_SELECT_MENU) && (CdcDemo.state != CDC_DEMO_RECEIVE))
+  {
+    switch(JoyPin)
     {
-      switch(JoyState)
-      {
-      case JOY_LEFT:
-        LCD_LOG_ScrollBack();
-        break;
-             
-      case JOY_RIGHT:
-        LCD_LOG_ScrollForward();
-        break;          
-        
-      default:
-        break;           
-      }
+    case JOY_LEFT:
+      UTIL_LCD_TRACE_ScrollBack();
+      break;
+      
+    case JOY_RIGHT:
+      UTIL_LCD_TRACE_ScrollForward();
+      break;          
+      
+    default:
+      break;           
     }
   }
-    HAL_Delay(400);
-  
-  if(CdcDemo.state == CDC_DEMO_CONFIGURATION)
+  HAL_Delay(400);
+}
+/**
+  * @brief  Button Callback
+  * @param  Button Specifies the pin connected EXTI line
+  * @retval None
+  */
+void BSP_PB_Callback(Button_TypeDef Button)
+{
+  static uint32_t debounce_time = 0;
+  if(Button == BUTTON_TAMPER)
   {
-    if(GPIO_Pin == TAMPER_BUTTON_PIN)
-    {  
+    if(CdcDemo.state == CDC_DEMO_SEND)
+    {
       /* Prevent debounce effect for Tamper button */
       if((HAL_GetTick() - debounce_time) > 50)
       {
@@ -357,7 +348,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
       {
         return;
       }  
-      BSP_LCD_SetBackColor(LCD_COLOR_BLACK); 
+      GUI_SetBackColor(GUI_COLOR_BLACK); 
       /* Change the selection type */
       if(CdcSelectMode == CDC_SELECT_MENU)
       {
@@ -374,39 +365,6 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
       }
     }
   }
-  
-  if(CdcDemo.state == CDC_DEMO_SEND)
-  {
-    if(GPIO_Pin == TAMPER_BUTTON_PIN)
-    { 
-      /* Prevent debounce effect for Tamper button */
-      if((HAL_GetTick() - debounce_time) > 50)
-      {
-        debounce_time = HAL_GetTick();
-      }
-      else
-      {
-        return;
-      }  
-      
-      if(CdcDemo.Send_state == CDC_SEND_SELECT_FILE)
-      {
-        BSP_LCD_SetBackColor(LCD_COLOR_BLACK);   
-        /* Change the selection type */
-        if(CdcSelectMode == CDC_SELECT_MENU)
-        {
-          CDC_ChangeSelectMode(CDC_SELECT_FILE); 
-        }
-        else if(CdcSelectMode == CDC_SELECT_FILE)
-        {
-          LCD_ClearTextZone();    
-          LCD_LOG_UpdateDisplay();
-          CDC_ChangeSelectMode(CDC_SELECT_MENU);
-          CdcDemo.Send_state = CDC_SEND_WAIT;
-        }
-      }
-    }
-  }  
 }
 
 /**
@@ -420,7 +378,7 @@ void LCD_ClearTextZone(void)
 
   for (i = 0; i < 12; i++)
   {
-    BSP_LCD_ClearStringLine(i + 3);
+    GUI_ClearStringLine(i + 3);
   }
 }
 

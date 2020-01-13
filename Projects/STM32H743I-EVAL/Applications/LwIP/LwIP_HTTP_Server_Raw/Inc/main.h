@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    LwIP/LwIP_HTTP_Server_Raw/Inc/main.h 
+  * @file    LwIP/LwIP_HTTP_Server_Raw/Inc/main.h
   * @author  MCD Application Team
   * @brief   Header for main.c module
   ******************************************************************************
@@ -26,20 +26,21 @@
 #endif
 
 /* Includes ------------------------------------------------------------------*/
-#include "stm32h7xx_hal.h"
 #include "stm32h743i_eval.h"
 #include "stm32h743i_eval_lcd.h"
-   
+#include "stm32h743i_eval_sdram.h"
+#include "basic_gui.h"
+
 /* Exported types ------------------------------------------------------------*/
-/* Exported constants --------------------------------------------------------*/ 
-#define USE_LCD   
-   
+/* Exported constants --------------------------------------------------------*/
+#define USE_LCD
+
 /*Static IP ADDRESS: IP_ADDR0.IP_ADDR1.IP_ADDR2.IP_ADDR3 */
 #define IP_ADDR0   ((uint8_t) 192U)
 #define IP_ADDR1   ((uint8_t) 168U)
 #define IP_ADDR2   ((uint8_t) 0U)
 #define IP_ADDR3   ((uint8_t) 10U)
-   
+
 /*NETMASK*/
 #define NETMASK_ADDR0   ((uint8_t) 255U)
 #define NETMASK_ADDR1   ((uint8_t) 255U)
@@ -50,10 +51,10 @@
 #define GW_ADDR0   ((uint8_t) 192U)
 #define GW_ADDR1   ((uint8_t) 168U)
 #define GW_ADDR2   ((uint8_t) 0U)
-#define GW_ADDR3   ((uint8_t) 1U) 
-   
+#define GW_ADDR3   ((uint8_t) 1U)
+
 /* Exported macro ------------------------------------------------------------*/
-/* Exported functions ------------------------------------------------------- */  
+/* Exported functions ------------------------------------------------------- */
 
 #ifdef __cplusplus
 }

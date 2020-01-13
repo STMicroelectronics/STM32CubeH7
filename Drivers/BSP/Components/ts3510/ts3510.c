@@ -2,39 +2,21 @@
   ******************************************************************************
   * @file    ts3510.c
   * @author  MCD Application Team
-  * @version V1.0.1
-  * @date    02-December-2014
   * @brief   This file provides a set of functions needed to manage the TS3510
-  *          IO Expander devices.
+  *          Touch Screen.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2014 STMicroelectronics</center></h2>
+  * <h2><center>&copy; Copyright (c) 2014 STMicroelectronics.
+  * All rights reserved.</center></h2>
   *
-  * Redistribution and use in source and binary forms, with or without modification,
-  * are permitted provided that the following conditions are met:
-  *   1. Redistributions of source code must retain the above copyright notice,
-  *      this list of conditions and the following disclaimer.
-  *   2. Redistributions in binary form must reproduce the above copyright notice,
-  *      this list of conditions and the following disclaimer in the documentation
-  *      and/or other materials provided with the distribution.
-  *   3. Neither the name of STMicroelectronics nor the names of its contributors
-  *      may be used to endorse or promote products derived from this software
-  *      without specific prior written permission.
-  *
-  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-  * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
-  * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-  * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-  * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-  * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  * This software component is licensed by ST under BSD 3-Clause license,
+  * the "License"; You may not use this file except in compliance with the
+  * License. You may obtain a copy of the License at:
+  *                        opensource.org/licenses/BSD-3-Clause
   *
   ******************************************************************************
-  */  
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "ts3510.h"
@@ -45,212 +27,410 @@
 
 /** @addtogroup Component
   * @{
-  */ 
-  
-/** @defgroup TS3510
+  */
+
+/** @defgroup TS3510 TS3510
   * @{
-  */   
-  
+  */
+
 /* Private typedef -----------------------------------------------------------*/
-
-/** @defgroup TS3510_Private_Types_Definitions
-  * @{
-  */ 
- 
-/* Private define ------------------------------------------------------------*/
-
-/** @defgroup TS3510_Private_Defines
-  * @{
-  */ 
-  
 /* Private macro -------------------------------------------------------------*/
-
-/** @defgroup TS3510_Private_Macros
+/** @defgroup TS3510_Exported_Variables TS3510 Exported Variables
   * @{
-  */ 
-  
-/* Private variables ---------------------------------------------------------*/
+  */
 
-/** @defgroup TS3510_Private_Variables
-  * @{
-  */ 
-  
-/* Touch screen driver structure initialization */  
-TS_DrvTypeDef ts3510_ts_drv = 
+/* Touch screen driver structure initialization */
+TS3510_TS_Drv_t TS3510_TS_Driver =
 {
-  ts3510_Init,
-  ts3510_ReadID,
-  ts3510_Reset,
-  
-  ts3510_TS_Start,
-  ts3510_TS_DetectTouch,
-  ts3510_TS_GetXY,
-  
-  ts3510_TS_EnableIT,
-  ts3510_TS_ClearIT,
-  ts3510_TS_ITStatus,
-  ts3510_TS_DisableIT,
+  TS3510_Init,
+  TS3510_DeInit,
+  TS3510_GestureConfig,
+  TS3510_ReadID, 
+  TS3510_GetState,
+  TS3510_GetMultiTouchState,
+  TS3510_GetGesture,
+  TS3510_GetCapabilities,
+  TS3510_EnableIT,
+  TS3510_DisableIT,  
+  TS3510_ClearIT,
+  TS3510_ITStatus
 };
+/**
+  * @}
+  */
+
+/** @defgroup TS3510_Private_Function_Prototypes TS3510 Private Function Prototypes
+  * @{
+  */
+static int32_t TS3510_DetectTouch(TS3510_Object_t *pObj);
+static int32_t ReadRegWrap(void *handle, uint8_t Reg, uint8_t* Data, uint16_t Length);
+static int32_t WriteRegWrap(void *handle, uint8_t Reg, uint8_t* Data, uint16_t Length);
 
 /**
   * @}
-  */ 
-    
-/* Private function prototypes -----------------------------------------------*/
-
-/** @defgroup ts3510_Private_Function_Prototypes
-  * @{
   */
 
-/* Private functions ---------------------------------------------------------*/
-
-/** @defgroup ts3510_Private_Functions
+/** @defgroup TS3510_Exported_Functions TS3510 Exported Functions
   * @{
   */
 
 /**
-  * @brief  Initialize the ts3510 and configure the needed hardware resources
-  * @param  DeviceAddr: Device address on communication Bus.
-  * @retval None
+  * @brief  Register IO bus to component object
+  * @param  Component object pointer
+  * @retval error status
   */
-void ts3510_Init(uint16_t DeviceAddr)
+int32_t TS3510_RegisterBusIO (TS3510_Object_t *pObj, TS3510_IO_t *pIO)
 {
-  /* Initialize IO BUS layer */
-  IOE_Init(); 
+  int32_t ret;
   
-}
- 
-/**
-  * @brief  Reset the ts3510 by Software.
-  * @param  DeviceAddr: Device address on communication Bus.  
-  * @retval None
-  */
-void ts3510_Reset(uint16_t DeviceAddr)
-{
-
-}
-
-/**
-  * @brief  Read the ts3510 IO Expander device ID.
-  * @param  DeviceAddr: Device address on communication Bus.  
-  * @retval The Device ID (two bytes).
-  */
-uint16_t ts3510_ReadID(uint16_t DeviceAddr)
-{
-  return 0;
-}
-
-/**
-  * @brief  Configures the touch Screen Controller (Single point detection)
-  * @param  DeviceAddr: Device address on communication Bus.
-  * @retval None.
-  */
-void ts3510_TS_Start(uint16_t DeviceAddr)
-{
-}
-
-/**
-  * @brief  Return if there is touch detected or not.
-  * @param  DeviceAddr: Device address on communication Bus.
-  * @retval Touch detected state.
-  */
-uint8_t ts3510_TS_DetectTouch(uint16_t DeviceAddr)
-{
-  uint8_t aBufferTS[11];
-  uint8_t aTmpBuffer[2] = {TS3510_READ_CMD, TS3510_WRITE_CMD};
-   
-  /* Prepare for LCD read data */
-  IOE_WriteMultiple(DeviceAddr, TS3510_SEND_CMD_REG, aTmpBuffer, 2);
-
-  /* Read TS data from LCD */
-  IOE_ReadMultiple(DeviceAddr, TS3510_READ_BLOCK_REG, aBufferTS, 11);  
-
-  /* check for first byte */
-  if((aBufferTS[1] == 0xFF) && (aBufferTS[2] == 0xFF) && (aBufferTS[3] == 0xFF) && (aBufferTS[4] == 0xFF))
+  if (pObj == NULL)
   {
-    return 0;
+    ret = TS3510_ERROR;
   }
   else
   {
-    return 1;
+    pObj->IO.Init      = pIO->Init;
+    pObj->IO.DeInit    = pIO->DeInit;
+    pObj->IO.Address   = pIO->Address;
+    pObj->IO.WriteReg  = pIO->WriteReg;
+    pObj->IO.ReadReg   = pIO->ReadReg;
+    pObj->IO.GetTick   = pIO->GetTick;
+    
+    pObj->Ctx.ReadReg  = ReadRegWrap;
+    pObj->Ctx.WriteReg = WriteRegWrap;
+    pObj->Ctx.handle   = pObj;
+    
+    if(pObj->IO.Init != NULL)
+    {
+      ret = pObj->IO.Init();
+    }
+    else
+    {
+      ret = TS3510_ERROR;
+    }
+  }    
+  
+  return ret;
+}
+
+/**
+  * @brief  Get TS3510 sensor capabilities
+  * @param  pObj Component object pointer
+  * @param  Capabilities pointer to TS3510 sensor capabilities
+  * @retval Component status
+  */
+int32_t TS3510_GetCapabilities(TS3510_Object_t *pObj, TS3510_Capabilities_t *Capabilities)
+{
+  /* Prevent unused argument(s) compilation warning */  
+  (void)(pObj);
+  
+  /* Store component's capabilities */
+  Capabilities->MultiTouch = 0;
+  Capabilities->Gesture    = 0;
+  Capabilities->MaxTouch   = TS3510_MAX_NB_TOUCH;
+  Capabilities->MaxXl      = TS3510_MAX_X_LENGTH;
+  Capabilities->MaxYl      = TS3510_MAX_Y_LENGTH;
+  
+  return TS3510_OK;
+}
+
+/**
+  * @brief  Initialize the TS3510 communication bus
+  *         from MCU to TS3510 : ie I2C channel initialization (if required).
+  * @param  pObj Component object pointer
+  * @retval Component status
+  */
+int32_t TS3510_Init(TS3510_Object_t *pObj)
+{
+  int32_t ret = TS3510_OK;
+  
+  if(pObj->IsInitialized == 0U)
+  {    
+    /* Initialize IO BUS layer */
+    if(pObj->IO.Init() != TS3510_OK)
+    {
+      ret = TS3510_ERROR;
+    }
+    else
+    {
+      pObj->IsInitialized = 1;
+    }
   }
+  
+  return ret;
+}
+
+/**
+  * @brief  De-Initialize the TS3510 communication bus
+  *         from MCU to TS3510 : ie I2C channel initialization (if required).
+  * @param  pObj Component object pointer
+  * @retval Component status
+  */
+int32_t TS3510_DeInit(TS3510_Object_t *pObj)
+{
+  int32_t ret = TS3510_OK;
+  
+  if(pObj->IsInitialized == 1U)
+  {
+    if(pObj->IO.DeInit() != TS3510_OK)
+    {
+      ret = TS3510_ERROR;
+    }
+    else
+    {
+      pObj->IsInitialized = 0;
+    }
+  }
+  
+  return ret;
+}
+
+/**
+  * @brief  Configure the TS3510 gesture
+  *         from MCU to TS3510 : ie I2C channel initialization (if required).
+  * @param  pObj  Component object pointer
+  * @param  GestureInit Gesture init structure
+  * @retval Component status
+  */
+int32_t TS3510_GestureConfig(TS3510_Object_t *pObj, TS3510_Gesture_Init_t *GestureInit)
+{
+  /* Feature not supported */
+  return TS3510_ERROR;  
+}
+
+/**
+  * @brief  Read the TS3510 device ID, pre initialize I2C in case of need to be
+  *         able to read the TS3510 device ID, and verify this is a TS3510.
+  * @param  pObj Component object pointer
+  * @param  Id Pointer to component ID value
+  * @retval Component status
+  */
+int32_t TS3510_ReadID(TS3510_Object_t *pObj, uint32_t *Id)
+{
+  int32_t ret = TS3510_OK;
+  uint8_t aTmpBuffer[2] = {TS3510_READ_CMD, TS3510_WRITE_CMD};
+  uint8_t  data;
+  
+  /* Prepare for LCD read data */
+  if(ts3510_write_reg(&pObj->Ctx, TS3510_READ_BLOCK_REG, aTmpBuffer, 2) != TS3510_OK)
+  {
+    ret = TS3510_ERROR;
+  }/* Read TS data from LCD */
+  else if(ts3510_read_reg(&pObj->Ctx, TS3510_READ_BLOCK_REG, &data, 1) != TS3510_OK)
+  {
+    ret = TS3510_ERROR;
+  }
+  else
+  {
+    *Id = TS3510_ID;
+  }
+  
+  return ret;     
 }
 
 /**
   * @brief  Get the touch screen X and Y positions values
-  * @param  DeviceAddr: Device address on communication Bus.
-  * @param  X: Pointer to X position value
-  * @param  Y: Pointer to Y position value   
-  * @retval None.
+  * @param  pObj Component object pointer
+  * @param  State Single Touch stucture pointer
+  * @retval Component status.
   */
-void ts3510_TS_GetXY(uint16_t DeviceAddr, uint16_t *X, uint16_t *Y)
+int32_t TS3510_GetState(TS3510_Object_t *pObj, TS3510_State_t *State)
 {
-  uint8_t aBufferTS[11];
+  int32_t ret = TS3510_OK;
   uint8_t aTmpBuffer[2] = {TS3510_READ_CMD, TS3510_WRITE_CMD};
+  uint8_t pData[11];
+  
+  /* Check if a touch is detected */
+  State->TouchDetected = (uint32_t)TS3510_DetectTouch(pObj);
+  
+  if(State->TouchDetected == 1U)
+  {  
+    /* Prepare for LCD read data */
+    if(ts3510_write_reg(&pObj->Ctx, TS3510_SEND_CMD_REG, aTmpBuffer, 2) != TS3510_OK)
+    {
+      ret = TS3510_ERROR;
+    }/* Read TS data from LCD */
+    else if(ts3510_read_reg(&pObj->Ctx, TS3510_READ_BLOCK_REG, pData, 11) != TS3510_OK)
+    {
+      ret = TS3510_ERROR;
+    }  
+    else
+    {
+      /* Send back first ready X position to caller */
+      State->TouchX = (((pData[1] << 8) | pData[2]) << 12) / 640;
+      /* Send back first ready Y position to caller */
+      State->TouchY = (((pData[3] << 8) | pData[4]) << 12) / 480;
+    }
+  }
+  
+  return ret;
+}
+
+/**
+  * @brief  Get the touch screen Xn and Yn positions values in multi-touch mode
+  * @param  pObj Component object pointer
+  * @param  State Multi Touch stucture pointer
+  * @retval Component status.
+  */
+int32_t TS3510_GetMultiTouchState(TS3510_Object_t *pObj, TS3510_MultiTouch_State_t *State)
+{
+  /* Feature not supported */
+  return TS3510_ERROR; 
+}
+
+/**
+  * @brief  Get Gesture ID
+  * @param  pObj Component object pointer
+  * @param  GestureId gesture ID
+  * @retval Component status.
+  */
+int32_t TS3510_GetGesture(TS3510_Object_t *pObj, uint8_t *GestureId)
+{  
+  /* Feature not supported */
+  return TS3510_ERROR;
+}
+
+/**
+  * @brief  Configure the TS3510 device to generate IT on given INT pin
+  *         connected to MCU as EXTI.
+  * @param  pObj Component object pointer
+  * @retval Component status.
+  */
+int32_t TS3510_EnableIT(TS3510_Object_t *pObj)
+{
+  /* Feature not supported */
+  return TS3510_ERROR;
+}
+
+/**
+  * @brief  Configure the TS3510 device to stop generating IT on the given INT pin
+  *         connected to MCU as EXTI.
+  * @param  pObj Component object pointer
+  * @retval Component status.
+  */
+int32_t TS3510_DisableIT(TS3510_Object_t *pObj)
+{
+  /* Feature not supported */
+  return TS3510_ERROR;
+}
+
+/**
+  * @brief  Get IT status from TS3510 interrupt status registers
+  *         Should be called Following an EXTI coming to the MCU to know the detailed
+  *         reason of the interrupt.
+  *         @note : This feature is not applicable to TS3510.
+  * @param  pObj Component object pointer
+  * @retval Component status.
+  */
+int32_t TS3510_ITStatus(TS3510_Object_t *pObj)
+{
+  /* Feature not supported */
+  return TS3510_ERROR;
+}
+
+/**
+  * @brief  Clear IT status in TS3510 interrupt status clear registers
+  *         Should be called Following an EXTI coming to the MCU.
+  *         @note : This feature is not applicable to TS3510.
+  * @param  pObj Component object pointer
+  * @retval Component status.
+  */
+int32_t TS3510_ClearIT(TS3510_Object_t *pObj)
+{
+  /* Feature not supported */
+  return TS3510_ERROR;
+}
+/**
+  * @}
+  */
+
+/** @defgroup TS3510_Private_Functions TS3510 Private Functions
+  * @{
+  */
+
+/**
+  * @brief  Return if there is touches detected or not.
+  *         Get the touch screen X and Y positions values 
+  * @param  pObj Component object pointer
+  * @retval Number of active touches detected (can be 0 or 1) or TS3510_ERROR
+  *         in case of error
+  */
+static int32_t TS3510_DetectTouch(TS3510_Object_t *pObj)
+{
+  int32_t ret;
+  uint8_t aTmpBuffer[2] = {TS3510_READ_CMD, TS3510_WRITE_CMD};
+  uint8_t pData[11];
   
   /* Prepare for LCD read data */
-  IOE_WriteMultiple(DeviceAddr, TS3510_SEND_CMD_REG, aTmpBuffer, 2);
-
-  /* Read TS data from LCD */
-  IOE_ReadMultiple(DeviceAddr, TS3510_READ_BLOCK_REG, aBufferTS, 11);  
-
-  /* Calculate positions */
-  *X = (((aBufferTS[1] << 8) | aBufferTS[2]) << 12) / 640;
-  *Y = (((aBufferTS[3] << 8) | aBufferTS[4]) << 12) / 480;
+  if(ts3510_write_reg(&pObj->Ctx, TS3510_SEND_CMD_REG, aTmpBuffer, 2) != TS3510_OK)
+  {
+    ret = TS3510_ERROR;
+  }/* Read TS data from LCD */
+  else if(ts3510_read_reg(&pObj->Ctx, TS3510_READ_BLOCK_REG, pData, 11) != TS3510_OK)
+  {
+    ret = TS3510_ERROR;
+  }
+  else
+  {
+    if((pData[1] == 0xFF) && (pData[2] == 0xFF) && (pData[3] == 0xFF) && (pData[4] == 0xFF))
+    {
+      /* If invalid number of touch detected, set it to zero */
+      ret = 0;
+    }
+    else
+    {
+      /* Touch detected */
+      ret = 1;
+    }
+  }
   
-  /* set position to be relative to 12bits resolution */
+  return ret;
 }
 
 /**
-  * @brief  Configure the selected source to generate a global interrupt or not
-  * @param  DeviceAddr: Device address on communication Bus.  
-  * @retval None
+  * @brief  Wrap IO bus read function to component register red function
+  * @param  handle Component object handle
+  * @param  Reg The target register address to read
+  * @param  pData The target register value to be read
+  * @param  Length buffer size to be read
+  * @retval Component status.
   */
-void ts3510_TS_EnableIT(uint16_t DeviceAddr)
-{  
-}
-
-/**
-  * @brief  Configure the selected source to generate a global interrupt or not
-  * @param  DeviceAddr: Device address on communication Bus.    
-  * @retval None
-  */
-void ts3510_TS_DisableIT(uint16_t DeviceAddr)
+static int32_t ReadRegWrap(void *handle, uint8_t Reg, uint8_t* pData, uint16_t Length)
 {
+  TS3510_Object_t *pObj = (TS3510_Object_t *)handle;
+
+  return pObj->IO.ReadReg(pObj->IO.Address, Reg, pData, Length);
 }
 
 /**
-  * @brief  Configure the selected source to generate a global interrupt or not
-  * @param  DeviceAddr: Device address on communication Bus.    
-  * @retval TS interrupts status
+  * @brief  Wrap IO bus write function to component register write function
+  * @param  handle Component object handle
+  * @param  Reg The target register address to write
+  * @param  pData The target register value to be written
+  * @param  Length buffer size to be written
+  * @retval Component status.
   */
-uint8_t ts3510_TS_ITStatus(uint16_t DeviceAddr)
+static int32_t WriteRegWrap(void *handle, uint8_t Reg, uint8_t* pData, uint16_t Length)
 {
-  return 0;
+  TS3510_Object_t *pObj = (TS3510_Object_t *)handle;
+
+  return pObj->IO.WriteReg(pObj->IO.Address, Reg, pData, Length);
 }
 
 /**
-  * @brief  Configure the selected source to generate a global interrupt or not
-  * @param  DeviceAddr: Device address on communication Bus.  
-  * @retval None
+  * @}
   */
-void ts3510_TS_ClearIT(uint16_t DeviceAddr)
-{
-}
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
-/**
-  * @}
-  */      
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

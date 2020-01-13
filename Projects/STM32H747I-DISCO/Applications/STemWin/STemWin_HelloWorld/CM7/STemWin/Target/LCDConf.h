@@ -36,7 +36,8 @@ typedef struct
   LCD_API_COLOR_CONV   *pColorConvAPI;
 }
 LCD_LayerPropTypedef;
-
+void DSI_IO_WriteCmd(uint32_t NbrParams, uint8_t *pParams);
+void LCD_MspInit(void);
 #endif /* LCDCONF_H */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

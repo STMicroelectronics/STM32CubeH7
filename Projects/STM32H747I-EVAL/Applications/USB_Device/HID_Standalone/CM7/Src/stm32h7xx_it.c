@@ -198,19 +198,8 @@ void OTG_FS_WKUP_IRQHandler(void)
   */
 void EXTI0_IRQHandler(void)
 {
-  HAL_GPIO_EXTI_IRQHandler(WAKEUP_BUTTON_PIN);
+  HAL_GPIO_EXTI_IRQHandler(BUTTON_WAKEUP_PIN);
 }
-
-/**
-  * @brief  This function handles External line 0 interrupt request.
-  * @param  None
-  * @retval None
-  */
-void EXTI15_10_IRQHandler(void)
-{
-  HAL_GPIO_EXTI_IRQHandler(TAMPER_BUTTON_PIN);
-}
-
 /**
   * @}
   */

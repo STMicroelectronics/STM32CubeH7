@@ -22,7 +22,7 @@
 #define __MAIN_H
 
 /* Includes ------------------------------------------------------------------*/
-#include "stm32h7xx_nucleo_144.h"
+#include "stm32h7xx_nucleo.h"
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
@@ -44,15 +44,10 @@
 #define SPIx_SCK_AF                      GPIO_AF5_SPI1
 #define SPIx_MISO_PIN                    GPIO_PIN_6
 #define SPIx_MISO_GPIO_PORT              GPIOA
-#define SPIx_MISO_AF                     GPIO_AF5_SPI1
 #define SPIx_MOSI_AF                     GPIO_AF5_SPI1
-#if defined (USE_STM32H7XX_NUCLEO_144_MB1364)
-#define SPIx_MOSI_PIN                    GPIO_PIN_5
-#define SPIx_MOSI_GPIO_PORT              GPIOB
-#else
 #define SPIx_MOSI_PIN                    GPIO_PIN_7
 #define SPIx_MOSI_GPIO_PORT              GPIOA
-#endif
+#define SPIx_MISO_AF                     GPIO_AF5_SPI1
 /* Definition for SPIx's NVIC */
 #define SPIx_IRQn                        SPI1_IRQn
 #define SPIx_IRQHandler                  SPI1_IRQHandler

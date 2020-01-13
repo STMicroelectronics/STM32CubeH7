@@ -148,7 +148,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 
     switch(GPIO_Pin)
     {
-        case WAKEUP_BUTTON_PIN :
+        case BUTTON_WAKEUP_PIN :
         {
             /* Toggle LED GREEN */
             BSP_LED_Toggle(LED_ORANGE);

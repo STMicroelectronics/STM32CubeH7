@@ -26,7 +26,6 @@
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 extern HCD_HandleTypeDef hhcd;
-extern SD_HandleTypeDef uSdHandle;
 
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
@@ -151,9 +150,13 @@ void EXTI9_5_IRQHandler(void)
   * @param  None
   * @retval None
   */
+/**
+  * @brief  Handles SD1 card interrupt request.
+  * @retval None
+  */
 void SDMMC1_IRQHandler(void)
 {
-  HAL_SD_IRQHandler(&uSdHandle);
+  BSP_SD_IRQHandler(0);
 }
 
 

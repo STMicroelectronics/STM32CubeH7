@@ -1,5 +1,5 @@
-#include <gui/hallwayscreen_screen/HallwayScreenView.hpp>
-#include <gui/hallwayscreen_screen/HallwayScreenPresenter.hpp>
+#include <gui/hallwayscreen_screen/hallwayScreenView.hpp>
+#include <gui/hallwayscreen_screen/hallwayScreenPresenter.hpp>
 
 HallwayScreenPresenter::HallwayScreenPresenter(HallwayScreenView& v) :
     view(v)

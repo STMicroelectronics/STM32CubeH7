@@ -54,7 +54,7 @@ void HAL_PCD_MspInit(PCD_HandleTypeDef * hpcd)
   GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
-  GPIO_InitStruct.Alternate = GPIO_AF10_OTG1_FS;
+  GPIO_InitStruct.Alternate = GPIO_AF10_OTG2_FS;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /* Configure VBUS Pin */
@@ -67,7 +67,7 @@ void HAL_PCD_MspInit(PCD_HandleTypeDef * hpcd)
   GPIO_InitStruct.Pin = GPIO_PIN_10;
   GPIO_InitStruct.Mode = GPIO_MODE_AF_OD;
   GPIO_InitStruct.Pull = GPIO_PULLUP;
-  GPIO_InitStruct.Alternate = GPIO_AF10_OTG1_FS;
+  GPIO_InitStruct.Alternate = GPIO_AF10_OTG2_FS;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /* Enable USB FS Clocks */
@@ -453,7 +453,7 @@ uint32_t USBD_LL_GetRxDataSize(USBD_HandleTypeDef * pdev, uint8_t ep_addr)
   */
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
-  if (GPIO_Pin == WAKEUP_BUTTON_PIN)
+  if (GPIO_Pin == BUTTON_WAKEUP_PIN)
   {
     if ((((USBD_HandleTypeDef *) hpcd.pData)->dev_remote_wakeup == 1) &&
         (((USBD_HandleTypeDef *) hpcd.pData)->dev_state ==

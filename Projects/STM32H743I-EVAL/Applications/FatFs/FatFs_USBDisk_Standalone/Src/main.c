@@ -27,6 +27,7 @@ FATFS USBDISKFatFs;           /* File system object for USB disk logical drive *
 FIL MyFile;                   /* File object */
 char USBDISKPath[4];          /* USB Host logical drive path */
 USBH_HandleTypeDef hUSB_Host; /* USB Host handle */
+BSP_IO_Init_t init;
 
 typedef enum {
   APPLICATION_IDLE = 0,   
@@ -66,7 +67,7 @@ int main(void)
   
   /* Configure the system clock to 400 MHz */
   SystemClock_Config();
-  BSP_IO_Init();
+  BSP_IO_Init(0, &init);
 
   /* Configure LED_GREEN and LED_RED */
   BSP_LED_Init(LED_GREEN);

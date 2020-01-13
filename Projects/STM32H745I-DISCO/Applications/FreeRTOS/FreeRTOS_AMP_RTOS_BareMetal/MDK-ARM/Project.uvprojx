@@ -337,7 +337,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32H745xx,USE_STM32H745I_Discovery,USE_IOEXPANDER,CORE_CM7</Define>
               <Undefine></Undefine>
-              <IncludePath>../CM7/Inc;../Common/Inc;../../../../../../Drivers/CMSIS/Include;../../../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../../../../../../Drivers/STM32H7xx_HAL_Driver/Inc;../../../../../../Drivers/BSP/STM32H745I-Discovery;../../../../../../Drivers/BSP/Components/Common;../../../../../../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F;../../../../../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS;../../../../../../Middlewares/Third_Party/FreeRTOS/Source/include;../../../../../../Utilities/Log;../../../../../../Utilities/Fonts;../../../../../../Utilities/CPU</IncludePath>
+              <IncludePath>../CM7/Inc;../Common/Inc;../../../../../../Drivers/CMSIS/Include;../../../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../../../../../../Drivers/STM32H7xx_HAL_Driver/Inc;../../../../../../Drivers/BSP/STM32H745I-DISCO;../../../../../../Drivers/BSP/Components/Common;../../../../../../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F;../../../../../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS;../../../../../../Middlewares/Third_Party/FreeRTOS/Source/include;../../../../../../Utilities/Log;../../../../../../Utilities/Fonts;../../../../../../Utilities/CPU</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -508,7 +508,7 @@
             <File>
               <FileName>stm32h745i_discovery.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../../Drivers/BSP/STM32H745I-Discovery/stm32h745i_discovery.c</FilePath>
+              <FilePath>../../../../../../Drivers/BSP/STM32H745I-DISCO/stm32h745i_discovery.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -529,6 +529,11 @@
               <FileName>stm32h7xx_hal.c</FileName>
               <FileType>1</FileType>
               <FilePath>../../../../../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal.c</FilePath>
+            </File>
+			<File>
+              <FileName>stm32h7xx_hal_exti.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../../../../../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_exti.c</FilePath>
             </File>
             <File>
               <FileName>stm32h7xx_hal_adc.c</FileName>
@@ -1018,7 +1023,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER, STM32H745xx, USE_STM32H745I_Discovery,USE_IOEXPANDER,CORE_CM4</Define>
               <Undefine></Undefine>
-              <IncludePath>../CM4/Inc;../Common/Inc;../../../../../../Drivers/CMSIS/Include;../../../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../../../../../../Drivers/STM32H7xx_HAL_Driver/Inc;../../../../../../Drivers/BSP/STM32H745I-Discovery;../../../../../../Drivers/BSP/Components/Common;../../../../../../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F;../../../../../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS;../../../../../../Middlewares/Third_Party/FreeRTOS/Source/include;../../../../../../Utilities/Log;../../../../../../Utilities/Fonts;../../../../../../Utilities/CPU</IncludePath>
+              <IncludePath>../CM4/Inc;../Common/Inc;../../../../../../Drivers/CMSIS/Include;../../../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../../../../../../Drivers/STM32H7xx_HAL_Driver/Inc;../../../../../../Drivers/BSP/STM32H745I-DISCO;../../../../../../Drivers/BSP/Components/Common;../../../../../../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F;../../../../../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS;../../../../../../Middlewares/Third_Party/FreeRTOS/Source/include;../../../../../../Utilities/Log;../../../../../../Utilities/Fonts;../../../../../../Utilities/CPU</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -1189,7 +1194,7 @@
             <File>
               <FileName>stm32h745i_discovery.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../../Drivers/BSP/STM32H745I-Discovery/stm32h745i_discovery.c</FilePath>
+              <FilePath>../../../../../../Drivers/BSP/STM32H745I-DISCO/stm32h745i_discovery.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1210,6 +1215,11 @@
               <FileName>stm32h7xx_hal.c</FileName>
               <FileType>1</FileType>
               <FilePath>../../../../../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal.c</FilePath>
+            </File>
+			<File>
+              <FileName>stm32h7xx_hal_exti.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../../../../../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_exti.c</FilePath>
             </File>
             <File>
               <FileName>stm32h7xx_hal_adc.c</FileName>

@@ -25,6 +25,7 @@
 FATFS SDFatFs;  /* File system object for SD card logical drive */
 FIL MyFile;     /* File object */
 char SDPath[4]; /* SD card logical drive path */
+BSP_IO_Init_t init;
 
 typedef enum {
   APPLICATION_IDLE = 0,   
@@ -73,7 +74,7 @@ int main(void)
   /* Configure the system clock to 400 MHz */
   SystemClock_Config();
   
-  BSP_IO_Init();
+  BSP_IO_Init(0, &init);
   
   /* Configure LED1 and LED3 */
   BSP_LED_Init(LED_GREEN);
@@ -91,7 +92,7 @@ int main(void)
     /* Make sure that the SD detecion IT has a lower priority than the Systick */
     HAL_NVIC_SetPriority(SysTick_IRQn, 0x0E ,0);
     
-    if(BSP_SD_IsDetected())
+    if(BSP_SD_IsDetected(0))
     {
       FRESULT res;
       
@@ -145,7 +146,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
   if(MFX_IRQOUT_PIN == GPIO_Pin)
   {
-    if(BSP_SD_IsDetected())
+    if(BSP_SD_IsDetected(0))
     {
       Appli_state = APPLICATION_RUNNING;
 
@@ -366,10 +367,9 @@ static void SD_Initialize(void)
 {
   if (isInitialized == 0)
   {
-    BSP_SD_Init();
-    BSP_SD_ITConfig();
+    BSP_SD_Init(0);
   
-    if(BSP_SD_IsDetected())
+    if(BSP_SD_IsDetected(0))
     {
       isInitialized = 1;
     }

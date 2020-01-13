@@ -32,12 +32,12 @@
 /* DISCO includes component */
 #include "stm32h747i_discovery.h"
 #include "stm32h747i_discovery_sdram.h"
-#include "stm32h747i_discovery_lcd.h"
 #include "stm32h747i_discovery_ts.h"
 #include "stm32h747i_discovery_sd.h"
+#include "stm32h747i_discovery_bus.h"
 #include "stm32h747i_discovery_audio.h"
 #include "stm32h747i_discovery_qspi.h"
-                 
+#include "otm8009a.h"                
 /* FatFs includes components */
 #include "ff_gen_drv.h"
 #include "sd_diskio.h"

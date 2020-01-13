@@ -116,11 +116,11 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 
       else if(statusGpio & SD_DETECT_PIN)
       {
-        if(BSP_SD_IsDetected())
+        if(BSP_SD_IsDetected(0))
         {
           /* Enable SD Interrupt mode */
-          BSP_SD_Init();
-          BSP_SD_ITConfig();
+          BSP_SD_Init(0);
+          BSP_SD_ITConfig(0);
           osMessagePut(StorageEvent, MSDDISK_CONNECTION_EVENT, 0);
         }
         else
@@ -148,7 +148,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
   }
   else if(GPIO_Pin == SD_DETECT_PIN)
   {
-    if(BSP_SD_IsDetected())
+    if(BSP_SD_IsDetected(0))
     {
       osMessagePut(StorageEvent, MSDDISK_CONNECTION_EVENT, 0);
     }

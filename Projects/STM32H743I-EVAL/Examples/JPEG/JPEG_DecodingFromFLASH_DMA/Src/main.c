@@ -37,6 +37,7 @@
 
 extern __IO uint32_t Jpeg_HWDecodingEnd;
 static uint32_t LCD_X_Size = 0;
+static uint32_t LCD_Y_Size = 0;
 
 JPEG_HandleTypeDef    JPEG_Handle;
 
@@ -61,7 +62,7 @@ void Error_Handler(void);
 int main(void)
 {
   uint32_t xPos = 0, yPos = 0;
-  uint8_t  lcd_status = LCD_OK;  
+  uint8_t  lcd_status = BSP_ERROR_NONE;  
   
   /* Configure the MPU attributes as Write Through for SDRAM*/
   MPU_Config();
@@ -93,18 +94,20 @@ int main(void)
   
   /*##-2- LCD Configuration ##################################################*/  
   /* Initialize the LCD   */
-  lcd_status = BSP_LCD_Init();
-  if(lcd_status != LCD_OK)
+  lcd_status = BSP_LCD_Init(0, LCD_ORIENTATION_LANDSCAPE);
+  if(lcd_status != BSP_ERROR_NONE)
   {
     Error_Handler();
   }
   
-  BSP_LCD_LayerDefaultInit(0, LCD_FRAME_BUFFER);     
-  BSP_LCD_SelectLayer(0); 
+  GUI_SetFuncDriver(&LCD_Driver);
+  GUI_SetLayer(0);
+
   
   /* Get the LCD Width */
-  LCD_X_Size = BSP_LCD_GetXSize();  
-
+  BSP_LCD_GetXSize(0,&LCD_X_Size);  
+  BSP_LCD_GetYSize(0,&LCD_Y_Size);
+  
   /* Display example brief   */
   LCD_BriefDisplay();
     
@@ -120,8 +123,8 @@ int main(void)
   HAL_JPEG_GetInfo(&JPEG_Handle, &JPEG_Info);       
   
   /*##-9- Copy RGB decoded Data to the display FrameBuffer  ############*/
-  xPos = (BSP_LCD_GetXSize() - JPEG_Info.ImageWidth)/2;
-  yPos = (BSP_LCD_GetYSize() - JPEG_Info.ImageHeight)/2;     
+  xPos = (LCD_X_Size - JPEG_Info.ImageWidth)/2;
+  yPos = (LCD_Y_Size - JPEG_Info.ImageHeight)/2;     
     
   DMA2D_CopyBuffer((uint32_t *)JPEG_OUTPUT_DATA_BUFFER, (uint32_t *)LCD_FRAME_BUFFER, xPos , yPos, JPEG_Info.ImageWidth, JPEG_Info.ImageHeight, JPEG_Info.ChromaSubsampling);
    
@@ -275,15 +278,14 @@ static void MPU_Config(void)
   */
 static void LCD_BriefDisplay(void)
 {
-  BSP_LCD_Clear(LCD_COLOR_WHITE);
-  BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-  BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
-  BSP_LCD_FillRect(0, 0, LCD_X_Size, 112);  
-  BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
-  BSP_LCD_DisplayStringAt(0, LINE(2), (uint8_t *)"JPEG Decoding from Flash With DMA", CENTER_MODE);
-  BSP_LCD_SetFont(&Font16);
-  BSP_LCD_DisplayStringAt(0, LINE(5), (uint8_t *)"This example shows how to Decode (with DMA)", CENTER_MODE);
-  BSP_LCD_DisplayStringAt(0, LINE(6), (uint8_t *)"and  display a JPEG file", CENTER_MODE);    
+  GUI_Clear(GUI_COLOR_WHITE);
+  GUI_FillRect(0, 0, LCD_X_Size, 80, GUI_COLOR_BLUE);
+  GUI_SetBackColor(GUI_COLOR_BLUE);
+  GUI_SetTextColor(GUI_COLOR_WHITE);
+  GUI_SetFont(&Font16);
+  GUI_DisplayStringAt(0, LINE(2), (uint8_t *)"JPEG Decoding from Flash With DMA", CENTER_MODE);
+  GUI_DisplayStringAt(0, LINE(3), (uint8_t *)"This example shows how to Decode (with DMA)", CENTER_MODE);
+  GUI_DisplayStringAt(0, LINE(4), (uint8_t *)"and  display a JPEG file", CENTER_MODE);
 }
 
 /**
@@ -360,7 +362,7 @@ static void DMA2D_CopyBuffer(uint32_t *pSrc, uint32_t *pDst, uint16_t x, uint16_
   HAL_DMA2D_ConfigLayer(&DMA2D_Handle, 1);
   
   /*##-5-  copy the new decoded frame to the LCD Frame buffer ################*/
-  destination = (uint32_t)pDst + ((y * BSP_LCD_GetXSize()) + x) * 4;
+  destination = (uint32_t)pDst + ((y *LCD_Y_Size) + x) * 4;
 
   HAL_DMA2D_Start(&DMA2D_Handle, (uint32_t)pSrc, destination, xsize, ysize);
   HAL_DMA2D_PollForTransfer(&DMA2D_Handle, 25);  /* wait for the previous DMA2D transfer to ends */

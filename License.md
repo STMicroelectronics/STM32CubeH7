@@ -3,12 +3,14 @@
 | CMSIS                           | Apache License 2.0   | Copyright (c) 2009-2017 ARM Limited. All rights reserved. |
 | CMSIS Device                    | Apache License 2.0   | ARM Limited - STMicroelectronics |
 | STM32H7 HAL                     | BSD-3-Clause         | STMicroelectronics |
-| BSP STM32H7xx_Nucleo_144        | BSD-3-Clause         | STMicroelectronics |
+| BSP STM32H7xx_Nucleo            | BSD-3-Clause         | STMicroelectronics |
+| BSP STM32H7B3I_EVAL             | BSD-3-Clause         | STMicroelectronics |
+| BSP STM32H7B3I_DK               | BSD-3-Clause         | STMicroelectronics |
 | BSP STM32H743I_EVAL             | BSD-3-Clause         | STMicroelectronics |
-| BSP STM32H745I-Discovery        | BSD-3-Clause         | STMicroelectronics |
+| BSP STM32H745I-DISCO            | BSD-3-Clause         | STMicroelectronics |
 | BSP STM32H747I_EVAL             | BSD-3-Clause         | STMicroelectronics |
-| BSP STM32H747I-Discovery        | BSD-3-Clause         | STMicroelectronics |
-| BSP STM32H750B-Discovery        | BSD-3-Clause         | STMicroelectronics |
+| BSP STM32H747I-DISCO            | BSD-3-Clause         | STMicroelectronics |
+| BSP STM32H750B-DK               | BSD-3-Clause         | STMicroelectronics |
 | BSP Components                  | BSD-3-Clause         | STMicroelectronics |
 | BSP Adafruit                    | BSD-3-Clause         | STMicroelectronics |
 | FreeRTOS kernel                 | MIT                  | Copyright (C) 2017 Amazon.com, Inc. or its affiliates |
@@ -19,6 +21,7 @@
 | OpenAMP                         | BSD-3-Clause         | Xilinx Inc. and Contributors |
 | STM32_USB_Device_Library        | ST SLA0044           | STMicroelectronics |
 | STM32_USB_Host_Library          | ST SLA0044           | STMicroelectronics |
+| STM32_Network_Library           | ST SLA0044           | STMicroelectronics |
 | STemWin                         | ST SLA0044           | STMicroelectronics |
 | TouchGFX                        | ST SLA0044           | STMicroelectronics |
 | STM32_Audio                     | ST SLA0047           | STMicroelectronics |

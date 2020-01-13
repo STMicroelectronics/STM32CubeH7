@@ -78,7 +78,7 @@ int main(void)
   BSP_LED_Init(LED3);
 
   /* Configure Tamper push-button */
-  BSP_PB_Init(BUTTON_USER, BUTTON_MODE_EXTI);
+  BSP_PB_Init(BUTTON_WAKEUP, BUTTON_MODE_EXTI);
 
   /*##-1- Check if the system has resumed from WWDG reset ####################*/
   if (__HAL_RCC_GET_FLAG(RCC_FLAG_WWDG1RST) != RESET)

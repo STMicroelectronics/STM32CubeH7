@@ -67,9 +67,6 @@ int main(void)
   /* Configure the System clock to have a frequency of 400 Mhz */
   SystemClock_Config();
 
-  /* Initialize IO expander */
-  BSP_IO_Init();
-
   /* Init Dynamic Switch Application */
   DynamicSwitch_InitApplication();
 
@@ -119,25 +116,25 @@ static void USBH_UserProcess(USBH_HandleTypeDef * phost, uint8_t id)
     }
     if (f_mount(NULL, "", 0) != FR_OK)
     {
-      LCD_ErrLog("ERROR : Cannot DeInitialize FatFs! \n");
+      LCD_ErrTrace("ERROR : Cannot DeInitialize FatFs! \n");
     }
     if (FATFS_UnLinkDriver(USBDISKPath) != 0)
     {
-      LCD_ErrLog("ERROR : Cannot UnLink USB FatFS Driver! \n");
+      LCD_ErrTrace("ERROR : Cannot UnLink USB FatFS Driver! \n");
     }
 
     /* Unlink the micro SD disk I/O driver */
     if (FATFS_UnLinkDriver(SD_Path) != 0)
     {
-      LCD_ErrLog("ERROR : Cannot UnLink SD FatFS Driver! \n");
+      LCD_ErrTrace("ERROR : Cannot UnLink SD FatFS Driver! \n");
     }
     /* Init the LCD Log module */
-    LCD_LOG_Init();
+    UTIL_LCD_TRACE_Init();
 
 #ifdef USE_USB_HS
-  LCD_LOG_SetHeader((uint8_t *)" USB HS DynamicSwitch Host");
+  UTIL_LCD_TRACE_SetHeader((uint8_t *)" USB HS DynamicSwitch Host");
 #else
-  LCD_LOG_SetHeader((uint8_t *)" USB FS DynamicSwitch Host");
+  UTIL_LCD_TRACE_SetHeader((uint8_t *)" USB FS DynamicSwitch Host");
 #endif
     break;
 
@@ -154,7 +151,7 @@ static void USBH_UserProcess(USBH_HandleTypeDef * phost, uint8_t id)
       {
         if (f_mount(&USBH_fatfs, "", 0) != FR_OK)
         {
-          LCD_ErrLog("ERROR : Cannot Initialize FatFs! \n");
+          LCD_ErrTrace("ERROR : Cannot Initialize FatFs! \n");
         }
       }
       break;
@@ -187,38 +184,30 @@ static void DynamicSwitch_InitApplication(void)
   BSP_PB_Init(BUTTON_TAMPER, BUTTON_MODE_EXTI);
 
   /* Configure Joystick in EXTI mode */
-  BSP_JOY_Init(JOY_MODE_EXTI);
+  BSP_JOY_Init(JOY1, JOY_MODE_EXTI, JOY_ALL);
 
   /* Configure LED1 and LED3 */
   BSP_LED_Init(LED1);
   BSP_LED_Init(LED3);
 
   /* Initialize the LCD */
-  BSP_LCD_Init();
-
-  /* LCD Layer Initialization */
-  BSP_LCD_LayerDefaultInit(1, LCD_FB_START_ADDRESS);
-
-  /* Selects the LCD Layer */
-  BSP_LCD_SelectLayer(1);
-
-  /* Enables the display */
-  BSP_LCD_DisplayOn();
+  BSP_LCD_Init(0, LCD_ORIENTATION_LANDSCAPE);
+  GUI_SetFuncDriver(&LCD_Driver);
 
   /* Init the LCD Log module */
-  LCD_LOG_Init();
+  UTIL_LCD_TRACE_Init();
 
 #ifdef USE_USB_HS
-  LCD_LOG_SetHeader((uint8_t *) " USB HS DynamicSwitch Host");
+  UTIL_LCD_TRACE_SetHeader((uint8_t *) " USB HS DynamicSwitch Host");
 #else
-  LCD_LOG_SetHeader((uint8_t *) " USB FS DynamicSwitch Host");
+  UTIL_LCD_TRACE_SetHeader((uint8_t *) " USB FS DynamicSwitch Host");
 #endif
 
-  LCD_UsrLog("USB Host library started.\n");
+  LCD_UsrTrace("USB Host library started.\n");
 
   /* Start Dynamic Switch Interface */
-  LCD_UsrLog("Starting DynamicSwitch Demo\n");
-  LCD_UsrLog("Plug your device To Continue...\n");
+  LCD_UsrTrace("Starting DynamicSwitch Demo\n");
+  LCD_UsrTrace("Plug your device To Continue...\n");
 }
 
 /**
@@ -321,55 +310,6 @@ void SystemClock_Config(void)
   HAL_EnableCompensationCell();
 }
 
-/**
-  * @brief  Clock Config.
-  * @param  hltdc: LTDC handle
-  * @note   This API is called by BSP_LCD_Init()
-  * @retval None
-  */
-void BSP_LCD_ClockConfig(LTDC_HandleTypeDef *hltdc, void *Params)
-{
-  static RCC_PeriphCLKInitTypeDef  periph_clk_init_struct;
-
-  if(stmpe811_ts_drv.ReadID(TS_I2C_ADDRESS) == STMPE811_ID)
-  {
-    /* AMPIRE480272 LCD clock configuration */
-    /* LCD clock configuration */
-    /* PLL3_VCO Input = HSE_VALUE/PLL3M = 1 Mhz */
-    /* PLL3_VCO Output = PLL3_VCO Input * PLL3N = 336 Mhz */
-    /* PLLLCDCLK = PLL3_VCO Output/PLL3R = 336/37 = 9.08 Mhz */
-    /* LTDC clock frequency = PLLLCDCLK = 9.08 Mhz */
-    /* USB uses same pll3 as clock frequency and PLL3Q as devider: USB clock frequency = 48 Mhz */ 
-    periph_clk_init_struct.PeriphClockSelection = RCC_PERIPHCLK_LTDC;
-    periph_clk_init_struct.PLL3.PLL3M = 25;    
-    periph_clk_init_struct.PLL3.PLL3N = 336;
-    periph_clk_init_struct.PLL3.PLL3FRACN = 0;
-    periph_clk_init_struct.PLL3.PLL3P = 2;
-    periph_clk_init_struct.PLL3.PLL3Q = 7;  
-    periph_clk_init_struct.PLL3.PLL3R = 37;
-    HAL_RCCEx_PeriphCLKConfig(&periph_clk_init_struct);  
-  }
-  else
-  {
-
-    /* In case of double layers the bandwidth is arround 80MBytesPerSec => 20MHz (<25MHz) */
-    /* so the PLL3R is configured to provide this clock */
-    /* AMPIRE640480 LCD clock configuration */
-    /* PLL3_VCO Input = HSE_VALUE/PLL3M = 1 Mhz */
-    /* PLL3_VCO Output = PLL3_VCO Input * PLL3N = 336 Mhz */
-    /* PLLLCDCLK = PLL3_VCO Output/PLL3R = 336/16 = 21Mhz */
-    /* LTDC clock frequency = PLLLCDCLK = 21 Mhz */     
-    /* USB uses same pll3 as clock frequency and PLL3Q as devider: USB clock frequency = 48 Mhz */ 
-    periph_clk_init_struct.PLL3.PLL3R = 16;
-    periph_clk_init_struct.PeriphClockSelection = RCC_PERIPHCLK_LTDC;
-    periph_clk_init_struct.PLL3.PLL3M = 25;    
-    periph_clk_init_struct.PLL3.PLL3N = 336;
-    periph_clk_init_struct.PLL3.PLL3FRACN = 0;
-    periph_clk_init_struct.PLL3.PLL3P = 2;
-    periph_clk_init_struct.PLL3.PLL3Q = 7;  
-    HAL_RCCEx_PeriphCLKConfig(&periph_clk_init_struct); 
-  }
-}
 
 /**
   * @brief  Configure the MPU attributes as Write Through for External SDRAM.
@@ -403,7 +343,32 @@ static void MPU_Config(void)
   /* Enable the MPU */
   HAL_MPU_Enable(MPU_PRIVILEGED_DEFAULT);
 }
-
+/**
+  * @brief  Clock Config.
+  * @param  hltdc: LTDC handle
+  * @note   This API is called by BSP_LCD_Init()
+  * @retval None
+  */
+HAL_StatusTypeDef MX_LTDC_ClockConfig(LTDC_HandleTypeDef *hltdc)
+{
+  /* In case of double layers the bandwidth is arround 80MBytesPerSec => 20MHz (<25MHz) */
+  /* so the PLL3R is configured to provide this clock */
+  /* AMPIRE640480 LCD clock configuration */
+  /* PLL3_VCO Input = HSE_VALUE/PLL3M = 1 Mhz */
+  /* PLL3_VCO Output = PLL3_VCO Input * PLL3N = 336 Mhz */
+  /* PLLLCDCLK = PLL3_VCO Output/PLL3R = 336/16 = 21Mhz */
+  /* LTDC clock frequency = PLLLCDCLK = 21 Mhz */
+  /* USB uses same pll3 as clock frequency and PLL3Q as devider: USB clock frequency = 48 Mhz */
+  RCC_PeriphCLKInitTypeDef periph_clk_init_struct;
+  periph_clk_init_struct.PLL3.PLL3R = 16;
+  periph_clk_init_struct.PeriphClockSelection = RCC_PERIPHCLK_LTDC;
+  periph_clk_init_struct.PLL3.PLL3M = 25;
+  periph_clk_init_struct.PLL3.PLL3N = 336;
+  periph_clk_init_struct.PLL3.PLL3FRACN = 0;
+  periph_clk_init_struct.PLL3.PLL3P = 2;
+  periph_clk_init_struct.PLL3.PLL3Q = 7;
+  return HAL_RCCEx_PeriphCLKConfig(&periph_clk_init_struct);
+}
 /**
   * @brief  CPU L1-Cache enable.
   * @param  None

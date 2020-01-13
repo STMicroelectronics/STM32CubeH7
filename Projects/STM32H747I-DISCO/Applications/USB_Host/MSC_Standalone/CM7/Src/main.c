@@ -82,7 +82,7 @@ int main(void)
   HAL_HSEM_Release(HSEM_ID_0,0);
 
   /* Initialize IO expander */
-  BSP_JOY_Init(JOY_MODE_GPIO);
+  BSP_JOY_Init(JOY1,JOY_MODE_GPIO,JOY_ALL);
 
   /* Init MSC Application */
   MSC_InitApplication();
@@ -125,23 +125,20 @@ static void MSC_InitApplication(void)
   BSP_LED_Init(LED_RED);
 
   /* Initialize the LCD */
-  BSP_LCD_Init();
+  BSP_LCD_Init(0,LCD_ORIENTATION_LANDSCAPE);
+  GUI_SetFuncDriver(&LCD_Driver);
 
-  /* LCD Layer Initialization */
-  BSP_LCD_LayerDefaultInit(1, LCD_FB_START_ADDRESS);
 
-  /* Select the LCD Layer */
-  BSP_LCD_SelectLayer(1);
+    /* Initialize the LCD Log module */
+  UTIL_LCD_TRACE_Init();
 
-  /* Enable the display */
-  BSP_LCD_DisplayOn();
-
-  /* Initialize the LCD Log module */
-  LCD_LOG_Init();
-
-  LCD_LOG_SetHeader((uint8_t *) " USB OTG HS MSC Host");
-
-  LCD_UsrLog("USB Host library started.\n");
+#ifdef USE_USB_HS
+  UTIL_LCD_TRACE_SetHeader((uint8_t *) " USB OTG HS MSC Host");
+#else
+  UTIL_LCD_TRACE_SetHeader((uint8_t *) " USB OTG FS MSC Host");
+#endif
+  
+  LCD_UsrTrace("USB Host library started.\n");
 
   /* Initialize menu and MSC process */
   USBH_UsrLog("Starting MSC Demo");
@@ -165,11 +162,11 @@ static void USBH_UserProcess(USBH_HandleTypeDef * phost, uint8_t id)
     Appli_state = APPLICATION_DISCONNECT;
     if (f_mount(NULL, "", 0) != FR_OK)
     {
-      LCD_ErrLog("ERROR : Cannot DeInitialize FatFs! \n");
+      LCD_ErrTrace("ERROR : Cannot DeInitialize FatFs! \n");
     }
     if (FATFS_UnLinkDriver(USBDISKPath) != 0)
     {
-      LCD_ErrLog("ERROR : Cannot UnLink FatFS Driver! \n");
+      LCD_ErrTrace("ERROR : Cannot UnLink FatFS Driver! \n");
     }
     break;
 
@@ -182,7 +179,7 @@ static void USBH_UserProcess(USBH_HandleTypeDef * phost, uint8_t id)
     {
       if (f_mount(&USBH_fatfs, "", 0) != FR_OK)
       {
-        LCD_ErrLog("ERROR : Cannot Initialize FatFs! \n");
+        LCD_ErrTrace("ERROR : Cannot Initialize FatFs! \n");
       }
     }
     break;

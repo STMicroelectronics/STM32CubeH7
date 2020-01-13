@@ -337,7 +337,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER, STM32H747xx, USE_STM32H747I_EVAL,CORE_CM7,USE_IOEXPANDER</Define>
               <Undefine></Undefine>
-              <IncludePath>../Common/Inc;../CM7/Inc;../../../../../../Drivers/CMSIS/Include;../../../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../../../../../../Drivers/STM32H7xx_HAL_Driver/Inc;../../../../../../Drivers/BSP/STM32H747I_EVAL;../../../../../../Drivers/BSP/Components/Common;../../../../../../Utilities/Log;../../../../../../Utilities/Fonts;../../../../../../Utilities/CPU</IncludePath>
+              <IncludePath>../Common/Inc;../CM7/Inc;../../../../../../Drivers/CMSIS/Include;../../../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../../../../../../Drivers/STM32H7xx_HAL_Driver/Inc;../../../../../../Drivers/BSP/STM32H747I-EVAL;../../../../../../Drivers/BSP/Components/Common;../../../../../../Utilities/Log;../../../../../../Utilities/Fonts;../../../../../../Utilities/CPU;../../../../../../Utilities/BASIC_GUI</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -411,6 +411,26 @@
               <FileType>1</FileType>
               <FilePath>../../../../../../Drivers/BSP/Components/wm8994/wm8994.c</FilePath>
             </File>
+            <File>
+              <FileName>otm8009a_reg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\Drivers\BSP\Components\otm8009a\otm8009a_reg.c</FilePath>
+            </File>
+            <File>
+              <FileName>mfxstm32l152_reg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\Drivers\BSP\Components\mfxstm32l152\mfxstm32l152_reg.c</FilePath>
+            </File>
+            <File>
+              <FileName>ft6x06_reg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\Drivers\BSP\Components\ft6x06\ft6x06_reg.c</FilePath>
+            </File>
+            <File>
+              <FileName>wm8994_reg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\Drivers\BSP\Components\wm8994\wm8994_reg.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -419,12 +439,17 @@
             <File>
               <FileName>stm32h747i_eval.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../../Drivers/BSP/STM32H747I_EVAL/stm32h747i_eval.c</FilePath>
+              <FilePath>../../../../../../Drivers/BSP/STM32H747I-EVAL/stm32h747i_eval.c</FilePath>
             </File>
             <File>
               <FileName>stm32h747i_eval_io.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../../Drivers/BSP/STM32H747I_EVAL/stm32h747i_eval_io.c</FilePath>
+              <FilePath>../../../../../../Drivers/BSP/STM32H747I-EVAL/stm32h747i_eval_io.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32h747i_eval_bus.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\Drivers\BSP\STM32H747I-EVAL\stm32h747i_eval_bus.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -545,6 +570,11 @@
               <FileName>stm32h7xx_hal_uart_ex.c</FileName>
               <FileType>1</FileType>
               <FilePath>../../../../../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_uart_ex.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32h7xx_hal_exti.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_exti.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1003,7 +1033,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER, STM32H747xx,USE_STM32H747I_EVAL,CORE_CM4,USE_IOEXPANDER</Define>
               <Undefine></Undefine>
-              <IncludePath>../Common/Inc;../CM4/Inc;../../../../../../Drivers/CMSIS/Include;../../../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../../../../../../Drivers/STM32H7xx_HAL_Driver/Inc;../../../../../../Drivers/BSP/STM32H747I_EVAL;../../../../../../Drivers/BSP/Components/Common;../../../../../../Utilities/Log;../../../../../../Utilities/Fonts;../../../../../../Utilities/CPU</IncludePath>
+              <IncludePath>../Common/Inc;../CM4/Inc;../../../../../../Drivers/CMSIS/Include;../../../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../../../../../../Drivers/STM32H7xx_HAL_Driver/Inc;../../../../../../Drivers/BSP/STM32H747I-EVAL;../../../../../../Drivers/BSP/Components/Common;../../../../../../Utilities/Log;../../../../../../Utilities/Fonts;../../../../../../Utilities/CPU;../../../../../../Utilities/BASIC_GUI</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -1077,6 +1107,26 @@
               <FileType>1</FileType>
               <FilePath>../../../../../../Drivers/BSP/Components/wm8994/wm8994.c</FilePath>
             </File>
+            <File>
+              <FileName>otm8009a_reg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\Drivers\BSP\Components\otm8009a\otm8009a_reg.c</FilePath>
+            </File>
+            <File>
+              <FileName>mfxstm32l152_reg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\Drivers\BSP\Components\mfxstm32l152\mfxstm32l152_reg.c</FilePath>
+            </File>
+            <File>
+              <FileName>ft6x06_reg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\Drivers\BSP\Components\ft6x06\ft6x06_reg.c</FilePath>
+            </File>
+            <File>
+              <FileName>wm8994_reg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\Drivers\BSP\Components\wm8994\wm8994_reg.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1085,12 +1135,17 @@
             <File>
               <FileName>stm32h747i_eval.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../../Drivers/BSP/STM32H747I_EVAL/stm32h747i_eval.c</FilePath>
+              <FilePath>../../../../../../Drivers/BSP/STM32H747I-EVAL/stm32h747i_eval.c</FilePath>
             </File>
             <File>
               <FileName>stm32h747i_eval_io.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../../Drivers/BSP/STM32H747I_EVAL/stm32h747i_eval_io.c</FilePath>
+              <FilePath>../../../../../../Drivers/BSP/STM32H747I-EVAL/stm32h747i_eval_io.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32h747i_eval_bus.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\Drivers\BSP\STM32H747I-EVAL\stm32h747i_eval_bus.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1211,6 +1266,11 @@
               <FileName>stm32h7xx_hal_uart_ex.c</FileName>
               <FileType>1</FileType>
               <FilePath>../../../../../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_uart_ex.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32h7xx_hal_exti.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_exti.c</FilePath>
             </File>
           </Files>
         </Group>

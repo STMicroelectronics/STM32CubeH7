@@ -76,7 +76,7 @@ const Diskio_drvTypeDef  SD_Driver =
 };
 
 #if _FS_REENTRANT
-extern SD_HandleTypeDef uSdHandle;
+extern SD_HandleTypeDef hsd_sdmmc[];
 #endif
 
 /* Private functions ---------------------------------------------------------*/
@@ -97,12 +97,12 @@ static DSTATUS SD_CheckStatus(BYTE lun)
 
 #if _FS_REENTRANT
   /* See Ticket 52883 - [FatFS] : Inconsistent Disk Status check in Multi-threading context */
-  if(HAL_SD_GetError(&uSdHandle) == HAL_SD_ERROR_NONE)
+  if(HAL_SD_GetError(&hsd_sdmmc[0]) == HAL_SD_ERROR_NONE)
   {
     Stat &= ~STA_NOINIT;
   }
 #else /* _FS_REENTRANT == 0 */
-  if(BSP_SD_GetCardState() == SD_TRANSFER_OK)
+  if(BSP_SD_GetCardState(0) == SD_TRANSFER_OK)
   {
     Stat &= ~STA_NOINIT;
   }
@@ -121,7 +121,7 @@ DSTATUS SD_initialize(BYTE lun)
   Stat = STA_NOINIT;
 #if !defined(DISABLE_SD_INIT)
 
-  if(BSP_SD_Init() == MSD_OK)
+  if(BSP_SD_Init(0) == BSP_ERROR_NONE)
   {
     Stat = SD_CheckStatus(lun);
   }
@@ -153,16 +153,16 @@ DSTATUS SD_status(BYTE lun)
 DRESULT SD_read(BYTE lun, BYTE *buff, DWORD sector, UINT count)
 {
   DRESULT res = RES_OK;
-  uint8_t sd_error = MSD_OK;
+  uint8_t sd_error = BSP_ERROR_NONE;
   
   EnterCriticalSection();
-  sd_error = BSP_SD_ReadBlocks((uint32_t*)buff,
+  sd_error = BSP_SD_ReadBlocks(0,(uint32_t*)buff,
                                (uint32_t) (sector),
-                               count, SD_TIMEOUT);
-  if(sd_error == MSD_OK)
+                               count);
+  if(sd_error == BSP_ERROR_NONE)
   {
     /* wait until the read operation is finished */
-    while(BSP_SD_GetCardState()!= MSD_OK)
+    while(BSP_SD_GetCardState(0)!= BSP_ERROR_NONE)
     {
       __NOP();
     }
@@ -189,16 +189,16 @@ DRESULT SD_read(BYTE lun, BYTE *buff, DWORD sector, UINT count)
 DRESULT SD_write(BYTE lun, const BYTE *buff, DWORD sector, UINT count)
 {
   DRESULT res = RES_OK;
-  uint8_t sd_error = MSD_OK;
+  uint8_t sd_error = BSP_ERROR_NONE;
 
   EnterCriticalSection();
-  sd_error = BSP_SD_WriteBlocks((uint32_t*)buff,
+  sd_error = BSP_SD_WriteBlocks(0,(uint32_t*)buff,
                                 (uint32_t)(sector),
-                                count, SD_TIMEOUT);
-  if(sd_error == MSD_OK)
+                                count);
+  if(sd_error == BSP_ERROR_NONE)
   {
 	/* wait until the Write operation is finished */
-    while(BSP_SD_GetCardState() != MSD_OK)
+    while(BSP_SD_GetCardState(0) != BSP_ERROR_NONE)
     {
       __NOP();
     }    
@@ -238,21 +238,21 @@ DRESULT SD_ioctl(BYTE lun, BYTE cmd, void *buff)
   
   /* Get number of sectors on the disk (DWORD) */
   case GET_SECTOR_COUNT :
-    BSP_SD_GetCardInfo(&CardInfo);
+    BSP_SD_GetCardInfo(0,&CardInfo);
     *(DWORD*)buff = CardInfo.LogBlockNbr;
     res = RES_OK;
     break;
   
   /* Get R/W sector size (WORD) */
   case GET_SECTOR_SIZE :
-    BSP_SD_GetCardInfo(&CardInfo);
+    BSP_SD_GetCardInfo(0,&CardInfo);
     *(WORD*)buff = CardInfo.LogBlockSize;
     res = RES_OK;
     break;
   
   /* Get erase block size in unit of sector (DWORD) */
   case GET_BLOCK_SIZE :
-    BSP_SD_GetCardInfo(&CardInfo);
+    BSP_SD_GetCardInfo(0,&CardInfo);
     *(DWORD*)buff = CardInfo.LogBlockSize / SD_DEFAULT_BLOCK_SIZE;
 	res = RES_OK;
     break;

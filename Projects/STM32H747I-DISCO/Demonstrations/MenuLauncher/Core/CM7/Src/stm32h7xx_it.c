@@ -37,9 +37,6 @@
 /* Private variables ---------------------------------------------------------*/
 extern LTDC_HandleTypeDef hltdc;
 extern DSI_HandleTypeDef hdsi;
-#if defined(USE_SDCARD)
-extern SD_HandleTypeDef uSdHandle;
-#endif /* USE_SDCARD */
 #if defined(USE_USB_FS) || defined(USE_USB_HS)
 extern HCD_HandleTypeDef hhcd;
 #endif /* USE_USB_FS | USE_USB_HS */
@@ -134,7 +131,7 @@ void SysTick_Handler(void)
   */
 void EXTI15_10_IRQHandler(void)
 {
-  HAL_GPIO_EXTI_IRQHandler(WAKEUP_BUTTON_PIN);
+  HAL_GPIO_EXTI_IRQHandler(BUTTON_WAKEUP_PIN);
 }
 
 #if defined(USE_JOYSTICK)
@@ -214,7 +211,7 @@ void DSI_IRQHandler(void)
 */
 void SDMMC1_IRQHandler(void)
 {
-  HAL_SD_IRQHandler(&uSdHandle);
+  BSP_SD_IRQHandler(0);
 }
 #endif /* USE_SDCARD */
 

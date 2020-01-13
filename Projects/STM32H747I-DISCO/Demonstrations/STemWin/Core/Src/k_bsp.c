@@ -93,6 +93,7 @@ static const Demo_Header_t ExtThirdPartyHeader = {
 
 uint8_t detected = 0;
 uint8_t Touchdetected = 0;
+BSP_QSPI_Init_t init;
 static UART_HandleTypeDef UART_Handle;
 
 /* Private function prototypes -----------------------------------------------*/
@@ -171,21 +172,23 @@ uint8_t k_BspInit(void)
   printf( "CPU running at %luMHz, Peripherals at %luMHz/%luMHz\n", (HAL_RCCEx_GetD1SysClockFreq()/1000000U), (HAL_RCC_GetPCLK1Freq()/1000000U), (HAL_RCC_GetPCLK2Freq()/1000000U) );
 
   /* Initialize the SDRAM memory */
-  if ((RetVal = BSP_SDRAM_Init()) != SDRAM_OK)
+  if ((RetVal = BSP_SDRAM_Init(0)) != BSP_ERROR_NONE)
   {
     printf("Failed to initialize the SDRAM !! (Error %d)\n", RetVal);
     return 0;
   }
-
+  init.InterfaceMode=MT25TL01G_QPI_MODE;
+  init.TransferRate= MT25TL01G_DTR_TRANSFER ;
+  init.DualFlashMode= MT25TL01G_DUALFLASH_ENABLE;
   /* Initialize the NOR QuadSPI flash */
-  if ((RetVal = BSP_QSPI_Init()) != QSPI_OK)
+  if ((RetVal = BSP_QSPI_Init(0,&init)) != BSP_ERROR_NONE)
   {
     printf("Failed to initialize the QSPI !! (Error %d)\n", RetVal);
     return 0;
   }
   else
   {
-    if((RetVal = BSP_QSPI_EnableMemoryMappedMode()) != QSPI_OK)
+    if((RetVal = BSP_QSPI_EnableMemoryMappedMode(0)) != BSP_ERROR_NONE)
     {
       printf("Failed to configure the QSPI !! (Error %d)\n", RetVal);
       return 0;
@@ -194,23 +197,27 @@ uint8_t k_BspInit(void)
 
   /* Initialize the Touch screen */
   LCD_LL_Reset(); /* LCD controller need to be initialized */
-  TS_IO_Init();
+  TS_Init_t hTS;
+  hTS.Width = 800;
+  hTS.Height = 480;
+  hTS.Orientation = TS_SWAP_XY | TS_SWAP_Y;
+  hTS.Accuracy = 5;
   do
   {
-    RetVal = BSP_TS_Init(800, 480);
+    RetVal = BSP_TS_Init(0,&hTS);
     HAL_Delay(100);
     counter--;
   }
-  while (counter && (RetVal != TS_OK));
+  while (counter && (RetVal != BSP_ERROR_NONE));
 
-  if(RetVal != TS_OK)
+  if(RetVal != BSP_ERROR_NONE)
   {
     printf("Failed to initialize TS !! (Error %d)\n", RetVal);
     return 0;
   }
 
-  RetVal = BSP_TS_ITConfig();
-  if(RetVal != TS_OK)
+  RetVal =  BSP_TS_EnableIT(0);;
+  if(RetVal != BSP_ERROR_NONE)
   {
     printf("Failed to initialize TS (IT) !! (Error %d)\n", RetVal);
     return 0;
@@ -239,41 +246,41 @@ uint8_t k_BspInit(void)
 void k_TouchUpdate(void)
 {
   static GUI_PID_STATE TS_State = {0, 0, 0, 0};
-  __IO TS_StateTypeDef ts;
+  __IO TS_State_t ts;
   uint16_t xDiff, yDiff;
 
-  BSP_TS_GetState((TS_StateTypeDef *)&ts);
+  BSP_TS_GetState(0,(TS_State_t *)&ts);
 
-  ts.touchX[0] = TouchScreen_Get_Calibrated_X(ts.touchX[0]);
-  ts.touchY[0] = TouchScreen_Get_Calibrated_Y(ts.touchY[0]);
+  ts.TouchX = TouchScreen_Get_Calibrated_X(ts.TouchX);
+  ts.TouchY = TouchScreen_Get_Calibrated_Y(ts.TouchY);
 
-  if((ts.touchX[0] >= LCD_GetXSize()) ||(ts.touchY[0] >= LCD_GetYSize()) )
+  if((ts.TouchX >= LCD_GetXSize()) ||(ts.TouchY >= LCD_GetYSize()) )
   {
-    ts.touchX[0] = 0;
-    ts.touchY[0] = 0;
+    ts.TouchX = 0;
+    ts.TouchY = 0;
   }
 
-  xDiff = (TS_State.x > ts.touchX[0]) ? (TS_State.x - ts.touchX[0]) : (ts.touchX[0] - TS_State.x);
-  yDiff = (TS_State.y > ts.touchY[0]) ? (TS_State.y - ts.touchY[0]) : (ts.touchY[0] - TS_State.y);
+  xDiff = (TS_State.x > ts.TouchX) ? (TS_State.x - ts.TouchX) : (ts.TouchX - TS_State.x);
+  yDiff = (TS_State.y > ts.TouchY) ? (TS_State.y - ts.TouchY) : (ts.TouchY - TS_State.y);
 
-  if((TS_State.Pressed != ts.touchDetected ) ||
+  if((TS_State.Pressed != ts.TouchDetected ) ||
      (xDiff > 8) || (yDiff > 8))
   {
-    TS_State.Pressed = ts.touchDetected;
+    TS_State.Pressed = ts.TouchDetected;
     TS_State.Layer = SelLayer;
-    if(ts.touchDetected)
+    if(ts.TouchDetected)
     {
       k_MenuResetAutoDemo();
 
-      TS_State.x = ts.touchX[0];
-      TS_State.y = ts.touchY[0];
-      if(ts.touchY[0] < 240)
+      TS_State.x = ts.TouchX;
+      TS_State.y = ts.TouchY;
+      if(ts.TouchY < 240)
       {
-        TS_State.y = (ts.touchY[0] * 100) / 105; /* -5% */
+        TS_State.y = (ts.TouchY * 100) / 105; /* -5% */
       }
       else
       {
-        TS_State.y = (ts.touchY[0] * 105) / 100; /* +5% */
+        TS_State.y = (ts.TouchY * 105) / 100; /* +5% */
       }
       GUI_TOUCH_StoreStateEx(&TS_State);
     }

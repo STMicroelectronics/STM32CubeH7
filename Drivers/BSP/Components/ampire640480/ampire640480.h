@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    ampire640480.h
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    18-February-2014
   * @brief   This file contains all the constants parameters for the ampire640480
   *          LCD component.
   ******************************************************************************

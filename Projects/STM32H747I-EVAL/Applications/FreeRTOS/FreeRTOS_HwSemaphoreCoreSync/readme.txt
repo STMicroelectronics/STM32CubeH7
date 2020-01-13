@@ -114,7 +114,7 @@ on STM32Cube with RTOS".
 
   - This example runs on STM32H747xx devices.
     
-  - This application has been tested with STM32H747I-EVAL rev.E board with SMPS (SD Convertor) power supply config and can be
+  - This application has been tested with STM32H747I-EVAL  board with SMPS (SD Convertor) power supply config and can be
     easily tailored to any other supported device and development board.
 
 @par How to use it ? 

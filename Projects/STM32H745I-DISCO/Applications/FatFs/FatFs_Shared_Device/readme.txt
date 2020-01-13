@@ -82,7 +82,7 @@ the CM4 and CM7 project files.
 
 STM32 Disco board's LEDs can be used to monitor the application status:
   - LED1 is toggling when the CM4 application run successfully.
-  - LED3 is toggling when the CM7 finishes running the application
+  - LED2 is toggling when the CM7 finishes running the application
     successfully.
   - ON success the content of the created files CM7_FILE and CM4_FILE is
     printed on the HyperTerminal.

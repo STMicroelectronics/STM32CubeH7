@@ -137,7 +137,7 @@ int main(void)
   /***********************************************************/
   
   /* Init the STemWin GUI Library */
-  BSP_SDRAM_Init(); /* Initializes the SDRAM device */
+  BSP_SDRAM_Init(0); /* Initializes the SDRAM device */
   __HAL_RCC_CRC_CLK_ENABLE(); /* Enable the CRC Module */
   
   GUI_Init();

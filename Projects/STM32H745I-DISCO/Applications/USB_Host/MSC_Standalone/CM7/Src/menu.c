@@ -47,7 +47,7 @@ uint8_t *MSC_main_menu[] = {
 */
 void Menu_Init(void)
 {
-  BSP_LCD_SetTextColor(LCD_COLOR_GREEN);
+  GUI_SetTextColor(GUI_COLOR_GREEN);
   USBH_UsrLog("Connect your MSC Device");
   msc_demo.state = MSC_DEMO_WAIT;
 }
@@ -69,7 +69,7 @@ void MSC_MenuProcess(void)
     /* Read and Write File Here */
     if(Appli_state == APPLICATION_READY)
     {
-      LCD_DbgLog("\n\n*** Files operations ***\n");
+      LCD_DbgTrace("\n\n*** Files operations ***\n");
       msc_demo.state = MSC_DEMO_EXPLORER;
       if(MSC_File_Operations() != 0)
       {
@@ -83,7 +83,7 @@ void MSC_MenuProcess(void)
     /* Display disk content */
     if(Appli_state == APPLICATION_READY)
     {
-      LCD_DbgLog("\n\n*** Explore Disk ***\n");
+      LCD_DbgTrace("\n\n*** Explore Disk ***\n");
       Explore_Disk("0:/", 1);
       msc_demo.state = MSC_DEMO_IDLE;
     }

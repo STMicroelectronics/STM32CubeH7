@@ -66,7 +66,7 @@ DSTATUS SRAMDISK_initialize(BYTE lun)
   Stat = STA_NOINIT;
   
   /* Configure the SRAM device */
-  if(BSP_SRAM_Init() == SRAM_OK)
+  if(BSP_SRAM_Init(0) == BSP_ERROR_NONE)
   {
      Stat &= ~STA_NOINIT;
   }

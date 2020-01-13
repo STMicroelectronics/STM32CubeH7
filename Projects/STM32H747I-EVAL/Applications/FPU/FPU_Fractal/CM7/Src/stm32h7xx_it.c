@@ -34,7 +34,7 @@
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 /* Private function prototypes -----------------------------------------------*/
-extern DSI_HandleTypeDef hdsi_eval;
+extern DSI_HandleTypeDef hlcd_dsi;
 /* Private functions ---------------------------------------------------------*/
 
 /******************************************************************************/
@@ -154,7 +154,7 @@ void SysTick_Handler(void)
   */
 void EXTI9_5_IRQHandler(void)
 {
-  HAL_GPIO_EXTI_IRQHandler(MFX_IRQOUT_PIN); 
+  BSP_TS_IRQHandler(0);
 }
 
 /**
@@ -164,7 +164,7 @@ void EXTI9_5_IRQHandler(void)
   */
 void EXTI15_10_IRQHandler(void)
 {
-  HAL_GPIO_EXTI_IRQHandler(TAMPER_BUTTON_PIN);
+  BSP_PB_IRQHandler(BUTTON_TAMPER);
 }
 
 /**
@@ -174,7 +174,7 @@ void EXTI15_10_IRQHandler(void)
   */
 void DSI_IRQHandler(void)
 {
-  HAL_DSI_IRQHandler(&hdsi_eval);
+  HAL_DSI_IRQHandler(&hlcd_dsi);
 }
 
 /**

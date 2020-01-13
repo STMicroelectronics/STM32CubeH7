@@ -131,7 +131,7 @@ The SystemClock_Config() function is used to set the Flash latency and  to confi
 
   - This example runs on STM32H747xx devices.
     
-  - This application has been tested with STM32H747I_DISCO rev.D board with SMPS (SD Convertor) power supply config and can be
+  - This application has been tested with STM32H747I_DISCO  board with SMPS (SD Convertor) power supply config and can be
     easily tailored to any other supported device and development board.
 
 @par How to use it ? 

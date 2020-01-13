@@ -32,7 +32,7 @@
 
 #define REC_WAVE_NAME "Wave.wav"
 
-#define REC_SAMPLE_LENGTH   (DEFAULT_TIME_REC * DEFAULT_AUDIO_IN_FREQ * DEFAULT_AUDIO_IN_CHANNEL_NBR * 2)
+#define REC_SAMPLE_LENGTH   (DEFAULT_TIME_REC * AUDIO_FREQUENCY_16K *2 * 2)/*DEFAULT_AUDIO_IN_CHANNEL_NBR*/
 
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */

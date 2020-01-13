@@ -34,6 +34,7 @@
 /* Private variables --------------------------------------------------------- */
 USBD_HandleTypeDef USBD_Device;
 extern PCD_HandleTypeDef hpcd;
+BSP_IO_Init_t init;
 
 /* Private function prototypes ----------------------------------------------- */
 static void CPU_CACHE_Enable(void);
@@ -71,7 +72,7 @@ int main(void)
   BSP_LED_Init(LED_BLUE);
 
   /* Initialize IO expander */
-  BSP_IO_Init();
+  BSP_IO_Init(0, &init);
 
   /* Init Device Library */
   USBD_Init(&USBD_Device, &MSC_Desc, 0);

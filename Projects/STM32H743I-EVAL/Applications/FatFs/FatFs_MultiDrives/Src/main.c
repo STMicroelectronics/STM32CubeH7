@@ -88,8 +88,6 @@ int main(void)
   /* Configure the system clock to 400 MHz */
   SystemClock_Config();
   
-  /* Initialize the IO */
-  BSP_IO_Init();
 
   /* Enable the USB voltage level detector */
   HAL_PWREx_EnableUSBVoltageDetector();
@@ -149,7 +147,7 @@ static void FS_AppThread(void const *argument)
   /* Start Host Process */
   USBH_Start(&hUSB_Host);
 
-  if(BSP_SD_IsDetected())
+  if(BSP_SD_IsDetected(0))
   {
     osMessagePut ( ConnectionEvent, CARD_CONNECTED, osWaitForever);
   }
@@ -163,7 +161,7 @@ static void FS_AppThread(void const *argument)
       switch(event.value.v)
       {
       case CARD_STATUS_CHANGED:
-        if (BSP_SD_IsDetected())
+        if (BSP_SD_IsDetected(0))
         {
           osMessagePut ( ConnectionEvent, CARD_CONNECTED, osWaitForever);
         }
@@ -197,7 +195,7 @@ static void FS_AppThread(void const *argument)
       case CARD_DISCONNECTED:
         if(isInitialized == 1)
         {
-          BSP_SD_DeInit();
+          BSP_SD_DeInit(0);
           isInitialized = 0;
           f_mount(NULL, (TCHAR const*)"", 0);
         }
@@ -536,10 +534,10 @@ static void SD_Initialize(void)
 {
   if (isInitialized == 0)
   {
-    BSP_SD_Init();
-    BSP_SD_ITConfig();
+    BSP_SD_Init(0);
+    BSP_SD_DetectITConfig(0);
     
-    if(BSP_SD_IsDetected())
+    if(BSP_SD_IsDetected(0))
     {
       isInitialized = 1;
     }

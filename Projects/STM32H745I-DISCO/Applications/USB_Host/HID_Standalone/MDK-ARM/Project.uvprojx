@@ -16,8 +16,8 @@
         <TargetCommonOption>
           <Device>STM32H745XIHx:CM7</Device>
           <Vendor>STMicroelectronics</Vendor>
-          <PackID>Keil.STM32H7xx_DFP.2.2.5</PackID>
-          <PackURL>http://www.ST.com/</PackURL>
+          <PackID>Keil.STM32H7xx_DFP.2.2.6</PackID>
+          <PackURL>http://www.keil.com/pack</PackURL>
           <Cpu>IRAM(0x20000000,0x00020000) IRAM2(0x24000000,0x00080000) IROM(0x08000000,0x00200000) CPUTYPE("Cortex-M7") FPU3(DFPU) CLOCK(12000000) ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile></StartupFile>
@@ -335,9 +335,9 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define>USE_HAL_DRIVER,STM32H747xx,USE_STM32H747I_EVAL,USE_IOEXPANDER,CORE_CM7,CH7,USE_USB_FS</Define>
+              <Define>USE_HAL_DRIVER,STM32H747xx,USE_STM32H747I_DISCO,CORE_CM7,CH7,USE_USB_FS</Define>
               <Undefine></Undefine>
-              <IncludePath>../CM7/Inc;../../../../../../Drivers/CMSIS/Include;../../../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../../../../../../Drivers/STM32H7xx_HAL_Driver/Inc;../../../../../../Drivers/BSP/STM32H745I-Discovery;../../../../../../Drivers/BSP/Components/Common;../../../../../../Drivers/BSP/Components;../../../../../../Middlewares/ST/STM32_USB_Host_Library/Core/Inc;../../../../../../Middlewares/ST/STM32_USB_Host_Library/Class/HID/Inc;../../../../../../Utilities/Fonts;../../../../../../Utilities/Log</IncludePath>
+              <IncludePath>../CM7/Inc;../../../../../../Drivers/CMSIS/Include;../../../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../../../../../../Drivers/STM32H7xx_HAL_Driver/Inc;../../../../../../Drivers/BSP/STM32H745I-DISCO;../../../../../../Drivers/BSP/Components/Common;../../../../../../Drivers/BSP/Components;../../../../../../Middlewares/ST/STM32_USB_Host_Library/Core/Inc;../../../../../../Middlewares/ST/STM32_USB_Host_Library/Class/HID/Inc;../../../../../../Utilities/Fonts;../../../../../../Utilities/Basic_GUI;../../../../../../Utilities/Lcd_Trace</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -528,17 +528,42 @@
             <File>
               <FileName>stm32h745i_discovery.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\..\Drivers\BSP\STM32H745I-Discovery\stm32h745i_discovery.c</FilePath>
+              <FilePath>..\..\..\..\..\..\Drivers\BSP\STM32H745I-DISCO\stm32h745i_discovery.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32h745i_discovery_bus.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\Drivers\BSP\STM32H745I-DISCO\stm32h745i_discovery_bus.c</FilePath>
             </File>
             <File>
               <FileName>stm32h745i_discovery_lcd.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\..\Drivers\BSP\STM32H745I-Discovery\stm32h745i_discovery_lcd.c</FilePath>
+              <FilePath>..\..\..\..\..\..\Drivers\BSP\STM32H745I-DISCO\stm32h745i_discovery_lcd.c</FilePath>
             </File>
             <File>
               <FileName>stm32h745i_discovery_sdram.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\..\Drivers\BSP\STM32H745I-Discovery\stm32h745i_discovery_sdram.c</FilePath>
+              <FilePath>..\..\..\..\..\..\Drivers\BSP\STM32H745I-DISCO\stm32h745i_discovery_sdram.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Drivers/BSP/Components</GroupName>
+          <Files>
+            <File>
+              <FileName>ft5336.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\Drivers\BSP\Components\ft5336\ft5336.c</FilePath>
+            </File>
+            <File>
+              <FileName>ft5336_reg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\Drivers\BSP\Components\ft5336\ft5336_reg.c</FilePath>
+            </File>
+            <File>
+              <FileName>mt48lc4m32b2.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\Drivers\BSP\Components\mt48lc4m32b2\mt48lc4m32b2.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -695,6 +720,16 @@
               <FileType>1</FileType>
               <FilePath>..\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_ll_fmc.c</FilePath>
             </File>
+            <File>
+              <FileName>stm32h7xx_hal_exti.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_exti.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32h7xx_hal_i2c_ex.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_i2c_ex.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -751,9 +786,14 @@
           <GroupName>Utilities</GroupName>
           <Files>
             <File>
-              <FileName>lcd_log.c</FileName>
+              <FileName>basic_gui.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\..\Utilities\Log\lcd_log.c</FilePath>
+              <FilePath>..\..\..\..\..\..\Utilities\Basic_GUI\basic_gui.c</FilePath>
+            </File>
+            <File>
+              <FileName>lcd_trace.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\Utilities\Lcd_Trace\lcd_trace.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -772,8 +812,8 @@
         <TargetCommonOption>
           <Device>STM32H745XIHx:CM4</Device>
           <Vendor>STMicroelectronics</Vendor>
-          <PackID>Keil.STM32H7xx_DFP.2.2.5</PackID>
-          <PackURL>http://www.ST.com/</PackURL>
+          <PackID>Keil.STM32H7xx_DFP.2.2.6</PackID>
+          <PackURL>http://www.keil.com/pack</PackURL>
           <Cpu>IRAM(0x20000000,0x00020000) IRAM2(0x24000000,0x00080000) IROM(0x08000000,0x00200000) CPUTYPE("Cortex-M4") FPU2 CLOCK(12000000) ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile></StartupFile>
@@ -1091,7 +1131,7 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define>USE_HAL_DRIVER,STM32H747xx,USE_STM32H747I_EVAL,USE_IOEXPANDER,CORE_CM4,CH7</Define>
+              <Define>USE_HAL_DRIVER,STM32H747xx,USE_STM32H745I_DISCO,CORE_CM4,CH7</Define>
               <Undefine></Undefine>
               <IncludePath>../CM4/Inc;../../../../../../Drivers/CMSIS/Include;../../../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../../../../../../Drivers/STM32H7xx_HAL_Driver/Inc</IncludePath>
             </VariousControls>
@@ -1353,17 +1393,111 @@
             <File>
               <FileName>stm32h745i_discovery.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\..\Drivers\BSP\STM32H745I-Discovery\stm32h745i_discovery.c</FilePath>
+              <FilePath>..\..\..\..\..\..\Drivers\BSP\STM32H745I-DISCO\stm32h745i_discovery.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32h745i_discovery_bus.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\Drivers\BSP\STM32H745I-DISCO\stm32h745i_discovery_bus.c</FilePath>
             </File>
             <File>
               <FileName>stm32h745i_discovery_lcd.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\..\Drivers\BSP\STM32H745I-Discovery\stm32h745i_discovery_lcd.c</FilePath>
+              <FilePath>..\..\..\..\..\..\Drivers\BSP\STM32H745I-DISCO\stm32h745i_discovery_lcd.c</FilePath>
             </File>
             <File>
               <FileName>stm32h745i_discovery_sdram.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\..\Drivers\BSP\STM32H745I-Discovery\stm32h745i_discovery_sdram.c</FilePath>
+              <FilePath>..\..\..\..\..\..\Drivers\BSP\STM32H745I-DISCO\stm32h745i_discovery_sdram.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Drivers/BSP/Components</GroupName>
+          <GroupOption>
+            <CommonProperty>
+              <UseCPPCompiler>0</UseCPPCompiler>
+              <RVCTCodeConst>0</RVCTCodeConst>
+              <RVCTZI>0</RVCTZI>
+              <RVCTOtherData>0</RVCTOtherData>
+              <ModuleSelection>0</ModuleSelection>
+              <IncludeInBuild>0</IncludeInBuild>
+              <AlwaysBuild>2</AlwaysBuild>
+              <GenerateAssemblyFile>2</GenerateAssemblyFile>
+              <AssembleAssemblyFile>2</AssembleAssemblyFile>
+              <PublicsOnly>2</PublicsOnly>
+              <StopOnExitCode>11</StopOnExitCode>
+              <CustomArgument></CustomArgument>
+              <IncludeLibraryModules></IncludeLibraryModules>
+              <ComprImg>1</ComprImg>
+            </CommonProperty>
+            <GroupArmAds>
+              <Cads>
+                <interw>2</interw>
+                <Optim>0</Optim>
+                <oTime>2</oTime>
+                <SplitLS>2</SplitLS>
+                <OneElfS>2</OneElfS>
+                <Strict>2</Strict>
+                <EnumInt>2</EnumInt>
+                <PlainCh>2</PlainCh>
+                <Ropi>2</Ropi>
+                <Rwpi>2</Rwpi>
+                <wLevel>0</wLevel>
+                <uThumb>2</uThumb>
+                <uSurpInc>2</uSurpInc>
+                <uC99>2</uC99>
+                <uGnu>2</uGnu>
+                <useXO>2</useXO>
+                <v6Lang>0</v6Lang>
+                <v6LangP>0</v6LangP>
+                <vShortEn>2</vShortEn>
+                <vShortWch>2</vShortWch>
+                <v6Lto>2</v6Lto>
+                <v6WtE>2</v6WtE>
+                <v6Rtti>2</v6Rtti>
+                <VariousControls>
+                  <MiscControls></MiscControls>
+                  <Define></Define>
+                  <Undefine></Undefine>
+                  <IncludePath></IncludePath>
+                </VariousControls>
+              </Cads>
+              <Aads>
+                <interw>2</interw>
+                <Ropi>2</Ropi>
+                <Rwpi>2</Rwpi>
+                <thumb>2</thumb>
+                <SplitLS>2</SplitLS>
+                <SwStkChk>2</SwStkChk>
+                <NoWarn>2</NoWarn>
+                <uSurpInc>2</uSurpInc>
+                <useXO>2</useXO>
+                <uClangAs>2</uClangAs>
+                <VariousControls>
+                  <MiscControls></MiscControls>
+                  <Define></Define>
+                  <Undefine></Undefine>
+                  <IncludePath></IncludePath>
+                </VariousControls>
+              </Aads>
+            </GroupArmAds>
+          </GroupOption>
+          <Files>
+            <File>
+              <FileName>ft5336.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\Drivers\BSP\Components\ft5336\ft5336.c</FilePath>
+            </File>
+            <File>
+              <FileName>ft5336_reg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\Drivers\BSP\Components\ft5336\ft5336_reg.c</FilePath>
+            </File>
+            <File>
+              <FileName>mt48lc4m32b2.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\Drivers\BSP\Components\mt48lc4m32b2\mt48lc4m32b2.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1519,6 +1653,16 @@
               <FileName>stm32h7xx_ll_fmc.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_ll_fmc.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32h7xx_hal_exti.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_exti.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32h7xx_hal_i2c_ex.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_i2c_ex.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1783,9 +1927,14 @@
           </GroupOption>
           <Files>
             <File>
-              <FileName>lcd_log.c</FileName>
+              <FileName>basic_gui.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\..\Utilities\Log\lcd_log.c</FilePath>
+              <FilePath>..\..\..\..\..\..\Utilities\Basic_GUI\basic_gui.c</FilePath>
+            </File>
+            <File>
+              <FileName>lcd_trace.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\Utilities\Lcd_Trace\lcd_trace.c</FilePath>
             </File>
           </Files>
         </Group>

@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    Audio/Audio_playback_and_record/Src/explorer.c 
+  * @file    Audio/Audio_playback_and_record/Src/explorer.c
   * @author  MCD Application Team
   * @brief   This file provides USB Key drive configuration
   ******************************************************************************
@@ -22,7 +22,7 @@
 
 /* Private typedef -----------------------------------------------------------*/
 FATFS USBH_FatFs;
-char USBKey_Path[4] = "0:/"; 
+char USBKey_Path[4] = "0:/";
 FILELIST_FileTypeDef FileList;
 uint16_t NumObs = 0;
 
@@ -40,22 +40,22 @@ uint16_t NumObs = 0;
 uint8_t AUDIO_StorageInit(void)
 {
   /* Link the USB Mass Storage disk I/O driver */
-  if(FATFS_LinkDriver(&USBH_Driver, USBKey_Path) != 0) 
+  if(FATFS_LinkDriver(&USBH_Driver, USBKey_Path) != 0)
   {
     /* FatFs Initialization Error */
     return 1;
   }
-  
+
   /* Link the USB Key disk I/O driver */
   if((f_mount(&USBH_FatFs, (TCHAR const*)USBKey_Path, 0) != FR_OK))
   {
     /* FatFs Initialization Error */
-    LCD_ErrLog("Cannot Initialize FatFs! \n");
+    LCD_ErrTrace("Cannot Initialize FatFs! \n");
     return 1;
   }
   else
   {
-    LCD_DbgLog ("INFO : FatFs Initialized! \n");
+    LCD_DbgTrace ("INFO : FatFs Initialized! \n");
     return 0;
   }
 }
@@ -71,13 +71,13 @@ FRESULT AUDIO_StorageParse (void)
   DIR dir;              /* Directory search object */
   FILINFO fno;          /* File information */
   FileList.ptr = 0;
-  
+
   /* Start to search for wave files */
-  res = f_findfirst(&dir, &fno, USBKey_Path, "*.wav");  
-  
+  res = f_findfirst(&dir, &fno, USBKey_Path, "*.wav");
+
   /* Repeat while an item is found */
-  while (fno.fname[0]) 
-  { 
+  while (fno.fname[0])
+  {
     if(res == FR_OK)
     {
       if(FileList.ptr < FILEMGR_LIST_DEPDTH)
@@ -98,12 +98,12 @@ FRESULT AUDIO_StorageParse (void)
     else
     {
       break;
-    }    
+    }
   }
-  
+
   NumObs = FileList.ptr;
   f_closedir(&dir);
-  
+
   return res;
 }
 
@@ -117,27 +117,27 @@ uint8_t AUDIO_ShowWavFiles(void)
   uint8_t i = 0;
   uint8_t line_idx = 0;
   uint8_t ret = FR_OK;
-  
+
   ret = AUDIO_StorageParse();
   if(ret ==  FR_OK)
   {
     if(FileList.ptr > 0)
     {
-      BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
-      LCD_UsrLog("audio file(s) [ROOT]:\n\n");
-      
+      GUI_SetTextColor(GUI_COLOR_WHITE);
+      LCD_UsrTrace("audio file(s) [ROOT]:\n\n");
+
       for(i = 0; i < FileList.ptr; i++)
       {
         line_idx++;
-        LCD_DbgLog("   |__");
-        LCD_DbgLog((char *)FileList.file[i].name);
-        LCD_DbgLog("\n");
+        LCD_DbgTrace("   |__");
+        LCD_DbgTrace((char *)FileList.file[i].name);
+        LCD_DbgTrace("\n");
       }
-      BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
-      LCD_UsrLog("\nEnd of files list.\n");
-    }    
+      GUI_SetTextColor(GUI_COLOR_WHITE);
+      LCD_UsrTrace("\nEnd of files list.\n");
+    }
   }
-  
+
   return ret;
 }
 

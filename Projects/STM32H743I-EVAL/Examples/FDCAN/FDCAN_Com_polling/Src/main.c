@@ -196,7 +196,7 @@ static uint32_t BufferCmp8b(uint8_t* pBuffer1, uint8_t* pBuffer2, uint16_t Buffe
   */
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
-  if (GPIO_Pin == TAMPER_BUTTON_PIN)
+  if (GPIO_Pin == BUTTON_TAMPER_PIN)
   {
     BSP_LED_Off(LED1);
     

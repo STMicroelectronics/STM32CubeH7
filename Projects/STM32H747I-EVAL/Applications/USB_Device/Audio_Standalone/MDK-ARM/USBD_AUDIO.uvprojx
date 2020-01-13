@@ -16,8 +16,8 @@
         <TargetCommonOption>
           <Device>STM32H747XIHx:CM7</Device>
           <Vendor>STMicroelectronics</Vendor>
-          <PackID>Keil.STM32H7xx_DFP.2.2.5</PackID>
-          <PackURL>http://www.ST.com/</PackURL>
+          <PackID>Keil.STM32H7xx_DFP.2.2.6</PackID>
+          <PackURL>http://www.keil.com/pack</PackURL>
           <Cpu>IROM(0x08000000-0x80FFFFF) IRAM(0x20000000-0x2001FFFF) IRAM2(0x00000000-0xFFFF) CLOCK(12000000) FPU3(DFPU) CPUTYPE("Cortex-M7") ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile></StartupFile>
@@ -54,7 +54,7 @@
           <CreateLib>0</CreateLib>
           <CreateHexFile>1</CreateHexFile>
           <DebugInformation>1</DebugInformation>
-          <BrowseInformation>0</BrowseInformation>
+          <BrowseInformation>1</BrowseInformation>
           <ListingPath></ListingPath>
           <HexFormatSelection>1</HexFormatSelection>
           <Merge32K>0</Merge32K>
@@ -335,9 +335,9 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define>STM32H747xx,USE_HAL_DRIVER,USE_USB_FS,USE_IOEXPANDER,CORE_CM7</Define>
+              <Define>STM32H747xx,USE_HAL_DRIVER,USE_USB_FS,CORE_CM7</Define>
               <Undefine></Undefine>
-              <IncludePath>../CM7/Inc;../../../../../../Drivers/CMSIS/Include;../../../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../../../../../../Drivers/STM32H7xx_HAL_Driver/Inc;../../../../../../Middlewares/ST/STM32_USB_Device_Library/Core/Inc;../../../../../../Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Inc;../../../../../../Drivers/BSP/STM32H747I_EVAL</IncludePath>
+              <IncludePath>../CM7/Inc;../../../../../../Drivers/CMSIS/Include;../../../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../../../../../../Drivers/STM32H7xx_HAL_Driver/Inc;../../../../../../Middlewares/ST/STM32_USB_Device_Library/Core/Inc;../../../../../../Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Inc;../../../../../../Drivers/BSP/STM32H747I-EVAL</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -525,6 +525,26 @@
               <FileType>1</FileType>
               <FilePath>../../../../../../Drivers/BSP/Components/wm8994/wm8994.c</FilePath>
             </File>
+            <File>
+              <FileName>mfxstm32l152_reg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\Drivers\BSP\Components\mfxstm32l152\mfxstm32l152_reg.c</FilePath>
+            </File>
+            <File>
+              <FileName>wm8994_reg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\Drivers\BSP\Components\wm8994\wm8994_reg.c</FilePath>
+            </File>
+            <File>
+              <FileName>adv7533.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\Drivers\BSP\Components\adv7533\adv7533.c</FilePath>
+            </File>
+            <File>
+              <FileName>adv7533_reg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\Drivers\BSP\Components\adv7533\adv7533_reg.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -533,17 +553,22 @@
             <File>
               <FileName>stm32h747i_eval.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../../Drivers/BSP/STM32H747I_EVAL/stm32h747i_eval.c</FilePath>
+              <FilePath>..\..\..\..\..\..\Drivers\BSP\STM32H747I-EVAL\stm32h747i_eval.c</FilePath>
             </File>
             <File>
               <FileName>stm32h747i_eval_audio.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../../Drivers/BSP/STM32H747I_EVAL/stm32h747i_eval_audio.c</FilePath>
+              <FilePath>..\..\..\..\..\..\Drivers\BSP\STM32H747I-EVAL\stm32h747i_eval_audio.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32h747i_eval_bus.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\Drivers\BSP\STM32H747I-EVAL\stm32h747i_eval_bus.c</FilePath>
             </File>
             <File>
               <FileName>stm32h747i_eval_io.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../../Drivers/BSP/STM32H747I_EVAL/stm32h747i_eval_io.c</FilePath>
+              <FilePath>..\..\..\..\..\..\Drivers\BSP\STM32H747I-EVAL\stm32h747i_eval_io.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -680,6 +705,16 @@
               <FileType>1</FileType>
               <FilePath>../../../../../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_usb.c</FilePath>
             </File>
+            <File>
+              <FileName>stm32h7xx_hal_exti.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_exti.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32h7xx_hal_i2c_ex.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_i2c_ex.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -737,8 +772,8 @@
         <TargetCommonOption>
           <Device>STM32H747XIHx:CM4</Device>
           <Vendor>STMicroelectronics</Vendor>
-          <PackID>Keil.STM32H7xx_DFP.2.2.5</PackID>
-          <PackURL>http://www.ST.com/</PackURL>
+          <PackID>Keil.STM32H7xx_DFP.2.2.6</PackID>
+          <PackURL>http://www.keil.com/pack</PackURL>
           <Cpu>IROM(0x08100000-0x81FFFFF) IRAM(0x10000000-0x10047FFF) CLOCK(12000000) FPU3(SFPU) CPUTYPE("Cortex-M4")</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile></StartupFile>
@@ -775,7 +810,7 @@
           <CreateLib>0</CreateLib>
           <CreateHexFile>0</CreateHexFile>
           <DebugInformation>1</DebugInformation>
-          <BrowseInformation>0</BrowseInformation>
+          <BrowseInformation>1</BrowseInformation>
           <ListingPath></ListingPath>
           <HexFormatSelection>1</HexFormatSelection>
           <Merge32K>0</Merge32K>
@@ -1058,7 +1093,7 @@
               <MiscControls></MiscControls>
               <Define>STM32H747xx,USE_HAL_DRIVER,CORE_CM4</Define>
               <Undefine></Undefine>
-              <IncludePath>../CM4/Inc;../../../../../../Drivers/CMSIS/Include;../../../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../../../../../../Drivers/STM32H7xx_HAL_Driver/Inc;../../../../../../Middlewares/ST/STM32_USB_Device_Library/Core/Inc;../../../../../../Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Inc;../../../../../../Drivers/BSP/STM32H747I_EVAL</IncludePath>
+              <IncludePath>../CM4/Inc;../../../../../../Drivers/CMSIS/Include;../../../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../../../../../../Drivers/STM32H7xx_HAL_Driver/Inc;../../../../../../Middlewares/ST/STM32_USB_Device_Library/Core/Inc;../../../../../../Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Inc;../../../../../../Drivers/BSP/STM32H747I-EVAL</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -1315,6 +1350,26 @@
               <FileType>1</FileType>
               <FilePath>../../../../../../Drivers/BSP/Components/wm8994/wm8994.c</FilePath>
             </File>
+            <File>
+              <FileName>mfxstm32l152_reg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\Drivers\BSP\Components\mfxstm32l152\mfxstm32l152_reg.c</FilePath>
+            </File>
+            <File>
+              <FileName>wm8994_reg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\Drivers\BSP\Components\wm8994\wm8994_reg.c</FilePath>
+            </File>
+            <File>
+              <FileName>adv7533.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\Drivers\BSP\Components\adv7533\adv7533.c</FilePath>
+            </File>
+            <File>
+              <FileName>adv7533_reg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\Drivers\BSP\Components\adv7533\adv7533_reg.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1392,17 +1447,22 @@
             <File>
               <FileName>stm32h747i_eval.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../../Drivers/BSP/STM32H747I_EVAL/stm32h747i_eval.c</FilePath>
+              <FilePath>..\..\..\..\..\..\Drivers\BSP\STM32H747I-EVAL\stm32h747i_eval.c</FilePath>
             </File>
             <File>
               <FileName>stm32h747i_eval_audio.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../../Drivers/BSP/STM32H747I_EVAL/stm32h747i_eval_audio.c</FilePath>
+              <FilePath>..\..\..\..\..\..\Drivers\BSP\STM32H747I-EVAL\stm32h747i_eval_audio.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32h747i_eval_bus.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\Drivers\BSP\STM32H747I-EVAL\stm32h747i_eval_bus.c</FilePath>
             </File>
             <File>
               <FileName>stm32h747i_eval_io.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../../Drivers/BSP/STM32H747I_EVAL/stm32h747i_eval_io.c</FilePath>
+              <FilePath>..\..\..\..\..\..\Drivers\BSP\STM32H747I-EVAL\stm32h747i_eval_io.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1538,6 +1598,16 @@
               <FileName>stm32h7xx_ll_usb.c</FileName>
               <FileType>1</FileType>
               <FilePath>../../../../../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_usb.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32h7xx_hal_exti.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_exti.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32h7xx_hal_i2c_ex.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_i2c_ex.c</FilePath>
             </File>
           </Files>
         </Group>

@@ -127,8 +127,9 @@ int main(void)
   
   if(TFT_ShieldDetect() == SHIELD_DETECTED)
   {
-    /* Initialize the LCD */
-    BSP_LCD_Init();
+   /* Initialize the LCD */
+    ADAFRUIT_802_LCD_Init(0, LCD_ORIENTATION_PORTRAIT);    
+    GUI_SetFuncDriver(&LCD_Driver);
 
     /* Configure SD card */
     SDCard_Config();
@@ -243,51 +244,54 @@ static void SystemClock_Config(void)
   */
 static void TFT_DisplayMenu(void)
 {
-  JOYState_TypeDef tmp;
-
+  uint32_t x_size;
+  uint32_t y_size;
+  uint32_t tmp = JOY_NONE;
+  ADAFRUIT_802_LCD_GetXSize(0, &x_size);
+  ADAFRUIT_802_LCD_GetYSize(0, &y_size);
   /* Set Menu font */
-  BSP_LCD_SetFont(&Font12);
+  GUI_SetFont(&Font12);
+  GUI_SetBackColor(GUI_COLOR_WHITE);
+  /* Set Text color */
+  GUI_SetTextColor(GUI_COLOR_RED);
+  /* Display message */
+  GUI_DisplayStringAt(0,10, (uint8_t*)"   NUCLEO-H745ZI-Q  ", LEFT_MODE);
+  GUI_DisplayStringAt(0,25, (uint8_t*)"       DEMO         ", LEFT_MODE);
 
   /* Set Text color */
-  BSP_LCD_SetTextColor(LCD_COLOR_RED);
+  GUI_SetTextColor(GUI_COLOR_BLUE);
   /* Display message */
-  BSP_LCD_DisplayStringAtLine(1, (uint8_t*)"   NUCLEO-H745ZI    ");
-  BSP_LCD_DisplayStringAtLine(2, (uint8_t*)"       DEMO         ");
+  GUI_DisplayStringAt(0,40, (uint8_t*)"Display images     ", LEFT_MODE);
+  GUI_DisplayStringAt(0,60, (uint8_t*)"stored under uSD   ", LEFT_MODE);
+  GUI_DisplayStringAt(0,80, (uint8_t*)"on TFT LCD         ", LEFT_MODE);
 
   /* Set Text color */
-  BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
+  GUI_SetTextColor(GUI_COLOR_BLACK);
   /* Display message */
-  BSP_LCD_DisplayStringAtLine(4, (uint8_t*)"Display images      ");
-  BSP_LCD_DisplayStringAtLine(6, (uint8_t*)"stored under uSD    ");
-  BSP_LCD_DisplayStringAtLine(8, (uint8_t*)"on TFT LCD          ");
-
-  /* Set Text color */
-  BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
-  /* Display message */
-  BSP_LCD_DisplayStringAtLine(11, (uint8_t*)"  Press JOY DOWN   ");
-  BSP_LCD_DisplayStringAtLine(12, (uint8_t*)"  to continue...   ");
+  GUI_DisplayStringAt(0,110, (uint8_t*)"  Press JOY DOWN  ", LEFT_MODE);
+  GUI_DisplayStringAt(0,120, (uint8_t*)"  to continue...  ", LEFT_MODE);
 
   /* Wait for JOY_DOWN is pressed */
-  while (BSP_JOY_GetState() != JOY_DOWN)
+  while (ADAFRUIT_802_JOY_GetState(JOY1) != JOY_DOWN)
   {}
   HAL_Delay(200);
   
   /* Set Text color */
-  BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
+  GUI_SetTextColor(GUI_COLOR_BLACK);
   /* Display message */
-  BSP_LCD_DisplayStringAtLine(4,  (uint8_t*)"                   ");
-  BSP_LCD_DisplayStringAtLine(6,  (uint8_t*)"  Press Joystick   ");
+  GUI_DisplayStringAt(0,40,  (uint8_t*)"                  ", LEFT_MODE);
+  GUI_DisplayStringAt(0,60,  (uint8_t*)"  Press Joystick  ", LEFT_MODE);
 
   /* Set Text color */
-  BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
+  GUI_SetTextColor(GUI_COLOR_BLUE);
   /* Display message */
-  BSP_LCD_DisplayStringAtLine(8,  (uint8_t*)"  UP for:          ");
-  BSP_LCD_DisplayStringAtLine(9,  (uint8_t*)"  Manual Mode      ");
-  BSP_LCD_DisplayStringAtLine(11, (uint8_t*)"  DOWN for:        ");
-  BSP_LCD_DisplayStringAtLine(12, (uint8_t*)"  Automatic Mode   ");
+  GUI_DisplayStringAt(0,80,  (uint8_t*)"  UP for:         ", LEFT_MODE);
+  GUI_DisplayStringAt(0,90,  (uint8_t*)"  Manual Mode     ", LEFT_MODE);
+  GUI_DisplayStringAt(0,110, (uint8_t*)"  DOWN for:       ", LEFT_MODE);
+  GUI_DisplayStringAt(0,120, (uint8_t*)"  Automatic Mode  ", LEFT_MODE);
 
   /* Wait until Joystick is released */
-  while (BSP_JOY_GetState() == JOY_DOWN)
+  while (ADAFRUIT_802_JOY_GetState(JOY1)  == JOY_DOWN)
   {}
   HAL_Delay(200);
 
@@ -295,38 +299,38 @@ static void TFT_DisplayMenu(void)
   tmp = JOY_RIGHT;
   while ((tmp != JOY_DOWN) && (tmp != JOY_UP))
   {
-    tmp = BSP_JOY_GetState();
+    tmp = ADAFRUIT_802_JOY_GetState(JOY1);
   }
 
   /* LCD Clear */
-  BSP_LCD_Clear(LCD_COLOR_WHITE);
+  GUI_Clear(GUI_COLOR_WHITE);
 
   /* JOY_UP is pressed: Display Manual mode menu #############################*/
   if(tmp == JOY_UP )
   {
     /* Set Text color */
-    BSP_LCD_SetTextColor(LCD_COLOR_RED);
+    GUI_SetTextColor(GUI_COLOR_RED);
     /* Display message */
-    BSP_LCD_DisplayStringAtLine(3,  (uint8_t*)"   Manual Mode   ");
-    BSP_LCD_DisplayStringAtLine(5,  (uint8_t*)"    Selected     ");
+    GUI_DisplayStringAt(0,30,  (uint8_t*)"   Manual Mode   ", LEFT_MODE);
+    GUI_DisplayStringAt(0,50,  (uint8_t*)"    Selected     ", LEFT_MODE);
 
     /* Set Text color */
-    BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
+    GUI_SetTextColor(GUI_COLOR_BLUE);
     /* Display message */
-    BSP_LCD_DisplayStringAtLine(9,  (uint8_t*)"RIGHT: Next image");
-    BSP_LCD_DisplayStringAtLine(10, (uint8_t*)"LEFT : Previous  ");
-    BSP_LCD_DisplayStringAtLine(11, (uint8_t*)"SEL  : Switch to ");
-    BSP_LCD_DisplayStringAtLine(12, (uint8_t*)"automatic mode   ");
+    GUI_DisplayStringAt(0,90,  (uint8_t*)"RIGHT: Next image", LEFT_MODE);
+    GUI_DisplayStringAt(0,100, (uint8_t*)"LEFT : Previous  ", LEFT_MODE);
+    GUI_DisplayStringAt(0,110, (uint8_t*)"SEL  : Switch to ", LEFT_MODE);
+    GUI_DisplayStringAt(0,120, (uint8_t*)"automatic mode   ", LEFT_MODE);
     JoystickValue = 2;
   }
   /* JOY_DOWN is pressed: Display Automatic mode menu ########################*/
   else if (tmp == JOY_DOWN)
   {
     /* Set Text color */
-    BSP_LCD_SetTextColor(LCD_COLOR_RED);
+    GUI_SetTextColor(GUI_COLOR_RED);
     /* Display message */
-    BSP_LCD_DisplayStringAtLine(3,  (uint8_t*)"  Automatic Mode  ");
-    BSP_LCD_DisplayStringAtLine(5,  (uint8_t*)"     Selected     ");
+    GUI_DisplayStringAt(0,30,  (uint8_t*)"  Automatic Mode  ", LEFT_MODE);
+    GUI_DisplayStringAt(0,50,  (uint8_t*)"     Selected     ", LEFT_MODE);
 
     JoystickValue = 1;
     HAL_Delay(200);
@@ -349,7 +353,7 @@ static void TFT_DisplayImages(void)
   FRESULT res;
 
   /* Initialize the Joystick available on adafruit 1.8" TFT shield */
-  BSP_JOY_Init();
+  ADAFRUIT_802_JOY_Init(JOY1, JOY_MODE_GPIO, JOY_ALL);
 
   /* Welcome message */
   TFT_DisplayMenu();
@@ -384,7 +388,7 @@ static void TFT_DisplayImages(void)
   while (1)
   {
     /* Get JoyStick status */
-    joystickstatus = BSP_JOY_GetState();
+    joystickstatus = ADAFRUIT_802_JOY_GetState(JOY1);
 
     if(joystickstatus == JOY_SEL )
     {
@@ -505,7 +509,7 @@ static void SDCard_Config(void)
   if(FATFS_LinkDriver(&SD_Driver, SD_Path) == 0)
   {
     /* Initialize the SD mounted on adafruit 1.8" TFT shield */
-    if(BSP_SD_Init() != MSD_OK)
+    if(ADAFRUIT_802_SD_Init(0) != BSP_ERROR_NONE)
     {
       TFT_DisplayErrorMessage(BSP_SD_INIT_FAILED);
     }
@@ -539,20 +543,20 @@ static void SDCard_Config(void)
 static void TFT_DisplayErrorMessage(uint8_t message)
 {
   /* LCD Clear */
-  BSP_LCD_Clear(LCD_COLOR_WHITE);
+  GUI_Clear(GUI_COLOR_WHITE);
   /* Set Error Message Font */
-  BSP_LCD_SetFont(&Font12);
+  GUI_SetFont(&Font12);
   /* Set Text and Back colors */
-  BSP_LCD_SetBackColor(LCD_COLOR_GREY);
-  BSP_LCD_SetTextColor(LCD_COLOR_RED);
+  GUI_SetBackColor(GUI_COLOR_ST_GRAY);
+  GUI_SetTextColor(GUI_COLOR_RED);
 
   if(message == SD_CARD_NOT_FORMATTED)
   {
     /* Display message */
-    BSP_LCD_DisplayStringAtLine(5, (uint8_t*)" SD Card is not    ");
-    BSP_LCD_DisplayStringAtLine(6, (uint8_t*)" FAT formatted.    ");
-    BSP_LCD_DisplayStringAtLine(7, (uint8_t*)" Please Format the ");
-    BSP_LCD_DisplayStringAtLine(8, (uint8_t*)" microSD card.     ");
+    GUI_DisplayStringAt(0,50, (uint8_t*)" SD Card is not    ", LEFT_MODE);
+    GUI_DisplayStringAt(0,60, (uint8_t*)" FAT formatted.    ", LEFT_MODE);
+    GUI_DisplayStringAt(0,70, (uint8_t*)" Please Format the ", LEFT_MODE);
+    GUI_DisplayStringAt(0,80, (uint8_t*)" microSD card.     ", LEFT_MODE);
     while (1)
     {
     }
@@ -560,10 +564,10 @@ static void TFT_DisplayErrorMessage(uint8_t message)
   if(message == SD_CARD_FILE_NOT_SUPPORTED)
   {
     /* Display message */
-    BSP_LCD_DisplayStringAtLine(5, (uint8_t*)"                   ");
-    BSP_LCD_DisplayStringAtLine(6, (uint8_t*)" File type is not  ");
-    BSP_LCD_DisplayStringAtLine(7, (uint8_t*)" supported.        ");
-    BSP_LCD_DisplayStringAtLine(8, (uint8_t*)"                   ");
+    GUI_DisplayStringAt(0,50, (uint8_t*)"                   ", LEFT_MODE);
+    GUI_DisplayStringAt(0,60, (uint8_t*)" File type is not  ", LEFT_MODE);
+    GUI_DisplayStringAt(0,70, (uint8_t*)" supported.        ", LEFT_MODE);
+    GUI_DisplayStringAt(0,80, (uint8_t*)"                   ", LEFT_MODE);
     while(1)
     {
     }
@@ -571,10 +575,10 @@ static void TFT_DisplayErrorMessage(uint8_t message)
   if(message == SD_CARD_OPEN_FAIL)
   {
     /* Display message */
-    BSP_LCD_DisplayStringAtLine(5, (uint8_t*)"                   ");
-    BSP_LCD_DisplayStringAtLine(6, (uint8_t*)" Open directory    ");
-    BSP_LCD_DisplayStringAtLine(7, (uint8_t*)" fails.            ");
-    BSP_LCD_DisplayStringAtLine(8, (uint8_t*)"                   ");
+    GUI_DisplayStringAt(0,50, (uint8_t*)"                   ", LEFT_MODE);
+    GUI_DisplayStringAt(0,60, (uint8_t*)" Open directory    ", LEFT_MODE);
+    GUI_DisplayStringAt(0,70, (uint8_t*)" fails.            ", LEFT_MODE);
+    GUI_DisplayStringAt(0,80, (uint8_t*)"                   ", LEFT_MODE);
     while(1)
     {
     }
@@ -582,10 +586,10 @@ static void TFT_DisplayErrorMessage(uint8_t message)
   if(message == FATFS_NOT_MOUNTED)
   {
     /* Display message */
-    BSP_LCD_DisplayStringAtLine(5, (uint8_t*)"                   ");
-    BSP_LCD_DisplayStringAtLine(6, (uint8_t*)" Cannot mount      ");
-    BSP_LCD_DisplayStringAtLine(7, (uint8_t*)" FatFs on Drive.   ");
-    BSP_LCD_DisplayStringAtLine(8, (uint8_t*)"                   ");
+    GUI_DisplayStringAt(0,50, (uint8_t*)"                   ", LEFT_MODE);
+    GUI_DisplayStringAt(0,60, (uint8_t*)" Cannot mount      ", LEFT_MODE);
+    GUI_DisplayStringAt(0,70, (uint8_t*)" FatFs on Drive.   ", LEFT_MODE);
+    GUI_DisplayStringAt(0,80, (uint8_t*)"                   ", LEFT_MODE);
     while (1)
     {
     }
@@ -593,10 +597,10 @@ static void TFT_DisplayErrorMessage(uint8_t message)
   if(message == BSP_SD_INIT_FAILED)
   {
     /* Display message */
-    BSP_LCD_DisplayStringAtLine(5, (uint8_t*)"                   ");
-    BSP_LCD_DisplayStringAtLine(6, (uint8_t*)" SD Init           ");
-    BSP_LCD_DisplayStringAtLine(7, (uint8_t*)" fails.            ");
-    BSP_LCD_DisplayStringAtLine(8, (uint8_t*)"                   ");
+    GUI_DisplayStringAt(0,50, (uint8_t*)"                   ", LEFT_MODE);
+    GUI_DisplayStringAt(0,60, (uint8_t*)" SD Init           ", LEFT_MODE);
+    GUI_DisplayStringAt(0,70, (uint8_t*)" fails.            ", LEFT_MODE);
+    GUI_DisplayStringAt(0,80, (uint8_t*)"                   ", LEFT_MODE);
     while(1)
     {
     }
@@ -604,10 +608,10 @@ static void TFT_DisplayErrorMessage(uint8_t message)
   if(message == SD_CARD_NO_FILE)
   {
     /* Display message */
-    BSP_LCD_DisplayStringAtLine(5, (uint8_t*)"                   ");
-    BSP_LCD_DisplayStringAtLine(6, (uint8_t*)" NO image found     ");
-    BSP_LCD_DisplayStringAtLine(7, (uint8_t*)" in the SD card.   ");
-    BSP_LCD_DisplayStringAtLine(8, (uint8_t*)"                   ");
+    GUI_DisplayStringAt(0,50, (uint8_t*)"                   ", LEFT_MODE);
+    GUI_DisplayStringAt(0,60, (uint8_t*)" NO image found     ", LEFT_MODE);
+    GUI_DisplayStringAt(0,70, (uint8_t*)" in the SD card.   ", LEFT_MODE);
+    GUI_DisplayStringAt(0,80, (uint8_t*)"                   ", LEFT_MODE);
     while(1)
     {
     }
@@ -668,7 +672,7 @@ static void LED1_Blink(void)
   * @param  GPIO_Pin: Specifies the pins connected EXTI line
   * @retval None
   */
-void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+void BSP_PB_Callback(Button_TypeDef Button)
 {
   if(BlinkSpeed == 2)
   {
@@ -695,14 +699,13 @@ static ShieldStatus TFT_ShieldDetect(void)
   GPIO_InitTypeDef  GPIO_InitStruct;
 
   /* Enable GPIO clock */
-  NUCLEO_ADCx_GPIO_CLK_ENABLE();
-
-  GPIO_InitStruct.Pin = NUCLEO_ADCx_GPIO_PIN ;
+  ADAFRUIT_802_ADCx_GPIO_CLK_ENABLE();
+  GPIO_InitStruct.Pin = ADAFRUIT_802_ADCx_GPIO_PIN ;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_PULLDOWN;
-  HAL_GPIO_Init(NUCLEO_ADCx_GPIO_PORT , &GPIO_InitStruct);
-
-  if(HAL_GPIO_ReadPin(NUCLEO_ADCx_GPIO_PORT, NUCLEO_ADCx_GPIO_PIN) != 0)
+  HAL_GPIO_Init(ADAFRUIT_802_ADCx_GPIO_PORT , &GPIO_InitStruct);
+  
+  if(HAL_GPIO_ReadPin(ADAFRUIT_802_ADCx_GPIO_PORT, ADAFRUIT_802_ADCx_GPIO_PIN) != 0)
   {
     return SHIELD_DETECTED;
   }

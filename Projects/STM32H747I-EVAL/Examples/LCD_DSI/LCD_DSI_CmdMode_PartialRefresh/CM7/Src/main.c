@@ -37,9 +37,9 @@
   */
 
 /* Private typedef -----------------------------------------------------------*/
-extern LTDC_HandleTypeDef hltdc_eval;
+extern LTDC_HandleTypeDef hlcd_ltdc;
 static DMA2D_HandleTypeDef   hdma2d;
-extern DSI_HandleTypeDef hdsi_eval;
+extern DSI_HandleTypeDef hlcd_dsi;
 DSI_VidCfgTypeDef hdsivideo_handle;
 DSI_CmdCfgTypeDef CmdCfg;
 DSI_LPCmdTypeDef LPCmd;
@@ -55,7 +55,6 @@ static RCC_PeriphCLKInitTypeDef  PeriphClkInitStruct;
 #define HFP             1
 #define HACT            400      /* !!!! SCREEN DIVIDED INTO 2 AREAS !!!! */
 
-#define LAYER0_ADDRESS  (LCD_FB_START_ADDRESS)
 
 #define INVALID_AREA      0
 #define LEFT_AREA         1
@@ -88,10 +87,32 @@ static void CopyPicture(uint32_t *pSrc,
 static uint8_t LCD_Init(void);
 void LCD_LayertInit(uint16_t LayerIndex, uint32_t Address);
 void LTDC_Init(void);
+static int32_t DSI_IO_Write(uint16_t ChannelNbr, uint16_t Reg, uint8_t *pData, uint16_t Size);
+static int32_t DSI_IO_Read(uint16_t ChannelNbr, uint16_t Reg, uint8_t *pData, uint16_t Size);
+int32_t LCD_GetXSize(uint32_t Instance, uint32_t *XSize);
+int32_t LCD_GetYSize(uint32_t Instance, uint32_t *YSize);
+void LCD_MspInit(void);
+
+
 static void LCD_BriefDisplay(void);
 
 static void CPU_CACHE_Enable(void);
 static void MPU_Config(void);
+
+const GUI_Drv_t LCD_GUI_Driver =
+{
+  BSP_LCD_DrawBitmap,
+  BSP_LCD_FillRGBRect,
+  BSP_LCD_DrawHLine,
+  BSP_LCD_DrawVLine,
+  BSP_LCD_FillRect,
+  BSP_LCD_ReadPixel,
+  BSP_LCD_WritePixel,
+  LCD_GetXSize,
+  LCD_GetYSize,
+  BSP_LCD_SetActiveLayer,
+  BSP_LCD_GetPixelFormat
+};
 
 /* Private functions ---------------------------------------------------------*/
 /**
@@ -133,50 +154,59 @@ int main(void)
      HSEM notification or by any D2 wakeup source (SEV,EXTI..)   */  
 
   /* Initialize the SDRAM */
-  BSP_SDRAM_Init();
+  BSP_SDRAM_Init(0);
   
   /* Initialize the LCD   */
-  if( LCD_Init() != LCD_OK)
+  if( LCD_Init() != BSP_ERROR_NONE)
   {
     Error_Handler();
   }
 
+  /* Set the LCD Context */
+  Lcd_Ctx[0].ActiveLayer = 0;
+  Lcd_Ctx[0].PixelFormat = LCD_PIXEL_FORMAT_ARGB8888;
+  Lcd_Ctx[0].BppFactor = 4; /* 4 Bytes Per Pixel for ARGB8888 */  
+  Lcd_Ctx[0].XSize = 800;  
+  Lcd_Ctx[0].YSize = 480;
+
   /* Disable DSI Wrapper in order to access and configure the LTDC */
-  __HAL_DSI_WRAPPER_DISABLE(&hdsi_eval);
+  __HAL_DSI_WRAPPER_DISABLE(&hlcd_dsi);
 
   /* Initialize LTDC layer 0 iused for Hint */  
-  LCD_LayertInit(0, LAYER0_ADDRESS);     
-  BSP_LCD_SelectLayer(0); 
+  LCD_LayertInit(0, LCD_FRAME_BUFFER);     
+
+  GUI_SetFuncDriver(&LCD_GUI_Driver);
+
   /* Update pitch : the draw is done on the whole physical X Size */
-  HAL_LTDC_SetPitch(&hltdc_eval, BSP_LCD_GetXSize(), 0);
+  HAL_LTDC_SetPitch(&hlcd_ltdc, Lcd_Ctx[0].XSize, 0);
 
   /* Enable DSI Wrapper so DSI IP will drive the LTDC */
-  __HAL_DSI_WRAPPER_ENABLE(&hdsi_eval);  
+  __HAL_DSI_WRAPPER_ENABLE(&hlcd_dsi);  
   
-  HAL_DSI_LongWrite(&hdsi_eval, 0, DSI_DCS_LONG_PKT_WRITE, 4, OTM8009A_CMD_CASET, pColLeft);
-  HAL_DSI_LongWrite(&hdsi_eval, 0, DSI_DCS_LONG_PKT_WRITE, 4, OTM8009A_CMD_PASET, pPage);
+  HAL_DSI_LongWrite(&hlcd_dsi, 0, DSI_DCS_LONG_PKT_WRITE, 4, OTM8009A_CMD_CASET, pColLeft);
+  HAL_DSI_LongWrite(&hlcd_dsi, 0, DSI_DCS_LONG_PKT_WRITE, 4, OTM8009A_CMD_PASET, pPage);
 
   /* Display example brief   */
   LCD_BriefDisplay();
   
   /* Show first image */
-  CopyPicture((uint32_t *)Images[ImageIndex++], (uint32_t *)LAYER0_ADDRESS, 240, 160, 320, 240);
+  CopyPicture((uint32_t *)Images[ImageIndex++], (uint32_t *)LCD_FRAME_BUFFER, 240, 160, 320, 240);
   
   pending_buffer = 0;
   active_area = LEFT_AREA;
   
   /* set the refresh area to LCD left half */
-  HAL_DSI_LongWrite(&hdsi_eval, 0, DSI_DCS_LONG_PKT_WRITE, 2, OTM8009A_CMD_WRTESCN, pSyncLeft);
+  HAL_DSI_LongWrite(&hlcd_dsi, 0, DSI_DCS_LONG_PKT_WRITE, 2, OTM8009A_CMD_WRTESCN, pSyncLeft);
 
   /* Refresh the LCD */
-  HAL_DSI_Refresh(&hdsi_eval);  
+  HAL_DSI_Refresh(&hlcd_dsi);  
         
   /* Infinite loop */
   while (1)
   {
     if(pending_buffer < 0)
     {
-      CopyPicture((uint32_t *)Images[ImageIndex++], (uint32_t *)LAYER0_ADDRESS, 240, 160, 320, 240);
+      CopyPicture((uint32_t *)Images[ImageIndex++], (uint32_t *)LCD_FRAME_BUFFER, 240, 160, 320, 240);
       
       if(ImageIndex >= 2)
       {
@@ -184,11 +214,37 @@ int main(void)
       }
       pending_buffer = 1;
       
-      HAL_DSI_Refresh(&hdsi_eval);
+      HAL_DSI_Refresh(&hlcd_dsi);
     }
     /* Wait some time before switching to next image */
     HAL_Delay(2000);
   }
+}
+
+/**
+  * @brief  Gets the LCD X size.
+  * @param  Instance  LCD Instance
+  * @param  XSize     LCD width
+  * @retval BSP status
+  */
+int32_t LCD_GetXSize(uint32_t Instance, uint32_t *XSize)
+{
+  *XSize = Lcd_Ctx[0].XSize;
+ 
+  return BSP_ERROR_NONE;
+}
+
+/**
+  * @brief  Gets the LCD Y size.
+  * @param  Instance  LCD Instance
+  * @param  YSize     LCD Height
+  * @retval BSP status
+  */
+int32_t LCD_GetYSize(uint32_t Instance, uint32_t *YSize)
+{
+  *YSize = Lcd_Ctx[0].YSize;
+ 
+  return BSP_ERROR_NONE;
 }
 
 /**
@@ -207,12 +263,12 @@ void HAL_DSI_EndOfRefreshCallback(DSI_HandleTypeDef *hdsi)
       HAL_DSI_ShortWrite(hdsi, 0, DSI_DCS_SHORT_PKT_WRITE_P1, OTM8009A_CMD_TEOFF, 0x00);
       
       /* Disable DSI Wrapper */
-      __HAL_DSI_WRAPPER_DISABLE(&hdsi_eval);
+      __HAL_DSI_WRAPPER_DISABLE(&hlcd_dsi);
       /* Update LTDC configuaration */
-      LTDC_LAYER(&hltdc_eval, 0)->CFBAR = LAYER0_ADDRESS + 400 * 4;
-      __HAL_LTDC_RELOAD_CONFIG(&hltdc_eval);
+      LTDC_LAYER(&hlcd_ltdc, 0)->CFBAR = LCD_FRAME_BUFFER + 400 * 4;
+      __HAL_LTDC_RELOAD_CONFIG(&hlcd_ltdc);
       /* Enable DSI Wrapper */
-      __HAL_DSI_WRAPPER_ENABLE(&hdsi_eval);
+      __HAL_DSI_WRAPPER_ENABLE(&hlcd_dsi);
       
       /* set the refresh area to LCD right half */
       HAL_DSI_LongWrite(hdsi, 0, DSI_DCS_LONG_PKT_WRITE, 4, OTM8009A_CMD_CASET, pColRight);
@@ -224,12 +280,12 @@ void HAL_DSI_EndOfRefreshCallback(DSI_HandleTypeDef *hdsi)
     {
 
       /* Disable DSI Wrapper */
-      __HAL_DSI_WRAPPER_DISABLE(&hdsi_eval);
+      __HAL_DSI_WRAPPER_DISABLE(&hlcd_dsi);
       /* Update LTDC configuaration */
-      LTDC_LAYER(&hltdc_eval, 0)->CFBAR = LAYER0_ADDRESS;
-      __HAL_LTDC_RELOAD_CONFIG(&hltdc_eval);
+      LTDC_LAYER(&hlcd_ltdc, 0)->CFBAR = LCD_FRAME_BUFFER;
+      __HAL_LTDC_RELOAD_CONFIG(&hlcd_ltdc);
       /* Enable DSI Wrapper */
-      __HAL_DSI_WRAPPER_ENABLE(&hdsi_eval);
+      __HAL_DSI_WRAPPER_ENABLE(&hlcd_dsi);
       
       /* set the refresh area to LCD left half */
       HAL_DSI_LongWrite(hdsi, 0, DSI_DCS_LONG_PKT_WRITE, 4, OTM8009A_CMD_CASET, pColLeft); 
@@ -350,9 +406,13 @@ static uint8_t LCD_Init(void)
 {
   DSI_PHY_TimerTypeDef  PhyTimings;
   
+  OTM8009A_IO_t              IOCtx;
+  static OTM8009A_Object_t   OTM8009AObj;
+  static void                *Lcd_CompObj = NULL;
+  
   /* Toggle Hardware Reset of the DSI LCD using
      its XRES signal (active low) */
-  BSP_LCD_Reset();
+  BSP_LCD_Reset(0);
   
   /* Call first MSP Initialize only in case of first initialization
   * This will set IP blocks LTDC, DSI and DMA2D
@@ -360,7 +420,7 @@ static uint8_t LCD_Init(void)
   * - clocked
   * - NVIC IRQ related to IP blocks enabled
   */
-  BSP_LCD_MspInit();
+  LCD_MspInit();
 
   /* LCD clock configuration */
   /* LCD clock configuration */
@@ -378,19 +438,19 @@ static uint8_t LCD_Init(void)
   HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct);   
   
   /* Base address of DSI Host/Wrapper registers to be set before calling De-Init */
-  hdsi_eval.Instance = DSI;
+  hlcd_dsi.Instance = DSI;
   
-  HAL_DSI_DeInit(&(hdsi_eval));
+  HAL_DSI_DeInit(&(hlcd_dsi));
   
   dsiPllInit.PLLNDIV  = 100;
   dsiPllInit.PLLIDF   = DSI_PLL_IN_DIV5;
   dsiPllInit.PLLODF  = DSI_PLL_OUT_DIV1;  
 
-  hdsi_eval.Init.NumberOfLanes = DSI_TWO_DATA_LANES;
-  hdsi_eval.Init.TXEscapeCkdiv = 0x4;
+  hlcd_dsi.Init.NumberOfLanes = DSI_TWO_DATA_LANES;
+  hlcd_dsi.Init.TXEscapeCkdiv = 0x4;
   
   
-  HAL_DSI_Init(&(hdsi_eval), &(dsiPllInit));
+  HAL_DSI_Init(&(hlcd_dsi), &(dsiPllInit));
     
   /* Configure the DSI for Command mode */
   CmdCfg.VirtualChannelID      = 0;
@@ -404,7 +464,7 @@ static uint8_t LCD_Init(void)
   CmdCfg.VSyncPol              = DSI_VSYNC_FALLING;
   CmdCfg.AutomaticRefresh      = DSI_AR_DISABLE;
   CmdCfg.TEAcknowledgeRequest  = DSI_TE_ACKNOWLEDGE_ENABLE;
-  HAL_DSI_ConfigAdaptedCommandMode(&hdsi_eval, &CmdCfg);
+  HAL_DSI_ConfigAdaptedCommandMode(&hlcd_dsi, &CmdCfg);
   
   LPCmd.LPGenShortWriteNoP    = DSI_LP_GSW0P_ENABLE;
   LPCmd.LPGenShortWriteOneP   = DSI_LP_GSW1P_ENABLE;
@@ -417,13 +477,13 @@ static uint8_t LCD_Init(void)
   LPCmd.LPDcsShortWriteOneP   = DSI_LP_DSW1P_ENABLE;
   LPCmd.LPDcsShortReadNoP     = DSI_LP_DSR0P_ENABLE;
   LPCmd.LPDcsLongWrite        = DSI_LP_DLW_ENABLE;
-  HAL_DSI_ConfigCommand(&hdsi_eval, &LPCmd);
+  HAL_DSI_ConfigCommand(&hlcd_dsi, &LPCmd);
 
   /* Initialize LTDC */
   LTDC_Init();
   
   /* Start DSI */
-  HAL_DSI_Start(&(hdsi_eval));
+  HAL_DSI_Start(&(hlcd_dsi));
  
   /* Configure DSI PHY HS2LP and LP2HS timings */
   PhyTimings.ClockLaneHS2LPTime = 35;
@@ -432,11 +492,16 @@ static uint8_t LCD_Init(void)
   PhyTimings.DataLaneLP2HSTime = 35;
   PhyTimings.DataLaneMaxReadTime = 0;
   PhyTimings.StopWaitTime = 10;
-  HAL_DSI_ConfigPhyTimer(&hdsi_eval, &PhyTimings); 
+  HAL_DSI_ConfigPhyTimer(&hlcd_dsi, &PhyTimings); 
   
-  /* Initialize the OTM8009A LCD Display IC Driver (KoD LCD IC Driver)
-  */
-  OTM8009A_Init(OTM8009A_COLMOD_RGB888, LCD_ORIENTATION_LANDSCAPE);
+  /* Initialize the OTM8009A LCD Display IC Driver (KoD LCD IC Driver) */
+  IOCtx.Address     = 0;
+  IOCtx.GetTick     = BSP_GetTick;
+  IOCtx.WriteReg    = DSI_IO_Write;
+  IOCtx.ReadReg     = DSI_IO_Read;
+  OTM8009A_RegisterBusIO(&OTM8009AObj, &IOCtx);
+  Lcd_CompObj=(&OTM8009AObj);
+  OTM8009A_Init(Lcd_CompObj, OTM8009A_COLMOD_RGB888, LCD_ORIENTATION_LANDSCAPE);
   
   LPCmd.LPGenShortWriteNoP    = DSI_LP_GSW0P_DISABLE;
   LPCmd.LPGenShortWriteOneP   = DSI_LP_GSW1P_DISABLE;
@@ -449,12 +514,12 @@ static uint8_t LCD_Init(void)
   LPCmd.LPDcsShortWriteOneP   = DSI_LP_DSW1P_DISABLE;
   LPCmd.LPDcsShortReadNoP     = DSI_LP_DSR0P_DISABLE;
   LPCmd.LPDcsLongWrite        = DSI_LP_DLW_DISABLE;
-  HAL_DSI_ConfigCommand(&hdsi_eval, &LPCmd);
+  HAL_DSI_ConfigCommand(&hlcd_dsi, &LPCmd);
   
-  HAL_DSI_ConfigFlowControl(&hdsi_eval, DSI_FLOW_CONTROL_BTA);
-  HAL_DSI_ForceRXLowPower(&hdsi_eval, ENABLE);  
+  HAL_DSI_ConfigFlowControl(&hlcd_dsi, DSI_FLOW_CONTROL_BTA);
+  HAL_DSI_ForceRXLowPower(&hlcd_dsi, ENABLE);  
   
-  return LCD_OK;
+  return BSP_ERROR_NONE;
 }
 
 /**
@@ -465,32 +530,32 @@ static uint8_t LCD_Init(void)
 void LTDC_Init(void)
 {
   /* DeInit */
-  HAL_LTDC_DeInit(&hltdc_eval);
+  HAL_LTDC_DeInit(&hlcd_ltdc);
   
   /* LTDC Config */
   /* Timing and polarity */
-  hltdc_eval.Init.HorizontalSync = HSYNC;
-  hltdc_eval.Init.VerticalSync = VSYNC;
-  hltdc_eval.Init.AccumulatedHBP = HSYNC+HBP;
-  hltdc_eval.Init.AccumulatedVBP = VSYNC+VBP;
-  hltdc_eval.Init.AccumulatedActiveH = VSYNC+VBP+VACT;
-  hltdc_eval.Init.AccumulatedActiveW = HSYNC+HBP+HACT;
-  hltdc_eval.Init.TotalHeigh = VSYNC+VBP+VACT+VFP;
-  hltdc_eval.Init.TotalWidth = HSYNC+HBP+HACT+HFP;
+  hlcd_ltdc.Init.HorizontalSync = HSYNC;
+  hlcd_ltdc.Init.VerticalSync = VSYNC;
+  hlcd_ltdc.Init.AccumulatedHBP = HSYNC+HBP;
+  hlcd_ltdc.Init.AccumulatedVBP = VSYNC+VBP;
+  hlcd_ltdc.Init.AccumulatedActiveH = VSYNC+VBP+VACT;
+  hlcd_ltdc.Init.AccumulatedActiveW = HSYNC+HBP+HACT;
+  hlcd_ltdc.Init.TotalHeigh = VSYNC+VBP+VACT+VFP;
+  hlcd_ltdc.Init.TotalWidth = HSYNC+HBP+HACT+HFP;
   
   /* background value */
-  hltdc_eval.Init.Backcolor.Blue = 0;
-  hltdc_eval.Init.Backcolor.Green = 0;
-  hltdc_eval.Init.Backcolor.Red = 0;
+  hlcd_ltdc.Init.Backcolor.Blue = 0;
+  hlcd_ltdc.Init.Backcolor.Green = 0;
+  hlcd_ltdc.Init.Backcolor.Red = 0;
   
   /* Polarity */
-  hltdc_eval.Init.HSPolarity = LTDC_HSPOLARITY_AL;
-  hltdc_eval.Init.VSPolarity = LTDC_VSPOLARITY_AL;
-  hltdc_eval.Init.DEPolarity = LTDC_DEPOLARITY_AL;
-  hltdc_eval.Init.PCPolarity = LTDC_PCPOLARITY_IPC;
-  hltdc_eval.Instance = LTDC;
+  hlcd_ltdc.Init.HSPolarity = LTDC_HSPOLARITY_AL;
+  hlcd_ltdc.Init.VSPolarity = LTDC_VSPOLARITY_AL;
+  hlcd_ltdc.Init.DEPolarity = LTDC_DEPOLARITY_AL;
+  hlcd_ltdc.Init.PCPolarity = LTDC_PCPOLARITY_IPC;
+  hlcd_ltdc.Instance = LTDC;
 
-  HAL_LTDC_Init(&hltdc_eval);
+  HAL_LTDC_Init(&hlcd_ltdc);
 }
 
 /**
@@ -501,28 +566,113 @@ void LTDC_Init(void)
   */
 void LCD_LayertInit(uint16_t LayerIndex, uint32_t Address)
 {
-    LCD_LayerCfgTypeDef  Layercfg;
+  LTDC_LayerCfgTypeDef  layercfg;
 
   /* Layer Init */
-  Layercfg.WindowX0 = 0;
-  Layercfg.WindowX1 = BSP_LCD_GetXSize()/2;
-  Layercfg.WindowY0 = 0;
-  Layercfg.WindowY1 = BSP_LCD_GetYSize(); 
-  Layercfg.PixelFormat = LTDC_PIXEL_FORMAT_ARGB8888;
-  Layercfg.FBStartAdress = Address;
-  Layercfg.Alpha = 255;
-  Layercfg.Alpha0 = 0;
-  Layercfg.Backcolor.Blue = 0;
-  Layercfg.Backcolor.Green = 0;
-  Layercfg.Backcolor.Red = 0;
-  Layercfg.BlendingFactor1 = LTDC_BLENDING_FACTOR1_PAxCA;
-  Layercfg.BlendingFactor2 = LTDC_BLENDING_FACTOR2_PAxCA;
-  Layercfg.ImageWidth = BSP_LCD_GetXSize()/2;
-  Layercfg.ImageHeight = BSP_LCD_GetYSize();
+  layercfg.WindowX0 = 0;
+  layercfg.WindowX1 = Lcd_Ctx[0].XSize/2;
+  layercfg.WindowY0 = 0;
+  layercfg.WindowY1 = Lcd_Ctx[0].YSize; 
+  layercfg.PixelFormat = LTDC_PIXEL_FORMAT_ARGB8888;
+  layercfg.FBStartAdress = Address;
+  layercfg.Alpha = 255;
+  layercfg.Alpha0 = 0;
+  layercfg.Backcolor.Blue = 0;
+  layercfg.Backcolor.Green = 0;
+  layercfg.Backcolor.Red = 0;
+  layercfg.BlendingFactor1 = LTDC_BLENDING_FACTOR1_PAxCA;
+  layercfg.BlendingFactor2 = LTDC_BLENDING_FACTOR2_PAxCA;
+  layercfg.ImageWidth = Lcd_Ctx[0].XSize/2;
+  layercfg.ImageHeight = Lcd_Ctx[0].YSize;
   
-  HAL_LTDC_ConfigLayer(&hltdc_eval, &Layercfg, LayerIndex); 
+  HAL_LTDC_ConfigLayer(&hlcd_ltdc, &layercfg, LayerIndex); 
 }
 
+/**
+  * @brief  DCS or Generic short/long write command
+  * @param  ChannelNbr Virtual channel ID
+  * @param  Reg Register to be written
+  * @param  pData pointer to a buffer of data to be write
+  * @param  Size To precise command to be used (short or long)
+  * @retval BSP status
+  */
+static int32_t DSI_IO_Write(uint16_t ChannelNbr, uint16_t Reg, uint8_t *pData, uint16_t Size)
+{
+  int32_t ret = BSP_ERROR_NONE;
+
+  if(Size <= 1U)
+  {
+    if(HAL_DSI_ShortWrite(&hlcd_dsi, ChannelNbr, DSI_DCS_SHORT_PKT_WRITE_P1, Reg, (uint32_t)pData[Size]) != HAL_OK)
+    {
+      ret = BSP_ERROR_BUS_FAILURE;
+    }
+  }
+  else
+  {
+    if(HAL_DSI_LongWrite(&hlcd_dsi, ChannelNbr, DSI_DCS_LONG_PKT_WRITE, Size, (uint32_t)Reg, pData) != HAL_OK)
+    {
+      ret = BSP_ERROR_BUS_FAILURE;
+    }
+  }
+
+  return ret;
+}
+
+/**
+  * @brief  DCS or Generic read command
+  * @param  ChannelNbr Virtual channel ID
+  * @param  Reg Register to be read
+  * @param  pData pointer to a buffer to store the payload of a read back operation.
+  * @param  Size  Data size to be read (in byte).
+  * @retval BSP status
+  */
+static int32_t DSI_IO_Read(uint16_t ChannelNbr, uint16_t Reg, uint8_t *pData, uint16_t Size)
+{
+  int32_t ret = BSP_ERROR_NONE;
+
+  if(HAL_DSI_Read(&hlcd_dsi, ChannelNbr, pData, Size, DSI_DCS_SHORT_PKT_READ, Reg, pData) != HAL_OK)
+  {
+    ret = BSP_ERROR_BUS_FAILURE;
+  }
+
+  return ret;
+}
+
+void LCD_MspInit(void)
+{
+  /** @brief Enable the LTDC clock */
+  __HAL_RCC_LTDC_CLK_ENABLE();
+
+  /** @brief Toggle Sw reset of LTDC IP */
+  __HAL_RCC_LTDC_FORCE_RESET();
+  __HAL_RCC_LTDC_RELEASE_RESET();
+
+  /** @brief Enable the DMA2D clock */
+  __HAL_RCC_DMA2D_CLK_ENABLE();
+
+  /** @brief Toggle Sw reset of DMA2D IP */
+  __HAL_RCC_DMA2D_FORCE_RESET();
+  __HAL_RCC_DMA2D_RELEASE_RESET();
+
+  /** @brief Enable DSI Host and wrapper clocks */
+  __HAL_RCC_DSI_CLK_ENABLE();
+
+  /** @brief Soft Reset the DSI Host and wrapper */
+  __HAL_RCC_DSI_FORCE_RESET();
+  __HAL_RCC_DSI_RELEASE_RESET();
+
+  /** @brief NVIC configuration for LTDC interrupt that is now enabled */
+  HAL_NVIC_SetPriority(LTDC_IRQn, 9, 0xf);
+  HAL_NVIC_EnableIRQ(LTDC_IRQn);
+
+  /** @brief NVIC configuration for DMA2D interrupt that is now enabled */
+  HAL_NVIC_SetPriority(DMA2D_IRQn, 9, 0xf);
+  HAL_NVIC_EnableIRQ(DMA2D_IRQn);
+
+  /** @brief NVIC configuration for DSI interrupt that is now enabled */
+  HAL_NVIC_SetPriority(DSI_IRQn, 9, 0xf);
+  HAL_NVIC_EnableIRQ(DSI_IRQn);
+}
 
 /**
   * @brief  Display Example description.
@@ -531,16 +681,16 @@ void LCD_LayertInit(uint16_t LayerIndex, uint32_t Address)
   */
 static void LCD_BriefDisplay(void)
 {
-  BSP_LCD_SetFont(&Font24);  
-  BSP_LCD_SetTextColor(LCD_COLOR_BLUE); 
-  BSP_LCD_FillRect(0, 0, 800, 112);  
-  BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
-  BSP_LCD_FillRect(0, 112, 800, 368);
-  BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-  BSP_LCD_DisplayStringAtLine(1, (uint8_t *)"        LCD_DSI_CmdMode_PartialRefresh");
-  BSP_LCD_SetFont(&Font16);
-  BSP_LCD_DisplayStringAtLine(4, (uint8_t *)"This example shows how to display images on LCD DSI using the partial");
-  BSP_LCD_DisplayStringAtLine(5, (uint8_t *)"Refresh method by splitting the display area.");
+  GUI_SetFont(&Font24);  
+  GUI_SetTextColor(GUI_COLOR_BLUE); 
+  GUI_FillRect(0, 0, 800, 112, GUI_COLOR_BLUE);  
+  GUI_SetTextColor(GUI_COLOR_WHITE);
+  GUI_FillRect(0, 112, 800, 368, GUI_COLOR_WHITE);
+  GUI_SetBackColor(GUI_COLOR_BLUE);
+  GUI_DisplayStringAtLine(1, (uint8_t *)"        LCD_DSI_CmdMode_PartialRefresh");
+  GUI_SetFont(&Font16);
+  GUI_DisplayStringAtLine(4, (uint8_t *)"This example shows how to display images on LCD DSI using the partial");
+  GUI_DisplayStringAtLine(5, (uint8_t *)"Refresh method by splitting the display area.");
 }
 
 /**

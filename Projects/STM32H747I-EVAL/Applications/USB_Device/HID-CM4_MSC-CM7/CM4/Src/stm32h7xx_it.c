@@ -175,7 +175,7 @@ void OTG_FS_IRQHandler(void)
   */
 void EXTI0_IRQHandler(void)
 {
-  HAL_GPIO_EXTI_IRQHandler(WAKEUP_BUTTON_PIN);
+ BSP_PB_IRQHandler(BUTTON_WAKEUP);
 }
 
 
@@ -186,7 +186,7 @@ void EXTI0_IRQHandler(void)
   */
 void EXTI15_10_IRQHandler(void)
 {
-  HAL_GPIO_EXTI_IRQHandler(TAMPER_BUTTON_PIN);
+  BSP_PB_IRQHandler(BUTTON_TAMPER);
 }
 
 /**

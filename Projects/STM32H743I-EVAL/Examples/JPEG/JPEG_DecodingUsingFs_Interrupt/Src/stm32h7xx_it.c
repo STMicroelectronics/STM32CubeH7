@@ -34,7 +34,7 @@
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 extern JPEG_HandleTypeDef    JPEG_Handle;
-extern SD_HandleTypeDef uSdHandle;
+extern SD_HandleTypeDef hsd_sdmmc[];
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 
@@ -166,7 +166,7 @@ void JPEG_IRQHandler(void)
 void SDMMC1_IRQHandler(void)
 {
 
-  HAL_SD_IRQHandler(&uSdHandle);
+  HAL_SD_IRQHandler(&hsd_sdmmc[0]);
 }
 
 /**

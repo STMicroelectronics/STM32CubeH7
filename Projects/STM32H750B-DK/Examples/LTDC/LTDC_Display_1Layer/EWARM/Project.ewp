@@ -2,7 +2,7 @@
 <project>
     <fileVersion>3</fileVersion>
     <configuration>
-        <name>STM32H750B_DISCO</name>
+        <name>STM32H750B_DK</name>
         <toolchain>
             <name>ARM</name>
         </toolchain>
@@ -16,15 +16,15 @@
                 <debug>1</debug>
                 <option>
                     <name>ExePath</name>
-                    <state>STM32H750B_DISCO\Exe</state>
+                    <state>STM32H750B_DK\Exe</state>
                 </option>
                 <option>
                     <name>ObjPath</name>
-                    <state>STM32H750B_DISCO\Obj</state>
+                    <state>STM32H750B_DK\Obj</state>
                 </option>
                 <option>
                     <name>ListPath</name>
-                    <state>STM32H750B_DISCO\List</state>
+                    <state>STM32H750B_DK\List</state>
                 </option>
                 <option>
                     <name>GEndianMode</name>
@@ -222,7 +222,7 @@
                     <state>APPLICATION_ADDRESS=0x90000000U</state>
                     <state>USE_HAL_DRIVER</state>
                     <state>STM32H750xx</state>
-                    <state>USE_STM32H750B_DISCO</state>
+                    <state>USE_STM32H750B_DK</state>
                 </option>
                 <option>
                     <name>CCPreprocFile</name>
@@ -351,11 +351,12 @@
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\CMSIS\Include</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\CMSIS\Device\ST\STM32H7xx\Include</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Inc</state>
-                    <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32H750B-Discovery</state>
+                    <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32H750B-DK</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\Components\Common</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Utilities\Log</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Utilities\Fonts</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Utilities\CPU</state>
+                    <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\Components\rk043fn48h</state>
                 </option>
                 <option>
                     <name>CCStdIncCheck</name>
@@ -706,7 +707,7 @@
                 </option>
                 <option>
                     <name>IlinkOutputFile</name>
-                    <state>STM32H750B_DISCO.out</state>
+                    <state>STM32H750B_DK.out</state>
                 </option>
                 <option>
                     <name>IlinkDebugInfoEnable</name>
@@ -1041,9 +1042,9 @@
         <group>
             <name>BSP</name>
             <group>
-                <name>STM32H750B_DISCO</name>
+                <name>STM32H750B_DK</name>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32H750B-Discovery\stm32h750b_discovery.c</name>
+                    <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32H750B-DK\stm32h750b_discovery.c</name>
                 </file>
             </group>
         </group>
@@ -1075,6 +1076,9 @@
             </file>
             <file>
                 <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_dma_ex.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_exti.c</name>
             </file>
             <file>
                 <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_gpio.c</name>

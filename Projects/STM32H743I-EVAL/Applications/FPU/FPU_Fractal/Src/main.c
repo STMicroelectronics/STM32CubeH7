@@ -39,7 +39,7 @@ extern LTDC_HandleTypeDef hltdc_eval;
 DMA2D_HandleTypeDef    DMA2D_Handle;
 
 extern LTDC_HandleTypeDef  hltdc_eval;
-
+TS_Init_t *hTS;
 /* 32-bytes Alignement is needed for cache maintenance purpose */
 ALIGN_32BYTES(uint32_t L8_CLUT[ITERATION]);
 ALIGN_32BYTES(uint32_t  buffer[LCD_X_SIZE * LCD_Y_SIZE / 4]);
@@ -52,10 +52,12 @@ uint16_t SizeTable[][6]={{600, 252}, {500, 220},{400, 200},{300, 180},{200, 150}
 uint16_t XSize = 600;
 uint16_t YSize = 252;
 
+uint32_t x_size, y_size;
+
 uint32_t  CurrentZoom = 100;
 uint32_t  DirectionZoom = 0;
 
-TS_StateTypeDef TS_State;
+TS_State_t TS_State;
 __IO uint8_t TouchdOn = 0;
 __IO uint8_t TouchReleased = 0;
 __IO uint8_t isplaying = 1;
@@ -95,7 +97,6 @@ static void DMA2D_CopyButton(uint32_t Button, uint32_t *pDst);
 static void LCD_BriefDisplay(void);
 static void Touch_Handler(void);
 static void print_Size(void);
-static void EXTI9_5_IRQHandler_Config(void);
 void Error_Handler(void);
 
 
@@ -147,25 +148,26 @@ int main(void)
 
  /*##-1- LCD Configuration ##################################################*/
   /* Initialize the LCD   */
-  BSP_LCD_Init();
-
-  BSP_LCD_LayerDefaultInit(0, LCD_FRAME_BUFFER);
-  BSP_LCD_SelectLayer(0);
-
-
+  BSP_LCD_Init(0, LCD_ORIENTATION_LANDSCAPE);
+  GUI_SetFuncDriver(&LCD_Driver);
+  GUI_SetLayer(0);
   LCD_BriefDisplay();
 
+  BSP_LCD_GetXSize(0, &x_size);
+  BSP_LCD_GetYSize(0, &y_size);
   /*##-2- Initialize the Touch Screen ##################################################*/
-  BSP_TS_Init(LCD_X_SIZE, LCD_Y_SIZE);
+  hTS->Width = x_size;
+  hTS->Height = y_size;
+  hTS->Orientation = TS_SWAP_NONE;
+  hTS->Accuracy = 0;
+  BSP_TS_Init(0, hTS);
+  BSP_TS_EnableIT(0);
   TS_State.TouchDetected = 0;
-  BSP_TS_ITConfig();
-  BSP_TS_ITClear();
-  EXTI9_5_IRQHandler_Config();
 
 #if (USE_VOS0_480MHZ_OVERCLOCK == 1)
-  EXTI15_10_IRQHandler_Config();
-#endif /* (USE_VOS0_480MHZ_OVERCLOCK == 1) */
-
+  /* Configure the Tamper push-button in EXTI Mode */
+  BSP_PB_Init(BUTTON_TAMPER, BUTTON_MODE_EXTI);
+#endif /*USE_VOS0_480MHZ_OVERCLOCK*/
 
   /* Init xsize and ysize used by fractal algo */
   XSize = SizeTable[SizeIndex][0];
@@ -206,17 +208,17 @@ int main(void)
       BSP_LED_Off(LED1);
 
       sprintf((char*)text, "%lu ms",score_fpu);
-      BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
-      BSP_LCD_DisplayStringAt(440 + 32, 370 + 68 , (uint8_t *)"         ", LEFT_MODE);
-      BSP_LCD_DisplayStringAt(440 + 32, 370 + 68 , (uint8_t *)text, LEFT_MODE);
+      GUI_SetTextColor(GUI_COLOR_WHITE);
+      GUI_DisplayStringAt(440 + 32, 370 + 68 , (uint8_t *)"         ", LEFT_MODE);
+      GUI_DisplayStringAt(440 + 32, 370 + 68 , (uint8_t *)text, LEFT_MODE);
 
       sprintf((char*)text, "Zoom : %lu",CurrentZoom);
-      BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
-      BSP_LCD_DisplayStringAt(440 + 8 , 370 + 8 , (uint8_t *)"           ", LEFT_MODE);
-      BSP_LCD_DisplayStringAt(440 + 8 , 370 + 8 , (uint8_t *)text, LEFT_MODE);
+      GUI_SetTextColor(GUI_COLOR_WHITE);
+      GUI_DisplayStringAt(440 + 8 , 370 + 8 , (uint8_t *)"           ", LEFT_MODE);
+      GUI_DisplayStringAt(440 + 8 , 370 + 8 , (uint8_t *)text, LEFT_MODE);
 #if (USE_VOS0_480MHZ_OVERCLOCK == 1)
       sprintf((char*)text,"System Clock = %lu MHz",SystemClock_MHz);
-      BSP_LCD_DisplayStringAt(2, 50, (uint8_t *)text, CENTER_MODE);
+      GUI_DisplayStringAt(2, 50, (uint8_t *)text, CENTER_MODE);
 #endif /* (USE_VOS0_480MHZ_OVERCLOCK == 1) */
 
 
@@ -255,7 +257,29 @@ int main(void)
 
   }
 }
+/**
+  * @brief  BSP TS Callback.
+  * @param  Instance  TS instance. Could be only 0.
+  * @retval None.
+  */
+void BSP_TS_Callback(uint32_t Instance)
+{
+    /* Get the IT status register value */
+    BSP_TS_GetState(0, &TS_State);
 
+    if(TS_State.TouchDetected)
+    {
+      if(TouchdOn < 4)
+      {
+        TouchdOn++;
+      }
+      else /*TouchReleased */
+      {
+        TouchdOn = 0;
+        TouchReleased = 1;
+      }
+    }
+}
 static void Touch_Handler(void)
 {
   if(TouchReleased != 0)
@@ -263,10 +287,10 @@ static void Touch_Handler(void)
     TouchReleased = 0;
 
     /*************************Pause/Play buttons *********************/
-    if((TS_State.x + SCREEN_SENSTIVITY >= PLAY_PAUSE_BUTTON_XPOS) && \
-      (TS_State.x <= (PLAY_PAUSE_BUTTON_XPOS + PLAY_PAUSE_BUTTON_WIDTH + SCREEN_SENSTIVITY)) && \
-        (TS_State.y + SCREEN_SENSTIVITY >= PLAY_PAUSE_BUTTON_YPOS) && \
-          (TS_State.y <= (PLAY_PAUSE_BUTTON_YPOS + PLAY_PAUSE_BUTTON_HEIGHT + SCREEN_SENSTIVITY)))
+    if((TS_State.TouchX + SCREEN_SENSTIVITY >= PLAY_PAUSE_BUTTON_XPOS) && \
+      (TS_State.TouchX <= (PLAY_PAUSE_BUTTON_XPOS + PLAY_PAUSE_BUTTON_WIDTH + SCREEN_SENSTIVITY)) && \
+        (TS_State.TouchY + SCREEN_SENSTIVITY >= PLAY_PAUSE_BUTTON_YPOS) && \
+          (TS_State.TouchY <= (PLAY_PAUSE_BUTTON_YPOS + PLAY_PAUSE_BUTTON_HEIGHT + SCREEN_SENSTIVITY)))
     {
       isplaying = 1 - isplaying;
 
@@ -282,10 +306,10 @@ static void Touch_Handler(void)
       DMA2D_Init(XSize, YSize);
     }
     /*************************Zoom In button *********************/
-    else if((TS_State.x + SCREEN_SENSTIVITY >= ZOOM_IN_BUTTON_XPOS) && \
-      (TS_State.x <= (ZOOM_IN_BUTTON_XPOS + ZOOM_BUTTON_WIDTH + SCREEN_SENSTIVITY)) && \
-        (TS_State.y + SCREEN_SENSTIVITY >= ZOOM_IN_BUTTON_YPOS) && \
-          (TS_State.y <= (ZOOM_IN_BUTTON_YPOS + ZOOM_BUTTON_HEIGHT + SCREEN_SENSTIVITY)))
+    else if((TS_State.TouchX + SCREEN_SENSTIVITY >= ZOOM_IN_BUTTON_XPOS) && \
+      (TS_State.TouchX <= (ZOOM_IN_BUTTON_XPOS + ZOOM_BUTTON_WIDTH + SCREEN_SENSTIVITY)) && \
+        (TS_State.TouchY + SCREEN_SENSTIVITY >= ZOOM_IN_BUTTON_YPOS) && \
+          (TS_State.TouchY <= (ZOOM_IN_BUTTON_YPOS + ZOOM_BUTTON_HEIGHT + SCREEN_SENSTIVITY)))
     {
       if (SizeIndex > 0)
       {
@@ -305,12 +329,12 @@ static void Touch_Handler(void)
         }
 
         /*Clear Fractal Display area */
-        BSP_LCD_SetBackColor(LCD_COLOR_BLACK);
-        BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
-        BSP_LCD_FillRect(2, 112 + 1, 640 - 4, 254);
+        GUI_SetBackColor(GUI_COLOR_BLACK);
+        GUI_SetTextColor(GUI_COLOR_BLACK);
+        GUI_FillRect( 2, 112 + 1, 640 - 4, 254,GUI_COLOR_BLACK);
 
-        BSP_LCD_SetBackColor(0xFF0080FF);
-        BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
+        GUI_SetBackColor(0xFF0080FF);
+        GUI_SetTextColor(GUI_COLOR_WHITE);
 
         print_Size();
         CurrentZoom = 100;
@@ -320,10 +344,10 @@ static void Touch_Handler(void)
       }
     }
     /*************************Zoom Out button *********************/
-    else if((TS_State.x + SCREEN_SENSTIVITY >= ZOOM_OUT_BUTTON_XPOS) && \
-      (TS_State.x <= (ZOOM_OUT_BUTTON_XPOS + ZOOM_BUTTON_WIDTH + SCREEN_SENSTIVITY)) && \
-        (TS_State.y + SCREEN_SENSTIVITY >= ZOOM_OUT_BUTTON_YPOS) && \
-          (TS_State.y <= (ZOOM_OUT_BUTTON_YPOS + ZOOM_BUTTON_HEIGHT + SCREEN_SENSTIVITY)))
+    else if((TS_State.TouchX + SCREEN_SENSTIVITY >= ZOOM_OUT_BUTTON_XPOS) && \
+      (TS_State.TouchX <= (ZOOM_OUT_BUTTON_XPOS + ZOOM_BUTTON_WIDTH + SCREEN_SENSTIVITY)) && \
+        (TS_State.TouchY + SCREEN_SENSTIVITY >= ZOOM_OUT_BUTTON_YPOS) && \
+          (TS_State.TouchY <= (ZOOM_OUT_BUTTON_YPOS + ZOOM_BUTTON_HEIGHT + SCREEN_SENSTIVITY)))
     {
       if (SizeIndex < 5)
       {
@@ -343,12 +367,12 @@ static void Touch_Handler(void)
         }
 
         /*Clear Fractal Display area */
-        BSP_LCD_SetBackColor(LCD_COLOR_BLACK);
-        BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
-        BSP_LCD_FillRect(2, 112 + 1, 640 - 4, 254);
+        GUI_SetBackColor(GUI_COLOR_BLACK);
+        GUI_SetTextColor(GUI_COLOR_BLACK);
+        GUI_FillRect( 2, 112 + 1, 640 - 4, 254,GUI_COLOR_BLACK);
 
-        BSP_LCD_SetBackColor(0xFF0080FF);
-        BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
+        GUI_SetBackColor(0xFF0080FF);
+        GUI_SetTextColor(GUI_COLOR_WHITE);
 
         print_Size();
         CurrentZoom = 100;
@@ -418,97 +442,28 @@ static void SystemClockChange_Handler(void)
   }
 }
 #endif /* (USE_VOS0_480MHZ_OVERCLOCK == 1) */
+
 /**
-  * @brief  EXTI line detection callbacks
-  * @param  GPIO_Pin: Specifies the pins connected EXTI line
+  * @brief  Button Callback
+  * @param  Button Specifies the pin connected EXTI line
   * @retval None
   */
-void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
-{
-  if (GPIO_Pin == MFX_IRQOUT_PIN)
-  {
-    /* Get the IT status register value */
-    BSP_TS_GetState(&TS_State);
-
-    if(TS_State.TouchDetected)
-    {
-      if(TouchdOn < 4)
-      {
-        TouchdOn++;
-      }
-      else /*TouchReleased */
-      {
-        TouchdOn = 0;
-        TouchReleased = 1;
-      }
-    }
-    BSP_TS_ITClear();
-  }
 #if (USE_VOS0_480MHZ_OVERCLOCK == 1)
-  else if (GPIO_Pin == TAMPER_BUTTON_PIN)
+void BSP_PB_Callback(Button_TypeDef Button)
+{
+  if(Button == BUTTON_TAMPER)
   {
     SystemClock_changed = 1;
   }
-#endif /* (USE_VOS0_480MHZ_OVERCLOCK == 1) */
 }
-
-/**
-  * @brief  Configures EXTI lines 9 to 5 (connected to PI.8 pin for MFX out) in interrupt mode
-  * @param  None
-  * @retval None
-  */
-static void EXTI9_5_IRQHandler_Config(void)
-{
-  GPIO_InitTypeDef   GPIO_InitStructure;
-
-  /* Enable GPIOI clock */
-  MFX_IRQOUT_GPIO_CLK_ENABLE();
-
-  /* Configure PC.13 pin as input floating */
-  GPIO_InitStructure.Mode = GPIO_MODE_IT_RISING;
-  GPIO_InitStructure.Pull = GPIO_NOPULL;
-  GPIO_InitStructure.Pin = MFX_IRQOUT_PIN;
-  HAL_GPIO_Init(MFX_IRQOUT_GPIO_PORT, &GPIO_InitStructure);
-
-  /* Enable and set EXTI lines 9 to 5 Interrupt to the lowest priority */
-  HAL_NVIC_SetPriority(MFX_IRQOUT_EXTI_IRQn, 0x0F, 0xF);
-  HAL_NVIC_EnableIRQ(MFX_IRQOUT_EXTI_IRQn);
-}
-
-#if (USE_VOS0_480MHZ_OVERCLOCK == 1)
-/**
-  * @brief  Configures EXTI lines 15 to 10 (connected to PC.13 pin) in interrupt mode
-  * @param  None
-  * @retval None
-  */
-static void EXTI15_10_IRQHandler_Config(void)
-{
-  GPIO_InitTypeDef   GPIO_InitStructure;
-
-  /* Enable GPIOC clock */
-  __HAL_RCC_GPIOC_CLK_ENABLE();
-
-  /* Configure PC.13 pin as the EXTI input event line in interrupt mode for both CPU1 and CPU2*/
-  GPIO_InitStructure.Mode = GPIO_MODE_IT_RISING;    /* current CPU (CM7) config in IT rising */
-  GPIO_InitStructure.Pull = GPIO_NOPULL;
-  GPIO_InitStructure.Pin = GPIO_PIN_13;
-  HAL_GPIO_Init(GPIOC, &GPIO_InitStructure);
-
-  /* Enable and set EXTI lines 15 to 10 Interrupt to the lowest priority */
-  HAL_NVIC_SetPriority(EXTI15_10_IRQn, 0xF, 0xF);
-  HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
-}
-#endif /* (USE_VOS0_480MHZ_OVERCLOCK == 1) */
+#endif
 
 static void print_Size(void)
 {
-
   sprintf((char*)text, "%u x %u",XSize,YSize);
-
-
-  BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
-  BSP_LCD_DisplayStringAt(64, 370 + 24 , (uint8_t *)"Size", LEFT_MODE);
-  BSP_LCD_DisplayStringAt(24, 370 + 48 , (uint8_t *)text, LEFT_MODE);
+  GUI_SetTextColor(GUI_COLOR_WHITE);
+  GUI_DisplayStringAt(64, 370 + 24 , (uint8_t *)"Size", LEFT_MODE);
+  GUI_DisplayStringAt(24, 370 + 48 , (uint8_t *)text, LEFT_MODE);
 
 }
 
@@ -573,50 +528,48 @@ static void LCD_BriefDisplay(void)
   char message[64];
 #endif
 
-  BSP_LCD_SetFont(&Font24);
-  BSP_LCD_Clear(LCD_COLOR_WHITE);
-  BSP_LCD_SetBackColor(0xFF0080FF);
-  BSP_LCD_SetTextColor(0xFF0080FF);
-  BSP_LCD_FillRect(2, 2, 640 - 4, 112 - 2);
-
+  GUI_SetFont(&Font24);
+  GUI_Clear(GUI_COLOR_WHITE);
+  GUI_FillRect(2, 2, 640 - 4, 112 - 2,0xFF0080FF);
+  GUI_SetBackColor(0xFF0080FF);
   /*Title*/
-  BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
-  BSP_LCD_DisplayStringAt(2, 24, (uint8_t *)"STM32H7xx Fractal Benchmark", CENTER_MODE);
-  BSP_LCD_DisplayStringAt(2, 72, (uint8_t *)SCORE_FPU_MODE, CENTER_MODE);
+  GUI_SetTextColor(GUI_COLOR_WHITE);
+  GUI_DisplayStringAt(2, 24, (uint8_t *)"STM32H7xx Fractal Benchmark", CENTER_MODE);
+  GUI_DisplayStringAt(2, 72, (uint8_t *)SCORE_FPU_MODE, CENTER_MODE);
 #if (USE_VOS0_480MHZ_OVERCLOCK == 1)
   sprintf((char*)message,"System Clock = %lu MHz",SystemClock_MHz);
-  BSP_LCD_DisplayStringAt(2, 50, (uint8_t *)message, CENTER_MODE);
-  BSP_LCD_SetFont(&Font12);
-  BSP_LCD_DisplayStringAt(2, 94, (uint8_t *)"Press Tamper button to switch the System Clock 400MHz/480MHz", CENTER_MODE);
-  BSP_LCD_SetFont(&Font24);
+  GUI_DisplayStringAt(2, 50, (uint8_t *)message, CENTER_MODE);
+  GUI_SetFont(&Font12);
+  GUI_DisplayStringAt(2, 94, (uint8_t *)"Press Tamper button to switch the System Clock 400MHz/480MHz", CENTER_MODE);
+  GUI_SetFont(&Font24);
 
 #else
-  BSP_LCD_DisplayStringAt(2, 50, (uint8_t *)"System Clock = 400MHz", CENTER_MODE);
+  GUI_DisplayStringAt(2, 50, (uint8_t *)"System Clock = 400MHz", CENTER_MODE);
 #endif
 
   /*Fractal Display area */
-  BSP_LCD_SetBackColor(LCD_COLOR_BLACK);
-  BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
-  BSP_LCD_FillRect(2, 112 + 1, 640 - 4, 254);
+  GUI_SetBackColor(GUI_COLOR_BLACK);
+  GUI_SetTextColor(GUI_COLOR_BLACK);
+  GUI_FillRect(2, 112 + 1, 640 - 4, 254,GUI_COLOR_BLACK);
 
 
 
   /*image Size*/
-  BSP_LCD_SetBackColor(0xFF0080FF);
-  BSP_LCD_SetTextColor(0xFF0080FF);
-  BSP_LCD_FillRect(2, 370, 180 - 2, 112 - 4);
+  GUI_SetBackColor(0xFF0080FF);
+  GUI_SetTextColor(0xFF0080FF);
+  GUI_FillRect(2, 370, 180 - 2, 112 - 4,0xFF0080FF);
 
   /*Button area */
-  BSP_LCD_SetBackColor(0xFF0080FF);
-  BSP_LCD_SetTextColor(0xFF0080FF);
-  BSP_LCD_FillRect(182, 370, 260 - 2, 112 - 4);
+  GUI_SetBackColor(0xFF0080FF);
+  GUI_SetTextColor(0xFF0080FF);
+  GUI_FillRect(182, 370, 260 - 2, 112 - 4,0xFF0080FF);
 
   /*Calculation Time*/
-  BSP_LCD_SetBackColor(0xFF0080FF);
-  BSP_LCD_SetTextColor(0xFF0080FF);
-  BSP_LCD_FillRect(442, 370, 200 - 4, 112 - 4);
-  BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
-  BSP_LCD_DisplayStringAt(440 + 32, 370 + 48 , (uint8_t *)"Duration:", LEFT_MODE);
+  GUI_SetBackColor(0xFF0080FF);
+  GUI_SetTextColor(0xFF0080FF);
+  GUI_FillRect(442, 370, 200 - 4, 112 - 4,0xFF0080FF);
+  GUI_SetTextColor(GUI_COLOR_WHITE);
+  GUI_DisplayStringAt(440 + 32, 370 + 48 , (uint8_t *)"Duration:", LEFT_MODE);
 
 }
 

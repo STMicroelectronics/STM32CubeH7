@@ -1,34 +1,18 @@
 /**
   ******************************************************************************
-  * @file    Core/CM7/Inc/stm32h7xx_hal_conf.h
+  * @file    stm32h7xx_hal_conf.h
   * @author  MCD Application Team
-  * @brief   HAL configuration file for Cortex-M7.
+  * @brief   HAL configuration file.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
+  * <h2><center>&copy; Copyright (c) 2018 STMicroelectronics.
+  * All rights reserved.</center></h2>
   *
-  * Redistribution and use in source and binary forms, with or without modification,
-  * are permitted provided that the following conditions are met:
-  *   1. Redistributions of source code must retain the above copyright notice,
-  *      this list of conditions and the following disclaimer.
-  *   2. Redistributions in binary form must reproduce the above copyright notice,
-  *      this list of conditions and the following disclaimer in the documentation
-  *      and/or other materials provided with the distribution.
-  *   3. Neither the name of STMicroelectronics nor the names of its contributors
-  *      may be used to endorse or promote products derived from this software
-  *      without specific prior written permission.
-  *
-  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-  * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
-  * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-  * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-  * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-  * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  * This software component is licensed by ST under BSD 3-Clause license,
+  * the "License"; You may not use this file except in compliance with the
+  * License. You may obtain a copy of the License at:
+  *                        opensource.org/licenses/BSD-3-Clause
   *
   ******************************************************************************
   */
@@ -60,8 +44,8 @@
 /* #define HAL_DFSDM_MODULE_ENABLED */
 #define HAL_DMA_MODULE_ENABLED
 #define HAL_DMA2D_MODULE_ENABLED
-/* #define HAL_DSI_MODULE_ENABLED */
 /* #define HAL_ETH_MODULE_ENABLED */
+#define HAL_EXTI_MODULE_ENABLED
 /* #define HAL_FDCAN_MODULE_ENABLED */
 #define HAL_FLASH_MODULE_ENABLED
 #define HAL_GPIO_MODULE_ENABLED
@@ -85,6 +69,7 @@
 /* #define HAL_PCD_MODULE_ENABLED */
 #define HAL_PWR_MODULE_ENABLED
 #define HAL_QSPI_MODULE_ENABLED
+/* #define HAL_RAMECC_MODULE_ENABLED */  
 #define HAL_RCC_MODULE_ENABLED
 /* #define HAL_RNG_MODULE_ENABLED */
 #define HAL_RTC_MODULE_ENABLED
@@ -146,6 +131,12 @@
   #define LSE_STARTUP_TIMEOUT    ((uint32_t)5000)   /*!< Time out for LSE start up, in ms */
 #endif /* LSE_STARTUP_TIMEOUT */
 
+#if !defined  (LSI_VALUE) 
+  #define LSI_VALUE  ((uint32_t)32000)      /*!< LSI Typical Value in Hz*/
+#endif /* LSI_VALUE */                      /*!< Value of the Internal Low Speed oscillator in Hz
+                                              The real value may vary depending on the variations
+                                              in voltage and temperature.*/
+
 /**
   * @brief External clock source for I2S peripheral
   *        This value is used by the I2S HAL module to compute the I2S clock source
@@ -203,6 +194,10 @@
   #include "stm32h7xx_hal_dma.h"
 #endif /* HAL_DMA_MODULE_ENABLED */
 
+#ifdef HAL_MDMA_MODULE_ENABLED
+ #include "stm32h7xx_hal_mdma.h"
+#endif /* HAL_MDMA_MODULE_ENABLED */
+
 #ifdef HAL_HASH_MODULE_ENABLED
   #include "stm32h7xx_hal_hash.h"
 #endif /* HAL_HASH_MODULE_ENABLED */
@@ -215,10 +210,6 @@
   #include "stm32h7xx_hal_dma2d.h"
 #endif /* HAL_DMA2D_MODULE_ENABLED */
 
-#ifdef HAL_DSI_MODULE_ENABLED
-  #include "stm32h7xx_hal_dsi.h"
-#endif /* HAL_DSI_MODULE_ENABLED */
-
 #ifdef HAL_DFSDM_MODULE_ENABLED
   #include "stm32h7xx_hal_dfsdm.h"
 #endif /* HAL_DFSDM_MODULE_ENABLED */
@@ -226,6 +217,10 @@
 #ifdef HAL_ETH_MODULE_ENABLED
   #include "stm32h7xx_hal_eth.h"
 #endif /* HAL_ETH_MODULE_ENABLED */
+
+#ifdef HAL_EXTI_MODULE_ENABLED
+  #include "stm32h7xx_hal_exti.h"
+#endif /* HAL_EXTI_MODULE_ENABLED */
 
 #ifdef HAL_CORTEX_MODULE_ENABLED
   #include "stm32h7xx_hal_cortex.h"
@@ -295,10 +290,6 @@
  #include "stm32h7xx_hal_iwdg.h"
 #endif /* HAL_IWDG_MODULE_ENABLED */
 
-#ifdef HAL_MDMA_MODULE_ENABLED
- #include "stm32h7xx_hal_mdma.h"
-#endif /* HAL_MDMA_MODULE_ENABLED */
-
 #ifdef HAL_JPEG_MODULE_ENABLED
  #include "stm32h7xx_hal_jpeg.h"
 #endif /* HAL_JPEG_MODULE_ENABLED */
@@ -331,6 +322,10 @@
  #include "stm32h7xx_hal_qspi.h"
 #endif /* HAL_QSPI_MODULE_ENABLED */
 
+#ifdef HAL_RAMECC_MODULE_ENABLED
+ #include "stm32h7xx_hal_ramecc.h"
+#endif /* HAL_HCD_MODULE_ENABLED */
+   
 #ifdef HAL_RNG_MODULE_ENABLED
  #include "stm32h7xx_hal_rng.h"
 #endif /* HAL_RNG_MODULE_ENABLED */
@@ -409,11 +404,11 @@
   *         If expr is true, it returns no value.
   * @retval None
   */
-  #define assert_param(expr) ((expr) ? (void)0 : assert_failed((uint8_t *)__FILE__, __LINE__))
+  #define assert_param(expr) ((expr) ? (void)0U : assert_failed((uint8_t *)__FILE__, __LINE__))
 /* Exported functions ------------------------------------------------------- */
   void assert_failed(uint8_t* file, uint32_t line);
 #else
-  #define assert_param(expr) ((void)0)
+  #define assert_param(expr) ((void)0U)
 #endif /* USE_FULL_ASSERT */
 
 #ifdef __cplusplus

@@ -159,16 +159,16 @@ static void LeaveCriticalSection(void)
 static DRESULT SD_read(BYTE lun, BYTE *buff, DWORD sector, UINT count)
 {
   DRESULT res = RES_OK;
-  uint8_t sd_error = MSD_OK;
+  uint8_t sd_error = BSP_ERROR_NONE;
   
   EnterCriticalSection();
   sd_error = BSP_SD_ReadBlocks((uint32_t*)buff,
                                (uint32_t) (sector),
                                count, SD_TIMEOUT);
-  if(sd_error == MSD_OK)
+  if(sd_error == BSP_ERROR_NONE)
   {
     /* wait until the read operation is finished */
-    while(BSP_SD_GetCardState()!= MSD_OK)
+    while(BSP_SD_GetCardState(0)!= BSP_ERROR_NONE)
     {
       __NOP();
     }
@@ -194,7 +194,7 @@ static DSTATUS SD_CheckStatus(BYTE lun)
     Stat &= ~STA_NOINIT;
   }
 #else /* _FS_REENTRANT == 0 */
-  if(BSP_SD_GetCardState() == SD_TRANSFER_OK)
+  if(BSP_SD_GetCardState(0) == SD_TRANSFER_OK)
   {
     Stat &= ~STA_NOINIT;
   }
@@ -219,7 +219,7 @@ static DSTATUS SD_initialize(BYTE lun)
   {
 #if !defined(DISABLE_SD_INIT)
 
-    if(BSP_SD_Init() == MSD_OK)
+    if(BSP_SD_Init(0) == BSP_ERROR_NONE)
     {
       Stat = SD_CheckStatus(lun);
     }
@@ -294,9 +294,9 @@ static DRESULT SD_read_dma(BYTE lun, BYTE *buff, DWORD sector, UINT count)
 #endif
     /* Fast path cause destination buffer is correctly aligned */
     uint8_t ret = BSP_SD_ReadBlocks_DMA((uint32_t*)buff, (uint32_t)(sector), count);
-    configASSERT(ret == MSD_OK);
+    configASSERT(ret == BSP_ERROR_NONE);
 
-    if (ret == MSD_OK)
+    if (ret == BSP_ERROR_NONE)
     {
       /* wait for a message from the queue or a timeout */
       event = osMessageGet(SDQueueID, SD_TIMEOUT);
@@ -323,9 +323,9 @@ static DRESULT SD_read_dma(BYTE lun, BYTE *buff, DWORD sector, UINT count)
     for (i = 0; i < count; i++)
     {
       ret = BSP_SD_ReadBlocks_DMA((uint32_t*)scratch, (uint32_t)sector++, 1);
-      configASSERT(ret == MSD_OK);
+      configASSERT(ret == BSP_ERROR_NONE);
 
-      if (ret == MSD_OK)
+      if (ret == BSP_ERROR_NONE)
       {
         /* wait for a message from the queue or a timeout */
         event = osMessageGet(SDQueueID, SD_TIMEOUT);
@@ -350,7 +350,7 @@ static DRESULT SD_read_dma(BYTE lun, BYTE *buff, DWORD sector, UINT count)
       }
     }
 
-    if ((i == count) && (ret == MSD_OK))
+    if ((i == count) && (ret == BSP_ERROR_NONE))
       res = RES_OK;
   }
 
@@ -375,16 +375,16 @@ static DRESULT SD_read_dma(BYTE lun, BYTE *buff, DWORD sector, UINT count)
 static DRESULT SD_write(BYTE lun, const BYTE *buff, DWORD sector, UINT count)
 {
   DRESULT res = RES_OK;
-  uint8_t sd_error = MSD_OK;
+  uint8_t sd_error = BSP_ERROR_NONE;
 
   EnterCriticalSection();
   sd_error = BSP_SD_WriteBlocks((uint32_t*)buff,
                                 (uint32_t)(sector),
                                 count, SD_TIMEOUT);
-  if(sd_error == MSD_OK)
+  if(sd_error == BSP_ERROR_NONE)
   {
 	/* wait until the Write operation is finished */
-    while(BSP_SD_GetCardState() != MSD_OK)
+    while(BSP_SD_GetCardState(0) != BSP_ERROR_NONE)
     {
       __NOP();
     }    
@@ -428,7 +428,7 @@ static DRESULT SD_write_dma(BYTE lun, const BYTE *buff, DWORD sector, UINT count
 #endif
     if(BSP_SD_WriteBlocks_DMA((uint32_t*)buff,
                               (uint32_t) (sector),
-                              count) == MSD_OK)
+                              count) == BSP_ERROR_NONE)
     {
       /* Get the message from the queue */
       event = osMessageGet(SDQueueID, SD_TIMEOUT);
@@ -441,7 +441,7 @@ static DRESULT SD_write_dma(BYTE lun, const BYTE *buff, DWORD sector, UINT count
           /* block until SDIO IP is ready or a timeout occur */
           while(timer > osKernelSysTick())
           {
-            if (BSP_SD_GetCardState() == SD_TRANSFER_OK)
+            if (BSP_SD_GetCardState(0) == SD_TRANSFER_OK)
             {
               res = RES_OK;
               break;
@@ -465,7 +465,7 @@ static DRESULT SD_write_dma(BYTE lun, const BYTE *buff, DWORD sector, UINT count
 
     for (i = 0; i < count; i++) {
       ret = BSP_SD_WriteBlocks_DMA((uint32_t*)scratch, (uint32_t)sector++, 1);
-      if (ret == MSD_OK) {
+      if (ret == BSP_ERROR_NONE) {
         /* wait for a message from the queue or a timeout */
         event = osMessageGet(SDQueueID, SD_TIMEOUT);
 
@@ -482,7 +482,7 @@ static DRESULT SD_write_dma(BYTE lun, const BYTE *buff, DWORD sector, UINT count
       }
     }
 
-    if ((i == count) && (ret == MSD_OK))
+    if ((i == count) && (ret == BSP_ERROR_NONE))
       res = RES_OK;
   }
 #endif
@@ -519,21 +519,21 @@ static DRESULT SD_ioctl(BYTE lun, BYTE cmd, void *buff)
 
     /* Get number of sectors on the disk (DWORD) */
   case GET_SECTOR_COUNT :
-    BSP_SD_GetCardInfo(&CardInfo);
+    BSP_SD_GetCardInfo(0,&CardInfo);
     *(DWORD*)buff = CardInfo.LogBlockNbr;
     res = RES_OK;
     break;
 
     /* Get R/W sector size (WORD) */
   case GET_SECTOR_SIZE :
-    BSP_SD_GetCardInfo(&CardInfo);
+    BSP_SD_GetCardInfo(0,&CardInfo);
     *(WORD*)buff = CardInfo.LogBlockSize;
     res = RES_OK;
     break;
 
     /* Get erase block size in unit of sector (DWORD) */
   case GET_BLOCK_SIZE :
-    BSP_SD_GetCardInfo(&CardInfo);
+    BSP_SD_GetCardInfo(0,&CardInfo);
     *(DWORD*)buff = CardInfo.LogBlockSize / SD_DEFAULT_BLOCK_SIZE;
 	res = RES_OK;
     break;

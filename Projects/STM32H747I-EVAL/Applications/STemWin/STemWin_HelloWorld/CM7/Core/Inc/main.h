@@ -28,9 +28,9 @@
 /* EVAL includes component */
 #include "stm32h747i_eval.h"
 #include "stm32h747i_eval_ts.h"
-#include "stm32h747i_eval_lcd.h"
 #include "stm32h747i_eval_sdram.h"
-
+#include "stm32h747i_eval_bus.h"
+#include "otm8009a.h"
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
 

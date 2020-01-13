@@ -36,7 +36,7 @@
 
 
 /* Private variables ---------------------------------------------------------*/ 
-extern LTDC_HandleTypeDef hltdc_discovery;
+extern LTDC_HandleTypeDef hlcd_ltdc;
 DMA2D_HandleTypeDef       DMA2D_Handle;
 __IO uint32_t pending_buffer = 0;
 
@@ -51,22 +51,19 @@ void LCD_BlendImage(uint32_t *pSrc, uint32_t *pDst, uint32_t Xpos, uint32_t Ypos
 void InitMenuDisplay(void)
 {  
   /* Initialize the LCD */
-  BSP_LCD_Init();
+  BSP_LCD_Init(0, LCD_ORIENTATION_LANDSCAPE);
   
-  BSP_LCD_LayerDefaultInit(0, LCD_FB_START_ADDRESS); 
   
-  /* Set LCD Foreground Layer  */
-  BSP_LCD_SelectLayer(0);
+  BSP_LCD_SetBrightness(0, 100);
+  BSP_LCD_DisplayOn(0);
   
-  BSP_LCD_SetBrightness(100);
-  BSP_LCD_DisplayOn();
-  
+  GUI_SetFuncDriver(&LCD_Driver);
   /* Set LCD Font  */
-  BSP_LCD_SetFont(&Font16);
+  GUI_SetFont(&Font16);
   
   /* Clear the LCD */
-  BSP_LCD_Clear(0x00000000);
-  BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
+  GUI_Clear(GUI_COLOR_BLACK);
+  GUI_SetTextColor(GUI_COLOR_WHITE);
   
   /* Enable IRQ */
   HAL_NVIC_SetPriority(LTDC_IRQn, 0x0F, 0x0F); 
@@ -87,7 +84,7 @@ void DisplayButton(ButtonWidgetTypeDef *pButton, uint32_t *pDst)
   uint32_t inputOffset;
   uint32_t X_size;
   
-  X_size = BSP_LCD_GetXSize();
+  BSP_LCD_GetXSize(0, &X_size);
   inputOffset =  X_size - pButton->buttonParams.Width;
   
   /* Blend switch buttons image on the Screen */
@@ -122,12 +119,14 @@ void DisplayMenuImages(BackgroundWidgetTypeDef *pImage,uint32_t buttonsNumber)
   uint32_t i;
   uint32_t inputOffset;
   uint32_t X_size;
+  uint32_t Y_size;
   
-  X_size = BSP_LCD_GetXSize();
-
+  BSP_LCD_GetXSize(0, &X_size);
+  BSP_LCD_GetYSize(0, &Y_size);
+  
   pending_buffer = 1;
   /* Set LTDC Line Event  */
-  HAL_LTDC_ProgramLineEvent(&hltdc_discovery, BSP_LCD_GetYSize()/2);  
+  HAL_LTDC_ProgramLineEvent(&hlcd_ltdc, Y_size/2);  
   while(pending_buffer != 0)
   {
   }
@@ -150,11 +149,11 @@ void LCD_BlendImage(uint32_t *pSrc, uint32_t *pDst, uint32_t Xpos, uint32_t Ypos
   uint32_t destination;
   uint32_t X_size;
   
-  X_size = BSP_LCD_GetXSize();
+  BSP_LCD_GetXSize(0, &X_size);
   
   pending_buffer = 1;
   /* Set LTDC Line Event  */
-  HAL_LTDC_ProgramLineEvent(&hltdc_discovery, 0);  
+  HAL_LTDC_ProgramLineEvent(&hlcd_ltdc, 0);  
   while(pending_buffer != 0) {}
 
   /* Init DMA2D */
@@ -197,10 +196,10 @@ void LCD_CopyImage(uint32_t *pSrc,uint32_t *pDst, uint32_t Xpos, uint32_t Ypos, 
   uint32_t destination;
   uint32_t X_size;
   
-  X_size = BSP_LCD_GetXSize();
+  BSP_LCD_GetXSize(0, &X_size);
   pending_buffer = 1;
   /* Set LTDC Line Event  */
-  HAL_LTDC_ProgramLineEvent(&hltdc_discovery, 0);  
+  HAL_LTDC_ProgramLineEvent(&hlcd_ltdc, 0);  
   while(pending_buffer != 0) {}
   
   

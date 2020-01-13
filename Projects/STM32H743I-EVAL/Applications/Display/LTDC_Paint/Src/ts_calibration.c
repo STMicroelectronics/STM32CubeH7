@@ -32,7 +32,8 @@
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-static TS_StateTypeDef  TS_State;
+static TS_State_t  TS_State;
+static TS_Init_t TS_Init;
 static int16_t A1, A2, B1, B2;
 static int16_t aPhysX[2], aPhysY[2], aLogX[2], aLogY[2];
 static uint8_t Calibration_Done = 0;
@@ -57,24 +58,28 @@ void Touchscreen_Calibration(void)
 
   TouchscreenCalibration_SetHint();
   
-  status = BSP_TS_Init(BSP_LCD_GetXSize(), BSP_LCD_GetYSize());
+  uint32_t XSize = 0, YSize = 0;
+  BSP_LCD_GetXSize(0, &XSize);
+  BSP_LCD_GetYSize(0, &YSize);
+    
+  status = BSP_TS_Init(0, &TS_Init);
   
-  if (status != TS_OK)
+  if (status != BSP_ERROR_NONE)
   {
-    BSP_LCD_SetBackColor(LCD_COLOR_WHITE); 
-    BSP_LCD_SetTextColor(LCD_COLOR_RED);
-    BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()- 95, (uint8_t *)"ERROR", CENTER_MODE);
-    BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()- 80, (uint8_t *)"Touchscreen cannot be initialized", CENTER_MODE);
+    GUI_SetBackColor(GUI_COLOR_WHITE); 
+    GUI_SetTextColor(GUI_COLOR_RED);
+    GUI_DisplayStringAt(0, XSize - 95, (uint8_t *)"ERROR", CENTER_MODE);
+    GUI_DisplayStringAt(0,YSize - 80, (uint8_t *)"Touchscreen cannot be initialized", CENTER_MODE);
   }
   
   while (1)
   {
-    if (status == TS_OK)
+    if (status == BSP_ERROR_NONE)
     {
       aLogX[0] = 15;
       aLogY[0] = 15;
-      aLogX[1] = BSP_LCD_GetXSize() - 15;
-      aLogY[1] = BSP_LCD_GetYSize() - 15;
+      aLogX[1] = XSize - 15;
+      aLogY[1] = YSize - 15;
       
       for (i = 0; i < 2; i++) 
       {
@@ -102,16 +107,20 @@ void Touchscreen_Calibration(void)
 static void TouchscreenCalibration_SetHint(void)
 {
   /* Clear the LCD */ 
-  BSP_LCD_Clear(LCD_COLOR_WHITE);
+  GUI_Clear(GUI_COLOR_WHITE);
   
   /* Set Touchscreen Demo description */
-  BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
-  BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
+  GUI_SetTextColor(GUI_COLOR_BLACK);
+  GUI_SetBackColor(GUI_COLOR_WHITE);
 
-  BSP_LCD_SetFont(&Font12);
-  BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()/2 - 27, (uint8_t *)"Before using the Touchscreen", CENTER_MODE);
-  BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()/2 - 12, (uint8_t *)"you need to calibrate it.", CENTER_MODE);
-  BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()/2 + 3, (uint8_t *)"Press on the black circles", CENTER_MODE);
+  uint32_t XSize = 0, YSize = 0;
+  BSP_LCD_GetXSize(0, &XSize);
+  BSP_LCD_GetYSize(0, &YSize);
+    
+  GUI_SetFont(&Font12);
+  GUI_DisplayStringAt(0, YSize/2 - 27, (uint8_t *)"Before using the Touchscreen", CENTER_MODE);
+  GUI_DisplayStringAt(0, YSize/2 - 12, (uint8_t *)"you need to calibrate it.", CENTER_MODE);
+  GUI_DisplayStringAt(0, YSize/2 + 3, (uint8_t *)"Press on the black circles", CENTER_MODE);
 }
 
 /**
@@ -125,22 +134,22 @@ static void TouchscreenCalibration_SetHint(void)
 static void GetPhysValues(int16_t LogX, int16_t LogY, int16_t *pPhysX, int16_t *pPhysY) 
 {
   /* Draw the ring */
-  BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
-  BSP_LCD_FillCircle(LogX, LogY, 5);
-  BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
-  BSP_LCD_FillCircle(LogX, LogY, 2);
+  GUI_SetTextColor(GUI_COLOR_BLACK);
+  GUI_FillCircle(LogX, LogY, 5, GUI_COLOR_BLACK);
+  GUI_SetTextColor(GUI_COLOR_WHITE);
+  GUI_FillCircle(LogX, LogY, 2, GUI_COLOR_WHITE);
   
   /* Wait until touch is pressed */
   WaitForPressedState(1);
   
-  BSP_TS_GetState(&TS_State);
-  *pPhysX = TS_State.x;
-  *pPhysY = TS_State.y; 
+  BSP_TS_GetState(0, &TS_State);
+  *pPhysX = TS_State.TouchX;
+  *pPhysY = TS_State.TouchY; 
   
   /* Wait until touch is released */
   WaitForPressedState(0);
-  BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
-  BSP_LCD_FillCircle(LogX, LogY, 5);
+  GUI_SetTextColor(GUI_COLOR_WHITE);
+  GUI_FillCircle(LogX, LogY, 5, GUI_COLOR_WHITE);
 }
 
 /**
@@ -150,17 +159,17 @@ static void GetPhysValues(int16_t LogX, int16_t LogY, int16_t *pPhysX, int16_t *
   */
 static void WaitForPressedState(uint8_t Pressed) 
 {
-  TS_StateTypeDef  State;
+  TS_State_t  State;
   
   do 
   {
-    BSP_TS_GetState(&State);
+    BSP_TS_GetState(0, &State);
     HAL_Delay(10);
     if (State.TouchDetected == Pressed) 
     {
       uint16_t TimeStart = HAL_GetTick();
       do {
-        BSP_TS_GetState(&State);      
+        BSP_TS_GetState(0, &State);      
         HAL_Delay(10);
         if (State.TouchDetected != Pressed) 
         {

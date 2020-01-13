@@ -6,7 +6,7 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics.
+  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
   * All rights reserved.</center></h2>
   *
   * This software component is licensed by ST under BSD 3-Clause license,
@@ -30,53 +30,45 @@
   */
 
 /* Private typedef -----------------------------------------------------------*/
+BSP_DemoTypedef  BSP_examples[]=
+{
+  {Joystick_demo, "JOYSTICK", 0},
+  {LCD_demo, "LCD demo", 1},
+  {Touchscreen_demo1, "TOUCHSCREEN POLLING DEMO", 2},
+  {Touchscreen_demo2, "TOUCHSCREEN INTERRUPT DEMO",3},
+  {POTENTIOMETER_demo, "POTENTIOMETER", 4},
+  {AudioPlay_demo, "SET VOLUME/ SET SAMPLE RATE", 5},
+  {AudioRec_demo, "AudioRec_demo",6 },
+  {REC_PDM_demo,"PDM record",7},
+  {REC_SingleBuff_demo, "LOOPBACK: SINGLE BUFFERING", 8},
+  {REC_MultiBuff_demo, "LOOPBACK: MULTI BUFFERING", 9},
+  {QSPI_demo, "LOOPBACK: QSPI", 10},
+  {SD_POLLING_demo, "SD POLLING TEST", 11},
+  {SD_DMA_demo, "SD DMA TEST", 12},
+  {SD_IT_demo, "SD IT TEST", 13},
+  {EEPROM_demo, "EEPROM TEST", 14},
+  {NOR_demo, "NOR TEST", 15},
+  {SDRAM_demo, "SDRAM TEST", 16},
+  {SDRAM_DMA_demo, "SDRAM DMA TEST", 17},
+  {SRAM_demo, "SRAM TEST", 18},
+  {SRAM_DMA_demo, "SRAM DMA TEST", 19},
+};
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 uint8_t DemoIndex = 0;
 __IO uint8_t NbLoop = 1;
-
-/* Wave Player Pause/Resume Status. Defined as external in waveplayer.c file */
-__IO uint32_t PauseResumeStatus = IDLE_STATUS;
-
-/* Counter for Sel Joystick pressed*/
-__IO uint32_t PressCount = 0;
-
-/* Joystick Status */
-static JOYState_TypeDef JoyState = JOY_NONE;
-
-uint8_t mfx_toggle_led = 0;
-
-/* Volume of the audio playback */
-/* Initial volume level (from 0% (Mute) to 100% (Max)) */
-__IO uint8_t volume = 60;
-__IO uint8_t VolumeChange = 0;
-
-__IO uint32_t SRAMTest = 0;
+uint32_t SdramTest = 0;
+uint32_t SdmmcTest = 0;
+uint32_t CameraTest = 0;
+uint32_t ButtonState = 0;
+uint32_t AudioUpdate = 0;
+uint32_t TSInterruptTest = 0;
 /* Private function prototypes -----------------------------------------------*/
 static void SystemClock_Config(void);
 static void Display_DemoDescription(void);
 static void MPU_Config(void);
 static void CPU_CACHE_Enable(void);
-
-BSP_DemoTypedef  BSP_examples[]=
-{
-  {Joystick_demo, "JOYSTICK", 0},
-  {Touchscreen_demo, "TOUCHSCREEN", 0},
-  {LCD_demo, "LCD", 0},
-  {POTENTIOMETER_demo, "POTENTIOMETER", 0},
-  {SD_demo, "SD", 0},
-  {AudioPlay_demo, "AUDIO PLAY", 0},
-  {AudioRecord_demo, "AUDIO RECORD", 0},
-  {QSPI_demo, "QSPI", 0},
-  {EEPROM_demo, "EEPROM", 0},
-  {NOR_demo, "NOR", 0},
-  {SRAM_demo, "SRAM", 0},
-  {SRAM_DMA_demo, "SRAM MDMA", 0},
-  {SDRAM_demo, "SDRAM", 0},
-  {SDRAM_DMA_demo, "SDRAM MDMA", 0},
-  {Log_demo, "LCD LOG", 0},
-};
 /* Private functions ---------------------------------------------------------*/
 
 /**
@@ -87,10 +79,10 @@ BSP_DemoTypedef  BSP_examples[]=
 int main(void)
 {
   /* Configure the MPU attributes as Write Through */
-  MPU_Config();
+   MPU_Config();
 
   /* Enable the CPU Cache */
-  CPU_CACHE_Enable();
+   CPU_CACHE_Enable();
 
   /* STM32H7xx HAL library initialization:
        - Systick timer is configured by default as source of time base, but user
@@ -110,13 +102,12 @@ int main(void)
   BSP_LED_Init(LED_RED);
 
   /* Configure the Tamper push-button in GPIO Mode */
-  BSP_PB_Init(BUTTON_TAMPER, BUTTON_MODE_GPIO);
+  BSP_PB_Init(BUTTON_TAMPER, BUTTON_MODE_EXTI);
 
   /*##-1- Initialize the LCD #################################################*/
   /* Initialize the LCD */
-  BSP_LCD_Init();
-
-  BSP_LCD_LayerDefaultInit(1, LCD_FB_START_ADDRESS);
+  BSP_LCD_Init(0, LCD_ORIENTATION_LANDSCAPE);
+  GUI_SetFuncDriver(&LCD_Driver);
 
   Display_DemoDescription();
 
@@ -124,15 +115,13 @@ int main(void)
   while (1)
   {
     /* Toggle LED1 before start test */
-    HAL_Delay(100);
+    HAL_Delay(400);
     BSP_LED_Toggle(LED_GREEN);
 
-    if(BSP_PB_GetState(BUTTON_TAMPER) == RESET)
+    if(ButtonState == 1)
     {
-      BSP_LED_Off(LED_GREEN);
-      HAL_Delay(10);
-      while (BSP_PB_GetState(BUTTON_TAMPER) == RESET);
-
+      ButtonState = 0;
+      HAL_Delay(10); /* to avoid bounce when button pressed */
       BSP_examples[DemoIndex++].DemoFunc();
 
       if(DemoIndex >= COUNT_OF_EXAMPLE(BSP_examples))
@@ -241,120 +230,60 @@ static void SystemClock_Config(void)
 static void Display_DemoDescription(void)
 {
   char desc[50];
+  uint32_t x_size;
+  uint32_t y_size;
 
-  /* Set LCD Foreground Layer  */
-  BSP_LCD_SelectLayer(1);
-
-  BSP_LCD_SetFont(&LCD_DEFAULT_FONT);
+  GUI_SetFont(&GUI_DEFAULT_FONT);
 
   /* Clear the LCD */
-  BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
-  BSP_LCD_Clear(LCD_COLOR_WHITE);
+  GUI_SetBackColor(GUI_COLOR_WHITE);
+  GUI_Clear(GUI_COLOR_WHITE);
 
   /* Set the LCD Text Color */
-  BSP_LCD_SetTextColor(LCD_COLOR_DARKBLUE);
+  GUI_SetTextColor(GUI_COLOR_DARKBLUE);
 
   /* Display LCD messages */
-  BSP_LCD_DisplayStringAt(0, 10, (uint8_t *)"STM32H743I BSP", CENTER_MODE);
-  BSP_LCD_DisplayStringAt(0, 35, (uint8_t *)"Drivers examples", CENTER_MODE);
+  GUI_DisplayStringAt(0, 10, (uint8_t *)"STM32H743I BSP", CENTER_MODE);
+  GUI_DisplayStringAt(0, 35, (uint8_t *)"Drivers examples", CENTER_MODE);
+
+  BSP_LCD_GetXSize(0, &x_size);
+  BSP_LCD_GetYSize(0, &y_size);
 
   /* Draw Bitmap */
-  BSP_LCD_DrawBitmap((BSP_LCD_GetXSize() - 80)/2, 65, (uint8_t *)stlogo);
+  GUI_DrawBitmap((x_size - 80)/2, 65, (uint8_t *)stlogo);
 
-  BSP_LCD_SetFont(&Font12);
-  BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()- 20, (uint8_t *)"Copyright (c) STMicroelectronics 2017", CENTER_MODE);
+  GUI_SetFont(&Font12);
+  GUI_DisplayStringAt(0, y_size - 20, (uint8_t *)"Copyright (c) STMicroelectronics 2019", CENTER_MODE);
 
-  BSP_LCD_SetFont(&Font16);
-  BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
-  BSP_LCD_FillRect(0, BSP_LCD_GetYSize()/2 + 15, BSP_LCD_GetXSize(), 60);
-  BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
-  BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-  BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize() / 2 + 30, (uint8_t *)"Press Tamper push-button to start :", CENTER_MODE);
+  GUI_SetFont(&Font16);
+  BSP_LCD_FillRect(0, 0, y_size/2 - 15, x_size, 122, GUI_COLOR_BLUE);
+  GUI_SetTextColor(GUI_COLOR_WHITE);
+  GUI_SetBackColor(GUI_COLOR_BLUE);
+  GUI_DisplayStringAt(0, y_size / 2 , (uint8_t *)"Press TAMPER button to start :", CENTER_MODE);
   sprintf(desc,"%s example", BSP_examples[DemoIndex].DemoName);
-  BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()/2 + 45, (uint8_t *)desc, CENTER_MODE);
+  GUI_DisplayStringAt(0, y_size/2 + 15, (uint8_t *)desc, CENTER_MODE);
 }
 
 /**
   * @brief  Check for user input
   * @param  None
-* @retval Input state (1 : active / 0 : Inactive)
+  * @retval Input state (1 : active / 0 : Inactive)
   */
 uint8_t CheckForUserInput(void)
 {
-  if(BSP_PB_GetState(BUTTON_TAMPER) == RESET)
-  {
-    HAL_Delay(10);
-    while (BSP_PB_GetState(BUTTON_TAMPER) == RESET);
-    return 1 ;
-  }
-  return 0;
+  return ButtonState;
 }
 
 /**
-  * @brief  EXTI line detection callbacks.
-  * @param  GPIO_Pin: Specifies the pins connected EXTI line
+  * @brief  Button Callback
+  * @param  Button Specifies the pin connected EXTI line
   * @retval None
   */
-void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+void BSP_PB_Callback(Button_TypeDef Button)
 {
-  /* If the interruption comes from the Joystick, check which
-     Joystick button has been pressed */
-  JoyState = BSP_JOY_GetState();
-
-  if(JoyState == JOY_SEL)
+  if(Button == BUTTON_TAMPER)
   {
-    /* SEL is used to pause and resume the audio playback */
-    if (PressCount == 1)
-    {
-      /* Resume playing Wave status */
-      PauseResumeStatus = RESUME_STATUS;
-      PressCount = 0;
-    }
-    else
-    {
-      /* Pause playing Wave status */
-      PauseResumeStatus = PAUSE_STATUS;
-      PressCount = 1;
-    }
-  }
-  else if(JoyState == JOY_UP)
-  {
-    /* UP is used to increment the volume of the audio playback */
-    volume ++;
-    if (volume > 100)
-    {
-      volume = 100;
-    }
-    VolumeChange = 1;
-  }
-  else if(JoyState == JOY_DOWN)
-  {
-    /* DOWN is used to decrement the volume of the audio playback */
-    volume --;
-    if ((int8_t)volume < 50)
-    {
-      volume = 50;
-    }
-    VolumeChange = 1;
-  }
-
-  /* Clear MFX IT */
-  BSP_IO_ITClear();
-}
-
-/**
-  * @brief Toggle Leds
-  * @param  None
-  * @retval None
-  */
-void Toggle_Leds(void)
-{
-  static uint8_t ticks = 0;
-
-  if(ticks++ > 100)
-  {
-    mfx_toggle_led = 1;   /* Toggle LED performed in main loop */
-    ticks = 0;
+    ButtonState = 1;
   }
 }
 
@@ -421,7 +350,7 @@ static void MPU_Config(void)
   MPU_InitStruct.DisableExec = MPU_INSTRUCTION_ACCESS_ENABLE;
 
   HAL_MPU_ConfigRegion(&MPU_InitStruct);
-  
+
   /* Configure the MPU attributes as WT for NOR */
   MPU_InitStruct.Enable = MPU_REGION_ENABLE;
   MPU_InitStruct.BaseAddress = NOR_DEVICE_ADDR;
@@ -433,11 +362,9 @@ static void MPU_Config(void)
   MPU_InitStruct.Number = MPU_REGION_NUMBER1;
   MPU_InitStruct.TypeExtField = MPU_TEX_LEVEL0;
   MPU_InitStruct.SubRegionDisable = 0x00;
-  MPU_InitStruct.DisableExec = MPU_INSTRUCTION_ACCESS_ENABLE;  
+  MPU_InitStruct.DisableExec = MPU_INSTRUCTION_ACCESS_ENABLE;
 
-  HAL_MPU_ConfigRegion(&MPU_InitStruct);  
-
-  /* Enable the MPU */
+  HAL_MPU_ConfigRegion(&MPU_InitStruct);
   HAL_MPU_Enable(MPU_PRIVILEGED_DEFAULT);
 }
 
@@ -454,8 +381,6 @@ static void CPU_CACHE_Enable(void)
   /* Enable D-Cache */
   SCB_EnableDCache();
 }
-
-
 /**
   * @}
   */

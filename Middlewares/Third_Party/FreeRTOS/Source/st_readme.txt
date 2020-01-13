@@ -25,6 +25,29 @@
 
 =======
 
+### 19-July-2019 ###
+=========================
+  + Fix runtime error in the  IAR/CM4_MPU port
+       - IAR/ARM_CM4_MPU/port.c
+
+### 12-July-2019 ###
+=========================
+  + FreeRTOS: Update against the FreeRTOS v10.2.1 release
+    - support for the CM33 and CM23 cores
+
+  + CMSIS_RTOS_V2: update against the latest CMSIS-FreeRTOS v10.2.0 release
+
+  + Add MPU support for the CM7/r0p1:
+       - GCC/ARM_CM7_MPU/r0p1/port.c
+       - GCC/ARM_CM7_MPU/r0p1/portmacro.h
+       - IAR/ARM_CM7_MPU/r0p1/port.c
+       - IAR/ARM_CM7_MPU/r0p1/portasm.s
+       - IAR/ARM_CM7_MPU/r0p1/portmacro.h
+       - RVDS/ARM_CM7_MPU/r0p1/port.c
+       - RVDS/ARM_CM7_MPU/r0p1/portmacro.h
+
+  + cmsis_os.c: Fix compile errors by using the correct TimerCallbackFunction_t type for timer creation
+
 ### 29-Mars-2019 ###
 =========================
   + cmsis_os.c : Fix bug in osPoolAlloc(): memory blocks can't be reused after being free'd

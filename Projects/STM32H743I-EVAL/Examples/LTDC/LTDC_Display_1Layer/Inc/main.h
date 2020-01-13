@@ -25,6 +25,7 @@
 #include "stm32h7xx_hal.h"
 #include "stm32h743i_eval.h"
 #include "stm32h743i_eval_lcd.h"
+#include "stm32h743i_eval_ts.h"
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/

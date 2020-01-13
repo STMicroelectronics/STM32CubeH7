@@ -222,7 +222,6 @@
                     <state>USE_HAL_DRIVER</state>
                     <state>STM32H747xx</state>
                     <state>USE_STM32H747I_EVAL</state>
-                    <state>USE_IOEXPANDER</state>
                     <state>USE_USB_FS</state>
                     <state>CORE_CM7</state>
                 </option>
@@ -353,7 +352,7 @@
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\ST\STM32_USB_Device_Library\Core\Inc</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\ST\STM32_USB_Device_Library\Class\DFU\Inc</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Inc</state>
-                    <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32H747I_EVAL</state>
+                    <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32H747I-EVAL</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\CMSIS\Include</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\CMSIS\Device\ST\STM32H7xx\Include</state>
                 </option>
@@ -1251,7 +1250,6 @@
                     <state>USE_HAL_DRIVER</state>
                     <state>STM32H747xx</state>
                     <state>USE_STM32H747I_EVAL</state>
-                    <state>USE_IOEXPANDER</state>
                     <state>USE_USB_HS</state>
                     <state>CORE_CM7</state>
                 </option>
@@ -1382,7 +1380,7 @@
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\ST\STM32_USB_Device_Library\Core\Inc</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\ST\STM32_USB_Device_Library\Class\DFU\Inc</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Inc</state>
-                    <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32H747I_EVAL</state>
+                    <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32H747I-EVAL</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\CMSIS\Include</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\CMSIS\Device\ST\STM32H7xx\Include</state>
                 </option>
@@ -3101,12 +3099,6 @@
             </file>
         </group>
         <group>
-            <name>EWARM</name>
-            <file>
-                <name>$PROJ_DIR$\startup_stm32h747xx.s</name>
-            </file>
-        </group>
-        <group>
             <name>CM7</name>
             <excluded>
                 <configuration>STM32H747I-EVAL_CM4</configuration>
@@ -3125,6 +3117,12 @@
             </file>
             <file>
                 <name>$PROJ_DIR$\..\CM7\Src\usbd_dfu_flash.c</name>
+            </file>
+        </group>
+        <group>
+            <name>EWARM</name>
+            <file>
+                <name>$PROJ_DIR$\startup_stm32h747xx.s</name>
             </file>
         </group>
     </group>
@@ -3150,10 +3148,13 @@
             <group>
                 <name>STM32H747I-EVAL </name>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32H747I_EVAL\stm32h747i_eval.c</name>
+                    <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32H747I-EVAL\stm32h747i_eval.c</name>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32H747I_EVAL\stm32h747i_eval_io.c</name>
+                    <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32H747I-EVAL\stm32h747i_eval_bus.c</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32H747I-EVAL\stm32h747i_eval_io.c</name>
                 </file>
             </group>
         </group>
@@ -3181,6 +3182,9 @@
                 <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_dma.c</name>
             </file>
             <file>
+                <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_exti.c</name>
+            </file>
+            <file>
                 <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_flash.c</name>
             </file>
             <file>
@@ -3194,6 +3198,9 @@
             </file>
             <file>
                 <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_i2c.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_i2c_ex.c</name>
             </file>
             <file>
                 <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_pcd.c</name>

@@ -39,6 +39,7 @@ FIL JPEG_File;  /* File object */
 
 uint32_t JpegProcessing_End = 0;
 static uint32_t LCD_X_Size = 0;
+static uint32_t LCD_Y_Size = 0;
 
 JPEG_HandleTypeDef    JPEG_Handle;
 
@@ -64,7 +65,7 @@ static void CPU_CACHE_Enable(void);
 int main(void)
 {
   uint32_t xPos = 0, yPos = 0;
-  uint8_t  lcd_status = LCD_OK;  
+  uint8_t  lcd_status = BSP_ERROR_NONE;  
   uint32_t file_error = 0, sd_detection_error = 0;  
   
   /* Configure the MPU attributes as Write Through for SDRAM*/
@@ -98,21 +99,25 @@ int main(void)
   /*##-2- LCD Configuration ##################################################*/  
   /* Initialize the LCD   */
 
-  lcd_status = BSP_LCD_Init();
-  if(lcd_status != LCD_OK)
+  lcd_status = BSP_LCD_Init(0, LCD_ORIENTATION_LANDSCAPE);
+  if(lcd_status != BSP_ERROR_NONE)
   {
     Error_Handler();
   }
   
-  BSP_LCD_LayerDefaultInit(0, LCD_FRAME_BUFFER);     
-  BSP_LCD_SelectLayer(0); 
+  GUI_SetFuncDriver(&LCD_Driver);     
+  GUI_SetLayer(0); 
 
 
   /* Get the LCD Width */
-  LCD_X_Size = BSP_LCD_GetXSize();
+  BSP_LCD_GetXSize(0, &LCD_X_Size);
+  BSP_LCD_GetYSize(0, &LCD_Y_Size);
   
   /* Cear LCD */
-  BSP_LCD_Clear(LCD_COLOR_BLACK);
+  GUI_Clear(GUI_COLOR_BLACK);
+  
+  /* Display example brief   */
+  LCD_BriefDisplay();
   
   /*##-3- Link the micro SD disk I/O driver ##################################*/
   if(FATFS_LinkDriver(&SD_Driver, SDPath) == 0)
@@ -120,7 +125,7 @@ int main(void)
     /*##-4- Init the SD Card #################################################*/
     SD_Initialize();
 
-    if(BSP_SD_IsDetected())
+    if(BSP_SD_IsDetected(0))
     {    
       /*##-5- Register the file system object to the FatFs module ##############*/
       if(f_mount(&SDFatFs, (TCHAR const*)SDPath, 0) == FR_OK)
@@ -143,8 +148,8 @@ int main(void)
           HAL_JPEG_GetInfo(&JPEG_Handle, &JPEG_Info);       
           
           /*##-10- Copy RGB decoded Data to the display FrameBuffer  ############*/
-          xPos = (BSP_LCD_GetXSize() - JPEG_Info.ImageWidth)/2;
-          yPos = (BSP_LCD_GetYSize() - JPEG_Info.ImageHeight)/2;        
+          xPos = (LCD_X_Size - JPEG_Info.ImageWidth)/2;
+          yPos = (LCD_Y_Size - JPEG_Info.ImageHeight)/2;        
           
           DMA2D_CopyBuffer((uint32_t *)JPEG_OUTPUT_DATA_BUFFER, (uint32_t *)LCD_FRAME_BUFFER, xPos , yPos, JPEG_Info.ImageWidth, JPEG_Info.ImageHeight, JPEG_Info.ChromaSubsampling);
           
@@ -164,8 +169,6 @@ int main(void)
 
     if((file_error != 0) || (sd_detection_error != 0))
     {
-      /* Display example brief   */
-      LCD_BriefDisplay();
       /* Display error brief   */
       LCD_FileErrorDisplay();
       Error_Handler();
@@ -323,15 +326,15 @@ static void CPU_CACHE_Enable(void)
   */
 static void LCD_BriefDisplay(void)
 {
-  BSP_LCD_Clear(LCD_COLOR_WHITE);
-  BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-  BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
-  BSP_LCD_FillRect(0, 0, LCD_X_Size, 112);  
-  BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
-  BSP_LCD_DisplayStringAt(0, LINE(2), (uint8_t *)"JPEG Decoding from uSD Fatfs with IT", CENTER_MODE);
-  BSP_LCD_SetFont(&Font16);
-  BSP_LCD_DisplayStringAt(0, LINE(5), (uint8_t *)"This example shows how to Decode (with IT model)", CENTER_MODE);
-  BSP_LCD_DisplayStringAt(0, LINE(6), (uint8_t *)"and  display a JPEG file", CENTER_MODE);
+  GUI_Clear(GUI_COLOR_WHITE);
+  GUI_SetBackColor(GUI_COLOR_BLUE);
+  GUI_SetTextColor(GUI_COLOR_BLUE);
+  GUI_FillRect(0, 0, LCD_X_Size, 112, GUI_COLOR_BLUE);  
+  GUI_SetTextColor(GUI_COLOR_WHITE);
+  GUI_DisplayStringAt(0, LINE(2), (uint8_t *)"JPEG Decoding from uSD Fatfs with IT", CENTER_MODE);
+  GUI_SetFont(&Font16);
+  GUI_DisplayStringAt(0, LINE(5), (uint8_t *)"This example shows how to Decode (with IT model)", CENTER_MODE);
+  GUI_DisplayStringAt(0, LINE(6), (uint8_t *)"and  display a JPEG file", CENTER_MODE);
 }
 
 /**
@@ -341,12 +344,12 @@ static void LCD_BriefDisplay(void)
   */
 static void LCD_FileErrorDisplay(void)
 {
-  BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
-  BSP_LCD_SetTextColor(LCD_COLOR_RED);
-  BSP_LCD_SetFont(&Font16);
-  BSP_LCD_DisplayStringAtLine(26, (uint8_t *)"Unable to open JPEG file image.jpg");
-  BSP_LCD_DisplayStringAtLine(27, (uint8_t *)"Please check that a jpeg file named image.jpg");
-  BSP_LCD_DisplayStringAtLine(28, (uint8_t *)"is stored on the uSD");
+  GUI_SetBackColor(GUI_COLOR_WHITE);
+  GUI_SetTextColor(GUI_COLOR_RED);
+  GUI_SetFont(&Font16);
+  GUI_DisplayStringAtLine(26, (uint8_t *)"Unable to open JPEG file image.jpg");
+  GUI_DisplayStringAtLine(27, (uint8_t *)"Please check that a jpeg file named image.jpg");
+  GUI_DisplayStringAtLine(28, (uint8_t *)"is stored on the uSD");
 }
 
 /**
@@ -423,7 +426,7 @@ static void DMA2D_CopyBuffer(uint32_t *pSrc, uint32_t *pDst, uint16_t x, uint16_
   HAL_DMA2D_ConfigLayer(&DMA2D_Handle, 1);
   
   /*##-5-  copy the new decoded frame to the LCD Frame buffer ################*/
-  destination = (uint32_t)pDst + ((y * BSP_LCD_GetXSize()) + x) * 4;
+  destination = (uint32_t)pDst + ((y * LCD_X_Size) + x) * 4;
 
   HAL_DMA2D_Start(&DMA2D_Handle, (uint32_t)pSrc, destination, xsize, ysize);
   HAL_DMA2D_PollForTransfer(&DMA2D_Handle, 25);  /* wait for the previous DMA2D transfer to ends */
@@ -431,7 +434,7 @@ static void DMA2D_CopyBuffer(uint32_t *pSrc, uint32_t *pDst, uint16_t x, uint16_
 
 static void SD_Initialize(void)
 {  
-  BSP_SD_Init();
+  BSP_SD_Init(0);
 }
 
 #ifdef USE_FULL_ASSERT

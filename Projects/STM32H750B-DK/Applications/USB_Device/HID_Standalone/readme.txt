@@ -29,7 +29,7 @@ In this application, the code is executed from QSPI external memory while data a
 SRAM memory.
 
 This is a typical application on how to use the STM32H750xx USB OTG Device peripheral where the STM32 MCU is
-enumerated as a HID device using the native PC Host HID driver to which the STM32H750B_DISCO
+enumerated as a HID device using the native PC Host HID driver to which the STM32H750B_DK
 board is connected, in order to emulate the Mouse directions using "User" button mounted on the
 STM32H750B_DISCO board (Press board "User" button to move the PC mouse).
 

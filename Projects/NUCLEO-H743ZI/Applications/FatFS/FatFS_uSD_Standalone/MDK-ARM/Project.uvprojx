@@ -10,13 +10,14 @@
       <TargetName>STM32H743ZI_Nucleo</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pCCUsed>5060422::V5.06 update 4 (build 422)::ARMCC</pCCUsed>
+      <pCCUsed>5060750::V5.06 update 6 (build 750)::ARMCC</pCCUsed>
+      <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
           <Device>STM32H743ZITx</Device>
           <Vendor>STMicroelectronics</Vendor>
-          <PackID>Keil.STM32H7xx_DFP.1.0.7</PackID>
-          <PackURL>http://www.keil.com/pack</PackURL>
+          <PackID>STMicroelectronics.STM32H7xx_DFP.0.0.9</PackID>
+          <PackURL>http://www.ST.com/</PackURL>
           <Cpu>IRAM(0x20000000,0x20000) IRAM2(0x24000000,0x80000) IROM(0x08000000,0x200000) CPUTYPE("Cortex-M7") FPU3(DFPU) CLOCK(12000000) ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile></StartupFile>
@@ -32,7 +33,7 @@
           <SLE66CMisc></SLE66CMisc>
           <SLE66AMisc></SLE66AMisc>
           <SLE66LinkerMisc></SLE66LinkerMisc>
-          <SFDFile></SFDFile>
+          <SFDFile>$$Device:STM32H743ZITx$CMSIS\SVD\STM32H7x3.svd</SFDFile>
           <bCustSvd>0</bCustSvd>
           <UseEnv>0</UseEnv>
           <BinPath></BinPath>
@@ -323,6 +324,7 @@
             <uThumb>0</uThumb>
             <uSurpInc>0</uSurpInc>
             <uC99>0</uC99>
+            <uGnu>0</uGnu>
             <useXO>0</useXO>
             <v6Lang>1</v6Lang>
             <v6LangP>1</v6LangP>
@@ -335,7 +337,7 @@
               <MiscControls>--C99</MiscControls>
               <Define>USE_HAL_DRIVER,STM32H743xx,USE_STM32H7XX_NUCLEO_144_MB1364,ADAFRUIT_TFT_JOY_SD_ID802</Define>
               <Undefine></Undefine>
-              <IncludePath>../Inc;../../../../../../Drivers/CMSIS/Include;../../../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../../../../../../Drivers/STM32H7xx_HAL_Driver/Inc;../../../../../../Drivers/BSP/STM32H7xx_Nucleo_144;../../../../../../Drivers/BSP/Components/Common;../../../../../../Middlewares/Third_Party/FatFS/src;../../../../../../Drivers/BSP/Adafruit_Shield</IncludePath>
+              <IncludePath>../Inc;../../../../../../Drivers/CMSIS/Include;../../../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../../../../../../Drivers/STM32H7xx_HAL_Driver/Inc;../../../../../../Drivers/BSP/STM32H7xx_Nucleo;../../../../../../Drivers/BSP/Components/Common;../../../../../../Middlewares/Third_Party/FatFS/src;../../../../../../Drivers/BSP/Adafruit_Shield</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -415,9 +417,14 @@
           <GroupName>Drivers/BSP/STM32H743ZI_Nucleo</GroupName>
           <Files>
             <File>
-              <FileName>stm32h7xx_nucleo_144.c</FileName>
+              <FileName>stm32h7xx_nucleo.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../../Drivers/BSP/STM32H7xx_Nucleo_144/stm32h7xx_nucleo_144.c</FilePath>
+              <FilePath>../../../../../../Drivers/BSP/STM32H7xx_Nucleo/stm32h7xx_nucleo.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32h7xx_nucleo_bus.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Src\stm32h7xx_nucleo_bus.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -435,9 +442,14 @@
           <GroupName>Drivers/BSP/AdaFruit_Shield</GroupName>
           <Files>
             <File>
-              <FileName>stm32_adafruit_sd.c</FileName>
+              <FileName>adafruit_802.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../../Drivers/BSP/Adafruit_Shield/stm32_adafruit_sd.c</FilePath>
+              <FilePath>../../../../../../Drivers/BSP/Adafruit_Shield/adafruit_802.c</FilePath>
+            </File>
+            <File>
+              <FileName>adafruit_802_sd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../../../../../../Drivers/BSP/Adafruit_Shield/adafruit_802_sd.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -553,6 +565,11 @@
               <FileName>stm32h7xx_hal_i2c.c</FileName>
               <FileType>1</FileType>
               <FilePath>../../../../../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_i2c.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32h7xx_hal_exti.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_exti.c</FilePath>
             </File>
           </Files>
         </Group>

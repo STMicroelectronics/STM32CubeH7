@@ -1,5 +1,5 @@
 
-
+#include <touchgfx/hal/HAL.hpp>
 #include <gui/common/TiledImage.hpp>
 
 void TiledImage::setBitmap(const Bitmap& bmp)

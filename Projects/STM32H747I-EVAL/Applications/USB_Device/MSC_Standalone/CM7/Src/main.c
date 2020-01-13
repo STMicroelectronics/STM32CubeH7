@@ -35,6 +35,8 @@
 /* Private variables --------------------------------------------------------- */
 USBD_HandleTypeDef USBD_Device;
 extern PCD_HandleTypeDef hpcd;
+BSP_IO_Init_t init;
+
 #define HSEM_ID_0 (0U) /* HW semaphore 0*/
 
 /* Private function prototypes ----------------------------------------------- */
@@ -50,7 +52,6 @@ void Error_Handler(void);
   */
 int main(void)
 {
-  int32_t timeout;    
 
   /* Enable the CPU Cache */
   CPU_CACHE_Enable();
@@ -66,36 +67,8 @@ int main(void)
    */
   HAL_Init();
 
-  /* Wait until CPU2 boots and enters in stop mode or timeout*/
-  timeout = 0xFFFF;
-  while((__HAL_RCC_GET_FLAG(RCC_FLAG_D2CKRDY) != RESET) && (timeout-- > 0));
-  if ( timeout < 0 )
-  {
-    Error_Handler();
-  }  
-
   /* Configure the system clock */
   SystemClock_Config();
-  
-  /* When system initialization is finished, Cortex-M7 will release (wakeup) Cortex-M4  by means of 
-  HSEM notification. Cortex-M4 release could be also ensured by any Domain D2 wakeup source (SEV,EXTI..).
-  */
-  
-  /*HW semaphore Clock enable*/
-  __HAL_RCC_HSEM_CLK_ENABLE();
-  
-  /*Take HSEM */
-  HAL_HSEM_FastTake(HSEM_ID_0);   
-  /*Release HSEM in order to notify the CPU2(CM4)*/     
-  HAL_HSEM_Release(HSEM_ID_0,0);
-  
-  /* wait until CPU2 wakes up from stop mode */
-  timeout = 0xFFFF;
-  while((__HAL_RCC_GET_FLAG(RCC_FLAG_D2CKRDY) == RESET) && (timeout-- > 0));
-  if ( timeout < 0 )
-  {
-    Error_Handler();
-  }
   
   /* Configure LED1, LED2, LED3 and LED4 */
   BSP_LED_Init(LED_GREEN);
@@ -104,7 +77,7 @@ int main(void)
   BSP_LED_Init(LED_BLUE);
 
   /* Initialize IO expander */
-  BSP_IO_Init();
+  BSP_IO_Init(0, &init);
 
   /* Init Device Library */
   USBD_Init(&USBD_Device, &MSC_Desc, 0);

@@ -352,11 +352,12 @@
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\CMSIS\Include</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\CMSIS\Device\ST\STM32H7xx\Include</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Inc</state>
-                    <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32H745I-Discovery</state>
+                    <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32H745I-DISCO</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\Components\Common</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Utilities\Log</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Utilities\Fonts</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Utilities\CPU</state>
+                    <state>$PROJ_DIR$\..\..\..\..\..\..\Utilities\BASIC_GUI</state>
                 </option>
                 <option>
                     <name>CCStdIncCheck</name>
@@ -1382,7 +1383,7 @@
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\CMSIS\Include</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\CMSIS\Device\ST\STM32H7xx\Include</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Inc</state>
-                    <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32H745I-Discovery</state>
+                    <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32H745I-DISCO</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\Components\Common</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Utilities\Log</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Utilities\Fonts</state>
@@ -2072,18 +2073,36 @@
         <group>
             <name>BSP</name>
             <group>
-                <name>STM32H745I_DISCO</name>
+                <name>Components</name>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32H745I-Discovery\stm32h745i_discovery.c</name>
+                    <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\Components\ft5336\ft5336.c</name>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32H745I-Discovery\stm32h745i_discovery_lcd.c</name>
+                    <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\Components\ft5336\ft5336_reg.c</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\Components\mt48lc4m32b2\mt48lc4m32b2.c</name>
+                    <excluded>
+                        <configuration>STM32H745I_DISCO_CM4</configuration>
+                    </excluded>
+                </file>
+            </group>
+            <group>
+                <name>STM32H745I_DISCO</name>
+                <file>
+                    <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32H745I-DISCO\stm32h745i_discovery.c</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32H745I-DISCO\stm32h745i_discovery_bus.c</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32H745I-DISCO\stm32h745i_discovery_lcd.c</name>
                     <excluded>
                         <configuration>STM32H745I_DISCO_CM4</configuration>
                     </excluded>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32H745I-Discovery\stm32h745i_discovery_sdram.c</name>
+                    <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32H745I-DISCO\stm32h745i_discovery_sdram.c</name>
                     <excluded>
                         <configuration>STM32H745I_DISCO_CM4</configuration>
                     </excluded>
@@ -2224,9 +2243,12 @@
                     <name>$PROJ_DIR$\..\CM7\Src\stm32h7xx_it.c</name>
                 </file>
             </group>
-            <group>
-                <name>Common</name>
-            </group>
         </group>
+    </group>
+    <group>
+        <name>Utilities</name>
+        <file>
+            <name>$PROJ_DIR$\..\..\..\..\..\..\Utilities\Basic_GUI\basic_gui.c</name>
+        </file>
     </group>
 </project>

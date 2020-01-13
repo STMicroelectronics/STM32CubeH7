@@ -98,9 +98,9 @@ uint32_t QSPI_Startup(uint32_t Mode)
   QSPIHandle.Init.FifoThreshold      = 1;
   QSPIHandle.Init.SampleShifting     = QSPI_SAMPLE_SHIFTING_HALFCYCLE;
   QSPIHandle.Init.FlashSize          = POSITION_VAL(MT25TL01G_FLASH_SIZE) - 1;
-  QSPIHandle.Init.ChipSelectHighTime = QSPI_CS_HIGH_TIME_3_CYCLE;
+  QSPIHandle.Init.ChipSelectHighTime = QSPI_CS_HIGH_TIME_4_CYCLE;
   QSPIHandle.Init.ClockMode          = QSPI_CLOCK_MODE_0;
-  QSPIHandle.Init.FlashID            = QSPI_FLASH_ID_2;
+  QSPIHandle.Init.FlashID            = QSPI_FLASH_ID_1;
   QSPIHandle.Init.DualFlash          = QSPI_DUALFLASH_ENABLE;
 
  if (HAL_QSPI_Init(&QSPIHandle) != HAL_OK)
@@ -178,7 +178,7 @@ static uint32_t QSPI_Copy(uint32_t WriteAddr, uint32_t ReadAddr, uint32_t Size)
 
   /* Initialize the read command */
   s_command.InstructionMode   = QSPI_INSTRUCTION_4_LINES;
-  s_command.Instruction       = QUAD_INOUT_FAST_READ_DTR_CMD; /* DTR QUAD INPUT/OUTPUT FAST READ and 4-BYTE DTR FAST READ commands */
+  s_command.Instruction       = MT25TL01G_QUAD_INOUT_FAST_READ_DTR_CMD; /* DTR QUAD INPUT/OUTPUT FAST READ and 4-BYTE DTR FAST READ commands */
   s_command.AddressMode       = QSPI_ADDRESS_4_LINES;
   s_command.AddressSize       = QSPI_ADDRESS_32_BITS;
   s_command.AlternateByteMode = QSPI_ALTERNATE_BYTES_NONE;
@@ -241,7 +241,7 @@ static uint32_t QSPI_EnableMemoryMappedMode(QSPI_HandleTypeDef *hqspi)
 
   /* Configure the command for the read instruction */
   s_command.InstructionMode   = QSPI_INSTRUCTION_4_LINES;
-  s_command.Instruction       = QUAD_INOUT_FAST_READ_DTR_CMD; /* DTR QUAD INPUT/OUTPUT FAST READ and 4-BYTE DTR FAST READ commands */
+  s_command.Instruction       = MT25TL01G_QUAD_INOUT_FAST_READ_DTR_CMD; /* DTR QUAD INPUT/OUTPUT FAST READ and 4-BYTE DTR FAST READ commands */
   s_command.AddressMode       = QSPI_ADDRESS_4_LINES;
   s_command.AddressSize       = QSPI_ADDRESS_32_BITS;
   s_command.AlternateByteMode = QSPI_ALTERNATE_BYTES_NONE;
@@ -275,7 +275,7 @@ static uint32_t QSPI_ResetMemory(QSPI_HandleTypeDef *hqspi)
 
   /* Initialize the reset enable command */
   s_command.InstructionMode   = QSPI_INSTRUCTION_1_LINE;
-  s_command.Instruction       = RESET_ENABLE_CMD;
+  s_command.Instruction       = MT25TL01G_RESET_ENABLE_CMD;
   s_command.AddressMode       = QSPI_ADDRESS_NONE;
   s_command.AlternateByteMode = QSPI_ALTERNATE_BYTES_NONE;
   s_command.DataMode          = QSPI_DATA_NONE;
@@ -291,14 +291,14 @@ static uint32_t QSPI_ResetMemory(QSPI_HandleTypeDef *hqspi)
   }
 
   /* Send the reset memory command */
-  s_command.Instruction = RESET_MEMORY_CMD;
+  s_command.Instruction = MT25TL01G_RESET_MEMORY_CMD;
   if (HAL_QSPI_Command(hqspi, &s_command, HAL_QPSI_TIMEOUT_DEFAULT_VALUE) != HAL_OK)
   {
     return MEMORY_ERROR;
   }
 
   s_command.InstructionMode   = QSPI_INSTRUCTION_4_LINES;
-  s_command.Instruction       = RESET_ENABLE_CMD;
+  s_command.Instruction       = MT25TL01G_RESET_ENABLE_CMD;
   /* Send the command */
   if (HAL_QSPI_Command(hqspi, &s_command, HAL_QPSI_TIMEOUT_DEFAULT_VALUE) != HAL_OK)
   {
@@ -306,7 +306,7 @@ static uint32_t QSPI_ResetMemory(QSPI_HandleTypeDef *hqspi)
   }
 
   /* Send the reset memory command */
-  s_command.Instruction = RESET_MEMORY_CMD;
+  s_command.Instruction = MT25TL01G_RESET_MEMORY_CMD;
   if (HAL_QSPI_Command(hqspi, &s_command, HAL_QPSI_TIMEOUT_DEFAULT_VALUE) != HAL_OK)
   {
     return MEMORY_ERROR;
@@ -338,7 +338,7 @@ static uint32_t QSPI_EnterFourBytesAddress(QSPI_HandleTypeDef *hqspi)
 
   /* Initialize the command */
   s_command.InstructionMode   = QSPI_INSTRUCTION_4_LINES;
-  s_command.Instruction       = ENTER_4_BYTE_ADDR_MODE_CMD;
+  s_command.Instruction       = MT25TL01G_ENTER_4_BYTE_ADDR_MODE_CMD;
   s_command.AddressMode       = QSPI_ADDRESS_NONE;
   s_command.AlternateByteMode = QSPI_ALTERNATE_BYTES_NONE;
   s_command.DataMode          = QSPI_DATA_NONE;
@@ -380,7 +380,7 @@ static uint32_t QSPI_DummyCyclesCfg(QSPI_HandleTypeDef *hqspi)
 
   /* Initialize the read volatile configuration register command */
   s_command.InstructionMode   = QSPI_INSTRUCTION_4_LINES;
-  s_command.Instruction       = READ_VOL_CFG_REG_CMD;
+  s_command.Instruction       = MT25TL01G_READ_VOL_CFG_REG_CMD;
   s_command.AddressMode       = QSPI_ADDRESS_NONE;
   s_command.AlternateByteMode = QSPI_ALTERNATE_BYTES_NONE;
   s_command.DataMode          = QSPI_DATA_4_LINES;
@@ -409,7 +409,7 @@ static uint32_t QSPI_DummyCyclesCfg(QSPI_HandleTypeDef *hqspi)
   }
 
   /* Update volatile configuration register (with new dummy cycles) */
-  s_command.Instruction = WRITE_VOL_CFG_REG_CMD;
+  s_command.Instruction = MT25TL01G_WRITE_VOL_CFG_REG_CMD;
   MODIFY_REG(reg, 0xF0F0, ((MT25TL01G_DUMMY_CYCLES_READ_QUAD << 4) |
                                (MT25TL01G_DUMMY_CYCLES_READ_QUAD << 12)));
 
@@ -440,7 +440,7 @@ static uint32_t QSPI_WriteEnable(QSPI_HandleTypeDef *hqspi)
 
   /* Enable write operations */
   s_command.InstructionMode   = QSPI_INSTRUCTION_4_LINES;
-  s_command.Instruction       = WRITE_ENABLE_CMD;
+  s_command.Instruction       = MT25TL01G_WRITE_ENABLE_CMD;
   s_command.AddressMode       = QSPI_ADDRESS_NONE;
   s_command.AlternateByteMode = QSPI_ALTERNATE_BYTES_NONE;
   s_command.DataMode          = QSPI_DATA_NONE;
@@ -462,7 +462,7 @@ static uint32_t QSPI_WriteEnable(QSPI_HandleTypeDef *hqspi)
   s_config.Interval        = 0x10;
   s_config.AutomaticStop   = QSPI_AUTOMATIC_STOP_ENABLE;
 
-  s_command.Instruction    = READ_STATUS_REG_CMD;
+  s_command.Instruction    = MT25TL01G_READ_STATUS_REG_CMD;
   s_command.DataMode       = QSPI_DATA_4_LINES;
 
   if (HAL_QSPI_AutoPolling(hqspi, &s_command, &s_config, HAL_QPSI_TIMEOUT_DEFAULT_VALUE) != HAL_OK)
@@ -486,7 +486,7 @@ static uint32_t QSPI_AutoPollingMemReady(QSPI_HandleTypeDef *hqspi, uint32_t Tim
 
   /* Configure automatic polling mode to wait for memory ready */
   s_command.InstructionMode   = QSPI_INSTRUCTION_4_LINES;
-  s_command.Instruction       = READ_STATUS_REG_CMD;
+  s_command.Instruction       = MT25TL01G_READ_STATUS_REG_CMD;
   s_command.AddressMode       = QSPI_ADDRESS_NONE;
   s_command.AlternateByteMode = QSPI_ALTERNATE_BYTES_NONE;
   s_command.DataMode          = QSPI_DATA_4_LINES;
@@ -520,7 +520,7 @@ static uint8_t QSPI_EnterQPI(QSPI_HandleTypeDef *hqspi)
   QSPI_CommandTypeDef s_command;
 
   s_command.InstructionMode   = QSPI_INSTRUCTION_1_LINE;
-  s_command.Instruction       = ENTER_QUAD_CMD;
+  s_command.Instruction       = MT25TL01G_ENTER_QUAD_CMD;
   s_command.AddressMode       = QSPI_ADDRESS_NONE;
   s_command.AlternateByteMode = QSPI_ALTERNATE_BYTES_NONE;
   s_command.DataMode          = QSPI_DATA_NONE;

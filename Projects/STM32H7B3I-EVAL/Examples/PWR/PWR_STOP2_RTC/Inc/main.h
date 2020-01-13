@@ -1,0 +1,43 @@
+/**
+  ******************************************************************************
+  * @file    PWR/PWR_STOP2_RTC/Inc/main.h
+  * @author  MCD Application Team
+  * @brief   Header for main.c module
+  ******************************************************************************
+  * @attention
+  *
+  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.</center></h2>
+  *
+  * This software component is licensed by ST under BSD 3-Clause license,
+  * the "License"; You may not use this file except in compliance with the
+  * License. You may obtain a copy of the License at:
+  *                        opensource.org/licenses/BSD-3-Clause
+  *
+  ******************************************************************************
+  */
+
+/* Define to prevent recursive inclusion -------------------------------------*/
+#ifndef __MAIN_H
+#define __MAIN_H
+
+/* Includes ------------------------------------------------------------------*/
+#include "stm32h7xx_hal.h"
+#include "stm32h7b3i_eval.h"
+
+/* Exported types ------------------------------------------------------------*/
+/* Exported constants --------------------------------------------------------*/
+#define RTC_ASYNCH_PREDIV    0x7F
+#define RTC_SYNCH_PREDIV     0x137  /* 32 kHz RC/128 - 1 */
+
+#define CD_AXISRAM1_SIZE     0x40000
+#define CD_AXI_DATAWIDTH     0x08
+
+#define Data64               0xA5A5A5A5A5A5A5A5
+#define LED_TOGGLE_DELAY     0x64
+/* Exported macro ------------------------------------------------------------*/
+/* Exported functions ------------------------------------------------------- */
+
+#endif /* __MAIN_H */
+
+/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

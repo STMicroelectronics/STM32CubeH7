@@ -137,7 +137,7 @@ The UART is configured as follows:
       Connect a null-modem female/female RS232 cable between the DB9 connector 
       CN2 (USART1) and PC serial port if you want to display data on the HyperTerminal.
 
-@note Make sure that jumper JP8 is on RX position for STM32H743I-EVAL RevB and jumper JP7 is on TX position. 
+@note Make sure that jumper JP8 is on RX position for STM32H743I-EVAL  and jumper JP7 is on TX position. 
 
   - Hyperterminal configuration:
     - Data Length = 7 Bits

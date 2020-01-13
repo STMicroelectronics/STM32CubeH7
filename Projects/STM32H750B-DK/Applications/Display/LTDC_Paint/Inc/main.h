@@ -25,7 +25,10 @@
 #include "stm32h750b_discovery.h"
 #include "stm32h750b_discovery_lcd.h"
 #include "stm32h750b_discovery_ts.h"
+#include "stm32h750b_discovery_sdram.h"
 #include <stdlib.h>
+#include "basic_gui.h"
+#include "lcd_trace.h"
 
 /* FatFs includes component */
 #include "ff_gen_drv.h"
@@ -33,8 +36,6 @@
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
-#define LCD_FRAME_BUFFER_LAYER0                  0xD0130000
-#define LCD_FRAME_BUFFER_LAYER1                  0xD0000000
 #define CONVERTED_LINE_BUFFER                    0x24000000
 
 /* Exported macro ------------------------------------------------------------*/

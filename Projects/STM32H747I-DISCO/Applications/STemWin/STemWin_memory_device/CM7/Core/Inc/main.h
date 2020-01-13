@@ -28,8 +28,9 @@
 /* Discovery includes component */
 #include "stm32h747i_discovery.h"
 #include "stm32h747i_discovery_ts.h"
-#include "stm32h747i_discovery_lcd.h"
 #include "stm32h747i_discovery_sdram.h"
+#include "stm32h747i_discovery_bus.h"
+#include "otm8009a.h"
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/

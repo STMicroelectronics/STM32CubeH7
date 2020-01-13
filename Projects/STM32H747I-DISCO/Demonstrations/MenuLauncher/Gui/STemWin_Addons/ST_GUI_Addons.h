@@ -27,7 +27,7 @@
 /* Includes ------------------------------------------------------------------*/   
 #include "GUI.h"
 #include "WM.h"
-#include "Dialog.h"
+#include "DIALOG.h"
 #include "CHOOSEFILE.h"
    
 #ifndef GUI_CONST_STORAGE

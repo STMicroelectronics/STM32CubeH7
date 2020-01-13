@@ -49,7 +49,7 @@ uint8_t *DEMO_HID_menu[] = {
 };
 
 /* Private function prototypes ----------------------------------------------- */
-static void HID_DEMO_ProbeKey(void);
+static void HID_DEMO_ProbeKey(uint32_t JoyPin);
 static void USBH_MouseDemo(USBH_HandleTypeDef * phost);
 static void USBH_KeybdDemo(USBH_HandleTypeDef * phost);
 
@@ -65,11 +65,11 @@ void HID_MenuInit(void)
   /* Start HID Interface */
   USBH_UsrLog("Starting HID Demo");
 
-  BSP_LCD_SetTextColor(LCD_COLOR_GREEN);
-  BSP_LCD_DisplayStringAtLine(18,
+  GUI_SetTextColor(GUI_COLOR_GREEN);
+  GUI_DisplayStringAtLine(18,
                               (uint8_t *)
                               "Use [Joystick Left/Right] to scroll up/down");
-  BSP_LCD_DisplayStringAtLine(19,
+  GUI_DisplayStringAtLine(19,
                               (uint8_t *)
                               "Use [Joystick Up/Down] to scroll HID menu");
   hid_demo.state = HID_DEMO_IDLE;
@@ -134,7 +134,7 @@ void HID_MenuProcess(void)
     }
     else
     {
-      LCD_ErrLog("No supported HID device!\n");
+      LCD_ErrTrace("No supported HID device!\n");
       hid_demo.state = HID_DEMO_WAIT;
     }
     break;
@@ -168,8 +168,8 @@ void HID_MenuProcess(void)
   if (Appli_state == APPLICATION_DISCONNECT)
   {
     Appli_state = APPLICATION_IDLE;
-    LCD_LOG_ClearTextZone();
-    LCD_ErrLog("HID device disconnected!\n");
+    UTIL_LCD_TRACE_ClearTextZone();
+    LCD_ErrTrace("HID device disconnected!\n");
     hid_demo.state = HID_DEMO_IDLE;
     hid_demo.select = 0;
   }
@@ -183,26 +183,26 @@ void HID_MenuProcess(void)
   */
 void HID_SelectItem(uint8_t ** menu, uint8_t item)
 {
-  BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
+  GUI_SetTextColor(GUI_COLOR_WHITE);
 
   switch (item)
   {
   case 0:
-    BSP_LCD_SetBackColor(LCD_COLOR_MAGENTA);
-    BSP_LCD_DisplayStringAtLine(20, menu[0]);
-    BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-    BSP_LCD_DisplayStringAtLine(21, menu[1]);
+    GUI_SetBackColor(GUI_COLOR_MAGENTA);
+    GUI_DisplayStringAtLine(20, menu[0]);
+    GUI_SetBackColor(GUI_COLOR_BLUE);
+    GUI_DisplayStringAtLine(21, menu[1]);
     break;
 
   case 1:
-    BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-    BSP_LCD_DisplayStringAtLine(20, menu[0]);
-    BSP_LCD_SetBackColor(LCD_COLOR_MAGENTA);
-    BSP_LCD_DisplayStringAtLine(21, menu[1]);
-    BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
+    GUI_SetBackColor(GUI_COLOR_BLUE);
+    GUI_DisplayStringAtLine(20, menu[0]);
+    GUI_SetBackColor(GUI_COLOR_MAGENTA);
+    GUI_DisplayStringAtLine(21, menu[1]);
+    GUI_SetBackColor(GUI_COLOR_BLUE);
     break;
   }
-  BSP_LCD_SetBackColor(LCD_COLOR_BLACK);
+  GUI_SetBackColor(GUI_COLOR_BLACK);
 
 }
 
@@ -211,49 +211,39 @@ void HID_SelectItem(uint8_t ** menu, uint8_t item)
   * @param  state: Joystick state
   * @retval None
   */
-static void HID_DEMO_ProbeKey(void)
+static void HID_DEMO_ProbeKey(uint32_t JoyPin)
 {
   /* Handle Menu inputs */
-  if ((BSP_JOY_GetState() == JOY_UP) && (hid_demo.select > 0))
+  if ((JoyPin== JOY_UP) && (hid_demo.select > 0))
   {
     hid_demo.select--;
   }
-  else if ((BSP_JOY_GetState() == JOY_DOWN) && (hid_demo.select < 1))
+  else if ((JoyPin == JOY_DOWN) && (hid_demo.select < 1))
   {
     hid_demo.select++;
   }
-  else if (BSP_JOY_GetState() == JOY_SEL)
+  else if (JoyPin == JOY_SEL)
   {
     hid_demo.select |= 0x80;
   }
 }
 
-/**
-  * @brief  EXTI line detection callbacks.
-  * @param  GPIO_Pin: Specifies the pins connected EXTI line
-  * @retval None
-  */
-void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+
+
+void BSP_JOY_Callback(JOY_TypeDef JOY, JOYPin_TypeDef JoyPin)
 {
-  JOYState_TypeDef JoyState = JOY_NONE;
-
-  if (GPIO_Pin == MFX_IRQOUT_PIN)
-  {
-    /* Get the Joystick State */
-    JoyState = BSP_JOY_GetState();
-
-    HID_DEMO_ProbeKey();
+    HID_DEMO_ProbeKey(JoyPin);
 
     if((hid_demo.state != HID_DEMO_MOUSE) && (hid_demo.state != HID_DEMO_KEYBOARD))
     {
-      switch (JoyState)
+      switch (JoyPin)
       {
       case JOY_LEFT:
-        LCD_LOG_ScrollBack();
+        UTIL_LCD_TRACE_ScrollBack();
         break;
 
       case JOY_RIGHT:
-        LCD_LOG_ScrollForward();
+        UTIL_LCD_TRACE_ScrollForward();
         break;
 
       default:
@@ -262,10 +252,44 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
     }
 
     HAL_Delay(400);
-    /* Clear joystick interrupt pending bits */
-    BSP_IO_ITClear();
-  }
 }
+///**
+//  * @brief  EXTI line detection callbacks.
+//  * @param  GPIO_Pin: Specifies the pins connected EXTI line
+//  * @retval None
+//  */
+//void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+//{
+//  uint32_t JoyState = JOY_NONE;
+//
+//  if (GPIO_Pin == MFX_IRQOUT_PIN)
+//  {
+//    /* Get the Joystick State */
+//    JoyState = BSP_JOY_GetState(JOY1);
+//
+//    HID_DEMO_ProbeKey();
+//
+//    if((hid_demo.state != HID_DEMO_MOUSE) && (hid_demo.state != HID_DEMO_KEYBOARD))
+//    {
+//      switch (JoyState)
+//      {
+//      case JOY_LEFT:
+//        UTIL_LCD_TRACE_ScrollBack();
+//        break;
+//
+//      case JOY_RIGHT:
+//        UTIL_LCD_TRACE_ScrollForward();
+//        break;
+//
+//      default:
+//        break;
+//      }
+//    }
+//
+//    HAL_Delay(400);
+//    /* Clear joystick interrupt pending bits */
+//  }
+//}
 
 /**
   * @brief  Main routine for Mouse application

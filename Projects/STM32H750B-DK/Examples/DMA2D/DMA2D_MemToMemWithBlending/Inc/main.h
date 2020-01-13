@@ -24,11 +24,15 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm32h750b_discovery.h"
 #include "stm32h750b_discovery_lcd.h"
+#include "stm32h750b_discovery_sdram.h"
+#include "basic_gui.h"
 
 #define LAYER_SIZE_X      240
 #define LAYER_SIZE_Y      130
 #define LAYER_BYTE_PER_PIXEL  2
 
+#define LCD_OK                 0x00U
+#define LCD_ERROR              0x01U
 
 #define LCD_FRAME_BUFFER  0xD0000000
 

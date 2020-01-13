@@ -1,0 +1,428 @@
+/**
+  ******************************************************************************
+  * @file    BSP/Src/main.c
+  * @author  MCD Application Team
+  * @brief   Main program body
+  ******************************************************************************
+  * @attention
+  *
+  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.</center></h2>
+  *
+  * This software component is licensed by ST under BSD 3-Clause license,
+  * the "License"; You may not use this file except in compliance with the
+  * License. You may obtain a copy of the License at:
+  *                        opensource.org/licenses/BSD-3-Clause
+  *
+  ******************************************************************************
+  */
+
+/* Includes ------------------------------------------------------------------*/
+#include "main.h"
+#include "stlogo.h"
+
+/** @addtogroup STM32H7xx_HAL_Examples
+  * @{
+  */
+
+/** @addtogroup BSP
+  * @{
+  */
+
+/* Private typedef -----------------------------------------------------------*/
+BSP_DemoTypedef  BSP_examples[]=
+{
+  {LCD_demo, "LCD demo", 0},
+  {Touchscreen_demo1, "TOUCHSCREEN DEMO1", 1},
+  {Touchscreen_demo2, "TOUCHSCREEN DEMO2", 2},
+  {Touchscreen_demo3, "TOUCHSCREEN DEMO3", 3},
+  {POTENTIOMETER_demo, "POTENTIOMETER", 4},
+  {OSPI_demo, "OCTO-SPI TEST", 5},
+  {AudioPlay_demo, "SET VOLUME/ SET SAMPLE RATE", 6},
+  {REC_SingleBuff_demo, "LOOPBACK: SINGLE BUFFERING", 7},
+  {REC_MultiBuff_demo, "LOOPBACK: MULTI BUFFERING", 8},
+  {REC_AnalogMicRecord_demo, "LOOPBACK: ANALOG MIC", 17},
+  {Camera_demo, "CAMERA TEST", 9},
+  {SD_POLLING_demo, "SD POLLING TEST", 10},
+  {SD_DMA_demo, "SD DMA TEST", 11},
+  {SD_IT_demo, "SD IT TEST", 12},
+  {EEPROM_demo, "EEPROM TEST", 13},
+  {NOR_demo, "NOR TEST", 14},
+  {SDRAM_demo, "SDRAM TEST", 15},
+  {SRAM_demo, "SRAM TEST", 16},
+};
+
+/* Private define ------------------------------------------------------------*/
+/* Private macro -------------------------------------------------------------*/
+/* Private variables ---------------------------------------------------------*/
+uint8_t DemoIndex = 0;
+__IO uint8_t NbLoop = 1;
+uint32_t SdmmcTest = 0;
+__IO uint32_t ButtonState = 0;
+uint32_t CameraTest = 0;
+uint32_t TSInterruptTest = 0;
+uint32_t AudioUpdate = 0;
+
+/* Private function prototypes -----------------------------------------------*/
+static void SystemClock_Config(void);
+static void MPU_Config(void);
+static void CPU_CACHE_Enable(void);
+static void Display_DemoDescription(void);
+
+/* Private functions ---------------------------------------------------------*/
+
+/**
+  * @brief  Main program
+  * @retval None
+  */
+int main(void)
+{
+  /* This project template calls firstly two functions in order to configure MPU feature
+     and to enable the CPU Cache, respectively MPU_Config() and CPU_CACHE_Enable().
+     These functions are provided as template implementation that User may integrate
+     in his application, to enhance the performance in case of use of AXI interface
+     with several masters. */
+
+  /* Configure the MPU attributes as Write Through for SDRAM*/
+  MPU_Config();
+
+  /* Enable the CPU Cache */
+  CPU_CACHE_Enable();
+
+  /* STM32H7xx HAL library initialization:
+       - Configure the Systick to generate an interrupt each 1 msec
+       - Set NVIC Group Priority to 4
+       - Low Level Initialization
+     */
+  HAL_Init();
+
+  /* Configure the system clock to 280 MHz */
+  SystemClock_Config();
+
+  HAL_RCC_MCOConfig(RCC_MCO1, RCC_MCO1SOURCE_PLL1QCLK, RCC_MCODIV_1);
+
+  BSP_LED_Init(LED1);
+  BSP_LED_Init(LED2);
+  BSP_LED_Init(LED3);
+  BSP_LED_Init(LED4);
+
+  BSP_LED_Toggle(LED1);
+  BSP_LED_Toggle(LED2);
+  BSP_LED_Toggle(LED3);
+  BSP_LED_Toggle(LED4);
+
+  /* Initialize the LCD */
+  BSP_LCD_Init(0, LCD_ORIENTATION_LANDSCAPE);
+  GUI_SetFuncDriver(&LCD_Driver);
+
+  Display_DemoDescription();
+
+  /* Configure TAMPER Button */
+  BSP_PB_Init(BUTTON_TAMPER, BUTTON_MODE_EXTI);
+
+  /* Wait For User inputs */
+  while (1)
+  {
+    if(ButtonState != 0)
+    {
+      BSP_examples[DemoIndex++].DemoFunc();
+
+      if(DemoIndex >= COUNT_OF_EXAMPLE(BSP_examples))
+      {
+        NbLoop++;
+        DemoIndex = 0;
+      }
+      Display_DemoDescription();
+    }
+  }
+}
+
+/**
+  * @brief  System Clock Configuration
+  *         The system Clock is configured as follow :
+  *            System Clock source            = PLL (HSE)
+  *            SYSCLK(Hz)                     = 280000000 (CPU Clock)
+  *            HCLK(Hz)                       = 280000000 (Bus matrix and AHBs Clock)
+  *            AHB Prescaler                  = 1
+  *            CD APB3 Prescaler              = 2 (APB3 Clock  140MHz)
+  *            CD APB1 Prescaler              = 2 (APB1 Clock  140MHz)
+  *            CD APB2 Prescaler              = 2 (APB2 Clock  140MHz)
+  *            SRD APB4 Prescaler             = 2 (APB4 Clock  140MHz)
+  *            HSE Frequency(Hz)              = 24000000
+  *            PLL_M                          = 12
+  *            PLL_N                          = 280
+  *            PLL_P                          = 2
+  *            PLL_Q                          = 2
+  *            PLL_R                          = 2
+  *            VDD(V)                         = 3.3
+  *            Flash Latency(WS)              = 6
+  * @param  None
+  * @retval None
+  */
+static void SystemClock_Config(void)
+{
+  RCC_ClkInitTypeDef RCC_ClkInitStruct;
+  RCC_OscInitTypeDef RCC_OscInitStruct;
+  HAL_StatusTypeDef ret = HAL_OK;
+
+  /*!< Supply configuration update enable */
+  HAL_PWREx_ConfigSupply(PWR_DIRECT_SMPS_SUPPLY);
+
+  /* The voltage scaling allows optimizing the power consumption when the device is
+  clocked below the maximum system frequency, to update the voltage scaling value
+  regarding system frequency refer to product datasheet.
+  */
+  __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE0);
+
+  while(!__HAL_PWR_GET_FLAG(PWR_FLAG_VOSRDY)) {}
+
+  /* Enable HSE Oscillator and activate PLL with HSE as source */
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
+  RCC_OscInitStruct.HSEState = RCC_HSE_ON;
+  RCC_OscInitStruct.HSIState = RCC_HSI_OFF;
+  RCC_OscInitStruct.CSIState = RCC_CSI_OFF;
+  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
+  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
+  RCC_OscInitStruct.PLL.PLLM = 12;
+  RCC_OscInitStruct.PLL.PLLN = 280;
+  RCC_OscInitStruct.PLL.PLLFRACN = 0;
+  RCC_OscInitStruct.PLL.PLLP = 2;
+  RCC_OscInitStruct.PLL.PLLR = 2;
+  RCC_OscInitStruct.PLL.PLLQ = 2;
+
+  RCC_OscInitStruct.PLL.PLLVCOSEL = RCC_PLL1VCOWIDE;
+  RCC_OscInitStruct.PLL.PLLRGE = RCC_PLL1VCIRANGE_1;
+  ret = HAL_RCC_OscConfig(&RCC_OscInitStruct);
+  if(ret != HAL_OK)
+  {
+    while(1);
+  }
+
+  /* Select PLL as system clock source and configure  bus clocks dividers */
+  RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_D1PCLK1 | RCC_CLOCKTYPE_PCLK1 | \
+    RCC_CLOCKTYPE_PCLK2  | RCC_CLOCKTYPE_D3PCLK1);
+
+  RCC_ClkInitStruct.SYSCLKSource   = RCC_SYSCLKSOURCE_PLLCLK;
+  RCC_ClkInitStruct.SYSCLKDivider  = RCC_SYSCLK_DIV1;
+  RCC_ClkInitStruct.AHBCLKDivider  = RCC_HCLK_DIV1;
+  RCC_ClkInitStruct.APB3CLKDivider = RCC_APB3_DIV2;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_APB1_DIV2;
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_APB2_DIV2;
+  RCC_ClkInitStruct.APB4CLKDivider = RCC_APB4_DIV2;
+  ret = HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_6);
+  if(ret != HAL_OK)
+  {
+     while(1);
+  }
+
+    /*
+  Note : The activation of the I/O Compensation Cell is recommended with communication  interfaces
+          (GPIO, SPI, FMC, QSPI ...)  when  operating at  high frequencies(please refer to product datasheet)
+          The I/O Compensation Cell activation  procedure requires :
+        - The activation of the CSI clock
+        - The activation of the SYSCFG clock
+        - Enabling the I/O Compensation Cell : setting bit[0] of register SYSCFG_CCCSR
+  */
+  __HAL_RCC_CSI_ENABLE() ;
+
+  __HAL_RCC_SYSCFG_CLK_ENABLE() ;
+
+  HAL_EnableCompensationCell();
+}
+
+/**
+  * @brief  Display main demo messages
+  * @retval None
+  */
+static void Display_DemoDescription(void)
+{
+  char desc[64];
+  uint32_t x_size;
+  uint32_t y_size;
+
+  GUI_SetFont(&GUI_DEFAULT_FONT);
+
+  /* Clear the LCD */
+  GUI_SetBackColor(GUI_COLOR_WHITE);
+  GUI_Clear(GUI_COLOR_WHITE);
+
+  /* Set the LCD Text Color */
+  GUI_SetTextColor(GUI_COLOR_DARKBLUE);
+
+  /* Display LCD messages */
+  GUI_DisplayStringAt(0, 10, (uint8_t *)"STM32H7B3I BSP", CENTER_MODE);
+  GUI_DisplayStringAt(0, 35, (uint8_t *)"Drivers examples", CENTER_MODE);
+
+  BSP_LCD_GetXSize(0, &x_size);
+  BSP_LCD_GetYSize(0, &y_size);
+
+  /* Draw Bitmap */
+  GUI_DrawBitmap((x_size - 80)/2, 65, (uint8_t *)stlogo);
+
+  GUI_SetFont(&Font12);
+  GUI_DisplayStringAt(0, y_size - 20, (uint8_t *)"Copyright (c) STMicroelectronics 2019", CENTER_MODE);
+
+  GUI_SetFont(&Font16);
+  BSP_LCD_FillRect(0, 0, y_size/2 - 15, x_size, 122, GUI_COLOR_BLUE);
+  GUI_SetTextColor(GUI_COLOR_WHITE);
+  GUI_SetBackColor(GUI_COLOR_BLUE);
+  GUI_DisplayStringAt(0, y_size / 2 , (uint8_t *)"Press TAMPER button to start :", CENTER_MODE);
+  sprintf(desc,"%s example", BSP_examples[DemoIndex].DemoName);
+  GUI_DisplayStringAt(0, y_size/2 + 15, (uint8_t *)desc, CENTER_MODE);
+
+  if(BSP_examples[DemoIndex].DemoIndex == 4)
+  {
+    GUI_DisplayStringAt(0, y_size/2 + 45, (uint8_t *)"Make sure JP5 is in POTPA0_C position", CENTER_MODE);
+  }
+  else if(BSP_examples[DemoIndex].DemoIndex == 5)
+  {
+    GUI_DisplayStringAt(0, y_size/2 + 45, (uint8_t *)"Make sure JP4 and JP23 are in OSPI1 position", CENTER_MODE);
+  }
+  else if(BSP_examples[DemoIndex].DemoIndex == 6)
+  {
+    GUI_DisplayStringAt(0, y_size/2 + 45, (uint8_t *)"Make sure:", LEFT_MODE);
+    GUI_DisplayStringAt(0, y_size/2 + 60, (uint8_t *)"JP14, JP26, JP27, JP28 and JP34 are fitted for SAI test", LEFT_MODE);
+    GUI_DisplayStringAt(0, y_size/2 + 75, (uint8_t *)"JP7, JP8, JP9 and JP11 are in I2S position, JP18 is fitted and ", LEFT_MODE);
+    GUI_DisplayStringAt(0, y_size/2 + 90, (uint8_t *)"JP16 and JP39 are removed for I2S test", LEFT_MODE);
+  }
+  else if((BSP_examples[DemoIndex].DemoIndex == 7) || (BSP_examples[DemoIndex].DemoIndex == 8))
+  {
+    GUI_DisplayStringAt(0, y_size/2 + 45, (uint8_t *)"Make sure JP14, JP26, JP27, JP28 and JP34 are fitted", CENTER_MODE);
+    GUI_DisplayStringAt(0, y_size/2 + 60, (uint8_t *)"Make sure JP19 and JP35 are in DFSDM position", CENTER_MODE);
+  }
+  else if(BSP_examples[DemoIndex].DemoIndex == 9)
+  {
+    GUI_DisplayStringAt(0, y_size/2 + 45, (uint8_t *)"Make sure JP1, JP6, JP7, JP17 and JP32 are in DCMI position", CENTER_MODE);
+    GUI_DisplayStringAt(0, y_size/2 + 60, (uint8_t *)"Make sure JP2 and JP35 are removed", CENTER_MODE);
+  }
+  else if((BSP_examples[DemoIndex].DemoIndex > 9) && (BSP_examples[DemoIndex].DemoIndex < 13))
+  {
+    GUI_DisplayStringAt(0, y_size/2 + 45, (uint8_t *)"Make sure JP12 and JP15 are in SDIO1 postion", CENTER_MODE);
+  }
+  else if(BSP_examples[DemoIndex].DemoIndex == 14)
+  {
+    GUI_DisplayStringAt(0, y_size/2 + 45, (uint8_t *)"Make sure JP32 and JP35 are in NOR position", CENTER_MODE);
+  }
+  else if(BSP_examples[DemoIndex].DemoIndex == 16)
+  {
+    GUI_DisplayStringAt(0, y_size/2 + 45, (uint8_t *)"Make sure JP2 and JP12 are in SRAM position", CENTER_MODE);
+  }
+  else if((BSP_examples[DemoIndex].DemoIndex == 7) || (BSP_examples[DemoIndex].DemoIndex == 17))
+  {
+    GUI_DisplayStringAt(0, y_size/2 + 45, (uint8_t *)"Make sure JP14, JP26, JP27, JP28 and JP34 are fitted", CENTER_MODE);
+  }
+  else
+  {
+  }
+}
+
+/**
+  * @brief  Check for user input
+  * @param  None
+* @retval Input state (1 : active / 0 : Inactive)
+  */
+uint8_t CheckForUserInput(void)
+{
+  return ButtonState;
+}
+
+/**
+  * @brief  Button Callback
+  * @param  Button Specifies the pin connected EXTI line
+  * @retval None
+  */
+void BSP_PB_Callback(Button_TypeDef Button)
+{
+  if(Button == BUTTON_TAMPER)
+  {
+    ButtonState = 1;
+  }
+}
+
+/**
+  * @brief  CPU L1-Cache enable.
+  * @param  None
+  * @retval None
+  */
+static void MPU_Config(void)
+{
+  MPU_Region_InitTypeDef MPU_InitStruct;
+
+  /* Disable the MPU */
+  HAL_MPU_Disable();
+
+  /* Configure the MPU attributes as WT for SDRAM */
+  MPU_InitStruct.Enable = MPU_REGION_ENABLE;
+  MPU_InitStruct.BaseAddress = SDRAM_DEVICE_ADDR;
+  MPU_InitStruct.Size = MPU_REGION_SIZE_32MB;
+  MPU_InitStruct.AccessPermission = MPU_REGION_FULL_ACCESS;
+  MPU_InitStruct.IsBufferable = MPU_ACCESS_NOT_BUFFERABLE;
+  MPU_InitStruct.IsCacheable = MPU_ACCESS_CACHEABLE;
+  MPU_InitStruct.IsShareable = MPU_ACCESS_NOT_SHAREABLE;
+  MPU_InitStruct.Number = MPU_REGION_NUMBER0;
+  MPU_InitStruct.TypeExtField = MPU_TEX_LEVEL0;
+  MPU_InitStruct.SubRegionDisable = 0x00;
+  MPU_InitStruct.DisableExec = MPU_INSTRUCTION_ACCESS_ENABLE;
+  HAL_MPU_ConfigRegion(&MPU_InitStruct);
+
+  MPU_InitStruct.Enable = MPU_REGION_ENABLE;
+  MPU_InitStruct.BaseAddress = NOR_MEMORY_ADRESS1;
+  MPU_InitStruct.Size = MPU_REGION_SIZE_256MB;
+  MPU_InitStruct.AccessPermission = MPU_REGION_FULL_ACCESS;
+  MPU_InitStruct.IsBufferable = MPU_ACCESS_BUFFERABLE;
+  MPU_InitStruct.IsCacheable = MPU_ACCESS_NOT_CACHEABLE;
+  MPU_InitStruct.IsShareable = MPU_ACCESS_SHAREABLE;
+  MPU_InitStruct.Number = MPU_REGION_NUMBER1;
+  MPU_InitStruct.TypeExtField = MPU_TEX_LEVEL0;
+  MPU_InitStruct.SubRegionDisable = 0x00;
+  MPU_InitStruct.DisableExec = MPU_INSTRUCTION_ACCESS_ENABLE;
+  HAL_MPU_ConfigRegion(&MPU_InitStruct);
+
+  /* Enable the MPU */
+  HAL_MPU_Enable(MPU_PRIVILEGED_DEFAULT);
+}
+
+/**
+  * @brief  CPU L1-Cache enable.
+  * @param  None
+  * @retval None
+  */
+static void CPU_CACHE_Enable(void)
+{
+  /* Enable I-Cache */
+  SCB_EnableICache();
+
+  /* Enable D-Cache */
+  SCB_EnableDCache();
+}
+
+#ifdef  USE_FULL_ASSERT
+
+/**
+  * @brief  Reports the name of the source file and the source line number
+  *         where the assert_param error has occurred.
+  * @param  file: pointer to the source file name
+  * @param  line: assert_param error line source number
+  * @retval None
+  */
+void assert_failed(uint8_t* file, uint32_t line)
+{
+  /* User can add his own implementation to report the file name and line number,
+     ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
+
+  /* Infinite loop */
+  while (1)
+  {
+  }
+}
+#endif
+
+/**
+  * @}
+  */
+
+/**
+  * @}
+  */
+
+/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

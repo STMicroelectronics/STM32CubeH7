@@ -30,7 +30,7 @@ uint32_t JumpAddress;
 pFunction Jump_To_Application;
 char USBDISKPath[4];            /* USB Host logical drive path */
 #define HSEM_ID_0 (0U) /* HW semaphore 0 */
-
+BSP_IO_Init_t init;
 /* Private function prototypes ----------------------------------------------- */
 static void SystemClock_Config(void);
 static void CPU_CACHE_Enable(void);
@@ -150,7 +150,7 @@ int main(void)
 static void FW_InitApplication(void)
 {
   /* Initialize IO expander */
-  BSP_IO_Init();
+  BSP_IO_Init(0, &init);
 
   /* Configure LED1, LED2, LED3 and LED4 */
   BSP_LED_Init(LED1);

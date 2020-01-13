@@ -136,7 +136,6 @@ Connectivity, USB Host, HID, MSC, Full Speed, High Speed, OTG, enumeration, mass
   - USB_Host/DualCore_Standalone/CM7/Src/keyboard.c              HID keyboard functions
   - USB_Host/DualCore_Standalone/CM7/Inc/main.h                  Main program header file
   - USB_Host/DualCore_Standalone/CM7/Inc/stm32h7xx_it.h          Interrupt handlers header file
-  - USB_Host/DualCore_Standalone/CM7/Inc/lcd_log_conf.h          LCD log configuration file
   - USB_Host/DualCore_Standalone/CM7/Inc/stm32h7xx_hal_conf.h    HAL configuration file
   - USB_Host/DualCore_Standalone/CM7/Inc/usbh_conf.h             USB Host driver Configuration file
   - USB_Host/DualCore_Standalone/CM7/Inc/ffconf.h                FAT file system module configuration file
@@ -152,11 +151,11 @@ Connectivity, USB Host, HID, MSC, Full Speed, High Speed, OTG, enumeration, mass
 
   - This application runs on STM32H7xx devices.
 
-  - This application has been tested with STMicroelectronics STM32H747I-EVAL RevB
+  - This application has been tested with STMicroelectronics STM32H747I-EVAL 
     evaluation boards and can be easily tailored to any other supported device
     and development board.
 
-  - STM32H747I-EVAL RevB Set-up
+  - STM32H747I-EVAL  Set-up
     - Plug the USB key into the STM32H747I-EVAL board through 'USB micro A-Male
       to A-Female' cable to the connector:
       - CN14 : to use USB High Speed (HS)

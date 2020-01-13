@@ -85,15 +85,15 @@ int main(void)
   /*##-1- Configure LCD ######################################################*/
   LCD_Config();  
 
-  BSP_SD_Init();
+  BSP_SD_Init(0);
     
-  while(BSP_SD_IsDetected() != SD_PRESENT)
+  while(BSP_SD_IsDetected(0) != SD_PRESENT)
   {
-    BSP_LCD_SetTextColor(LCD_COLOR_RED);
-    BSP_LCD_DisplayStringAtLine(8, (uint8_t*)"  Please insert SD Card                  ");
+    GUI_SetTextColor(GUI_COLOR_RED);
+    GUI_DisplayStringAtLine(8, (uint8_t*)"  Please insert SD Card                  ");
   }
   
-  BSP_LCD_Clear(LCD_COLOR_BLACK);
+  GUI_Clear(GUI_COLOR_BLACK);
   
   /*##-2- Link the SD Card disk I/O driver ###################################*/
   if(FATFS_LinkDriver(&SD_Driver, SD_Path) != 0)
@@ -109,9 +109,9 @@ int main(void)
       if(pDirectoryFiles[counter] == NULL)
       {
         /* Set the Text Color */
-        BSP_LCD_SetTextColor(LCD_COLOR_RED);
+        GUI_SetTextColor(GUI_COLOR_RED);
         
-        BSP_LCD_DisplayStringAtLine(8, (uint8_t*)"  Cannot allocate memory ");
+        GUI_DisplayStringAtLine(8, (uint8_t*)"  Cannot allocate memory ");
         while(1)
         {
         }       
@@ -120,16 +120,16 @@ int main(void)
     
     /*##-4- Display Background picture #######################################*/
     /* Select Background Layer  */
-    BSP_LCD_SelectLayer(0);
+    GUI_SetLayer(0);
     
     /* Register the file system object to the FatFs module */
     if(f_mount(&SD_FatFs, (TCHAR const*)SD_Path, 0) != FR_OK)
     {
       /* FatFs Initialization Error */
       /* Set the Text Color */
-      BSP_LCD_SetTextColor(LCD_COLOR_RED);
+      GUI_SetTextColor(GUI_COLOR_RED);
       
-      BSP_LCD_DisplayStringAtLine(8, (uint8_t*)"  FatFs Initialization Error ");
+      GUI_DisplayStringAtLine(8, (uint8_t*)"  FatFs Initialization Error ");
     }
     else
     {    
@@ -137,9 +137,9 @@ int main(void)
       if (f_opendir(&directory, (TCHAR const*)"/BACK") != FR_OK)
       {
         /* Set the Text Color */
-        BSP_LCD_SetTextColor(LCD_COLOR_RED);
+        GUI_SetTextColor(GUI_COLOR_RED);
         
-        BSP_LCD_DisplayStringAtLine(8, (uint8_t*)"    Open directory.. fails      ");
+        GUI_DisplayStringAtLine(8, (uint8_t*)"    Open directory.. fails      ");
         while(1)
         {
         } 
@@ -151,14 +151,14 @@ int main(void)
       /* Format the string */
       Storage_OpenReadFile(uwInternelBuffer, "BACK/image.bmp");
       /* Write bmp file on LCD frame buffer */
-      BSP_LCD_DrawBitmap(0, 0, uwInternelBuffer);
+      GUI_DrawBitmap(0, 0, uwInternelBuffer);
     }
     else
     {
       /* Set the Text Color */
-      BSP_LCD_SetTextColor(LCD_COLOR_RED);
+      GUI_SetTextColor(GUI_COLOR_RED);
       
-      BSP_LCD_DisplayStringAtLine(8, (uint8_t*)"    File type not supported. "); 
+      GUI_DisplayStringAtLine(8, (uint8_t*)"    File type not supported. "); 
       while(1)
       {
       }  
@@ -166,10 +166,10 @@ int main(void)
     
     /*##-5- Display Foreground picture #######################################*/
     /* Select Foreground Layer  */
-    BSP_LCD_SelectLayer(1);
+    GUI_SetLayer(1);
     
     /* Decrease the foreground transparency */
-    BSP_LCD_SetTransparency(1, 200); 
+    BSP_LCD_SetTransparency(0, 1, 200); 
     
     /* Get the BMP file names on root directory */
     ubNumberOfFiles = Storage_GetDirectoryBitmapFiles("/TOP", pDirectoryFiles);
@@ -181,9 +181,9 @@ int main(void)
         free(pDirectoryFiles[counter]);
       }
       /* Set the Text Color */
-      BSP_LCD_SetTextColor(LCD_COLOR_RED);
+      GUI_SetTextColor(GUI_COLOR_RED);
       
-      BSP_LCD_DisplayStringAtLine(8, (uint8_t*)"    No Bitmap files...      ");
+      GUI_DisplayStringAtLine(8, (uint8_t*)"    No Bitmap files...      ");
       while(1)
       {
       } 
@@ -211,7 +211,7 @@ int main(void)
         HAL_Delay(100);
         
         /* Write bmp file on LCD frame buffer */
-        BSP_LCD_DrawBitmap(0, 0, uwInternelBuffer);
+        GUI_DrawBitmap(0, 0, uwInternelBuffer);
         
         /* Jump to next image */
         counter++;   
@@ -219,10 +219,10 @@ int main(void)
       else
       {
         /* Set the Text Color */
-        BSP_LCD_SetTextColor(LCD_COLOR_RED); 
+        GUI_SetTextColor(GUI_COLOR_RED); 
         
-        BSP_LCD_DisplayStringAtLine(7, (uint8_t *) str);        
-        BSP_LCD_DisplayStringAtLine(8, (uint8_t*)"    File type not supported. "); 
+        GUI_DisplayStringAtLine(7, (uint8_t *) str);        
+        GUI_DisplayStringAtLine(8, (uint8_t*)"    File type not supported. "); 
         while(1)
         {
         }    
@@ -237,34 +237,46 @@ int main(void)
   * @retval None
   */
 static void LCD_Config(void)
-{
-  /* LCD Initialization */ 
-  /* Two layers are used in this application simultaneously 
-     so "LCD_MIN_PCLK" is recommended to programme the PCLK at 20 MHz */  
-  BSP_LCD_InitEx(LCD_MIN_PCLK);
-  
-  /* LCD Layers Initialization */ 
-  BSP_LCD_LayerDefaultInit(0, LCD_FB_START_ADDRESS);
-  BSP_LCD_LayerDefaultInit(1, (LCD_FB_START_ADDRESS+(BSP_LCD_GetXSize()*BSP_LCD_GetYSize()*4)));
-  
-  /* Enable the LCD */ 
-  BSP_LCD_DisplayOn();
+{  
+  int32_t lcd_status = BSP_ERROR_NONE;
+  BSP_LCD_LayerConfig_t config;
 
-  /* Set LCD Background Layer  */
-  BSP_LCD_SelectLayer(0);
+  /* Initialize LCD BACKGROUND layer: activated by default */
+  BSP_LCD_Init(0, LCD_ORIENTATION_LANDSCAPE);
+  while(lcd_status != BSP_ERROR_NONE);
+  GUI_SetFuncDriver(&LCD_Driver);
+
   /* Clear the Background Layer */
-  BSP_LCD_Clear(LCD_COLOR_WHITE);
+  GUI_Clear(GUI_COLOR_BLACK);
 
-  /* Set LCD Foreground Layer  */
-  BSP_LCD_SelectLayer(1);
-  /* Clear the Foreground Layer */ 
-  BSP_LCD_Clear(LCD_COLOR_BLACK); 
+  /* Initialize LCD FOREGROUND layer */
+  config.Address = LCD_BG_LAYER_ADDRESS;
+  config.PixelFormat = LTDC_PIXEL_FORMAT_ARGB8888;
+  config.X0          = 0;
+  config.X1          = LCD_DEFAULT_WIDTH;
+  config.Y0          = 0;
+  config.Y1          = LCD_DEFAULT_HEIGHT;
 
-  /* Configure and enable the Color Keying feature */
-  BSP_LCD_SetColorKeying(1, 0); 
+  BSP_LCD_ConfigLayer(0, LTDC_ACTIVE_LAYER_FOREGROUND, &config);
 
-  /* Configure the transparency for foreground: Increase the transparency */
-  BSP_LCD_SetTransparency(1, 100);
+  /* Select the LCD Foreground Layer */
+  BSP_LCD_SetActiveLayer(0, LTDC_ACTIVE_LAYER_FOREGROUND);
+  GUI_SetLayer(LTDC_ACTIVE_LAYER_FOREGROUND);
+
+  /* Clear the Foreground Layer */
+  GUI_Clear(GUI_COLOR_BLACK);
+
+  /* Configure the transparency for foreground and background :
+  Increase the transparency */
+  BSP_LCD_SetTransparency(0, LTDC_ACTIVE_LAYER_BACKGROUND, 0);
+  BSP_LCD_SetTransparency(0, LTDC_ACTIVE_LAYER_FOREGROUND, 100);
+
+  /* Set Font */
+  GUI_SetFont(&Font16);
+
+  /* Set the Text and Back Color */
+  GUI_SetTextColor(GUI_COLOR_RED);
+  GUI_SetBackColor(GUI_COLOR_BLACK);
 }
 
 /**

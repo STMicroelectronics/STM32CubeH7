@@ -24,6 +24,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm32h7xx_hal.h"
 #include "stm32h747i_discovery.h"
+#include "stm32h747i_discovery_bus.h"
 #include "audio.h"
 #include "../Components/wm8994/wm8994.h"
 
@@ -57,7 +58,9 @@
 #define AUDIO_SPDIFRX_AF                    GPIO_AF9_SPDIF
 #define AUDIO_SPDIFRX_PIN                   GPIO_PIN_7
 #define AUDIO_SPDIFRX_IN_ENABLE()           __HAL_RCC_GPIOD_CLK_ENABLE()
-
+/* Audio codec I2C address */
+#define AUDIO_I2C_ADDRESS                  0x34U
+#define VOLUME_OUT_CONVERT(Volume)    (((Volume) > 100)? 63:((uint8_t)(((Volume) * 63) / 100)))
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */
 void Error_Handler(void);

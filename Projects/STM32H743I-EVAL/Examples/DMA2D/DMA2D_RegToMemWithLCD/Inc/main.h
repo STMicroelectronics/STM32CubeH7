@@ -26,6 +26,7 @@
 #include "stm32h743i_eval_lcd.h"
 #include "stm32h743i_eval_io.h"
 #include "stm32h743i_eval_sdram.h"
+#include "stmpe811.h"
 
 #define QVGA_RES_X  320
 #define QVGA_RES_Y  240

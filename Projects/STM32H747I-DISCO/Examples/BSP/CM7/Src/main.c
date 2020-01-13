@@ -3,7 +3,7 @@
   * @file    BSP/CM7/Src/main.c
   * @author  MCD Application Team
   * @brief   This example code shows how to use the STM32H747I-DISCO BSP Drivers
-  *          This is the main program for Cortex-M7.   
+  *          This is the main program for Cortex-M7.
   ******************************************************************************
   * @attention
   *
@@ -46,15 +46,15 @@ __IO uint32_t PauseResumeStatus = IDLE_STATUS;
 
 /* Counter for Sel Joystick pressed*/
 __IO uint32_t PressCount = 0;
-
+__IO uint32_t ButtonState=0;
 uint8_t toggle_led = 0;
-
+__IO uint32_t CameraTest=0;
 /* Volume of the audio playback */
 /* Initial volume level (from 0% (Mute) to 100% (Max)) */
 __IO uint8_t volume = 60;
 __IO uint8_t VolumeChange = 0;
 __IO uint32_t SRAMTest = 0;
-__IO uint32_t JoystickStates = 0, PreviousPinState = 0, JoyPin = 0;
+__IO uint32_t SdramTest=0;
 /* Private function prototypes -----------------------------------------------*/
 static void SystemClock_Config(void);
 static void Display_DemoDescription(void);
@@ -63,19 +63,20 @@ static void CPU_CACHE_Enable(void);
 
 BSP_DemoTypedef  BSP_examples[]=
 {
-  {Joystick_demo, "JOYSTICK POLLING", 0},
-  {Joystick_exti_demo, "JOYSTICK EXTI", 0},
+  {Joystick_demo, "JOYSTICK EXTI", 0},
   {Touchscreen_demo1, "TOUCHSCREEN DEMO1", 0},
   {Touchscreen_demo2, "TOUCHSCREEN DEMO2", 0},
   {LCD_demo, "LCD", 0},
   {Camera_demo, "CAMERA", 0},
   {AudioPlay_demo, "AUDIO PLAY", 0},
   {AudioRecord_demo, "AUDIO RECORD", 0},
-  {SD_demo, "SD", 0},
+  {SD_DMA_demo, "SD", 0},
+  {SD_IT_demo, "SD", 0},
+  {SD_POLLING_demo, "SD", 0},
   {QSPI_demo, "QSPI", 0},
   {SDRAM_demo, "SDRAM", 0},
   {SDRAM_DMA_demo, "SDRAM MDMA", 0},
-  {Log_demo, "LCD LOG", 0}
+
 };
 /* Private functions ---------------------------------------------------------*/
 
@@ -86,15 +87,15 @@ BSP_DemoTypedef  BSP_examples[]=
   */
 int main(void)
 {
-  /* System Init, System clock, voltage scaling and L1-Cache configuration are done by CPU1 (Cortex-M7) 
+  /* System Init, System clock, voltage scaling and L1-Cache configuration are done by CPU1 (Cortex-M7)
      in the meantime Domain D2 is put in STOP mode(Cortex-M4 in deep-sleep)
   */
-  
+
   /* Configure the MPU attributes as Write Through */
   MPU_Config();
 
   /* Enable the CPU Cache */
-  CPU_CACHE_Enable();
+ CPU_CACHE_Enable();
 
   /* STM32H7xx HAL library initialization:
        - Systick timer is configured by default as source of time base, but user
@@ -110,39 +111,33 @@ int main(void)
   /* Configure the system clock to 400 MHz */
   SystemClock_Config();
 
-  /* When system initialization is finished, Cortex-M7 could wakeup (when needed) the Cortex-M4  by means of 
-     HSEM notification or by any D2 wakeup source (SEV,EXTI..)   */   
 
-  BSP_LED_Init(LED_GREEN);
-  BSP_LED_Init(LED_ORANGE);
-  BSP_LED_Init(LED_RED);
-  BSP_LED_Init(LED_BLUE);
+  /* When system initialization is finished, Cortex-M7 could wakeup (when needed) the Cortex-M4  by means of
+     HSEM notification or by any D2 wakeup source (SEV,EXTI..)   */
 
-  /* Configure the Wakeup push-button in GPIO Mode */
-  BSP_PB_Init(BUTTON_WAKEUP, BUTTON_MODE_GPIO);
 
+  /* Configure the Wakeup push-button in EXTI Mode */
+  BSP_PB_Init(BUTTON_WAKEUP, BUTTON_MODE_EXTI);
+  BSP_LED_Init(LED1);
+  BSP_LED_Init(LED2);
+  BSP_LED_Init(LED3);
+  BSP_LED_Init(LED4);
   /*##-1- Initialize the LCD #################################################*/
   /* Initialize the LCD */
-  BSP_LCD_Init();
-
-  BSP_LCD_LayerDefaultInit(1, LCD_FB_START_ADDRESS);
-
+  BSP_LCD_Init(0, LCD_ORIENTATION_LANDSCAPE);
+  GUI_SetFuncDriver(&LCD_Driver);
+  GUI_SetFont(&GUI_DEFAULT_FONT);
   Display_DemoDescription();
-
   /* Wait For User inputs */
   while (1)
   {
-    /* Toggle LED1 before start test */
-    HAL_Delay(100);
-    BSP_LED_Toggle(LED_GREEN);
-
-    if(BSP_PB_GetState(BUTTON_WAKEUP) != RESET)
+    if(ButtonState == 1)
     {
-      BSP_LED_Off(LED_GREEN);
-      HAL_Delay(10);
-      while (BSP_PB_GetState(BUTTON_WAKEUP) != RESET);
-
+      HAL_Delay(400);
+      ButtonState = 0;
       BSP_examples[DemoIndex++].DemoFunc();
+
+      HAL_Delay(100);
 
       if(DemoIndex >= COUNT_OF_EXAMPLE(BSP_examples))
       {
@@ -152,11 +147,12 @@ int main(void)
       Display_DemoDescription();
     }
   }
+
 }
 
 /**
   * @brief  System Clock Configuration
-  *         The system Clock is configured as follow : 
+  *         The system Clock is configured as follow :
   *            System Clock source            = PLL (HSE)
   *            SYSCLK(Hz)                     = 400000000 (Cortex-M7 CPU Clock)
   *            HCLK(Hz)                       = 200000000 (Cortex-M4 CPU, Bus matrix Clocks)
@@ -181,17 +177,17 @@ static void SystemClock_Config(void)
   RCC_ClkInitTypeDef RCC_ClkInitStruct;
   RCC_OscInitTypeDef RCC_OscInitStruct;
   HAL_StatusTypeDef ret = HAL_OK;
-  
+
   /*!< Supply configuration update enable */
   HAL_PWREx_ConfigSupply(PWR_DIRECT_SMPS_SUPPLY);
 
-  /* The voltage scaling allows optimizing the power consumption when the device is 
-     clocked below the maximum system frequency, to update the voltage scaling value 
+  /* The voltage scaling allows optimizing the power consumption when the device is
+     clocked below the maximum system frequency, to update the voltage scaling value
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
 
   while(!__HAL_PWR_GET_FLAG(PWR_FLAG_VOSRDY)) {}
-  
+
   /* Enable HSE Oscillator and activate PLL with HSE as source */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
@@ -214,7 +210,7 @@ static void SystemClock_Config(void)
   {
     Error_Handler();
   }
-  
+
 /* Select PLL as system clock source and configure  bus clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_D1PCLK1 | RCC_CLOCKTYPE_PCLK1 | \
                                  RCC_CLOCKTYPE_PCLK2  | RCC_CLOCKTYPE_D3PCLK1);
@@ -222,10 +218,10 @@ static void SystemClock_Config(void)
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.SYSCLKDivider = RCC_SYSCLK_DIV1;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_HCLK_DIV2;
-  RCC_ClkInitStruct.APB3CLKDivider = RCC_APB3_DIV2;  
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_APB1_DIV2; 
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_APB2_DIV2; 
-  RCC_ClkInitStruct.APB4CLKDivider = RCC_APB4_DIV2; 
+  RCC_ClkInitStruct.APB3CLKDivider = RCC_APB3_DIV2;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_APB1_DIV2;
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_APB2_DIV2;
+  RCC_ClkInitStruct.APB4CLKDivider = RCC_APB4_DIV2;
   ret = HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_4);
   if(ret != HAL_OK)
   {
@@ -234,21 +230,21 @@ static void SystemClock_Config(void)
 
  /*
   Note : The activation of the I/O Compensation Cell is recommended with communication  interfaces
-          (GPIO, SPI, FMC, QSPI ...)  when  operating at  high frequencies(please refer to product datasheet)       
+          (GPIO, SPI, FMC, QSPI ...)  when  operating at  high frequencies(please refer to product datasheet)
           The I/O Compensation Cell activation  procedure requires :
         - The activation of the CSI clock
         - The activation of the SYSCFG clock
         - Enabling the I/O Compensation Cell : setting bit[0] of register SYSCFG_CCCSR
  */
- 
-  /*activate CSI clock mondatory for I/O Compensation Cell*/  
+
+  /*activate CSI clock mondatory for I/O Compensation Cell*/
   __HAL_RCC_CSI_ENABLE() ;
-    
+
   /* Enable SYSCFG clock mondatory for I/O Compensation Cell */
   __HAL_RCC_SYSCFG_CLK_ENABLE() ;
-  
-  /* Enables the I/O Compensation Cell */    
-  HAL_EnableCompensationCell();  
+
+  /* Enables the I/O Compensation Cell */
+  HAL_EnableCompensationCell();
 }
 
 /**
@@ -259,115 +255,63 @@ static void SystemClock_Config(void)
 static void Display_DemoDescription(void)
 {
   char desc[64];
+  uint32_t x_size;
+  uint32_t y_size;
 
+  BSP_LCD_GetXSize(0, &x_size);
+  BSP_LCD_GetYSize(0, &y_size);
   /* Set LCD Foreground Layer  */
-  BSP_LCD_SelectLayer(1);
-
-  BSP_LCD_SetFont(&LCD_DEFAULT_FONT);
+  GUI_SetFont(&GUI_DEFAULT_FONT);
 
   /* Clear the LCD */
-  BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
-  BSP_LCD_Clear(LCD_COLOR_WHITE);
+  GUI_SetBackColor(GUI_COLOR_WHITE);
+  GUI_Clear(GUI_COLOR_WHITE);
 
   /* Set the LCD Text Color */
-  BSP_LCD_SetTextColor(LCD_COLOR_DARKBLUE);
+  GUI_SetTextColor(GUI_COLOR_DARKBLUE);
 
   /* Display LCD messages */
-  BSP_LCD_DisplayStringAt(0, 10, (uint8_t *)"STM32H747I BSP", CENTER_MODE);
-  BSP_LCD_DisplayStringAt(0, 35, (uint8_t *)"Drivers examples", CENTER_MODE);
+  GUI_DisplayStringAt(0, 10, (uint8_t *)"STM32H747I BSP", CENTER_MODE);
+  GUI_DisplayStringAt(0, 35, (uint8_t *)"Drivers examples", CENTER_MODE);
 
   /* Draw Bitmap */
-  BSP_LCD_DrawBitmap((BSP_LCD_GetXSize() - 80)/2, 65, (uint8_t *)stlogo);
+  GUI_DrawBitmap((x_size - 80)/2, 65, (uint8_t *)stlogo);
 
-  BSP_LCD_SetFont(&Font12);
-  BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()- 20, (uint8_t *)"Copyright (c) STMicroelectronics 2019", CENTER_MODE);
+  GUI_SetFont(&Font12);
+  GUI_DisplayStringAt(0, y_size - 20, (uint8_t *)"Copyright (c) STMicroelectronics 2018", CENTER_MODE);
 
-  BSP_LCD_SetFont(&Font16);
-  BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
-  BSP_LCD_FillRect(0, BSP_LCD_GetYSize()/2 + 15, BSP_LCD_GetXSize(), 60);
-  BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
-  BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-  BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize() / 2 + 30, (uint8_t *)"Press Wakeup push-button to start :", CENTER_MODE);
+  GUI_SetFont(&Font16);
+  BSP_LCD_FillRect(0, 0, y_size/2 + 15, x_size, 60, GUI_COLOR_BLUE);
+  GUI_SetTextColor(GUI_COLOR_WHITE);
+  GUI_SetBackColor(GUI_COLOR_BLUE);
+  GUI_DisplayStringAt(0, y_size / 2 + 30, (uint8_t *)"Press Wakeup button to start :", CENTER_MODE);
   sprintf(desc,"%s example", BSP_examples[DemoIndex].DemoName);
-  BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()/2 + 45, (uint8_t *)desc, CENTER_MODE);
+  GUI_DisplayStringAt(0, y_size/2 + 45, (uint8_t *)desc, CENTER_MODE);
 }
 
 /**
   * @brief  Check for user input
   * @param  None
-* @retval Input state (1 : active / 0 : Inactive)
+  * @retval Input state (1 : active / 0 : Inactive)
   */
 uint8_t CheckForUserInput(void)
 {
-  if(BSP_PB_GetState(BUTTON_WAKEUP) != GPIO_PIN_RESET)
-  {
-    HAL_Delay(10);
-    while (BSP_PB_GetState(BUTTON_WAKEUP) != GPIO_PIN_RESET);
-    return 1 ;
-  }
-  return 0;
-}
-
-
-
-/**
-  * @brief  EXTI line detection callbacks.
-  * @param  GPIO_Pin: Specifies the pins connected EXTI line
-  * @retval None
-  */
-void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
-{
-  switch(GPIO_Pin)
-  {
-  case SEL_JOY_PIN:
-    JoyPin = 0;
-    break;
-    
-  case DOWN_JOY_PIN:
-    JoyPin = 1;
-    break; 
-    
-  case LEFT_JOY_PIN:
-    JoyPin = 2;
-    break; 
-    
-  case RIGHT_JOY_PIN:
-    JoyPin = 3;
-    break; 
-    
-  case UP_JOY_PIN:
-    JoyPin = 4;
-    break;    
-  default:
-    break;
-  }
-  
-  if(PreviousPinState == 0)
-  {
-    JoystickStates = (1 << 8) | JoyPin;
-    PreviousPinState = 1;
-  }
-  else
-  {
-    JoystickStates = JoyPin;
-    PreviousPinState = 0;    
-  }
+  return ButtonState;
 }
 
 /**
-  * @brief Toggle Leds
-  * @param  None
+  * @brief  Button Callback
+  * @param  Button Specifies the pin connected EXTI line
   * @retval None
   */
-void Toggle_Leds(void)
+void BSP_PB_Callback(Button_TypeDef Button)
 {
-  static uint8_t ticks = 0;
-
-  if(ticks++ > 100)
+  if(Button == BUTTON_WAKEUP)
   {
-    toggle_led = 1;   /* Toggle LED performed in main loop */
-    ticks = 0;
+
+    ButtonState = 1;
   }
+
 }
 
 /**

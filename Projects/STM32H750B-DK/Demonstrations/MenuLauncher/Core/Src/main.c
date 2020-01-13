@@ -533,38 +533,11 @@ static void AutoDemoTask(void const * argument)
   }
 }
 
-/**
-  * @brief  EXTI line detection callbacks.
-  * @param GPIO_Pin: Specifies the pins connected EXTI line
-  * @retval None
-  */
-void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+void BSP_TS_Callback(uint32_t Instance)
 {
-  if(!BSP_Initialized)
-    return;
-
-  switch(GPIO_Pin)
+  if(TSSemaphoreID)
   {
-    case USER_BUTTON_PIN :
-    {
-      /* Turn LED RED off */
-      BSP_LED_Off(LED_RED);
-    }
-    break;
-
-#if defined(USE_TS_INT)
-    case TS_INT_PIN :
-    {
-      if(TSSemaphoreID)
-      {
-        osSemaphoreRelease(TSSemaphoreID);
-      }
-    }
-    break;
-#endif /* USE_TS_INT */
-
-    default:
-      break;
+    osSemaphoreRelease(TSSemaphoreID);
   }
 }
 

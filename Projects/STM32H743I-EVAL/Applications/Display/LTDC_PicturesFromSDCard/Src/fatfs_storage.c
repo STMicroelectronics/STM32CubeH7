@@ -89,7 +89,7 @@ uint32_t BytesRead = 0;
   */
 uint32_t Storage_Init(void)
 {
-  BSP_SD_Init();
+  BSP_SD_Init(0);
   
   /****************** FatFs Volume Access ******************************/
   if(f_mount(&fs, (TCHAR const*)"",0))

@@ -33,7 +33,7 @@
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/ 
-extern DSI_HandleTypeDef hdsi_eval;
+extern DSI_HandleTypeDef hlcd_dsi;
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 
@@ -152,7 +152,7 @@ void SysTick_Handler(void)
   */
 void DSI_IRQHandler(void)
 {
-  HAL_DSI_IRQHandler(&hdsi_eval);
+  HAL_DSI_IRQHandler(&hlcd_dsi);
 }
 
 /**

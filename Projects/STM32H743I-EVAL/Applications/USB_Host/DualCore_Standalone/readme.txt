@@ -118,7 +118,6 @@ Connectivity, USB Host, HID, MSC, Full Speed, High Speed, OTG, enumeration, mass
   - USB_Host/DualCore_Standalone/Src/keyboard.c              HID keyboard functions
   - USB_Host/DualCore_Standalone/Inc/main.h                  Main program header file
   - USB_Host/DualCore_Standalone/Inc/stm32h7xx_it.h          Interrupt handlers header file
-  - USB_Host/DualCore_Standalone/Inc/lcd_log_conf.h          LCD log configuration file
   - USB_Host/DualCore_Standalone/Inc/stm32h7xx_hal_conf.h    HAL configuration file
   - USB_Host/DualCore_Standalone/Inc/usbh_conf.h             USB Host driver Configuration file
   - USB_Host/DualCore_Standalone/Inc/ffconf.h                FAT file system module configuration file
@@ -128,11 +127,11 @@ Connectivity, USB Host, HID, MSC, Full Speed, High Speed, OTG, enumeration, mass
 
   - This application runs on STM32H7xx devices.
     
-  - This application has been tested with STMicroelectronics STM32H743I-EVAL RevB
+  - This application has been tested with STMicroelectronics STM32H743I-EVAL 
     evaluation boards and can be easily tailored to any other supported device 
     and development board.
 
-  - STM32H743I-EVAL RevB Set-up
+  - STM32H743I-EVAL  Set-up
     - Plug the USB key into the STM32H743I-EVAL board through 'USB micro A-Male 
       to A-Female' cable to the connector:
       - CN14 : to use USB High Speed (HS)

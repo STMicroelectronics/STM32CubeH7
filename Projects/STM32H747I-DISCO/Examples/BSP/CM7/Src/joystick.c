@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    BSP/CM7/Src/joystick.c
   * @author  MCD Application Team
-  * @brief   This example code shows how to use the joystick feature in the 
+  * @brief   This example code shows how to use the joystick feature in the
   *          stm32h747i_discovery driver
   ******************************************************************************
   * @attention
@@ -32,131 +32,91 @@
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 #define HEADBAND_HEIGHT                 80
+ __IO uint32_t JoyPinPressed = 0;
+__IO uint32_t Joy_State ;
+__IO uint32_t PreviousPinState=0;
+  uint32_t x_size, y_size;
+
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-static JOYState_TypeDef JoyState = JOY_NONE;
-  
+
+uint32_t JoyStickDemo = 0;
 /* Private function prototypes -----------------------------------------------*/
-static void Joystick_SetHint(uint32_t Index);
+static void Joystick_SetHint(void);
+static void Joystick_SetCursorPosition(void);
 /* Private functions ---------------------------------------------------------*/
 
 /**
-  * @brief  Joystick Gpio demo
-  * @param  None
-  * @retval None
-  */
+* @brief  Joystick demo
+* @param  None
+* @retval None
+*/
 void Joystick_demo (void)
-{ 
-
-  uint8_t status = 0;
-
-  Joystick_SetHint(0);
-  
-  status = BSP_JOY_Init(JOY_MODE_GPIO);
-  
-  if (status != HAL_OK)
-  {
-    BSP_LCD_SetBackColor(LCD_COLOR_WHITE); 
-    BSP_LCD_SetTextColor(LCD_COLOR_RED);
-    BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()- 95, (uint8_t *)"ERROR", CENTER_MODE);
-    BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()- 80, (uint8_t *)"Joystick cannot be initialized", CENTER_MODE);
-  }
-  
-  while (1)
-  {
-    if (status == HAL_OK)
-    {
-      /* Get the Joystick State */
-      JoyState = BSP_JOY_GetState();
-      Joystick_SetCursorPosition();
-    }
-    if(CheckForUserInput() > 0)
-    {
-      return;
-    }
-    HAL_Delay(6);
-  }
-}
-
-/**
-  * @brief  Joystick EXTI demo
-  * @param  None
-  * @retval None
-  */
-void Joystick_exti_demo (void)
 {
-  uint8_t status = 0;
-  uint32_t joy_pin;
-  Joystick_SetHint(1);
-  
-  status = BSP_JOY_Init(JOY_MODE_EXTI);
-  
-  if (status != HAL_OK)
-  {
-    BSP_LCD_SetBackColor(LCD_COLOR_WHITE); 
-    BSP_LCD_SetTextColor(LCD_COLOR_RED);
-    BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()- 95, (uint8_t *)"ERROR", CENTER_MODE);
-    BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()- 80, (uint8_t *)"Joystick cannot be initialized", CENTER_MODE);
-  }
-  
-  JoyState = JOY_NONE;
-  Joystick_SetCursorPosition();
+  JoyStickDemo = 1;
+  Joystick_SetHint();
+  BSP_JOY_Init(JOY1, JOY_MODE_EXTI,JOY_ALL);
+
+   JoyPinPressed = 0;
   while (1)
   {
-    if((JoystickStates & 0x0F00) == 0x0100)
-    {
-      joy_pin = JoystickStates & 0x000F;
-      switch(joy_pin)
+          switch(JoyPinPressed)
       {
-      case 0:
-        JoyState = JOY_SEL;
+      case 0x01U:
+        Joy_State = JOY_SEL;
         break;
-        
-      case 1:
-        JoyState = JOY_DOWN;
+
+      case 0x02U:
+        Joy_State = JOY_DOWN;
         break;
-        
-      case 2:
-        JoyState = JOY_LEFT;
-        break; 
-        
-      case 3:
-        JoyState = JOY_RIGHT;
-        break; 
-        
-      case 4:
-        JoyState = JOY_UP;
+
+      case 0x04U:
+        Joy_State = JOY_LEFT;
+        break;
+
+      case 0x08U:
+        Joy_State = JOY_RIGHT;
+        break;
+
+      case 0x10U:
+        Joy_State = JOY_UP;
         break;
       default:
-        JoyState = JOY_NONE;
+        Joy_State = JOY_NONE;
         break;
       }
-      
-      Joystick_SetCursorPosition();
-    }
-    
+    Joystick_SetCursorPosition();
+    JoyPinPressed = 0;
     if(CheckForUserInput() > 0)
     {
+
+      BSP_JOY_DeInit(JOY1, JOY_ALL);
+      ButtonState = 0;
+      JoyStickDemo = 0;
       return;
     }
-    HAL_Delay(6);
+     HAL_Delay(6);
   }
 }
 
+void BSP_JOY_Callback(JOY_TypeDef JOY, uint32_t JoyPin)
+{
+    JoyPinPressed = JoyPin;
+}
 /**
-  * @brief  Joystick cursor position
-  * @param  None
-  * @retval None
-  */
-void Joystick_SetCursorPosition(void)
+* @brief  Joystick cursor position
+* @param  None
+* @retval None
+*/
+static void Joystick_SetCursorPosition()
 {
   static uint16_t xPtr = 12;
   static uint16_t yPtr = HEADBAND_HEIGHT + 12;
   static uint16_t old_xPtr = 12;
   static uint16_t old_yPtr = HEADBAND_HEIGHT + 12;
 
-      
-  switch(JoyState)
+
+  switch(Joy_State)
   {
   case JOY_UP:
     if(yPtr > HEADBAND_HEIGHT + 12)
@@ -165,7 +125,7 @@ void Joystick_SetCursorPosition(void)
     }
     break;
   case JOY_DOWN:
-    if(yPtr < (BSP_LCD_GetYSize() - 12 - 11))
+    if(yPtr < (y_size - 12 - 11))
     {
       yPtr++;
     }
@@ -177,35 +137,36 @@ void Joystick_SetCursorPosition(void)
     }
     break;
   case JOY_RIGHT:
-    if(xPtr < (BSP_LCD_GetXSize() - 8 - 11))
+    if(xPtr < (y_size - 8 - 11))
     {
       xPtr++;
     }
     break;
   default:
+
     break;
   }
 
-  BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
-  BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
+  GUI_SetBackColor(GUI_COLOR_WHITE);
+  GUI_SetTextColor(GUI_COLOR_BLUE);
 
-  if(JoyState == JOY_SEL)
+  if(Joy_State == JOY_SEL)
   {
-    BSP_LCD_SetTextColor(LCD_COLOR_RED);
-    BSP_LCD_DisplayChar(xPtr, yPtr, 'X');
+    GUI_SetTextColor(GUI_COLOR_RED);
+    GUI_DisplayChar(xPtr, yPtr, 'X');
 
   }
-  else if(JoyState == JOY_NONE)
+  else if(Joy_State == JOY_NONE)
   {
-    BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
-    BSP_LCD_DisplayChar(xPtr, yPtr, 'X');
+    GUI_SetTextColor(GUI_COLOR_BLUE);
+    GUI_DisplayChar(xPtr, yPtr, 'X');
   }
   else
   {
-    BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
-    BSP_LCD_DisplayChar(old_xPtr, old_yPtr, 'X');
-    BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
-    BSP_LCD_DisplayChar(xPtr, yPtr, 'X');
+    GUI_SetTextColor(GUI_COLOR_WHITE);
+    GUI_DisplayChar(old_xPtr, old_yPtr, 'X');
+    GUI_SetTextColor(GUI_COLOR_BLUE);
+    GUI_DisplayChar(xPtr, yPtr, 'X');
 
     old_xPtr = xPtr;
     old_yPtr = yPtr;
@@ -213,45 +174,39 @@ void Joystick_SetCursorPosition(void)
 }
 
 /**
-  * @brief  Display joystick demo hint
-  * @param  None
-  * @retval None
-  */
-static void Joystick_SetHint(uint32_t Index)
+* @brief  Display joystick demo hint
+* @param  None
+* @retval None
+*/
+static void Joystick_SetHint(void)
 {
-  /* Clear the LCD */ 
-  BSP_LCD_Clear(LCD_COLOR_WHITE);
-  
+  BSP_LCD_GetXSize(0, &x_size);
+  BSP_LCD_GetYSize(0, &y_size);
+
+  /* Clear the LCD */
+  GUI_Clear(GUI_COLOR_WHITE);
+
   /* Set Joystick Demo description */
-  BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
-  BSP_LCD_FillRect(0, 0, BSP_LCD_GetXSize(), HEADBAND_HEIGHT);
-  BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
-  BSP_LCD_SetBackColor(LCD_COLOR_BLUE); 
-  BSP_LCD_SetFont(&Font24);
-  if(Index == 0)
-  {
-    BSP_LCD_DisplayStringAt(0, 0, (uint8_t *)"Joystick in POLLING mode", CENTER_MODE);
-  }
-  else
-  {
-    BSP_LCD_DisplayStringAt(0, 0, (uint8_t *)"Joystick in EXTI mode", CENTER_MODE);
-  }
-  BSP_LCD_SetFont(&Font12);
-  BSP_LCD_DisplayStringAt(0, 30, (uint8_t *)"Please use the joystick to move", CENTER_MODE);
-  BSP_LCD_DisplayStringAt(0, 45, (uint8_t *)"the pointer inside the rectangle", CENTER_MODE);
-  BSP_LCD_DisplayStringAt(0, 60, (uint8_t *)"Press Tamper push-button to switch to next menu", CENTER_MODE);
-  
+  GUI_FillRect(0, 0, x_size, 80, GUI_COLOR_BLUE);
+  GUI_SetTextColor(GUI_COLOR_WHITE);
+  GUI_SetBackColor(GUI_COLOR_BLUE);
+  GUI_SetFont(&Font24);
+  GUI_DisplayStringAt(0, 0, (uint8_t *)"Joystick", CENTER_MODE);
+  GUI_SetFont(&Font12);
+  GUI_DisplayStringAt(0, 30, (uint8_t *)"Please use the joystick to move", CENTER_MODE);
+  GUI_DisplayStringAt(0, 45, (uint8_t *)"the pointer inside the rectangle", CENTER_MODE);
+  GUI_DisplayStringAt(0, 60, (uint8_t *)"Press Tamper push-button to switch to next menu", CENTER_MODE);
+
   /* Set the LCD Text Color */
-  BSP_LCD_SetTextColor(LCD_COLOR_BLUE);  
-  BSP_LCD_DrawRect(10, 90, BSP_LCD_GetXSize() - 20, BSP_LCD_GetYSize()- 100);
-  BSP_LCD_DrawRect(11, 91, BSP_LCD_GetXSize() - 22, BSP_LCD_GetYSize()- 102);
+  GUI_DrawRect(10, 90, x_size - 20, y_size- 100, GUI_COLOR_BLUE);
+  GUI_DrawRect(11, 91, x_size - 22, y_size- 102, GUI_COLOR_BLUE);
 }
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
-  
+  */
+
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

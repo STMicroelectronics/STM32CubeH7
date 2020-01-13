@@ -381,7 +381,7 @@ static void Config_FDCAN(void)
   */
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
-  if (GPIO_Pin == TAMPER_BUTTON_PIN)
+  if (GPIO_Pin == BUTTON_TAMPER_PIN)
   {
     /* Report Tamper push button event to main program */
     UserButtonClickEvent = SET;
@@ -417,12 +417,13 @@ static void Flush_Rx_Buffers(void)
 static void DMA2D_CopyBuffer(uint32_t *pSrc, uint32_t *pDst, uint16_t x, uint16_t y, uint16_t xsize, uint16_t ysize)
 {   
   
- uint32_t destination = 0; 
-  
+  uint32_t destination = 0; 
+  uint32_t x_size;
+  BSP_LCD_GetXSize(0, &x_size);
   /*##-1- Configure the DMA2D Mode, Color Mode and output offset #############*/ 
   DMA2D_Handle.Init.Mode         = DMA2D_M2M_PFC;
   DMA2D_Handle.Init.ColorMode    = DMA2D_OUTPUT_ARGB8888;
-  DMA2D_Handle.Init.OutputOffset = BSP_LCD_GetXSize() - xsize; 
+  DMA2D_Handle.Init.OutputOffset = x_size - xsize; 
   DMA2D_Handle.Init.AlphaInverted = DMA2D_REGULAR_ALPHA;  /* No Output Alpha Inversion*/  
   DMA2D_Handle.Init.RedBlueSwap   = DMA2D_RB_REGULAR;     /* No Output Red & Blue swap */  
   
@@ -445,7 +446,7 @@ static void DMA2D_CopyBuffer(uint32_t *pSrc, uint32_t *pDst, uint16_t x, uint16_
   HAL_DMA2D_ConfigLayer(&DMA2D_Handle, 1);
   
   /*##-5- Copy the new decoded frame to the LCD Frame buffer #################*/
-  destination = (uint32_t)pDst + ((y * BSP_LCD_GetXSize()) + x) * 4;
+  destination = (uint32_t)pDst + ((y * x_size) + x) * 4;
 
   HAL_DMA2D_Start(&DMA2D_Handle, (uint32_t)pSrc, destination, xsize, ysize);
   HAL_DMA2D_PollForTransfer(&DMA2D_Handle, 25);  /* wait for the previous DMA2D transfer to end */
@@ -458,44 +459,46 @@ static void DMA2D_CopyBuffer(uint32_t *pSrc, uint32_t *pDst, uint16_t x, uint16_
   */
 static void Display_Init(uint32_t step)
 {
+  uint32_t x_size, y_size;
+  BSP_LCD_GetXSize(0, &x_size);
+  BSP_LCD_GetYSize(0, &y_size);
   if(step == FIRST_RUN)
   {
     /* Initialize and configure the LCD */
-    BSP_LCD_Init();
-    BSP_LCD_LayerDefaultInit(1, LCD_FRAME_BUFFER);
-    BSP_LCD_SelectLayer(1);
-    BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
-    BSP_LCD_Clear(LCD_COLOR_WHITE);
+    BSP_LCD_Init(0, LCD_ORIENTATION_LANDSCAPE);
+    GUI_SetLayer(1);
+    GUI_SetBackColor(GUI_COLOR_WHITE);
+    GUI_Clear(GUI_COLOR_WHITE);
   }
   
   /* Set description */
-  BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
-  BSP_LCD_FillRect(0, 0, BSP_LCD_GetXSize(), 80);
-  BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
-  BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
+  GUI_SetTextColor(GUI_COLOR_BLUE);
+  GUI_FillRect(0, 0, x_size, 80, GUI_COLOR_WHITE);
+  GUI_SetTextColor(GUI_COLOR_WHITE);
+  GUI_SetBackColor(GUI_COLOR_BLUE);
   if(step != END_TEST)
   {
-    BSP_LCD_SetFont(&Font24);
-    BSP_LCD_DisplayStringAt(0, 2, (uint8_t *)"FDCAN image transmission", CENTER_MODE);
-    BSP_LCD_SetFont(&Font12);
+    GUI_SetFont(&Font24);
+    GUI_DisplayStringAt(0, 2, (uint8_t *)"FDCAN image transmission", CENTER_MODE);
+    GUI_SetFont(&Font12);
   }
   if(step == FIRST_RUN)
   {
-    BSP_LCD_SetFont(&Font12);
-    BSP_LCD_DisplayStringAt(0, 35, (uint8_t *)"Press Tamper push-button to request image transmission", CENTER_MODE);
-    BSP_LCD_DisplayStringAt(0, 57, (uint8_t *)"Without Bit Rate Switching", CENTER_MODE);
+    GUI_SetFont(&Font12);
+    GUI_DisplayStringAt(0, 35, (uint8_t *)"Press Tamper push-button to request image transmission", CENTER_MODE);
+    GUI_DisplayStringAt(0, 57, (uint8_t *)"Without Bit Rate Switching", CENTER_MODE);
   }
   else if(step == SECOND_RUN)
   {
-    BSP_LCD_SetFont(&Font12);
-    BSP_LCD_DisplayStringAt(0, 35, (uint8_t *)"Press again Tamper push-button to request image transmission", CENTER_MODE);
-    BSP_LCD_DisplayStringAt(0, 57, (uint8_t *)"With Bit Rate Switching activated", CENTER_MODE);
+    GUI_SetFont(&Font12);
+    GUI_DisplayStringAt(0, 35, (uint8_t *)"Press again Tamper push-button to request image transmission", CENTER_MODE);
+    GUI_DisplayStringAt(0, 57, (uint8_t *)"With Bit Rate Switching activated", CENTER_MODE);
   }
   else
   {
-    BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
-    BSP_LCD_SetFont(&Font24);
-    BSP_LCD_DisplayStringAt(0, 33, (uint8_t *)"FDCAN image transmission", CENTER_MODE);
+    GUI_SetTextColor(GUI_COLOR_WHITE);
+    GUI_SetFont(&Font24);
+    GUI_DisplayStringAt(0, 33, (uint8_t *)"FDCAN image transmission", CENTER_MODE);
   }
 }
 
@@ -509,44 +512,47 @@ static void Display_PropagationTime(uint32_t step)
   uint32_t Xpos, Color;
   uint8_t *BRSstate;
   
+  uint32_t x_size;
+  BSP_LCD_GetXSize(0, &x_size);
+  
   if(step == FIRST_RUN)
   {
     Xpos = 480;
-    Color = LCD_COLOR_RED;
+    Color = GUI_COLOR_RED;
     BRSstate = (uint8_t *)"[BRS disabled]";
   }
   else
   {
     Xpos = 160;
-    Color = LCD_COLOR_DARKGREEN;
+    Color = GUI_COLOR_DARKGREEN;
     BRSstate = (uint8_t *)"[BRS enabled]";
   }
   
-  BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
-  BSP_LCD_SetFont(&Font20);
-  BSP_LCD_SetTextColor(Color);
-  BSP_LCD_DisplayStringAt(Xpos, 330, BRSstate, CENTER_MODE);
-  BSP_LCD_SetFont(&Font16);
-  BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
-  BSP_LCD_DisplayStringAt(Xpos, 355, (uint8_t *)"Communication process (ms)", CENTER_MODE);
-  BSP_LCD_SetFont(&Font24);
-  BSP_LCD_SetTextColor(Color);
-  BSP_LCD_DisplayStringAt(Xpos, 375, (uint8_t *)s, CENTER_MODE);
+ GUI_SetBackColor(GUI_COLOR_WHITE);
+  GUI_SetFont(&Font20);
+  GUI_SetTextColor(Color);
+  GUI_DisplayStringAt(Xpos, 330, BRSstate, CENTER_MODE);
+  GUI_SetFont(&Font16);
+  GUI_SetTextColor(GUI_COLOR_BLACK);
+  GUI_DisplayStringAt(Xpos, 355, (uint8_t *)"Communication process (ms)", CENTER_MODE);
+  GUI_SetFont(&Font24);
+  GUI_SetTextColor(Color);
+  GUI_DisplayStringAt(Xpos, 375, (uint8_t *)s, CENTER_MODE);
   
   if(step == FIRST_RUN)
   {
-    BSP_LCD_SetTextColor(LCD_COLOR_LIGHTGRAY);
-    BSP_LCD_FillRect(0, 400, BSP_LCD_GetXSize(), 80);
-    BSP_LCD_SetTextColor(LCD_COLOR_DARKGRAY);
-    BSP_LCD_SetBackColor(LCD_COLOR_LIGHTGRAY);
-    BSP_LCD_SetFont(&Font12);
+    GUI_SetTextColor(GUI_COLOR_LIGHTGRAY);
+    GUI_FillRect(0, 400, x_size, 80, GUI_COLOR_BLUE);
+    GUI_SetTextColor(GUI_COLOR_DARKGRAY);
+    GUI_SetBackColor(GUI_COLOR_LIGHTGRAY);
+    GUI_SetFont(&Font12);
     
-    BSP_LCD_DisplayStringAt(30, 425, (uint8_t *)"The communication", LEFT_MODE);
-    BSP_LCD_DisplayStringAt(30, 443, (uint8_t *)"process includes:", LEFT_MODE);
-    BSP_LCD_DisplayStringAt(220, 407, (uint8_t *)"- Adding messages to Tx FIFO", LEFT_MODE);
-    BSP_LCD_DisplayStringAt(220, 425, (uint8_t *)"- Transmission (message propagation)", LEFT_MODE);
-    BSP_LCD_DisplayStringAt(220, 443, (uint8_t *)"- Retrieving messages from Rx FIFO", LEFT_MODE);
-    BSP_LCD_DisplayStringAt(220, 461, (uint8_t *)"- Synchronization (sending Tx request every 32 messages)", LEFT_MODE);
+    GUI_DisplayStringAt(30, 425, (uint8_t *)"The communication", LEFT_MODE);
+    GUI_DisplayStringAt(30, 443, (uint8_t *)"process includes:", LEFT_MODE);
+    GUI_DisplayStringAt(220, 407, (uint8_t *)"- Adding messages to Tx FIFO", LEFT_MODE);
+    GUI_DisplayStringAt(220, 425, (uint8_t *)"- Transmission (message propagation)", LEFT_MODE);
+    GUI_DisplayStringAt(220, 443, (uint8_t *)"- Retrieving messages from Rx FIFO", LEFT_MODE);
+    GUI_DisplayStringAt(220, 461, (uint8_t *)"- Synchronization (sending Tx request every 32 messages)", LEFT_MODE);
   }
 }
 

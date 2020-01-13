@@ -51,17 +51,17 @@ void MSC_MenuProcess(void)
   switch (msc_demo.state)
   {
   case MSC_DEMO_IDLE:
-    BSP_LCD_SetTextColor(LCD_COLOR_GREEN);
-    BSP_LCD_DisplayStringAtLine(16,
+    GUI_SetTextColor(GUI_COLOR_GREEN);
+    GUI_DisplayStringAtLine(16,
                                 (uint8_t *)
                                 "                                                 ");
-    BSP_LCD_DisplayStringAtLine(17,
+    GUI_DisplayStringAtLine(17,
                                 (uint8_t *)
                                 "Use [Joystick Left/Right] to scroll up/down       ");
-    BSP_LCD_DisplayStringAtLine(18,
+    GUI_DisplayStringAtLine(18,
                                 (uint8_t *)
                                 "Use [Joystick Up/Down] to scroll MSC menu        ");
-    BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
+    GUI_SetTextColor(GUI_COLOR_WHITE);
     MSC_SelectItem(MSC_main_menu, 0);
     msc_demo.state = MSC_DEMO_WAIT;
     msc_demo.select = 0;
@@ -113,7 +113,7 @@ void MSC_MenuProcess(void)
       /* Register the file system object to the FatFs module */
       if (f_mount(&USBH_fatfs, "", 0) != FR_OK)
       {
-        LCD_ErrLog("Cannot Initialize FatFs! \n");
+        LCD_ErrTrace("Cannot Initialize FatFs! \n");
       }
       else
       {
@@ -144,37 +144,37 @@ void MSC_MenuProcess(void)
   */
 static void MSC_SelectItem(uint8_t ** menu, uint8_t item)
 {
-  BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
+  GUI_SetTextColor(GUI_COLOR_WHITE);
 
   switch (item)
   {
   case 0:
-    BSP_LCD_SetBackColor(LCD_COLOR_MAGENTA);
-    BSP_LCD_DisplayStringAtLine(19, menu[0]);
-    BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-    BSP_LCD_DisplayStringAtLine(20, menu[1]);
-    BSP_LCD_DisplayStringAtLine(21, menu[2]);
+    GUI_SetBackColor(GUI_COLOR_MAGENTA);
+    GUI_DisplayStringAtLine(19, menu[0]);
+    GUI_SetBackColor(GUI_COLOR_BLUE);
+    GUI_DisplayStringAtLine(20, menu[1]);
+    GUI_DisplayStringAtLine(21, menu[2]);
     break;
 
   case 1:
-    BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-    BSP_LCD_DisplayStringAtLine(19, menu[0]);
-    BSP_LCD_SetBackColor(LCD_COLOR_MAGENTA);
-    BSP_LCD_DisplayStringAtLine(20, menu[1]);
-    BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-    BSP_LCD_DisplayStringAtLine(21, menu[2]);
+    GUI_SetBackColor(GUI_COLOR_BLUE);
+    GUI_DisplayStringAtLine(19, menu[0]);
+    GUI_SetBackColor(GUI_COLOR_MAGENTA);
+    GUI_DisplayStringAtLine(20, menu[1]);
+    GUI_SetBackColor(GUI_COLOR_BLUE);
+    GUI_DisplayStringAtLine(21, menu[2]);
     break;
 
   case 2:
-    BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-    BSP_LCD_DisplayStringAtLine(19, menu[0]);
-    BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-    BSP_LCD_DisplayStringAtLine(20, menu[1]);
-    BSP_LCD_SetBackColor(LCD_COLOR_MAGENTA);
-    BSP_LCD_DisplayStringAtLine(21, menu[2]);
+    GUI_SetBackColor(GUI_COLOR_BLUE);
+    GUI_DisplayStringAtLine(19, menu[0]);
+    GUI_SetBackColor(GUI_COLOR_BLUE);
+    GUI_DisplayStringAtLine(20, menu[1]);
+    GUI_SetBackColor(GUI_COLOR_MAGENTA);
+    GUI_DisplayStringAtLine(21, menu[2]);
     break;
   }
-  BSP_LCD_SetBackColor(LCD_COLOR_BLACK);
+  GUI_SetBackColor(GUI_COLOR_BLACK);
 }
 
 /**
@@ -182,7 +182,7 @@ static void MSC_SelectItem(uint8_t ** menu, uint8_t item)
   * @param  state: Joystick state
   * @retval None
   */
-void MSC_DEMO_ProbeKey(JOYState_TypeDef state)
+void MSC_DEMO_ProbeKey(uint32_t state)
 {
   /* Handle Menu inputs */
   if ((state == JOY_UP) && (msc_demo.select > 0))

@@ -106,7 +106,7 @@ FatFS, File system, SD Card, SDRAM
 
   - This example runs on STM32H743xx device.
     
-  - This example has been tested with STMicroelectronics STM32H743I-EVAL revB 
+  - This example has been tested with STMicroelectronics STM32H743I-EVAL  
     evaluation boards and can be easily tailored to any other supported device 
     and development board. 
     

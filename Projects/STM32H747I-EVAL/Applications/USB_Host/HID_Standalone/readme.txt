@@ -136,11 +136,11 @@ displaying taped characters.
 
   - This application runs on STM32h7xx devices.
 
-  - This application has been tested with STMicroelectronics STM32H747I_EVAL- RevB
+  - This application has been tested with STMicroelectronics STM32H747I_EVAL- 
     evaluation boards and can be easily tailored to any other supported device
     and development board.
 
-  - STM32H747I_EVAL RevB Set-up
+  - STM32H747I_EVAL  Set-up
     - Plug a USB device mouse or keyboard into the STM32H747I_EVAL board
       through 'USB micro A-Male to A-Female' cable
       - CN14 : to use USB High Speed (HS)

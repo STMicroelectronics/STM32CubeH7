@@ -25,9 +25,9 @@
 /* Private macro ------------------------------------------------------------- */
 /* Private variables --------------------------------------------------------- */
 HID_DEMO_StateMachine hid_demo;
-JOYState_TypeDef JoyState = JOY_NONE;
+__IO uint32_t JoyState = JOY_NONE;
 uint8_t prev_select = 0;
-uint8_t joy_select = 0;
+__IO uint8_t joy_select = 0;
 
 uint8_t *DEMO_KEYBOARD_menu[] = {
   (uint8_t *)
@@ -51,7 +51,7 @@ uint8_t *DEMO_HID_menu[] = {
 };
 
 /* Private function prototypes ----------------------------------------------- */
-static void HID_DEMO_ProbeKey(JOYState_TypeDef state);
+static void HID_DEMO_ProbeKey(uint32_t state);
 static void USBH_MouseDemo(USBH_HandleTypeDef * phost);
 static void USBH_KeybdDemo(USBH_HandleTypeDef * phost);
 
@@ -67,11 +67,11 @@ void HID_MenuInit(void)
   /* Start HID Interface */
   USBH_UsrLog("Starting HID Demo");
 
-  BSP_LCD_SetTextColor(LCD_COLOR_GREEN);
-  BSP_LCD_DisplayStringAtLine(18,
+  GUI_SetTextColor(GUI_COLOR_GREEN);
+  GUI_DisplayStringAtLine(18,
                               (uint8_t *)
                               "Use [Joystick Left/Right] to scroll up/down");
-  BSP_LCD_DisplayStringAtLine(19,
+  GUI_DisplayStringAtLine(19,
                               (uint8_t *)
                               "Use [Joystick Up/Down] to scroll HID menu");
   hid_demo.state = HID_DEMO_IDLE;
@@ -136,7 +136,7 @@ void HID_MenuProcess(void)
     }
     else
     {
-      LCD_ErrLog("No supported HID device!\n");
+      LCD_ErrTrace("No supported HID device!\n");
       hid_demo.state = HID_DEMO_WAIT;
     }
     break;
@@ -171,10 +171,6 @@ void HID_MenuProcess(void)
 
   if (joy_select == 1)
   {
-    /* Get the Joystick State */
-    JoyState = BSP_JOY_GetState();
-    HAL_Delay(400);
-
     HID_DEMO_ProbeKey(JoyState);
 
     if((hid_demo.state != HID_DEMO_MOUSE) && (hid_demo.state != HID_DEMO_KEYBOARD))
@@ -182,11 +178,11 @@ void HID_MenuProcess(void)
       switch (JoyState)
       {
       case JOY_LEFT:
-        LCD_LOG_ScrollBack();
+        UTIL_LCD_TRACE_ScrollBack();
         break;
 
       case JOY_RIGHT:
-        LCD_LOG_ScrollForward();
+        UTIL_LCD_TRACE_ScrollForward();
         break;
 
       default:
@@ -195,15 +191,14 @@ void HID_MenuProcess(void)
     }
 
     /* Clear joystick interrupt pending bits */
-    BSP_IO_ITClear();
     joy_select = 0;
   }
 
   if (Appli_state == APPLICATION_DISCONNECT)
   {
     Appli_state = APPLICATION_IDLE;
-    LCD_LOG_ClearTextZone();
-    LCD_ErrLog("HID device disconnected!\n");
+    UTIL_LCD_TRACE_ClearTextZone();
+    LCD_ErrTrace("HID device disconnected!\n");
     hid_demo.state = HID_DEMO_IDLE;
     hid_demo.select = 0;
   }
@@ -217,76 +212,36 @@ void HID_MenuProcess(void)
   */
 void HID_SelectItem(uint8_t ** menu, uint8_t item)
 {
-  BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
+  GUI_SetTextColor(GUI_COLOR_WHITE);
 
   switch (item)
   {
   case 0:
-    BSP_LCD_SetBackColor(LCD_COLOR_MAGENTA);
-    BSP_LCD_DisplayStringAtLine(20, menu[0]);
-    BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-    BSP_LCD_DisplayStringAtLine(21, menu[1]);
+    GUI_SetBackColor(GUI_COLOR_MAGENTA);
+    GUI_DisplayStringAtLine(20, menu[0]);
+    GUI_SetBackColor(GUI_COLOR_BLUE);
+    GUI_DisplayStringAtLine(21, menu[1]);
     break;
 
   case 1:
-    BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-    BSP_LCD_DisplayStringAtLine(20, menu[0]);
-    BSP_LCD_SetBackColor(LCD_COLOR_MAGENTA);
-    BSP_LCD_DisplayStringAtLine(21, menu[1]);
-    BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
+    GUI_SetBackColor(GUI_COLOR_BLUE);
+    GUI_DisplayStringAtLine(20, menu[0]);
+    GUI_SetBackColor(GUI_COLOR_MAGENTA);
+    GUI_DisplayStringAtLine(21, menu[1]);
+    GUI_SetBackColor(GUI_COLOR_BLUE);
     break;
   }
-  BSP_LCD_SetBackColor(LCD_COLOR_BLACK);
+  GUI_SetBackColor(GUI_COLOR_BLACK);
 }
 
-/**
-  * @brief  Probes the HID joystick state.
-  * @param  state: Joystick state
-  * @retval None
-  */
-static void HID_DEMO_ProbeKey(JOYState_TypeDef state)
+void BSP_JOY_Callback(JOY_TypeDef JOY, JOYPin_TypeDef JoyPin)
 {
-  /* Handle Menu inputs */
-  if ((state == JOY_UP) && (hid_demo.select > 0))
+  if (JOY == JOY1)
   {
-    hid_demo.select--;
-  }
-  else if ((state == JOY_DOWN) && (hid_demo.select < 1))
-  {
-    hid_demo.select++;
-  }
-  else if (state == JOY_SEL)
-  {
-    hid_demo.select |= 0x80;
+    joy_select = 1;
+    JoyState=JoyPin;
   }
 }
-
-/**
-  * @brief  EXTI line detection callbacks.
-  * @param  GPIO_Pin: Specifies the pins connected EXTI line
-  * @retval None
-  */
-void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
-{
-  if (GPIO_Pin == MFX_IRQOUT_PIN)
-  {
-    /* The different functionalities of MFX (TS, Joystick, SD detection, etc. )
-     * can be configured in exti mode to generate an IRQ on given events. The
-     * MFX IRQ_OUT pin is unique and common to all functionalities, so if
-     * several functionalities are configured in exit mode, the MCU has to
-     * enquire MFX about the IRQ source (see BSP_IO_ITGetStatus).
-     * Communication with Mfx is done by I2C. Often the sw requires ISRs (irq
-     * service routines) to be quick while communication with I2C can be
-     * considered relatively long (hundreds of usec depending on I2C clk).
-     * Considering that the features for human interaction like TS, Joystick,
-     * SD detection don’t need immediate reaction, it is suggested to use
-     * POLLING instead of EXTI mode, in order to avoid "blocking I2C
-     * communication" on interrupt service routines */
-
-     joy_select = 1;
-  }
-}
-
 /**
   * @brief  Main routine for Mouse application
   * @param  phost: Host handle
@@ -330,7 +285,27 @@ static void USBH_MouseDemo(USBH_HandleTypeDef * phost)
     }
   }
 }
-
+/**
+  * @brief  Probes the HID joystick state.
+  * @param  state: Joystick state
+  * @retval None
+  */
+static void HID_DEMO_ProbeKey(uint32_t state)
+{
+  /* Handle Menu inputs */
+  if ((state == JOY_UP) && (hid_demo.select > 0))
+  {
+    hid_demo.select--;
+  }
+  else if ((state == JOY_DOWN) && (hid_demo.select < 1))
+  {
+    hid_demo.select++;
+  }
+  else if (state == JOY_SEL)
+  {
+    hid_demo.select |= 0x80;
+  }
+}
 /**
   * @brief  Main routine for Keyboard application
   * @param  phost: Host handle

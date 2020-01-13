@@ -7,7 +7,7 @@
 WasherScreenViewBase::WasherScreenViewBase() :
     buttonCallback(this, &WasherScreenViewBase::buttonCallbackHandler)
 {
-    CanvasWidgetRenderer::setupBuffer(canvasBuffer, CANVAS_BUFFER_SIZE);
+    touchgfx::CanvasWidgetRenderer::setupBuffer(canvasBuffer, CANVAS_BUFFER_SIZE);
 
     washerContainer.setXY(0, 0);
 
@@ -15,16 +15,16 @@ WasherScreenViewBase::WasherScreenViewBase() :
     washerInstructionContainer.setVisible(false);
 
     buttonInstructions.setXY(440, 0);
-    buttonInstructions.setBitmaps(Bitmap(BITMAP_ICON_INSTRUCTIONS_40PX_ID), Bitmap(BITMAP_ICON_INSTRUCTIONS_40PX_ID));
+    buttonInstructions.setBitmaps(touchgfx::Bitmap(BITMAP_ICON_INSTRUCTIONS_40PX_ID), touchgfx::Bitmap(BITMAP_ICON_INSTRUCTIONS_40PX_ID));
     buttonInstructions.setAction(buttonCallback);
 
     buttonBack.setXY(0, 0);
     buttonBack.setVisible(false);
-    buttonBack.setBitmaps(Bitmap(BITMAP_BACK_ARROW_ID), Bitmap(BITMAP_BACK_ARROW_ID));
+    buttonBack.setBitmaps(touchgfx::Bitmap(BITMAP_BACK_ARROW_ID), touchgfx::Bitmap(BITMAP_BACK_ARROW_ID));
     buttonBack.setAction(buttonCallback);
 
     buttonBath.setXY(0, 0);
-    buttonBath.setBitmaps(Bitmap(BITMAP_WASHER_DEMO_ICON_ID), Bitmap(BITMAP_WASHER_DEMO_ICON_ID));
+    buttonBath.setBitmaps(touchgfx::Bitmap(BITMAP_WASHER_DEMO_ICON_ID), touchgfx::Bitmap(BITMAP_WASHER_DEMO_ICON_ID));
     buttonBath.setAction(buttonCallback);
 
     add(washerContainer);

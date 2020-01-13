@@ -91,7 +91,7 @@ uint32_t Storage_OpenReadFile(uint8_t Xpoz, uint16_t Ypoz, const char *BmpName)
     f_read(&bmpfile, aBuffer + pbmpheader->offset, nbbytetoread, &BytesRead);
 
     /* Draw the bitmap */
-    BSP_LCD_DrawBitmap(Xpoz, Ypoz, aBuffer);
+    GUI_DrawBitmap(Xpoz, Ypoz, aBuffer);
 
     /* Update the remaining number of bytes to read */
     size -= nbbytetoread;

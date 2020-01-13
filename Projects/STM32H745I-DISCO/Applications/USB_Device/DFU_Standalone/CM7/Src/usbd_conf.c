@@ -51,7 +51,7 @@ void HAL_PCD_MspInit(PCD_HandleTypeDef * hpcd)
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
-    GPIO_InitStruct.Alternate = GPIO_AF10_OTG1_FS;
+    GPIO_InitStruct.Alternate = GPIO_AF10_OTG2_FS;
     HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
     /* Configure VBUS Pin */
@@ -64,7 +64,7 @@ void HAL_PCD_MspInit(PCD_HandleTypeDef * hpcd)
     GPIO_InitStruct.Pin = GPIO_PIN_10;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_OD;
     GPIO_InitStruct.Pull = GPIO_PULLUP;
-    GPIO_InitStruct.Alternate = GPIO_AF10_OTG1_FS;
+    GPIO_InitStruct.Alternate = GPIO_AF10_OTG2_FS;
     HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
     /* Enable USB FS Clocks */
@@ -93,7 +93,7 @@ void HAL_PCD_MspInit(PCD_HandleTypeDef * hpcd)
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
-    GPIO_InitStruct.Alternate = GPIO_AF10_OTG2_HS;
+    GPIO_InitStruct.Alternate = GPIO_AF10_OTG1_HS;
     HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
     /* D0 */
@@ -101,7 +101,7 @@ void HAL_PCD_MspInit(PCD_HandleTypeDef * hpcd)
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
-    GPIO_InitStruct.Alternate = GPIO_AF10_OTG2_HS;
+    GPIO_InitStruct.Alternate = GPIO_AF10_OTG1_HS;
     HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
     /* D1 D2 D3 D4 D5 D6 D7 */
@@ -109,28 +109,28 @@ void HAL_PCD_MspInit(PCD_HandleTypeDef * hpcd)
       GPIO_PIN_10 | GPIO_PIN_11 | GPIO_PIN_12 | GPIO_PIN_13;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
-    GPIO_InitStruct.Alternate = GPIO_AF10_OTG2_HS;
+    GPIO_InitStruct.Alternate = GPIO_AF10_OTG1_HS;
     HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
     /* STP */
     GPIO_InitStruct.Pin = GPIO_PIN_0;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
-    GPIO_InitStruct.Alternate = GPIO_AF10_OTG2_HS;
+    GPIO_InitStruct.Alternate = GPIO_AF10_OTG1_HS;
     HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
     /* NXT */
     GPIO_InitStruct.Pin = GPIO_PIN_4;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
-    GPIO_InitStruct.Alternate = GPIO_AF10_OTG2_HS;
+    GPIO_InitStruct.Alternate = GPIO_AF10_OTG1_HS;
     HAL_GPIO_Init(GPIOH, &GPIO_InitStruct);
 
     /* DIR */
     GPIO_InitStruct.Pin = GPIO_PIN_11;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
-    GPIO_InitStruct.Alternate = GPIO_AF10_OTG2_HS;
+    GPIO_InitStruct.Alternate = GPIO_AF10_OTG1_HS;
     HAL_GPIO_Init(GPIOI, &GPIO_InitStruct);
     __HAL_RCC_USB1_OTG_HS_ULPI_CLK_ENABLE();
 
@@ -357,7 +357,7 @@ USBD_StatusTypeDef USBD_LL_Init(USBD_HandleTypeDef * pdev)
   HAL_PCD_Init(&hpcd);
 
   HAL_PCDEx_SetRxFiFo(&hpcd, 0x200);
-  HAL_PCDEx_SetTxFiFo(&hpcd, 0, 0x200);
+  HAL_PCDEx_SetTxFiFo(&hpcd, 0, 0x100);
 #endif
 
   return USBD_OK;

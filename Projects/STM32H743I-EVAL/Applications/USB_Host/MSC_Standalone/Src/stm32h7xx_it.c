@@ -161,7 +161,7 @@ void OTG_HS_IRQHandler(void)
   */
 void EXTI9_5_IRQHandler(void)
 {
-  HAL_GPIO_EXTI_IRQHandler(MFX_IRQOUT_PIN);
+BSP_JOY_IRQHandler(JOY1, JOY_ALL);
 }
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

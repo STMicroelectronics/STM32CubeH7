@@ -33,7 +33,7 @@
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-extern LTDC_HandleTypeDef hltdc_eval;
+extern LTDC_HandleTypeDef hlcd_ltdc;
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 
@@ -152,7 +152,7 @@ void SysTick_Handler(void)
   */
 void LTDC_IRQHandler(void)
 {
-  HAL_LTDC_IRQHandler(&hltdc_eval);
+  HAL_LTDC_IRQHandler(&hlcd_ltdc);
 }
 
 /**

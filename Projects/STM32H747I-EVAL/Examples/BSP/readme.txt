@@ -101,9 +101,6 @@ This example shows how to erase, write and read the SDRAM memory.
  ** SDRAM DMA **
 This example shows how to erase, write and read the SDRAM memory in MDMA mode.
 
- ** LCD LOG **
-This example shows how to use the LCD log features.
-
  ** QSPI test **
 This example provides of how to write, read and buffers compare for external
 flash memory using QSPI communication.
@@ -119,7 +116,6 @@ This example shows how to get the potentiometer’s voltage level.
   - BSP/CM7/Src/stm32h7xx_it.c         Interrupt handlers for cortex-M7
   - BSP/CM7/Src/joystick.c             joystick feature
   - BSP/CM7/Src/lcd.c                  LCD drawing features
-  - BSP/CM7/Src/log.c                  LCD Log firmware functions
   - BSP/CM7/Src/eeprom.c               EEPROM Read/Write features
   - BSP/CM7/Src/audio_play.c           Play audio
   - BSP/CM7/Src/audio_record.c         Record and Play audio
@@ -134,7 +130,6 @@ This example shows how to get the potentiometer’s voltage level.
   - BSP/CM7/Inc/main.h                 Main program header file for cortex-M7
   - BSP/CM7/Inc/stm32h7xx_hal_conf.h   HAL Configuration file for cortex-M7
   - BSP/CM7/Inc/stm32h7xx_it.h         Interrupt handlers header file for cortex-M7
-  - BSP/CM7/Inc/lcd_log_conf.h         lcd_log configuration template file
   - BSP/CM7/Inc/stlogo.h               Image used for BSP example
 
   - BSP/CM4/Src/main.c                 Main program for cortex-M4
@@ -147,7 +142,7 @@ This example shows how to get the potentiometer’s voltage level.
 
   - This example runs on STM32H747xx device.
 
-  - This example has been tested with STM32H747I-EVAL rev.E board with SMPS (SD Convertor) power supply config and can be
+  - This example has been tested with STM32H747I-EVAL  board with SMPS (SD Convertor) power supply config and can be
     easily tailored to any other supported device and development board.
 
   - STM32H747I-EVAL Set-up :

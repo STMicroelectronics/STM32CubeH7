@@ -19,27 +19,13 @@ AboutScreenViewBase::AboutScreenViewBase() :
     scrollableContainerAbout.add(backgroundBox);
 
     backgroudImage.setXY(0, 0);
-    backgroudImage.setBitmap(Bitmap(BITMAP_BGTOP_ID));
+    backgroudImage.setBitmap(touchgfx::Bitmap(BITMAP_BGTOP_ID));
     scrollableContainerAbout.add(backgroudImage);
 
     buttonHallway.setXY(0, 0);
-    buttonHallway.setBitmaps(Bitmap(BITMAP_INFOBACKBUTTON_ID), Bitmap(BITMAP_INFOBACKBUTTON_ID));
+    buttonHallway.setBitmaps(touchgfx::Bitmap(BITMAP_INFOBACKBUTTON_ID), touchgfx::Bitmap(BITMAP_INFOBACKBUTTON_ID));
     buttonHallway.setAction(buttonCallback);
     scrollableContainerAbout.add(buttonHallway);
-
-    imageST.setXY(91, 123);
-    imageST.setBitmap(Bitmap(BITMAP_INFOSTLOGO_ID));
-    scrollableContainerAbout.add(imageST);
-
-    imageMjolner.setXY(314, 120);
-    imageMjolner.setBitmap(Bitmap(BITMAP_INFOMJOLNERLOGO_ID));
-    scrollableContainerAbout.add(imageMjolner);
-
-    textAreaSubHeadline.setPosition(120, 77, 240, 32);
-    textAreaSubHeadline.setColor(touchgfx::Color::getColorFrom24BitRGB(54, 54, 54));
-    textAreaSubHeadline.setLinespacing(0);
-    textAreaSubHeadline.setTypedText(TypedText(T_SINGLEUSEID119));
-    scrollableContainerAbout.add(textAreaSubHeadline);
 
     boxVideoSeperator2.setPosition(0, 543, 480, 1);
     boxVideoSeperator2.setColor(touchgfx::Color::getColorFrom24BitRGB(163, 159, 158));
@@ -50,116 +36,64 @@ AboutScreenViewBase::AboutScreenViewBase() :
     scrollableContainerAbout.add(boxVideoSeperator1);
 
     imageVideoBackground.setXY(0, 273);
-    imageVideoBackground.setBitmap(Bitmap(BITMAP_VIDEOBG_ID));
+    imageVideoBackground.setBitmap(touchgfx::Bitmap(BITMAP_VIDEOBG_ID));
     scrollableContainerAbout.add(imageVideoBackground);
 
     imageLaptopCreative.setXY(28, 671);
-    imageLaptopCreative.setBitmap(Bitmap(BITMAP_LAPTOP_ID));
+    imageLaptopCreative.setBitmap(touchgfx::Bitmap(BITMAP_LAPTOP_ID));
     scrollableContainerAbout.add(imageLaptopCreative);
 
     buttonPlayVideo.setXY(198, 374);
-    buttonPlayVideo.setBitmaps(Bitmap(BITMAP_PLAY_ABOUT_VIDEO_ICON_ID), Bitmap(BITMAP_PLAY_ABOUT_VIDEO_ICON_ID));
+    buttonPlayVideo.setBitmaps(touchgfx::Bitmap(BITMAP_PLAY_ABOUT_VIDEO_ICON_ID), touchgfx::Bitmap(BITMAP_PLAY_ABOUT_VIDEO_ICON_ID));
     buttonPlayVideo.setAction(buttonCallback);
     scrollableContainerAbout.add(buttonPlayVideo);
 
     imageLaptopRocket.setXY(28, 1125);
-    imageLaptopRocket.setBitmap(Bitmap(BITMAP_LAPTOPROCKET_ID));
+    imageLaptopRocket.setBitmap(touchgfx::Bitmap(BITMAP_LAPTOPROCKET_ID));
     scrollableContainerAbout.add(imageLaptopRocket);
 
     imageLaptopMjolner.setXY(28, 1348);
-    imageLaptopMjolner.setBitmap(Bitmap(BITMAP_LAPTOPMJOLNER_ID));
+    imageLaptopMjolner.setBitmap(touchgfx::Bitmap(BITMAP_LAPTOPMJOLNER_ID));
     scrollableContainerAbout.add(imageLaptopMjolner);
 
-    imageArrow.setXY(232, 229);
-    imageArrow.setBitmap(Bitmap(BITMAP_ARROWDOWN_ID));
-    scrollableContainerAbout.add(imageArrow);
-
-    textAreaScreenHeadline.setPosition(100, 18, 280, 45);
-    textAreaScreenHeadline.setColor(touchgfx::Color::getColorFrom24BitRGB(54, 54, 54));
-    textAreaScreenHeadline.setLinespacing(0);
-    textAreaScreenHeadline.setTypedText(TypedText(T_SINGLEUSEID120));
-    scrollableContainerAbout.add(textAreaScreenHeadline);
-
-    textAreaST.setPosition(33, 184, 200, 20);
-    textAreaST.setColor(touchgfx::Color::getColorFrom24BitRGB(54, 54, 54));
-    textAreaST.setLinespacing(0);
-    textAreaST.setTypedText(TypedText(T_SINGLEUSEID121));
-    scrollableContainerAbout.add(textAreaST);
-
-    textAreaMjolner.setPosition(243, 184, 200, 20);
-    textAreaMjolner.setColor(touchgfx::Color::getColorFrom24BitRGB(54, 54, 54));
-    textAreaMjolner.setLinespacing(0);
-    textAreaMjolner.setTypedText(TypedText(T_SINGLEUSEID122));
-    scrollableContainerAbout.add(textAreaMjolner);
-
-    textAreaHyperlinkST1.setPosition(33, 207, 200, 20);
-    textAreaHyperlinkST1.setColor(touchgfx::Color::getColorFrom24BitRGB(0, 114, 185));
-    textAreaHyperlinkST1.setLinespacing(0);
-    textAreaHyperlinkST1.setTypedText(TypedText(T_SINGLEUSEID123));
-    scrollableContainerAbout.add(textAreaHyperlinkST1);
-
-    textAreaHyperlinkMjolner1.setPosition(243, 207, 200, 20);
-    textAreaHyperlinkMjolner1.setColor(touchgfx::Color::getColorFrom24BitRGB(0, 114, 185));
-    textAreaHyperlinkMjolner1.setLinespacing(0);
-    textAreaHyperlinkMjolner1.setTypedText(TypedText(T_SINGLEUSEID124));
-    scrollableContainerAbout.add(textAreaHyperlinkMjolner1);
-
-    textAreaMore.setPosition(0, 246, 480, 26);
-    textAreaMore.setColor(touchgfx::Color::getColorFrom24BitRGB(54, 54, 54));
-    textAreaMore.setLinespacing(0);
-    textAreaMore.setTypedText(TypedText(T_SINGLEUSEID125));
-    scrollableContainerAbout.add(textAreaMore);
-
-    textAreaVideoHeadline.setPosition(0, 290, 480, 45);
-    textAreaVideoHeadline.setColor(touchgfx::Color::getColorFrom24BitRGB(54, 54, 54));
-    textAreaVideoHeadline.setLinespacing(0);
-    textAreaVideoHeadline.setTypedText(TypedText(T_SINGLEUSEID126));
-    scrollableContainerAbout.add(textAreaVideoHeadline);
-
     imageSliderBg.setXY(0, 911);
-    imageSliderBg.setBitmap(Bitmap(BITMAP_ABOUTSLIDER_ID));
+    imageSliderBg.setBitmap(touchgfx::Bitmap(BITMAP_ABOUTSLIDER_ID));
     scrollableContainerAbout.add(imageSliderBg);
-
-    textAreaVideoSubHeadline.setPosition(0, 326, 480, 28);
-    textAreaVideoSubHeadline.setColor(touchgfx::Color::getColorFrom24BitRGB(54, 54, 54));
-    textAreaVideoSubHeadline.setLinespacing(0);
-    textAreaVideoSubHeadline.setTypedText(TypedText(T_SINGLEUSEID127));
-    scrollableContainerAbout.add(textAreaVideoSubHeadline);
 
     textAreaGetStartedHeadline.setPosition(0, 562, 480, 45);
     textAreaGetStartedHeadline.setColor(touchgfx::Color::getColorFrom24BitRGB(54, 54, 54));
     textAreaGetStartedHeadline.setLinespacing(0);
-    textAreaGetStartedHeadline.setTypedText(TypedText(T_SINGLEUSEID131));
+    textAreaGetStartedHeadline.setTypedText(touchgfx::TypedText(T_SINGLEUSEID131));
     scrollableContainerAbout.add(textAreaGetStartedHeadline);
 
     textAreaGettingStarted.setPosition(0, 604, 480, 49);
     textAreaGettingStarted.setColor(touchgfx::Color::getColorFrom24BitRGB(54, 54, 54));
     textAreaGettingStarted.setLinespacing(0);
-    textAreaGettingStarted.setTypedText(TypedText(T_SINGLEUSEID132));
+    textAreaGettingStarted.setTypedText(touchgfx::TypedText(T_SINGLEUSEID132));
     scrollableContainerAbout.add(textAreaGettingStarted);
 
     textAreaDesigerHead.setPosition(158, 665, 322, 27);
     textAreaDesigerHead.setColor(touchgfx::Color::getColorFrom24BitRGB(54, 54, 54));
     textAreaDesigerHead.setLinespacing(0);
-    textAreaDesigerHead.setTypedText(TypedText(T_SINGLEUSEID134));
+    textAreaDesigerHead.setTypedText(touchgfx::TypedText(T_SINGLEUSEID134));
     scrollableContainerAbout.add(textAreaDesigerHead);
 
     textAreaDesigner1.setPosition(158, 692, 322, 101);
     textAreaDesigner1.setColor(touchgfx::Color::getColorFrom24BitRGB(54, 54, 54));
     textAreaDesigner1.setLinespacing(0);
-    textAreaDesigner1.setTypedText(TypedText(T_SINGLEUSEID133));
+    textAreaDesigner1.setTypedText(touchgfx::TypedText(T_SINGLEUSEID133));
     scrollableContainerAbout.add(textAreaDesigner1);
 
     textAreaDesigner2.setPosition(28, 795, 452, 101);
     textAreaDesigner2.setColor(touchgfx::Color::getColorFrom24BitRGB(54, 54, 54));
     textAreaDesigner2.setLinespacing(0);
-    textAreaDesigner2.setTypedText(TypedText(T_SINGLEUSEID135));
+    textAreaDesigner2.setTypedText(touchgfx::TypedText(T_SINGLEUSEID135));
     scrollableContainerAbout.add(textAreaDesigner2);
 
     designerAboutScrollWheel.setPosition(0, 922, 480, 38);
     designerAboutScrollWheel.setHorizontal(true);
     designerAboutScrollWheel.setCircular(true);
-    designerAboutScrollWheel.setEasingEquation(EasingEquations::backEaseOut);
+    designerAboutScrollWheel.setEasingEquation(touchgfx::EasingEquations::backEaseOut);
     designerAboutScrollWheel.setSwipeAcceleration(10);
     designerAboutScrollWheel.setDragAcceleration(10);
     designerAboutScrollWheel.setNumberOfItems(9);
@@ -179,25 +113,25 @@ AboutScreenViewBase::AboutScreenViewBase() :
     textAreaAboutInfo.setPosition(30, 984, 420, 116);
     textAreaAboutInfo.setColor(touchgfx::Color::getColorFrom24BitRGB(54, 54, 54));
     textAreaAboutInfo.setLinespacing(0);
-    textAreaAboutInfo.setTypedText(TypedText(T_ABOUTSTRUCTURETEXT));
+    textAreaAboutInfo.setTypedText(touchgfx::TypedText(T_ABOUTSTRUCTURETEXT));
     scrollableContainerAbout.add(textAreaAboutInfo);
 
     textAreaGetStartedHead.setPosition(158, 1119, 322, 27);
     textAreaGetStartedHead.setColor(touchgfx::Color::getColorFrom24BitRGB(54, 54, 54));
     textAreaGetStartedHead.setLinespacing(0);
-    textAreaGetStartedHead.setTypedText(TypedText(T_SINGLEUSEID136));
+    textAreaGetStartedHead.setTypedText(touchgfx::TypedText(T_SINGLEUSEID136));
     scrollableContainerAbout.add(textAreaGetStartedHead);
 
     textAreaGetStarted1.setPosition(158, 1151, 322, 108);
     textAreaGetStarted1.setColor(touchgfx::Color::getColorFrom24BitRGB(54, 54, 54));
     textAreaGetStarted1.setLinespacing(0);
-    textAreaGetStarted1.setTypedText(TypedText(T_SINGLEUSEID137));
+    textAreaGetStarted1.setTypedText(touchgfx::TypedText(T_SINGLEUSEID137));
     scrollableContainerAbout.add(textAreaGetStarted1);
 
     textAreaGetStarted2.setPosition(28, 1250, 452, 51);
     textAreaGetStarted2.setColor(touchgfx::Color::getColorFrom24BitRGB(54, 54, 54));
     textAreaGetStarted2.setLinespacing(0);
-    textAreaGetStarted2.setTypedText(TypedText(T_SINGLEUSEID139));
+    textAreaGetStarted2.setTypedText(touchgfx::TypedText(T_SINGLEUSEID139));
     scrollableContainerAbout.add(textAreaGetStarted2);
 
     boxSeperator2.setPosition(30, 1321, 420, 1);
@@ -207,32 +141,32 @@ AboutScreenViewBase::AboutScreenViewBase() :
     textAreaGetAssistanceHead.setPosition(158, 1343, 322, 27);
     textAreaGetAssistanceHead.setColor(touchgfx::Color::getColorFrom24BitRGB(54, 54, 54));
     textAreaGetAssistanceHead.setLinespacing(0);
-    textAreaGetAssistanceHead.setTypedText(TypedText(T_SINGLEUSEID140));
+    textAreaGetAssistanceHead.setTypedText(touchgfx::TypedText(T_SINGLEUSEID140));
     scrollableContainerAbout.add(textAreaGetAssistanceHead);
 
     textAreaAssistance.setPosition(158, 1375, 322, 105);
     textAreaAssistance.setColor(touchgfx::Color::getColorFrom24BitRGB(54, 54, 54));
     textAreaAssistance.setLinespacing(0);
-    textAreaAssistance.setTypedText(TypedText(T_SINGLEUSEID141));
+    textAreaAssistance.setTypedText(touchgfx::TypedText(T_SINGLEUSEID141));
     scrollableContainerAbout.add(textAreaAssistance);
 
     textAreaHyperlinkMjolner.setPosition(238, 1444, 322, 26);
     textAreaHyperlinkMjolner.setColor(touchgfx::Color::getColorFrom24BitRGB(0, 114, 185));
     textAreaHyperlinkMjolner.setLinespacing(0);
-    textAreaHyperlinkMjolner.setTypedText(TypedText(T_SINGLEUSEID142));
+    textAreaHyperlinkMjolner.setTypedText(touchgfx::TypedText(T_SINGLEUSEID142));
     scrollableContainerAbout.add(textAreaHyperlinkMjolner);
 
     MissingUSBMessage.setPosition(40, 419, 400, 35);
     MissingUSBMessage.setVisible(false);
     MissingUSBMessage.setColor(touchgfx::Color::getColorFrom24BitRGB(54, 54, 54));
     MissingUSBMessage.setLinespacing(0);
-    MissingUSBMessage.setTypedText(TypedText(T_ABOUTINSERTUSB));
+    MissingUSBMessage.setTypedText(touchgfx::TypedText(T_ABOUTINSERTUSB));
     scrollableContainerAbout.add(MissingUSBMessage);
 
     textAreaSTHyperlink.setPosition(350, 1273, 45, 25);
     textAreaSTHyperlink.setColor(touchgfx::Color::getColorFrom24BitRGB(0, 114, 185));
     textAreaSTHyperlink.setLinespacing(0);
-    textAreaSTHyperlink.setTypedText(TypedText(T_SINGLEUSEID150));
+    textAreaSTHyperlink.setTypedText(touchgfx::TypedText(T_SINGLEUSEID150));
     scrollableContainerAbout.add(textAreaSTHyperlink);
     scrollableContainerAbout.setScrollbarsVisible(false);
 
@@ -270,17 +204,17 @@ void AboutScreenViewBase::buttonCallbackHandler(const touchgfx::AbstractButton& 
     }
 }
 
-void AboutScreenViewBase::updateItemCallbackHandler(DrawableListItemsInterface* items, int16_t containerIndex, int16_t itemIndex)
+void AboutScreenViewBase::updateItemCallbackHandler(touchgfx::DrawableListItemsInterface* items, int16_t containerIndex, int16_t itemIndex)
 {
     if (items == &designerAboutScrollWheelListItems)
     {
-        Drawable* d = items->getDrawable(containerIndex);
+        touchgfx::Drawable* d = items->getDrawable(containerIndex);
         AboutWheelElement* cc = (AboutWheelElement*)d;
         designerAboutScrollWheelUpdateItem(*cc, itemIndex);
     }
     else if (items == &designerAboutScrollWheelSelectedListItems)
     {
-        Drawable* d = items->getDrawable(containerIndex);
+        touchgfx::Drawable* d = items->getDrawable(containerIndex);
         AboutWheelElement* cc = (AboutWheelElement*)d;
         designerAboutScrollWheelUpdateCenterItem(*cc, itemIndex);
     }

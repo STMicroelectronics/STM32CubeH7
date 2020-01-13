@@ -15,25 +15,25 @@ WasherInstructionContainerBase::WasherInstructionContainerBase()
     background.setColor(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
 
     backgroundImage.setXY(0, 44);
-    backgroundImage.setBitmap(Bitmap(BITMAP_VIDEO_BACKGROUND_ID));
+    backgroundImage.setBitmap(touchgfx::Bitmap(BITMAP_VIDEO_BACKGROUND_ID));
 
     textAreaInstuctions.setXY(40, 11);
     textAreaInstuctions.setColor(touchgfx::Color::getColorFrom24BitRGB(0, 0, 0));
     textAreaInstuctions.setLinespacing(0);
-    textAreaInstuctions.setTypedText(TypedText(T_INSTRUCTIONTEXT));
+    textAreaInstuctions.setTypedText(touchgfx::TypedText(T_INSTRUCTIONTEXT));
 
     textAreaBodyText.setPosition(7, 88, 120, 126);
     textAreaBodyText.setColor(touchgfx::Color::getColorFrom24BitRGB(0, 0, 0));
     textAreaBodyText.setLinespacing(0);
-    textAreaBodyText.setTypedText(TypedText(T_VIDEOTEXT1));
+    textAreaBodyText.setTypedText(touchgfx::TypedText(T_VIDEOTEXT1));
 
     textAreaHeadline.setPosition(7, 64, 120, 26);
     textAreaHeadline.setColor(touchgfx::Color::getColorFrom24BitRGB(0, 0, 0));
     textAreaHeadline.setLinespacing(0);
-    textAreaHeadline.setTypedText(TypedText(T_VIDEOHEADLINE1));
+    textAreaHeadline.setTypedText(touchgfx::TypedText(T_VIDEOHEADLINE1));
 
     imageIndication.setXY(266, 101);
-    imageIndication.setBitmap(Bitmap(BITMAP_VIDEO_PLAY_BUTTON_ID));
+    imageIndication.setBitmap(touchgfx::Bitmap(BITMAP_VIDEO_PLAY_BUTTON_ID));
 
     boxStartStopClick.setPosition(146, 53, 300, 180);
     boxStartStopClick.setColor(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));

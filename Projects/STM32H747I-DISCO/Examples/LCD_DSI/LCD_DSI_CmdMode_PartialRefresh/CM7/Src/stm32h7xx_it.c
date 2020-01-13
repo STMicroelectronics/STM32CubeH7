@@ -33,8 +33,8 @@
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-extern LTDC_HandleTypeDef hltdc_discovery;   
-extern DSI_HandleTypeDef hdsi_discovery;
+extern LTDC_HandleTypeDef hlcd_ltdc;   
+extern DSI_HandleTypeDef hlcd_dsi;
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 
@@ -148,13 +148,13 @@ void SysTick_Handler(void)
   */
 void LTDC_IRQHandler(void)
 {
-  HAL_LTDC_IRQHandler(&hltdc_discovery);
+  HAL_LTDC_IRQHandler(&hlcd_ltdc);
 }
 
 void LTDC_ER_IRQHandler(void)
 { 
   /* Check the interrupt and clear flag */
-  HAL_LTDC_IRQHandler(&hltdc_discovery);
+  HAL_LTDC_IRQHandler(&hlcd_ltdc);
 
 }
 /**
@@ -164,7 +164,7 @@ void LTDC_ER_IRQHandler(void)
   */
 void DSI_IRQHandler(void)
 {
-  HAL_DSI_IRQHandler(&hdsi_discovery);
+  HAL_DSI_IRQHandler(&hlcd_dsi);
 }
 
 /******************************************************************************/

@@ -76,7 +76,7 @@ typedef enum
 #define ABORT2                  ((uint8_t)0x61)  /* 'a' == 0x61, abort by user */
 
 #define NAK_TIMEOUT             ((uint32_t)0x100000)
-#define DOWNLOAD_TIMEOUT        ((uint32_t)1000) /* One second retry delay */
+#define DOWNLOAD_TIMEOUT        ((uint32_t)10000) /* 10 second retry delay */
 #define MAX_ERRORS              ((uint32_t)5)
 
 /* Exported functions ------------------------------------------------------- */

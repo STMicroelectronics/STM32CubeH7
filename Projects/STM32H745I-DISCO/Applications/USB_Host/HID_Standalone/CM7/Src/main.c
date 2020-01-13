@@ -118,21 +118,13 @@ static void HID_InitApplication(void)
   BSP_LED_Init(LED2);
 
   /* Initialize the LCD */
-  BSP_LCD_Init();
-
-  /* LCD Layer Initialization */
-  BSP_LCD_LayerDefaultInit(1, LCD_FB_START_ADDRESS);
-
-  /* Select the LCD Layer */
-  BSP_LCD_SelectLayer(1);
-
-  /* Enable the display */
-  BSP_LCD_DisplayOn();
-
+  BSP_LCD_Init(0,LCD_ORIENTATION_LANDSCAPE);
+  /*link board LCD drivers to BASIC GUI LCD drivers*/
+  GUI_SetFuncDriver(&LCD_Driver);
   /* Init the LCD Log module */
-  LCD_LOG_Init();
-  LCD_LOG_SetHeader((uint8_t *) " USB OTG FS HID Host");
-  LCD_UsrLog("USB Host library started.\n");
+  UTIL_LCD_TRACE_Init();
+  UTIL_LCD_TRACE_SetHeader((uint8_t *) " USB OTG FS HID Host");
+  LCD_UsrTrace("USB Host library started.\n");
 
   /* Start HID Interface */
   HID_MenuInit();
@@ -201,7 +193,7 @@ void SystemClock_Config(void)
   RCC_OscInitTypeDef RCC_OscInitStruct;
   RCC_PeriphCLKInitTypeDef PeriphClkInitStruct;
 
-  /*!< Supply configuration update enable */
+  /*!< Supply configuration update enable */  
   HAL_PWREx_ConfigSupply(PWR_DIRECT_SMPS_SUPPLY);
 
   /* The voltage scaling allows optimizing the power consumption when the device is
@@ -230,14 +222,13 @@ void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLRGE = RCC_PLL1VCIRANGE_2;
   HAL_RCC_OscConfig(&RCC_OscInitStruct);
 
-    /* PLL3 for USB Clock */
-
+  /* PLL3 for USB Clock */
   PeriphClkInitStruct.PLL3.PLL3M = 5;
-  PeriphClkInitStruct.PLL3.PLL3N = 192;
+  PeriphClkInitStruct.PLL3.PLL3N = 96;
   PeriphClkInitStruct.PLL3.PLL3P = 2;
-  PeriphClkInitStruct.PLL3.PLL3Q = 20;
-  PeriphClkInitStruct.PLL3.PLL3R = 99;
-
+  PeriphClkInitStruct.PLL3.PLL3Q = 10;
+  PeriphClkInitStruct.PLL3.PLL3R = 18;
+  
   PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_USB;
   PeriphClkInitStruct.UsbClockSelection = RCC_USBCLKSOURCE_PLL3;
   HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct);
@@ -312,14 +303,11 @@ static void MPU_Config(void)
 }
 
 /**
-  * @brief  Clock Config.
-  * @param  hltdc: LTDC handle
-  * @param  Params: Pointer to void
-  * @note   This API is called by BSP_LCD_Init()
-  *         Being __weak it can be overwritten by the application
-  * @retval None
+  * @brief  LTDC Clock Config for LCD DPI display.
+  * @param  hltdc  LTDC Handle
+  * @retval HAL_status
   */
-void BSP_LCD_ClockConfig(LTDC_HandleTypeDef *hltdc, void *Params)
+ HAL_StatusTypeDef MX_LTDC_ClockConfig(LTDC_HandleTypeDef *hltdc)
 {
   static RCC_PeriphCLKInitTypeDef  periph_clk_init_struct;
 
@@ -335,7 +323,7 @@ void BSP_LCD_ClockConfig(LTDC_HandleTypeDef *hltdc, void *Params)
   periph_clk_init_struct.PLL3.PLL3P = 2;
   periph_clk_init_struct.PLL3.PLL3Q = 20;
   periph_clk_init_struct.PLL3.PLL3R = 99;
-  HAL_RCCEx_PeriphCLKConfig(&periph_clk_init_struct);
+  return  HAL_RCCEx_PeriphCLKConfig(&periph_clk_init_struct);
 }
 
 /**

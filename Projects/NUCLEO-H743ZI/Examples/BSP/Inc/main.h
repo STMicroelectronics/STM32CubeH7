@@ -6,7 +6,7 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics.
+  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
   * All rights reserved.</center></h2>
   *
   * This software component is licensed by ST under BSD 3-Clause license,
@@ -22,11 +22,13 @@
 #define __MAIN_H
 
 /* Includes ------------------------------------------------------------------*/
-#include <stdio.h>
-#include <stdlib.h>
-#include "stm32h7xx_nucleo_144.h"
-#include "stm32_adafruit_sd.h"
-#include "stm32_adafruit_lcd.h"
+#include "stdio.h"
+#include "string.h"
+#include "stm32h7xx_nucleo.h"
+#include "adafruit_802.h"
+#include "adafruit_802_sd.h"
+#include "adafruit_802_lcd.h"
+#include "../../../../../Utilities/Basic_GUI/basic_gui.h"
 
 /* Exported types ------------------------------------------------------------*/
 typedef struct
@@ -37,7 +39,7 @@ typedef struct
 }BSP_DemoTypedef;
 
 extern const unsigned char stlogo[];
-
+extern uint32_t ButtonState;
 /* Exported constants --------------------------------------------------------*/
 #define KEY_NOT_PRESSED 0x00
 #define KEY_PRESSED     0x01

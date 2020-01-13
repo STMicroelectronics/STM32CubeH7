@@ -76,32 +76,9 @@ int main(void)
   /* Configure the System clock to have a frequency of 400 Mhz */
   SystemClock_Config();
 
-  /* When system initialization is finished, Cortex-M7 will release (wakeup) Cortex-M4  by means of
-  HSEM notification. Cortex-M4 release could be also ensured by any Domain D2 wakeup source (SEV,EXTI..).
-  */
-
-  /*HW semaphore Clock enable*/
-  __HAL_RCC_HSEM_CLK_ENABLE();
-
-  /*Take HSEM */
-  HAL_HSEM_FastTake(HSEM_ID_0);
-  /*Release HSEM in order to notify the CPU2(CM4)*/
-  HAL_HSEM_Release(HSEM_ID_0,0);
-
-  /* wait until CPU2 wakes up from stop mode */
-  timeout = 0xFFFF;
-  while((__HAL_RCC_GET_FLAG(RCC_FLAG_D2CKRDY) == RESET) && (timeout-- > 0));
-  if ( timeout < 0 )
-  {
-    Error_Handler();
-  }
-
-  /* Initialize IO expander */
-   BSP_IO_Init();
-
   /* Init HID Application */
   HID_InitApplication();
-
+  
   /* Init Host Library */
   USBH_Init(&hUSB_Host, USBH_UserProcess, 0);
 
@@ -133,34 +110,26 @@ int main(void)
 static void HID_InitApplication(void)
 {
   /* Configure Joystick in EXTI mode */
-  BSP_JOY_Init(JOY_MODE_EXTI);
+  BSP_JOY_Init(JOY1, JOY_MODE_EXTI, JOY_ALL);
 
   /* Configure LED1 and LED3 */
   BSP_LED_Init(LED1);
   BSP_LED_Init(LED3);
 
   /* Initialize the LCD */
-  BSP_LCD_Init();
-
-  /* LCD Layer Initialization */
-  BSP_LCD_LayerDefaultInit(1, LCD_FB_START_ADDRESS);
-
-  /* Select the LCD Layer */
-  BSP_LCD_SelectLayer(1);
-
-  /* Enable the display */
-  BSP_LCD_DisplayOn();
+  BSP_LCD_Init(0, LCD_ORIENTATION_LANDSCAPE);
+  GUI_SetFuncDriver(&LCD_Driver);
 
   /* Init the LCD Log module */
-  LCD_LOG_Init();
+  UTIL_LCD_TRACE_Init();
 
 #ifdef USE_USB_HS
-  LCD_LOG_SetHeader((uint8_t *) " USB OTG HS HID Host");
+  UTIL_LCD_TRACE_SetHeader((uint8_t *) " USB OTG HS HID Host");
 #else
-  LCD_LOG_SetHeader((uint8_t *) " USB OTG FS HID Host");
+  UTIL_LCD_TRACE_SetHeader((uint8_t *) " USB OTG FS HID Host");
 #endif
 
-  LCD_UsrLog("USB Host library started.\n");
+  LCD_UsrTrace("USB Host library started.\n");
 
   /* Start HID Interface */
   HID_MenuInit();
@@ -338,8 +307,27 @@ static void MPU_Config(void)
   /* Enable the MPU */
   HAL_MPU_Enable(MPU_PRIVILEGED_DEFAULT);
 }
-
-
+/**
+  * @brief  LTDC Clock Config for LCD DSI display.
+  * @param  hltdc  LTDC Handle
+  * @retval HAL_status
+  */
+ HAL_StatusTypeDef MX_LTDC_ClockConfig(LTDC_HandleTypeDef *hltdc)
+{
+  RCC_PeriphCLKInitTypeDef  PeriphClkInitStruct;
+  /* LCD clock configuration */
+  /* PLL3_VCO Input = HSE_VALUE/PLL3M = 5 Mhz */
+  /* PLL3_VCO Output = PLL3_VCO Input * PLL3N = 480 Mhz */
+  /* PLLLCDCLK = PLL3_VCO Output/PLL3R = 480/18 = 26.666 Mhz */
+  /* LTDC clock frequency = PLLLCDCLK = 26.666 Mhz */
+  PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_LTDC;
+  PeriphClkInitStruct.PLL3.PLL3M = 5;
+  PeriphClkInitStruct.PLL3.PLL3N = 96;
+  PeriphClkInitStruct.PLL3.PLL3P = 2;
+  PeriphClkInitStruct.PLL3.PLL3Q = 10;
+  PeriphClkInitStruct.PLL3.PLL3R = 18;
+  return HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct);
+}
 /**
 * @brief  CPU L1-Cache enable.
 * @param  None

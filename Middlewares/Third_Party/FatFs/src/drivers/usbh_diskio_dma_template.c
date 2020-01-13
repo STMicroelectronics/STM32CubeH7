@@ -104,7 +104,7 @@ DRESULT USBH_read(BYTE lun, BYTE *buff, DWORD sector, UINT count)
   MSC_LUNTypeDef info;
   USBH_StatusTypeDef  status = USBH_OK;
 
-  if (((DWORD)buff & 3) && (((HCD_HandleTypeDef *)hUSB_Host.pData)->Init.dma_enable))
+  if ((DWORD)buff & 3)
   {
     while ((count--)&&(status == USBH_OK))
     {
@@ -166,7 +166,7 @@ DRESULT USBH_write(BYTE lun, const BYTE *buff, DWORD sector, UINT count)
   MSC_LUNTypeDef info;
   USBH_StatusTypeDef  status = USBH_OK;
 
-  if (((DWORD)buff & 3) && (((HCD_HandleTypeDef *)hUSB_Host.pData)->Init.dma_enable))
+  if ((DWORD)buff & 3)
   {
 
     while (count--)

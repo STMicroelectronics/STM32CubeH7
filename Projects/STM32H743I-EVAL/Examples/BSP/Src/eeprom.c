@@ -5,16 +5,15 @@
   * @brief   This example code shows how to manage I2C EEPROM memory
   *          ===================================================================
   *          Notes:
-  *           - This driver is intended for SRM32H743I families devices only.
   *           - The I2C EEPROM memory (M24LR64) is available on separate daughter
-  *             board ANT7-M24LR-A, which is provided with the SRM32H743I-EVAL board.
+  *             board ANT7-M24LR-A, which is provided with the STM32H7B3I-EVAL board.
   *             To use this driver with M24LR64, you have to connect
-  *             the ANT7-M24LR-A to CN4 connector of SRM32H743I-EVAL board.
+  *             the ANT7-M24LR-A to CN24 connector of STM32H7B3I-EVAL board.
   *          ===================================================================
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics.
+  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
   * All rights reserved.</center></h2>
   *
   * This software component is licensed by ST under BSD 3-Clause license,
@@ -39,21 +38,28 @@
 /* Private typedef -----------------------------------------------------------*/
 typedef enum {FAILED = 0, PASSED = !FAILED} TestStatus;
 /* Private define ------------------------------------------------------------*/
-#define EEPROM_FEATURES_NUM     2
-#define BUFFER_SIZE1            50
-#define EEPROM_WRITE_ADDRESS1   0x50
-#define EEPROM_READ_ADDRESS1    0x50
+#define EEPROM_FEATURES_NUM     3
+
+#define EEPROM_WRITE_ADDRESS1   0x0
+#define EEPROM_READ_ADDRESS1    0x0
 /* Private macro -------------------------------------------------------------*/
 #define countof(a) (sizeof(a) / sizeof(*(a)))
 /* Private variables ---------------------------------------------------------*/
 static uint8_t EepromFeature = 0;
-uint8_t EepromDetected = 1;
+
+char Tx1Buffer[] = "***STM32H743I EEPROM***READ AND WRITE****";
+#define BUFFER_SIZE1            8192
+#define BUFFER_SIZE  countof(Tx1Buffer)
+char RxBuffer[BUFFER_SIZE] = {0};
+char Rx1Buffer[BUFFER_SIZE1] = {0};
+char Tx2Buffer[BUFFER_SIZE1] = {0};
+
 /* Private function prototypes -----------------------------------------------*/
 static void EEPROM_SetHint(void);
 static void EEPROM_Show_Feature(uint8_t feature);
 static TestStatus Buffercmp(uint8_t* pBuffer1, uint8_t* pBuffer2, uint16_t BufferLength);
+static void FillBuffer(uint8_t* pBuffer1, uint16_t Index, uint16_t BufferLength);
 
-extern __IO uint8_t NbLoop;
 /* Private functions ---------------------------------------------------------*/
 
 /**
@@ -66,23 +72,23 @@ void EEPROM_demo (void)
   EEPROM_SetHint();
   EepromFeature = 0;
 
-  EEPROM_Show_Feature(EepromFeature++);
+  EEPROM_Show_Feature(EepromFeature);
 
   while (1)
   {
     if(CheckForUserInput() > 0)
     {
+      ButtonState = 0;
       if(EepromFeature < EEPROM_FEATURES_NUM)
       {
-       EEPROM_Show_Feature(EepromFeature++);
+        EEPROM_Show_Feature(EepromFeature++);
       }
       else
       {
+        ButtonState = 0;
         return;
       }
-
     }
-    HAL_Delay(100);
   }
 }
 
@@ -93,25 +99,28 @@ void EEPROM_demo (void)
   */
 static void EEPROM_SetHint(void)
 {
+  uint32_t x_size, y_size;
+
+  BSP_LCD_GetXSize(0, &x_size);
+  BSP_LCD_GetYSize(0, &y_size);
+
   /* Clear the LCD */
-  BSP_LCD_Clear(LCD_COLOR_WHITE);
+  GUI_Clear(GUI_COLOR_WHITE);
 
   /* Set LCD Demo description */
-  BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
-  BSP_LCD_FillRect(0, 0, BSP_LCD_GetXSize(), 80);
-  BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
-  BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-  BSP_LCD_SetFont(&Font24);
-  BSP_LCD_DisplayStringAt(0, 0, (uint8_t*)"EEPROM", CENTER_MODE);
-  BSP_LCD_SetFont(&Font12);
-  BSP_LCD_DisplayStringAt(0, 30, (uint8_t*)"This example shows the different", CENTER_MODE);
-  BSP_LCD_DisplayStringAt(0, 45, (uint8_t*)"EEPROM Features, use TAMPER button", CENTER_MODE);
-  BSP_LCD_DisplayStringAt(0, 60, (uint8_t*)"to start EEPROM data transfer", CENTER_MODE);
+  GUI_FillRect(0, 0, x_size, 80, GUI_COLOR_BLUE);
+  GUI_SetTextColor(GUI_COLOR_WHITE);
+  GUI_SetBackColor(GUI_COLOR_BLUE);
+  GUI_SetFont(&Font24);
+  GUI_DisplayStringAt(0, 0, (uint8_t*)"EEPROM", CENTER_MODE);
+  GUI_SetFont(&Font12);
+  GUI_DisplayStringAt(0, 30, (uint8_t*)"This example shows the different", CENTER_MODE);
+  GUI_DisplayStringAt(0, 45, (uint8_t*)"EEPROM Features, use TAMPER button", CENTER_MODE);
+  GUI_DisplayStringAt(0, 60, (uint8_t*)"to start EEPROM data transfer", CENTER_MODE);
 
    /* Set the LCD Text Color */
-  BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
-  BSP_LCD_DrawRect(10, 90, BSP_LCD_GetXSize() - 20, BSP_LCD_GetYSize()- 100);
-  BSP_LCD_DrawRect(11, 91, BSP_LCD_GetXSize() - 22, BSP_LCD_GetYSize()- 102);
+  GUI_DrawRect(10, 90, x_size - 20, y_size- 100, GUI_COLOR_BLUE);
+  GUI_DrawRect(11, 91, x_size - 22, y_size- 102, GUI_COLOR_BLUE);
  }
 
 /**
@@ -121,76 +130,77 @@ static void EEPROM_SetHint(void)
   */
 static void EEPROM_Show_Feature(uint8_t feature)
 {
-  uint8_t TxBuffer[BUFFER_SIZE1];
-
-  uint8_t Rx1Buffer[BUFFER_SIZE1] = {0};
+  char text[50];
   __IO TestStatus TransferStatus1 = FAILED;
   __IO uint32_t NumDataRead = 0;
+  uint32_t x_size, y_size;
 
-  BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
-  BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
-  BSP_LCD_FillRect(12, 92, BSP_LCD_GetXSize()- 24, BSP_LCD_GetYSize() - 104);
-  BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
+  BSP_LCD_GetXSize(0, &x_size);
+  BSP_LCD_GetYSize(0, &y_size);
+
+  GUI_SetBackColor(GUI_COLOR_WHITE);
+  GUI_FillRect(12, 92, x_size- 24, y_size - 104, GUI_COLOR_WHITE);
 
   /* Initialize the EEPROM driver --------------------------------------------*/
-  if (BSP_EEPROM_Init() != EEPROM_OK)
+  if (BSP_EEPROM_Init(0) != BSP_ERROR_NONE)
   {
-    BSP_LCD_SetTextColor(LCD_COLOR_RED);
-    BSP_LCD_DisplayStringAt(0, 115, (uint8_t*)"Initialization problem", CENTER_MODE);
-    BSP_LCD_DisplayStringAt(0, 130, (uint8_t*)"Check if HW connected or", CENTER_MODE);
-    BSP_LCD_DisplayStringAt(0, 145, (uint8_t*)"HW version not supported", CENTER_MODE);
+    GUI_SetTextColor(GUI_COLOR_RED);
+    GUI_DisplayStringAt(0, 115, (uint8_t*)"Initialization problem", CENTER_MODE);
+    GUI_DisplayStringAt(0, 130, (uint8_t*)"Check if HW connected or", CENTER_MODE);
+    GUI_DisplayStringAt(0, 145, (uint8_t*)"HW version not supported", CENTER_MODE);
     return;
   }
-  EepromDetected = 1;
 
   switch (feature)
   {
   case 0:
     /* Read old parameter in EEPROM */
-    if (EepromDetected == 1)
+    if(BSP_EEPROM_IsDeviceReady(0) == BSP_ERROR_NONE)
     {
       /* Set the Number of data to be read */
-      NumDataRead = (uint32_t)BUFFER_SIZE1;
+      NumDataRead = BUFFER_SIZE;
 
       /* Read from EEPROM from EEPROM_READ_ADDRESS1 */
-      if (BSP_EEPROM_ReadBuffer(Rx1Buffer, EEPROM_READ_ADDRESS1, (uint16_t *)(&NumDataRead)) != EEPROM_OK)
+      if (BSP_EEPROM_ReadBuffer(0, (uint8_t*)RxBuffer, EEPROM_READ_ADDRESS1, NumDataRead) != BSP_ERROR_NONE)
       {
-        BSP_LCD_SetTextColor(LCD_COLOR_RED);
-        BSP_LCD_DisplayStringAt(0, 115, (uint8_t*)"Init issue at read old data", CENTER_MODE);
-        BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
-        BSP_LCD_DisplayStringAt(0, 145, (uint8_t*)"Press again TAMPER button", CENTER_MODE);
-        BSP_LCD_DisplayStringAt(0, 160, (uint8_t*)"To write new data", CENTER_MODE);
+        GUI_SetTextColor(GUI_COLOR_RED);
+        GUI_DisplayStringAt(0, 115, (uint8_t*)"Init issue at read old data", CENTER_MODE);
+        GUI_SetTextColor(GUI_COLOR_BLACK);
+        GUI_DisplayStringAt(0, 145, (uint8_t*)"Press again TAMPER button", CENTER_MODE);
+        GUI_DisplayStringAt(0, 160, (uint8_t*)"To write new data", CENTER_MODE);
         return;
       }
-      BSP_LCD_DisplayStringAt(0, 115, (uint8_t*)"String read", CENTER_MODE);
-      BSP_LCD_DisplayStringAt(0, 130, (uint8_t*)"in the current EEPROM selected:", CENTER_MODE);
-      BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
-      BSP_LCD_DisplayStringAt(0, 160, Rx1Buffer, CENTER_MODE);
-      BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
-      BSP_LCD_DisplayStringAt(0, 190, (uint8_t*)"Press TAMPER button", CENTER_MODE);
-      BSP_LCD_DisplayStringAt(0, 205, (uint8_t*)"To write new data", CENTER_MODE);
+      GUI_DisplayStringAt(0, 115, (uint8_t*)"String read", CENTER_MODE);
+      GUI_DisplayStringAt(0, 130, (uint8_t*)"in the current EEPROM selected:", CENTER_MODE);
+      GUI_SetTextColor(GUI_COLOR_BLUE);
+      GUI_DisplayStringAt(0, 160, (uint8_t*)RxBuffer, CENTER_MODE);
+      GUI_SetTextColor(GUI_COLOR_BLACK);
+      GUI_DisplayStringAt(0, 190, (uint8_t*)"Press TAMPER button", CENTER_MODE);
+      GUI_DisplayStringAt(0, 205, (uint8_t*)"To write new data", CENTER_MODE);
     }
     else
     {
-      BSP_LCD_SetTextColor(LCD_COLOR_RED);
-      BSP_LCD_DisplayStringAt(0, 115, (uint8_t*)"Problem to communicate", CENTER_MODE);
-      BSP_LCD_DisplayStringAt(0, 130, (uint8_t*)"with EEPROM", CENTER_MODE);
-      BSP_LCD_DisplayStringAt(0, 145, (uint8_t*)"Press again TAMPER button", CENTER_MODE);
+      GUI_SetTextColor(GUI_COLOR_RED);
+      GUI_DisplayStringAt(0, 115, (uint8_t*)"Problem to communicate", CENTER_MODE);
+      GUI_DisplayStringAt(0, 130, (uint8_t*)"with EEPROM", CENTER_MODE);
+      GUI_DisplayStringAt(0, 145, (uint8_t*)"Press again TAMPER button", CENTER_MODE);
     }
 
     break;
 
   case 1:
      /* Write new parameter in EEPROM */
-    if (EepromDetected == 1)
+    if(BSP_EEPROM_IsDeviceReady(0) == BSP_ERROR_NONE)
     {
-      sprintf((char*)TxBuffer,"STM32H743I EEPROM Ex. test %d" , NbLoop);
+      FillBuffer((uint8_t*)Tx2Buffer, 0x21, BUFFER_SIZE1);
+
+      GUI_DisplayStringAt(0, 115, (uint8_t*)"Writing data to memory ...", CENTER_MODE);
       /* First write in the memory followed by a read of the written data ----*/
       /* Write on EEPROM to EEPROM_WRITE_ADDRESS1 */
-      if (BSP_EEPROM_WriteBuffer(TxBuffer, EEPROM_WRITE_ADDRESS1, BUFFER_SIZE1) != EEPROM_OK)
+      if (BSP_EEPROM_WriteBuffer(0, (uint8_t*)Tx2Buffer, EEPROM_WRITE_ADDRESS1, BUFFER_SIZE1) != BSP_ERROR_NONE)
       {
-        BSP_LCD_SetTextColor(LCD_COLOR_RED);
-        BSP_LCD_DisplayStringAt(0, 115, (uint8_t*)"Init issue at write", CENTER_MODE);
+        GUI_SetTextColor(GUI_COLOR_RED);
+        GUI_DisplayStringAt(0, 115, (uint8_t*)"Init issue at write", CENTER_MODE);
         return;
       }
 
@@ -198,48 +208,96 @@ static void EEPROM_Show_Feature(uint8_t feature)
       NumDataRead = (uint32_t)BUFFER_SIZE1;
 
       /* Read from I2C EEPROM from EEPROM_READ_ADDRESS1 */
-      if (BSP_EEPROM_ReadBuffer(Rx1Buffer, EEPROM_READ_ADDRESS1, (uint16_t *)(&NumDataRead)) != EEPROM_OK)
+      if (BSP_EEPROM_ReadBuffer(0, (uint8_t*)Rx1Buffer, EEPROM_READ_ADDRESS1, NumDataRead) != BSP_ERROR_NONE)
       {
-        BSP_LCD_SetTextColor(LCD_COLOR_RED);
-        BSP_LCD_DisplayStringAt(0, 115, (uint8_t*)"Init issue at read", CENTER_MODE);
+        GUI_SetTextColor(GUI_COLOR_RED);
+        GUI_DisplayStringAt(0, 115, (uint8_t*)"Init issue at read", CENTER_MODE);
         return;
       }
 
       /* Check if the data written to the memory is read correctly */
-      TransferStatus1 = Buffercmp(TxBuffer, Rx1Buffer, BUFFER_SIZE1);
+      TransferStatus1 = Buffercmp((uint8_t*)Tx2Buffer, (uint8_t*)Rx1Buffer, BUFFER_SIZE1);
       if(TransferStatus1 != FAILED)
       {
-        BSP_LCD_DisplayStringAt(0, 115, (uint8_t*)"String writes", CENTER_MODE);
-        BSP_LCD_DisplayStringAt(0, 130, (uint8_t*)"in the current EEPROM selected:", CENTER_MODE);
-        BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
-        BSP_LCD_DisplayStringAt(0, 160, TxBuffer, CENTER_MODE);
+        GUI_DisplayStringAt(0, 115, (uint8_t*)"String writes                  ", CENTER_MODE);
+        GUI_DisplayStringAt(0, 130, (uint8_t*)"in the current EEPROM selected:", CENTER_MODE);
+        GUI_SetTextColor(GUI_COLOR_BLUE);
+        GUI_DisplayStringAt(0, 160, (uint8_t*)"READ/WRITE SUCCECC", CENTER_MODE);
       }
       else
       {
-        BSP_LCD_SetTextColor(LCD_COLOR_RED);
-        BSP_LCD_DisplayStringAt(0, 115, (uint8_t*)"FAILED to write!", CENTER_MODE);
-        BSP_LCD_DisplayStringAt(0, 130, (uint8_t*)"Press TAMPER button to end test", CENTER_MODE);
+        GUI_SetTextColor(GUI_COLOR_RED);
+        GUI_DisplayStringAt(0, 115, (uint8_t*)"FAILED to write!", CENTER_MODE);
+        GUI_DisplayStringAt(0, 130, (uint8_t*)"Press TAMPER button to end test", CENTER_MODE);
       }
     }
     else
     {
-      BSP_LCD_SetTextColor(LCD_COLOR_RED);
-      BSP_LCD_DisplayStringAt(0, 115, (uint8_t*)"Problem to communicate", CENTER_MODE);
-      BSP_LCD_DisplayStringAt(0, 130, (uint8_t*)"again with EEPROM", CENTER_MODE);
-      BSP_LCD_DisplayStringAt(0, 145, (uint8_t*)"Press TAMPER button to end test", CENTER_MODE);
+      GUI_SetTextColor(GUI_COLOR_RED);
+      GUI_DisplayStringAt(0, 115, (uint8_t*)"Problem to communicate", CENTER_MODE);
+      GUI_DisplayStringAt(0, 130, (uint8_t*)"again with EEPROM", CENTER_MODE);
+      GUI_DisplayStringAt(0, 145, (uint8_t*)"Press TAMPER button to end test", CENTER_MODE);
+    }
+    break;
+  case 2:
+    if(BSP_EEPROM_IsDeviceReady(0) == BSP_ERROR_NONE)
+    {
+      FillBuffer((uint8_t*)Tx2Buffer, 0xAA, EEPROM_PAGESIZE);
+
+      for(uint32_t i = 0; i < 2048; i++)
+      {
+      /* First write in the memory followed by a read of the written data ----*/
+      /* Write on EEPROM to EEPROM_WRITE_ADDRESS1 */
+      if (BSP_EEPROM_WritePage(0, (uint8_t*)Tx2Buffer, i) != BSP_ERROR_NONE)
+      {
+        GUI_SetTextColor(GUI_COLOR_RED);
+        GUI_DisplayStringAt(0, 115, (uint8_t*)"Init issue at write page", CENTER_MODE);
+        return;
+      }
+
+      /* Read from I2C EEPROM from EEPROM_READ_ADDRESS1 */
+      if (BSP_EEPROM_ReadPage(0, (uint8_t*)Rx1Buffer, i) != BSP_ERROR_NONE)
+      {
+        GUI_SetTextColor(GUI_COLOR_RED);
+        GUI_DisplayStringAt(0, 115, (uint8_t*)"Init issue at read page", CENTER_MODE);
+        return;
+      }
+
+      /* Check if the data written to the memory is read correctly */
+      TransferStatus1 = Buffercmp((uint8_t*)Tx2Buffer, (uint8_t*)Rx1Buffer, EEPROM_PAGESIZE);
+      if(TransferStatus1 != FAILED)
+      {
+        GUI_DisplayStringAt(0, 115, (uint8_t*)"String writes", CENTER_MODE);
+        GUI_DisplayStringAt(0, 130, (uint8_t*)"in the current EEPROM selected:", CENTER_MODE);
+        GUI_SetTextColor(GUI_COLOR_BLUE);
+        sprintf(text,"READ/WRITE PAGE %lu  SUCCEEDED", i);
+        GUI_DisplayStringAt(0, 160, (uint8_t*)text, CENTER_MODE);
+      }
+      else
+      {
+        GUI_SetTextColor(GUI_COLOR_RED);
+        sprintf(text,"READ/WRITE PAGE %lu  FAILED", i);
+        GUI_DisplayStringAt(0, 160, (uint8_t*)text, CENTER_MODE);
+        GUI_DisplayStringAt(0, 130, (uint8_t*)"Press TAMPER button to end test", CENTER_MODE);
+      }
+      }
+    }
+    else
+    {
+      GUI_SetTextColor(GUI_COLOR_RED);
+      GUI_DisplayStringAt(0, 115, (uint8_t*)"Problem to communicate", CENTER_MODE);
+      GUI_DisplayStringAt(0, 130, (uint8_t*)"again with EEPROM", CENTER_MODE);
+      GUI_DisplayStringAt(0, 145, (uint8_t*)"Press TAMPER button to end test", CENTER_MODE);
+    }
+
+    /* Tx1Buffer to the EEPROM */
+    if (BSP_EEPROM_WriteBuffer(0, (uint8_t*)Tx1Buffer, EEPROM_WRITE_ADDRESS1, BUFFER_SIZE) != BSP_ERROR_NONE)
+    {
+      GUI_SetTextColor(GUI_COLOR_RED);
+      GUI_DisplayStringAt(0, 115, (uint8_t*)"Issue to write Tx1Buffer", CENTER_MODE);
     }
     break;
   }
-}
-
-/**
-  * @brief  Basic management of the timeout situation.
-  * @param  None.
-  * @retval 0.
-  */
-void BSP_EEPROM_TIMEOUT_UserCallback(void)
-{
-  EepromDetected = 0;
 }
 
 /**
@@ -264,6 +322,16 @@ static TestStatus Buffercmp(uint8_t* pBuffer1, uint8_t* pBuffer2, uint16_t Buffe
 
   return PASSED;
 }
+
+static void FillBuffer(uint8_t* pBuffer1, uint16_t Index, uint16_t BufferLength)
+{
+  uint32_t i;
+  for(i = 0; i < BufferLength; i++)
+  {
+    pBuffer1[i] = Index + i;
+  }
+}
+
 /**
   * @}
   */

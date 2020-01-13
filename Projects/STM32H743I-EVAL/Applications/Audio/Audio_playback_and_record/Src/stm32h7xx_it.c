@@ -27,9 +27,6 @@
 /* Private variables ---------------------------------------------------------*/
 extern HCD_HandleTypeDef hhcd;
 /* SAI handler declared in "stm32h743i_eval_audio.c" file */
-extern SAI_HandleTypeDef haudio_out_sai;
-extern DFSDM_Filter_HandleTypeDef      hAudioInDfsdmFilter[];
-
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 
@@ -163,7 +160,7 @@ void OTG_HS_IRQHandler(void)
   */
 void AUDIO_OUT_SAIx_DMAx_IRQHandler(void)
 {
-  HAL_DMA_IRQHandler(haudio_out_sai.hdmatx);
+   BSP_AUDIO_OUT_IRQHandler(0);
 }
 
 
@@ -173,7 +170,7 @@ void AUDIO_OUT_SAIx_DMAx_IRQHandler(void)
   */
 void AUDIO_DFSDM_DMAx_MIC1_IRQHandler(void)
 {
-  HAL_DMA_IRQHandler(hAudioInDfsdmFilter[POS_VAL(INPUT_DEVICE_DIGITAL_MIC1)].hdmaReg);
+BSP_AUDIO_IN_IRQHandler(1, AUDIO_IN_DEVICE_DIGITAL_MIC1);
 }
 
 /**
@@ -182,7 +179,7 @@ void AUDIO_DFSDM_DMAx_MIC1_IRQHandler(void)
   */
 void AUDIO_DFSDM_DMAx_MIC2_IRQHandler(void)
 {
-  HAL_DMA_IRQHandler(hAudioInDfsdmFilter[POS_VAL(INPUT_DEVICE_DIGITAL_MIC2)].hdmaReg);
+  BSP_AUDIO_IN_IRQHandler(1, AUDIO_IN_DEVICE_DIGITAL_MIC2);
 }
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

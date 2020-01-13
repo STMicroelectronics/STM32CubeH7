@@ -34,7 +34,7 @@
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-extern SD_HandleTypeDef uSdHandle;
+extern SD_HandleTypeDef hsd_sdmmc[SD_INSTANCES_NBR];
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 

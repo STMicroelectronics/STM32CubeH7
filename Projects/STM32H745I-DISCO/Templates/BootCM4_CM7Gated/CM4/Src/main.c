@@ -65,14 +65,14 @@ int main(void)
   /* Enable CPU1 (CM7) boot regardless of option byte values */
   HAL_RCCEx_EnableBootCore(RCC_BOOT_C1);
 
- 
   /* Add Cortex-M4 user application code here */ 
-
-
+  BSP_LED_Init(LED2);
 
   /* Infinite loop */
   while (1)
   {
+    BSP_LED_Toggle(LED2);
+    HAL_Delay (1000);
   }
 }
 

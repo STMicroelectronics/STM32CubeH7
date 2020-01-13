@@ -410,8 +410,8 @@ static void QSPI_WriteEnable(QSPI_HandleTypeDef *hqspi)
   }
 
   /* Configure automatic polling mode to wait for write enabling */
-  s_config.Match           = 0x0202;
-  s_config.Mask            = 0x0202;
+  s_config.Match           = 0;
+  s_config.Mask            = 0x01|(0x01<<8);
   s_config.MatchMode       = QSPI_MATCH_MODE_AND;
   s_config.StatusBytesSize = 2;
   s_config.Interval        = 0x10;
@@ -477,7 +477,7 @@ static void QSPI_DummyCyclesCfg(QSPI_HandleTypeDef *hqspi)
   s_command.AddressMode       = QSPI_ADDRESS_NONE;
   s_command.AlternateByteMode = QSPI_ALTERNATE_BYTES_NONE;
   s_command.DataMode          = QSPI_DATA_1_LINE;
-  s_command.DummyCycles       = 0;
+  s_command.DummyCycles       = 5;
   s_command.NbData            = 2;
   s_command.DdrMode           = QSPI_DDR_MODE_DISABLE;
   s_command.DdrHoldHalfCycle  = QSPI_DDR_HHC_ANALOG_DELAY;

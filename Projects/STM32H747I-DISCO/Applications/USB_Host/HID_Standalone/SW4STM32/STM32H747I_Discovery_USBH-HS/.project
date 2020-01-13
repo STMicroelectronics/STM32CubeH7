@@ -32,9 +32,14 @@
 			<locationURI>PARENT-2-PROJECT_LOC/readme.txt</locationURI>
 		</link>
 		<link>
-			<name>Utilities/lcd_log.c</name>
+			<name>Utilities/basic_gui.c</name>
 			<type>1</type>
-			<locationURI>PARENT-7-PROJECT_LOC/Utilities/Log/lcd_log.c</locationURI>
+			<locationURI>PARENT-7-PROJECT_LOC/Utilities/Basic_GUI/basic_gui.c</locationURI>
+		</link>
+		<link>
+			<name>Utilities/lcd_trace.c</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Utilities/Lcd_Trace/lcd_trace.c</locationURI>
 		</link>
 		<link>
 			<name>Application/CM4/main.c</name>
@@ -130,6 +135,11 @@
 			<name>Drivers/STM32H7xx_HAL_Driver/stm32h7xx_hal_dsi.c</name>
 			<type>1</type>
 			<locationURI>PARENT-7-PROJECT_LOC/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_dsi.c</locationURI>
+		</link>
+		<link>
+			<name>Drivers/STM32H7xx_HAL_Driver/stm32h7xx_hal_exti.c</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_exti.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32H7xx_HAL_Driver/stm32h7xx_hal_flash.c</name>
@@ -242,24 +252,39 @@
 			<locationURI>PARENT-7-PROJECT_LOC/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_usb.c</locationURI>
 		</link>
 		<link>
+			<name>Drivers/BSP/Components/is42s32800j.c</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Drivers/BSP/Components/is42s32800j/is42s32800j.c</locationURI>
+		</link>
+		<link>
 			<name>Drivers/BSP/Components/otm8009a.c</name>
 			<type>1</type>
 			<locationURI>PARENT-7-PROJECT_LOC/Drivers/BSP/Components/otm8009a/otm8009a.c</locationURI>
 		</link>
 		<link>
+			<name>Drivers/BSP/Components/otm8009a_reg.c</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Drivers/BSP/Components/otm8009a/otm8009a_reg.c</locationURI>
+		</link>
+		<link>
 			<name>Drivers/BSP/STM32H747I_Discovery/stm32h747i_discovery.c</name>
 			<type>1</type>
-			<locationURI>PARENT-7-PROJECT_LOC/Drivers/BSP/STM32H747I-Discovery/stm32h747i_discovery.c</locationURI>
+			<locationURI>PARENT-7-PROJECT_LOC/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery.c</locationURI>
+		</link>
+		<link>
+			<name>Drivers/BSP/STM32H747I_Discovery/stm32h747i_discovery_bus.c</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_bus.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/BSP/STM32H747I_Discovery/stm32h747i_discovery_lcd.c</name>
 			<type>1</type>
-			<locationURI>PARENT-7-PROJECT_LOC/Drivers/BSP/STM32H747I-Discovery/stm32h747i_discovery_lcd.c</locationURI>
+			<locationURI>PARENT-7-PROJECT_LOC/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_lcd.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/BSP/STM32H747I_Discovery/stm32h747i_discovery_sdram.c</name>
 			<type>1</type>
-			<locationURI>PARENT-7-PROJECT_LOC/Drivers/BSP/STM32H747I-Discovery/stm32h747i_discovery_sdram.c</locationURI>
+			<locationURI>PARENT-7-PROJECT_LOC/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_sdram.c</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/STM32_USBH_Library/Core/usbh_core.c</name>

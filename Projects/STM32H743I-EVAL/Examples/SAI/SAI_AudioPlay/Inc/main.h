@@ -24,6 +24,8 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm32h7xx_hal.h"
 #include "stm32h743i_eval.h"
+#include "stm32h743i_eval_audio.h"
+#include "stm32h743i_eval_bus.h"
 #include "audio.h"
 #include "../Components/wm8994/wm8994.h"
 

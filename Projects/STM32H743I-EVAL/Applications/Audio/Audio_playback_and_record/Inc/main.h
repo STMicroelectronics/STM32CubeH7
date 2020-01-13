@@ -26,13 +26,18 @@
 #include "usbh_core.h"
 #include "stm32h7xx_hal.h"
 #include "stm32h743i_eval.h"
+#include "stm32h743i_eval_conf.h"
+#include "stm32h743i_eval_io.h"
 #include "stm32h743i_eval_audio.h"
 #include "stm32h743i_eval_ts.h"
-#include "lcd_log.h"
+#include "stm32h743i_eval_lcd.h"
+#include "stm32h743i_eval_sdram.h"
 #include "ff.h"    
 #include "ff_gen_drv.h"
 #include "usbh_diskio.h"
-
+#include "basic_gui.h"
+#include "lcd_trace.h"
+#include "utilities_conf.h"
 /* Exported Defines ----------------------------------------------------------*/
 #define AUDIO_OUT_BUFFER_SIZE                      8192
 #define AUDIO_IN_PCM_BUFFER_SIZE                   4*2304 /* buffer size in half-word */

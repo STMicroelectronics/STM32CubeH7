@@ -104,6 +104,7 @@ void Fill_Buffer(uint32_t *pBuffer, uint16_t BufferLength, uint32_t Offset);
 int main(void)
 {
   uint32_t index = 0;
+  BSP_IO_Init_t io_init_structure;
 
   /* Enable the CPU Cache */
   CPU_CACHE_Enable();
@@ -129,10 +130,12 @@ int main(void)
   UART_Config();
   
   /*##-2- Initialize IO functionalities (MFX) #####################*/
-  BSP_IO_Init(); 
+  /* Initialise Transciver MFXPIN to enable 1.8V Switch mode    */
+  io_init_structure.Pin  = IO_PIN_13;
+  io_init_structure.Pull = IO_PULLDOWN;
+  io_init_structure.Mode = IO_MODE_OUTPUT_PP;
   
-  /* Initialise Transciver MFXPIN to enable 1.8V Switch mode */
-  BSP_IO_ConfigPin(SD_LDO_SEL_PIN, IO_MODE_OUTPUT_PP_PU);
+  BSP_IO_Init(0, &io_init_structure); 
   
   /*##-3- Initialize SD instance #####################*/
   SDHandle.Instance = SDMMC1;
@@ -406,11 +409,11 @@ void HAL_SD_DriveTransciver_1_8V_Callback(FlagStatus status)
 {
   if(status == SET)
   {
-    BSP_IO_WritePin(IO_PIN_13, BSP_IO_PIN_SET);  
+    BSP_IO_WritePin(0, IO_PIN_13, IO_PIN_SET);  
   }
   else
   {
-    BSP_IO_WritePin(IO_PIN_13, BSP_IO_PIN_RESET);
+    BSP_IO_WritePin(0, IO_PIN_13, IO_PIN_RESET);
   }
 }
 

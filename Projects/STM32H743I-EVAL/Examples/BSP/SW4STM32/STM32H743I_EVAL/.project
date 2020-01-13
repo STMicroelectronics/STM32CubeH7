@@ -31,9 +31,9 @@
 			<locationURI>PARENT-2-PROJECT_LOC/readme.txt</locationURI>
 		</link>
 		<link>
-			<name>Utilities/lcd_log.c</name>
+			<name>Utilities/basic_gui.c</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/Utilities/Log/lcd_log.c</locationURI>
+			<locationURI>PARENT-6-PROJECT_LOC/Utilities/Basic_GUI/basic_gui.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/CMSIS/system_stm32h7xx.c</name>
@@ -195,6 +195,11 @@
 			<type>1</type>
 			<locationURI>PARENT-6-PROJECT_LOC/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_uart_ex.c</locationURI>
 		</link>
+			<link>
+			<name>Drivers/STM32H7xx_HAL_Driver/stm32h7xx_hal_exti.c</name>
+			<type>1</type>
+			<locationURI>PARENT-6-PROJECT_LOC/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_exti.c</locationURI>
+		</link>
 		<link>
 			<name>Drivers/STM32H7xx_HAL_Driver/stm32h7xx_hal_usart.c</name>
 			<type>1</type>
@@ -251,11 +256,6 @@
 			<locationURI>PARENT-2-PROJECT_LOC/Src/lcd.c</locationURI>
 		</link>
 		<link>
-			<name>Example/User/log.c</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/Src/log.c</locationURI>
-		</link>
-		<link>
 			<name>Example/User/main.c</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/Src/main.c</locationURI>
@@ -286,11 +286,6 @@
 			<locationURI>PARENT-2-PROJECT_LOC/Src/sdram.c</locationURI>
 		</link>
 		<link>
-			<name>Example/User/sdram_dma.c</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/Src/sdram_dma.c</locationURI>
-		</link>
-		<link>
 			<name>Example/User/sram.c</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/Src/sram.c</locationURI>
@@ -306,19 +301,24 @@
 			<locationURI>PARENT-2-PROJECT_LOC/Src/touchscreen.c</locationURI>
 		</link>
 		<link>
-			<name>Example/User/ts_calibration.c</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/Src/ts_calibration.c</locationURI>
-		</link>
-		<link>
 			<name>Drivers/BSP/Components/exc7200.c</name>
 			<type>1</type>
 			<locationURI>PARENT-6-PROJECT_LOC/Drivers/BSP/Components/exc7200/exc7200.c</locationURI>
 		</link>
 		<link>
+			<name>Drivers/BSP/Components/exc7200_reg.c</name>
+			<type>1</type>
+			<locationURI>PARENT-6-PROJECT_LOC/Drivers/BSP/Components/exc7200/exc7200_reg.c</locationURI>
+		</link>
+		<link>
 			<name>Drivers/BSP/Components/mfxstm32l152.c</name>
 			<type>1</type>
 			<locationURI>PARENT-6-PROJECT_LOC/Drivers/BSP/Components/mfxstm32l152/mfxstm32l152.c</locationURI>
+		</link>
+				<link>
+			<name>Drivers/BSP/Components/mfxstm32l152_reg.c</name>
+			<type>1</type>
+			<locationURI>PARENT-6-PROJECT_LOC/Drivers/BSP/Components/mfxstm32l152/mfxstm32l152_reg.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/BSP/Components/stmpe811.c</name>
@@ -326,69 +326,99 @@
 			<locationURI>PARENT-6-PROJECT_LOC/Drivers/BSP/Components/stmpe811/stmpe811.c</locationURI>
 		</link>
 		<link>
+			<name>Drivers/BSP/Components/is42s32800g.c</name>
+			<type>1</type>
+			<locationURI>PARENT-6-PROJECT_LOC/Drivers/BSP/Components/is42s32800g/is42s32800g.c</locationURI>
+		</link>
+		<link>
+			<name>Drivers/BSP/Components/mt25tl01g.c</name>
+			<type>1</type>
+			<locationURI>PARENT-6-PROJECT_LOC/Drivers/BSP/Components/mt25tl01g/mt25tl01g.c</locationURI>
+		</link>
+		<link>
 			<name>Drivers/BSP/Components/ts3510.c</name>
 			<type>1</type>
 			<locationURI>PARENT-6-PROJECT_LOC/Drivers/BSP/Components/ts3510/ts3510.c</locationURI>
+		</link>
+			<link>
+			<name>Drivers/BSP/Components/ts3510_reg.c</name>
+			<type>1</type>
+			<locationURI>PARENT-6-PROJECT_LOC/Drivers/BSP/Components/ts3510/ts3510_reg.c</locationURI>
+		</link>
+		<link>
+			<name>Drivers/BSP/Components/m24lr64.c</name>
+			<type>1</type>
+			<locationURI>PARENT-6-PROJECT_LOC/Drivers/BSP/Components/m24lr64/m24lr64.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/BSP/Components/wm8994.c</name>
 			<type>1</type>
 			<locationURI>PARENT-6-PROJECT_LOC/Drivers/BSP/Components/wm8994/wm8994.c</locationURI>
 		</link>
+				<link>
+			<name>Drivers/BSP/Components/wm8994_reg.c</name>
+			<type>1</type>
+			<locationURI>PARENT-6-PROJECT_LOC/Drivers/BSP/Components/wm8994/wm8994_reg.c</locationURI>
+		</link>
 		<link>
 			<name>Drivers/BSP/STM32H743I_EVAL/stm32h743i_eval.c</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/Drivers/BSP/STM32H743I_EVAL/stm32h743i_eval.c</locationURI>
+			<locationURI>PARENT-6-PROJECT_LOC/Drivers/BSP/STM32H743I-EVAL/stm32h743i_eval.c</locationURI>
+		</link>
+			<link>
+			<name>Drivers/BSP/STM32H743I_EVAL/stm32h743i_eval_bus.c</name>
+			<type>1</type>
+			<locationURI>PARENT-6-PROJECT_LOC/Drivers/BSP/STM32H743I-EVAL/stm32h743i_eval_bus.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/BSP/STM32H743I_EVAL/stm32h743i_eval_audio.c</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/Drivers/BSP/STM32H743I_EVAL/stm32h743i_eval_audio.c</locationURI>
+			<locationURI>PARENT-6-PROJECT_LOC/Drivers/BSP/STM32H743I-EVAL/stm32h743i_eval_audio.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/BSP/STM32H743I_EVAL/stm32h743i_eval_eeprom.c</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/Drivers/BSP/STM32H743I_EVAL/stm32h743i_eval_eeprom.c</locationURI>
+			<locationURI>PARENT-6-PROJECT_LOC/Drivers/BSP/STM32H743I-EVAL/stm32h743i_eval_eeprom.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/BSP/STM32H743I_EVAL/stm32h743i_eval_io.c</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/Drivers/BSP/STM32H743I_EVAL/stm32h743i_eval_io.c</locationURI>
+			<locationURI>PARENT-6-PROJECT_LOC/Drivers/BSP/STM32H743I-EVAL/stm32h743i_eval_io.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/BSP/STM32H743I_EVAL/stm32h743i_eval_lcd.c</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/Drivers/BSP/STM32H743I_EVAL/stm32h743i_eval_lcd.c</locationURI>
+			<locationURI>PARENT-6-PROJECT_LOC/Drivers/BSP/STM32H743I-EVAL/stm32h743i_eval_lcd.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/BSP/STM32H743I_EVAL/stm32h743i_eval_nor.c</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/Drivers/BSP/STM32H743I_EVAL/stm32h743i_eval_nor.c</locationURI>
+			<locationURI>PARENT-6-PROJECT_LOC/Drivers/BSP/STM32H743I-EVAL/stm32h743i_eval_nor.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/BSP/STM32H743I_EVAL/stm32h743i_eval_qspi.c</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/Drivers/BSP/STM32H743I_EVAL/stm32h743i_eval_qspi.c</locationURI>
+			<locationURI>PARENT-6-PROJECT_LOC/Drivers/BSP/STM32H743I-EVAL/stm32h743i_eval_qspi.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/BSP/STM32H743I_EVAL/stm32h743i_eval_sd.c</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/Drivers/BSP/STM32H743I_EVAL/stm32h743i_eval_sd.c</locationURI>
+			<locationURI>PARENT-6-PROJECT_LOC/Drivers/BSP/STM32H743I-EVAL/stm32h743i_eval_sd.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/BSP/STM32H743I_EVAL/stm32h743i_eval_sdram.c</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/Drivers/BSP/STM32H743I_EVAL/stm32h743i_eval_sdram.c</locationURI>
+			<locationURI>PARENT-6-PROJECT_LOC/Drivers/BSP/STM32H743I-EVAL/stm32h743i_eval_sdram.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/BSP/STM32H743I_EVAL/stm32h743i_eval_sram.c</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/Drivers/BSP/STM32H743I_EVAL/stm32h743i_eval_sram.c</locationURI>
+			<locationURI>PARENT-6-PROJECT_LOC/Drivers/BSP/STM32H743I-EVAL/stm32h743i_eval_sram.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/BSP/STM32H743I_EVAL/stm32h743i_eval_ts.c</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/Drivers/BSP/STM32H743I_EVAL/stm32h743i_eval_ts.c</locationURI>
+			<locationURI>PARENT-6-PROJECT_LOC/Drivers/BSP/STM32H743I-EVAL/stm32h743i_eval_ts.c</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>

@@ -45,11 +45,15 @@ FATFS USBDISK_FatFs;  /* File system object for USB Disk logical drive */
 FIL MyFile;           /* File object */
 char USB_Path[4];     /* USB Disk logical drive path */
 
-extern  DMA2D_HandleTypeDef hdma2d_eval;
+extern DMA2D_HandleTypeDef hlcd_dma2d;
 
 static uint32_t Radius = 2;
 static uint32_t x = 0, y = 0;
-static TS_StateTypeDef  TS_State;
+uint32_t x_size =0, y_size=0;
+static TS_State_t  TS_State;
+BSP_IO_Init_t Init;
+uint32_t ts_status = BSP_ERROR_NONE;
+TS_Init_t hTS;
 
 const uint32_t aBMPHeader1[14]=         
 {0x26E64D42, 0x0000000B, 0x00360000, 0x00280000, 0x02440000, 0x01A40000, 0x00010000, 
@@ -101,46 +105,35 @@ int main(void)
   /* Configure the system clock to 400 MHz */
   SystemClock_Config(); 
   
-  BSP_IO_Init();  
-  
   /* Configure LED1 and LED3 */
   BSP_LED_Init(LED1);
   BSP_LED_Init(LED3);
   
   /*##-1- LCD Initialization #################################################*/ 
   /* Initialize the LCD */
-  BSP_LCD_Init();
-  
-  /* Foreground Layer Initialization */
-  BSP_LCD_LayerDefaultInit(1, LCD_FRAME_BUFFER_LAYER1);
-  /* Set Foreground Layer */
-  BSP_LCD_SelectLayer(1);
-  /* Clear the LCD Foreground layer */
-  BSP_LCD_Clear(LCD_COLOR_WHITE);
-  /* Enable the color Key for foreground layer */   
-  BSP_LCD_SetColorKeying(1, LCD_COLOR_WHITE);
-  BSP_LCD_SetLayerVisible(1, DISABLE);
-  
+  BSP_LCD_Init(0, LCD_ORIENTATION_LANDSCAPE);
+  GUI_SetFuncDriver(&LCD_Driver);
   /* Background Layer Initialization */
-  BSP_LCD_LayerDefaultInit(0, LCD_FRAME_BUFFER_LAYER0);
   
   /* Set Foreground Layer */
-  BSP_LCD_SelectLayer(0);
+  GUI_SetLayer(0);
   
   /* Enable the LCD */
-  BSP_LCD_DisplayOn();
+  BSP_LCD_DisplayOn(0);
   
   /* Clear the LCD Background layer */
-  BSP_LCD_Clear(LCD_COLOR_WHITE);
+  GUI_Clear(GUI_COLOR_WHITE);
   
+  BSP_LCD_GetXSize(0, &x_size);
+  BSP_LCD_GetYSize(0, &y_size);
+
+  hTS.Width = x_size;
+  hTS.Height = y_size;
+  hTS.Orientation = TS_SWAP_NONE;
+  hTS.Accuracy = 0;
   /*##-2- Touch screen initialization ########################################*/
-  if(stmpe811_ts_drv.ReadID(TS_I2C_ADDRESS) == STMPE811_ID)
-  {
-    Touchscreen_Calibration();
-  }
-  
-  BSP_TS_Init(BSP_LCD_GetXSize(), BSP_LCD_GetYSize());
-  
+  BSP_TS_Init(0, &hTS);
+   
   /*##-3- USB Initialization #################################################*/ 
   
   /* Set the source of USB clock (PLL3*/
@@ -225,9 +218,9 @@ static void USBH_UserProcess(USBH_HandleTypeDef *phost, uint8_t id)
 static void GetPosition(void)
 {
   static uint32_t color_width;  
-  static uint32_t color;
-  
-  if (BSP_LCD_GetXSize() == 640)
+  static uint32_t color ;
+
+  if (x_size == 640)
   {
     color_width = 36;
   }
@@ -237,94 +230,86 @@ static void GetPosition(void)
   }
   
   /* Get Touch screen position */
-  BSP_TS_GetState(&TS_State); 
+  BSP_TS_GetState(0,&TS_State); 
   
   /* Read the coordinate */
-  if(stmpe811_ts_drv.ReadID(TS_I2C_ADDRESS) == STMPE811_ID)
-  {
-    x = Calibration_GetX(TS_State.x);
-    y = Calibration_GetX(TS_State.y);
-  }
-  else
-  {
-    x = TS_State.x;
-    y = TS_State.y;
-  }
+  x = TS_State.TouchX;
+  y = TS_State.TouchY;
   
-  if ((TS_State.TouchDetected) & (x > (67 + Radius)) & (y > (7 + Radius) ) & ( x < (BSP_LCD_GetXSize()-(7  + Radius )) ) & (y < (BSP_LCD_GetYSize()-(67 + Radius )) ))
+  if ((TS_State.TouchDetected) & (x > (67 + Radius)) & (y > (7 + Radius) ) & ( x < (x_size-(7  + Radius )) ) & (y < (y_size-(67 + Radius )) ))
   {
-    BSP_LCD_FillCircle((x), (y), Radius);
+    GUI_FillCircle((x), (y), Radius,GUI_GetTextColor());
   }
   else if ((TS_State.TouchDetected) & (x > 0 ) & ( x < 50 ))
   { 
     if ((TS_State.TouchDetected) & ( y > 0 ) & ( y < color_width ))
     {
-      BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
+      GUI_SetTextColor(GUI_COLOR_WHITE);
       Update_Size(Radius);
     }
     else if ((TS_State.TouchDetected) & ( y > color_width ) & (y < (2 * color_width)))
     {
-      BSP_LCD_SetTextColor(LCD_COLOR_YELLOW);
+      GUI_SetTextColor(GUI_COLOR_YELLOW);
       Update_Size(Radius);
     }
     else if ((TS_State.TouchDetected) & (y > (2 * color_width)) & (y < (3 * color_width)))
     {
-      BSP_LCD_SetTextColor(LCD_COLOR_ORANGE);
+      GUI_SetTextColor(GUI_COLOR_ORANGE);
       Update_Size(Radius);
     }
     else if ((TS_State.TouchDetected) & (y > (3 * color_width)) & (y < (4 * color_width)))
     {
-      BSP_LCD_SetTextColor(LCD_COLOR_LIGHTMAGENTA);
+      GUI_SetTextColor(GUI_COLOR_LIGHTMAGENTA);
       Update_Size(Radius);
     }
     else if ((TS_State.TouchDetected) & (y > (4 * color_width)) & (y < (5 * color_width)))
     {
-      BSP_LCD_SetTextColor(LCD_COLOR_DARKGREEN);
+      GUI_SetTextColor(GUI_COLOR_DARKGREEN);
       Update_Size(Radius);
     }
     else if ((TS_State.TouchDetected) & (y > (5 * color_width)) &(y < (6 * color_width)))
     {
-      BSP_LCD_SetTextColor(LCD_COLOR_GREEN);
+      GUI_SetTextColor(GUI_COLOR_GREEN);
       Update_Size(Radius);
     }
     else if ((TS_State.TouchDetected) & (y > (6 * color_width)) &(y < (7 * color_width)))
     {
-      BSP_LCD_SetTextColor(LCD_COLOR_BROWN);
+      GUI_SetTextColor(GUI_COLOR_BROWN);
       Update_Size(Radius);
     }
     else if ((TS_State.TouchDetected) & (y > (7 * color_width)) & (y < (8 * color_width)))
     {
-      BSP_LCD_SetTextColor(LCD_COLOR_RED);
+      GUI_SetTextColor(GUI_COLOR_RED);
       Update_Size(Radius);
     }
     else if ((TS_State.TouchDetected) & (y > (8 * color_width)) & (y < (9 * color_width)))
     {
-      BSP_LCD_SetTextColor(LCD_COLOR_DARKMAGENTA);
+      GUI_SetTextColor(GUI_COLOR_DARKMAGENTA);
       Update_Size(Radius);
     }
     else if ((TS_State.TouchDetected) & (y > (9 * color_width)) & (y < (10 * color_width)))
     {
-      BSP_LCD_SetTextColor(LCD_COLOR_CYAN);
+      GUI_SetTextColor(GUI_COLOR_CYAN);
       Update_Size(Radius);
     }
     else if ((TS_State.TouchDetected) & (y > (10 * color_width)) & (y < (11 * color_width)))
     {
-      BSP_LCD_SetTextColor(LCD_COLOR_DARKBLUE);
+      GUI_SetTextColor(GUI_COLOR_DARKBLUE);
       Update_Size(Radius);
     }
     else if ((TS_State.TouchDetected) & (y > (11 * color_width)) & (y < (12 * color_width)))
     {
-      BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
+      GUI_SetTextColor(GUI_COLOR_BLACK);
       Update_Size(Radius);
     }    
     else if ((TS_State.TouchDetected) &  (y > (12 * color_width)) & (y < (13 * color_width)))
     {
       /* Get the current text color */
-      color = BSP_LCD_GetTextColor();
-      BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
+      color = GUI_GetTextColor();
+      GUI_SetTextColor(GUI_COLOR_WHITE);
       /* Clear the working window */
-      BSP_LCD_FillRect(68, 8, (BSP_LCD_GetXSize() - 75), (BSP_LCD_GetYSize() - 75));
-      BSP_LCD_SetTextColor(color);
+      GUI_FillRect(68, 8, (x_size - 75), (y_size - 75), GUI_COLOR_WHITE);
+      GUI_SetTextColor(color);
     }
     else
     {
@@ -358,12 +343,12 @@ static void GetPosition(void)
     Radius = 2;
     Update_Size(Radius);
   }  
-  else if ((TS_State.TouchDetected) & (((x > (BSP_LCD_GetXSize()-5) ) & (y > (12 * color_width)) & (y < (13 * color_width))) | (( x < 55 ) & ( y < 5 ))))
+  else if ((TS_State.TouchDetected) & (((x > (x_size-5) ) & (y > (12 * color_width)) & (y < (13 * color_width))) | (( x < 55 ) & ( y < 5 ))))
   {    
-    TS_State.x = 0;
-    TS_State.y = 0;
+    TS_State.TouchX = 0;
+    TS_State.TouchY = 0;
   }  
-  else if ((TS_State.TouchDetected) & (x > 320) & (y > (BSP_LCD_GetYSize() - 50)) & (x < 370) & (y < BSP_LCD_GetYSize() ))
+  else if ((TS_State.TouchDetected) & (x > 320) & (y > (y_size - 50)) & (x < 370) & (y < y_size ))
   {   
     Save_Picture();
   }    
@@ -377,49 +362,54 @@ static void GetPosition(void)
 static void Draw_Menu(void)
 { 
   /* Set background Layer */
-  BSP_LCD_SelectLayer(0);
+  GUI_SetLayer(0);
   
 /* Clear the LCD */
-  BSP_LCD_Clear(LCD_COLOR_WHITE);  
+  GUI_Clear(GUI_COLOR_WHITE);  
 
-  if (BSP_LCD_GetXSize() == 640)
+
+
+  BSP_LCD_GetXSize(0, &x_size);
+  BSP_LCD_GetYSize(0, &y_size);
+  
+  if (x_size == 640)
   {  
     /* Draw color image */
-    BSP_LCD_DrawBitmap(0, 0, (uint8_t *)color);
+    BSP_LCD_DrawBitmap(0, 0, 0, (uint8_t *)color);
   }
   else
   {
     /* Draw color image */
-    BSP_LCD_DrawBitmap(0, 0, (uint8_t *)color2);
+    BSP_LCD_DrawBitmap(0, 0, 0, (uint8_t *)color2);
   }
   
   /* Draw save image */
-  BSP_LCD_DrawBitmap(310, (BSP_LCD_GetYSize() - 50), (uint8_t *)save);
+  GUI_DrawBitmap(310, (y_size - 50), (uint8_t *)save);
 
   /* Set Black as text color */
-  BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
+  GUI_SetTextColor(GUI_COLOR_BLACK);
   
   /* Draw working window */
-  BSP_LCD_DrawRect(61, 0, (BSP_LCD_GetXSize() - 61), (BSP_LCD_GetYSize() - 60));
-  BSP_LCD_DrawRect(63, 3, (BSP_LCD_GetXSize() - 66), (BSP_LCD_GetYSize() - 66));
-  BSP_LCD_DrawRect(65, 5, (BSP_LCD_GetXSize() - 70), (BSP_LCD_GetYSize() - 70));
-  BSP_LCD_DrawRect(67, 7, (BSP_LCD_GetXSize() - 74), (BSP_LCD_GetYSize() - 74));
+  GUI_DrawRect(61, 0, (x_size - 61), (y_size - 60), GUI_COLOR_BLACK);
+  GUI_DrawRect(63, 3, (x_size - 66), (y_size - 66), GUI_COLOR_BLACK);
+  GUI_DrawRect(65, 5, (x_size - 70), (y_size - 70), GUI_COLOR_BLACK);
+  GUI_DrawRect(67, 7, (x_size - 74), (y_size - 74), GUI_COLOR_BLACK);
   
   /* Draw size icons */
-  BSP_LCD_FillRect(60, (BSP_LCD_GetYSize() - 48), 250, 48);
-  BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
-  BSP_LCD_FillCircle(95, (BSP_LCD_GetYSize() - 24), 20);
-  BSP_LCD_FillCircle(145, (BSP_LCD_GetYSize() - 24), 15);
-  BSP_LCD_FillCircle(195, (BSP_LCD_GetYSize() - 24), 10);
-  BSP_LCD_FillCircle(245, (BSP_LCD_GetYSize() - 24), 5);
-  BSP_LCD_FillCircle(295, (BSP_LCD_GetYSize() - 24), 2);  
+  GUI_FillRect(60, (y_size - 48), 250, 48, GUI_COLOR_BLACK);
+  GUI_SetTextColor(GUI_COLOR_WHITE);
+  GUI_FillCircle(95, (y_size - 24), 20, GUI_COLOR_WHITE);
+  GUI_FillCircle(145, (y_size - 24), 15, GUI_COLOR_WHITE);
+  GUI_FillCircle(195, (y_size - 24), 10, GUI_COLOR_WHITE);
+  GUI_FillCircle(245, (y_size - 24), 5, GUI_COLOR_WHITE);
+  GUI_FillCircle(295, (y_size - 24), 2, GUI_COLOR_WHITE);  
   
-  BSP_LCD_SetTextColor(LCD_COLOR_DARKRED);
-  BSP_LCD_SetFont(&Font8);
-  BSP_LCD_DisplayStringAt(360, (BSP_LCD_GetYSize() - 55), (uint8_t *)"Selected Color  Size", LEFT_MODE);  
-  BSP_LCD_SetTextColor(LCD_COLOR_BLACK); 
-  BSP_LCD_FillRect(380, (BSP_LCD_GetYSize() - 40), 30, 30);  
-  BSP_LCD_FillCircle(450, (BSP_LCD_GetYSize()- 24), Radius); 
+  GUI_SetTextColor(GUI_COLOR_DARKRED);
+  GUI_SetFont(&Font8);
+  GUI_DisplayStringAt(360, (y_size - 55), (uint8_t *)"Selected Color  Size", LEFT_MODE);  
+  GUI_SetTextColor(GUI_COLOR_BLACK); 
+  GUI_FillRect(380, (y_size - 40), 30, 30, GUI_COLOR_BLACK);  
+  GUI_FillCircle(450, (y_size- 24), Radius, GUI_COLOR_BLACK); 
 }
 
 /**
@@ -431,40 +421,38 @@ void Save_Picture(void)
 { 
   FRESULT res1, res2;    /* FatFs function common result code */
   uint32_t byteswritten; /* File write count */
-  uint32_t sourceAddress = LCD_FRAME_BUFFER_LAYER0 + ((BSP_LCD_GetXSize() * (BSP_LCD_GetYSize() - 61) + 60) * 4);
+  uint32_t sourceAddress;
   uint32_t index = 0;
-  
-  /* Configure the DMA2D For ARGB8888 to RGB888 conversion */
-  hdma2d_eval.Init.Mode         = DMA2D_M2M_PFC;
-  hdma2d_eval.Init.ColorMode    = DMA2D_OUTPUT_RGB888;
-  hdma2d_eval.Init.OutputOffset = 0;     
+
+  GUI_SetTextColor(GUI_COLOR_DARKRED);
+  GUI_SetFont(&Font20);
+
+  sourceAddress = LCD_LAYER_0_ADDRESS + ((x_size * (y_size - 61) + 60) * 4);
+   
+  /* Configure the hlcd_dma2d For ARGB8888 to RGB888 conversion */
+  hlcd_dma2d.Init.Mode         = DMA2D_M2M_PFC;
+  hlcd_dma2d.Init.ColorMode    = DMA2D_OUTPUT_RGB888;
+  hlcd_dma2d.Init.OutputOffset = 0;     
   
   /* Foreground Configuration */
-  hdma2d_eval.LayerCfg[1].AlphaMode = DMA2D_NO_MODIF_ALPHA;
-  hdma2d_eval.LayerCfg[1].InputAlpha = 0xFF;
-  hdma2d_eval.LayerCfg[1].InputColorMode = DMA2D_INPUT_ARGB8888;
-  hdma2d_eval.LayerCfg[1].InputOffset = 0;
+  hlcd_dma2d.LayerCfg[1].AlphaMode = DMA2D_NO_MODIF_ALPHA;
+  hlcd_dma2d.LayerCfg[1].InputAlpha = 0xFF;
+  hlcd_dma2d.LayerCfg[1].InputColorMode = DMA2D_INPUT_ARGB8888;
+  hlcd_dma2d.LayerCfg[1].InputOffset = 0;
   
-  hdma2d_eval.Instance = DMA2D; 
-  
-  HAL_DMA2D_Init(&hdma2d_eval);
-  HAL_DMA2D_ConfigLayer(&hdma2d_eval, 1);
-  
-  BSP_LCD_SetLayerVisible(1, ENABLE);
-  BSP_LCD_SetColorKeying(1, LCD_COLOR_WHITE);
-  /* Set foreground Layer */
-  BSP_LCD_SelectLayer(1);
-  BSP_LCD_SetTextColor(LCD_COLOR_DARKRED);
-  BSP_LCD_SetFont(&Font20);
-  
+  hlcd_dma2d.Instance = DMA2D;   
   /* Turn LED1 and LED3 Off */
   BSP_LED_Off(LED1);
   BSP_LED_Off(LED3);
   
   if (Appli_state == APPLICATION_RUNNIG)
   {
-    BSP_LCD_DisplayStringAt(10, (BSP_LCD_GetYSize()-100), (uint8_t *)"Saving ... ", RIGHT_MODE);
+    GUI_DisplayStringAt(10, (y_size-40), (uint8_t *)"Saving ...", RIGHT_MODE);
     
+    HAL_DMA2D_DeInit(&hlcd_dma2d);
+    HAL_DMA2D_Init(&hlcd_dma2d);
+    HAL_DMA2D_ConfigLayer(&hlcd_dma2d, 1);
+
     /*##-2- Create and Open a new bmp file object with write access ##########*/
     if(f_open(&MyFile, "image.bmp", FA_CREATE_ALWAYS | FA_WRITE) != FR_OK)
     {
@@ -473,9 +461,9 @@ void Save_Picture(void)
     }
     else
     {
-      /*##-3- Write data to the BMP file #####################################*/
+       /*##-3- Write data to the BMP file #####################################*/
       /* Write the BMP header */
-      if (BSP_LCD_GetXSize() == 640)
+      if (x_size == 640)
       {  
         /* if ampire 640x480 LCD is used */
         res1 = f_write(&MyFile, (uint32_t *)aBMPHeader1, 54, (void *)&byteswritten);
@@ -484,77 +472,63 @@ void Save_Picture(void)
       {  
         /* if ampire 480x272 LCD is used */
         res1 = f_write(&MyFile, (uint32_t *)aBMPHeader2, 54, (void *)&byteswritten);
-      }        
+      }     
       
       /* Note that BMP file is organized as follow :
          -  first a header of 54 bytes
          - then pixels scan lines ordered from last line of the image to first one.
          It is then mandatory to reorder the image line from last line to first.
       */
-      for(index=0; index < (BSP_LCD_GetYSize() - 60); index++)
+      for(index=0; index < (y_size - 60); index++)
       {        
-        /* Convert a Line from ARGB8888 to RGB888 using the DMA2D */
-        if (HAL_DMA2D_Start(&hdma2d_eval, sourceAddress, CONVERTED_LINE_BUFFER, (BSP_LCD_GetXSize() - 60), 1) == HAL_OK)
+        /* Convert a Line from ARGB8888 to RGB888 using the hlcd_dma2d */
+        if (HAL_DMA2D_Start(&hlcd_dma2d, sourceAddress, CONVERTED_LINE_BUFFER, (x_size - 60), 1) == HAL_OK)
         {
           /* Polling For DMA transfer */  
-          HAL_DMA2D_PollForTransfer(&hdma2d_eval, 10);
+          HAL_DMA2D_PollForTransfer(&hlcd_dma2d, 25);
         }
         
-        /*As the DMA2D destiantion address is located in the D1 AXI-SRAM which 
-        is cacheable, it is necessary to invalidate the data cache the DMA2D transfer 
+        /*As the hlcd_dma2d destiantion address is located in the D1 AXI-SRAM which 
+        is cacheable, it is necessary to invalidate the data cache the hlcd_dma2d transfer 
         before saving these data to the bmp file using the CPU */
-        SCB_InvalidateDCache_by_Addr((uint32_t *)CONVERTED_LINE_BUFFER, ((BSP_LCD_GetXSize()-60)*3)); 
+        SCB_InvalidateDCache_by_Addr((uint32_t *)CONVERTED_LINE_BUFFER, ((x_size-60)*3)); 
         
         /* Save Converted line to the bmp file */
-        res2 = f_write(&MyFile, (uint32_t *)CONVERTED_LINE_BUFFER, ((BSP_LCD_GetXSize()-60)*3), (void *)&byteswritten);
+        res2 = f_write(&MyFile, (uint32_t *)CONVERTED_LINE_BUFFER, ((x_size-60)*3), (void *)&byteswritten);
         if((res2 != FR_OK) || (byteswritten == 0))
         {
           break;
         }
-        /* Upodate DMA2D source Address */
-        sourceAddress -= BSP_LCD_GetXSize()*4;
+        /* Upodate hlcd_dma2d source Address */
+        sourceAddress -= x_size*4;
       }
       
       if((res1 != FR_OK) || (res2 != FR_OK) || (byteswritten == 0))
       {
         /* 'image' file Write or EOF Error */
-        BSP_LED_On(LED3);
-        BSP_LCD_DisplayStringAt(10, (BSP_LCD_GetYSize()-100), (uint8_t *)" Aborted...", RIGHT_MODE);
+        GUI_DisplayStringAt(10, (y_size-40), (uint8_t *)" Aborted...", RIGHT_MODE);
         /* Wait for 2s */
         HAL_Delay(2000);
-        /* Disable the Layer 2 */
-        BSP_LCD_SetLayerVisible(1, DISABLE);
-        /* Select Layer 1 */
-        BSP_LCD_SelectLayer(0);
       }
       else
       {
         /*##-4- Close the open bmp file #####################################*/
         f_close(&MyFile);
-        
         /* Success of the demo: no error occurrence */
         BSP_LED_On(LED1);
-        BSP_LCD_SetTextColor(LCD_COLOR_DARKGREEN);
-        BSP_LCD_DisplayStringAt(10, (BSP_LCD_GetYSize()-100), (uint8_t *)" Saved     ", RIGHT_MODE);
+        GUI_SetTextColor(GUI_COLOR_DARKGREEN);
+        GUI_DisplayStringAt(10, (y_size-40), (uint8_t *)" Saved    ", RIGHT_MODE);
         /* Wait for 2s */
         HAL_Delay(2000);
-        /* Disable the Layer 2 */
-        BSP_LCD_SetLayerVisible(1, DISABLE);
-        /* Select Layer 1 */
-        BSP_LCD_SelectLayer(0);
       }
     }
   }
   else
   {
     /* USB not connected */
-    BSP_LCD_DisplayStringAt(10, (BSP_LCD_GetYSize()-100), (uint8_t *)"USB KO... ", RIGHT_MODE);
+    GUI_DisplayStringAt(10, (y_size-40), (uint8_t *)"USB KO... ", RIGHT_MODE);
     /* Wait for 2s */
     HAL_Delay(2000);
-    /* Disable the Layer 2 */
-    BSP_LCD_SetLayerVisible(1, DISABLE);
-    /* Select Layer 1 */
-    BSP_LCD_SelectLayer(0);
   }
 }
 
@@ -565,31 +539,12 @@ void Save_Picture(void)
   *         Being __weak it can be overwritten by the application
   * @retval None
   */
-void BSP_LCD_ClockConfig(LTDC_HandleTypeDef *hltdc, void *Params)
+
+
+HAL_StatusTypeDef MX_LTDC_ClockConfig(LTDC_HandleTypeDef *hltdc)
 {
   static RCC_PeriphCLKInitTypeDef  periph_clk_init_struct;
-
-  if(stmpe811_ts_drv.ReadID(TS_I2C_ADDRESS) == STMPE811_ID)
-  {
-    /* AMPIRE480272 LCD clock configuration */
-    /* LCD clock configuration */
-    /* PLL3_VCO Input = HSE_VALUE/PLL3M = 1 Mhz */
-    /* PLL3_VCO Output = PLL3_VCO Input * PLL3N = 336 Mhz */
-    /* PLLLCDCLK = PLL3_VCO Output/PLL3R = 336/37 = 9.08 Mhz */
-    /* LTDC clock frequency = PLLLCDCLK = 9.08 Mhz */
-    /* USB uses same pll3 as clock frequency and PLL3Q as devider: USB clock frequency = 48 Mhz */ 
-    periph_clk_init_struct.PeriphClockSelection = RCC_PERIPHCLK_LTDC;
-    periph_clk_init_struct.PLL3.PLL3M = 25;    
-    periph_clk_init_struct.PLL3.PLL3N = 336;
-    periph_clk_init_struct.PLL3.PLL3FRACN = 0;
-    periph_clk_init_struct.PLL3.PLL3P = 2;
-    periph_clk_init_struct.PLL3.PLL3Q = 7;  
-    periph_clk_init_struct.PLL3.PLL3R = 37;
-    HAL_RCCEx_PeriphCLKConfig(&periph_clk_init_struct);  
-  }
-  else
-  {
-
+  
     /* In case of double layers the bandwidth is arround 80MBytesPerSec => 20MHz (<25MHz) */
     /* so the PLL3R is configured to provide this clock */
     /* AMPIRE640480 LCD clock configuration */
@@ -605,8 +560,8 @@ void BSP_LCD_ClockConfig(LTDC_HandleTypeDef *hltdc, void *Params)
     periph_clk_init_struct.PLL3.PLL3FRACN = 0;
     periph_clk_init_struct.PLL3.PLL3P = 2;
     periph_clk_init_struct.PLL3.PLL3Q = 7;  
-    HAL_RCCEx_PeriphCLKConfig(&periph_clk_init_struct); 
-  }
+   return  HAL_RCCEx_PeriphCLKConfig(&periph_clk_init_struct); 
+  
 }
 
 /**
@@ -629,16 +584,16 @@ static void Error_Handler(void)
   * @retval None
   */
 static void Update_Color(void)
-{
+{ 
   static uint32_t color;
   
   /* Get the current text color */
-  color = BSP_LCD_GetTextColor();
+  color = GUI_GetTextColor();
   /* Update the selected color icon */
-  BSP_LCD_FillRect(380, (BSP_LCD_GetYSize()-40), 30, 30);
-  BSP_LCD_SetTextColor(LCD_COLOR_BLACK);    
-  BSP_LCD_DrawRect(380, (BSP_LCD_GetYSize()-40), 30, 30);
-  BSP_LCD_SetTextColor(color);  
+  GUI_FillRect(380, (y_size-40), 30, 30, color);
+  GUI_SetTextColor(GUI_COLOR_BLACK);    
+  GUI_DrawRect(380, (y_size-40), 30, 30, color);
+  GUI_SetTextColor(color); 
 }
 
 /**
@@ -649,17 +604,20 @@ static void Update_Color(void)
 static void Update_Size(uint8_t size)
 {
   static uint32_t color;
-  
+  uint32_t x_size, y_size;
+
+  BSP_LCD_GetXSize(0, &x_size);
+  BSP_LCD_GetYSize(0, &y_size);
   /* Get the current text color */ 
-  color = BSP_LCD_GetTextColor();
+  color = GUI_GetTextColor();
   /* Update the selected size icon */
-  BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
-  BSP_LCD_FillCircle(450, (BSP_LCD_GetYSize()-24), 20);
-  BSP_LCD_SetTextColor(color);  
-  BSP_LCD_FillCircle(450, (BSP_LCD_GetYSize()-24), size);
-  BSP_LCD_SetTextColor(LCD_COLOR_BLACK);    
-  BSP_LCD_DrawCircle(450, (BSP_LCD_GetYSize()-24), size);
-  BSP_LCD_SetTextColor(color);  
+  GUI_SetTextColor(GUI_COLOR_WHITE);
+  GUI_FillCircle(450, (y_size -24), 20, GUI_COLOR_WHITE);
+  GUI_SetTextColor(color);  
+  GUI_FillCircle(450, (y_size-24), size, GUI_COLOR_WHITE);
+  GUI_SetTextColor(GUI_COLOR_BLACK);    
+  GUI_DrawCircle(450, (y_size-24), size, GUI_COLOR_BLACK);
+  GUI_SetTextColor(color);  
 }
 
 /**
@@ -766,6 +724,7 @@ static void CPU_CACHE_Enable(void)
 }
 
 
+
 /**
   * @brief  Configure the MPU attributes as Write Through for External SDRAM.
   * @note   The Base Address is 0xD0000000 .
@@ -775,7 +734,7 @@ static void CPU_CACHE_Enable(void)
   */
 static void MPU_Config(void)
 {
-  MPU_Region_InitTypeDef MPU_InitStruct;
+MPU_Region_InitTypeDef MPU_InitStruct;
   
   /* Disable the MPU */
   HAL_MPU_Disable();

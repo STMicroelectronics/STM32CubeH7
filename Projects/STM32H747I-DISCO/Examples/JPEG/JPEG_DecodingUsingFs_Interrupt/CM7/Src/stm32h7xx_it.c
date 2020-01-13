@@ -34,7 +34,6 @@
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 extern JPEG_HandleTypeDef    JPEG_Handle;
-extern SD_HandleTypeDef uSdHandle;
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 
@@ -156,17 +155,6 @@ void SysTick_Handler(void)
 void JPEG_IRQHandler(void)
 {
   HAL_JPEG_IRQHandler(&JPEG_Handle);
-}
-
-/**
-* @brief  This function handles SDMMC interrupt request.
-* @param  None
-* @retval None
-*/
-void SDMMC1_IRQHandler(void)
-{
-
-  HAL_SD_IRQHandler(&uSdHandle);
 }
 
 /**

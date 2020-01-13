@@ -103,7 +103,6 @@ Connectivity, LwIP, Ethernet, Echo Server, Netconn, TCP/IP, FreeRTOS, DHCP
   - LwIP/LwIP_UDPTCP_Echo_Server_Netconn/Inc/stm32h7xx_it.h          STM32 interrupt handlers header file
   - LwIP/LwIP_UDPTCP_Echo_Server_Netconn/Inc/main.h                  Main program header file
   - LwIP/LwIP_UDPTCP_Echo_Server_Netconn/Inc/lwipopts.h              LwIP stack configuration options
-  - LwIP/LwIP_UDPTCP_Echo_Server_Netconn/Inc/lcd_log_conf.h          LCD Log configuration file
   - LwIP/LwIP_UDPTCP_Echo_Server_Netconn/Inc/FreeRTOSConfig.h        FreeRTOS configuration options
   - LwIP/LwIP_UDPTCP_Echo_Server_Netconn/Inc/tcpecho.h               header for tcpecho.c
   - LwIP/LwIP_UDPTCP_Echo_Server_Netconn/Inc/udpecho.h               header for udpecho.c

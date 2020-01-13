@@ -6,7 +6,7 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
+  * <h2><center>&copy; Copyright (c) 2018 STMicroelectronics.
   * All rights reserved.</center></h2>
   *
   * This software component is licensed by ST under BSD 3-Clause license,
@@ -26,16 +26,18 @@
 #include "string.h"
 #include "stm32h7xx_hal.h"
 #include "stm32h747i_eval.h"
+#include "stm32h747i_eval_bus.h"
 #include "stm32h747i_eval_lcd.h"
 #include "stm32h747i_eval_sd.h"
 #include "stm32h747i_eval_eeprom.h"
 #include "stm32h747i_eval_nor.h"
 #include "stm32h747i_eval_sram.h"
+#include "stm32h747i_eval_sdram.h"
 #include "stm32h747i_eval_io.h"
 #include "stm32h747i_eval_ts.h"
 #include "stm32h747i_eval_audio.h"
 #include "stm32h747i_eval_qspi.h"
-
+#include "../../../../../../Utilities/Basic_GUI/basic_gui.h"
 /* Exported types ------------------------------------------------------------*/
 typedef struct
 {
@@ -51,30 +53,41 @@ typedef enum {
   AUDIO_ERROR_EOF,
 }AUDIO_ErrorTypeDef;
 
+typedef enum {
+  TS_ACT_NONE = 0,
+  TS_ACT_FREQ_DOWN,
+  TS_ACT_FREQ_UP,
+  TS_ACT_VOLUME_DOWN,
+  TS_ACT_VOLUME_UP,
+  TS_ACT_PAUSE = 0xFE
+}TS_ActionTypeDef;
 /* Exported variables --------------------------------------------------------*/
 extern const unsigned char stlogo[];
-extern __IO uint32_t SRAMTest;
+extern __IO uint32_t AudioUpdate ;
+extern uint8_t FreqStr[256];
+extern uint32_t SdmmcTest;
+extern uint32_t SdramTest;
+extern uint32_t SdmmcTest;
+extern TS_Init_t hTS;
+extern TS_ActionTypeDef ts_action;
+extern uint32_t JoyStickDemo;
+extern uint32_t TouchScreenDemo;
+extern __IO uint32_t ButtonState;
+extern volatile uint8_t mfx_exti_received;
+extern uint32_t audio_Control;
 /* Exported constants --------------------------------------------------------*/
-
-
 /**
   * @brief  SDRAM Write read buffer start address after CAM Frame buffer
   * Assuming Camera frame buffer is of size 800x480 and format ARGB8888 (32 bits per pixel).
   */
 #define SDRAM_WRITE_READ_ADDR        ((uint32_t)0xD0177000)
 
-#define SDRAM_WRITE_READ_ADDR_OFFSET ((uint32_t)0x0800)
+#define SDRAM_WRITE_READ_ADDR_OFFSET ((uint32_t)0x0C00)
 
 /* Defines for the Audio playing process */
 #define PAUSE_STATUS     ((uint32_t)0x00) /* Audio Player in Pause Status */
 #define RESUME_STATUS    ((uint32_t)0x01) /* Audio Player in Resume Status */
 #define IDLE_STATUS      ((uint32_t)0x02) /* Audio Player in Idle Status */
-
-
-#define LED_GREEN      LED1
-#define LED_ORANGE      LED2
-#define LED_RED      LED3
-#define LED_BLUE      LED4
 
 #define AUDIO_REC_START_ADDR         SDRAM_WRITE_READ_ADDR
 #define AUDIO_REC_TOTAL_SIZE         ((uint32_t) 0x0000E000)
@@ -82,39 +95,48 @@ extern __IO uint32_t SRAMTest;
 
 /* The Audio file is flashed with ST-Link Utility @ flash address =  AUDIO_SRC_FILE_ADDRESS */
 #define AUDIO_SRC_FILE_ADDRESS       0x08080000   /* Audio file address in flash */
-#define AUDIO_FILE_SIZE              0x80000
 
-#define AUDIO_PLAY_SAMPLE        0
-#define AUDIO_PLAY_RECORDED      1
+#define SD_DMA_MODE      0U
+#define SD_IT_MODE       1U
+#define SD_POLLING_MODE  2U
 
 /* Exported macro ------------------------------------------------------------*/
 #define COUNT_OF_EXAMPLE(x)    (sizeof(x)/sizeof(BSP_DemoTypedef))
 
 /* Exported functions ------------------------------------------------------- */
-void     Touchscreen_demo1 (void);
-void     Touchscreen_demo2 (void);
 void LCD_demo (void);
-void Log_demo(void);
-void Joystick_demo (void);
-void EEPROM_demo (void);
-void TSENSOR_demo (void);
-void Touchscreen_demo(void);
-void AudioPlay_demo(void);
-void SD_demo(void);
-void NOR_demo(void);
-void SRAM_demo(void);
-void SRAM_DMA_demo (void);
-void Error_Handler(void);
-void SDRAM_demo(void);
-void SDRAM_DMA_demo (void);
-void AudioPlay_demo (void);
-void AudioRecord_demo(void);
-uint8_t AUDIO_Process(void);
+void Joystick_demo(void);
 void QSPI_demo (void);
-void POTENTIOMETER_demo (void);
-
+void AudioPlay_demo (void);
+void AudioPlay_demo2 (void);
+void REC_INSTANCE1_HDMI_demo(void);
+void REC_INSTANCE1_SingleBuff_demo(void);
+void REC_INSTANCE1_MultiBuff_demo(void);
+void REC_INSTANCE1_Mute_demo(void);
+void REC_INSTANCE1_SetDevice_demo(void);
+void REC_INSTANCE2_PDM_demo(void);
+void AudioRec_demo (void);
+void AudioRecAnalog_demo (void);
+void SRAM_demo (void);
+void SRAM_DMA_demo (void);
+void SDRAM_demo(void);
+void SDRAM_DMA_demo(void);
+void Touchscreen_demo1(void);
+void Touchscreen_demo2(void);
+void Touchscreen_demo3(void);
+uint8_t TouchScreen_GetTouchPosition(void);
+void Touchscreen_DrawBackground_Circles(uint8_t state);
+AUDIO_ErrorTypeDef AUDIO_Start(uint32_t *psrc_address, uint32_t file_size);
+void SD_DMA_demo(void);
+void SD_IT_demo(void);
+void SD_POLLING_demo(void);
+void NOR_demo (void);
+void NOR_HAL_demo (void);
 uint8_t CheckForUserInput(void);
-void Toggle_Leds(void);
+uint8_t AUDIO_Process(void);
+void EEPROM_demo (void);
+void POTENTIOMETER_demo (void);
+void Error_Handler(void);
 
 #endif /* __MAIN_H */
 

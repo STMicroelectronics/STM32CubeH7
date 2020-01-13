@@ -48,17 +48,8 @@ void Error_Handler(void);
   */
 int main(void)
 {
-  int32_t timeout;
   /* Configure the MPU attributes as Write Through */
   MPU_Config();
-
-  /* Wait until CPU2 boots and enters in stop mode or timeout*/
-  timeout = 0xFFFF;
-  while((__HAL_RCC_GET_FLAG(RCC_FLAG_D2CKRDY) != RESET) && (timeout-- > 0));
-  if ( timeout < 0 )
-  {
-    Error_Handler();
-  }
   
    /* STM32H7xx HAL library initialization:
      - Systick timer is configured by default as source of time base, but user
@@ -73,27 +64,7 @@ int main(void)
 
   /* Configure the system clock */
   SystemClock_Config();
-
-  /* When system initialization is finished, Cortex-M7 will release (wakeup) Cortex-M4  by means of
-  HSEM notification. Cortex-M4 release could be also ensured by any Domain D2 wakeup source (SEV,EXTI..).
-  */
-
-  /*HW semaphore Clock enable*/
-  __HAL_RCC_HSEM_CLK_ENABLE();
-
-  /*Take HSEM */
-  HAL_HSEM_FastTake(HSEM_ID_0);
-  /*Release HSEM in order to notify the CPU2(CM4)*/
-  HAL_HSEM_Release(HSEM_ID_0,0);
-
-  /* wait until CPU2 wakes up from stop mode */
-  timeout = 0xFFFF;
-  while((__HAL_RCC_GET_FLAG(RCC_FLAG_D2CKRDY) == RESET) && (timeout-- > 0));
-  if ( timeout < 0 )
-  {
-    Error_Handler();
-  }
-
+  
   /* Init Device Library */
   USBD_Init(&USBD_Device, &AUDIO_Desc, 0);
 
@@ -113,59 +84,60 @@ int main(void)
   }
 }
 
-/**
-  * @brief  Clock Config.
-  * @param  hsai: might be required to set audio peripheral predivider if any.
-  * @param  AudioFreq: Audio frequency used to play the audio stream.
-  * @note   This API is called by BSP_AUDIO_OUT_Init() and BSP_AUDIO_OUT_SetFrequency()
-  *         Being __weak it can be overwritten by the application
-  * @retval None
-  */
-void BSP_AUDIO_OUT_ClockConfig(SAI_HandleTypeDef * hsai, uint32_t AudioFreq,
-                               void *Params)
-{
-  RCC_PeriphCLKInitTypeDef rcc_ex_clk_init_struct;
 
-  HAL_RCCEx_GetPeriphCLKConfig(&rcc_ex_clk_init_struct);
-
-  /* Set the PLL configuration according to the audio frequency */
-  if ((AudioFreq == AUDIO_FREQUENCY_11K) || (AudioFreq == AUDIO_FREQUENCY_22K)
-      || (AudioFreq == AUDIO_FREQUENCY_44K))
-  {
-    /* SAI clock config */
-    /* Configure PLLSAI prescalers */
-    /* PLL2_VCO Input = HSE_VALUE/PLL2M = 1 Mhz */
-    /* PLL2_VCO Output = PLL2_VCO Input * PLL2N = 429 Mhz */
-    /* SAI_CLK_x = PLL2_VCO Output/PLL2P = 429/38 = 11.267 Mhz */
-    rcc_ex_clk_init_struct.PeriphClockSelection = RCC_PERIPHCLK_SAI1;
-    rcc_ex_clk_init_struct.Sai1ClockSelection = RCC_SAI1CLKSOURCE_PLL2;
-    rcc_ex_clk_init_struct.PLL2.PLL2P = 38;
-    rcc_ex_clk_init_struct.PLL2.PLL2Q = 1;
-    rcc_ex_clk_init_struct.PLL2.PLL2R = 1;
-    rcc_ex_clk_init_struct.PLL2.PLL2N = 429;
-    rcc_ex_clk_init_struct.PLL2.PLL2FRACN = 0;
-    rcc_ex_clk_init_struct.PLL2.PLL2M = 25;
-    HAL_RCCEx_PeriphCLKConfig(&rcc_ex_clk_init_struct);
-  }
-  else                          /* AUDIO_FREQUENCY_8K, AUDIO_FREQUENCY_16K, *
-                                 * AUDIO_FREQUENCY_48K, AUDIO_FREQUENCY_96K */
-  {
-    /* SAI clock config */
-    /* Configure PLLSAI prescalers */
-    /* PLL2_VCO Input = HSE_VALUE/PLL2M = 1 Mhz */
-    /* PLL2_VCO Output = PLL2_VCO Input * PLL2N = 344 Mhz */
-    /* SAI_CLK_x = PLL2_VCO Output/PLL2P = 344/7 = 49.333 Mhz */
-    rcc_ex_clk_init_struct.PeriphClockSelection = RCC_PERIPHCLK_SAI1;
-    rcc_ex_clk_init_struct.Sai1ClockSelection = RCC_SAI1CLKSOURCE_PLL2;
-    rcc_ex_clk_init_struct.PLL2.PLL2P = 7;
-    rcc_ex_clk_init_struct.PLL2.PLL2Q = 1;
-    rcc_ex_clk_init_struct.PLL2.PLL2R = 1;
-    rcc_ex_clk_init_struct.PLL2.PLL2N = 344;
-    rcc_ex_clk_init_struct.PLL2.PLL2FRACN = 0;
-    rcc_ex_clk_init_struct.PLL2.PLL2M = 25;
-    HAL_RCCEx_PeriphCLKConfig(&rcc_ex_clk_init_struct);
-  }
-}
+///**
+//  * @brief  Clock Config.
+//  * @param  hsai: might be required to set audio peripheral predivider if any.
+//  * @param  AudioFreq: Audio frequency used to play the audio stream.
+//  * @note   This API is called by BSP_AUDIO_OUT_Init() and BSP_AUDIO_OUT_SetFrequency()
+//  *         Being __weak it can be overwritten by the application     
+//  * @retval None
+//  */
+//void AUDIO_OUT_ClockConfig(SAI_HandleTypeDef * hsai, uint32_t AudioFreq,
+//                               void *Params)
+//{
+//  RCC_PeriphCLKInitTypeDef rcc_ex_clk_init_struct;
+//
+//  HAL_RCCEx_GetPeriphCLKConfig(&rcc_ex_clk_init_struct);
+//
+//  /* Set the PLL configuration according to the audio frequency */
+//  if ((AudioFreq == AUDIO_FREQUENCY_11K) || (AudioFreq == AUDIO_FREQUENCY_22K)
+//      || (AudioFreq == AUDIO_FREQUENCY_44K))
+//  {
+//    /* SAI clock config */
+//    /* Configure PLLSAI prescalers */
+//    /* PLL2_VCO Input = HSE_VALUE/PLL2M = 1 Mhz */
+//    /* PLL2_VCO Output = PLL2_VCO Input * PLL2N = 429 Mhz */
+//    /* SAI_CLK_x = PLL2_VCO Output/PLL2P = 429/38 = 11.267 Mhz */
+//    rcc_ex_clk_init_struct.PeriphClockSelection = RCC_PERIPHCLK_SAI1;
+//    rcc_ex_clk_init_struct.Sai1ClockSelection = RCC_SAI1CLKSOURCE_PLL2;
+//    rcc_ex_clk_init_struct.PLL2.PLL2P = 38;
+//    rcc_ex_clk_init_struct.PLL2.PLL2Q = 1;
+//    rcc_ex_clk_init_struct.PLL2.PLL2R = 1;
+//    rcc_ex_clk_init_struct.PLL2.PLL2N = 429;
+//    rcc_ex_clk_init_struct.PLL2.PLL2FRACN = 0;
+//    rcc_ex_clk_init_struct.PLL2.PLL2M = 25;
+//    HAL_RCCEx_PeriphCLKConfig(&rcc_ex_clk_init_struct);
+//  }
+//  else                          /* AUDIO_FREQUENCY_8K, AUDIO_FREQUENCY_16K, *
+//                                 * AUDIO_FREQUENCY_48K, AUDIO_FREQUENCY_96K */
+//  {
+//    /* SAI clock config */
+//    /* Configure PLLSAI prescalers */
+//    /* PLL2_VCO Input = HSE_VALUE/PLL2M = 1 Mhz */
+//    /* PLL2_VCO Output = PLL2_VCO Input * PLL2N = 344 Mhz */
+//    /* SAI_CLK_x = PLL2_VCO Output/PLL2P = 344/7 = 49.333 Mhz */
+//    rcc_ex_clk_init_struct.PeriphClockSelection = RCC_PERIPHCLK_SAI1;
+//    rcc_ex_clk_init_struct.Sai1ClockSelection = RCC_SAI1CLKSOURCE_PLL2;
+//    rcc_ex_clk_init_struct.PLL2.PLL2P = 7;
+//    rcc_ex_clk_init_struct.PLL2.PLL2Q = 1;
+//    rcc_ex_clk_init_struct.PLL2.PLL2R = 1;
+//    rcc_ex_clk_init_struct.PLL2.PLL2N = 344;
+//    rcc_ex_clk_init_struct.PLL2.PLL2FRACN = 0;
+//    rcc_ex_clk_init_struct.PLL2.PLL2M = 25;
+//    HAL_RCCEx_PeriphCLKConfig(&rcc_ex_clk_init_struct);
+//  }
+//}
 
 /**
   * @brief  System Clock Configuration

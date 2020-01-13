@@ -353,7 +353,7 @@
                     <state>$PROJ_DIR$/../CM7/Inc/</state>
                     <state>$PROJ_DIR$/../Common/Inc/</state>
                     <state>$PROJ_DIR$/../Common/Inc/openamp/</state>
-                    <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32H747I-Discovery</state>
+                    <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32H747I-DISCO</state>
                     <state>$PROJ_DIR$/../../../../../../Drivers/CMSIS/Include</state>
                     <state>$PROJ_DIR$/../../../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include</state>
                     <state>$PROJ_DIR$/../../../../../../Drivers/STM32H7xx_HAL_Driver/Inc</state>
@@ -2069,6 +2069,18 @@
     <group>
         <name>Application</name>
         <group>
+            <name>EWARM</name>
+            <file>
+                <name>$EW_DIR$\arm\src\lib\atomic\libatomic.c</name>
+                <excluded>
+                    <configuration>STM32H7_CM4_OpenAMP_PingPong</configuration>
+                </excluded>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\startup_stm32h747xx.s</name>
+            </file>
+        </group>
+        <group>
             <name>User</name>
             <group>
                 <name>CM4</name>
@@ -2107,18 +2119,6 @@
                 </file>
             </group>
         </group>
-        <group>
-            <name>EWARM</name>
-            <file>
-                <name>$EW_DIR$\arm\src\lib\atomic\libatomic.c</name>
-                <excluded>
-                    <configuration>STM32H7_CM4_OpenAMP_PingPong</configuration>
-                </excluded>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\startup_stm32h747xx.s</name>
-            </file>
-        </group>
     </group>
     <group>
         <name>Doc</name>
@@ -2131,7 +2131,7 @@
         <group>
             <name>BSP</name>
             <file>
-                <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32H747I-Discovery\stm32h747i_discovery.c</name>
+                <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32H747I-DISCO\stm32h747i_discovery.c</name>
             </file>
         </group>
         <group>

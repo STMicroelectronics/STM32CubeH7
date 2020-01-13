@@ -39,7 +39,7 @@ extern USBH_HandleTypeDef hUSBHost;
 #define MOUSE_RIGHT_DIR                 0x00
 
 #define MOUSE_WINDOW_X                  140
-#define MOUSE_WINDOW_Y                  70
+#define MOUSE_WINDOW_Y                  100
 #define MOUSE_WINDOW_X_MAX              181
 #define MOUSE_WINDOW_Y_MIN              101
 #define MOUSE_WINDOW_HEIGHT             80
@@ -50,7 +50,7 @@ extern USBH_HandleTypeDef hUSBHost;
 #define HID_MOUSE_BUTTON1_XCHORD        145
 #define HID_MOUSE_BUTTON2_XCHORD        225
 #define HID_MOUSE_BUTTON3_XCHORD        315
-#define HID_MOUSE_BUTTON_YCHORD         170
+#define HID_MOUSE_BUTTON_YCHORD         185
 
 #define MOUSE_LEFT_MOVE                  1
 #define MOUSE_RIGHT_MOVE                 2
@@ -81,7 +81,7 @@ void HID_MouseMenuProcess(void)
   {
   case HID_MOUSE_IDLE:
     hid_demo.mouse_state = HID_MOUSE_START;
-    BSP_LCD_ClearStringLine(18);
+    GUI_ClearStringLine(18);
     HID_SelectItem(DEMO_MOUSE_menu, 0);
     hid_demo.select = 0;
     prev_select = 0;
@@ -104,9 +104,9 @@ void HID_MouseMenuProcess(void)
           break;
 
         case 1:                /* Return */
-          LCD_LOG_ClearTextZone();
-          BSP_LCD_SetTextColor(LCD_COLOR_GREEN);
-          BSP_LCD_DisplayStringAtLine(18,
+          UTIL_LCD_TRACE_ClearTextZone();
+          GUI_SetTextColor(GUI_COLOR_GREEN);
+          GUI_DisplayStringAtLine(18,
                               (uint8_t *)
                               "Use [Joystick Left/Right] to scroll up/down");
           hid_demo.state = HID_DEMO_REENUMERATE;
@@ -138,23 +138,23 @@ void HID_MouseMenuProcess(void)
   */
 static void USR_MOUSE_Init(void)
 {
-  LCD_LOG_ClearTextZone();
-  BSP_LCD_SetTextColor(LCD_COLOR_YELLOW);
-  BSP_LCD_DisplayStringAtLine(4,
+  UTIL_LCD_TRACE_ClearTextZone();
+  GUI_SetTextColor(GUI_COLOR_YELLOW);
+  GUI_DisplayStringAtLine(4,
                               (uint8_t *)
                               "USB HID Host Mouse Demo...                     ");
-  BSP_LCD_SetTextColor(LCD_LOG_DEFAULT_COLOR);
+  GUI_SetTextColor(GUI_COLOR_WHITE);
 
   /* Display Mouse Window */
-  BSP_LCD_DrawRect(MOUSE_WINDOW_X, MOUSE_WINDOW_Y, MOUSE_WINDOW_WIDTH,
-                   MOUSE_WINDOW_HEIGHT);
+  GUI_DrawRect(MOUSE_WINDOW_X, MOUSE_WINDOW_Y, MOUSE_WINDOW_WIDTH,
+                   MOUSE_WINDOW_HEIGHT,GUI_COLOR_WHITE);
 
   HID_MOUSE_ButtonReleased(0);
   HID_MOUSE_ButtonReleased(1);
   HID_MOUSE_ButtonReleased(2);
 
-  BSP_LCD_SetTextColor(LCD_COLOR_GREEN);
-  BSP_LCD_SetBackColor(LCD_COLOR_BLACK);
+  GUI_SetTextColor(GUI_COLOR_GREEN);
+  GUI_SetBackColor(GUI_COLOR_BLACK);
 
   HID_MOUSE_UpdatePosition(0, 0);
 }
@@ -188,13 +188,13 @@ static void HID_MOUSE_UpdatePosition(int8_t x, int8_t y)
     x_loc += x / 2;
     y_loc += y / 10;
 
-    if (y_loc > MOUSE_WINDOW_HEIGHT - 12)
+    if (y_loc > MOUSE_WINDOW_HEIGHT - 21)
     {
-      y_loc = MOUSE_WINDOW_HEIGHT - 12;
+      y_loc = MOUSE_WINDOW_HEIGHT - 21;
     }
-    if (x_loc > MOUSE_WINDOW_WIDTH - 10)
+    if (x_loc > MOUSE_WINDOW_WIDTH - 15)
     {
-      x_loc = MOUSE_WINDOW_WIDTH - 10;
+      x_loc = MOUSE_WINDOW_WIDTH - 15;
     }
 
     if (y_loc < 2)
@@ -205,12 +205,12 @@ static void HID_MOUSE_UpdatePosition(int8_t x, int8_t y)
     {
       x_loc = 2;
     }
-    BSP_LCD_SetBackColor(LCD_COLOR_BLACK);
-    BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
-    BSP_LCD_DisplayChar(MOUSE_WINDOW_X + prev_x, MOUSE_WINDOW_Y + prev_y, 'x');
+    GUI_SetBackColor(GUI_COLOR_BLACK);
+    GUI_SetTextColor(GUI_COLOR_BLACK);
+    GUI_DisplayChar(MOUSE_WINDOW_X + prev_x, MOUSE_WINDOW_Y + prev_y, 'x');
 
-    BSP_LCD_SetTextColor(LCD_COLOR_GREEN);
-    BSP_LCD_DisplayChar(MOUSE_WINDOW_X + x_loc, MOUSE_WINDOW_Y + y_loc, 'x');
+    GUI_SetTextColor(GUI_COLOR_GREEN);
+    GUI_DisplayChar(MOUSE_WINDOW_X + x_loc, MOUSE_WINDOW_Y + y_loc, 'x');
 
     prev_x = x_loc;
     prev_y = y_loc;
@@ -225,28 +225,28 @@ static void HID_MOUSE_UpdatePosition(int8_t x, int8_t y)
 void HID_MOUSE_ButtonPressed(uint8_t button_idx)
 {
   /* Set the color for button press status */
-  BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
-  BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
+  GUI_SetTextColor(GUI_COLOR_BLUE);
+  GUI_SetBackColor(GUI_COLOR_BLUE);
 
   /* Change the color of button pressed to indicate button press */
   switch (button_idx)
   {
     /* Left Button Pressed */
   case 0:
-    BSP_LCD_FillRect(HID_MOUSE_BUTTON1_XCHORD, HID_MOUSE_BUTTON_YCHORD,
-                     HID_MOUSE_BUTTON_WIDTH, HID_MOUSE_BUTTON_HEIGHT);
+    GUI_FillRect(HID_MOUSE_BUTTON1_XCHORD, HID_MOUSE_BUTTON_YCHORD,
+                     HID_MOUSE_BUTTON_WIDTH, HID_MOUSE_BUTTON_HEIGHT,GUI_COLOR_BLUE);
     break;
 
     /* Right Button Pressed */
   case 1:
-    BSP_LCD_FillRect(HID_MOUSE_BUTTON2_XCHORD, HID_MOUSE_BUTTON_YCHORD,
-                     HID_MOUSE_BUTTON_WIDTH, HID_MOUSE_BUTTON_HEIGHT);
+    GUI_FillRect(HID_MOUSE_BUTTON2_XCHORD, HID_MOUSE_BUTTON_YCHORD,
+                     HID_MOUSE_BUTTON_WIDTH, HID_MOUSE_BUTTON_HEIGHT,GUI_COLOR_BLUE);
     break;
 
     /* Middle button Pressed */
   case 2:
-    BSP_LCD_FillRect(HID_MOUSE_BUTTON3_XCHORD, HID_MOUSE_BUTTON_YCHORD,
-                     HID_MOUSE_BUTTON_WIDTH, HID_MOUSE_BUTTON_HEIGHT);
+    GUI_FillRect(HID_MOUSE_BUTTON3_XCHORD, HID_MOUSE_BUTTON_YCHORD,
+                     HID_MOUSE_BUTTON_WIDTH, HID_MOUSE_BUTTON_HEIGHT,GUI_COLOR_BLUE);
     break;
   }
 }
@@ -259,28 +259,28 @@ void HID_MOUSE_ButtonPressed(uint8_t button_idx)
 void HID_MOUSE_ButtonReleased(uint8_t button_idx)
 {
   /* Set the color for release status */
-  BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
-  BSP_LCD_SetBackColor(LCD_COLOR_BLACK);
+  GUI_SetTextColor(GUI_COLOR_WHITE);
+  GUI_SetBackColor(GUI_COLOR_BLACK);
 
   /* Change the color of button released to default button color */
   switch (button_idx)
   {
     /* Left Button Released */
   case 0:
-    BSP_LCD_FillRect(HID_MOUSE_BUTTON1_XCHORD, HID_MOUSE_BUTTON_YCHORD,
-                     HID_MOUSE_BUTTON_WIDTH, HID_MOUSE_BUTTON_HEIGHT);
+    GUI_FillRect(HID_MOUSE_BUTTON1_XCHORD, HID_MOUSE_BUTTON_YCHORD,
+                     HID_MOUSE_BUTTON_WIDTH, HID_MOUSE_BUTTON_HEIGHT,GUI_COLOR_WHITE);
     break;
 
     /* Right Button Released */
   case 1:
-    BSP_LCD_FillRect(HID_MOUSE_BUTTON2_XCHORD, HID_MOUSE_BUTTON_YCHORD,
-                     HID_MOUSE_BUTTON_WIDTH, HID_MOUSE_BUTTON_HEIGHT);
+    GUI_FillRect(HID_MOUSE_BUTTON2_XCHORD, HID_MOUSE_BUTTON_YCHORD,
+                     HID_MOUSE_BUTTON_WIDTH, HID_MOUSE_BUTTON_HEIGHT,GUI_COLOR_WHITE);
     break;
 
     /* Middle Button Released */
   case 2:
-    BSP_LCD_FillRect(HID_MOUSE_BUTTON3_XCHORD, HID_MOUSE_BUTTON_YCHORD,
-                     HID_MOUSE_BUTTON_WIDTH, HID_MOUSE_BUTTON_HEIGHT);
+    GUI_FillRect(HID_MOUSE_BUTTON3_XCHORD, HID_MOUSE_BUTTON_YCHORD,
+                     HID_MOUSE_BUTTON_WIDTH, HID_MOUSE_BUTTON_HEIGHT,GUI_COLOR_WHITE);
     break;
   }
 }

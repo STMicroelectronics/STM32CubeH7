@@ -102,7 +102,7 @@ present example).
 
   - This example runs on STM32H747xx devices.
   
-  - This example has been tested with STM32H747I_DISCO rev.D board with SMPS (SD Convertor) power supply config and can be
+  - This example has been tested with STM32H747I_DISCO  board with SMPS (SD Convertor) power supply config and can be
     easily tailored to any other supported device and development board.
     
   - Generate pulses on PD12 (pin 10 on CN5 connector). (Connect a square waveform).    

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Release Notes for STM32 Connect Library</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="_htmresc/mini-st.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+  <link rel="icon" type="image/x-icon" href="_htmresc/favicon.png" />
+</head>
+<body>
+<div class="row">
+<div class="col-sm-12 col-lg-4">
+<div class="card fluid">
+<div class="sectione dark">
+<center>
+<h1 id="release-notes-for-stm32-connect-library"><small>Release Notes for</small> <mark>STM32 Connect Library</mark></h1>
+<p>Copyright © 2019 STMicroelectronics<br />
+Microcontrollers Division - Application Team</p>
+<a href="https://www.st.com" class="logo"><img src="_htmresc/st_logo.png" alt="ST logo" /></a>
+</center>
+</div>
+</div>
+<h1 id="license">License</h1>
+<p>Licensed under ST license SLA0044 (the “License”). You may not use this package except in compliance with the License.</p>
+<p>You may obtain a copy of the License at: <a href="http://www.st.com/software_license_agreement_liberty_v2">SLA0044 Software license agreement</a>.</p>
+<h1 id="purpose">Purpose</h1>
+<p>The <mark>STM32 Connect Library</mark> is an STM32 middleware providing an API to access network services on STM32 devices.</p>
+<p>It supports several network adapters and several protocols.</p>
+<p>This library aims at being used in any STM32Cube application requiring network services.</p>
+</div>
+<div class="col-sm-12 col-lg-8">
+<h1 id="update-history">Update History</h1>
+<div class="collapse">
+<input type="checkbox" id="collapse-section2" checked aria-hidden="false"> <label for="collapse-section2" aria-hidden="true">V1.0.4 / 2019-August-1</label>
+<div>
+<h2 id="main-changes">Main changes</h2>
+<ul>
+<li>Renamed STM32 Connectivity library as STM32 Network library</li>
+<li>Re-implement State management of network interface ,renamed states from INITIALIZED to READY , suppress some unused states</li>
+<li>Add and test support of embedded Inventek WIFI TLS socket</li>
+<li>Run MISRA checks</li>
+</ul>
+<h2 id="bug-fixes">Bug fixes</h2>
+<ul>
+<li>Fix missing semaphore on net_wait API</li>
+</ul>
+<h2 id="development-toolchains-and-compilers">Development Toolchains and Compilers</h2>
+<ul>
+<li>IAR Embedded Workbench for ARM (EWARM). Version 8.30.1.</li>
+<li>Keil Microcontroller Development Kit (MDK-ARM) Version 5.26.</li>
+<li>System Workbench for STM32. Version 2.8.1.</li>
+</ul>
+<h2 id="supported-devices-and-boards">Supported Devices and Boards</h2>
+<ul>
+<li>B-L475E-IOT01A board (MB1297 rev D).</li>
+<li>32F413HDISCOVERY board (MB1274 rev B).</li>
+<li>32F769IDISCOVERY board (MB1225 rev B).</li>
+<li>P-L496G-CELL02 board package including the 32L496G-Discovery board (MB1261 rev B) and the Cellular Add-on board based on BG96 4G Modem (MB1329 rev B)</li>
+</ul>
+<h2 id="known-limitations">Known Limitations</h2>
+<ul>
+<li>Cellular on P-L496G-CELL02:
+<ul>
+<li>Server sockets are not supported</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div class="collapse">
+<input type="checkbox" id="collapse-section2" checked aria-hidden="false"> <label for="collapse-section2" aria-hidden="true">V1.0.2 / 2019-06-07</label>
+<div>
+<h2 id="main-changes-1">Main changes</h2>
+<h3 id="bug-fixes-1">Bug fixes</h3>
+<ul>
+<li>Ethernet template: properly clear the “Receive buffer unavailable status” in case of RX descriptor underflow.</li>
+</ul>
+<h2 id="development-toolchains-and-compilers-1">Development Toolchains and Compilers</h2>
+<ul>
+<li>IAR Embedded Workbench for ARM (EWARM). Version 8.30.1.</li>
+<li>Keil Microcontroller Development Kit (MDK-ARM) Version 5.26.</li>
+<li>System Workbench for STM32. Version 2.8.1.</li>
+</ul>
+<h2 id="supported-devices-and-boards-1">Supported Devices and Boards</h2>
+<ul>
+<li>B-L475E-IOT01A board (MB1297 rev D).</li>
+<li>32F413HDISCOVERY board (MB1274 rev B).</li>
+<li>32F769IDISCOVERY board (MB1225 rev B).</li>
+<li>P-L496G-CELL02 board package including the 32L496G-Discovery board (MB1261 rev B) and the Cellular Add-on board based on BG96 4G Modem (MB1329 rev B)</li>
+</ul>
+<h2 id="known-limitations-1">Known Limitations</h2>
+<ul>
+<li>Cellular on P-L496G-CELL02:
+<ul>
+<li>Server sockets are not supported</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div class="collapse">
+<input type="checkbox" id="collapse-section1" aria-hidden="false"> <label for="collapse-section1" aria-hidden="true">V1.0.0 / 2019-04-26</label>
+<div>
+<h2 id="initial-version">Initial version</h2>
+<ul>
+<li>Features supported:
+<ul>
+<li>BSD socket like API</li>
+<li>Network interface control API (init, start, stop, …)</li>
+<li>TCP and UPD protocols</li>
+<li>Client and server connections</li>
+<li>DNS and ping services</li>
+<li>Secure socket on top of mbedTLS</li>
+<li>RTOS and bare metal applications are supported</li>
+<li>IPv4 address only is supported (IPv6 will be available in a future version)</li>
+<li>Wi-Fi, Ethernet and cellular connectivities</li>
+</ul></li>
+</ul>
+<h2 id="development-toolchains-and-compilers-2">Development Toolchains and Compilers</h2>
+<ul>
+<li>IAR Embedded Workbench for ARM (EWARM). Version 8.30.1.</li>
+<li>Keil Microcontroller Development Kit (MDK-ARM) Version 5.26.</li>
+<li>System Workbench for STM32. Version 2.8.1.</li>
+</ul>
+<h2 id="supported-devices-and-boards-2">Supported Devices and Boards</h2>
+<ul>
+<li>B-L475E-IOT01A board (MB1297 rev D).</li>
+<li>32F413HDISCOVERY board (MB1274 rev B).</li>
+<li>32F769IDISCOVERY board (MB1225 rev B).</li>
+<li>P-L496G-CELL02 board package including the 32L496G-Discovery board (MB1261 rev B) and the Cellular Add-on board based on BG96 4G Modem (MB1329 rev B)</li>
+</ul>
+<h2 id="known-limitations-2">Known Limitations</h2>
+<ul>
+<li>Cellular on P-L496G-CELL02:
+<ul>
+<li>UDP sockets are not supported</li>
+<li>Server sockets are not supported</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<footer class="sticky">
+For complete documentation on <mark>STM32</mark> microcontrollers please visit <a href="http://www.st.com/stm32" class="uri">http://www.st.com/stm32</a>
+</footer>
+</body>
+</html>

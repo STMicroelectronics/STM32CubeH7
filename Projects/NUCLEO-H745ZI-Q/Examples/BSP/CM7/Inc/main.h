@@ -22,11 +22,14 @@
 #define __MAIN_H
 
 /* Includes ------------------------------------------------------------------*/
-#include <stdio.h>
-#include <stdlib.h>
-#include "stm32h7xx_nucleo_144.h"
-#include "stm32_adafruit_sd.h"
-#include "stm32_adafruit_lcd.h"
+#include "stdio.h"
+#include "string.h"
+#include "adafruit_802.h"
+#include "adafruit_802_conf.h"
+#include "stm32h7xx_nucleo.h"
+#include "adafruit_802_sd.h"
+#include "adafruit_802_lcd.h"
+#include "basic_gui.h"
 
 /* Exported types ------------------------------------------------------------*/
 typedef struct
@@ -35,7 +38,7 @@ typedef struct
   uint8_t DemoName[30];
   uint32_t DemoIndex;
 }BSP_DemoTypedef;
-
+extern uint32_t ButtonState;
 extern const unsigned char stlogo[];
 
 /* Exported constants --------------------------------------------------------*/

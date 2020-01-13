@@ -34,8 +34,8 @@
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 extern DCMI_HandleTypeDef  hdcmi_discovery;
-extern DSI_HandleTypeDef hdsi_discovery; 
-extern DMA2D_HandleTypeDef hdma2d_discovery;
+extern DSI_HandleTypeDef hlcd_dsi; 
+extern DMA2D_HandleTypeDef hlcd_dma2d;
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 
@@ -145,9 +145,9 @@ void SysTick_Handler(void)
   * @param  None
   * @retval None
   */
-void BSP_CAMERA_DMA_IRQHandler(void)
+void DMA2_Stream3_IRQHandler(void)
 {
-  HAL_DMA_IRQHandler(hdcmi_discovery.DMA_Handle);
+  BSP_CAMERA_DMA_IRQHandler(0);
 }
 
 /**
@@ -155,9 +155,9 @@ void BSP_CAMERA_DMA_IRQHandler(void)
   * @param  None
   * @retval None
   */
-void BSP_CAMERA_IRQHandler(void)
+void CAMERA_IRQHandler(void)
 {
-  HAL_DCMI_IRQHandler(&hdcmi_discovery);
+  BSP_CAMERA_IRQHandler(0);
 }
 
 /**
@@ -167,12 +167,12 @@ void BSP_CAMERA_IRQHandler(void)
   */
 void DSI_IRQHandler(void)
 {
-  HAL_DSI_IRQHandler(&hdsi_discovery);
+  HAL_DSI_IRQHandler(&hlcd_dsi);
 }
 
 void DMA2D_IRQHandler(void)
 {
-  HAL_DMA2D_IRQHandler(&hdma2d_discovery);
+  HAL_DMA2D_IRQHandler(&hlcd_dma2d);
 }
 /******************************************************************************/
 /*                stm32H7xx  Peripherals Interrupt Handlers                   */

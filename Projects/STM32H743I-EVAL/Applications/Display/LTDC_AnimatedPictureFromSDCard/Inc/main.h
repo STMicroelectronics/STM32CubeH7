@@ -26,7 +26,7 @@
 #include "stm32h743i_eval_lcd.h"
 #include <stdlib.h>
 #include "fatfs_storage.h"
-
+#include "basic_gui.h"
 /* FatFs includes component */
 #include "ff_gen_drv.h"
 #include "sd_diskio.h"
@@ -35,7 +35,13 @@
 /* Exported constants --------------------------------------------------------*/
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */
+#define ARGB8888_BYTE_PER_PIXEL       4
+#define LCD_BG_LAYER_ADDRESS          LCD_LAYER_0_ADDRESS + (LCD_DEFAULT_WIDTH * LCD_DEFAULT_HEIGHT * ARGB8888_BYTE_PER_PIXEL)
+#define LTDC_ACTIVE_LAYER_BACKGROUND      ((uint32_t) 0)
 
+/** @brief LTDC Foreground layer index
+ */
+#define LTDC_ACTIVE_LAYER_FOREGROUND      ((uint32_t) 1)
 #endif /* __MAIN_H */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

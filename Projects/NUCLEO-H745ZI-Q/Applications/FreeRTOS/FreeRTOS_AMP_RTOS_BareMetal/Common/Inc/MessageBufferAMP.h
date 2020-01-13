@@ -55,11 +55,11 @@ StaticStreamBuffer_t xStreamBufferStruct __attribute__((at(0x38000004)));
 /* Defines the memory that will actually hold the streams within the stream buffer.*/
 static uint8_t ucStorageBuffer[ mbaTASK_MESSAGE_BUFFER_SIZE ]__attribute__((at(0x38000040)));
 #elif defined ( __GNUC__ )
-MessageBufferHandle_t xCoreMessageBuffer __attribute__((section(".xCoreMessageBuffer_section")));;
+MessageBufferHandle_t xCoreMessageBuffer __attribute__((section(".RAM_D3_Z1")));;
 /* The variable used to hold the stream buffer structure.*/
-StaticStreamBuffer_t xStreamBufferStruct __attribute__((section(".xStreamBufferStruct_section")));;
+StaticStreamBuffer_t xStreamBufferStruct __attribute__((section(".RAM_D3_Z2")));;
 /* Used to dimension the array used to hold the streams. */
 /* Defines the memory that will actually hold the streams within the stream buffer.*/
-static uint8_t ucStorageBuffer[ mbaTASK_MESSAGE_BUFFER_SIZE ]__attribute__((section(".ucStorageBuffer_section")));;
+static uint8_t ucStorageBuffer[ mbaTASK_MESSAGE_BUFFER_SIZE ]__attribute__((section(".RAM_D3_Z3")));;
 #endif
 #endif /* MESSAGE_BUFFER_AMP_H */

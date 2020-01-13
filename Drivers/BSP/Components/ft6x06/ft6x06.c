@@ -2,36 +2,18 @@
   ******************************************************************************
   * @file    ft6x06.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    03-August-2015
   * @brief   This file provides a set of functions needed to manage the FT6X06
   *          IO Expander devices.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.</center></h2>
   *
-  * Redistribution and use in source and binary forms, with or without modification,
-  * are permitted provided that the following conditions are met:
-  *   1. Redistributions of source code must retain the above copyright notice,
-  *      this list of conditions and the following disclaimer.
-  *   2. Redistributions in binary form must reproduce the above copyright notice,
-  *      this list of conditions and the following disclaimer in the documentation
-  *      and/or other materials provided with the distribution.
-  *   3. Neither the name of STMicroelectronics nor the names of its contributors
-  *      may be used to endorse or promote products derived from this software
-  *      without specific prior written permission.
-  *
-  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-  * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
-  * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-  * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-  * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-  * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  * This software component is licensed by ST under BSD 3-Clause license,
+  * the "License"; You may not use this file except in compliance with the
+  * License. You may obtain a copy of the License at:
+  *                        opensource.org/licenses/BSD-3-Clause
   *
   ******************************************************************************
   */
@@ -47,454 +29,499 @@
   * @{
   */
 
-/** @defgroup FT6X06
+/** @defgroup FT6X06 FT6X06
   * @{
   */
 
 /* Private typedef -----------------------------------------------------------*/
-
-/** @defgroup FT6X06_Private_Defines FT6X06 Private Defines
-  * @{
-  */
-#define FT6x06_MAX_INSTANCE  2
-/**
-  * @}
-  */
-
 /* Private macro -------------------------------------------------------------*/
-
-/** @defgroup FT6X06_Private_Variables FT6X06 Private Variables
+/** @defgroup FT6X06_Exported_Variables FT6X06 Exported Variables
   * @{
   */
 
 /* Touch screen driver structure initialization */
-TS_DrvTypeDef ft6x06_ts_drv =
+FT6X06_TS_Drv_t FT6X06_TS_Driver =
 {
-  ft6x06_Init,
-  ft6x06_ReadID,
-  ft6x06_Reset,
-
-  ft6x06_TS_Start,
-  ft6x06_TS_DetectTouch,
-  ft6x06_TS_GetXY,
-
-  ft6x06_TS_EnableIT,
-  ft6x06_TS_ClearIT,
-  ft6x06_TS_ITStatus,
-  ft6x06_TS_DisableIT
-
+  FT6X06_Init,
+  FT6X06_DeInit,
+  FT6X06_GestureConfig,
+  FT6X06_ReadID, 
+  FT6X06_GetState,
+  FT6X06_GetMultiTouchState,
+  FT6X06_GetGesture,
+  FT6X06_GetCapabilities,
+  FT6X06_EnableIT,
+  FT6X06_DisableIT,  
+  FT6X06_ClearIT,
+  FT6X06_ITStatus
 };
+/**
+  * @}
+  */
 
-/* ft6x06 instances by address */
-uint8_t ft6x06[FT6x06_MAX_INSTANCE] = {0};
-
-/* Global ft6x06 handle */
-static ft6x06_handle_TypeDef ft6x06_handle = { FT6206_I2C_NOT_INITIALIZED, 0, 0};
+/** @defgroup FT6X06_Private_Function_Prototypes FT6X06 Private Function Prototypes
+  * @{
+  */
+#if (FT6X06_AUTO_CALIBRATION_ENABLED == 1)
+static int32_t FT6X06_TS_Calibration(FT6X06_Object_t *pObj);
+static int32_t FT6X06_Delay(FT6X06_Object_t *pObj, uint32_t Delay);
+#endif /* FT6X06_AUTO_CALIBRATION_ENABLED == 1 */
+static int32_t FT6X06_DetectTouch(FT6X06_Object_t *pObj);
+static int32_t ReadRegWrap(void *handle, uint8_t Reg, uint8_t* Data, uint16_t Length);
+static int32_t WriteRegWrap(void *handle, uint8_t Reg, uint8_t* Data, uint16_t Length);
 
 /**
   * @}
   */
 
-/** @defgroup ft6x06_Private_Function_Prototypes ft6x06 Private Function Prototypes
+/** @defgroup FT6X06_Exported_Functions FT6X06 Exported Functions
   * @{
   */
-static uint8_t ft6x06_GetInstance(uint16_t DeviceAddr);
-/* Private functions prototypes-----------------------------------------------*/
-#if (TS_AUTO_CALIBRATION_SUPPORTED == 1)
+
+/**
+  * @brief  Register IO bus to component object
+  * @param  Component object pointer
+  * @retval error status
+  */
+int32_t FT6X06_RegisterBusIO (FT6X06_Object_t *pObj, FT6X06_IO_t *pIO)
+{
+  int32_t ret;
+  
+  if (pObj == NULL)
+  {
+    ret = FT6X06_ERROR;
+  }
+  else
+  {
+    pObj->IO.Init      = pIO->Init;
+    pObj->IO.DeInit    = pIO->DeInit;
+    pObj->IO.Address   = pIO->Address;
+    pObj->IO.WriteReg  = pIO->WriteReg;
+    pObj->IO.ReadReg   = pIO->ReadReg;
+    pObj->IO.GetTick   = pIO->GetTick;
+    
+    pObj->Ctx.ReadReg  = ReadRegWrap;
+    pObj->Ctx.WriteReg = WriteRegWrap;
+    pObj->Ctx.handle   = pObj;
+    
+    if(pObj->IO.Init != NULL)
+    {
+      ret = pObj->IO.Init();
+    }
+    else
+    {
+      ret = FT6X06_ERROR;
+    }
+  }    
+  
+  return ret;
+}
+
+/**
+  * @brief  Get FT6X06 sensor capabilities
+  * @param  pObj Component object pointer
+  * @param  Capabilities pointer to FT6X06 sensor capabilities
+  * @retval Component status
+  */
+int32_t FT6X06_GetCapabilities(FT6X06_Object_t *pObj, FT6X06_Capabilities_t *Capabilities)
+{
+  /* Prevent unused argument(s) compilation warning */  
+  (void)(pObj);
+  
+  /* Store component's capabilities */
+  Capabilities->MultiTouch = 1;
+  Capabilities->Gesture    = 0;  /* Gesture feature is currently not activated on FW chipset */
+  Capabilities->MaxTouch   = FT6X06_MAX_NB_TOUCH;
+  Capabilities->MaxXl      = FT6X06_MAX_X_LENGTH;
+  Capabilities->MaxYl      = FT6X06_MAX_Y_LENGTH;
+  
+  return FT6X06_OK;
+}
+
+/**
+  * @brief  Initialize the FT6X06 communication bus
+  *         from MCU to FT6X06 : ie I2C channel initialization (if required).
+  * @param  pObj Component object pointer
+  * @retval Component status
+  */
+int32_t FT6X06_Init(FT6X06_Object_t *pObj)
+{
+  int32_t ret = FT6X06_OK;
+  
+  if(pObj->IsInitialized == 0U)
+  {    
+    /* Initialize IO BUS layer */
+    pObj->IO.Init();
+    
+#if (FT6X06_AUTO_CALIBRATION_ENABLED == 1)
+    /* Hw Calibration sequence start : should be done once after each power up */
+    /* This is called internal calibration of the touch screen                 */
+    ret += FT6X06_TS_Calibration(pObj);
+#endif /* (FT6X06_AUTO_CALIBRATION_ENABLED == 1) */    
+    /* By default set FT6X06 IC in Polling mode : no INT generation on FT6X06 for new touch available */
+    /* Note TS_INT is active low                                                                      */
+    ret += FT6X06_DisableIT(pObj);
+    
+    pObj->IsInitialized = 1;
+  }
+  
+  if(ret != FT6X06_OK)
+  {
+    ret = FT6X06_ERROR;
+  }
+  
+  return ret;
+}
+
+/**
+  * @brief  De-Initialize the FT6X06 communication bus
+  *         from MCU to FT6X06 : ie I2C channel initialization (if required).
+  * @param  pObj Component object pointer
+  * @retval Component status
+  */
+int32_t FT6X06_DeInit(FT6X06_Object_t *pObj)
+{
+  if(pObj->IsInitialized == 1U)
+  {
+    pObj->IsInitialized = 0;
+  }
+  
+  return FT6X06_OK;
+}
+
+/**
+  * @brief  Configure the FT6X06 gesture
+  *         from MCU to FT6X06 : ie I2C channel initialization (if required).
+  * @param  pObj  Component object pointer
+  * @param  GestureInit Gesture init structure
+  * @retval Component status
+  */
+int32_t FT6X06_GestureConfig(FT6X06_Object_t *pObj, FT6X06_Gesture_Init_t *GestureInit)
+{
+  int32_t ret;
+  
+  ret = ft6x06_radian_value(&pObj->Ctx, (uint8_t)GestureInit->Radian);
+  ret += ft6x06_offset_left_right(&pObj->Ctx, (uint8_t)GestureInit->OffsetLeftRight);
+  ret += ft6x06_offset_up_down(&pObj->Ctx, (uint8_t)GestureInit->OffsetUpDown);
+  ret += ft6x06_disatnce_left_right(&pObj->Ctx, (uint8_t)GestureInit->DistanceLeftRight);
+  ret += ft6x06_distance_up_down(&pObj->Ctx, (uint8_t)GestureInit->DistanceUpDown);
+  ret += ft6x06_distance_zoom(&pObj->Ctx, (uint8_t)GestureInit->DistanceZoom);
+  
+  if(ret != FT6X06_OK)
+  {
+    ret = FT6X06_ERROR;
+  }
+  
+  return ret;   
+}
+
+/**
+  * @brief  Read the FT6X06 device ID, pre initialize I2C in case of need to be
+  *         able to read the FT6X06 device ID, and verify this is a FT6X06.
+  * @param  pObj Component object pointer
+  * @param  Id Pointer to component's ID
+  * @retval Component status
+  */
+int32_t FT6X06_ReadID(FT6X06_Object_t *pObj, uint32_t *Id)
+{
+  int32_t ret;
+  uint8_t ft6x06_id;
+
+  ret = ft6x06_chip_id(&pObj->Ctx, &ft6x06_id);
+  *Id = (uint32_t) ft6x06_id;
+
+  return ret;
+}
+
+/**
+  * @brief  Get the touch screen X and Y positions values
+  * @param  pObj Component object pointer
+  * @param  State Single Touch structure pointer
+  * @retval Component status.
+  */
+int32_t FT6X06_GetState(FT6X06_Object_t *pObj, FT6X06_State_t *State)
+{
+  int32_t ret = FT6X06_OK;
+  uint8_t  data[4];
+  
+  State->TouchDetected = (uint32_t)FT6X06_DetectTouch(pObj);
+  if(ft6x06_read_reg(&pObj->Ctx, FT6X06_P1_XH_REG, data, (uint16_t)sizeof(data)) != FT6X06_OK)
+  {
+    ret = FT6X06_ERROR;
+  }
+  else
+  {
+    /* Send back first ready X position to caller */
+    State->TouchX = (((uint32_t)data[0] & FT6X06_P1_XH_TP_BIT_MASK) << 8) | ((uint32_t)data[1] & FT6X06_P1_XL_TP_BIT_MASK);
+    /* Send back first ready Y position to caller */
+    State->TouchY = (((uint32_t)data[2] & FT6X06_P1_YH_TP_BIT_MASK) << 8) | ((uint32_t)data[3] & FT6X06_P1_YL_TP_BIT_MASK);
+  }
+  
+  return ret;
+}
+
+/**
+  * @brief  Get the touch screen Xn and Yn positions values in multi-touch mode
+  * @param  pObj Component object pointer
+  * @param  State Multi Touch structure pointer
+  * @retval Component status.
+  */
+int32_t FT6X06_GetMultiTouchState(FT6X06_Object_t *pObj, FT6X06_MultiTouch_State_t *State)
+{
+  int32_t ret = FT6X06_OK;  
+  uint8_t  data[12];
+  
+  State->TouchDetected = (uint32_t)FT6X06_DetectTouch(pObj);
+  
+  if(ft6x06_read_reg(&pObj->Ctx, FT6X06_P1_XH_REG, data, (uint16_t)sizeof(data)) != FT6X06_OK)
+  {
+    ret = FT6X06_ERROR;
+  }
+  else
+  {  
+    /* Send back first ready X position to caller */
+    State->TouchX[0] = (((uint32_t)data[0] & FT6X06_P1_XH_TP_BIT_MASK) << 8) | ((uint32_t)data[1] & FT6X06_P1_XL_TP_BIT_MASK);
+    /* Send back first ready Y position to caller */
+    State->TouchY[0] = (((uint32_t)data[2] & FT6X06_P1_YH_TP_BIT_MASK) << 8) | ((uint32_t)data[3] & FT6X06_P1_YL_TP_BIT_MASK);
+    /* Send back first ready Event to caller */  
+    State->TouchEvent[0] = (((uint32_t)data[0] & FT6X06_P1_XH_EF_BIT_MASK) >> FT6X06_P1_XH_EF_BIT_POSITION);
+    /* Send back first ready Weight to caller */  
+    State->TouchWeight[0] = ((uint32_t)data[4] & FT6X06_P1_WEIGHT_BIT_MASK);
+    /* Send back first ready Area to caller */  
+    State->TouchArea[0] = ((uint32_t)data[5] & FT6X06_P1_MISC_BIT_MASK) >> FT6X06_P1_MISC_BIT_POSITION;
+    
+    /* Send back first ready X position to caller */
+    State->TouchX[1] = (((uint32_t)data[6] & FT6X06_P2_XH_TP_BIT_MASK) << 8) | ((uint32_t)data[7] & FT6X06_P2_XL_TP_BIT_MASK);
+    /* Send back first ready Y position to caller */
+    State->TouchY[1] = (((uint32_t)data[8] & FT6X06_P2_YH_TP_BIT_MASK) << 8) | ((uint32_t)data[9] & FT6X06_P2_YL_TP_BIT_MASK);
+    /* Send back first ready Event to caller */  
+    State->TouchEvent[1] = (((uint32_t)data[6] & FT6X06_P2_XH_EF_BIT_MASK) >> FT6X06_P2_XH_EF_BIT_POSITION);
+    /* Send back first ready Weight to caller */  
+    State->TouchWeight[1] = ((uint32_t)data[10] & FT6X06_P2_WEIGHT_BIT_MASK);
+    /* Send back first ready Area to caller */  
+    State->TouchArea[1] = ((uint32_t)data[11] & FT6X06_P2_MISC_BIT_MASK) >> FT6X06_P2_MISC_BIT_POSITION;
+  }
+  
+  return ret;  
+}
+
+/**
+  * @brief  Get Gesture ID
+  * @param  pObj Component object pointer
+  * @param  GestureId gesture ID
+  * @retval Component status
+  */
+int32_t FT6X06_GetGesture(FT6X06_Object_t *pObj, uint8_t *GestureId)
+{  
+  return ft6x06_gest_id(&pObj->Ctx, GestureId);
+}
+
+/**
+  * @brief  Configure the FT6X06 device to generate IT on given INT pin
+  *         connected to MCU as EXTI.
+  * @param  pObj Component object pointer
+  * @retval Component status
+  */
+int32_t FT6X06_EnableIT(FT6X06_Object_t *pObj)
+{
+  return ft6x06_g_mode(&pObj->Ctx, FT6X06_G_MODE_INTERRUPT_TRIGGER);
+}
+
+/**
+  * @brief  Configure the FT6X06 device to stop generating IT on the given INT pin
+  *         connected to MCU as EXTI.
+  * @param  pObj Component object pointer
+  * @retval Component status
+  */
+int32_t FT6X06_DisableIT(FT6X06_Object_t *pObj)
+{
+  return ft6x06_g_mode(&pObj->Ctx, FT6X06_G_MODE_INTERRUPT_POLLING);
+}
+
+/**
+  * @brief  Get IT status from FT6X06 interrupt status registers
+  *         Should be called Following an EXTI coming to the MCU to know the detailed
+  *         reason of the interrupt.
+  *         @note : This feature is not supported by FT6X06.
+  * @param  pObj Component object pointer
+  * @retval Component status
+  */
+int32_t FT6X06_ITStatus(FT6X06_Object_t *pObj)
+{
+  /* Prevent unused argument(s) compilation warning */  
+  (void)(pObj);
+  
+  /* Always return FT6X06_OK as feature not supported by FT6X06 */
+  return FT6X06_OK;
+}
+
+/**
+  * @brief  Clear IT status in FT6X06 interrupt status clear registers
+  *         Should be called Following an EXTI coming to the MCU.
+  *         @note : This feature is not supported by FT6X06.
+  * @param  pObj Component object pointer
+  * @retval Component status
+  */
+int32_t FT6X06_ClearIT(FT6X06_Object_t *pObj)
+{
+  /* Prevent unused argument(s) compilation warning */  
+  (void)(pObj);
+  
+  /* Always return FT6X06_OK as feature not supported by FT6X06 */
+  return FT6X06_OK;
+}
+
+/**
+  * @}
+  */
+
+/** @defgroup FT6X06_Private_Functions FT6X06 Private Functions
+  * @{
+  */
+#if (FT6X06_AUTO_CALIBRATION_ENABLED == 1)
+/**
+  * @brief This function provides accurate delay (in milliseconds)
+  * @param pObj pointer to component object
+  * @param Delay specifies the delay time length, in milliseconds
+  * @retval Component status
+  */
+static int32_t FT6X06_Delay(FT6X06_Object_t *pObj, uint32_t Delay)
+{  
+  uint32_t tickstart;
+  tickstart = pObj->IO.GetTick();
+  while((pObj->IO.GetTick() - tickstart) < Delay)
+  {
+  }
+  return FT6X06_OK;
+}
+
 /**
   * @brief  Start TouchScreen calibration phase
-  * @param  DeviceAddr: FT6206 Device address for communication on I2C Bus.
-  * @retval Status FT6206_STATUS_OK or FT6206_STATUS_NOT_OK.
+  * @param pObj pointer to component object
+  * @retval Component status
   */
-static uint32_t ft6x06_TS_Calibration(uint16_t DeviceAddr);
-#endif /* TS_AUTO_CALIBRATION_SUPPORTED == 1 */
-
-/**
-  * @brief  Basic static configuration of TouchScreen
-  * @param  DeviceAddr: FT6206 Device address for communication on I2C Bus.
-  * @retval Status FT6206_STATUS_OK or FT6206_STATUS_NOT_OK.
-  */
-static uint32_t ft6x06_TS_Configure(uint16_t DeviceAddr);
-
-/**
-  * @}
-  */
-
-/** @defgroup ft6x06_Private_Functions ft6x06 Private Functions
-  * @{
-  */
-
-/**
-  * @brief  Initialize the ft6x06 communication bus
-  *         from MCU to FT6206 : ie I2C channel initialization (if required).
-  * @param  DeviceAddr: Device address on communication Bus (I2C slave address of FT6206).
-  * @retval None
-  */
-void ft6x06_Init(uint16_t DeviceAddr)
-{  
-  uint8_t instance;
-  uint8_t empty;
+static int32_t FT6X06_TS_Calibration(FT6X06_Object_t *pObj)
+{
+  int32_t ret = FT6X06_OK;
+  uint32_t nbr_attempt;
+  uint8_t read_data;
+  uint8_t end_calibration = 0;
   
-  /* Check if device instance already exists */
-  instance = ft6x06_GetInstance(DeviceAddr);
-  
-  /* To prevent double initialization */
-  if(instance == 0xFF)
+  /* Switch FT6X06 back to factory mode to calibrate */
+  if(ft6x06_dev_mode_w(&pObj->Ctx, FT6X06_DEV_MODE_FACTORY) != FT6X06_OK)
   {
-    /* Look for empty instance */
-    empty = ft6x06_GetInstance(0);
+    ret = FT6X06_ERROR;
+  }/* Read back the same register FT6X06_DEV_MODE_REG */
+  else if(ft6x06_dev_mode_r(&pObj->Ctx, &read_data) != FT6X06_OK)
+  {
+    ret = FT6X06_ERROR;
+  }
+  else
+  {
+    (void)FT6X06_Delay(pObj, 300); /* Wait 300 ms */
     
-    if(empty < FT6x06_MAX_INSTANCE)
+    if(read_data != FT6X06_DEV_MODE_FACTORY )
     {
-      /* Register the current device instance */
-      ft6x06[empty] = DeviceAddr;
-      
-      /* Initialize IO BUS layer */
-      TS_IO_Init(); 
+      /* Return error to caller */
+      ret = FT6X06_ERROR;
     }
-  }        
-}
-
-/**
-  * @brief  Software Reset the ft6x06.
-  *         @note : Not applicable to FT6206.
-  * @param  DeviceAddr: Device address on communication Bus (I2C slave address of FT6206).
-  * @retval None
-  */
-void ft6x06_Reset(uint16_t DeviceAddr)
-{
-  /* Do nothing */
-  /* No software reset sequence available in FT6206 IC */
-}
-
-/**
-  * @brief  Read the ft6x06 device ID, pre initialize I2C in case of need to be
-  *         able to read the FT6206 device ID, and verify this is a FT6206.
-  * @param  DeviceAddr: I2C FT6x06 Slave address.
-  * @retval The Device ID (two bytes).
-  */
-uint16_t ft6x06_ReadID(uint16_t DeviceAddr)
-{
-  /* Initialize I2C link if needed */
-  TS_IO_Init();
+    else
+    {
+      /* Start calibration command */
+      read_data= 0x04;
+      if(ft6x06_write_reg(&pObj->Ctx, FT6X06_TD_STAT_REG, &read_data, 1) != FT6X06_OK)
+      {
+        ret = FT6X06_ERROR;
+      }
+      else
+      {
+        (void)FT6X06_Delay(pObj, 300); /* Wait 300 ms */
+        
+        /* 100 attempts to wait switch from factory mode (calibration) to working mode */
+        for (nbr_attempt=0; ((nbr_attempt < 100U) && (end_calibration == 0U)) ; nbr_attempt++)
+        {
+          if(ft6x06_dev_mode_r(&pObj->Ctx, &read_data) != FT6X06_OK)
+          {
+            ret = FT6X06_ERROR;
+            break;
+          }
+          if(read_data == FT6X06_DEV_MODE_WORKING)
+          {
+            /* Auto Switch to FT6X06_DEV_MODE_WORKING : means calibration have ended */
+            end_calibration = 1; /* exit for loop */
+          }
+          
+          (void)FT6X06_Delay(pObj, 200); /* Wait 200 ms */
+        } 
+      }
+    }
+  }
   
-  /* Return the device ID value */
-  return (TS_IO_Read(DeviceAddr, FT6206_CHIP_ID_REG));
+  return ret;
 }
-
-/**
-  * @brief  Configures the touch Screen IC device to start detecting touches
-  *         It goes through an internal calibration process (Hw calibration sequence of
-  *         the touch screen).
-  * @param  DeviceAddr: Device address on communication Bus (I2C slave address).
-  * @retval None.
-  */
-void ft6x06_TS_Start(uint16_t DeviceAddr)
-{
-#if (TS_AUTO_CALIBRATION_SUPPORTED == 1)
-  /* Hw Calibration sequence start : should be done once after each power up */
-  /* This is called internal calibration of the touch screen                 */
-  ft6x06_TS_Calibration(DeviceAddr);
-#endif
-  /* Minimum static configuration of FT6206 */
-  ft6x06_TS_Configure(DeviceAddr);
-
-  /* By default set FT6206 IC in Polling mode : no INT generation on FT6206 for new touch available */
-  /* Note TS_INT is active low                                                                      */
-  ft6x06_TS_DisableIT(DeviceAddr);
-}
+#endif /* FT6X06_AUTO_CALIBRATION_ENABLED == 1 */
 
 /**
   * @brief  Return if there is touches detected or not.
   *         Try to detect new touches and forget the old ones (reset internal global
   *         variables).
-  * @param  DeviceAddr: Device address on communication Bus.
-  * @retval : Number of active touches detected (can be 0, 1 or 2).
+  * @param  pObj Component object pointer
+  * @retval Number of active touches detected (can be 0, 1 or 2) or FT6X06_ERROR
+  *         in case of error
   */
-uint8_t ft6x06_TS_DetectTouch(uint16_t DeviceAddr)
+static int32_t FT6X06_DetectTouch(FT6X06_Object_t *pObj)
 {
-  volatile uint8_t nbTouch = 0;
-
-  /* Read register FT6206_TD_STAT_REG to check number of touches detection */
-  nbTouch = TS_IO_Read(DeviceAddr, FT6206_TD_STAT_REG);
-  nbTouch &= FT6206_TD_STAT_MASK;
-
-  if(nbTouch > FT6206_MAX_DETECTABLE_TOUCH)
-  {
-    /* If invalid number of touch detected, set it to zero */
-    nbTouch = 0;
-  }
-
-  /* Update ft6x06 driver internal global : current number of active touches */
-  ft6x06_handle.currActiveTouchNb = nbTouch;
-
-  /* Reset current active touch index on which to work on */
-  ft6x06_handle.currActiveTouchIdx = 0;
-
-  return(nbTouch);
-}
-
-/**
-  * @brief  Get the touch screen X and Y positions values
-  *         Manage multi touch thanks to touch Index global
-  *         variable 'ft6x06_handle.currActiveTouchIdx'.
-  * @param  DeviceAddr: Device address on communication Bus.
-  * @param  X: Pointer to X position value
-  * @param  Y: Pointer to Y position value
-  * @retval None.
-  */
-void ft6x06_TS_GetXY(uint16_t DeviceAddr, uint16_t *X, uint16_t *Y)
-{
-  uint8_t regAddress = 0;
-  uint8_t  dataxy[4];
+  int32_t ret;
+  uint8_t nb_touch;
   
-  if(ft6x06_handle.currActiveTouchIdx < ft6x06_handle.currActiveTouchNb)
+  /* Read register FT6X06_TD_STAT_REG to check number of touches detection */
+  if(ft6x06_td_status(&pObj->Ctx, &nb_touch) != FT6X06_OK)
   {
-    switch(ft6x06_handle.currActiveTouchIdx)
+    ret = FT6X06_ERROR;
+  }
+  else
+  {
+    if(nb_touch > FT6X06_MAX_NB_TOUCH)
     {
-    case 0 :    
-      regAddress = FT6206_P1_XH_REG; 
-      break;
-    case 1 :
-      regAddress = FT6206_P2_XH_REG; 
-      break;
-
-    default :
-      break;
+      /* If invalid number of touch detected, set it to zero */
+      ret = 0;
     }
-    
-    /* Read X and Y positions */
-    TS_IO_ReadMultiple(DeviceAddr, regAddress, dataxy, sizeof(dataxy)); 
-
-    /* Send back ready X position to caller */
-    *X = ((dataxy[0] & FT6206_MSB_MASK) << 8) | (dataxy[1] & FT6206_LSB_MASK);
-    
-    /* Send back ready Y position to caller */
-    *Y = ((dataxy[2] & FT6206_MSB_MASK) << 8) | (dataxy[3] & FT6206_LSB_MASK);
-    
-    ft6x06_handle.currActiveTouchIdx++;
-  }
-}
-
-/**
-  * @brief  Configure the FT6206 device to generate IT on given INT pin
-  *         connected to MCU as EXTI.
-  * @param  DeviceAddr: Device address on communication Bus (Slave I2C address of FT6206).
-  * @retval None
-  */
-void ft6x06_TS_EnableIT(uint16_t DeviceAddr)
-{
-  uint8_t regValue = 0;
-  regValue = (FT6206_G_MODE_INTERRUPT_TRIGGER & (FT6206_G_MODE_INTERRUPT_MASK >> FT6206_G_MODE_INTERRUPT_SHIFT)) << FT6206_G_MODE_INTERRUPT_SHIFT;
-  
-  /* Set interrupt trigger mode in FT6206_GMODE_REG */
-  TS_IO_Write(DeviceAddr, FT6206_GMODE_REG, regValue);
-}
-
-/**
-  * @brief  Configure the FT6206 device to stop generating IT on the given INT pin
-  *         connected to MCU as EXTI.
-  * @param  DeviceAddr: Device address on communication Bus (Slave I2C address of FT6206).
-  * @retval None
-  */
-void ft6x06_TS_DisableIT(uint16_t DeviceAddr)
-{
-  uint8_t regValue = 0;
-  regValue = (FT6206_G_MODE_INTERRUPT_POLLING & (FT6206_G_MODE_INTERRUPT_MASK >> FT6206_G_MODE_INTERRUPT_SHIFT)) << FT6206_G_MODE_INTERRUPT_SHIFT;
-
-  /* Set interrupt polling mode in FT6206_GMODE_REG */
-  TS_IO_Write(DeviceAddr, FT6206_GMODE_REG, regValue);
-}
-
-/**
-  * @brief  Get IT status from FT6206 interrupt status registers
-  *         Should be called Following an EXTI coming to the MCU to know the detailed
-  *         reason of the interrupt.
-  *         @note : This feature is not applicable to FT6206.
-  * @param  DeviceAddr: Device address on communication Bus (I2C slave address of FT6206).
-  * @retval TS interrupts status : always return 0 here
-  */
-uint8_t ft6x06_TS_ITStatus(uint16_t DeviceAddr)
-{
-  /* Always return 0 as feature not applicable to FT6206 */
-  return 0;
-}
-
-/**
-  * @brief  Clear IT status in FT6206 interrupt status clear registers
-  *         Should be called Following an EXTI coming to the MCU.
-  *         @note : This feature is not applicable to FT6206.
-  * @param  DeviceAddr: Device address on communication Bus (I2C slave address of FT6206).
-  * @retval None
-  */
-void ft6x06_TS_ClearIT(uint16_t DeviceAddr)
-{
-  /* Nothing to be done here for FT6206 */
-}
-
-/**** NEW FEATURES enabled when Multi-touch support is enabled ****/
-
-#if (TS_MULTI_TOUCH_SUPPORTED == 1)
-
-/**
-  * @brief  Get the last touch gesture identification (zoom, move up/down...).
-  * @param  DeviceAddr: Device address on communication Bus (I2C slave address of FT6x06).
-  * @param  pGestureId : Pointer to get last touch gesture Identification.
-  * @retval None.
-  */
-void ft6x06_TS_GetGestureID(uint16_t DeviceAddr, uint32_t * pGestureId)
-{
-  volatile uint8_t ucReadData = 0;
-
-  ucReadData = TS_IO_Read(DeviceAddr, FT6206_GEST_ID_REG);
-
-  * pGestureId = ucReadData;
-}
-
-/**
-  * @brief  Get the touch detailed informations on touch number 'touchIdx' (0..1)
-  *         This touch detailed information contains :
-  *         - weight that was applied to this touch
-  *         - sub-area of the touch in the touch panel
-  *         - event of linked to the touch (press down, lift up, ...)
-  * @param  DeviceAddr: Device address on communication Bus (I2C slave address of FT6x06).
-  * @param  touchIdx : Passed index of the touch (0..1) on which we want to get the
-  *                    detailed information.
-  * @param  pWeight : Pointer to to get the weight information of 'touchIdx'.
-  * @param  pArea   : Pointer to to get the sub-area information of 'touchIdx'.
-  * @param  pEvent  : Pointer to to get the event information of 'touchIdx'.
-
-  * @retval None.
-  */
-void ft6x06_TS_GetTouchInfo(uint16_t   DeviceAddr,
-                            uint32_t   touchIdx,
-                            uint32_t * pWeight,
-                            uint32_t * pArea,
-                            uint32_t * pEvent)
-{
-  uint8_t regAddress = 0;
-  uint8_t dataxy[3];
-  
-  if(touchIdx < ft6x06_handle.currActiveTouchNb)
-  {
-    switch(touchIdx)
+    else
     {
-    case 0 : 
-      regAddress = FT6206_P1_WEIGHT_REG;
-      break;
-      
-    case 1 :
-      regAddress = FT6206_P2_WEIGHT_REG;
-      break;
-      
-    default :
-      break;
-      
-    } /* end switch(touchIdx) */
-    
-    /* Read weight, area and Event Id of touch index */
-    TS_IO_ReadMultiple(DeviceAddr, regAddress, dataxy, sizeof(dataxy)); 
-    
-    /* Return weight of touch index */
-    * pWeight = (dataxy[0] & FT6206_TOUCH_WEIGHT_MASK) >> FT6206_TOUCH_WEIGHT_SHIFT;
-    /* Return area of touch index */
-    * pArea = (dataxy[1] & FT6206_TOUCH_AREA_MASK) >> FT6206_TOUCH_AREA_SHIFT;
-    /* Return Event Id  of touch index */
-    * pEvent = (dataxy[2] & FT6206_TOUCH_EVT_FLAG_MASK) >> FT6206_TOUCH_EVT_FLAG_SHIFT;
-    
-  } /* of if(touchIdx < ft6x06_handle.currActiveTouchNb) */
-}
-
-#endif /* TS_MULTI_TOUCH_SUPPORTED == 1 */
-
-#if (TS_AUTO_CALIBRATION_SUPPORTED == 1)
-/**
-  * @brief  Start TouchScreen calibration phase
-  * @param  DeviceAddr: FT6206 Device address for communication on I2C Bus.
-  * @retval Status FT6206_STATUS_OK or FT6206_STATUS_NOT_OK.
-  */
-static uint32_t ft6x06_TS_Calibration(uint16_t DeviceAddr)
-{
-  uint32_t nbAttempt = 0;
-  volatile uint8_t ucReadData;
-  volatile uint8_t regValue;
-  uint32_t status = FT6206_STATUS_OK;
-  uint8_t bEndCalibration = 0;
-
-  /* >> Calibration sequence start */
-
-  /* Switch FT6206 back to factory mode to calibrate */
-  regValue = (FT6206_DEV_MODE_FACTORY & FT6206_DEV_MODE_MASK) << FT6206_DEV_MODE_SHIFT;
-  TS_IO_Write(DeviceAddr, FT6206_DEV_MODE_REG, regValue); /* 0x40 */
-
-  /* Read back the same register FT6206_DEV_MODE_REG */
-  ucReadData = TS_IO_Read(DeviceAddr, FT6206_DEV_MODE_REG);
-  TS_IO_Delay(300); /* Wait 300 ms */
-
-  if(((ucReadData & (FT6206_DEV_MODE_MASK << FT6206_DEV_MODE_SHIFT)) >> FT6206_DEV_MODE_SHIFT) != FT6206_DEV_MODE_FACTORY )
-  {
-    /* Return error to caller */
-    return(FT6206_STATUS_NOT_OK);
-  }
-
-  /* Start calibration command */
-  TS_IO_Write(DeviceAddr, FT6206_TD_STAT_REG, 0x04);
-  TS_IO_Delay(300); /* Wait 300 ms */
-
-  /* 100 attempts to wait switch from factory mode (calibration) to working mode */
-  for (nbAttempt=0; ((nbAttempt < 100) && (!bEndCalibration)) ; nbAttempt++)
-  {
-    ucReadData = TS_IO_Read(DeviceAddr, FT6206_DEV_MODE_REG);
-    ucReadData = (ucReadData & (FT6206_DEV_MODE_MASK << FT6206_DEV_MODE_SHIFT)) >> FT6206_DEV_MODE_SHIFT;
-    if(ucReadData == FT6206_DEV_MODE_WORKING)
-    {
-      /* Auto Switch to FT6206_DEV_MODE_WORKING : means calibration have ended */
-      bEndCalibration = 1; /* exit for loop */
-    }
-    
-    TS_IO_Delay(200); /* Wait 200 ms */
-  }
-
-  /* Calibration sequence end << */
-
-  return(status);
-}
-#endif /* TS_AUTO_CALIBRATION_SUPPORTED == 1 */
-
-/**
-  * @brief  Basic static configuration of TouchScreen
-  * @param  DeviceAddr: FT6206 Device address for communication on I2C Bus.
-  * @retval Status FT6206_STATUS_OK or FT6206_STATUS_NOT_OK.
-  */
-static uint32_t ft6x06_TS_Configure(uint16_t DeviceAddr)
-{
-  uint32_t status = FT6206_STATUS_OK;
-
-  /* Nothing special to be done for FT6206 */
-
-  return(status);
-}
-
-/**
-  * @brief  Check if the device instance of the selected address is already registered
-  *         and return its index  
-  * @param  DeviceAddr: Device address on communication Bus.
-  * @retval Index of the device instance if registered, 0xFF if not.
-  */
-static uint8_t ft6x06_GetInstance(uint16_t DeviceAddr)
-{
-  uint8_t idx = 0;
-  
-  /* Check all the registered instances */
-  for(idx = 0; idx < FT6x06_MAX_INSTANCE ; idx ++)
-  {
-    if(ft6x06[idx] == DeviceAddr)
-    {
-      return idx; 
+      ret = (int32_t)nb_touch;
     }
   }
-  
-  return 0xFF;
+  return ret;
+}
+
+/**
+  * @brief  Wrap IO bus read function to component register red function
+  * @param  handle Component object handle
+  * @param  Reg The target register address to read
+  * @param  pData The target register value to be read
+  * @param  Length buffer size to be read
+  * @retval Component status.
+  */
+static int32_t ReadRegWrap(void *handle, uint8_t Reg, uint8_t* pData, uint16_t Length)
+{
+  FT6X06_Object_t *pObj = (FT6X06_Object_t *)handle;
+
+  return pObj->IO.ReadReg(pObj->IO.Address, Reg, pData, Length);
+}
+
+/**
+  * @brief  Wrap IO bus write function to component register write function
+  * @param  handle Component object handle
+  * @param  Reg The target register address to write
+  * @param  pData The target register value to be written
+  * @param  Length buffer size to be written
+  * @retval Component status.
+  */
+static int32_t WriteRegWrap(void *handle, uint8_t Reg, uint8_t* pData, uint16_t Length)
+{
+  FT6X06_Object_t *pObj = (FT6X06_Object_t *)handle;
+
+  return pObj->IO.WriteReg(pObj->IO.Address, Reg, pData, Length);
 }
 
 /**

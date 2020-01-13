@@ -137,7 +137,7 @@ Graphic, Display, LTDC, LCD, Pictures, SD Card, BMP, RGB565, RGB888, ARGB8888
 
   - This application runs on STM32H743xx/STM32H753xx devices.
     
-  - This application has been tested with STMicroelectronics STM32H743I-EVAL revB
+  - This application has been tested with STMicroelectronics STM32H743I-EVAL 
     evaluation boards and can be easily tailored to any other supported device 
     and development board.
     

@@ -51,81 +51,80 @@ static uint8_t Buffercmp(uint32_t* pBuffer1, uint32_t* pBuffer2, uint16_t Buffer
   */
 void MMC_demo (void)
 {
-  uint8_t MMC_state = MMC_OK;
-
+int32_t MMC_state ;
   MMC_SetHint();
 
-  MMC_state = BSP_MMC_Init();
+  MMC_state = BSP_MMC_Init(0);
 
-  BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
+  GUI_SetTextColor(GUI_COLOR_BLACK);
 
-  if(MMC_state != MMC_OK)
+  if(MMC_state != BSP_ERROR_NONE)
   {
-    BSP_LCD_SetTextColor(LCD_COLOR_RED);
-    BSP_LCD_DisplayStringAt(20, 100, (uint8_t *)"MMC INITIALIZATION : FAIL.", LEFT_MODE);
-    BSP_LCD_DisplayStringAt(20, 115, (uint8_t *)"MMC Test Aborted.", LEFT_MODE);
+    GUI_SetTextColor(GUI_COLOR_RED);
+    GUI_DisplayStringAt(20, 100, (uint8_t *)"MMC INITIALIZATION : FAIL.", LEFT_MODE);
+    GUI_DisplayStringAt(20, 115, (uint8_t *)"MMC Test Aborted.", LEFT_MODE);
   }
   else
   {
-    BSP_LCD_DisplayStringAt(20, 100, (uint8_t *)"MMC INITIALIZATION : OK.", LEFT_MODE);
+    GUI_DisplayStringAt(20, 100, (uint8_t *)"MMC INITIALIZATION : OK.", LEFT_MODE);
 
-    MMC_state = BSP_MMC_Erase(BLOCK_START_ADDR, (MMC_BLOCKSIZE * NUM_OF_BLOCKS));
-    while(BSP_MMC_GetCardState() != MMC_TRANSFER_OK)
+    MMC_state = BSP_MMC_Erase(0,BLOCK_START_ADDR, (MMC_BLOCKSIZE * NUM_OF_BLOCKS));
+    while(BSP_MMC_GetCardState(0) != MMC_TRANSFER_OK)
     {
     }
 
-    if(MMC_state != MMC_OK)
+    if(MMC_state != BSP_ERROR_NONE)
     {
-      BSP_LCD_SetTextColor(LCD_COLOR_RED);
-      BSP_LCD_DisplayStringAt(20, 115, (uint8_t *)"MMC ERASE : FAILED.", LEFT_MODE);
-      BSP_LCD_DisplayStringAt(20, 130, (uint8_t *)"MMC Test Aborted.", LEFT_MODE);
+      GUI_SetTextColor(GUI_COLOR_RED);
+      GUI_DisplayStringAt(20, 115, (uint8_t *)"MMC ERASE : FAILED.", LEFT_MODE);
+      GUI_DisplayStringAt(20, 130, (uint8_t *)"MMC Test Aborted.", LEFT_MODE);
     }
     else
     {
-      BSP_LCD_DisplayStringAt(20, 115, (uint8_t *)"MMC ERASE : OK.", LEFT_MODE);
+      GUI_DisplayStringAt(20, 115, (uint8_t *)"MMC ERASE : OK.", LEFT_MODE);
 
       /* Fill the buffer to write */
       Fill_Buffer(aTxBuffer, BUFFER_WORDS_SIZE, 0x22FF);
-      MMC_state = BSP_MMC_WriteBlocks((uint32_t *)aTxBuffer, BLOCK_START_ADDR, NUM_OF_BLOCKS, MMC_DATATIMEOUT);
-      
+      MMC_state = BSP_MMC_WriteBlocks(0,(uint32_t *)aTxBuffer, BLOCK_START_ADDR, NUM_OF_BLOCKS);
+
       /* Wait until MMC cards are ready to use for new operation */
-      while(BSP_MMC_GetCardState() != MMC_TRANSFER_OK)
+      while(BSP_MMC_GetCardState(0) != MMC_TRANSFER_OK)
       {
       }
-      if(MMC_state != MMC_OK)
+      if(MMC_state != BSP_ERROR_NONE)
       {
-        BSP_LCD_SetTextColor(LCD_COLOR_RED);
-        BSP_LCD_DisplayStringAt(20, 130, (uint8_t *)"MMC WRITE : FAILED.", LEFT_MODE);
-        BSP_LCD_DisplayStringAt(20, 145, (uint8_t *)"MMC Test Aborted.", LEFT_MODE);
+        GUI_SetTextColor(GUI_COLOR_RED);
+        GUI_DisplayStringAt(20, 130, (uint8_t *)"MMC WRITE : FAILED.", LEFT_MODE);
+        GUI_DisplayStringAt(20, 145, (uint8_t *)"MMC Test Aborted.", LEFT_MODE);
       }
       else
       {
-        BSP_LCD_DisplayStringAt(20, 130, (uint8_t *)"MMC WRITE : OK.", LEFT_MODE);
-        MMC_state = BSP_MMC_ReadBlocks((uint32_t *)aRxBuffer, BLOCK_START_ADDR, NUM_OF_BLOCKS, MMC_DATATIMEOUT);
+        GUI_DisplayStringAt(20, 130, (uint8_t *)"MMC WRITE : OK.", LEFT_MODE);
+        MMC_state = BSP_MMC_ReadBlocks(0,(uint32_t *)aRxBuffer, BLOCK_START_ADDR, NUM_OF_BLOCKS);
 
         /* Wait until MMC cards are ready to use for new operation */
-        while(BSP_MMC_GetCardState() != MMC_TRANSFER_OK)
+        while(BSP_MMC_GetCardState(0) != MMC_TRANSFER_OK)
         {
         }
-        if(MMC_state != MMC_OK)
+        if(MMC_state != BSP_ERROR_NONE)
         {
-          BSP_LCD_SetTextColor(LCD_COLOR_RED);
-          BSP_LCD_DisplayStringAt(20, 145, (uint8_t *)"MMC READ : FAILED.", LEFT_MODE);
-          BSP_LCD_DisplayStringAt(20, 160, (uint8_t *)"MMC Test Aborted.", LEFT_MODE);
+          GUI_SetTextColor(GUI_COLOR_RED);
+          GUI_DisplayStringAt(20, 145, (uint8_t *)"MMC READ : FAILED.", LEFT_MODE);
+          GUI_DisplayStringAt(20, 160, (uint8_t *)"MMC Test Aborted.", LEFT_MODE);
         }
         else
         {
-          BSP_LCD_DisplayStringAt(20, 145, (uint8_t *)"MMC READ : OK.", LEFT_MODE);
+          GUI_DisplayStringAt(20, 145, (uint8_t *)"MMC READ : OK.", LEFT_MODE);
           if(Buffercmp(aTxBuffer, aRxBuffer, BUFFER_WORDS_SIZE) > 0)
           {
-            BSP_LCD_SetTextColor(LCD_COLOR_RED);
-            BSP_LCD_DisplayStringAt(20, 160, (uint8_t *)"MMC COMPARE : FAILED.", LEFT_MODE);
-            BSP_LCD_DisplayStringAt(20, 175, (uint8_t *)"MMC Test Aborted.", LEFT_MODE);
+            GUI_SetTextColor(GUI_COLOR_RED);
+            GUI_DisplayStringAt(20, 160, (uint8_t *)"MMC COMPARE : FAILED.", LEFT_MODE);
+            GUI_DisplayStringAt(20, 175, (uint8_t *)"MMC Test Aborted.", LEFT_MODE);
           }
           else
           {
-            BSP_LCD_SetTextColor(LCD_COLOR_GREEN);
-            BSP_LCD_DisplayStringAt(20, 160, (uint8_t *)"MMC TEST : OK.", LEFT_MODE);
+            GUI_SetTextColor(GUI_COLOR_GREEN);
+            GUI_DisplayStringAt(20, 160, (uint8_t *)"MMC TEST : OK.", LEFT_MODE);
           }
         }
       }
@@ -134,7 +133,7 @@ void MMC_demo (void)
 
   while (1)
   {
-    
+
     if(CheckForUserInput() > 0)
     {
       return;
@@ -148,7 +147,7 @@ void MMC_demo (void)
   * @param None
   * @retval None
   */
-void BSP_MMC_WriteCpltCallback()
+void BSP_MMC_WriteCpltCallback(uint32_t Instance)
 {
   MMCWriteStatus = 1;
 
@@ -159,7 +158,7 @@ void BSP_MMC_WriteCpltCallback()
   * @param None
   * @retval None
   */
-void BSP_MMC_ReadCpltCallback()
+void BSP_MMC_ReadCpltCallback(uint32_t Instance)
 {
   MMCReadStatus = 1;
 }
@@ -171,28 +170,32 @@ void BSP_MMC_ReadCpltCallback()
   */
 static void MMC_SetHint(void)
 {
+  uint32_t x_size, y_size;
+
+  BSP_LCD_GetXSize(0, &x_size);
+  BSP_LCD_GetYSize(0, &y_size);
   /* Clear the LCD */
-  BSP_LCD_Clear(LCD_COLOR_WHITE);
+  GUI_Clear(GUI_COLOR_WHITE);
 
   /* Set LCD Demo description */
-  BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
-  BSP_LCD_FillRect(0, 0, BSP_LCD_GetXSize(), 80);
-  BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
-  BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-  BSP_LCD_SetFont(&Font24);
-  BSP_LCD_DisplayStringAt(0, 0, (uint8_t *)"MMC", CENTER_MODE);
-  BSP_LCD_SetFont(&Font12);
-  BSP_LCD_DisplayStringAt(0, 30, (uint8_t *)"This example shows how to write", CENTER_MODE);
-  BSP_LCD_DisplayStringAt(0, 45, (uint8_t *)"and read data on the microMMC and also", CENTER_MODE);
-  BSP_LCD_DisplayStringAt(0, 60, (uint8_t *)"how to detect the presence of the card", CENTER_MODE);
+  GUI_SetTextColor(GUI_COLOR_BLUE);
+  GUI_FillRect(0, 0, x_size, 80, GUI_COLOR_BLUE);
+  GUI_SetTextColor(GUI_COLOR_WHITE);
+  GUI_SetBackColor(GUI_COLOR_BLUE);
+  GUI_SetFont(&Font24);
+  GUI_DisplayStringAt(0, 0, (uint8_t *)"MMC", CENTER_MODE);
+  GUI_SetFont(&Font12);
+  GUI_DisplayStringAt(0, 30, (uint8_t *)"This example shows how to write", CENTER_MODE);
+  GUI_DisplayStringAt(0, 45, (uint8_t *)"and read data on the microMMC and also", CENTER_MODE);
+  GUI_DisplayStringAt(0, 60, (uint8_t *)"how to detect the presence of the card", CENTER_MODE);
 
-   /* Set the LCD Text Color */
-  BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
-  BSP_LCD_DrawRect(10, 90, BSP_LCD_GetXSize() - 20, BSP_LCD_GetYSize()- 100);
-  BSP_LCD_DrawRect(11, 91, BSP_LCD_GetXSize() - 22, BSP_LCD_GetYSize()- 102);
+  /* Set the LCD Text Color */
+  GUI_SetTextColor(GUI_COLOR_BLUE);
+  GUI_DrawRect(10, 90, x_size - 20, y_size - 100, GUI_COLOR_BLUE);
+  GUI_DrawRect(11, 91, x_size - 22, y_size - 102, GUI_COLOR_BLUE);
 
-  BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
-  BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
+  GUI_SetTextColor(GUI_COLOR_BLACK);
+  GUI_SetBackColor(GUI_COLOR_WHITE);
  }
 
 /**

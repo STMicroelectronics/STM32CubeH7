@@ -222,7 +222,7 @@
                     <state>APPLICATION_ADDRESS=0x90000000U</state>
                     <state>USE_HAL_DRIVER</state>
                     <state> STM32H750xx</state>
-                    <state>USE_STM32H750B_DISCO</state>
+                    <state>USE_STM32H750B_DK</state>
                 </option>
                 <option>
                     <name>CCPreprocFile</name>
@@ -351,9 +351,9 @@
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\CMSIS\Include</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\CMSIS\Device\ST\STM32H7xx\Include</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Inc</state>
-                    <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32H750B-Discovery</state>
+                    <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32H750B-DK</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\Components\Common</state>
-                    <state>$PROJ_DIR$\..\..\..\..\..\..\Utilities\Log</state>
+                    <state>$PROJ_DIR$\..\..\..\..\..\..\Utilities\Basic_GUI</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Utilities\Fonts</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Utilities\CPU</state>
                 </option>
@@ -706,7 +706,7 @@
                 </option>
                 <option>
                     <name>IlinkOutputFile</name>
-                    <state>STM32H750B_DISCO.out</state>
+                    <state>STM32H750B_DK.out</state>
                 </option>
                 <option>
                     <name>IlinkDebugInfoEnable</name>
@@ -1031,27 +1031,6 @@
         </settings>
     </configuration>
     <group>
-        <name>Example</name>
-        <group>
-            <name>EWARM</name>
-            <file>
-                <name>$PROJ_DIR$\startup_stm32h750xx.s</name>
-            </file>
-        </group>
-        <group>
-            <name>User</name>
-            <file>
-                <name>$PROJ_DIR$\..\Src\main.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\Src\stm32h7xx_hal_msp.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\Src\stm32h7xx_it.c</name>
-            </file>
-        </group>
-    </group>
-    <group>
         <name>Doc</name>
         <file>
             <name>$PROJ_DIR$\..\readme.txt</name>
@@ -1066,9 +1045,9 @@
             </file>
         </group>
         <group>
-            <name>STM32H750B_DISCOVERY</name>
+            <name>STM32H750B_DKVERY</name>
             <file>
-                <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32H750B-Discovery\stm32h750b_discovery.c</name>
+                <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32H750B-DK\stm32h750b_discovery.c</name>
             </file>
         </group>
         <group>
@@ -1084,6 +1063,9 @@
             </file>
             <file>
                 <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_dma_ex.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_exti.c</name>
             </file>
             <file>
                 <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_gpio.c</name>
@@ -1117,6 +1099,27 @@
             </file>
             <file>
                 <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_uart_ex.c</name>
+            </file>
+        </group>
+    </group>
+    <group>
+        <name>Example</name>
+        <group>
+            <name>EWARM</name>
+            <file>
+                <name>$PROJ_DIR$\startup_stm32h750xx.s</name>
+            </file>
+        </group>
+        <group>
+            <name>User</name>
+            <file>
+                <name>$PROJ_DIR$\..\Src\main.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\Src\stm32h7xx_hal_msp.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\Src\stm32h7xx_it.c</name>
             </file>
         </group>
     </group>

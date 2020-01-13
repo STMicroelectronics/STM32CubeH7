@@ -93,8 +93,8 @@ The waveforms can be displayed using an oscilloscope.
 
   - NUCLEO-H743ZI Set-up
    Connect the following pins to an oscilloscope to monitor the different waveforms:
-        - HRTIM1_TIMD_TD1: PA.11 (pin 14 in CN12 connector)
-        - HRTIM1_TIMD_TD1: PA.12 (pin 12 in CN12 connector)
+        - HRTIM1_TIMD_TD1: PA.11 (pin 14 in CN12 connector with SB16 fitted on MB1364)
+        - HRTIM1_TIMD_TD1: PA.12 (pin 12 in CN12 connector with SB17 fitted on MB1364)
 
 @par How to use it ? 
 

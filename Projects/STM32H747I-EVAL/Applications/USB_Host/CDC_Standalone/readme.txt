@@ -149,7 +149,6 @@ Connectivity, USB Host, Full Speed, High Speed, CDC, PSTN, HyperTerminal, VCP, C
   - USB_Host/CDC_Standalone/CM7/Src/cdc_send.c              CDC Send State Machine
   - USB_Host/CDC_Standalone/CM7/Inc/main.h                  Main program header file
   - USB_Host/CDC_Standalone/CM7/Inc/stm32h7xx_it.h          Interrupt handlers header file
-  - USB_Host/CDC_Standalone/CM7/Inc/lcd_log_conf.h          LCD log configuration file
   - USB_Host/CDC_Standalone/CM7/Inc/usbh_conf.h             USB Host driver Configuration file
   - USB_Host/CDC_Standalone/CM7/Inc/stm32h7xx_hal_conf.h    HAL configuration file
   - USB_Host/CDC_Standalone/CM7/Inc/ffconf.h                FAT file system module configuration file
@@ -164,7 +163,7 @@ Connectivity, USB Host, Full Speed, High Speed, CDC, PSTN, HyperTerminal, VCP, C
 
   - This application runs on stm32h7xx devices.
 
-  - This application has been tested with STMicroelectronics STM32H747I_EVAL RevB
+  - This application has been tested with STMicroelectronics STM32H747I_EVAL 
     evaluation boards and can be easily tailored to any other supported device
     and development board.
 

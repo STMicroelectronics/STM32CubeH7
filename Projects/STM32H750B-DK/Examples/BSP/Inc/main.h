@@ -29,17 +29,14 @@
 #include "stm32h750b_discovery_lcd.h"
 #include "stm32h750b_discovery_ts.h"
 #include "stm32h750b_discovery_audio.h"
-#include "stm32h750b_discovery_qspi.h"
 #include "stm32h750b_discovery_mmc.h"
+#include "stm32h750b_discovery_sdram.h"
+#include "basic_gui.h"
 
-
-/* Exported types ------------------------------------------------------------*/
-typedef struct
-{
-  void   (*DemoFunc)(void);
-  uint8_t DemoName[50]; 
-  uint32_t DemoIndex;
-}BSP_DemoTypedef;
+/* Exported variables --------------------------------------------------------*/
+extern const unsigned char stlogo[];
+extern __IO uint32_t SRAMTest;
+extern __IO uint32_t ButtonState ;
 
 typedef enum {
   AUDIO_ERROR_NONE = 0,
@@ -48,12 +45,12 @@ typedef enum {
   AUDIO_ERROR_EOF,
 }AUDIO_ErrorTypeDef;
 
-/* Exported variables --------------------------------------------------------*/
-extern const unsigned char stlogo[];
-extern __IO uint32_t SRAMTest;
-#ifndef USE_FULL_ASSERT
-extern uint32_t    ErrorCounter;
-#endif
+typedef struct
+{
+  void   (*DemoFunc)(void);
+  uint8_t DemoName[50];
+  uint32_t DemoIndex;
+}BSP_DemoTypedef;
 
 /* Exported constants --------------------------------------------------------*/
 
@@ -84,21 +81,6 @@ extern uint32_t    ErrorCounter;
 /* Exported macro ------------------------------------------------------------*/
 #define COUNT_OF_EXAMPLE(x)    (sizeof(x)/sizeof(BSP_DemoTypedef))
 
-#ifdef USE_FULL_ASSERT
-/* Assert activated */
-#define ASSERT(__condition__)                do { if(__condition__) \
-                                                   {  assert_failed(__FILE__, __LINE__); \
-                                                      while(1);  \
-                                                    } \
-                                              }while(0)
-#else
-/* Assert not activated : macro has no effect */
-#define ASSERT(__condition__)                  do { if(__condition__) \
-                                                   {  ErrorCounter++; \
-                                                    } \
-                                              }while(0)
-#endif /* USE_FULL_ASSERT */
-                                              
 /* Exported functions ------------------------------------------------------- */
 void Touchscreen_demo1 (void);
 void Touchscreen_demo2 (void);
@@ -114,9 +96,13 @@ void AudioRecord_demo(void);
 uint8_t AUDIO_Process(void);
 void QSPI_demo (void);
 void MMC_demo (void);
-
+void DMA2_Stream0_IRQHandler(void);
+void DMA2_Stream5_IRQHandler(void);
 uint8_t CheckForUserInput(void);
 void Toggle_Leds(void);
+void Touchscreen_DrawBackground_Circles(uint8_t state);
+void Touchscreen_demo3(void);
+uint8_t TouchScreen_GetTouchPosition(void);
 
 #endif /* __MAIN_H */
 

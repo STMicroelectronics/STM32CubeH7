@@ -474,7 +474,7 @@ void OPAMP_Config(void)
   */
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
-  if (GPIO_Pin == USER_BUTTON_PIN)
+  if (GPIO_Pin == BUTTON_USER_PIN)
   {
     UserButtonStatus = 1;
   }

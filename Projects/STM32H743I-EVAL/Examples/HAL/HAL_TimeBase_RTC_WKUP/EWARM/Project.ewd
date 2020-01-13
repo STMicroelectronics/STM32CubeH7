@@ -2,7 +2,7 @@
 <project>
     <fileVersion>3</fileVersion>
     <configuration>
-        <name>STM32H743I_EVAL</name>
+        <name>STM32H743I-EVAL</name>
         <toolchain>
             <name>ARM</name>
         </toolchain>
@@ -44,7 +44,7 @@
                 </option>
                 <option>
                     <name>MemFile</name>
-                    <state>$TOOLKIT_DIR$\CONFIG\debugger\ST\STM32H743XI.ddf</state>
+                    <state>$TOOLKIT_DIR$\CONFIG\debugger\ST\STM32H7x3.ddf</state>
                 </option>
                 <option>
                     <name>RunToEnable</name>
@@ -80,7 +80,7 @@
                 </option>
                 <option>
                     <name>OCProductVersion</name>
-                    <state>5.30.0.51236</state>
+                    <state>8.20.2.14834</state>
                 </option>
                 <option>
                     <name>OCDynDriverList</name>
@@ -278,10 +278,6 @@
                 <wantNonLocal>1</wantNonLocal>
                 <debug>1</debug>
                 <option>
-                    <name>CatchSFERR</name>
-                    <state>1</state>
-                </option>
-                <option>
                     <name>OCDriverInfo</name>
                     <state>1</state>
                 </option>
@@ -349,7 +345,7 @@
                 </option>
                 <option>
                     <name>RDICatchUndef</name>
-                    <state>0</state>
+                    <state>1</state>
                 </option>
                 <option>
                     <name>RDICatchSWI</name>
@@ -357,11 +353,11 @@
                 </option>
                 <option>
                     <name>RDICatchData</name>
-                    <state>0</state>
+                    <state>1</state>
                 </option>
                 <option>
                     <name>RDICatchPrefetch</name>
-                    <state>0</state>
+                    <state>1</state>
                 </option>
                 <option>
                     <name>RDICatchIRQ</name>
@@ -377,31 +373,35 @@
                 </option>
                 <option>
                     <name>CatchMMERR</name>
-                    <state>0</state>
+                    <state>1</state>
                 </option>
                 <option>
                     <name>CatchNOCPERR</name>
-                    <state>0</state>
+                    <state>1</state>
                 </option>
                 <option>
                     <name>CatchCHKERR</name>
-                    <state>0</state>
+                    <state>1</state>
                 </option>
                 <option>
                     <name>CatchSTATERR</name>
-                    <state>0</state>
+                    <state>1</state>
                 </option>
                 <option>
                     <name>CatchBUSERR</name>
-                    <state>0</state>
+                    <state>1</state>
                 </option>
                 <option>
                     <name>CatchINTERR</name>
-                    <state>0</state>
+                    <state>1</state>
+                </option>
+                <option>
+                    <name>CatchSFERR</name>
+                    <state>1</state>
                 </option>
                 <option>
                     <name>CatchHARDERR</name>
-                    <state>0</state>
+                    <state>1</state>
                 </option>
                 <option>
                     <name>CatchDummy</name>
@@ -470,7 +470,7 @@
                 </option>
                 <option>
                     <name>LogFile</name>
-                    <state>$TOOLKIT_DIR$\cspycomm.log</state>
+                    <state>$PROJ_DIR$\cspycomm.log</state>
                 </option>
                 <option>
                     <name>CCJTagBreakpointRadio</name>
@@ -482,7 +482,7 @@
                 </option>
                 <option>
                     <name>CCJTagUpdateBreakpoints</name>
-                    <state>main</state>
+                    <state>_call_main</state>
                 </option>
             </data>
         </settings>
@@ -493,10 +493,6 @@
                 <version>8</version>
                 <wantNonLocal>1</wantNonLocal>
                 <debug>1</debug>
-                <option>
-                    <name>CatchSFERR</name>
-                    <state>1</state>
-                </option>
                 <option>
                     <name>OCDriverInfo</name>
                     <state>1</state>
@@ -573,7 +569,7 @@
                 </option>
                 <option>
                     <name>IjetCpuClockEdit</name>
-                    <state>72.0</state>
+                    <state></state>
                 </option>
                 <option>
                     <name>IjetSwoPrescalerList</name>
@@ -598,7 +594,7 @@
                 </option>
                 <option>
                     <name>RDICatchUndef</name>
-                    <state>0</state>
+                    <state>1</state>
                 </option>
                 <option>
                     <name>RDICatchSWI</name>
@@ -606,11 +602,11 @@
                 </option>
                 <option>
                     <name>RDICatchData</name>
-                    <state>0</state>
+                    <state>1</state>
                 </option>
                 <option>
                     <name>RDICatchPrefetch</name>
-                    <state>0</state>
+                    <state>1</state>
                 </option>
                 <option>
                     <name>RDICatchIRQ</name>
@@ -626,31 +622,35 @@
                 </option>
                 <option>
                     <name>CatchMMERR</name>
-                    <state>0</state>
+                    <state>1</state>
                 </option>
                 <option>
                     <name>CatchNOCPERR</name>
-                    <state>0</state>
+                    <state>1</state>
                 </option>
                 <option>
                     <name>CatchCHKERR</name>
-                    <state>0</state>
+                    <state>1</state>
                 </option>
                 <option>
                     <name>CatchSTATERR</name>
-                    <state>0</state>
+                    <state>1</state>
                 </option>
                 <option>
                     <name>CatchBUSERR</name>
-                    <state>0</state>
+                    <state>1</state>
                 </option>
                 <option>
                     <name>CatchINTERR</name>
-                    <state>0</state>
+                    <state>1</state>
+                </option>
+                <option>
+                    <name>CatchSFERR</name>
+                    <state>1</state>
                 </option>
                 <option>
                     <name>CatchHARDERR</name>
-                    <state>0</state>
+                    <state>1</state>
                 </option>
                 <option>
                     <name>CatchDummy</name>
@@ -690,7 +690,7 @@
                 </option>
                 <option>
                     <name>IjetPreferETB</name>
-                    <state>0</state>
+                    <state>1</state>
                 </option>
                 <option>
                     <name>IjetTraceSettingsList</name>
@@ -700,7 +700,7 @@
                 <option>
                     <name>IjetTraceSizeList</name>
                     <version>0</version>
-                    <state>2</state>
+                    <state>4</state>
                 </option>
                 <option>
                     <name>FlashBoardPathSlave</name>
@@ -724,12 +724,8 @@
                 <wantNonLocal>1</wantNonLocal>
                 <debug>1</debug>
                 <option>
-                    <name>CCCatchSFERR</name>
-                    <state>0</state>
-                </option>
-                <option>
                     <name>JLinkSpeed</name>
-                    <state>32</state>
+                    <state>1000</state>
                 </option>
                 <option>
                     <name>CCJLinkDoLogfile</name>
@@ -737,7 +733,7 @@
                 </option>
                 <option>
                     <name>CCJLinkLogFile</name>
-                    <state>$TOOLKIT_DIR$\cspycomm.log</state>
+                    <state>$PROJ_DIR$\cspycomm.log</state>
                 </option>
                 <option>
                     <name>CCJLinkHWResetDelay</name>
@@ -749,7 +745,7 @@
                 </option>
                 <option>
                     <name>JLinkInitialSpeed</name>
-                    <state>32</state>
+                    <state>1000</state>
                 </option>
                 <option>
                     <name>CCDoJlinkMultiTarget</name>
@@ -822,7 +818,7 @@
                 </option>
                 <option>
                     <name>CCJLinkUpdateBreakpoints</name>
-                    <state>main</state>
+                    <state>_call_main</state>
                 </option>
                 <option>
                     <name>CCJLinkInterfaceRadio</name>
@@ -831,7 +827,7 @@
                 <option>
                     <name>CCJLinkResetList</name>
                     <version>6</version>
-                    <state>7</state>
+                    <state>5</state>
                 </option>
                 <option>
                     <name>CCJLinkInterfaceCmdLine</name>
@@ -866,6 +862,10 @@
                     <state>0</state>
                 </option>
                 <option>
+                    <name>CCCatchSFERR</name>
+                    <state>0</state>
+                </option>
+                <option>
                     <name>CCCatchHARDERR</name>
                     <state>0</state>
                 </option>
@@ -892,7 +892,7 @@
                 </option>
                 <option>
                     <name>CCCpuClockEdit</name>
-                    <state>72.0</state>
+                    <state></state>
                 </option>
                 <option>
                     <name>CCSwoClockAuto</name>
@@ -982,14 +982,6 @@
                 <wantNonLocal>1</wantNonLocal>
                 <debug>1</debug>
                 <option>
-                    <name>CCSTLinkCatchSFERR</name>
-                    <state>0</state>
-                </option>
-                <option>
-                    <name>CCSTLinkDAPNumber</name>
-                    <state>0</state>
-                </option>
-                <option>
                     <name>OCDriverInfo</name>
                     <state>1</state>
                 </option>
@@ -1063,6 +1055,10 @@
                     <state>0</state>
                 </option>
                 <option>
+                    <name>CCSTLinkCatchSFERR</name>
+                    <state>0</state>
+                </option>
+                <option>
                     <name>CCSTLinkCatchHARDERR</name>
                     <state>0</state>
                 </option>
@@ -1084,8 +1080,12 @@
                     <state>0</state>
                 </option>
                 <option>
+                    <name>CCSTLinkDAPNumber</name>
+                    <state></state>
+                </option>
+                <option>
                     <name>CCSTLinkDebugAccessPortRadio</name>
-                    <state>1</state>
+                    <state>0</state>
                 </option>
             </data>
         </settings>
@@ -1098,7 +1098,7 @@
                 <debug>1</debug>
                 <option>
                     <name>CThirdPartyDriverDll</name>
-                    <state>Browse to your third-party driver</state>
+                    <state>###Uninitialized###</state>
                 </option>
                 <option>
                     <name>CThirdPartyLogFileCheck</name>
@@ -1106,7 +1106,7 @@
                 </option>
                 <option>
                     <name>CThirdPartyLogFileEditB</name>
-                    <state>$TOOLKIT_DIR$\cspycomm.log</state>
+                    <state>$PROJ_DIR$\cspycomm.log</state>
                 </option>
                 <option>
                     <name>OCDriverInfo</name>
@@ -1192,10 +1192,6 @@
                 <version>6</version>
                 <wantNonLocal>1</wantNonLocal>
                 <debug>1</debug>
-                <option>
-                    <name>CCXds100CatchSFERR</name>
-                    <state>0</state>
-                </option>
                 <option>
                     <name>OCDriverInfo</name>
                     <state>1</state>
@@ -1289,6 +1285,10 @@
                     <state>0</state>
                 </option>
                 <option>
+                    <name>CCXds100CatchSFERR</name>
+                    <state>0</state>
+                </option>
+                <option>
                     <name>CCXds100CatchHARDERR</name>
                     <state>0</state>
                 </option>
@@ -1298,7 +1298,7 @@
                 </option>
                 <option>
                     <name>CCXds100CpuClockEdit</name>
-                    <state>72.0</state>
+                    <state></state>
                 </option>
                 <option>
                     <name>CCXds100SwoClockAuto</name>
@@ -1332,7 +1332,7 @@
                 </option>
                 <option>
                     <name>CCXds100InterfaceRadio</name>
-                    <state>0</state>
+                    <state>2</state>
                 </option>
                 <option>
                     <name>CCXds100InterfaceCmdLine</name>
@@ -1341,7 +1341,7 @@
                 <option>
                     <name>CCXds100ProbeList</name>
                     <version>0</version>
-                    <state>0</state>
+                    <state>2</state>
                 </option>
                 <option>
                     <name>CCXds100SWOPortRadio</name>

@@ -114,17 +114,17 @@ int main(void)
   BSP_LED_Init(LED4);
   BSP_LED_Init(LED3);
   
-  BSP_SDRAM_Init();
+  BSP_SDRAM_Init(0);
   /*##-1- Initialize the LCD #################################################*/
   /* Initialize the LCD */
-  BSP_LCD_Init();
-  BSP_LCD_LayerDefaultInit(0, LCD_FRAME_BUFFER);
-  BSP_LCD_SelectLayer(0);   
-  BSP_LCD_Clear(COLOR_GRAY);
-  BSP_LCD_SetFont(&Font24);
+  BSP_LCD_Init(0, LCD_ORIENTATION_LANDSCAPE);
+  GUI_SetFuncDriver(&LCD_Driver);
+  GUI_SetLayer(0);   
+  GUI_Clear(COLOR_GRAY);
+  GUI_SetFont(&Font24);
   
-  LCD_X_Size = BSP_LCD_GetXSize();
-  LCD_Y_Size = BSP_LCD_GetYSize();
+  BSP_LCD_GetXSize(0, &LCD_X_Size);
+  BSP_LCD_GetYSize(0, &LCD_Y_Size);
  
   /* Set the MDMA parameters : For Repeat block transfer to clear the MDMA destination frame buffer (drawing buffer) */ 
   MDMA_Config(0);

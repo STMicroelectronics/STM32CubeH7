@@ -31,10 +31,11 @@
 #include "usbh_msc.h"
 #include "ff.h"
 #include "usbh_hid.h"
-#include "lcd_log.h"
 #include "ff_gen_drv.h"
 #include "sd_diskio.h"
 #include "usbh_diskio.h"
+#include "lcd_trace.h"
+#include "utilities_conf.h"
 
 /* Exported constants --------------------------------------------------------*/
 #define FILEMGR_LIST_DEPDTH                     24
@@ -183,8 +184,8 @@ void DS_MenuProcess(void);
 void Menu_Init(void);
 void AUDIO_MenuSelectItem(uint8_t **menu, uint8_t item);
 void AUDIO_MenuProcess(void);
-void AUDIO_MenuProbeKey(JOYState_TypeDef state);
-void AUDIO_PlaybackProbeKey(JOYState_TypeDef state);
+void AUDIO_MenuProbeKey(uint32_t state);
+void AUDIO_PlaybackProbeKey(uint32_t state);
 uint8_t SD_StorageInit(void);
 FRESULT SD_StorageParse(void);
 AUDIO_ErrorTypeDef AUDIO_Start(uint8_t idx);
@@ -194,7 +195,7 @@ FRESULT Explore_Disk(char *path, uint8_t recu_level);
 void Audio_ChangeSelectMode(AUDIO_DEMO_SelectMode select_mode);
 void MSC_File_Operations(void);
 void MSC_MenuProcess(void);
-void MSC_DEMO_ProbeKey(JOYState_TypeDef state);
+void MSC_DEMO_ProbeKey(uint32_t state);
 void HID_SelectItem(uint8_t **menu, uint8_t item);
 void HID_MenuProcess(void);
 void HID_MouseMenuProcess(void);
@@ -203,7 +204,7 @@ void HID_MOUSE_ButtonReleased(uint8_t button_idx);
 void HID_MOUSE_ButtonPressed(uint8_t button_idx);
 void USR_MOUSE_ProcessData(HID_MOUSE_Info_TypeDef *data);
 void USR_KEYBRD_ProcessData(uint8_t data);
-void HID_DEMO_ProbeKey(JOYState_TypeDef state);
+void HID_DEMO_ProbeKey(uint32_t state);
 
 #endif /* __MAIN_H */
 

@@ -354,9 +354,9 @@
                     <state>$PROJ_DIR$\..\..\..\..\..\Drivers\CMSIS\Device\ST\STM32H7xx\Include</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\Middlewares\ST\STM32_Audio\Addons\PDM\Inc</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Inc</state>
-                    <state>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\STM32H750B-Discovery</state>
+                    <state>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\STM32H750B-DK</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\Components\Common</state>
-                    <state>$PROJ_DIR$\..\..\..\..\..\Utilities\Log</state>
+                    <state>$PROJ_DIR$\..\..\..\..\..\Utilities\Basic_GUI</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\Utilities\Fonts</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\Utilities\CPU</state>
                 </option>
@@ -1049,31 +1049,43 @@
                     <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\Components\ft5336\ft5336.c</name>
                 </file>
                 <file>
+                    <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\Components\ft5336\ft5336_reg.c</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\Components\mt48lc4m32b2\mt48lc4m32b2.c</name>
+                </file>
+                <file>
                     <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\Components\wm8994\wm8994.c</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\Components\wm8994\wm8994_reg.c</name>
                 </file>
             </group>
             <group>
                 <name>STM32H750B_DISCOVERY</name>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\STM32H750B-Discovery\stm32h750b_discovery.c</name>
+                    <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\STM32H750B-DK\stm32h750b_discovery.c</name>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\STM32H750B-Discovery\stm32h750b_discovery_audio.c</name>
+                    <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\STM32H750B-DK\stm32h750b_discovery_audio.c</name>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\STM32H750B-Discovery\stm32h750b_discovery_lcd.c</name>
+                    <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\STM32H750B-DK\stm32h750b_discovery_bus.c</name>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\STM32H750B-Discovery\stm32h750b_discovery_mmc.c</name>
+                    <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\STM32H750B-DK\stm32h750b_discovery_lcd.c</name>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\STM32H750B-Discovery\stm32h750b_discovery_qspi.c</name>
+                    <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\STM32H750B-DK\stm32h750b_discovery_mmc.c</name>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\STM32H750B-Discovery\stm32h750b_discovery_sdram.c</name>
+                    <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\STM32H750B-DK\stm32h750b_discovery_qspi.c</name>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\STM32H750B-Discovery\stm32h750b_discovery_ts.c</name>
+                    <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\STM32H750B-DK\stm32h750b_discovery_sdram.c</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\STM32H750B-DK\stm32h750b_discovery_ts.c</name>
                 </file>
             </group>
         </group>
@@ -1111,6 +1123,9 @@
             </file>
             <file>
                 <name>$PROJ_DIR$\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_dma_ex.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_exti.c</name>
             </file>
             <file>
                 <name>$PROJ_DIR$\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_flash.c</name>
@@ -1209,9 +1224,6 @@
                 <name>$PROJ_DIR$\..\Src\lcd.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\Src\log.c</name>
-            </file>
-            <file>
                 <name>$PROJ_DIR$\..\Src\main.c</name>
             </file>
             <file>
@@ -1219,12 +1231,6 @@
             </file>
             <file>
                 <name>$PROJ_DIR$\..\Src\sdram.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\Src\sdram_dma.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\Src\stm32h7xx_hal_msp.c</name>
             </file>
             <file>
                 <name>$PROJ_DIR$\..\Src\stm32h7xx_it.c</name>
@@ -1237,7 +1243,7 @@
     <group>
         <name>Utilities</name>
         <file>
-            <name>$PROJ_DIR$\..\..\..\..\..\Utilities\Log\lcd_log.c</name>
+            <name>$PROJ_DIR$\..\..\..\..\..\Utilities\Basic_GUI\basic_gui.c</name>
         </file>
     </group>
 </project>

@@ -142,11 +142,11 @@ the RTOS is enabled by setting, #define USBH_USE_OS      1
 
   - This application runs on STM32h7xx devices.
 
-  - This application has been tested with STMicroelectronics STM32H747I_EVAL- RevB
+  - This application has been tested with STMicroelectronics STM32H747I_EVAL- 
     evaluation boards and can be easily tailored to any other supported device
     and development board.
 
-  - STM32H747I-EVAL RevB Set-up
+  - STM32H747I-EVAL  Set-up
     - Connect the STM32H747I-EVAL board to the PC through 'USB micro A-Male
       to A-Male' cable to the connector:
       - CN14 : to use USB High Speed (HS)

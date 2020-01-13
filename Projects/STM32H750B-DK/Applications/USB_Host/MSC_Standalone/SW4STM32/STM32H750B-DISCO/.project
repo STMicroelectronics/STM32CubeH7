@@ -31,9 +31,14 @@
 			<locationURI>PARENT-2-PROJECT_LOC/readme.txt</locationURI>
 		</link>
 		<link>
-			<name>Utilities/lcd_log.c</name>
+			<name>Utilities/basic_gui.c</name>
 			<type>1</type>
-			<locationURI>PARENT-7-PROJECT_LOC/Utilities/Log/lcd_log.c</locationURI>
+			<locationURI>PARENT-7-PROJECT_LOC/Utilities/Basic_GUI/basic_gui.c</locationURI>
+		</link>
+		<link>
+			<name>Utilities/lcd_trace.c</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Utilities/Lcd_Trace/lcd_trace.c</locationURI>
 		</link>
 		<link>
 			<name>Application/SW4STM32/startup_stm32h750xx.s</name>
@@ -211,19 +216,39 @@
 			<locationURI>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/FatFs/src/ff_gen_drv.c</locationURI>
 		</link>
 		<link>
+			<name>Drivers/BSP/Components/ft5336.c</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Drivers/BSP/Components/ft5336/ft5336.c</locationURI>
+		</link>
+		<link>
+			<name>Drivers/BSP/Components/ft5336_reg.c</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Drivers/BSP/Components/ft5336/ft5336_reg.c</locationURI>
+		</link>
+		<link>
+			<name>Drivers/BSP/Components/mt48lc4m32b2.c</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Drivers/BSP/Components/mt48lc4m32b2/mt48lc4m32b2.c</locationURI>
+		</link>
+		<link>
 			<name>Drivers/BSP/STM32H750B-Discovery/stm32h750b_discovery.c</name>
 			<type>1</type>
-			<locationURI>PARENT-7-PROJECT_LOC/Drivers/BSP/STM32H750B-Discovery/stm32h750b_discovery.c</locationURI>
+			<locationURI>PARENT-7-PROJECT_LOC/Drivers/BSP/STM32H750B-DK/stm32h750b_discovery.c</locationURI>
+		</link>
+		<link>
+			<name>Drivers/BSP/STM32H750B-Discovery/stm32h750b_discovery_bus.c</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Drivers/BSP/STM32H750B-DK/stm32h750b_discovery_bus.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/BSP/STM32H750B-Discovery/stm32h750b_discovery_lcd.c</name>
 			<type>1</type>
-			<locationURI>PARENT-7-PROJECT_LOC/Drivers/BSP/STM32H750B-Discovery/stm32h750b_discovery_lcd.c</locationURI>
+			<locationURI>PARENT-7-PROJECT_LOC/Drivers/BSP/STM32H750B-DK/stm32h750b_discovery_lcd.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/BSP/STM32H750B-Discovery/stm32h750b_discovery_sdram.c</name>
 			<type>1</type>
-			<locationURI>PARENT-7-PROJECT_LOC/Drivers/BSP/STM32H750B-Discovery/stm32h750b_discovery_sdram.c</locationURI>
+			<locationURI>PARENT-7-PROJECT_LOC/Drivers/BSP/STM32H750B-DK/stm32h750b_discovery_sdram.c</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/STM32_USBD_Library/Core/usbh_core.c</name>

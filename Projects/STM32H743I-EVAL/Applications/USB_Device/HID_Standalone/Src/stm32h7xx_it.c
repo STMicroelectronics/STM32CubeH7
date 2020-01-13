@@ -214,7 +214,7 @@ void OTG_FS_WKUP_IRQHandler(void)
   */
 void EXTI0_IRQHandler(void)
 {
-  HAL_GPIO_EXTI_IRQHandler(WAKEUP_BUTTON_PIN);
+  HAL_GPIO_EXTI_IRQHandler(BUTTON_WAKEUP_PIN);
 }
 
 /**
@@ -226,7 +226,7 @@ static void GetPointerData(uint8_t * pbuf)
 {
   int8_t x = 0, y = 0;
 
-  switch (BSP_JOY_GetState())
+  switch (BSP_JOY_GetState(JOY1))
   {
   case JOY_LEFT:
     x -= CURSOR_STEP;

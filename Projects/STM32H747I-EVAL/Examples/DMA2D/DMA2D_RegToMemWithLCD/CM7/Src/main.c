@@ -61,7 +61,7 @@ int main(void)
 {
   dma2d_TransferComplete_Flag = 0;
   HAL_StatusTypeDef hal_status = HAL_OK;
-  uint8_t lcd_status = LCD_OK;
+  uint8_t lcd_status = BSP_ERROR_NONE;
 
   /* System Init, System clock, voltage scaling and L1-Cache configuration are done by CPU1 (Cortex-M7) 
      in the meantime Domain D2 is put in STOP mode(Cortex-M4 in deep-sleep)
@@ -96,14 +96,14 @@ int main(void)
   
   /*##-1- Initialize the LCD #################################################*/
   /* LTDC, DSI initialization and LCD screen initialization */
-  lcd_status = BSP_LCD_Init();
-  BSP_LCD_LayerDefaultInit(0, LCD_FRAME_BUFFER);   
-  OnError_Handler(lcd_status != LCD_OK);
+  lcd_status = BSP_LCD_Init(0, LCD_ORIENTATION_LANDSCAPE);
+  GUI_SetFuncDriver(&LCD_Driver);   
+  OnError_Handler(lcd_status != BSP_ERROR_NONE);
   
-  BSP_LCD_Clear(LCD_COLOR_WHITE);
+  GUI_Clear(GUI_COLOR_WHITE);
   
   /* Get the LCD width */
-  LCD_X_Size = BSP_LCD_GetXSize();  
+  BSP_LCD_GetXSize(0, &LCD_X_Size);  
   
   /*##-2- DMA2D configuration ################################################*/
   DMA2D_Config();  

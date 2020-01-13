@@ -142,44 +142,12 @@ static void TouchScreenTask(void const *argument)
     }
   }
 }
- 
- /**
-  * @brief  EXTI line detection callbacks.
-  * @param GPIO_Pin: Specifies the pins connected EXTI line
-  * @retval None
-  */
-void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+
+void BSP_TS_Callback(uint32_t Instance)
 {
-  if(!BSP_Initialized)
-    return;
-
-  switch(GPIO_Pin)
+  if(TouchScreenEvent)
   {
-    case WAKEUP_BUTTON_PIN :
-    {
-      /* Turn LEDs off */
-      BSP_LED_Off(LED_RED);
-    }
-    break;
-
-#if defined (USE_SDCARD)
-    case SD_DETECT_PIN :
-    {
-      k_StorageDetectSDCard();
-    }
-    break;
-#endif /* USE_SDCARD */
-
-    case TS_INT_PIN :
-    {
-      if(TouchScreenEvent)
-      {
-        osMessagePut ( TouchScreenEvent, 0, 0);
-      }
-    }
-    break;
-    default:
-      break;
+    osMessagePut ( TouchScreenEvent, 0, 0);
   }
 }
 

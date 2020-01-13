@@ -18,6 +18,21 @@
   ******************************************************************************
   @endverbatim
 
+### V1.0.2/29-July-2019 ###
+============================
+
+   + rsc_table_template.c:
+     - fix a runtime issue when the "__LOG_TRACE_IO_" flag is not enabled.
+
+### V1.0.1/15-June-2019 ###
+============================
+   + openamp_conf_template.h:
+      - use "openamp_log.h" header name instead of "log.h" to avoid name clashing.
+
+   + rsc_table_template.c:
+      - correct declaration of the resource_table  for the STM32MP1
+
+
 ### V1.0.0/29-Mach-2019 ###
 ============================
    + First version compliant with the OpenAMP v2018.10 release

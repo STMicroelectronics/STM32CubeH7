@@ -25,23 +25,24 @@
 This example shows how to perform SPI data buffer transmission/reception between 
 two boards via DMA.
 
-   _________________________                        _________________________
-  |           ______________|                      |__________________       |
-  |          |     SPI1     |                      |        SPI1      |      |
-  |          |              |                      |                  |      |
-  |          |      CLK(PA5)|______________________|(PA5)CLK  CN7.D13 |      |
-  |          |              |                      |                  |      |
-  |          |     MISO(PA6)|______________________|(PA6)MISO CN7.D12 |      |
-  |          |              |                      |                  |      |
-  |          |     MOSI(PA7)|______________________|(PA7)MOSI CN7.D11 |      |
-  |          |              |                      |                  |      |
-  |          |______________|                      |__________________|      |
-  |      __                 |                      |                         |
-  |     |__|                |                      |                         |
-  |     USER                |                      |                         |
-  |                      GND|______________________|GND                      |
-  |                         |                      |                         |
-  |_STM32H7 Master _________|                      |_STM32H7 Slave __________|
+   _________________________                        _____________________________
+  |           ______________|                      |______________________       |
+  |          |     SPI1     |                      |        SPI1          |      |
+  |          |              |                      |                      |      |
+  |          |      CLK(PA5)|______________________|(PA5)CLK  CN7.D13     |      |
+  |          |              |                      |                      |      |
+  |          |     MISO(PA6)|______________________|(PA6)MISO CN7.D12     |      |
+  |          |              |                      |                      |      |
+  |          | MOSI(PA7/PB5)|______________________|(PA7/PB5)MOSI CN7.D11 |      |
+  |          |              |                      |                      |      |
+  |          |______________|                      |______________________|      |
+  |      __                 |                      |                             |
+  |     |__|                |                      |                             |
+  |     USER                |                      |                             |
+  |                      GND|______________________|GND                          |
+  |                         |                      |                             |
+  |_STM32H7 Master _________|                      |_STM32H7 Slave ______________|
+
 
 @note The connection between the pins should use a short wires and a common Ground.
 
@@ -137,11 +138,13 @@ STM32 board's LEDs can be used to monitor the transfer status:
   - This example has been tested with NUCLEO-H743ZI board and can be
     easily tailored to any other supported device and development board.
 
-  - NUCLEO-H743ZI Set-up
+  - NUCLEO-H743ZI/NUCLEO-H743ZI2 Set-up
     - Connect Master board PA5 to Slave Board PA5
     - Connect Master board PA6 to Slave Board PA6
-    - Connect Master board PA7 to Slave Board PA7
-    - Connect Master board GND  to Slave Board GND
+    - Connect Master board PA7 (or PB5) to Slave Board PA7 (or PB5)
+          PA7 if SB121 is closed or PB5 if SB122 is open (Nucleo MB1137 : NUCLEO-H743ZI)
+          PA7 if SB33 is open or PB5 if SB35 is closed   (Nucleo MB1364 : NUCLEO-H743ZI2)
+    - Connect Master board GND to Slave Board GND
 
 @par How to use it ? 
 

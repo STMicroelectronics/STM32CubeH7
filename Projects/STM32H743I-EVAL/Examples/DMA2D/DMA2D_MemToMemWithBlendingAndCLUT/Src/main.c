@@ -38,7 +38,7 @@
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 DMA2D_HandleTypeDef Dma2dHandle;
-extern LTDC_HandleTypeDef  hltdc_eval;
+extern LTDC_HandleTypeDef  hlcd_ltdc;
 
 __IO uint32_t CLUT_LoadComplete;
 __IO uint32_t Transfer_Complete;
@@ -64,7 +64,7 @@ static void MPU_Config(void);
 int main(void)
 {
   HAL_StatusTypeDef hal_status = HAL_OK;
-  uint8_t  lcd_status = LCD_OK;
+  uint8_t  lcd_status = BSP_ERROR_NONE;
 
   /* Configure the MPU attributes as Write Through for SDRAM*/
   MPU_Config();
@@ -92,9 +92,9 @@ int main(void)
   BSP_LED_Init(LED3);
 
  /*##-1- Initialize the LCD ##################################################*/
-  lcd_status = BSP_LCD_Init();
+  lcd_status = BSP_LCD_Init(0, LCD_ORIENTATION_LANDSCAPE);
   LCD_LayerInit(0, LCD_FRAME_BUFFER);   
-  OnError_Handler(lcd_status != LCD_OK);
+  OnError_Handler(lcd_status != BSP_ERROR_NONE);
 
 
   HAL_Delay(100);
@@ -375,7 +375,9 @@ static void DMA2D_Config(uint32_t configNb)
   */
 void LCD_LayerInit(uint16_t LayerIndex, uint32_t FB_Address)
 {
- LCD_LayerCfgTypeDef  Layercfg;
+  LTDC_LayerCfgTypeDef  Layercfg;
+  
+  uint32_t X_size, Y_size;
   
   Layercfg.FBStartAdress = FB_Address;
   Layercfg.Alpha = 255;
@@ -389,13 +391,15 @@ void LCD_LayerInit(uint16_t LayerIndex, uint32_t FB_Address)
   Layercfg.ImageHeight = IMAGE_SIZE_Y;
   
     /* Layer Init */
-  Layercfg.WindowX0 = (BSP_LCD_GetXSize()/2) - (Layercfg.ImageWidth/2) ;
+  BSP_LCD_GetXSize(0, &X_size);
+  BSP_LCD_GetXSize(0, &Y_size);
+  Layercfg.WindowX0 = (X_size/2) - (Layercfg.ImageWidth/2) ;
   Layercfg.WindowX1 = Layercfg.WindowX0 + Layercfg.ImageWidth;
-  Layercfg.WindowY0 = (BSP_LCD_GetYSize()/2) - (Layercfg.ImageHeight/2) ;
+  Layercfg.WindowY0 = (Y_size/2) - (Layercfg.ImageHeight/2) ;
   Layercfg.WindowY1 = Layercfg.WindowY0 + Layercfg.ImageHeight;
   Layercfg.PixelFormat = LTDC_PIXEL_FORMAT_ARGB8888;
   
-  HAL_LTDC_ConfigLayer(&hltdc_eval, &Layercfg, LayerIndex);
+  HAL_LTDC_ConfigLayer(&hlcd_ltdc, &Layercfg, LayerIndex);
 }
 
 /**

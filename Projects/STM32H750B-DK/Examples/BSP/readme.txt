@@ -72,10 +72,6 @@ This example shows how to erase, write and read the SDRAM memory.
  ** SDRAM DMA **
 This example shows how to erase, write and read the SDRAM memory in DMA mode.
 
- ** LCD LOG **
-This example shows how to use the LCD log features. 
-
-
 @Note If the  application is using the DTCM/ITCM memories (@0x20000000/ 0x0000000: not cacheable and only accessible
       by the Cortex M7 and the  MDMA), no need for cache maintenance when the Cortex M7 and the MDMA access these RAMs.
       If the application needs to use DMA(or other masters) based access or requires more RAM, then  the user has to:
@@ -94,14 +90,12 @@ This example shows how to use the LCD log features.
   - BSP/Src/system_stm32h7xx.c     STM32H7xx system configuration source file 
   - BSP/Inc/stm32h7xx_hal_conf.h   HAL Configuration file for Cortex-M7
   - BSP/Inc/stm32h7xx_it.h         Interrupt handlers header file for Cortex-M7
-  - BSP/Inc/main.h                 Main program header file for Cortex-M7 
-  - BSP/Inc/lcd_log_conf.h         lcd_log configuration template file
+  - BSP/Inc/main.h                 Main program header file for Cortex-M7
   - BSP/Inc/stlogo.h               Image used for BSP example
   - BSP/Src/stm32h7xx_it.c         Interrupt handlers for Cortex-M7  
   - BSP/Src/main.c                 Main program for Cortex-M7
   - BSP/Src/stm32h7xx_hal_msp.c    HAL MSP module for Cortex-M7   
   - BSP/Src/lcd.c                  LCD drawing features
-  - BSP/Src/log.c                  LCD Log firmware functions
   - BSP/Src/audio_play.c           Play audio 
   - BSP/Src/audio_record.c         Record and Play audio
   - BSP/Src/sdram.c                SDRAM Read/Write features

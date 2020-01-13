@@ -37,6 +37,8 @@
 TIM_HandleTypeDef TimHandle;
 uint32_t uwPrescalerValue = 0;
 volatile uint8_t GUI_Initialized = 0;
+BSP_IO_Init_t init;
+TS_Init_t ts_init;
 
 /* Private function prototypes -----------------------------------------------*/
 static void BSP_Config(void);
@@ -114,7 +116,7 @@ int main(void)
   
   /* Initializes the SDRAM device */
 
-  BSP_SDRAM_Init();  
+  BSP_SDRAM_Init(0);  
   
   /* Enable the CRC Module */
   __HAL_RCC_CRC_CLK_ENABLE(); 
@@ -181,11 +183,12 @@ void HAL_TIM_Base_MspInit(TIM_HandleTypeDef *htim)
   */
 static void BSP_Config(void)
 {
-  /* Initialize IO expander */
-  BSP_IO_Init();
-  
+  ts_init.Width = 640;
+  ts_init.Height = 480;
+  ts_init.Orientation = TS_SWAP_NONE;
+  ts_init.Accuracy = 5;
   /* Initialize the Touch screen */
-  BSP_TS_Init(640, 480);  
+  BSP_TS_Init(0, &ts_init);  
 }
 
 /**
@@ -212,19 +215,19 @@ void BSP_Background(void)
 void BSP_Pointer_Update(void)
 {
   static GUI_PID_STATE TS_State = {0, 0, 0, 0};
-  __IO TS_StateTypeDef  ts;
+  __IO TS_State_t ts;
   uint16_t xDiff, yDiff;
   
-  BSP_TS_GetState((TS_StateTypeDef *)&ts);
+  BSP_TS_GetState(0, (TS_State_t *)&ts);
 
-  if((ts.x >= LCD_GetXSize()) ||(ts.y >= LCD_GetYSize()) ) 
+  if((ts.TouchX >= LCD_GetXSize()) ||(ts.TouchY >= LCD_GetYSize()) ) 
   {
-    ts.x = 0;
-    ts.y = 0;
+    ts.TouchX = 0;
+    ts.TouchY = 0;
   }
 
-  xDiff = (TS_State.x > ts.x) ? (TS_State.x - ts.x) : (ts.x - TS_State.x);
-  yDiff = (TS_State.y > ts.y) ? (TS_State.y - ts.y) : (ts.y - TS_State.y);
+  xDiff = (TS_State.x > ts.TouchX) ? (TS_State.x - ts.TouchX) : (ts.TouchX - TS_State.x);
+  yDiff = (TS_State.y > ts.TouchY) ? (TS_State.y - ts.TouchY) : (ts.TouchY - TS_State.y);
   
   if((TS_State.Pressed != ts.TouchDetected ) ||
      (xDiff > 20 )||
@@ -234,8 +237,8 @@ void BSP_Pointer_Update(void)
     TS_State.Layer = 0;
     if(ts.TouchDetected) 
     {
-      TS_State.x = ts.x;
-      TS_State.y = ts.y ;
+      TS_State.x = ts.TouchX;
+      TS_State.y = ts.TouchY ;
       GUI_TOUCH_StoreStateEx(&TS_State);
     }
     else

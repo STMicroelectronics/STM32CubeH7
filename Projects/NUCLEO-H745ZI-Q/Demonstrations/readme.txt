@@ -180,7 +180,7 @@ Demonstrations, Adafruit, Shield, TFT, Joystick, SD Card, Display,
 
   - This demonstration runs on STM32H745ZI/STM32H755ZI devices.
 
-  - This demonstration has been tested with STMicroelectronics NUCLEO-H745ZI-Q Rev.A
+  - This demonstration has been tested with STMicroelectronics NUCLEO-H745ZI-Q 
     board and can be easily tailored to any other supported device
     and development board.
 

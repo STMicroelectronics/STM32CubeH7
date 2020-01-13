@@ -206,9 +206,18 @@ HAL_StatusTypeDef HAL_InitTick (uint32_t TickPriority)
       /* Enable the write protection for RTC registers */
       __HAL_RTC_WRITEPROTECTION_ENABLE(&hRTC_Handle);
 
-      HAL_NVIC_SetPriority(RTC_Alarm_IRQn, TickPriority, 0U);
-      HAL_NVIC_EnableIRQ(RTC_Alarm_IRQn);
-      return HAL_OK;
+      if (TickPriority < (1UL << __NVIC_PRIO_BITS))
+      {
+        HAL_NVIC_SetPriority(RTC_Alarm_IRQn, TickPriority, 0U);
+        HAL_NVIC_EnableIRQ(RTC_Alarm_IRQn);
+
+        uwTickPrio = TickPriority;      
+        return HAL_OK;
+      }
+      else
+      {
+        return HAL_ERROR;
+      }
     }
   }
   return HAL_ERROR;

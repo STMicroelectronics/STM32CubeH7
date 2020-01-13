@@ -11,8 +11,6 @@
 
 @par Demo Description
 
-For more details please refer to the STemWin subsection in the full demonstration readme.txt file ../readme.txt
-
 The binary and Media demonstration files are available from the STM32H743I-EVAL page in the Binary Delivery section.
 
 Please refer to :

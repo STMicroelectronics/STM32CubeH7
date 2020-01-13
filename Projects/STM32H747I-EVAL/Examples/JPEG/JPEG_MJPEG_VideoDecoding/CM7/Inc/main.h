@@ -26,6 +26,7 @@
 
 #include "stm32h747i_eval.h"
 #include "stm32h747i_eval_lcd.h"
+#include "basic_gui.h"
 #include "stm32h747i_eval_sdram.h"
 #include "stm32h747i_eval_sd.h"
 

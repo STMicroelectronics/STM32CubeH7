@@ -10,14 +10,14 @@
       <TargetName>STM32H743ZI-Nucleo</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pCCUsed>5060528::V5.06 update 5 (build 528)::ARMCC</pCCUsed>
+      <pCCUsed>5060750::V5.06 update 6 (build 750)::ARMCC</pCCUsed>
       <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
           <Device>STM32H743ZITx</Device>
           <Vendor>STMicroelectronics</Vendor>
-          <PackID>STMicroelectronics.STM32H7xx_DFP.0.0.9</PackID>
-          <PackURL>http://www.ST.com/</PackURL>
+          <PackID>Keil.STM32H7xx_DFP.2.2.6</PackID>
+          <PackURL>http://www.keil.com/pack</PackURL>
           <Cpu>IRAM(0x20000000,0x20000) IRAM2(0x24000000,0x80000) IROM(0x08000000,0x200000) CPUTYPE("Cortex-M7") FPU3(DFPU) CLOCK(12000000) ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile></StartupFile>
@@ -337,7 +337,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER, STM32H743xx, USE_STM32H7XX_NUCLEO_144_MB1364</Define>
               <Undefine></Undefine>
-              <IncludePath>..\Inc;..\..\..\..\Drivers\CMSIS\Include;..\..\..\..\Drivers\CMSIS\Device\ST\STM32H7xx\Include;..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Inc;..\..\..\..\Drivers\BSP\STM32H7xx_Nucleo_144;..\..\..\..\Drivers\BSP\Components\Common;..\..\..\..\Utilities\Log;..\..\..\..\Utilities\Fonts;..\..\..\..\Utilities\CPU</IncludePath>
+              <IncludePath>..\Inc;..\..\..\..\Drivers\CMSIS\Include;..\..\..\..\Drivers\CMSIS\Device\ST\STM32H7xx\Include;..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Inc;..\..\..\..\Drivers\BSP\STM32H7xx_Nucleo;..\..\..\..\Drivers\BSP\Components\Common;..\..\..\..\Utilities\Log;..\..\..\..\Utilities\Fonts;..\..\..\..\Utilities\CPU</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -767,11 +767,6 @@
               <FilePath>..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_spi.c</FilePath>
             </File>
             <File>
-              <FileName>stm32h7xx_hal_i2s_ex.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_i2s_ex.c</FilePath>
-            </File>
-            <File>
               <FileName>stm32h7xx_hal_mmc.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_mmc.c</FilePath>
@@ -834,12 +829,12 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Drivers/BSP/STM32H7xx_Nucleo_144</GroupName>
+          <GroupName>Drivers/BSP/STM32H7xx_Nucleo</GroupName>
           <Files>
             <File>
-              <FileName>stm32h7xx_nucleo_144.c</FileName>
+              <FileName>stm32h7xx_nucleo.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\Drivers\BSP\STM32H7xx_Nucleo_144\stm32h7xx_nucleo_144.c</FilePath>
+              <FilePath>..\..\..\..\Drivers\BSP\STM32H7xx_Nucleo\stm32h7xx_nucleo.c</FilePath>
             </File>
           </Files>
         </Group>

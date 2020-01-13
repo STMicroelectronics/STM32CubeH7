@@ -145,7 +145,7 @@ STM32H747I-EVAL board LEDs are used to monitor the program execution status:
 
   - This example runs on STM32H747xx devices.
 
-  - This example has been tested with STM32H747I-EVAL rev.E board with SMPS (SD Converter) power supply 
+  - This example has been tested with STM32H747I-EVAL  board with SMPS (SD Converter) power supply 
    config and can be easily tailored to any other supported device and development board.
 
 @par How to use it ? 

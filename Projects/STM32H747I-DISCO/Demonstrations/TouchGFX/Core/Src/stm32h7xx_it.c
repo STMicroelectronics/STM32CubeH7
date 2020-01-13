@@ -36,6 +36,9 @@
 
 #ifdef USE_STM32H747I_DISCO
 #include "stm32h747i_discovery.h"
+#include "stm32h747i_discovery_ts.h"
+#include "stm32h747i_discovery_sd.h"
+#include "stm32h747i_discovery_audio.h"
 #else
 #include "stm32h747i_eval.h"
 #include "stm32h747i_eval_io.h"
@@ -45,7 +48,7 @@ extern DMA2D_HandleTypeDef hdma2d;
 extern DSI_HandleTypeDef   hdsi;
 extern LTDC_HandleTypeDef  hltdc;
 extern HCD_HandleTypeDef   hhcd;
-extern SD_HandleTypeDef    uSdHandle;
+
 
 extern struct HwJPEG_Context_s HwJPEG_Context;
 
@@ -217,5 +220,14 @@ void MDMA_IRQHandler(void)
  */
 void SDMMC1_IRQHandler(void)
 {
-  HAL_SD_IRQHandler(&uSdHandle);
+  BSP_SD_IRQHandler(0);
+}
+/**
+  * @brief  This function handles DMA2 Stream 1 interrupt request.
+  * @param  None
+  * @retval None
+  */
+void AUDIO_OUT_SAIx_DMAx_IRQHandler(void)
+{
+  BSP_AUDIO_OUT_IRQHandler(0);
 }

@@ -104,7 +104,7 @@ Game, System, CPU, SAI, QSPI, SD,
 
   - This demonstration runs on STM32H743xx/STM32H753xx devices.
     
-  - This demonstration has been tested with STMicroelectronics STM32H743I-EVAL revE
+  - This demonstration has been tested with STMicroelectronics STM32H743I-EVAL 
     evaluation boards and can be easily tailored to any other supported device 
     and development board.
      

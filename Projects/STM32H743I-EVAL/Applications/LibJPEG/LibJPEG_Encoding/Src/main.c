@@ -32,6 +32,7 @@ RGB_typedef *RGB_matrix;
 ALIGN_32BYTES(uint8_t  _aucLine[ROW_SIZE]);
 uint32_t  offset = 0;
 uint32_t line_counter = 0;
+BSP_IO_Init_t init;
 
 /* Private function prototypes -----------------------------------------------*/
 static void SystemClock_Config(void);
@@ -62,16 +63,14 @@ int main(void)
          handled in milliseconds basis.
        - Set NVIC Group Priority to 4
        - Low Level Initialization
-     */
+  */
   HAL_Init();
-  
-  BSP_IO_Init();
-  BSP_LED_Init(LED_GREEN);
-  BSP_LED_Init(LED_RED);
   
   /* Configure the system clock to 400 MHz */
   SystemClock_Config();
   
+  BSP_LED_Init(LED_GREEN);
+  BSP_LED_Init(LED_RED);
   /*##-1- LCD Configuration ##################################################*/   
   LCD_Config();
 
@@ -80,8 +79,8 @@ int main(void)
   {
     /*##-3- Init the SD Card #################################################*/
 
-    BSP_SD_Init();
-    BSP_SD_ITConfig();
+    BSP_SD_Init(0);
+    //BSP_SD_ITConfig();
         
     /*##-4- Register the file system object to the FatFs module ##############*/
     if(f_mount(&SDFatFs, (TCHAR const*)SDPath, 0) != FR_OK)
@@ -127,17 +126,14 @@ int main(void)
 static void LCD_Config(void)
 {
   /* Initialize the LCD */  
-  BSP_LCD_Init();
-  BSP_LCD_LayerDefaultInit(0, LCD_FB_START_ADDRESS);
+  BSP_LCD_Init(0, LCD_ORIENTATION_LANDSCAPE);
+ 
 
   /* Set Foreground Layer */
-  BSP_LCD_SelectLayer(0);
-
-  /* Set Display window */
-  BSP_LCD_SetLayerWindow(0, 0, 0, IMAGE_WIDTH, IMAGE_HEIGHT);
+  GUI_SetLayer(0);
   
   /* Clear the LCD Background layer */
-  BSP_LCD_Clear(LCD_COLOR_TRANSPARENT); 
+  GUI_Clear(GUI_COLOR_WHITE); 
 
 }
 

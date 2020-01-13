@@ -1,0 +1,26 @@
+/**
+  @page Demo   STM32H7B3I-DK Video Player Demonstration Firmware
+ 
+  @verbatim
+  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  * @file    readme.txt 
+  * @author  MCD Application Team 
+  * @brief   Description of STM32H7B3I-DK Video Player Demonstration
+  ******************************************************************************
+
+  @endverbatim
+
+@par Demo Description
+
+For more details please refer to the Video Player readme.txt file ../readme.txt
+
+The binary and Media demonstration files are available from the STM32H7B3I-DK page in the Binary Delivery section.
+
+Please refer to :
+
+www.st.com/en/product/stm32h7b3i-dk.html
+
+
+ * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
+ */
+ 

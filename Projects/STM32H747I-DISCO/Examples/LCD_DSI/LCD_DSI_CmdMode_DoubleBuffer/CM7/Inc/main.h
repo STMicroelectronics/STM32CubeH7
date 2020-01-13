@@ -27,12 +27,13 @@
 #include "stm32h747i_discovery.h"
 #include "stm32h747i_discovery_lcd.h"
 #include "stm32h747i_discovery_sdram.h"
-
+#include "stm32h747i_discovery_bus.h"
+#include "basic_gui.h"
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */
-
+#define LCD_FRAME_BUFFER        0xD0000000
 #endif /* __MAIN_H */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

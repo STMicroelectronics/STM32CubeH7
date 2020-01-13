@@ -158,11 +158,11 @@ compiler preprocessor (already done in the preconfigured projects provided with 
 
   - This application runs on STM32H747xx devices.
 
-  - This application has been tested with STMicroelectronics STM32H747I-EVAL RevE
+  - This application has been tested with STMicroelectronics STM32H747I-EVAL 
     evaluation boards and can be easily tailored to any other supported device
     and development board.
 
-  - STM32H747I-EVAL RevE Set-up
+  - STM32H747I-EVAL  Set-up
     - Connect the STM32H747I-EVAL board to the PC through 'USB micro A-Male
       to A-Male' cable to the connector:
       - CN14 : to use USB High Speed (HS)

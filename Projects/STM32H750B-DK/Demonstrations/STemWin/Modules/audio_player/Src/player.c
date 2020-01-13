@@ -645,16 +645,18 @@ static AUDIO_ErrorTypeDef PlayerGetFileInfo(PLAYER_Instance_t *Instance, char * 
 static uint8_t PlayerStreamInit(uint32_t AudioVol, uint32_t AudioFreq)
 {
   uint8_t retval = 0;
+  BSP_AUDIO_Init_t audioPlayInit;  
 
+  audioPlayInit.Device = AUDIO_OUT_DEVICE_HEADPHONE;
+  audioPlayInit.ChannelsNbr = 2;
+  audioPlayInit.SampleRate = AudioFreq;
+  audioPlayInit.BitsPerSample = AUDIO_RESOLUTION_16B;
+  audioPlayInit.Volume = AudioVol;
+  
   /* Initialize the Audio codec and all related peripherals (I2S, I2C, IOExpander, IOs...) */
-  if(BSP_AUDIO_OUT_Init(OUTPUT_DEVICE_BOTH, AudioVol, AudioFreq) != 0)
+  if(BSP_AUDIO_OUT_Init(0, &audioPlayInit) != BSP_ERROR_NONE)
   {
     retval = 1;
-  }
-  else
-  {
-    BSP_AUDIO_OUT_SetAudioFrameSlot((SAI_SLOTACTIVE_0 | SAI_SLOTACTIVE_2));
-    retval = 0;
   }
 
   return retval;
@@ -860,6 +862,8 @@ static void NotifyDecoder(PLAYER_Instance_t *Instance)
 */
 AUDIO_ErrorTypeDef PLAYER_Init(uint8_t Volume, PLAYER_HANDLE_h *pHandle)
 {
+  BSP_AUDIO_Init_t audioPlayInit;
+  
   /* Allocate Player Handle */
   PLAYER_Instance_t *Instance = PLAYER_MALLOC(sizeof(PLAYER_Instance_t));  /* 0x0E8: 232 */
   if (NULL == Instance)
@@ -921,15 +925,17 @@ AUDIO_ErrorTypeDef PLAYER_Init(uint8_t Volume, PLAYER_HANDLE_h *pHandle)
     return AUDIO_ERROR_MEM;
   }
 
+  audioPlayInit.Device = AUDIO_OUT_DEVICE_HEADPHONE;
+  audioPlayInit.ChannelsNbr = 2;
+  audioPlayInit.SampleRate = I2S_AUDIOFREQ_48K;
+  audioPlayInit.BitsPerSample = AUDIO_RESOLUTION_16B;
+  audioPlayInit.Volume = Instance->uwVolumeRef;
+  
   /* Initialize the Audio codec and all related peripherals (I2S, I2C, IOExpander, IOs...) */
-  if(BSP_AUDIO_OUT_Init(OUTPUT_DEVICE_AUTO, Instance->uwVolumeRef, I2S_AUDIOFREQ_48K) != AUDIO_ERROR_NONE)
+  if(BSP_AUDIO_OUT_Init(0, &audioPlayInit) != AUDIO_ERROR_NONE)
   {
     PLAYER_DeInit(*pHandle);
     return AUDIO_ERROR_MEM;
-  }
-  else
-  {
-    BSP_AUDIO_OUT_SetAudioFrameSlot((SAI_SLOTACTIVE_0 | SAI_SLOTACTIVE_2));
   }
 
   Instance->CurrentAudioState = AUDIO_STATE_STOP;
@@ -953,7 +959,7 @@ AUDIO_ErrorTypeDef PLAYER_DeInit(PLAYER_HANDLE_h pHandle)
     /* Immediatly stop HW */
     if(Instance->CurrentAudioState != AUDIO_STATE_INIT)
     {
-      BSP_AUDIO_OUT_DeInit();
+      BSP_AUDIO_OUT_DeInit(0);
       Instance->CurrentAudioState = AUDIO_STATE_INIT;
     }
 
@@ -1233,7 +1239,7 @@ AUDIO_ErrorTypeDef PLAYER_Start(PLAYER_HANDLE_h pHandle, char *file_name)
 
   if(Instance->CurrentAudioState != AUDIO_STATE_INIT)
   {
-    BSP_AUDIO_OUT_DeInit();
+    BSP_AUDIO_OUT_DeInit(0);
   }
 
 #ifdef PLAYER_DISABLE_SRC
@@ -1309,7 +1315,7 @@ AUDIO_ErrorTypeDef PLAYER_Start(PLAYER_HANDLE_h pHandle, char *file_name)
       }
 
       /*DMA stream from output double buffer to codec in Circular mode launch*/
-      BSP_AUDIO_OUT_Play((uint16_t*)&(Instance->Buffers.BufferCtl.buff[0]), Instance->Buffers.BufferCtl.size);
+      BSP_AUDIO_OUT_Play(0, (uint8_t*)&(Instance->Buffers.BufferCtl.buff[0]), Instance->Buffers.BufferCtl.size);
 
       /* Set Volume */
       // BSP_AUDIO_OUT_SetVolume(Instance->uwVolumeRef);
@@ -1450,7 +1456,7 @@ AUDIO_ErrorTypeDef PLAYER_Stop(PLAYER_HANDLE_h pHandle)
   Instance->CurrentAudioState = AUDIO_STATE_STOP;
 
   /*Stop the output audio stream*/
-  BSP_AUDIO_OUT_Stop(CODEC_PDWN_HW);
+  BSP_AUDIO_OUT_Stop(0);
 
   /* Close Player */
   PLAYER_Close(Instance);
@@ -1520,7 +1526,7 @@ AUDIO_ErrorTypeDef PLAYER_SetConfig(PLAYER_HANDLE_h pHandle, AUDIO_PLAYBACK_CfgT
     {
       Instance->uwVolumeRef += 10;
     }
-    BSP_AUDIO_OUT_SetVolume(Instance->uwVolumeRef);
+    BSP_AUDIO_OUT_SetVolume(0, Instance->uwVolumeRef);
     break;
 
   case AUDIO_CFG_VOLUME_DOWN:
@@ -1528,30 +1534,30 @@ AUDIO_ErrorTypeDef PLAYER_SetConfig(PLAYER_HANDLE_h pHandle, AUDIO_PLAYBACK_CfgT
     {
       Instance->uwVolumeRef -= 10;
     }
-    BSP_AUDIO_OUT_SetVolume(Instance->uwVolumeRef);
+    BSP_AUDIO_OUT_SetVolume(0, Instance->uwVolumeRef);
     break;
 
   case AUDIO_CFG_VOLUME_SET:
-    BSP_AUDIO_OUT_SetVolume(Instance->uwVolumeRef);
+    BSP_AUDIO_OUT_SetVolume(0, Instance->uwVolumeRef);
     break;
 
   case AUDIO_CFG_MUTE_ON:
-    BSP_AUDIO_OUT_SetMute(MUTE_ON);
+    BSP_AUDIO_OUT_Mute(0);
     break;
 
   case AUDIO_CFG_MUTE_OFF:
-    BSP_AUDIO_OUT_SetMute(MUTE_OFF);
+    BSP_AUDIO_OUT_UnMute(0);
     break;
 
   case AUDIO_CFG_PAUSE:
-    if(BSP_AUDIO_OUT_Pause() == AUDIO_OK)
+    if(BSP_AUDIO_OUT_Pause(0) == BSP_ERROR_NONE)
     {
       Instance->CurrentAudioState = AUDIO_STATE_PAUSE;
     }
     break;
 
   case AUDIO_CFG_RESUME:
-    if(BSP_AUDIO_OUT_Resume() == AUDIO_OK)
+    if(BSP_AUDIO_OUT_Resume(0) == BSP_ERROR_NONE)
     {
       Instance->CurrentAudioState = AUDIO_STATE_PLAY;
     }
@@ -1571,7 +1577,7 @@ AUDIO_ErrorTypeDef PLAYER_SetConfig(PLAYER_HANDLE_h pHandle, AUDIO_PLAYBACK_CfgT
 * @param  None
 * @retval None
 */
-void BSP_AUDIO_OUT_TransferComplete_CallBack(void)
+void BSP_AUDIO_OUT_TransferComplete_CallBack(uint32_t Instance)
 {
 #ifdef AUDIO_DEBUG
   /* For Debug purpos */
@@ -1605,7 +1611,7 @@ void BSP_AUDIO_OUT_TransferComplete_CallBack(void)
 * @param  None
 * @retval None
 */
-void BSP_AUDIO_OUT_HalfTransfer_CallBack(void)
+void BSP_AUDIO_OUT_HalfTransfer_CallBack(uint32_t Instance)
 {
   /* Iterate on all created instance ! */
   for(uint8_t instance=0; instance < MAX_PLAYER_INSTANCES_NBR; instance++)
@@ -1630,7 +1636,7 @@ void BSP_AUDIO_OUT_HalfTransfer_CallBack(void)
   * @param  None
   * @retval None
   */
-void BSP_AUDIO_OUT_Error_CallBack(void)
+void BSP_AUDIO_OUT_Error_CallBack(uint32_t Instance)
 {
   /* Iterate on all created instance ! */
   for(uint8_t instance=0; instance < MAX_PLAYER_INSTANCES_NBR; instance++)
@@ -1719,11 +1725,11 @@ uint32_t PLAYER_SeekToTime(PLAYER_HANDLE_h pHandle, uint32_t NewTime)
             DecodeAudioBuffer(Instance, 0);
             if(Instance->Buffers.BufferCtl.fptr > 0)
             {
-              BSP_AUDIO_OUT_Play((uint16_t*)&(Instance->Buffers.BufferCtl.buff[0]), Instance->Buffers.BufferCtl.size);
+              BSP_AUDIO_OUT_Play(0, (uint8_t*)&(Instance->Buffers.BufferCtl.buff[0]), Instance->Buffers.BufferCtl.size);
               if(PreviousAudioState == AUDIO_STATE_PAUSE)
               {
                 /* Pause Player after seeking */
-                if(BSP_AUDIO_OUT_Pause() != AUDIO_OK)
+                if(BSP_AUDIO_OUT_Pause(0) != BSP_ERROR_NONE)
                 {
                   return 1;
                 }

@@ -366,7 +366,7 @@
                     <state>$PROJ_DIR$\..\..\..\..\..\Middlewares\Third_Party\FatFs\src\drivers</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\Middlewares\Third_Party\FreeRTOS\Source\portable\IAR\ARM_CM7\r0p1</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Inc</state>
-                    <state>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\STM32H750B-Discovery</state>
+                    <state>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\STM32H750B-DK</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\Drivers\CMSIS\Device\ST\STM32H7xx\Include</state>
                     <state>$PROJ_DIR$\..\Gui\target</state>
                     <state>$PROJ_DIR$\..\Core\Inc</state>
@@ -376,6 +376,7 @@
                     <state>$PROJ_DIR$\..\..\..\..\..\Utilities\JPEG</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\Middlewares\ST\STM32_USB_Host_Library\Core\Inc</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\Middlewares\ST\STM32_USB_Host_Library\Class\MSC\Inc</state>
+                    <state>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\Components\Common</state>
                 </option>
                 <option>
                     <name>CCStdIncCheck</name>
@@ -1107,130 +1108,139 @@
                             <name>$PROJ_DIR$\..\Gui\generated\fonts\src\ApplicationFontProvider.cpp</name>
                         </file>
                         <file>
-                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\Font_Asap_Bold_10_4bpp.cpp</name>
+                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\CachedFont.cpp</name>
                         </file>
                         <file>
-                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\Font_Asap_Bold_12_4bpp.cpp</name>
+                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\Font_Asap_Bold_10_4bpp_0.cpp</name>
                         </file>
                         <file>
-                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\Font_Asap_Bold_14_4bpp.cpp</name>
+                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\Font_Asap_Bold_12_4bpp_0.cpp</name>
                         </file>
                         <file>
-                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\Font_Asap_Bold_16_4bpp.cpp</name>
+                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\Font_Asap_Bold_14_4bpp_0.cpp</name>
                         </file>
                         <file>
-                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\Font_Asap_Bold_18_4bpp.cpp</name>
+                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\Font_Asap_Bold_16_4bpp_0.cpp</name>
                         </file>
                         <file>
-                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\Font_Asap_Bold_20_4bpp.cpp</name>
+                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\Font_Asap_Bold_18_4bpp_0.cpp</name>
                         </file>
                         <file>
-                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\Font_Asap_Bold_22_4bpp.cpp</name>
+                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\Font_Asap_Bold_20_4bpp_0.cpp</name>
                         </file>
                         <file>
-                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\Font_Asap_Bold_24_4bpp.cpp</name>
+                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\Font_Asap_Bold_22_4bpp_0.cpp</name>
                         </file>
                         <file>
-                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\Font_Asap_Bold_25_4bpp.cpp</name>
+                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\Font_Asap_Bold_24_4bpp_0.cpp</name>
                         </file>
                         <file>
-                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\Font_Asap_Bold_26_4bpp.cpp</name>
+                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\Font_Asap_Bold_25_4bpp_0.cpp</name>
                         </file>
                         <file>
-                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\Font_Asap_Bold_40_4bpp.cpp</name>
+                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\Font_Asap_Bold_26_4bpp_0.cpp</name>
                         </file>
                         <file>
-                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\Font_Asap_Bold_60_4bpp.cpp</name>
+                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\Font_Asap_Bold_40_4bpp_0.cpp</name>
                         </file>
                         <file>
-                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\Font_Asap_Bold_94_4bpp.cpp</name>
+                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\Font_Asap_Bold_60_4bpp_0.cpp</name>
                         </file>
                         <file>
-                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\Font_Asap_Regular_26_4bpp.cpp</name>
+                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\Font_Asap_Bold_94_4bpp_0.cpp</name>
                         </file>
                         <file>
-                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\Font_Exo2_Medium_18_4bpp.cpp</name>
+                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\Font_Asap_Regular_26_4bpp_0.cpp</name>
                         </file>
                         <file>
-                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\Font_Exo2_Medium_24_4bpp.cpp</name>
+                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\Font_Exo2_Medium_18_4bpp_0.cpp</name>
                         </file>
                         <file>
-                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\Font_Exo2_Medium_26_4bpp.cpp</name>
+                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\Font_Exo2_Medium_24_4bpp_0.cpp</name>
                         </file>
                         <file>
-                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\Font_Exo2_Medium_30_4bpp.cpp</name>
+                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\Font_Exo2_Medium_26_4bpp_0.cpp</name>
                         </file>
                         <file>
-                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\Font_Exo2_Medium_34_4bpp.cpp</name>
+                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\Font_Exo2_Medium_30_4bpp_0.cpp</name>
                         </file>
                         <file>
-                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\Font_Exo2_Medium_40_4bpp.cpp</name>
+                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\Font_Exo2_Medium_34_4bpp_0.cpp</name>
                         </file>
                         <file>
-                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\Font_Exo2_Medium_80_4bpp.cpp</name>
+                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\Font_Exo2_Medium_40_4bpp_0.cpp</name>
                         </file>
                         <file>
-                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\Font_Exo2_SemiBold_25_4bpp.cpp</name>
+                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\Font_Exo2_Medium_80_4bpp_0.cpp</name>
                         </file>
                         <file>
-                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\Font_OpenSans_Italic_20_4bpp.cpp</name>
+                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\Font_Exo2_SemiBold_25_4bpp_0.cpp</name>
                         </file>
                         <file>
-                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\Font_OpenSans_Regular_10_4bpp.cpp</name>
+                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\Font_OpenSans_Italic_20_4bpp_0.cpp</name>
                         </file>
                         <file>
-                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\Font_OpenSans_Regular_16_4bpp.cpp</name>
+                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\Font_OpenSans_Regular_10_4bpp_0.cpp</name>
                         </file>
                         <file>
-                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\Font_OpenSans_Semibold_14_4bpp.cpp</name>
+                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\Font_OpenSans_Regular_16_4bpp_0.cpp</name>
                         </file>
                         <file>
-                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\Font_OpenSans_Semibold_18_4bpp.cpp</name>
+                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\Font_OpenSans_Regular_16_4bpp_4.cpp</name>
                         </file>
                         <file>
-                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\Font_OpenSans_Semibold_20_4bpp.cpp</name>
+                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\Font_OpenSans_Semibold_14_4bpp_0.cpp</name>
                         </file>
                         <file>
-                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\Font_OpenSans_Semibold_23_4bpp.cpp</name>
+                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\Font_OpenSans_Semibold_18_4bpp_0.cpp</name>
                         </file>
                         <file>
-                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\Font_OpenSans_Semibold_26_4bpp.cpp</name>
+                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\Font_OpenSans_Semibold_20_4bpp_0.cpp</name>
                         </file>
                         <file>
-                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\Font_OpenSans_SemiboldItalic_13_4bpp.cpp</name>
+                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\Font_OpenSans_Semibold_23_4bpp_0.cpp</name>
                         </file>
                         <file>
-                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\Font_SairaCondensed_Medium_14_4bpp.cpp</name>
+                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\Font_OpenSans_Semibold_26_4bpp_0.cpp</name>
                         </file>
                         <file>
-                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\Font_SairaCondensed_Medium_16_4bpp.cpp</name>
+                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\Font_OpenSans_SemiboldItalic_13_4bpp_0.cpp</name>
                         </file>
                         <file>
-                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\Font_SairaCondensed_Medium_20_4bpp.cpp</name>
+                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\Font_SairaCondensed_Medium_14_4bpp_0.cpp</name>
                         </file>
                         <file>
-                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\Font_SairaCondensed_Medium_22_4bpp.cpp</name>
+                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\Font_SairaCondensed_Medium_16_4bpp_0.cpp</name>
                         </file>
                         <file>
-                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\Font_SairaCondensed_Medium_28_4bpp.cpp</name>
+                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\Font_SairaCondensed_Medium_20_4bpp_0.cpp</name>
                         </file>
                         <file>
-                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\Font_SairaCondensed_SemiBold_12_4bpp.cpp</name>
+                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\Font_SairaCondensed_Medium_22_4bpp_0.cpp</name>
                         </file>
                         <file>
-                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\Font_SairaCondensed_SemiBold_14_4bpp.cpp</name>
+                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\Font_SairaCondensed_Medium_28_4bpp_0.cpp</name>
                         </file>
                         <file>
-                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\Font_SairaCondensed_SemiBold_16_4bpp.cpp</name>
+                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\Font_SairaCondensed_SemiBold_12_4bpp_0.cpp</name>
                         </file>
                         <file>
-                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\Font_SairaCondensed_SemiBold_20_4bpp.cpp</name>
+                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\Font_SairaCondensed_SemiBold_14_4bpp_0.cpp</name>
                         </file>
                         <file>
-                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\Font_SairaSemiCondensed_Medium_34_4bpp.cpp</name>
+                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\Font_SairaCondensed_SemiBold_16_4bpp_0.cpp</name>
                         </file>
                         <file>
-                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\FontGetters.cpp</name>
+                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\Font_SairaCondensed_SemiBold_20_4bpp_0.cpp</name>
+                        </file>
+                        <file>
+                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\Font_SairaSemiCondensed_Medium_34_4bpp_0.cpp</name>
+                        </file>
+                        <file>
+                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\FontCache.cpp</name>
+                        </file>
+                        <file>
+                            <name>$PROJ_DIR$\..\Gui\generated\fonts\src\GeneratedFont.cpp</name>
                         </file>
                         <file>
                             <name>$PROJ_DIR$\..\Gui\generated\fonts\src\Kerning_Asap_Bold_10_4bpp.cpp</name>
@@ -2842,19 +2852,34 @@
                 <file>
                     <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\Components\ft5336\ft5336.c</name>
                 </file>
+                <file>
+                    <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\Components\ft5336\ft5336_reg.c</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\Components\mt25tl01g\mt25tl01g.c</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\Components\mt48lc4m32b2\mt48lc4m32b2.c</name>
+                </file>
             </group>
-            <file>
-                <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\STM32H750B-Discovery\stm32h750b_discovery.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\STM32H750B-Discovery\stm32h750b_discovery_qspi.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\STM32H750B-Discovery\stm32h750b_discovery_sdram.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\STM32H750B-Discovery\stm32h750b_discovery_ts.c</name>
-            </file>
+            <group>
+                <name>STM32H750B-DK</name>
+                <file>
+                    <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\STM32H750B-DK\stm32h750b_discovery.c</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\STM32H750B-DK\stm32h750b_discovery_bus.c</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\STM32H750B-DK\stm32h750b_discovery_qspi.c</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\STM32H750B-DK\stm32h750b_discovery_sdram.c</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\STM32H750B-DK\stm32h750b_discovery_ts.c</name>
+                </file>
+            </group>
         </group>
         <group>
             <name>CMSIS</name>
@@ -2887,6 +2912,9 @@
             </file>
             <file>
                 <name>$PROJ_DIR$\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_dsi.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_exti.c</name>
             </file>
             <file>
                 <name>$PROJ_DIR$\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_gpio.c</name>

@@ -123,6 +123,8 @@ uint8_t k_BspInit(void)
 {
   uint8_t RetVal = 0;
   uint8_t counter = 10;
+  
+  TS_Init_t hTS;  
 
   /* Enable CRC to Unlock GUI */
   __HAL_RCC_CRC_CLK_ENABLE();
@@ -132,7 +134,7 @@ uint8_t k_BspInit(void)
   BSP_LED_Init(LED_RED);
 
   /* Init Wakeup/Tamper push-button in EXTI Mode */
-  BSP_PB_Init(BUTTON_WAKEUP, BUTTON_MODE_EXTI);
+  BSP_PB_Init(BUTTON_USER, BUTTON_MODE_EXTI);
 
   BSP_ConfigSerial();
 
@@ -140,29 +142,34 @@ uint8_t k_BspInit(void)
   printf( "CPU running at %luMHz, Peripherals at %luMHz/%luMHz\n", (HAL_RCCEx_GetD1SysClockFreq()/1000000U), (HAL_RCC_GetPCLK1Freq()/1000000U), (HAL_RCC_GetPCLK2Freq()/1000000U) );
 
   /* Initialize the SDRAM memory */
-  if ((RetVal = BSP_SDRAM_Init()) != SDRAM_OK)
+  if ((RetVal = BSP_SDRAM_Init(0)) != BSP_ERROR_NONE)
   {
     printf("Failed to initialize the SDRAM !! (Error %d)\n", RetVal);
     return 0;
   }
 
+  hTS.Width = 480;
+  hTS.Height = 272;
+  hTS.Orientation =TS_SWAP_XY ;
+  hTS.Accuracy = 5;
+  
   do
   {
-    RetVal = BSP_TS_Init(480, 272);
+    RetVal = BSP_TS_Init(0, &hTS);
     HAL_Delay(100);
     counter--;
   }
-  while (counter && (RetVal != TS_OK));
+  while (counter && (RetVal != BSP_ERROR_NONE));
 
-  if(RetVal != TS_OK)
+  if(RetVal != BSP_ERROR_NONE)
   {
     printf("Failed to initialize TS !! (Error %d)\n", RetVal);
     return 0;
   }
 
 #if defined(USE_TS_INT)
-  RetVal = BSP_TS_ITConfig();
-  if(RetVal != TS_OK)
+  RetVal = BSP_TS_EnableIT(0);
+  if(RetVal != BSP_ERROR_NONE)
   {
     printf("Failed to initialize TS (IT) !! (Error %d)\n", RetVal);
     return 0;
@@ -192,30 +199,32 @@ uint8_t k_BspInit(void)
 uint8_t k_TouchUpdate(void)
 {
   static GUI_PID_STATE TS_State = {0, 0, 0, 0};
-  __IO TS_StateTypeDef  ts;
+  __IO TS_State_t  ts;
   uint16_t xDiff, yDiff;
+  
 
-  BSP_TS_GetState((TS_StateTypeDef *)&ts);
+  BSP_TS_GetState(0, (TS_State_t *)&ts);
+  
 
-  if((ts.touchX[0] >= LCD_GetXSize()) ||(ts.touchY[0] >= LCD_GetYSize()) )
+  if((ts.TouchX >= LCD_GetXSize()) ||(ts.TouchY >= LCD_GetYSize()) )
   {
-    ts.touchX[0] = 0;
-    ts.touchY[0] = 0;
+    ts.TouchX = 0;
+    ts.TouchY = 0;
   }
 
-  xDiff = (TS_State.x > ts.touchX[0]) ? (TS_State.x - ts.touchX[0]) : (ts.touchX[0] - TS_State.x);
-  yDiff = (TS_State.y > ts.touchY[0]) ? (TS_State.y - ts.touchY[0]) : (ts.touchY[0] - TS_State.y);
+  xDiff = (TS_State.x > ts.TouchX) ? (TS_State.x - ts.TouchX) : (ts.TouchX - TS_State.x);
+  yDiff = (TS_State.y > ts.TouchY) ? (TS_State.y - ts.TouchY) : (ts.TouchY - TS_State.y);
 
-  if((TS_State.Pressed != ts.touchDetected ) ||
+  if((TS_State.Pressed != ts.TouchDetected ) ||
      (xDiff > 8 )||
        (yDiff > 8))
   {
-    TS_State.Pressed = ts.touchDetected;
+    TS_State.Pressed = ts.TouchDetected;
     TS_State.Layer = SelLayer;
-    if(ts.touchDetected)
+    if(ts.TouchDetected)
     {
-      TS_State.x = ts.touchX[0];
-      TS_State.y = ts.touchY[0] ;
+      TS_State.x = ts.TouchX;
+      TS_State.y = ts.TouchY ;
       GUI_TOUCH_StoreStateEx(&TS_State);
     }
     else

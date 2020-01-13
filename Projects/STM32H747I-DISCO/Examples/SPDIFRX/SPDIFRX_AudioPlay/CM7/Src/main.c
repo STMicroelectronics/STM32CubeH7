@@ -44,17 +44,18 @@ typedef enum AUDIO_BufferStatus {
 /* Private variables ---------------------------------------------------------*/
 SAI_HandleTypeDef           SaiOutputHandle;
 SPDIFRX_HandleTypeDef       SpdifrxHandle;
-AUDIO_DrvTypeDef            *audio_drv;
 __IO uint32_t               spdifrxBuf[PLAY_BUFF_SIZE];
 __IO uint16_t               saiOutPlayBuff[PLAY_BUFF_SIZE];
 __IO AUDIO_BufferStatus_e   bufferStatus = BUFFER_OFFSET_NONE;
-
+WM8994_IO_t              IOCtx;
 /* Private function prototypes -----------------------------------------------*/
 static void SystemClock_Config(void);
 static void MPU_Config(void);
 static void CPU_CACHE_Enable(void);
 static void Playback_Init(void);
-
+static WM8994_Object_t   WM8994Obj;
+static AUDIO_Drv_t                     *Audio_Drv = NULL;
+void                                   *Audio_CompObj = NULL;
 /* Private functions ---------------------------------------------------------*/
 
 /**
@@ -94,13 +95,12 @@ int main(void)
 
   /* Initialize playback */
   Playback_Init();
-
   /* Start the playback */
-  if(0 != audio_drv->Play(AUDIO_I2C_ADDRESS, NULL, 0))
+ 
+  if(Audio_Drv->Play(Audio_CompObj) != 0)
   {
     Error_Handler();
   }
-
   /* Start SPDIFRX audio Reception in DMA circular mode */
   HAL_SPDIFRX_ReceiveDataFlow_DMA(&SpdifrxHandle, (uint32_t *)spdifrxBuf, PLAY_BUFF_SIZE);
   
@@ -248,7 +248,8 @@ static void SystemClock_Config(void)
 static void Playback_Init(void)
 {
   RCC_PeriphCLKInitTypeDef RCC_PeriphCLKInitStruct;
-  
+  uint32_t id;
+  WM8994_Init_t codec_init;
   /* Configure PLLSAI prescalers */
   /* PLL2SAI_VCO: VCO_429M
      SAI_CLK(first level) = PLLSAI_VCO/PLLSAIP = 429/38 = 11.289 Mhz */
@@ -303,18 +304,41 @@ static void Playback_Init(void)
   /* Enable SAI to generate clock used by audio driver */
   __HAL_SAI_ENABLE(&SaiOutputHandle);
   
-  /* Initialize audio driver */
-  if(WM8994_ID != wm8994_drv.ReadID(AUDIO_I2C_ADDRESS))
+
+    /* Configure the audio driver */
+  IOCtx.Address     = AUDIO_I2C_ADDRESS;
+  IOCtx.Init        = BSP_I2C4_Init;
+  IOCtx.DeInit      = BSP_I2C4_DeInit;
+  IOCtx.ReadReg     = BSP_I2C4_ReadReg16;
+  IOCtx.WriteReg    = BSP_I2C4_WriteReg16;
+  IOCtx.GetTick     = BSP_GetTick;
+  
+    /* Initialize audio driver */
+  if(WM8994_ReadID(&WM8994Obj, &id) != WM8994_OK)
   {
     Error_Handler();
   }
-  
-  audio_drv = &wm8994_drv;
-  audio_drv->Reset(AUDIO_I2C_ADDRESS);  
-  if(0 != audio_drv->Init(AUDIO_I2C_ADDRESS, OUTPUT_DEVICE_HEADPHONE, 40, AUDIO_FREQUENCY))
+  else if(id != WM8994_ID)
   {
     Error_Handler();
-  }  
+  }
+  else
+  {
+    Audio_Drv = (AUDIO_Drv_t *) &WM8994_Driver;
+    Audio_CompObj = &WM8994Obj;
+  }
+  codec_init.Resolution  =0;
+  /* Fill codec_init structure */
+  codec_init.Frequency    = AUDIO_FREQUENCY;
+  codec_init.InputDevice  = WM8994_IN_NONE;
+  codec_init.OutputDevice =WM8994_OUT_HEADPHONE;
+  
+  /* Convert volume before sending to the codec */
+  codec_init.Volume       = VOLUME_OUT_CONVERT(40);
+  if(Audio_Drv->Init(Audio_CompObj, &codec_init) != 0)
+  {
+    Error_Handler();
+  }
   
   /* Configure SPDIFRX Peripheral */
   SpdifrxHandle.Instance = SPDIFRX;

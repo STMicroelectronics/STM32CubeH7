@@ -8,13 +8,15 @@
 ###############################################################################
 
 # Relative location of the TouchGFX framework from root of application
-touchgfx_path := ../../../../../Middlewares/ST/TouchGFX/touchgfx/
+touchgfx_path := ../../../../../Middlewares/ST/TouchGFX/touchgfx
 
 # Location of the TouchGFX Environment
-touchgfx_env := C:/TouchGFX/4.10.0/env
+touchgfx_env := D:/TouchGFX/4.12.3/env
 # Optional additional compiler flags
 user_cflags := -DUSE_BPP=24
 opaque_image_format := RGB888
 non_opaque_image_format := ARGB8888
 dither_algorithm := 2
 alpha_dither := yes
+
+text_converter_options := remap A4 BPP24

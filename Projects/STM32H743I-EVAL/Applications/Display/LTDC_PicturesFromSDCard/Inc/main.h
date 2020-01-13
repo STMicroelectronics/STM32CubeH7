@@ -26,7 +26,7 @@
 #include "stm32h743i_eval_io.h"
 #include "stm32h743i_eval_lcd.h"
 #include "stm32h743i_eval_sdram.h"
-
+#include "basic_gui.h"
 #include "fatfs_storage.h"
 
 /* FatFs includes component */
@@ -39,7 +39,20 @@
 #define INTERNAL_BUFFER  0xD0300000
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */
+#define ARGB8888_BYTE_PER_PIXEL       4
 
+/* LTDC background layer address 800x480 in ARGB8888 following the foreground layer */
+#define LCD_BG_LAYER_ADDRESS          LCD_LAYER_0_ADDRESS + (LCD_DEFAULT_WIDTH * LCD_DEFAULT_HEIGHT * ARGB8888_BYTE_PER_PIXEL)
+
+#define INTERNAL_BUFFER_START_ADDRESS LCD_BG_LAYER_ADDRESS + (LCD_DEFAULT_WIDTH * LCD_DEFAULT_HEIGHT * ARGB8888_BYTE_PER_PIXEL)
+
+/** @brief LTDC Background layer index
+ */
+#define LTDC_ACTIVE_LAYER_BACKGROUND      ((uint32_t) 0)
+
+/** @brief LTDC Foreground layer index
+ */
+#define LTDC_ACTIVE_LAYER_FOREGROUND      ((uint32_t) 1)
 #endif /* __MAIN_H */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

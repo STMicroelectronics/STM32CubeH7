@@ -24,8 +24,10 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm32h7xx_hal.h"
 #include "stm32h743i_eval.h"
-#include "audio.h"
+#include "stm32h743i_eval_bus.h"
+/* Include audio component Driver */
 #include "../Components/wm8994/wm8994.h"
+#include "../Components/Common/audio.h"
 #include "pdm2pcm_glo.h"
 
 /* Exported types ------------------------------------------------------------*/
@@ -33,7 +35,7 @@
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */
 void Error_Handler(void);
-
+#define VOLUME_OUT_CONVERT(Volume)    (((Volume) > 100)? 63:((uint8_t)(((Volume) * 63) / 100)))
 /* SAI PDM input definitions */
 /* SAI input peripheral configuration defines */
 #define AUDIO_IN_SAI_PDMx                           SAI4_Block_A
@@ -88,7 +90,9 @@ void Error_Handler(void);
 
 /* Select the interrupt preemption priority and subpriority for the DMA interrupt */
 #define AUDIO_IRQ_PREPRIO                    ((uint32_t)0x0E)
-
+#define AUDIO_IN_DEVICE_DIGITAL_MIC           0x40U
+#define AUDIO_OUT_DEVICE_HEADPHONE            WM8994_OUT_HEADPHONE
+#define AUDIO_I2C_ADDRESS                     0x34U
 #endif /* __MAIN_H */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

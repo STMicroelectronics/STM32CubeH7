@@ -33,7 +33,6 @@
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-extern SD_HandleTypeDef uSdHandle;
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 
@@ -145,17 +144,6 @@ void SysTick_Handler(void)
 /*  available peripheral interrupt handler's name please refer to the startup */
 /*  file (startup_stm32h7xx.s).                                               */
 /******************************************************************************/
-
-/**
-* @brief  This function handles SDMMC interrupt request.
-* @param  None
-* @retval None
-*/
-void SDMMC1_IRQHandler(void)
-{
-
-  HAL_SD_IRQHandler(&uSdHandle);
-}
 
 /**
   * @}

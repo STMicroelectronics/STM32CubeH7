@@ -27,7 +27,6 @@
 /* Private macro ------------------------------------------------------------- */
 /* Private variables --------------------------------------------------------- */
 extern HCD_HandleTypeDef hhcd;
-extern SD_HandleTypeDef uSdHandle;
 /* Private function prototypes ----------------------------------------------- */
 /* Private functions --------------------------------------------------------- */
 
@@ -161,7 +160,7 @@ void OTG_HS_IRQHandler(void)
   */
 void EXTI9_5_IRQHandler(void)
 {
-  HAL_GPIO_EXTI_IRQHandler(MFX_IRQOUT_PIN);
+  BSP_JOY_IRQHandler(JOY1, JOY_ALL);
 }
 
 /**
@@ -170,7 +169,7 @@ void EXTI9_5_IRQHandler(void)
   */
 void SDMMC1_IRQHandler(void)
 {
-  HAL_SD_IRQHandler(&uSdHandle);
+ BSP_SD_IRQHandler(0);
 }
 
 /**
@@ -180,7 +179,8 @@ void SDMMC1_IRQHandler(void)
   */
 void EXTI15_10_IRQHandler(void)
 {
-  HAL_GPIO_EXTI_IRQHandler(TAMPER_BUTTON_PIN);
+
+  BSP_PB_IRQHandler(BUTTON_TAMPER);
 }
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

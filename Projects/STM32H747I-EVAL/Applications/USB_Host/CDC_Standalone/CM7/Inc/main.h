@@ -27,11 +27,15 @@
 #include "stm32h747i_eval.h"
 #include "stm32h747i_eval_io.h"
 #include "stm32h747i_eval_sd.h"
+#include "stm32h747i_eval_sd.h"
 #include "usbh_cdc.h"
-#include "lcd_log.h"
-#include "ff.h"
+#include "lcd.h"
 #include "ff_gen_drv.h"
 #include "sd_diskio.h"
+#include "lcd_trace.h"
+#include "basic_gui.h"
+#include "utilities_conf.h"
+
 
 /* Exported constants --------------------------------------------------------*/
 #define FILEMGR_LIST_DEPDTH                     24
@@ -144,8 +148,8 @@ void CDC_SelectItem(uint8_t **menu, uint8_t item);
 void CDC_ChangeSelectMode(CDC_DEMO_SelectMode select_mode);
 void CDC_SelectSettingsItem(uint8_t item);
 void CDC_MenuProcess(void);
-void CDC_Settings_ProbeKey(JOYState_TypeDef state);
-void CDC_SendFile_ProbeKey(JOYState_TypeDef state);
+void CDC_Settings_ProbeKey(uint32_t state);
+void CDC_SendFile_ProbeKey(uint32_t state);
 uint8_t SD_StorageInit(void);
 FRESULT SD_StorageParse(void);
 void LCD_ClearTextZone(void);

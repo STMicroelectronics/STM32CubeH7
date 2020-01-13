@@ -34,7 +34,6 @@
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-extern SD_HandleTypeDef uSdHandle;
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 
@@ -155,12 +154,12 @@ void SysTick_Handler(void)
   */
 void SDMMC1_IRQHandler(void)
 {
-  HAL_SD_IRQHandler(&uSdHandle);
+ BSP_SD_IRQHandler(0);
 }
 
 void EXTI9_5_IRQHandler(void)
 {
-  SD_DetectIRQHandler();
+  BSP_SD_DETECT_IRQHandler(0);
 }
 
 /**

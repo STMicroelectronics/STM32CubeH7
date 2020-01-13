@@ -35,8 +35,8 @@
 #include <gui/common/FrontendApplication.hpp>
 #include <gui/model/Model.hpp>
 
-#include <gui/hallwayscreen_screen/HallwayScreenView.hpp>
-#include <gui/hallwayscreen_screen/HallwayScreenPresenter.hpp>
+#include <gui/hallwayscreen_screen/hallwayScreenView.hpp>
+#include <gui/hallwayscreen_screen/hallwayScreenPresenter.hpp>
 #include <gui/kitchenscreen_screen/KitchenScreenView.hpp>
 #include <gui/kitchenscreen_screen/KitchenScreenPresenter.hpp>
 #include <gui/bathtubscreen_screen/BathtubScreenView.hpp>
@@ -72,78 +72,78 @@
  * type lists in this class.
  *
  */
-class FrontendHeapBase : public MVPHeap
+class FrontendHeapBase : public touchgfx::MVPHeap
 {
 public:
     /**
      * A list of all view types. Must end with meta::Nil.
      * @note All view types used in the application MUST be added to this list!
      */
-    typedef meta::TypeList< HallwayScreenView,
-            meta::TypeList< KitchenScreenView,
-            meta::TypeList< BathtubScreenView,
-            meta::TypeList< BathroomScreenView,
-            meta::TypeList< WasherScreenView,
-            meta::TypeList< ExtractorHoodScreenView,
-            meta::TypeList< RecipeScreenView,
-            meta::TypeList< RecipeSelectedScreenView,
-            meta::TypeList< OvenScreenView,
-            meta::TypeList< HomeControlScreenView,
-            meta::TypeList< AboutScreenView,
-            meta::Nil > > > > > > > > > >
+    typedef touchgfx::meta::TypeList< HallwayScreenView,
+            touchgfx::meta::TypeList< KitchenScreenView,
+            touchgfx::meta::TypeList< BathtubScreenView,
+            touchgfx::meta::TypeList< BathroomScreenView,
+            touchgfx::meta::TypeList< WasherScreenView,
+            touchgfx::meta::TypeList< ExtractorHoodScreenView,
+            touchgfx::meta::TypeList< RecipeScreenView,
+            touchgfx::meta::TypeList< RecipeSelectedScreenView,
+            touchgfx::meta::TypeList< OvenScreenView,
+            touchgfx::meta::TypeList< HomeControlScreenView,
+            touchgfx::meta::TypeList< AboutScreenView,
+            touchgfx::meta::Nil > > > > > > > > > >
             > GeneratedViewTypes;
 
     /**
      * Determine (compile time) the View type of largest size.
      */
-    typedef meta::select_type_maxsize< GeneratedViewTypes >::type MaxGeneratedViewType;
+    typedef touchgfx::meta::select_type_maxsize< GeneratedViewTypes >::type MaxGeneratedViewType;
 
     /**
      * A list of all presenter types. Must end with meta::Nil.
      * @note All presenter types used in the application MUST be added to this list!
      */
-    typedef meta::TypeList< HallwayScreenPresenter,
-            meta::TypeList< KitchenScreenPresenter,
-            meta::TypeList< BathtubScreenPresenter,
-            meta::TypeList< BathroomScreenPresenter,
-            meta::TypeList< WasherScreenPresenter,
-            meta::TypeList< ExtractorHoodScreenPresenter,
-            meta::TypeList< RecipeScreenPresenter,
-            meta::TypeList< RecipeSelectedScreenPresenter,
-            meta::TypeList< OvenScreenPresenter,
-            meta::TypeList< HomeControlScreenPresenter,
-            meta::TypeList< AboutScreenPresenter,
-            meta::Nil > > > > > > > > > >
+    typedef touchgfx::meta::TypeList< HallwayScreenPresenter,
+            touchgfx::meta::TypeList< KitchenScreenPresenter,
+            touchgfx::meta::TypeList< BathtubScreenPresenter,
+            touchgfx::meta::TypeList< BathroomScreenPresenter,
+            touchgfx::meta::TypeList< WasherScreenPresenter,
+            touchgfx::meta::TypeList< ExtractorHoodScreenPresenter,
+            touchgfx::meta::TypeList< RecipeScreenPresenter,
+            touchgfx::meta::TypeList< RecipeSelectedScreenPresenter,
+            touchgfx::meta::TypeList< OvenScreenPresenter,
+            touchgfx::meta::TypeList< HomeControlScreenPresenter,
+            touchgfx::meta::TypeList< AboutScreenPresenter,
+            touchgfx::meta::Nil > > > > > > > > > >
             > GeneratedPresenterTypes;
 
     /**
      * Determine (compile time) the Presenter type of largest size.
      */
-    typedef meta::select_type_maxsize< GeneratedPresenterTypes >::type MaxGeneratedPresenterType;
+    typedef touchgfx::meta::select_type_maxsize< GeneratedPresenterTypes >::type MaxGeneratedPresenterType;
 
     /**
      * A list of all transition types. Must end with meta::Nil.
      * @note All transition types used in the application MUST be added to this list!
      */
-    typedef meta::TypeList< NoTransition,
-            meta::TypeList< SlideTransition<WEST>,
-            meta::TypeList< SlideTransition<EAST>,
-            meta::TypeList< CoverTransition<NORTH>,
-            meta::TypeList< CoverTransition<SOUTH>,
-            meta::Nil > > > >
+    typedef touchgfx::meta::TypeList< touchgfx::NoTransition,
+            touchgfx::meta::TypeList< SlideTransition<WEST>,
+            touchgfx::meta::TypeList< SlideTransition<EAST>,
+            touchgfx::meta::TypeList< CoverTransition<NORTH>,
+            touchgfx::meta::TypeList< CoverTransition<SOUTH>,
+            touchgfx::meta::Nil > > > >
             > GeneratedTransitionTypes;
 
     /**
      * Determine (compile time) the Transition type of largest size.
      */
-    typedef meta::select_type_maxsize< GeneratedTransitionTypes >::type MaxGeneratedTransitionType;
+    typedef touchgfx::meta::select_type_maxsize< GeneratedTransitionTypes >::type MaxGeneratedTransitionType;
 
     virtual void gotoStartScreen(FrontendApplication& app)
     {
         app.gotoHallwayScreenScreenNoTransition();
     }
 protected:
-    FrontendHeapBase(AbstractPartition& presenters, AbstractPartition& views, AbstractPartition& transitions, FrontendApplication& app)
+    FrontendHeapBase(touchgfx::AbstractPartition& presenters, touchgfx::AbstractPartition& views, touchgfx::AbstractPartition& transitions, FrontendApplication& app)
         : MVPHeap(presenters, views, transitions, app)
     {
 

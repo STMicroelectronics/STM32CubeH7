@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    mbedTLS/SSL_Client/Src/main.c
   * @author  MCD Application Team
-  * @brief   Main program 
+  * @brief   Main program
   ******************************************************************************
   * @attention
   *
@@ -14,7 +14,7 @@
   * the License. You may obtain a copy of the License at:
   *                             www.st.com/SLA0044
   *
-  ******************************************************************************  
+  ******************************************************************************
   */
 
 #include <string.h>
@@ -70,19 +70,27 @@ int main()
   RNG_Init();
 
 #ifdef USE_LCD
+  BSP_LCD_LayerConfig_t config;
 
   /* Initialize the LCD */
-  BSP_LCD_Init();
-  
-  /* Initialize the LCD Layers */
-  BSP_LCD_LayerDefaultInit(1, LCD_FB_START_ADDRESS);
-  
+  BSP_LCD_Init(0, LCD_ORIENTATION_LANDSCAPE);
+
   /* Set LCD Foreground Layer  */
-  BSP_LCD_SelectLayer(1);
-  LCD_LOG_Init();
-  LCD_LOG_SetHeader((uint8_t*)"mbedTLS: SSL Client Application");
+  config.Address     = LCD_LAYER_1_ADDRESS;
+  config.PixelFormat = LTDC_PIXEL_FORMAT_ARGB8888;
+  config.X0          = 0;
+  config.X1          = 640;
+  config.Y0          = 0;
+  config.Y1          = 480;
+  BSP_LCD_ConfigLayer(0, 1, &config);
+  BSP_LCD_SetActiveLayer(0, 1);
+
+  GUI_SetFuncDriver(&LCD_Driver);
+
+  UTIL_LCD_TRACE_Init();
+  UTIL_LCD_TRACE_SetHeader((uint8_t*)"mbedTLS: SSL Client Application");
 #else
-	
+
   UartHandle.Instance        = USARTx;
 
   UartHandle.Init.BaudRate   = 115200;
@@ -103,26 +111,26 @@ int main()
    /* Init thread */
   osThreadDef(Start, MainThread, osPriorityHigh, 0, configMINIMAL_STACK_SIZE * 2);
   osThreadCreate (osThread(Start), NULL);
-  
+
   /* Start scheduler */
   osKernelStart();
-  
+
   /* We should never get here as control is now taken by the scheduler */
   Error_Handler();
 
-  
+
 }
 
 /**
-  * @brief  Start Thread 
+  * @brief  Start Thread
   * @param  argument not used
   * @retval None
   */
 static void MainThread(void const * argument)
-{ 
+{
   UNUSED(argument);
 #ifdef USE_LCD
-  LCD_UsrLog("\r\n Starting Main Thread...\n");
+  LCD_UsrTrace(" Starting Main Thread...\n");
 #else
   printf("\r\n Starting Main Thread...\n");
 #endif
@@ -133,13 +141,13 @@ static void MainThread(void const * argument)
 
   for( ;; )
   {
-    /* Delete the start Thread */ 
+    /* Delete the start Thread */
     osThreadTerminate(NULL);
   }
 }
 /**
   * @brief  System Clock Configuration
-  *         The system Clock is configured as follow : 
+  *         The system Clock is configured as follow :
   *            System Clock source            = PLL (HSE)
   *            SYSCLK(Hz)                     = 400000000 (CPU Clock)
   *            HCLK(Hz)                       = 200000000 (AXI and AHBs Clock)
@@ -165,7 +173,7 @@ static void SystemClock_Config(void)
 RCC_ClkInitTypeDef RCC_ClkInitStruct;
   RCC_OscInitTypeDef RCC_OscInitStruct;
   HAL_StatusTypeDef ret = HAL_OK;
-  
+
   /*!< Supply configuration update enable */
   HAL_PWREx_ConfigSupply(PWR_LDO_SUPPLY);
 
@@ -175,10 +183,10 @@ RCC_ClkInitTypeDef RCC_ClkInitStruct;
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
 
   while(!__HAL_PWR_GET_FLAG(PWR_FLAG_VOSRDY)) {}
-  
+
   /* Enable D2 domain SRAM3 Clock (0x30040000 AXI)*/
   __HAL_RCC_D2SRAM3_CLK_ENABLE();
-   
+
   /* Enable HSE Oscillator and activate PLL with HSE as source */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
@@ -187,14 +195,14 @@ RCC_ClkInitTypeDef RCC_ClkInitStruct;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
 
-   
+
   RCC_OscInitStruct.PLL.PLLM = 5;
   RCC_OscInitStruct.PLL.PLLN = 160;
   RCC_OscInitStruct.PLL.PLLFRACN = 0;
   RCC_OscInitStruct.PLL.PLLP = 2;
   RCC_OscInitStruct.PLL.PLLR = 2;
   RCC_OscInitStruct.PLL.PLLQ = 4;
-   
+
   RCC_OscInitStruct.PLL.PLLVCOSEL = RCC_PLL1VCOWIDE;
   RCC_OscInitStruct.PLL.PLLRGE = RCC_PLL1VCIRANGE_2;
   ret = HAL_RCC_OscConfig(&RCC_OscInitStruct);
@@ -202,35 +210,35 @@ RCC_ClkInitTypeDef RCC_ClkInitStruct;
   {
     while(1) { ; }
   }
-  
+
 /* Select PLL as system clock source and configure  bus clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_D1PCLK1 | RCC_CLOCKTYPE_PCLK1 | \
                                   RCC_CLOCKTYPE_PCLK2  | RCC_CLOCKTYPE_D3PCLK1);
-  
+
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.SYSCLKDivider = RCC_SYSCLK_DIV1;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_HCLK_DIV2;
-  RCC_ClkInitStruct.APB3CLKDivider = RCC_APB3_DIV2;  
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_APB1_DIV2; 
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_APB2_DIV2; 
-  RCC_ClkInitStruct.APB4CLKDivider = RCC_APB4_DIV2; 
+  RCC_ClkInitStruct.APB3CLKDivider = RCC_APB3_DIV2;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_APB1_DIV2;
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_APB2_DIV2;
+  RCC_ClkInitStruct.APB4CLKDivider = RCC_APB4_DIV2;
   ret = HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_4);
   if(ret != HAL_OK)
   {
     while(1) { ; }
   }
 
-  /*activate CSI clock mondatory for I/O Compensation Cell*/  
+  /*activate CSI clock mondatory for I/O Compensation Cell*/
   __HAL_RCC_CSI_ENABLE() ;
-    
+
   /* Enable SYSCFG clock mondatory for I/O Compensation Cell */
   __HAL_RCC_SYSCFG_CLK_ENABLE() ;
-  
-  /* Enables the I/O Compensation Cell */    
+
+  /* Enables the I/O Compensation Cell */
   HAL_EnableCompensationCell();
 }
 
-            
+
 /* RNG init function */
 static void RNG_Init(void)
 {
@@ -240,7 +248,7 @@ static void RNG_Init(void)
   {
     /* DeInitialization Error */
     Error_Handler();
-  }    
+  }
 
   /* Initialize the RNG peripheral */
   if (HAL_RNG_Init(&RngHandle) != HAL_OK)
@@ -252,18 +260,18 @@ static void RNG_Init(void)
 
 
 /**
-  * @brief  Configure the MPU attributes 
+  * @brief  Configure the MPU attributes
   * @param  None
   * @retval None
   */
 static void MPU_Config(void)
 {
   MPU_Region_InitTypeDef MPU_InitStruct;
-  
+
   /* Disable the MPU */
   HAL_MPU_Disable();
 
-  /* Configure the MPU attributes as Device not cacheable 
+  /* Configure the MPU attributes as Device not cacheable
      for ETH DMA descriptors */
   MPU_InitStruct.Enable = MPU_REGION_ENABLE;
   MPU_InitStruct.BaseAddress = 0x30040000;
@@ -278,7 +286,7 @@ static void MPU_Config(void)
   MPU_InitStruct.DisableExec = MPU_INSTRUCTION_ACCESS_ENABLE;
 
   HAL_MPU_ConfigRegion(&MPU_InitStruct);
-  
+
   /* Configure the MPU attributes as Normal Non Cacheable
      for LwIP RAM heap which contains the Tx buffers */
   MPU_InitStruct.Enable = MPU_REGION_ENABLE;
@@ -294,9 +302,9 @@ static void MPU_Config(void)
   MPU_InitStruct.DisableExec = MPU_INSTRUCTION_ACCESS_ENABLE;
 
   HAL_MPU_ConfigRegion(&MPU_InitStruct);
-  
+
 #ifdef USE_LCD
-  /* Configure the MPU attributes as WT for SDRAM */  
+  /* Configure the MPU attributes as WT for SDRAM */
   MPU_InitStruct.Enable = MPU_REGION_ENABLE;
   MPU_InitStruct.BaseAddress = SDRAM_DEVICE_ADDR;
   MPU_InitStruct.Size = MPU_REGION_SIZE_32MB;
@@ -308,7 +316,7 @@ static void MPU_Config(void)
   MPU_InitStruct.TypeExtField = MPU_TEX_LEVEL0;
   MPU_InitStruct.SubRegionDisable = 0x00;
   MPU_InitStruct.DisableExec = MPU_INSTRUCTION_ACCESS_ENABLE;
-  
+
   HAL_MPU_ConfigRegion(&MPU_InitStruct);
 #endif
 

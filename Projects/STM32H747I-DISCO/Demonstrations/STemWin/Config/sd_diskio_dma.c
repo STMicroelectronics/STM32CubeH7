@@ -132,7 +132,7 @@ static DSTATUS SD_CheckStatus(BYTE lun)
     Stat &= ~STA_NOINIT;
   }
 #else /* _FS_REENTRANT == 0 */
-  if(BSP_SD_GetCardState() == SD_TRANSFER_OK)
+  if(BSP_SD_GetCardState(0) == SD_TRANSFER_OK)
   {
     Stat &= ~STA_NOINIT;
   }
@@ -156,7 +156,7 @@ DSTATUS SD_initialize(BYTE lun)
   {
 #if !defined(DISABLE_SD_INIT)
 
-    if(BSP_SD_Init() == MSD_OK)
+    if(BSP_SD_Init(0) == BSP_ERROR_NONE)
     {
       Stat = SD_CheckStatus(lun);
     }
@@ -235,7 +235,7 @@ DRESULT SD_read(BYTE lun, BYTE *buff, DWORD sector, UINT count)
 
         /* block until SDIO IP is ready or a timeout occur */
         while (timer > osKernelSysTick()) {
-            status = BSP_SD_GetCardState();
+            status = BSP_SD_GetCardState(0);
             if (status == SD_TRANSFER_OK)
                 break;
         }
@@ -246,9 +246,9 @@ DRESULT SD_read(BYTE lun, BYTE *buff, DWORD sector, UINT count)
         //osThreadSuspendAll();
         uint8_t ret = BSP_SD_ReadBlocks_DMA((uint32_t*)buff, (uint32_t)(sector), count);
         //osThreadResumeAll();
-        configASSERT(ret == MSD_OK);
+        configASSERT(ret == BSP_ERROR_NONE);
 
-        if (ret == MSD_OK) {
+        if (ret == BSP_ERROR_NONE) {
             /* wait for a message from the queue or a timeout */
             event = osMessageGet(SDQueueID, SD_TIMEOUT);
             if (event.status == osEventMessage) {
@@ -274,7 +274,7 @@ DRESULT SD_read(BYTE lun, BYTE *buff, DWORD sector, UINT count)
 
             /* block until SDIO IP is ready or a timeout occur */
             while (timer > osKernelSysTick()) {
-                status = BSP_SD_GetCardState();
+                status = BSP_SD_GetCardState(0);
                 if (status == SD_TRANSFER_OK)
                     break;
             }
@@ -283,9 +283,9 @@ DRESULT SD_read(BYTE lun, BYTE *buff, DWORD sector, UINT count)
                 return RES_ERROR;
 
             ret = BSP_SD_ReadBlocks_DMA((uint32_t*)buffer, (uint32_t)sector++, 1);
-            configASSERT(ret == MSD_OK);
+            configASSERT(ret == BSP_ERROR_NONE);
 
-            if (ret == MSD_OK) {
+            if (ret == BSP_ERROR_NONE) {
                 /* wait for a message from the queue or a timeout */
                 event = osMessageGet(SDQueueID, SD_TIMEOUT);
 
@@ -304,7 +304,7 @@ DRESULT SD_read(BYTE lun, BYTE *buff, DWORD sector, UINT count)
             }
         }
 
-        if ((i == count) && (ret == MSD_OK))
+        if ((i == count) && (ret == BSP_ERROR_NONE))
             res = RES_OK;
     }
 
@@ -352,7 +352,7 @@ DRESULT SD_write(BYTE lun, const BYTE *buff, DWORD sector, UINT count)
 
   if(BSP_SD_WriteBlocks_DMA((uint32_t*)buff,
                            (uint32_t) (sector),
-                           count) == MSD_OK)
+                           count) == BSP_ERROR_NONE)
   {
     /* Get the message from the queue */
     event = osMessageGet(SDQueueID, SD_TIMEOUT);
@@ -365,7 +365,7 @@ DRESULT SD_write(BYTE lun, const BYTE *buff, DWORD sector, UINT count)
         /* block until SDIO IP is ready or a timeout occur */
         while(timer > osKernelSysTick())
         {
-          if (BSP_SD_GetCardState() == SD_TRANSFER_OK)
+          if (BSP_SD_GetCardState(0) == SD_TRANSFER_OK)
           {
             res = RES_OK;
             break;
@@ -403,21 +403,21 @@ DRESULT SD_ioctl(BYTE lun, BYTE cmd, void *buff)
 
   /* Get number of sectors on the disk (DWORD) */
   case GET_SECTOR_COUNT :
-    BSP_SD_GetCardInfo(&CardInfo);
+    BSP_SD_GetCardInfo(0,&CardInfo);
     *(DWORD*)buff = CardInfo.LogBlockNbr;
     res = RES_OK;
     break;
 
   /* Get R/W sector size (WORD) */
   case GET_SECTOR_SIZE :
-    BSP_SD_GetCardInfo(&CardInfo);
+    BSP_SD_GetCardInfo(0,&CardInfo);
     *(WORD*)buff = CardInfo.LogBlockSize;
     res = RES_OK;
     break;
 
   /* Get erase block size in unit of sector (DWORD) */
   case GET_BLOCK_SIZE :
-    BSP_SD_GetCardInfo(&CardInfo);
+    BSP_SD_GetCardInfo(0,&CardInfo);
     *(DWORD*)buff = CardInfo.LogBlockSize / SD_DEFAULT_BLOCK_SIZE;
 	res = RES_OK;
     break;

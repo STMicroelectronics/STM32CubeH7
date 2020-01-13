@@ -37,14 +37,13 @@
 								<option defaultValue="gnu.c.optimization.level.none" id="fr.ac6.managedbuild.gnu.c.compiler.option.optimization.level.934965681" name="Optimization Level" superClass="fr.ac6.managedbuild.gnu.c.compiler.option.optimization.level" useByScannerDiscovery="false" value="fr.ac6.managedbuild.gnu.c.optimization.level.none" valueType="enumerated"/>
 								<option id="gnu.c.compiler.option.debugging.level.693831038" name="Debug Level" superClass="gnu.c.compiler.option.debugging.level" useByScannerDiscovery="false" value="gnu.c.debugging.level.max" valueType="enumerated"/>
 								<option id="gnu.c.compiler.option.include.paths.1717099321" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
-									<listOptionValue builtIn="false" value="../../../Common/Inc"/>
 									<listOptionValue builtIn="false" value="../../../CM4/Inc"/>
 									<listOptionValue builtIn="false" value="../../../../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include"/>
 									<listOptionValue builtIn="false" value="../../../../../../../Middlewares/ST/STM32_Audio/Addons/PDM/Inc"/>
 									<listOptionValue builtIn="false" value="../../../../../../../Drivers/STM32H7xx_HAL_Driver/Inc"/>
-									<listOptionValue builtIn="false" value="../../../../../../../Drivers/BSP/STM32H747I-Discovery"/>
+									<listOptionValue builtIn="false" value="../../../../../../../Drivers/BSP/STM32H747I-DISCO"/>
 									<listOptionValue builtIn="false" value="../../../../../../../Drivers/BSP/Components/Common"/>
-									<listOptionValue builtIn="false" value="../../../../../../../Utilities/Log"/>
+									<listOptionValue builtIn="false" value="../../../../../../../Utilities/Basic_GUI"/>
 									<listOptionValue builtIn="false" value="../../../../../../../Utilities/Fonts"/>
 									<listOptionValue builtIn="false" value="../../../../../../../Utilities/CPU"/>
 									<listOptionValue builtIn="false" value="../../../../../../../Drivers/CMSIS/Include"/>
@@ -68,9 +67,9 @@
 									<listOptionValue builtIn="false" value="../../../../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include"/>
 									<listOptionValue builtIn="false" value="../../../../../../../Middlewares/ST/STM32_Audio/Addons/PDM/Inc"/>
 									<listOptionValue builtIn="false" value="../../../../../../../Drivers/STM32H7xx_HAL_Driver/Inc"/>
-									<listOptionValue builtIn="false" value="../../../../../../../Drivers/BSP/STM32H747I-Discovery"/>
+									<listOptionValue builtIn="false" value="../../../../../../../Drivers/BSP/STM32H747I-DISCO"/>
 									<listOptionValue builtIn="false" value="../../../../../../../Drivers/BSP/Components/Common"/>
-									<listOptionValue builtIn="false" value="../../../../../../../Utilities/Log"/>
+									<listOptionValue builtIn="false" value="../../../../../../../Utilities/Basic_GUI"/>
 									<listOptionValue builtIn="false" value="../../../../../../../Utilities/Fonts"/>
 									<listOptionValue builtIn="false" value="../../../../../../../Utilities/CPU"/>
 									<listOptionValue builtIn="false" value="../../../../../../../Drivers/CMSIS/Include"/>
@@ -124,7 +123,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="Example/User/CM7|Drivers/BSP/Components/ft6x06.c|Drivers/BSP/Components/otm8009a.c|Drivers/BSP/Components/ov9655.c|Drivers/BSP/Components/wm8994.c|Drivers/BSP/STM32H747I_DISCOVERY/stm32h747i_discovery_audio.c|Drivers/BSP/STM32H747I_DISCOVERY/stm32h747i_discovery_camera.c|Drivers/BSP/STM32H747I_DISCOVERY/stm32h747i_discovery_lcd.c|Drivers/BSP/STM32H747I_DISCOVERY/stm32h747i_discovery_qspi.c|Drivers/BSP/STM32H747I_DISCOVERY/stm32h747i_discovery_sd.c|Drivers/BSP/STM32H747I_DISCOVERY/stm32h747i_discovery_sdram.c|Drivers/BSP/STM32H747I_DISCOVERY/stm32h747i_discovery_ts.c|Drivers/STM32H7xx_HAL_Driver/stm32h7xx_hal_dcmi.c|Drivers/STM32H7xx_HAL_Driver/stm32h7xx_hal_dfsdm.c|Drivers/STM32H7xx_HAL_Driver/stm32h7xx_hal_dma2d.c|Drivers/STM32H7xx_HAL_Driver/stm32h7xx_hal_dsi.c|Drivers/STM32H7xx_HAL_Driver/stm32h7xx_hal_ltdc.c|Drivers/STM32H7xx_HAL_Driver/stm32h7xx_hal_ltdc_ex.c|Drivers/STM32H7xx_HAL_Driver/stm32h7xx_hal_mdma.c|Drivers/STM32H7xx_HAL_Driver/stm32h7xx_hal_nor.c|Drivers/STM32H7xx_HAL_Driver/stm32h7xx_hal_qspi.c|Drivers/STM32H7xx_HAL_Driver/stm32h7xx_hal_sai.c|Drivers/STM32H7xx_HAL_Driver/stm32h7xx_hal_sai_ex.c|Drivers/STM32H7xx_HAL_Driver/stm32h7xx_hal_sd.c|Drivers/STM32H7xx_HAL_Driver/stm32h7xx_hal_sd_ex.c|Drivers/STM32H7xx_HAL_Driver/stm32h7xx_hal_sdram.c|Drivers/STM32H7xx_HAL_Driver/stm32h7xx_hal_tim.c|Drivers/STM32H7xx_HAL_Driver/stm32h7xx_hal_tim_ex.c|Drivers/STM32H7xx_HAL_Driver/stm32h7xx_ll_fmc.c|Drivers/STM32H7xx_HAL_Driver/stm32h7xx_ll_sdmmc.c|Utilities/lcd_log.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="Drivers/BSP/Components|Example/User/CM7|Drivers/BSP/Components/ft6x06.c|Drivers/BSP/Components/otm8009a.c|Drivers/BSP/Components/ov9655.c|Drivers/BSP/Components/wm8994.c|Drivers/BSP/STM32H747I_DISCOVERY/stm32h747i_discovery_audio.c|Drivers/BSP/STM32H747I_DISCOVERY/stm32h747i_discovery_camera.c|Drivers/BSP/STM32H747I_DISCOVERY/stm32h747i_discovery_lcd.c|Drivers/BSP/STM32H747I_DISCOVERY/stm32h747i_discovery_qspi.c|Drivers/BSP/STM32H747I_DISCOVERY/stm32h747i_discovery_sd.c|Drivers/BSP/STM32H747I_DISCOVERY/stm32h747i_discovery_sdram.c|Drivers/BSP/STM32H747I_DISCOVERY/stm32h747i_discovery_ts.c|Drivers/STM32H7xx_HAL_Driver/stm32h7xx_hal_dcmi.c|Drivers/STM32H7xx_HAL_Driver/stm32h7xx_hal_dfsdm.c|Drivers/STM32H7xx_HAL_Driver/stm32h7xx_hal_dma2d.c|Drivers/STM32H7xx_HAL_Driver/stm32h7xx_hal_dsi.c|Drivers/STM32H7xx_HAL_Driver/stm32h7xx_hal_ltdc.c|Drivers/STM32H7xx_HAL_Driver/stm32h7xx_hal_ltdc_ex.c|Drivers/STM32H7xx_HAL_Driver/stm32h7xx_hal_mdma.c|Drivers/STM32H7xx_HAL_Driver/stm32h7xx_hal_nor.c|Drivers/STM32H7xx_HAL_Driver/stm32h7xx_hal_qspi.c|Drivers/STM32H7xx_HAL_Driver/stm32h7xx_hal_sai.c|Drivers/STM32H7xx_HAL_Driver/stm32h7xx_hal_sai_ex.c|Drivers/STM32H7xx_HAL_Driver/stm32h7xx_hal_sd.c|Drivers/STM32H7xx_HAL_Driver/stm32h7xx_hal_sd_ex.c|Drivers/STM32H7xx_HAL_Driver/stm32h7xx_hal_sdram.c|Drivers/STM32H7xx_HAL_Driver/stm32h7xx_hal_tim.c|Drivers/STM32H7xx_HAL_Driver/stm32h7xx_hal_tim_ex.c|Drivers/STM32H7xx_HAL_Driver/stm32h7xx_ll_fmc.c|Drivers/STM32H7xx_HAL_Driver/stm32h7xx_ll_sdmmc.c|Utilities/lcd_log.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -166,13 +165,12 @@
 								<option defaultValue="gnu.c.optimization.level.none" id="fr.ac6.managedbuild.gnu.c.compiler.option.optimization.level.1573819592" name="Optimization Level" superClass="fr.ac6.managedbuild.gnu.c.compiler.option.optimization.level" useByScannerDiscovery="false" value="fr.ac6.managedbuild.gnu.c.optimization.level.none" valueType="enumerated"/>
 								<option id="gnu.c.compiler.option.debugging.level.485024744" name="Debug Level" superClass="gnu.c.compiler.option.debugging.level" useByScannerDiscovery="false" value="gnu.c.debugging.level.max" valueType="enumerated"/>
 								<option id="gnu.c.compiler.option.include.paths.1052864439" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
-									<listOptionValue builtIn="false" value="../../../Common/Inc"/>
 									<listOptionValue builtIn="false" value="../../../CM7/Inc"/>
 									<listOptionValue builtIn="false" value="../../../../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include"/>
 									<listOptionValue builtIn="false" value="../../../../../../../Drivers/STM32H7xx_HAL_Driver/Inc"/>
-									<listOptionValue builtIn="false" value="../../../../../../../Drivers/BSP/STM32H747I-Discovery"/>
+									<listOptionValue builtIn="false" value="../../../../../../../Drivers/BSP/STM32H747I-DISCO"/>
 									<listOptionValue builtIn="false" value="../../../../../../../Drivers/BSP/Components/Common"/>
-									<listOptionValue builtIn="false" value="../../../../../../../Utilities/Log"/>
+									<listOptionValue builtIn="false" value="../../../../../../../Utilities/Basic_GUI"/>
 									<listOptionValue builtIn="false" value="../../../../../../../Utilities/Fonts"/>
 									<listOptionValue builtIn="false" value="../../../../../../../Utilities/CPU"/>
 									<listOptionValue builtIn="false" value="../../../../../../../Middlewares/ST/STM32_Audio/Addons/PDM/Inc"/>
@@ -197,9 +195,9 @@
 									<listOptionValue builtIn="false" value="../../../CM7/Inc"/>
 									<listOptionValue builtIn="false" value="../../../../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include"/>
 									<listOptionValue builtIn="false" value="../../../../../../../Drivers/STM32H7xx_HAL_Driver/Inc"/>
-									<listOptionValue builtIn="false" value="../../../../../../../Drivers/BSP/STM32H747I-Discovery"/>
+									<listOptionValue builtIn="false" value="../../../../../../../Drivers/BSP/STM32H747I-DISCO"/>
 									<listOptionValue builtIn="false" value="../../../../../../../Drivers/BSP/Components/Common"/>
-									<listOptionValue builtIn="false" value="../../../../../../../Utilities/Log"/>
+									<listOptionValue builtIn="false" value="../../../../../../../Utilities/Basic_GUI"/>
 									<listOptionValue builtIn="false" value="../../../../../../../Utilities/Fonts"/>
 									<listOptionValue builtIn="false" value="../../../../../../../Utilities/CPU"/>
 									<listOptionValue builtIn="false" value="../../../../../../../Middlewares/ST/STM32_Audio/Addons/PDM/Inc"/>

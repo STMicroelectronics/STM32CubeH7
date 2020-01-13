@@ -16,8 +16,8 @@
         <TargetCommonOption>
           <Device>STM32H750XBHx</Device>
           <Vendor>STMicroelectronics</Vendor>
-          <PackID>STMicroelectronics.STM32H7xx_DFP.0.0.8</PackID>
-          <PackURL>http://www.ST.com/</PackURL>
+          <PackID>Keil.STM32H7xx_DFP.2.2.6</PackID>
+          <PackURL>http://www.keil.com/pack</PackURL>
           <Cpu>IROM(0x90000000-0x97FFFFFF) IRAM(0x20000000-0x2001FFFF) IRAM2(0x00000000-0xFFFF) CLOCK(12000000) FPU3(DFPU) CPUTYPE("Cortex-M7") ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile></StartupFile>
@@ -337,7 +337,7 @@
               <MiscControls></MiscControls>
               <Define>APPLICATION_ADDRESS=0x90000000U,USE_HAL_DRIVER,STM32H750xx,USE_STM32H743I_EVAL,USE_IOEXPANDER</Define>
               <Undefine></Undefine>
-              <IncludePath>../Inc;../../../../../../../Drivers/CMSIS/Include;../../../../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../../../../../../../Drivers/STM32H7xx_HAL_Driver/Inc;../../../../../../../Drivers/BSP//STM32H743I_EVAL;../../../../../../../Utilities;../../../../../../../Utilities/Fonts;../../../../../../../Drivers/BSP/Components</IncludePath>
+              <IncludePath>../Inc;../../../../../../../Drivers/CMSIS/Include;../../../../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../../../../../../../Drivers/STM32H7xx_HAL_Driver/Inc;../../../../../../../Drivers/BSP/STM32H743I-EVAL;../../../../../../../Utilities;../../../../../../../Utilities/Fonts;../../../../../../../Drivers/BSP/Components;../../../../../../../Drivers/BSP/Components/Common</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -429,27 +429,37 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Drivers/Components</GroupName>
+          <GroupName>Drivers/BSP/Components</GroupName>
           <Files>
             <File>
               <FileName>mfxstm32l152.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../../../Drivers/BSP/Components/mfxstm32l152/mfxstm32l152.c</FilePath>
+              <FilePath>..\..\..\..\..\..\..\Drivers\BSP\Components\mfxstm32l152\mfxstm32l152.c</FilePath>
+            </File>
+            <File>
+              <FileName>mfxstm32l152_reg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\..\Drivers\BSP\Components\mfxstm32l152\mfxstm32l152_reg.c</FilePath>
             </File>
           </Files>
         </Group>
         <Group>
-          <GroupName>Drivers/STM32H743I_EVAL</GroupName>
+          <GroupName>Drivers/BSP/STM32H743I_EVAL</GroupName>
           <Files>
             <File>
               <FileName>stm32h743i_eval.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../../../Drivers/BSP/STM32H743I_EVAL/stm32h743i_eval.c</FilePath>
+              <FilePath>..\..\..\..\..\..\..\Drivers\BSP\STM32H743I-EVAL\stm32h743i_eval.c</FilePath>
             </File>
             <File>
               <FileName>stm32h743i_eval_io.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../../../Drivers/BSP/STM32H743I_EVAL/stm32h743i_eval_io.c</FilePath>
+              <FilePath>..\..\..\..\..\..\..\Drivers\BSP\STM32H743I-EVAL\stm32h743i_eval_io.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32h743i_eval_bus.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\..\Drivers\BSP\STM32H743I-EVAL\stm32h743i_eval_bus.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -581,6 +591,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_flash_ex.c</FilePath>
             </File>
+            <File>
+              <FileName>stm32h7xx_hal_exti.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_exti.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -598,8 +613,8 @@
         <TargetCommonOption>
           <Device>STM32H750XBHx</Device>
           <Vendor>STMicroelectronics</Vendor>
-          <PackID>STMicroelectronics.STM32H7xx_DFP.0.0.8</PackID>
-          <PackURL>http://www.ST.com/</PackURL>
+          <PackID>Keil.STM32H7xx_DFP.2.2.6</PackID>
+          <PackURL>http://www.keil.com/pack</PackURL>
           <Cpu>IROM(0x90000000-0x97FFFFFF) IRAM(0x68000000-0x681FFFFF) IRAM2(0x00000000-0xFFFF) CLOCK(12000000) FPU3(DFPU) CPUTYPE("Cortex-M7") ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile></StartupFile>
@@ -919,7 +934,7 @@
               <MiscControls></MiscControls>
               <Define>APPLICATION_ADDRESS=0x90000000U,USE_HAL_DRIVER,STM32H743xx,USE_STM32H743I_EVAL,USE_IOEXPANDER</Define>
               <Undefine></Undefine>
-              <IncludePath>../Inc;../../../../../../../Drivers/CMSIS/Include;../../../../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../../../../../../../Drivers/STM32H7xx_HAL_Driver/Inc;../../../../../../../Drivers/BSP//STM32H743I_EVAL;../../../../../../../Utilities;../../../../../../../Utilities/Fonts;../../../../../../../Drivers/BSP/Components</IncludePath>
+              <IncludePath>../Inc;../../../../../../../Drivers/CMSIS/Include;../../../../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../../../../../../../Drivers/STM32H7xx_HAL_Driver/Inc;../../../../../../../Drivers/BSP//STM32H743I-EVAL;../../../../../../../Utilities;../../../../../../../Utilities/Fonts;../../../../../../../Drivers/BSP/Components;../../../../../../../Drivers/BSP/Components/Common</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -1011,27 +1026,37 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Drivers/Components</GroupName>
+          <GroupName>Drivers/BSP/Components</GroupName>
           <Files>
             <File>
               <FileName>mfxstm32l152.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../../../Drivers/BSP/Components/mfxstm32l152/mfxstm32l152.c</FilePath>
+              <FilePath>..\..\..\..\..\..\..\Drivers\BSP\Components\mfxstm32l152\mfxstm32l152.c</FilePath>
+            </File>
+            <File>
+              <FileName>mfxstm32l152_reg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\..\Drivers\BSP\Components\mfxstm32l152\mfxstm32l152_reg.c</FilePath>
             </File>
           </Files>
         </Group>
         <Group>
-          <GroupName>Drivers/STM32H743I_EVAL</GroupName>
+          <GroupName>Drivers/BSP/STM32H743I_EVAL</GroupName>
           <Files>
             <File>
               <FileName>stm32h743i_eval.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../../../Drivers/BSP/STM32H743I_EVAL/stm32h743i_eval.c</FilePath>
+              <FilePath>..\..\..\..\..\..\..\Drivers\BSP\STM32H743I-EVAL\stm32h743i_eval.c</FilePath>
             </File>
             <File>
               <FileName>stm32h743i_eval_io.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../../../Drivers/BSP/STM32H743I_EVAL/stm32h743i_eval_io.c</FilePath>
+              <FilePath>..\..\..\..\..\..\..\Drivers\BSP\STM32H743I-EVAL\stm32h743i_eval_io.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32h743i_eval_bus.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\..\Drivers\BSP\STM32H743I-EVAL\stm32h743i_eval_bus.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1163,6 +1188,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_flash_ex.c</FilePath>
             </File>
+            <File>
+              <FileName>stm32h7xx_hal_exti.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_exti.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1180,8 +1210,8 @@
         <TargetCommonOption>
           <Device>STM32H750XBHx</Device>
           <Vendor>STMicroelectronics</Vendor>
-          <PackID>STMicroelectronics.STM32H7xx_DFP.0.0.8</PackID>
-          <PackURL>http://www.ST.com/</PackURL>
+          <PackID>Keil.STM32H7xx_DFP.2.2.6</PackID>
+          <PackURL>http://www.keil.com/pack</PackURL>
           <Cpu>IROM(0x90000000-0x97FFFFFF) IRAM(0xD0000000-0xD1FFFFFF) IRAM2(0x00000000-0xFFFF) CLOCK(12000000) FPU3(DFPU) CPUTYPE("Cortex-M7") ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile></StartupFile>
@@ -1501,7 +1531,7 @@
               <MiscControls></MiscControls>
               <Define>APPLICATION_ADDRESS=0x90000000U,USE_HAL_DRIVER,STM32H743xx,USE_STM32H743I_EVAL,USE_IOEXPANDER</Define>
               <Undefine></Undefine>
-              <IncludePath>../Inc;../../../../../../../Drivers/CMSIS/Include;../../../../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../../../../../../../Drivers/STM32H7xx_HAL_Driver/Inc;../../../../../../../Drivers/BSP//STM32H743I_EVAL;../../../../../../../Utilities;../../../../../../../Utilities/Fonts;../../../../../../../Drivers/BSP/Components</IncludePath>
+              <IncludePath>../Inc;../../../../../../../Drivers/CMSIS/Include;../../../../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../../../../../../../Drivers/STM32H7xx_HAL_Driver/Inc;../../../../../../../Drivers/BSP//STM32H743I-EVAL;../../../../../../../Utilities;../../../../../../../Utilities/Fonts;../../../../../../../Drivers/BSP/Components;../../../../../../../Drivers/BSP/Components/Common</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -1593,27 +1623,37 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Drivers/Components</GroupName>
+          <GroupName>Drivers/BSP/Components</GroupName>
           <Files>
             <File>
               <FileName>mfxstm32l152.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../../../Drivers/BSP/Components/mfxstm32l152/mfxstm32l152.c</FilePath>
+              <FilePath>..\..\..\..\..\..\..\Drivers\BSP\Components\mfxstm32l152\mfxstm32l152.c</FilePath>
+            </File>
+            <File>
+              <FileName>mfxstm32l152_reg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\..\Drivers\BSP\Components\mfxstm32l152\mfxstm32l152_reg.c</FilePath>
             </File>
           </Files>
         </Group>
         <Group>
-          <GroupName>Drivers/STM32H743I_EVAL</GroupName>
+          <GroupName>Drivers/BSP/STM32H743I_EVAL</GroupName>
           <Files>
             <File>
               <FileName>stm32h743i_eval.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../../../Drivers/BSP/STM32H743I_EVAL/stm32h743i_eval.c</FilePath>
+              <FilePath>..\..\..\..\..\..\..\Drivers\BSP\STM32H743I-EVAL\stm32h743i_eval.c</FilePath>
             </File>
             <File>
               <FileName>stm32h743i_eval_io.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../../../Drivers/BSP/STM32H743I_EVAL/stm32h743i_eval_io.c</FilePath>
+              <FilePath>..\..\..\..\..\..\..\Drivers\BSP\STM32H743I-EVAL\stm32h743i_eval_io.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32h743i_eval_bus.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\..\Drivers\BSP\STM32H743I-EVAL\stm32h743i_eval_bus.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1745,6 +1785,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_flash_ex.c</FilePath>
             </File>
+            <File>
+              <FileName>stm32h7xx_hal_exti.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_exti.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1762,8 +1807,8 @@
         <TargetCommonOption>
           <Device>STM32H750XBHx</Device>
           <Vendor>STMicroelectronics</Vendor>
-          <PackID>STMicroelectronics.STM32H7xx_DFP.0.0.8</PackID>
-          <PackURL>http://www.ST.com/</PackURL>
+          <PackID>Keil.STM32H7xx_DFP.2.2.6</PackID>
+          <PackURL>http://www.keil.com/pack</PackURL>
           <Cpu>IROM(0x60000000-0x60FFFFFF) IRAM(0x20000000-0x2001FFFF) IRAM2(0x00000000-0xFFFF) CLOCK(12000000) FPU3(DFPU) CPUTYPE("Cortex-M7") ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile></StartupFile>
@@ -2083,7 +2128,7 @@
               <MiscControls></MiscControls>
               <Define>APPLICATION_ADDRESS=0x60000000U,USE_HAL_DRIVER,STM32H750xx,USE_STM32H743I_EVAL,USE_IOEXPANDER</Define>
               <Undefine></Undefine>
-              <IncludePath>../Inc;../../../../../../../Drivers/CMSIS/Include;../../../../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../../../../../../../Drivers/STM32H7xx_HAL_Driver/Inc;../../../../../../../Drivers/BSP//STM32H743I_EVAL;../../../../../../../Utilities;../../../../../../../Utilities/Fonts;../../../../../../../Drivers/BSP/Components</IncludePath>
+              <IncludePath>../Inc;../../../../../../../Drivers/CMSIS/Include;../../../../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../../../../../../../Drivers/STM32H7xx_HAL_Driver/Inc;../../../../../../../Drivers/BSP//STM32H743I-EVAL;../../../../../../../Utilities;../../../../../../../Utilities/Fonts;../../../../../../../Drivers/BSP/Components;../../../../../../../Drivers/BSP/Components/Common</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -2175,27 +2220,37 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Drivers/Components</GroupName>
+          <GroupName>Drivers/BSP/Components</GroupName>
           <Files>
             <File>
               <FileName>mfxstm32l152.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../../../Drivers/BSP/Components/mfxstm32l152/mfxstm32l152.c</FilePath>
+              <FilePath>..\..\..\..\..\..\..\Drivers\BSP\Components\mfxstm32l152\mfxstm32l152.c</FilePath>
+            </File>
+            <File>
+              <FileName>mfxstm32l152_reg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\..\Drivers\BSP\Components\mfxstm32l152\mfxstm32l152_reg.c</FilePath>
             </File>
           </Files>
         </Group>
         <Group>
-          <GroupName>Drivers/STM32H743I_EVAL</GroupName>
+          <GroupName>Drivers/BSP/STM32H743I_EVAL</GroupName>
           <Files>
             <File>
               <FileName>stm32h743i_eval.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../../../Drivers/BSP/STM32H743I_EVAL/stm32h743i_eval.c</FilePath>
+              <FilePath>..\..\..\..\..\..\..\Drivers\BSP\STM32H743I-EVAL\stm32h743i_eval.c</FilePath>
             </File>
             <File>
               <FileName>stm32h743i_eval_io.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../../../Drivers/BSP/STM32H743I_EVAL/stm32h743i_eval_io.c</FilePath>
+              <FilePath>..\..\..\..\..\..\..\Drivers\BSP\STM32H743I-EVAL\stm32h743i_eval_io.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32h743i_eval_bus.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\..\Drivers\BSP\STM32H743I-EVAL\stm32h743i_eval_bus.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -2327,6 +2382,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_flash_ex.c</FilePath>
             </File>
+            <File>
+              <FileName>stm32h7xx_hal_exti.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_exti.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -2344,8 +2404,8 @@
         <TargetCommonOption>
           <Device>STM32H750XBHx</Device>
           <Vendor>STMicroelectronics</Vendor>
-          <PackID>STMicroelectronics.STM32H7xx_DFP.0.0.8</PackID>
-          <PackURL>http://www.ST.com/</PackURL>
+          <PackID>Keil.STM32H7xx_DFP.2.2.6</PackID>
+          <PackURL>http://www.keil.com/pack</PackURL>
           <Cpu>IROM(0x60000000-0x60FFFFFF) IRAM(0x68000000-0x681FFFFF) IRAM2(0x00000000-0xFFFF) CLOCK(12000000) FPU3(DFPU) CPUTYPE("Cortex-M7") ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile></StartupFile>
@@ -2665,7 +2725,7 @@
               <MiscControls></MiscControls>
               <Define>APPLICATION_ADDRESS=0x60000000U,USE_HAL_DRIVER,STM32H750xx,USE_STM32H743I_EVAL,USE_IOEXPANDER</Define>
               <Undefine></Undefine>
-              <IncludePath>../Inc;../../../../../../../Drivers/CMSIS/Include;../../../../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../../../../../../../Drivers/STM32H7xx_HAL_Driver/Inc;../../../../../../../Drivers/BSP//STM32H743I_EVAL;../../../../../../../Utilities;../../../../../../../Utilities/Fonts;../../../../../../../Drivers/BSP/Components</IncludePath>
+              <IncludePath>../Inc;../../../../../../../Drivers/CMSIS/Include;../../../../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../../../../../../../Drivers/STM32H7xx_HAL_Driver/Inc;../../../../../../../Drivers/BSP//STM32H743I-EVAL;../../../../../../../Utilities;../../../../../../../Utilities/Fonts;../../../../../../../Drivers/BSP/Components;../../../../../../../Drivers/BSP/Components/Common</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -2757,27 +2817,37 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Drivers/Components</GroupName>
+          <GroupName>Drivers/BSP/Components</GroupName>
           <Files>
             <File>
               <FileName>mfxstm32l152.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../../../Drivers/BSP/Components/mfxstm32l152/mfxstm32l152.c</FilePath>
+              <FilePath>..\..\..\..\..\..\..\Drivers\BSP\Components\mfxstm32l152\mfxstm32l152.c</FilePath>
+            </File>
+            <File>
+              <FileName>mfxstm32l152_reg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\..\Drivers\BSP\Components\mfxstm32l152\mfxstm32l152_reg.c</FilePath>
             </File>
           </Files>
         </Group>
         <Group>
-          <GroupName>Drivers/STM32H743I_EVAL</GroupName>
+          <GroupName>Drivers/BSP/STM32H743I_EVAL</GroupName>
           <Files>
             <File>
               <FileName>stm32h743i_eval.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../../../Drivers/BSP/STM32H743I_EVAL/stm32h743i_eval.c</FilePath>
+              <FilePath>..\..\..\..\..\..\..\Drivers\BSP\STM32H743I-EVAL\stm32h743i_eval.c</FilePath>
             </File>
             <File>
               <FileName>stm32h743i_eval_io.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../../../Drivers/BSP/STM32H743I_EVAL/stm32h743i_eval_io.c</FilePath>
+              <FilePath>..\..\..\..\..\..\..\Drivers\BSP\STM32H743I-EVAL\stm32h743i_eval_io.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32h743i_eval_bus.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\..\Drivers\BSP\STM32H743I-EVAL\stm32h743i_eval_bus.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -2909,6 +2979,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_flash_ex.c</FilePath>
             </File>
+            <File>
+              <FileName>stm32h7xx_hal_exti.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_exti.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -2926,8 +3001,8 @@
         <TargetCommonOption>
           <Device>STM32H750XBHx</Device>
           <Vendor>STMicroelectronics</Vendor>
-          <PackID>STMicroelectronics.STM32H7xx_DFP.0.0.8</PackID>
-          <PackURL>http://www.ST.com/</PackURL>
+          <PackID>Keil.STM32H7xx_DFP.2.2.6</PackID>
+          <PackURL>http://www.keil.com/pack</PackURL>
           <Cpu>IROM(0x60000000-0x60FFFFFF) IRAM(0xD0000000-0xD1FFFFFF) IRAM2(0x00000000-0xFFFF) CLOCK(12000000) FPU3(DFPU) CPUTYPE("Cortex-M7") ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile></StartupFile>
@@ -3247,7 +3322,7 @@
               <MiscControls></MiscControls>
               <Define>APPLICATION_ADDRESS=0x60000000U,USE_HAL_DRIVER,STM32H750xx,USE_STM32H743I_EVAL,USE_IOEXPANDER</Define>
               <Undefine></Undefine>
-              <IncludePath>../Inc;../../../../../../../Drivers/CMSIS/Include;../../../../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../../../../../../../Drivers/STM32H7xx_HAL_Driver/Inc;../../../../../../../Drivers/BSP//STM32H743I_EVAL;../../../../../../../Utilities;../../../../../../../Utilities/Fonts;../../../../../../../Drivers/BSP/Components</IncludePath>
+              <IncludePath>../Inc;../../../../../../../Drivers/CMSIS/Include;../../../../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../../../../../../../Drivers/STM32H7xx_HAL_Driver/Inc;../../../../../../../Drivers/BSP//STM32H743I-EVAL;../../../../../../../Utilities;../../../../../../../Utilities/Fonts;../../../../../../../Drivers/BSP/Components;../../../../../../../Drivers/BSP/Components/Common</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -3339,27 +3414,37 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Drivers/Components</GroupName>
+          <GroupName>Drivers/BSP/Components</GroupName>
           <Files>
             <File>
               <FileName>mfxstm32l152.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../../../Drivers/BSP/Components/mfxstm32l152/mfxstm32l152.c</FilePath>
+              <FilePath>..\..\..\..\..\..\..\Drivers\BSP\Components\mfxstm32l152\mfxstm32l152.c</FilePath>
+            </File>
+            <File>
+              <FileName>mfxstm32l152_reg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\..\Drivers\BSP\Components\mfxstm32l152\mfxstm32l152_reg.c</FilePath>
             </File>
           </Files>
         </Group>
         <Group>
-          <GroupName>Drivers/STM32H743I_EVAL</GroupName>
+          <GroupName>Drivers/BSP/STM32H743I_EVAL</GroupName>
           <Files>
             <File>
               <FileName>stm32h743i_eval.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../../../Drivers/BSP/STM32H743I_EVAL/stm32h743i_eval.c</FilePath>
+              <FilePath>..\..\..\..\..\..\..\Drivers\BSP\STM32H743I-EVAL\stm32h743i_eval.c</FilePath>
             </File>
             <File>
               <FileName>stm32h743i_eval_io.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../../../Drivers/BSP/STM32H743I_EVAL/stm32h743i_eval_io.c</FilePath>
+              <FilePath>..\..\..\..\..\..\..\Drivers\BSP\STM32H743I-EVAL\stm32h743i_eval_io.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32h743i_eval_bus.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\..\Drivers\BSP\STM32H743I-EVAL\stm32h743i_eval_bus.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -3491,6 +3576,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_flash_ex.c</FilePath>
             </File>
+            <File>
+              <FileName>stm32h7xx_hal_exti.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_exti.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -3508,8 +3598,8 @@
         <TargetCommonOption>
           <Device>STM32H750XBHx</Device>
           <Vendor>STMicroelectronics</Vendor>
-          <PackID>STMicroelectronics.STM32H7xx_DFP.0.0.8</PackID>
-          <PackURL>http://www.ST.com/</PackURL>
+          <PackID>Keil.STM32H7xx_DFP.2.2.6</PackID>
+          <PackURL>http://www.keil.com/pack</PackURL>
           <Cpu>IROM(0x68000000-0x681FFFFF) IRAM(0x20000000-0x2001FFFF) IRAM2(0x00000000-0xFFFF) CLOCK(12000000) FPU3(DFPU) CPUTYPE("Cortex-M7") ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile></StartupFile>
@@ -3829,7 +3919,7 @@
               <MiscControls></MiscControls>
               <Define>APPLICATION_ADDRESS=0x68000000U,USE_HAL_DRIVER,STM32H750xx,USE_STM32H743I_EVAL,USE_IOEXPANDER</Define>
               <Undefine></Undefine>
-              <IncludePath>../Inc;../../../../../../../Drivers/CMSIS/Include;../../../../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../../../../../../../Drivers/STM32H7xx_HAL_Driver/Inc;../../../../../../../Drivers/BSP//STM32H743I_EVAL;../../../../../../../Utilities;../../../../../../../Utilities/Fonts;../../../../../../../Drivers/BSP/Components</IncludePath>
+              <IncludePath>../Inc;../../../../../../../Drivers/CMSIS/Include;../../../../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../../../../../../../Drivers/STM32H7xx_HAL_Driver/Inc;../../../../../../../Drivers/BSP//STM32H743I-EVAL;../../../../../../../Utilities;../../../../../../../Utilities/Fonts;../../../../../../../Drivers/BSP/Components;../../../../../../../Drivers/BSP/Components/Common</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -3921,27 +4011,37 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Drivers/Components</GroupName>
+          <GroupName>Drivers/BSP/Components</GroupName>
           <Files>
             <File>
               <FileName>mfxstm32l152.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../../../Drivers/BSP/Components/mfxstm32l152/mfxstm32l152.c</FilePath>
+              <FilePath>..\..\..\..\..\..\..\Drivers\BSP\Components\mfxstm32l152\mfxstm32l152.c</FilePath>
+            </File>
+            <File>
+              <FileName>mfxstm32l152_reg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\..\Drivers\BSP\Components\mfxstm32l152\mfxstm32l152_reg.c</FilePath>
             </File>
           </Files>
         </Group>
         <Group>
-          <GroupName>Drivers/STM32H743I_EVAL</GroupName>
+          <GroupName>Drivers/BSP/STM32H743I_EVAL</GroupName>
           <Files>
             <File>
               <FileName>stm32h743i_eval.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../../../Drivers/BSP/STM32H743I_EVAL/stm32h743i_eval.c</FilePath>
+              <FilePath>..\..\..\..\..\..\..\Drivers\BSP\STM32H743I-EVAL\stm32h743i_eval.c</FilePath>
             </File>
             <File>
               <FileName>stm32h743i_eval_io.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../../../Drivers/BSP/STM32H743I_EVAL/stm32h743i_eval_io.c</FilePath>
+              <FilePath>..\..\..\..\..\..\..\Drivers\BSP\STM32H743I-EVAL\stm32h743i_eval_io.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32h743i_eval_bus.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\..\Drivers\BSP\STM32H743I-EVAL\stm32h743i_eval_bus.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -4073,6 +4173,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_flash_ex.c</FilePath>
             </File>
+            <File>
+              <FileName>stm32h7xx_hal_exti.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_exti.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -4090,8 +4195,8 @@
         <TargetCommonOption>
           <Device>STM32H750XBHx</Device>
           <Vendor>STMicroelectronics</Vendor>
-          <PackID>STMicroelectronics.STM32H7xx_DFP.0.0.8</PackID>
-          <PackURL>http://www.ST.com/</PackURL>
+          <PackID>Keil.STM32H7xx_DFP.2.2.6</PackID>
+          <PackURL>http://www.keil.com/pack</PackURL>
           <Cpu>IROM(0xD0000000-0xD1FFFFFF) IRAM(0x20000000-0x2001FFFF) IRAM2(0x00000000-0xFFFF) CLOCK(12000000) FPU3(DFPU) CPUTYPE("Cortex-M7") ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile></StartupFile>
@@ -4411,7 +4516,7 @@
               <MiscControls></MiscControls>
               <Define>APPLICATION_ADDRESS=0xD0000000U,USE_HAL_DRIVER,STM32H750xx,USE_STM32H743I_EVAL,USE_IOEXPANDER</Define>
               <Undefine></Undefine>
-              <IncludePath>../Inc;../../../../../../../Drivers/CMSIS/Include;../../../../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../../../../../../../Drivers/STM32H7xx_HAL_Driver/Inc;../../../../../../../Drivers/BSP//STM32H743I_EVAL;../../../../../../../Utilities;../../../../../../../Utilities/Fonts;../../../../../../../Drivers/BSP/Components</IncludePath>
+              <IncludePath>../Inc;../../../../../../../Drivers/CMSIS/Include;../../../../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../../../../../../../Drivers/STM32H7xx_HAL_Driver/Inc;../../../../../../../Drivers/BSP//STM32H743I-EVAL;../../../../../../../Utilities;../../../../../../../Utilities/Fonts;../../../../../../../Drivers/BSP/Components;../../../../../../../Drivers/BSP/Components/Common</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -4503,27 +4608,37 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Drivers/Components</GroupName>
+          <GroupName>Drivers/BSP/Components</GroupName>
           <Files>
             <File>
               <FileName>mfxstm32l152.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../../../Drivers/BSP/Components/mfxstm32l152/mfxstm32l152.c</FilePath>
+              <FilePath>..\..\..\..\..\..\..\Drivers\BSP\Components\mfxstm32l152\mfxstm32l152.c</FilePath>
+            </File>
+            <File>
+              <FileName>mfxstm32l152_reg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\..\Drivers\BSP\Components\mfxstm32l152\mfxstm32l152_reg.c</FilePath>
             </File>
           </Files>
         </Group>
         <Group>
-          <GroupName>Drivers/STM32H743I_EVAL</GroupName>
+          <GroupName>Drivers/BSP/STM32H743I_EVAL</GroupName>
           <Files>
             <File>
               <FileName>stm32h743i_eval.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../../../Drivers/BSP/STM32H743I_EVAL/stm32h743i_eval.c</FilePath>
+              <FilePath>..\..\..\..\..\..\..\Drivers\BSP\STM32H743I-EVAL\stm32h743i_eval.c</FilePath>
             </File>
             <File>
               <FileName>stm32h743i_eval_io.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../../../Drivers/BSP/STM32H743I_EVAL/stm32h743i_eval_io.c</FilePath>
+              <FilePath>..\..\..\..\..\..\..\Drivers\BSP\STM32H743I-EVAL\stm32h743i_eval_io.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32h743i_eval_bus.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\..\Drivers\BSP\STM32H743I-EVAL\stm32h743i_eval_bus.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -4654,6 +4769,11 @@
               <FileName>stm32h7xx_hal_flash_ex.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_flash_ex.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32h7xx_hal_exti.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_exti.c</FilePath>
             </File>
           </Files>
         </Group>

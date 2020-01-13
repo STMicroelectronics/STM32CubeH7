@@ -222,7 +222,6 @@
                     <state>STM32H747xx</state>
                     <state>USE_HAL_DRIVER</state>
                     <state>USE_USB_FS</state>
-                    <state>USE_IOEXPANDER</state>
                     <state>CORE_CM7</state>
                 </option>
                 <option>
@@ -284,7 +283,7 @@
                 <option>
                     <name>CCAllowList</name>
                     <version>1</version>
-                    <state>11111110</state>
+                    <state>00000000</state>
                 </option>
                 <option>
                     <name>CCDebugInfo</name>
@@ -354,10 +353,12 @@
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Inc</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\ST\STM32_USB_Host_Library\Core\Inc</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\ST\STM32_USB_Host_Library\Class\CDC\Inc</state>
-                    <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32H747I_EVAL</state>
+                    <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32H747I-EVAL</state>
+                    <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\Components\Common</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\FatFs\src</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\FatFs\src\drivers</state>
-                    <state>$PROJ_DIR$\..\..\..\..\..\..\Utilities\Log</state>
+                    <state>$PROJ_DIR$\..\..\..\..\..\..\Utilities\Basic_GUI</state>
+                    <state>$PROJ_DIR$\..\..\..\..\..\..\Utilities\Lcd_Trace</state>
                 </option>
                 <option>
                     <name>CCStdIncCheck</name>
@@ -373,7 +374,7 @@
                 </option>
                 <option>
                     <name>CCOptLevel</name>
-                    <state>3</state>
+                    <state>0</state>
                 </option>
                 <option>
                     <name>CCOptStrategy</name>
@@ -382,7 +383,7 @@
                 </option>
                 <option>
                     <name>CCOptLevelSlave</name>
-                    <state>3</state>
+                    <state>0</state>
                 </option>
                 <option>
                     <name>CompilerMisraRules98</name>
@@ -1253,7 +1254,6 @@
                     <state>STM32H747xx</state>
                     <state>USE_HAL_DRIVER</state>
                     <state>USE_USB_HS</state>
-                    <state>USE_IOEXPANDER</state>
                     <state>CORE_CM7</state>
                 </option>
                 <option>
@@ -1384,11 +1384,14 @@
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Inc</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\ST\STM32_USB_Host_Library\Core\Inc</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\ST\STM32_USB_Host_Library\Class\CDC\Inc</state>
-                    <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32H747I_EVAL</state>
+                    <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32H747I-EVAL</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\FatFs\src</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\FatFs\src\drivers</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Utilities\Log</state>
                     <state>$PROJ_DIR$\..\CM7\Inc</state>
+                    <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\Components\Common</state>
+                    <state>$PROJ_DIR$\..\..\..\..\..\..\Utilities\Basic_GUI</state>
+                    <state>$PROJ_DIR$\..\..\..\..\..\..\Utilities\Lcd_Trace</state>
                 </option>
                 <option>
                     <name>CCStdIncCheck</name>
@@ -2283,7 +2286,6 @@
                     <name>CCDefines</name>
                     <state>STM32H747xx</state>
                     <state>USE_HAL_DRIVER</state>
-                    <state>USE_IOEXPANDER</state>
                     <state>CORE_CM4</state>
                 </option>
                 <option>
@@ -2414,6 +2416,10 @@
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\CMSIS\Device\ST\STM32H7xx\Include</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Inc</state>
                     <state>C:\mcd_git\h7_master\Firmware\Middlewares\ST\STM32_USB_Host_Library\Core\Inc</state>
+                    <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\Components\Common</state>
+                    <state>$PROJ_DIR$\..\..\..\..\..\..\Utilities\Basic_GUI</state>
+                    <state>$PROJ_DIR$\..\..\..\..\..\..\Utilities\Lcd_Trace</state>
+                    <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32H747I-EVAL</state>
                 </option>
                 <option>
                     <name>CCStdIncCheck</name>
@@ -3121,6 +3127,9 @@
                 <name>$PROJ_DIR$\..\CM7\Src\explorer.c</name>
             </file>
             <file>
+                <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\Components\is42s32800j\is42s32800j.c</name>
+            </file>
+            <file>
                 <name>$PROJ_DIR$\..\CM7\Src\main.c</name>
             </file>
             <file>
@@ -3162,7 +3171,13 @@
                     <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\Components\mfxstm32l152\mfxstm32l152.c</name>
                 </file>
                 <file>
+                    <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\Components\mfxstm32l152\mfxstm32l152_reg.c</name>
+                </file>
+                <file>
                     <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\Components\otm8009a\otm8009a.c</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\Components\otm8009a\otm8009a_reg.c</name>
                 </file>
                 <file>
                     <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\Components\stmpe811\stmpe811.c</name>
@@ -3171,19 +3186,19 @@
             <group>
                 <name>STM32H747I_EVAL</name>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32H747I_EVAL\stm32h747i_eval.c</name>
+                    <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32H747I-EVAL\stm32h747i_eval_bus.c</name>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32H747I_EVAL\stm32h747i_eval_io.c</name>
+                    <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32H747I-EVAL\stm32h747i_eval_io.c</name>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32H747I_EVAL\stm32h747i_eval_lcd.c</name>
+                    <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32H747I-EVAL\stm32h747i_eval_lcd.c</name>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32H747I_EVAL\stm32h747i_eval_sd.c</name>
+                    <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32H747I-EVAL\stm32h747i_eval_sd.c</name>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32H747I_EVAL\stm32h747i_eval_sdram.c</name>
+                    <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32H747I-EVAL\stm32h747i_eval_sdram.c</name>
                 </file>
             </group>
         </group>
@@ -3212,9 +3227,18 @@
             </file>
             <file>
                 <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_dma2d.c</name>
+                <excluded>
+                    <configuration>STM32H747I-EVAL_CM4</configuration>
+                </excluded>
             </file>
             <file>
                 <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_dsi.c</name>
+                <excluded>
+                    <configuration>STM32H747I-EVAL_CM4</configuration>
+                </excluded>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_exti.c</name>
             </file>
             <file>
                 <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_flash.c</name>
@@ -3235,13 +3259,25 @@
                 <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_i2c.c</name>
             </file>
             <file>
+                <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_i2c_ex.c</name>
+            </file>
+            <file>
                 <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_ltdc.c</name>
+                <excluded>
+                    <configuration>STM32H747I-EVAL_CM4</configuration>
+                </excluded>
             </file>
             <file>
                 <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_ltdc_ex.c</name>
+                <excluded>
+                    <configuration>STM32H747I-EVAL_CM4</configuration>
+                </excluded>
             </file>
             <file>
                 <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_mdma.c</name>
+                <excluded>
+                    <configuration>STM32H747I-EVAL_CM4</configuration>
+                </excluded>
             </file>
             <file>
                 <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_pwr.c</name>
@@ -3266,6 +3302,9 @@
             </file>
             <file>
                 <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_sdram.c</name>
+                <excluded>
+                    <configuration>STM32H747I-EVAL_CM4</configuration>
+                </excluded>
             </file>
             <file>
                 <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_sram.c</name>
@@ -3287,6 +3326,9 @@
             </file>
             <file>
                 <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_ll_fmc.c</name>
+                <excluded>
+                    <configuration>STM32H747I-EVAL_CM4</configuration>
+                </excluded>
             </file>
             <file>
                 <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_ll_sdmmc.c</name>
@@ -3295,6 +3337,9 @@
                 <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_ll_usb.c</name>
             </file>
         </group>
+        <file>
+            <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32H747I-EVAL\stm32h747i_eval.c</name>
+        </file>
     </group>
     <group>
         <name>Middlewares</name>
@@ -3350,7 +3395,10 @@
             <configuration>STM32H747I-EVAL_CM4</configuration>
         </excluded>
         <file>
-            <name>$PROJ_DIR$\..\..\..\..\..\..\Utilities\Log\lcd_log.c</name>
+            <name>$PROJ_DIR$\..\..\..\..\..\..\Utilities\Basic_GUI\basic_gui.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\..\..\..\..\Utilities\Lcd_Trace\lcd_trace.c</name>
         </file>
     </group>
 </project>

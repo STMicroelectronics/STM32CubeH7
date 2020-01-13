@@ -85,13 +85,13 @@ void STORAGE_Init(void)
 
   /**** SDMMC Initialization ****/
   /* Enable SD Interrupt mode */
-  BSP_SD_ITConfig();
+  BSP_SD_DetectITConfig(0);
 
   /* NVIC configuration for SDMMC1 interrupts */
   HAL_NVIC_SetPriority(SDMMC1_IRQn, 4, 0);
   HAL_NVIC_EnableIRQ(SDMMC1_IRQn);
 
-  if(BSP_SD_IsDetected())
+  if(BSP_SD_IsDetected(0))
   {
     osMessagePut(StorageEvent, MSDDISK_CONNECTION_EVENT, 0);
   }
@@ -299,9 +299,9 @@ static void StorageThread(void const * argument)
       
       case MSDDISK_CONNECTION_EVENT:
         /* Enable SD Interrupt mode */
-        if(BSP_SD_Init() == MSD_OK)
+        if(BSP_SD_Init(0) == BSP_ERROR_NONE)
         {
-            if(BSP_SD_ITConfig() == MSD_OK)
+            if(BSP_SD_DetectITConfig(0) == BSP_ERROR_NONE)
             {
                 /* NVIC configuration for SDMMC1 interrupts */
                 HAL_NVIC_SetPriority(SDMMC1_IRQn, 4, 0);
@@ -323,7 +323,7 @@ static void StorageThread(void const * argument)
         f_mount(NULL, "", 0);
         FATFS_UnLinkDriver(MSDDISK_Drive);
         StorageStatus[MSD_DISK_UNIT] = 0;
-        BSP_SD_DeInit();
+        BSP_SD_DeInit(0);
         STORAGE_NotifyConnectionChange (MSD_DISK_UNIT, 0);          
         break;  
       }      

@@ -2,36 +2,18 @@
   ******************************************************************************
   * @file    stmpe811.c
   * @author  MCD Application Team
-  * @version V2.0.0
-  * @date    15-December-2014
   * @brief   This file provides a set of functions needed to manage the STMPE811
-  *          IO Expander devices.
+  *          IO Expander component core drivers.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2014 STMicroelectronics</center></h2>
+  * <h2><center>&copy; Copyright (c) 2014 STMicroelectronics.
+  * All rights reserved.</center></h2>
   *
-  * Redistribution and use in source and binary forms, with or without modification,
-  * are permitted provided that the following conditions are met:
-  *   1. Redistributions of source code must retain the above copyright notice,
-  *      this list of conditions and the following disclaimer.
-  *   2. Redistributions in binary form must reproduce the above copyright notice,
-  *      this list of conditions and the following disclaimer in the documentation
-  *      and/or other materials provided with the distribution.
-  *   3. Neither the name of STMicroelectronics nor the names of its contributors
-  *      may be used to endorse or promote products derived from this software
-  *      without specific prior written permission.
-  *
-  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-  * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
-  * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-  * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-  * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-  * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  * This software component is licensed by ST under BSD 3-Clause license,
+  * the "License"; You may not use this file except in compliance with the
+  * License. You may obtain a copy of the License at:
+  *                        opensource.org/licenses/BSD-3-Clause
   *
   ******************************************************************************
   */  
@@ -47,382 +29,284 @@
   * @{
   */ 
   
-/** @defgroup STMPE811
+/** @defgroup STMPE811 STMPE811
   * @{
   */   
 
-/** @defgroup STMPE811_Private_Types_Definitions
-  * @{
-  */ 
-
-/** @defgroup STMPE811_Private_Defines
-  * @{
-  */ 
-#define STMPE811_MAX_INSTANCE         2 
-/**
-  * @}
-  */
-
-/** @defgroup STMPE811_Private_Macros
-  * @{
-  */ 
-/**
-  * @}
-  */ 
-
-/** @defgroup STMPE811_Private_Variables
+/** @defgroup STMPE811_Exported_Variables Exported Variables
   * @{
   */ 
 
 /* Touch screen driver structure initialization */  
-TS_DrvTypeDef stmpe811_ts_drv = 
+STMPE811_TS_Mode_t STMPE811_TS_Driver = 
 {
-  stmpe811_Init,
-  stmpe811_ReadID,
-  stmpe811_Reset,
-  stmpe811_TS_Start,
-  stmpe811_TS_DetectTouch,
-  stmpe811_TS_GetXY,
-  stmpe811_TS_EnableIT,
-  stmpe811_TS_ClearIT,
-  stmpe811_TS_ITStatus,
-  stmpe811_TS_DisableIT,
+  STMPE811_TS_Init,
+  STMPE811_DeInit,
+  STMPE811_TS_GestureConfig,
+  STMPE811_ReadID, 
+  STMPE811_TS_GetState,
+  STMPE811_TS_GetMultiTouchState,
+  STMPE811_TS_GetGesture,
+  STMPE811_GetCapabilities,
+  STMPE811_TS_EnableIT,
+  STMPE811_TS_DisableIT,  
+  STMPE811_TS_ClearIT,
+  STMPE811_TS_ITStatus
 };
 
 /* IO driver structure initialization */ 
-IO_DrvTypeDef stmpe811_io_drv = 
+STMPE811_IO_Mode_t STMPE811_IO_Driver = 
 {
-  stmpe811_Init,
-  stmpe811_ReadID,
-  stmpe811_Reset,
-  stmpe811_IO_Start,
-  stmpe811_IO_Config,
-  stmpe811_IO_WritePin,
-  stmpe811_IO_ReadPin,
-  stmpe811_IO_EnableIT,
-  stmpe811_IO_DisableIT,
-  stmpe811_IO_ITStatus,
-  stmpe811_IO_ClearIT,
+  STMPE811_IO_Init,
+  STMPE811_DeInit,  
+  STMPE811_ReadID,
+  STMPE811_Reset,  
+  STMPE811_IO_Start,
+  STMPE811_IO_WritePin,
+  STMPE811_IO_ReadPin,
+  STMPE811_IO_EnableIT,
+  STMPE811_IO_DisableIT,
+  STMPE811_IO_ITStatus,
+  STMPE811_IO_ClearIT,
 };
 
-/* stmpe811 instances by address */
-uint8_t stmpe811[STMPE811_MAX_INSTANCE] = {0};
 /**
   * @}
   */ 
 
-/** @defgroup STMPE811_Private_Function_Prototypes
+/** @defgroup STMPE811_Private_Function_Prototypes Private Function Prototypes
   * @{
   */
-static uint8_t stmpe811_GetInstance(uint16_t DeviceAddr); 
+static int32_t STMPE811_EnableGlobalIT(STMPE811_Object_t *pObj);
+static int32_t STMPE811_DisableGlobalIT(STMPE811_Object_t *pObj);
+static int32_t STMPE811_TS_DetectTouch(STMPE811_Object_t *pObj);
+static int32_t STMPE811_EnableITSource(STMPE811_Object_t *pObj, uint8_t Source);
+static int32_t STMPE811_DisableITSource(STMPE811_Object_t *pObj, uint8_t Source);
+static int32_t STMPE811_ClearGlobalIT(STMPE811_Object_t *pObj, uint8_t Source);
+static void    STMPE811_Delay(STMPE811_Object_t *pObj, uint32_t Delay);
+static int32_t STMPE811_ReadRegWrap(void *handle, uint16_t Reg, uint8_t* pData, uint16_t Length);
+static int32_t STMPE811_WriteRegWrap(void *handle, uint16_t Reg, uint8_t* pData, uint16_t Length);
 /**
   * @}
   */ 
 
-/** @defgroup STMPE811_Private_Functions
+/** @defgroup STMPE811_Exported_Functions Exported Functions
   * @{
   */
+
+/**
+  * @brief  Register IO bus to component object
+  * @param  Component object pointer
+  * @retval Component status
+  */
+int32_t STMPE811_RegisterBusIO (STMPE811_Object_t *pObj, STMPE811_IO_t *pIO)
+{
+  int32_t ret;
+  
+  if (pObj == NULL)
+  {
+    ret = STMPE811_ERROR;
+  }
+  else
+  {
+    pObj->IO.Init      = pIO->Init;
+    pObj->IO.DeInit    = pIO->DeInit;
+    pObj->IO.Address   = pIO->Address;
+    pObj->IO.WriteReg  = pIO->WriteReg;
+    pObj->IO.ReadReg   = pIO->ReadReg;
+    pObj->IO.GetTick   = pIO->GetTick;
+    
+    pObj->Ctx.ReadReg  = STMPE811_ReadRegWrap;
+    pObj->Ctx.WriteReg = STMPE811_WriteRegWrap;
+    pObj->Ctx.handle   = pObj;
+    
+    if(pObj->IO.Init != NULL)
+    {
+      ret = pObj->IO.Init();
+    }
+    else
+    {
+      ret = STMPE811_ERROR;
+    }
+  }    
+  
+  return ret;
+}
 
 /**
   * @brief  Initialize the stmpe811 and configure the needed hardware resources
-  * @param  DeviceAddr: Device address on communication Bus.
-  * @retval None
+  * @param  pObj  Pointer to component object.
+  * @retval Component status
   */
-void stmpe811_Init(uint16_t DeviceAddr)
+int32_t STMPE811_Init(STMPE811_Object_t *pObj)
 {
-  uint8_t instance;
-  uint8_t empty;
+  int32_t ret = STMPE811_OK;
   
-  /* Check if device instance already exists */
-  instance = stmpe811_GetInstance(DeviceAddr);
-  
-  /* To prevent double initialization */
-  if(instance == 0xFF)
-  {
-    /* Look for empty instance */
-    empty = stmpe811_GetInstance(0);
+  if(pObj->IsInitialized == 0U)
+  {    
+    /* Initialize IO BUS layer */
+    pObj->IO.Init();
     
-    if(empty < STMPE811_MAX_INSTANCE)
+    /* Generate stmpe811 Software reset */
+    if(STMPE811_Reset(pObj) != STMPE811_OK)
     {
-      /* Register the current device instance */
-      stmpe811[empty] = DeviceAddr;
-      
-      /* Initialize IO BUS layer */
-      IOE_Init(); 
-      
-      /* Generate stmpe811 Software reset */
-      stmpe811_Reset(DeviceAddr);
+      ret = STMPE811_ERROR;
+    }
+    else
+    {
+      pObj->IsInitialized = 1U;
     }
   }
+  
+  return ret;
+}
+
+/**
+  * @brief  DeInitialize the stmpe811 and un-configure the needed hardware resources
+  * @param  pObj  Pointer to component object.
+  * @retval Component status
+  */
+int32_t STMPE811_DeInit(STMPE811_Object_t *pObj)
+{
+  if(pObj->IsInitialized == 1U)
+  {
+    /* Generate stmpe811 Software reset */
+    if(STMPE811_Reset(pObj) != STMPE811_OK)
+    {
+      return STMPE811_ERROR;
+    }
+    else 
+    {	
+      /* De-Initialize IO BUS layer */
+      pObj->IO.DeInit();
+      
+      pObj->IsInitialized = 0U; 
+    }
+  }
+  
+  return STMPE811_OK;  
 }
  
 /**
   * @brief  Reset the stmpe811 by Software.
-  * @param  DeviceAddr: Device address on communication Bus.  
-  * @retval None
+  * @param  pObj  Pointer to component object.
+  * @retval Component status
   */
-void stmpe811_Reset(uint16_t DeviceAddr)
+int32_t STMPE811_Reset(STMPE811_Object_t *pObj)
 {
+  int32_t ret = STMPE811_OK;
+  uint8_t tmp = 2;
+  
   /* Power Down the stmpe811 */  
-  IOE_Write(DeviceAddr, STMPE811_REG_SYS_CTRL1, 2);
-
-  /* Wait for a delay to ensure registers erasing */
-  IOE_Delay(10); 
+  if(stmpe811_write_reg(&pObj->Ctx, STMPE811_SYS_CTRL1_REG, &tmp, 1) != STMPE811_OK)
+  {
+    ret = STMPE811_ERROR;
+  }
+  else
+  {
+    /* Wait for a delay to ensure registers erasing */
+    STMPE811_Delay(pObj, 10); 
+    tmp = 0;
+    /* Power On the stmpe811 after the power off => all registers are reinitialized */
+    if(stmpe811_write_reg(&pObj->Ctx, STMPE811_SYS_CTRL1_REG, &tmp, 1) != STMPE811_OK)
+    {
+      ret = STMPE811_ERROR;
+    }
+    else
+    {
+      /* Wait for a delay to ensure registers erasing */
+      STMPE811_Delay(pObj, 2);
+    }
+  }
   
-  /* Power On the Codec after the power off => all registers are reinitialized */
-  IOE_Write(DeviceAddr, STMPE811_REG_SYS_CTRL1, 0);
-  
-  /* Wait for a delay to ensure registers erasing */
-  IOE_Delay(2); 
+  return ret;  
 }
 
 /**
-  * @brief  Read the stmpe811 IO Expander device ID.
-  * @param  DeviceAddr: Device address on communication Bus.  
+  * @brief  Read the STMPE811 IO Expander device ID.
+  * @param  pObj  Pointer to component object.  
   * @retval The Device ID (two bytes).
   */
-uint16_t stmpe811_ReadID(uint16_t DeviceAddr)
+int32_t STMPE811_ReadID(STMPE811_Object_t *pObj, uint32_t *Id)
 {
+  int32_t ret = STMPE811_OK;  
+  uint8_t id_lsb, id_msb;
+  
   /* Initialize IO BUS layer */
-  IOE_Init(); 
+  pObj->IO.Init();
   
-  /* Return the device ID value */
-  return ((IOE_Read(DeviceAddr, STMPE811_REG_CHP_ID_LSB) << 8) |\
-          (IOE_Read(DeviceAddr, STMPE811_REG_CHP_ID_MSB)));
+  if(stmpe811_read_reg(&pObj->Ctx, STMPE811_CHP_ID_LSB_REG, &id_lsb, 1) != STMPE811_OK)
+  {
+    ret = STMPE811_ERROR;
+  }
+  else if(stmpe811_read_reg(&pObj->Ctx, STMPE811_CHP_ID_MSB_REG, &id_msb, 1) != STMPE811_OK)
+  {
+    ret = STMPE811_ERROR;
+  }  
+  else
+  {
+    /* Store the device ID value */
+    *Id = ((uint32_t)id_lsb << 8) | (uint32_t)id_msb;
+  }
+  
+  return ret;
 }
 
-/**
-  * @brief  Enable the Global interrupt.
-  * @param  DeviceAddr: Device address on communication Bus.       
-  * @retval None
-  */
-void stmpe811_EnableGlobalIT(uint16_t DeviceAddr)
-{
-  uint8_t tmp = 0;
-  
-  /* Read the Interrupt Control register  */
-  tmp = IOE_Read(DeviceAddr, STMPE811_REG_INT_CTRL);
-  
-  /* Set the global interrupts to be Enabled */    
-  tmp |= (uint8_t)STMPE811_GIT_EN;
-  
-  /* Write Back the Interrupt Control register */
-  IOE_Write(DeviceAddr, STMPE811_REG_INT_CTRL, tmp); 
-}
-
-/**
-  * @brief  Disable the Global interrupt.
-  * @param  DeviceAddr: Device address on communication Bus.      
-  * @retval None
-  */
-void stmpe811_DisableGlobalIT(uint16_t DeviceAddr)
-{
-  uint8_t tmp = 0;
-  
-  /* Read the Interrupt Control register  */
-  tmp = IOE_Read(DeviceAddr, STMPE811_REG_INT_CTRL);
-
-  /* Set the global interrupts to be Disabled */    
-  tmp &= ~(uint8_t)STMPE811_GIT_EN;
- 
-  /* Write Back the Interrupt Control register */
-  IOE_Write(DeviceAddr, STMPE811_REG_INT_CTRL, tmp);
-    
-}
-
-/**
-  * @brief  Enable the interrupt mode for the selected IT source
-  * @param  DeviceAddr: Device address on communication Bus.  
-  * @param Source: The interrupt source to be configured, could be:
-  *   @arg  STMPE811_GIT_IO: IO interrupt 
-  *   @arg  STMPE811_GIT_ADC : ADC interrupt    
-  *   @arg  STMPE811_GIT_FE : Touch Screen Controller FIFO Error interrupt
-  *   @arg  STMPE811_GIT_FF : Touch Screen Controller FIFO Full interrupt      
-  *   @arg  STMPE811_GIT_FOV : Touch Screen Controller FIFO Overrun interrupt     
-  *   @arg  STMPE811_GIT_FTH : Touch Screen Controller FIFO Threshold interrupt   
-  *   @arg  STMPE811_GIT_TOUCH : Touch Screen Controller Touch Detected interrupt  
-  * @retval None
-  */
-void stmpe811_EnableITSource(uint16_t DeviceAddr, uint8_t Source)
-{
-  uint8_t tmp = 0;
-  
-  /* Get the current value of the INT_EN register */
-  tmp = IOE_Read(DeviceAddr, STMPE811_REG_INT_EN);
-
-  /* Set the interrupts to be Enabled */    
-  tmp |= Source; 
-  
-  /* Set the register */
-  IOE_Write(DeviceAddr, STMPE811_REG_INT_EN, tmp);   
-}
-
-/**
-  * @brief  Disable the interrupt mode for the selected IT source
-  * @param  DeviceAddr: Device address on communication Bus.  
-  * @param  Source: The interrupt source to be configured, could be:
-  *   @arg  STMPE811_GIT_IO: IO interrupt 
-  *   @arg  STMPE811_GIT_ADC : ADC interrupt    
-  *   @arg  STMPE811_GIT_FE : Touch Screen Controller FIFO Error interrupt
-  *   @arg  STMPE811_GIT_FF : Touch Screen Controller FIFO Full interrupt      
-  *   @arg  STMPE811_GIT_FOV : Touch Screen Controller FIFO Overrun interrupt     
-  *   @arg  STMPE811_GIT_FTH : Touch Screen Controller FIFO Threshold interrupt   
-  *   @arg  STMPE811_GIT_TOUCH : Touch Screen Controller Touch Detected interrupt  
-  * @retval None
-  */
-void stmpe811_DisableITSource(uint16_t DeviceAddr, uint8_t Source)
-{
-  uint8_t tmp = 0;
-  
-  /* Get the current value of the INT_EN register */
-  tmp = IOE_Read(DeviceAddr, STMPE811_REG_INT_EN);
-
-  /* Set the interrupts to be Enabled */    
-  tmp &= ~Source; 
-  
-  /* Set the register */
-  IOE_Write(DeviceAddr, STMPE811_REG_INT_EN, tmp);   
-}
-
-/**
-  * @brief  Set the global interrupt Polarity.
-  * @param  DeviceAddr: Device address on communication Bus.  
-  * @param  Polarity: the IT mode polarity, could be one of the following values:
-  *   @arg  STMPE811_POLARITY_LOW: Interrupt line is active Low/Falling edge      
-  *   @arg  STMPE811_POLARITY_HIGH: Interrupt line is active High/Rising edge              
-  * @retval None
-  */
-void stmpe811_SetITPolarity(uint16_t DeviceAddr, uint8_t Polarity)
-{
-  uint8_t tmp = 0;
-  
-  /* Get the current register value */ 
-  tmp = IOE_Read(DeviceAddr, STMPE811_REG_INT_CTRL);
-  
-  /* Mask the polarity bits */
-  tmp &= ~(uint8_t)0x04;
-    
-  /* Modify the Interrupt Output line configuration */
-  tmp |= Polarity;
-  
-  /* Set the new register value */
-  IOE_Write(DeviceAddr, STMPE811_REG_INT_CTRL, tmp);
- 
-}
-
-/**
-  * @brief  Set the global interrupt Type. 
-  * @param  DeviceAddr: Device address on communication Bus.      
-  * @param  Type: Interrupt line activity type, could be one of the following values:
-  *   @arg  STMPE811_TYPE_LEVEL: Interrupt line is active in level model         
-  *   @arg  STMPE811_TYPE_EDGE: Interrupt line is active in edge model           
-  * @retval None
-  */
-void stmpe811_SetITType(uint16_t DeviceAddr, uint8_t Type)
-{
-  uint8_t tmp = 0;
-  
-  /* Get the current register value */ 
-  tmp = IOE_Read(DeviceAddr, STMPE811_REG_INT_CTRL);
-  
-  /* Mask the type bits */
-  tmp &= ~(uint8_t)0x02;
-    
-  /* Modify the Interrupt Output line configuration */
-  tmp |= Type;
-  
-  /* Set the new register value */
-  IOE_Write(DeviceAddr, STMPE811_REG_INT_CTRL, tmp);
- 
-}
-
-/**
-  * @brief  Check the selected Global interrupt source pending bit
-  * @param  DeviceAddr: Device address on communication Bus. 
-  * @param  Source: the Global interrupt source to be checked, could be:
-  *   @arg  STMPE811_GIT_IO: IO interrupt 
-  *   @arg  STMPE811_GIT_ADC : ADC interrupt    
-  *   @arg  STMPE811_GIT_FE : Touch Screen Controller FIFO Error interrupt
-  *   @arg  STMPE811_GIT_FF : Touch Screen Controller FIFO Full interrupt      
-  *   @arg  STMPE811_GIT_FOV : Touch Screen Controller FIFO Overrun interrupt     
-  *   @arg  STMPE811_GIT_FTH : Touch Screen Controller FIFO Threshold interrupt   
-  *   @arg  STMPE811_GIT_TOUCH : Touch Screen Controller Touch Detected interrupt      
-  * @retval The checked Global interrupt source status.
-  */
-uint8_t stmpe811_GlobalITStatus(uint16_t DeviceAddr, uint8_t Source)
-{
-  /* Return the global IT source status */
-  return((IOE_Read(DeviceAddr, STMPE811_REG_INT_STA) & Source) == Source);
-}
-
-/**
-  * @brief  Return the Global interrupts status
-  * @param  DeviceAddr: Device address on communication Bus. 
-  * @param  Source: the Global interrupt source to be checked, could be:
-  *   @arg  STMPE811_GIT_IO: IO interrupt 
-  *   @arg  STMPE811_GIT_ADC : ADC interrupt    
-  *   @arg  STMPE811_GIT_FE : Touch Screen Controller FIFO Error interrupt
-  *   @arg  STMPE811_GIT_FF : Touch Screen Controller FIFO Full interrupt      
-  *   @arg  STMPE811_GIT_FOV : Touch Screen Controller FIFO Overrun interrupt     
-  *   @arg  STMPE811_GIT_FTH : Touch Screen Controller FIFO Threshold interrupt   
-  *   @arg  STMPE811_GIT_TOUCH : Touch Screen Controller Touch Detected interrupt      
-  * @retval The checked Global interrupt source status.
-  */
-uint8_t stmpe811_ReadGITStatus(uint16_t DeviceAddr, uint8_t Source)
-{
-  /* Return the global IT source status */
-  return((IOE_Read(DeviceAddr, STMPE811_REG_INT_STA) & Source));
-}
-
-/**
-  * @brief  Clear the selected Global interrupt pending bit(s)
-  * @param  DeviceAddr: Device address on communication Bus. 
-  * @param  Source: the Global interrupt source to be cleared, could be any combination
-  *         of the following values:        
-  *   @arg  STMPE811_GIT_IO: IO interrupt 
-  *   @arg  STMPE811_GIT_ADC : ADC interrupt    
-  *   @arg  STMPE811_GIT_FE : Touch Screen Controller FIFO Error interrupt
-  *   @arg  STMPE811_GIT_FF : Touch Screen Controller FIFO Full interrupt      
-  *   @arg  STMPE811_GIT_FOV : Touch Screen Controller FIFO Overrun interrupt     
-  *   @arg  STMPE811_GIT_FTH : Touch Screen Controller FIFO Threshold interrupt   
-  *   @arg  STMPE811_GIT_TOUCH : Touch Screen Controller Touch Detected interrupt 
-  * @retval None
-  */
-void stmpe811_ClearGlobalIT(uint16_t DeviceAddr, uint8_t Source)
-{
-  /* Write 1 to the bits that have to be cleared */
-  IOE_Write(DeviceAddr, STMPE811_REG_INT_STA, Source);
-}
 
 /**
   * @brief  Start the IO functionality use and disable the AF for selected IO pin(s).
-  * @param  DeviceAddr: Device address on communication Bus.  
-  * @param  IO_Pin: The IO pin(s) to put in AF. This parameter can be one 
+  * @param  pObj  Pointer to component object. 
+  * @param  IO_Pin  The IO pin(s) to put in AF. This parameter can be one 
   *         of the following values:
   *   @arg  STMPE811_PIN_x: where x can be from 0 to 7.
-  * @retval None
+  * @retval Component status
   */
-void stmpe811_IO_Start(uint16_t DeviceAddr, uint32_t IO_Pin)
+int32_t STMPE811_IO_Start(STMPE811_Object_t *pObj, uint32_t IO_Pin)
 {
-  uint8_t mode;
+  int32_t ret = STMPE811_OK; 
+  uint8_t tmp;
   
   /* Get the current register value */
-  mode = IOE_Read(DeviceAddr, STMPE811_REG_SYS_CTRL2);
+  if(stmpe811_read_reg(&pObj->Ctx, STMPE811_SYS_CTRL2_REG, &tmp, 1) != STMPE811_OK)
+  {
+    ret = STMPE811_ERROR;
+  }  
+  else
+  {
+    /* Set the Functionalities to be Disabled */    
+    tmp &= ~(STMPE811_IO_FCT | STMPE811_ADC_FCT);  
+    
+    /* Write the new register value */  
+    if(stmpe811_write_reg(&pObj->Ctx, STMPE811_SYS_CTRL2_REG, &tmp, 1) != STMPE811_OK)
+    {
+      ret = STMPE811_ERROR;
+    }   
+    /* Disable AF for the selected IO pin(s) */   
+    /* Get the current state of the IO_AF register */
+    else if(stmpe811_read_reg(&pObj->Ctx, STMPE811_IO_AF_REG, &tmp, 1) != STMPE811_OK)
+    {
+      ret = STMPE811_ERROR;
+    }   
+    else
+    {
+      /* Enable the selected pins alternate function */
+      tmp |= (uint8_t)IO_Pin;
+      
+      /* Write back the new value in IO AF register */
+      if(stmpe811_write_reg(&pObj->Ctx, STMPE811_IO_AF_REG, &tmp, 1) != STMPE811_OK)
+      {
+        ret = STMPE811_ERROR;
+      }   
+    }
+  }
   
-  /* Set the Functionalities to be Disabled */    
-  mode &= ~(STMPE811_IO_FCT | STMPE811_ADC_FCT);  
-  
-  /* Write the new register value */  
-  IOE_Write(DeviceAddr, STMPE811_REG_SYS_CTRL2, mode); 
-
-  /* Disable AF for the selected IO pin(s) */
-  stmpe811_IO_DisableAF(DeviceAddr, (uint8_t)IO_Pin);
+  return ret;
 }
 
 /**
   * @brief  Configures the IO pin(s) according to IO mode structure value.
-  * @param  DeviceAddr: Device address on communication Bus.  
-  * @param  IO_Pin: The output pin to be set or reset. This parameter can be one 
+  * @param  pObj  Pointer to component object. 
+  * @param  IO_Pin  The output pin to be set or reset. This parameter can be one 
   *         of the following values:   
   *   @arg  STMPE811_PIN_x: where x can be from 0 to 7.
   * @param  IO_Mode: The IO pin mode to configure, could be one of the following values:
@@ -434,530 +318,959 @@ void stmpe811_IO_Start(uint16_t DeviceAddr, uint32_t IO_Pin)
   *   @arg  IO_MODE_IT_HIGH_LEVEL            
   * @retval 0 if no error, IO_Mode if error
   */
-uint8_t stmpe811_IO_Config(uint16_t DeviceAddr, uint32_t IO_Pin, IO_ModeTypedef IO_Mode)
+int32_t STMPE811_IO_Init(STMPE811_Object_t *pObj, STMPE811_IO_Init_t *IoInit)
 {
-  uint8_t error_code = 0;
-
-  /* Configure IO pin according to selected IO mode */
-  switch(IO_Mode)
+  int32_t ret = STMPE811_OK; 
+  uint8_t tmp;
+  
+  /* IT enable/disable */
+  switch(IoInit->Mode)
   {
-  case IO_MODE_INPUT: /* Input mode */
-    stmpe811_IO_InitPin(DeviceAddr, IO_Pin, STMPE811_DIRECTION_IN);
+  case STMPE811_GPIO_MODE_OFF:
+  case STMPE811_GPIO_MODE_ANALOG:  
+  case STMPE811_GPIO_MODE_INPUT:   
+  case STMPE811_GPIO_MODE_OUTPUT_OD:
+  case STMPE811_GPIO_MODE_OUTPUT_PP:
+    ret += STMPE811_IO_DisablePinIT(pObj, IoInit->Pin); /* first disable IT */
     break;
     
-  case IO_MODE_OUTPUT: /* Output mode */
-    stmpe811_IO_InitPin(DeviceAddr, IO_Pin, STMPE811_DIRECTION_OUT);
+  case STMPE811_GPIO_MODE_IT_RISING_EDGE:
+  case STMPE811_GPIO_MODE_IT_FALLING_EDGE:
+  case STMPE811_GPIO_MODE_IT_LOW_LEVEL:  
+  case STMPE811_GPIO_MODE_IT_HIGH_LEVEL: 
+    ret += STMPE811_IO_EnableIT(pObj); /* first enable IT */
     break;
-  
-  case IO_MODE_IT_RISING_EDGE: /* Interrupt rising edge mode */
-    stmpe811_IO_EnableIT(DeviceAddr);
-    stmpe811_IO_EnablePinIT(DeviceAddr, IO_Pin);
-    stmpe811_IO_InitPin(DeviceAddr, IO_Pin, STMPE811_DIRECTION_IN); 
-    stmpe811_SetITType(DeviceAddr, STMPE811_TYPE_EDGE);      
-    stmpe811_IO_SetEdgeMode(DeviceAddr, IO_Pin, STMPE811_EDGE_RISING); 
-    break;
-  
-  case IO_MODE_IT_FALLING_EDGE: /* Interrupt falling edge mode */
-    stmpe811_IO_EnableIT(DeviceAddr);
-    stmpe811_IO_EnablePinIT(DeviceAddr, IO_Pin);
-    stmpe811_IO_InitPin(DeviceAddr, IO_Pin, STMPE811_DIRECTION_IN); 
-    stmpe811_SetITType(DeviceAddr, STMPE811_TYPE_EDGE);    
-    stmpe811_IO_SetEdgeMode(DeviceAddr, IO_Pin, STMPE811_EDGE_FALLING); 
-    break;
-  
-  case IO_MODE_IT_LOW_LEVEL: /* Low level interrupt mode */
-    stmpe811_IO_EnableIT(DeviceAddr);
-    stmpe811_IO_EnablePinIT(DeviceAddr, IO_Pin);
-    stmpe811_IO_InitPin(DeviceAddr, IO_Pin, STMPE811_DIRECTION_IN); 
-    stmpe811_SetITType(DeviceAddr, STMPE811_TYPE_LEVEL);
-    stmpe811_SetITPolarity(DeviceAddr, STMPE811_POLARITY_LOW);      
-    break;
-    
-  case IO_MODE_IT_HIGH_LEVEL: /* High level interrupt mode */
-    stmpe811_IO_EnableIT(DeviceAddr);
-    stmpe811_IO_EnablePinIT(DeviceAddr, IO_Pin);
-    stmpe811_IO_InitPin(DeviceAddr, IO_Pin, STMPE811_DIRECTION_IN); 
-    stmpe811_SetITType(DeviceAddr, STMPE811_TYPE_LEVEL);
-    stmpe811_SetITPolarity(DeviceAddr, STMPE811_POLARITY_HIGH);  
-    break;    
-
   default:
-    error_code = (uint8_t) IO_Mode;
     break;
-  } 
-  return error_code;
-}
-
-/**
-  * @brief  Initialize the selected IO pin direction.
-  * @param  DeviceAddr: Device address on communication Bus.
-  * @param  IO_Pin: The IO pin to be configured. This parameter could be any 
-  *         combination of the following values:
-  *   @arg  STMPE811_PIN_x: Where x can be from 0 to 7.   
-  * @param  Direction: could be STMPE811_DIRECTION_IN or STMPE811_DIRECTION_OUT.      
-  * @retval None
-  */
-void stmpe811_IO_InitPin(uint16_t DeviceAddr, uint32_t IO_Pin, uint8_t Direction)
-{
-  uint8_t tmp = 0;   
-  
-  /* Get all the Pins direction */
-  tmp = IOE_Read(DeviceAddr, STMPE811_REG_IO_DIR);
-  
-  /* Set the selected pin direction */
-  if (Direction != STMPE811_DIRECTION_IN)
-  {
-    tmp |= (uint8_t)IO_Pin;
-  }  
-  else 
-  {
-    tmp &= ~(uint8_t)IO_Pin;
   }
   
-  /* Write the register new value */
-  IOE_Write(DeviceAddr, STMPE811_REG_IO_DIR, tmp);   
-}
-
-/**
-  * @brief  Disable the AF for the selected IO pin(s).
-  * @param  DeviceAddr: Device address on communication Bus.  
-  * @param  IO_Pin: The IO pin to be configured. This parameter could be any 
-  *         combination of the following values:
-  *   @arg  STMPE811_PIN_x: Where x can be from 0 to 7.        
-  * @retval None
-  */
-void stmpe811_IO_DisableAF(uint16_t DeviceAddr, uint32_t IO_Pin)
-{
-  uint8_t tmp = 0;
-  
-  /* Get the current state of the IO_AF register */
-  tmp = IOE_Read(DeviceAddr, STMPE811_REG_IO_AF);
-
-  /* Enable the selected pins alternate function */
-  tmp |= (uint8_t)IO_Pin;
-
-  /* Write back the new value in IO AF register */
-  IOE_Write(DeviceAddr, STMPE811_REG_IO_AF, tmp);
-  
-}
-
-/**
-  * @brief  Enable the AF for the selected IO pin(s).
-  * @param  DeviceAddr: Device address on communication Bus.  
-  * @param  IO_Pin: The IO pin to be configured. This parameter could be any 
-  *         combination of the following values:
-  *   @arg  STMPE811_PIN_x: Where x can be from 0 to 7.       
-  * @retval None
-  */
-void stmpe811_IO_EnableAF(uint16_t DeviceAddr, uint32_t IO_Pin)
-{
-  uint8_t tmp = 0;
-  
-  /* Get the current register value */
-  tmp = IOE_Read(DeviceAddr, STMPE811_REG_IO_AF);
-
-  /* Enable the selected pins alternate function */   
-  tmp &= ~(uint8_t)IO_Pin;   
-  
-  /* Write back the new register value */
-  IOE_Write(DeviceAddr, STMPE811_REG_IO_AF, tmp); 
-}
-
-/**
-  * @brief  Configure the Edge for which a transition is detectable for the
-  *         selected pin.
-  * @param  DeviceAddr: Device address on communication Bus.
-  * @param  IO_Pin: The IO pin to be configured. This parameter could be any 
-  *         combination of the following values:
-  *   @arg  STMPE811_PIN_x: Where x can be from 0 to 7.  
-  * @param  Edge: The edge which will be detected. This parameter can be one or
-  *         a combination of following values: STMPE811_EDGE_FALLING and STMPE811_EDGE_RISING .
-  * @retval None
-  */
-void stmpe811_IO_SetEdgeMode(uint16_t DeviceAddr, uint32_t IO_Pin, uint8_t Edge)
-{
-  uint8_t tmp1 = 0, tmp2 = 0;   
-  
-  /* Get the current registers values */
-  tmp1 = IOE_Read(DeviceAddr, STMPE811_REG_IO_FE);
-  tmp2 = IOE_Read(DeviceAddr, STMPE811_REG_IO_RE);
-
-  /* Disable the Falling Edge */
-  tmp1 &= ~(uint8_t)IO_Pin;
-  
-  /* Disable the Falling Edge */
-  tmp2 &= ~(uint8_t)IO_Pin;
-
-  /* Enable the Falling edge if selected */
-  if (Edge & STMPE811_EDGE_FALLING)
+  /* Set direction IN/OUT */
+  if((IoInit->Mode == STMPE811_GPIO_MODE_OUTPUT_PP) || (IoInit->Mode == STMPE811_GPIO_MODE_OUTPUT_OD))
   {
-    tmp1 |= (uint8_t)IO_Pin;
-  }
-
-  /* Enable the Rising edge if selected */
-  if (Edge & STMPE811_EDGE_RISING)
-  {
-    tmp2 |= (uint8_t)IO_Pin;
-  }
-
-  /* Write back the new registers values */
-  IOE_Write(DeviceAddr, STMPE811_REG_IO_FE, tmp1);
-  IOE_Write(DeviceAddr, STMPE811_REG_IO_RE, tmp2);
-}
-
-/**
-  * @brief  Write a new IO pin state.
-  * @param  DeviceAddr: Device address on communication Bus.  
-  * @param IO_Pin: The output pin to be set or reset. This parameter can be one 
-  *        of the following values:
-  *   @arg  STMPE811_PIN_x: where x can be from 0 to 7. 
-  * @param PinState: The new IO pin state.
-  * @retval None
-  */
-void stmpe811_IO_WritePin(uint16_t DeviceAddr, uint32_t IO_Pin, uint8_t PinState)
-{
-  /* Apply the bit value to the selected pin */
-  if (PinState != 0)
-  {
-    /* Set the register */
-    IOE_Write(DeviceAddr, STMPE811_REG_IO_SET_PIN, (uint8_t)IO_Pin);
+    ret += STMPE811_IO_InitPin(pObj, IoInit->Pin, STMPE811_GPIO_DIR_OUT);
   }
   else
   {
-    /* Set the register */
-    IOE_Write(DeviceAddr, STMPE811_REG_IO_CLR_PIN, (uint8_t)IO_Pin);
-  } 
-}
-
-/**
-  * @brief  Return the state of the selected IO pin(s).
-  * @param  DeviceAddr: Device address on communication Bus.  
-  * @param IO_Pin: The output pin to be set or reset. This parameter can be one 
-  *        of the following values:
-  *   @arg  STMPE811_PIN_x: where x can be from 0 to 7. 
-  * @retval IO pin(s) state.
-  */
-uint32_t stmpe811_IO_ReadPin(uint16_t DeviceAddr, uint32_t IO_Pin)
-{
-  return((uint32_t)(IOE_Read(DeviceAddr, STMPE811_REG_IO_MP_STA) & (uint8_t)IO_Pin));
-}
-
-/**
-  * @brief  Enable the global IO interrupt source.
-  * @param  DeviceAddr: Device address on communication Bus.  
-  * @retval None
-  */
-void stmpe811_IO_EnableIT(uint16_t DeviceAddr)
-{ 
-  IOE_ITConfig();
+    ret += STMPE811_IO_InitPin(pObj, IoInit->Pin, STMPE811_GPIO_DIR_IN);
+  }
   
-  /* Enable global IO IT source */
-  stmpe811_EnableITSource(DeviceAddr, STMPE811_GIT_IO);
-  
-  /* Enable global interrupt */
-  stmpe811_EnableGlobalIT(DeviceAddr); 
-}
-
-/**
-  * @brief  Disable the global IO interrupt source.
-  * @param  DeviceAddr: Device address on communication Bus.   
-  * @retval None
-  */
-void stmpe811_IO_DisableIT(uint16_t DeviceAddr)
-{
-  /* Disable the global interrupt */
-  stmpe811_DisableGlobalIT(DeviceAddr);
-  
-  /* Disable global IO IT source */
-  stmpe811_DisableITSource(DeviceAddr, STMPE811_GIT_IO);    
-}
-
-/**
-  * @brief  Enable interrupt mode for the selected IO pin(s).
-  * @param  DeviceAddr: Device address on communication Bus.
-  * @param  IO_Pin: The IO interrupt to be enabled. This parameter could be any 
-  *         combination of the following values:
-  *   @arg  STMPE811_PIN_x: where x can be from 0 to 7.
-  * @retval None
-  */
-void stmpe811_IO_EnablePinIT(uint16_t DeviceAddr, uint32_t IO_Pin)
-{
-  uint8_t tmp = 0;
-  
-  /* Get the IO interrupt state */
-  tmp = IOE_Read(DeviceAddr, STMPE811_REG_IO_INT_EN);
-  
-  /* Set the interrupts to be enabled */    
-  tmp |= (uint8_t)IO_Pin;
-  
-  /* Write the register new value */
-  IOE_Write(DeviceAddr, STMPE811_REG_IO_INT_EN, tmp);  
-}
-
-/**
-  * @brief  Disable interrupt mode for the selected IO pin(s).
-  * @param  DeviceAddr: Device address on communication Bus.
-  * @param  IO_Pin: The IO interrupt to be disabled. This parameter could be any 
-  *         combination of the following values:
-  *   @arg  STMPE811_PIN_x: where x can be from 0 to 7.
-  * @retval None
-  */
-void stmpe811_IO_DisablePinIT(uint16_t DeviceAddr, uint32_t IO_Pin)
-{
-  uint8_t tmp = 0;
-  
-  /* Get the IO interrupt state */
-  tmp = IOE_Read(DeviceAddr, STMPE811_REG_IO_INT_EN);
-  
-  /* Set the interrupts to be Disabled */    
-  tmp &= ~(uint8_t)IO_Pin;
-  
-  /* Write the register new value */
-  IOE_Write(DeviceAddr, STMPE811_REG_IO_INT_EN, tmp);   
-}
-
-/**
-  * @brief  Check the status of the selected IO interrupt pending bit
-  * @param  DeviceAddr: Device address on communication Bus.
-  * @param  IO_Pin: The IO interrupt to be checked could be:
-  *   @arg  STMPE811_PIN_x Where x can be from 0 to 7.             
-  * @retval Status of the checked IO pin(s).
-  */
-uint32_t stmpe811_IO_ITStatus(uint16_t DeviceAddr, uint32_t IO_Pin)
-{
-  /* Get the Interrupt status */
-  return(IOE_Read(DeviceAddr, STMPE811_REG_IO_INT_STA) & (uint8_t)IO_Pin); 
-}
-
-/**
-  * @brief  Clear the selected IO interrupt pending bit(s).
-  * @param  DeviceAddr: Device address on communication Bus.
-  * @param  IO_Pin: the IO interrupt to be cleared, could be:
-  *   @arg  STMPE811_PIN_x: Where x can be from 0 to 7.            
-  * @retval None
-  */
-void stmpe811_IO_ClearIT(uint16_t DeviceAddr, uint32_t IO_Pin)
-{
-  /* Clear the global IO IT pending bit */
-  stmpe811_ClearGlobalIT(DeviceAddr, STMPE811_GIT_IO);
-  
-  /* Clear the IO IT pending bit(s) */
-  IOE_Write(DeviceAddr, STMPE811_REG_IO_INT_STA, (uint8_t)IO_Pin);  
-  
-  /* Clear the Edge detection pending bit*/
-  IOE_Write(DeviceAddr, STMPE811_REG_IO_ED, (uint8_t)IO_Pin);
-  
-  /* Clear the Rising edge pending bit */
-  IOE_Write(DeviceAddr, STMPE811_REG_IO_RE, (uint8_t)IO_Pin);
-  
-  /* Clear the Falling edge pending bit */
-  IOE_Write(DeviceAddr, STMPE811_REG_IO_FE, (uint8_t)IO_Pin); 
-}
-
-/**
-  * @brief  Configures the touch Screen Controller (Single point detection)
-  * @param  DeviceAddr: Device address on communication Bus.
-  * @retval None.
-  */
-void stmpe811_TS_Start(uint16_t DeviceAddr)
-{
-  uint8_t mode;
-  
-  /* Get the current register value */
-  mode = IOE_Read(DeviceAddr, STMPE811_REG_SYS_CTRL2);
-  
-  /* Set the Functionalities to be Enabled */    
-  mode &= ~(STMPE811_IO_FCT);  
-  
-  /* Write the new register value */  
-  IOE_Write(DeviceAddr, STMPE811_REG_SYS_CTRL2, mode); 
-
-  /* Select TSC pins in TSC alternate mode */  
-  stmpe811_IO_EnableAF(DeviceAddr, STMPE811_TOUCH_IO_ALL);
-  
-  /* Set the Functionalities to be Enabled */    
-  mode &= ~(STMPE811_TS_FCT | STMPE811_ADC_FCT);  
-  
-  /* Set the new register value */  
-  IOE_Write(DeviceAddr, STMPE811_REG_SYS_CTRL2, mode); 
-  
-  /* Select Sample Time, bit number and ADC Reference */
-  IOE_Write(DeviceAddr, STMPE811_REG_ADC_CTRL1, 0x49);
-  
-  /* Wait for 2 ms */
-  IOE_Delay(2); 
-  
-  /* Select the ADC clock speed: 3.25 MHz */
-  IOE_Write(DeviceAddr, STMPE811_REG_ADC_CTRL2, 0x01);
-  
-  /* Select 2 nF filter capacitor */
-  /* Configuration: 
-     - Touch average control    : 4 samples
-     - Touch delay time         : 500 uS
-     - Panel driver setting time: 500 uS 
-  */
-  IOE_Write(DeviceAddr, STMPE811_REG_TSC_CFG, 0x9A); 
-  
-  /* Configure the Touch FIFO threshold: single point reading */
-  IOE_Write(DeviceAddr, STMPE811_REG_FIFO_TH, 0x01);
-  
-  /* Clear the FIFO memory content. */
-  IOE_Write(DeviceAddr, STMPE811_REG_FIFO_STA, 0x01);
-  
-  /* Put the FIFO back into operation mode  */
-  IOE_Write(DeviceAddr, STMPE811_REG_FIFO_STA, 0x00);
-  
-  /* Set the range and accuracy pf the pressure measurement (Z) : 
-     - Fractional part :7 
-     - Whole part      :1 
-  */
-  IOE_Write(DeviceAddr, STMPE811_REG_TSC_FRACT_XYZ, 0x01);
-  
-  /* Set the driving capability (limit) of the device for TSC pins: 50mA */
-  IOE_Write(DeviceAddr, STMPE811_REG_TSC_I_DRIVE, 0x01);
-  
-  /* Touch screen control configuration (enable TSC):
-     - No window tracking index
-     - XYZ acquisition mode
-   */
-  IOE_Write(DeviceAddr, STMPE811_REG_TSC_CTRL, 0x01);
-  
-  /*  Clear all the status pending bits if any */
-  IOE_Write(DeviceAddr, STMPE811_REG_INT_STA, 0xFF);
-
-  /* Wait for 2 ms delay */
-  IOE_Delay(2); 
-}
-
-/**
-  * @brief  Return if there is touch detected or not.
-  * @param  DeviceAddr: Device address on communication Bus.
-  * @retval Touch detected state.
-  */
-uint8_t stmpe811_TS_DetectTouch(uint16_t DeviceAddr)
-{
-  uint8_t state;
-  uint8_t ret = 0;
-  
-  state = ((IOE_Read(DeviceAddr, STMPE811_REG_TSC_CTRL) & (uint8_t)STMPE811_TS_CTRL_STATUS) == (uint8_t)0x80);
-  
-  if(state > 0)
+  /* Configure IT mode */
+  if(IoInit->Mode >= STMPE811_GPIO_MODE_IT_RISING_EDGE)
   {
-    if(IOE_Read(DeviceAddr, STMPE811_REG_FIFO_SIZE) > 0)
+    if(STMPE811_IO_EnableIT(pObj) != STMPE811_OK)
     {
-      ret = 1;
+      ret = STMPE811_ERROR;
     }
-  }
-  else
-  {
-    /* Reset FIFO */
-    IOE_Write(DeviceAddr, STMPE811_REG_FIFO_STA, 0x01);
-    /* Enable the FIFO again */
-    IOE_Write(DeviceAddr, STMPE811_REG_FIFO_STA, 0x00);
+    else if(STMPE811_IO_EnablePinIT(pObj, IoInit->Pin) != STMPE811_OK)
+    {
+      ret = STMPE811_ERROR;
+    }/* Get the current register value */ 
+    else if(stmpe811_read_reg(&pObj->Ctx, STMPE811_INT_CTRL_REG, &tmp, 1) != STMPE811_OK)
+    {
+      ret = STMPE811_ERROR;
+    }
+    else
+    {
+      /* Mask the polarity and type bits */
+      tmp &= ~(uint8_t)0x06U;
+      
+      /* Modify the Interrupt Output line configuration */
+      tmp |= (uint8_t)((IoInit->Mode - STMPE811_GPIO_MODE_IT_RISING_EDGE) << 1);
+      
+      /* Set the new register value */
+      if(stmpe811_write_reg(&pObj->Ctx, STMPE811_INT_CTRL_REG, &tmp, 1) != STMPE811_OK)
+      {
+        ret = STMPE811_ERROR;
+      }
+    }    
   }
   
   return ret;
 }
 
 /**
-  * @brief  Get the touch screen X and Y positions values
-  * @param  DeviceAddr: Device address on communication Bus.
-  * @param  X: Pointer to X position value
-  * @param  Y: Pointer to Y position value   
-  * @retval None.
+  * @brief  Initialize the selected IO pin direction.
+  * @param  pObj  Pointer to component object. 
+  * @param  IO_Pin  The IO pin to be configured. This parameter could be any 
+  *         combination of the following values:
+  *   @arg  STMPE811_PIN_x: Where x can be from 0 to 7.   
+  * @param  Direction could be STMPE811_GPIO_DIR_IN or STMPE811_GPIO_DIR_OUT.      
+  * @retval Component status
   */
-void stmpe811_TS_GetXY(uint16_t DeviceAddr, uint16_t *X, uint16_t *Y)
+int32_t STMPE811_IO_InitPin(STMPE811_Object_t *pObj, uint32_t IO_Pin, uint8_t Direction)
 {
-  uint8_t  dataXYZ[4];
-  uint32_t uldataXYZ;
+  int32_t ret = STMPE811_OK; 
+  uint8_t tmp;   
   
-  IOE_ReadMultiple(DeviceAddr, STMPE811_REG_TSC_DATA_NON_INC, dataXYZ, sizeof(dataXYZ)) ;
-  
-  /* Calculate positions values */
-  uldataXYZ = (dataXYZ[0] << 24)|(dataXYZ[1] << 16)|(dataXYZ[2] << 8)|(dataXYZ[3] << 0);     
-  *X = (uldataXYZ >> 20) & 0x00000FFF;     
-  *Y = (uldataXYZ >>  8) & 0x00000FFF;     
-  
-  /* Reset FIFO */
-  IOE_Write(DeviceAddr, STMPE811_REG_FIFO_STA, 0x01);
-  /* Enable the FIFO again */
-  IOE_Write(DeviceAddr, STMPE811_REG_FIFO_STA, 0x00);
-}
-
-/**
-  * @brief  Configure the selected source to generate a global interrupt or not
-  * @param  DeviceAddr: Device address on communication Bus.  
-  * @retval None
-  */
-void stmpe811_TS_EnableIT(uint16_t DeviceAddr)
-{
-  IOE_ITConfig();
-  
-  /* Enable global TS IT source */
-  stmpe811_EnableITSource(DeviceAddr, STMPE811_TS_IT); 
-  
-  /* Enable global interrupt */
-  stmpe811_EnableGlobalIT(DeviceAddr);
-}
-
-/**
-  * @brief  Configure the selected source to generate a global interrupt or not
-  * @param  DeviceAddr: Device address on communication Bus.    
-  * @retval None
-  */
-void stmpe811_TS_DisableIT(uint16_t DeviceAddr)
-{
-  /* Disable global interrupt */
-  stmpe811_DisableGlobalIT(DeviceAddr);
-  
-  /* Disable global TS IT source */
-  stmpe811_DisableITSource(DeviceAddr, STMPE811_TS_IT); 
-}
-
-/**
-  * @brief  Configure the selected source to generate a global interrupt or not
-  * @param  DeviceAddr: Device address on communication Bus.    
-  * @retval TS interrupts status
-  */
-uint8_t stmpe811_TS_ITStatus(uint16_t DeviceAddr)
-{
-  /* Return TS interrupts status */
-  return(stmpe811_ReadGITStatus(DeviceAddr, STMPE811_TS_IT));
-}
-
-/**
-  * @brief  Configure the selected source to generate a global interrupt or not
-  * @param  DeviceAddr: Device address on communication Bus.  
-  * @retval None
-  */
-void stmpe811_TS_ClearIT(uint16_t DeviceAddr)
-{
-  /* Clear the global TS IT source */
-  stmpe811_ClearGlobalIT(DeviceAddr, STMPE811_TS_IT);
-}
-
-/**
-  * @brief  Check if the device instance of the selected address is already registered
-  *         and return its index  
-  * @param  DeviceAddr: Device address on communication Bus.
-  * @retval Index of the device instance if registered, 0xFF if not.
-  */
-static uint8_t stmpe811_GetInstance(uint16_t DeviceAddr)
-{
-  uint8_t idx = 0;
-  
-  /* Check all the registered instances */
-  for(idx = 0; idx < STMPE811_MAX_INSTANCE ; idx ++)
+  /* Get all the Pins direction */
+  if(stmpe811_read_reg(&pObj->Ctx, STMPE811_IO_DIR_REG, &tmp, 1) != STMPE811_OK)
   {
-    if(stmpe811[idx] == DeviceAddr)
+    ret = STMPE811_ERROR;
+  }
+  else
+  {
+    /* Set the selected pin direction */
+    if (Direction != STMPE811_GPIO_DIR_IN)
     {
-      return idx; 
+      tmp |= (uint8_t)IO_Pin;
+    }  
+    else 
+    {
+      tmp &= ~(uint8_t)IO_Pin;
+    }
+    
+    /* Write the register new value */
+    if(stmpe811_write_reg(&pObj->Ctx, STMPE811_IO_DIR_REG, &tmp, 1) != STMPE811_OK)
+    {
+      ret = STMPE811_ERROR;
+    } 
+  }
+  
+  return ret;  
+}
+
+/**
+  * @brief  Write a new IO pin state.
+  * @param  pObj  Pointer to component object. 
+  * @param IO_Pin The output pin to be set or reset. This parameter can be one 
+  *        of the following values:
+  *   @arg  STMPE811_GPIO_PIN_x: where x can be from 0 to 7. 
+  * @param PinState The new IO pin state.
+  * @retval Component status
+  */
+int32_t STMPE811_IO_WritePin(STMPE811_Object_t *pObj, uint32_t IO_Pin, uint8_t PinState)
+{
+  int32_t ret = STMPE811_OK; 
+  uint8_t tmp = (uint8_t)IO_Pin; 
+
+  /* Apply the bit value to the selected pin */
+  if (PinState != 0U)
+  {
+    /* Set the register */
+    if(stmpe811_write_reg(&pObj->Ctx, STMPE811_IO_SET_PIN_REG, &tmp, 1) != STMPE811_OK)
+    {
+      ret = STMPE811_ERROR;
+    }
+  }
+  else
+  {
+    /* Set the register */
+    if(stmpe811_write_reg(&pObj->Ctx, STMPE811_IO_CLR_PIN_REG, &tmp, 1) != STMPE811_OK)
+    {
+      ret = STMPE811_ERROR;
     }
   }
   
-  return 0xFF;
+  return ret;
 }
 
+/**
+  * @brief  Return the state of the selected IO pin(s).
+  * @param  pObj  Pointer to component object. 
+  * @param IO_Pin The output pin to read its state. This parameter can be one 
+  *        of the following values:
+  *   @arg  STMPE811_PIN_x: where x can be from 0 to 7. 
+  * @retval STMPE811_ERROR in case of error else IO pin(s) state.
+  */
+int32_t STMPE811_IO_ReadPin(STMPE811_Object_t *pObj, uint32_t IO_Pin)
+{
+  uint8_t tmp;
+
+  /* Get the current register value */
+  if(stmpe811_read_reg(&pObj->Ctx, STMPE811_IO_MP_STA_REG, &tmp, 1) != STMPE811_OK)
+  {
+    return STMPE811_ERROR;
+  } 
+  tmp &= (uint8_t)IO_Pin;
+  
+  return (int32_t)tmp;
+}
+
+/**
+  * @brief  Enable the AF for the selected IO pin(s).
+  * @param  pObj  Pointer to component object. 
+  * @param  IO_Pin  The IO pin to be configured. This parameter could be any 
+  *         combination of the following values:
+  *   @arg  STMPE811_PIN_x: Where x can be from 0 to 7.       
+  * @retval Component status
+  */
+int32_t STMPE811_IO_EnableAF(STMPE811_Object_t *pObj, uint32_t IO_Pin)
+{
+  int32_t ret = STMPE811_OK;
+  uint8_t tmp;
+  
+  /* Get the current register value */
+  if(stmpe811_read_reg(&pObj->Ctx, STMPE811_IO_AF_REG, &tmp, 1) != STMPE811_OK)
+  {
+    ret = STMPE811_ERROR;
+  } 
+  else
+  {
+    /* Enable the selected pins alternate function */ 
+    tmp &= ~(uint8_t)IO_Pin; 
+    
+    /* Write back the new register value */
+    if(stmpe811_write_reg(&pObj->Ctx, STMPE811_IO_AF_REG, &tmp, 1) != STMPE811_OK)
+    {
+      ret = STMPE811_ERROR;
+    } 
+  }
+  
+  return ret;
+}
+
+/**
+  * @brief  Disable the AF for the selected IO pin(s).
+  * @param  pObj  Pointer to component object. 
+  * @param  IO_Pin  The IO pin to be configured. This parameter could be any 
+  *         combination of the following values:
+  *   @arg  STMPE811_PIN_x: Where x can be from 0 to 7.       
+  * @retval Component status
+  */
+int32_t STMPE811_IO_DisableAF(STMPE811_Object_t *pObj, uint32_t IO_Pin)
+{
+  int32_t ret = STMPE811_OK;
+  uint8_t tmp;
+  
+  /* Get the current register value */
+  if(stmpe811_read_reg(&pObj->Ctx, STMPE811_IO_AF_REG, &tmp, 1) != STMPE811_OK)
+  {
+    ret = STMPE811_ERROR;
+  } 
+  else
+  {
+    /* Disable the selected pins alternate function */   
+    tmp |= (uint8_t)IO_Pin;    
+    
+    /* Write back the new register value */
+    if(stmpe811_write_reg(&pObj->Ctx, STMPE811_IO_AF_REG, &tmp, 1) != STMPE811_OK)
+    {
+      ret = STMPE811_ERROR;
+    } 
+  }
+  
+  return ret;
+}
+
+/**
+  * @brief  Enable the global IO interrupt source.
+  * @param  pObj  Pointer to component object. 
+  * @retval Component status
+  */
+int32_t STMPE811_IO_EnableIT(STMPE811_Object_t *pObj)
+{ 
+  int32_t ret;
+  
+  /* Enable global IO IT source */
+  if(STMPE811_EnableITSource(pObj, STMPE811_GIT_IO) != STMPE811_OK)
+  {
+    ret = STMPE811_ERROR;
+  } /* Enable global interrupt */
+  else if(STMPE811_EnableGlobalIT(pObj) != STMPE811_OK)
+  {
+    ret = STMPE811_ERROR;
+  }
+  else
+  {
+    ret = STMPE811_OK;
+  }
+  
+  return ret;
+}
+
+/**
+  * @brief  Disable the global IO interrupt source.
+  * @param  pObj  Pointer to component object.  
+  * @retval Component status
+  */
+int32_t STMPE811_IO_DisableIT(STMPE811_Object_t *pObj)
+{
+  int32_t ret;
+  
+  /* Disable the global interrupt */
+  if(STMPE811_DisableGlobalIT(pObj) != STMPE811_OK)
+  {
+    ret = STMPE811_ERROR;
+  }/* Disable global IO IT source */
+  else if(STMPE811_DisableITSource(pObj, STMPE811_GIT_IO) != STMPE811_OK)
+  {
+    ret = STMPE811_ERROR;
+  }
+  else
+  {
+    ret = STMPE811_OK;
+  }
+  
+  return ret;   
+}
+
+/**
+  * @brief  Enable interrupt mode for the selected IO pin(s).
+  * @param  pObj  Pointer to component object. 
+  * @param  IO_Pin  The IO interrupt to be enabled. This parameter could be any 
+  *         combination of the following values:
+  *   @arg  STMPE811_PIN_x: where x can be from 0 to 7.
+  * @retval Component status
+  */
+int32_t STMPE811_IO_EnablePinIT(STMPE811_Object_t *pObj, uint32_t IO_Pin)
+{
+  int32_t ret = STMPE811_OK;
+  uint8_t tmp;
+  
+  /* Get the IO interrupt state */
+  if(stmpe811_read_reg(&pObj->Ctx, STMPE811_IO_INT_EN_REG, &tmp, 1) != STMPE811_OK)
+  {
+    ret = STMPE811_ERROR;
+  }
+  else
+  {
+    /* Set the interrupts to be enabled */    
+    tmp |= (uint8_t)IO_Pin;
+    
+    /* Write the register new value */
+    if(stmpe811_write_reg(&pObj->Ctx, STMPE811_IO_INT_EN_REG, &tmp, 1) != STMPE811_OK)
+    {
+      ret = STMPE811_ERROR;
+    } 
+  }
+  
+  return ret;
+}
+
+/**
+  * @brief  Disable interrupt mode for the selected IO pin(s).
+  * @param  pObj  Pointer to component object. 
+  * @param  IO_Pin  The IO interrupt to be disabled. This parameter could be any 
+  *         combination of the following values:
+  *   @arg  STMPE811_PIN_x: where x can be from 0 to 7.
+  * @retval Component status
+  */
+int32_t STMPE811_IO_DisablePinIT(STMPE811_Object_t *pObj, uint32_t IO_Pin)
+{
+  int32_t ret = STMPE811_OK;
+  uint8_t tmp;
+  
+  /* Get the IO interrupt state */
+  if(stmpe811_read_reg(&pObj->Ctx, STMPE811_IO_INT_EN_REG, &tmp, 1) != STMPE811_OK)
+  {
+    ret = STMPE811_ERROR;
+  }
+  else
+  {
+    /* Set the interrupts to be enabled */    
+    tmp &= ~(uint8_t)IO_Pin;
+    
+    /* Write the register new value */
+    if(stmpe811_write_reg(&pObj->Ctx, STMPE811_IO_INT_EN_REG, &tmp, 1) != STMPE811_OK)
+    {
+      ret = STMPE811_ERROR;
+    } 
+  }
+  
+  return ret; 
+}
+
+/**
+  * @brief  Check the status of the selected IO interrupt pending bit
+  * @param  pObj  Pointer to component object. 
+  * @param  IO_Pin  The IO interrupt to be checked could be:
+  *   @arg  STMPE811_PIN_x Where x can be from 0 to 7.             
+  * @retval Status of the checked IO pin(s).
+  */
+int32_t STMPE811_IO_ITStatus(STMPE811_Object_t *pObj, uint32_t IO_Pin)
+{
+  uint8_t tmp;
+
+  /* Get the Interrupt status  */
+  if(stmpe811_read_reg(&pObj->Ctx, STMPE811_IO_INT_STA_REG, &tmp, 1) != STMPE811_OK)
+  {
+    return STMPE811_ERROR;
+  } 
+  tmp &= (uint8_t)IO_Pin;
+  
+  return (int32_t)tmp;
+}
+
+/**
+  * @brief  Clear the selected IO interrupt pending bit(s).
+  * @param  pObj  Pointer to component object. 
+  * @param  IO_Pin  the IO interrupt to be cleared, could be:
+  *   @arg  STMPE811_PIN_x: Where x can be from 0 to 7.            
+  * @retval Component status
+  */
+int32_t STMPE811_IO_ClearIT(STMPE811_Object_t *pObj, uint32_t IO_Pin)
+{
+  int32_t ret;
+  uint8_t tmp = (uint8_t)IO_Pin;
+  
+  /* Clear the global IO IT pending bit */
+  if(STMPE811_ClearGlobalIT(pObj, STMPE811_GIT_IO) != STMPE811_OK)
+  {
+    ret = STMPE811_ERROR;
+  } /* Clear the IO IT pending bit(s) */
+  else if(stmpe811_write_reg(&pObj->Ctx, STMPE811_IO_INT_STA_REG, &tmp, 1) != STMPE811_OK)
+  {
+    ret = STMPE811_ERROR;
+  }/* Clear the Edge detection pending bit*/
+  else if(stmpe811_write_reg(&pObj->Ctx, STMPE811_IO_ED_REG, &tmp, 1) != STMPE811_OK)
+  {
+    ret = STMPE811_ERROR;
+  }/* Clear the Rising edge pending bit */
+  else if(stmpe811_write_reg(&pObj->Ctx, STMPE811_IO_RE_REG, &tmp, 1) != STMPE811_OK)
+  {
+    ret = STMPE811_ERROR;
+  }/* Clear the Falling edge pending bit */
+  else if(stmpe811_write_reg(&pObj->Ctx, STMPE811_IO_FE_REG, &tmp, 1) != STMPE811_OK)
+  {
+    ret = STMPE811_ERROR;
+  }
+  else
+  {
+    ret = STMPE811_OK;
+  }
+  
+  return ret;
+}
+
+/**
+  * @brief  Configures the touch Screen Controller (Single point detection)
+  * @param  pObj  Pointer to component object. 
+  * @retval Component status.
+  */
+int32_t STMPE811_TS_Init(STMPE811_Object_t *pObj)
+{
+  int32_t ret;
+  uint8_t tmp;
+  
+  ret = STMPE811_Reset(pObj);
+  
+  /* Get the current register value */
+  ret += stmpe811_read_reg(&pObj->Ctx, STMPE811_SYS_CTRL2_REG, &tmp, 1);
+  
+  /* Set the Functionalities to be Enabled */    
+  tmp &= ~(STMPE811_IO_FCT);  
+  
+  /* Write the new register value */  
+  ret += stmpe811_write_reg(&pObj->Ctx, STMPE811_SYS_CTRL2_REG, &tmp, 1); 
+  
+  /* Select TSC pins in TSC alternate mode */  
+  ret += STMPE811_IO_EnableAF(pObj, STMPE811_TOUCH_IO_ALL);
+  
+  /* Set the Functionalities to be Enabled */    
+  tmp &= ~(STMPE811_TS_FCT | STMPE811_ADC_FCT);  
+  
+  /* Set the new register value */  
+  ret += stmpe811_write_reg(&pObj->Ctx, STMPE811_SYS_CTRL2_REG, &tmp, 1); 
+  
+  /* Select Sample Time, bit number and ADC Reference */
+  tmp = 0x48U;
+  ret += stmpe811_write_reg(&pObj->Ctx, STMPE811_ADC_CTRL1_REG, &tmp, 1);
+  
+  /* Wait for 2 ms */
+  STMPE811_Delay(pObj, 2); 
+  
+  /* Select the ADC clock speed: 3.25 MHz */
+  tmp = 0x01U;
+  ret += stmpe811_write_reg(&pObj->Ctx, STMPE811_ADC_CTRL2_REG, &tmp, 1);
+  
+  /* Select 2 nF filter capacitor */
+  /* Configuration: 
+  - Touch average control    : 4 samples
+  - Touch delay time         : 500 uS
+  - Panel driver setting time: 500 uS 
+  */
+  tmp = 0x9AU;
+  ret += stmpe811_write_reg(&pObj->Ctx, STMPE811_TSC_CFG_REG, &tmp, 1); 
+  
+  /* Configure the Touch FIFO threshold: single point reading */
+  tmp = 0x01U;
+  ret += stmpe811_write_reg(&pObj->Ctx, STMPE811_FIFO_TH_REG, &tmp, 1);
+  
+  /* Clear the FIFO memory content. */
+  ret += stmpe811_write_reg(&pObj->Ctx, STMPE811_FIFO_STA_REG, &tmp, 1);
+  
+  /* Put the FIFO back into operation mode  */
+  tmp = 0x00U;
+  ret += stmpe811_write_reg(&pObj->Ctx, STMPE811_FIFO_STA_REG, &tmp, 1);
+  
+  /* Set the range and accuracy pf the pressure measurement (Z) : 
+  - Fractional part :7 
+  - Whole part      :1 
+  */
+  tmp = 0x01U;
+  ret += stmpe811_write_reg(&pObj->Ctx, STMPE811_TSC_FRACT_XYZ_REG, &tmp, 1);
+  
+  /* Set the driving capability (limit) of the device for TSC pins: 50mA */
+  ret += stmpe811_write_reg(&pObj->Ctx, STMPE811_TSC_I_DRIVE_REG, &tmp, 1);
+  
+  /* Touch screen control configuration (enable TSC):
+  - Window tracking index at 127
+  - X, Y only acquisition mode
+  */
+  tmp = 0x73U;
+  ret += stmpe811_write_reg(&pObj->Ctx, STMPE811_TSC_CTRL_REG, &tmp, 1);
+  
+  /*  Clear all the status pending bits if any */
+  tmp = 0xFFU;
+  ret += stmpe811_write_reg(&pObj->Ctx, STMPE811_INT_STA_REG, &tmp, 1);
+  
+  /* Wait for 2 ms delay */
+  STMPE811_Delay(pObj, 2);
+  
+  if(ret != STMPE811_OK)
+  {
+    ret = STMPE811_ERROR;
+  }
+  
+  return ret;
+}
+
+/**
+  * @brief  Configure the STMPE811 gesture
+  * @param  pObj  Component object pointer
+  * @param  GestureInit Gesture init structure
+  * @retval STMPE811_OK
+  */
+int32_t STMPE811_TS_GestureConfig(STMPE811_Object_t *pObj, STMPE811_Gesture_Init_t *GestureInit)
+{
+  /* Feature not supported */
+  (void)pObj;
+  (void)GestureInit;
+  return STMPE811_ERROR;  
+}
+
+/**
+  * @brief  Get the touch screen X and Y positions values
+  * @param  pObj  Pointer to component object. 
+  * @param  State Single Touch stucture pointer  
+  * @retval Component status.
+  */
+int32_t STMPE811_TS_GetState(STMPE811_Object_t *pObj, STMPE811_State_t *State)
+{
+  int32_t  ret;
+  int32_t  touchDetected;
+  uint8_t  tmp, data_xy[3];
+  uint32_t uldata_xy;
+  
+  touchDetected = STMPE811_TS_DetectTouch(pObj);
+  
+  if(touchDetected > 0)
+  {
+    if(stmpe811_read_reg(&pObj->Ctx, STMPE811_TSC_DATA_NON_INC_REG, data_xy, (uint16_t) sizeof(data_xy)) != STMPE811_OK)
+    {
+      ret = STMPE811_ERROR;
+    }
+    else
+    {
+      State->TouchDetected = 1U;
+      /* Calculate positions values */
+      uldata_xy = ((uint32_t)data_xy[0] << 16)|((uint32_t)data_xy[1] << 8)| (uint32_t)data_xy[2];
+      State->TouchX = (uldata_xy >> 12U) & 0x00000FFFU;
+      State->TouchY = uldata_xy & 0x00000FFFU;
+      
+      /* Reset FIFO */
+      tmp = 0x01U;
+      if(stmpe811_write_reg(&pObj->Ctx, STMPE811_FIFO_STA_REG, &tmp, 1) != STMPE811_OK)
+      {
+        ret = STMPE811_ERROR;
+      }
+      else
+      {
+        /* Enable the FIFO again */
+        tmp = 0x00U;
+        if(stmpe811_write_reg(&pObj->Ctx, STMPE811_FIFO_STA_REG, &tmp, 1) != STMPE811_OK)
+        {
+          ret = STMPE811_ERROR;
+        }
+        else
+        {
+          ret = STMPE811_OK;
+        }
+      }
+    }
+  }
+  else if (touchDetected == 0)
+  {
+    State->TouchDetected = 0U;
+    ret = STMPE811_OK;
+  }
+  else
+  {
+    ret = STMPE811_ERROR;
+  }
+  
+  return ret;
+}
+
+/**
+  * @brief  Get the touch screen Xn and Yn positions values in multi-touch mode
+  * @param  pObj Component object pointer
+  * @param  State Multi Touch structure pointer
+  * @retval STMPE811_OK.
+  */
+int32_t STMPE811_TS_GetMultiTouchState(STMPE811_Object_t *pObj, STMPE811_MultiTouch_State_t *State)
+{
+  /* Feature not supported */
+  (void)pObj;
+  (void)State;
+  return STMPE811_ERROR;  
+}
+
+/**
+  * @brief  Get Gesture ID
+  * @param  pObj Component object pointer
+  * @param  GestureId: gesture ID
+  * @retval Gesture ID.
+  */
+int32_t STMPE811_TS_GetGesture(STMPE811_Object_t *pObj, uint8_t *GestureId)
+{  
+  /* Feature not supported */  
+  (void)pObj;
+  (void)GestureId;
+  return STMPE811_ERROR;
+}
+
+/**
+  * @brief  Configure the selected source to generate a global interrupt or not
+  * @param  pObj  Pointer to component object. 
+  * @retval Component status
+  */
+int32_t STMPE811_TS_EnableIT(STMPE811_Object_t *pObj)
+{
+  int32_t ret;
+  
+  /* Enable TS fifo threshold IT */
+  if(STMPE811_EnableITSource(pObj, STMPE811_GIT_FTH) != STMPE811_OK)
+  {
+    ret = STMPE811_ERROR;
+  }/* Enable global interrupt */
+  else if(STMPE811_EnableGlobalIT(pObj) != STMPE811_OK)
+  {
+    ret = STMPE811_ERROR;
+  }
+  else
+  {
+    ret = STMPE811_OK;
+  }
+  
+  return ret;
+}
+
+/**
+  * @brief  Configure the selected source to generate a global interrupt or not
+  * @param  pObj  Pointer to component object.   
+  * @retval Component status
+  */
+int32_t STMPE811_TS_DisableIT(STMPE811_Object_t *pObj)
+{
+  int32_t ret;
+  
+  /* Disable global interrupt */
+  if(STMPE811_DisableGlobalIT(pObj) != STMPE811_OK)
+  {
+    ret = STMPE811_ERROR;
+  }/* Disable TS fifo threshold IT */
+  else if(STMPE811_DisableITSource(pObj, STMPE811_GIT_FTH) != STMPE811_OK)
+  {
+    ret = STMPE811_ERROR;
+  }
+  else
+  {
+    ret = STMPE811_OK;
+  }
+  
+  return ret;
+}
+
+/**
+  * @brief  Configure the selected source to generate a global interrupt or not
+  * @param  pObj  Pointer to component object.   
+  * @retval TS interrupts status
+  */
+int32_t STMPE811_TS_ITStatus(STMPE811_Object_t *pObj)
+{
+  uint8_t tmp;
+  
+  /* Get the Interrupt status  */
+  if(stmpe811_read_reg(&pObj->Ctx, STMPE811_INT_STA_REG, &tmp, 1) != STMPE811_OK)
+  {
+    return STMPE811_ERROR;
+  } 
+  tmp &= STMPE811_TS_IT;
+  
+  /* Return TS interrupts status */
+  return (int32_t)tmp;
+}
+
+/**
+  * @brief  Configure the selected source to generate a global interrupt or not
+  * @param  pObj  Pointer to component object. 
+  * @retval Component status
+  */
+int32_t STMPE811_TS_ClearIT(STMPE811_Object_t *pObj)
+{
+  /* Clear the global TS IT source */
+  return STMPE811_ClearGlobalIT(pObj, STMPE811_TS_IT);
+}
+
+/**
+  * @brief  Get STMPE811 TouchScreen capabilities
+  * @param  pObj Component object pointer
+  * @param  Capabilities pointer to STMPE811 TouchScreen capabilities
+  * @retval Component status
+  */
+int32_t STMPE811_GetCapabilities(STMPE811_Object_t *pObj, STMPE811_Capabilities_t *Capabilities)
+{
+  /* Prevent unused argument(s) compilation warning */  
+  (void)(pObj);
+  
+  /* Store component's capabilities */
+  Capabilities->MultiTouch = 0;
+  Capabilities->Gesture    = 0;
+  Capabilities->MaxTouch   = STMPE811_MAX_NB_TOUCH;
+  Capabilities->MaxXl      = STMPE811_MAX_X_LENGTH;
+  Capabilities->MaxYl      = STMPE811_MAX_Y_LENGTH;
+  
+  return STMPE811_OK;
+}
+
+/**
+  * @}
+  */ 
+
+/** @defgroup STMPE811_Private_Functions Private Functions
+  * @{
+  */
+
+/**
+  * @brief  Enable the Global interrupt.
+  * @param  pObj  Pointer to component object.      
+  * @retval Component status
+  */
+static int32_t STMPE811_EnableGlobalIT(STMPE811_Object_t *pObj)
+{
+  int32_t ret = STMPE811_OK;
+  uint8_t tmp;
+  
+  /* Read the Interrupt Control register  */
+  if(stmpe811_read_reg(&pObj->Ctx, STMPE811_INT_CTRL_REG, &tmp, 1) != STMPE811_OK)
+  {
+    ret = STMPE811_ERROR;
+  }
+  else
+  {
+    /* Set the global interrupts to be Enabled */    
+    tmp |= (uint8_t)STMPE811_GIT_EN;
+    
+    /* Write Back the Interrupt Control register */
+    if(stmpe811_write_reg(&pObj->Ctx, STMPE811_INT_CTRL_REG, &tmp, 1) != STMPE811_OK)
+    {
+      ret = STMPE811_ERROR;
+    }
+  }
+  return ret;
+}
+
+/**
+  * @brief  Disable the Global interrupt.
+  * @param  pObj  Pointer to component object.     
+  * @retval Component status
+  */
+static int32_t STMPE811_DisableGlobalIT(STMPE811_Object_t *pObj)
+{
+  int32_t ret = STMPE811_OK;
+  uint8_t tmp;
+  
+  /* Read the Interrupt Control register  */
+  if(stmpe811_read_reg(&pObj->Ctx, STMPE811_INT_CTRL_REG, &tmp, 1) != STMPE811_OK)
+  {
+    ret = STMPE811_ERROR;
+  }
+  else
+  {
+    /* Set the global interrupts to be Disabled */    
+    tmp &= ~(uint8_t)STMPE811_GIT_EN;
+    
+    /* Write Back the Interrupt Control register */
+    if(stmpe811_write_reg(&pObj->Ctx, STMPE811_INT_CTRL_REG, &tmp, 1) != STMPE811_OK)
+    {
+      ret = STMPE811_ERROR;
+    }
+  }
+  
+  return ret;
+}
+
+/**
+  * @brief  Enable the interrupt mode for the selected IT source
+  * @param  pObj  Pointer to component object. 
+  * @param Source: The interrupt source to be configured, could be:
+  *   @arg  STMPE811_GIT_IO: IO interrupt 
+  *   @arg  STMPE811_GIT_ADC : ADC interrupt    
+  *   @arg  STMPE811_GIT_FE : Touch Screen Controller FIFO Error interrupt
+  *   @arg  STMPE811_GIT_FF : Touch Screen Controller FIFO Full interrupt      
+  *   @arg  STMPE811_GIT_FOV : Touch Screen Controller FIFO Overrun interrupt     
+  *   @arg  STMPE811_GIT_FTH : Touch Screen Controller FIFO Threshold interrupt   
+  *   @arg  STMPE811_GIT_TOUCH : Touch Screen Controller Touch Detected interrupt  
+  * @retval Component status
+  */
+static int32_t STMPE811_EnableITSource(STMPE811_Object_t *pObj, uint8_t Source)
+{
+  int32_t ret = STMPE811_OK;
+  uint8_t tmp;
+  
+  /* Get the current value of the INT_EN register */
+  if(stmpe811_read_reg(&pObj->Ctx, STMPE811_INT_EN_REG, &tmp, 1) != STMPE811_OK)
+  {
+    ret = STMPE811_ERROR;
+  }
+  else
+  {
+    /* Set the interrupts to be Enabled */    
+    tmp |= Source; 
+    
+    /* Set the register */
+    if(stmpe811_write_reg(&pObj->Ctx, STMPE811_INT_EN_REG, &tmp, 1) != STMPE811_OK)
+    {
+      ret = STMPE811_ERROR;
+    }
+  }
+  
+  return ret;
+}
+
+/**
+  * @brief  Disable the interrupt mode for the selected IT source
+  * @param  pObj  Pointer to component object. 
+  * @param  Source: The interrupt source to be configured, could be:
+  *   @arg  STMPE811_GIT_IO: IO interrupt 
+  *   @arg  STMPE811_GIT_ADC : ADC interrupt    
+  *   @arg  STMPE811_GIT_FE : Touch Screen Controller FIFO Error interrupt
+  *   @arg  STMPE811_GIT_FF : Touch Screen Controller FIFO Full interrupt      
+  *   @arg  STMPE811_GIT_FOV : Touch Screen Controller FIFO Overrun interrupt     
+  *   @arg  STMPE811_GIT_FTH : Touch Screen Controller FIFO Threshold interrupt   
+  *   @arg  STMPE811_GIT_TOUCH : Touch Screen Controller Touch Detected interrupt  
+  * @retval Component status
+  */
+static int32_t STMPE811_DisableITSource(STMPE811_Object_t *pObj, uint8_t Source)
+{
+  int32_t ret = STMPE811_OK;
+  uint8_t tmp;
+  
+  /* Get the current value of the INT_EN register */
+  if(stmpe811_read_reg(&pObj->Ctx, STMPE811_INT_EN_REG, &tmp, 1) != STMPE811_OK)
+  {
+    ret = STMPE811_ERROR;
+  }
+  else
+  {
+    /* Set the interrupts to be Enabled */    
+    tmp &= ~Source; 
+    
+    /* Set the register */
+    if(stmpe811_write_reg(&pObj->Ctx, STMPE811_INT_EN_REG, &tmp, 1) != STMPE811_OK)
+    {
+      ret = STMPE811_ERROR;
+    } 
+  }
+  
+  return ret;  
+}
+
+/**
+  * @brief  Clear the selected Global interrupt pending bit(s)
+  * @param  pObj  Pointer to component object.
+  * @param  Source: the Global interrupt source to be cleared, could be any combination
+  *         of the following values:        
+  *   @arg  STMPE811_GIT_IO: IO interrupt 
+  *   @arg  STMPE811_GIT_ADC : ADC interrupt    
+  *   @arg  STMPE811_GIT_FE : Touch Screen Controller FIFO Error interrupt
+  *   @arg  STMPE811_GIT_FF : Touch Screen Controller FIFO Full interrupt      
+  *   @arg  STMPE811_GIT_FOV : Touch Screen Controller FIFO Overrun interrupt     
+  *   @arg  STMPE811_GIT_FTH : Touch Screen Controller FIFO Threshold interrupt   
+  *   @arg  STMPE811_GIT_TOUCH : Touch Screen Controller Touch Detected interrupt 
+  * @retval Component status
+  */
+static int32_t STMPE811_ClearGlobalIT(STMPE811_Object_t *pObj, uint8_t Source)
+{
+  /* Write 1 to the bits that have to be cleared */
+  return stmpe811_write_reg(&pObj->Ctx, STMPE811_INT_STA_REG, &Source, 1);
+}
+
+/**
+  * @brief  Return if there is touch detected or not.
+  * @param pObj pointer to component object
+  * @retval Touch detected state.
+  */
+static int32_t STMPE811_TS_DetectTouch(STMPE811_Object_t *pObj)
+{
+  int32_t ret;
+  uint8_t fifo_level;
+
+  /* Read fifo level */
+  if(stmpe811_read_reg(&pObj->Ctx, STMPE811_FIFO_SIZE_REG, &fifo_level, 1) != STMPE811_OK)
+  {
+    ret = STMPE811_ERROR;
+  }
+  else
+  {
+    if(fifo_level > 0U)
+    {
+      ret = 1;
+    }
+    else
+    {
+      ret = 0;
+    }
+  }
+
+  return ret;
+}
+
+/**
+  * @brief This function provides accurate delay (in milliseconds)
+  * @param pObj pointer to component object
+  * @param Delay specifies the delay time length, in milliseconds
+  * @retval STMPE811_OK
+  */
+static void STMPE811_Delay(STMPE811_Object_t *pObj, uint32_t Delay)
+{  
+  uint32_t tickstart;
+  tickstart = pObj->IO.GetTick();
+  while((pObj->IO.GetTick() - tickstart) < Delay)
+  {
+  }
+}
+
+/**
+  * @brief  Wrap STMPE811 read function to Bus IO function
+  * @param  handle Component object handle
+  * @param  Reg The target register address to write
+  * @param  pData The target register value to be written
+  * @param  Length buffer size to be written
+  * @retval Component status
+  */
+static int32_t STMPE811_ReadRegWrap(void *handle, uint16_t Reg, uint8_t* pData, uint16_t Length)
+{
+  STMPE811_Object_t *pObj = (STMPE811_Object_t *)handle;
+
+  return pObj->IO.ReadReg(pObj->IO.Address, Reg, pData, Length);
+}
+
+/**
+  * @brief  Wrap STMPE811 write function to Bus IO function
+  * @param  handle Component object handle
+  * @param  Reg The target register address to write
+  * @param  pData The target register value to be written
+  * @param  Length buffer size to be written
+  * @retval Component status
+  */
+static int32_t STMPE811_WriteRegWrap(void *handle, uint16_t Reg, uint8_t* pData, uint16_t Length)
+{
+  STMPE811_Object_t *pObj = (STMPE811_Object_t *)handle;
+
+  return pObj->IO.WriteReg(pObj->IO.Address, Reg, pData, Length);
+}
 /**
   * @}
   */ 

@@ -65,7 +65,7 @@ FRESULT Explore_Disk(char *path, uint8_t recu_level)
       {
         line_idx = 0;
 
-        LCD_UsrLog("> Press [Tamper] To Continue.\n");
+        LCD_UsrTrace("> Press [Tamper] To Continue.\n");
 
         /* Tamper Button in polling */
         while ((BSP_PB_GetState(BUTTON_TAMPER) != RESET) &&
@@ -77,22 +77,22 @@ FRESULT Explore_Disk(char *path, uint8_t recu_level)
 
       if (recu_level == 1)
       {
-        LCD_DbgLog("   |__");
+        LCD_DbgTrace("   |__");
       }
       else if (recu_level == 2)
       {
-        LCD_DbgLog("   |   |__");
+        LCD_DbgTrace("   |   |__");
       }
       if (fno.fattrib & AM_DIR)
       {
         strcat(tmp, "\n");
-        LCD_UsrLog((void *)tmp);
+        LCD_UsrTrace((void *)tmp);
         Explore_Disk(fno.fname, 2);
       }
       else
       {
         strcat(tmp, "\n");
-        LCD_DbgLog((void *)tmp);
+        LCD_DbgTrace((void *)tmp);
       }
 
       if ((fno.fattrib & AM_DIR) && (recu_level == 2))
@@ -105,7 +105,7 @@ FRESULT Explore_Disk(char *path, uint8_t recu_level)
 
   if (--recurseLevel == -1)
   {
-    LCD_UsrLog("> Select an operation to Continue.\n");
+    LCD_UsrTrace("> Select an operation to Continue.\n");
   }
 
   return res;

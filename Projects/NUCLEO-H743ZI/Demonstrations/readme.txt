@@ -139,7 +139,7 @@ Demonstrations, Adafruit, Shield, TFT, Joystick, SD Card, Display,
 
   - This demonstration runs on STM32H743ZI devices.
 
-  - This demonstration has been tested with STMicroelectronics NUCLEO-H743ZI Rev.B
+  - This demonstration has been tested with STMicroelectronics NUCLEO-H743ZI 
     board and can be easily tailored to any other supported device
     and development board.
 

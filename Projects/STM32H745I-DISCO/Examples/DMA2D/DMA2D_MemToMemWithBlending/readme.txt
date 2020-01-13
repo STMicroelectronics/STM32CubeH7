@@ -142,8 +142,10 @@ Display, Graphic, DMA2D, LCD, SRAM, ARGB8888, Blending, Memory to memory, Foregr
 Background, RGB565, LTDC, Pixel
 
 @par Directory contents
-
-  - DMA2D/DMA2D_MemToMemWithBlending/Common/Src/system_stm32h7xx.c     STM32H7xx system configuration source file 
+  
+  - DMA2D/DMA2D_MemToMemWithBlending/Common/Inc/ft5336_conf.h           Configuration file for the ft5336
+  - DMA2D/DMA2D_MemToMemWithBlending/Common/Inc/mt48lc4m32b2_conf.h     Configuration file for the mt48lc4m32b2 SDRAM memory
+  - DMA2D/DMA2D_MemToMemWithBlending/Common/Src/system_stm32h7xx.c      STM32H7xx system configuration source file 
   
   - DMA2D/DMA2D_MemToMemWithBlending/CM7/Inc/main.h                      Main configuration file for Cortex-M7
   - DMA2D/DMA2D_MemToMemWithBlending/CM7/Inc/stm32h7xx_it.h              Interrupt handlers header file for Cortex-M7
@@ -160,6 +162,7 @@ Background, RGB565, LTDC, Pixel
   - DMA2D/DMA2D_MemToMemWithBlending/CM4/Src/main.c                Main program  for Cortex-M4
   - DMA2D/DMA2D_MemToMemWithBlending/CM4/Src/stm32h7xx_it.c        Interrupt handlers for Cortex-M4
   - DMA2D/DMA2D_MemToMemWithBlending/CM4/Src/stm32h7xx_hal_msp.c   HAL MSP module for Cortex-M4  	
+  
 
 @par Hardware and Software environment  
 

@@ -81,7 +81,7 @@ static STORAGE_Status_t StorageTryMount( const uint8_t unit )
   if(unit == MSD_DISK_UNIT)
   {
     /* We need to check for SD Card before mounting the volume */
-    if(!BSP_SD_IsDetected())
+    if(!BSP_SD_IsDetected(0))
     {
       StorageStatus[unit] = STORAGE_UNMOUNTED;
       goto unlock_exit;
@@ -199,9 +199,9 @@ static void StorageThread(void const * argument)
         case MSDDISK_CONNECTION_EVENT:
 #ifdef STORAGE_BSP_INIT
           /* Enable SD Interrupt mode */
-          if(BSP_SD_Init() == MSD_OK)
+          if(BSP_SD_Init(0) == BSP_ERROR_NONE)
           {
-            if(BSP_SD_ITConfig() == MSD_OK)
+            if(BSP_SD_DetectITConfig(0) == BSP_ERROR_NONE)
               StorageTryMount(MSD_DISK_UNIT);
           }
 #else
@@ -212,7 +212,7 @@ static void StorageThread(void const * argument)
         case MSDDISK_DISCONNECTION_EVENT:
           StorageTryUnMount(MSD_DISK_UNIT);
 #ifdef STORAGE_BSP_INIT
-          BSP_SD_DeInit();
+          BSP_SD_DeInit(0);
 #endif /* STORAGE_BSP_INIT */
         break;
 #endif /* USE_SDCARD */
@@ -231,26 +231,26 @@ static void StorageThread(void const * argument)
   */
 static uint8_t StorageInitMSD(void)
 {
-  uint8_t sd_status = MSD_OK;
+  uint8_t sd_status = BSP_ERROR_NONE;
 
   if(StorageID[MSD_DISK_UNIT] != 0)
     return StorageID[MSD_DISK_UNIT];
 
 #ifdef STORAGE_BSP_INIT
-  sd_status = BSP_SD_Init();
-  if( sd_status == MSD_ERROR )
+  sd_status = BSP_SD_Init(0);
+  if( sd_status != BSP_ERROR_NONE )
   {
     /* Undo the SD CArd init */
-    BSP_SD_DeInit();
+    BSP_SD_DeInit(0);
   }
   else
   {
     /* Configure SD Interrupt mode */
-    sd_status = BSP_SD_ITConfig();
+    sd_status = BSP_SD_DetectITConfig(0);
   }
 #endif /* STORAGE_BSP_INIT */
 
-  if(sd_status == MSD_OK)
+  if(sd_status == BSP_ERROR_NONE)
   {
     /* Create Storage Semaphore */
     osSemaphoreDef(STORAGE_MSD_Semaphore);
@@ -273,7 +273,7 @@ static uint8_t StorageInitMSD(void)
 static void StorageDeInitMSD(void)
 {
 #ifdef STORAGE_BSP_INIT
-  BSP_SD_DeInit();
+  BSP_SD_DeInit(0);
 #endif /* STORAGE_BSP_INIT */
   
   if(StorageSemaphore[MSD_DISK_UNIT])
@@ -475,14 +475,14 @@ void Storage_DetectSDCard( void )
   if(!StorageEvent)
     return;
 
-  if((BSP_SD_IsDetected()))
+  if((BSP_SD_IsDetected(0)))
   {
     /* After sd disconnection, a SD Init is required */
     if(Storage_GetStatus(MSD_DISK_UNIT) == STORAGE_NOINIT)
     {
-      if( BSP_SD_Init() == MSD_OK )
+      if( BSP_SD_Init(0) == BSP_ERROR_NONE )
       {
-        if( BSP_SD_ITConfig() == MSD_OK )
+        if( BSP_SD_DetectITConfig(0) == BSP_ERROR_NONE )
           osMessagePut ( StorageEvent, MSDDISK_CONNECTION_EVENT, 0);
       }
     }

@@ -40,10 +40,10 @@ void SVC_Handler(void);
 void DebugMon_Handler(void);
 void PendSV_Handler(void);
 void SysTick_Handler(void);
-void BSP_CAMERA_DMA_IRQHandler(void);
-void BSP_CAMERA_IRQHandler(void);
 void DSI_IRQHandler(void);
 void DMA2D_IRQHandler(void);
+void CAMERA_IRQHandler(void);
+void DMA2_Stream3_IRQHandler(void);
 #ifdef __cplusplus
 }
 #endif

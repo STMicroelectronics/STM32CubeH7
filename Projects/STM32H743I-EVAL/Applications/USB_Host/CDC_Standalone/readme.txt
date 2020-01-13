@@ -125,7 +125,6 @@ Connectivity, USB Host, Full Speed, High Speed, CDC, PSTN, HyperTerminal, VCP, C
   - USB_Host/CDC_Standalone/Src/cdc_send.c              CDC Send State Machine
   - USB_Host/CDC_Standalone/Inc/main.h                  Main program header file
   - USB_Host/CDC_Standalone/Inc/stm32h7xx_it.h          Interrupt handlers header file
-  - USB_Host/CDC_Standalone/Inc/lcd_log_conf.h          LCD log configuration file
   - USB_Host/CDC_Standalone/Inc/stm32h7xx_hal_conf.h    HAL configuration file
   - USB_Host/CDC_Standalone/Inc/usbh_conf.h             USB Host driver Configuration file
   - USB_Host/CDC_Standalone/Inc/ffconf.h                FAT file system module configuration file
@@ -134,11 +133,11 @@ Connectivity, USB Host, Full Speed, High Speed, CDC, PSTN, HyperTerminal, VCP, C
 
   - This application runs on stm32h7xx devices.
     
-  - This application has been tested with STMicroelectronics STM32H743I-EVAL RevB
+  - This application has been tested with STMicroelectronics STM32H743I-EVAL 
     evaluation boards and can be easily tailored to any other supported device 
     and development board.
 
-  - STM32H743I-EVAL RevB Set-up
+  - STM32H743I-EVAL  Set-up
     - Insert a microSD card into the STM32H743I-EVAL uSD slot (CN13)
     - Plug the CDC device into the STM32H743I-EVAL board through 'USB micro A-Male 
       to B-Male' cable to the connector:

@@ -75,15 +75,15 @@ StaticStreamBuffer_t xStreamBufferStruct[mbaNUMBER_OF_CORE_2_TASKS]__attribute__
 static uint8_t ucStorageBuffer_ctr[ mbaCONTROL_MESSAGE_BUFFER_SIZE ]__attribute__((at(0x38000100)));
 static uint8_t ucStorageBuffer[mbaNUMBER_OF_CORE_2_TASKS][ mbaTASK_MESSAGE_BUFFER_SIZE ]__attribute__((at(0x38000200)));
 #elif defined ( __GNUC__ )
-MessageBufferHandle_t xControlMessageBuffer __attribute__((section(".xControlMessageBuffer")));
-MessageBufferHandle_t xDataMessageBuffers[ mbaNUMBER_OF_CORE_2_TASKS ] __attribute__ ((section (".xDataMessageBuffers")));
-static uint32_t ulCycleCounters[ mbaNUMBER_OF_CORE_2_TASKS ] __attribute__ ((section (".ulCycleCounters")));
+MessageBufferHandle_t xControlMessageBuffer __attribute__((section(".RAM_D3_Z1")));
+MessageBufferHandle_t xDataMessageBuffers[ mbaNUMBER_OF_CORE_2_TASKS ] __attribute__ ((section (".RAM_D3_Z2")));
+static uint32_t ulCycleCounters[ mbaNUMBER_OF_CORE_2_TASKS ] __attribute__ ((section (".RAM_D3_Z3")));
 /* The variable used to hold the stream buffer structure.*/
-StaticStreamBuffer_t xStreamBufferStruct_ctrl  __attribute__ ((section (".xStreamBufferStruct_ctrl")));
-StaticStreamBuffer_t xStreamBufferStruct[mbaNUMBER_OF_CORE_2_TASKS] __attribute__ ((section (".xStreamBufferStruct")));
+StaticStreamBuffer_t xStreamBufferStruct_ctrl  __attribute__ ((section (".RAM_D3_Z4")));
+StaticStreamBuffer_t xStreamBufferStruct[mbaNUMBER_OF_CORE_2_TASKS] __attribute__ ((section (".RAM_D3_Z5")));
 /* Used to dimension the array used to hold the streams.*/
 /* Defines the memory that will actually hold the streams within the stream buffer.*/
-static uint8_t ucStorageBuffer_ctr[ mbaCONTROL_MESSAGE_BUFFER_SIZE ] __attribute__ ((section (".ucStorageBuffer_ctr")));
-static uint8_t ucStorageBuffer[mbaNUMBER_OF_CORE_2_TASKS][ mbaTASK_MESSAGE_BUFFER_SIZE ] __attribute__ ((section (".ucStorageBuffer")));
+static uint8_t ucStorageBuffer_ctr[ mbaCONTROL_MESSAGE_BUFFER_SIZE ] __attribute__ ((section (".RAM_D3_Z6")));
+static uint8_t ucStorageBuffer[mbaNUMBER_OF_CORE_2_TASKS][ mbaTASK_MESSAGE_BUFFER_SIZE ] __attribute__ ((section (".RAM_D3_Z7")));
 #endif
 #endif /* MESSAGE_BUFFER_AMP_H */

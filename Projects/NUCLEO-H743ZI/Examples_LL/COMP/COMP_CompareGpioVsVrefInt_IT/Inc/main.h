@@ -40,9 +40,9 @@
 /**
   * @brief LED2 
   */
-#define LED2_PIN                           LL_GPIO_PIN_7
-#define LED2_GPIO_PORT                     GPIOB
-#define LED2_GPIO_CLK_ENABLE()             LL_AHB4_GRP1_EnableClock(LL_AHB4_GRP1_PERIPH_GPIOB)  
+#define LED2_PIN                           LL_GPIO_PIN_1
+#define LED2_GPIO_PORT                     GPIOE
+#define LED2_GPIO_CLK_ENABLE()             LL_AHB4_GRP1_EnableClock(LL_AHB4_GRP1_PERIPH_GPIOE)
 
 /* Exported macro ------------------------------------------------------------*/
 

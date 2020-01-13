@@ -39,14 +39,16 @@
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 DMA2D_HandleTypeDef Dma2dHandle;
-extern LTDC_HandleTypeDef  hltdc_discovery;
+LTDC_HandleTypeDef  hltdc;
 
 __IO uint32_t CLUT_LoadComplete;
 __IO uint32_t Transfer_Complete;
 
+static uint32_t LCD_X_Size = 0, LCD_Y_Size = 0; 
+
+
 /* Private function prototypes -----------------------------------------------*/
 static void DMA2D_Config(uint32_t configNb);
-void LCD_LayerInit(uint16_t LayerIndex, uint32_t FB_Address);
 static void TransferError(DMA2D_HandleTypeDef* Dma2dHandle);
 static void TransferComplete(DMA2D_HandleTypeDef* Dma2dHandle);
 static void SystemClock_Config(void);
@@ -65,7 +67,7 @@ static void MPU_Config(void);
 int main(void)
 {
   HAL_StatusTypeDef hal_status = HAL_OK;
-  uint8_t  lcd_status = LCD_OK;
+  uint8_t  lcd_status= BSP_ERROR_NONE;
 
   /* System Init, System clock, voltage scaling and L1-Cache configuration are done by CPU1 (Cortex-M7) 
      in the meantime Domain D2 is put in STOP mode(Cortex-M4 in deep-sleep)
@@ -100,12 +102,17 @@ int main(void)
   BSP_LED_Init(LED3);
 
  /*##-1- Initialize the LCD ##################################################*/
-  lcd_status = BSP_LCD_Init();
-  LCD_LayerInit(0, LCD_FRAME_BUFFER);   
-  OnError_Handler(lcd_status != LCD_OK);
-
+  lcd_status = BSP_LCD_Init(0, LCD_ORIENTATION_LANDSCAPE);
+  OnError_Handler(lcd_status != BSP_ERROR_NONE);
+  
+  GUI_SetFuncDriver(&LCD_Driver);
+  GUI_Clear(GUI_COLOR_BLACK);
 
   HAL_Delay(100);
+  
+  /* Get the LCD width and height */
+  BSP_LCD_GetXSize(0, &LCD_X_Size);
+  BSP_LCD_GetYSize(0, &LCD_Y_Size);
   
   while (1)
   {
@@ -222,7 +229,7 @@ static void DMA2D_Config(uint32_t configNb)
     /* Configure the DMA2D Mode, Color Mode and output offset */
     Dma2dHandle.Init.Mode         = DMA2D_M2M_PFC;         /* DMA2D mode Memory to Memory with Pixel Format Conversion */
     Dma2dHandle.Init.ColorMode    = DMA2D_OUTPUT_ARGB8888; /* output format of DMA2D */
-    Dma2dHandle.Init.OutputOffset = 0x0;                   /* No offset in output */
+    Dma2dHandle.Init.OutputOffset = (LCD_X_Size - IMAGE_SIZE_X); /* output in pixels */
     Dma2dHandle.Init.AlphaInverted = DMA2D_REGULAR_ALPHA;  /* No Output Alpha Inversion*/  
     Dma2dHandle.Init.RedBlueSwap   = DMA2D_RB_REGULAR;     /* No Output Red & Blue swap */       
     
@@ -266,7 +273,7 @@ static void DMA2D_Config(uint32_t configNb)
     /* Configure the DMA2D Mode, Color Mode and output offset */
     Dma2dHandle.Init.Mode         = DMA2D_M2M_PFC;         /* DMA2D mode Memory to Memory with Pixel Format Conversion */
     Dma2dHandle.Init.ColorMode    = DMA2D_OUTPUT_ARGB8888; /* output format of DMA2D */
-    Dma2dHandle.Init.OutputOffset = 0x0;                   /* No offset in output */
+    Dma2dHandle.Init.OutputOffset = (LCD_X_Size - IMAGE_SIZE_X); /* output in pixels */
     Dma2dHandle.Init.AlphaInverted = DMA2D_REGULAR_ALPHA;  /* No Output Alpha Inversion*/  
     Dma2dHandle.Init.RedBlueSwap   = DMA2D_RB_REGULAR;     /* No Output Red & Blue swap */      
     
@@ -310,7 +317,7 @@ static void DMA2D_Config(uint32_t configNb)
     /* Configure the DMA2D Mode, Color Mode and output offset */
     Dma2dHandle.Init.Mode          = DMA2D_M2M_BLEND;       /* DMA2D mode Memory to Memory with Blending */    
     Dma2dHandle.Init.ColorMode     = DMA2D_OUTPUT_ARGB8888; /* output format of DMA2D */
-    Dma2dHandle.Init.OutputOffset  = 0x0;                   /* No offset in output */
+    Dma2dHandle.Init.OutputOffset  = (LCD_X_Size - IMAGE_SIZE_X); /* output in pixels */
     Dma2dHandle.Init.AlphaInverted = DMA2D_REGULAR_ALPHA;   /* No Output Alpha Inversion*/  
     Dma2dHandle.Init.RedBlueSwap   = DMA2D_RB_REGULAR;      /* No Output Red & Blue swap */      
     
@@ -373,37 +380,6 @@ static void DMA2D_Config(uint32_t configNb)
       /* wait for the end of the CLUT loading*/
     }    
   }  
-}
-
-/**
-  * @brief  Initializes the LCD layers.
-  * @param  LayerIndex: Layer foreground or background
-  * @param  FB_Address: Layer frame buffer
-  * @retval None
-  */
-void LCD_LayerInit(uint16_t LayerIndex, uint32_t FB_Address)
-{
- LCD_LayerCfgTypeDef  Layercfg;
-  
-  Layercfg.FBStartAdress = FB_Address;
-  Layercfg.Alpha = 255;
-  Layercfg.Alpha0 = 0;
-  Layercfg.Backcolor.Blue = 0;
-  Layercfg.Backcolor.Green = 0;
-  Layercfg.Backcolor.Red = 0;
-  Layercfg.BlendingFactor1 = LTDC_BLENDING_FACTOR1_PAxCA;
-  Layercfg.BlendingFactor2 = LTDC_BLENDING_FACTOR2_PAxCA;
-  Layercfg.ImageWidth = IMAGE_SIZE_X;
-  Layercfg.ImageHeight = IMAGE_SIZE_Y;
-  
-    /* Layer Init */
-  Layercfg.WindowX0 = (BSP_LCD_GetXSize()/2) - (Layercfg.ImageWidth/2) ;
-  Layercfg.WindowX1 = Layercfg.WindowX0 + Layercfg.ImageWidth;
-  Layercfg.WindowY0 = (BSP_LCD_GetYSize()/2) - (Layercfg.ImageHeight/2) ;
-  Layercfg.WindowY1 = Layercfg.WindowY0 + Layercfg.ImageHeight;
-  Layercfg.PixelFormat = LTDC_PIXEL_FORMAT_ARGB8888;
-  
-  HAL_LTDC_ConfigLayer(&hltdc_discovery, &Layercfg, LayerIndex);
 }
 
 /**

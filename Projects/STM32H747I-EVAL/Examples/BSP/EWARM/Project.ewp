@@ -32,11 +32,11 @@
                 </option>
                 <option>
                     <name>Input description</name>
-                    <state>Full formatting, with multibyte support.</state>
+                    <state>Automatic choice of formatter, without multibyte support.</state>
                 </option>
                 <option>
                     <name>Output description</name>
-                    <state>Full formatting, with multibyte support.</state>
+                    <state>Automatic choice of formatter, without multibyte support.</state>
                 </option>
                 <option>
                     <name>GOutputBinary</name>
@@ -49,20 +49,20 @@
                 <option>
                     <name>GRuntimeLibSelect</name>
                     <version>0</version>
-                    <state>2</state>
+                    <state>1</state>
                 </option>
                 <option>
                     <name>GRuntimeLibSelectSlave</name>
                     <version>0</version>
-                    <state>2</state>
+                    <state>1</state>
                 </option>
                 <option>
                     <name>RTDescription</name>
-                    <state>Use the full configuration of the C/C++ runtime library. Full locale interface, C locale, file descriptor support, multibytes in printf and scanf, and hex floats in strtod.</state>
+                    <state>Use the normal configuration of the C/C++ runtime library. No locale interface, C locale, no file descriptor support, no multibytes in printf and scanf, and no hex floats in strtod.</state>
                 </option>
                 <option>
                     <name>OGProductVersion</name>
-                    <state>4.41A</state>
+                    <state>8.11.2.13604</state>
                 </option>
                 <option>
                     <name>OGLastSavedByProductVersion</name>
@@ -108,11 +108,11 @@
                 <option>
                     <name>GeneralMisraRules04</name>
                     <version>0</version>
-                    <state>011111111111111110111111111111111111111111111010110100111111111111110111111111111111111111111111111111110111111011111111111111111111111111111</state>
+                    <state>111101110010111111111000110111111111111111111111111110010111101111010101111111111111111111111111101111111011111001111011111011111111111111111</state>
                 </option>
                 <option>
                     <name>RTConfigPath2</name>
-                    <state>$TOOLKIT_DIR$\INC\c\DLib_Config_Full.h</state>
+                    <state>$TOOLKIT_DIR$\INC\c\DLib_Config_Normal.h</state>
                 </option>
                 <option>
                     <name>GBECoreSlave</name>
@@ -121,7 +121,7 @@
                 </option>
                 <option>
                     <name>OGUseCmsis</name>
-                    <state>0</state>
+                    <state>1</state>
                 </option>
                 <option>
                     <name>OGUseCmsisDspLib</name>
@@ -173,20 +173,20 @@
                 <option>
                     <name>OGPrintfVariant</name>
                     <version>0</version>
-                    <state>1</state>
+                    <state>0</state>
                 </option>
                 <option>
                     <name>OGPrintfMultibyteSupport</name>
-                    <state>1</state>
+                    <state>0</state>
                 </option>
                 <option>
                     <name>OGScanfVariant</name>
                     <version>0</version>
-                    <state>1</state>
+                    <state>0</state>
                 </option>
                 <option>
                     <name>OGScanfMultibyteSupport</name>
-                    <state>1</state>
+                    <state>0</state>
                 </option>
                 <option>
                     <name>GenLocaleTags</name>
@@ -222,7 +222,6 @@
                     <state>USE_HAL_DRIVER</state>
                     <state> STM32H747xx</state>
                     <state> USE_STM32H747I_EVAL</state>
-                    <state>USE_IOEXPANDER</state>
                     <state>CORE_CM7</state>
                     <state>TS_MULTI_TOUCH_SUPPORTED</state>
                 </option>
@@ -285,7 +284,7 @@
                 <option>
                     <name>CCAllowList</name>
                     <version>1</version>
-                    <state>11111110</state>
+                    <state>00000000</state>
                 </option>
                 <option>
                     <name>CCDebugInfo</name>
@@ -351,14 +350,15 @@
                     <name>CCIncludePath2</name>
                     <state>$PROJ_DIR$\..\Common\Inc</state>
                     <state>$PROJ_DIR$\..\CM7\Inc</state>
-                    <state>$PROJ_DIR$\..\..\..\..\..\Drivers\CMSIS\Include</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\Drivers\CMSIS\Device\ST\STM32H7xx\Include</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Inc</state>
-                    <state>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\STM32H747I_EVAL</state>
+                    <state>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\STM32H747I-EVAL</state>
+                    <state>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\Components</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\Components\Common</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\Utilities\Log</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\Utilities\Fonts</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\Utilities\CPU</state>
+                    <state>$PROJ_DIR$\..\..\..\..\..\Utilities\Basic_GUI</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\Middlewares\ST\STM32_Audio\Addons\PDM\Inc</state>
                 </option>
                 <option>
@@ -375,7 +375,7 @@
                 </option>
                 <option>
                     <name>CCOptLevel</name>
-                    <state>3</state>
+                    <state>0</state>
                 </option>
                 <option>
                     <name>CCOptStrategy</name>
@@ -384,7 +384,7 @@
                 </option>
                 <option>
                     <name>CCOptLevelSlave</name>
-                    <state>3</state>
+                    <state>0</state>
                 </option>
                 <option>
                     <name>CompilerMisraRules98</name>
@@ -1095,7 +1095,7 @@
                 </option>
                 <option>
                     <name>OGProductVersion</name>
-                    <state>4.41A</state>
+                    <state>8.11.2.13604</state>
                 </option>
                 <option>
                     <name>OGLastSavedByProductVersion</name>
@@ -1255,9 +1255,7 @@
                     <state>USE_HAL_DRIVER</state>
                     <state> STM32H747xx</state>
                     <state> USE_STM32H747I_EVAL</state>
-                    <state>USE_IOEXPANDER</state>
                     <state>CORE_CM4</state>
-                    <state>TS_MULTI_TOUCH_SUPPORTED</state>
                 </option>
                 <option>
                     <name>CCPreprocFile</name>
@@ -1384,14 +1382,14 @@
                     <name>CCIncludePath2</name>
                     <state>$PROJ_DIR$\..\Common\Inc</state>
                     <state>$PROJ_DIR$\..\CM4\Inc</state>
-                    <state>$PROJ_DIR$\..\..\..\..\..\Drivers\CMSIS\Include</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\Drivers\CMSIS\Device\ST\STM32H7xx\Include</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Inc</state>
-                    <state>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\STM32H747I_EVAL</state>
+                    <state>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\STM32H747I-EVAL</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\Components\Common</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\Utilities\Log</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\Utilities\Fonts</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\Utilities\CPU</state>
+                    <state>$PROJ_DIR$\..\..\..\..\..\Drivers\CMSIS\Include</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\Middlewares\ST\STM32_Audio\Addons\PDM\Inc</state>
                 </option>
                 <option>
@@ -2080,13 +2078,37 @@
             <group>
                 <name>Components</name>
                 <file>
+                    <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\Components\adv7533\adv7533.c</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\Components\adv7533\adv7533_reg.c</name>
+                </file>
+                <file>
                     <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\Components\ft6x06\ft6x06.c</name>
                     <excluded>
                         <configuration>STM32H747I_EVAL_CM4</configuration>
                     </excluded>
                 </file>
                 <file>
+                    <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\Components\ft6x06\ft6x06_reg.c</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\Components\is42s32800j\is42s32800j.c</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\Components\m24lr64\m24lr64.c</name>
+                </file>
+                <file>
                     <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\Components\mfxstm32l152\mfxstm32l152.c</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\Components\mfxstm32l152\mfxstm32l152_reg.c</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\Components\mt25tl01g\mt25tl01g.c</name>
+                    <excluded>
+                        <configuration>STM32H747I_EVAL_CM4</configuration>
+                    </excluded>
                 </file>
                 <file>
                     <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\Components\otm8009a\otm8009a.c</name>
@@ -2095,10 +2117,7 @@
                     </excluded>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\Components\stmpe811\stmpe811.c</name>
-                    <excluded>
-                        <configuration>STM32H747I_EVAL_CM4</configuration>
-                    </excluded>
+                    <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\Components\otm8009a\otm8009a_reg.c</name>
                 </file>
                 <file>
                     <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\Components\wm8994\wm8994.c</name>
@@ -2106,65 +2125,71 @@
                         <configuration>STM32H747I_EVAL_CM4</configuration>
                     </excluded>
                 </file>
+                <file>
+                    <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\Components\wm8994\wm8994_reg.c</name>
+                </file>
             </group>
             <group>
                 <name>STM32H747I_EVAL</name>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\STM32H747I_EVAL\stm32h747i_eval.c</name>
+                    <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\STM32H747I-EVAL\stm32h747i_eval.c</name>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\STM32H747I_EVAL\stm32h747i_eval_audio.c</name>
+                    <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\STM32H747I-EVAL\stm32h747i_eval_audio.c</name>
                     <excluded>
                         <configuration>STM32H747I_EVAL_CM4</configuration>
                     </excluded>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\STM32H747I_EVAL\stm32h747i_eval_eeprom.c</name>
+                    <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\STM32H747I-EVAL\stm32h747i_eval_bus.c</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\STM32H747I-EVAL\stm32h747i_eval_eeprom.c</name>
                     <excluded>
                         <configuration>STM32H747I_EVAL_CM4</configuration>
                     </excluded>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\STM32H747I_EVAL\stm32h747i_eval_io.c</name>
+                    <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\STM32H747I-EVAL\stm32h747i_eval_io.c</name>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\STM32H747I_EVAL\stm32h747i_eval_lcd.c</name>
+                    <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\STM32H747I-EVAL\stm32h747i_eval_lcd.c</name>
                     <excluded>
                         <configuration>STM32H747I_EVAL_CM4</configuration>
                     </excluded>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\STM32H747I_EVAL\stm32h747i_eval_nor.c</name>
+                    <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\STM32H747I-EVAL\stm32h747i_eval_nor.c</name>
                     <excluded>
                         <configuration>STM32H747I_EVAL_CM4</configuration>
                     </excluded>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\STM32H747I_EVAL\stm32h747i_eval_qspi.c</name>
+                    <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\STM32H747I-EVAL\stm32h747i_eval_qspi.c</name>
                     <excluded>
                         <configuration>STM32H747I_EVAL_CM4</configuration>
                     </excluded>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\STM32H747I_EVAL\stm32h747i_eval_sd.c</name>
+                    <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\STM32H747I-EVAL\stm32h747i_eval_sd.c</name>
                     <excluded>
                         <configuration>STM32H747I_EVAL_CM4</configuration>
                     </excluded>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\STM32H747I_EVAL\stm32h747i_eval_sdram.c</name>
+                    <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\STM32H747I-EVAL\stm32h747i_eval_sdram.c</name>
                     <excluded>
                         <configuration>STM32H747I_EVAL_CM4</configuration>
                     </excluded>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\STM32H747I_EVAL\stm32h747i_eval_sram.c</name>
+                    <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\STM32H747I-EVAL\stm32h747i_eval_sram.c</name>
                     <excluded>
                         <configuration>STM32H747I_EVAL_CM4</configuration>
                     </excluded>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\STM32H747I_EVAL\stm32h747i_eval_ts.c</name>
+                    <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\STM32H747I-EVAL\stm32h747i_eval_ts.c</name>
                     <excluded>
                         <configuration>STM32H747I_EVAL_CM4</configuration>
                     </excluded>
@@ -2214,6 +2239,9 @@
                 <excluded>
                     <configuration>STM32H747I_EVAL_CM4</configuration>
                 </excluded>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_exti.c</name>
             </file>
             <file>
                 <name>$PROJ_DIR$\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_flash.c</name>
@@ -2324,6 +2352,9 @@
                 <name>$PROJ_DIR$\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_uart_ex.c</name>
             </file>
             <file>
+                <name>$PROJ_DIR$\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_usart_ex.c</name>
+            </file>
+            <file>
                 <name>$PROJ_DIR$\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_ll_delayblock.c</name>
                 <excluded>
                     <configuration>STM32H747I_EVAL_CM4</configuration>
@@ -2386,9 +2417,6 @@
                     <name>$PROJ_DIR$\..\CM7\Src\lcd.c</name>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\CM7\Src\log.c</name>
-                </file>
-                <file>
                     <name>$PROJ_DIR$\..\CM7\Src\main.c</name>
                 </file>
                 <file>
@@ -2407,9 +2435,6 @@
                     <name>$PROJ_DIR$\..\CM7\Src\sdram.c</name>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\CM7\Src\sdram_dma.c</name>
-                </file>
-                <file>
                     <name>$PROJ_DIR$\..\CM7\Src\sram.c</name>
                 </file>
                 <file>
@@ -2418,9 +2443,6 @@
                 <file>
                     <name>$PROJ_DIR$\..\CM7\Src\touchscreen.c</name>
                 </file>
-            </group>
-            <group>
-                <name>Common</name>
             </group>
         </group>
     </group>
@@ -2442,7 +2464,7 @@
             <configuration>STM32H747I_EVAL_CM4</configuration>
         </excluded>
         <file>
-            <name>$PROJ_DIR$\..\..\..\..\..\Utilities\Log\lcd_log.c</name>
+            <name>$PROJ_DIR$\..\..\..\..\..\Utilities\Basic_GUI\basic_gui.c</name>
         </file>
     </group>
 </project>

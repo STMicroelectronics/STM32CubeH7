@@ -27,7 +27,7 @@
 /* Private variables ---------------------------------------------------------*/
 USBH_HandleTypeDef  hUSB_Host;
 AUDIO_ApplicationTypeDef appli_state = APPLICATION_IDLE;
-
+TS_Init_t *hTS;
 /* Private function prototypes -----------------------------------------------*/
 static void SystemClock_Config(void);
 static void Error_Handler(void);
@@ -45,6 +45,9 @@ static void CPU_CACHE_Enable(void);
   */
 int main(void)
 {
+  uint32_t x_size, y_size;
+
+
   /* Configure the MPU attributes as Write Through */
   MPU_Config();
 
@@ -68,8 +71,15 @@ int main(void)
   /* Init Audio Application */
   AUDIO_InitApplication();
 
+  BSP_LCD_GetXSize(0, &x_size);
+  BSP_LCD_GetYSize(0, &y_size);
   /* Init TS module */
-  BSP_TS_Init(BSP_LCD_GetXSize(), BSP_LCD_GetYSize());
+  hTS->Width = x_size;
+  hTS->Height = y_size;
+  hTS->Orientation = TS_SWAP_NONE;
+  hTS->Accuracy = 0;
+  /* Touchscreen initialization */
+  BSP_TS_Init(0, hTS);
 
   /* Init Host Library */
   if (USBH_Init(&hUSB_Host, USBH_UserProcess, 0) != USBH_OK)
@@ -120,24 +130,18 @@ int main(void)
   */
 static void AUDIO_InitApplication(void)
 {
-  /* Initialize the LCD */
-  BSP_LCD_Init();
-
-  /* LCD Layer Initialization */
-  BSP_LCD_LayerDefaultInit(1, LCD_FB_START_ADDRESS);
-
-  /* Select the LCD Layer */
-  BSP_LCD_SelectLayer(1);
-
+  BSP_LCD_Init(0, LCD_ORIENTATION_LANDSCAPE);
+  GUI_SetFuncDriver(&LCD_Driver);
+  GUI_SetLayer(0);
   /* Enable the display */
-  BSP_LCD_DisplayOn();
+  BSP_LCD_DisplayOn(0);
 
   /* Init the LCD Log module */
-  LCD_LOG_Init();
+ UTIL_LCD_TRACE_Init();
 
-  LCD_LOG_SetHeader((uint8_t *)"Audio Playback and Record Application");
+  UTIL_LCD_TRACE_SetHeader((uint8_t *)"Audio Playback and Record Application");
 
-  LCD_UsrLog("USB Host library started.\n");
+  LCD_UsrTrace("USB Host library started.\n");
 
   /* Start Audio interface */
   USBH_UsrLog("Starting Audio Demo");
@@ -269,11 +273,11 @@ static void SystemClock_Config(void)
   * @param  None
   * @retval None
   */
-static void Error_Handler(void)
+void Error_Handler(void)
 {
-  /* Turn LED3 on */
+  /* LED3 On in error case */
   BSP_LED_On(LED3);
-  while(1)
+  while (1)
   {
   }
 }

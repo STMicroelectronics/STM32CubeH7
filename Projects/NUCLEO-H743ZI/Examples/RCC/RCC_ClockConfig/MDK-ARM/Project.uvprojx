@@ -361,7 +361,7 @@
               <MiscControls>--C99</MiscControls>
               <Define>USE_HAL_DRIVER, STM32H743xx,USE_STM32H7XX_NUCLEO_144_MB1364</Define>
               <Undefine />
-              <IncludePath>../Inc;../../../../../../Drivers/CMSIS/Include;../../../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../../../../../../Drivers/STM32H7xx_HAL_Driver/Inc;../../../../../../Drivers/BSP/STM32H7xx_Nucleo_144;../../../../../../Utilities/Log;../../../../../../Utilities/Fonts;../../../../../../Utilities/CPU</IncludePath>
+              <IncludePath>../Inc;../../../../../../Drivers/CMSIS/Include;../../../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../../../../../../Drivers/STM32H7xx_HAL_Driver/Inc;../../../../../../Drivers/BSP/STM32H7xx_Nucleo;../../../../../../Utilities/Log;../../../../../../Utilities/Fonts;../../../../../../Utilities/CPU</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -436,9 +436,9 @@
           <Files>
           
           <File>
-              <FileName>stm32h7xx_nucleo_144.c</FileName>
+              <FileName>stm32h7xx_nucleo.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../../Drivers/BSP/STM32H7xx_Nucleo_144/stm32h7xx_nucleo_144.c</FilePath>
+              <FilePath>../../../../../../Drivers/BSP/STM32H7xx_Nucleo/stm32h7xx_nucleo.c</FilePath>
               
             </File></Files>
         </Group><Group>
@@ -472,6 +472,11 @@
               <FileName>stm32h7xx_hal_dma.c</FileName>
               <FileType>1</FileType>
               <FilePath>../../../../../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_dma.c</FilePath>
+	</File>
+	<File>
+	<FileName>stm32h7xx_hal_exti.c</FileName>
+	<FileType>1</FileType>
+	<FilePath>../../../../../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_exti.c</FilePath>
               
             </File><File>
               <FileName>stm32h7xx_hal_dma_ex.c</FileName>

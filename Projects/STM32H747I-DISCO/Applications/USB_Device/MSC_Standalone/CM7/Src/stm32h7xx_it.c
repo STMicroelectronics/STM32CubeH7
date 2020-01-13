@@ -32,7 +32,6 @@
 /* Private macro ------------------------------------------------------------- */
 /* Private variables --------------------------------------------------------- */
 extern PCD_HandleTypeDef hpcd;
-extern SD_HandleTypeDef uSdHandle;
 /* Private function prototypes ----------------------------------------------- */
 #ifdef USE_USB_FS
 void OTG_FS_IRQHandler(void);
@@ -156,17 +155,6 @@ void OTG_HS_IRQHandler(void)
 {
   HAL_PCD_IRQHandler(&hpcd);
 }
-
-/**
-  * @brief  This function handles DMA2 Stream 6 interrupt request.
-  * @param  None
-  * @retval None
-  */
-void SDMMC1_IRQHandler(void)
-{
-  HAL_SD_IRQHandler(&uSdHandle);
-}
-
 /**
   * @}
   */

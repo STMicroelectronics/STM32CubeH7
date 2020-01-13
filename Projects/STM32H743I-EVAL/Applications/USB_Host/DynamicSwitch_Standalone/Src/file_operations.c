@@ -46,60 +46,60 @@ void MSC_File_Operations(void)
   /* Register the file system object to the FatFs module */
   if (f_mount(&USBH_fatfs, "", 0) != FR_OK)
   {
-    LCD_ErrLog("Cannot Initialize FatFs! \n");
+    LCD_ErrTrace("Cannot Initialize FatFs! \n");
   }
   else
   {
-    LCD_UsrLog("INFO : FatFs Initialized \n");
+    LCD_UsrTrace("INFO : FatFs Initialized \n");
 
     if (f_open(&MyFile, "0:USBHost.txt", FA_CREATE_ALWAYS | FA_WRITE) != FR_OK)
     {
-      LCD_ErrLog("Cannot Open 'USBHost.txt' file \n");
+      LCD_ErrTrace("Cannot Open 'USBHost.txt' file \n");
     }
     else
     {
-      LCD_UsrLog("INFO : 'USBHost.txt' opened for write  \n");
+      LCD_UsrTrace("INFO : 'USBHost.txt' opened for write  \n");
       res = f_write(&MyFile, wtext, sizeof(wtext), (void *)&bytesWritten);
       f_close(&MyFile);
 
       if ((bytesWritten == 0) || (res != FR_OK))  /* EOF or Error */
       {
-        LCD_ErrLog("Cannot Write on the  'USBHost.txt' file \n");
+        LCD_ErrTrace("Cannot Write on the  'USBHost.txt' file \n");
       }
       else
       {
         if (f_open(&MyFile, "0:USBHost.txt", FA_READ) != FR_OK)
         {
-          LCD_ErrLog("Cannot Open 'USBHost.txt' file for read.\n");
+          LCD_ErrTrace("Cannot Open 'USBHost.txt' file for read.\n");
         }
         else
         {
-          LCD_UsrLog("INFO : Text written on the 'USBHost.txt' file \n");
+          LCD_UsrTrace("INFO : Text written on the 'USBHost.txt' file \n");
 
           res = f_read(&MyFile, rtext, sizeof(rtext), (void *)&bytesread);
 
           if ((bytesread == 0) || (res != FR_OK)) /* EOF or Error */
           {
-            LCD_ErrLog("Cannot Read from the  'USBHost.txt' file \n");
+            LCD_ErrTrace("Cannot Read from the  'USBHost.txt' file \n");
           }
           else
           {
-            LCD_UsrLog("Read Text : \n");
-            LCD_DbgLog((char *)rtext);
-            LCD_DbgLog("\n");
+            LCD_UsrTrace("Read Text : \n");
+            LCD_DbgTrace((char *)rtext);
+            LCD_DbgTrace("\n");
           }
           f_close(&MyFile);
         }
         /* Compare read data with the expected data */
         if ((bytesread == bytesWritten))
         {
-          LCD_UsrLog("INFO : FatFs data compare SUCCES");
-          LCD_UsrLog("\n");
+          LCD_UsrTrace("INFO : FatFs data compare SUCCES");
+          LCD_UsrTrace("\n");
         }
         else
         {
-          LCD_ErrLog("FatFs data compare ERROR");
-          LCD_ErrLog("\n");
+          LCD_ErrTrace("FatFs data compare ERROR");
+          LCD_ErrTrace("\n");
         }
       }
     }

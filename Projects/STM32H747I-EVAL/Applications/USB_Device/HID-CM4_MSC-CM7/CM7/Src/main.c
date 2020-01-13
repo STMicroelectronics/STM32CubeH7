@@ -101,9 +101,6 @@ int main(void)
   BSP_LED_Init(LED_RED);
   BSP_LED_Init(LED_BLUE);
 
-  /* Initialize IO expander */
-  BSP_IO_Init();
-
   /* Init Device Library */
   USBD_Init(&USBD_Device, &MSC_Desc, 0);
 

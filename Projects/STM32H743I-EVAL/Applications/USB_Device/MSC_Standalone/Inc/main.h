@@ -28,6 +28,7 @@
 #include "usbd_msc.h"
 #include "usbd_storage.h" 
 #include "stm32h743i_eval.h"
+#include "stm32h743i_eval_io.h"
 #include "stm32h743i_eval_sd.h"
 
 /* Exported types ------------------------------------------------------------*/

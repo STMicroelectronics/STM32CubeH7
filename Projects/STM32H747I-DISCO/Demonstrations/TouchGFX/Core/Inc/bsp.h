@@ -27,7 +27,8 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32h7xx_hal.h"
-
+#include "stm32h747i_discovery_ts.h"
+#include "stm32h747i_discovery_sd.h"
 /* Standard includes components */
 #include <stddef.h>
 #include <stdlib.h>

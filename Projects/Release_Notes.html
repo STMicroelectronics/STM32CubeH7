@@ -1,0 +1,3074 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Release Notes for Projects of STM32CubeH7 Firmware Package</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="../_htmresc/mini-st.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<div class="row">
+<div class="col-sm-12 col-lg-4">
+<div class="card fluid">
+<div class="sectione dark">
+<center>
+<h1 id="release-notes-forprojects-of-stm32cubeh7-firmware-package"><small>Release Notes for</small><mark>Projects of STM32CubeH7 Firmware Package</mark></h1>
+<p>Copyright © 2017 STMicroelectronics<br />
+</p>
+<a href="https://www.st.com" class="logo"><img src="../_htmresc/st_logo.png" alt="ST logo" /></a>
+</center>
+</div>
+</div>
+<h1 id="license">License</h1>
+<p>The projects covered by these release notes are delivered under different licenses. Details of applicable license for each project are provided in the table of the "Contents" section below.</p>
+<h1 id="purpose">Purpose</h1>
+<p>The projects are a set of applicative tasks that aim to explain and provide use cases of the different products features based on the products hardware (Boards, STM32 Core(s) features, interconnections and peripherals) and built around the different firmware components. They can be directly used or adapted by the STM32CubeH7 Firmware Package users. They provide basic functionalities, show main features or demonstrate performance. They are provided with preconfigured projects for the main supported toolchains.</p>
+<p>In the STM32CubeH7 Firmware Package, the projects are organized in a sequential scheme based on the following levels:</p>
+<ul>
+<li>Boards : Hardware platform (evaluation, discovery, nucleo boards)</li>
+<li>Project Category:
+<ul>
+<li>Applications</li>
+<li>Demonstrations</li>
+<li>Examples</li>
+<li>Examples_LL</li>
+<li>Examples_MIX</li>
+<li>Templates</li>
+<li>Templates_LL</li>
+</ul></li>
+<li>Project Class</li>
+<li>Project Subclass</li>
+</ul>
+<p>The Project Class refers to the main peripherals (drivers), middleware libraries or BSP classes while the projects Subclass stands for a project specific feature within a class.</p>
+<p>The exhaustive list of projects is provided in this table: <a href="STM32CubeProjectsList.html">STM32CubeProjectsList</a>.</p>
+<p>Here is the list of references to user documents:</p>
+<ul>
+<li><a href="http://www.st.com/st-web-ui/static/active/en/resource/technical/document/user_manual/DM00103685.pdf">UM1713</a>: Developing applications on STM32Cube with LwIP TCP/IP stack</li>
+<li><a href="http://www.st.com/st-web-ui/static/active/en/resource/technical/document/user_manual/DM00105256.pdf">UM1720</a>: STM32Cube USB host library</li>
+<li><a href="http://www.st.com/st-web-ui/static/active/en/resource/technical/document/user_manual/DM00108129.pdf">UM1734</a>: STM32Cube USB device library</li>
+<li><a href="http://www.st.com/st-web-ui/static/active/en/resource/technical/document/user_manual/DM00105259.pdf">UM1721</a>: Developing Applications on STM32Cube with FatFs</li>
+<li><a href="http://www.st.com/st-web-ui/static/active/en/resource/technical/document/user_manual/DM00105262.pdf">UM1722</a>: Developing Applications on STM32Cube with RTOS</li>
+<li><a href="http://www.st.com/st-web-ui/static/active/en/resource/technical/document/user_manual/DM00386433.pdf">UM2204</a>: Getting started with STM32CubeH7 firmware package for STM32H7xx series</li>
+<li><a href="https://www.st.com/resource/en/user_manual/dm00395407.pdf">UM2222</a>: STM32CubeH7 demonstration platform - STMicroelectronics</li>
+<li><a href="https://www.st.com/content/ccc/resource/technical/document/user_manual/group1/a1/59/6c/60/d9/49/49/c3/DM00440740/files/DM00440740.pdf/jcr:content/translations/en.DM00440740.pdf">UM2298</a>: STM32Cube BSP drivers development guidelines</li>
+</ul>
+</div>
+<div class="col-sm-12 col-lg-8">
+<h1 id="update-history">Update History</h1>
+<div class="collapse">
+<input type="checkbox" id="collapse-section8" checked aria-hidden="true"> <label for="collapse-section8" aria-hidden="true"><strong>V1.6.0 / 06-December-2019</strong></label>
+<div>
+<h2 id="main-changes">Main Changes</h2>
+<h3 id="first-official-release-to-support-stm32h7a3b3xxb0xx-new-devices-and-boards">First official release to support STM32H7A3/B3xx/B0xx new devices and boards</h3>
+<p>Official release with support of STM32H7A3/B3xx/B0xx new devices</p>
+<p>Add support of NUCLEO-H7A3ZI-Q, STM32H7B3I-DK and STM32H7B3I-EVAL boards with dedicated template HAL/LL projects, examples, applications and demonstrations</p>
+<p>Update NUCLEO-H743ZI, NUCLEO-H745ZI-Q, STM32H743I-EVAL, STM32H745I-DISCO, STM32H747I-DISCO, STM32H747I-EVAL and STM32H750B-DK projects with new BSP drivers archirecture in line with STM32Cube BSP drivers development guidelines (<a href="https://www.st.com/content/ccc/resource/technical/document/user_manual/group1/a1/59/6c/60/d9/49/49/c3/DM00440740/files/DM00440740.pdf/jcr:content/translations/en.DM00440740.pdf">UM2298</a>)</p>
+<table>
+<caption>Additional features<br />
+</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Headline</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">[NUCLEO-H7A3ZI-Q] Initial version for HAL/LL Templates Examples, Applications and Demonstartion: in line with STM32Cube BSP drivers development guidelines (UM2298)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">[NUCLEO-H743ZI] HAL/LL Templates, Examples, Applications and Demonstartion: Updated with new BSP drivers archirecture in line with STM32Cube BSP drivers development guidelines (UM2298)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">[NUCLEO-H745ZI-Q] HAL/LL Templates, Examples, Applications and Demonstartion: Updated with new BSP drivers archirecture in line with STM32Cube BSP drivers development guidelines (UM2298)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">[STM32H7B3I-DK] Initial version for HAL/LL Templates, Examples, Applications and Demonstartion: in line with STM32Cube BSP drivers development guidelines (UM2298)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">[STM32H7B3I-EVAL] Initial version for HAL/LL Templates, Examples, Applications and Demonstartion: in line with STM32Cube BSP drivers development guidelines (UM2298)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">[STM32H743I-EVAL] HAL/LL Templates, Examples, Applications and Demonstartion: Updated with new BSP drivers archirecture in line with STM32Cube BSP drivers development guidelines (UM2298)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">[STM32H745I-DISCO] HAL/LL Templates, Examples, Applications and Demonstartion: Updated with new BSP drivers archirecture in line with STM32Cube BSP drivers development guidelines (UM2298)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">[STM32H747I-DISCO] HAL/LL Templates, Examples, Applications and Demonstartion: Updated with new BSP drivers archirecture in line with STM32Cube BSP drivers development guidelines (UM2298)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">[STM32H747I-EVAL] HAL/LL Templates, Examples, Applications and Demonstartion: Updated with new BSP drivers archirecture in line with STM32Cube BSP drivers development guidelines (UM2298)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">[STM32H750B-DK] HAL/LL Templates, Examples, Applications and Demonstartion: Updated with new BSP drivers archirecture in line with STM32Cube BSP drivers development guidelines (UM2298)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="contents">Contents</h2>
+<h3 id="projects">Projects</h3>
+<table>
+<caption>Projects <strong>NUCLEO-H7A3ZI-Q</strong></caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Board</th>
+<th style="text-align: left;">Project category</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: center;">License</th>
+<th style="text-align: center;">Path</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>NUCLEO-H7A3ZI-Q</strong></td>
+<td style="text-align: left;"><strong>Applications</strong></td>
+<td style="text-align: left;"><strong>V1.0.0</strong></td>
+<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: center;">Projects/NUCLEO-H7A3ZI-Q/Applications</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>NUCLEO-H7A3ZI-Q</strong></td>
+<td style="text-align: left;"><strong>Demonstrations</strong></td>
+<td style="text-align: left;"><strong>V1.0.0</strong></td>
+<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: center;">Projects/NUCLEO-H7A3ZI-Q/Demonstrations</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>NUCLEO-H7A3ZI-Q</strong></td>
+<td style="text-align: left;"><strong>Examples</strong></td>
+<td style="text-align: left;"><strong>V1.0.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/NUCLEO-H7A3ZI-Q/Examples</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>NUCLEO-H7A3ZI-Q</strong></td>
+<td style="text-align: left;"><strong>LL Examples</strong></td>
+<td style="text-align: left;"><strong>V1.0.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/NUCLEO-H7A3ZI-Q/Examples_LL</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>NUCLEO-H7A3ZI-Q</strong></td>
+<td style="text-align: left;"><strong>MIX Examples</strong></td>
+<td style="text-align: left;"><strong>V1.0.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/NUCLEO-H7A3ZI-Q/Examples_MIX</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>NUCLEO-H7A3ZI-Q</strong></td>
+<td style="text-align: left;"><strong>Templates</strong></td>
+<td style="text-align: left;"><strong>V1.0.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/NUCLEO-H7A3ZI-Q/Templates</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>NUCLEO-H7A3ZI-Q</strong></td>
+<td style="text-align: left;"><strong>LL Templates</strong></td>
+<td style="text-align: left;"><strong>V1.0.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/NUCLEO-H7A3ZI-Q/Templates_LL</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Projects NUCLEO-H743ZI</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Board</th>
+<th style="text-align: left;">Project category</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: center;">License</th>
+<th style="text-align: center;">Path</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">NUCLEO-H743ZI</td>
+<td style="text-align: left;"><strong>Applications</strong></td>
+<td style="text-align: left;"><strong>V1.5.0</strong></td>
+<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: center;">Projects/NUCLEO-H743ZI/Applications</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NUCLEO-H743ZI</td>
+<td style="text-align: left;"><strong>Demonstrations</strong></td>
+<td style="text-align: left;"><strong>V1.5.0</strong></td>
+<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: center;">Projects/NUCLEO-H743ZI/Demonstrations</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">NUCLEO-H743ZI</td>
+<td style="text-align: left;"><strong>Examples</strong></td>
+<td style="text-align: left;"><strong>V1.5.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/NUCLEO-H743ZI/Examples</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NUCLEO-H743ZI</td>
+<td style="text-align: left;"><strong>LL Examples</strong></td>
+<td style="text-align: left;"><strong>V1.2.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/NUCLEO-H743ZI/Examples_LL</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">NUCLEO-H743ZI</td>
+<td style="text-align: left;"><strong>Templates</strong></td>
+<td style="text-align: left;"><strong>V1.5.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/NUCLEO-H743ZI/Templates</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NUCLEO-H743ZI</td>
+<td style="text-align: left;"><strong>LL Templates</strong></td>
+<td style="text-align: left;"><strong>V1.2.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/NUCLEO-H743ZI/Templates_LL</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Projects NUCLEO-H745ZI-Q</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Board</th>
+<th style="text-align: left;">Project category</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: center;">License</th>
+<th style="text-align: center;">Path</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">NUCLEO-H745ZI-Q</td>
+<td style="text-align: left;"><strong>Applications</strong></td>
+<td style="text-align: left;"><strong>V1.2.0</strong></td>
+<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: center;">Projects/NUCLEO-H745ZI-Q/Applications</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NUCLEO-H745ZI-Q</td>
+<td style="text-align: left;"><strong>Demonstrations</strong></td>
+<td style="text-align: left;"><strong>V1.2.0</strong></td>
+<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: center;">Projects/NUCLEO-H745ZI-Q/Demonstrations</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">NUCLEO-H745ZI-Q</td>
+<td style="text-align: left;"><strong>Examples</strong></td>
+<td style="text-align: left;"><strong>V1.2.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/NUCLEO-H745ZI-Q/Examples</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NUCLEO-H745ZI-Q</td>
+<td style="text-align: left;"><strong>Templates</strong></td>
+<td style="text-align: left;"><strong>V1.2.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/NUCLEO-H745ZI-Q/Templates</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">NUCLEO-H745ZI-Q</td>
+<td style="text-align: left;"><strong>LL Templates</strong></td>
+<td style="text-align: left;"><strong>V1.2.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/NUCLEO-H745ZI-Q/Templates_LL</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Projects <strong>STM32H7B3I-DK</strong></caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Board</th>
+<th style="text-align: left;">Project category</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: center;">License</th>
+<th style="text-align: center;">Path</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>STM32H7B3I-DK</strong></td>
+<td style="text-align: left;"><strong>Applications</strong></td>
+<td style="text-align: left;"><strong>v1.0.0</strong></td>
+<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: center;">Projects/STM32H7B3I-DK/Applications</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>STM32H7B3I-DK</strong></td>
+<td style="text-align: left;"><strong>Demonstrations</strong></td>
+<td style="text-align: left;"><strong>v1.0.0</strong></td>
+<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: center;">Projects/STM32H7B3I-DK/Demonstrations</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>STM32H7B3I-DK</strong></td>
+<td style="text-align: left;"><strong>Examples</strong></td>
+<td style="text-align: left;"><strong>v1.0.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/STM32H7B3I-DK/Examples</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>STM32H7B3I-DK</strong></td>
+<td style="text-align: left;"><strong>LL Examples</strong></td>
+<td style="text-align: left;"><strong>v1.0.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/STM32H7B3I-DK/Examples_LL</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>STM32H7B3I-DK</strong></td>
+<td style="text-align: left;"><strong>MIX Examples</strong></td>
+<td style="text-align: left;"><strong>v1.0.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/STM32H7B3I-DK/Examples_MIX</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>STM32H7B3I-DK</strong></td>
+<td style="text-align: left;"><strong>Templates</strong></td>
+<td style="text-align: left;"><strong>v1.0.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/STM32H7B3I-DK/Templates</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>STM32H7B3I-DK</strong></td>
+<td style="text-align: left;"><strong>LL Templates</strong></td>
+<td style="text-align: left;"><strong>v1.0.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/STM32H7B3I-DK/Templates_LL</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Projects <strong>STM32H7B3I-EVAL</strong></caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Board</th>
+<th style="text-align: left;">Project category</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: center;">License</th>
+<th style="text-align: center;">Path</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>STM32H7B3I-EVAL</strong></td>
+<td style="text-align: left;"><strong>Applications</strong></td>
+<td style="text-align: left;"><strong>v1.0.0</strong></td>
+<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: center;">Projects/STM32H7B3I-EVAL/Applications</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>STM32H7B3I-EVAL</strong></td>
+<td style="text-align: left;"><strong>Demonstrations</strong></td>
+<td style="text-align: left;"><strong>v1.0.0</strong></td>
+<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: center;">Projects/STM32H7B3I-EVAL/Demonstrations</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>STM32H7B3I-EVAL</strong></td>
+<td style="text-align: left;"><strong>Examples</strong></td>
+<td style="text-align: left;"><strong>v1.0.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/STM32H7B3I-EVAL/Examples</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>STM32H7B3I-EVAL</strong></td>
+<td style="text-align: left;"><strong>LL Examples</strong></td>
+<td style="text-align: left;"><strong>v1.0.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/STM32H7B3I-EVAL/Examples_LL</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>STM32H7B3I-EVAL</strong></td>
+<td style="text-align: left;"><strong>MIX Examples</strong></td>
+<td style="text-align: left;"><strong>v1.0.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/STM32H7B3I-EVAL/Examples_MIX</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>STM32H7B3I-EVAL</strong></td>
+<td style="text-align: left;"><strong>Templates</strong></td>
+<td style="text-align: left;"><strong>v1.0.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/STM32H7B3I-EVAL/Templates</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>STM32H7B3I-EVAL</strong></td>
+<td style="text-align: left;"><strong>LL Templates</strong></td>
+<td style="text-align: left;"><strong>v1.0.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/STM32H7B3I-EVAL/Templates_LL</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Projects STM32H743I-EVAL</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Board</th>
+<th style="text-align: left;">Project category</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: center;">License</th>
+<th style="text-align: center;">Path</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">STM32H743I-EVAL</td>
+<td style="text-align: left;"><strong>Applications</strong></td>
+<td style="text-align: left;"><strong>V1.6.0</strong></td>
+<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: center;">Projects/STM32H743I-EVAL/Applications</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32H743I-EVAL</td>
+<td style="text-align: left;"><strong>Demonstrations</strong></td>
+<td style="text-align: left;"><strong>V1.4.0</strong></td>
+<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: center;">Projects/STM32H743I-EVAL/Demonstrations</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32H743I-EVAL</td>
+<td style="text-align: left;"><strong>Examples</strong></td>
+<td style="text-align: left;"><strong>V1.5.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/STM32H743I-EVAL/Examples</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32H743I-EVAL</td>
+<td style="text-align: left;"><strong>Templates</strong></td>
+<td style="text-align: left;"><strong>V1.5.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/STM32H743I-EVAL/Templates</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32H743I-EVAL</td>
+<td style="text-align: left;"><strong>LL Templates</strong></td>
+<td style="text-align: left;"><strong>V1.2.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/STM32H743I-EVAL/Templates_LL</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Projects STM32H745I-DISCO</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Board</th>
+<th style="text-align: left;">Project category</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: center;">License</th>
+<th style="text-align: center;">Path</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">STM32H745I-DISCO</td>
+<td style="text-align: left;"><strong>Applications</strong></td>
+<td style="text-align: left;"><strong>V1.2.0</strong></td>
+<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: center;">Projects/STM32H745I-DISCO/Applications</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32H745I-DISCO</td>
+<td style="text-align: left;"><strong>Demonstrations</strong></td>
+<td style="text-align: left;"><strong>V1.2.0</strong></td>
+<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: center;">Projects/STM32H745I-DISCO/Demonstrations</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32H745I-DISCO</td>
+<td style="text-align: left;"><strong>Examples</strong></td>
+<td style="text-align: left;"><strong>V1.2.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/STM32H745I-DISCO/Examples</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32H745I-DISCO</td>
+<td style="text-align: left;"><strong>Templates</strong></td>
+<td style="text-align: left;"><strong>V1.2.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/STM32H745I-DISCO/Templates</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32H745I-DISCO</td>
+<td style="text-align: left;"><strong>LL Templates</strong></td>
+<td style="text-align: left;"><strong>V1.2.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/STM32H745I-DISCO/Templates_LL</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Projects STM32H747I-DISCO</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Board</th>
+<th style="text-align: left;">Project category</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: center;">License</th>
+<th style="text-align: center;">Path</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">STM32H747I-DISCO</td>
+<td style="text-align: left;"><strong>Applications</strong></td>
+<td style="text-align: left;"><strong>V1.2.0</strong></td>
+<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: center;">Projects/STM32H747I-DISCO/Applications</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32H747I-DISCO</td>
+<td style="text-align: left;"><strong>Demonstrations</strong></td>
+<td style="text-align: left;"><strong>V1.2.0</strong></td>
+<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: center;">Projects/STM32H747I-DISCO/Demonstrations</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32H747I-DISCO</td>
+<td style="text-align: left;"><strong>Examples</strong></td>
+<td style="text-align: left;"><strong>V1.2.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/STM32H747I-DISCO/Examples</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32H747I-DISCO</td>
+<td style="text-align: left;"><strong>Templates</strong></td>
+<td style="text-align: left;"><strong>V1.2.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/STM32H747I-DISCO/Templates</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32H747I-DISCO</td>
+<td style="text-align: left;"><strong>LL Templates</strong></td>
+<td style="text-align: left;"><strong>V1.2.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/STM32H747I-DISCO/Templates_LL</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Projects STM32H747I-EVAL</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Board</th>
+<th style="text-align: left;">Project category</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: center;">License</th>
+<th style="text-align: center;">Path</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">STM32H747I-EVAL</td>
+<td style="text-align: left;"><strong>Applications</strong></td>
+<td style="text-align: left;"><strong>V1.2.0</strong></td>
+<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: center;">Projects/STM32H747I-EVAL/Applications</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32H747I-EVAL</td>
+<td style="text-align: left;"><strong>Demonstrations</strong></td>
+<td style="text-align: left;"><strong>V1.2.0</strong></td>
+<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: center;">Projects/STM32H747I-EVAL/Demonstrations</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32H747I-EVAL</td>
+<td style="text-align: left;"><strong>Examples</strong></td>
+<td style="text-align: left;"><strong>V1.2.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/STM32H747I-EVAL/Examples</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32H747I-EVAL</td>
+<td style="text-align: left;"><strong>Templates</strong></td>
+<td style="text-align: left;"><strong>V1.2.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/STM32H747I-EVAL/Templates</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32H747I-EVAL</td>
+<td style="text-align: left;"><strong>LL Templates</strong></td>
+<td style="text-align: left;"><strong>V1.2.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/STM32H747I-EVAL/Templates_LL</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Projects STM32H750B-DK</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Board</th>
+<th style="text-align: left;">Project category</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: center;">License</th>
+<th style="text-align: center;">Path</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">STM32H750B-DK</td>
+<td style="text-align: left;"><strong>Applications</strong></td>
+<td style="text-align: left;"><strong>V1.2.0</strong></td>
+<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: center;">Projects/STM32H750B-DK/Applications</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32H750B-DK</td>
+<td style="text-align: left;"><strong>Demonstrations</strong></td>
+<td style="text-align: left;"><strong>V1.2.0</strong></td>
+<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: center;">Projects/STM32H750B-DK/Demonstrations</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32H750B-DK</td>
+<td style="text-align: left;"><strong>Examples</strong></td>
+<td style="text-align: left;"><strong>V1.2.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/STM32H750B-DK/Examples</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32H750B-DK</td>
+<td style="text-align: left;"><strong>Templates</strong></td>
+<td style="text-align: left;"><strong>V1.2.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/STM32H750B-DK/Templates</td>
+</tr>
+</tbody>
+</table>
+<p>Note: in the tables above, project categories <strong>highlighted</strong> have changed since previous release.</p>
+<h2 id="known-limitations">Known Limitations</h2>
+<ul>
+<li>OpenAMP-based applications (available on STM32H745I-DISCO, STM32H747I-DISCO and STM32H747I-EVAL) come with known compilation warning
+<ul>
+<li>Related to the OpenAmp third party stack</li>
+<li>Related to ST application implementation For warning details please refer to the corresponding applications readme.txt files</li>
+</ul></li>
+<li>STM32H747I-DISCO and STM32H750B-DK TouchGFX demonstrations come with known compilation warnings on SW4STM32 IDE:
+<ul>
+<li>Warnings related to the Libjpeg third party MW</li>
+</ul></li>
+<li><strong>LwIP</strong>-based applications (available on NUCLEO-H743ZI and STM32H743I-EVAL) come with known compilation warning on EWARM V8.30
+<ul>
+<li>Related to the combination of LWIP third party stack and EWARM V8.30</li>
+</ul></li>
+<li><p>No impact of these warnings on the functional behavior</p></li>
+<li><p><strong>Demonstrations</strong> for <strong>STM32H743I-EVAL</strong> and <strong>STM32H747I-EVAL</strong> are provided as binaries only</p></li>
+<li><p><strong>Demonstrations</strong> for <strong>STM32H7B3I-EVAL</strong> is provided as binaries only</p></li>
+<li><p><strong>STM32H7B3I-DK</strong> demonstration is provided with EWARM toolchain only</p></li>
+<li><p>Value Line applications, STM32H7B3I-DK_CodeExecution, are not supported with STM32CubeIDE toolchain</p></li>
+</ul>
+<h2 id="development-toolchains-and-compilers">Development Toolchains and Compilers</h2>
+<ul>
+<li>IAR Embedded Workbench for ARM (EWARM) toolchain V8.30.1 + ST-Link</li>
+<li>RealView Microcontroller Development Kit (MDK-ARM) toolchain V5.27 + ST-Link</li>
+<li>System Workbench for STM32 (SW4STM32) toolchain V2.9.0 + ST-Link</li>
+</ul>
+<h2 id="supported-devices-and-boards">Supported Devices and boards</h2>
+<ul>
+<li>STM32H743/753/747/757/745/755/750/742/<strong>7A3</strong>/<strong>7B3</strong>/<strong>7B0</strong> devices</li>
+<li><strong>NUCLEO-H7A3ZI-Q</strong> rev.D</li>
+<li>NUCLEO-H743ZI rev.B and NUCLEO-H743ZI2 rev.B</li>
+<li>NUCLEO-H745ZI-Q rev.B</li>
+<li><strong>STM32H7B3I-DK</strong> rev.D</li>
+<li><strong>STM32H7B3I-EVAL</strong> rev.D</li>
+<li>STM32H743I-EVAL rev.B/rev.E</li>
+<li>STM32H745I-DISCO rev.B</li>
+<li>STM32H747I-EVAL rev.E</li>
+<li>STM32H747I-DISCO rev.D</li>
+<li>STM32H750B-DISCO rev.B</li>
+</ul>
+<h2 id="backward-compatibility">Backward Compatibility</h2>
+<ul>
+<li>The BSP drivers for This release have been updated with respect to the new BSP archirecture in line with STM32Cube BSP drivers development guidelines (UM2298)
+<ul>
+<li>NUCLEO-H743ZI, NUCLEO-H745ZI-Q, STM32H743I-EVAL, STM32H745I-DISCO, STM32H747I-DISCO, STM32H747I-EVAL and STM32H750B-DK projects has been reworked with respect to these new BSP Drivers</li>
+</ul></li>
+</ul>
+<h2 id="dependencies">Dependencies</h2>
+<ul>
+<li>None</li>
+</ul>
+</div>
+</div>
+<div class="collapse">
+<input type="checkbox" id="collapse-section7" aria-hidden="true"> <label for="collapse-section7" aria-hidden="true"><strong>V1.5.0 / 28-June-2019</strong></label>
+<div>
+<h2 id="main-changes-1">Main Changes</h2>
+<h3 id="maintenance-release">Maintenance release</h3>
+<ul>
+<li>Add <strong>Dual Core</strong> demonstrations source code with preconfigured projects on EWARM, MDK-ARM and SW4STM32 IDEs:
+<ul>
+<li>Source code available for MenuLauncher , TouchGFX and STemWin sub-demonstrations</li>
+<li>EmbeddedWizard sub-demonstration comes with binary format only</li>
+<li>Related boards: STM32H747I-EVAL and STM32H747I-DISCO</li>
+<li>All binaries and Media demonstration files are available from the corresponding board web page in the Binary Delivery section.
+<ul>
+<li>STM32H747I-DISCO : Please refer to <a href="https://www.st.com/en/product/stm32h747i-disco.html">https://www.st.com/en/product/stm32h747i-disco.html</a><br />
+</li>
+<li>STM32H747I-EVAL : Please refer to : <a href="https://www.st.com/en/product/stm32h747i-eval.html">https://www.st.com/en/product/stm32h747i-eval.html</a></li>
+</ul></li>
+</ul></li>
+<li>Add STM32H750B-DK demonstrations source code with preconfigured projects on EWARM, MDK-ARM and SW4STM32 IDEs:
+<ul>
+<li>Source code available for:
+<ul>
+<li>MenuLauncher: execution from internal flash, allowing to select TouchGFX or STemWin sub-demonstration that are executed from external QSPI flash</li>
+<li>TouchGFX sub-demonstration: executing from external QSPI flash<br />
+</li>
+<li>STemWin sub-demonstration:executing from external QSPI flash</li>
+</ul></li>
+<li>All binaries and Media demonstration files are available from the STM32H750B-DK board web page in the Binary Delivery section.
+<ul>
+<li>Please refer to : <a href="https://www.st.com/en/product/stm32h750b-dk.html">https://www.st.com/en/product/stm32h750b-dk.html</a></li>
+</ul></li>
+</ul></li>
+</ul>
+<p><strong>Additional features</strong></p>
+<p><strong>NUCLEO-H743ZI</strong></p>
+<ul>
+<li>Applications
+<ul>
+<li>Update EWARM and MDK-ARM projects configuration to use the STM32CubeH7 CMSIS Core version (v5.4.0) instead of IDE CMSIS Core version</li>
+<li>Fix MPU configuration in applications LwIP/LwIP_HTTP_Server_Netconn_RTOS and EEPROM/EEPROM_Emulation applications:
+<ul>
+<li>Avoid using MPU write through configuration</li>
+<li>Use instead non cacheable configuration for memories regions that are accessed by the Cortex-M7 in write only</li>
+</ul></li>
+</ul></li>
+<li>Demonstrations
+<ul>
+<li>Update EWARM and MDK-ARM projects configuration to use the STM32CubeH7 CMSIS Core version (v5.4.0) instead of IDE CMSIS Core version</li>
+</ul></li>
+<li>HAL Examples
+<ul>
+<li>Update EWARM and MDK-ARM projects configuration to use the STM32CubeH7 CMSIS Core version (v5.4.0) instead of IDE CMSIS Core version</li>
+<li>Update PWR/PWR_STOP_RTC example to add voltage scale configuration after wake-up from stop mode</li>
+<li>Fix button bounce management in GPIO/GPIO_EXTI example</li>
+</ul></li>
+<li>LL Examples
+<ul>
+<li>Update EWARM and MDK-ARM projects configuration to use the STM32CubeH7 CMSIS Core version (v5.4.0) instead of IDE CMSIS Core version</li>
+</ul></li>
+<li>HAL Templates
+<ul>
+<li>Update EWARM and MDK-ARM projects configuration to use the STM32CubeH7 CMSIS Core version (v5.4.0) instead of IDE CMSIS Core version</li>
+<li>Add “USE_SPI_CRC” definition to “stm32h7xx_hal_conf.h”. This define is set to 1 by default and customizable by the HAL user</li>
+</ul></li>
+<li>LL Templates
+<ul>
+<li>Update EWARM and MDK-ARM projects configuration to use the STM32CubeH7 CMSIS Core version (v5.4.0) instead of IDE CMSIS Core version</li>
+</ul></li>
+</ul>
+<p><strong>NUCLEO-H745ZI-Q</strong></p>
+<ul>
+<li>Applications
+<ul>
+<li>Update EWARM and MDK-ARM projects configuration to use the STM32CubeH7 CMSIS Core version (v5.4.0) instead of IDE CMSIS Core version</li>
+</ul></li>
+<li>Demonstrations
+<ul>
+<li>Update EWARM and MDK-ARM projects configuration to use the STM32CubeH7 CMSIS Core version (v5.4.0) instead of IDE CMSIS Core version</li>
+</ul></li>
+<li>HAL Examples
+<ul>
+<li>Update EWARM and MDK-ARM projects configuration to use the STM32CubeH7 CMSIS Core version (v5.4.0) instead of IDE CMSIS Core version</li>
+<li>Update PWR/PWR_STOP_RTC example to add voltage scale configuration after wake-up from stop mode</li>
+</ul></li>
+<li>HAL Templates
+<ul>
+<li>Update EWARM and MDK-ARM projects configuration to use the STM32CubeH7 CMSIS Core version (v5.4.0) instead of IDE CMSIS Core version</li>
+<li>Update Templates/BootCM7_CM4Gated_RAM with configuration of the Cortex-M4 “ART” instruction cache configuration</li>
+<li>Add “USE_SPI_CRC” definition to “stm32h7xx_hal_conf.h”. This define is set to 1 by default and customizable by the HAL user</li>
+</ul></li>
+<li>LL Templates
+<ul>
+<li>Update EWARM and MDK-ARM projects configuration to use the STM32CubeH7 CMSIS Core version (v5.4.0) instead of IDE CMSIS Core version</li>
+</ul></li>
+</ul>
+<p><strong>STM32H743I-EVAL</strong></p>
+<ul>
+<li>Applications
+<ul>
+<li>Update EWARM and MDK-ARM projects configuration to use the STM32CubeH7 CMSIS Core version (v5.4.0) instead of IDE CMSIS Core version</li>
+<li>Improve IAP/IAP_Main application regarding the FLASH lock/unlock settings</li>
+<li>Update USB Device applications to support USB device MW library v2.5.3</li>
+<li>Update LwIP, USB Device, USB Host, Fatfs, MbedTLS and EEPROM_Emulation applications to:
+<ul>
+<li>Avoid using MPU write through configuration</li>
+<li>Use instead non cacheable configuration for memories regions that are accessed by the Cortex-M7 in write only</li>
+</ul></li>
+</ul></li>
+<li>Demonstrations
+<ul>
+<li>None</li>
+</ul></li>
+<li>HAL Examples
+<ul>
+<li>Update EWARM and MDK-ARM projects configuration to use the STM32CubeH7 CMSIS Core version (v5.4.0) instead of IDE CMSIS Core version</li>
+<li>Update PWR/PWR_STOP_RTC example to add voltage scale configuration after wake-up from stop mode</li>
+<li>Update FLASH/FLASH_WriteProtection example to avoid configuring the MPU in write through for the SDRAM</li>
+<li>Update SD/SD_ReadWrite_DMA , SD/SD_ReadWrite_IT and SD/SD_ReadWrite_DMA_HS examples to avoid waiting on card ready inside the Rx/Tx callbacks</li>
+</ul></li>
+<li>HAL Templates
+<ul>
+<li>Update EWARM and MDK-ARM projects configuration to use the STM32CubeH7 CMSIS Core version (v5.4.0) instead of IDE CMSIS Core version</li>
+<li>Add “USE_SPI_CRC” definition to “stm32h7xx_hal_conf.h”. This define is set to 1 by default and customizable by the HAL user</li>
+<li>Update EWARM and MDK-ARM projects configuration to use the STM32CubeH7 CMSIS Core version (v5.4.0) instead of IDE CMSIS Core version</li>
+</ul></li>
+<li>LL Templates
+<ul>
+<li>Update EWARM and MDK-ARM projects configuration to use the STM32CubeH7 CMSIS Core version (v5.4.0) instead of IDE CMSIS Core version</li>
+</ul></li>
+</ul>
+<p><strong>STM32H745I-DISCO</strong></p>
+<ul>
+<li>Applications
+<ul>
+<li>Update EWARM and MDK-ARM projects configuration to use the STM32CubeH7 CMSIS Core version (v5.4.0) instead of IDE CMSIS Core version</li>
+<li>Update USB Device applications to support USB device MW library v2.5.3</li>
+<li>Update USB Device applications to:
+<ul>
+<li>Avoid using MPU write through configuration</li>
+<li>Use instead non cacheable configuration for memories regions that are accessed by the Cortex-M7 in write only</li>
+</ul></li>
+</ul></li>
+<li>Demonstrations
+<ul>
+<li>Update EWARM and MDK-ARM projects configuration to use the STM32CubeH7 CMSIS Core version (v5.4.0) instead of IDE CMSIS Core version</li>
+</ul></li>
+<li>HAL Examples
+<ul>
+<li>Update EWARM and MDK-ARM projects configuration to use the STM32CubeH7 CMSIS Core version (v5.4.0) instead of IDE CMSIS Core version</li>
+<li>Update PWR/PWR_STOP_RTC example to add voltage scale configuration after wake-up from stop mode</li>
+<li>Update FLASH/FLASH_CoreConfiguration example to avoid configuring the MPU in write through for the SDRAM</li>
+<li>Update MMC/MMC_ReadWrite_DMA and MMC/MMC_ReadWrite_IT examples to avoid waiting on card ready inside the Rx/Tx callbacks</li>
+</ul></li>
+<li>HAL Templates
+<ul>
+<li>Update EWARM and MDK-ARM projects configuration to use the STM32CubeH7 CMSIS Core version (v5.4.0) instead of IDE CMSIS Core version</li>
+<li>Update Templates/BootCM7_CM4Gated_RAM with configuration of the Cortex-M4 “ART” instruction cache configuration</li>
+<li>Add “USE_SPI_CRC” definition to “stm32h7xx_hal_conf.h”. This define is set to 1 by default and customizable by the HAL user</li>
+</ul></li>
+<li>LL Templates
+<ul>
+<li>Update EWARM and MDK-ARM projects configuration to use the STM32CubeH7 CMSIS Core version (v5.4.0) instead of IDE CMSIS Core version</li>
+</ul></li>
+</ul>
+<p><strong>STM32H747I-DISCO</strong></p>
+<ul>
+<li>Applications
+<ul>
+<li>Update EWARM and MDK-ARM projects configuration to use the STM32CubeH7 CMSIS Core version (v5.4.0) instead of IDE CMSIS Core version</li>
+<li>Update USB Device applications to support USB device MW library v2.5.3</li>
+<li>Update USB Device applications to:
+<ul>
+<li>Avoid using MPU write through configuration</li>
+<li>Use instead non cacheable configuration for memories regions that are accessed by the Cortex-M7 in write only</li>
+</ul></li>
+</ul></li>
+<li>Demonstrations
+<ul>
+<li>Add STM32H747I-DISCO demonstration source code:
+<ul>
+<li>MenuLauncher</li>
+<li>TouchGFX sub-demonstration</li>
+<li>STemWin sub-demonstration</li>
+<li>extra_modules : Cortex-M4 source code for dual core STemWin submodule</li>
+</ul></li>
+<li>Note:
+<ul>
+<li>EmbeddedWizard sub-demonstration comes with binary format only</li>
+<li>All binaries and Media demonstration files are available from the STM32H747I-DISCO page in the Binary Delivery section.
+<ul>
+<li>Please refer to : <a href="https://www.st.com/en/product/stm32h747i-disco.html">https://www.st.com/en/product/stm32h747i-disco.html</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li>HAL Examples
+<ul>
+<li>Update EWARM and MDK-ARM projects configuration to use the STM32CubeH7 CMSIS Core version (v5.4.0) instead of IDE CMSIS Core version</li>
+<li>Update PWR/PWR_STOP_RTC example to add voltage scale configuration after wake-up from stop mode</li>
+<li>Update PWR/PWR_Domain3SystemControl example to avoid configuring the MPU in write through for the D3 SRAM
+<ul>
+<li>D3 SRAM is configured in Non Cacheable to ensure cache coherency between the Cortex-M7 and the BDMA</li>
+</ul></li>
+</ul></li>
+<li>HAL Templates
+<ul>
+<li>Update EWARM and MDK-ARM projects configuration to use the STM32CubeH7 CMSIS Core version (v5.4.0) instead of IDE CMSIS Core version</li>
+<li>Update Templates/BootCM7_CM4Gated_RAM with configuration of the Cortex-M4 “ART” instruction cache configuration</li>
+<li>Add “USE_SPI_CRC” definition to “stm32h7xx_hal_conf.h”. This define is set to 1 by default and customizable by the HAL user</li>
+</ul></li>
+<li>LL Templates
+<ul>
+<li>Update EWARM and MDK-ARM projects configuration to use the STM32CubeH7 CMSIS Core version (v5.4.0) instead of IDE CMSIS Core version</li>
+</ul></li>
+</ul>
+<p><strong>STM32H747I-EVAL</strong></p>
+<ul>
+<li>Applications
+<ul>
+<li>Update EWARM and MDK-ARM projects configuration to use the STM32CubeH7 CMSIS Core version (v5.4.0) instead of IDE CMSIS Core version</li>
+<li>Update USB Device applications to support USB device MW library v2.5.3</li>
+<li>Update USB Device, USB Host and Fatfs applications to:
+<ul>
+<li>Avoid using MPU write through configuration</li>
+<li>Use instead non cacheable configuration for memories regions that are accessed by the Cortex-M7 in write only</li>
+</ul></li>
+</ul></li>
+<li>Demonstrations
+<ul>
+<li>Add STM32H747I-EVAL demonstration source code:
+<ul>
+<li>MenuLauncher</li>
+<li>TouchGFX sub-demonstration</li>
+<li>STemWin sub-demonstration</li>
+<li>extra_modules : Cortex-M4 source code for dual core STemWin submodule</li>
+</ul></li>
+<li>Note:
+<ul>
+<li>EmbeddedWizard sub-demonstration comes with binary format only</li>
+<li>All binaries and Media demonstration files are available from the STM32H747I-EVAL page in the Binary Delivery section.
+<ul>
+<li>Please refer to : https://www.st.com/en/product/stm32h747i-eval.html</li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li>HAL Examples
+<ul>
+<li>Update EWARM and MDK-ARM projects configuration to use the STM32CubeH7 CMSIS Core version (v5.4.0) instead of IDE CMSIS Core version</li>
+<li>Update PWR/PWR_STOP_RTC example to add voltage scale configuration after wake-up from stop mode</li>
+<li>Update FLASH/FLASH_CoreConfiguration example to avoid configuring the MPU in write through for the AXI SRAM</li>
+</ul></li>
+<li>HAL Templates
+<ul>
+<li>Update EWARM and MDK-ARM projects configuration to use the STM32CubeH7 CMSIS Core version (v5.4.0) instead of IDE CMSIS Core version</li>
+<li>Update Templates/BootCM7_CM4Gated_RAM with configuration of the Cortex-M4 “ART” instruction cache configuration</li>
+<li>Add “USE_SPI_CRC” definition to “stm32h7xx_hal_conf.h”. This define is set to 1 by default and customizable by the HAL user</li>
+</ul></li>
+<li>LL Templates
+<ul>
+<li>Update EWARM and MDK-ARM projects configuration to use the STM32CubeH7 CMSIS Core version (v5.4.0) instead of IDE CMSIS Core version</li>
+</ul></li>
+</ul>
+<p><strong>STM32H750B-DK</strong></p>
+<ul>
+<li>Applications
+<ul>
+<li>Update EWARM and MDK-ARM projects configuration to use the STM32CubeH7 CMSIS Core version (v5.4.0) instead of IDE CMSIS Core version</li>
+<li>Update USB Device applications to support USB device MW library v2.5.3</li>
+</ul></li>
+<li>Demonstrations
+<ul>
+<li>Add STM32H750B-DK demonstration source code:
+<ul>
+<li>MenuLauncher</li>
+<li>TouchGFX sub-demonstration</li>
+<li>STemWin sub-demonstration</li>
+</ul></li>
+<li>Note:
+<ul>
+<li>The binary and Media demonstration files are available from the STM32H750B-DK page in the Binary Delivery section.
+<ul>
+<li>Please refer to : <a href="https://www.st.com/en/product/stm32h750b-dk.html">https://www.st.com/en/product/stm32h750b-dk.html</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li>HAL Examples
+<ul>
+<li>Update EWARM and MDK-ARM projects configuration to use the STM32CubeH7 CMSIS Core version (v5.4.0) instead of IDE CMSIS Core version</li>
+</ul></li>
+<li>HAL Templates
+<ul>
+<li>Update EWARM and MDK-ARM projects configuration to use the STM32CubeH7 CMSIS Core version (v5.4.0) instead of IDE CMSIS Core version</li>
+<li>Add “USE_SPI_CRC” definition to “stm32h7xx_hal_conf.h”. This define is set to 1 by default and customizable by the HAL user ## Contents</li>
+</ul></li>
+</ul>
+<h3 id="projects-1">Projects</h3>
+<table>
+<caption>Projects NUCLEO-H743ZI</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Board</th>
+<th style="text-align: left;">Project category</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: center;">License</th>
+<th style="text-align: center;">Path</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">NUCLEO-H743ZI</td>
+<td style="text-align: left;"><strong>Applications</strong></td>
+<td style="text-align: left;"><strong>V1.4.0</strong></td>
+<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: center;">Projects/NUCLEO-H743ZI/Applications</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NUCLEO-H743ZI</td>
+<td style="text-align: left;"><strong>Demonstrations</strong></td>
+<td style="text-align: left;"><strong>V1.4.0</strong></td>
+<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: center;">Projects/NUCLEO-H743ZI/Demonstrations</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">NUCLEO-H743ZI</td>
+<td style="text-align: left;"><strong>Examples</strong></td>
+<td style="text-align: left;"><strong>V1.4.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/NUCLEO-H743ZI/Examples</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NUCLEO-H743ZI</td>
+<td style="text-align: left;"><strong>LL Examples</strong></td>
+<td style="text-align: left;"><strong>V1.1.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/NUCLEO-H743ZI/Examples_LL</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">NUCLEO-H743ZI</td>
+<td style="text-align: left;"><strong>Templates</strong></td>
+<td style="text-align: left;"><strong>V1.4.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/NUCLEO-H743ZI/Templates</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NUCLEO-H743ZI</td>
+<td style="text-align: left;"><strong>LL Templates</strong></td>
+<td style="text-align: left;"><strong>V1.1.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/NUCLEO-H743ZI/Templates_LL</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Projects NUCLEO-H745ZI-Q</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Board</th>
+<th style="text-align: left;">Project category</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: center;">License</th>
+<th style="text-align: center;">Path</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">NUCLEO-H745ZI-Q</td>
+<td style="text-align: left;"><strong>Applications</strong></td>
+<td style="text-align: left;"><strong>V1.1.0</strong></td>
+<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: center;">Projects/NUCLEO-H745ZI-Q/Applications</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NUCLEO-H745ZI-Q</td>
+<td style="text-align: left;"><strong>Demonstrations</strong></td>
+<td style="text-align: left;"><strong>V1.1.0</strong></td>
+<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: center;">Projects/NUCLEO-H745ZI-Q/Demonstrations</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">NUCLEO-H745ZI-Q</td>
+<td style="text-align: left;"><strong>Examples</strong></td>
+<td style="text-align: left;"><strong>V1.1.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/NUCLEO-H745ZI-Q/Examples</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NUCLEO-H745ZI-Q</td>
+<td style="text-align: left;"><strong>Templates</strong></td>
+<td style="text-align: left;"><strong>V1.1.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/NUCLEO-H745ZI-Q/Templates</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">NUCLEO-H745ZI-Q</td>
+<td style="text-align: left;"><strong>LL Templates</strong></td>
+<td style="text-align: left;"><strong>V1.1.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/NUCLEO-H745ZI-Q/Templates_LL</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Projects STM32H743I-EVAL</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Board</th>
+<th style="text-align: left;">Project category</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: center;">License</th>
+<th style="text-align: center;">Path</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">STM32H743I-EVAL</td>
+<td style="text-align: left;"><strong>Applications</strong></td>
+<td style="text-align: left;"><strong>V1.5.0</strong></td>
+<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: center;">Projects/STM32H743I-EVAL/Applications</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32H743I-EVAL</td>
+<td style="text-align: left;">Demonstrations</td>
+<td style="text-align: left;">V1.3.0</td>
+<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: center;">Projects/STM32H743I-EVAL/Demonstrations</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32H743I-EVAL</td>
+<td style="text-align: left;"><strong>Examples</strong></td>
+<td style="text-align: left;"><strong>V1.4.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/STM32H743I-EVAL/Examples</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32H743I-EVAL</td>
+<td style="text-align: left;"><strong>Templates</strong></td>
+<td style="text-align: left;"><strong>V1.4.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/STM32H743I-EVAL/Templates</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32H743I-EVAL</td>
+<td style="text-align: left;"><strong>LL Templates</strong></td>
+<td style="text-align: left;"><strong>V1.1.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/STM32H743I-EVAL/Templates_LL</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Projects STM32H745I-DISCO</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Board</th>
+<th style="text-align: left;">Project category</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: center;">License</th>
+<th style="text-align: center;">Path</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">STM32H745I-DISCO</td>
+<td style="text-align: left;"><strong>Applications</strong></td>
+<td style="text-align: left;"><strong>V1.1.0</strong></td>
+<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: center;">Projects/STM32H745I-DISCO/Applications</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32H745I-DISCO</td>
+<td style="text-align: left;"><strong>Demonstrations</strong></td>
+<td style="text-align: left;"><strong>V1.1.0</strong></td>
+<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: center;">Projects/STM32H745I-DISCO/Demonstrations</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32H745I-DISCO</td>
+<td style="text-align: left;"><strong>Examples</strong></td>
+<td style="text-align: left;"><strong>V1.1.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/STM32H745I-DISCO/Examples</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32H745I-DISCO</td>
+<td style="text-align: left;"><strong>Templates</strong></td>
+<td style="text-align: left;"><strong>V1.1.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/STM32H745I-DISCO/Templates</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32H745I-DISCO</td>
+<td style="text-align: left;"><strong>LL Templates</strong></td>
+<td style="text-align: left;"><strong>V1.1.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/STM32H745I-DISCO/Templates_LL</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Projects STM32H747I-DISCO</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Board</th>
+<th style="text-align: left;">Project category</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: center;">License</th>
+<th style="text-align: center;">Path</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">STM32H747I-DISCO</td>
+<td style="text-align: left;"><strong>Applications</strong></td>
+<td style="text-align: left;"><strong>V1.1.0</strong></td>
+<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: center;">Projects/STM32H747I-DISCO/Applications</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32H747I-DISCO</td>
+<td style="text-align: left;"><strong>Demonstrations</strong></td>
+<td style="text-align: left;"><strong>V1.1.0</strong></td>
+<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: center;">Projects/STM32H747I-DISCO/Demonstrations</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32H747I-DISCO</td>
+<td style="text-align: left;"><strong>Examples</strong></td>
+<td style="text-align: left;"><strong>V1.1.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/STM32H747I-DISCO/Examples</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32H747I-DISCO</td>
+<td style="text-align: left;"><strong>Templates</strong></td>
+<td style="text-align: left;"><strong>V1.1.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/STM32H747I-DISCO/Templates</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32H747I-DISCO</td>
+<td style="text-align: left;"><strong>LL Templates</strong></td>
+<td style="text-align: left;"><strong>V1.1.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/STM32H747I-DISCO/Templates_LL</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Projects STM32H747I-EVAL</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Board</th>
+<th style="text-align: left;">Project category</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: center;">License</th>
+<th style="text-align: center;">Path</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">STM32H747I-EVAL</td>
+<td style="text-align: left;"><strong>Applications</strong></td>
+<td style="text-align: left;"><strong>V1.1.0</strong></td>
+<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: center;">Projects/STM32H747I-EVAL/Applications</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32H747I-EVAL</td>
+<td style="text-align: left;"><strong>Demonstrations</strong></td>
+<td style="text-align: left;"><strong>V1.1.0</strong></td>
+<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: center;">Projects/STM32H747I-EVAL/Demonstrations</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32H747I-EVAL</td>
+<td style="text-align: left;"><strong>Examples</strong></td>
+<td style="text-align: left;"><strong>V1.1.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/STM32H747I-EVAL/Examples</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32H747I-EVAL</td>
+<td style="text-align: left;"><strong>Templates</strong></td>
+<td style="text-align: left;"><strong>V1.1.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/STM32H747I-EVAL/Templates</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32H747I-EVAL</td>
+<td style="text-align: left;"><strong>LL Templates</strong></td>
+<td style="text-align: left;"><strong>V1.1.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/STM32H747I-EVAL/Templates_LL</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Projects STM32H750B-DK</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Board</th>
+<th style="text-align: left;">Project category</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: center;">License</th>
+<th style="text-align: center;">Path</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">STM32H750B-DK</td>
+<td style="text-align: left;"><strong>Applications</strong></td>
+<td style="text-align: left;"><strong>V1.1.0</strong></td>
+<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: center;">Projects/STM32H750B-DK/Applications</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32H750B-DK</td>
+<td style="text-align: left;"><strong>Demonstrations</strong></td>
+<td style="text-align: left;"><strong>V1.1.0</strong></td>
+<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: center;">Projects/STM32H750B-DK/Demonstrations</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32H750B-DK</td>
+<td style="text-align: left;"><strong>Examples</strong></td>
+<td style="text-align: left;"><strong>V1.1.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/STM32H750B-DK/Examples</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32H750B-DK</td>
+<td style="text-align: left;"><strong>Templates</strong></td>
+<td style="text-align: left;"><strong>V1.1.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/STM32H750B-DK/Templates</td>
+</tr>
+</tbody>
+</table>
+<p>Note: in the tables above, project categories <strong>highlighted</strong> have changed since previous release.</p>
+<h2 id="known-limitations-1">Known Limitations</h2>
+<ul>
+<li>OpenAMP-based applications (available on STM32H745I-DISCO, STM32H747I-DISCO and STM32H747I-EVAL) come with known compilation warning
+<ul>
+<li>Related to the OpenAmp third party stack</li>
+<li>Related to ST application implementation For warning details please refer to the corresponding applications readme.txt files</li>
+</ul></li>
+<li>STM32H750B-DK TouchGFX demonstration comes with known compilation warnings on MDK-ARM IDE:
+<ul>
+<li>Warnings related to the TouchGFX MW file RepeatButtonTrigger.hpp :
+<ul>
+<li>A non-virtual member function of a derived class hides a virtual member of a parent class</li>
+</ul></li>
+<li>These warnings will be fixed in th next TouchGFX MW version</li>
+</ul></li>
+<li>STM32H747I-EVAL, STM32H747I-DISCO and STM32H750B-DK TouchGFX demonstrations come with known compilation warnings on SW4STM32 IDE:
+<ul>
+<li>Warnings related to the Libjpeg third party MW</li>
+</ul></li>
+<li><p>No impact of these warnings on the functional behavior</p></li>
+<li>STM32H743I-EVAL TouchGFX sub-demonstration is provided as binaries only.
+<ul>
+<li>The source code for this demonstration will be available in next STM32CubeH7 releases</li>
+</ul></li>
+</ul>
+<h2 id="development-toolchains-and-compilers-1">Development Toolchains and Compilers</h2>
+<ul>
+<li>IAR Embedded Workbench for ARM (EWARM) toolchain V8.20.2 + ST-Link</li>
+<li>RealView Microcontroller Development Kit (MDK-ARM) toolchain V5.25 + ST-Link</li>
+<li>System Workbench for STM32 (SW4STM32) toolchain V2.9.0 + ST-Link</li>
+</ul>
+<h2 id="supported-devices-and-boards-1">Supported Devices and boards</h2>
+<ul>
+<li>STM32H743/753/747/757/745/755/750/742 devices</li>
+<li>NUCLEO-H743ZI rev.B and NUCLEO-H743ZI2 rev.B</li>
+<li>NUCLEO-H745ZI-Q rev.B</li>
+<li>STM32H743I-EVAL rev.B/rev.E</li>
+<li>STM32H745I-DISCO rev.B</li>
+<li>STM32H747I-EVAL rev.E</li>
+<li>STM32H747I-DISCO rev.D</li>
+<li>STM32H750B-DISCO rev.B</li>
+</ul>
+<h2 id="backward-compatibility-1">Backward Compatibility</h2>
+<ul>
+<li>None</li>
+</ul>
+<h2 id="dependencies-1">Dependencies</h2>
+<ul>
+<li>None</li>
+</ul>
+</div>
+</div>
+<div class="collapse">
+<input type="checkbox" id="collapse-section6" aria-hidden="true"> <label for="collapse-section6" aria-hidden="true"><strong>V1.4.0 / 05-April-2019</strong></label>
+<div>
+<h2 id="main-changes-2">Main Changes</h2>
+<ul>
+<li>First official release to support STM32H7 <strong>Rev.V</strong> all lines:
+<ul>
+<li><strong>Dual Core</strong> lines: <strong>STM32H745xx/H755xx/H747xx/H757xx</strong></li>
+<li><strong>Value line</strong>: STM32H750xx</li>
+<li><strong>New single core line</strong>: <strong>STM32H742xx</strong> (with reduced internal RAM and without LTDC, JPEG peripherals)</li>
+<li>Legacy single core lines: STM32H743/H753</li>
+</ul></li>
+<li><p>Add support of the STM32H750B-DISCO value line discovery board. several examples applications and demonstrations are available to show how to boot from internal flash, configure the external memories and jump to user application (located on an external memory)</p>
+<ul>
+<li>Add <strong>Dual Core</strong> boards support:
+<ul>
+<li>Boards
+<ul>
+<li><strong>NUCLEO-H745ZI-Q</strong> : new <strong>Dual Core</strong> STM32H745xx nucleo board support with several examples, application and a demonstration</li>
+<li><strong>STM32H745I-DISCO</strong> : new <strong>Dual Core</strong> STM32H745xx discovery board support with several examples, application and a demonstration</li>
+<li><strong>STM32H747I-DISCO</strong> : new <strong>Dual Core</strong> STM32H747xx discovery board support with several examples, application and a demonstration</li>
+<li><strong>STM32H747I-EVAL</strong> : new <strong>Dual Core</strong> STM32H747xx evaluation board support with several examples, application and a demonstration</li>
+</ul></li>
+<li>Templates
+<ul>
+<li>Four template projects available with different boot scenarios (Cortex-M7 and Cortex-M4)
+<ul>
+<li>BootCM4_CM7:
+<ul>
+<li>Cortex-M7 and Cortex-M4 running from the flash (each from a bank)</li>
+<li>System configuration performed by the Cortex-M7</li>
+<li>Cortex-M4 goes to STOP after boot, then woken-up by Cortex-M7 using a HW semaphore</li>
+</ul></li>
+<li>BootCM7_CM4Gated:
+<ul>
+<li>Cortex-M4 boot is gated using Flash option bytes</li>
+<li>Cortex-M7 and Cortex-M4 running from the flash (each from a bank)</li>
+<li>Cortex-M7 boots , performs the System configuration then enable the Cortex-M4 boot using RCC</li>
+</ul></li>
+<li>BootCM4_CM7Gated:
+<ul>
+<li>Cortex-M7 boot is gated using Flash option bytes</li>
+<li>Cortex-M7 and Cortex-M4 running from the flash (each from a bank)</li>
+<li>Cortex-M4 boots , performs the System configuration then enable the Cortex-M7 boot using RCC</li>
+</ul></li>
+<li>BootCM7_CM4Gated_RAM:
+<ul>
+<li>Cortex-M4 boot is gated using Flash option bytes</li>
+<li>Cortex-M7 running from the flash (Bank1), Cortex-M4 running from the D2 domain SRAM</li>
+<li>Cortex-M7 boots:
+<ul>
+<li>Performs the system configuration</li>
+<li>Loads the Cortex-M4 code into the D2 SRAM</li>
+<li>Changes the Cortex-M4 boot address then enable Cortex-M4 boot (using the RCC)</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li>Templates_LL project:
+<ul>
+<li>One <strong>Dual Core</strong> LL template project available. Same approach as BootCM4_CM7 HAL template by mean of LL implementation</li>
+</ul></li>
+<li>Examples
+<ul>
+<li>New HAL examples for <strong>Dual Core</strong> lines mainly around peripherals FLASH, GPIO, HSEM, PWR, I2C, RTC</li>
+<li>New HAL examples for LCD DSI running STM32H747I-DISCO and STM32H747I-EVAL</li>
+</ul></li>
+<li>Applications
+<ul>
+<li>FPU_Fractal application showing how to configure the system clock to 480MHz with voltage scaling zero (VOS0)</li>
+<li>New FreeRTOS application with two FeeRTOS instances one for each core and a HW semaphore signaling between them</li>
+<li>New OpenAmp applications:
+<ul>
+<li>OpenAMP_PingPong : OS less application with messaging between Cortex-M7 and Cortex-M4 based on OpenAmp</li>
+<li>OpenAMP_RTOS_PingPong : FreeRTOS application with messaging between Cortex-M7 and Cortex-M4 based on OpenAmp</li>
+</ul></li>
+<li>New resource manager applications: Two applications showing how to safely share an UART resource between Cortex-M7 and Cortex-M4</li>
+</ul></li>
+<li>Demonstrations
+<ul>
+<li>STM32H747I-DISCO/STM32H747I-EVAL
+<ul>
+<li>Three sub-demonstrations:
+<ul>
+<li>STemWin based sub-demo</li>
+<li>TouchGFX based sub-demo</li>
+<li>Embedded Wizard based sub-demo</li>
+</ul></li>
+</ul></li>
+<li>STM32H745I-DISCO
+<ul>
+<li>Two sub-demonstrations:
+<ul>
+<li>Oscilloscope sub-demo</li>
+<li>EEMBC(R) CoreMark(R) sub-demo</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li><strong>STM32H750B-DK</strong> : new Value Line STM32H750xx discovery board support with several examples, application and a demonstration
+<ul>
+<li>Templates
+<ul>
+<li>ExtMem_Boot : Reference Boot code executing from internal flash allowing to configure external memories then jump to user application located on an external memory. two possible use cases are available: XiP and BootROM
+<ul>
+<li>XiP use case is intended for eXecution in Place from external flash memory (QSPI)
+<ul>
+<li>In this case, the user application code shall be linked with the target execution memory address (External QSPI Flash)</li>
+</ul></li>
+<li>BootROM use case is intended to demonstrate how to boot from internal flash, configure the external SDRAM memory, copy user application binary from the SDMMC flash or from QSPI-Flash to the external SDRAM then jump to the user application
+<ul>
+<li>In this case, the user application code shall be linked with the target execution memory address (external SDRAM)</li>
+</ul></li>
+</ul></li>
+<li>Template_Project : Typical template with execution from external memory. Different configurations are available respecting the possibilities offered by the external memory boot:
+<ul>
+<li>XiP From QSPI, Data on Internal SRAM</li>
+<li>XiP From QSPI, Data on External SDRAM</li>
+<li>BootROM : Execution From External SDRAM , Data on Internal SRAM</li>
+</ul></li>
+</ul></li>
+<li>Examples
+<ul>
+<li>Different examples for different peripherals are available using the following configuration : XiP From QSPI, Data on Internal SRAM</li>
+<li>GPIO example comes with all the possible configurations (same as for Template project)</li>
+<li>QSPI example running from internal flash showing how to read and write from the QSPI flash</li>
+</ul></li>
+<li>Applications
+<ul>
+<li>Different applications are available(Display, USB, STemWin …) using the following configuration : XiP From QSPI, Data on Internal SRAM</li>
+<li>FreeRTOS applications come with all the possible configurations (same as for Template project)</li>
+</ul></li>
+<li>Demonstrations
+<ul>
+<li>Two sub-demonstrations with XiP From QSPI:
+<ul>
+<li>STemWin based sub-demo: audio/video and graphical modules</li>
+<li>TouchGFX based sub-demo: video, washing machine, and graphical modules</li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li><strong>STM32H743I-EVAL</strong>:
+<ul>
+<li>Rename project folder to align with the board RPNs</li>
+<li>General updates and enhancements implementation</li>
+<li>Update FPU_Fractal application to show how to configure the system clock to 480MHz with voltage scaling zero (VOS0)</li>
+<li>Add <strong>Templates_LL</strong> project</li>
+</ul></li>
+<li><strong>NUCLEO-H743ZI</strong>:
+<ul>
+<li>Rename project folder to align with the board RPNs</li>
+<li>General updates and enhancements implementation</li>
+<li>Update projects to support <strong>NUCLEO-H743ZI2</strong> nucleo (MB1364) and <strong>NUCLEO-H743ZI</strong> (MB1137)</li>
+<li>Add dedicated example under PWR_VOS0_480MHZ to show how to use VOS0 with 480MHz system clock</li>
+<li>Add <strong>Templates_LL</strong> project</li>
+<li>Add <strong>Examples_LL</strong> projects: for COMP, DAC, RTC and SPI peripherals</li>
+</ul></li>
+</ul></li>
+</ul>
+<p><strong>Additional features</strong></p>
+<p><strong>NUCLEO-H743ZI</strong></p>
+<ul>
+<li>Applications
+<ul>
+<li>Rename root folder to NUCLEO-H743ZI to align with nucleo RPN</li>
+<li>General updates to fix known defects and enhancements implementation</li>
+<li>Update to support NUCLEO-H743ZI2(MB1364) and NUCLEO-H743ZI(MB1137):
+<ul>
+<li>By default NUCLEO-H743ZI2 is used thanks to pre-processor define USE_STM32H7XX_NUCLEO_144_MB1364</li>
+</ul></li>
+<li>Update startup_stm32h743xx.s (EWARM, MDK-ARM and SW4STM32) to align with the template startup file</li>
+<li>Update stm32h7xx_hal_conf.h to align with the template</li>
+<li>Update system_stm32h7xx.c to align with the template</li>
+<li>Align applications to the latest FreeRTOS version FreeRTOS_v10.0.1</li>
+<li>Update FreeRTOS_MPU application to add stream_buffer.c file to project source file</li>
+<li>Update all applications to add PLLFRACN (PLL Fractional divider) in SystemClock_Config() Function.</li>
+<li>Update stm32h7xx_hal_conf.h header files in all applications to add HAL EXTI and RAMECC drives</li>
+<li>Remove non-necessary cast on uint64_t for 3rd parameter when calling HAL_FLASH_Program() API:
+<ul>
+<li>Impacted applications : EEPROM</li>
+</ul></li>
+<li>Update LwIP LwIP_HTTP_Server_Netconn_RTOS application to enhance performances when receiving mass TCPIP packets:
+<ul>
+<li>Impacted files : ethernetif.c and lwipopts.h</li>
+</ul></li>
+</ul></li>
+<li>Demonstrations
+<ul>
+<li>Rename root folder to NUCLEO-H743ZI to align with nucleo RPN</li>
+<li>General updates to fix known defects and enhancements implementation</li>
+<li>Update to support NUCLEO-H743ZI2(MB1364) and NUCLEO-H743ZI(MB1137):
+<ul>
+<li>By default NUCLEO-H743ZI2 is used thanks to pre-processor define USE_STM32H7XX_NUCLEO_144_MB1364</li>
+</ul></li>
+<li>Update startup_stm32h743xx.s (EWARM, MDK-ARM and SW4STM32) to align with the template startup file</li>
+<li>Update stm32h7xx_hal_conf.h to align with the template and add HAL EXTI and RAMECC drives</li>
+<li>Update system_stm32h7xx.c to align with the template</li>
+</ul></li>
+<li>HAL Examples
+<ul>
+<li>Rename root folder to NUCLEO-H743ZI to align with nucleo RPN</li>
+<li>General updates to fix known defects and enhancements implementation</li>
+<li>Update to support NUCLEO-H743ZI2(MB1364) and NUCLEO-H743ZI(MB1137):
+<ul>
+<li>By default NUCLEO-H743ZI2 is used thanks to pre-processor define USE_STM32H7XX_NUCLEO_144_MB1364</li>
+</ul></li>
+<li>Add PWR example to show how to configure the system clock to 480MHz with voltage scaling zero</li>
+<li>Update startup_stm32h743xx.s (EWARM, MDK-ARM and SW4STM32) to align with the template startup file</li>
+<li>Update stm32h7xx_hal_conf.h to align with the template and add HAL EXTI and RAMECC drives</li>
+<li>Update system_stm32h7xx.c to align with the template</li>
+<li>Add stm32h7xx_hal_usart_ex.c to projects where stm32h7xx_hal_usart.c is already used</li>
+<li>Update USART and UART examples : fix compilation errors due to USART/ UART drivers alignment</li>
+<li>Update readme short description for examples : GPIO, RCC, IWDG, HSEM, WWDG, RTC, FLASH, CRC, RNG</li>
+<li>Update DMA/DMAMUX examples to :
+<ul>
+<li>Use HAL_DMA_RegisterCallback instead of direct setting of the DMA callbacks</li>
+<li>Fix SW4STM32 linker and startup files in order to correctly initialize global variables located on D3 domain RAM</li>
+</ul></li>
+<li>Fix RTC examples:
+<ul>
+<li>All examples :
+<ul>
+<li>Fix RTC_SYNCH_PREDIV value: use 0xF9 when LSI is the RTC source clock for better granularity</li>
+</ul></li>
+<li>RTC_Tamper example: add a reset of the TamperStatus flag after initializing the backup registers</li>
+<li>RTC_Alarm example: AlarmTime.SubSeconds filed of the RTC_AlarmTypeDef structure set to 0xF9 to remove any additional delay (Since RTC_SYNCH_PREDIV is set to 0xF9)</li>
+</ul></li>
+<li>Update ADC and HRTIM examples: remove ADC BoostMode init parameter (following HAL ADC driver update)</li>
+<li>Fix ADC clock configuration in ADC and HRTIM examples :
+<ul>
+<li>Use peripheral clock (per_ck) as ADC kernel source clock</li>
+<li>The per_ck clock is set to HSI internal clock (64 MHz)</li>
+<li>Input ADC clock divided by 2 giving an ADC clock of (64MHz / 2) = 32MHz which is within the ADC specification</li>
+</ul></li>
+<li>Add HAL examples HAL_TimeBase_TIM, HAL_TimeBase_RTC_WKUP and HAL_TimeBase_RTC_ALARM- LL Examples</li>
+</ul></li>
+<li>LL Examples
+<ul>
+<li>First official release</li>
+</ul></li>
+<li>HAL Templates
+<ul>
+<li>Rename root folder to NUCLEO-H743ZI to align with nucleo RPN</li>
+<li>General updates to fix known defects and enhancements implementation</li>
+<li>Update to support NUCLEO-H743ZI2(MB1364) and NUCLEO-H743ZI(MB1137):
+<ul>
+<li>By default NUCLEO-H743ZI2 is used thanks to pre-processor define USE_STM32H7XX_NUCLEO_144_MB1364</li>
+</ul></li>
+<li>Update startup_stm32h743xx.s (EWARM, MDK-ARM and SW4STM32) to align with the template startup file</li>
+<li>Update stm32h7xx_hal_conf.h to align with the template and add HAL EXTI and RAMECC drives header files inclusion</li>
+<li>Update system_stm32h7xx.c to align with the template</li>
+<li>Update template projects (EWARM, MDK-ARM and SW4STM32) to add EXTI and RAMECC drives source files</li>
+</ul></li>
+<li>LL Templates
+<ul>
+<li>First official release</li>
+</ul></li>
+</ul>
+<p><strong>NUCLEO-H745ZI-Q</strong> : First official release</p>
+<p><strong>STM32H743I-EVAL</strong></p>
+<ul>
+<li>Applications
+<ul>
+<li>Rename root folder to STM32H743I-EVAL to align with board RPN</li>
+<li>General updates to fix known defects and enhancements implementation</li>
+<li>Update FPU_Fractal application to show how to configure the system clock to 480MHz with voltage scaling zero</li>
+<li>Update LwIP LwIP_HTTP_Server_Netconn_RTOS application to enhance performances when receiving mass TCPIP packets:
+<ul>
+<li>Impacted files : ethernetif.c and lwipopts.h</li>
+</ul></li>
+<li>Update startup_stm32h743xx.s (EWARM, MDK-ARM and SW4STM32) to align with the template startup file</li>
+<li>Update stm32h7xx_hal_conf.h to align with the template</li>
+<li>Update system_stm32h7xx.c to align with the template</li>
+<li>Update USB applications following mw/usb_host upgrade to v3.3.2</li>
+<li>Update USB_Device_Standalone: remove ADC BoostMode init parameter (following ADC HAL driver change)</li>
+<li>Update USB_Device applications to force 4 bytes alignment in USBD_StringSerial structure</li>
+<li>Update audio and USB applications projects (EWARM, MDK-ARM and SW4STM32) to use new PDM libraries : v3.1.0</li>
+<li>Update STemWin applications projects (EWARM, MDK-ARM and SW4STM32) to use new STemWin libraries : v544_20180322_cm7</li>
+<li>FatFs applications: Typo and comment fixes</li>
+<li>Align applications to the FreeRTOS version v10.0.1</li>
+<li>Update all applications to add PLLFRACN (PLL Fractional divider) in SystemClock_Config() Function</li>
+<li>Update mbedTLS applications following new mbedTLS MW version v2.14.0</li>
+<li>Update EEPROM application to remove extra uint64_t cast for 3rd parameter when calling HAL_FLASH_Program() API (following FLASH HAL driver update)</li>
+<li>Update LibJPEG_Encoding application to support bmp files with header length different than 54 bytes</li>
+</ul></li>
+<li>Demonstrations
+<ul>
+<li>Rename root folder to STM32H743I-EVAL to align with board RPN</li>
+<li>General updates to fix known defects and enhancements implementation</li>
+<li>Update startup_stm32h743xx.s (EWARM, MDK-ARM and SW4STM32) to align with the template startup files</li>
+<li>Update stm32h7xx_hal_conf.h to align with the template</li>
+<li>Update system_stm32h7xx.c to align with the template</li>
+<li>Update projects (EWARM, MDK-ARM and SW4STM32) to use new STemWin libraries : v544_20180322_cm7</li>
+<li>Update projects (EWARM, MDK-ARM and SW4STM32) use new PDM libraries : v3.1.0</li>
+<li>Add cache maintenance to videoplayer module</li>
+<li>Align to the latest FreeRTOS version FreeRTOS_v10.0.1</li>
+<li><p>Binaries files removed from this package, refer to note bellow</p></li>
+<li>Note:
+<ul>
+<li>The binary and Media demonstration files are available from the STM32H743I-EVAL page in the Binary Delivery section.
+<ul>
+<li>Please refer to : <a href="https://www.st.com/en/product/stm32h743i-eval.html">https://www.st.com/en/product/stm32h743i-eval.html</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li>HAL Examples
+<ul>
+<li>Rename root folder to STM32H743I-EVAL to align with board RPN</li>
+<li>General updates to fix known defects and enhancements implementation</li>
+<li>Update startup_stm32h743xx.s (EWARM, MDK-ARM and SW4STM32) to align with the template startup file</li>
+<li>Update stm32h7xx_hal_conf.h to align with the template</li>
+<li>Update system_stm32h7xx.c to align with the template</li>
+<li>Add CORTEXM_Cache example</li>
+<li>Update USART and UART examples : fix compilation errors due to USART/ UART drivers alignment</li>
+<li>Add stm32h7xx_hal_usart_ex.c in to projects where stm32h7xx_hal_usart.c is already used</li>
+<li>Update ADC and HRTIM examples: remove ADC BoostMode init parameter (following HAL ADC driver update)</li>
+<li>Fix ADC clock configuration in ADC and HRTIM examples :
+<ul>
+<li>Use peripheral clock (per_ck) as ADC kernel source clock</li>
+<li>The per_ck clock is set to HSI internal clock (64 MHz)</li>
+<li>Input ADC clock divided by 2 giving an ADC clock of (64MHz / 2) = 32MHz which is within the ADC specification</li>
+<li>Update ADC_InternalChannelConversion example to use ADC_CHANNEL_VBAT define instead of ADC_CHANNEL_VBAT_DIV4</li>
+</ul></li>
+<li>Update all examples to add PLLFRACN (PLL Fractional divider) in SystemClock_Config() Function</li>
+<li>Update BSP and SAI_AudioPlayback examples projects (EWARM, MDK-ARM and SW4STM32) to use new PDM libraries : v3.1.0</li>
+<li>Update and fix DMA/DMAMUX examples:
+<ul>
+<li>Use HAL_DMA_RegisterCallback instead of a direct setting of the DMA callbacks</li>
+<li>DMAMUX_RequestGen example: Fix SW4STM32 linker and startup files in order to correctly initialize global variables located on D3 domain RAM</li>
+</ul></li>
+<li>Update read-me short description for examples : GPIO, CORTEX, RCC, IWDG, HSEM, WWDG, RTC, FLASH, CRC, CRYP, RNG</li>
+<li>Fix RTC examples:
+<ul>
+<li>All examples :
+<ul>
+<li>Fix RTC_SYNCH_PREDIV value: use 0xF9 when LSI is the RTC source clock for better granularity</li>
+</ul></li>
+<li>RTC_Tamper example: add a reset of the TamperStatus flag after initializing the backup registers</li>
+<li>RTC_Alarm example: AlarmTime.SubSeconds filed of the RTC_AlarmTypeDef structure set to 0xF9 to remove any additional delay (Since RTC_SYNCH_PREDIV is set to 0xF9)</li>
+</ul></li>
+<li>Update FMC_NOR example:</li>
+<li>Use correct timing for NOR flash MT28EW128ABA1LPC-0SIT</li>
+<li>Use access mode FMC_ACCESS_MODE_B instead of FMC_ACCESS_MODE_A</li>
+<li>Update SD examples following HAL SD driver rework:
+<ul>
+<li>Introducing HAL_SD_ConfigSpeedBusOperation API to select the the SD speed mode (DEFAULT, High speed, Ultra high speed or auto detection )</li>
+<li>Set the SDMMC peripheral clock divider according to the target speed</li>
+</ul></li>
+<li>Fix a warning in JPEG examples for SW4STM32 IDE</li>
+<li>Add HAL examples HAL_TimeBase_TIM, HAL_TimeBase_RTC_WKUP and HAL_TimeBase_RTC_ALARM</li>
+<li>Fix and improve FDCAN examples:
+<ul>
+<li>Improve FDCAN_Clock_calibration example read-me description</li>
+<li>FDCAN_Classic_Frame_Networking, FDCAN_Com_IT and FDCAN_Com_polling examples :
+<ul>
+<li>Add call for HAL_FDCAN_ConfigGlobalFilter to reject all non-matching frames</li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li>HAL Templates
+<ul>
+<li>Rename root folder to STM32H743I-EVAL to align with board RPN</li>
+<li>General updates to fix known defects and enhancements implementation</li>
+<li>Update startup_stm32h743xx.s (EWARM, MDK-ARM and SW4STM32) to align with the template startup file</li>
+<li>Update stm32h7xx_hal_conf.h to align with the template</li>
+<li>Update system_stm32h7xx.c to align with the template</li>
+<li>Update template projects (EWARM, MDK-ARM and SW4STM32) to add EXTI and RAMECC drives source files</li>
+<li>Update template projects (EWARM, MDK-ARM and SW4STM32) to add stm32h7xx_hal_usart_ex.c source file</li>
+<li>Add PLLFRACN (PLL Fractional divider) in SystemClock_Config() Function</li>
+</ul></li>
+<li>LL Templates</li>
+<li>First official release</li>
+</ul>
+<p><strong>STM32H745I-DISCO</strong>: First official release</p>
+<p><strong>STM32H747I-DISCO</strong>: First official release</p>
+<p><strong>STM32H747I-EVAL</strong>: First official release</p>
+<p><strong>STM32H750B-DK</strong>: First official release</p>
+<h2 id="contents-1">Contents</h2>
+<h3 id="projects-2">Projects</h3>
+<table>
+<caption>Projects NUCLEO-H743ZI</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Board</th>
+<th style="text-align: left;">Project category</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: center;">License</th>
+<th style="text-align: center;">Path</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">NUCLEO-H743ZI</td>
+<td style="text-align: left;"><strong>Applications</strong></td>
+<td style="text-align: left;"><strong>V1.3.0</strong></td>
+<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: center;">Projects/NUCLEO-H743ZI/Applications</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NUCLEO-H743ZI</td>
+<td style="text-align: left;"><strong>Demonstrations</strong></td>
+<td style="text-align: left;"><strong>V1.3.0</strong></td>
+<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: center;">Projects/NUCLEO-H743ZI/Demonstrations</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">NUCLEO-H743ZI</td>
+<td style="text-align: left;"><strong>Examples</strong></td>
+<td style="text-align: left;"><strong>V1.3.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/NUCLEO-H743ZI/Examples</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NUCLEO-H743ZI</td>
+<td style="text-align: left;"><strong>LL Examples</strong></td>
+<td style="text-align: left;"><strong>V1.0.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/NUCLEO-H743ZI/Examples_LL</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">NUCLEO-H743ZI</td>
+<td style="text-align: left;"><strong>Templates</strong></td>
+<td style="text-align: left;"><strong>V1.3.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/NUCLEO-H743ZI/Templates</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NUCLEO-H743ZI</td>
+<td style="text-align: left;"><strong>LL Templates</strong></td>
+<td style="text-align: left;"><strong>V1.0.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/NUCLEO-H743ZI/Templates_LL</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Projects NUCLEO-H745ZI-Q</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Board</th>
+<th style="text-align: left;">Project category</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: center;">License</th>
+<th style="text-align: center;">Path</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">NUCLEO-H745ZI-Q</td>
+<td style="text-align: left;"><strong>Applications</strong></td>
+<td style="text-align: left;"><strong>V1.0.0</strong></td>
+<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: center;">Projects/NUCLEO-H745ZI-Q/Applications</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NUCLEO-H745ZI-Q</td>
+<td style="text-align: left;"><strong>Demonstrations</strong></td>
+<td style="text-align: left;"><strong>V1.0.0</strong></td>
+<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: center;">Projects/NUCLEO-H745ZI-Q/Demonstrations</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">NUCLEO-H745ZI-Q</td>
+<td style="text-align: left;"><strong>Examples</strong></td>
+<td style="text-align: left;"><strong>V1.0.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/NUCLEO-H745ZI-Q/Examples</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NUCLEO-H745ZI-Q</td>
+<td style="text-align: left;"><strong>Templates</strong></td>
+<td style="text-align: left;"><strong>V1.0.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/NUCLEO-H745ZI-Q/Templates</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">NUCLEO-H745ZI-Q</td>
+<td style="text-align: left;"><strong>LL Templates</strong></td>
+<td style="text-align: left;"><strong>V1.0.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/NUCLEO-H745ZI-Q/Templates_LL</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Projects STM32H743I-EVAL</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Board</th>
+<th style="text-align: left;">Project category</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: center;">License</th>
+<th style="text-align: center;">Path</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">STM32H743I-EVAL</td>
+<td style="text-align: left;"><strong>Applications</strong></td>
+<td style="text-align: left;"><strong>V1.4.0</strong></td>
+<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: center;">Projects/STM32H743I-EVAL/Applications</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32H743I-EVAL</td>
+<td style="text-align: left;"><strong>Demonstrations</strong></td>
+<td style="text-align: left;"><strong>V1.3.0</strong></td>
+<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: center;">Projects/STM32H743I-EVAL/Demonstrations</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32H743I-EVAL</td>
+<td style="text-align: left;"><strong>Examples</strong></td>
+<td style="text-align: left;"><strong>V1.3.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/STM32H743I-EVAL/Examples</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32H743I-EVAL</td>
+<td style="text-align: left;"><strong>Templates</strong></td>
+<td style="text-align: left;"><strong>V1.3.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/STM32H743I-EVAL/Templates</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32H743I-EVAL</td>
+<td style="text-align: left;"><strong>LL Templates</strong></td>
+<td style="text-align: left;"><strong>V1.0.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/STM32H743I-EVAL/Templates_LL</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Projects STM32H745I-DISCO</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Board</th>
+<th style="text-align: left;">Project category</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: center;">License</th>
+<th style="text-align: center;">Path</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">STM32H745I-DISCO</td>
+<td style="text-align: left;"><strong>Applications</strong></td>
+<td style="text-align: left;"><strong>V1.0.0</strong></td>
+<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: center;">Projects/STM32H745I-DISCO/Applications</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32H745I-DISCO</td>
+<td style="text-align: left;"><strong>Demonstrations</strong></td>
+<td style="text-align: left;"><strong>V1.0.0</strong></td>
+<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: center;">Projects/STM32H745I-DISCO/Demonstrations</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32H745I-DISCO</td>
+<td style="text-align: left;"><strong>Examples</strong></td>
+<td style="text-align: left;"><strong>V1.0.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/STM32H745I-DISCO/Examples</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32H745I-DISCO</td>
+<td style="text-align: left;"><strong>Templates</strong></td>
+<td style="text-align: left;"><strong>V1.0.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/STM32H745I-DISCO/Templates</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32H745I-DISCO</td>
+<td style="text-align: left;"><strong>LL Templates</strong></td>
+<td style="text-align: left;"><strong>V1.0.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/STM32H745I-DISCO/Templates_LL</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Projects STM32H747I-DISCO</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Board</th>
+<th style="text-align: left;">Project category</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: center;">License</th>
+<th style="text-align: center;">Path</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">STM32H747I-DISCO</td>
+<td style="text-align: left;"><strong>Applications</strong></td>
+<td style="text-align: left;"><strong>V1.0.0</strong></td>
+<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: center;">Projects/STM32H747I-DISCO/Applications</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32H747I-DISCO</td>
+<td style="text-align: left;"><strong>Demonstrations</strong></td>
+<td style="text-align: left;"><strong>V1.0.0</strong></td>
+<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: center;">Projects/STM32H747I-DISCO/Demonstrations</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32H747I-DISCO</td>
+<td style="text-align: left;"><strong>Examples</strong></td>
+<td style="text-align: left;"><strong>V1.0.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/STM32H747I-DISCO/Examples</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32H747I-DISCO</td>
+<td style="text-align: left;"><strong>Templates</strong></td>
+<td style="text-align: left;"><strong>V1.0.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/STM32H747I-DISCO/Templates</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32H747I-DISCO</td>
+<td style="text-align: left;"><strong>LL Templates</strong></td>
+<td style="text-align: left;"><strong>V1.0.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/STM32H747I-DISCO/Templates_LL</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Projects STM32H747I-EVAL</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Board</th>
+<th style="text-align: left;">Project category</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: center;">License</th>
+<th style="text-align: center;">Path</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">STM32H747I-EVAL</td>
+<td style="text-align: left;"><strong>Applications</strong></td>
+<td style="text-align: left;"><strong>V1.0.0</strong></td>
+<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: center;">Projects/STM32H747I-EVAL/Applications</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32H747I-EVAL</td>
+<td style="text-align: left;"><strong>Demonstrations</strong></td>
+<td style="text-align: left;"><strong>V1.0.0</strong></td>
+<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: center;">Projects/STM32H747I-EVAL/Demonstrations</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32H747I-EVAL</td>
+<td style="text-align: left;"><strong>Examples</strong></td>
+<td style="text-align: left;"><strong>V1.0.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/STM32H747I-EVAL/Examples</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32H747I-EVAL</td>
+<td style="text-align: left;"><strong>Templates</strong></td>
+<td style="text-align: left;"><strong>V1.0.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/STM32H747I-EVAL/Templates</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32H747I-EVAL</td>
+<td style="text-align: left;"><strong>LL Templates</strong></td>
+<td style="text-align: left;"><strong>V1.0.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/STM32H747I-EVAL/Templates_LL</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Projects STM32H750B-DK</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Board</th>
+<th style="text-align: left;">Project category</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: center;">License</th>
+<th style="text-align: center;">Path</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">STM32H750B-DK</td>
+<td style="text-align: left;"><strong>Applications</strong></td>
+<td style="text-align: left;"><strong>V1.0.0</strong></td>
+<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: center;">Projects/STM32H750B-DK/Applications</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32H750B-DK</td>
+<td style="text-align: left;"><strong>Demonstrations</strong></td>
+<td style="text-align: left;"><strong>V1.0.0</strong></td>
+<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: center;">Projects/STM32H750B-DK/Demonstrations</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32H750B-DK</td>
+<td style="text-align: left;"><strong>Examples</strong></td>
+<td style="text-align: left;"><strong>V1.0.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/STM32H750B-DK/Examples</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32H750B-DK</td>
+<td style="text-align: left;"><strong>Templates</strong></td>
+<td style="text-align: left;"><strong>V1.0.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/STM32H750B-DK/Templates</td>
+</tr>
+</tbody>
+</table>
+<p>Note: in the tables above, project categories <strong>highlighted</strong> have changed since previous release.</p>
+<h2 id="known-limitations-2">Known Limitations</h2>
+<ul>
+<li><strong>OpenAMP</strong>-based applications (available on STM32H745I-DISCO, STM32H747I-DISCO and STM32H747I-EVAL) come with known compilation warning
+<ul>
+<li>Related to the OpenAmp third party stack</li>
+<li>Related to ST application implementation For warning details please refer to the corresponding applications readme.txt files</li>
+</ul></li>
+<li>Demonstrations for STM32H747I-DISCO, STM32H747I-EVAL and STM32H750B-DK are provided as binaries only.
+<ul>
+<li>The source code for these demonstrations will be available in next STM32CubeH7 releases</li>
+</ul></li>
+</ul>
+<h2 id="development-toolchains-and-compilers-2">Development Toolchains and Compilers</h2>
+<ul>
+<li>IAR Embedded Workbench for ARM (EWARM) toolchain V8.20.2 + ST-Link</li>
+<li>RealView Microcontroller Development Kit (MDK-ARM) toolchain V5.25 + ST-Link</li>
+<li>System Workbench for STM32 (SW4STM32) toolchain V2.9.0 + ST-Link</li>
+</ul>
+<h2 id="supported-devices-and-boards-2">Supported Devices and boards</h2>
+<ul>
+<li>STM32H743/753/<strong>747</strong>/<strong>757</strong>/<strong>745</strong>/<strong>755</strong>/750/<strong>742</strong> devices</li>
+<li><strong>STM32H743I-EVAL</strong> rev.B/rev.E</li>
+<li>NUCLEO-H743ZI rev.B and <strong>NUCLEO-H743ZI2</strong> rev.B</li>
+<li><strong>NUCLEO-H745ZI-Q</strong> rev.B</li>
+<li><strong>STM32H745I-DISCO</strong> rev.B</li>
+<li><strong>STM32H747I-EVAL</strong> rev.E</li>
+<li><strong>STM32H747I-DISCO</strong> rev.D</li>
+<li><strong>STM32H750B-DISCO</strong> rev.B</li>
+</ul>
+<h2 id="backward-compatibility-2">Backward Compatibility</h2>
+<ul>
+<li>None</li>
+</ul>
+<h2 id="dependencies-2">Dependencies</h2>
+<ul>
+<li>None</li>
+</ul>
+</div>
+</div>
+<div class="collapse">
+<input type="checkbox" id="collapse-section5" aria-hidden="true"> <label for="collapse-section5" aria-hidden="true"><strong>V1.3.2 / 31-January-2019</strong></label>
+<div>
+<h2 id="main-changes-3">Main Changes</h2>
+<h3 id="patch-release">Patch release</h3>
+<ul>
+<li><p>Patch release to add definition of UID_BASE (Unique device ID register base address) to the CMSIS STM32H7xx include files.</p></li>
+<li><strong>CMSIS</strong>
+<ul>
+<li>CMSIS STM32H7xx include files : stm32h743xx.h, stm32h750xx.h and stm32h753xx.h.</li>
+</ul></li>
+<li><p>No impact on the STM32CubeH7 Projects (Templates, Examples, Applications, Demonstartion)</p></li>
+</ul>
+<h2 id="contents-2">Contents</h2>
+<h3 id="projects-3">Projects</h3>
+<table>
+<caption>Projects NUCLEO-H743ZI</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Board</th>
+<th style="text-align: left;">Project category</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: center;">License</th>
+<th style="text-align: center;">Path</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">NUCLEO-H743ZI</td>
+<td style="text-align: left;">Applications</td>
+<td style="text-align: left;">V1.2.1</td>
+<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: center;">Projects/NUCLEO-H743ZI/Applications</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NUCLEO-H743ZI</td>
+<td style="text-align: left;">Demonstrations</td>
+<td style="text-align: left;">V1.2.0</td>
+<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: center;">Projects/NUCLEO-H743ZI/Demonstrations</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">NUCLEO-H743ZI</td>
+<td style="text-align: left;">Examples</td>
+<td style="text-align: left;">V1.2.0</td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/NUCLEO-H743ZI/Examples</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NUCLEO-H743ZI</td>
+<td style="text-align: left;">Templates</td>
+<td style="text-align: left;">V1.2.0</td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/NUCLEO-H743ZI/Templates</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Projects STM32H743I-EVAL</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Board</th>
+<th style="text-align: left;">Project category</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: center;">License</th>
+<th style="text-align: center;">Path</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">STM32H743I-EVAL</td>
+<td style="text-align: left;">Applications</td>
+<td style="text-align: left;">V1.3.1</td>
+<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: center;">Projects/STM32H743I-EVAL/Applications</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32H743I-EVAL</td>
+<td style="text-align: left;">Demonstrations</td>
+<td style="text-align: left;">V1.2.0</td>
+<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: center;">Projects/STM32H743I-EVAL/Demonstrations</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32H743I-EVAL</td>
+<td style="text-align: left;">Examples</td>
+<td style="text-align: left;">V1.2.0</td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/STM32H743I-EVAL/Examples</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32H743I-EVAL</td>
+<td style="text-align: left;">Templates</td>
+<td style="text-align: left;">V1.2.0</td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/STM32H743I-EVAL/Templates</td>
+</tr>
+</tbody>
+</table>
+<p>Note: in the tables above, project categories <strong>highlighted</strong> have changed since previous release.</p>
+<h2 id="known-limitations-3">Known Limitations</h2>
+<ul>
+<li>None</li>
+</ul>
+<h2 id="development-toolchains-and-compilers-3">Development Toolchains and Compilers</h2>
+<ul>
+<li>IAR Embedded Workbench for ARM (EWARM) toolchain V7.80.4 + ST-Link</li>
+<li>RealView Microcontroller Development Kit (MDK-ARM) toolchain V5.25 + ST-Link</li>
+<li>System Workbench for STM32 (SW4STM32) toolchain V2.7.0 + ST-Link</li>
+</ul>
+<h2 id="supported-devices-and-boards-3">Supported Devices and boards</h2>
+<ul>
+<li>STM32H743/753/750 devices</li>
+<li>STM32H743I-EVAL rev.B</li>
+<li>NUCLEO-H743ZI rev.B</li>
+</ul>
+<h2 id="backward-compatibility-3">Backward Compatibility</h2>
+<ul>
+<li>None</li>
+</ul>
+<h2 id="dependencies-3">Dependencies</h2>
+<ul>
+<li>None</li>
+</ul>
+</div>
+</div>
+<div class="collapse">
+<input type="checkbox" id="collapse-section4" aria-hidden="true"> <label for="collapse-section4" aria-hidden="true"><strong>V1.3.1 / 18-January-2019</strong></label>
+<div>
+<h2 id="main-changes-4">Main Changes</h2>
+<h3 id="patch-release-1">Patch release</h3>
+<ul>
+<li><p>Patch release to Fix LwIP and mbedTLS applications : enhance Ethernet zero-copy feature allowing to fix ping behavior.</p></li>
+<li><strong>Projects</strong>
+<ul>
+<li>STM32H743I_EVAL LwIP and mbedTLS applications : under STM32H743I_EVAL/Applications\LwIP and STM32H743I_EVAL/Applications\mbedTLS
+<ul>
+<li>Src\ethernetif.c in all LwIP and mbedTLS applications</li>
+<li>Src\udp_echoserver.c in LwIP LwIP_UDP_Echo_Server application</li>
+</ul></li>
+<li>STM32H743ZI-Nucleo LwIP and mbedTLS application : under STM32H743ZI-Nucleo/Applications\LwIP
+<ul>
+<li>Src\ethernetif.c</li>
+</ul></li>
+</ul></li>
+</ul>
+<p><strong>NUCLEO-H743ZI</strong></p>
+<ul>
+<li>Applications
+<ul>
+<li>Update LwIP LwIP_HTTP_Server_Netconn_RTOS application to enhance Ethernet zero-copy feature allowing to fix ping behavior
+<ul>
+<li>Impacted file : ethernetif.c</li>
+</ul></li>
+</ul></li>
+</ul>
+<p><strong>STM32H743I-EVAL</strong></p>
+<ul>
+<li>Applications
+<ul>
+<li>Update LwIP and mbedTLS STM32H43I_EVAL applications to enhance Ethernet zero-copy feature allowing to fix ping behavior
+<ul>
+<li>Updated files :
+<ul>
+<li>ethernetif.c in all LwIP and mbedTLS applications</li>
+<li>udp_echoserver.c in LwIP LwIP_UDP_Echo_Server application</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+<h2 id="contents-3">Contents</h2>
+<h3 id="projects-4">Projects</h3>
+<table>
+<caption>Projects NUCLEO-H743ZI</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Board</th>
+<th style="text-align: left;">Project category</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: center;">License</th>
+<th style="text-align: center;">Path</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">NUCLEO-H743ZI</td>
+<td style="text-align: left;"><strong>Applications</strong></td>
+<td style="text-align: left;"><strong>V1.2.1</strong></td>
+<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: center;">Projects/NUCLEO-H743ZI/Applications</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NUCLEO-H743ZI</td>
+<td style="text-align: left;">Demonstrations</td>
+<td style="text-align: left;">V1.2.0</td>
+<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: center;">Projects/NUCLEO-H743ZI/Demonstrations</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">NUCLEO-H743ZI</td>
+<td style="text-align: left;">Examples</td>
+<td style="text-align: left;">V1.2.0</td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/NUCLEO-H743ZI/Examples</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NUCLEO-H743ZI</td>
+<td style="text-align: left;">Templates</td>
+<td style="text-align: left;">V1.2.0</td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/NUCLEO-H743ZI/Templates</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Projects STM32H743I-EVAL</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Board</th>
+<th style="text-align: left;">Project category</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: center;">License</th>
+<th style="text-align: center;">Path</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">STM32H743I-EVAL</td>
+<td style="text-align: left;"><strong>Applications</strong></td>
+<td style="text-align: left;"><strong>V1.3.1</strong></td>
+<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: center;">Projects/STM32H743I-EVAL/Applications</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32H743I-EVAL</td>
+<td style="text-align: left;">Demonstrations</td>
+<td style="text-align: left;">V1.2.0</td>
+<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: center;">Projects/STM32H743I-EVAL/Demonstrations</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32H743I-EVAL</td>
+<td style="text-align: left;">Examples</td>
+<td style="text-align: left;">V1.2.0</td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/STM32H743I-EVAL/Examples</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32H743I-EVAL</td>
+<td style="text-align: left;">Templates</td>
+<td style="text-align: left;">V1.2.0</td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/STM32H743I-EVAL/Templates</td>
+</tr>
+</tbody>
+</table>
+<p>Note: in the tables above, project categories <strong>highlighted</strong> have changed since previous release.</p>
+<h2 id="known-limitations-4">Known Limitations</h2>
+<ul>
+<li>None</li>
+</ul>
+<h2 id="development-toolchains-and-compilers-4">Development Toolchains and Compilers</h2>
+<ul>
+<li>IAR Embedded Workbench for ARM (EWARM) toolchain V7.80.4 + ST-Link</li>
+<li>RealView Microcontroller Development Kit (MDK-ARM) toolchain V5.25 + ST-Link</li>
+<li>System Workbench for STM32 (SW4STM32) toolchain V2.7.0 + ST-Link</li>
+</ul>
+<h2 id="supported-devices-and-boards-4">Supported Devices and boards</h2>
+<ul>
+<li>STM32H743/753/750 devices</li>
+<li>STM32H743I-EVAL rev.B</li>
+<li>NUCLEO-H743ZI rev.B</li>
+</ul>
+<h2 id="backward-compatibility-4">Backward Compatibility</h2>
+<ul>
+<li>None</li>
+</ul>
+<h2 id="dependencies-4">Dependencies</h2>
+<ul>
+<li>None</li>
+</ul>
+</div>
+</div>
+<div class="collapse">
+<input type="checkbox" id="collapse-section3" aria-hidden="true"> <label for="collapse-section3" aria-hidden="true"><strong>V1.3.0 / 29-June-2018</strong></label>
+<div>
+<h2 id="main-changes-5">Main Changes</h2>
+<ul>
+<li><strong>Add support for STM32H750xx value line</strong>
+<ul>
+<li>The STM32H750xx value line come with only 128KB internal flash, it is intended for code execution from external memories.</li>
+<li>This STM32CubeH7 FW release provides several applications to demonstrate how to boot from internal flash, configure the external memories and jump to user application (located on external memory). Two possible use cases are available : XiP and BootROM.
+<ul>
+<li>XiP use case is intended for eXecution in Place from external flash memory (QSPI or FMC-NOR flash) .
+<ul>
+<li>The user application code shall be linked with the target execution memory address (external QSPI or FMC-NOR flash).</li>
+</ul></li>
+<li>BootROM use case is intended to demonstrate how to boot from internal flash, configure the external RAM memories (SDRAM or SRAM), copy user application binary from a micro-SD or from QSPI-Flash to the external SDRAM or external SRAM then jump to the user application.
+<ul>
+<li>The user application code shall be linked with the target execution memory address (external SDRAM or SRAM).</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+<p><strong>NUCLEO-H743ZI</strong></p>
+<ul>
+<li>Applications</li>
+</ul>
+<p><strong>STM32H743I-EVAL</strong></p>
+<ul>
+<li>Applications
+<ul>
+<li>Add dedicated applications for STM32H750xx value line devices
+<ul>
+<li>ExtMem_Boot:
+<ul>
+<li>This application shows how to boot from internal flash, configure external memories then jump to user application located on external memory</li>
+<li>User can select QSPI flash , FMC-NOR flash, external SDRAM or external SRAM for code execution</li>
+<li>In case of code execution from external SRAM/SDRAM, the application binary can be stored on the micro-SD card or on the QSPI flash, the Boot application will then copy the application binary to the target execution memory</li>
+<li>User can select internal RAM, external SRAM or external SDRAM for application data memory</li>
+</ul></li>
+<li>ExtMem_Application:
+<ul>
+<li>Sample application runing from external flash (QSPI flash or FMC-NOR flash) or external RAM(SRDRAM or SRAM)</li>
+<li>Application RAM data memory can be either internal SRAM external SRAM or external SDRAM when executing from external flash</li>
+<li>When executing from external SDRAM/SRAM, the internal SRAM is used as application RAM data memory</li>
+</ul></li>
+<li>ExtMem_Application:
+<ul>
+<li>Sample FreeRTOS application with execution from external flash (QSPI flash or FMC-NOR flash) or external RAM(SRDRAM or SRAM)</li>
+<li>Application RAM data memory can be either internal SRAM or external SRAM when executing from external flash</li>
+<li>When executing from external SDRAM/SRAM, the internal SRAM is used as application RAM data memory</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+<h2 id="contents-4">Contents</h2>
+<h3 id="projects-5">Projects</h3>
+<table>
+<caption>Projects NUCLEO-H743ZI</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Board</th>
+<th style="text-align: left;">Project category</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: center;">License</th>
+<th style="text-align: center;">Path</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">NUCLEO-H743ZI</td>
+<td style="text-align: left;">Applications</td>
+<td style="text-align: left;">V1.2.0</td>
+<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: center;">Projects/NUCLEO-H743ZI/Applications</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NUCLEO-H743ZI</td>
+<td style="text-align: left;">Demonstrations</td>
+<td style="text-align: left;">V1.2.0</td>
+<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: center;">Projects/NUCLEO-H743ZI/Demonstrations</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">NUCLEO-H743ZI</td>
+<td style="text-align: left;">Examples**</td>
+<td style="text-align: left;">V1.2.0</td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/NUCLEO-H743ZI/Examples</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NUCLEO-H743ZI</td>
+<td style="text-align: left;">Templates**</td>
+<td style="text-align: left;">V1.2.0</td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/NUCLEO-H743ZI/Templates</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Projects STM32H743I-EVAL</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Board</th>
+<th style="text-align: left;">Project category</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: center;">License</th>
+<th style="text-align: center;">Path</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">STM32H743I-EVAL</td>
+<td style="text-align: left;"><strong>Applications</strong></td>
+<td style="text-align: left;"><strong>V1.3.0</strong></td>
+<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: center;">Projects/STM32H743I-EVAL/Applications</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32H743I-EVAL</td>
+<td style="text-align: left;">Demonstrations</td>
+<td style="text-align: left;">V1.2.0</td>
+<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: center;">Projects/STM32H743I-EVAL/Demonstrations</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32H743I-EVAL</td>
+<td style="text-align: left;">Examples</td>
+<td style="text-align: left;">V1.2.0</td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/STM32H743I-EVAL/Examples</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32H743I-EVAL</td>
+<td style="text-align: left;">Templates</td>
+<td style="text-align: left;">V1.2.0</td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/STM32H743I-EVAL/Templates</td>
+</tr>
+</tbody>
+</table>
+<p>Note: in the tables above, project categories <strong>highlighted</strong> have changed since previous release.</p>
+<h2 id="known-limitations-5">Known Limitations</h2>
+<ul>
+<li>None</li>
+</ul>
+<h2 id="development-toolchains-and-compilers-5">Development Toolchains and Compilers</h2>
+<ul>
+<li>IAR Embedded Workbench for ARM (EWARM) toolchain V7.80.4 + ST-Link</li>
+<li>RealView Microcontroller Development Kit (MDK-ARM) toolchain V5.25 + ST-Link</li>
+<li>System Workbench for STM32 (SW4STM32) toolchain V2.5.0 + ST-Link</li>
+</ul>
+<h2 id="supported-devices-and-boards-5">Supported Devices and boards</h2>
+<ul>
+<li>STM32H743/753/750 devices</li>
+<li><strong>STM32H743I-EVAL</strong> rev.B</li>
+<li>NUCLEO-H743ZI rev.B</li>
+</ul>
+<h2 id="backward-compatibility-5">Backward Compatibility</h2>
+<ul>
+<li>None</li>
+</ul>
+<h2 id="dependencies-5">Dependencies</h2>
+<ul>
+<li>None</li>
+</ul>
+</div>
+</div>
+<div class="collapse">
+<input type="checkbox" id="collapse-section2" aria-hidden="true"> <label for="collapse-section2" aria-hidden="true"><strong>V1.2.0 / 29-December-2017</strong></label>
+<div>
+<h2 id="main-changes-6">Main Changes</h2>
+<h3 id="maintenance-release-1">Maintenance release</h3>
+<ul>
+<li>Update projects to support new FatFs, MbedTLS and LwIP versions.</li>
+<li>Add new FDCAN_Classic_Frame_Networking example running on STM32H743I_EVAL.</li>
+<li>Update cache management for all examples and applications.</li>
+</ul>
+<p><strong>NUCLEO-H743ZI</strong></p>
+<ul>
+<li>Applications
+<ul>
+<li>Improve cache management for all examples and applications using cache maintenance routines</li>
+<li>Align applications to the latest FatFs version R0.12c (ST modified 20171110)</li>
+<li>Align applications to the latest LwIP version V2.0.3 (ST modified 20171110)</li>
+</ul></li>
+<li>Demonstrations
+<ul>
+<li>Improve cache management for all examples and applications using cache maintenance routines.</li>
+<li>Align applications to the latest FatFs version R0.12c (ST modified 20171110)</li>
+</ul></li>
+<li>HAL Examples
+<ul>
+<li>Improve cache management for all examples and applications using cache maintenance routines</li>
+<li>Align applications to the latest FatFs version R0.12c (ST modified 20171110)</li>
+</ul></li>
+<li>HAL Templates
+<ul>
+<li>General Enhancement and Fixes</li>
+</ul></li>
+</ul>
+<p><strong>STM32H743I-EVAL</strong></p>
+<ul>
+<li>Applications
+<ul>
+<li>Improve cache management for all examples and applications using cache maintenance routines</li>
+<li>Align applications to the latest FatFs version R0.12c (ST modified 20171110)</li>
+<li>Align applications to the latest LwIP version V2.0.3 (ST modified 20171110)</li>
+<li>Align applications to the latest mbedTLS version V2.6.1 (ST modified 20171110)</li>
+</ul></li>
+<li>Demonstrations
+<ul>
+<li><p>Align demonstration to the latest FatFs version R0.12c (ST modified 20171110)</p></li>
+<li>Note:
+<ul>
+<li>Demonstrations Firmware for STM32H743I_EVAL provided within this package, don’t embed:
+<ul>
+<li>TouchGFX demonstration module. Free evaluation version of the TouchGFX demonstration, based on Draupner Graphics’ commercial graphic library, is available at www.touchgfx.com</li>
+<li>Embedded Wizard demonstration module. Free evaluation version of the TARA Systems demonstration, is available at [www.embedded-wizard.de]@(www.embedded-wizard.de)</li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li>HAL Examples
+<ul>
+<li>Improve cache management for all examples and applications using cache maintenance routines</li>
+<li>Align applications to the latest FatFs version R0.12c (ST modified 20171110</li>
+<li>Add new FDCAN_Classic_Frame_Networking example running on STM32H743I_EVAL</li>
+</ul></li>
+<li>HAL Templates
+<ul>
+<li>Update MPU attributes as Write Through for SDRAM</li>
+</ul></li>
+</ul>
+<h2 id="contents-5">Contents</h2>
+<h3 id="projects-6">Projects</h3>
+<table>
+<caption>Projects NUCLEO-H743ZI</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Board</th>
+<th style="text-align: left;">Project category</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: center;">License</th>
+<th style="text-align: center;">Path</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">NUCLEO-H743ZI</td>
+<td style="text-align: left;"><strong>Applications</strong></td>
+<td style="text-align: left;"><strong>V1.2.0</strong></td>
+<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: center;">Projects/NUCLEO-H743ZI/Applications</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NUCLEO-H743ZI</td>
+<td style="text-align: left;"><strong>Demonstrations</strong></td>
+<td style="text-align: left;"><strong>V1.2.0</strong></td>
+<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: center;">Projects/NUCLEO-H743ZI/Demonstrations</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">NUCLEO-H743ZI</td>
+<td style="text-align: left;"><strong>Examples</strong></td>
+<td style="text-align: left;"><strong>V1.2.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/NUCLEO-H743ZI/Examples</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NUCLEO-H743ZI</td>
+<td style="text-align: left;"><strong>Templates</strong></td>
+<td style="text-align: left;"><strong>V1.2.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/NUCLEO-H743ZI/Templates</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Projects STM32H743I-EVAL</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Board</th>
+<th style="text-align: left;">Project category</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: center;">License</th>
+<th style="text-align: center;">Path</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">STM32H743I-EVAL</td>
+<td style="text-align: left;"><strong>Applications</strong></td>
+<td style="text-align: left;"><strong>V1.2.0</strong></td>
+<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: center;">Projects/STM32H743I-EVAL/Applications</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32H743I-EVAL</td>
+<td style="text-align: left;"><strong>Demonstrations</strong></td>
+<td style="text-align: left;"><strong>V1.2.0</strong></td>
+<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: center;">Projects/STM32H743I-EVAL/Demonstrations</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32H743I-EVAL</td>
+<td style="text-align: left;"><strong>Examples</strong></td>
+<td style="text-align: left;"><strong>V1.2.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/STM32H743I-EVAL/Examples</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32H743I-EVAL</td>
+<td style="text-align: left;"><strong>Templates</strong></td>
+<td style="text-align: left;"><strong>V1.2.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/STM32H743I-EVAL/Templates</td>
+</tr>
+</tbody>
+</table>
+<p>Note: in the tables above, project categories <strong>highlighted</strong> have changed since previous release.</p>
+<h2 id="known-limitations-6">Known Limitations</h2>
+<ul>
+<li>None</li>
+</ul>
+<h2 id="development-toolchains-and-compilers-6">Development Toolchains and Compilers</h2>
+<ul>
+<li>IAR Embedded Workbench for ARM (EWARM) toolchain V7.80.4 + ST-Link</li>
+<li>RealView Microcontroller Development Kit (MDK-ARM) toolchain V5.23 + ST-Link</li>
+<li>System Workbench for STM32 (SW4STM32) toolchain V1.14 + ST-Link</li>
+</ul>
+<h2 id="supported-devices-and-boards-6">Supported Devices and boards</h2>
+<ul>
+<li>STM32H743/753/750 devices</li>
+<li>STM32H743I-EVAL rev.B</li>
+<li>NUCLEO-H743ZI rev.B</li>
+</ul>
+<h2 id="backward-compatibility-6">Backward Compatibility</h2>
+<ul>
+<li>None</li>
+</ul>
+<h2 id="dependencies-6">Dependencies</h2>
+<ul>
+<li>None</li>
+</ul>
+</div>
+</div>
+<div class="collapse">
+<input type="checkbox" id="collapse-section1" aria-hidden="true"> <label for="collapse-section1" aria-hidden="true"><strong>V1.1.0 / 31-August-2017</strong></label>
+<div>
+<h2 id="main-changes-7">Main Changes</h2>
+<h3 id="maintenance-release-2">Maintenance release</h3>
+<ul>
+<li>Update projects to support new FatFs and STemWin versions.</li>
+<li>Add new FreeRTOS MPU application running on STM32H743I_EVAL and STM32H7xx_Nucleo_144, only EWARM Toolchain is supported.</li>
+<li>Add FWupgrade_Standalone and HID_LPM_Standalone applications running on STM32H743I_EVAL.</li>
+<li><p>Add Demonstration Firmware for STM32H743I_EVAL.</p></li>
+<li><strong>Note:</strong>
+<ul>
+<li><strong>Demonstrations Firmware for STM32H743I_EVAL provided within this package, don’t embed:</strong></li>
+<li><strong>TouchGFX demonstration module. Free evaluation version of the TouchGFX demonstration, based on Draupner Graphics’ commercial graphic library, is available at <a href="https://www.touchgfx.com/product/supported-stm32-kits">www.touchgfx.com/stmicroelectronics</a></strong></li>
+<li><strong>Embedded Wizard demonstration module. Free evaluation version of the TARA Systems demonstration, is available at <a href="http://www.embedded-wizard.de/platforms/stmicroelectronics">www.embedded-wizard.de/stm32</a></strong>)</li>
+</ul></li>
+</ul>
+<p><strong>NUCLEO-H743ZI</strong></p>
+<ul>
+<li>Applications: Maintenance release</li>
+<li>Demonstrations: Maintenance release</li>
+<li>HAL Examples: Maintenance release</li>
+<li>HAL Templates: Maintenance release
+<ul>
+<li>Adjust PLL fractional computation in SystemClock_Config function</li>
+</ul></li>
+</ul>
+<p><strong>STM32H743I-EVAL</strong></p>
+<ul>
+<li><p>Applications: Maintenance release</p></li>
+<li>Demonstrations
+<ul>
+<li><p>Official demonstration firmware release</p></li>
+<li>Note:
+<ul>
+<li>Demonstrations Firmware for STM32H743I_EVAL provided within this package, don’t embed:
+<ul>
+<li>TouchGFX demonstration module. Free evaluation version of the TouchGFX demonstration, based on Draupner Graphics’ commercial graphic library, is available at <a href="www.touchgfx.com">www.touchgfx.com</a></li>
+<li>Embedded Wizard demonstration module. Free evaluation version of the TARA Systems demonstration, is available at <a href="www.embedded-wizard.de">www.embedded-wizard.de</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li>HAL Examples :Maintenance release</li>
+<li>HAL Templates
+<ul>
+<li>Adjust PLL fractional computation</li>
+</ul></li>
+</ul>
+<h2 id="contents-6">Contents</h2>
+<h3 id="projects-7">Projects</h3>
+<table>
+<caption>Projects NUCLEO-H743ZI</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Board</th>
+<th style="text-align: left;">Project category</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: center;">License</th>
+<th style="text-align: center;">Path</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">NUCLEO-H743ZI</td>
+<td style="text-align: left;"><strong>Applications</strong></td>
+<td style="text-align: left;"><strong>V1.1.0</strong></td>
+<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: center;">Projects/NUCLEO-H743ZI/Applications</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NUCLEO-H743ZI</td>
+<td style="text-align: left;"><strong>Demonstrations</strong></td>
+<td style="text-align: left;"><strong>V1.1.0</strong></td>
+<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: center;">Projects/NUCLEO-H743ZI/Demonstrations</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">NUCLEO-H743ZI</td>
+<td style="text-align: left;"><strong>Examples</strong></td>
+<td style="text-align: left;"><strong>V1.1.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/NUCLEO-H743ZI/Examples</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NUCLEO-H743ZI</td>
+<td style="text-align: left;"><strong>Templates</strong></td>
+<td style="text-align: left;"><strong>V1.1.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/NUCLEO-H743ZI/Templates</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Projects STM32H743I-EVAL</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Board</th>
+<th style="text-align: left;">Project category</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: center;">License</th>
+<th style="text-align: center;">Path</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">STM32H743I-EVAL</td>
+<td style="text-align: left;"><strong>Applications</strong></td>
+<td style="text-align: left;"><strong>V1.1.0</strong></td>
+<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: center;">Projects/STM32H743I-EVAL/Applications</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32H743I-EVAL</td>
+<td style="text-align: left;"><strong>Demonstrations</strong></td>
+<td style="text-align: left;"><strong>V1.1.0</strong></td>
+<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: center;">Projects/STM32H743I-EVAL/Demonstrations</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32H743I-EVAL</td>
+<td style="text-align: left;"><strong>Examples</strong></td>
+<td style="text-align: left;"><strong>V1.1.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/STM32H743I-EVAL/Examples</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32H743I-EVAL</td>
+<td style="text-align: left;"><strong>Templates</strong></td>
+<td style="text-align: left;"><strong>V1.1.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/STM32H743I-EVAL/Templates</td>
+</tr>
+</tbody>
+</table>
+<p>Note: in the tables above, project categories <strong>highlighted</strong> have changed since previous release.</p>
+<h2 id="known-limitations-7">Known Limitations</h2>
+<ul>
+<li>None</li>
+</ul>
+<h2 id="development-toolchains-and-compilers-7">Development Toolchains and Compilers</h2>
+<ul>
+<li>IAR Embedded Workbench for ARM (EWARM) toolchain V7.80.4 + ST-Link</li>
+<li>RealView Microcontroller Development Kit (MDK-ARM) toolchain V5.23 + ST-Link</li>
+<li>System Workbench for STM32 (SW4STM32) toolchain V1.14 + ST-Link</li>
+</ul>
+<h2 id="supported-devices-and-boards-7">Supported Devices and boards</h2>
+<ul>
+<li>STM32H743/753/750 devices</li>
+<li>STM32H743I-EVAL rev.B</li>
+<li>NUCLEO-H743ZI rev.B</li>
+</ul>
+<h2 id="backward-compatibility-7">Backward Compatibility</h2>
+<ul>
+<li>None</li>
+</ul>
+<h2 id="dependencies-7">Dependencies</h2>
+<ul>
+<li>None</li>
+</ul>
+</div>
+</div>
+<div class="collapse">
+<input type="checkbox" id="collapse-section0" aria-hidden="true"> <label for="collapse-section0" aria-hidden="true"><strong>V1.0.0 / 21-April-2017</strong></label>
+<div>
+<h2 id="main-changes-8">Main Changes</h2>
+<p><strong>First official release of STM32CubeH7 (STM32Cube for STM32H7 Series)</strong></p>
+<p><strong>NUCLEO-H743ZI</strong>: First official release</p>
+<p><strong>STM32H743I-EVAL</strong>: First official release</p>
+<h2 id="contents-7">Contents</h2>
+<h3 id="projects-8">Projects</h3>
+<table>
+<caption>Projects NUCLEO-H743ZI</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Board</th>
+<th style="text-align: left;">Project category</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: center;">License</th>
+<th style="text-align: center;">Path</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">NUCLEO-H743ZI</td>
+<td style="text-align: left;"><strong>Applications</strong></td>
+<td style="text-align: left;"><strong>V1.0.0</strong></td>
+<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: center;">Projects/NUCLEO-H743ZI/Applications</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NUCLEO-H743ZI</td>
+<td style="text-align: left;"><strong>Demonstrations</strong></td>
+<td style="text-align: left;"><strong>V1.0.0</strong></td>
+<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: center;">Projects/NUCLEO-H743ZI/Demonstrations</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">NUCLEO-H743ZI</td>
+<td style="text-align: left;"><strong>Examples</strong></td>
+<td style="text-align: left;"><strong>V1.0.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/NUCLEO-H743ZI/Examples</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NUCLEO-H743ZI</td>
+<td style="text-align: left;"><strong>Templates</strong></td>
+<td style="text-align: left;"><strong>V1.0.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/NUCLEO-H743ZI/Templates</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Projects STM32H743I-EVAL</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Board</th>
+<th style="text-align: left;">Project category</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: center;">License</th>
+<th style="text-align: center;">Path</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">STM32H743I-EVAL</td>
+<td style="text-align: left;"><strong>Applications</strong></td>
+<td style="text-align: left;"><strong>V1.0.0</strong></td>
+<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: center;">Projects/STM32H743I-EVAL/Applications</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32H743I-EVAL</td>
+<td style="text-align: left;"><strong>Demonstrations</strong></td>
+<td style="text-align: left;"><strong>V1.0.0</strong></td>
+<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: center;">Projects/STM32H743I-EVAL/Demonstrations</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32H743I-EVAL</td>
+<td style="text-align: left;"><strong>Examples</strong></td>
+<td style="text-align: left;"><strong>V1.0.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/STM32H743I-EVAL/Examples</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32H743I-EVAL</td>
+<td style="text-align: left;"><strong>Templates</strong></td>
+<td style="text-align: left;"><strong>V1.0.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: center;">Projects/STM32H743I-EVAL/Templates</td>
+</tr>
+</tbody>
+</table>
+<p>Note: in the tables above, project categories <strong>highlighted</strong> have changed since previous release.</p>
+<h2 id="known-limitations-8">Known Limitations</h2>
+<ul>
+<li>None</li>
+</ul>
+<h2 id="development-toolchains-and-compilers-8">Development Toolchains and Compilers</h2>
+<ul>
+<li>IAR Embedded Workbench for ARM (EWARM) toolchain V7.80.4 + ST-Link</li>
+<li>RealView Microcontroller Development Kit (MDK-ARM) toolchain V5.23 + ST-Link</li>
+<li>System Workbench for STM32 (SW4STM32) toolchain V1.14 + ST-Link</li>
+</ul>
+<h2 id="supported-devices-and-boards-8">Supported Devices and boards</h2>
+<ul>
+<li>STM32H743/753/750 devices</li>
+<li>STM32H743I-EVAL rev.B</li>
+<li>NUCLEO-H743ZI rev.B</li>
+</ul>
+<h2 id="backward-compatibility-8">Backward Compatibility</h2>
+<ul>
+<li>None</li>
+</ul>
+<h2 id="dependencies-8">Dependencies</h2>
+<ul>
+<li>None</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<footer class="sticky">
+<p>For complete documentation on STM32H7xx,visit: [<a href="http://www.st.com/stm32h7">www.st.com/stm32h7</a>]</p>
+<em>This release note uses up to date web standards and, for this reason, should not be opened with Internet Explorer but preferably with popular browsers such as Google Chrome, Mozilla Firefox, Opera or Microsoft Edge.</em>
+</footer>
+</body>
+</html>

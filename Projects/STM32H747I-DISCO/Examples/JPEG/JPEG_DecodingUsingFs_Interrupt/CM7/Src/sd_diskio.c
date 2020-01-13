@@ -59,7 +59,7 @@ static DSTATUS SD_CheckStatus(BYTE lun)
 {
   Stat = STA_NOINIT;
 
-  if(BSP_SD_GetCardState() == MSD_OK)
+  if(BSP_SD_GetCardState(0) == BSP_ERROR_NONE)
   {
     Stat &= ~STA_NOINIT;
   }
@@ -99,12 +99,12 @@ DRESULT SD_read(BYTE lun, BYTE *buff, DWORD sector, UINT count)
 {
   DRESULT res = RES_ERROR;
   
-  if(BSP_SD_ReadBlocks((uint32_t*)buff, 
+  if(BSP_SD_ReadBlocks(0,(uint32_t*)buff, 
                        (uint32_t) (sector), 
-                       count, SDMMC_DATATIMEOUT) == MSD_OK)
+                       count) == BSP_ERROR_NONE)
   {
     /* wait until the read operation is finished */
-    while(BSP_SD_GetCardState()!= MSD_OK)
+    while(BSP_SD_GetCardState(0)!= BSP_ERROR_NONE)
     {
     }
     res = RES_OK;
@@ -126,12 +126,12 @@ DRESULT SD_write(BYTE lun, const BYTE *buff, DWORD sector, UINT count)
 {
   DRESULT res = RES_ERROR;
   
-  if(BSP_SD_WriteBlocks((uint32_t*)buff, 
+  if(BSP_SD_WriteBlocks(0,(uint32_t*)buff, 
                         (uint32_t)(sector), 
-                        count, SDMMC_DATATIMEOUT) == MSD_OK)
+                        count) == BSP_ERROR_NONE)
   {
   /* wait until the Write operation is finished */
-    while(BSP_SD_GetCardState() != MSD_OK)
+    while(BSP_SD_GetCardState(0) != BSP_ERROR_NONE)
     {
     }    
     res = RES_OK;
@@ -165,21 +165,21 @@ DRESULT SD_ioctl(BYTE lun, BYTE cmd, void *buff)
   
   /* Get number of sectors on the disk (DWORD) */
   case GET_SECTOR_COUNT :
-    BSP_SD_GetCardInfo(&CardInfo);
+    BSP_SD_GetCardInfo(0,&CardInfo);
     *(DWORD*)buff = CardInfo.LogBlockNbr;
     res = RES_OK;
     break;
   
   /* Get R/W sector size (WORD) */
   case GET_SECTOR_SIZE :
-    BSP_SD_GetCardInfo(&CardInfo);
+    BSP_SD_GetCardInfo(0,&CardInfo);
     *(WORD*)buff = CardInfo.LogBlockSize;
     res = RES_OK;
     break;
   
   /* Get erase block size in unit of sector (DWORD) */
   case GET_BLOCK_SIZE :
-    BSP_SD_GetCardInfo(&CardInfo);
+    BSP_SD_GetCardInfo(0,&CardInfo);
     *(DWORD*)buff = CardInfo.LogBlockSize;
   res = RES_OK;
     break;

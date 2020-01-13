@@ -37,6 +37,9 @@ typedef struct
 }
 LCD_LayerPropTypedef;
 
+void LCD_MspInit(void);
+void DSI_IO_WriteCmd(uint32_t NbrParams, uint8_t *pParams);
+
 #endif /* LCDCONF_H */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

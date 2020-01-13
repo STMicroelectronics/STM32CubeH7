@@ -121,7 +121,7 @@ LTDC, DMA2D , WVGA, ARGB8888, SDRAM, Burst mode
 
   - This example runs on STM32H747xx/STM32H757xx devices.
 
-  - This example has been tested with STMicroelectronics STM32H747I-DISCO rev.D
+  - This example has been tested with STMicroelectronics STM32H747I-DISCO 
     board and can be easily tailored to any other supported device
     and development board.
 

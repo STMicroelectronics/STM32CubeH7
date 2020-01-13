@@ -73,7 +73,7 @@ int main(void)
   }
   
   /* Initialize the SD interface */
-  BSP_SD_Init();
+  ADAFRUIT_802_SD_Init(0);
 
   /* Configure LED1 and LED3 */
   BSP_LED_Init(LED_GREEN);
@@ -253,16 +253,16 @@ static ShieldStatus TFT_ShieldDetect(void)
   GPIO_InitTypeDef  GPIO_InitStruct;
 
   /* Enable GPIO clock */
-  NUCLEO_ADCx_GPIO_CLK_ENABLE();
+  ADAFRUIT_802_ADCx_GPIO_CLK_ENABLE();
 
-  GPIO_InitStruct.Pin = NUCLEO_ADCx_GPIO_PIN ;
+  GPIO_InitStruct.Pin = ADAFRUIT_802_ADCx_GPIO_PIN ;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_PULLDOWN;
-  HAL_GPIO_Init(NUCLEO_ADCx_GPIO_PORT , &GPIO_InitStruct);
+  HAL_GPIO_Init(ADAFRUIT_802_ADCx_GPIO_PORT , &GPIO_InitStruct);
 
   HAL_Delay(1);
 
-  if(HAL_GPIO_ReadPin(NUCLEO_ADCx_GPIO_PORT , NUCLEO_ADCx_GPIO_PIN ) != 0)
+  if(HAL_GPIO_ReadPin(ADAFRUIT_802_ADCx_GPIO_PORT , ADAFRUIT_802_ADCx_GPIO_PIN ) != 0)
   {
     return SHIELD_DETECTED;
   }

@@ -55,7 +55,9 @@ SAI_HandleTypeDef  SaiInputHandle;
 SAI_HandleTypeDef  SaiOutputHandle;
 
 /* Audio codec Handle */
-AUDIO_DrvTypeDef  *audio_drv;
+static AUDIO_Drv_t                     *Audio_Drv = NULL;
+void *Audio_CompObj = NULL;
+WM8994_Init_t codec_init;
 
 /* Buffer containing the PDM samples */
 #if defined ( __CC_ARM )  /* !< ARM Compiler */
@@ -86,6 +88,7 @@ __IO BUFFER_StateTypeDef bufferStatus = BUFFER_OFFSET_NONE;
 
 /* Private function prototypes -----------------------------------------------*/
 static void SystemClock_Config(void);
+static int32_t WM8994_Probe(void);
 static void Playback_Init(void);
 static void AUDIO_IN_PDMToPCM_Init(uint32_t AudioFreq, uint32_t ChannelNumber);
 static void AUDIO_IN_PDMToPCM(uint16_t *PDMBuf, uint16_t *PCMBuf, uint32_t ChannelNumber);
@@ -125,13 +128,24 @@ int main(void)
 
   /* Initialize playback */
   Playback_Init();
-
+  WM8994_Init_t codec_init;
+  
+  codec_init.Resolution   = 0;
+  
+  /* Fill codec_init structure */
+  codec_init.Frequency    = 16000;
+  codec_init.InputDevice  = AUDIO_IN_DEVICE_DIGITAL_MIC;
+  codec_init.OutputDevice = AUDIO_OUT_DEVICE_HEADPHONE;
+  
+  /* Convert volume before sending to the codec */
+  codec_init.Volume       = VOLUME_OUT_CONVERT(100);
+  
   /* Start the playback */
-  if(0 != audio_drv->Play(AUDIO_I2C_ADDRESS, (uint16_t *)audioPcmBuf, AUDIO_BUFFER_SIZE))
+  if(Audio_Drv->Init(Audio_CompObj, &codec_init) != 0)
   {
     Error_Handler();
   }
-
+  
   /* Start the PDM data reception process */
   if(HAL_OK != HAL_SAI_Receive_DMA(&SaiInputHandle, (uint8_t*)audioPdmBuf, AUDIO_BUFFER_SIZE))
   {
@@ -143,7 +157,11 @@ int main(void)
   {
     Error_Handler();
   }
-
+    /* Start the playback */
+  if(Audio_Drv->Play(Audio_CompObj) < 0)
+  {
+    Error_Handler();
+  }
   /* Initialize Rx buffer status */
   bufferStatus &= BUFFER_OFFSET_NONE;
 
@@ -263,6 +281,53 @@ static void SystemClock_Config(void)
 }
 
 /**
+  * @brief  Register Bus IOs if component ID is OK
+  * @retval error status
+  */
+static int32_t WM8994_Probe(void)
+{
+  int32_t ret = BSP_ERROR_NONE;
+  WM8994_IO_t              IOCtx;
+  static WM8994_Object_t   WM8994Obj;
+  uint32_t id;
+
+  /* Configure the audio driver */
+  IOCtx.Address     = AUDIO_I2C_ADDRESS;
+  IOCtx.Init        = BSP_I2C1_Init;
+  IOCtx.DeInit      = BSP_I2C1_DeInit;
+  IOCtx.ReadReg     = BSP_I2C1_ReadReg16;
+  IOCtx.WriteReg    = BSP_I2C1_WriteReg16;
+  IOCtx.GetTick     = BSP_GetTick;
+
+  if(WM8994_RegisterBusIO (&WM8994Obj, &IOCtx) != WM8994_OK)
+  {
+    ret = BSP_ERROR_BUS_FAILURE;
+  }
+  else
+  {
+    /* Reset the codec */
+    if(WM8994_Reset(&WM8994Obj) != WM8994_OK)
+    {
+      ret = BSP_ERROR_COMPONENT_FAILURE;
+    }
+    else if(WM8994_ReadID(&WM8994Obj, &id) != WM8994_OK)
+    {
+      ret = BSP_ERROR_COMPONENT_FAILURE;
+    }
+    else if(id != WM8994_ID)
+    {
+      ret = BSP_ERROR_UNKNOWN_COMPONENT;
+    }
+    else
+    {
+      Audio_Drv = (AUDIO_Drv_t *) &WM8994_Driver;
+      Audio_CompObj = &WM8994Obj;
+    }
+  }
+  return ret;
+}
+
+/**
   * @brief  Playback initialization
   * @param  None
   * @retval None
@@ -318,7 +383,7 @@ static void Playback_Init(void)
   SaiInputHandle.Init.Protocol            = SAI_FREE_PROTOCOL;
   SaiInputHandle.Init.DataSize            = SAI_DATASIZE_16;
   SaiInputHandle.Init.FirstBit            = SAI_FIRSTBIT_LSB;
-  SaiInputHandle.Init.ClockStrobing       = SAI_CLOCKSTROBING_FALLINGEDGE;
+  SaiInputHandle.Init.ClockStrobing       = SAI_CLOCKSTROBING_RISINGEDGE;
 
   SaiInputHandle.FrameInit.FrameLength       = 16;
   SaiInputHandle.FrameInit.ActiveFrameLength = 1;
@@ -358,16 +423,16 @@ static void Playback_Init(void)
   SaiOutputHandle.Init.FirstBit       = SAI_FIRSTBIT_MSB;
   SaiOutputHandle.Init.ClockStrobing  = SAI_CLOCKSTROBING_FALLINGEDGE;
 
-  SaiOutputHandle.FrameInit.FrameLength       = 128;
-  SaiOutputHandle.FrameInit.ActiveFrameLength = 64;
+  SaiOutputHandle.FrameInit.FrameLength       = 32;
+  SaiOutputHandle.FrameInit.ActiveFrameLength = 16;
   SaiOutputHandle.FrameInit.FSDefinition      = SAI_FS_CHANNEL_IDENTIFICATION;
   SaiOutputHandle.FrameInit.FSPolarity        = SAI_FS_ACTIVE_LOW;
   SaiOutputHandle.FrameInit.FSOffset          = SAI_FS_BEFOREFIRSTBIT;
 
   SaiOutputHandle.SlotInit.FirstBitOffset = 0;
   SaiOutputHandle.SlotInit.SlotSize       = SAI_SLOTSIZE_DATASIZE;
-  SaiOutputHandle.SlotInit.SlotNumber     = 4;
-  SaiOutputHandle.SlotInit.SlotActive     = (SAI_SLOTACTIVE_0 | SAI_SLOTACTIVE_2);
+  SaiOutputHandle.SlotInit.SlotNumber     = 2;
+  SaiOutputHandle.SlotInit.SlotActive     = (SAI_SLOTACTIVE_0 | SAI_SLOTACTIVE_1 | SAI_SLOTACTIVE_2 | SAI_SLOTACTIVE_3);
 
   /* DeInit SAI PCM input */
   HAL_SAI_DeInit(&SaiOutputHandle);
@@ -381,24 +446,7 @@ static void Playback_Init(void)
   /* Enable SAI to generate clock used by audio driver */
   __HAL_SAI_ENABLE(&SaiOutputHandle);
 
-  /* Check audio codec ID */
-  if(WM8994_ID != wm8994_drv.ReadID(AUDIO_I2C_ADDRESS))
-  {
-    Error_Handler();
-  }
-  else
-  {
-    audio_drv = &wm8994_drv;
-  }
-
-  /* Reset audio codec */
-  audio_drv->Reset(AUDIO_I2C_ADDRESS);
-
-  /* Init audio codec */
-  if(0 != audio_drv->Init(AUDIO_I2C_ADDRESS, OUTPUT_DEVICE_HEADPHONE, 60, AUDIO_FREQUENCY))
-  {
-    Error_Handler();
-  }
+  WM8994_Probe();
 
   /* Init PDM Filters */
   AUDIO_IN_PDMToPCM_Init(AUDIO_FREQUENCY, AUDIO_CHANNEL_NUMBER);

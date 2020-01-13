@@ -31,9 +31,9 @@
 			<locationURI>PARENT-2-PROJECT_LOC/readme.txt</locationURI>
 		</link>
 		<link>
-			<name>Utilities/lcd_log.c</name>
+			<name>Utilities/basic_gui.c</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/Utilities/Log/lcd_log.c</locationURI>
+			<locationURI>PARENT-6-PROJECT_LOC/Utilities/Basic_GUI/basic_gui.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/CMSIS/system_stm32h7xx.c</name>
@@ -151,6 +151,11 @@
 			<locationURI>PARENT-6-PROJECT_LOC/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_pwr_ex.c</locationURI>
 		</link>
 		<link>
+			<name>Drivers/STM32H7xx_HAL_Driver/stm32h7xx_hal_exti.c</name>
+			<type>1</type>
+			<locationURI>PARENT-6-PROJECT_LOC/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_exti.c</locationURI>
+		</link>
+		<link>
 			<name>Drivers/STM32H7xx_HAL_Driver/stm32h7xx_hal_qspi.c</name>
 			<type>1</type>
 			<locationURI>PARENT-6-PROJECT_LOC/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_qspi.c</locationURI>
@@ -236,11 +241,6 @@
 			<locationURI>PARENT-2-PROJECT_LOC/Src/lcd.c</locationURI>
 		</link>
 		<link>
-			<name>Example/User/log.c</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/Src/log.c</locationURI>
-		</link>
-		<link>
 			<name>Example/User/main.c</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/Src/main.c</locationURI>
@@ -254,16 +254,6 @@
 			<name>Example/User/sdram.c</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/Src/sdram.c</locationURI>
-		</link>
-		<link>
-			<name>Example/User/sdram_dma.c</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/Src/sdram_dma.c</locationURI>
-		</link>
-		<link>
-			<name>Example/User/stm32h7xx_hal_msp.c</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/Src/stm32h7xx_hal_msp.c</locationURI>
 		</link>
 		<link>
 			<name>Example/User/stm32h7xx_it.c</name>
@@ -280,45 +270,60 @@
 			<type>1</type>
 			<locationURI>PARENT-6-PROJECT_LOC/Drivers/BSP/Components/ft5336/ft5336.c</locationURI>
 		</link>
+	   <link>
+			<name>Drivers/BSP/Components/ft5336_reg.c</name>
+			<type>1</type>
+			<locationURI>PARENT-6-PROJECT_LOC/Drivers/BSP/Components/ft5336/ft5336_reg.c</locationURI>
+		</link>
 		<link>
 			<name>Drivers/BSP/Components/wm8994.c</name>
 			<type>1</type>
 			<locationURI>PARENT-6-PROJECT_LOC/Drivers/BSP/Components/wm8994/wm8994.c</locationURI>
 		</link>
 		<link>
+			<name>Drivers/BSP/Components/wm8994_reg.c</name>
+			<type>1</type>
+			<locationURI>PARENT-6-PROJECT_LOC/Drivers/BSP/Components/wm8994/wm8994_reg.c</locationURI>
+		</link>
+		<link>
+			<name>Drivers/BSP/Components/mt48lc4m32b2.c</name>
+			<type>1</type>
+			<locationURI>PARENT-6-PROJECT_LOC/Drivers/BSP/Components/mt48lc4m32b2/mt48lc4m32b2.c</locationURI>
+		</link>
+		<link>
 			<name>Drivers/BSP/STM32H750B_DISCOVERY/stm32h750b_discovery.c</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/Drivers/BSP/STM32H750B-Discovery/stm32h750b_discovery.c</locationURI>
+			<locationURI>PARENT-6-PROJECT_LOC/Drivers/BSP/STM32H750B-DK/stm32h750b_discovery.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/BSP/STM32H750B_DISCOVERY/stm32h750b_discovery_audio.c</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/Drivers/BSP/STM32H750B-Discovery/stm32h750b_discovery_audio.c</locationURI>
+			<locationURI>PARENT-6-PROJECT_LOC/Drivers/BSP/STM32H750B-DK/stm32h750b_discovery_audio.c</locationURI>
+		</link>
+		<link>
+			<name>Drivers/BSP/STM32H750B_DISCOVERY/stm32h750b_discovery_bus.c</name>
+			<type>1</type>
+			<locationURI>PARENT-6-PROJECT_LOC/Drivers/BSP/STM32H750B-DK/stm32h750b_discovery_bus.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/BSP/STM32H750B_DISCOVERY/stm32h750b_discovery_lcd.c</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/Drivers/BSP/STM32H750B-Discovery/stm32h750b_discovery_lcd.c</locationURI>
+			<locationURI>PARENT-6-PROJECT_LOC/Drivers/BSP/STM32H750B-DK/stm32h750b_discovery_lcd.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/BSP/STM32H750B_DISCOVERY/stm32h750b_discovery_mmc.c</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/Drivers/BSP/STM32H750B-Discovery/stm32h750b_discovery_mmc.c</locationURI>
-		</link>
-		<link>
-			<name>Drivers/BSP/STM32H750B_DISCOVERY/stm32h750b_discovery_qspi.c</name>
-			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/Drivers/BSP/STM32H750B-Discovery/stm32h750b_discovery_qspi.c</locationURI>
+			<locationURI>PARENT-6-PROJECT_LOC/Drivers/BSP/STM32H750B-DK/stm32h750b_discovery_mmc.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/BSP/STM32H750B_DISCOVERY/stm32h750b_discovery_sdram.c</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/Drivers/BSP/STM32H750B-Discovery/stm32h750b_discovery_sdram.c</locationURI>
+			<locationURI>PARENT-6-PROJECT_LOC/Drivers/BSP/STM32H750B-DK/stm32h750b_discovery_sdram.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/BSP/STM32H750B_DISCOVERY/stm32h750b_discovery_ts.c</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/Drivers/BSP/STM32H750B-Discovery/stm32h750b_discovery_ts.c</locationURI>
+			<locationURI>PARENT-6-PROJECT_LOC/Drivers/BSP/STM32H750B-DK/stm32h750b_discovery_ts.c</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>

@@ -50,7 +50,7 @@ void HAL_MspInit(void)
 
 /**
   * @brief  DeInitializes the Global MSP.
-  * @param  None  
+  * @param  None
   * @retval None
   */
 void HAL_MspDeInit(void)
@@ -68,7 +68,7 @@ void HAL_MspDeInit(void)
 
 /**
   * @brief  DeInitializes the PPP MSP.
-  * @param  None  
+  * @param  None
   * @retval None
   */
 /*void HAL_PPP_MspDeInit(void)

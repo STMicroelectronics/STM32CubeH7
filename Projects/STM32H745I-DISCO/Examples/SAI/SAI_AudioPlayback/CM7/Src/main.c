@@ -53,10 +53,11 @@ SAI_HandleTypeDef  SaiInputHandle;
 
 /* SAI output Handle */
 SAI_HandleTypeDef  SaiOutputHandle;
-
+static int32_t WM8994_Probe(void);
 /* Audio codec Handle */
-AUDIO_DrvTypeDef  *audio_drv;
-
+static AUDIO_Drv_t  *Audio_Drv = NULL;
+void *Audio_CompObj = NULL;
+WM8994_Init_t codec_init;
 /* Buffer containing the PDM samples */
 #if defined ( __CC_ARM )  /* !< ARM Compiler */
   /* Buffer location should aligned to cache line size (32 bytes) */
@@ -132,13 +133,30 @@ int main(void)
 
   /* Initialize playback */
   Playback_Init();
-
+  WM8994_Init_t codec_init;
+  
+  codec_init.Resolution   = 0;
+  
+  /* Fill codec_init structure */
+  codec_init.Frequency    = 16000;
+  codec_init.InputDevice  = WM8994_IN_NONE;
+  codec_init.OutputDevice = AUDIO_OUT_DEVICE_HEADPHONE;
+  
+  /* Convert volume before sending to the codec */
+  codec_init.Volume       = VOLUME_OUT_CONVERT(60);
+  
   /* Start the playback */
-  if(0 != audio_drv->Play(AUDIO_I2C_ADDRESS, (uint16_t *)audioPcmBuf, AUDIO_BUFFER_SIZE))
+  if(Audio_Drv->Init(Audio_CompObj, &codec_init) != 0)
   {
     Error_Handler();
   }
-
+  
+  /* Start the playback */
+  if(Audio_Drv->Play(Audio_CompObj) < 0)
+  {
+    Error_Handler();
+  }
+  
   /* Start the PDM data reception process */
   if(HAL_OK != HAL_SAI_Receive_DMA(&SaiInputHandle, (uint8_t*)audioPdmBuf, AUDIO_BUFFER_SIZE))
   {
@@ -387,30 +405,57 @@ static void Playback_Init(void)
 
   /* Enable SAI to generate clock used by audio driver */
   __HAL_SAI_ENABLE(&SaiOutputHandle);
-
-  /* Check audio codec ID */
-  if(WM8994_ID != wm8994_drv.ReadID(AUDIO_I2C_ADDRESS))
-  {
-    Error_Handler();
-  }
-  else
-  {
-    audio_drv = &wm8994_drv;
-  }
-
-  /* Reset audio codec */
-  audio_drv->Reset(AUDIO_I2C_ADDRESS);
-
-  /* Init audio codec */
-  if(0 != audio_drv->Init(AUDIO_I2C_ADDRESS, OUTPUT_DEVICE_HEADPHONE, 70, AUDIO_FREQUENCY))
-  {
-    Error_Handler();
-  }
+    WM8994_Probe();
 
   /* Init PDM Filters */
   AUDIO_IN_PDMToPCM_Init(AUDIO_FREQUENCY, AUDIO_CHANNEL_NUMBER);
 }
+/**
+  * @brief  Register Bus IOs if component ID is OK
+  * @retval error status
+  */
+static int32_t WM8994_Probe(void)
+{
+  int32_t ret = BSP_ERROR_NONE;
+  WM8994_IO_t              IOCtx;
+  static WM8994_Object_t   WM8994Obj;
+  uint32_t id;
 
+  /* Configure the audio driver */
+  IOCtx.Address     = AUDIO_I2C_ADDRESS;
+  IOCtx.Init        = BSP_I2C4_Init;
+  IOCtx.DeInit      = BSP_I2C4_DeInit;
+  IOCtx.ReadReg     = BSP_I2C4_ReadReg16;
+  IOCtx.WriteReg    = BSP_I2C4_WriteReg16;
+  IOCtx.GetTick     = BSP_GetTick;
+
+  if(WM8994_RegisterBusIO (&WM8994Obj, &IOCtx) != WM8994_OK)
+  {
+    ret = BSP_ERROR_BUS_FAILURE;
+  }
+  else
+  {
+    /* Reset the codec */
+    if(WM8994_Reset(&WM8994Obj) != WM8994_OK)
+    {
+      ret = BSP_ERROR_COMPONENT_FAILURE;
+    }
+    else if(WM8994_ReadID(&WM8994Obj, &id) != WM8994_OK)
+    {
+      ret = BSP_ERROR_COMPONENT_FAILURE;
+    }
+    else if(id != WM8994_ID)
+    {
+      ret = BSP_ERROR_UNKNOWN_COMPONENT;
+    }
+    else
+    {
+      Audio_Drv = (AUDIO_Drv_t *) &WM8994_Driver;
+      Audio_CompObj = &WM8994Obj;
+    }
+  }
+  return ret;
+}
 /**
 * @brief  Init PDM Filters.
 * @param  AudioFreq: Audio sampling frequency

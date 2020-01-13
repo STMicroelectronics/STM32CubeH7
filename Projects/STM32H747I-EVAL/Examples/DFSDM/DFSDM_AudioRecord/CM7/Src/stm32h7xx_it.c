@@ -39,7 +39,7 @@ extern SAI_HandleTypeDef            SaiHandle;
 /* Private function prototypes -----------------------------------------------*/
 void AUDIO_DFSDMx_DMAx_LEFT_IRQHandler(void);
 void AUDIO_DFSDMx_DMAx_RIGHT_IRQHandler(void);
-void AUDIO_OUT_SAIx_DMAx_IRQHandler(void);
+void AUDIO_SAIx_DMAx_IRQHandler(void);
 /* Private functions ---------------------------------------------------------*/
 
 /******************************************************************************/
@@ -177,7 +177,7 @@ void AUDIO_DFSDMx_DMAx_RIGHT_IRQHandler(void)
   * @param  None
   * @retval None
   */
-void AUDIO_OUT_SAIx_DMAx_IRQHandler(void)
+void AUDIO_SAIx_DMAx_IRQHandler(void)
 {
   HAL_DMA_IRQHandler(SaiHandle.hdmatx);
 }

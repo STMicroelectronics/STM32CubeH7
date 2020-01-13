@@ -39,16 +39,16 @@ DRESULT SD_read (BYTE, BYTE*, DWORD, UINT);
 #if _USE_IOCTL == 1
   DRESULT SD_ioctl (BYTE, BYTE, void*);
 #endif  /* _USE_IOCTL == 1 */
-  
+
 const Diskio_drvTypeDef  SD_Driver =
 {
   SD_initialize,
   SD_status,
-  SD_read, 
+  SD_read,
 #if  _USE_WRITE == 1
   SD_write,
 #endif /* _USE_WRITE == 1 */
-  
+
 #if  _USE_IOCTL == 1
   SD_ioctl,
 #endif /* _USE_IOCTL == 1 */
@@ -59,17 +59,17 @@ static DSTATUS SD_CheckStatus(BYTE lun)
 {
   Stat = STA_NOINIT;
 
-  if(BSP_SD_GetCardState() == MSD_OK)
+  if(BSP_SD_GetCardState(0) == BSP_ERROR_NONE)
   {
     Stat &= ~STA_NOINIT;
   }
-  
+
   return Stat;
 }
 
 /**
   * @brief  Initializes a Drive
-  * @param  lun : not used 
+  * @param  lun : not used
   * @retval DSTATUS: Operation status
   */
 DSTATUS SD_initialize(BYTE lun)
@@ -98,18 +98,18 @@ DSTATUS SD_status(BYTE lun)
 DRESULT SD_read(BYTE lun, BYTE *buff, DWORD sector, UINT count)
 {
   DRESULT res = RES_ERROR;
-  
-  if(BSP_SD_ReadBlocks((uint32_t*)buff, 
-                       (uint32_t) (sector), 
-                       count, SDMMC_DATATIMEOUT) == MSD_OK)
+
+  if(BSP_SD_ReadBlocks(0, (uint32_t*)buff,
+                       (uint32_t) (sector),
+                       count) == BSP_ERROR_NONE)
   {
     /* wait until the read operation is finished */
-    while(BSP_SD_GetCardState()!= MSD_OK)
+    while(BSP_SD_GetCardState(0)!= BSP_ERROR_NONE)
     {
     }
     res = RES_OK;
   }
-  
+
   return res;
 }
 
@@ -125,18 +125,18 @@ DRESULT SD_read(BYTE lun, BYTE *buff, DWORD sector, UINT count)
 DRESULT SD_write(BYTE lun, const BYTE *buff, DWORD sector, UINT count)
 {
   DRESULT res = RES_ERROR;
-  
-  if(BSP_SD_WriteBlocks((uint32_t*)buff, 
-                        (uint32_t)(sector), 
-                        count, SDMMC_DATATIMEOUT) == MSD_OK)
+
+  if(BSP_SD_WriteBlocks(0, (uint32_t*)buff,
+                        (uint32_t)(sector),
+                        count) == BSP_ERROR_NONE)
   {
 	/* wait until the Write operation is finished */
-    while(BSP_SD_GetCardState() != MSD_OK)
+    while(BSP_SD_GetCardState(0) != BSP_ERROR_NONE)
     {
-    }    
+    }
     res = RES_OK;
   }
-  
+
   return res;
 }
 #endif /* _USE_WRITE == 1 */
@@ -153,44 +153,44 @@ DRESULT SD_ioctl(BYTE lun, BYTE cmd, void *buff)
 {
   DRESULT res = RES_ERROR;
   BSP_SD_CardInfo CardInfo;
-  
+
   if (Stat & STA_NOINIT) return RES_NOTRDY;
-  
+
   switch (cmd)
   {
   /* Make sure that no pending write process */
   case CTRL_SYNC :
     res = RES_OK;
     break;
-  
+
   /* Get number of sectors on the disk (DWORD) */
   case GET_SECTOR_COUNT :
-    BSP_SD_GetCardInfo(&CardInfo);
+    BSP_SD_GetCardInfo(0, &CardInfo);
     *(DWORD*)buff = CardInfo.LogBlockNbr;
     res = RES_OK;
     break;
-  
+
   /* Get R/W sector size (WORD) */
   case GET_SECTOR_SIZE :
-    BSP_SD_GetCardInfo(&CardInfo);
+    BSP_SD_GetCardInfo(0, &CardInfo);
     *(WORD*)buff = CardInfo.LogBlockSize;
     res = RES_OK;
     break;
-  
+
   /* Get erase block size in unit of sector (DWORD) */
   case GET_BLOCK_SIZE :
-    BSP_SD_GetCardInfo(&CardInfo);
+    BSP_SD_GetCardInfo(0, &CardInfo);
     *(DWORD*)buff = CardInfo.LogBlockSize;
 	res = RES_OK;
     break;
-  
+
   default:
     res = RES_PARERR;
   }
-  
+
   return res;
 }
 #endif /* _USE_IOCTL == 1 */
-  
+
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
 

@@ -2,51 +2,34 @@
   ******************************************************************************
   * @file    otm8009a.h
   * @author  MCD Application Team
-  * @version V1.0.2
-  * @date    27-January-2017
   * @brief   This file contains all the constants parameters for the OTM8009A
   *          which is the LCD Driver for KoD KM-040TMP-02-0621 (WVGA)
   *          DSI LCD Display.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
+  * <h2><center>&copy; Copyright (c) 2015 STMicroelectronics.
+  * All rights reserved.</center></h2>
   *
-  * Redistribution and use in source and binary forms, with or without modification,
-  * are permitted provided that the following conditions are met:
-  *   1. Redistributions of source code must retain the above copyright notice,
-  *      this list of conditions and the following disclaimer.
-  *   2. Redistributions in binary form must reproduce the above copyright notice,
-  *      this list of conditions and the following disclaimer in the documentation
-  *      and/or other materials provided with the distribution.
-  *   3. Neither the name of STMicroelectronics nor the names of its contributors
-  *      may be used to endorse or promote products derived from this software
-  *      without specific prior written permission.
-  *
-  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-  * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
-  * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-  * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-  * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-  * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  * This software component is licensed by ST under BSD 3-Clause license,
+  * the "License"; You may not use this file except in compliance with the
+  * License. You may obtain a copy of the License at:
+  *                        opensource.org/licenses/BSD-3-Clause
   *
   ******************************************************************************
   */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __OTM8009A_H
-#define __OTM8009A_H
+#ifndef OTM8009A_H
+#define OTM8009A_H
 
 #ifdef __cplusplus
  extern "C" {
 #endif
 
 /* Includes ------------------------------------------------------------------*/
-#include <stdint.h>
+#include "otm8009a_reg.h"
+
 /** @addtogroup BSP
   * @{
   */
@@ -63,18 +46,79 @@
   * @{
   */
 
-#if defined ( __GNUC__ )
-#ifndef __weak
-#define __weak __attribute__((weak))
-#endif /* __weak */
-#endif /* __GNUC__ */
-      
+typedef int32_t (*OTM8009A_GetTick_Func) (void);
+typedef int32_t (*OTM8009A_Delay_Func)   (uint32_t);
+typedef int32_t (*OTM8009A_WriteReg_Func)(uint16_t, uint16_t, uint8_t*, uint16_t);
+typedef int32_t (*OTM8009A_ReadReg_Func) (uint16_t, uint16_t, uint8_t*, uint16_t);
+
+/** @addtogroup OTM8009A_Exported_Types
+  * @{
+  */
+
+typedef struct
+{ 
+  uint32_t  Orientation;
+  uint32_t  ColorCode;
+  uint32_t  Brightness;
+} OTM8009A_LCD_Ctx_t;
+
+typedef struct
+{
+  uint16_t                  Address;  
+  OTM8009A_WriteReg_Func    WriteReg;
+  OTM8009A_ReadReg_Func     ReadReg;  
+  OTM8009A_GetTick_Func     GetTick; 
+} OTM8009A_IO_t;
+
+typedef struct
+{
+  OTM8009A_IO_t         IO;
+  otm8009a_ctx_t        Ctx; 
+  uint8_t               IsInitialized;
+} OTM8009A_Object_t;
+
+typedef struct
+{
+  /* Control functions */
+  int32_t (*Init             )(OTM8009A_Object_t*, uint32_t, uint32_t);
+  int32_t (*DeInit           )(OTM8009A_Object_t*);
+  int32_t (*ReadID           )(OTM8009A_Object_t*, uint32_t*);
+  int32_t (*DisplayOn        )(OTM8009A_Object_t*);
+  int32_t (*DisplayOff       )(OTM8009A_Object_t*);
+  int32_t (*SetBrightness    )(OTM8009A_Object_t*, uint32_t); 
+  int32_t (*GetBrightness    )(OTM8009A_Object_t*, uint32_t*);   
+  int32_t (*SetOrientation   )(OTM8009A_Object_t*, uint32_t);
+  int32_t (*GetOrientation   )(OTM8009A_Object_t*, uint32_t*);
+
+  /* Drawing functions*/
+  int32_t ( *SetCursor       ) (OTM8009A_Object_t*, uint32_t, uint32_t); 
+  int32_t ( *DrawBitmap      ) (OTM8009A_Object_t*, uint32_t, uint32_t, uint8_t *);
+  int32_t ( *FillRGBRect     ) (OTM8009A_Object_t *pObj, uint32_t Xpos, uint32_t Ypos, uint8_t *pData, uint32_t Width, uint32_t Height);
+  int32_t ( *DrawHLine       ) (OTM8009A_Object_t*, uint32_t, uint32_t, uint32_t, uint32_t);
+  int32_t ( *DrawVLine       ) (OTM8009A_Object_t*, uint32_t, uint32_t, uint32_t, uint32_t);
+  int32_t ( *FillRect        ) (OTM8009A_Object_t*, uint32_t, uint32_t, uint32_t, uint32_t, uint32_t);
+  int32_t ( *GetPixel        ) (OTM8009A_Object_t*, uint32_t, uint32_t, uint32_t*);
+  int32_t ( *SetPixel        ) (OTM8009A_Object_t*, uint32_t, uint32_t, uint32_t);
+  int32_t ( *GetXSize        ) (OTM8009A_Object_t*, uint32_t *);
+  int32_t ( *GetYSize        ) (OTM8009A_Object_t*, uint32_t *);
+  
+}OTM8009A_LCD_Drv_t;
+
 /**
- *  @brief LCD_OrientationTypeDef
+  * @}
+  */
+
+#define OTM8009A_OK                (0)
+#define OTM8009A_ERROR             (-1)
+
+/* OTM8009A ID */
+#define OTM8009A_ID                 0x40U
+
+/**
  *  Possible values of Display Orientation
  */
-#define OTM8009A_ORIENTATION_PORTRAIT    ((uint32_t)0x00) /* Portrait orientation choice of LCD screen  */
-#define OTM8009A_ORIENTATION_LANDSCAPE   ((uint32_t)0x01) /* Landscape orientation choice of LCD screen */
+#define OTM8009A_ORIENTATION_PORTRAIT    0U /* Portrait orientation choice of LCD screen  */
+#define OTM8009A_ORIENTATION_LANDSCAPE   1U /* Landscape orientation choice of LCD screen */
 
 /**
  *  @brief  Possible values of
@@ -102,77 +146,19 @@
 #define  OTM8009A_480X800_HBP               ((uint16_t)34)     /* Horizontal back porch      */
 #define  OTM8009A_480X800_HFP               ((uint16_t)34)     /* Horizontal front porch     */
 #define  OTM8009A_480X800_VSYNC             ((uint16_t)1)      /* Vertical synchronization   */
-#define  OTM8009A_480X800_VBP               ((uint16_t)15)      /* Vertical back porch        */
-#define  OTM8009A_480X800_VFP               ((uint16_t)16)      /* Vertical front porch       */
+#define  OTM8009A_480X800_VBP               ((uint16_t)15)     /* Vertical back porch        */
+#define  OTM8009A_480X800_VFP               ((uint16_t)16)     /* Vertical front porch       */
 
 /**
   * @brief  OTM8009A_800X480 Timing parameters for Landscape orientation mode
   *         Same values as for Portrait mode in fact.
   */
-#define  OTM8009A_800X480_HSYNC             OTM8009A_480X800_VSYNC  /* Horizontal synchronization */
-#define  OTM8009A_800X480_HBP               OTM8009A_480X800_VBP    /* Horizontal back porch      */
-#define  OTM8009A_800X480_HFP               OTM8009A_480X800_VFP    /* Horizontal front porch     */
-#define  OTM8009A_800X480_VSYNC             OTM8009A_480X800_HSYNC  /* Vertical synchronization   */
-#define  OTM8009A_800X480_VBP               OTM8009A_480X800_HBP    /* Vertical back porch        */
-#define  OTM8009A_800X480_VFP               OTM8009A_480X800_HFP    /* Vertical front porch       */
-
-
-/* List of OTM8009A used commands                                  */
-/* Detailed in OTM8009A Data Sheet 'DATA_SHEET_OTM8009A_V0 92.pdf' */
-/* Version of 14 June 2012                                         */
-#define  OTM8009A_CMD_NOP                   0x00  /* NOP command      */
-#define  OTM8009A_CMD_SWRESET               0x01  /* Sw reset command */
-#define  OTM8009A_CMD_RDDMADCTL             0x0B  /* Read Display MADCTR command : read memory display access ctrl */
-#define  OTM8009A_CMD_RDDCOLMOD             0x0C  /* Read Display pixel format */
-#define  OTM8009A_CMD_SLPIN                 0x10  /* Sleep In command */
-#define  OTM8009A_CMD_SLPOUT                0x11  /* Sleep Out command */
-#define  OTM8009A_CMD_PTLON                 0x12  /* Partial mode On command */
-
-#define  OTM8009A_CMD_DISPOFF               0x28  /* Display Off command */
-#define  OTM8009A_CMD_DISPON                0x29  /* Display On command */
-
-#define  OTM8009A_CMD_CASET                 0x2A  /* Column address set command */
-#define  OTM8009A_CMD_PASET                 0x2B  /* Page address set command */
-
-#define  OTM8009A_CMD_RAMWR                 0x2C  /* Memory (GRAM) write command */
-#define  OTM8009A_CMD_RAMRD                 0x2E  /* Memory (GRAM) read command  */
-
-#define  OTM8009A_CMD_PLTAR                 0x30  /* Partial area command (4 parameters) */
-
-#define  OTM8009A_CMD_TEOFF                 0x34  /* Tearing Effect Line Off command : command with no parameter */
-
-#define  OTM8009A_CMD_TEEON                 0x35  /* Tearing Effect Line On command : command with 1 parameter 'TELOM' */
-
-/* Parameter TELOM : Tearing Effect Line Output Mode : possible values */
-#define OTM8009A_TEEON_TELOM_VBLANKING_INFO_ONLY            0x00
-#define OTM8009A_TEEON_TELOM_VBLANKING_AND_HBLANKING_INFO   0x01
-
-#define  OTM8009A_CMD_MADCTR                0x36  /* Memory Access write control command  */
-
-/* Possible used values of MADCTR */
-#define OTM8009A_MADCTR_MODE_PORTRAIT       0x00
-#define OTM8009A_MADCTR_MODE_LANDSCAPE      0x60  /* MY = 0, MX = 1, MV = 1, ML = 0, RGB = 0 */
-
-#define  OTM8009A_CMD_IDMOFF                0x38  /* Idle mode Off command */
-#define  OTM8009A_CMD_IDMON                 0x39  /* Idle mode On command  */
-
-#define  OTM8009A_CMD_COLMOD                0x3A  /* Interface Pixel format command */
-
-/* Possible values of COLMOD parameter corresponding to used pixel formats */
-#define  OTM8009A_COLMOD_RGB565             0x55
-#define  OTM8009A_COLMOD_RGB888             0x77
-
-#define  OTM8009A_CMD_RAMWRC                0x3C  /* Memory write continue command */
-#define  OTM8009A_CMD_RAMRDC                0x3E  /* Memory read continue command  */
-
-#define  OTM8009A_CMD_WRTESCN               0x44  /* Write Tearing Effect Scan line command */
-#define  OTM8009A_CMD_RDSCNL                0x45  /* Read  Tearing Effect Scan line command */
-
-/* CABC Management : ie : Content Adaptive Back light Control in IC OTM8009a */
-#define  OTM8009A_CMD_WRDISBV               0x51  /* Write Display Brightness command          */
-#define  OTM8009A_CMD_WRCTRLD               0x53  /* Write CTRL Display command                */
-#define  OTM8009A_CMD_WRCABC                0x55  /* Write Content Adaptive Brightness command */
-#define  OTM8009A_CMD_WRCABCMB              0x5E  /* Write CABC Minimum Brightness command     */
+#define  OTM8009A_800X480_HSYNC             OTM8009A_480X800_HSYNC  /* Horizontal synchronization */
+#define  OTM8009A_800X480_HBP               OTM8009A_480X800_HBP    /* Horizontal back porch      */
+#define  OTM8009A_800X480_HFP               OTM8009A_480X800_HFP    /* Horizontal front porch     */
+#define  OTM8009A_800X480_VSYNC             OTM8009A_480X800_VSYNC  /* Vertical synchronization   */
+#define  OTM8009A_800X480_VBP               OTM8009A_480X800_VBP    /* Vertical back porch        */
+#define  OTM8009A_800X480_VFP               OTM8009A_480X800_VFP    /* Vertical front porch       */
 
 /**
   * @brief  OTM8009A_480X800 frequency divider
@@ -198,9 +184,31 @@
 /** @addtogroup OTM8009A_Exported_Functions
   * @{
   */
-void DSI_IO_WriteCmd(uint32_t NbrParams, uint8_t *pParams);
-uint8_t OTM8009A_Init(uint32_t ColorCoding, uint32_t orientation);
-void OTM8009A_IO_Delay(uint32_t Delay);
+int32_t OTM8009A_RegisterBusIO (OTM8009A_Object_t *pObj, OTM8009A_IO_t *pIO);
+int32_t OTM8009A_Init(OTM8009A_Object_t *pObj, uint32_t ColorCoding, uint32_t Orientation);
+int32_t OTM8009A_DeInit(OTM8009A_Object_t *pObj);
+int32_t OTM8009A_ReadID(OTM8009A_Object_t *pObj, uint32_t *Id);
+int32_t OTM8009A_DisplayOn(OTM8009A_Object_t *pObj);
+int32_t OTM8009A_DisplayOff(OTM8009A_Object_t *pObj);
+int32_t OTM8009A_SetBrightness(OTM8009A_Object_t *pObj, uint32_t Brightness);
+int32_t OTM8009A_GetBrightness(OTM8009A_Object_t *pObj, uint32_t *Brightness);
+int32_t OTM8009A_SetOrientation(OTM8009A_Object_t *pObj, uint32_t Orientation);
+int32_t OTM8009A_GetOrientation(OTM8009A_Object_t *pObj, uint32_t *Orientation);
+
+
+int32_t OTM8009A_SetCursor(OTM8009A_Object_t *pObj, uint32_t Xpos, uint32_t Ypos);
+int32_t OTM8009A_DrawBitmap(OTM8009A_Object_t *pObj, uint32_t Xpos, uint32_t Ypos, uint8_t *pBmp);
+int32_t OTM8009A_FillRGBRect(OTM8009A_Object_t *pObj, uint32_t Xpos, uint32_t Ypos, uint8_t *pData, uint32_t Width, uint32_t Height);
+int32_t OTM8009A_DrawHLine(OTM8009A_Object_t *pObj, uint32_t Xpos, uint32_t Ypos, uint32_t Length, uint32_t Color);
+int32_t OTM8009A_DrawVLine(OTM8009A_Object_t *pObj, uint32_t Xpos, uint32_t Ypos, uint32_t Length, uint32_t Color);
+int32_t OTM8009A_FillRect(OTM8009A_Object_t *pObj, uint32_t Xpos, uint32_t Ypos, uint32_t Width, uint32_t Height, uint32_t Color);
+int32_t OTM8009A_SetPixel(OTM8009A_Object_t *pObj, uint32_t Xpos, uint32_t Ypos, uint32_t Color);
+int32_t OTM8009A_GetPixel(OTM8009A_Object_t *pObj, uint32_t Xpos, uint32_t Ypos, uint32_t *Color);
+int32_t OTM8009A_GetXSize(OTM8009A_Object_t *pObj, uint32_t *XSize);
+int32_t OTM8009A_GetYSize(OTM8009A_Object_t *pObj, uint32_t *YSize);
+
+extern OTM8009A_LCD_Drv_t   OTM8009A_LCD_Driver;
+
 /**
   * @}
   */
@@ -208,7 +216,7 @@ void OTM8009A_IO_Delay(uint32_t Delay);
 }
 #endif
 
-#endif /* __OTM8009A_480X800_H */
+#endif /* OTM8009A_H */
 /**
   * @}
   */

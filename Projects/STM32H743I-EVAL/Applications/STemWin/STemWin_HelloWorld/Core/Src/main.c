@@ -65,7 +65,7 @@ int main(void)
   SystemClock_Config();
   
   /* Initializes the SDRAM device */
-  BSP_SDRAM_Init();  
+  BSP_SDRAM_Init(0);  
   
   /* Init the STemWin GUI Library */  
   __HAL_RCC_CRC_CLK_ENABLE(); /* Enable the CRC Module */

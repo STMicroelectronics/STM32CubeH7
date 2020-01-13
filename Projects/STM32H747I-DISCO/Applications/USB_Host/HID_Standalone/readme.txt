@@ -133,10 +133,10 @@ displaying taped characters.
 
   - This application runs on STM32h7xx devices.
 
-  - This application has been tested with STMicroelectronics STM32H747I_Discovery- RevC
+  - This application has been tested with STMicroelectronics STM32H747I_Discovery- 
     boards and can be easily tailored to any other supported device and development board.
 
-  - STM32H747I_Discovery RevC Set-up
+  - STM32H747I_Discovery  Set-up
     - Plug a USB device mouse or keyboard into the STM32H747I_Discovery board
       through 'USB micro A-Male to A-Female' cable
       - CN1 : to use USB High Speed (HS)

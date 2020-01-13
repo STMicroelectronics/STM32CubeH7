@@ -1,6 +1,6 @@
 #include <widgets/MJPEGWidget.hpp>
 #include <touchgfx/Color.hpp>
-#include <widgets/fileinput.hpp>
+#include <widgets/FileInput.hpp>
 
 #include "jinclude.h"
 #include "jpeglib.h"

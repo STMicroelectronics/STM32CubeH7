@@ -24,7 +24,6 @@
 /* Private define ----------------------------------------------------------- */
 /* Private macro ------------------------------------------------------------ */
 /* Private variables -------------------------------------------------------- */
-static int32_t recurseLevel = -1;
 /* Private function prototypes ---------------------------------------------- */
 /* Private functions -------------------------------------------------------- */
 
@@ -39,64 +38,50 @@ FRESULT Explore_Disk(char *path, uint8_t recu_level)
   FRESULT res = FR_OK;
   FILINFO fno;
   DIR dir;
+  char *fn;
   char tmp[14];
-  uint8_t line_idx = 0;
 
-  recurseLevel++;
-  res = f_opendir(&dir, path);
-  if (res == FR_OK)
+    res = f_opendir(&dir, path);
+  if(res == FR_OK)
   {
-    while (USBH_MSC_IsReady(&hUSBHost))
+    while(USBH_MSC_IsReady(&hUSBHost))
     {
       res = f_readdir(&dir, &fno);
-      if (res != FR_OK || fno.fname[0] == 0)
+      if(res != FR_OK || fno.fname[0] == 0)
       {
         break;
       }
-      if (fno.fname[0] == '.')
+      if(fno.fname[0] == '.')
       {
         continue;
       }
 
-      strcpy(tmp, fno.fname);
+      fn = fno.fname;
+      strcpy(tmp, fn);
 
-      line_idx++;
-      if (line_idx > YWINDOW_SIZE)
+      if(recu_level == 1)
       {
-        line_idx = 0;
-        LCD_UsrLog("> Press [WAKEUP] To Continue.\n");
-
-        /* WAKEUP Button in polling */
-        while ((BSP_PB_GetState(BUTTON_WAKEUP) != RESET) &&
-               (Appli_state != APPLICATION_DISCONNECT))
-        {
-          /* Wait for User Input */
-        }
+        LCD_DbgTrace("   |__");
       }
-
-      if (recu_level == 1)
+      else if(recu_level == 2)
       {
-        LCD_DbgLog("   |__");
+        LCD_DbgTrace("   |   |__");
       }
-      else if (recu_level == 2)
-      {
-        LCD_DbgLog("   |   |__");
-      }
-      if (fno.fattrib & AM_DIR)
+      if((fno.fattrib & AM_DIR) == AM_DIR)
       {
         strcat(tmp, "\n");
-        LCD_UsrLog((void *)tmp);
-        Explore_Disk(fno.fname, 2);
+        LCD_UsrTrace((void *)tmp);
+        Explore_Disk(fn, 2);
       }
       else
       {
         strcat(tmp, "\n");
-        LCD_DbgLog((void *)tmp);
+        LCD_DbgTrace((void *)tmp);
       }
 
-      if ((fno.fattrib & AM_DIR) && (recu_level == 2))
+      if(((fno.fattrib & AM_DIR) == AM_DIR)&&(recu_level == 2))
       {
-        Explore_Disk(fno.fname, 2);
+        Explore_Disk(fn, 2);
       }
     }
     f_closedir(&dir);

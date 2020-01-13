@@ -74,7 +74,7 @@ void MSC_MenuProcess(void)
         case 2: /* Return */
           demo.state = DEMO_IDLE;
           demo.select = 0;
-          LCD_UsrLogY("> MSC application closed.\n");
+          LCD_UsrTrace("> MSC application closed.\n");
           f_mount(0,0,0);
           break;
 

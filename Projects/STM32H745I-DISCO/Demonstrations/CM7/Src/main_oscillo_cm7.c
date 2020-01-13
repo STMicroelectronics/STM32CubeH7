@@ -278,6 +278,7 @@ static uint32_t count = 0;
 int main(void)
 {  
   
+  BSP_QSPI_Init_t qspi_init;
 
   MPU_Config();
   
@@ -323,9 +324,13 @@ int main(void)
     HAL_Delay(100);
     HAL_SYSCFG_CM4BootAddConfig(SYSCFG_BOOT_ADDR0, FLASH_BANK2_BASE); /* 0x08100000*/
   }
-  
-  BSP_QSPI_Init();
-  BSP_QSPI_EnableMemoryMappedMode();
+
+  qspi_init.InterfaceMode=MT25TL01G_QPI_MODE;
+  qspi_init.TransferRate= MT25TL01G_DTR_TRANSFER ;
+  qspi_init.DualFlashMode= MT25TL01G_DUALFLASH_ENABLE;
+
+  BSP_QSPI_Init(0, &qspi_init);
+  BSP_QSPI_EnableMemoryMappedMode(0);
   
   SG_InitGeneratorMenu();
   
@@ -345,41 +350,40 @@ int main(void)
 static void SG_InitGeneratorMenu(void)
 {
   uint8_t  frequencyName[10];
+  /* Init the Display */  
+  SG_InitDisplay();
   
   /* Init the touch screen */
   SG_InitTouchScreen();
 
-  /* Init the Display */  
-  SG_InitDisplay();
-  
   /* Display background image */
   SG_DisplayBackgroundImage(BackgroundImage,1); 
   
   /* Display Demo title */
-  BSP_LCD_SetTextColor(LCD_COLOR_GREEN);
-  BSP_LCD_SetBackColor(LCD_COLOR_GRAY);
-  BSP_LCD_SetFont(&Font24);
-  BSP_LCD_DisplayStringAt(0, 2,(uint8_t *)"SIGNALS GENERATOR", CENTER_MODE);
+  GUI_SetTextColor(GUI_COLOR_GREEN);
+  GUI_SetBackColor(GUI_COLOR_GRAY);
+  GUI_SetFont(&Font24);
+  GUI_DisplayStringAt(0, 2,(uint8_t *)"SIGNALS GENERATOR", CENTER_MODE);
   
-  BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
-  BSP_LCD_SetBackColor(0xFFCCCFF2);
-  BSP_LCD_SetFont(&Font16);
-  BSP_LCD_DisplayStringAt(0, 210,(uint8_t *)" Press User Button to enter STANDBY mode ", CENTER_MODE);
+  GUI_SetTextColor(GUI_COLOR_BLUE);
+  GUI_SetBackColor(0xFFCCCFF2);
+  GUI_SetFont(&Font16);
+  GUI_DisplayStringAt(0, 210,(uint8_t *)" Press User Button to enter STANDBY mode ", CENTER_MODE);
 
 
-  BSP_LCD_SetTextColor(LCD_COLOR_WHITE);  
-  BSP_LCD_FillRect(6, 233 , 466, 34);
+  GUI_SetTextColor(GUI_COLOR_WHITE);  
+  GUI_FillRect(6, 233 , 466, 34, GUI_COLOR_WHITE);
   
-  BSP_LCD_SetTextColor(LCD_COLOR_DARKMAGENTA);
-  BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
+  GUI_SetTextColor(GUI_COLOR_DARKMAGENTA);
+  GUI_SetBackColor(GUI_COLOR_WHITE);
 
-  BSP_LCD_DrawRect(3, 230 , 472, 40);
-  BSP_LCD_DrawRect(4, 231 , 470, 38);
+  GUI_DrawRect(3, 230 , 472, 40, GUI_COLOR_WHITE);
+  GUI_DrawRect(4, 231 , 470, 38, GUI_COLOR_WHITE);
   
-  BSP_LCD_SetFont(&Font20);
-  BSP_LCD_DisplayStringAt(20, 234,(uint8_t *) "           STM32H745           ", LEFT_MODE);
-  BSP_LCD_SetFont(&Font16);
-  BSP_LCD_DisplayStringAt(20, 251,(uint8_t *)"    Dual core STM32 Microcontroller    ", LEFT_MODE);
+  GUI_SetFont(&Font20);
+  GUI_DisplayStringAt(20, 234,(uint8_t *) "           STM32H745           ", LEFT_MODE);
+  GUI_SetFont(&Font16);
+  GUI_DisplayStringAt(20, 251,(uint8_t *)"    Dual core STM32 Microcontroller    ", LEFT_MODE);
 
 
   
@@ -401,7 +405,7 @@ static void SG_InitGeneratorMenu(void)
   SG_DisplayUpDownButtons(UpDownAmplitudeButtonsTab, SG_TOTAL_UPDOWN_BUTTON_NBR); 
   
   /* Configure the Wakeup push-button in GPIO Mode */
-  BSP_PB_Init(BUTTON_WAKEUP, BUTTON_MODE_GPIO);
+  BSP_PB_Init(BUTTON_USER, BUTTON_MODE_GPIO);
 }
 
 
@@ -600,13 +604,13 @@ static void SG_SetWaveFormat(void)
       sprintf(status_freq , "Freq: ------ HZ");
     }
     
-    BSP_LCD_SetFont(&Font12);
-    BSP_LCD_SetTextColor(LCD_COLOR_GREEN);
-    BSP_LCD_SetBackColor(LCD_COLOR_BLACK);  
-    BSP_LCD_DisplayStringAt(364, 156, (uint8_t*)status_type, LEFT_MODE);  
-    BSP_LCD_DisplayStringAt(364, 172, (uint8_t*)status_freq, LEFT_MODE);
+    GUI_SetFont(&Font12);
+    GUI_SetTextColor(GUI_COLOR_GREEN);
+    GUI_SetBackColor(GUI_COLOR_BLACK);  
+    GUI_DisplayStringAt(364, 156, (uint8_t*)status_type, LEFT_MODE);  
+    GUI_DisplayStringAt(364, 172, (uint8_t*)status_freq, LEFT_MODE);
     sprintf((char*)status_msg ,"Ampl: %lu mV", (waveAmplitude));
-    BSP_LCD_DisplayStringAt(364, 188, (uint8_t*)status_msg, LEFT_MODE);   
+    GUI_DisplayStringAt(364, 188, (uint8_t*)status_msg, LEFT_MODE);   
     
   }
   else
@@ -614,12 +618,12 @@ static void SG_SetWaveFormat(void)
     
     LCD_CopyImage((uint32_t*)sig_none,(uint32_t *)LCD_FRAME_BUFFER, 360,70, 112, 80, DMA2D_INPUT_ARGB8888, 0);
     
-    BSP_LCD_SetFont(&Font12);
-    BSP_LCD_SetTextColor(LCD_COLOR_GREEN);
-    BSP_LCD_SetBackColor(LCD_COLOR_BLACK);
-    BSP_LCD_DisplayStringAt(364, 156,(uint8_t *) "Type:   N.A    ", LEFT_MODE);
-    BSP_LCD_DisplayStringAt(364, 172,(uint8_t *) "Freq: ------ HZ", LEFT_MODE);
-    BSP_LCD_DisplayStringAt(364, 188,(uint8_t *) "Ampl: ------ mV", LEFT_MODE);
+    GUI_SetFont(&Font12);
+    GUI_SetTextColor(GUI_COLOR_GREEN);
+    GUI_SetBackColor(GUI_COLOR_BLACK);
+    GUI_DisplayStringAt(364, 156,(uint8_t *) "Type:   N.A    ", LEFT_MODE);
+    GUI_DisplayStringAt(364, 172,(uint8_t *) "Freq: ------ HZ", LEFT_MODE);
+    GUI_DisplayStringAt(364, 188,(uint8_t *) "Ampl: ------ mV", LEFT_MODE);
   }
   
   
@@ -638,12 +642,12 @@ static void SG_EnterGeneratorLowPowerMode(void)
 {
   GPIO_InitTypeDef   GPIO_InitStructure;
   
-  if(BSP_PB_GetState(BUTTON_WAKEUP) != RESET)
+  if(BSP_PB_GetState(BUTTON_USER) != RESET)
   {
-    BSP_LCD_SetTextColor(LCD_COLOR_RED);
-    BSP_LCD_SetBackColor(LCD_COLOR_LIGHTGRAY);
-    BSP_LCD_SetFont(&Font12);
-    BSP_LCD_DisplayStringAt(0, 212,(uint8_t *) "   The D1 Domain will Enter STANDBY mode after 3 seconds ...   ", CENTER_MODE);
+    GUI_SetTextColor(GUI_COLOR_RED);
+    GUI_SetBackColor(GUI_COLOR_LIGHTGRAY);
+    GUI_SetFont(&Font12);
+    GUI_DisplayStringAt(0, 212,(uint8_t *) "   The D1 Domain will Enter STANDBY mode after 3 seconds ...   ", CENTER_MODE);
     
     /* -2- Configure EXTI15_10 (connected to PC.13 pin) to interrupt CPU1 and CPU2 */
     /* Enable GPIOC clock */
@@ -668,9 +672,9 @@ static void SG_EnterGeneratorLowPowerMode(void)
     /* Insert 1 seconds delay */
     HAL_Delay(3000);
     
-    BSP_LCD_SetBrightness(0);
+    BSP_LCD_SetBrightness(0, 0);
     HAL_Delay(10);
-    BSP_LCD_DisplayOff();
+    BSP_LCD_DisplayOff(0);
     SG_StopWaveGeneration();
     __HAL_RCC_DAC12_CLK_DISABLE();
     BSP_LED_Off(LED1);
@@ -710,25 +714,25 @@ static void SG_StartGeneratorProcess(void)
   {      
     if (count %2 ==0)
     {
-      BSP_LCD_SetFont(&Font12);
-      BSP_LCD_SetTextColor(LCD_COLOR_RED); 
+      GUI_SetFont(&Font12);
+      GUI_SetTextColor(GUI_COLOR_RED); 
       sprintf((char*)msg , "!!!AUTO!!!");
-      BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
-      BSP_LCD_DisplayStringAt(400,240, msg, LEFT_MODE);
+      GUI_SetBackColor(GUI_COLOR_WHITE);
+      GUI_DisplayStringAt(400,240, msg, LEFT_MODE);
     }
     else
     {
-      BSP_LCD_SetFont(&Font12);
-      BSP_LCD_SetTextColor(LCD_COLOR_WHITE); 
-      BSP_LCD_FillRect(400, 240, 70, 15);  
+      GUI_SetFont(&Font12);
+      GUI_SetTextColor(GUI_COLOR_WHITE); 
+      GUI_FillRect(400, 240, 70, 15, GUI_COLOR_WHITE);  
     }
     
   } 
   else
   {
-    BSP_LCD_SetFont(&Font12);
-    BSP_LCD_SetTextColor(LCD_COLOR_WHITE); 
-    BSP_LCD_FillRect(400, 240, 70, 15);  
+    GUI_SetFont(&Font12);
+    GUI_SetTextColor(GUI_COLOR_WHITE); 
+    GUI_FillRect(400, 240, 70, 15, GUI_COLOR_WHITE);  
   }
 
 
@@ -985,7 +989,7 @@ static void MPU_Config(void)
 
   /* Configure the MPU attributes as WT for SRAM */
   MPU_InitStruct.Enable = MPU_REGION_ENABLE;
-  MPU_InitStruct.BaseAddress = SDRAM_DEVICE_ADDR;
+  MPU_InitStruct.BaseAddress = LCD_FRAME_BUFFER;
   MPU_InitStruct.Size = MPU_REGION_SIZE_512KB;
   MPU_InitStruct.AccessPermission = MPU_REGION_FULL_ACCESS;
   MPU_InitStruct.IsBufferable = MPU_ACCESS_NOT_BUFFERABLE;

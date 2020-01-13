@@ -126,15 +126,15 @@ int main(void)
   BSP_LED_Init(LED3);
 
    /* Initialize the LCD   */
-  BSP_LCD_Init();
+  BSP_LCD_Init(0, LCD_ORIENTATION_LANDSCAPE);
   
-  BSP_LCD_LayerDefaultInit(0, LCD_FRAME_BUFFER);     
-  BSP_LCD_SelectLayer(0);   
-  BSP_LCD_Clear(LCD_COLOR_WHITE);  
+  GUI_SetFuncDriver(&LCD_Driver);     
+  GUI_SetLayer(0);   
+  GUI_Clear(GUI_COLOR_WHITE);  
   
   /* Get the LCD Width and Height */
-  LCD_X_Size = BSP_LCD_GetXSize();  
-  LCD_Y_Size = BSP_LCD_GetYSize(); 
+  BSP_LCD_GetXSize(0, &LCD_X_Size);  
+  BSP_LCD_GetYSize(0, &LCD_Y_Size); 
 
   /* Calculate the MDMA and DMA2D destination transfer addresses */  
   xPos = (LCD_X_Size - IMAGE_WIDTH)/2;

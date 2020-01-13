@@ -86,7 +86,7 @@ int main(void)
   BSP_LED_Init(LED3);
   
   /* Initialize push-button, will be used to trigger an interrupt each time it's pressed.*/
-  BSP_PB_Init(BUTTON_USER, BUTTON_MODE_EXTI);
+  BSP_PB_Init(BUTTON_WAKEUP, BUTTON_MODE_EXTI);
   
   
   /* Toggle LED1 in an infinite loop */
@@ -112,7 +112,7 @@ int main(void)
   */
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
-  if (GPIO_Pin == USER_BUTTON_PIN)
+  if (GPIO_Pin == BUTTON_WAKEUP_PIN)
   {
     SwitchClock = SET;
   }

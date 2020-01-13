@@ -40,7 +40,7 @@ uint8_t *MSC_main_menu[] = {
 
 /* Private function prototypes ----------------------------------------------- */
 static void MSC_SelectItem(uint8_t ** menu, uint8_t item);
-static void MSC_DEMO_ProbeKey(JOYState_TypeDef state);
+static void MSC_DEMO_ProbeKey(uint32_t state);
 static void MSC_MenuThread(void const *argument);
 
 /* Private functions --------------------------------------------------------- */
@@ -70,11 +70,11 @@ void Menu_Init(void)
 #endif
   osThreadCreate(osThread(Menu_Thread), NULL);
 
-  BSP_LCD_SetTextColor(LCD_COLOR_GREEN);
-  BSP_LCD_DisplayStringAtLine(15,
+  GUI_SetTextColor(GUI_COLOR_GREEN);
+  GUI_DisplayStringAtLine(15,
                               (uint8_t *)
                               "Use [Joystick Left/Right] to scroll up/down");
-  BSP_LCD_DisplayStringAtLine(16,
+  GUI_DisplayStringAtLine(16,
                               (uint8_t *)
                               "Use [Joystick Up/Down] to scroll MSC menu");
 }
@@ -169,37 +169,37 @@ static void MSC_MenuThread(void const *argument)
   */
 static void MSC_SelectItem(uint8_t ** menu, uint8_t item)
 {
-  BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
+  GUI_SetTextColor(GUI_COLOR_WHITE);
 
   switch (item)
   {
   case 0:
-    BSP_LCD_SetBackColor(LCD_COLOR_MAGENTA);
-    BSP_LCD_DisplayStringAtLine(17, menu[0]);
-    BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-    BSP_LCD_DisplayStringAtLine(18, menu[1]);
-    BSP_LCD_DisplayStringAtLine(19, menu[2]);
+    GUI_SetBackColor(GUI_COLOR_MAGENTA);
+    GUI_DisplayStringAtLine(17, menu[0]);
+    GUI_SetBackColor(GUI_COLOR_BLUE);
+    GUI_DisplayStringAtLine(18, menu[1]);
+    GUI_DisplayStringAtLine(19, menu[2]);
     break;
 
   case 1:
-    BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-    BSP_LCD_DisplayStringAtLine(17, menu[0]);
-    BSP_LCD_SetBackColor(LCD_COLOR_MAGENTA);
-    BSP_LCD_DisplayStringAtLine(18, menu[1]);
-    BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-    BSP_LCD_DisplayStringAtLine(19, menu[2]);
+    GUI_SetBackColor(GUI_COLOR_BLUE);
+    GUI_DisplayStringAtLine(17, menu[0]);
+    GUI_SetBackColor(GUI_COLOR_MAGENTA);
+    GUI_DisplayStringAtLine(18, menu[1]);
+    GUI_SetBackColor(GUI_COLOR_BLUE);
+    GUI_DisplayStringAtLine(19, menu[2]);
     break;
 
   case 2:
-    BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-    BSP_LCD_DisplayStringAtLine(17, menu[0]);
-    BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-    BSP_LCD_DisplayStringAtLine(18, menu[1]);
-    BSP_LCD_SetBackColor(LCD_COLOR_MAGENTA);
-    BSP_LCD_DisplayStringAtLine(19, menu[2]);
+    GUI_SetBackColor(GUI_COLOR_BLUE);
+    GUI_DisplayStringAtLine(17, menu[0]);
+    GUI_SetBackColor(GUI_COLOR_BLUE);
+    GUI_DisplayStringAtLine(18, menu[1]);
+    GUI_SetBackColor(GUI_COLOR_MAGENTA);
+    GUI_DisplayStringAtLine(19, menu[2]);
     break;
   }
-  BSP_LCD_SetBackColor(LCD_COLOR_BLACK);
+  GUI_SetBackColor(GUI_COLOR_BLACK);
 }
 
 /**
@@ -207,7 +207,7 @@ static void MSC_SelectItem(uint8_t ** menu, uint8_t item)
   * @param  state: Joystick state
   * @retval None
   */
-static void MSC_DEMO_ProbeKey(JOYState_TypeDef state)
+static void MSC_DEMO_ProbeKey(uint32_t state)
 {
   /* Handle Menu inputs */
   if ((state == JOY_UP) && (msc_demo.select > 0))
@@ -229,36 +229,24 @@ static void MSC_DEMO_ProbeKey(JOYState_TypeDef state)
   * @param  GPIO_Pin: Specifies the pins connected EXTI line
   * @retval None
   */
-void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+void BSP_JOY_Callback(JOY_TypeDef JOY, JOYPin_TypeDef JoyPin)
 {
-  __IO JOYState_TypeDef JoyState = JOY_NONE;
-
-  if (GPIO_Pin == MFX_IRQOUT_PIN)
+  MSC_DEMO_ProbeKey(JoyPin);
+  
+  switch (JoyPin)
   {
-    /* Get the Joystick State */
-    JoyState = BSP_JOY_GetState();
-
-    MSC_DEMO_ProbeKey(JoyState);
-
-    switch (JoyState)
-    {
-    case JOY_LEFT:
-      LCD_LOG_ScrollBack();
-      break;
-
-    case JOY_RIGHT:
-      LCD_LOG_ScrollForward();
-      break;
-
-    default:
-      break;
-    }
-    /* Clear joystick interrupt pending bits */
-    BSP_IO_ITClearPin(MFXSTM32L152_GPIO_PINS_ALL);
-    osSemaphoreRelease(MenuEvent);
+  case JOY_LEFT:
+    UTIL_LCD_TRACE_ScrollBack();
+    break;
+    
+  case JOY_RIGHT:
+    UTIL_LCD_TRACE_ScrollForward();
+    break;
+    
+  default:
+    break;
   }
-
-  HAL_Delay(400);
+  osSemaphoreRelease(MenuEvent);
 }
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

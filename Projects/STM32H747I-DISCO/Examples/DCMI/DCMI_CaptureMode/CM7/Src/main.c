@@ -57,17 +57,35 @@ static uint32_t   LcdResX    = 0;
 static uint32_t   LcdResY    = 0;
 
 /* Camera resolutions */
-uint32_t CameraResolution[4] = {RESOLUTION_R160x120, RESOLUTION_R320x240, RESOLUTION_R480x272, RESOLUTION_R640x480}; 
+uint32_t CameraResolution[4] = {CAMERA_R160x120, CAMERA_R320x240, CAMERA_R480x272, CAMERA_R640x480}; 
 uint32_t CameraResX[4] = {160, 320, 480, 640};
 uint32_t CameraResY[4] = {120, 240, 272, 480};
 uint32_t CameraResIndex = 0;
 
-extern LTDC_HandleTypeDef hltdc_discovery;
-extern DSI_HandleTypeDef hdsi_discovery;
+extern LTDC_HandleTypeDef hlcd_ltdc;
+extern DSI_HandleTypeDef hlcd_dsi;
 
 static __IO int32_t pending_buffer = -1;
 static __IO int32_t active_area = 0;
 static __IO int32_t dma2d_pending_copy = 0;
+
+int32_t LCD_GetXSize(uint32_t Instance, uint32_t *XSize);
+int32_t LCD_GetYSize(uint32_t Instance, uint32_t *YSize);
+
+const GUI_Drv_t LCD_GUI_Driver =
+{
+  BSP_LCD_DrawBitmap,
+  BSP_LCD_FillRGBRect,
+  BSP_LCD_DrawHLine,
+  BSP_LCD_DrawVLine,
+  BSP_LCD_FillRect,
+  BSP_LCD_ReadPixel,
+  BSP_LCD_WritePixel,
+  LCD_GetXSize,
+  LCD_GetYSize,
+  BSP_LCD_SetActiveLayer,
+  BSP_LCD_GetPixelFormat
+};
 
 DSI_CmdCfgTypeDef CmdCfg;
 DSI_LPCmdTypeDef LPCmd;
@@ -84,6 +102,8 @@ static void SystemClock_Config(void);
 static void DMA2D_ConvertFrameToARGB8888(void *pSrc, void *pDst, uint32_t xsize, uint32_t ysize);
 static void DMA2D_Config(uint16_t xsize, uint32_t ysize);
 static void DMA2D_TransferCompleteCallback(DMA2D_HandleTypeDef *hdma2d);
+static int32_t DSI_IO_Write(uint16_t ChannelNbr, uint16_t Reg, uint8_t *pData, uint16_t Size);
+static int32_t DSI_IO_Read(uint16_t ChannelNbr, uint16_t Reg, uint8_t *pData, uint16_t Size);
 static uint8_t LCD_Init(void);
 static void LCD_LayertInit(uint16_t LayerIndex, uint32_t Address);
 static void LTDC_Init(void);
@@ -91,8 +111,9 @@ static void Display_StartRefresh(void);
 static void Display_WaitRefresh(void);
 static void CPU_CACHE_Enable(void);
 static void MPU_Config(void);
-
+static void LCD_MspInit(void);
 void Error_Handler(void);
+
 /* Private functions ---------------------------------------------------------*/
 
 /**
@@ -127,33 +148,48 @@ int main(void)
   BSP_LED_Init(LED_GREEN);
   
   /* SDRAM initialization */
-  BSP_SDRAM_Init();
+  BSP_SDRAM_Init(0);
   
   /* LCD DSI initialization in command mode  with one LTDC layers of size 800x480 */
-  LCD_Init(); 
 
+  if(LCD_Init() != BSP_ERROR_NONE)
+  {
+    Error_Handler();
+  } 
+
+  /* Set the LCD Context */
+  Lcd_Ctx[0].ActiveLayer = 0;
+  Lcd_Ctx[0].PixelFormat = LCD_PIXEL_FORMAT_ARGB8888;
+  Lcd_Ctx[0].BppFactor = 4; /* 4 Bytes Per Pixel for ARGB8888 */  
+  Lcd_Ctx[0].XSize = 800;  
+  Lcd_Ctx[0].YSize = 480;
+
+  GUI_SetFuncDriver(&LCD_GUI_Driver);
+  LCD_GetXSize(0,&LcdResX);
+  LCD_GetYSize(0,&LcdResY);
   /* Disable DSI Wrapper in order to access and configure the LTDC */
-  __HAL_DSI_WRAPPER_DISABLE(&hdsi_discovery);
-  
-  LCD_LayertInit(0, LCD_FRAME_BUFFER);
-  BSP_LCD_SelectLayer(0); 
+  __HAL_DSI_WRAPPER_DISABLE(&hlcd_dsi);
 
-  /* Get LCD width and height*/  
-  LcdResX = BSP_LCD_GetXSize();
-  LcdResY = BSP_LCD_GetYSize();  
-  
+  /* Initialize LTDC layer 0 iused for Hint */  
+  LCD_LayertInit(0, LCD_FRAME_BUFFER); 
+
   /* Update pitch : the draw is done on the whole physical X Size */
-  HAL_LTDC_SetPitch(&hltdc_discovery, BSP_LCD_GetXSize(), 0);
+  HAL_LTDC_SetPitch(&hlcd_ltdc,LcdResX, 0);
 
   /* Enable DSI Wrapper so DSI IP will drive the LTDC */
-  __HAL_DSI_WRAPPER_ENABLE(&hdsi_discovery);  
+  __HAL_DSI_WRAPPER_ENABLE(&hlcd_dsi);  
   
-  HAL_DSI_LongWrite(&hdsi_discovery, 0, DSI_DCS_LONG_PKT_WRITE, 4, OTM8009A_CMD_CASET, pColLeft);
-  HAL_DSI_LongWrite(&hdsi_discovery, 0, DSI_DCS_LONG_PKT_WRITE, 4, OTM8009A_CMD_PASET, pPage);
+  HAL_DSI_LongWrite(&hlcd_dsi, 0, DSI_DCS_LONG_PKT_WRITE, 4, OTM8009A_CMD_CASET, pColLeft);
+  HAL_DSI_LongWrite(&hlcd_dsi, 0, DSI_DCS_LONG_PKT_WRITE, 4, OTM8009A_CMD_PASET, pPage);
+  
+  HAL_DSI_LongWrite(&hlcd_dsi, 0, DSI_DCS_LONG_PKT_WRITE, 2, OTM8009A_CMD_WRTESCN, pScanCol);
+
   
   /* Configure TAMPER Button */
-  BSP_PB_Init(BUTTON_USER, BUTTON_MODE_GPIO);
+  BSP_PB_Init(BUTTON_WAKEUP, BUTTON_MODE_GPIO);
   
+   
+
   /* Run Application */
   while (1)
   {
@@ -162,20 +198,17 @@ int main(void)
       change_resolution = 0;
       
       /* Reset and power down camera to be sure camera is Off prior start */
-      BSP_CAMERA_PwrDown();
       cameraState = CAMERA_STATE_CAPTURE_ONGOING; 
-          
-      BSP_LCD_Clear(LCD_COLOR_WHITE);
+        
+      GUI_Clear(GUI_COLOR_WHITE);
       /* Display USB initialization message */
-      BSP_LCD_SetBackColor(LCD_COLOR_WHITE); 
-      BSP_LCD_SetTextColor(LCD_COLOR_DARKBLUE);
-      BSP_LCD_SetFont(&Font24);
-      BSP_LCD_DisplayStringAt(20, (BSP_LCD_GetYSize() - 24), (uint8_t *)"CAMERA CONTINUOUS MODE", CENTER_MODE);  
+      GUI_SetBackColor(GUI_COLOR_WHITE); 
+      GUI_SetTextColor(GUI_COLOR_DARKBLUE);
+      GUI_SetFont(&Font24);
+      GUI_DisplayStringAt(20, (LcdResY- 24), (uint8_t *)"CAMERA CONTINUOUS MODE", CENTER_MODE);  
       
       pending_buffer = 0;
       active_area = LEFT_AREA; 
-      
-      HAL_DSI_LongWrite(&hdsi_discovery, 0, DSI_DCS_LONG_PKT_WRITE, 2, OTM8009A_CMD_WRTESCN, pScanCol);
      
       Display_StartRefresh();
       Display_WaitRefresh(); 
@@ -184,28 +217,31 @@ int main(void)
       DMA2D_Config(CameraResX[CameraResIndex], CameraResY[CameraResIndex]);
       
       /* Initialize the Camera */
-      if(BSP_CAMERA_Init(CameraResolution[CameraResIndex]) != CAMERA_OK)
+      if(BSP_CAMERA_Init(0,CameraResolution[CameraResIndex],CAMERA_PF_RGB565) != BSP_ERROR_NONE)
       {
         Error_Handler(); 
       }
       /* Wait for the camera initialization after HW reset*/
+
       HAL_Delay(100);
-      
-      /* Start the Camera Capture */
-      BSP_CAMERA_ContinuousStart((uint8_t *)CAMERA_FRAME_BUFFER);      
+      /* Start the Camera Capture */    
+      if(BSP_CAMERA_Start(0,(uint8_t *)CAMERA_FRAME_BUFFER,CAMERA_MODE_CONTINUOUS)!=BSP_ERROR_NONE)
+      {
+        while(1);
+      }
     }
     
     /* Wait for user press button */
-    while (BSP_PB_GetState(BUTTON_USER) != SET)
+    while (BSP_PB_GetState(BUTTON_WAKEUP) != SET)
     {
       HAL_Delay(100);
       BSP_LED_Toggle(LED_GREEN);
     }
     /* Wait for user release button */
-    while (BSP_PB_GetState(BUTTON_USER) != RESET);
+    while (BSP_PB_GetState(BUTTON_WAKEUP) != RESET);
     
     cameraState = CAMERA_STATE_RESET; 
-    BSP_CAMERA_Stop();     
+    BSP_CAMERA_DeInit(0);
     Display_WaitRefresh();
     
     /* Change camera resolution index and stop the camera */
@@ -222,9 +258,9 @@ int main(void)
 /**
   * @brief  Camera Frame Event callback.
   */
-void BSP_CAMERA_FrameEventCallback(void)
+void BSP_CAMERA_FrameEventCallback(uint32_t Instance)
 {
-  BSP_CAMERA_Suspend();
+  BSP_CAMERA_Suspend(0);
   if(cameraState == CAMERA_STATE_CAPTURE_ONGOING)
   {
     cameraState = CAMERA_STATE_DISPLAY_ONGOING;  
@@ -232,7 +268,6 @@ void BSP_CAMERA_FrameEventCallback(void)
     DMA2D_ConvertFrameToARGB8888((uint32_t *)(CAMERA_FRAME_BUFFER), (uint32_t *)(LCD_FRAME_BUFFER), CameraResX[CameraResIndex], CameraResY[CameraResIndex]);
   }
 }
-
 /**
   * @brief  Copy the Captured Picture to the display Frame buffer.
   * @param  xsize: Picture X size
@@ -241,27 +276,30 @@ void BSP_CAMERA_FrameEventCallback(void)
   */
 static void DMA2D_Config(uint16_t xsize, uint32_t ysize)
 {
+	
+/* Configure the DMA2D Mode, Color Mode and output offset */
+  hlcd_dma2d.Instance = DMA2D;
   /* Configure the DMA2D Mode, Color Mode and output offset */
-  hdma2d_discovery.Init.Mode         = DMA2D_M2M_PFC;
-  hdma2d_discovery.Init.ColorMode    = DMA2D_OUTPUT_ARGB8888;
-  hdma2d_discovery.Init.OutputOffset = LcdResX - xsize;     
+  hlcd_dma2d.Init.Mode         = DMA2D_M2M_PFC;
+  hlcd_dma2d.Init.ColorMode    = DMA2D_OUTPUT_ARGB8888;
+  hlcd_dma2d.Init.OutputOffset = LcdResX - xsize;     
   
   /* DMA2D Callbacks Configuration */
-  hdma2d_discovery.XferCpltCallback  = DMA2D_TransferCompleteCallback;
+  hlcd_dma2d.XferCpltCallback  = DMA2D_TransferCompleteCallback;
   
   /* Foreground Configuration */
-  hdma2d_discovery.LayerCfg[1].AlphaMode = DMA2D_REPLACE_ALPHA;
-  hdma2d_discovery.LayerCfg[1].InputAlpha = 0xFF;
-  hdma2d_discovery.LayerCfg[1].InputColorMode = DMA2D_INPUT_RGB565;
-  hdma2d_discovery.LayerCfg[1].InputOffset = 0;
+  hlcd_dma2d.LayerCfg[1].AlphaMode = DMA2D_REPLACE_ALPHA;
+  hlcd_dma2d.LayerCfg[1].InputAlpha = 0xFF;
+  hlcd_dma2d.LayerCfg[1].InputColorMode = DMA2D_INPUT_RGB565;
+  hlcd_dma2d.LayerCfg[1].InputOffset = 0;
   
-  hdma2d_discovery.Instance = DMA2D;
-  HAL_DMA2D_DeInit(&hdma2d_discovery);
+  hlcd_dma2d.Instance = DMA2D;
+  HAL_DMA2D_DeInit(&hlcd_dma2d);
   
   /* DMA2D Initialization */
-  if(HAL_DMA2D_Init(&hdma2d_discovery) == HAL_OK) 
+  if(HAL_DMA2D_Init(&hlcd_dma2d) == HAL_OK) 
   {
-    if(HAL_DMA2D_ConfigLayer(&hdma2d_discovery, 1) != HAL_OK) 
+    if(HAL_DMA2D_ConfigLayer(&hlcd_dma2d, 1) != HAL_OK) 
     {
       Error_Handler();      
     }
@@ -271,7 +309,46 @@ static void DMA2D_Config(uint16_t xsize, uint32_t ysize)
     Error_Handler();
   }  
 }
+/**
+  * @brief  Gets the LCD X size.
+  * @param  Instance  LCD Instance
+  * @param  XSize     LCD width
+  * @retval BSP status
+  */
+int32_t LCD_GetXSize(uint32_t Instance, uint32_t *XSize)
+{
+  *XSize = Lcd_Ctx[0].XSize;
+ 
+  return BSP_ERROR_NONE;
+}
 
+/**
+  * @brief  Gets the LCD Y size.
+  * @param  Instance  LCD Instance
+  * @param  YSize     LCD Height
+  * @retval BSP status
+  */
+int32_t LCD_GetYSize(uint32_t Instance, uint32_t *YSize)
+{
+  *YSize = Lcd_Ctx[0].YSize;
+ 
+  return BSP_ERROR_NONE;
+}
+
+ void HAL_DMA2D_MspInit(DMA2D_HandleTypeDef* hdma2d)
+{
+  /* Prevent unused argument(s) compilation warning */
+  UNUSED(hdma2d);
+  /** @brief Enable the DMA2D clock */
+  __HAL_RCC_DMA2D_CLK_ENABLE();
+
+  /** @brief Toggle Sw reset of DMA2D IP */
+  __HAL_RCC_DMA2D_FORCE_RESET();
+  __HAL_RCC_DMA2D_RELEASE_RESET();
+  /* NOTE : This function should not be modified; when the callback is needed,
+            the HAL_DMA2D_MspInit can be implemented in the user file.
+   */
+}
 /**
   * @brief  Copy the Captured Picture to the display Frame buffer.
   * @param  pSrc: Pointer to source buffer
@@ -291,7 +368,7 @@ static void DMA2D_ConvertFrameToARGB8888(void *pSrc, void *pDst, uint32_t xsize,
   destination = (uint32_t)pDst + (yPos * LcdResX + xPos) * ARGB8888_BYTE_PER_PIXEL;
   dma2d_pending_copy = 1;
   /* Starts the DMA2D transfer */
-  if(HAL_DMA2D_Start_IT(&hdma2d_discovery, (uint32_t)pSrc, destination, xsize, ysize) != HAL_OK)
+  if(HAL_DMA2D_Start_IT(&hlcd_dma2d, (uint32_t)pSrc, destination, xsize, ysize) != HAL_OK)
   {
     Error_Handler();
   }
@@ -318,14 +395,18 @@ static void DMA2D_TransferCompleteCallback(DMA2D_HandleTypeDef *hdma2d)
   * @param  None
   * @retval LCD state
   */
-static uint8_t LCD_Init(void)
-{
-  DSI_PHY_TimerTypeDef  PhyTimings;   
+static uint8_t LCD_Init(void){
+  
   GPIO_InitTypeDef GPIO_Init_Structure;
+  DSI_PHY_TimerTypeDef  PhyTimings;
+
+  OTM8009A_IO_t              IOCtx;
+  static OTM8009A_Object_t   OTM8009AObj;
+  static void                *Lcd_CompObj = NULL;  
   
   /* Toggle Hardware Reset of the DSI LCD using
      its XRES signal (active low) */
-  BSP_LCD_Reset();
+  BSP_LCD_Reset(0);
   
   /* Call first MSP Initialize only in case of first initialization
   * This will set IP blocks LTDC, DSI and DMA2D
@@ -333,8 +414,9 @@ static uint8_t LCD_Init(void)
   * - clocked
   * - NVIC IRQ related to IP blocks enabled
   */
-  BSP_LCD_MspInit();
+  LCD_MspInit();
 
+  /* LCD clock configuration */
   /* LCD clock configuration */
   /* PLL3_VCO Input = HSE_VALUE/PLL3M = 5 Mhz */
   /* PLL3_VCO Output = PLL3_VCO Input * PLL3N = 800 Mhz */
@@ -349,18 +431,20 @@ static uint8_t LCD_Init(void)
   PeriphClkInitStruct.PLL3.PLL3R = 19;
   HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct);   
   
- /* Base address of DSI Host/Wrapper registers to be set before calling De-Init */
-  hdsi_discovery.Instance = DSI;
+  /* Base address of DSI Host/Wrapper registers to be set before calling De-Init */
+  hlcd_dsi.Instance = DSI;
   
-  HAL_DSI_DeInit(&(hdsi_discovery));
+  HAL_DSI_DeInit(&(hlcd_dsi));
   
   dsiPllInit.PLLNDIV  = 100;
   dsiPllInit.PLLIDF   = DSI_PLL_IN_DIV5;
   dsiPllInit.PLLODF  = DSI_PLL_OUT_DIV1;  
 
-  hdsi_discovery.Init.NumberOfLanes = DSI_TWO_DATA_LANES;
-  hdsi_discovery.Init.TXEscapeCkdiv = 0x4;
-  HAL_DSI_Init(&(hdsi_discovery), &(dsiPllInit));
+  hlcd_dsi.Init.NumberOfLanes = DSI_TWO_DATA_LANES;
+  hlcd_dsi.Init.TXEscapeCkdiv = 0x4;
+  
+  
+  HAL_DSI_Init(&(hlcd_dsi), &(dsiPllInit));
     
   /* Configure the DSI for Command mode */
   CmdCfg.VirtualChannelID      = 0;
@@ -374,7 +458,7 @@ static uint8_t LCD_Init(void)
   CmdCfg.VSyncPol              = DSI_VSYNC_FALLING;
   CmdCfg.AutomaticRefresh      = DSI_AR_DISABLE;
   CmdCfg.TEAcknowledgeRequest  = DSI_TE_ACKNOWLEDGE_DISABLE;
-  HAL_DSI_ConfigAdaptedCommandMode(&hdsi_discovery, &CmdCfg);
+  HAL_DSI_ConfigAdaptedCommandMode(&hlcd_dsi, &CmdCfg);
   
   LPCmd.LPGenShortWriteNoP    = DSI_LP_GSW0P_ENABLE;
   LPCmd.LPGenShortWriteOneP   = DSI_LP_GSW1P_ENABLE;
@@ -387,13 +471,13 @@ static uint8_t LCD_Init(void)
   LPCmd.LPDcsShortWriteOneP   = DSI_LP_DSW1P_ENABLE;
   LPCmd.LPDcsShortReadNoP     = DSI_LP_DSR0P_ENABLE;
   LPCmd.LPDcsLongWrite        = DSI_LP_DLW_ENABLE;
-  HAL_DSI_ConfigCommand(&hdsi_discovery, &LPCmd);
+  HAL_DSI_ConfigCommand(&hlcd_dsi, &LPCmd);
 
   /* Initialize LTDC */
   LTDC_Init();
   
   /* Start DSI */
-  HAL_DSI_Start(&(hdsi_discovery));
+  HAL_DSI_Start(&(hlcd_dsi));
 
   /* Configure DSI PHY HS2LP and LP2HS timings */
   PhyTimings.ClockLaneHS2LPTime = 35;
@@ -402,11 +486,16 @@ static uint8_t LCD_Init(void)
   PhyTimings.DataLaneLP2HSTime = 35;
   PhyTimings.DataLaneMaxReadTime = 0;
   PhyTimings.StopWaitTime = 10;
-  HAL_DSI_ConfigPhyTimer(&hdsi_discovery, &PhyTimings);
-  
-  /* Initialize the OTM8009A LCD Display IC Driver (KoD LCD IC Driver)
-  */
-  OTM8009A_Init(OTM8009A_COLMOD_RGB888, LCD_ORIENTATION_LANDSCAPE);
+  HAL_DSI_ConfigPhyTimer(&hlcd_dsi, &PhyTimings);   
+    
+  /* Initialize the OTM8009A LCD Display IC Driver (KoD LCD IC Driver) */
+  IOCtx.Address     = 0;
+  IOCtx.GetTick     = BSP_GetTick;
+  IOCtx.WriteReg    = DSI_IO_Write;
+  IOCtx.ReadReg     = DSI_IO_Read;
+  OTM8009A_RegisterBusIO(&OTM8009AObj, &IOCtx);
+  Lcd_CompObj=(&OTM8009AObj);
+  OTM8009A_Init(Lcd_CompObj, OTM8009A_COLMOD_RGB888, LCD_ORIENTATION_LANDSCAPE);
   
   LPCmd.LPGenShortWriteNoP    = DSI_LP_GSW0P_DISABLE;
   LPCmd.LPGenShortWriteOneP   = DSI_LP_GSW1P_DISABLE;
@@ -419,10 +508,10 @@ static uint8_t LCD_Init(void)
   LPCmd.LPDcsShortWriteOneP   = DSI_LP_DSW1P_DISABLE;
   LPCmd.LPDcsShortReadNoP     = DSI_LP_DSR0P_DISABLE;
   LPCmd.LPDcsLongWrite        = DSI_LP_DLW_DISABLE;
-  HAL_DSI_ConfigCommand(&hdsi_discovery, &LPCmd);
+  HAL_DSI_ConfigCommand(&hlcd_dsi, &LPCmd);
   
-  HAL_DSI_ConfigFlowControl(&hdsi_discovery, DSI_FLOW_CONTROL_BTA);
-  HAL_DSI_ForceRXLowPower(&hdsi_discovery, ENABLE);  
+  HAL_DSI_ConfigFlowControl(&hlcd_dsi, DSI_FLOW_CONTROL_BTA);
+  HAL_DSI_ForceRXLowPower(&hlcd_dsi, ENABLE);  
   
   /* Enable GPIOJ clock */
   __HAL_RCC_GPIOJ_CLK_ENABLE();
@@ -435,9 +524,9 @@ static uint8_t LCD_Init(void)
   GPIO_Init_Structure.Pull      = GPIO_NOPULL;
   GPIO_Init_Structure.Speed     = GPIO_SPEED_FREQ_HIGH;
   GPIO_Init_Structure.Alternate = GPIO_AF13_DSI;
-  HAL_GPIO_Init(GPIOJ, &GPIO_Init_Structure);   
+  HAL_GPIO_Init(GPIOJ, &GPIO_Init_Structure);
   
-  return LCD_OK;
+  return BSP_ERROR_NONE;
 }
 
 /**
@@ -448,32 +537,32 @@ static uint8_t LCD_Init(void)
 static void LTDC_Init(void)
 {
   /* DeInit */
-  HAL_LTDC_DeInit(&hltdc_discovery);
+  HAL_LTDC_DeInit(&hlcd_ltdc);
   
   /* LTDC Config */
   /* Timing and polarity */
-  hltdc_discovery.Init.HorizontalSync = HSYNC;
-  hltdc_discovery.Init.VerticalSync = VSYNC;
-  hltdc_discovery.Init.AccumulatedHBP = HSYNC+HBP;
-  hltdc_discovery.Init.AccumulatedVBP = VSYNC+VBP;
-  hltdc_discovery.Init.AccumulatedActiveH = VSYNC+VBP+VACT;
-  hltdc_discovery.Init.AccumulatedActiveW = HSYNC+HBP+HACT;
-  hltdc_discovery.Init.TotalHeigh = VSYNC+VBP+VACT+VFP;
-  hltdc_discovery.Init.TotalWidth = HSYNC+HBP+HACT+HFP;
+  hlcd_ltdc.Init.HorizontalSync = HSYNC;
+  hlcd_ltdc.Init.VerticalSync = VSYNC;
+  hlcd_ltdc.Init.AccumulatedHBP = HSYNC+HBP;
+  hlcd_ltdc.Init.AccumulatedVBP = VSYNC+VBP;
+  hlcd_ltdc.Init.AccumulatedActiveH = VSYNC+VBP+VACT;
+  hlcd_ltdc.Init.AccumulatedActiveW = HSYNC+HBP+HACT;
+  hlcd_ltdc.Init.TotalHeigh = VSYNC+VBP+VACT+VFP;
+  hlcd_ltdc.Init.TotalWidth = HSYNC+HBP+HACT+HFP;
   
   /* background value */
-  hltdc_discovery.Init.Backcolor.Blue = 0;
-  hltdc_discovery.Init.Backcolor.Green = 0;
-  hltdc_discovery.Init.Backcolor.Red = 0;
+  hlcd_ltdc.Init.Backcolor.Blue = 0;
+  hlcd_ltdc.Init.Backcolor.Green = 0;
+  hlcd_ltdc.Init.Backcolor.Red = 0;
   
   /* Polarity */
-  hltdc_discovery.Init.HSPolarity = LTDC_HSPOLARITY_AL;
-  hltdc_discovery.Init.VSPolarity = LTDC_VSPOLARITY_AL;
-  hltdc_discovery.Init.DEPolarity = LTDC_DEPOLARITY_AL;
-  hltdc_discovery.Init.PCPolarity = LTDC_PCPOLARITY_IPC;
-  hltdc_discovery.Instance = LTDC;
+  hlcd_ltdc.Init.HSPolarity = LTDC_HSPOLARITY_AL;
+  hlcd_ltdc.Init.VSPolarity = LTDC_VSPOLARITY_AL;
+  hlcd_ltdc.Init.DEPolarity = LTDC_DEPOLARITY_AL;
+  hlcd_ltdc.Init.PCPolarity = LTDC_PCPOLARITY_IPC;
+  hlcd_ltdc.Instance = LTDC;
 
-  HAL_LTDC_Init(&hltdc_discovery);
+  HAL_LTDC_Init(&hlcd_ltdc);
 }
 
 /**
@@ -484,29 +573,79 @@ static void LTDC_Init(void)
   */
 static void LCD_LayertInit(uint16_t LayerIndex, uint32_t Address)
 {
-  LCD_LayerCfgTypeDef  Layercfg;
+  LTDC_LayerCfgTypeDef  layercfg;
 
   /* Layer Init */
-  Layercfg.WindowX0 = 0;
-  Layercfg.WindowX1 = BSP_LCD_GetXSize()/2 ;
-  Layercfg.WindowY0 = 0;
-  Layercfg.WindowY1 = BSP_LCD_GetYSize(); 
-  Layercfg.PixelFormat = LTDC_PIXEL_FORMAT_ARGB8888;
-  Layercfg.FBStartAdress = Address;
-  Layercfg.Alpha = 255;
-  Layercfg.Alpha0 = 0;
-  Layercfg.Backcolor.Blue = 0;
-  Layercfg.Backcolor.Green = 0;
-  Layercfg.Backcolor.Red = 0;
-  Layercfg.BlendingFactor1 = LTDC_BLENDING_FACTOR1_PAxCA;
-  Layercfg.BlendingFactor2 = LTDC_BLENDING_FACTOR2_PAxCA;
-  Layercfg.ImageWidth = BSP_LCD_GetXSize() / 2;
-  Layercfg.ImageHeight = BSP_LCD_GetYSize();
+  layercfg.WindowX0 = 0;
+  layercfg.WindowX1 = Lcd_Ctx[0].XSize/2 ;
+  layercfg.WindowY0 = 0;
+  layercfg.WindowY1 = Lcd_Ctx[0].YSize; 
+  layercfg.PixelFormat = LTDC_PIXEL_FORMAT_ARGB8888;
+  layercfg.FBStartAdress = Address;
+  layercfg.Alpha = 255;
+  layercfg.Alpha0 = 0;
+  layercfg.Backcolor.Blue = 0;
+  layercfg.Backcolor.Green = 0;
+  layercfg.Backcolor.Red = 0;
+  layercfg.BlendingFactor1 = LTDC_BLENDING_FACTOR1_PAxCA;
+  layercfg.BlendingFactor2 = LTDC_BLENDING_FACTOR2_PAxCA;
+  layercfg.ImageWidth = Lcd_Ctx[0].XSize / 2;
+  layercfg.ImageHeight = Lcd_Ctx[0].YSize;
   
-  HAL_LTDC_ConfigLayer(&hltdc_discovery, &Layercfg, LayerIndex); 
+  HAL_LTDC_ConfigLayer(&hlcd_ltdc, &layercfg, LayerIndex); 
 }
 
-void BSP_LCD_MspInit(void)
+/**
+  * @brief  DCS or Generic short/long write command
+  * @param  ChannelNbr Virtual channel ID
+  * @param  Reg Register to be written
+  * @param  pData pointer to a buffer of data to be write
+  * @param  Size To precise command to be used (short or long)
+  * @retval BSP status
+  */
+static int32_t DSI_IO_Write(uint16_t ChannelNbr, uint16_t Reg, uint8_t *pData, uint16_t Size)
+{
+  int32_t ret = BSP_ERROR_NONE;
+
+  if(Size <= 1U)
+  {
+    if(HAL_DSI_ShortWrite(&hlcd_dsi, ChannelNbr, DSI_DCS_SHORT_PKT_WRITE_P1, Reg, (uint32_t)pData[Size]) != HAL_OK)
+    {
+      ret = BSP_ERROR_BUS_FAILURE;
+    }
+  }
+  else
+  {
+    if(HAL_DSI_LongWrite(&hlcd_dsi, ChannelNbr, DSI_DCS_LONG_PKT_WRITE, Size, (uint32_t)Reg, pData) != HAL_OK)
+    {
+      ret = BSP_ERROR_BUS_FAILURE;
+    }
+  }
+
+  return ret;
+}
+
+/**
+  * @brief  DCS or Generic read command
+  * @param  ChannelNbr Virtual channel ID
+  * @param  Reg Register to be read
+  * @param  pData pointer to a buffer to store the payload of a read back operation.
+  * @param  Size  Data size to be read (in byte).
+  * @retval BSP status
+  */
+static int32_t DSI_IO_Read(uint16_t ChannelNbr, uint16_t Reg, uint8_t *pData, uint16_t Size)
+{
+  int32_t ret = BSP_ERROR_NONE;
+
+  if(HAL_DSI_Read(&hlcd_dsi, ChannelNbr, pData, Size, DSI_DCS_SHORT_PKT_READ, Reg, pData) != HAL_OK)
+  {
+    ret = BSP_ERROR_BUS_FAILURE;
+  }
+
+  return ret;
+}
+
+void LCD_MspInit(void)
 {
   /** @brief Enable the LTDC clock */
   __HAL_RCC_LTDC_CLK_ENABLE();
@@ -542,7 +681,6 @@ void BSP_LCD_MspInit(void)
   HAL_NVIC_EnableIRQ(DSI_IRQn);
 }
 
-
 /**
   * @brief  Tearing Effect DSI callback.
   * @param  hdsi: pointer to a DSI_HandleTypeDef structure that contains
@@ -573,8 +711,8 @@ void HAL_DSI_EndOfRefreshCallback(DSI_HandleTypeDef *hdsi)
       /* Disable DSI Wrapper */
       __HAL_DSI_WRAPPER_DISABLE(hdsi);
       /* Update LTDC configuaration */
-      LTDC_LAYER(&hltdc_discovery, 0)->CFBAR = LCD_FRAME_BUFFER + 400 * ARGB8888_BYTE_PER_PIXEL;
-      __HAL_LTDC_RELOAD_CONFIG(&hltdc_discovery);
+      LTDC_LAYER(&hlcd_ltdc, 0)->CFBAR = LCD_FRAME_BUFFER + 400 * ARGB8888_BYTE_PER_PIXEL;
+      __HAL_LTDC_RELOAD_CONFIG(&hlcd_ltdc);
       /* Enable DSI Wrapper */
       __HAL_DSI_WRAPPER_ENABLE(hdsi);
       
@@ -586,19 +724,19 @@ void HAL_DSI_EndOfRefreshCallback(DSI_HandleTypeDef *hdsi)
     else if(active_area == RIGHT_AREA)
     {
       /* Disable DSI Wrapper */
-      __HAL_DSI_WRAPPER_DISABLE(&hdsi_discovery);
+      __HAL_DSI_WRAPPER_DISABLE(&hlcd_dsi);
       /* Update LTDC configuaration */
-      LTDC_LAYER(&hltdc_discovery, 0)->CFBAR = LCD_FRAME_BUFFER;
-      __HAL_LTDC_RELOAD_CONFIG(&hltdc_discovery);
+      LTDC_LAYER(&hlcd_ltdc, 0)->CFBAR = LCD_FRAME_BUFFER;
+      __HAL_LTDC_RELOAD_CONFIG(&hlcd_ltdc);
       /* Enable DSI Wrapper */
-      __HAL_DSI_WRAPPER_ENABLE(&hdsi_discovery);
+      __HAL_DSI_WRAPPER_ENABLE(&hlcd_dsi);
       
       HAL_DSI_LongWrite(hdsi, 0, DSI_DCS_LONG_PKT_WRITE, 4, OTM8009A_CMD_CASET, pColLeft); 
  
       if(cameraState == CAMERA_STATE_DISPLAY_ONGOING)
       {
         cameraState = CAMERA_STATE_CAPTURE_ONGOING;
-        BSP_CAMERA_Resume();
+        BSP_CAMERA_Resume(0);
       }      
         
       pending_buffer = -1; 

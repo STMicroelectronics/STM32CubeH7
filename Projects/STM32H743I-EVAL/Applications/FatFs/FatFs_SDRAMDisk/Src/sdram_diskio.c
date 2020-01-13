@@ -67,7 +67,7 @@ DSTATUS SDRAMDISK_initialize(BYTE lun)
   Stat = STA_NOINIT;
   
   /* Configure the SDRAM device */
-  if(BSP_SDRAM_Init() == SDRAM_OK)
+  if(BSP_SDRAM_Init(0) == BSP_ERROR_NONE)
   {
     Stat &= ~STA_NOINIT;
   }

@@ -16,7 +16,7 @@
         <TargetCommonOption>
           <Device>STM32H747XIHx:CM7</Device>
           <Vendor>STMicroelectronics</Vendor>
-          <PackID>Keil.STM32H7xx_DFP.2.2.5</PackID>
+          <PackID>Keil.STM32H7xx_DFP.2.2.6</PackID>
           <PackURL>http://www.keil.com/pack</PackURL>
           <Cpu>IROM(0x08000000-0x80FFFFF) IRAM(0x24000000-0x2407FFFF) IRAM2(0x00000000-0xFFFF) CLOCK(12000000) FPU3(DFPU) CPUTYPE("Cortex-M7") ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
@@ -337,7 +337,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32H747xx,CORE_CM7</Define>
               <Undefine></Undefine>
-              <IncludePath>../CM7/Core/Inc;../../../../../../Drivers/CMSIS/Include;../../../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../../../../../../Drivers/STM32H7xx_HAL_Driver/Inc;../../../../../../Drivers/BSP/STM32H747I-Discovery;../../../../../../Drivers/BSP/Components/mfxstm32l152;../../../../../../Drivers/BSP/Components/Common;../../../../../../Drivers/BSP/Components;../../../../../../Middlewares/ST/STemWin/inc;../../../../../../Utilities/Fonts;../CM7/STemWin/Target;../CM7/STemWin/App/generated</IncludePath>
+              <IncludePath>../CM7/Core/Inc;../../../../../../Drivers/CMSIS/Include;../../../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../../../../../../Drivers/STM32H7xx_HAL_Driver/Inc;../../../../../../Drivers/BSP/STM32H747I-EVAL;../../../../../../Drivers/BSP/Components/mfxstm32l152;../../../../../../Drivers/BSP/Components/otm8009a;../../../../../../Drivers/BSP/Components/Common;../../../../../../Drivers/BSP/Components;../../../../../../Middlewares/ST/STemWin/inc;../../../../../../Utilities/Fonts;../CM7/STemWin/Target;../CM7/STemWin/App/generated</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -515,20 +515,50 @@
               <FileType>1</FileType>
               <FilePath>../../../../../../Drivers/BSP/Components/otm8009a/otm8009a.c</FilePath>
             </File>
+            <File>
+              <FileName>otm8009a_reg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\Drivers\BSP\Components\otm8009a\otm8009a_reg.c</FilePath>
+            </File>
+            <File>
+              <FileName>is42s32800j.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\Drivers\BSP\Components\is42s32800j\is42s32800j.c</FilePath>
+            </File>
+            <File>
+              <FileName>mfxstm32l152.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\Drivers\BSP\Components\mfxstm32l152\mfxstm32l152.c</FilePath>
+            </File>
+            <File>
+              <FileName>mfxstm32l152_reg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\Drivers\BSP\Components\mfxstm32l152\mfxstm32l152_reg.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
           <GroupName>Drivers/BSP/STM32H747I-EVAL</GroupName>
           <Files>
             <File>
-              <FileName>stm32h747i_discovery.c</FileName>
+              <FileName>stm32h747i_eval.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../../Drivers/BSP/STM32H747I-Discovery/stm32h747i_discovery.c</FilePath>
+              <FilePath>..\..\..\..\..\..\Drivers\BSP\STM32H747I-EVAL\stm32h747i_eval.c</FilePath>
             </File>
             <File>
-              <FileName>stm32h747i_discovery_sdram.c</FileName>
+              <FileName>stm32h747i_eval_bus.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../../Drivers/BSP/STM32H747I-Discovery/stm32h747i_discovery_sdram.c</FilePath>
+              <FilePath>..\..\..\..\..\..\Drivers\BSP\STM32H747I-EVAL\stm32h747i_eval_bus.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32h747i_eval_io.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\Drivers\BSP\STM32H747I-EVAL\stm32h747i_eval_io.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32h747i_eval_sdram.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\Drivers\BSP\STM32H747I-EVAL\stm32h747i_eval_sdram.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -675,6 +705,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_uart_ex.c</FilePath>
             </File>
+            <File>
+              <FileName>stm32h7xx_hal_exti.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_exti.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -727,7 +762,7 @@
         <TargetCommonOption>
           <Device>STM32H747XIHx:CM4</Device>
           <Vendor>STMicroelectronics</Vendor>
-          <PackID>Keil.STM32H7xx_DFP.2.2.5</PackID>
+          <PackID>Keil.STM32H7xx_DFP.2.2.6</PackID>
           <PackURL>http://www.keil.com/pack</PackURL>
           <Cpu>IROM(0x08100000-0x81FFFFF) IRAM(0x10000000-0x10047FFF) CLOCK(12000000) FPU2 CPUTYPE("Cortex-M4")</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
@@ -1364,6 +1399,26 @@
               <FileType>1</FileType>
               <FilePath>../../../../../../Drivers/BSP/Components/otm8009a/otm8009a.c</FilePath>
             </File>
+            <File>
+              <FileName>otm8009a_reg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\Drivers\BSP\Components\otm8009a\otm8009a_reg.c</FilePath>
+            </File>
+            <File>
+              <FileName>is42s32800j.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\Drivers\BSP\Components\is42s32800j\is42s32800j.c</FilePath>
+            </File>
+            <File>
+              <FileName>mfxstm32l152.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\Drivers\BSP\Components\mfxstm32l152\mfxstm32l152.c</FilePath>
+            </File>
+            <File>
+              <FileName>mfxstm32l152_reg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\Drivers\BSP\Components\mfxstm32l152\mfxstm32l152_reg.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1439,14 +1494,24 @@
           </GroupOption>
           <Files>
             <File>
-              <FileName>stm32h747i_discovery.c</FileName>
+              <FileName>stm32h747i_eval.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../../Drivers/BSP/STM32H747I-Discovery/stm32h747i_discovery.c</FilePath>
+              <FilePath>..\..\..\..\..\..\Drivers\BSP\STM32H747I-EVAL\stm32h747i_eval.c</FilePath>
             </File>
             <File>
-              <FileName>stm32h747i_discovery_sdram.c</FileName>
+              <FileName>stm32h747i_eval_bus.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../../Drivers/BSP/STM32H747I-Discovery/stm32h747i_discovery_sdram.c</FilePath>
+              <FilePath>..\..\..\..\..\..\Drivers\BSP\STM32H747I-EVAL\stm32h747i_eval_bus.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32h747i_eval_io.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\Drivers\BSP\STM32H747I-EVAL\stm32h747i_eval_io.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32h747i_eval_sdram.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\Drivers\BSP\STM32H747I-EVAL\stm32h747i_eval_sdram.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1592,6 +1657,11 @@
               <FileName>stm32h7xx_hal_uart_ex.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_uart_ex.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32h7xx_hal_exti.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_exti.c</FilePath>
             </File>
           </Files>
         </Group>

@@ -1,5 +1,5 @@
 #include <gui/containers/WasherInstructionContainer.hpp>
-#include <Bitmapdatabase.hpp>
+#include <BitmapDatabase.hpp>
 #include <texts/TextKeysAndLanguages.hpp>
 
 extern "C" {

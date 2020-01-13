@@ -3,46 +3,29 @@
   ******************************************************************************
   * @file    adv7533.h
   * @author  MCD Application Team
-  * @version V1.0.1
-  * @date    05-December-2016
   * @brief   This file contains all the constants parameters for the ADV7533
   *          which is the HDMI bridge between DSI and HDMI
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; Copyright (c) 2016 STMicroelectronics.
+  * All rights reserved.</center></h2>
   *
-  * Redistribution and use in source and binary forms, with or without modification,
-  * are permitted provided that the following conditions are met:
-  *   1. Redistributions of source code must retain the above copyright notice,
-  *      this list of conditions and the following disclaimer.
-  *   2. Redistributions in binary form must reproduce the above copyright notice,
-  *      this list of conditions and the following disclaimer in the documentation
-  *      and/or other materials provided with the distribution.
-  *   3. Neither the name of STMicroelectronics nor the names of its contributors
-  *      may be used to endorse or promote products derived from this software
-  *      without specific prior written permission.
-  *
-  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-  * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
-  * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-  * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-  * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-  * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  * This software component is licensed by ST under BSD 3-Clause license,
+  * the "License"; You may not use this file except in compliance with the
+  * License. You may obtain a copy of the License at:
+  *                        opensource.org/licenses/BSD-3-Clause
   *
   ******************************************************************************
   */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __ADV7533_H
-#define __ADV7533_H
+#ifndef ADV7533_H
+#define ADV7533_H
 
-/* Includes ------------------------------------------------------------------*/
-#include "../Common/audio.h"
+/* Includes ------------------------------------------------------------------*/  
+#include "adv7533_reg.h"
+#include <stddef.h>
 
 /** @addtogroup BSP
   * @{
@@ -52,108 +35,150 @@
   * @{
   */
 
-/** @addtogroup adv7533
+/** @addtogroup ADV7533
   * @{
   */
 
-/** @addtogroup ADV7533_Exported_Types
+/** @defgroup ADV7533_Exported_Types Exported Types
   * @{
   */
+typedef int32_t (*ADV7533_Init_Func)    (void);
+typedef int32_t (*ADV7533_DeInit_Func)  (void);
+typedef int32_t (*ADV7533_GetTick_Func) (void);
+typedef int32_t (*ADV7533_Delay_Func)   (uint32_t);
+typedef int32_t (*ADV7533_WriteReg_Func)(uint16_t, uint16_t, uint8_t*, uint16_t);
+typedef int32_t (*ADV7533_ReadReg_Func) (uint16_t, uint16_t, uint8_t*, uint16_t);
 
-typedef struct {
-  uint8_t       DSI_LANES;
-  uint16_t      HACT;
-  uint16_t      HSYNC;
-  uint16_t      HBP;
-  uint16_t      HFP;
-  uint16_t      VACT;
-  uint16_t      VSYNC;
-  uint16_t      VBP;
-  uint16_t      VFP;
-  uint8_t       ASPECT_RATIO;
-} adv7533ConfigTypeDef;
+typedef struct
+{
+  uint32_t   Frequency;
+} ADV7533_Init_t;
 
-/** @defgroup ADV7533_Exported_Constants
+typedef struct
+{
+  ADV7533_Init_Func          Init;
+  ADV7533_DeInit_Func        DeInit;
+  uint16_t                   Address;  
+  ADV7533_WriteReg_Func      WriteReg;
+  ADV7533_ReadReg_Func       ReadReg; 
+  ADV7533_GetTick_Func       GetTick; 
+} ADV7533_IO_t;
+
+typedef struct
+{
+  ADV7533_IO_t         IO;
+  adv7533_ctx_t        Ctx;   
+  uint8_t              IsInitialized;
+} ADV7533_Object_t;
+
+ typedef struct
+{
+  int32_t ( *Init                 ) ( ADV7533_Object_t *, ADV7533_Init_t* );
+  int32_t ( *DeInit               ) ( ADV7533_Object_t * );
+  int32_t ( *ReadID               ) ( ADV7533_Object_t *, uint32_t *); 
+  int32_t ( *Play                 ) ( ADV7533_Object_t * );
+  int32_t ( *Pause                ) ( ADV7533_Object_t * );
+  int32_t ( *Resume               ) ( ADV7533_Object_t * );
+  int32_t ( *Stop                 ) ( ADV7533_Object_t *, uint32_t );
+  int32_t ( *SetFrequency         ) ( ADV7533_Object_t *, uint32_t );
+  int32_t ( *GetFrequency         ) ( ADV7533_Object_t *, uint32_t* );  
+  int32_t ( *SetVolume            ) ( ADV7533_Object_t *, uint8_t, uint8_t );
+  int32_t ( *GetVolume            ) ( ADV7533_Object_t *, uint8_t );  
+  int32_t ( *SetMute              ) ( ADV7533_Object_t *, uint16_t );
+  int32_t ( *SetOutputMode        ) ( ADV7533_Object_t *, uint16_t ); 
+  int32_t ( *SetResolution        ) ( ADV7533_Object_t *, uint32_t );
+  int32_t ( *GetResolution        ) ( ADV7533_Object_t *, uint32_t *);  
+  int32_t ( *SetProtocol          ) ( ADV7533_Object_t *, uint16_t );
+  int32_t ( *GetProtocol          ) ( ADV7533_Object_t *);  
+  int32_t ( *Reset                ) ( ADV7533_Object_t * );
+} ADV7533_Drv_t;
+
+ typedef struct
+{
+  /* Control functions */
+  int32_t (*Init             )(ADV7533_Object_t*, uint32_t, uint32_t);
+  int32_t (*DeInit           )(ADV7533_Object_t*);
+  int32_t (*ReadID           )(ADV7533_Object_t*, uint32_t*);
+  int32_t (*DisplayOn        )(ADV7533_Object_t*);
+  int32_t (*DisplayOff       )(ADV7533_Object_t*);
+  int32_t (*SetBrightness    )(ADV7533_Object_t*, uint32_t); 
+  int32_t (*GetBrightness    )(ADV7533_Object_t*, uint32_t*);   
+  int32_t (*SetOrientation   )(ADV7533_Object_t*, uint32_t);
+  int32_t (*GetOrientation   )(ADV7533_Object_t*, uint32_t*);
+
+  /* Drawing functions*/
+  int32_t ( *SetCursor       ) (ADV7533_Object_t*, uint32_t, uint32_t); 
+  int32_t ( *DrawBitmap      ) (ADV7533_Object_t*, uint32_t, uint32_t, uint8_t *);
+  int32_t (*FillRGBRect      ) (ADV7533_Object_t*, uint32_t, uint32_t, uint8_t *, uint32_t, uint32_t);  
+  int32_t ( *DrawHLine       ) (ADV7533_Object_t*, uint32_t, uint32_t, uint32_t, uint32_t);
+  int32_t ( *DrawVLine       ) (ADV7533_Object_t*, uint32_t, uint32_t, uint32_t, uint32_t);
+  int32_t ( *FillRect        ) (ADV7533_Object_t*, uint32_t, uint32_t, uint32_t, uint32_t, uint32_t);
+  int32_t ( *GetPixel        ) (ADV7533_Object_t*, uint32_t, uint32_t, uint32_t*);
+  int32_t ( *SetPixel        ) (ADV7533_Object_t*, uint32_t, uint32_t, uint32_t);
+  int32_t ( *GetXSize        ) (ADV7533_Object_t*, uint32_t *);
+  int32_t ( *GetYSize        ) (ADV7533_Object_t*, uint32_t *);  
+} ADV7533_LcdDrv_t;
+
+/**
+  * @}
+  */
+
+/** @defgroup ADV7533_Exported_Constants Exported Constants
   * @{
   */
+#define ADV7533_OK                (0)
+#define ADV7533_ERROR             (-1)
+
+/** 
+  * @brief AUDIO FREQUENCY
+  */
+#define ADV7533_FREQUENCY_192K    192000
+#define ADV7533_FREQUENCY_176K    176400
+#define ADV7533_FREQUENCY_96K     96000
+#define ADV7533_FREQUENCY_88K     88200  
+#define ADV7533_FREQUENCY_48K     48000
+#define ADV7533_FREQUENCY_44K     44100
+#define ADV7533_FREQUENCY_32K     32000
+#define ADV7533_FREQUENCY_22K     22050
+#define ADV7533_FREQUENCY_16K     16000
+#define ADV7533_FREQUENCY_11K     11025
+#define ADV7533_FREQUENCY_8K      8000
 
 /** 
   * @brief HDMI audio output DEVICE
   */ 
-#define OUTPUT_DEVICE_ADV7533_HDMI       ((uint16_t)0x1000)
+#define OUTPUT_DEVICE_ADV7533_HDMI       0x1000U
 
 /** 
   * @brief  ADV7533 I2C Addresses 0x7A / 0x78
   */  
-#define  ADV7533_MAIN_I2C_ADDR           ((uint8_t)0x7A)
-#define  ADV7533_CEC_DSI_I2C_ADDR        ((uint8_t)0x78)
+#define  ADV7533_MAIN_I2C_ADDR           0x7AU
+#define  ADV7533_CEC_DSI_I2C_ADDR        0x78U
 
 /** 
   * @brief  ADV7533 Aspect ratio
   */  
-#define ADV7533_ASPECT_RATIO_16_9        ((uint8_t)0x00)
-#define ADV7533_ASPECT_RATIO_4_3         ((uint8_t)0x01)
+#define ADV7533_ASPECT_RATIO_16_9        00U
+#define ADV7533_ASPECT_RATIO_4_3         01U
 
 /** 
   * @brief  ADV7533 Aspect ratio
   */  
-#define ADV7533_MODE_HDMI                0x0
-#define ADV7533_MODE_DVI                 0x1
+#define ADV7533_MODE_HDMI                00U
+#define ADV7533_MODE_DVI                 01U
    
-/** 
-  * @brief  ADV7533 Main Registers
-  */
-#define  ADV7533_MAIN_SYNC_REG           ((uint8_t)0x17)
-#define  ADV7533_MAIN_POWER_DOWN_REG     ((uint8_t)0x41)
-#define  ADV7533_MAIN_HPG_REG            ((uint8_t)0x42)
-
 /**
  * @brief   ADV7533 Main Features Parameters
  */
 
-/**
-  * @brief ADV7533 CEC DSI Registers
-  */
-#define ADV7533_CEC_DSI_INTERNAL_TIMING_REG  ((uint8_t)0x27)
-#define ADV7533_CEC_DSI_TOTAL_WIDTH_H_REG    ((uint8_t)0x28)
-#define ADV7533_CEC_DSI_TOTAL_WIDTH_L_REG    ((uint8_t)0x29)
-#define ADV7533_CEC_DSI_HSYNC_H_REG          ((uint8_t)0x2A)
-#define ADV7533_CEC_DSI_HSYNC_L_REG          ((uint8_t)0x2B)
-#define ADV7533_CEC_DSI_HFP_H_REG            ((uint8_t)0x2C)
-#define ADV7533_CEC_DSI_HFP_L_REG            ((uint8_t)0x2D)
-#define ADV7533_CEC_DSI_HBP_H_REG            ((uint8_t)0x2E)
-#define ADV7533_CEC_DSI_HBP_L_REG            ((uint8_t)0x2F)
-
-#define ADV7533_CEC_DSI_TOTAL_HEIGHT_H_REG   ((uint8_t)0x30)
-#define ADV7533_CEC_DSI_TOTAL_HEIGHT_L_REG   ((uint8_t)0x31)
-#define ADV7533_CEC_DSI_VSYNC_H_REG          ((uint8_t)0x32)
-#define ADV7533_CEC_DSI_VSYNC_L_REG          ((uint8_t)0x33)
-#define ADV7533_CEC_DSI_VFP_H_REG            ((uint8_t)0x34)
-#define ADV7533_CEC_DSI_VFP_L_REG            ((uint8_t)0x35)
-#define ADV7533_CEC_DSI_VBP_H_REG            ((uint8_t)0x36)
-#define ADV7533_CEC_DSI_VBP_L_REG            ((uint8_t)0x37)
-
 /** @Brief adv7533 ID
   */
-#define ADV7533_ID  0x7533
-   
-/** @Brief device ID register 
-  */
-#define   ADV7533_CHIPID_ADDR0   0x00
-#define   ADV7533_CHIPID_ADDR1   0x01    
+#define ADV7533_ID                      0x7533U
 
 /* MUTE commands */
-#define AUDIO_MUTE_ON                 1
-#define AUDIO_MUTE_OFF                0
+#define ADV7533_MUTE_ON                 1U
+#define ADV7533_MUTE_OFF                0U
     
-/* AUDIO FREQUENCY */
-#define AUDIO_FREQUENCY_192K           ((uint32_t)192000)
-#define AUDIO_FREQUENCY_176K           ((uint32_t)176400)
-#define AUDIO_FREQUENCY_96K            ((uint32_t)96000)
-#define AUDIO_FREQUENCY_88K            ((uint32_t)88200)
-#define AUDIO_FREQUENCY_48K            ((uint32_t)48000)
-#define AUDIO_FREQUENCY_44K            ((uint32_t)44100)
-#define AUDIO_FREQUENCY_32K            ((uint32_t)32000) 
 
 /**
   * @}
@@ -174,49 +199,64 @@ typedef struct {
 /** @addtogroup ADV7533_Exported_Functions
   * @{
   */
-
+int32_t ADV7533_RegisterBusIO (ADV7533_Object_t *pObj, ADV7533_IO_t *pIO);
 /*------------------------------------------------------------------------------
                            HDMI video functions 
 ------------------------------------------------------------------------------*/  
-uint8_t ADV7533_Init(void);
-void ADV7533_PowerOn(void);
-void ADV7533_PowerDown(void);
-void ADV7533_Configure(adv7533ConfigTypeDef * config);
-void ADV7533_PatternEnable(void);
-void ADV7533_PatternDisable(void);
+int32_t ADV7533_Init(ADV7533_Object_t *pObj, uint32_t ColorCoding, uint32_t Orientation);
+int32_t ADV7533_DisplayOn(ADV7533_Object_t *pObj);
+int32_t ADV7533_DisplayOff(ADV7533_Object_t *pObj);
+int32_t ADV7533_Configure(ADV7533_Object_t *pObj, uint8_t LaneNumber);
+int32_t ADV7533_PatternEnable(ADV7533_Object_t *pObj);
+int32_t ADV7533_PatternDisable(ADV7533_Object_t *pObj);
 
+int32_t ADV7533_SetBrightness(ADV7533_Object_t *pObj, uint32_t Brightness);
+int32_t ADV7533_GetBrightness(ADV7533_Object_t *pObj, uint32_t *Brightness);
+int32_t ADV7533_SetOrientation(ADV7533_Object_t *pObj, uint32_t Orientation);
+int32_t ADV7533_GetOrientation(ADV7533_Object_t *pObj, uint32_t *Orientation);
+
+
+int32_t ADV7533_SetCursor(ADV7533_Object_t *pObj, uint32_t Xpos, uint32_t Ypos);
+int32_t ADV7533_DrawBitmap(ADV7533_Object_t *pObj, uint32_t Xpos, uint32_t Ypos, uint8_t *pBmp);
+int32_t ADV7533_FillRGBRect(ADV7533_Object_t *pObj, uint32_t Xpos, uint32_t Ypos, uint8_t *pData, uint32_t Width, uint32_t Height);
+int32_t ADV7533_DrawHLine(ADV7533_Object_t *pObj, uint32_t Xpos, uint32_t Ypos, uint32_t Length, uint32_t Color);
+int32_t ADV7533_DrawVLine(ADV7533_Object_t *pObj, uint32_t Xpos, uint32_t Ypos, uint32_t Length, uint32_t Color);
+int32_t ADV7533_FillRect(ADV7533_Object_t *pObj, uint32_t Xpos, uint32_t Ypos, uint32_t Width, uint32_t Height, uint32_t Color);
+int32_t ADV7533_SetPixel(ADV7533_Object_t *pObj, uint32_t Xpos, uint32_t Ypos, uint32_t Color);
+int32_t ADV7533_GetPixel(ADV7533_Object_t *pObj, uint32_t Xpos, uint32_t Ypos, uint32_t *Color);
+int32_t ADV7533_GetXSize(ADV7533_Object_t *pObj, uint32_t *XSize);
+int32_t ADV7533_GetYSize(ADV7533_Object_t *pObj, uint32_t *YSize);
 /*------------------------------------------------------------------------------
                            HDMI Audio functions 
 ------------------------------------------------------------------------------*/
-uint32_t adv7533_AudioInit(uint16_t DeviceAddr, uint16_t OutputDevice, uint8_t Volume,uint32_t AudioFreq);
-void adv7533_DeInit(void);
-uint32_t adv7533_ReadID(uint16_t DeviceAddr);
-uint32_t adv7533_Play(uint16_t DeviceAddr, uint16_t* pBuffer, uint16_t Size);
-uint32_t adv7533_Stop(uint16_t DeviceAddr,uint32_t Cmd);
-uint32_t adv7533_Pause(uint16_t DeviceAddr);
-uint32_t adv7533_Resume(uint16_t DeviceAddr);
-uint32_t adv7533_SetMute(uint16_t DeviceAddr, uint32_t Cmd);
-uint32_t adv7533_SetVolume(uint16_t, uint8_t);
-uint32_t adv7533_Reset(uint16_t DeviceAddr);
-uint32_t adv7533_SetOutputMode(uint16_t DeviceAddr, uint8_t Output);
-uint32_t adv7533_SetFrequency(uint16_t DeviceAddr, uint32_t AudioFreq);
-
-
-/* HDMI IO functions */
-void     HDMI_IO_Init(void);
-void     HDMI_IO_Write(uint8_t addr, uint8_t reg, uint8_t value);
-uint8_t  HDMI_IO_Read(uint8_t addr, uint8_t reg);
-void     HDMI_IO_Delay(uint32_t delay);
-void     AUDIO_IO_DeInit(void);
+int32_t ADV7533_AudioInit(ADV7533_Object_t *pObj, ADV7533_Init_t *pInit);
+int32_t ADV7533_DeInit(ADV7533_Object_t *pObj);
+int32_t ADV7533_ReadID(ADV7533_Object_t *pObj, uint32_t *Id);
+int32_t ADV7533_Play(ADV7533_Object_t *pObj);
+int32_t ADV7533_Pause(ADV7533_Object_t *pObj);
+int32_t ADV7533_Resume(ADV7533_Object_t *pObj);
+int32_t ADV7533_Stop(ADV7533_Object_t *pObj, uint32_t CodecPdwnMode);
+int32_t ADV7533_SetVolume(ADV7533_Object_t *pObj, uint8_t Volume, uint8_t InputOutput);
+int32_t ADV7533_GetVolume(ADV7533_Object_t *pObj, uint8_t InputOutput);
+int32_t ADV7533_SetMute(ADV7533_Object_t *pObj, uint16_t Cmd);
+int32_t ADV7533_SetOutputMode(ADV7533_Object_t *pObj, uint16_t Output);
+int32_t ADV7533_SetResolution(ADV7533_Object_t *pObj, uint32_t Resolution);
+int32_t ADV7533_GetResolution(ADV7533_Object_t *pObj, uint32_t *Resolution);
+int32_t ADV7533_SetProtocol(ADV7533_Object_t *pObj, uint16_t Protocol);
+int32_t ADV7533_GetProtocol(ADV7533_Object_t *pObj);
+int32_t ADV7533_SetFrequency(ADV7533_Object_t *pObj, uint32_t AudioFreq);
+int32_t ADV7533_GetFrequency(ADV7533_Object_t *pObj, uint32_t *Frequency);
+int32_t ADV7533_Reset(ADV7533_Object_t *pObj);
 
 /**
   * @}
   */ 
 
-/* HDMI Audio driver structure */
-extern AUDIO_DrvTypeDef adv7533_drv;
-
-#endif /* __ADV7533_H */
+/* Audio driver structure */
+extern ADV7533_Drv_t ADV7533_Driver;
+/* LCD driver structure */
+extern ADV7533_LcdDrv_t ADV7533_LCD_Driver;
+#endif /* ADV7533_H */
 /**
   * @}
   */

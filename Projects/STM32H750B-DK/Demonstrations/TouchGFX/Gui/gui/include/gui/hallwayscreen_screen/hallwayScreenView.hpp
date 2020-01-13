@@ -2,7 +2,7 @@
 #define HALLWAYSCREEN_VIEW_HPP
 
 #include <gui_generated/hallwayscreen_screen/HallwayScreenViewBase.hpp>
-#include <gui/hallwayscreen_screen/HallwayScreenPresenter.hpp>
+#include <gui/hallwayscreen_screen/hallwayScreenPresenter.hpp>
 
 class HallwayScreenView : public HallwayScreenViewBase
 {

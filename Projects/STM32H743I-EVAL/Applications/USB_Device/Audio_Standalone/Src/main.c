@@ -89,7 +89,7 @@ int main(void)
   *         Being __weak it can be overwritten by the application     
   * @retval None
   */
-void BSP_AUDIO_OUT_ClockConfig(SAI_HandleTypeDef * hsai, uint32_t AudioFreq,
+void AUDIO_OUT_ClockConfig(SAI_HandleTypeDef * hsai, uint32_t AudioFreq,
                                void *Params)
 {
   RCC_PeriphCLKInitTypeDef rcc_ex_clk_init_struct;

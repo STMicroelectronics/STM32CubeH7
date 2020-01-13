@@ -116,27 +116,21 @@ static void MSC_InitApplication(void)
   BSP_LED_Init(LED_RED);
 
   /* Initialize the LCD */
-  BSP_LCD_Init();
+  BSP_LCD_Init(0,LCD_ORIENTATION_LANDSCAPE);
 
-  /* LCD Layer Initialization */
-  BSP_LCD_LayerDefaultInit(1, LCD_FB_START_ADDRESS);
-
-  /* Select the LCD Layer */
-  BSP_LCD_SelectLayer(1);
-
-  /* Enable the display */
-  BSP_LCD_DisplayOn();
+  /*link board LCD drivers to BASIC GUI LCD drivers*/
+  GUI_SetFuncDriver(&LCD_Driver);
 
   /* Initialize the LCD Log module */
-  LCD_LOG_Init();
+  UTIL_LCD_TRACE_Init();
 
 #ifdef USE_USB_HS
-  LCD_LOG_SetHeader((uint8_t *) " USB OTG HS MSC Host");
+  UTIL_LCD_TRACE_SetHeader((uint8_t *) " USB OTG HS MSC Host");
 #else
-  LCD_LOG_SetHeader((uint8_t *) " USB OTG FS MSC Host");
+  UTIL_LCD_TRACE_SetHeader((uint8_t *) " USB OTG FS MSC Host");
 #endif
 
-  LCD_UsrLog("USB Host library started.\n");
+  LCD_UsrTrace("USB Host library started.\n");
 
   /* Initialize menu and MSC process */
   USBH_UsrLog("Starting MSC Demo");
@@ -160,11 +154,11 @@ static void USBH_UserProcess(USBH_HandleTypeDef * phost, uint8_t id)
     Appli_state = APPLICATION_DISCONNECT;
     if (f_mount(NULL, "", 0) != FR_OK)
     {
-      LCD_ErrLog("ERROR : Cannot DeInitialize FatFs! \n");
+      LCD_ErrTrace("ERROR : Cannot DeInitialize FatFs! \n");
     }
     if (FATFS_UnLinkDriver(USBDISKPath) != 0)
     {
-      LCD_ErrLog("ERROR : Cannot UnLink FatFS Driver! \n");
+      LCD_ErrTrace("ERROR : Cannot UnLink FatFS Driver! \n");
     }
     break;
 
@@ -177,7 +171,7 @@ static void USBH_UserProcess(USBH_HandleTypeDef * phost, uint8_t id)
     {
       if (f_mount(&USBH_fatfs, "", 0) != FR_OK)
       {
-        LCD_ErrLog("ERROR : Cannot Initialize FatFs! \n");
+        LCD_ErrTrace("ERROR : Cannot Initialize FatFs! \n");
       }
     }
     break;
@@ -288,10 +282,9 @@ void SystemClock_Config(void)
   * @param  hltdc: LTDC handle
   * @param  Params: Pointer to void
   * @note   This API is called by BSP_LCD_Init()
-  *         Being __weak it can be overwritten by the application
   * @retval None
   */
-void BSP_LCD_ClockConfig(LTDC_HandleTypeDef *hltdc, void *Params)
+ HAL_StatusTypeDef MX_LTDC_ClockConfig(LTDC_HandleTypeDef *hltdc)
 {
   static RCC_PeriphCLKInitTypeDef  periph_clk_init_struct;
 
@@ -307,7 +300,7 @@ void BSP_LCD_ClockConfig(LTDC_HandleTypeDef *hltdc, void *Params)
   periph_clk_init_struct.PLL3.PLL3P = 2;
   periph_clk_init_struct.PLL3.PLL3Q = 20;
   periph_clk_init_struct.PLL3.PLL3R = 99;
-  HAL_RCCEx_PeriphCLKConfig(&periph_clk_init_struct);
+  return HAL_RCCEx_PeriphCLKConfig(&periph_clk_init_struct);
 }
 
 /**

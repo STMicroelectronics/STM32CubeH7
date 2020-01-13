@@ -29,6 +29,7 @@
 #include "usbd_storage.h" 
 #include "stm32h747i_eval.h"
 #include "stm32h747i_eval_sd.h"
+#include "stm32h747i_eval_io.h"
 
 /* Exported types ------------------------------------------------------------*/
 #define LED_GREEN       LED1

@@ -6,7 +6,7 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics.
+  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
   * All rights reserved.</center></h2>
   *
   * This software component is licensed by ST under BSD 3-Clause license,
@@ -53,74 +53,77 @@ static uint8_t Buffercmp(uint32_t* pBuffer1, uint32_t* pBuffer2, uint16_t Buffer
   * @retval None
   */
 void SD_demo (void)
-{
-  uint8_t SD_state = SD_OK;
-
+{ 
+  int32_t SD_state = BSP_ERROR_NONE;
+  
   SD_SetHint();
-  SD_state = BSP_SD_Init();
-
-  if(SD_state != SD_OK)
+  SD_state = ADAFRUIT_802_SD_Init(0);
+  ButtonState = 0;
+  
+  if(SD_state != BSP_ERROR_NONE)
   {
-    BSP_LCD_DisplayStringAt(5, 90, (uint8_t *)"SD Initialization", LEFT_MODE);
-    BSP_LCD_DisplayStringAt(5, 105, (uint8_t *)"     FAILED", LEFT_MODE);
-    BSP_LCD_DisplayStringAt(5, 120, (uint8_t *)"SD Test Aborted.", LEFT_MODE);
+    GUI_DisplayStringAt(5, 90, (uint8_t *)"SD Initialization", LEFT_MODE);
+    GUI_DisplayStringAt(5, 105, (uint8_t *)"     FAILED", LEFT_MODE);
+    GUI_DisplayStringAt(5, 120, (uint8_t *)"SD Test Aborted.", LEFT_MODE);
   }
   else
   {
-    BSP_LCD_DisplayStringAt(5, 75, (uint8_t *)"SD Init : OK.", LEFT_MODE);
-
-    SD_state = BSP_SD_Erase(BLOCK_START_ADDR, BLOCK_START_ADDR + NUM_OF_BLOCKS - 1);
-
-    if(SD_state != SD_OK)
+    GUI_DisplayStringAt(5, 75, (uint8_t *)"SD Init : OK.", LEFT_MODE);
+    
+    SD_state = ADAFRUIT_802_SD_Erase(0, BLOCK_START_ADDR, BLOCK_START_ADDR + NUM_OF_BLOCKS - 1);
+        /* Wait until SD card is ready to use for new operation */
+    while(ADAFRUIT_802_SD_GetCardState(0) != SD_TRANSFER_OK);
+    
+    if(SD_state != BSP_ERROR_NONE)
     {
-      BSP_LCD_DisplayStringAt(5, 90, (uint8_t *)"SD ERASE : FAILED.", LEFT_MODE);
-      BSP_LCD_DisplayStringAt(5, 105, (uint8_t *)"SD Test Aborted.", LEFT_MODE);
+      GUI_DisplayStringAt(5, 90, (uint8_t *)"SD ERASE : FAILED.", LEFT_MODE);
+      GUI_DisplayStringAt(5, 105, (uint8_t *)"SD Test Aborted.", LEFT_MODE);
     }
     else
     {
-      BSP_LCD_DisplayStringAt(5, 90, (uint8_t *)"SD ERASE : OK.", LEFT_MODE);
-
+      GUI_DisplayStringAt(5, 90, (uint8_t *)"SD ERASE : OK.", LEFT_MODE);
+      
       /* Fill the buffer to write */
       Fill_Buffer(aTxBuffer, BUFFER_WORDS_SIZE, 0x22FF);
-      SD_state = BSP_SD_WriteBlocks(aTxBuffer, BLOCK_START_ADDR, NUM_OF_BLOCKS, 1);
-
-      if(SD_state != SD_OK)
+      SD_state = ADAFRUIT_802_SD_WriteBlocks(0, aTxBuffer, BLOCK_START_ADDR, NUM_OF_BLOCKS);
+      
+      if(SD_state != BSP_ERROR_NONE)
       {
-        BSP_LCD_DisplayStringAt(5, 105, (uint8_t *)"SD WRITE : FAILED.", LEFT_MODE);
-        BSP_LCD_DisplayStringAt(5, 120, (uint8_t *)"SD Test Aborted.", LEFT_MODE);
+        GUI_DisplayStringAt(5, 105, (uint8_t *)"SD WRITE : FAILED.", LEFT_MODE);
+        GUI_DisplayStringAt(5, 120, (uint8_t *)"SD Test Aborted.", LEFT_MODE);
       }
       else
       {
-        BSP_LCD_DisplayStringAt(5, 105, (uint8_t *)"SD WRITE : OK.", LEFT_MODE);
-        SD_state = BSP_SD_ReadBlocks(aRxBuffer, BLOCK_START_ADDR, NUM_OF_BLOCKS, 1);
-        if(SD_state != SD_OK)
+        GUI_DisplayStringAt(5, 105, (uint8_t *)"SD WRITE : OK.", LEFT_MODE);
+        SD_state = ADAFRUIT_802_SD_ReadBlocks(0, aRxBuffer, BLOCK_START_ADDR, NUM_OF_BLOCKS);
+        if(SD_state != BSP_ERROR_NONE)
         {
-          BSP_LCD_DisplayStringAt(5, 120, (uint8_t *)"SD READ : FAILED.", LEFT_MODE);
-          BSP_LCD_DisplayStringAt(5, 135, (uint8_t *)"SD Test Aborted.", LEFT_MODE);
+          GUI_DisplayStringAt(5, 120, (uint8_t *)"SD READ : FAILED.", LEFT_MODE);
+          GUI_DisplayStringAt(5, 135, (uint8_t *)"SD Test Aborted.", LEFT_MODE);
         }
         else
         {
-          BSP_LCD_DisplayStringAt(5, 120, (uint8_t *)"SD READ : OK.", LEFT_MODE);
+          GUI_DisplayStringAt(5, 120, (uint8_t *)"SD READ : OK.", LEFT_MODE);
           if(Buffercmp(aTxBuffer, aRxBuffer, BUFFER_WORDS_SIZE) > 0)
           {
-            BSP_LCD_DisplayStringAt(5, 135, (uint8_t *)"SD COMPARE : FAILED.", LEFT_MODE);
-            BSP_LCD_DisplayStringAt(5, 150, (uint8_t *)"SD Test Aborted.", LEFT_MODE);
+            GUI_DisplayStringAt(5, 135, (uint8_t *)"SD COMPARE : FAILED.", LEFT_MODE);
+            GUI_DisplayStringAt(5, 150, (uint8_t *)"SD Test Aborted.", LEFT_MODE);
           }
           else
           {
-            BSP_LCD_DisplayStringAt(5, 135, (uint8_t *)"SD Test : OK.", LEFT_MODE);
-            BSP_LCD_DisplayStringAt(5, 150, (uint8_t *)"SD can be removed.", LEFT_MODE);
+            GUI_DisplayStringAt(5, 135, (uint8_t *)"SD Test : OK.", LEFT_MODE);
+            GUI_DisplayStringAt(5, 150, (uint8_t *)"SD can be removed.", LEFT_MODE);
           }
         }
       }
     }
   }
-
+  
   while (1)
   {
     if(CheckForUserInput() > 0)
     {
-      /* BSP_SD_DeInit(); */
+      /* ADAFRUIT_802_SD_DeInit(); */
       return;
     }
   }
@@ -128,27 +131,31 @@ void SD_demo (void)
 
 /**
   * @brief  Display SD Demo Hint
+  * @param  None
   * @retval None
   */
 static void SD_SetHint(void)
 {
-  /* Clear the LCD */
-  BSP_LCD_Clear(LCD_COLOR_WHITE);
-
+  uint32_t x_size;
+  
+  ADAFRUIT_802_LCD_GetXSize(0, &x_size);
+  
+  /* Clear the LCD */ 
+  GUI_Clear(GUI_COLOR_WHITE);
+  
   /* Set SD Demo description */
-  BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
-  BSP_LCD_FillRect(0, 0, BSP_LCD_GetXSize(), 55);
-  BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
-  BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-  BSP_LCD_SetFont(&Font24);
+  GUI_FillRect(0, 0, x_size, 55, GUI_COLOR_BLUE);
+  GUI_SetTextColor(GUI_COLOR_WHITE);
+  GUI_SetBackColor(GUI_COLOR_BLUE); 
+  GUI_SetFont(&Font24);
 
-  BSP_LCD_SetFont(&Font12);
-  BSP_LCD_DisplayStringAt(0, 10, (uint8_t *)"SD Demo", CENTER_MODE);
-  BSP_LCD_DisplayStringAt(0, 25, (uint8_t *)"Shows how to write", CENTER_MODE);
-  BSP_LCD_DisplayStringAt(0, 40, (uint8_t *)"& read data on SD", CENTER_MODE);
+  GUI_SetFont(&Font12);
+  GUI_DisplayStringAt(0, 10, (uint8_t *)"SD Demo", CENTER_MODE);
+  GUI_DisplayStringAt(0, 25, (uint8_t *)"Shows how to write", CENTER_MODE);
+  GUI_DisplayStringAt(0, 40, (uint8_t *)"& read data on SD", CENTER_MODE);
 
-  BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
-  BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
+  GUI_SetTextColor(GUI_COLOR_BLUE);
+  GUI_SetBackColor(GUI_COLOR_WHITE); 
 }
 
 /**

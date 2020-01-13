@@ -378,11 +378,13 @@ void hw_init()
     SCB_InvalidateDCache();
     SCB_EnableDCache();
 
+    HAL_Init();
+    
     SystemClock_Config();
 
-    BSP_SDRAM_Init();
+    BSP_SDRAM_Init(0);
 
-    HAL_Init();
+
     __HAL_RCC_CRC_CLK_ENABLE();
 
     /* Disable FMC Bank1 to avoid speculative/cache accesses */

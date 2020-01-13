@@ -39,12 +39,14 @@ extern "C"
 #include "stm32h747i_discovery_sd.h"
 #include "stm32h747i_discovery_sdram.h"
 #include "stm32h747i_discovery_qspi.h"
+#include "stm32h747i_discovery_bus.h"
 #else
 #include "stm32h747i_eval.h"
 #include "stm32h747i_eval_io.h"
 #include "stm32h747i_eval_sd.h"
 #include "stm32h747i_eval_sdram.h"
 #include "stm32h747i_eval_qspi.h"
+#include "stm32h747i_eval_bus.h"
 #endif
 
 #include "../Components/otm8009a/otm8009a.h"
@@ -64,6 +66,8 @@ typedef struct pwr_db
 static void SystemClock_Config(void);
 static void MPU_Config(void);
 static void CPU_CACHE_Enable(void);
+static int32_t DSI_IO_Write(uint16_t ChannelNbr, uint16_t Reg, uint8_t *pData, uint16_t Size);
+static int32_t DSI_IO_Read(uint16_t ChannelNbr, uint16_t Reg, uint8_t *pData, uint16_t Size);
 
 LTDC_HandleTypeDef hltdc;
 DSI_HandleTypeDef hdsi;
@@ -505,9 +509,10 @@ static void LCD_MspInit(void)
   */
 static uint8_t LCD_Init(void)
 {
-    GPIO_InitTypeDef GPIO_Init_Structure;
-    DSI_PHY_TimerTypeDef PhyTimings;
-
+  GPIO_InitTypeDef GPIO_Init_Structure;
+  DSI_PHY_TimerTypeDef PhyTimings;
+  OTM8009A_IO_t              IOCtx;
+  static OTM8009A_Object_t   OTM8009AObj;
     LCD_Reset();
     LCD_MspInit();
 
@@ -615,11 +620,17 @@ static uint8_t LCD_Init(void)
 
     /* Start DSI */
     HAL_DSI_Start(&hdsi);
+    /* Configure the audio driver */
+    IOCtx.Address     = 0;
+    IOCtx.GetTick     = BSP_GetTick;
+    IOCtx.WriteReg    = DSI_IO_Write;
+    IOCtx.ReadReg     = DSI_IO_Read;
+    OTM8009A_RegisterBusIO(&OTM8009AObj, &IOCtx);
 
 #if !defined(USE_BPP) || USE_BPP==16
-    OTM8009A_Init(OTM8009A_FORMAT_RBG565, 1);
+    OTM8009A_Init(&OTM8009AObj, OTM8009A_FORMAT_RBG565, OTM8009A_ORIENTATION_LANDSCAPE);
 #elif USE_BPP==24
-    OTM8009A_Init(OTM8009A_FORMAT_RGB888, 1);
+    OTM8009A_Init(&OTM8009AObj, OTM8009A_FORMAT_RGB888, OTM8009A_ORIENTATION_LANDSCAPE);
 #else
 #error Unknown USE_BPP
 #endif
@@ -683,14 +694,17 @@ void hw_init()
     /* Configure IO expanders */
     BSP_IO_Init();
 #endif // USE_STM32H747I_EVAL
-
+    BSP_QSPI_Init_t init ;
+    init.InterfaceMode=MT25TL01G_QPI_MODE;
+    init.TransferRate= MT25TL01G_DTR_TRANSFER ;
+    init.DualFlashMode= MT25TL01G_DUALFLASH_ENABLE;
     /* Initialize the QSPI */
-    BSP_QSPI_Init();
-    BSP_QSPI_EnableMemoryMappedMode();
+    BSP_QSPI_Init(0,&init);
+    BSP_QSPI_EnableMemoryMappedMode(0);
     HAL_NVIC_DisableIRQ(QUADSPI_IRQn);
 
     /* Initialize external SDRAM */
-    BSP_SDRAM_Init();
+    BSP_SDRAM_Init(0);
 
     /* Disable FMC Bank1 to avoid speculative/cache accesses */
     FMC_Bank1_R->BTCR[0] &= ~FMC_BCRx_MBKEN;
@@ -992,7 +1006,55 @@ static void MPU_Config(void)
 
     HAL_MPU_Enable(MPU_PRIVILEGED_DEFAULT);
 }
+/**
+  * @brief  DCS or Generic short/long write command
+  * @param  ChannelNbr Virtual channel ID
+  * @param  Reg Register to be written
+  * @param  pData pointer to a buffer of data to be write
+  * @param  Size To precise command to be used (short or long)
+  * @retval BSP status
+  */
+static int32_t DSI_IO_Write(uint16_t ChannelNbr, uint16_t Reg, uint8_t *pData, uint16_t Size)
+{
+  int32_t ret = BSP_ERROR_NONE;
 
+  if(Size <= 1U)
+  {
+    if(HAL_DSI_ShortWrite(&hdsi, ChannelNbr, DSI_DCS_SHORT_PKT_WRITE_P1, Reg, (uint32_t)pData[Size]) != HAL_OK)
+    {
+      ret = BSP_ERROR_BUS_FAILURE;
+    }
+  }
+  else
+  {
+    if(HAL_DSI_LongWrite(&hdsi, ChannelNbr, DSI_DCS_LONG_PKT_WRITE, Size, (uint32_t)Reg, pData) != HAL_OK)
+    {
+      ret = BSP_ERROR_BUS_FAILURE;
+    }
+  }
+
+  return ret;
+}
+
+/**
+  * @brief  DCS or Generic read command
+  * @param  ChannelNbr Virtual channel ID
+  * @param  Reg Register to be read
+  * @param  pData pointer to a buffer to store the payload of a read back operation.
+  * @param  Size  Data size to be read (in byte).
+  * @retval BSP status
+  */
+static int32_t DSI_IO_Read(uint16_t ChannelNbr, uint16_t Reg, uint8_t *pData, uint16_t Size)
+{
+  int32_t ret = BSP_ERROR_NONE;
+
+  if(HAL_DSI_Read(&hdsi, ChannelNbr, pData, Size, DSI_DCS_SHORT_PKT_READ, Reg, pData) != HAL_OK)
+  {
+    ret = BSP_ERROR_BUS_FAILURE;
+  }
+
+  return ret;
+}
 /**
 * @brief  CPU L1-Cache enable.
 * @param  None

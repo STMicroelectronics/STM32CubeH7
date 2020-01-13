@@ -132,7 +132,6 @@ File system, Write, Read, Format
   - USB_Host/MSC_Standalone/CM7/Src/usbh_diskio.c           USB diskio interface for FatFs
   - USB_Host/MSC_Standalone/CM7/Inc/main.h                  Main program header file
   - USB_Host/MSC_Standalone/CM7/Inc/stm32h7xx_it.h          Interrupt handlers header file
-  - USB_Host/MSC_Standalone/CM7/Inc/lcd_log_conf.h          LCD log configuration file
   - USB_Host/MSC_Standalone/CM7/Inc/stm32h7xx_hal_conf.h    HAL configuration file
   - USB_Host/MSC_Standalone/CM7/Inc/usbh_conf.h             USB Host driver Configuration file
   - USB_Host/MSC_Standalone/CM7/Inc/ffconf.h                FatFs Module Configuration file

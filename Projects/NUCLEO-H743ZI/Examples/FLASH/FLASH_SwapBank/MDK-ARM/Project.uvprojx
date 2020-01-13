@@ -337,7 +337,7 @@
               <MiscControls>--C99</MiscControls>
               <Define>USE_HAL_DRIVER,STM32H743xx,USE_STM32H7XX_NUCLEO_144_MB1364,FLASH_BANK1</Define>
               <Undefine></Undefine>
-              <IncludePath>../Inc;../../../../../../Drivers/CMSIS/Include;../../../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../../../../../../Drivers/STM32H7xx_HAL_Driver/Inc;../../../../../../Drivers/BSP/STM32H7xx_Nucleo_144;../../../../../../Drivers/BSP/Components/Common;../../../../../../Utilities/Log;../../../../../../Utilities/Fonts;../../../../../../Utilities/CPU</IncludePath>
+              <IncludePath>../Inc;../../../../../../Drivers/CMSIS/Include;../../../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../../../../../../Drivers/STM32H7xx_HAL_Driver/Inc;../../../../../../Drivers/BSP/STM32H7xx_Nucleo;../../../../../../Drivers/BSP/Components/Common;../../../../../../Utilities/Log;../../../../../../Utilities/Fonts;../../../../../../Utilities/CPU</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -379,12 +379,12 @@
       </TargetOption>
       <Groups>
         <Group>
-          <GroupName>Drivers/BSP/stm32h7xx_nucleo_144</GroupName>
+          <GroupName>Drivers/BSP/stm32h7xx_nucleo</GroupName>
           <Files>
             <File>
-              <FileName>stm32h7xx_nucleo_144.c</FileName>
+              <FileName>stm32h7xx_nucleo.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../../Drivers/BSP/STM32H7xx_Nucleo_144/stm32h7xx_nucleo_144.c</FilePath>
+              <FilePath>../../../../../../Drivers/BSP/STM32H7xx_Nucleo/stm32h7xx_nucleo.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -457,6 +457,11 @@
               <FilePath>../../../../../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_dma.c</FilePath>
             </File>
             <File>
+              <FileName>stm32h7xx_hal_exti.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../../../../../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_exti.c</FilePath>
+            </File>
+            <File>
               <FileName>stm32h7xx_hal_flash.c</FileName>
               <FileType>1</FileType>
               <FilePath>../../../../../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_flash.c</FilePath>
@@ -522,7 +527,7 @@
       <TargetName>FLASH_SwapBank_Bank2</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pCCUsed>5060422::V5.06 update 4 (build 422)::ARMCC</pCCUsed>
+      <pCCUsed>5060750::V5.06 update 6 (build 750)::ARMCC</pCCUsed>
       <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
@@ -849,7 +854,7 @@
               <MiscControls>--C99</MiscControls>
               <Define>USE_HAL_DRIVER, STM32H743xx, USE_STM32H7XX_NUCLEO_144_MB1364</Define>
               <Undefine></Undefine>
-              <IncludePath>../Inc;../../../../../../Drivers/CMSIS/Include;../../../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../../../../../../Drivers/STM32H7xx_HAL_Driver/Inc;../../../../../../Drivers/BSP/STM32H7xx_Nucleo_144;../../../../../../Drivers/BSP/Components/Common;../../../../../../Utilities/Log;../../../../../../Utilities/Fonts;../../../../../../Utilities/CPU</IncludePath>
+              <IncludePath>../Inc;../../../../../../Drivers/CMSIS/Include;../../../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../../../../../../Drivers/STM32H7xx_HAL_Driver/Inc;../../../../../../Drivers/BSP/STM32H7xx_Nucleo;../../../../../../Drivers/BSP/Components/Common;../../../../../../Utilities/Log;../../../../../../Utilities/Fonts;../../../../../../Utilities/CPU</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -891,12 +896,12 @@
       </TargetOption>
       <Groups>
         <Group>
-          <GroupName>Drivers/BSP/stm32h7xx_nucleo_144</GroupName>
+          <GroupName>Drivers/BSP/stm32h7xx_nucleo</GroupName>
           <Files>
             <File>
-              <FileName>stm32h7xx_nucleo_144.c</FileName>
+              <FileName>stm32h7xx_nucleo.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../../Drivers/BSP/STM32H7xx_Nucleo_144/stm32h7xx_nucleo_144.c</FilePath>
+              <FilePath>../../../../../../Drivers/BSP/STM32H7xx_Nucleo/stm32h7xx_nucleo.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -967,6 +972,11 @@
               <FileName>stm32h7xx_hal_dma.c</FileName>
               <FileType>1</FileType>
               <FilePath>../../../../../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_dma.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32h7xx_hal_exti.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../../../../../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_exti.c</FilePath>
             </File>
             <File>
               <FileName>stm32h7xx_hal_flash.c</FileName>

@@ -29,9 +29,7 @@
 #include "tcpecho.h"
 #include "udpecho.h"
 #include "app_ethernet.h"
-#ifdef USE_LCD
-#include "Log/lcd_log.h"
-#endif
+
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -121,18 +119,18 @@ static void BSP_Config(void)
 #ifdef USE_LCD
   
   /* Initialize the LCD */
-  BSP_LCD_Init();
+  BSP_LCD_Init(0, LCD_ORIENTATION_LANDSCAPE);
+  GUI_SetFuncDriver(&LCD_Driver);
 
-  BSP_LCD_LayerDefaultInit(0, LCD_FB_START_ADDRESS);
   
   /* Initialize LCD Log module */
-  LCD_LOG_Init();  
+  UTIL_LCD_TRACE_Init();  
 
   /* Show Header and Footer texts */
-  LCD_LOG_SetHeader((uint8_t *)"TCP & UDP Echo Server");
-  LCD_LOG_SetFooter((uint8_t *)"STM32H743I-EVAL board");
+  UTIL_LCD_TRACE_SetHeader((uint8_t *)"TCP & UDP Echo Server");
+  UTIL_LCD_TRACE_SetFooter((uint8_t *)"STM32H743I-EVAL board");
   
-  LCD_UsrLog("  State: Ethernet Initialization ...\n");
+  LCD_UsrTrace("  State: Ethernet Initialization ...\n");
 #else
   BSP_LED_Init(LED1);
   BSP_LED_Init(LED2);

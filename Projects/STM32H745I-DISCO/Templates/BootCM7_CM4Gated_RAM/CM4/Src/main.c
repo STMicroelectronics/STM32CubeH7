@@ -62,8 +62,7 @@ int main(void)
   __HAL_ART_CONFIG_BASE_ADDRESS(D2_AXISRAM_BASE);
 
   /* Add Cortex-M4 user application code here */ 
-
-                        
+  
   /* Infinite loop */
   while (1)
   {

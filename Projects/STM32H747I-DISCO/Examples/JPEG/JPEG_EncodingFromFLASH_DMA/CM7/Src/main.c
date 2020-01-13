@@ -42,7 +42,6 @@ FIL JPEG_File;  /* File object */
 
 JPEG_HandleTypeDef    JPEG_Handle;
 uint32_t RGB_ImageAddress;
-
 static uint32_t LCD_X_Size = 0;
 
 /* Private function prototypes -----------------------------------------------*/
@@ -119,14 +118,14 @@ int main(void)
   
   /*##-2- LCD Configuration ##################################################*/  
   /* Initialize the LCD   */
-  BSP_LCD_Init(); 
+  BSP_LCD_Init(0, LCD_ORIENTATION_LANDSCAPE); 
   
-  BSP_LCD_LayerDefaultInit(0, LCD_FRAME_BUFFER);     
-  BSP_LCD_SelectLayer(0); 
-
+  GUI_SetFuncDriver(&LCD_Driver);     
+  GUI_SetLayer(0); 
+  
   /* Get the LCD Width */
-  LCD_X_Size = BSP_LCD_GetXSize(); 
-  
+  BSP_LCD_GetXSize(0, &LCD_X_Size); 
+
   /* Display example brief   */
   LCD_BriefDisplay();
   
@@ -136,7 +135,7 @@ int main(void)
     /*##-4- Init the SD Card #################################################*/
     SD_Initialize();
 
-    if(BSP_SD_IsDetected())
+    if(BSP_SD_IsDetected(0))
     {
       /*##-5- Register the file system object to the FatFs module ##############*/
       if(f_mount(&SDFatFs, (TCHAR const*)SDPath, 0) == FR_OK)
@@ -158,10 +157,10 @@ int main(void)
           /*##-9- Close the JPEG file #######################################*/
           f_close(&JPEG_File);
           
-          BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
-          BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
-          BSP_LCD_SetFont(&Font16);
-          BSP_LCD_DisplayStringAt(0, LINE(20), (uint8_t *)"JPEG file encoded and saved on the uSD", CENTER_MODE);
+          GUI_SetBackColor(GUI_COLOR_WHITE);
+          GUI_SetTextColor(GUI_COLOR_BLACK);
+          GUI_SetFont(&Font16);
+          GUI_DisplayStringAt(0, LINE(20), (uint8_t *)"JPEG file encoded and saved on the uSD", CENTER_MODE);
           
           /* Encoding accomplished successfully */
           BSP_LED_On(LED4);
@@ -347,16 +346,16 @@ static void CPU_CACHE_Enable(void)
   */
 static void LCD_BriefDisplay(void)
 {
-  BSP_LCD_Clear(LCD_COLOR_WHITE);
-  BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-  BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
-  BSP_LCD_FillRect(0, 177, LCD_X_Size, 112);  
-  BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
+  GUI_Clear(GUI_COLOR_WHITE);
+  GUI_SetBackColor(GUI_COLOR_BLUE);
+  GUI_SetTextColor(GUI_COLOR_BLUE);
+  GUI_FillRect(0, 177, LCD_X_Size, 112, GUI_COLOR_BLUE);  
+  GUI_SetTextColor(GUI_COLOR_WHITE);
 
-  BSP_LCD_DisplayStringAt(0, LINE(9), (uint8_t *)"JPEG Encoding from Flash With DMA Method", CENTER_MODE);
-  BSP_LCD_SetFont(&Font16);
-  BSP_LCD_DisplayStringAt(0, LINE(15), (uint8_t *)"This example shows how to Encode (with DMA model)", CENTER_MODE);
-  BSP_LCD_DisplayStringAt(0, LINE(16), (uint8_t *)"and save a JPEG file in uSD", CENTER_MODE);    
+  GUI_DisplayStringAt(0, LINE(9), (uint8_t *)"JPEG Encoding from Flash With DMA Method", CENTER_MODE);
+  GUI_SetFont(&Font16);
+  GUI_DisplayStringAt(0, LINE(15), (uint8_t *)"This example shows how to Encode (with DMA model)", CENTER_MODE);
+  GUI_DisplayStringAt(0, LINE(16), (uint8_t *)"and save a JPEG file in uSD", CENTER_MODE);    
 }
 
 /**
@@ -366,11 +365,11 @@ static void LCD_BriefDisplay(void)
   */
 static void LCD_SizesErrorDisplay(void)
 {
-  BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
-  BSP_LCD_SetTextColor(LCD_COLOR_WHITE); 
-  BSP_LCD_SetTextColor(LCD_COLOR_RED);
-  BSP_LCD_SetFont(&Font16);
-  BSP_LCD_DisplayStringAtLine(27, (uint8_t *)"     Input Sizes of the RGB image doesn't meet the requirements");
+  GUI_SetBackColor(GUI_COLOR_WHITE);
+  GUI_SetTextColor(GUI_COLOR_WHITE); 
+  GUI_SetTextColor(GUI_COLOR_RED);
+  GUI_SetFont(&Font16);
+  GUI_DisplayStringAtLine(27, (uint8_t *)"     Input Sizes of the RGB image doesn't meet the requirements");
 
 }
 
@@ -381,18 +380,18 @@ static void LCD_SizesErrorDisplay(void)
   */
 static void LCD_FileErrorDisplay(void)
 {
-  BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
-  BSP_LCD_SetTextColor(LCD_COLOR_WHITE); 
-  BSP_LCD_SetTextColor(LCD_COLOR_RED);
-  BSP_LCD_SetFont(&Font16);
-  BSP_LCD_DisplayStringAtLine(27, (uint8_t *)"     Unable to create a new jpeg file on the uSD");
-  BSP_LCD_DisplayStringAtLine(28, (uint8_t *)"     Check that a valid uSD is connected to CN12 connector");
+  GUI_SetBackColor(GUI_COLOR_WHITE);
+  GUI_SetTextColor(GUI_COLOR_WHITE); 
+  GUI_SetTextColor(GUI_COLOR_RED);
+  GUI_SetFont(&Font16);
+  GUI_DisplayStringAtLine(27, (uint8_t *)"     Unable to create a new jpeg file on the uSD");
+  GUI_DisplayStringAtLine(28, (uint8_t *)"     Check that a valid uSD is connected to CN12 connector");
 
 }
 
 static void SD_Initialize(void)
 {  
-  BSP_SD_Init();
+  BSP_SD_Init(0);
 }
 
 #ifdef USE_FULL_ASSERT

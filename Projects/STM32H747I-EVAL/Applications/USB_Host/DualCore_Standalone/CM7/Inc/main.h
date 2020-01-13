@@ -26,14 +26,16 @@
 #include "usbh_core.h"
 #include "stm32h747i_eval.h"
 #include "stm32h747i_eval_io.h"
-#include "lcd_log.h"
+//#include "lcd_log.h"
 #include "usbh_msc.h"
 #include "ff.h"
 #include "ff_gen_drv.h"
 #include "usbh_diskio.h"
 #include "usbh_hid.h"
 #include "usbh_hid_parser.h"
-
+#include "lcd_trace.h"
+#include "basic_gui.h"
+#include "utilities_conf.h"
 /* Exported types ------------------------------------------------------------*/
 typedef enum {
   APPLI_HID_IDLE = 0,
@@ -124,7 +126,7 @@ void USR_MOUSE_ProcessData(HID_MOUSE_Info_TypeDef *data);
 void USR_KEYBRD_ProcessData(uint8_t data);
 void DUAL_MenuProcess(void);
 void DUAL_MenuInit(void);
-void Demo_ProbeKey(JOYState_TypeDef state);
+void Demo_ProbeKey(uint32_t state);
 
 #endif /* __MAIN_H */
 

@@ -16,8 +16,8 @@
         <TargetCommonOption>
           <Device>STM32H750XBHx</Device>
           <Vendor>STMicroelectronics</Vendor>
-          <PackID>STMicroelectronics.STM32H7xx_DFP.0.0.9</PackID>
-          <PackURL>http://www.ST.com/</PackURL>
+          <PackID>Keil.STM32H7xx_DFP.2.2.1</PackID>
+          <PackURL>http://www.keil.com/pack</PackURL>
           <Cpu>IRAM(0x20000000,0x00020000) IRAM2(0x24000000,0x00080000) IROM(0x08000000,0x00020000) CPUTYPE("Cortex-M7") FPU3(DFPU) CLOCK(12000000) ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile></StartupFile>
@@ -337,7 +337,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32H750xx,USE_STM32H750B_DK,BSP_USE_CMSIS_OS,USE_PWR_LDO_SUPPLY,USE_TS_INT</Define>
               <Undefine></Undefine>
-              <IncludePath>../Core/Inc;../Gui/Target;../Gui/STemWin_Addons;../Gui/App;../Gui/App/generated;../Modules/splashscreen;../../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../../../../../Drivers/STM32H7xx_HAL_Driver/Inc;../../../../../Drivers/BSP/STM32H750B-Discovery;../../../../../Drivers/BSP/Components/Common;../../../../../Drivers/BSP/Components/ft6x06;../../../../../Drivers/BSP/Components/mfxstm32l152;../../../../../Middlewares/ST/STemWin/inc;../../../../../Middlewares/Third_Party/FatFs/src;../../../../../Middlewares/Third_Party/FatFs/src/drivers;../../../../../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1;../../../../../Middlewares/Third_Party/FreeRTOS/Source/include;../../../../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS;../../../../../Middlewares/ST/STM32_USB_Host_Library/Core/Inc;../../../../../Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Inc;../../../../../Drivers/CMSIS/Include</IncludePath>
+              <IncludePath>../Core/Inc;../Gui/Target;../Gui/STemWin_Addons;../Gui/App;../Gui/App/generated;../Modules/splashscreen;../../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../../../../../Drivers/STM32H7xx_HAL_Driver/Inc;../../../../../Drivers/BSP/STM32H750B-DK;../../../../../Drivers/BSP/Components/Common;../../../../../Drivers/BSP/Components/ft6x06;../../../../../Drivers/BSP/Components/mfxstm32l152;../../../../../Middlewares/ST/STemWin/inc;../../../../../Middlewares/Third_Party/FatFs/src;../../../../../Middlewares/Third_Party/FatFs/src/drivers;../../../../../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1;../../../../../Middlewares/Third_Party/FreeRTOS/Source/include;../../../../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS;../../../../../Middlewares/ST/STM32_USB_Host_Library/Core/Inc;../../../../../Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Inc;../../../../../Drivers/CMSIS/Include</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -546,6 +546,21 @@
               <FileType>1</FileType>
               <FilePath>../../../../../Drivers/BSP/Components/ft5336/ft5336.c</FilePath>
             </File>
+            <File>
+              <FileName>mt25tl01g.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\Drivers\BSP\Components\mt25tl01g\mt25tl01g.c</FilePath>
+            </File>
+            <File>
+              <FileName>mt48lc4m32b2.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\Drivers\BSP\Components\mt48lc4m32b2\mt48lc4m32b2.c</FilePath>
+            </File>
+            <File>
+              <FileName>ft5336_reg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\Drivers\BSP\Components\ft5336\ft5336_reg.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -554,22 +569,27 @@
             <File>
               <FileName>stm32h750b_discovery.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../Drivers/BSP/STM32H750B-Discovery/stm32h750b_discovery.c</FilePath>
+              <FilePath>..\..\..\..\..\Drivers\BSP\STM32H750B-DK\stm32h750b_discovery.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32h750b_discovery_bus.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\Drivers\BSP\STM32H750B-DK\stm32h750b_discovery_bus.c</FilePath>
             </File>
             <File>
               <FileName>stm32h750b_discovery_qspi.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../Drivers/BSP/STM32H750B-Discovery/stm32h750b_discovery_qspi.c</FilePath>
+              <FilePath>..\..\..\..\..\Drivers\BSP\STM32H750B-DK\stm32h750b_discovery_qspi.c</FilePath>
             </File>
             <File>
               <FileName>stm32h750b_discovery_sdram.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../Drivers/BSP/STM32H750B-Discovery/stm32h750b_discovery_sdram.c</FilePath>
+              <FilePath>..\..\..\..\..\Drivers\BSP\STM32H750B-DK\stm32h750b_discovery_sdram.c</FilePath>
             </File>
             <File>
               <FileName>stm32h750b_discovery_ts.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../Drivers/BSP/STM32H750B-Discovery/stm32h750b_discovery_ts.c</FilePath>
+              <FilePath>..\..\..\..\..\Drivers\BSP\STM32H750B-DK\stm32h750b_discovery_ts.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -725,6 +745,11 @@
               <FileName>stm32h7xx_ll_fmc.c</FileName>
               <FileType>1</FileType>
               <FilePath>../../../../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_fmc.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32h7xx_hal_exti.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_exti.c</FilePath>
             </File>
           </Files>
         </Group>

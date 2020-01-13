@@ -80,8 +80,6 @@ int main(void)
 
   /* Add Cortex-M7 user application code here */ 
 
-
-
   /* Infinite loop */
   while (1)
   {

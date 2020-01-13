@@ -133,7 +133,7 @@ Middleware, USB Device, Audio, Streaming, SAI, Full speed, PCM
     evaluation boards and can be easily tailored to any other supported device 
     and development board.
 
-  - STM32H743I-EVAL RevB Set-up
+  - STM32H743I-EVAL  Set-up
     - Connect the STM32H743I-EVAL board to the PC through 'USB micro A-Male 
       to A-Male' cable to the connector:
       - CN18: to use USB Full Speed (FS)

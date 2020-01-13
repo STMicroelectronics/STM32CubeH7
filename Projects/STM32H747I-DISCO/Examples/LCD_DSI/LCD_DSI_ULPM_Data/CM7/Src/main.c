@@ -35,14 +35,15 @@
   */
 
 /* Private typedef -----------------------------------------------------------*/
-extern DSI_HandleTypeDef hdsi_discovery;
-extern LTDC_HandleTypeDef  hltdc_discovery;
+extern DSI_HandleTypeDef hlcd_dsi;
+extern LTDC_HandleTypeDef  hlcd_ltdc;
 static DMA2D_HandleTypeDef   hdma2d;
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 uint32_t frameCnt = 0;
 char str_display[60] = "";
+uint32_t LCD_X_Size;
 
 __IO uint32_t ltdc_lowpower_request = 0;
 
@@ -117,67 +118,61 @@ int main(void)
   /* Configure Tamper push-button */
   BSP_PB_Init(BUTTON_WAKEUP, BUTTON_MODE_GPIO);
 
-  /* Initialize the SDRAM */
-  if(BSP_SDRAM_Init() != SDRAM_OK)
-  {
-    Error_Handler();
-  }
-
   /* Initialize the LCD DSI in Video Burst mode with LANDSCAPE orientation */
-  if(BSP_LCD_Init() != LCD_OK)
+  if(BSP_LCD_Init(0, LCD_ORIENTATION_LANDSCAPE) != BSP_ERROR_NONE)
   {
     Error_Handler();
   }
   
   /* Program a line event at line 0 */
-  HAL_LTDC_ProgramLineEvent(&hltdc_discovery, 0); 
+  HAL_LTDC_ProgramLineEvent(&hlcd_ltdc, 0); 
   
-  BSP_LCD_LayerDefaultInit(LTDC_ACTIVE_LAYER_BACKGROUND, LCD_FB_START_ADDRESS);
-  BSP_LCD_SelectLayer(LTDC_ACTIVE_LAYER_BACKGROUND);
+   GUI_SetFuncDriver(&LCD_Driver);
+   GUI_SetLayer(0);
 
-  BSP_LCD_Clear(LCD_COLOR_BLACK);  
+  GUI_Clear(GUI_COLOR_BLACK);  
 
   /* Copy texture to be displayed on LCD from Flash to SDRAM */
-  CopyPicture((uint32_t *)&image_320x240_argb8888, (uint32_t *)LCD_FB_START_ADDRESS, 240, 100, 320, 240);
+  CopyPicture((uint32_t *)&image_320x240_argb8888, (uint32_t *)LCD_FRAME_BUFFER, 240, 100, 320, 240);
 
   /* Prepare area to display frame number in the image displayed on LCD */
-  BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
-  BSP_LCD_FillRect(0, 400, BSP_LCD_GetXSize(), 80);
-  BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
-  BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-  BSP_LCD_SetFont(&Font16);
+  GUI_SetTextColor(GUI_COLOR_BLUE);
+  GUI_FillRect(0, 400, LCD_X_Size, 80, GUI_COLOR_BLUE);
+  GUI_SetTextColor(GUI_COLOR_WHITE);
+  GUI_SetBackColor(GUI_COLOR_BLUE);
+  GUI_SetFont(&Font16);
 
   /* Display title */
-  BSP_LCD_DisplayStringAt(0, 420, (uint8_t *) "LCD_DSI_ULPM_Data example", CENTER_MODE);
-  BSP_LCD_DisplayStringAt(0, 440, (uint8_t *) "Press TAMPER button to enter ULPM", CENTER_MODE);
+  GUI_DisplayStringAt(0, 420, (uint8_t *) "LCD_DSI_ULPM_Data example", CENTER_MODE);
+  GUI_DisplayStringAt(0, 440, (uint8_t *) "Press TAMPER button to enter ULPM", CENTER_MODE);
 
-  BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
-  BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-  BSP_LCD_SetFont(&Font16);
+  GUI_SetTextColor(GUI_COLOR_WHITE);
+  GUI_SetBackColor(GUI_COLOR_BLUE);
+  GUI_SetFont(&Font16);
 
   /* Infinite loop */
   while (1)
   {
     /* Clear previous line */
-    BSP_LCD_ClearStringLine(460);
+    GUI_ClearStringLine(460);
 
     /* New text to display */
     sprintf(str_display, ">> Frame Nb : %lu", frameCnt);
 
     /* Print updated frame number */
-    BSP_LCD_DisplayStringAt(0, 460, (uint8_t *)str_display, CENTER_MODE);
+    GUI_DisplayStringAt(0, 460, (uint8_t *)str_display, CENTER_MODE);
 
     if (CheckForUserInput() > 0)
     {
       /* Clear previous line */
-      BSP_LCD_SetTextColor(LCD_COLOR_GREEN);
-      BSP_LCD_ClearStringLine(440);
-      BSP_LCD_DisplayStringAt(0, 440, (uint8_t *) "          Enter ULPM - switch Off LCD 6 seconds          ", CENTER_MODE);
-      BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
+      GUI_SetTextColor(GUI_COLOR_GREEN);
+      GUI_ClearStringLine(440);
+      GUI_DisplayStringAt(0, 440, (uint8_t *) "          Enter ULPM - switch Off LCD 6 seconds          ", CENTER_MODE);
+      GUI_SetTextColor(GUI_COLOR_WHITE);
 
       HAL_Delay(1000);
       /* Display Off with ULPM management Data lane only integrated */
-      BSP_LCD_DisplayOff();    
+      BSP_LCD_DisplayOff(0);    
 
       
       ltdc_lowpower_request = 1;
@@ -188,26 +183,26 @@ int main(void)
       } 
 
       /* Enter ultra low power mode (data lane only integrated) */
-      HAL_DSI_EnterULPMData(&hdsi_discovery);
+      HAL_DSI_EnterULPMData(&hlcd_dsi);
       BSP_LED_On(LED4);
       
       HAL_Delay(6000);
 
-      BSP_LCD_ClearStringLine(440);
-      BSP_LCD_DisplayStringAt(0, 440, (uint8_t *) " Exited ULPM with success - Press To enter Again ULPM. ", CENTER_MODE);
+      GUI_ClearStringLine(440);
+      GUI_DisplayStringAt(0, 440, (uint8_t *) " Exited ULPM with success - Press To enter Again ULPM. ", CENTER_MODE);
       
       /* Exit ultra low power mode (data lane only integrated) */
-      HAL_DSI_ExitULPMData(&hdsi_discovery);
+      HAL_DSI_ExitULPMData(&hlcd_dsi);
       BSP_LED_Off(LED4);
       
       /* Switch On bit LTDCEN */
-      __HAL_LTDC_ENABLE(&hltdc_discovery); 
+      __HAL_LTDC_ENABLE(&hlcd_ltdc); 
 
       /* Display On with ULPM exit Data lane only integrated */
-      BSP_LCD_DisplayOn();
+      BSP_LCD_DisplayOn(0);
 
       /* Program a line event at line 0 */
-      HAL_LTDC_ProgramLineEvent(&hltdc_discovery, 0);        
+      HAL_LTDC_ProgramLineEvent(&hlcd_ltdc, 0);        
     }
   }
 }
@@ -225,13 +220,13 @@ static uint8_t CheckForUserInput(void)
     do
     {
       /* Clear previous line */
-      BSP_LCD_ClearStringLine(460);
+      GUI_ClearStringLine(460);
 
       /* New text to display */
       sprintf(str_display, ">> Frame Nb : %lu", frameCnt);
 
       /* Print updated frame number */
-      BSP_LCD_DisplayStringAt(0, 460, (uint8_t *)str_display, CENTER_MODE);
+      GUI_DisplayStringAt(0, 460, (uint8_t *)str_display, CENTER_MODE);
 
     } while (BSP_PB_GetState(BUTTON_WAKEUP) == GPIO_PIN_RESET);
 
@@ -259,7 +254,7 @@ void HAL_LTDC_LineEventCallback(LTDC_HandleTypeDef *hltdc)
     /* Application asks to enter DSI to Ultra low power mode */
     
     /* Switch Off bit LTDCEN */
-    __HAL_LTDC_DISABLE(&hltdc_discovery);
+    __HAL_LTDC_DISABLE(&hlcd_ltdc);
 
     /* Reset the ltdc_lowpower_request*/
     ltdc_lowpower_request = 0;    

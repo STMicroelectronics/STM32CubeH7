@@ -54,12 +54,12 @@ int main(void)
    HAL_Init();
    
   /* Add Cortex-M7 user application code here */ 
-  
-
-
+   BSP_LED_Init(LED1);
   /* Infinite loop */
   while (1)
   {
+    BSP_LED_Toggle(LED1);
+    HAL_Delay (1000);
   }
 }
 
@@ -94,6 +94,7 @@ void assert_failed(uint8_t* file, uint32_t line)
   /* Infinite loop */
   while (1)
   {
+
   }
 }
 #endif

@@ -99,30 +99,28 @@ int main(void)
   /*##- Initialise the LCD #################################################*/
   /* Proceed to LTDC, DSI and LCD screen initialization with the configuration filled in above */
   /* for stageNb == 1 */
-  BSP_LCD_Init();
-  BSP_LCD_LayerDefaultInit(1, LCD_FRAME_BUFFER);   
-  BSP_LCD_SelectLayer(1);
-
+  BSP_LCD_Init(0, LCD_ORIENTATION_LANDSCAPE);
+  GUI_SetFuncDriver(&LCD_Driver);
   /* Get LCD width and height*/  
-  LcdResX = BSP_LCD_GetXSize();
-  LcdResY = BSP_LCD_GetYSize();  
+  BSP_LCD_GetXSize(0,&LcdResX);
+  BSP_LCD_GetYSize(0,&LcdResY);  
 
   /* Reset and power down camera to be sure camera is Off prior start testing BSP */
-  BSP_CAMERA_PwrDown();
+  BSP_CAMERA_PwrDown(0);
     
   /* Prepare using DMA2D the 800x480 LCD frame buffer to display background color black */
   /* and title of the example                                                           */
-  BSP_LCD_Clear(LCD_COLOR_BLACK);
-  BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
-  BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-  BSP_LCD_SetFont(&Font16);
+  GUI_Clear(GUI_COLOR_BLACK);
+  GUI_SetTextColor(GUI_COLOR_WHITE);
+  GUI_SetBackColor(GUI_COLOR_BLUE);
+  GUI_SetFont(&Font16);
 
   /* Print example description */
-  BSP_LCD_DisplayStringAt(0, 440, (uint8_t *)"DCMI Snapshot example", CENTER_MODE);   
+  GUI_DisplayStringAt(0, 440, (uint8_t *)"DCMI Snapshot example", CENTER_MODE);   
 
   /*## Camera Initialization and capture start ############################*/
   /* Initialize the Camera in QVGA mode */
-  if(BSP_CAMERA_Init(CAMERA_R320x240) != CAMERA_OK)
+  if(BSP_CAMERA_Init(0,CAMERA_R320x240,CAMERA_PF_RGB565) != BSP_ERROR_NONE)
   {
     Error_Handler(); 
   }
@@ -131,7 +129,7 @@ int main(void)
   HAL_Delay(1000);
 
   /* Start the Camera Snapshot Capture */
-  BSP_CAMERA_SnapshotStart((uint8_t *)CAMERA_FRAME_BUFFER);
+  BSP_CAMERA_Start(0,(uint8_t *)CAMERA_FRAME_BUFFER,CAMERA_MODE_SNAPSHOT);
 
   /* Wait until camera frame is ready : DCMI Frame event */
   while(camera_frame_ready == 0)
@@ -140,7 +138,7 @@ int main(void)
   
   /* Stop the camera to avoid having the DMA2D work in parallel of Display */
   /* which cause perturbation of LTDC                                      */
-  BSP_CAMERA_Stop();
+  BSP_CAMERA_Stop(0);
 
   /* Copy the Camera captured frame to the LCD display buffer using DMA2D */
   DMA2D_ConvertFrameToARGB8888((uint32_t *)(CAMERA_FRAME_BUFFER), (uint32_t *)(LCD_FRAME_BUFFER), CameraResX, CameraResY);
@@ -150,8 +148,8 @@ int main(void)
   {
   }
   
-  BSP_LCD_ClearStringLine(460);
-  BSP_LCD_DisplayStringAt(0, 460, (uint8_t *)"Capture OK - Test End", CENTER_MODE);
+  GUI_ClearStringLine(460);
+  GUI_DisplayStringAt(0, 460, (uint8_t *)"Capture OK - Test End", CENTER_MODE);
 
   while (1)
   {
@@ -179,29 +177,29 @@ static void DMA2D_ConvertFrameToARGB8888(void *pSrc, void *pDst, uint32_t xsize,
   __HAL_RCC_DMA2D_CLK_ENABLE();
 
   /* Configure the DMA2D Mode, Color Mode and output offset */
-  hdma2d_discovery.Init.Mode         = DMA2D_M2M_PFC;
-  hdma2d_discovery.Init.ColorMode    = DMA2D_OUTPUT_ARGB8888; /* Output color out of PFC */
-  hdma2d_discovery.Init.OutputOffset = LcdResX - xsize;
-  hdma2d_discovery.Init.AlphaInverted = DMA2D_REGULAR_ALPHA;  /* No Output Alpha Inversion*/  
-  hdma2d_discovery.Init.RedBlueSwap   = DMA2D_RB_REGULAR;     /* No Output Red & Blue swap */ 
+  hlcd_dma2d.Init.Mode         = DMA2D_M2M_PFC;
+  hlcd_dma2d.Init.ColorMode    = DMA2D_OUTPUT_ARGB8888; /* Output color out of PFC */
+  hlcd_dma2d.Init.OutputOffset = LcdResX - xsize;
+  hlcd_dma2d.Init.AlphaInverted = DMA2D_REGULAR_ALPHA;  /* No Output Alpha Inversion*/  
+  hlcd_dma2d.Init.RedBlueSwap   = DMA2D_RB_REGULAR;     /* No Output Red & Blue swap */ 
 
   /* DMA2D Callbacks Configuration */
-  hdma2d_discovery.XferCpltCallback  = DMA2D_TransferCompleteCallback;  
+  hlcd_dma2d.XferCpltCallback  = DMA2D_TransferCompleteCallback;  
 
   /* Foreground Configuration */
-  hdma2d_discovery.LayerCfg[1].AlphaMode = DMA2D_NO_MODIF_ALPHA;
-  hdma2d_discovery.LayerCfg[1].InputAlpha = 0xFF; /* fully opaque */
-  hdma2d_discovery.LayerCfg[1].InputColorMode = DMA2D_INPUT_RGB565;
-  hdma2d_discovery.LayerCfg[1].InputOffset = 0;
-  hdma2d_discovery.LayerCfg[1].RedBlueSwap = DMA2D_RB_REGULAR; /* No ForeGround Red/Blue swap */
-  hdma2d_discovery.LayerCfg[1].AlphaInverted = DMA2D_REGULAR_ALPHA; /* No ForeGround Alpha inversion */ 
+  hlcd_dma2d.LayerCfg[1].AlphaMode = DMA2D_NO_MODIF_ALPHA;
+  hlcd_dma2d.LayerCfg[1].InputAlpha = 0xFF; /* fully opaque */
+  hlcd_dma2d.LayerCfg[1].InputColorMode = DMA2D_INPUT_RGB565;
+  hlcd_dma2d.LayerCfg[1].InputOffset = 0;
+  hlcd_dma2d.LayerCfg[1].RedBlueSwap = DMA2D_RB_REGULAR; /* No ForeGround Red/Blue swap */
+  hlcd_dma2d.LayerCfg[1].AlphaInverted = DMA2D_REGULAR_ALPHA; /* No ForeGround Alpha inversion */ 
   
-  hdma2d_discovery.Instance = DMA2D;
+  hlcd_dma2d.Instance = DMA2D;
 
   /* DMA2D Initialization */
-  if(HAL_DMA2D_Init(&hdma2d_discovery) == HAL_OK) 
+  if(HAL_DMA2D_Init(&hlcd_dma2d) == HAL_OK) 
   {
-    if(HAL_DMA2D_ConfigLayer(&hdma2d_discovery, 1) != HAL_OK) 
+    if(HAL_DMA2D_ConfigLayer(&hlcd_dma2d, 1) != HAL_OK) 
     {
       Error_Handler();      
     }
@@ -218,7 +216,7 @@ static void DMA2D_ConvertFrameToARGB8888(void *pSrc, void *pDst, uint32_t xsize,
   destination = (uint32_t)pDst + (yPos * LcdResX + xPos) * ARGB8888_BYTE_PER_PIXEL;
   
   /* Starts the DMA2D transfer */
-  if(HAL_DMA2D_Start_IT(&hdma2d_discovery, (uint32_t)pSrc, destination, xsize, ysize) != HAL_OK)
+  if(HAL_DMA2D_Start_IT(&hlcd_dma2d, (uint32_t)pSrc, destination, xsize, ysize) != HAL_OK)
   {
     Error_Handler();
   }
@@ -229,7 +227,7 @@ static void DMA2D_ConvertFrameToARGB8888(void *pSrc, void *pDst, uint32_t xsize,
   * @param  None
   * @retval None
   */
-void BSP_CAMERA_FrameEventCallback(void)
+void BSP_CAMERA_FrameEventCallback(uint32_t Instance)
 {
   camera_frame_ready = 1;
 }

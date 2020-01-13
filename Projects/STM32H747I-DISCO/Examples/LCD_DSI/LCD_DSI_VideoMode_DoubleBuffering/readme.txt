@@ -112,7 +112,7 @@ Graphic, Display, LCD, DMA2D, DSI, MIPI Alliance, Video mode, Double buffering, 
 
   - This example runs on STM32H747xx/STM32H757xx devices.
 
-  - This example has been tested with STMicroelectronics STM32H747I-DISCO rev.D
+  - This example has been tested with STMicroelectronics STM32H747I-DISCO 
     board and can be easily tailored to any other supported device
     and development board.
 
@@ -123,7 +123,7 @@ In order to make the program work, you must do the following :
  - For each target configuartion (STM32H747I_DISCO_CM4 first then STM32H747I_DISCO_CM7) : 
      - Rebuild all files 
      - Load images into target memory
- - Mount either the KoD LCD pannel (Board MB1166 rev.A) or the DSI-HDMI bridge(Board MB1232 Rev.A)
+ - Mount either the KoD LCD pannel (Board MB1166 ) or the DSI-HDMI bridge(Board MB1232 )
    to the DSI connector (CN15). 
  - if using the DSI-HDMI bridge then connect a HDMI monitor using a HDMI cable to the 
    MB1232 board.  

@@ -102,7 +102,7 @@ int main(void)
   /* button-triggered interruptions initialization */
   BSP_PB_Init(BUTTON_TAMPER,BUTTON_MODE_EXTI);
   /* -3- Configure Joystick Selection push-button in Interrupt mode */
-  BSP_JOY_Init(JOY_MODE_EXTI);
+  BSP_JOY_Init(JOY1, JOY_MODE_EXTI, JOY_ALL);
 
   /* CEC device initialization */
   
@@ -272,9 +272,9 @@ static void CEC_FlushRxBuffer(void)
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
   uint32_t ITstatus = 0;
-  JOYState_TypeDef JoyState = JOY_NONE;
+  JOYPin_TypeDef JoyPin = JOY_NONE;
 
-  if(GPIO_Pin == TAMPER_BUTTON_PIN)
+  if(GPIO_Pin == BUTTON_TAMPER_PIN)
   {
     /* Toggle GREEN LED1 */
     BSP_LED_Toggle(LED1);
@@ -287,13 +287,13 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 
   if(GPIO_Pin == MFX_IRQOUT_PIN)  /* Interrupt received from MFX */
   {
-    ITstatus = BSP_IO_ITGetStatus(JOY_ALL_PINS);
+    ITstatus = BSP_IO_GetIT(0,JOY1_ALL_PIN);
     if (ITstatus)                 /* Checks if interrupt comes from joystick */
     {
       /* Get the Joystick State */
-      JoyState = BSP_JOY_GetState();
+      JoyPin = (JOYPin_TypeDef)BSP_JOY_GetState(JOY1);
 
-      if(JoyState == JOY_DOWN)
+      if(JoyPin == JOY_DOWN)
       {
         /* Toggle BLUE LED4 */
         BSP_LED_Toggle(LED4);
@@ -302,7 +302,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
         TxSize    = 0x01;
         StartSending = 1;
       }
-      if(JoyState == JOY_SEL)
+      if(JoyPin == JOY_SEL)
       {
         /* Toggle ORANGE LED2 */
         BSP_LED_Toggle(LED2);
@@ -312,7 +312,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
         StartSending = 1;
       }
 
-      if(JoyState == JOY_UP)
+      if(JoyPin == JOY_UP)
       {
         /* Toggle RED LED3 */
         BSP_LED_Toggle(LED3);
@@ -323,7 +323,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
         StartSending = 1;
       }
     }
-    BSP_IO_ITClear();
+    BSP_IO_ClearIT(0, JOY_SEL);
   }
 } 
 

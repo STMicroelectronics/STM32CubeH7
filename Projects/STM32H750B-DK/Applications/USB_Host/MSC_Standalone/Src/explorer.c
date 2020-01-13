@@ -62,22 +62,22 @@ FRESULT Explore_Disk(char *path, uint8_t recu_level)
 
       if(recu_level == 1)
       {
-        LCD_DbgLog("   |__");
+        LCD_DbgTrace("   |__");
       }
       else if(recu_level == 2)
       {
-        LCD_DbgLog("   |   |__");
+        LCD_DbgTrace("   |   |__");
       }
       if((fno.fattrib & AM_DIR) == AM_DIR)
       {
         strcat(tmp, "\n");
-        LCD_UsrLog((void *)tmp);
+        LCD_UsrTrace((void *)tmp);
         Explore_Disk(fn, 2);
       }
       else
       {
         strcat(tmp, "\n");
-        LCD_DbgLog((void *)tmp);
+        LCD_DbgTrace((void *)tmp);
       }
 
       if(((fno.fattrib & AM_DIR) == AM_DIR)&&(recu_level == 2))

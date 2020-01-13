@@ -75,42 +75,22 @@ int main(void)
   
   /* Configure the system clock to 400 MHz */
   SystemClock_Config();
-  
-  /*## LTDC Clock Configuration ###########################################*/  
-  if(stmpe811_ts_drv.ReadID(TS_I2C_ADDRESS) == STMPE811_ID)
-  {
-    /* AMPIRE480272 LCD clock configuration */
-    /* LCD clock configuration */
-    /* PLL3_VCO Input = HSE_VALUE/PLL3M = 5 Mhz */
-    /* PLL3_VCO Output = PLL3_VCO Input * PLL3N = 800 Mhz */
-    /* PLLLCDCLK = PLL3_VCO Output/PLL3R = 800/83 = 9.63 Mhz */
-    /* LTDC clock frequency = PLLLCDCLK = 9.63 Mhz */
-    PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_LTDC;
-    PeriphClkInitStruct.PLL3.PLL3M = 5;    
-    PeriphClkInitStruct.PLL3.PLL3N = 160;
-    PeriphClkInitStruct.PLL3.PLL3FRACN = 0;
-    PeriphClkInitStruct.PLL3.PLL3P = 2;
-    PeriphClkInitStruct.PLL3.PLL3Q = 2;  
-    PeriphClkInitStruct.PLL3.PLL3R = 83;
-    HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct);      
-  }
-  else
-  {
-    /* AMPIRE640480 typical PCLK is 25 MHz so the PLL3R is configured to provide this clock */ 
-    /* AMPIRE640480 LCD clock configuration */
-    /* PLL3_VCO Input = HSE_VALUE/PLL3M = 5 Mhz */
-    /* PLL3_VCO Output = PLL3_VCO Input * PLL3N = 800 Mhz */
-    /* PLLLCDCLK = PLL3_VCO Output/PLL3R = 800/32 = 25Mhz */
-    /* LTDC clock frequency = PLLLCDCLK = 25 Mhz */    
-    PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_LTDC;
-    PeriphClkInitStruct.PLL3.PLL3M = 5;    
-    PeriphClkInitStruct.PLL3.PLL3N = 160;
-    PeriphClkInitStruct.PLL3.PLL3FRACN = 0;
-    PeriphClkInitStruct.PLL3.PLL3P = 2;
-    PeriphClkInitStruct.PLL3.PLL3Q = 2;
-    PeriphClkInitStruct.PLL3.PLL3R = 32;  
-    HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct);     
-  } 
+
+  /* AMPIRE640480 typical PCLK is 25 MHz so the PLL3R is configured to provide this clock */ 
+  /* AMPIRE640480 LCD clock configuration */
+  /* PLL3_VCO Input = HSE_VALUE/PLL3M = 5 Mhz */
+  /* PLL3_VCO Output = PLL3_VCO Input * PLL3N = 800 Mhz */
+  /* PLLLCDCLK = PLL3_VCO Output/PLL3R = 800/32 = 25Mhz */
+  /* LTDC clock frequency = PLLLCDCLK = 25 Mhz */    
+  PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_LTDC;
+  PeriphClkInitStruct.PLL3.PLL3M = 5;    
+  PeriphClkInitStruct.PLL3.PLL3N = 160;
+  PeriphClkInitStruct.PLL3.PLL3FRACN = 0;
+  PeriphClkInitStruct.PLL3.PLL3P = 2;
+  PeriphClkInitStruct.PLL3.PLL3Q = 2;
+  PeriphClkInitStruct.PLL3.PLL3R = 32;  
+  HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct);     
+
   
   
   /* Configure LED3 */
@@ -268,33 +248,16 @@ static void LCD_Config(void)
   /* Initialize the pixel clock polarity as input pixel clock */  
   LtdcHandle.Init.PCPolarity = LTDC_PCPOLARITY_IPC;
   
+  /* The LCD AMPIRE 640x480 is selected */
   /* Timing configuration */
-  if(stmpe811_ts_drv.ReadID(TS_I2C_ADDRESS) == STMPE811_ID)
-  {  
-    /* The AMPIRE LCD 480x272 is selected */
-    /* Timing Configuration */    
-    LtdcHandle.Init.HorizontalSync = (AMPIRE480272_HSYNC - 1);
-    LtdcHandle.Init.VerticalSync = (AMPIRE480272_VSYNC - 1);
-    LtdcHandle.Init.AccumulatedHBP = (AMPIRE480272_HSYNC + AMPIRE480272_HBP - 1);
-    LtdcHandle.Init.AccumulatedVBP = (AMPIRE480272_VSYNC + AMPIRE480272_VBP - 1);  
-    LtdcHandle.Init.AccumulatedActiveH = (AMPIRE480272_HEIGHT + AMPIRE480272_VSYNC + AMPIRE480272_VBP - 1);
-    LtdcHandle.Init.AccumulatedActiveW = (AMPIRE480272_WIDTH + AMPIRE480272_HSYNC + AMPIRE480272_HBP - 1);
-    LtdcHandle.Init.TotalHeigh = (AMPIRE480272_HEIGHT + AMPIRE480272_VSYNC + AMPIRE480272_VBP + AMPIRE480272_VFP - 1);
-    LtdcHandle.Init.TotalWidth = (AMPIRE480272_WIDTH + AMPIRE480272_HSYNC + AMPIRE480272_HBP + AMPIRE480272_HFP - 1); 
-  }
-  else
-  {
-    /* The LCD AMPIRE 640x480 is selected */
-    /* Timing configuration */
-    LtdcHandle.Init.HorizontalSync = (AMPIRE640480_HSYNC - 1);
-    LtdcHandle.Init.VerticalSync = (AMPIRE640480_VSYNC - 1);
-    LtdcHandle.Init.AccumulatedHBP = (AMPIRE640480_HSYNC + AMPIRE640480_HBP - 1);
-    LtdcHandle.Init.AccumulatedVBP = (AMPIRE640480_VSYNC + AMPIRE640480_VBP - 1);  
-    LtdcHandle.Init.AccumulatedActiveH = (AMPIRE640480_HEIGHT + AMPIRE640480_VSYNC + AMPIRE640480_VBP - 1);
-    LtdcHandle.Init.AccumulatedActiveW = (AMPIRE640480_WIDTH + AMPIRE640480_HSYNC + AMPIRE640480_HBP - 1);
-    LtdcHandle.Init.TotalHeigh = (AMPIRE640480_HEIGHT + AMPIRE640480_VSYNC + AMPIRE640480_VBP + AMPIRE640480_VFP - 1);
-    LtdcHandle.Init.TotalWidth = (AMPIRE640480_WIDTH + AMPIRE640480_HSYNC + AMPIRE640480_HBP + AMPIRE640480_HFP - 1); 
-  }
+  LtdcHandle.Init.HorizontalSync = (AMPIRE640480_HSYNC - 1);
+  LtdcHandle.Init.VerticalSync = (AMPIRE640480_VSYNC - 1);
+  LtdcHandle.Init.AccumulatedHBP = (AMPIRE640480_HSYNC + AMPIRE640480_HBP - 1);
+  LtdcHandle.Init.AccumulatedVBP = (AMPIRE640480_VSYNC + AMPIRE640480_VBP - 1);  
+  LtdcHandle.Init.AccumulatedActiveH = (AMPIRE640480_HEIGHT + AMPIRE640480_VSYNC + AMPIRE640480_VBP - 1);
+  LtdcHandle.Init.AccumulatedActiveW = (AMPIRE640480_WIDTH + AMPIRE640480_HSYNC + AMPIRE640480_HBP - 1);
+  LtdcHandle.Init.TotalHeigh = (AMPIRE640480_HEIGHT + AMPIRE640480_VSYNC + AMPIRE640480_VBP + AMPIRE640480_VFP - 1);
+  LtdcHandle.Init.TotalWidth = (AMPIRE640480_WIDTH + AMPIRE640480_HSYNC + AMPIRE640480_HBP + AMPIRE640480_HFP - 1); 
   
   /* Configure R,G,B component values for LCD background color : all black */
   LtdcHandle.Init.Backcolor.Blue = 0;

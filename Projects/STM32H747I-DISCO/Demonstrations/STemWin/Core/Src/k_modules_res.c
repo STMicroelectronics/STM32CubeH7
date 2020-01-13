@@ -44,14 +44,14 @@
 #include "generated/menu/idle/graphic_effects_idle_210x210.c"
 #include "generated/menu/idle/video_game_idle_210x210.c"
 #include "generated/menu/idle/video_player_idle_210x210.c"
-#include "generated/menu/idle/dual_core_idle_210x210.c"
+#include "generated/menu/idle/Dual_core_idle_210x210.c"
 /* Clicked one's */
 #include "generated/menu/clicked/audio_player_clicked_210x210.c"
 #include "generated/menu/clicked/clock_date_clicked_210x210.c"
 #include "generated/menu/clicked/graphic_effects_clicked_210x210.c"
 #include "generated/menu/clicked/video_game_clicked_210x210.c"
 #include "generated/menu/clicked/video_player_clicked_210x210.c"
-#include "generated/menu/clicked/dual_core_clicked_210x210.c"
+#include "generated/menu/clicked/Dual_core_clicked_210x210.c"
 
 /* Background and info images */
 extern GUI_CONST_STORAGE GUI_BITMAP bmbkc_16bit;

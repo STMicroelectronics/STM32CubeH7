@@ -135,8 +135,7 @@ DMA, SAI, DFSDM
   - Audio_playback_and_record/Src/waveplayer.c         Audio play file
   - Audio_playback_and_record/Src/waverecorder.c       Audio record file
  
-  - Audio_playback_and_record/Inc/ffconf.h             FAT file system module configuration file   
-  - Audio_playback_and_record/Inc/lcd_log_conf.h       LCD log configuration file 
+  - Audio_playback_and_record/Inc/ffconf.h             FAT file system module configuration file
   - Audio_playback_and_record/Inc/main.h               Main program header file
   - Audio_playback_and_record/Inc/stm32h7xx_hal_conf.h HAL configuration file
   - Audio_playback_and_record/Inc/stm32h7xx_it.h       Interrupt handlers header file

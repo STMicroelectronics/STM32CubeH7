@@ -16,8 +16,8 @@
         <TargetCommonOption>
           <Device>STM32H747XIHx:CM4</Device>
           <Vendor>STMicroelectronics</Vendor>
-          <PackID>Keil.STM32H7xx_DFP.2.2.5</PackID>
-          <PackURL>http://www.ST.com/</PackURL>
+          <PackID>Keil.STM32H7xx_DFP.2.2.1</PackID>
+          <PackURL>http://www.keil.com/pack</PackURL>
           <Cpu>IRAM(0x20000000,0x00020000) IRAM2(0x24000000,0x00080000) IROM(0x08000000,0x00200000) CPUTYPE("Cortex-M4") FPU2 CLOCK(12000000) ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile></StartupFile>
@@ -184,6 +184,7 @@
             <hadXRAM>0</hadXRAM>
             <uocXRam>0</uocXRam>
             <RvdsVP>2</RvdsVP>
+            <RvdsMve>0</RvdsMve>
             <hadIRAM2>1</hadIRAM2>
             <hadIROM2>0</hadIROM2>
             <StupSel>8</StupSel>
@@ -303,8 +304,8 @@
               </OCR_RVCT9>
               <OCR_RVCT10>
                 <Type>0</Type>
-                <StartAddress>0x0</StartAddress>
-                <Size>0x0</Size>
+                <StartAddress>0x24000000</StartAddress>
+                <Size>0x80000</Size>
               </OCR_RVCT10>
             </OnChipMemories>
             <RvctStartVector></RvctStartVector>
@@ -337,7 +338,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER, STM32H747xx,USE_STM32H747I_DISCO,CORE_CM4</Define>
               <Undefine></Undefine>
-              <IncludePath>../Common/Inc;../CM4/Inc;../../../../../Drivers/CMSIS/Include;../../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../../../../../Drivers/STM32H7xx_HAL_Driver/Inc;../../../../../Drivers/BSP/STM32H747I-Discovery;../../../../../Drivers/BSP/Components/Common;../../../../../Utilities/Log;../../../../../Utilities/Fonts;../../../../../Utilities/CPU;../../../../../Middlewares/ST/STM32_Audio/Addons/PDM/Inc</IncludePath>
+              <IncludePath>../Common/Inc;../CM4/Inc;../../../../../Drivers/CMSIS/Include;../../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../../../../../Drivers/STM32H7xx_HAL_Driver/Inc;../../../../../Drivers/BSP/STM32H747I-DISCO;../../../../../Drivers/BSP/Components/Common;../../../../../Utilities/Log;../../../../../Utilities/Fonts;../../../../../Utilities/CPU;../../../../../Middlewares/ST/STM32_Audio/Addons/PDM/Inc</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -411,6 +412,46 @@
               <FileType>1</FileType>
               <FilePath>..\..\..\..\..\Drivers\BSP\Components\ov9655\ov9655.c</FilePath>
             </File>
+            <File>
+              <FileName>adv7533.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\Drivers\BSP\Components\adv7533\adv7533.c</FilePath>
+            </File>
+            <File>
+              <FileName>adv7533_reg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\Drivers\BSP\Components\adv7533\adv7533_reg.c</FilePath>
+            </File>
+            <File>
+              <FileName>ft6x06_reg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\Drivers\BSP\Components\ft6x06\ft6x06_reg.c</FilePath>
+            </File>
+            <File>
+              <FileName>is42s32800j.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\Drivers\BSP\Components\is42s32800j\is42s32800j.c</FilePath>
+            </File>
+            <File>
+              <FileName>otm8009a_reg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\Drivers\BSP\Components\otm8009a\otm8009a_reg.c</FilePath>
+            </File>
+            <File>
+              <FileName>ov9655_reg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\Drivers\BSP\Components\ov9655\ov9655_reg.c</FilePath>
+            </File>
+            <File>
+              <FileName>wm8994_reg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\Drivers\BSP\Components\wm8994\wm8994_reg.c</FilePath>
+            </File>
+            <File>
+              <FileName>mt25tl01g.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\Drivers\BSP\Components\mt25tl01g\mt25tl01g.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -419,37 +460,42 @@
             <File>
               <FileName>stm32h747i_discovery.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\Drivers\BSP\STM32H747I-Discovery\stm32h747i_discovery.c</FilePath>
+              <FilePath>..\..\..\..\..\Drivers\BSP\STM32H747I-DISCO\stm32h747i_discovery.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32h747i_discovery_bus.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\Drivers\BSP\STM32H747I-DISCO\stm32h747i_discovery_bus.c</FilePath>
             </File>
             <File>
               <FileName>stm32h747i_discovery_camera.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\Drivers\BSP\STM32H747I-Discovery\stm32h747i_discovery_camera.c</FilePath>
+              <FilePath>..\..\..\..\..\Drivers\BSP\STM32H747I-DISCO\stm32h747i_discovery_camera.c</FilePath>
             </File>
             <File>
               <FileName>stm32h747i_discovery_lcd.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\Drivers\BSP\STM32H747I-Discovery\stm32h747i_discovery_lcd.c</FilePath>
+              <FilePath>..\..\..\..\..\Drivers\BSP\STM32H747I-DISCO\stm32h747i_discovery_lcd.c</FilePath>
             </File>
             <File>
               <FileName>stm32h747i_discovery_qspi.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\Drivers\BSP\STM32H747I-Discovery\stm32h747i_discovery_qspi.c</FilePath>
+              <FilePath>..\..\..\..\..\Drivers\BSP\STM32H747I-DISCO\stm32h747i_discovery_qspi.c</FilePath>
             </File>
             <File>
               <FileName>stm32h747i_discovery_sd.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\Drivers\BSP\STM32H747I-Discovery\stm32h747i_discovery_sd.c</FilePath>
+              <FilePath>..\..\..\..\..\Drivers\BSP\STM32H747I-DISCO\stm32h747i_discovery_sd.c</FilePath>
             </File>
             <File>
               <FileName>stm32h747i_discovery_sdram.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\Drivers\BSP\STM32H747I-Discovery\stm32h747i_discovery_sdram.c</FilePath>
+              <FilePath>..\..\..\..\..\Drivers\BSP\STM32H747I-DISCO\stm32h747i_discovery_sdram.c</FilePath>
             </File>
             <File>
               <FileName>stm32h747i_discovery_ts.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\Drivers\BSP\STM32H747I-Discovery\stm32h747i_discovery_ts.c</FilePath>
+              <FilePath>..\..\..\..\..\Drivers\BSP\STM32H747I-DISCO\stm32h747i_discovery_ts.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -625,11 +671,6 @@
               <FileName>stm32h7xx_hal_i2s.c</FileName>
               <FileType>1</FileType>
               <FilePath>../../../../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_i2s.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32h7xx_hal_i2s_ex.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../../../../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_i2s_ex.c</FilePath>
             </File>
             <File>
               <FileName>stm32h7xx_hal_irda.c</FileName>
@@ -1055,8 +1096,8 @@
         <TargetCommonOption>
           <Device>STM32H747XIHx:CM4</Device>
           <Vendor>STMicroelectronics</Vendor>
-          <PackID>Keil.STM32H7xx_DFP.2.2.5</PackID>
-          <PackURL>http://www.ST.com/</PackURL>
+          <PackID>Keil.STM32H7xx_DFP.2.2.1</PackID>
+          <PackURL>http://www.keil.com/pack</PackURL>
           <Cpu>IRAM(0x20000000,0x00020000) IRAM2(0x24000000,0x00080000) IROM(0x08000000,0x00200000) CPUTYPE("Cortex-M4") FPU2 CLOCK(12000000) ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile></StartupFile>
@@ -1223,6 +1264,7 @@
             <hadXRAM>0</hadXRAM>
             <uocXRam>0</uocXRam>
             <RvdsVP>2</RvdsVP>
+            <RvdsMve>0</RvdsMve>
             <hadIRAM2>1</hadIRAM2>
             <hadIROM2>0</hadIROM2>
             <StupSel>8</StupSel>
@@ -1376,7 +1418,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER, STM32H747xx, USE_STM32H747I_DISCO,CORE_CM7</Define>
               <Undefine></Undefine>
-              <IncludePath>../Common/Inc;../CM7/Inc;../../../../../Drivers/CMSIS/Include;../../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../../../../../Drivers/STM32H7xx_HAL_Driver/Inc;../../../../../Drivers/BSP/STM32H747I-Discovery;../../../../../Drivers/BSP/Components/Common;../../../../../Utilities/Log;../../../../../Utilities/Fonts;../../../../../Utilities/CPU;../../../../../Middlewares/ST/STM32_Audio/Addons/PDM/Inc</IncludePath>
+              <IncludePath>../Common/Inc;../CM7/Inc;../../../../../Drivers/CMSIS/Include;../../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../../../../../Drivers/STM32H7xx_HAL_Driver/Inc;../../../../../Drivers/BSP/STM32H747I-DISCO;../../../../../Drivers/BSP/Components/Common;../../../../../Utilities/Log;../../../../../Utilities/Fonts;../../../../../Utilities/CPU;../../../../../Middlewares/ST/STM32_Audio/Addons/PDM/Inc</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -1450,6 +1492,46 @@
               <FileType>1</FileType>
               <FilePath>..\..\..\..\..\Drivers\BSP\Components\ov9655\ov9655.c</FilePath>
             </File>
+            <File>
+              <FileName>adv7533.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\Drivers\BSP\Components\adv7533\adv7533.c</FilePath>
+            </File>
+            <File>
+              <FileName>adv7533_reg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\Drivers\BSP\Components\adv7533\adv7533_reg.c</FilePath>
+            </File>
+            <File>
+              <FileName>ft6x06_reg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\Drivers\BSP\Components\ft6x06\ft6x06_reg.c</FilePath>
+            </File>
+            <File>
+              <FileName>is42s32800j.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\Drivers\BSP\Components\is42s32800j\is42s32800j.c</FilePath>
+            </File>
+            <File>
+              <FileName>otm8009a_reg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\Drivers\BSP\Components\otm8009a\otm8009a_reg.c</FilePath>
+            </File>
+            <File>
+              <FileName>ov9655_reg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\Drivers\BSP\Components\ov9655\ov9655_reg.c</FilePath>
+            </File>
+            <File>
+              <FileName>wm8994_reg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\Drivers\BSP\Components\wm8994\wm8994_reg.c</FilePath>
+            </File>
+            <File>
+              <FileName>mt25tl01g.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\Drivers\BSP\Components\mt25tl01g\mt25tl01g.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1458,37 +1540,42 @@
             <File>
               <FileName>stm32h747i_discovery.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\Drivers\BSP\STM32H747I-Discovery\stm32h747i_discovery.c</FilePath>
+              <FilePath>..\..\..\..\..\Drivers\BSP\STM32H747I-DISCO\stm32h747i_discovery.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32h747i_discovery_bus.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\Drivers\BSP\STM32H747I-DISCO\stm32h747i_discovery_bus.c</FilePath>
             </File>
             <File>
               <FileName>stm32h747i_discovery_camera.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\Drivers\BSP\STM32H747I-Discovery\stm32h747i_discovery_camera.c</FilePath>
+              <FilePath>..\..\..\..\..\Drivers\BSP\STM32H747I-DISCO\stm32h747i_discovery_camera.c</FilePath>
             </File>
             <File>
               <FileName>stm32h747i_discovery_lcd.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\Drivers\BSP\STM32H747I-Discovery\stm32h747i_discovery_lcd.c</FilePath>
+              <FilePath>..\..\..\..\..\Drivers\BSP\STM32H747I-DISCO\stm32h747i_discovery_lcd.c</FilePath>
             </File>
             <File>
               <FileName>stm32h747i_discovery_qspi.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\Drivers\BSP\STM32H747I-Discovery\stm32h747i_discovery_qspi.c</FilePath>
+              <FilePath>..\..\..\..\..\Drivers\BSP\STM32H747I-DISCO\stm32h747i_discovery_qspi.c</FilePath>
             </File>
             <File>
               <FileName>stm32h747i_discovery_sd.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\Drivers\BSP\STM32H747I-Discovery\stm32h747i_discovery_sd.c</FilePath>
+              <FilePath>..\..\..\..\..\Drivers\BSP\STM32H747I-DISCO\stm32h747i_discovery_sd.c</FilePath>
             </File>
             <File>
               <FileName>stm32h747i_discovery_sdram.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\Drivers\BSP\STM32H747I-Discovery\stm32h747i_discovery_sdram.c</FilePath>
+              <FilePath>..\..\..\..\..\Drivers\BSP\STM32H747I-DISCO\stm32h747i_discovery_sdram.c</FilePath>
             </File>
             <File>
               <FileName>stm32h747i_discovery_ts.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\Drivers\BSP\STM32H747I-Discovery\stm32h747i_discovery_ts.c</FilePath>
+              <FilePath>..\..\..\..\..\Drivers\BSP\STM32H747I-DISCO\stm32h747i_discovery_ts.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1664,11 +1751,6 @@
               <FileName>stm32h7xx_hal_i2s.c</FileName>
               <FileType>1</FileType>
               <FilePath>../../../../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_i2s.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32h7xx_hal_i2s_ex.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../../../../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_i2s_ex.c</FilePath>
             </File>
             <File>
               <FileName>stm32h7xx_hal_irda.c</FileName>

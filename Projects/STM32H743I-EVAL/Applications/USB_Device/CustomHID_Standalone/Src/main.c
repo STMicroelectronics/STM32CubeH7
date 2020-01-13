@@ -34,6 +34,7 @@
 /* Private variables --------------------------------------------------------- */
 USBD_HandleTypeDef USBD_Device;
 extern PCD_HandleTypeDef hpcd;
+BSP_IO_Init_t init;
 
 /* Private function prototypes ----------------------------------------------- */
 static void CPU_CACHE_Enable(void);
@@ -64,7 +65,7 @@ int main(void)
   /* Configure the system clock */
   SystemClock_Config();
 
-  BSP_IO_Init();
+  BSP_IO_Init(0, &init);
 
   /* Configure LED1, LED2, LED3 and LED4 */
   BSP_LED_Init(LED1);

@@ -246,9 +246,9 @@ static void Get_SerialNum(void)
 {
   uint32_t deviceserial0, deviceserial1, deviceserial2;
 
-  deviceserial0 = 5;            // *(uint32_t*)DEVICE_ID1; TBD
-  deviceserial1 = 6;            // *(uint32_t*)DEVICE_ID2;
-  deviceserial2 = 7;            // *(uint32_t*)DEVICE_ID3;
+  deviceserial0 = 5;
+  deviceserial1 = 6;
+  deviceserial2 = 7;
 
   deviceserial0 += deviceserial2;
 

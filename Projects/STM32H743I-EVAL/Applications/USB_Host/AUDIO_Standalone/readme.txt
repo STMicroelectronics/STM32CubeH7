@@ -111,7 +111,6 @@ Middleware, USB Host, Audio, Streaming, SAI, Full speed, PCM
   - USB_Host/AUDIO_Standalone/Src/sd_diskio_dma.c         SD Disk I/O configuration
   - USB_Host/AUDIO_Standalone/Inc/main.h                  Main program header file
   - USB_Host/AUDIO_Standalone/Inc/stm32h7xx_it.h          Interrupt handlers header file
-  - USB_Host/AUDIO_Standalone/Inc/lcd_log_conf.h          LCD log configuration header file
   - USB_Host/AUDIO_Standalone/Inc/stm32h7xx_hal_conf.h    HAL configuration header file
   - USB_Host/AUDIO_Standalone/Inc/usbh_conf.h             USB Host driver Configuration header file
   - USB_Host/AUDIO_Standalone/Inc/ffconf.h                FAT file system module configuration header file
@@ -121,11 +120,11 @@ Middleware, USB Host, Audio, Streaming, SAI, Full speed, PCM
 
   - This application runs on stm32h7xx devices.
 
-  - This application has been tested with STMicroelectronics STM32H743I-EVAL RevB
+  - This application has been tested with STMicroelectronics STM32H743I-EVAL 
     evaluation boards and can be easily tailored to any other supported device
     and development board.
 
-  - STM32H743I-EVAL RevB Set-up
+  - STM32H743I-EVAL  Set-up
     - Insert a microSD card containing .Wav audio file into the STM32H743I-EVAL uSD slot (CN13)
     - Plug the USB headset for sound playback into the STM32H743I-EVAL board through
       'USB micro A-Male to A-Female' cable to the connector:

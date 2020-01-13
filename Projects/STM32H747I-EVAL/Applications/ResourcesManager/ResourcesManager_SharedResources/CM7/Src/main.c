@@ -33,8 +33,7 @@
 #define HSEM_ID_0 (0U) /* HW semaphore 0*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-uint8_t CM7_Message[]="This Message is from CM7 Core \n\r";
-UART_HandleTypeDef UartHandle;
+COM_InitTypeDef  COM_Init;
 /* Private function prototypes -----------------------------------------------*/
 static void MPU_Config(void);
 static void CPU_CACHE_Enable(void);
@@ -119,15 +118,13 @@ int main(void)
   /* Initialize LEDs */
   BSP_LED_Init(LED1);
   BSP_LED_Init(LED3);
-  /* Uart Pre-Initialization*/
-  UartHandle.Init.BaudRate   = 115200;
-  UartHandle.Init.WordLength = UART_WORDLENGTH_8B;
-  UartHandle.Init.StopBits   = UART_STOPBITS_1;
-  UartHandle.Init.Parity     = UART_PARITY_NONE;
-  UartHandle.Init.HwFlowCtl  = UART_HWCONTROL_NONE;
-  UartHandle.Init.Mode       = UART_MODE_TX_RX;
-  UartHandle.Init.OverSampling = UART_OVERSAMPLING_16;
-
+  
+  /* COM Pre-Initialization*/
+  COM_Init.BaudRate = 115200;
+  COM_Init.WordLength=COM_WORDLENGTH_8B;
+  COM_Init.StopBits=COM_STOPBITS_1;
+  COM_Init.Parity=COM_PARITY_NONE;
+  COM_Init.HwFlowCtl=COM_HWCONTROL_NONE;
   for (;;)
   {
     do
@@ -139,11 +136,10 @@ int main(void)
     /* Here We can use the resource */
 
     BSP_LED_On(LED1);
-
-    BSP_COM_Init(COM1, &UartHandle);
-    HAL_UART_Transmit(&UartHandle,CM7_Message,sizeof(CM7_Message),0xff);
+    BSP_COM_Init(COM1,&COM_Init);
+    printf("This Message is from CM7 Core \n\r");
     HAL_Delay(1000); /* To simutate the use of the resource*/
-    BSP_COM_DeInit(COM1, &UartHandle);
+    BSP_COM_DeInit(COM1);
     ResMgr_Release(RESMGR_ID_USART1, RESMGR_FLAGS_CPU1);
     BSP_LED_Off(LED1);
     HAL_Delay(100);

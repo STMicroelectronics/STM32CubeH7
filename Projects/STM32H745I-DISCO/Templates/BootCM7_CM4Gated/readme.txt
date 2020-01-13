@@ -74,6 +74,9 @@ The SystemClock_Config() function is used to set the Flash latency and  to confi
 @par Directory contents 
 
   - Templates/BootCM7_CM4Gated/Common/Src/system_stm32h7xx.c     STM32H7xx system configuration file
+  - Templates/BootCM7_CM4Gated/Common/Inc/ft5336_conf.h          Configuration file for ft5336
+  - Templates/BootCM7_CM4Gated/Common/Inc/mt25tl01g_conf.h       Configuration file for mt25tl01g 
+  - Templates/BootCM7_CM4Gated/Common/Inc/mt48lc4m32b2_conf.h    Configuration file for mt48lc4m32b2
   
   - Templates/BootCM7_CM4Gated/CM7/Src/main.c                 Main program for Cortex-M7
   - Templates/BootCM7_CM4Gated/CM7/Src/stm32h7xx_it.c         Interrupt handlers for Cortex-M7

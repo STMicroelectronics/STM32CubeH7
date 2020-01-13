@@ -90,7 +90,7 @@ STM32 board's LEDs can be used to monitor the application status:
 
   - This application runs on STM32H743xx devices.
     
-  - This application has been tested with STMicroelectronics stm32h743I-EVAL RevB
+  - This application has been tested with STMicroelectronics stm32h743I-EVAL 
     evaluation boards and can be easily tailored to any other supported device 
     and development board.  
 

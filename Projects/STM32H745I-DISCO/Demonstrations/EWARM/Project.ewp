@@ -353,9 +353,8 @@
                     <state>$PROJ_DIR$\..\..\..\..\Drivers\CMSIS\Include</state>
                     <state>$PROJ_DIR$\..\..\..\..\Drivers\CMSIS\Device\ST\STM32H7xx\Include</state>
                     <state>$PROJ_DIR$\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Inc</state>
-                    <state>$PROJ_DIR$\..\..\..\..\Drivers\BSP\STM32H745I-Discovery</state>
+                    <state>$PROJ_DIR$\..\..\..\..\Drivers\BSP\STM32H745I-DISCO</state>
                     <state>$PROJ_DIR$\..\..\..\..\Drivers\BSP\Components\Common</state>
-                    <state>$PROJ_DIR$\..\..\..\..\Utilities\Log</state>
                     <state>$PROJ_DIR$\..\..\..\..\Utilities\Fonts</state>
                     <state>$PROJ_DIR$\..\..\..\..\Utilities\CPU</state>
                 </option>
@@ -1384,11 +1383,11 @@
                     <state>$PROJ_DIR$\..\..\..\..\Drivers\CMSIS\Include</state>
                     <state>$PROJ_DIR$\..\..\..\..\Drivers\CMSIS\Device\ST\STM32H7xx\Include</state>
                     <state>$PROJ_DIR$\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Inc</state>
-                    <state>$PROJ_DIR$\..\..\..\..\Drivers\BSP\STM32H745I-Discovery</state>
+                    <state>$PROJ_DIR$\..\..\..\..\Drivers\BSP\STM32H745I-DISCO</state>
                     <state>$PROJ_DIR$\..\..\..\..\Drivers\BSP\Components\Common</state>
-                    <state>$PROJ_DIR$\..\..\..\..\Utilities\Log</state>
                     <state>$PROJ_DIR$\..\..\..\..\Utilities\Fonts</state>
                     <state>$PROJ_DIR$\..\..\..\..\Utilities\CPU</state>
+                    <state>$PROJ_DIR$\..\..\..\..\Utilities\Basic_GUI</state>
                 </option>
                 <option>
                     <name>CCStdIncCheck</name>
@@ -2347,7 +2346,7 @@
                 <option>
                     <name>CCAllowList</name>
                     <version>1</version>
-                    <state>00000000</state>
+                    <state>11111110</state>
                 </option>
                 <option>
                     <name>CCDebugInfo</name>
@@ -2416,11 +2415,11 @@
                     <state>$PROJ_DIR$\..\..\..\..\Drivers\CMSIS\Include</state>
                     <state>$PROJ_DIR$\..\..\..\..\Drivers\CMSIS\Device\ST\STM32H7xx\Include</state>
                     <state>$PROJ_DIR$\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Inc</state>
-                    <state>$PROJ_DIR$\..\..\..\..\Drivers\BSP\STM32H745I-Discovery</state>
+                    <state>$PROJ_DIR$\..\..\..\..\Drivers\BSP\STM32H745I-DISCO</state>
                     <state>$PROJ_DIR$\..\..\..\..\Drivers\BSP\Components\Common</state>
-                    <state>$PROJ_DIR$\..\..\..\..\Utilities\Log</state>
                     <state>$PROJ_DIR$\..\..\..\..\Utilities\Fonts</state>
                     <state>$PROJ_DIR$\..\..\..\..\Utilities\CPU</state>
+                    <state>$PROJ_DIR$\..\..\..\..\Utilities\Basic_GUI</state>
                 </option>
                 <option>
                     <name>CCStdIncCheck</name>
@@ -2436,7 +2435,7 @@
                 </option>
                 <option>
                     <name>CCOptLevel</name>
-                    <state>0</state>
+                    <state>3</state>
                 </option>
                 <option>
                     <name>CCOptStrategy</name>
@@ -2445,7 +2444,7 @@
                 </option>
                 <option>
                     <name>CCOptLevelSlave</name>
-                    <state>0</state>
+                    <state>3</state>
                 </option>
                 <option>
                     <name>CompilerMisraRules98</name>
@@ -3201,33 +3200,60 @@
                 <name>Components</name>
                 <file>
                     <name>$PROJ_DIR$\..\..\..\..\Drivers\BSP\Components\ft5336\ft5336.c</name>
+                    <excluded>
+                        <configuration>OSCILLO_SG_CM4</configuration>
+                    </excluded>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\..\..\..\..\Drivers\BSP\Components\ft5336\ft5336_reg.c</name>
+                    <excluded>
+                        <configuration>OSCILLO_SG_CM4</configuration>
+                    </excluded>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\..\..\..\..\Drivers\BSP\Components\mt25tl01g\mt25tl01g.c</name>
+                    <excluded>
+                        <configuration>OSCILLO_SG_CM4</configuration>
+                    </excluded>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\..\..\..\..\Drivers\BSP\Components\mt48lc4m32b2\mt48lc4m32b2.c</name>
+                    <excluded>
+                        <configuration>OSCILLO_SG_CM4</configuration>
+                    </excluded>
                 </file>
             </group>
             <group>
                 <name>STM32H745I_DISCOVERY</name>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\..\Drivers\BSP\STM32H745I-Discovery\stm32h745i_discovery.c</name>
+                    <name>$PROJ_DIR$\..\..\..\..\Drivers\BSP\STM32H745I-DISCO\stm32h745i_discovery.c</name>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\..\Drivers\BSP\STM32H745I-Discovery\stm32h745i_discovery_lcd.c</name>
+                    <name>$PROJ_DIR$\..\..\..\..\Drivers\BSP\STM32H745I-DISCO\stm32h745i_discovery_bus.c</name>
                     <excluded>
                         <configuration>OSCILLO_SG_CM4</configuration>
                     </excluded>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\..\Drivers\BSP\STM32H745I-Discovery\stm32h745i_discovery_qspi.c</name>
+                    <name>$PROJ_DIR$\..\..\..\..\Drivers\BSP\STM32H745I-DISCO\stm32h745i_discovery_lcd.c</name>
                     <excluded>
                         <configuration>OSCILLO_SG_CM4</configuration>
                     </excluded>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\..\Drivers\BSP\STM32H745I-Discovery\stm32h745i_discovery_sdram.c</name>
+                    <name>$PROJ_DIR$\..\..\..\..\Drivers\BSP\STM32H745I-DISCO\stm32h745i_discovery_qspi.c</name>
                     <excluded>
                         <configuration>OSCILLO_SG_CM4</configuration>
                     </excluded>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\..\Drivers\BSP\STM32H745I-Discovery\stm32h745i_discovery_ts.c</name>
+                    <name>$PROJ_DIR$\..\..\..\..\Drivers\BSP\STM32H745I-DISCO\stm32h745i_discovery_sdram.c</name>
+                    <excluded>
+                        <configuration>OSCILLO_SG_CM4</configuration>
+                    </excluded>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\..\..\..\..\Drivers\BSP\STM32H745I-DISCO\stm32h745i_discovery_ts.c</name>
                     <excluded>
                         <configuration>OSCILLO_SG_CM4</configuration>
                     </excluded>
@@ -3271,6 +3297,9 @@
             </file>
             <file>
                 <name>$PROJ_DIR$\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_dma_ex.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_exti.c</name>
             </file>
             <file>
                 <name>$PROJ_DIR$\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_flash.c</name>
@@ -3351,5 +3380,14 @@
                 </excluded>
             </file>
         </group>
+    </group>
+    <group>
+        <name>Utilities</name>
+        <file>
+            <name>$PROJ_DIR$\..\..\..\..\Utilities\Basic_GUI\basic_gui.c</name>
+            <excluded>
+                <configuration>OSCILLO_SG_CM4</configuration>
+            </excluded>
+        </file>
     </group>
 </project>

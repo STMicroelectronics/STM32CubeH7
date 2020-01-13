@@ -34,7 +34,8 @@
 #include "stm32h747i_discovery_ts.h"
 #include "stm32h747i_discovery_qspi.h"
 #include "stm32h747i_discovery_sdram.h"
-
+#include "stm32h747i_discovery_bus.h"
+#include "otm8009a.h"
 #include "cmsis_os.h"
 
 /* FatFs includes component */

@@ -1,5 +1,5 @@
 
-
+#include <touchgfx/hal/HAL.hpp>
 #include <gui/home_automation_screen/RoomControl.hpp>
 #include <BitmapDatabase.hpp>
 

@@ -1,12 +1,12 @@
 /**
   ******************************************************************************
-  * @file    BSP/CM7/Src/stm32h7xx_it.c
+  * @file    BSP/Src/stm32h7xx_it.c
   * @author  MCD Application Team
-  * @brief   Main Interrupt Service Routines for Cortex-M7.
+  * @brief   Main Interrupt Service Routines.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
+  * <h2><center>&copy; Copyright (c) 2018 STMicroelectronics.
   * All rights reserved.</center></h2>
   *
   * This software component is licensed by ST under BSD 3-Clause license,
@@ -16,7 +16,6 @@
   *
   ******************************************************************************
   */
-
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "stm32h7xx_it.h"
@@ -33,17 +32,6 @@
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-/* SAI handler declared in "stm32h747i_eval_audio.c" file */
-extern SAI_HandleTypeDef haudio_out_sai;
-extern SAI_HandleTypeDef haudio_in_sai;
-extern DFSDM_Filter_HandleTypeDef      hAudioInDfsdmFilter[];
-
-extern SRAM_HandleTypeDef sramHandle;
-extern SDRAM_HandleTypeDef sdramHandle;
-extern SDRAM_HandleTypeDef sdramHandle;
-extern SRAM_HandleTypeDef sramHandle;
-extern SD_HandleTypeDef uSdHandle;
-
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 
@@ -156,7 +144,10 @@ void SysTick_Handler(void)
 /*  file (startup_stm32h7xx.s).                                               */
 /******************************************************************************/
 
-
+void EXTI0_IRQHandler(void)
+{
+  BSP_PB_IRQHandler(BUTTON_WAKEUP);
+}
 
 /**
   * @brief  This function handles External lines 9 to 5 interrupt request.
@@ -165,7 +156,22 @@ void SysTick_Handler(void)
   */
 void EXTI9_5_IRQHandler(void)
 {
-  HAL_GPIO_EXTI_IRQHandler(MFX_IRQOUT_PIN);
+  if(SdmmcTest !=0){
+
+    BSP_SD_DETECT_IRQHandler(0);
+  }
+  else if(JoyStickDemo != 0)
+  {
+    BSP_JOY_IRQHandler(JOY1, JOY_ALL);
+  }
+  else if(TouchScreenDemo != 0)
+  {
+    BSP_TS_IRQHandler(0);
+  }
+  else
+  {
+    BSP_IO_ClearIT(0, IO_PIN_ALL);
+  }
 }
 
 /**
@@ -175,7 +181,28 @@ void EXTI9_5_IRQHandler(void)
   */
 void EXTI15_10_IRQHandler(void)
 {
-  HAL_GPIO_EXTI_IRQHandler(TAMPER_BUTTON_PIN);
+  BSP_PB_IRQHandler(BUTTON_TAMPER);
+}
+
+/**
+  * @brief  This function handles SDMMC1 interrupt request.
+  * @retval None
+  */
+void SDMMC1_IRQHandler(void)
+{
+  BSP_SD_IRQHandler(0);
+}
+
+void MDMA_IRQHandler(void)
+{
+  if(SdramTest == 1)
+  {
+    BSP_SDRAM_IRQHandler(0);
+  }
+  else
+  {
+    BSP_SRAM_IRQHandler(0);
+  }
 }
 
 /**
@@ -184,7 +211,7 @@ void EXTI15_10_IRQHandler(void)
   */
 void AUDIO_DFSDM_DMAx_MIC1_IRQHandler(void)
 {
-  HAL_DMA_IRQHandler(hAudioInDfsdmFilter[POS_VAL(INPUT_DEVICE_DIGITAL_MIC1)].hdmaReg);
+  BSP_AUDIO_IN_IRQHandler(1,AUDIO_IN_DEVICE_DIGITAL_MIC1);
 }
 
 /**
@@ -193,7 +220,7 @@ void AUDIO_DFSDM_DMAx_MIC1_IRQHandler(void)
   */
 void AUDIO_DFSDM_DMAx_MIC2_IRQHandler(void)
 {
-  HAL_DMA_IRQHandler(hAudioInDfsdmFilter[POS_VAL(INPUT_DEVICE_DIGITAL_MIC2)].hdmaReg);
+  BSP_AUDIO_IN_IRQHandler(1,AUDIO_IN_DEVICE_DIGITAL_MIC2);
 }
 /**
   * @brief  This function handles DMA2 Stream 1 for SAI1A interrupt request.
@@ -202,19 +229,13 @@ void AUDIO_DFSDM_DMAx_MIC2_IRQHandler(void)
   */
 void AUDIO_OUT_SAIx_DMAx_IRQHandler(void)
 {
-  HAL_DMA_IRQHandler(haudio_out_sai.hdmatx);
+  BSP_AUDIO_OUT_IRQHandler(0);
 }
 
-/**
-  * @brief  This function handles DMA2 Stream 4 for SAI1B interrupt request.
-  * @param  None
-  * @retval None
-  */
 void AUDIO_IN_SAIx_DMAx_IRQHandler(void)
 {
-  HAL_DMA_IRQHandler(haudio_in_sai.hdmarx);
+  BSP_AUDIO_IN_IRQHandler(0,AUDIO_IN_DEVICE_DIGITAL_MIC);
 }
-
 /**
   * @brief  This function handles BDMA Channel 1 for SAI_PDM interrupt request.
   * @param  None
@@ -222,32 +243,7 @@ void AUDIO_IN_SAIx_DMAx_IRQHandler(void)
   */
 void AUDIO_IN_SAI_PDMx_DMAx_IRQHandler(void)
 {
-  HAL_DMA_IRQHandler(haudio_in_sai.hdmarx);
-}
-
-/**
-  * @brief  Handles MDMA transfer interrupt request.
-  * @retval None
-  */
-void MDMA_IRQHandler(void)
-{
-  if(SRAMTest == 1)
-  {
-    HAL_MDMA_IRQHandler(sramHandle.hmdma);
-  }
-  else
-  {
-    HAL_MDMA_IRQHandler(sdramHandle.hmdma);
-  }
-}
-
-/**
-  * @brief  Handles SD1 card interrupt request.
-  * @retval None
-  */
-void SDMMC1_IRQHandler(void)
-{
-  HAL_SD_IRQHandler(&uSdHandle);
+  BSP_AUDIO_IN_IRQHandler(2,AUDIO_IN_DEVICE_DIGITAL_MIC);
 }
 
 /**
@@ -257,5 +253,4 @@ void SDMMC1_IRQHandler(void)
 /**
   * @}
   */
-
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

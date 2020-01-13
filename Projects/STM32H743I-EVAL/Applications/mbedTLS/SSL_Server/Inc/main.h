@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    mbedTLS/SSL_Server/Inc/main.h
   * @author  MCD Application Team
-  * @brief   main application header file. 
+  * @brief   main application header file.
   ******************************************************************************
   * @attention
   *
@@ -15,22 +15,20 @@
   *                             www.st.com/SLA0044
   *
   ******************************************************************************
-  */ 
+  */
 
 #ifndef __MAIN_H
 #define __MAIN_H
 
 #define USE_DHCP
 
-#include "stm32h7xx_hal.h"
-
 #ifdef USE_LCD
 #include "stm32h743i_eval_lcd.h"
-#include "lcd_log.h"
+#include "stm32h743i_eval_sdram.h"
+#include "basic_gui.h"
+#include "lcd_trace.h"
 #endif
 
-#include "stm32h7xx_hal.h"
-#include "stm32h7xx_hal_rng.h"
 #include "stm32h743i_eval.h"
 
 

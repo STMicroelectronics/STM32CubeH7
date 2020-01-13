@@ -77,7 +77,7 @@ static void Audio_Thread(void const * argument);
 #endif
 
 PRAGMA_AUDIO_BUFFERS_LOCATION AUDIO_ProcessTypdef haudio ATTRIBUTE_AUDIO_BUFFERS_LOCATION;
-
+BSP_AUDIO_Init_t AudioPlayInit;
 /* Private functions ---------------------------------------------------------*/
 
 /**
@@ -91,10 +91,13 @@ AUDIOPLAYER_ErrorTypdef  AUDIOPLAYER_Init(uint8_t volume)
   uint32_t index = 0;
   __IO uint32_t ldness_value;
 #endif  
-
+  AudioPlayInit.Device = AUDIO_OUT_DEVICE_HEADPHONE;
+  AudioPlayInit.ChannelsNbr = 2;
+  AudioPlayInit.SampleRate = I2S_AUDIOFREQ_48K ;
+  AudioPlayInit.BitsPerSample = AUDIO_RESOLUTION_16B;
+  AudioPlayInit.Volume = volume;
    /* Try to Init Audio interface in diffrent config in case of failure */
-  BSP_AUDIO_OUT_Init(OUTPUT_DEVICE_AUTO, volume, I2S_AUDIOFREQ_48K);
-  BSP_AUDIO_OUT_SetAudioFrameSlot(CODEC_AUDIOFRAME_SLOT_02);
+  BSP_AUDIO_OUT_Init(0, &AudioPlayInit);
 
   /* Initialize internal audio structure */
   haudio.state  = AUDIOPLAYER_STOP;
@@ -249,7 +252,7 @@ uint32_t  AUDIOPLAYER_GetVolume(void)
   */
 AUDIOPLAYER_ErrorTypdef  AUDIOPLAYER_SetVolume(uint32_t volume)
 {
-  if(BSP_AUDIO_OUT_SetVolume(volume) == AUDIO_OK)
+  if(BSP_AUDIO_OUT_SetVolume(0,volume) == BSP_ERROR_NONE)
   {
     haudio.volume = volume;
     return AUDIOPLAYER_ERROR_NONE;    
@@ -278,16 +281,17 @@ AUDIOPLAYER_ErrorTypdef  AUDIOPLAYER_Play(uint32_t frequency)
   { 
     if(numOfReadBytes != 0)
     {
-      BSP_AUDIO_OUT_Pause();
+      BSP_AUDIO_OUT_Stop(0);
       memset(haudio.buff, 0, AUDIO_OUT_BUFFER_SIZE);
 
       if(haudio.freq != frequency )
       {
-        BSP_AUDIO_OUT_SetFrequency(frequency);
+         BSP_AUDIO_OUT_SetSampleRate(0,frequency);
         haudio.freq = frequency;
       }
 
-      BSP_AUDIO_OUT_Play((uint16_t*)&haudio.buff[0], AUDIO_OUT_BUFFER_SIZE);
+      BSP_AUDIO_OUT_Play(0,(uint8_t *)&haudio.buff[0], AUDIO_OUT_BUFFER_SIZE);
+
       return AUDIOPLAYER_ERROR_NONE;
     }
   }
@@ -303,8 +307,8 @@ AUDIOPLAYER_ErrorTypdef  AUDIOPLAYER_DeInit(void)
 {
   haudio.state = AUDIOPLAYER_STOP; 
   
-  BSP_AUDIO_OUT_Stop(CODEC_PDWN_HW);
-  BSP_AUDIO_OUT_DeInit();
+  BSP_AUDIO_OUT_Stop(0);
+  BSP_AUDIO_OUT_DeInit(0);
 
   f_close(&wav_file); 
   
@@ -353,7 +357,7 @@ AUDIOPLAYER_ErrorTypdef  AUDIOPLAYER_Stop(void)
 AUDIOPLAYER_ErrorTypdef  AUDIOPLAYER_Pause(void)
 {  
   haudio.state = AUDIOPLAYER_PAUSE;
-  BSP_AUDIO_OUT_Pause();
+  BSP_AUDIO_OUT_Pause(0);
   return AUDIOPLAYER_ERROR_NONE;
 }
 
@@ -366,7 +370,7 @@ AUDIOPLAYER_ErrorTypdef  AUDIOPLAYER_Pause(void)
 AUDIOPLAYER_ErrorTypdef  AUDIOPLAYER_Resume(void)
 {
   haudio.state = AUDIOPLAYER_PLAY;
-  BSP_AUDIO_OUT_Resume(); 
+  BSP_AUDIO_OUT_Resume(0); 
   return AUDIOPLAYER_ERROR_NONE;
 }
 /**
@@ -393,7 +397,7 @@ AUDIOPLAYER_ErrorTypdef  AUDIOPLAYER_SetPosition(uint32_t position)
   */
 AUDIOPLAYER_ErrorTypdef  AUDIOPLAYER_Mute(uint8_t state)
 {
-   BSP_AUDIO_OUT_SetMute(state);
+   BSP_AUDIO_OUT_Mute(0);
    
    return AUDIOPLAYER_ERROR_NONE;
 }
@@ -456,11 +460,10 @@ uint32_t AUDIOPLAYER_GetProgress(void)
   * @param  None
   * @retval None
   */
-void BSP_AUDIO_OUT_TransferComplete_CallBack(void)
+void BSP_AUDIO_OUT_TransferComplete_CallBack(uint32_t Instance)
 {
   if(haudio.state == AUDIOPLAYER_PLAY)
   {
-    BSP_AUDIO_OUT_ChangeBuffer((uint16_t*)&haudio.buff[0], AUDIO_OUT_BUFFER_SIZE /2);
     osMessagePut ( AudioEvent, PLAY_BUFFER_OFFSET_FULL, 0);    
   }
 }
@@ -470,11 +473,10 @@ void BSP_AUDIO_OUT_TransferComplete_CallBack(void)
   * @param  None
   * @retval None
   */
-void BSP_AUDIO_OUT_HalfTransfer_CallBack(void)
+void BSP_AUDIO_OUT_HalfTransfer_CallBack(uint32_t Instance)
 { 
   if(haudio.state == AUDIOPLAYER_PLAY)
   {
-    BSP_AUDIO_OUT_ChangeBuffer((uint16_t*)&haudio.buff[AUDIO_OUT_BUFFER_SIZE /2], AUDIO_OUT_BUFFER_SIZE /2);
     osMessagePut ( AudioEvent, PLAY_BUFFER_OFFSET_HALF, 0);    
   }
 }
@@ -484,7 +486,7 @@ void BSP_AUDIO_OUT_HalfTransfer_CallBack(void)
   * @param  None
   * @retval None
   */
-void BSP_AUDIO_OUT_Error_CallBack(void)
+void BSP_AUDIO_OUT_Error_CallBack(uint32_t Instance)
 {
   haudio.state = AUDIOPLAYER_ERROR;
 }
@@ -599,16 +601,6 @@ __weak AUDIOPLAYER_ErrorTypdef  AUDIOPLAYER_NotifyEndOfFile(void)
 __weak AUDIOPLAYER_ErrorTypdef  AUDIOPLAYER_NotifyError(void)
 {
   return AUDIOPLAYER_Stop();
-}
-/**
-  * @brief  This function handles DMA2 Stream 5 interrupt request.
-  * @param  None
-  * @retval None
-  */
-
-void AUDIO_OUT_SAIx_DMAx_IRQHandler(void)
-{
-  HAL_DMA_IRQHandler(haudio_out_sai.hdmatx);
 }
 
 /**

@@ -24,10 +24,12 @@
 /* Includes ------------------------------------------------------------------*/
 #include <stdio.h>
 #include <stdlib.h>
-#include "stm32h7xx_nucleo_144.h"
-#include "stm32_adafruit_sd.h"
-#include "stm32_adafruit_lcd.h"
-
+#include "stm32h7xx_nucleo.h"
+#include "stm32h7xx_nucleo_bus.h"
+#include "adafruit_802.h"
+#include "adafruit_802_lcd.h"
+#include "adafruit_802_sd.h"
+#include "basic_gui.h"
 /* FatFs includes component */
 #include "ff_gen_drv.h"
 #include "sd_diskio.h"

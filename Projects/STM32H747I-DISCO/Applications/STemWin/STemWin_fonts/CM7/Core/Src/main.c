@@ -28,6 +28,7 @@
 TIM_HandleTypeDef TimHandle;
 uint32_t uwPrescalerValue = 0;
 uint8_t GUI_Initialized = 0;
+TS_Init_t hTS;
 #define HSEM_ID_0 (0U) /* HW semaphore 0*/
 
 /* Private function prototypes -----------------------------------------------*/
@@ -138,7 +139,7 @@ int main(void)
   /***********************************************************/
   
   /* Init the STemWin GUI Library */
-  BSP_SDRAM_Init(); /* Initializes the SDRAM device */
+  BSP_SDRAM_Init(0); /* Initializes the SDRAM device */
   __HAL_RCC_CRC_CLK_ENABLE(); /* Enable the CRC Module */
   
   GUI_Init();
@@ -195,7 +196,13 @@ void HAL_TIM_Base_MspInit(TIM_HandleTypeDef *htim)
   */
 static void BSP_Config(void)
 {  
-  BSP_TS_Init (800, 480);
+  hTS.Width = 800;
+  hTS.Height = 480;
+  hTS.Orientation = TS_SWAP_XY | TS_SWAP_Y;
+  hTS.Accuracy = 0;
+  
+  /* Touchscreen initialization */
+  BSP_TS_Init(0, &hTS);
 }
 
 /**
@@ -240,6 +247,7 @@ static void SystemClock_Config(void)
   RCC_OscInitTypeDef RCC_OscInitStruct;
   HAL_StatusTypeDef ret = HAL_OK;
 
+   /*!< Supply configuration update enable */
   HAL_PWREx_ConfigSupply(PWR_DIRECT_SMPS_SUPPLY);
 
   /* The voltage scaling allows optimizing the power consumption when the device is 
@@ -394,36 +402,35 @@ static void CPU_CACHE_Enable(void)
 void BSP_Pointer_Update(void)
 {
   static GUI_PID_STATE TS_State = {0, 0, 0, 0};
-  __IO TS_StateTypeDef  ts;
+  TS_State_t  ts;
   uint16_t xDiff, yDiff;
   
-  BSP_TS_GetState((TS_StateTypeDef *)&ts);
+  BSP_TS_GetState(0,(TS_State_t *)&ts);
 
-  if((ts.touchX[0] >= LCD_GetXSize()) ||(ts.touchY[0] >= LCD_GetYSize()) ) 
+  if((ts.TouchX >= LCD_GetXSize()) ||(ts.TouchY >= LCD_GetYSize()) ) 
   {
-    ts.touchX[0] = 0;
-    ts.touchY[0] = 0;
+    ts.TouchX = 0;
+    ts.TouchY = 0;
   }
-
-  xDiff = (TS_State.x > ts.touchX[0]) ? (TS_State.x - ts.touchX[0]) : (ts.touchX[0] - TS_State.x);
-  yDiff = (TS_State.y > ts.touchY[0]) ? (TS_State.y - ts.touchY[0]) : (ts.touchY[0] - TS_State.y);
+ xDiff = (TS_State.x > ts.TouchX) ? (TS_State.x - ts.TouchX) : (ts.TouchX - TS_State.x);
+  yDiff = (TS_State.y > ts.TouchY) ? (TS_State.y - ts.TouchY) : (ts.TouchY - TS_State.y);
   
-  if((TS_State.Pressed != ts.touchDetected ) ||
+  if((TS_State.Pressed != ts.TouchDetected ) ||
      (xDiff > 20 )||
        (yDiff > 20))
   {
-    TS_State.Pressed = ts.touchDetected;
+    TS_State.Pressed = ts.TouchDetected;
     TS_State.Layer = 0;
-    if(ts.touchDetected) 
+    if(ts.TouchDetected) 
     {
-      TS_State.x = ts.touchX[0];
-      if(ts.touchY[0] < 240)
+      TS_State.x = ts.TouchX;
+      if(ts.TouchY < 240)
       {
-        TS_State.y = ts.touchY[0] ;
+        TS_State.y = ts.TouchY ;
       }
       else
       {
-        TS_State.y = (ts.touchY[0] * 480) / 450;
+        TS_State.y = (ts.TouchY * 480) / 450;
       }
       GUI_TOUCH_StoreStateEx(&TS_State);
     }

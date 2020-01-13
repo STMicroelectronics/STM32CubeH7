@@ -33,15 +33,6 @@
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-extern SAI_HandleTypeDef haudio_out_sai;
-extern SAI_HandleTypeDef haudio_in_sai;
-
-extern SDRAM_HandleTypeDef sdramHandle; 
-extern DMA2D_HandleTypeDef hdma2d_discovery;
-extern LTDC_HandleTypeDef  hltdc_discovery;
-extern SDRAM_HandleTypeDef sdramHandle;
-extern SD_HandleTypeDef uSdHandle;
-extern DCMI_HandleTypeDef  hdcmi_discovery;
 
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
@@ -156,44 +147,44 @@ void SysTick_Handler(void)
 /******************************************************************************/
 
 /**
-  * @brief  This function handles External line 2 interrupt request.
-  * @param  None
-  * @retval None
-  */
+* @brief  This function handles External line 2 interrupt request.
+* @param  None
+* @retval None
+*/
 void EXTI2_IRQHandler(void)
 {
-  HAL_GPIO_EXTI_IRQHandler(SEL_JOY_PIN);
+   BSP_JOY_IRQHandler(JOY1, JOY_SEL);
 }
 
 /**
-  * @brief  This function handles External line 3 interrupt request.
-  * @param  None
-  * @retval None
-  */
+* @brief  This function handles External line 3 interrupt request.
+* @param  None
+* @retval None
+*/
 void EXTI3_IRQHandler(void)
 {
-  HAL_GPIO_EXTI_IRQHandler(DOWN_JOY_PIN);
+   BSP_JOY_IRQHandler(JOY1, JOY_DOWN);
 }
 
 /**
-  * @brief  This function handles External line 4 interrupt request.
-  * @param  None
-  * @retval None
-  */
+* @brief  This function handles External line 4 interrupt request.
+* @param  None
+* @retval None
+*/
 void EXTI4_IRQHandler(void)
 {
-  HAL_GPIO_EXTI_IRQHandler(LEFT_JOY_PIN);
+   BSP_JOY_IRQHandler(JOY1, JOY_LEFT);
 }
 
 /**
-  * @brief  This function handles External lines 9 to 5 interrupt request.
-  * @param  None
-  * @retval None
-  */
+* @brief  This function handles External lines 9 to 5 interrupt request.
+* @param  None
+* @retval None
+*/
 void EXTI9_5_IRQHandler(void)
 {
-  HAL_GPIO_EXTI_IRQHandler(RIGHT_JOY_PIN);
-  HAL_GPIO_EXTI_IRQHandler(UP_JOY_PIN);
+  BSP_JOY_IRQHandler(JOY1, JOY_RIGHT);
+  BSP_JOY_IRQHandler(JOY1, JOY_UP);
 }
 
 /**
@@ -203,47 +194,18 @@ void EXTI9_5_IRQHandler(void)
   */
 void EXTI15_10_IRQHandler(void)
 {
-  HAL_GPIO_EXTI_IRQHandler(WAKEUP_BUTTON_PIN);
+  BSP_PB_IRQHandler(BUTTON_WAKEUP);
 }
 
 /**
-* @brief  This function handles SAI DMA interrupt request.
-* @param  None
-* @retval None
-*/
-void DMA2_Stream6_IRQHandler(void)
-{
-  HAL_DMA_IRQHandler(haudio_out_sai.hdmatx);
-}
-
-/**
-  * @brief  This function handles DMA2D Handler.
+  * @brief  This function handles SAI DMA interrupt request.
   * @param  None
   * @retval None
   */
-void DMA2D_IRQHandler(void)
+void AUDIO_IN_SAIx_DMAx_IRQHandler()
 {
-  HAL_DMA2D_IRQHandler(&hdma2d_discovery);
+  BSP_AUDIO_IN_IRQHandler(0,AUDIO_IN_DEVICE_DIGITAL_MIC);
 }
-
-/**
-  * @brief  Handles LTDC interrupt request.
-  * @note : Can be surcharged by application code implementation of the function.
-  */
-void BSP_LCD_LTDC_IRQHandler(void)
-{
-  HAL_LTDC_IRQHandler(&(hltdc_discovery));
-}
-
-/**
-  * @brief  This function handles LTDC Error interrupt Handler.
-  * @note : Can be surcharged by application code implementation of the function.
-  */
-void BSP_LCD_LTDC_ER_IRQHandler(void)
-{
-  HAL_LTDC_IRQHandler(&(hltdc_discovery));
-}
-
 /**
   * @brief  This function handles DMA2 Stream 1 interrupt request.
   * @param  None
@@ -251,7 +213,7 @@ void BSP_LCD_LTDC_ER_IRQHandler(void)
   */
 void AUDIO_OUT_SAIx_DMAx_IRQHandler(void)
 {
-  HAL_DMA_IRQHandler(haudio_out_sai.hdmatx);
+  BSP_AUDIO_OUT_IRQHandler(0);
 }
 
 /**
@@ -261,7 +223,7 @@ void AUDIO_OUT_SAIx_DMAx_IRQHandler(void)
   */
 void AUDIO_IN_SAI_PDMx_DMAx_IRQHandler(void)
 {
-  HAL_DMA_IRQHandler(haudio_in_sai.hdmarx);
+  BSP_AUDIO_IN_IRQHandler(1, AUDIO_IN_DEVICE_DIGITAL_MIC);
 }
 
 /**
@@ -270,7 +232,7 @@ void AUDIO_IN_SAI_PDMx_DMAx_IRQHandler(void)
   */
 void MDMA_IRQHandler(void)
 {
-  HAL_MDMA_IRQHandler(sdramHandle.hmdma);
+    BSP_SDRAM_IRQHandler(0);
 }
 
 /**
@@ -280,7 +242,7 @@ void MDMA_IRQHandler(void)
   */
 void SDMMC1_IRQHandler(void)
 {
-  BSP_SD_IRQHandler();
+  BSP_SD_IRQHandler(0);
 }
 
 /**
@@ -290,7 +252,7 @@ void SDMMC1_IRQHandler(void)
   */
 void DCMI_IRQHandler(void)
 {
-  HAL_DCMI_IRQHandler(&hdcmi_discovery);
+   BSP_CAMERA_IRQHandler(0);
 }
 
 /**
@@ -300,7 +262,7 @@ void DCMI_IRQHandler(void)
   */
 void DMA2_Stream3_IRQHandler(void)
 {
-  HAL_DMA_IRQHandler(hdcmi_discovery.DMA_Handle);
+  BSP_CAMERA_DMA_IRQHandler(0);
 }
 
 /**

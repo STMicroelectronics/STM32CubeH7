@@ -25,9 +25,12 @@
 #include "stdio.h"
 #include "usbh_core.h"
 #include "stm32h747i_discovery.h"
-#include "lcd_log.h"
+#include "stm32h747i_discovery_bus.h"
+#include "basic_gui.h"
+#include "lcd_trace.h"
 #include "usbh_hid.h"
 #include "usbh_hid_parser.h"
+#include "utilities_conf.h"
 
 /* Exported types ------------------------------------------------------------*/
 typedef enum {

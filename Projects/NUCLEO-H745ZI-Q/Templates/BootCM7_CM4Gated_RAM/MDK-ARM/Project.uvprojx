@@ -16,8 +16,8 @@
         <TargetCommonOption>
           <Device>STM32H745ZITx:CM4</Device>
           <Vendor>STMicroelectronics</Vendor>
-          <PackID>Keil.STM32H7xx_DFP.2.2.5</PackID>
-          <PackURL>http://www.ST.com/</PackURL>
+          <PackID>Keil.STM32H7xx_DFP.2.2.6</PackID>
+          <PackURL>http://www.keil.com/pack</PackURL>
           <Cpu>IRAM(0x20000000,0x00020000) IRAM2(0x24000000,0x00080000) IROM(0x08000000,0x00200000) CPUTYPE("Cortex-M4") FPU2 CLOCK(12000000) ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile></StartupFile>
@@ -337,7 +337,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER, STM32H745xx,USE_STM32H7XX_NUCLEO_144_MB1363,CORE_CM4, VECT_TAB_SRAM</Define>
               <Undefine></Undefine>
-              <IncludePath>../Common/Inc;../CM4/Inc;../../../../../Drivers/CMSIS/Include;../../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../../../../../Drivers/STM32H7xx_HAL_Driver/Inc;../../../../../Drivers/BSP/STM32H7xx_Nucleo_144;../../../../../Drivers/BSP/Components/Common;../../../../../Utilities/Log;../../../../../Utilities/Fonts;../../../../../Utilities/CPU</IncludePath>
+              <IncludePath>../Common/Inc;../CM4/Inc;../../../../../Drivers/CMSIS/Include;../../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../../../../../Drivers/STM32H7xx_HAL_Driver/Inc;../../../../../Drivers/BSP/STM32H7xx_Nucleo;../../../../../Drivers/BSP/Components/Common;../../../../../Utilities/Log;../../../../../Utilities/Fonts;../../../../../Utilities/CPU</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -392,9 +392,9 @@
           <GroupName>Drivers/BSP/STM32H745I_Nucleo</GroupName>
           <Files>
             <File>
-              <FileName>stm32h7xx_nucleo_144.c</FileName>
+              <FileName>stm32h7xx_nucleo.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\Drivers\BSP\STM32H7xx_Nucleo_144\stm32h7xx_nucleo_144.c</FilePath>
+              <FilePath>..\..\..\..\..\Drivers\BSP\STM32H7xx_Nucleo\stm32h7xx_nucleo.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -570,11 +570,6 @@
               <FileName>stm32h7xx_hal_i2s.c</FileName>
               <FileType>1</FileType>
               <FilePath>../../../../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_i2s.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32h7xx_hal_i2s_ex.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../../../../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_i2s_ex.c</FilePath>
             </File>
             <File>
               <FileName>stm32h7xx_hal_irda.c</FileName>
@@ -990,8 +985,8 @@
         <TargetCommonOption>
           <Device>STM32H745ZITx:CM7</Device>
           <Vendor>STMicroelectronics</Vendor>
-          <PackID>Keil.STM32H7xx_DFP.2.2.5</PackID>
-          <PackURL>http://www.ST.com/</PackURL>
+          <PackID>Keil.STM32H7xx_DFP.2.2.6</PackID>
+          <PackURL>http://www.keil.com/pack</PackURL>
           <Cpu>IRAM(0x20000000,0x00020000) IRAM2(0x24000000,0x00080000) IROM(0x08000000,0x00200000) CPUTYPE("Cortex-M7") FPU3(DFPU) CLOCK(12000000) ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile></StartupFile>
@@ -1311,7 +1306,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER, STM32H745xx, USE_STM32H7XX_NUCLEO_144_MB1363,CORE_CM7</Define>
               <Undefine></Undefine>
-              <IncludePath>../Common/Inc;../CM7/Inc;../../../../../Drivers/CMSIS/Include;../../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../../../../../Drivers/STM32H7xx_HAL_Driver/Inc;../../../../../Drivers/BSP/STM32H7xx_Nucleo_144;../../../../../Drivers/BSP/Components/Common;../../../../../Utilities/Log;../../../../../Utilities/Fonts;../../../../../Utilities/CPU;../../../../../Middlewares/ST/STM32_Audio/Addons/PDM/Inc</IncludePath>
+              <IncludePath>../Common/Inc;../CM7/Inc;../../../../../Drivers/CMSIS/Include;../../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../../../../../Drivers/STM32H7xx_HAL_Driver/Inc;../../../../../Drivers/BSP/STM32H7xx_Nucleo;../../../../../Drivers/BSP/Components/Common;../../../../../Utilities/Log;../../../../../Utilities/Fonts;../../../../../Utilities/CPU;../../../../../Middlewares/ST/STM32_Audio/Addons/PDM/Inc</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -1366,9 +1361,9 @@
           <GroupName>Drivers/BSP/STM32H745I_Nucleo</GroupName>
           <Files>
             <File>
-              <FileName>stm32h7xx_nucleo_144.c</FileName>
+              <FileName>stm32h7xx_nucleo.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\Drivers\BSP\STM32H7xx_Nucleo_144\stm32h7xx_nucleo_144.c</FilePath>
+              <FilePath>..\..\..\..\..\Drivers\BSP\STM32H7xx_Nucleo\stm32h7xx_nucleo.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1544,11 +1539,6 @@
               <FileName>stm32h7xx_hal_i2s.c</FileName>
               <FileType>1</FileType>
               <FilePath>../../../../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_i2s.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32h7xx_hal_i2s_ex.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../../../../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_i2s_ex.c</FilePath>
             </File>
             <File>
               <FileName>stm32h7xx_hal_irda.c</FileName>

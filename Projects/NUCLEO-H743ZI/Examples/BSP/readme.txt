@@ -5,7 +5,7 @@
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    Examples/BSP/readme.txt 
   * @author  MCD Application Team
-  * @brief   Description STM32H7xx_Nucleo_144 Demo description.
+  * @brief   Description STM32H7xx_Nucleo_144 BSP example.
   ******************************************************************************
   * @attention
   *
@@ -93,10 +93,10 @@ Board Support Package, BSP, Adafruit, TFT, LCD, Joystick, SD Card
 
  - This example runs on STM32H743ZI Devices 
   
- - This example has been tested with STMicroelectronics NUCLEO-H743ZI Rev.B board
+ - This example has been tested with STMicroelectronics NUCLEO-H743ZI  board
    and can be easily tailored to any other supported device and development board.
 
- - NUCLEO-H743ZI Rev.B board Set-up
+ - NUCLEO-H743ZI  board Set-up
    - Connect the Adafruit 1.8" TFT shield (https://www.adafruit.com/products/802)
    - Make sure the SB146 is closed and the SB165 and SB174 are opened on the NUCLEO-H743ZI board
    

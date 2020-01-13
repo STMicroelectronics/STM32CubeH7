@@ -16,8 +16,8 @@
         <TargetCommonOption>
           <Device>STM32H745ZITx:CM4</Device>
           <Vendor>STMicroelectronics</Vendor>
-          <PackID>Keil.STM32H7xx_DFP.2.2.5</PackID>
-          <PackURL>http://www.ST.com/</PackURL>
+          <PackID>Keil.STM32H7xx_DFP.2.2.6</PackID>
+          <PackURL>http://www.keil.com/pack</PackURL>
           <Cpu>IRAM(0x20000000,0x00020000) IRAM2(0x24000000,0x00080000) IROM(0x08000000,0x00200000) CPUTYPE("Cortex-M4") FPU2 CLOCK(12000000) ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile></StartupFile>
@@ -337,7 +337,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32H745xx,CORE_CM4,USE_STM32H7XX_NUCLEO_144_MB1363,ADAFRUIT_TFT_JOY_SD_ID802</Define>
               <Undefine></Undefine>
-              <IncludePath>../CM4/Inc;../../../../Drivers/CMSIS/Include;../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../../../../Drivers/STM32H7xx_HAL_Driver/Inc;../../../../Drivers/BSP/STM32H7xx_Nucleo_144;../../../../Drivers/BSP/Adafruit_Shield;../../../../Drivers/BSP/Components/st7735;../../../../Drivers/BSP/Components/Common</IncludePath>
+              <IncludePath>../CM4/Inc;../../../../Drivers/CMSIS/Include;../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../../../../Drivers/STM32H7xx_HAL_Driver/Inc;../../../../Drivers/BSP/STM32H7xx_Nucleo;../../../../Drivers/BSP/Adafruit_Shield;../../../../Drivers/BSP/Components/st7735;../../../../Drivers/BSP/Components/Common;../Common/Inc</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -397,7 +397,7 @@
               <RVCTZI>0</RVCTZI>
               <RVCTOtherData>0</RVCTOtherData>
               <ModuleSelection>0</ModuleSelection>
-              <IncludeInBuild>0</IncludeInBuild>
+              <IncludeInBuild>1</IncludeInBuild>
               <AlwaysBuild>2</AlwaysBuild>
               <GenerateAssemblyFile>2</GenerateAssemblyFile>
               <AssembleAssemblyFile>2</AssembleAssemblyFile>
@@ -461,14 +461,19 @@
           </GroupOption>
           <Files>
             <File>
-              <FileName>stm32_adafruit_lcd.c</FileName>
+              <FileName>adafruit_802.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\Drivers\BSP\Adafruit_Shield\stm32_adafruit_lcd.c</FilePath>
+              <FilePath>..\..\..\..\Drivers\BSP\Adafruit_Shield\adafruit_802.c</FilePath>
             </File>
             <File>
-              <FileName>stm32_adafruit_sd.c</FileName>
+              <FileName>adafruit_802_lcd.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\Drivers\BSP\Adafruit_Shield\stm32_adafruit_sd.c</FilePath>
+              <FilePath>..\..\..\..\Drivers\BSP\Adafruit_Shield\adafruit_802_lcd.c</FilePath>
+            </File>
+            <File>
+              <FileName>adafruit_802_sd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\Drivers\BSP\Adafruit_Shield\adafruit_802_sd.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -481,7 +486,7 @@
               <RVCTZI>0</RVCTZI>
               <RVCTOtherData>0</RVCTOtherData>
               <ModuleSelection>0</ModuleSelection>
-              <IncludeInBuild>0</IncludeInBuild>
+              <IncludeInBuild>1</IncludeInBuild>
               <AlwaysBuild>2</AlwaysBuild>
               <GenerateAssemblyFile>2</GenerateAssemblyFile>
               <AssembleAssemblyFile>2</AssembleAssemblyFile>
@@ -549,15 +554,20 @@
               <FileType>1</FileType>
               <FilePath>..\..\..\..\Drivers\BSP\Components\st7735\st7735.c</FilePath>
             </File>
+            <File>
+              <FileName>st7735_reg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\Drivers\BSP\Components\st7735\st7735_reg.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
           <GroupName>Drivers/BSP/STM32H7xx_Nucleo</GroupName>
           <Files>
             <File>
-              <FileName>stm32h7xx_nucleo_144.c</FileName>
+              <FileName>stm32h7xx_nucleo.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\Drivers\BSP\STM32H7xx_Nucleo_144\stm32h7xx_nucleo_144.c</FilePath>
+              <FilePath>..\..\..\..\Drivers\BSP\STM32H7xx_Nucleo\stm32h7xx_nucleo.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -654,6 +664,21 @@
               <FileType>1</FileType>
               <FilePath>..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_spi_ex.c</FilePath>
             </File>
+            <File>
+              <FileName>stm32h7xx_hal_exti.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_exti.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32h7xx_hal_uart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_uart.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32h7xx_hal_uart_ex.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_uart_ex.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -673,6 +698,11 @@
               <FileName>stm32h7xx_it.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\CM4\Src\stm32h7xx_it.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32h7xx_nucleo_bus.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\CM7\Src\stm32h7xx_nucleo_bus.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -772,6 +802,11 @@
               <FileName>stm32h7xx_it.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\CM7\Src\stm32h7xx_it.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32h7xx_nucleo_bus.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\CM7\Src\stm32h7xx_nucleo_bus.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -959,6 +994,16 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>Utilities</GroupName>
+          <Files>
+            <File>
+              <FileName>basic_gui.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\Utilities\Basic_GUI\basic_gui.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>::CMSIS</GroupName>
         </Group>
       </Groups>
@@ -973,8 +1018,8 @@
         <TargetCommonOption>
           <Device>STM32H745ZITx:CM7</Device>
           <Vendor>STMicroelectronics</Vendor>
-          <PackID>Keil.STM32H7xx_DFP.2.2.5</PackID>
-          <PackURL>http://www.ST.com/</PackURL>
+          <PackID>Keil.STM32H7xx_DFP.2.2.6</PackID>
+          <PackURL>http://www.keil.com/pack</PackURL>
           <Cpu>IROM(0x08000000-0x80FFFFF) IRAM(0x24000000-0x2400FFFF) IRAM2(0x00000000-0xFFFF) CLOCK(12000000) FPU3(DFPU) CPUTYPE("Cortex-M7") ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile></StartupFile>
@@ -1011,7 +1056,7 @@
           <CreateLib>0</CreateLib>
           <CreateHexFile>1</CreateHexFile>
           <DebugInformation>1</DebugInformation>
-          <BrowseInformation>0</BrowseInformation>
+          <BrowseInformation>1</BrowseInformation>
           <ListingPath></ListingPath>
           <HexFormatSelection>1</HexFormatSelection>
           <Merge32K>0</Merge32K>
@@ -1294,7 +1339,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32H745xx,CORE_CM7,USE_STM32H7XX_NUCLEO_144_MB1363,ADAFRUIT_TFT_JOY_SD_ID802</Define>
               <Undefine></Undefine>
-              <IncludePath>../CM7/Inc;../../../../Drivers/CMSIS/Include;../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../../../../Drivers/STM32H7xx_HAL_Driver/Inc;../../../../Drivers/BSP/STM32H7xx_Nucleo_144;../../../../Drivers/BSP/Adafruit_Shield;../../../../Drivers/BSP/Components/st7735;../../../../Drivers/BSP/Components/Common;../../../../Middlewares/Third_Party/FatFs/src;../../../../Middlewares/Third_Party/FatFs/src/drivers</IncludePath>
+              <IncludePath>../CM7/Inc;../../../../Drivers/CMSIS/Include;../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../../../../Drivers/STM32H7xx_HAL_Driver/Inc;../../../../Drivers/BSP/STM32H7xx_Nucleo;../../../../Drivers/BSP/Adafruit_Shield;../../../../Drivers/BSP/Components/st7735;../../../../Drivers/BSP/Components/Common;../../../../Middlewares/Third_Party/FatFs/src;../../../../Middlewares/Third_Party/FatFs/src/drivers;../../../../Utilities/Basic_GUI;../Common/Inc</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -1349,14 +1394,19 @@
           <GroupName>Drivers/BSP/Adafruit_Shield</GroupName>
           <Files>
             <File>
-              <FileName>stm32_adafruit_lcd.c</FileName>
+              <FileName>adafruit_802.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\Drivers\BSP\Adafruit_Shield\stm32_adafruit_lcd.c</FilePath>
+              <FilePath>..\..\..\..\Drivers\BSP\Adafruit_Shield\adafruit_802.c</FilePath>
             </File>
             <File>
-              <FileName>stm32_adafruit_sd.c</FileName>
+              <FileName>adafruit_802_lcd.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\Drivers\BSP\Adafruit_Shield\stm32_adafruit_sd.c</FilePath>
+              <FilePath>..\..\..\..\Drivers\BSP\Adafruit_Shield\adafruit_802_lcd.c</FilePath>
+            </File>
+            <File>
+              <FileName>adafruit_802_sd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\Drivers\BSP\Adafruit_Shield\adafruit_802_sd.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1368,15 +1418,20 @@
               <FileType>1</FileType>
               <FilePath>..\..\..\..\Drivers\BSP\Components\st7735\st7735.c</FilePath>
             </File>
+            <File>
+              <FileName>st7735_reg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\Drivers\BSP\Components\st7735\st7735_reg.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
           <GroupName>Drivers/BSP/STM32H7xx_Nucleo</GroupName>
           <Files>
             <File>
-              <FileName>stm32h7xx_nucleo_144.c</FileName>
+              <FileName>stm32h7xx_nucleo.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\Drivers\BSP\STM32H7xx_Nucleo_144\stm32h7xx_nucleo_144.c</FilePath>
+              <FilePath>..\..\..\..\Drivers\BSP\STM32H7xx_Nucleo\stm32h7xx_nucleo.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1473,6 +1528,21 @@
               <FileType>1</FileType>
               <FilePath>..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_spi_ex.c</FilePath>
             </File>
+            <File>
+              <FileName>stm32h7xx_hal_exti.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_exti.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32h7xx_hal_uart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_uart.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32h7xx_hal_uart_ex.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_uart_ex.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1562,6 +1632,11 @@
               <FileType>1</FileType>
               <FilePath>..\CM4\Src\stm32h7xx_it.c</FilePath>
             </File>
+            <File>
+              <FileName>stm32h7xx_nucleo_bus.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\CM7\Src\stm32h7xx_nucleo_bus.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1591,6 +1666,11 @@
               <FileName>stm32h7xx_it.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\CM7\Src\stm32h7xx_it.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32h7xx_nucleo_bus.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\CM7\Src\stm32h7xx_nucleo_bus.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1636,6 +1716,16 @@
               <FileName>unicode.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\..\Middlewares\Third_Party\FatFs\src\option\unicode.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Utilities</GroupName>
+          <Files>
+            <File>
+              <FileName>basic_gui.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\Utilities\Basic_GUI\basic_gui.c</FilePath>
             </File>
           </Files>
         </Group>

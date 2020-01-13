@@ -230,7 +230,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 
   switch(GPIO_Pin)
   {
-    case WAKEUP_BUTTON_PIN :
+    case BUTTON_WAKEUP_PIN :
     {
       /* Turn LED RED off */
       BSP_LED_Off(LED_RED);
@@ -248,14 +248,14 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
       if(!StorageEvent)
         return;
 
-      if((BSP_SD_IsDetected()))
+      if((BSP_SD_IsDetected(0)))
       {
         /* After sd disconnection, a SD Init is required */
         if(Storage_GetStatus(MSD_DISK_UNIT) == STORAGE_NOINIT)
         {
-          if( BSP_SD_Init() == MSD_OK )
+          if( BSP_SD_Init(0) == BSP_ERROR_NONE )
           {
-            if( BSP_SD_ITConfig() == MSD_OK )
+            if( BSP_SD_DetectITConfig(0) == BSP_ERROR_NONE )
               osMessagePut ( StorageEvent, MSDDISK_CONNECTION_EVENT, 0);
           }
         }

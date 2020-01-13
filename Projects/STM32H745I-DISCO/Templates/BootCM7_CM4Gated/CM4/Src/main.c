@@ -59,8 +59,7 @@ int main(void)
 
 
   /* Add Cortex-M4 user application code here */ 
-
-                        
+          
   /* Infinite loop */
   while (1)
   {

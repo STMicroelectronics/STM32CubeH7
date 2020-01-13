@@ -85,9 +85,6 @@ This example shows how to erase, write and read the SDRAM memory.
  ** SDRAM DMA **
 This example shows how to erase, write and read the SDRAM memory in DMA mode.
 
- ** LCD LOG **
-This example shows how to use the LCD log features. 
-
  ** QSPI test **
 This example provides of how to write, read and buffers compare for external 
 flash memory using QSPI communication.
@@ -111,8 +108,7 @@ flash memory using QSPI communication.
 
   - BSP/CM7/Inc/stm32h7xx_hal_conf.h   HAL Configuration file for Cortex-M7
   - BSP/CM7/Inc/stm32h7xx_it.h         Interrupt handlers header file for Cortex-M7
-  - BSP/CM7/Inc/main.h                 Main program header file for Cortex-M7 
-  - BSP/CM7/Inc/lcd_log_conf.h         lcd_log configuration template file
+  - BSP/CM7/Inc/main.h                 Main program header file for Cortex-M7
   - BSP/CM7/Inc/stlogo.h               Image used for BSP example
 
   - BSP/CM7/Src/stm32h7xx_it.c         Interrupt handlers for Cortex-M7  

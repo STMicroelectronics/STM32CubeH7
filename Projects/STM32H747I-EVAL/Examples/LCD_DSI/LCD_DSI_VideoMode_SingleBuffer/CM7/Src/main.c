@@ -104,16 +104,16 @@ int main(void)
   BSP_LED_Init(LED3);
 
    /* Initialize the LCD   */
-  if(BSP_LCD_Init() != LCD_OK)
+  if(BSP_LCD_Init(0, LCD_ORIENTATION_LANDSCAPE) != BSP_ERROR_NONE)
   {
     Error_Handler();
   }  
   
-  BSP_LCD_LayerDefaultInit(0, LAYER0_ADDRESS);     
-  BSP_LCD_SelectLayer(0); 
+  GUI_SetFuncDriver(&LCD_Driver);
+  GUI_SetLayer(0);
   
   /* Get the LCD Width */
-  LCD_X_Size = BSP_LCD_GetXSize();
+  BSP_LCD_GetXSize(0, &LCD_X_Size);
   
   
   /* Display example brief   */
@@ -122,7 +122,7 @@ int main(void)
   /* Infinite loop */
   while (1)
   {
-    CopyBuffer((uint32_t *)Images[ImageIndex ++], (uint32_t *)LAYER0_ADDRESS, (LCD_X_Size - 320)/2, 160, 320, 240);
+    CopyBuffer((uint32_t *)Images[ImageIndex ++], (uint32_t *)LCD_FRAME_BUFFER, (LCD_X_Size - 320)/2, 160, 320, 240);
     
     if(ImageIndex >= 2)
     {
@@ -238,15 +238,14 @@ static void SystemClock_Config(void)
   */
 static void LCD_BriefDisplay(void)
 {
-  BSP_LCD_Clear(LCD_COLOR_WHITE);
-  BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-  BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
-  BSP_LCD_FillRect(0, 0, LCD_X_Size, 112);  
-  BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
-  BSP_LCD_DisplayStringAt(0, LINE(2), (uint8_t *)"LCD_DSI_VideoMode_SingleBuffer", CENTER_MODE);
-  BSP_LCD_SetFont(&Font16);    
-  BSP_LCD_DisplayStringAt(0, LINE(5), (uint8_t *)"This example shows how to display images", CENTER_MODE);    
-  BSP_LCD_DisplayStringAt(0, LINE(6), (uint8_t *)"on LCD DSI using same buffer for display and for draw", CENTER_MODE);
+  GUI_Clear(GUI_COLOR_WHITE);
+  GUI_SetBackColor(GUI_COLOR_BLUE);
+  GUI_FillRect(0, 0, LCD_X_Size, 112, GUI_COLOR_BLUE);  
+  GUI_SetTextColor(GUI_COLOR_WHITE);
+  GUI_DisplayStringAt(0, LINE(2), (uint8_t *)"LCD_DSI_VideoMode_SingleBuffer", CENTER_MODE);
+  GUI_SetFont(&Font16);    
+  GUI_DisplayStringAt(0, LINE(5), (uint8_t *)"This example shows how to display images", CENTER_MODE);    
+  GUI_DisplayStringAt(0, LINE(6), (uint8_t *)"on LCD DSI using same buffer for display and for draw", CENTER_MODE);
 }
 /**
   * @brief  Converts a line to an ARGB8888 pixel format.

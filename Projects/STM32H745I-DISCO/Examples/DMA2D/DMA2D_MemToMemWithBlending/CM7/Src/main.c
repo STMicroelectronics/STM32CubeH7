@@ -68,7 +68,7 @@ static void MPU_Config(void);
 int main(void)
 {
   HAL_StatusTypeDef hal_status = HAL_OK;
-  uint8_t  lcd_status = LCD_OK;
+  uint8_t  lcd_status = BSP_ERROR_NONE;
 
   blended_image_ready = 0;
   offset_address_area_blended_image_in_lcd_buffer =  ((((LCD_RES_Y - LAYER_SIZE_Y) / 2) * LCD_RES_X)
@@ -108,19 +108,20 @@ int main(void)
 
   /*##-1- Initialize the LCD #################################################*/
   /* Proceed to LTDC and LCD screen initialization */
-  lcd_status = BSP_LCD_Init();
-  BSP_LCD_LayerDefaultInit(0, LCD_FRAME_BUFFER);   
-  OnError_Handler(lcd_status != LCD_OK);
+  lcd_status = BSP_LCD_Init(0, LCD_ORIENTATION_LANDSCAPE);
+  GUI_SetFuncDriver(&LCD_Driver);
+  GUI_SetLayer(0);   
+  OnError_Handler(lcd_status != BSP_ERROR_NONE);
 
   /* Prepare using DMA2D the 640x480 LCD frame buffer to display background color black */
   /* and title of the example                                                           */
-  BSP_LCD_Clear(LCD_COLOR_BLACK);
-  BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
-  BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-  BSP_LCD_SetFont(&Font16);
+  GUI_Clear(GUI_COLOR_BLACK);
+  GUI_SetTextColor(GUI_COLOR_WHITE);
+  GUI_SetBackColor(GUI_COLOR_BLUE);
+  GUI_SetFont(&Font16);
 
   /* Print example description */
-  BSP_LCD_DisplayStringAt(0, 20, (uint8_t *)"DMA2D_MemToMemWithBlending example", CENTER_MODE);
+  GUI_DisplayStringAt(0, 20, (uint8_t *)"DMA2D_MemToMemWithBlending example", CENTER_MODE);
 
   HAL_Delay(100);
 
@@ -129,27 +130,27 @@ int main(void)
 
     /*##-2- Copy Foreground image in center of LCD frame buffer ################################################*/
     
-    BSP_LCD_DisplayStringAt(0, 240, (uint8_t *)"Display Foreground Image ", CENTER_MODE); 
+    GUI_DisplayStringAt(0, 240, (uint8_t *)"Display Foreground Image ", CENTER_MODE); 
     /* Blocking copy Foreground image buffer to LCD frame buffer center area */
     /* Using the DMA2D in polling mode                            */
     lcd_status = CopyImageToLcdFrameBuffer((void*)&(RGB565_240x130_1[0]),
                                                 (void*)(LCD_FRAME_BUFFER + offset_address_area_blended_image_in_lcd_buffer),
                                                 LAYER_SIZE_X,
                                                 LAYER_SIZE_Y);
-    OnError_Handler(lcd_status != LCD_OK);  
+    OnError_Handler(lcd_status != BSP_ERROR_NONE);  
     HAL_Delay(2000);  
 
     
     /*##-3- Copy Background image in center of LCD frame buffer ################################################*/
 
-    BSP_LCD_DisplayStringAt(0, 240, (uint8_t *)"Display Background Image ", CENTER_MODE);
+    GUI_DisplayStringAt(0, 240, (uint8_t *)"Display Background Image ", CENTER_MODE);
     /* Blocking copy Background image buffer to LCD frame buffer center area */
     /* Using the DMA2D in polling mode  */    
     lcd_status = CopyImageToLcdFrameBuffer((void*)&(RGB565_240x130_2[0]),
                                                 (void*)(LCD_FRAME_BUFFER + offset_address_area_blended_image_in_lcd_buffer),
                                                 LAYER_SIZE_X,
                                                 LAYER_SIZE_Y);
-    OnError_Handler(lcd_status != LCD_OK);    
+    OnError_Handler(lcd_status != BSP_ERROR_NONE);    
     HAL_Delay(2000); 
   
 
@@ -157,7 +158,7 @@ int main(void)
     /* Turn LED4 Off */
     BSP_LED_Off(LED1);
     
-    BSP_LCD_DisplayStringAt(0, 240, (uint8_t *)"Display Blended Image    ", CENTER_MODE);
+    GUI_DisplayStringAt(0, 240, (uint8_t *)"Display Blended Image    ", CENTER_MODE);
     /*##-5- Configure DMA2D : Configure foreground and background ##############*/
     DMA2D_Config();
 
@@ -189,13 +190,13 @@ int main(void)
   * @param  pDst: Pointer to destination buffer LCD frame buffer center area start here
   * @param  xSize: Buffer width (LAYER_SIZE_X here)
   * @param  ySize: Buffer height (LAYER_SIZE_Y here)
-  * @retval LCD Status : LCD_OK or LCD_ERROR
+  * @retval LCD Status : BSP_ERROR_NONE or LCD_ERROR
   */
 static uint8_t CopyImageToLcdFrameBuffer(void *pSrc, void *pDst, uint32_t xSize, uint32_t ySize)
 {
   DMA2D_HandleTypeDef hdma2d_eval;
   HAL_StatusTypeDef hal_status = HAL_OK;
-  uint8_t lcd_status = LCD_ERROR;
+  uint8_t lcd_status;
 
   /* Configure the DMA2D Mode, Color Mode and output offset */
   hdma2d_eval.Init.Mode          = DMA2D_M2M_PFC;
@@ -229,7 +230,7 @@ static uint8_t CopyImageToLcdFrameBuffer(void *pSrc, void *pDst, uint32_t xSize,
         if(hal_status == HAL_OK)
         {
           /* return good status on exit */
-          lcd_status = LCD_OK;
+          lcd_status = BSP_ERROR_NONE;
         }
       }
     }

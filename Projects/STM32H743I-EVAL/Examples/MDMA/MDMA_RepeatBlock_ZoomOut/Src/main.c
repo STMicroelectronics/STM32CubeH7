@@ -103,7 +103,7 @@ int main(void)
   BSP_LED_Init(LED1);
   BSP_LED_Init(LED3);
   
-  BSP_SDRAM_Init();
+  BSP_SDRAM_Init(0);
   /*##-1- Initialize the LCD #################################################*/
   /* Initialize the LCD */
   LCD_Config();

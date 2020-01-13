@@ -22,7 +22,7 @@
 /* Includes ------------------------------------------------------------------*/
 
 #include "main.h"
-
+#include "stm32h747i_discovery_sdram.h"
 #include "RGB565_240x130_1.h"
 #include "RGB565_240x130_2.h"
 
@@ -68,7 +68,7 @@ static void MPU_Config(void);
 int main(void)
 {
   HAL_StatusTypeDef hal_status = HAL_OK;
-  uint8_t  lcd_status = LCD_OK;
+  uint8_t  lcd_status = BSP_ERROR_NONE;
 
   blended_image_ready = 0;
   offset_address_area_blended_image_in_lcd_buffer =  ((((LCD_RES_Y - LAYER_SIZE_Y) / 2) * LCD_RES_X)
@@ -109,19 +109,19 @@ int main(void)
 
   /*##-1- Initialize the LCD #################################################*/
   /* Proceed to LTDC and LCD screen initialization */
-  lcd_status = BSP_LCD_Init();
-  BSP_LCD_LayerDefaultInit(0, LCD_FRAME_BUFFER);
-  OnError_Handler(lcd_status != LCD_OK);
+  lcd_status = BSP_LCD_Init(0, LCD_ORIENTATION_LANDSCAPE);
+  GUI_SetFuncDriver(&LCD_Driver);   
+  OnError_Handler(lcd_status != BSP_ERROR_NONE);
 
   /* Prepare using DMA2D the 640x480 LCD frame buffer to display background color black */
   /* and title of the example                                                           */
-  BSP_LCD_Clear(LCD_COLOR_BLACK);
-  BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
-  BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-  BSP_LCD_SetFont(&Font16);
+  GUI_Clear(GUI_COLOR_BLACK);
+  GUI_SetTextColor(GUI_COLOR_WHITE);
+  GUI_SetBackColor(GUI_COLOR_BLUE);
+  GUI_SetFont(&Font16);
 
   /* Print example description */
-  BSP_LCD_DisplayStringAt(0, 100, (uint8_t *)"DMA2D_MemToMemWithBlending example", CENTER_MODE);
+  GUI_DisplayStringAt(0, 100, (uint8_t *)"DMA2D_MemToMemWithBlending example", CENTER_MODE);
 
   HAL_Delay(100);
 
@@ -130,27 +130,27 @@ int main(void)
 
     /*##-2- Copy Foreground image in center of LCD frame buffer ################################################*/
 
-    BSP_LCD_DisplayStringAt(0, 420, (uint8_t *)"Display Foreground Image :           life.augmented", CENTER_MODE);
+    GUI_DisplayStringAt(0, 420, (uint8_t *)"Display Foreground Image :           life.augmented", CENTER_MODE);
     /* Blocking copy Foreground image buffer to LCD frame buffer center area */
     /* Using the DMA2D in polling mode                            */
     lcd_status = CopyImageToLcdFrameBuffer((void*)&(RGB565_240x130_1[0]),
                                                 (void*)(LCD_FRAME_BUFFER + offset_address_area_blended_image_in_lcd_buffer),
                                                 LAYER_SIZE_X,
                                                 LAYER_SIZE_Y);
-    OnError_Handler(lcd_status != LCD_OK);
+    OnError_Handler(lcd_status != BSP_ERROR_NONE);
     HAL_Delay(2000);
 
 
     /*##-3- Copy Background image in center of LCD frame buffer ################################################*/
 
-    BSP_LCD_DisplayStringAt(0, 420, (uint8_t *)"Display Background Image :                  ST Logo", CENTER_MODE);
+    GUI_DisplayStringAt(0, 420, (uint8_t *)"Display Background Image :                  ST Logo", CENTER_MODE);
     /* Blocking copy Background image buffer to LCD frame buffer center area */
     /* Using the DMA2D in polling mode  */
     lcd_status = CopyImageToLcdFrameBuffer((void*)&(RGB565_240x130_2[0]),
                                                 (void*)(LCD_FRAME_BUFFER + offset_address_area_blended_image_in_lcd_buffer),
                                                 LAYER_SIZE_X,
                                                 LAYER_SIZE_Y);
-    OnError_Handler(lcd_status != LCD_OK);
+    OnError_Handler(lcd_status != BSP_ERROR_NONE);
     HAL_Delay(2000);
 
 
@@ -158,7 +158,7 @@ int main(void)
     /* Turn LED4 Off */
     BSP_LED_Off(LED4);
 
-    BSP_LCD_DisplayStringAt(0, 420, (uint8_t *)"Display Blended Image    : ST Logo + life.augmented", CENTER_MODE);
+    GUI_DisplayStringAt(0, 420, (uint8_t *)"Display Blended Image    : ST Logo + life.augmented", CENTER_MODE);
     /*##-5- Configure DMA2D : Configure foreground and background ##############*/
     DMA2D_Config();
 
@@ -194,43 +194,42 @@ int main(void)
   */
 static uint8_t CopyImageToLcdFrameBuffer(void *pSrc, void *pDst, uint32_t xSize, uint32_t ySize)
 {
-  DMA2D_HandleTypeDef hdma2d_eval;
   HAL_StatusTypeDef hal_status = HAL_OK;
-  uint8_t lcd_status = LCD_ERROR;
+  uint8_t lcd_status =BSP_ERROR_NONE ;
 
   /* Configure the DMA2D Mode, Color Mode and output offset */
-  hdma2d_eval.Init.Mode          = DMA2D_M2M_PFC;
-  hdma2d_eval.Init.ColorMode     = DMA2D_OUTPUT_ARGB8888; /* Output color out of PFC */
-  hdma2d_eval.Init.AlphaInverted = DMA2D_REGULAR_ALPHA;  /* No Output Alpha Inversion*/
-  hdma2d_eval.Init.RedBlueSwap   = DMA2D_RB_REGULAR;     /* No Output Red & Blue swap */
+  Dma2dHandle.Init.Mode          = DMA2D_M2M_PFC;
+  Dma2dHandle.Init.ColorMode     = DMA2D_OUTPUT_ARGB8888; /* Output color out of PFC */
+  Dma2dHandle.Init.AlphaInverted = DMA2D_REGULAR_ALPHA;  /* No Output Alpha Inversion*/
+  Dma2dHandle.Init.RedBlueSwap   = DMA2D_RB_REGULAR;     /* No Output Red & Blue swap */
 
   /* Output offset in pixels == nb of pixels to be added at end of line to come to the  */
   /* first pixel of the next line : on the output side of the DMA2D computation         */
-  hdma2d_eval.Init.OutputOffset = (LCD_RES_X - LAYER_SIZE_X);
+  Dma2dHandle.Init.OutputOffset = (LCD_RES_X - LAYER_SIZE_X);
 
   /* Foreground Configuration */
-  hdma2d_eval.LayerCfg[1].AlphaMode      = DMA2D_NO_MODIF_ALPHA;
-  hdma2d_eval.LayerCfg[1].InputAlpha     = 0xFF; /* fully opaque */
-  hdma2d_eval.LayerCfg[1].InputColorMode = DMA2D_INPUT_RGB565;
-  hdma2d_eval.LayerCfg[1].InputOffset    = 0;
-  hdma2d_eval.LayerCfg[1].RedBlueSwap    = DMA2D_RB_REGULAR; /* No ForeGround Red/Blue swap */
-  hdma2d_eval.LayerCfg[1].AlphaInverted  = DMA2D_REGULAR_ALPHA; /* No ForeGround Alpha inversion */
+  Dma2dHandle.LayerCfg[1].AlphaMode      = DMA2D_NO_MODIF_ALPHA;
+  Dma2dHandle.LayerCfg[1].InputAlpha     = 0xFF; /* fully opaque */
+  Dma2dHandle.LayerCfg[1].InputColorMode = DMA2D_INPUT_RGB565;
+  Dma2dHandle.LayerCfg[1].InputOffset    = 0;
+  Dma2dHandle.LayerCfg[1].RedBlueSwap    = DMA2D_RB_REGULAR; /* No ForeGround Red/Blue swap */
+  Dma2dHandle.LayerCfg[1].AlphaInverted  = DMA2D_REGULAR_ALPHA; /* No ForeGround Alpha inversion */
 
-  hdma2d_eval.Instance = DMA2D;
+  Dma2dHandle.Instance = DMA2D;
 
   /* DMA2D Initialization */
-  if(HAL_DMA2D_Init(&hdma2d_eval) == HAL_OK)
+  if(HAL_DMA2D_Init(&Dma2dHandle) == HAL_OK)
   {
-    if(HAL_DMA2D_ConfigLayer(&hdma2d_eval, 1) == HAL_OK)
+    if(HAL_DMA2D_ConfigLayer(&Dma2dHandle, 1) == HAL_OK)
     {
-      if (HAL_DMA2D_Start(&hdma2d_eval, (uint32_t)pSrc, (uint32_t)pDst, xSize, ySize) == HAL_OK)
+      if (HAL_DMA2D_Start(&Dma2dHandle, (uint32_t)pSrc, (uint32_t)pDst, xSize, ySize) == HAL_OK)
       {
         /* Polling For DMA transfer */
-        hal_status = HAL_DMA2D_PollForTransfer(&hdma2d_eval, 10);
+        hal_status = HAL_DMA2D_PollForTransfer(&Dma2dHandle, 10);
         if(hal_status == HAL_OK)
         {
           /* return good status on exit */
-          lcd_status = LCD_OK;
+          lcd_status = BSP_ERROR_NONE;
         }
       }
     }

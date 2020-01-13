@@ -28,9 +28,11 @@
 #include "stm32h743i_eval.h"
 #include "stm32h743i_eval_io.h"
 #include "stm32h743i_eval_sd.h"
-#include "lcd_log.h"
 #include "ff_gen_drv.h"
 #include "sd_diskio_dma.h"
+#include "basic_gui.h"
+#include "lcd_trace.h"
+#include "utilities_conf.h"
 
 /* Exported constants --------------------------------------------------------*/
 #define FILEMGR_LIST_DEPDTH                     24
@@ -39,7 +41,11 @@
 #define FILEMGR_MAX_LEVEL                        4    
 #define FILETYPE_DIR                             0
 #define FILETYPE_FILE                            1
-
+#define OTG_FS1_OVER_CURRENT_PIN                 IO_PIN_6
+#define OTG_FS1_POWER_SWITCH_PIN                 IO_PIN_7
+#define OTG_FS2_OVER_CURRENT_PIN                 IO_PIN_8
+#define OTG_FS2_POWER_SWITCH_PIN                 IO_PIN_9
+#define AUDIO_INT_PIN                            IO_PIN_5
 /* Exported types ------------------------------------------------------------*/
 typedef struct AUDIO_Info_t {
   uint32_t ChunkID;       /* 0  */ 
@@ -127,8 +133,8 @@ extern AUDIO_PLAYBACK_StateTypeDef audio_state;
 void AUDIO_MenuInit(void);
 void AUDIO_MenuSelectItem(uint8_t **menu, uint8_t item);
 void AUDIO_MenuProcess(void);
-void AUDIO_MenuProbeKey(JOYState_TypeDef state);
-void AUDIO_PlaybackProbeKey(JOYState_TypeDef state);
+void AUDIO_MenuProbeKey(uint32_t state);
+void AUDIO_PlaybackProbeKey(uint32_t state);
 uint8_t SD_StorageInit(void);
 FRESULT SD_StorageParse(void);
 AUDIO_ErrorTypeDef AUDIO_Start(uint8_t idx);

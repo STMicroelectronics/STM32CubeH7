@@ -27,7 +27,8 @@
 /* Private macro ------------------------------------------------------------- */
 /* Private variables --------------------------------------------------------- */
 MSC_DEMO_StateMachine msc_demo;
-JOYState_TypeDef JoyState = JOY_NONE;
+uint32_t JoyState = JOY_NONE;
+__IO uint32_t Joy_State ;
 uint8_t prev_select = 0;
 uint8_t joy_select = 0;
 osSemaphoreId MenuEvent;
@@ -43,9 +44,8 @@ uint8_t *MSC_main_menu[] = {
 
 /* Private function prototypes ----------------------------------------------- */
 static void MSC_SelectItem(uint8_t ** menu, uint8_t item);
-static void MSC_DEMO_ProbeKey(JOYState_TypeDef state);
 static void MSC_MenuThread(void const *argument);
-
+static void MSC_DEMO_ProbeKey(uint32_t state);
 /* Private functions --------------------------------------------------------- */
 
 /**
@@ -69,11 +69,11 @@ void Menu_Init(void)
 
   osThreadCreate(osThread(Menu_Thread), NULL);
 
-  BSP_LCD_SetTextColor(LCD_COLOR_GREEN);
-  BSP_LCD_DisplayStringAtLine(17,
+  GUI_SetTextColor(GUI_COLOR_GREEN);
+  GUI_DisplayStringAtLine(17,
                               (uint8_t *)
                               "Use [Joystick Left/Right] to scroll up/down");
-  BSP_LCD_DisplayStringAtLine(18,
+  GUI_DisplayStringAtLine(18,
                               (uint8_t *)
                               "Use [Joystick Up/Down] to scroll MSC menu");
 }
@@ -165,23 +165,18 @@ static void MSC_MenuThread(void const *argument)
       if (joy_select == 1)
       {
         joy_select = 0;
-        /* Get the Joystick State */
-        JoyState = BSP_JOY_GetState();
         HAL_Delay(300);
 
-        /* Clear joystick interrupt pending bits */
-        BSP_IO_ITClear();
+        MSC_DEMO_ProbeKey(Joy_State);
 
-        MSC_DEMO_ProbeKey(JoyState);
-
-        switch (JoyState)
+        switch (Joy_State)
         {
         case JOY_LEFT:
-          LCD_LOG_ScrollBack();
+          UTIL_LCD_TRACE_ScrollBack();
           break;
 
         case JOY_RIGHT:
-          LCD_LOG_ScrollForward();
+          UTIL_LCD_TRACE_ScrollForward();
           break;
 
         default:
@@ -193,6 +188,7 @@ static void MSC_MenuThread(void const *argument)
   }
 }
 
+
 /**
   * @brief  Manages the menu on the screen.
   * @param  menu: Menu table
@@ -201,45 +197,44 @@ static void MSC_MenuThread(void const *argument)
   */
 static void MSC_SelectItem(uint8_t ** menu, uint8_t item)
 {
-  BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
+  GUI_SetTextColor(GUI_COLOR_WHITE);
 
   switch (item)
   {
   case 0:
-    BSP_LCD_SetBackColor(LCD_COLOR_MAGENTA);
-    BSP_LCD_DisplayStringAtLine(19, menu[0]);
-    BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-    BSP_LCD_DisplayStringAtLine(20, menu[1]);
-    BSP_LCD_DisplayStringAtLine(21, menu[2]);
+    GUI_SetBackColor(GUI_COLOR_MAGENTA);
+    GUI_DisplayStringAtLine(19, menu[0]);
+    GUI_SetBackColor(GUI_COLOR_BLUE);
+    GUI_DisplayStringAtLine(20, menu[1]);
+    GUI_DisplayStringAtLine(21, menu[2]);
     break;
 
   case 1:
-    BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-    BSP_LCD_DisplayStringAtLine(19, menu[0]);
-    BSP_LCD_SetBackColor(LCD_COLOR_MAGENTA);
-    BSP_LCD_DisplayStringAtLine(20, menu[1]);
-    BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-    BSP_LCD_DisplayStringAtLine(21, menu[2]);
+    GUI_SetBackColor(GUI_COLOR_BLUE);
+    GUI_DisplayStringAtLine(19, menu[0]);
+    GUI_SetBackColor(GUI_COLOR_MAGENTA);
+    GUI_DisplayStringAtLine(20, menu[1]);
+    GUI_SetBackColor(GUI_COLOR_BLUE);
+    GUI_DisplayStringAtLine(21, menu[2]);
     break;
 
   case 2:
-    BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-    BSP_LCD_DisplayStringAtLine(19, menu[0]);
-    BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-    BSP_LCD_DisplayStringAtLine(20, menu[1]);
-    BSP_LCD_SetBackColor(LCD_COLOR_MAGENTA);
-    BSP_LCD_DisplayStringAtLine(21, menu[2]);
+    GUI_SetBackColor(GUI_COLOR_BLUE);
+    GUI_DisplayStringAtLine(19, menu[0]);
+    GUI_SetBackColor(GUI_COLOR_BLUE);
+    GUI_DisplayStringAtLine(20, menu[1]);
+    GUI_SetBackColor(GUI_COLOR_MAGENTA);
+    GUI_DisplayStringAtLine(21, menu[2]);
     break;
   }
-  BSP_LCD_SetBackColor(LCD_COLOR_BLACK);
+  GUI_SetBackColor(GUI_COLOR_BLACK);
 }
-
 /**
   * @brief  Probes the MSC joystick state.
   * @param  state: Joystick state
   * @retval None
   */
-static void MSC_DEMO_ProbeKey(JOYState_TypeDef state)
+static void MSC_DEMO_ProbeKey(uint32_t state)
 {
   /* Handle Menu inputs */
   if ((state == JOY_UP) && (msc_demo.select > 0))
@@ -261,23 +256,11 @@ static void MSC_DEMO_ProbeKey(JOYState_TypeDef state)
   * @param  GPIO_Pin: Specifies the pins connected EXTI line
   * @retval None
   */
-void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+void BSP_JOY_Callback(JOY_TypeDef JOY, JOYPin_TypeDef JoyPin)
 {
-  if (GPIO_Pin == MFX_IRQOUT_PIN)
+  if (JOY == JOY1)
   {
-    /* The different functionalities of MFX (TS, Joystick, SD detection, etc. )
-    * can be configured in exti mode to generate an IRQ on given events. The
-    * MFX IRQ_OUT pin is unique and common to all functionalities, so if
-    * several functionalities are configured in exit mode, the MCU has to
-    * enquire MFX about the IRQ source (see BSP_IO_ITGetStatus).
-    * Communication with Mfx is done by I2C. Often the sw requires ISRs (irq
-    * service routines) to be quick while communication with I2C can be
-    * considered relatively long (hundreds of usec depending on I2C clk).
-    * Considering that the features for human interaction like TS, Joystick,
-    * SD detection don’t need immediate reaction, it is suggested to use
-    * POLLING instead of EXTI mode, in order to avoid "blocking I2C
-    * communication" on interrupt service routines */
-
+    Joy_State =JoyPin;
     joy_select = 1;
     osSemaphoreRelease(MenuEvent);
   }

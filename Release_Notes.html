@@ -48,7 +48,7 @@
 <figure>
 <img src="_htmresc/STM32Cube.bmp" alt="STM32Cube" /><figcaption>STM32Cube</figcaption>
 </figure>
-<p>The <strong>drivers</strong> provided within this package <strong>support</strong> the <strong>STM32H743/753/750/745/755/747/757/742 lines.</strong></p>
+<p>The <strong>drivers</strong> provided within this package <strong>support</strong> the <strong>STM32H743/753/750/745/755/747/757/742/7B3/7A3/7B0 lines.</strong></p>
 <p>The HAL and LL drivers provided within this package are compliant with MISRA-C®:2012 guidelines, and have been reviewed with a static analysis tool to eliminate possible run-time errors. Reports are available on demand.</p>
 <ul>
 <li>For <strong>quick getting started with the STM32CubeH7 firmware package</strong>, refer to <a href="Documentation/STM32CubeH7GettingStarted.pdf">UM2204</a> you can download firmware updates and all the latest documentation from <a href="https://www.st.com/en/microcontrollers/stm32h7-series.html?querycriteria=productId=SS1951">www.st.com/stm32cubeH7</a></li>
@@ -61,15 +61,655 @@
 <li><a href="http://www.st.com/st-web-ui/static/active/en/resource/technical/document/user_manual/DM00105262.pdf">UM1722</a>: Developing Applications on STM32Cube with RTOS</li>
 <li><a href="http://www.st.com/st-web-ui/static/active/en/resource/technical/document/user_manual/DM00386433.pdf">UM2204</a>: Getting started with STM32CubeH7 firmware package for STM32H7xx series</li>
 <li><a href="https://www.st.com/resource/en/user_manual/dm00395407.pdf">UM2222</a>: STM32CubeH7 demonstration platform - STMicroelectronics</li>
+<li><a href="https://www.st.com/content/ccc/resource/technical/document/user_manual/group1/a1/59/6c/60/d9/49/49/c3/DM00440740/files/DM00440740.pdf/jcr:content/translations/en.DM00440740.pdf">UM2298</a>: STM32Cube BSP drivers development guidelines</li>
 </ul></li>
 </ul>
 </div>
 <div class="col-sm-12 col-lg-8">
 <h2 id="update-history"><strong>Update History</strong></h2>
 <div class="collapse">
-<input type="checkbox" id="collapse-section8" checked aria-hidden="true"> <label for="collapse-section8" aria-hidden="true"><strong>V1.5.0 / 28-June-2019</strong></label>
+<input type="checkbox" id="collapse-section9" checked aria-hidden="true"> <label for="collapse-section9" aria-hidden="true"><strong>V1.6.0 / 02-December-2019</strong></label>
 <div>
 <h2 id="main-changes">Main Changes</h2>
+<ul>
+<li><p>Official release to support STM32H7A3xx, STM32H7A3xxQ, STM32H7B3xx, STM32H7B3xxQ, STM32H7B0xx and STM32H7B0xxQ new devices</p></li>
+<li><p>Add support of the STM32H7B3I-DK, STM32H7B3I-EVAL and NUCLEO-H7A3ZI-Q boards. Several examples applications and demonstrations are available on EWARM, Keil and <strong>STM32CubeIDE</strong> IDEs</p></li>
+<li><p>Add support of the value line STM32H7B0 devices over STM32H7B3I-DK discovery board. Two examples, with several configurations, are available to show how to boot from internal flash, configure the external memories and jump to user application (located on an external memory)</p></li>
+<li><p>BSP drivers developed in line with <strong>STM32Cube BSP drivers development guidelines (<a href="https://www.st.com/content/ccc/resource/technical/document/user_manual/group1/a1/59/6c/60/d9/49/49/c3/DM00440740/files/DM00440740.pdf/jcr:content/translations/en.DM00440740.pdf">UM2298</a>)</strong>. Legacy BSP drivers were migrated too to insure coherence.</p></li>
+<li><p>All legacy examples, applications and demonstrations are updated following BSP drivers updates.</p></li>
+<li>Add STM32H7B3I-DK demonstrations source code with preconfigured projects on EWARM toolchain:
+<ul>
+<li>Source code available for:
+<ul>
+<li><strong>MenuLauncher</strong>: Execution from internal flash, allowing to select one of the following sub-demonstration that are executed from external octoSPI NOR flash</li>
+<li><strong>AudioPlayer</strong>: Audio Player Demonstration(playing music in WAV and MP3 formats, low power, …)</li>
+<li><strong>VideoPlayer</strong>: Video Player Demonstration(movies in AVI mjpeg/wav format, …)</li>
+<li><strong>ClockAndWeather</strong>: Clock and Weather Demonstration(Allow to retrieve the time and weather forecast for up six cities, …)<br />
+</li>
+<li><strong>TouchGFX</strong>: Touch GFX graphical library demonstration(Smart recipe with video instruction, Washing machine UI with video instruction, …)</li>
+<li><strong>STemWin</strong>: STemWin graphical library demonstration(Graphical Effect and Rocket Game)</li>
+<li><strong>EmbeddedWizard</strong>: Embedded Wizard GUI demonstration(Climate Cabinet, WashingMachine, …)</li>
+</ul></li>
+<li>All binaries and Media demonstration files are available from the STM32H7B3I-DK board web page in the Binary Delivery section.
+<ul>
+<li>Please refer to : <a href="https://www.st.com/en/product/stm32h7b3i-dk.html">https://www.st.com/en/product/stm32h7b3i-dk.html</a></li>
+</ul></li>
+</ul></li>
+<li><strong>CMSIS Device</strong> updates (Please Refer to the <a href="Drivers/CMSIS/Device/ST/STM32H7xx/Release_Notes.html">release notes</a> for detailed)
+<ul>
+<li>General updates to fix known defects and enhancements implementation.</li>
+<li>Add support of stm32h7A3xx, stm32h7A3xxQ, stm32h7B3xx, stm32h7B3xxQ, stm32h7B0xx and stm32h7B0xxQ devices</li>
+<li>Add “stm32h7a3xx.h”, “stm32h7a3xxq.h”, “stm32h7b3xx.h”, “stm32h7b3xxq.h”, “stm32h7b0xx.h” and “stm32h7b0xxq.h” files</li>
+<li>Add startup files “startup_stm32h7a3xx.s”, “startup_stm32h7a3xxq.s”, “startup_stm32h7b3xx.s”, “startup_stm32h7b3xxq.s”, “startup_stm32h7b0xx.s” and “startup_stm32h7b0xxq.s” for EWARM , MDK-ARM and STM32CubeIDE toolchains</li>
+</ul></li>
+<li><strong>HAL/LL Drivers</strong> updates (Please Refer to the <a href="Drivers/STM32H7xx_HAL_Driver/Release_Notes.html">release notes</a> for detailed)
+<ul>
+<li>General updates to fix known defects and enhancements implementation.</li>
+<li>Add support for HAL <strong>DTS</strong>, <strong>OTFDEC</strong>, <strong>GFXMMU</strong>, <strong>OSPI</strong> and <strong>PSSI</strong> peripherals</li>
+<li>Add support for <strong>LL CRS</strong> drivers: New LL driver allowing to handle the Clock Recovery System module</li>
+<li>Update HAL drivers to support features available on STM32H7A3/B3xx/B0xx devices
+<ul>
+<li>HAL drivers: Add macros to enable/disable I2C Fast-mode Plus driving capability</li>
+<li>ADC drivers : Add definitions for DAC2 to ADC connection</li>
+<li>COMP drivers: Add definitions for DAC2 to COMP connection</li>
+<li>DAC drivers: Add support of DAC2 instance</li>
+<li>DMA drivers:
+<ul>
+<li>Add PSSI and DAC2 requests</li>
+<li>Support BDMA1 and BDMA2</li>
+</ul></li>
+<li>I2S drivers: Add support I2S mode on SPI6 instance</li>
+<li>RCC drivers: Update to support STM32H7A3xx/B3xx/B0xx devices</li>
+</ul></li>
+</ul></li>
+<li><strong>BSP</strong> updates
+<ul>
+<li>Add BSP drivers for <strong>STM32H7B3I-EVAL</strong> board</li>
+<li>Add BSP drivers for <strong>STM32H7B3I-DK</strong> board</li>
+<li>Add BSP drivers for <strong>NUCLEO-H7A3ZI-Q</strong> board</li>
+<li>Update BSP Adafruit_Shield drivers to new version <strong>V4.0.4</strong></li>
+<li>Update BSP STM32H743I-EVAL drivers to new version <strong>V2.0.0</strong></li>
+<li>Update BSP STM32H747I-EVAL drivers to new version <strong>V2.0.0</strong></li>
+<li>Update BSP STM32H745I-DISCO drivers to new version <strong>V2.0.0</strong></li>
+<li>Update BSP STM32H747I-DISCO drivers to new version <strong>V2.0.0</strong></li>
+<li>Update BSP STM32H750B-DK drivers to new version <strong>V2.0.0</strong></li>
+<li>Align all components drivers with “STM32Cube BSP drivers development guidelines” (UM2298)</li>
+</ul></li>
+<li><strong>Middleware</strong> updates
+<ul>
+<li>Introduce <strong>STM32_Network_Library</strong>: A STM32 middleware providing an API to access network services on STM32 devices.<br />
+</li>
+<li>Update of <strong>TouchGFX</strong> library to new version <strong>V4.12.3</strong></li>
+<li>Update of <strong>FreeRTOS</strong> library to new version <strong>V10.2.1</strong></li>
+<li>Update of <strong>FatFS</strong> library to new version <strong>r0.12c_stm32cube_20191011</strong></li>
+<li>Update of <strong>OpenAMP</strong> library to new version <strong>v2018.10_20191011</strong></li>
+</ul></li>
+<li><strong>Utilities</strong> updates
+<ul>
+<li>Introduce <strong>Lcd_Trace</strong> utility to replace legacy Log utility</li>
+<li>Introduce <strong>Basic_GUI</strong> utility to offer a common and generic 2D display functionalities</li>
+<li>Introduce <strong>Common</strong> utility: A common configuration file allowing to adapt utilities to fit user’s needs</li>
+</ul></li>
+<li><strong>Projects</strong> updates
+<ul>
+<li><p>Update legacy projects, using BSP drivers, following alignment with “STM32Cube BSP drivers development guidelines” (UM2298)</p></li>
+<li>Add STM32H7A3/B3xx/B0xx devices support:
+<ul>
+<li>Boards:
+<ul>
+<li><strong>STM32H7B3I-EVAL</strong>: new STM32H7B3xxQ evaluation board support with several examples and applications</li>
+<li><strong>STM32H7B3I-DK</strong>: new STM32H7B3xxQ discovery board support with several examples, applications and a demonstration</li>
+<li><strong>NUCLEO-H7A3ZI-Q</strong>: new STM32H7A3xxQ nucleo board support with several examples, applications and a demonstration</li>
+</ul></li>
+<li>Tools:
+<ul>
+<li>Introduce <strong>STM32CubeIDE</strong> support for STM32H7B3I-EVAL, STM32H7B3I-DK and NUCLEO-H7A3ZI-Q boards</li>
+</ul></li>
+<li>Templates:
+<ul>
+<li>New HAL templates for STM32H7B3I-EVAL, STM32H7B3I-DK and NUCLEO-H7A3ZI-Q</li>
+<li>New LL templates for STM32H7B3I-EVAL, STM32H7B3I-DK and NUCLEO-H7A3ZI-Q</li>
+</ul></li>
+<li>Examples:
+<ul>
+<li>New HAL examples mainly around new peripherals <strong>DTS</strong>, <strong>PSSI</strong>, <strong>OTFDEC</strong>, <strong>GFXMMU</strong> and <strong>OSPI</strong></li>
+</ul></li>
+<li>LL examples:
+<ul>
+<li>Several examples added through STM32H7B3I-DK and NUCLEO-H7A3ZI-Q boards</li>
+</ul></li>
+<li>LL MIX examples:
+<ul>
+<li>Examples based on a mix of HAL and LL drivers available through STM32H7B3I-DK and NUCLEO-H7A3ZI-Q boards</li>
+</ul></li>
+<li>Applications:
+<ul>
+<li>New FatFS applications added: FatFs_MultiDrives</li>
+<li>New FreeRTOS applications added: FreeRTOS_LowPower, FreeRTOS_Timers, FreeRTOS_Mutexes</li>
+<li>For <strong>STM32H7B0xx</strong> Value line devices based on STM32H7B3I-DK board, ExtMem_CodeExecution applications are provided with two sub-applications:
+<ul>
+<li>ExtMem_Boot: Reference boot code executing from internal Flash memory, enabling to configure external memories, then jumping to the user application located in an external memory. Two use cases are possible:
+<ul>
+<li>XiP: This use case is intended for eXecution in Place from external Flash memory (Octo-SPI). The user application code shall be linked to the target execution memory address (external Octo-SPI NOR Flash memory).</li>
+<li>BootROM: This use case is intended to demonstrate how to boot from internal Flash memory, configure the external SDRAM, copy user application binary from the SDMMC Flash memory or from Octo-SPI Flash memory to the external SDRAM, and then jump to the user application. The user application code shall be linked to the target execution memory address (external SDRAM)</li>
+</ul></li>
+<li>ExtMem_Application
+<ul>
+<li>XiP from Octo-SPI Flash memory, data stored in external SDRAM</li>
+<li>XiP from Octo-SPI Flash memory, data stored in internal SRAM</li>
+<li>BootROM: execution from external SDRAM, data stored in internal SRAM</li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li>Demonstrations:
+<ul>
+<li>STM32H7B3I-DK: Seven sub-demonstrations
+<ul>
+<li>MenuLauncher based sub-demo</li>
+<li>AudioPlayer based sub-demo</li>
+<li>VideoPlayer based sub-demo</li>
+<li>ClockAndWeather based sub-demo</li>
+<li>TouchGFX based sub-demo</li>
+<li>STemWin based sub-demo</li>
+<li>EmbeddedWizard based sub-demo</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+<h2 id="contents">Contents</h2>
+<h3 id="projects">Projects</h3>
+<ul>
+<li><p>The STM32CubeH7 Firmware package comes with a rich set of examples running on STMicroelectronics boards, organized by board and provided with preconfigured projects for the main supported toolchains. The exhaustive list of projects is provided in this table <a href="Projects/STM32CubeProjectsList.html">STM32CubeProjectsList.html</a>.</p></li>
+<li><p>Projects Release Note is available <a href="Projects/Release_Notes.html">release notes</a></p></li>
+</ul>
+<h3 id="components">Components</h3>
+<table>
+<caption>Drivers</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: center;">Version</th>
+<th style="text-align: center;">License</th>
+<th style="text-align: center;">Release note</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Cortex-M CMSIS</td>
+<td style="text-align: center;">V5.4.0</td>
+<td style="text-align: center;"><a href="Drivers/CMSIS/LICENSE.txt">Apache License 2.0</a></td>
+<td style="text-align: center;"><a href="Drivers/CMSIS/docs/General/html/index.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>STM32H7xx CMSIS</strong></td>
+<td style="text-align: center;"><strong>V1.7.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/Apache-2.0">Apache License 2.0</a></td>
+<td style="text-align: center;"><a href="Drivers/CMSIS/Device/ST/STM32H7xx/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>STM32H7xx HAL</strong></td>
+<td style="text-align: center;"><strong>V1.7.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Drivers/STM32H7xx_HAL_Driver/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>BSP STM32H7B3I-EVAL</strong></td>
+<td style="text-align: center;"><strong>V1.0.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/STM32H7B3I-EVAL/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>BSP STM32H7B3I-DK</strong></td>
+<td style="text-align: center;"><strong>V1.0.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/STM32H7B3I-DK/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>BSP STM32H743I-EVAL</strong></td>
+<td style="text-align: center;"><strong>V2.0.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/STM32H743I-EVAL/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>BSP STM32H7xx_Nucleo</strong></td>
+<td style="text-align: center;"><strong>V1.0.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/STM32H7xx_Nucleo/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>BSP STM32H745I-DISCO</strong></td>
+<td style="text-align: center;"><strong>V2.0.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/STM32H745I-DISCO/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>BSP STM32H747I-EVAL</strong></td>
+<td style="text-align: center;"><strong>V2.0.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/STM32H747I-EVAL/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>BSP STM32H747I-DISCO</strong></td>
+<td style="text-align: center;"><strong>V2.0.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/STM32H747I-DISCO/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>BSP STM32H750B-DK</strong></td>
+<td style="text-align: center;"><strong>V2.0.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/STM32H750B-DK/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>BSP Adafruit_Shield</strong></td>
+<td style="text-align: center;"><strong>V4.0.4</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/Adafruit_Shield/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>BSP Common</strong></td>
+<td style="text-align: center;"><strong>V6.0.1</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/Components/common/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>BSP adv7533</strong></td>
+<td style="text-align: center;"><strong>v2.0.1</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/Components/adv7533/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>BSP ampire480272</strong></td>
+<td style="text-align: center;"><strong>v1.0.3</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/Components/ampire480272/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>BSP ampire640480</strong></td>
+<td style="text-align: center;"><strong>v1.0.3</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/Components/ampire640480/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>BSP cs42l51</strong></td>
+<td style="text-align: center;"><strong>v2.0.1</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/Components/cs42l51/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>BSP exc7200</strong></td>
+<td style="text-align: center;"><strong>v2.0.1</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/Components/exc7200/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>BSP ft6x06</strong></td>
+<td style="text-align: center;"><strong>v2.0.1</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/Components/ft6x06/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>BSP ft5336</strong></td>
+<td style="text-align: center;"><strong>v2.0.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/Components/ft5336/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>BSP lan8742</strong></td>
+<td style="text-align: center;"><strong>v1.0.1</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/Components/lan8742/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>BSP mfxstm32l152</strong></td>
+<td style="text-align: center;"><strong>v3.0.2</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/Components/mfxstm32l152/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>BSP m24lr64</strong></td>
+<td style="text-align: center;"><strong>v1.0.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/Components/m24lr64/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>BSP mt25tl01g</strong></td>
+<td style="text-align: center;"><strong>v2.0.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/Components/mt25tl01g/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>BSP mx25lm51245g</strong></td>
+<td style="text-align: center;"><strong>v2.0.1</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/Components/mx25lm51245g/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>BSP mt48lc4m32b2</strong></td>
+<td style="text-align: center;"><strong>v1.0.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/Components/mt48lc4m32b2/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>BSP is42s32800j</strong></td>
+<td style="text-align: center;"><strong>v1.0.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/Components/is42s32800j/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>BSP is42s32800g</strong></td>
+<td style="text-align: center;"><strong>v1.0.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/Components/is42s32800g/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>BSP is42s16800j</strong></td>
+<td style="text-align: center;"><strong>v1.0.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/Components/is42s16800j/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>BSP otm8009a</strong></td>
+<td style="text-align: center;"><strong>v2.0.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/Components/otm8009a/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>BSP ov9655</strong></td>
+<td style="text-align: center;"><strong>v2.0.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/Components/ov9655/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>BSP ov5640</strong></td>
+<td style="text-align: center;"><strong>v1.0.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/Components/ov5640/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>BSP rk043fn48h</strong></td>
+<td style="text-align: center;"><strong>v1.0.3</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/Components/rk043fn48h/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>BSP rk070er9427</strong></td>
+<td style="text-align: center;"><strong>v1.0.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/Components/rk070er9427/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>BSP s5k5cag</strong></td>
+<td style="text-align: center;"><strong>v2.0.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/Components/s5k5cag/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>BSP st7735</strong></td>
+<td style="text-align: center;"><strong>v2.0.2</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/Components/st7735/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>BSP stmpe811</strong></td>
+<td style="text-align: center;"><strong>v3.0.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/Components/stmpe811/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>BSP ts3510</strong></td>
+<td style="text-align: center;"><strong>v2.0.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/Components/ts3510/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>BSP wm8994</strong></td>
+<td style="text-align: center;"><strong>v3.0.2</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/Components/wm8994/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>BSP es_wifi</strong></td>
+<td style="text-align: center;"><strong>v1.5.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/Components/es_wifi/Release_Notes.html">release notes</a></td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Middlewares</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: center;">Version</th>
+<th style="text-align: center;">License</th>
+<th style="text-align: center;">Release note</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">STM32 USB Host Library</td>
+<td style="text-align: center;">V3.3.3</td>
+<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: center;"><a href="Middlewares/ST/STM32_USB_Host_Library/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32 USB Device Library</td>
+<td style="text-align: center;">V2.5.3</td>
+<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: center;"><a href="Middlewares/ST/STM32_USB_Device_Library/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">FatFS</td>
+<td style="text-align: center;">R0.12c</td>
+<td style="text-align: center;"><a href="Middlewares/Third_Party/FatFs/doc/en/appnote.html#license">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Middlewares/Third_Party/FatFs/doc/updates.txt">release notes</a> ST modified 20191011 <a href="Middlewares/Third_Party/FatFs/src/st_readme.txt">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">FreeRTOS MPU</td>
+<td style="text-align: center;"><strong>V10.2.1</strong></td>
+<td style="text-align: center;"><a href="Middlewares/Third_Party/FreeRTOS/License/license.txt">MIT</a></td>
+<td style="text-align: center;"><a href="Middlewares/Third_Party/FreeRTOS/Source/readme.txt">release notes</a> ST modified 20190719 <a href="Middlewares/Third_Party/FreeRTOS/Source/st_readme.txt">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">LwIP</td>
+<td style="text-align: center;">V2.0.3</td>
+<td style="text-align: center;"><a href="Middlewares/Third_Party/LwIP/COPYING">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Middlewares/Third_Party/LwIP/CHANGELOG">release notes</a> ST modified 20180813 <a href="Middlewares/Third_Party/LwIP/st_readme.txt">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STemWin</td>
+<td style="text-align: center;">V5.44</td>
+<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: center;"><a href="Middlewares/ST/STemWin/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">TouchGFX</td>
+<td style="text-align: center;"><strong>V4.12.3</strong></td>
+<td style="text-align: center;"><a href="Middlewares/ST/TouchGFX/license.txt">SLA0044</a></td>
+<td style="text-align: center;"><a href="Middlewares/ST/TouchGFX/changelog.txt">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">LibJPEG</td>
+<td style="text-align: center;">V8d</td>
+<td style="text-align: center;"><a href="Middlewares/Third_Party/LibJPEG/README">Independent JPEG Group License</a></td>
+<td style="text-align: center;"><a href="Middlewares/Third_Party/LibJPEG/change.log">release notes</a> ST modified 20190329 <a href="Middlewares/Third_Party/LibJPEG/st_readme.txt">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">mbedTLS</td>
+<td style="text-align: center;">V2.14.1</td>
+<td style="text-align: center;"><a href="Middlewares/Third_Party/mbedTLS/apache-2.0.txt">Apache License 2.0</a></td>
+<td style="text-align: center;"><a href="Middlewares/Third_Party/mbedTLS/ChangeLog">release notes</a> ST modified 20190329 <a href="Middlewares/Third_Party/mbedTLS/st_readme.txt">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32 PDM audio software decoding Library</td>
+<td style="text-align: center;">V3.1.0</td>
+<td style="text-align: center;"><a href="http://www.st.com/software_license_agreement_image_v2">SLA0047</a></td>
+<td style="text-align: center;"><a href="Middlewares/ST/STM32_Audio/Addons/PDM/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">OpenAmp</td>
+<td style="text-align: center;">V2018.10</td>
+<td style="text-align: center;"><a href="Middlewares/Third_Party/OpenAMP/open-amp/LICENSE.md">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Middlewares/Third_Party/OpenAMP/open-amp/README.md">release notes</a> ST modified 20191011 <a href="Middlewares/Third_Party/OpenAMP/open-amp/st_readme.txt">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>STM32_Network_Library</strong></td>
+<td style="text-align: center;"><strong>V1.0.4</strong></td>
+<td style="text-align: center;"><a href="Middlewares/ST/STM32_Network_Library/Software_License_Agreement_SLA0044.pdf">SLA0044</a></td>
+<td style="text-align: center;"><a href="Middlewares/ST/STM32_Network_Library/Release_notes.html">release notes</a></td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Utilities</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: center;">Version</th>
+<th style="text-align: center;">License</th>
+<th style="text-align: center;">Release note</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>CPU</strong></td>
+<td style="text-align: center;"><strong>V1.1.2</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Utilities/CPU/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Fonts</strong></td>
+<td style="text-align: center;"><strong>V2.0.2</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Utilities/Fonts/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Lcd_Trace</strong></td>
+<td style="text-align: center;"><strong>V1.1.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Utilities/Lcd_Trace/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">JPEG</td>
+<td style="text-align: center;">V2.0.0</td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Utilities/JPEG/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ResourcesManager</td>
+<td style="text-align: center;">V1.4.0</td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Utilities/ResourcesManager/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Basic_GUI</strong></td>
+<td style="text-align: center;"><strong>V1.0.2</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Utilities/Basic_GUI/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Common</strong></td>
+<td style="text-align: center;"><strong>V1.3.0</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Utilities/Common/Release_Notes.html">release notes</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="known-limitations">Known Limitations</h2>
+<ul>
+<li><strong>HAL I2S</strong>:
+<ul>
+<li>Full duplex Transmit/receive feature not available
+<ul>
+<li>stm32h7xx_hal_i2s_ex.h/stm32h7xx_hal_i2s_ex.c HAL driver are empty files as full duplex feature is not available in this release</li>
+</ul></li>
+</ul></li>
+<li><strong>HAL PSSI</strong>:
+<ul>
+<li>New PSSI driver provided supporting both modes : DMA mode recommended/ polling mode has hardware limitation confirmed and mentioned in the STM32H7A3/B3xx/B0xx erratasheet.</li>
+</ul></li>
+<li>OpenAMP-based applications (available on STM32H745I-DISCO, STM32H747I-DISCO and STM32H747I-EVAL) come with known compilation warning
+<ul>
+<li>Related to the OpenAmp third party stack</li>
+<li>Related to ST application implementation For warning details please refer to the corresponding applications readme.txt files</li>
+</ul></li>
+<li>STM32H747I-DISCO and STM32H750B-DK TouchGFX demonstrations come with known compilation warnings on SW4STM32 IDE:
+<ul>
+<li>Warnings related to the Libjpeg third party MW</li>
+</ul></li>
+<li><strong>LwIP</strong>-based applications (available on NUCLEO-H743ZI and STM32H743I-EVAL) come with known compilation warning on EWARM V8.30
+<ul>
+<li>Related to the combination of LWIP third party stack and EWARM V8.30</li>
+</ul></li>
+<li><p>No impact of these warnings on the functional behavior</p></li>
+<li><p><strong>Demonstrations</strong> for <strong>STM32H743I-EVAL</strong> and <strong>STM32H747I-EVAL</strong> are provided as binaries only</p></li>
+<li><p><strong>Demonstrations</strong> for <strong>STM32H7B3I-EVAL</strong> is provided as binaries only</p></li>
+<li><p><strong>STM32H7B3I-DK</strong> demonstration is provided with EWARM toolchain only</p></li>
+<li><p>Value Line applications, STM32H7B3I-DK_CodeExecution, are not supported with STM32CubeIDE toolchain</p></li>
+</ul>
+<h2 id="development-toolchains-and-compilers">Development Toolchains and Compilers</h2>
+<ul>
+<li>IAR Embedded Workbench for ARM (EWARM) toolchain V8.30.1 + ST-LINKV3, patch available here:
+<ul>
+<li><a href="Utilities\PC_Software\IDEs_Patches\EWARM\EWARMv8_STM32H7xx_Support_V1.1.zip">Utilities\PC_Software\IDEs_Patches\EWARM\EWARMv8_STM32H7xx_Support_V1.1.zip</a>
+<ul>
+<li>This patch supports STM32H743/753/747/757/745/755/750/742/<strong>7B3</strong>/<strong>7A3</strong>/<strong>7B0</strong> devices</li>
+<li>Note: For STM32H750xx value line devices, this patch allows to program correctly internal flash and the external QSPI flash of the STM32H750B-DISCO board . However, “verify” phase after programming is not functional for the QSPI flash.</li>
+</ul></li>
+</ul></li>
+<li>RealView Microcontroller Development Kit (MDK-ARM) toolchain V5.27 + ST-LINKV3, patch available here:
+<ul>
+<li><a href="Utilities\PC_Software\IDEs_Patches\MDK-ARM\Keil.STM32H7xx_DFP.2.3.2.zip">Utilities\PC_Software\IDEs_Patches\MDK-ARM\Keil.STM32H7xx_DFP.2.3.2.zip</a>
+<ul>
+<li>This patch supports STM32H743/753/747/757/745/755/750/742/<strong>7B3</strong>/<strong>7A3</strong>/<strong>7B0</strong> devices</li>
+</ul></li>
+</ul></li>
+</ul>
+<h2 id="supported-devices-and-eval-boards">Supported Devices and EVAL boards</h2>
+<ul>
+<li>STM32H743/753/747/757/745/755/750/742/<strong>7B3</strong>/<strong>7A3</strong>/<strong>7B0</strong> devices</li>
+<li><strong>STM32H7B3I-EVAL</strong> revD</li>
+<li><strong>STM32H7B3I-DK</strong> revD</li>
+<li><strong>NUCLEO-H7A3ZI-Q</strong> revD</li>
+<li>STM32H743I-EVAL rev.B/rev.E</li>
+<li>NUCLEO-H743ZI rev.B and NUCLEO-H743ZI2 rev.B</li>
+<li>NUCLEO-H745ZI-Q rev.B</li>
+<li>STM32H745I-DISCO rev.B</li>
+<li>STM32H747I-EVAL rev.E</li>
+<li>STM32H747I-DISCO rev.D</li>
+<li>STM32H750B-DISCO rev.B</li>
+</ul>
+<h2 id="backward-compatibility">Backward compatibility</h2>
+<ul>
+<li>The BSP drivers for This release have been updated with respect to the new BSP architecture in line with STM32Cube BSP drivers development guidelines (UM2298)
+<ul>
+<li>NUCLEO-H743ZI, NUCLEO-H745ZI-Q, STM32H743I-EVAL, STM32H745I-DISCO, STM32H747I-DISCO, STM32H747I-EVAL and STM32H750B-DK projects has been reworked with respect to these new BSP Drivers</li>
+</ul></li>
+<li><strong>HAL I2S</strong>:
+<ul>
+<li>stm32h7xx_hal_i2s_ex.h/stm32h7xx_hal_i2s_ex.c : Empty files as full duplex feature is not available in this release</li>
+</ul></li>
+<li><strong>HAL LPTIM</strong>:
+<ul>
+<li>stm32h7xx_hal_lptim.h:
+<ul>
+<li>LPTIM_INPUT1SOURCE_SAI1_FSA and LPTIM_INPUT1SOURCE_SAI1_FSB replaced respectively by LPTIM_INPUT1SOURCE_SAI4_FSA and LPTIM_INPUT1SOURCE_SAI4_FSB to be aligned with the Reference manual</li>
+</ul></li>
+</ul></li>
+<li><strong>HAL TIM</strong>:
+<ul>
+<li>stm32h7xx_hal_tim_ex.h:</li>
+<li>TIM_TIM1_ETR_ADC2_AWD1, TIM_TIM1_ETR_ADC2_AWD2 and TIM_TIM1_ETR_ADC2_AWD3 respectively to TIM_TIM1_ETR_ADC1_AWD1, TIM_TIM1_ETR_ADC1_AWD2 and TIM_TIM1_ETR_ADC1_AWD2 to be aligned with all STM32H7 devices Reference manuals</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div class="collapse">
+<input type="checkbox" id="collapse-section8" aria-hidden="true"> <label for="collapse-section8" aria-hidden="true"><strong>V1.5.0 / 28-June-2019</strong></label>
+<div>
+<h2 id="main-changes-1">Main Changes</h2>
 <ul>
 <li><p>Maintenance release.</p></li>
 <li>Add <strong>Dual Core</strong> demonstrations source code with preconfigured projects on EWARM, MDK-ARM and SW4STM32 IDEs:
@@ -143,66 +783,13 @@
 <li>Update all template projects to add “USE_SPI_CRC” definition to “stm32h7xx_hal_conf.h”. This define is set to 1 by default and customizable by the HAL user</li>
 </ul></li>
 </ul>
-<h2 id="contents">Contents</h2>
-<h3 id="projects">Projects</h3>
-<p>The STM32CubeH7 Firmware package comes with a rich set of examples running on STMicroelectronics boards, organized by board and provided with preconfigured projects for the main supported toolchains. The exhaustive list of projects is provided in this table <a href="Projects/STM32CubeProjectsList.html">STM32CubeProjectsList.html</a>.</p>
-<p>NUCLEO-H743ZI</p>
+<h2 id="contents-1">Contents</h2>
+<h3 id="projects-1">Projects</h3>
 <ul>
-<li>Applications (<a href="Projects/NUCLEO-H743ZI/Applications/Release_Notes.html">release notes</a>)</li>
-<li>Demonstrations (<a href="Projects/NUCLEO-H743ZI/Demonstrations/Release_Notes.html">release notes</a>)</li>
-<li>HAL Examples (<a href="Projects/NUCLEO-H743ZI/Examples/Release_Notes.html">release notes</a>)</li>
-<li>LL Examples (<a href="Projects/NUCLEO-H743ZI/Examples_LL/Release_Notes.html">release notes</a>)</li>
-<li>HAL Templates (<a href="Projects/NUCLEO-H743ZI/Templates/Release_Notes.html">release notes</a>)</li>
-<li>LL Templates (<a href="Projects/NUCLEO-H743ZI/Templates_LL/Release_Notes.html">release notes</a>)</li>
+<li><p>The STM32CubeH7 Firmware package comes with a rich set of examples running on STMicroelectronics boards, organized by board and provided with preconfigured projects for the main supported toolchains. The exhaustive list of projects is provided in this table <a href="Projects/STM32CubeProjectsList.html">STM32CubeProjectsList.html</a>.</p></li>
+<li><p>Projects Release Note is available <a href="Projects/Release_Notes.html">release notes</a></p></li>
 </ul>
-<p>NUCLEO-H745ZI-Q</p>
-<ul>
-<li>Applications (<a href="Projects/NUCLEO-H745ZI-Q/Applications/Release_Notes.html">release notes</a>)</li>
-<li>Demonstrations (<a href="Projects/NUCLEO-H745ZI-Q/Demonstrations/Release_Notes.html">release notes</a>)</li>
-<li>HAL Examples (<a href="Projects/NUCLEO-H745ZI-Q/Examples/Release_Notes.html">release notes</a>)</li>
-<li>HAL Templates (<a href="Projects/NUCLEO-H745ZI-Q/Templates/Release_Notes.html">release notes</a>)</li>
-<li>LL Templates (<a href="Projects/NUCLEO-H745ZI-Q/Templates_LL/Release_Notes.html">release notes</a>)</li>
-</ul>
-<p>STM32H743I-EVAL</p>
-<ul>
-<li>Applications (<a href="Projects/STM32H743I-EVAL/Applications/Release_Notes.html">release notes</a>)</li>
-<li>Demonstrations (<a href="Projects/STM32H743I-EVAL/Demonstrations/Release_Notes.html">release notes</a>)</li>
-<li>HAL Examples (<a href="Projects/STM32H743I-EVAL/Examples/Release_Notes.html">release notes</a>)</li>
-<li>HAL Templates (<a href="Projects/STM32H743I-EVAL/Templates/Release_Notes.html">release notes</a>)</li>
-<li>LL Templates (<a href="Projects/STM32H743I-EVAL/Templates_LL/Release_Notes.html">release notes</a>)</li>
-</ul>
-<p>STM32H745I-DISCO</p>
-<ul>
-<li>Applications (<a href="Projects/STM32H745I-DISCO/Applications/Release_Notes.html">release notes</a>)</li>
-<li>Demonstrations (<a href="Projects/STM32H745I-DISCO/Demonstrations/Release_Notes.html">release notes</a>)</li>
-<li>HAL Examples (<a href="Projects/STM32H745I-DISCO/Examples/Release_Notes.html">release notes</a>)</li>
-<li>HAL Templates (<a href="Projects/STM32H745I-DISCO/Templates/Release_Notes.html">release notes</a>)</li>
-<li>LL Templates (<a href="Projects/STM32H745I-DISCO/Templates_LL/Release_Notes.html">release notes</a>)</li>
-</ul>
-<p>STM32H747I-DISCO</p>
-<ul>
-<li>Applications (<a href="Projects/STM32H747I-DISCO/Applications/Release_Notes.html">release notes</a>)</li>
-<li>Demonstrations (<a href="Projects/STM32H747I-DISCO/Demonstrations/Release_Notes.html">release notes</a>)</li>
-<li>HAL Examples (<a href="Projects/STM32H747I-DISCO/Examples/Release_Notes.html">release notes</a>)</li>
-<li>HAL Templates (<a href="Projects/STM32H747I-DISCO/Templates/Release_Notes.html">release notes</a>)</li>
-<li>LL Templates (<a href="Projects/STM32H747I-DISCO/Templates_LL/Release_Notes.html">release notes</a>)</li>
-</ul>
-<p>STM32H747I-EVAL</p>
-<ul>
-<li>Applications (<a href="Projects/STM32H747I-EVAL/Applications/Release_Notes.html">release notes</a>)</li>
-<li>Demonstrations (<a href="Projects/STM32H747I-EVAL/Demonstrations/Release_Notes.html">release notes</a>)</li>
-<li>HAL Examples (<a href="Projects/STM32H747I-EVAL/Examples/Release_Notes.html">release notes</a>)</li>
-<li>HAL Templates (<a href="Projects/STM32H747I-EVAL/Templates/Release_Notes.html">release notes</a>)</li>
-<li>LL Templates (<a href="Projects/STM32H747I-EVAL/Templates_LL/Release_Notes.html">release notes</a>)</li>
-</ul>
-<p>STM32H750B-DK</p>
-<ul>
-<li>Applications (<a href="Projects/STM32H750B-DK/Applications/Release_Notes.html">release notes</a>)</li>
-<li>Demonstrations (<a href="Projects/STM32H750B-DK/Demonstrations/Release_Notes.html">release notes</a>)</li>
-<li>HAL Examples (<a href="Projects/STM32H750B-DK/Examples/Release_Notes.html">release notes</a>)</li>
-<li>HAL Templates (<a href="Projects/STM32H750B-DK/Templates/Release_Notes.html">release notes</a>)</li>
-</ul>
-<h3 id="components">Components</h3>
+<h3 id="components-1">Components</h3>
 <table>
 <caption>Drivers</caption>
 <thead>
@@ -233,40 +820,40 @@
 <td style="text-align: center;"><a href="Drivers/STM32H7xx_HAL_Driver/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">BSP STM32H743I_EVAL</td>
+<td style="text-align: left;">BSP STM32H743I-EVAL</td>
 <td style="text-align: center;">V1.3.0</td>
 <td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
-<td style="text-align: center;"><a href="Drivers/BSP/STM32H743I_EVAL/Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/STM32H743I-EVAL/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">BSP STM32H7xx_Nucleo_144</td>
+<td style="text-align: left;">BSP STM32H7xx_Nucleo</td>
 <td style="text-align: center;">V1.3.0</td>
 <td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
-<td style="text-align: center;"><a href="Drivers/BSP/STM32H7xx_Nucleo_144/Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/STM32H7xx_Nucleo/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">BSP STM32H745I-Discovery</td>
+<td style="text-align: left;">BSP STM32H745I-DISCO</td>
 <td style="text-align: center;">V1.0.0</td>
 <td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
-<td style="text-align: center;"><a href="Drivers/BSP/STM32H745I-Discovery/Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/STM32H745I-DISCO/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">BSP STM32H747I_EVAL</td>
+<td style="text-align: left;">BSP STM32H747I-EVAL</td>
 <td style="text-align: center;">V1.0.0</td>
 <td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
-<td style="text-align: center;"><a href="Drivers/BSP/STM32H747I_EVAL/Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/STM32H747I-EVAL/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">BSP STM32H747I-Discovery</td>
+<td style="text-align: left;">BSP STM32H747I-DISCO</td>
 <td style="text-align: center;">V1.0.0</td>
 <td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
-<td style="text-align: center;"><a href="Drivers/BSP/STM32H747I-Discovery/Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/STM32H747I-DISCO/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">BSP STM32H750B-Discovery</td>
+<td style="text-align: left;">BSP STM32H750B-DK</td>
 <td style="text-align: center;">V1.0.0</td>
 <td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
-<td style="text-align: center;"><a href="Drivers/BSP/STM32H750B-Discovery/Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/STM32H750B-DK/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><strong>BSP Adafruit_Shield</strong></td>
@@ -500,7 +1087,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="known-limitations">Known Limitations</h2>
+<h2 id="known-limitations-1">Known Limitations</h2>
 <ul>
 <li>OpenAMP-based applications (available on STM32H745I-DISCO, STM32H747I-DISCO and STM32H747I-EVAL) come with known compilation warning
 <ul>
@@ -525,7 +1112,7 @@
 <li>The source code for this demonstration will be available in next STM32CubeH7 releases</li>
 </ul></li>
 </ul>
-<h2 id="development-toolchains-and-compilers">Development Toolchains and Compilers</h2>
+<h2 id="development-toolchains-and-compilers-1">Development Toolchains and Compilers</h2>
 <ul>
 <li>IAR Embedded Workbench for ARM (EWARM) toolchain V8.20.2 + ST-LINKV3, patch available here:
 <ul>
@@ -543,7 +1130,7 @@
 </ul></li>
 </ul></li>
 </ul>
-<h2 id="supported-devices-and-eval-boards">Supported Devices and EVAL boards</h2>
+<h2 id="supported-devices-and-eval-boards-1">Supported Devices and EVAL boards</h2>
 <ul>
 <li>STM32H743/753/747/757/745/755/750/742 devices</li>
 <li>STM32H743I-EVAL rev.B/rev.E</li>
@@ -554,7 +1141,7 @@
 <li>STM32H747I-DISCO rev.D</li>
 <li>STM32H750B-DISCO rev.B</li>
 </ul>
-<h2 id="backward-compatibility">Backward compatibility</h2>
+<h2 id="backward-compatibility-1">Backward compatibility</h2>
 <ul>
 <li><strong>HAL TIM</strong>:
 <ul>
@@ -572,7 +1159,7 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section7" aria-hidden="true"> <label for="collapse-section7" aria-hidden="true"><strong>V1.4.0 / 05-April-2019</strong></label>
 <div>
-<h2 id="main-changes-1">Main Changes</h2>
+<h2 id="main-changes-2">Main Changes</h2>
 <ul>
 <li>First official release to support STM32H7 <strong>Rev.V</strong> all lines:
 <ul>
@@ -791,66 +1378,13 @@
 </ul></li>
 </ul></li>
 </ul>
-<h2 id="contents-1">Contents</h2>
-<h3 id="projects-1">Projects</h3>
-<p>The STM32CubeH7 Firmware package comes with a rich set of examples running on STMicroelectronics boards, organized by board and provided with preconfigured projects for the main supported toolchains. The exhaustive list of projects is provided in this table <a href="Projects/STM32CubeProjectsList.html">STM32CubeProjectsList.html</a>.</p>
-<p>NUCLEO-H743ZI</p>
+<h2 id="contents-2">Contents</h2>
+<h3 id="projects-2">Projects</h3>
 <ul>
-<li>Applications (<a href="Projects/NUCLEO-H743ZI/Applications/Release_Notes.html">release notes</a>)</li>
-<li>Demonstrations (<a href="Projects/NUCLEO-H743ZI/Demonstrations/Release_Notes.html">release notes</a>)</li>
-<li>HAL Examples (<a href="Projects/NUCLEO-H743ZI/Examples/Release_Notes.html">release notes</a>)</li>
-<li>LL Examples (<a href="Projects/NUCLEO-H743ZI/Examples_LL/Release_Notes.html">release notes</a>)</li>
-<li>HAL Templates (<a href="Projects/NUCLEO-H743ZI/Templates/Release_Notes.html">release notes</a>)</li>
-<li>LL Templates (<a href="Projects/NUCLEO-H743ZI/Templates_LL/Release_Notes.html">release notes</a>)</li>
+<li><p>The STM32CubeH7 Firmware package comes with a rich set of examples running on STMicroelectronics boards, organized by board and provided with preconfigured projects for the main supported toolchains. The exhaustive list of projects is provided in this table <a href="Projects/STM32CubeProjectsList.html">STM32CubeProjectsList.html</a>.</p></li>
+<li><p>Projects Release Note is available <a href="Projects/Release_Notes.html">release notes</a></p></li>
 </ul>
-<p>NUCLEO-H745ZI-Q</p>
-<ul>
-<li>Applications (<a href="Projects/NUCLEO-H745ZI-Q/Applications/Release_Notes.html">release notes</a>)</li>
-<li>Demonstrations (<a href="Projects/NUCLEO-H745ZI-Q/Demonstrations/Release_Notes.html">release notes</a>)</li>
-<li>HAL Examples (<a href="Projects/NUCLEO-H745ZI-Q/Examples/Release_Notes.html">release notes</a>)</li>
-<li>HAL Templates (<a href="Projects/NUCLEO-H745ZI-Q/Templates/Release_Notes.html">release notes</a>)</li>
-<li>LL Templates (<a href="Projects/NUCLEO-H745ZI-Q/Templates_LL/Release_Notes.html">release notes</a>)</li>
-</ul>
-<p>STM32H743I-EVAL</p>
-<ul>
-<li>Applications (<a href="Projects/STM32H743I-EVAL/Applications/Release_Notes.html">release notes</a>)</li>
-<li>Demonstrations (<a href="Projects/STM32H743I-EVAL/Demonstrations/Release_Notes.html">release notes</a>)</li>
-<li>HAL Examples (<a href="Projects/STM32H743I-EVAL/Examples/Release_Notes.html">release notes</a>)</li>
-<li>HAL Templates (<a href="Projects/STM32H743I-EVAL/Templates/Release_Notes.html">release notes</a>)</li>
-<li>LL Templates (<a href="Projects/STM32H743I-EVAL/Templates_LL/Release_Notes.html">release notes</a>)</li>
-</ul>
-<p>STM32H745I-DISCO</p>
-<ul>
-<li>Applications (<a href="Projects/STM32H745I-DISCO/Applications/Release_Notes.html">release notes</a>)</li>
-<li>Demonstrations (<a href="Projects/STM32H745I-DISCO/Demonstrations/Release_Notes.html">release notes</a>)</li>
-<li>HAL Examples (<a href="Projects/STM32H745I-DISCO/Examples/Release_Notes.html">release notes</a>)</li>
-<li>HAL Templates (<a href="Projects/STM32H745I-DISCO/Templates/Release_Notes.html">release notes</a>)</li>
-<li>LL Templates (<a href="Projects/STM32H745I-DISCO/Templates_LL/Release_Notes.html">release notes</a>)</li>
-</ul>
-<p>STM32H747I-DISCO</p>
-<ul>
-<li>Applications (<a href="Projects/STM32H747I-DISCO/Applications/Release_Notes.html">release notes</a>)</li>
-<li>Demonstrations (<a href="Projects/STM32H747I-DISCO/Demonstrations/Release_Notes.html">release notes</a>)</li>
-<li>HAL Examples (<a href="Projects/STM32H747I-DISCO/Examples/Release_Notes.html">release notes</a>)</li>
-<li>HAL Templates (<a href="Projects/STM32H747I-DISCO/Templates/Release_Notes.html">release notes</a>)</li>
-<li>LL Templates (<a href="Projects/STM32H747I-DISCO/Templates_LL/Release_Notes.html">release notes</a>)</li>
-</ul>
-<p>STM32H747I-EVAL</p>
-<ul>
-<li>Applications (<a href="Projects/STM32H747I-EVAL/Applications/Release_Notes.html">release notes</a>)</li>
-<li>Demonstrations (<a href="Projects/STM32H747I-EVAL/Demonstrations/Release_Notes.html">release notes</a>)</li>
-<li>HAL Examples (<a href="Projects/STM32H747I-EVAL/Examples/Release_Notes.html">release notes</a>)</li>
-<li>HAL Templates (<a href="Projects/STM32H747I-EVAL/Templates/Release_Notes.html">release notes</a>)</li>
-<li>LL Templates (<a href="Projects/STM32H747I-EVAL/Templates_LL/Release_Notes.html">release notes</a>)</li>
-</ul>
-<p>STM32H750B-DK</p>
-<ul>
-<li>Applications (<a href="Projects/STM32H750B-DK/Applications/Release_Notes.html">release notes</a>)</li>
-<li>Demonstrations (<a href="Projects/STM32H750B-DK/Demonstrations/Release_Notes.html">release notes</a>)</li>
-<li>HAL Examples (<a href="Projects/STM32H750B-DK/Examples/Release_Notes.html">release notes</a>)</li>
-<li>HAL Templates (<a href="Projects/STM32H750B-DK/Templates/Release_Notes.html">release notes</a>)</li>
-</ul>
-<h3 id="components-1">Components</h3>
+<h3 id="components-2">Components</h3>
 <table>
 <caption>Drivers</caption>
 <thead>
@@ -881,40 +1415,40 @@
 <td style="text-align: center;"><a href="Drivers/STM32H7xx_HAL_Driver/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><strong>BSP STM32H743I_EVAL</strong></td>
+<td style="text-align: left;"><strong>BSP STM32H743I-EVAL</strong></td>
 <td style="text-align: center;"><strong>V1.3.0</strong></td>
 <td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
-<td style="text-align: center;"><a href="Drivers/BSP/STM32H743I_EVAL/Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/STM32H743I-EVAL/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;"><strong>BSP STM32H7xx_Nucleo_144</strong></td>
+<td style="text-align: left;"><strong>BSP STM32H7xx_Nucleo</strong></td>
 <td style="text-align: center;"><strong>V1.3.0</strong></td>
 <td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
-<td style="text-align: center;"><a href="Drivers/BSP/STM32H7xx_Nucleo_144/Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/STM32H7xx_Nucleo/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><strong>BSP STM32H745I-Discovery</strong></td>
+<td style="text-align: left;"><strong>BSP STM32H745I-DISCO</strong></td>
 <td style="text-align: center;"><strong>V1.0.0</strong></td>
 <td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
-<td style="text-align: center;"><a href="Drivers/BSP/STM32H745I-Discovery/Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/STM32H745I-DISCO/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;"><strong>BSP STM32H747I_EVAL</strong></td>
+<td style="text-align: left;"><strong>BSP STM32H747I-EVAL</strong></td>
 <td style="text-align: center;"><strong>V1.0.0</strong></td>
 <td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
-<td style="text-align: center;"><a href="Drivers/BSP/STM32H747I_EVAL/Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/STM32H747I-EVAL/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><strong>BSP STM32H747I-Discovery</strong></td>
+<td style="text-align: left;"><strong>BSP STM32H747I-DISCO</strong></td>
 <td style="text-align: center;"><strong>V1.0.0</strong></td>
 <td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
-<td style="text-align: center;"><a href="Drivers/BSP/STM32H747I-Discovery/Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/STM32H747I-DISCO/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;"><strong>BSP STM32H750B-Discovery</strong></td>
+<td style="text-align: left;"><strong>BSP STM32H750B-DK</strong></td>
 <td style="text-align: center;"><strong>V1.0.0</strong></td>
 <td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
-<td style="text-align: center;"><a href="Drivers/BSP/STM32H750B-Discovery/Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/STM32H750B-DK/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">BSP Adafruit_Shield</td>
@@ -1148,7 +1682,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="known-limitations-1">Known Limitations</h2>
+<h2 id="known-limitations-2">Known Limitations</h2>
 <ul>
 <li><strong>HAL SD</strong>:
 <ul>
@@ -1171,7 +1705,7 @@
 <li>The source code for these demonstrations will be available in next STM32CubeH7 releases</li>
 </ul></li>
 </ul>
-<h2 id="development-toolchains-and-compilers-1">Development Toolchains and Compilers</h2>
+<h2 id="development-toolchains-and-compilers-2">Development Toolchains and Compilers</h2>
 <ul>
 <li>IAR Embedded Workbench for ARM (EWARM) toolchain V8.20.2 + ST-LINKV3, patch available here:
 <ul>
@@ -1189,7 +1723,7 @@
 </ul></li>
 </ul></li>
 </ul>
-<h2 id="supported-devices-and-eval-boards-1">Supported Devices and EVAL boards</h2>
+<h2 id="supported-devices-and-eval-boards-2">Supported Devices and EVAL boards</h2>
 <ul>
 <li>STM32H743/753/<strong>747</strong>/<strong>757</strong>/<strong>745</strong>/<strong>755</strong>/750/<strong>742</strong> devices</li>
 <li><strong>STM32H743I-EVAL</strong> rev.B/rev.E</li>
@@ -1200,7 +1734,7 @@
 <li><strong>STM32H747I-DISCO</strong> rev.D</li>
 <li><strong>STM32H750B-DISCO</strong> rev.B</li>
 </ul>
-<h2 id="backward-compatibility-1">Backward compatibility</h2>
+<h2 id="backward-compatibility-2">Backward compatibility</h2>
 <ul>
 <li><strong>HAL ADC</strong>:
 <ul>
@@ -1240,7 +1774,7 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section6" aria-hidden="true"> <label for="collapse-section6" aria-hidden="true"><strong>V1.3.2 / 31-January-2019</strong></label>
 <div>
-<h2 id="main-changes-2">Main Changes</h2>
+<h2 id="main-changes-3">Main Changes</h2>
 <ul>
 <li><p>Patch release to add definition of UID_BASE (Unique device ID register base address) to the CMSIS STM32H7xx include files.</p></li>
 <li><strong>CMSIS</strong>
@@ -1253,7 +1787,7 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section5" aria-hidden="true"> <label for="collapse-section5" aria-hidden="true"><strong>V1.3.1 / 18-January-2019</strong></label>
 <div>
-<h2 id="main-changes-3">Main Changes</h2>
+<h2 id="main-changes-4">Main Changes</h2>
 <ul>
 <li><p>Patch release to Fix LwIP and mbedTLS applications : enhance Ethernet zero-copy feature allowing to fix ping behavior.</p></li>
 <li><strong>Projects</strong>
@@ -1274,7 +1808,7 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section4" aria-hidden="true"> <label for="collapse-section4" aria-hidden="true"><strong>V1.3.0 / 29-June-2018</strong></label>
 <div>
-<h2 id="main-changes-4">Main Changes</h2>
+<h2 id="main-changes-5">Main Changes</h2>
 <ul>
 <li><strong>Add support for STM32H750xx value line</strong>
 <ul>
@@ -1322,24 +1856,13 @@
 </ul></li>
 </ul></li>
 </ul>
-<h2 id="contents-2">Contents</h2>
-<h3 id="projects-2">Projects</h3>
-<p>The STM32CubeH7 Firmware package comes with a rich set of examples running on STMicroelectronics boards, organized by board and provided with preconfigured projects for the main supported toolchains. The exhaustive list of projects is provided in this table <a href="Projects/STM32CubeProjectsList.html">STM32CubeProjectsList.html</a>.</p>
-<p>NUCLEO-H743ZI</p>
+<h2 id="contents-3">Contents</h2>
+<h3 id="projects-3">Projects</h3>
 <ul>
-<li>Applications (<a href="Projects/NUCLEO-H743ZI/Applications/Release_Notes.html">release notes</a>)</li>
-<li>Demonstrations (<a href="Projects/NUCLEO-H743ZI/Demonstrations/Release_Notes.html">release notes</a>)</li>
-<li>HAL Examples (<a href="Projects/NUCLEO-H743ZI/Examples/Release_Notes.html">release notes</a>)</li>
-<li>HAL Templates (<a href="Projects/NUCLEO-H743ZI/Templates/Release_Notes.html">release notes</a>)</li>
+<li><p>The STM32CubeH7 Firmware package comes with a rich set of examples running on STMicroelectronics boards, organized by board and provided with preconfigured projects for the main supported toolchains. The exhaustive list of projects is provided in this table <a href="Projects/STM32CubeProjectsList.html">STM32CubeProjectsList.html</a>.</p></li>
+<li><p>Projects Release Note is available <a href="Projects/Release_Notes.html">release notes</a></p></li>
 </ul>
-<p>STM32H743I-EVAL</p>
-<ul>
-<li>Applications (<a href="Projects/STM32H743I-EVAL/Applications/Release_Notes.html">release notes</a>)</li>
-<li>Demonstrations (<a href="Projects/STM32H743I-EVAL/Demonstrations/Release_Notes.html">release notes</a>)</li>
-<li>HAL Examples (<a href="Projects/STM32H743I-EVAL/Examples/Release_Notes.html">release notes</a>)</li>
-<li>HAL Templates (<a href="Projects/STM32H743I-EVAL/Templates/Release_Notes.html">release notes</a>)</li>
-</ul>
-<h3 id="components-2">Components</h3>
+<h3 id="components-3">Components</h3>
 <table>
 <caption>Drivers</caption>
 <thead>
@@ -1370,16 +1893,16 @@
 <td style="text-align: center;"><a href="Drivers/STM32H7xx_HAL_Driver/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">BSP STM32H743I_EVAL</td>
+<td style="text-align: left;">BSP STM32H743I-EVAL</td>
 <td style="text-align: center;">V1.2.0</td>
 <td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
-<td style="text-align: center;"><a href="Drivers/BSP/STM32H743I_EVAL/Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/STM32H743I-EVAL/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">BSP STM32H7xx_Nucleo_144</td>
-<td style="text-align: center;">V1.2.0</td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
-<td style="text-align: center;"><a href="Drivers/BSP/STM32H7xx_Nucleo_144/Release_Notes.html">release notes</a></td>
+<td style="text-align: left;">BSP STM32H7xx_Nucleo V1</td>
+<td style="text-align: center;">.2.0 [BSD</td>
+<td style="text-align: center;">-3-Clause](https://opensource.org/licenses/BSD-3-Clause) [rel</td>
+<td style="text-align: center;">ease notes](Drivers/BSP/STM32H7xx_Nucleo/Release_Notes.html)</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">BSP Adafruit_Shield</td>
@@ -1583,7 +2106,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="development-toolchains-and-compilers-2">Development Toolchains and Compilers</h2>
+<h2 id="development-toolchains-and-compilers-3">Development Toolchains and Compilers</h2>
 <ul>
 <li>IAR Embedded Workbench for ARM (EWARM) toolchain V7.80.4 + ST-LINK
 <ul>
@@ -1606,14 +2129,14 @@
 <li>Note : rely on the STM32CubeProgarmmer to load the external flash application (QSPI flash and FMC-NOR flash)</li>
 </ul></li>
 </ul>
-<h2 id="supported-devices-and-eval-boards-2">Supported Devices and EVAL boards</h2>
+<h2 id="supported-devices-and-eval-boards-3">Supported Devices and EVAL boards</h2>
 <ul>
 <li>STM32H743/753 devices</li>
 <li><strong>STM32H750</strong> devices</li>
 <li>STM32H743XI-EVAL</li>
 <li>STM32H743ZI Nucleo 144</li>
 </ul>
-<h2 id="backward-compatibility-2">Backward compatibility</h2>
+<h2 id="backward-compatibility-3">Backward compatibility</h2>
 <ul>
 <li>None</li>
 </ul>
@@ -1622,7 +2145,7 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section3" aria-hidden="true"> <label for="collapse-section3" aria-hidden="true"><strong>V1.2.0 / 29-December-2017</strong></label>
 <div>
-<h2 id="main-changes-5">Main Changes</h2>
+<h2 id="main-changes-6">Main Changes</h2>
 <ul>
 <li><strong>Maintenance release.</strong></li>
 <li>General update to fix known defects and several implementations enhancement</li>
@@ -1648,24 +2171,13 @@
 <li>Update cache management for all examples and applications.</li>
 </ul></li>
 </ul>
-<h2 id="contents-3">Contents</h2>
-<h3 id="projects-3">Projects</h3>
-<p>The STM32CubeH7 Firmware package comes with a rich set of examples running on STMicroelectronics boards, organized by board and provided with preconfigured projects for the main supported toolchains. The exhaustive list of projects is provided in this table <a href="Projects/STM32CubeProjectsList.html">STM32CubeProjectsList.html</a>.</p>
-<p>NUCLEO-H743ZI</p>
+<h2 id="contents-4">Contents</h2>
+<h3 id="projects-4">Projects</h3>
 <ul>
-<li>Applications (<a href="Projects/NUCLEO-H743ZI/Applications/Release_Notes.html">release notes</a>)</li>
-<li>Demonstrations (<a href="Projects/NUCLEO-H743ZI/Demonstrations/Release_Notes.html">release notes</a>)</li>
-<li>HAL Examples (<a href="Projects/NUCLEO-H743ZI/Examples/Release_Notes.html">release notes</a>)</li>
-<li>HAL Templates (<a href="Projects/NUCLEO-H743ZI/Templates/Release_Notes.html">release notes</a>)</li>
+<li><p>The STM32CubeH7 Firmware package comes with a rich set of examples running on STMicroelectronics boards, organized by board and provided with preconfigured projects for the main supported toolchains. The exhaustive list of projects is provided in this table <a href="Projects/STM32CubeProjectsList.html">STM32CubeProjectsList.html</a>.</p></li>
+<li><p>Projects Release Note is available <a href="Projects/Release_Notes.html">release notes</a></p></li>
 </ul>
-<p>STM32H743I-EVAL</p>
-<ul>
-<li>Applications (<a href="Projects/STM32H743I-EVAL/Applications/Release_Notes.html">release notes</a>)</li>
-<li>Demonstrations (<a href="Projects/STM32H743I-EVAL/Demonstrations/Release_Notes.html">release notes</a>)</li>
-<li>HAL Examples (<a href="Projects/STM32H743I-EVAL/Examples/Release_Notes.html">release notes</a>)</li>
-<li>HAL Templates (<a href="Projects/STM32H743I-EVAL/Templates/Release_Notes.html">release notes</a>)</li>
-</ul>
-<h3 id="components-3">Components</h3>
+<h3 id="components-4">Components</h3>
 <table>
 <caption>Drivers</caption>
 <thead>
@@ -1696,16 +2208,16 @@
 <td style="text-align: center;"><a href="Drivers/STM32H7xx_HAL_Driver/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><strong>BSP STM32H743I_EVAL</strong></td>
+<td style="text-align: left;"><strong>BSP STM32H743I-EVAL</strong></td>
 <td style="text-align: center;"><strong>V1.2.0</strong></td>
 <td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
-<td style="text-align: center;"><a href="Drivers/BSP/STM32H743I_EVAL/Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/STM32H743I-EVAL/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;"><strong>BSP STM32H7xx_Nucleo_144</strong></td>
+<td style="text-align: left;"><strong>BSP STM32H7xx_Nucleo</strong></td>
 <td style="text-align: center;"><strong>V1.2.0</strong></td>
 <td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
-<td style="text-align: center;"><a href="Drivers/BSP/STM32H7xx_Nucleo_144/Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/STM32H7xx_Nucleo/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">BSP Adafruit_Shield</td>
@@ -1909,19 +2421,19 @@
 </tr>
 </tbody>
 </table>
-<h2 id="development-toolchains-and-compilers-3">Development Toolchains and Compilers</h2>
+<h2 id="development-toolchains-and-compilers-4">Development Toolchains and Compilers</h2>
 <ul>
 <li>RealView Microcontroller Development Kit (MDK-ARM) toolchain V5.23 + ST-LINK</li>
 <li>IAR Embedded Workbench for ARM (EWARM) toolchain V7.80.4 + ST-LINK</li>
 <li>System Workbench for STM32 (SW4STM32) toolchain V1.14 + ST-Link</li>
 </ul>
-<h2 id="supported-devices-and-eval-boards-3">Supported Devices and EVAL boards</h2>
+<h2 id="supported-devices-and-eval-boards-4">Supported Devices and EVAL boards</h2>
 <ul>
 <li>STM32H743/753 devices</li>
 <li>STM32H743XI-EVAL</li>
 <li>STM32H743ZI Nucleo 144</li>
 </ul>
-<h2 id="backward-compatibility-3">Backward compatibility</h2>
+<h2 id="backward-compatibility-4">Backward compatibility</h2>
 <ul>
 <li>None</li>
 </ul>
@@ -1930,7 +2442,7 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section2" aria-hidden="true"> <label for="collapse-section2" aria-hidden="true"><strong>V1.1.0 / 31-August-2017</strong></label>
 <div>
-<h2 id="main-changes-6">Main Changes</h2>
+<h2 id="main-changes-7">Main Changes</h2>
 <ul>
 <li><strong>Official release to add Demonstration Firmware for STM32H743I_EVAL.</strong></li>
 <li>General update to fix known defects and several implementations enhancement</li>
@@ -1978,24 +2490,13 @@
 </ul></li>
 </ul></li>
 </ul>
-<h2 id="contents-4">Contents</h2>
-<h3 id="projects-4">Projects</h3>
-<p>The STM32CubeH7 Firmware package comes with a rich set of examples running on STMicroelectronics boards, organized by board and provided with preconfigured projects for the main supported toolchains. The exhaustive list of projects is provided in this table <a href="Projects/STM32CubeProjectsList.html">STM32CubeProjectsList.html</a>.</p>
-<p>NUCLEO-H743ZI</p>
+<h2 id="contents-5">Contents</h2>
+<h3 id="projects-5">Projects</h3>
 <ul>
-<li>Applications (<a href="Projects/NUCLEO-H743ZI/Applications/Release_Notes.html">release notes</a>)</li>
-<li>Demonstrations (<a href="Projects/NUCLEO-H743ZI/Demonstrations/Release_Notes.html">release notes</a>)</li>
-<li>HAL Examples (<a href="Projects/NUCLEO-H743ZI/Examples/Release_Notes.html">release notes</a>)</li>
-<li>HAL Templates (<a href="Projects/NUCLEO-H743ZI/Templates/Release_Notes.html">release notes</a>)</li>
+<li><p>The STM32CubeH7 Firmware package comes with a rich set of examples running on STMicroelectronics boards, organized by board and provided with preconfigured projects for the main supported toolchains. The exhaustive list of projects is provided in this table <a href="Projects/STM32CubeProjectsList.html">STM32CubeProjectsList.html</a>.</p></li>
+<li><p>Projects Release Note is available <a href="Projects/Release_Notes.html">release notes</a></p></li>
 </ul>
-<p>STM32H743I-EVAL</p>
-<ul>
-<li>Applications (<a href="Projects/STM32H743I-EVAL/Applications/Release_Notes.html">release notes</a>)</li>
-<li>Demonstrations (<a href="Projects/STM32H743I-EVAL/Demonstrations/Release_Notes.html">release notes</a>)</li>
-<li>HAL Examples (<a href="Projects/STM32H743I-EVAL/Examples/Release_Notes.html">release notes</a>)</li>
-<li>HAL Templates (<a href="Projects/STM32H743I-EVAL/Templates/Release_Notes.html">release notes</a>)</li>
-</ul>
-<h3 id="components-4">Components</h3>
+<h3 id="components-5">Components</h3>
 <table>
 <caption>Drivers</caption>
 <thead>
@@ -2026,16 +2527,16 @@
 <td style="text-align: center;"><a href="Drivers/STM32H7xx_HAL_Driver/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><strong>BSP STM32H743I_EVAL</strong></td>
+<td style="text-align: left;"><strong>BSP STM32H743I-EVAL</strong></td>
 <td style="text-align: center;"><strong>V1.1.0</strong></td>
 <td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
-<td style="text-align: center;"><a href="Drivers/BSP/STM32H743I_EVAL/Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/STM32H743I-EVAL/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;"><strong>BSP STM32H7xx_Nucleo_144</strong></td>
+<td style="text-align: left;"><strong>BSP STM32H7xx_Nucleo</strong></td>
 <td style="text-align: center;"><strong>V1.1.0</strong></td>
 <td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
-<td style="text-align: center;"><a href="Drivers/BSP/STM32H7xx_Nucleo_144/Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/STM32H7xx_Nucleo/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">BSP Adafruit_Shield</td>
@@ -2239,19 +2740,19 @@
 </tr>
 </tbody>
 </table>
-<h2 id="development-toolchains-and-compilers-4">Development Toolchains and Compilers</h2>
+<h2 id="development-toolchains-and-compilers-5">Development Toolchains and Compilers</h2>
 <ul>
 <li>RealView Microcontroller Development Kit (MDK-ARM) toolchain V5.23 + ST-LINK</li>
 <li>IAR Embedded Workbench for ARM (EWARM) toolchain V7.80.4 + ST-LINK</li>
 <li>System Workbench for STM32 (SW4STM32) toolchain V1.14 + ST-Link</li>
 </ul>
-<h2 id="supported-devices-and-eval-boards-4">Supported Devices and EVAL boards</h2>
+<h2 id="supported-devices-and-eval-boards-5">Supported Devices and EVAL boards</h2>
 <ul>
 <li>STM32H743/753 devices</li>
 <li>STM32H743XI-EVAL</li>
 <li>STM32H743ZI Nucleo 144</li>
 </ul>
-<h2 id="backward-compatibility-4">Backward compatibility</h2>
+<h2 id="backward-compatibility-5">Backward compatibility</h2>
 <ul>
 <li>None</li>
 </ul>
@@ -2260,28 +2761,17 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section1" aria-hidden="true"> <label for="collapse-section1" aria-hidden="true"><strong>V1.0.0 / 21-April-2017</strong></label>
 <div>
-<h2 id="main-changes-7">Main Changes</h2>
+<h2 id="main-changes-8">Main Changes</h2>
 <ul>
 <li><strong>First official release of STM32CubeH7 (STM32Cube for STM32H7 Series)</strong></li>
 </ul>
-<h2 id="contents-5">Contents</h2>
-<h3 id="projects-5">Projects</h3>
-<p>The STM32CubeH7 Firmware package comes with a rich set of examples running on STMicroelectronics boards, organized by board and provided with preconfigured projects for the main supported toolchains. The exhaustive list of projects is provided in this table <a href="Projects/STM32CubeProjectsList.html">STM32CubeProjectsList.html</a>.</p>
-<p>NUCLEO-H743ZI</p>
+<h2 id="contents-6">Contents</h2>
+<h3 id="projects-6">Projects</h3>
 <ul>
-<li>Applications (<a href="Projects/NUCLEO-H743ZI/Applications/Release_Notes.html">release notes</a>)</li>
-<li>Demonstrations (<a href="Projects/NUCLEO-H743ZI/Demonstrations/Release_Notes.html">release notes</a>)</li>
-<li>HAL Examples (<a href="Projects/NUCLEO-H743ZI/Examples/Release_Notes.html">release notes</a>)</li>
-<li>HAL Templates (<a href="Projects/NUCLEO-H743ZI/Templates/Release_Notes.html">release notes</a>)</li>
+<li><p>The STM32CubeH7 Firmware package comes with a rich set of examples running on STMicroelectronics boards, organized by board and provided with preconfigured projects for the main supported toolchains. The exhaustive list of projects is provided in this table <a href="Projects/STM32CubeProjectsList.html">STM32CubeProjectsList.html</a>.</p></li>
+<li><p>Projects Release Note is available <a href="Projects/Release_Notes.html">release notes</a></p></li>
 </ul>
-<p>STM32H743I-EVAL</p>
-<ul>
-<li>Applications (<a href="Projects/STM32H743I-EVAL/Applications/Release_Notes.html">release notes</a>)</li>
-<li>Demonstrations (<a href="Projects/STM32H743I-EVAL/Demonstrations/Release_Notes.html">release notes</a>)</li>
-<li>HAL Examples (<a href="Projects/STM32H743I-EVAL/Examples/Release_Notes.html">release notes</a>)</li>
-<li>HAL Templates (<a href="Projects/STM32H743I-EVAL/Templates/Release_Notes.html">release notes</a>)</li>
-</ul>
-<h3 id="components-5">Components</h3>
+<h3 id="components-6">Components</h3>
 <table>
 <caption>Drivers</caption>
 <thead>
@@ -2312,16 +2802,16 @@
 <td style="text-align: center;"><a href="Drivers/STM32H7xx_HAL_Driver/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">BSP STM32H743I_EVAL</td>
+<td style="text-align: left;">BSP STM32H743I-EVAL</td>
 <td style="text-align: center;">V1.0.0</td>
 <td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
-<td style="text-align: center;"><a href="Drivers/BSP/STM32H743I_EVAL/Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/STM32H743I-EVAL/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">BSP STM32H7xx_Nucleo_144</td>
-<td style="text-align: center;">V1.0.0</td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
-<td style="text-align: center;"><a href="Drivers/BSP/STM32H7xx_Nucleo_144/Release_Notes.html">release notes</a></td>
+<td style="text-align: left;">BSP STM32H7xx_Nucleo V1</td>
+<td style="text-align: center;">.0.0 [BSD</td>
+<td style="text-align: center;">-3-Clause](https://opensource.org/licenses/BSD-3-Clause) [rel</td>
+<td style="text-align: center;">ease notes](Drivers/BSP/STM32H7xx_Nucleo/Release_Notes.html)</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">BSP Adafruit_Shield</td>
@@ -2525,19 +3015,19 @@
 </tr>
 </tbody>
 </table>
-<h2 id="development-toolchains-and-compilers-5">Development Toolchains and Compilers</h2>
+<h2 id="development-toolchains-and-compilers-6">Development Toolchains and Compilers</h2>
 <ul>
 <li>RealView Microcontroller Development Kit (MDK-ARM) toolchain V5.23 + ST-LINK</li>
 <li>IAR Embedded Workbench for ARM (EWARM) toolchain V7.80.4 + ST-LINK</li>
 <li>System Workbench for STM32 (SW4STM32) toolchain V1.14 + ST-Link</li>
 </ul>
-<h2 id="supported-devices-and-eval-boards-5">Supported Devices and EVAL boards</h2>
+<h2 id="supported-devices-and-eval-boards-6">Supported Devices and EVAL boards</h2>
 <ul>
 <li>STM32H743/753 devices</li>
 <li>STM32H743XI-EVAL</li>
 <li>STM32H743ZI Nucleo 144</li>
 </ul>
-<h2 id="backward-compatibility-5">Backward compatibility</h2>
+<h2 id="backward-compatibility-6">Backward compatibility</h2>
 <ul>
 <li>None</li>
 </ul>

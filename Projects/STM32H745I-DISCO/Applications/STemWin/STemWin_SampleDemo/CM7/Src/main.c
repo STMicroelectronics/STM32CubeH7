@@ -30,7 +30,7 @@
 uint8_t GUI_Initialized = 0;
 TIM_HandleTypeDef TimHandle;
 uint32_t uwPrescalerValue = 0;
-
+TS_Init_t *hTS;
 /* Private function prototypes -----------------------------------------------*/
 static void BSP_Config(void);
 static void SystemClock_Config(void);
@@ -103,7 +103,7 @@ int main(void)
   /***********************************************************/
   
   /* Init the STemWin GUI Library */
-  BSP_SDRAM_Init(); /* Initializes the SDRAM device */
+  BSP_SDRAM_Init(0); /* Initializes the SDRAM device */
   __HAL_RCC_CRC_CLK_ENABLE(); /* Enable the CRC Module */
   GUI_Init();
 
@@ -176,7 +176,13 @@ static void BSP_Config(void)
   BSP_LED_Init(LED2);
   
   /* Initialize the Touch screen */
-  BSP_TS_Init(480, 272);
+  hTS->Width = 480;
+  hTS->Height = 272;
+  hTS->Orientation =TS_SWAP_XY;;
+  hTS->Accuracy = 0;
+
+  /* Touchscreen initialization */
+  BSP_TS_Init(0, hTS);
 }
 
 /**
@@ -208,40 +214,40 @@ void BSP_Background(void)
 void BSP_Pointer_Update(void)
 {
   GUI_PID_STATE TS_State;
-  static TS_StateTypeDef prev_state;
-  TS_StateTypeDef  ts;
+  static TS_State_t prev_state;
+  TS_State_t  ts;
   uint16_t xDiff, yDiff;  
   
-  BSP_TS_GetState(&ts);
+  BSP_TS_GetState(0, &ts);
   
-  TS_State.Pressed = ts.touchDetected;
+  TS_State.Pressed = ts.TouchDetected;
 
-  xDiff = (prev_state.touchX > ts.touchX) ? (prev_state.touchX - ts.touchX) : (ts.touchX - prev_state.touchX);
-  yDiff = (prev_state.touchY > ts.touchY) ? (prev_state.touchY - ts.touchY) : (ts.touchY - prev_state.touchY);
+  xDiff = (prev_state.TouchX > ts.TouchX) ? (prev_state.TouchX - ts.TouchX) : (ts.TouchX - prev_state.TouchX);
+  yDiff = (prev_state.TouchY > ts.TouchY) ? (prev_state.TouchY - ts.TouchY) : (ts.TouchY - prev_state.TouchY);
   
-  if((prev_state.touchDetected != ts.touchDetected )||
+  if((prev_state.TouchDetected != ts.TouchDetected )||
      (xDiff > 3 )||
        (yDiff > 3))
   {
-    prev_state.touchDetected = ts.touchDetected;
+    prev_state.TouchDetected = ts.TouchDetected;
     
-    if((ts.touchX != 0) &&  (ts.touchY != 0)) 
+    if((ts.TouchX != 0) &&  (ts.TouchY != 0)) 
     {
-      prev_state.touchX[0]= ts.touchX[0];
-      prev_state.touchY[0]= ts.touchY[0];
+      prev_state.TouchX= ts.TouchX;
+      prev_state.TouchY= ts.TouchY;
     }
       
     if(CALIBRATION_IsDone())
     {
       TS_State.Layer = 0;
-      TS_State.x = CALIBRATION_GetX (prev_state.touchX[0]);
-      TS_State.y = CALIBRATION_GetY (prev_state.touchY[0]);
+      TS_State.x = CALIBRATION_GetX (prev_state.TouchX);
+      TS_State.y = CALIBRATION_GetY (prev_state.TouchY);
     }
     else
     {
       TS_State.Layer = 0;
-      TS_State.x = prev_state.touchX[0];
-      TS_State.y = prev_state.touchY[0];
+      TS_State.x = prev_state.TouchX;
+      TS_State.y = prev_state.TouchY;
     }
     
     GUI_TOUCH_StoreStateEx(&TS_State);

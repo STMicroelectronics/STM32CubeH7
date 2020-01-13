@@ -24,35 +24,44 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm32h7xx_hal.h"
 #include "stm32h743i_eval.h"
+#include "stm32h743i_eval_audio.h"
+#include "stm32h743i_eval_bus.h"
 #include "audio.h"
-#include "../Components/wm8994/wm8994.h"
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
 /* SAI output definitions */
 /* SAI output peripheral configuration defines */
-#define AUDIO_OUT_SAIx                           SAI1_Block_A
-#define AUDIO_OUT_SAIx_CLK_ENABLE()              __HAL_RCC_SAI1_CLK_ENABLE()
-#define AUDIO_OUT_SAIx_CLK_DISABLE()             __HAL_RCC_SAI1_CLK_DISABLE()
-#define AUDIO_OUT_SAIx_AF                        GPIO_AF6_SAI1
+/* SAI peripheral configuration defines */
+#define AUDIO_SAIx                           SAI1_Block_A
+#define AUDIO_SAIx_CLK_ENABLE()              __HAL_RCC_SAI1_CLK_ENABLE()
 
-#define AUDIO_OUT_SAIx_SD_FS_CLK_ENABLE()        __HAL_RCC_GPIOE_CLK_ENABLE()
-#define AUDIO_OUT_SAIx_SD_FS_SCK_GPIO_PORT       GPIOE
-#define AUDIO_OUT_SAIx_FS_PIN                    GPIO_PIN_4   
-#define AUDIO_OUT_SAIx_SCK_PIN                   GPIO_PIN_5
-#define AUDIO_OUT_SAIx_SD_PIN                    GPIO_PIN_6
-#define AUDIO_OUT_SAIx_MCLK_ENABLE()             __HAL_RCC_GPIOE_CLK_ENABLE()
-#define AUDIO_OUT_SAIx_MCLK_GPIO_PORT            GPIOE
-#define AUDIO_OUT_SAIx_MCLK_PIN                  GPIO_PIN_2
+#define AUDIO_SAIx_FS_GPIO_PORT              GPIOE
+#define AUDIO_SAIx_FS_AF                     GPIO_AF6_SAI1
+#define AUDIO_SAIx_FS_PIN                    GPIO_PIN_4
+#define AUDIO_SAIx_SCK_GPIO_PORT             GPIOE
+#define AUDIO_SAIx_SCK_AF                    GPIO_AF6_SAI1
+#define AUDIO_SAIx_SCK_PIN                   GPIO_PIN_5
+#define AUDIO_SAIx_SD_GPIO_PORT              GPIOE
+#define AUDIO_SAIx_SD_AF                     GPIO_AF6_SAI1
+#define AUDIO_SAIx_SD_PIN                    GPIO_PIN_6
+#define AUDIO_SAIx_MCLK_GPIO_PORT            GPIOE
+#define AUDIO_SAIx_MCLK_AF                   GPIO_AF6_SAI1
+#define AUDIO_SAIx_MCLK_PIN                  GPIO_PIN_2
+
+#define AUDIO_SAIx_MCLK_ENABLE()             __HAL_RCC_GPIOE_CLK_ENABLE()
+#define AUDIO_SAIx_SCK_ENABLE()              __HAL_RCC_GPIOE_CLK_ENABLE()
+#define AUDIO_SAIx_FS_ENABLE()               __HAL_RCC_GPIOE_CLK_ENABLE()
+#define AUDIO_SAIx_SD_ENABLE()               __HAL_RCC_GPIOE_CLK_ENABLE()
 
 /* SAI DMA Stream definitions */
-#define AUDIO_OUT_SAIx_DMAx_CLK_ENABLE()         __HAL_RCC_DMA2_CLK_ENABLE()
-#define AUDIO_OUT_SAIx_DMAx_STREAM               DMA2_Stream2
-#define AUDIO_OUT_SAIx_DMAx_REQUEST              DMA_REQUEST_SAI1_A
-#define AUDIO_OUT_SAIx_DMAx_IRQ                  DMA2_Stream2_IRQn
-#define AUDIO_OUT_SAIx_DMAx_PERIPH_DATA_SIZE     DMA_PDATAALIGN_HALFWORD
-#define AUDIO_OUT_SAIx_DMAx_MEM_DATA_SIZE        DMA_MDATAALIGN_HALFWORD   
-#define AUDIO_OUT_SAIx_DMAx_IRQHandler           DMA2_Stream2_IRQHandler 
+#define AUDIO_SAIx_DMAx_CLK_ENABLE()         __HAL_RCC_DMA2_CLK_ENABLE()
+#define AUDIO_SAIx_DMAx_STREAM               DMA2_Stream2
+#define AUDIO_SAIx_DMAx_REQUEST              DMA_REQUEST_SAI1_A
+#define AUDIO_SAIx_DMAx_IRQ                  DMA2_Stream2_IRQn
+#define AUDIO_SAIx_DMAx_PERIPH_DATA_SIZE     DMA_PDATAALIGN_HALFWORD
+#define AUDIO_SAIx_DMAx_MEM_DATA_SIZE        DMA_MDATAALIGN_HALFWORD   
+#define AUDIO_SAIx_DMAx_IRQHandler           DMA2_Stream2_IRQHandler 
 
 /* DFSDM Configuration defines */
 #define AUDIO_DFSDMx_RIGHT_CHANNEL      DFSDM_CHANNEL_0

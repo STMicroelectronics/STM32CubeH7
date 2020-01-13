@@ -27,6 +27,7 @@
 #include "stm32h743i_eval_io.h"
 #include "stm32h743i_eval_lcd.h"
 #include "stm32h743i_eval_sdram.h"
+#include "basic_gui.h"
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/

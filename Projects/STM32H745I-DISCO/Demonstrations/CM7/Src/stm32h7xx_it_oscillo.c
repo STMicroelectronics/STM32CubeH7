@@ -36,7 +36,7 @@
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 extern DAC_HandleTypeDef    DacHandle;
-extern LTDC_HandleTypeDef hltdc_discovery;
+extern LTDC_HandleTypeDef hlcd_ltdc;
 extern DMA2D_HandleTypeDef    DMA2D_Handle;
 
 /* Private function prototypes -----------------------------------------------*/
@@ -178,7 +178,7 @@ void DMA2D_IRQHandler(void)
   */
 void LTDC_IRQHandler(void)
 {
-  HAL_LTDC_IRQHandler(&hltdc_discovery);
+  HAL_LTDC_IRQHandler(&hlcd_ltdc);
 }
 
 /**
@@ -188,7 +188,7 @@ void LTDC_IRQHandler(void)
   */
 void EXTI15_10_IRQHandler(void)
 {
-  HAL_GPIO_EXTI_IRQHandler(WAKEUP_BUTTON_PIN);
+  HAL_GPIO_EXTI_IRQHandler(BUTTON_USER_PIN);
 }
 /**
   * @}

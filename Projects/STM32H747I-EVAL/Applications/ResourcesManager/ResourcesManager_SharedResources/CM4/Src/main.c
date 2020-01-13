@@ -33,8 +33,7 @@
 #define HSEM_ID_0 (0U) /* HW semaphore 0*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-uint8_t CM4_Message[] = "THIS MESSAGE IS FROM CM4 CORE \n\r";
-UART_HandleTypeDef UartHandle;
+COM_InitTypeDef  COM_Init;
 /* Private function prototypes -----------------------------------------------*/
 
 static void ResMgrSendMessage (uint32_t id, uint32_t msg);
@@ -90,16 +89,13 @@ int main(void)
     Error_Handler();
   }
 
-  /* Uart Pre-Initialization*/
-  UartHandle.Init.BaudRate   = 115200;
-  UartHandle.Init.WordLength = UART_WORDLENGTH_8B;
-  UartHandle.Init.StopBits   = UART_STOPBITS_1;
-  UartHandle.Init.Parity     = UART_PARITY_NONE;
-  UartHandle.Init.HwFlowCtl  = UART_HWCONTROL_NONE;
-  UartHandle.Init.Mode       = UART_MODE_TX_RX;
-  UartHandle.Init.OverSampling = UART_OVERSAMPLING_16;
-
-
+  /* COM Pre-Initialization*/
+  COM_Init.BaudRate = 115200;
+  COM_Init.WordLength=COM_WORDLENGTH_8B;
+  COM_Init.StopBits=COM_STOPBITS_1;
+  COM_Init.Parity=COM_PARITY_NONE;
+  COM_Init.HwFlowCtl=COM_HWCONTROL_NONE;
+  
   for (;;)
   {
     do
@@ -112,10 +108,10 @@ int main(void)
 
     BSP_LED_On(LED2);
 
-    BSP_COM_Init(COM1, &UartHandle);
-    HAL_UART_Transmit(&UartHandle,CM4_Message,sizeof(CM4_Message),0xff);
+    BSP_COM_Init(COM1,&COM_Init);
+    printf("THIS MESSAGE IS FROM CM4 CORE \n\r");
     HAL_Delay(2000); /* To simutate the use of the resource*/
-    BSP_COM_DeInit(COM1, &UartHandle);
+    BSP_COM_DeInit(COM1);
     ResMgr_Release(RESMGR_ID_USART1, RESMGR_FLAGS_CPU2);
 
     BSP_LED_Off(LED2);

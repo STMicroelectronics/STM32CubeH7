@@ -221,7 +221,6 @@
                     <name>CCDefines</name>
                     <state>STM32H747xx</state>
                     <state>CORE_CM7</state>
-                    <state>USE_IOEXPANDER</state>
                     <state>VIRTIO_MASTER_ONLY</state>
                     <state>NO_ATOMIC_64_SUPPORT</state>
                     <state>METAL_MAX_DEVICE_REGIONS=2</state>
@@ -354,7 +353,7 @@
                     <state>$PROJ_DIR$/../CM7/Inc/</state>
                     <state>$PROJ_DIR$/../Common/Inc/</state>
                     <state>$PROJ_DIR$/../Common/Inc/openamp/</state>
-                    <state>$PROJ_DIR$/../../../../../../Drivers/BSP/STM32H7xx_EVAL</state>
+                    <state>$PROJ_DIR$/../../../../../../Drivers/BSP/STM32H747I-EVAL</state>
                     <state>$PROJ_DIR$/../../../../../../Drivers/CMSIS/Include</state>
                     <state>$PROJ_DIR$/../../../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include</state>
                     <state>$PROJ_DIR$/../../../../../../Drivers/STM32H7xx_HAL_Driver/Inc</state>
@@ -363,7 +362,6 @@
                     <state>$PROJ_DIR$/../../../../../../Middlewares/Third_Party/FreeRTOS/Source/portable/IAR/ARM_CM4F</state>
                     <state>$PROJ_DIR$/../../../../../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS</state>
                     <state>$PROJ_DIR$/../../../../../../Middlewares/Third_Party/FreeRTOS/Source/include</state>
-                    <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32H747I_EVAL</state>
                 </option>
                 <option>
                     <name>CCStdIncCheck</name>
@@ -2149,12 +2147,18 @@
                 <file>
                     <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\Components\mfxstm32l152\mfxstm32l152.c</name>
                 </file>
+                <file>
+                    <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\Components\mfxstm32l152\mfxstm32l152_reg.c</name>
+                </file>
             </group>
             <file>
-                <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32H747I_EVAL\stm32h747i_eval.c</name>
+                <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32H747I-EVAL\stm32h747i_eval.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32H747I_EVAL\stm32h747i_eval_io.c</name>
+                <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32H747I-EVAL\stm32h747i_eval_bus.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32H747I-EVAL\stm32h747i_eval_io.c</name>
             </file>
         </group>
         <group>
@@ -2182,6 +2186,9 @@
             </file>
             <file>
                 <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_dma_ex.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_exti.c</name>
             </file>
             <file>
                 <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_gpio.c</name>

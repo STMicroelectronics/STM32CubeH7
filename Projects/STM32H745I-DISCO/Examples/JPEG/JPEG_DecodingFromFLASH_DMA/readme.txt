@@ -100,6 +100,8 @@ Display, Graphic, JPEG, Decoding, Flash memory, LTDC, DMA, MDMA, DMA2D, ARGB8888
 @par Directory contents
 
   - JPEG/JPEG_DecodingFromFLASH_DMA/Common/Src/system_stm32h7xx.c     STM32H7xx system configuration source file
+  - FDCAN/FDCAN_Image_transmission/Common/Src/ft5336_conf.h          Configurations file for ft5336
+  - FDCAN/FDCAN_Image_transmission/Common/Inc/mt48lc4m32b2_conf.h     Configurations file for mt48lc4m32b2
   
   - JPEG/JPEG_DecodingFromFLASH_DMA/CM7/Inc/stm32h7xx_hal_conf.h          HAL configuration file for cortex-M7
   - JPEG/JPEG_DecodingFromFLASH_DMA/CM7/Inc/stm32h7xx_it.h                Interrupt handlers header file for cortex-M7

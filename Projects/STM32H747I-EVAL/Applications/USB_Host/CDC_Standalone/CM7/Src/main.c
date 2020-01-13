@@ -47,13 +47,12 @@ int main(void)
   int32_t timeout;
   /* This project calls firstly two functions in order to configure MPU feature
   and to enable the CPU Cache, respectively MPU_Config() and CPU_CACHE_Enable()*/
-
+  
   /* Configure the MPU attributes as Write Through for SDRAM*/
   MPU_Config();
-
+  
   /* Enable the CPU Cache */
   CPU_CACHE_Enable();
-
   /* Wait until CPU2 boots and enters in stop mode or timeout*/
   timeout = 0xFFFF;
   while((__HAL_RCC_GET_FLAG(RCC_FLAG_D2CKRDY) != RESET) && (timeout-- > 0));
@@ -61,7 +60,6 @@ int main(void)
   {
     Error_Handler();
   }  
-
   /* STM32H7xx HAL library initialization:
   - Systick timer is configured by default as source of time base, but user
   can eventually implement his proper time base source (a general purpose
@@ -75,7 +73,6 @@ int main(void)
 
   /* Configure the System clock to have a frequency of 400 Mhz */
   SystemClock_Config();
-
   /* When system initialization is finished, Cortex-M7 will release (wakeup) Cortex-M4  by means of
   HSEM notification. Cortex-M4 release could be also ensured by any Domain D2 wakeup source (SEV,EXTI..).
   */
@@ -95,10 +92,6 @@ int main(void)
   {
     Error_Handler();
   }
-
-  /* Initialize IO expander */
-  BSP_IO_Init();
-
   /* Init CDC Application */
   CDC_InitApplication();
 
@@ -136,34 +129,24 @@ static void CDC_InitApplication(void)
   BSP_PB_Init(BUTTON_TAMPER, BUTTON_MODE_EXTI);
 
   /* Configure Joystick in EXTI mode */
-  BSP_JOY_Init(JOY_MODE_EXTI);
-
+ BSP_JOY_Init(JOY1, JOY_MODE_EXTI, JOY_ALL);
+ 
   /* Configure LED1 and LED3 */
   BSP_LED_Init(LED1);
   BSP_LED_Init(LED3);
 
   /* Initialize the LCD */
-  BSP_LCD_Init();
-
-  /* LCD Layer Initialization */
-  BSP_LCD_LayerDefaultInit(1, LCD_FB_START_ADDRESS);
-
-  /* Selects the LCD Layer */
-  BSP_LCD_SelectLayer(1);
-
-  /* Enables the display */
-  BSP_LCD_DisplayOn();
-
-  /* Initialize the LCD Log module */
-  LCD_LOG_Init();
-
+  BSP_LCD_Init(0, LCD_ORIENTATION_LANDSCAPE);
+  GUI_SetFuncDriver(&LCD_Driver);
+  
+  UTIL_LCD_TRACE_Init();
 #ifdef USE_USB_HS
-  LCD_LOG_SetHeader((uint8_t *) " USB OTG HS CDC Host");
+  UTIL_LCD_TRACE_SetHeader((uint8_t *) " USB OTG HS CDC Host");
 #else
-  LCD_LOG_SetHeader((uint8_t *) " USB OTG FS CDC Host");
+  UTIL_LCD_TRACE_SetHeader((uint8_t *) " USB OTG FS CDC Host");
 #endif
 
-  LCD_UsrLog("USB Host library started.\n");
+  LCD_UsrTrace("USB Host library started.\n");
 
   /* Start CDC Interface */
   USBH_UsrLog("Starting CDC Demo");
@@ -337,7 +320,27 @@ static void MPU_Config(void)
   HAL_MPU_Enable(MPU_PRIVILEGED_DEFAULT);
 }
 
-
+/**
+  * @brief  LTDC Clock Config for LCD DSI display.
+  * @param  hltdc  LTDC Handle
+  * @retval HAL_status
+  */
+ HAL_StatusTypeDef MX_LTDC_ClockConfig(LTDC_HandleTypeDef *hltdc)
+{
+  RCC_PeriphCLKInitTypeDef  PeriphClkInitStruct;
+  /* LCD clock configuration */
+  /* PLL3_VCO Input = HSE_VALUE/PLL3M = 5 Mhz */
+  /* PLL3_VCO Output = PLL3_VCO Input * PLL3N = 480 Mhz */
+  /* PLLLCDCLK = PLL3_VCO Output/PLL3R = 480/18 = 26.666 Mhz */
+  /* LTDC clock frequency = PLLLCDCLK = 26.666 Mhz */
+  PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_LTDC;
+  PeriphClkInitStruct.PLL3.PLL3M = 5;
+  PeriphClkInitStruct.PLL3.PLL3N = 96;
+  PeriphClkInitStruct.PLL3.PLL3P = 2;
+  PeriphClkInitStruct.PLL3.PLL3Q = 10;
+  PeriphClkInitStruct.PLL3.PLL3R = 18;
+  return HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct);
+}
 /**
 * @brief  CPU L1-Cache enable.
 * @param  None
@@ -351,7 +354,6 @@ static void CPU_CACHE_Enable(void)
   /* Enable D-Cache */
   SCB_EnableDCache();
 }
-
 /**
   * @brief Error Handler
   * @retval None
@@ -361,6 +363,10 @@ static void Error_Handler(void)
   while(1) { ; } /* Blocking on error */
 }
 
+/**
+  * @brief Error Handler
+  * @retval None
+  */
 #ifdef  USE_FULL_ASSERT
 /**
 * @brief  Reports the name of the source file and the source line number

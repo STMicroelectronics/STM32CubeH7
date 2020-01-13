@@ -40,7 +40,9 @@
 /* Private variables ---------------------------------------------------------*/
 SAI_HandleTypeDef   SaiHandle;
 DMA_HandleTypeDef   hSaiDma;
-AUDIO_DrvTypeDef    *audio_drv;
+static AUDIO_Drv_t                     *Audio_Drv = NULL;
+void *Audio_CompObj = NULL;
+WM8994_Init_t codec_init;
 __IO int16_t        UpdatePointer = -1;
 
 /* Buffer location should aligned to cache line size (32 bytes) */
@@ -61,6 +63,7 @@ static void CPU_CACHE_Enable(void);
 int main(void)
 {
   __IO uint32_t PlaybackPosition   = PLAY_BUFF_SIZE + PLAY_HEADER;
+  WM8994_Init_t codec_init;
 
   /* Enable the CPU Cache */
   CPU_CACHE_Enable();
@@ -95,9 +98,25 @@ int main(void)
   {
     PlayBuff[i]=*((__IO uint16_t *)(AUDIO_FILE_ADDRESS + PLAY_HEADER + i));
   }
+ 
+  codec_init.Resolution   = 0;
+  
+  /* Fill codec_init structure */
+  codec_init.Frequency    = 16000;
+  codec_init.InputDevice  = WM8994_IN_NONE;
+  codec_init.OutputDevice = AUDIO_OUT_DEVICE_HEADPHONE;
+  
+  /* Convert volume before sending to the codec */
+  codec_init.Volume       = VOLUME_OUT_CONVERT(60);
+  
+  /* Initialize the codec internal registers */
+  if(Audio_Drv->Init(Audio_CompObj, &codec_init) != 0)
+  {
+    Error_Handler();
+  }
 
   /* Start the playback */
-  if(0 != audio_drv->Play(AUDIO_I2C_ADDRESS, NULL, 0))
+  if(Audio_Drv->Play(Audio_CompObj) < 0)
   {
     Error_Handler();
   }
@@ -111,29 +130,29 @@ int main(void)
   while(1)
   {
     BSP_LED_Toggle(LED1);
-
+    
     /* Wait a callback event */
     while(UpdatePointer==-1);
-
+    
     int position = UpdatePointer;
     UpdatePointer = -1;
-
+    
     /* Upate the first or the second part of the buffer */
     for(int i = 0; i < PLAY_BUFF_SIZE/2; i++)
     {
       PlayBuff[i+position] = *(uint16_t *)(AUDIO_FILE_ADDRESS + PlaybackPosition);
       PlaybackPosition+=2;
     }
-
+    
     /* Clean Data Cache to update the content of the SRAM */
     SCB_CleanDCache_by_Addr((uint32_t*)&PlayBuff[position], PLAY_BUFF_SIZE);
-
+    
     /* check the end of the file */
     if((PlaybackPosition+PLAY_BUFF_SIZE/2) > AUDIO_FILE_SIZE)
     {
       PlaybackPosition = PLAY_HEADER;
     }
-
+    
     if(UpdatePointer != -1)
     {
       /* Buffer update time is too long compare to the data transfer time */
@@ -222,6 +241,52 @@ static void SystemClock_Config(void)
 }
 
 /**
+  * @brief  Register Bus IOs if component ID is OK
+  * @retval error status
+  */
+static int32_t WM8994_Probe(void)
+{
+  int32_t ret = BSP_ERROR_NONE;
+  WM8994_IO_t              IOCtx;
+  static WM8994_Object_t   WM8994Obj;
+  uint32_t id;
+
+  /* Configure the audio driver */
+  IOCtx.Address     = AUDIO_I2C_ADDRESS;
+  IOCtx.Init        = BSP_I2C1_Init;
+  IOCtx.DeInit      = BSP_I2C1_DeInit;
+  IOCtx.ReadReg     = BSP_I2C1_ReadReg16;
+  IOCtx.WriteReg    = BSP_I2C1_WriteReg16;
+  IOCtx.GetTick     = BSP_GetTick;
+
+  if(WM8994_RegisterBusIO (&WM8994Obj, &IOCtx) != WM8994_OK)
+  {
+    ret = BSP_ERROR_BUS_FAILURE;
+  }
+  else
+  {
+    /* Reset the codec */
+    if(WM8994_Reset(&WM8994Obj) != WM8994_OK)
+    {
+      ret = BSP_ERROR_COMPONENT_FAILURE;
+    }
+    else if(WM8994_ReadID(&WM8994Obj, &id) != WM8994_OK)
+    {
+      ret = BSP_ERROR_COMPONENT_FAILURE;
+    }
+    else if(id != WM8994_ID)
+    {
+      ret = BSP_ERROR_UNKNOWN_COMPONENT;
+    }
+    else
+    {
+      Audio_Drv = (AUDIO_Drv_t *) &WM8994_Driver;
+      Audio_CompObj = &WM8994Obj;
+    }
+  }
+  return ret;
+}
+/**
   * @brief  Playback initialization
   * @param  None
   * @retval None
@@ -283,16 +348,13 @@ static void Playback_Init(void)
 
   /* Enable SAI to generate clock used by audio driver */
   __HAL_SAI_ENABLE(&SaiHandle);
-
-  /* Initialize audio driver */
-  if(WM8994_ID != wm8994_drv.ReadID(AUDIO_I2C_ADDRESS))
+  
+  if(WM8994_Probe() != BSP_ERROR_NONE)
   {
     Error_Handler();
   }
-
-  audio_drv = &wm8994_drv;
-  audio_drv->Reset(AUDIO_I2C_ADDRESS);
-  if(0 != audio_drv->Init(AUDIO_I2C_ADDRESS, OUTPUT_DEVICE_HEADPHONE, 50, AUDIO_FREQUENCY_22K))
+  
+  if(Audio_Drv->Init(Audio_CompObj, &codec_init)!=0)
   {
     Error_Handler();
   }

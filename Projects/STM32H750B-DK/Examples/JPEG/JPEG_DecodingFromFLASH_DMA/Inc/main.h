@@ -27,7 +27,7 @@
 #include "stm32h750b_discovery.h"
 #include "stm32h750b_discovery_lcd.h"
 #include "stm32h750b_discovery_sdram.h"
-
+#include "basic_gui.h"
 /* Exported variables --------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
 #define LCD_FRAME_BUFFER         0xD0000000

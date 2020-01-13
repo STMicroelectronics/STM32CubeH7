@@ -134,7 +134,7 @@ The check could be done using this macro : __HAL_RCC_GET_FLAG(RCC_FLAG_D2CKRDY).
 
   - This example runs on STM32H747xx device.
   
-  - This example has been tested with STM32H747I-DISCO rev.D board with SMPS (SD Convertor) power supply config and can be
+  - This example has been tested with STM32H747I-DISCO  board with SMPS (SD Convertor) power supply config and can be
     easily tailored to any other supported device and development board.    
 
 @par How to use it ?

@@ -140,6 +140,8 @@ Repeat blocks
 @par Directory contents
 
   - MDMA/MDMA_RepeatBlock_ZoomOut/Common/Src/system_stm32h7xx.c     STM32H7xx system configuration source file 
+  - MDMA/MDMA_RepeatBlock_ZoomOut/Common/Inc/mt48lc4m32b2_conf.h    Configuration file for mt48lc4m32b2 
+
   
   - MDMA/MDMA_RepeatBlock_ZoomOut/CM7/Inc/stm32h7xx_hal_conf.h  HAL configuration file for Cortex-M7
   - MDMA/MDMA_RepeatBlock_ZoomOut/CM7/Inc/stm32h7xx_it.h        Interrupt handlers header file for Cortex-M7
@@ -148,7 +150,8 @@ Repeat blocks
   - MDMA/MDMA_RepeatBlock_ZoomOut/CM7/Src/main.c                Main program for Cortex-M7
   - MDMA/MDMA_RepeatBlock_ZoomOut/CM7/Src/stm32h7xx_hal_msp.c   HAL MSP module for Cortex-M7 
   - MDMA/MDMA_RepeatBlock_ZoomOut/CM7/Inc/RGB565_480x272.h      Image of size 480x272 and format RGB565 to be decimated and displayed in ARGB8888 on LCD  
-
+  - MDMA/MDMA_RepeatBlock_ZoomOut/CM7/Inc/ft5336_conf.h        Configuration file for ft5336 
+  
   - MDMA/MDMA_RepeatBlock_ZoomOut/CM4/Inc/stm32h7xx_hal_conf.h    HAL configuration file for Cortex-M4
   - MDMA/MDMA_RepeatBlock_ZoomOut/CM4/Inc/stm32h7xx_it.h          Interrupt handlers header file for Cortex-M4
   - MDMA/MDMA_RepeatBlock_ZoomOut/CM4/Inc/main.h                  Main configuration file for Cortex-M4
@@ -160,7 +163,7 @@ Repeat blocks
 
   - This example runs on STM32H745xx devices.
   
-  - This example has been tested with STM32H745I-DISCO rev.A board with SMPS (SD Convertor) power supply config and can be
+  - This example has been tested with STM32H745I-DISCO  board with SMPS (SD Convertor) power supply config and can be
     easily tailored to any other supported device and development board.    
 
 @par How to use it ?

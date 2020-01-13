@@ -39,10 +39,10 @@ FILELIST_FileTypeDef FileList;
 uint8_t SD_StorageInit(void)
 {
   /* Initializes the SD card device */
-  BSP_SD_Init();
+  BSP_SD_Init(0);
 
   /* Check if the SD card is plugged in the slot */
-  if (BSP_SD_IsDetected() == SD_PRESENT)
+  if (BSP_SD_IsDetected(0) == SD_PRESENT)
   {
     /* Link the SD Card disk I/O driver */
     if (FATFS_LinkDriver(&SD_Driver, SD_Path) == 0)
@@ -50,18 +50,18 @@ uint8_t SD_StorageInit(void)
       if ((f_mount(&SD_FatFs, (TCHAR const *)SD_Path, 0) != FR_OK))
       {
         /* FatFs Initialization Error */
-        LCD_ErrLog("Cannot Initialize FatFs! \n");
+        LCD_ErrTrace("Cannot Initialize FatFs! \n");
         return 1;
       }
       else
       {
-        LCD_DbgLog("INFO : FatFs Initialized! \n");
+        LCD_DbgTrace("INFO : FatFs Initialized! \n");
       }
     }
   }
   else
   {
-    LCD_ErrLog("SD card NOT plugged \n");
+    LCD_ErrTrace("SD card NOT plugged \n");
     return 1;
   }
   return 0;

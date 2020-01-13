@@ -39,6 +39,7 @@
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */
 void SystemClock_Config(void);
+void AUDIO_OUT_ClockConfig(SAI_HandleTypeDef * hsai, uint32_t AudioFreq, void *Params);
 #endif /* __MAIN_H */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

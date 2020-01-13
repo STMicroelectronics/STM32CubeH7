@@ -164,7 +164,7 @@ void ADCx_DMA_IRQHandler(void)
   */
 void EXTI15_10_IRQHandler(void)
 {
-  HAL_GPIO_EXTI_IRQHandler(USER_BUTTON_PIN);
+  BSP_PB_IRQHandler(BUTTON_USER);
 }
 
 /**

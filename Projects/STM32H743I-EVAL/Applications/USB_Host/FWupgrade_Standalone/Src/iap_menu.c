@@ -91,7 +91,7 @@ void FW_UPGRADE_Process(void)
       }
       
       /* Waiting KEY Button Pressed */
-      while((BSP_PB_GetState(BUTTON_KEY) != GPIO_PIN_RESET) && (Appli_state == APPLICATION_READY))
+      while((BSP_PB_GetState(BUTTON_USER) != GPIO_PIN_RESET) && (Appli_state == APPLICATION_READY))
       {}
       
       /* Waiting KEY Button Released */
@@ -127,13 +127,13 @@ void FW_UPGRADE_Process(void)
 static void IAP_UploadTimeout(void)
 {
   /* Check if KEY button is pressed */
-  if(BSP_PB_GetState(BUTTON_KEY) != GPIO_PIN_SET)
+  if(BSP_PB_GetState(BUTTON_USER) != GPIO_PIN_SET)
   {
     /* To execute the UPLOAD command the KEY button should be kept pressed 3s 
        just after a board reset, at firmware startup */
     HAL_Delay (3000);
     
-    if(BSP_PB_GetState(BUTTON_KEY) != GPIO_PIN_SET)
+    if(BSP_PB_GetState(BUTTON_USER) != GPIO_PIN_SET)
     {
       /* UPLOAD command will be executed immediately after
       completed execution of the DOWNLOAD command */

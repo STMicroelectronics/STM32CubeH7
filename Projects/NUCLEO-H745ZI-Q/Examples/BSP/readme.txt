@@ -115,7 +115,7 @@ Board Support Package, BSP, Adafruit, TFT, LCD, Joystick, SD Card
 
  - This example runs on STM32H745ZI/STM32H755ZI Devices 
   
- - This example has been tested with STMicroelectronics NUCLEO-H745ZI Rev.A board
+ - This example has been tested with STMicroelectronics NUCLEO-H745ZI  board
    and can be easily tailored to any other supported device and development board.
 
  - NUCLEO-H745ZI board Set-up

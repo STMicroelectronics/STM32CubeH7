@@ -7,8 +7,9 @@
 #include <touchgfx/transitions/NoTransition.hpp>
 #include <texts/TextKeysAndLanguages.hpp>
 #include <touchgfx/Texts.hpp>
-#include <gui/hallwayscreen_screen/HallwayScreenView.hpp>
-#include <gui/hallwayscreen_screen/HallwayScreenPresenter.hpp>
+#include <touchgfx/hal/HAL.hpp>
+#include <gui/hallwayscreen_screen/hallwayScreenView.hpp>
+#include <gui/hallwayscreen_screen/hallwayScreenPresenter.hpp>
 #include <gui/kitchenscreen_screen/KitchenScreenView.hpp>
 #include <gui/kitchenscreen_screen/KitchenScreenPresenter.hpp>
 #include <gui/bathtubscreen_screen/BathtubScreenView.hpp>
@@ -39,7 +40,8 @@ FrontendApplicationBase::FrontendApplicationBase(Model& m, FrontendHeap& heap)
       frontendHeap(heap),
       model(m)
 {
-    Texts::setLanguage(GB);
+    touchgfx::HAL::getInstance()->setDisplayOrientation(touchgfx::ORIENTATION_LANDSCAPE);
+    touchgfx::Texts::setLanguage(GB);
 }
 
 /*
@@ -55,7 +57,7 @@ void FrontendApplicationBase::gotoHallwayScreenScreenNoTransition()
 
 void FrontendApplicationBase::gotoHallwayScreenScreenNoTransitionImpl()
 {
-    makeTransition<HallwayScreenView, HallwayScreenPresenter, touchgfx::NoTransition, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
+    touchgfx::makeTransition<HallwayScreenView, HallwayScreenPresenter, touchgfx::NoTransition, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
 }
 
 
@@ -67,7 +69,7 @@ void FrontendApplicationBase::gotoHallwayScreenScreenSlideTransitionWest()
 
 void FrontendApplicationBase::gotoHallwayScreenScreenSlideTransitionWestImpl()
 {
-    makeTransition<HallwayScreenView, HallwayScreenPresenter, touchgfx::SlideTransition<WEST>, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
+    touchgfx::makeTransition<HallwayScreenView, HallwayScreenPresenter, touchgfx::SlideTransition<WEST>, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
 }
 
 
@@ -79,7 +81,7 @@ void FrontendApplicationBase::gotoHallwayScreenScreenSlideTransitionEast()
 
 void FrontendApplicationBase::gotoHallwayScreenScreenSlideTransitionEastImpl()
 {
-    makeTransition<HallwayScreenView, HallwayScreenPresenter, touchgfx::SlideTransition<EAST>, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
+    touchgfx::makeTransition<HallwayScreenView, HallwayScreenPresenter, touchgfx::SlideTransition<EAST>, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
 }
 
 
@@ -91,7 +93,7 @@ void FrontendApplicationBase::gotoHallwayScreenScreenCoverTransitionSouth()
 
 void FrontendApplicationBase::gotoHallwayScreenScreenCoverTransitionSouthImpl()
 {
-    makeTransition<HallwayScreenView, HallwayScreenPresenter, touchgfx::CoverTransition<SOUTH>, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
+    touchgfx::makeTransition<HallwayScreenView, HallwayScreenPresenter, touchgfx::CoverTransition<SOUTH>, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
 }
 
 // KitchenScreen
@@ -104,7 +106,7 @@ void FrontendApplicationBase::gotoKitchenScreenScreenSlideTransitionEast()
 
 void FrontendApplicationBase::gotoKitchenScreenScreenSlideTransitionEastImpl()
 {
-    makeTransition<KitchenScreenView, KitchenScreenPresenter, touchgfx::SlideTransition<EAST>, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
+    touchgfx::makeTransition<KitchenScreenView, KitchenScreenPresenter, touchgfx::SlideTransition<EAST>, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
 }
 
 
@@ -116,7 +118,7 @@ void FrontendApplicationBase::gotoKitchenScreenScreenNoTransition()
 
 void FrontendApplicationBase::gotoKitchenScreenScreenNoTransitionImpl()
 {
-    makeTransition<KitchenScreenView, KitchenScreenPresenter, touchgfx::NoTransition, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
+    touchgfx::makeTransition<KitchenScreenView, KitchenScreenPresenter, touchgfx::NoTransition, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
 }
 
 // BathtubScreen
@@ -129,7 +131,7 @@ void FrontendApplicationBase::gotoBathtubScreenScreenNoTransition()
 
 void FrontendApplicationBase::gotoBathtubScreenScreenNoTransitionImpl()
 {
-    makeTransition<BathtubScreenView, BathtubScreenPresenter, touchgfx::NoTransition, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
+    touchgfx::makeTransition<BathtubScreenView, BathtubScreenPresenter, touchgfx::NoTransition, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
 }
 
 // BathroomScreen
@@ -142,7 +144,7 @@ void FrontendApplicationBase::gotoBathroomScreenScreenSlideTransitionWest()
 
 void FrontendApplicationBase::gotoBathroomScreenScreenSlideTransitionWestImpl()
 {
-    makeTransition<BathroomScreenView, BathroomScreenPresenter, touchgfx::SlideTransition<WEST>, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
+    touchgfx::makeTransition<BathroomScreenView, BathroomScreenPresenter, touchgfx::SlideTransition<WEST>, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
 }
 
 
@@ -154,7 +156,7 @@ void FrontendApplicationBase::gotoBathroomScreenScreenNoTransition()
 
 void FrontendApplicationBase::gotoBathroomScreenScreenNoTransitionImpl()
 {
-    makeTransition<BathroomScreenView, BathroomScreenPresenter, touchgfx::NoTransition, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
+    touchgfx::makeTransition<BathroomScreenView, BathroomScreenPresenter, touchgfx::NoTransition, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
 }
 
 // WasherScreen
@@ -167,7 +169,7 @@ void FrontendApplicationBase::gotoWasherScreenScreenNoTransition()
 
 void FrontendApplicationBase::gotoWasherScreenScreenNoTransitionImpl()
 {
-    makeTransition<WasherScreenView, WasherScreenPresenter, touchgfx::NoTransition, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
+    touchgfx::makeTransition<WasherScreenView, WasherScreenPresenter, touchgfx::NoTransition, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
 }
 
 // ExtractorHoodScreen
@@ -180,7 +182,7 @@ void FrontendApplicationBase::gotoExtractorHoodScreenScreenNoTransition()
 
 void FrontendApplicationBase::gotoExtractorHoodScreenScreenNoTransitionImpl()
 {
-    makeTransition<ExtractorHoodScreenView, ExtractorHoodScreenPresenter, touchgfx::NoTransition, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
+    touchgfx::makeTransition<ExtractorHoodScreenView, ExtractorHoodScreenPresenter, touchgfx::NoTransition, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
 }
 
 // RecipeScreen
@@ -193,7 +195,7 @@ void FrontendApplicationBase::gotoRecipeScreenScreenCoverTransitionSouth()
 
 void FrontendApplicationBase::gotoRecipeScreenScreenCoverTransitionSouthImpl()
 {
-    makeTransition<RecipeScreenView, RecipeScreenPresenter, touchgfx::CoverTransition<SOUTH>, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
+    touchgfx::makeTransition<RecipeScreenView, RecipeScreenPresenter, touchgfx::CoverTransition<SOUTH>, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
 }
 
 
@@ -205,7 +207,7 @@ void FrontendApplicationBase::gotoRecipeScreenScreenNoTransition()
 
 void FrontendApplicationBase::gotoRecipeScreenScreenNoTransitionImpl()
 {
-    makeTransition<RecipeScreenView, RecipeScreenPresenter, touchgfx::NoTransition, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
+    touchgfx::makeTransition<RecipeScreenView, RecipeScreenPresenter, touchgfx::NoTransition, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
 }
 
 // RecipeSelectedScreen
@@ -218,7 +220,7 @@ void FrontendApplicationBase::gotoRecipeSelectedScreenScreenCoverTransitionNorth
 
 void FrontendApplicationBase::gotoRecipeSelectedScreenScreenCoverTransitionNorthImpl()
 {
-    makeTransition<RecipeSelectedScreenView, RecipeSelectedScreenPresenter, touchgfx::CoverTransition<NORTH>, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
+    touchgfx::makeTransition<RecipeSelectedScreenView, RecipeSelectedScreenPresenter, touchgfx::CoverTransition<NORTH>, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
 }
 
 // OvenScreen
@@ -231,7 +233,7 @@ void FrontendApplicationBase::gotoOvenScreenScreenNoTransition()
 
 void FrontendApplicationBase::gotoOvenScreenScreenNoTransitionImpl()
 {
-    makeTransition<OvenScreenView, OvenScreenPresenter, touchgfx::NoTransition, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
+    touchgfx::makeTransition<OvenScreenView, OvenScreenPresenter, touchgfx::NoTransition, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
 }
 
 // HomeControlScreen
@@ -244,7 +246,7 @@ void FrontendApplicationBase::gotoHomeControlScreenScreenNoTransition()
 
 void FrontendApplicationBase::gotoHomeControlScreenScreenNoTransitionImpl()
 {
-    makeTransition<HomeControlScreenView, HomeControlScreenPresenter, touchgfx::NoTransition, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
+    touchgfx::makeTransition<HomeControlScreenView, HomeControlScreenPresenter, touchgfx::NoTransition, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
 }
 
 // AboutScreen
@@ -257,6 +259,6 @@ void FrontendApplicationBase::gotoAboutScreenScreenCoverTransitionNorth()
 
 void FrontendApplicationBase::gotoAboutScreenScreenCoverTransitionNorthImpl()
 {
-    makeTransition<AboutScreenView, AboutScreenPresenter, touchgfx::CoverTransition<NORTH>, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
+    touchgfx::makeTransition<AboutScreenView, AboutScreenPresenter, touchgfx::CoverTransition<NORTH>, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
 }
 

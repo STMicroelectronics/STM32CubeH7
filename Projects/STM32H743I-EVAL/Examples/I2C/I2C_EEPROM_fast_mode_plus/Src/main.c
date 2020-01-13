@@ -42,7 +42,7 @@
    conditions (interrupts routines ...). */   
 #define I2C_XFER_TIMEOUT_MAX    300
 /* Maximum number of trials for HAL_I2C_IsDeviceReady() function */
-#define EEPROM_MAX_TRIALS       300
+#define I2C_EEPROM_MAX_TRIALS       300
 
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
@@ -166,7 +166,7 @@ int main(void)
     }
     
     /* Check if the EEPROM is ready for a new operation */
-    while (HAL_I2C_IsDeviceReady(&I2cHandle, EEPROM_ADDRESS, EEPROM_MAX_TRIALS, I2C_XFER_TIMEOUT_MAX) != HAL_OK);
+    while (HAL_I2C_IsDeviceReady(&I2cHandle, EEPROM_ADDRESS, I2C_EEPROM_MAX_TRIALS, I2C_XFER_TIMEOUT_MAX) != HAL_OK);
     
     /* Update Remaining bytes and Memory Address values */
     Remaining_Bytes -= EEPROM_PAGESIZE;

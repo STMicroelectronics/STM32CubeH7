@@ -24,7 +24,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm32h7xx_hal.h"
 #include "stm32h7xx_hal_sd.h"
-#include "stm32h7xx_nucleo_144.h"
+#include "stm32h7xx_nucleo.h"
 
 
 

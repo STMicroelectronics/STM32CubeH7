@@ -60,7 +60,7 @@ Firmware upgrade application "APPLICATION_ADDRESS".
 
   - This application runs on STM32H7xx devices.
     
-  - This application has been tested with STMicroelectronics STM32H743I-EVAL RevB
+  - This application has been tested with STMicroelectronics STM32H743I-EVAL 
     evaluation boards and can be easily tailored to any other supported device 
     and development board.  
 

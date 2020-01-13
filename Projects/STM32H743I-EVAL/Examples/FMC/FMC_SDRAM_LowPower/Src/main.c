@@ -36,7 +36,7 @@
 
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-SDRAM_HandleTypeDef      hsdram;
+SDRAM_HandleTypeDef      hSdram;
 FMC_SDRAM_TimingTypeDef  SDRAM_Timing;
 FMC_SDRAM_CommandTypeDef SDRAMCommandStructure;
 
@@ -95,7 +95,7 @@ int main(void)
 
   /*##-1- Configure the SDRAM device #########################################*/
   /* SDRAM device configuration */
-  BSP_SDRAM_Init();
+  BSP_SDRAM_Init(0);
 
   /*##-2- SDRAM memory read/write access #####################################*/
  /* Fill the buffer to write */
@@ -105,8 +105,7 @@ int main(void)
   Fill_Buffer(aRxBuffer, BUFFER_SIZE, 0xBBBBBBBB);
 
 	/* Write data to the SDRAM memory */
-  BSP_SDRAM_WriteData(SDRAM_DEVICE_ADDR + WRITE_READ_ADDR, aTxBuffer, BUFFER_SIZE);
-
+  HAL_SDRAM_Write_32b(&hsdram[0], (uint32_t*)(SDRAM_DEVICE_ADDR + WRITE_READ_ADDR), (uint32_t*)aTxBuffer, BUFFER_SIZE);
   /* Wait for TAMPER/KEY to be pressed to enter stop mode */
   while(BSP_PB_GetState(BUTTON_TAMPER) != GPIO_PIN_SET){}
   /* Wait for TAMPER/KEY to be released */
@@ -118,7 +117,7 @@ int main(void)
   SDRAMCommandStructure.AutoRefreshNumber      = 1;
   SDRAMCommandStructure.ModeRegisterDefinition = 0;
 
-  if(BSP_SDRAM_Sendcmd(&SDRAMCommandStructure) != HAL_OK)
+  if(BSP_SDRAM_SendCmd(0, &SDRAMCommandStructure) != HAL_OK)
   {
     /* Command send Error */
     Error_Handler();
@@ -140,14 +139,14 @@ int main(void)
   /*##-6- SDRAM memory read back access ######################################*/
   SDRAMCommandStructure.CommandMode = FMC_SDRAM_CMD_NORMAL_MODE;
 
-  if(BSP_SDRAM_Sendcmd(&SDRAMCommandStructure) != HAL_OK)
+  if(BSP_SDRAM_SendCmd(0,&SDRAMCommandStructure) != HAL_OK)
   {
     /* Command send Error */
     Error_Handler();
   }
 
   /* Read back data from the SDRAM memory */
-  BSP_SDRAM_ReadData(SDRAM_DEVICE_ADDR + WRITE_READ_ADDR, aRxBuffer, BUFFER_SIZE);
+  HAL_SDRAM_Read_32b(&hsdram[0], (uint32_t*)(SDRAM_DEVICE_ADDR + WRITE_READ_ADDR), (uint32_t*)aRxBuffer, BUFFER_SIZE);
 
   /*##-7- Checking data integrity ############################################*/
   uwWriteReadStatus = Buffercmp(aTxBuffer, aRxBuffer, BUFFER_SIZE);

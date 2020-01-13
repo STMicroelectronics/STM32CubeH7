@@ -37,7 +37,7 @@
 /* Private variables ---------------------------------------------------------*/
 
 extern __IO uint32_t Jpeg_HWDecodingEnd;
-static uint32_t LCD_X_Size = 0;
+static uint32_t LCD_X_Size = 0,LCD_Y_Size = 0;
 
 JPEG_HandleTypeDef    JPEG_Handle;
 
@@ -60,8 +60,8 @@ void Error_Handler(void);
   */
 int main(void)
 {
-  uint32_t xPos = 0, yPos = 0;
-  uint8_t  lcd_status = LCD_OK;  
+   uint32_t xPos = 0, yPos = 0;
+  uint8_t  lcd_status = BSP_ERROR_NONE;
 
   /* Configure the MPU attributes as Write Through for SDRAM*/
   MPU_Config();
@@ -93,18 +93,15 @@ int main(void)
   
   /*##-2- LCD Configuration ##################################################*/  
   /* Initialize the LCD   */
-  lcd_status = BSP_LCD_Init();
-  if(lcd_status != LCD_OK)
+  lcd_status = BSP_LCD_Init(0, LCD_ORIENTATION_LANDSCAPE);;
+  if(lcd_status != BSP_ERROR_NONE)
   {
     Error_Handler();
   }
-  
-  BSP_LCD_LayerDefaultInit(0, LCD_FRAME_BUFFER);     
-  BSP_LCD_SelectLayer(0); 
-  BSP_LCD_Clear(LCD_COLOR_WHITE);
-    
+  GUI_SetFuncDriver(&LCD_Driver);;
+  GUI_Clear(GUI_COLOR_WHITE);
   /* Get the LCD Width */
-  LCD_X_Size = BSP_LCD_GetXSize();  
+  BSP_LCD_GetXSize(0,&LCD_X_Size);  
 
     
   /*##-3- JPEG decoding with DMA (Not Blocking ) Method ################*/
@@ -119,8 +116,10 @@ int main(void)
   HAL_JPEG_GetInfo(&JPEG_Handle, &JPEG_Info);       
   
   /*##-9- Copy RGB decoded Data to the display FrameBuffer  ############*/
-  xPos = (BSP_LCD_GetXSize() - JPEG_Info.ImageWidth)/2;
-  yPos = (BSP_LCD_GetYSize() - JPEG_Info.ImageHeight)/2;     
+  BSP_LCD_GetXSize(0, &LCD_X_Size);
+  BSP_LCD_GetYSize(0, &LCD_Y_Size);
+  xPos = (LCD_X_Size - JPEG_Info.ImageWidth)/2;
+  yPos = (LCD_Y_Size - JPEG_Info.ImageHeight)/2; 
     
   DMA2D_CopyBuffer((uint32_t *)JPEG_OUTPUT_DATA_BUFFER, (uint32_t *)LCD_FRAME_BUFFER, xPos , yPos, JPEG_Info.ImageWidth, JPEG_Info.ImageHeight, JPEG_Info.ChromaSubsampling);
    
@@ -292,6 +291,7 @@ static void DMA2D_CopyBuffer(uint32_t *pSrc, uint32_t *pDst, uint16_t x, uint16_
   
   uint32_t cssMode = DMA2D_CSS_420, inputLineOffset = 0;  
   uint32_t destination = 0; 
+  uint32_t xSize  =0;
   
   if(ChromaSampling == JPEG_420_SUBSAMPLING)
   {
@@ -348,9 +348,9 @@ static void DMA2D_CopyBuffer(uint32_t *pSrc, uint32_t *pDst, uint16_t x, uint16_
   /*##-4- DMA2D Initialization     ###########################################*/
   HAL_DMA2D_Init(&DMA2D_Handle);
   HAL_DMA2D_ConfigLayer(&DMA2D_Handle, 1);
-  
+  BSP_LCD_GetXSize(0, &xSize);
   /*##-5-  copy the new decoded frame to the LCD Frame buffer ################*/
-  destination = (uint32_t)pDst + ((y * BSP_LCD_GetXSize()) + x) * 4;
+  destination = (uint32_t)pDst + ((y * xSize) + x) * 4;
 
   HAL_DMA2D_Start(&DMA2D_Handle, (uint32_t)pSrc, destination, xsize, ysize);
   HAL_DMA2D_PollForTransfer(&DMA2D_Handle, 25);  /* wait for the previous DMA2D transfer to ends */

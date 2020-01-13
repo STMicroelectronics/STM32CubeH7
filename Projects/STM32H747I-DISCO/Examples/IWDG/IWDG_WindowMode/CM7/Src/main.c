@@ -88,7 +88,7 @@ int main(void)
   BSP_LED_Init(LED3);
 
   /* Configure Tamper push-button */
-  BSP_PB_Init(BUTTON_USER, BUTTON_MODE_EXTI);
+  BSP_PB_Init(BUTTON_WAKEUP, BUTTON_MODE_EXTI);
 
   /*##-1- Check if the system has resumed from IWDG reset ####################*/
   if (__HAL_RCC_GET_FLAG(RCC_FLAG_IWDG1RST) != RESET)
@@ -150,7 +150,7 @@ int main(void)
   */
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
-  if(GPIO_Pin == USER_BUTTON_PIN)
+  if(GPIO_Pin == BUTTON_WAKEUP_PIN)
   {
     /* waiting 200 ms to be above window value on next refresh */
     WaitingDelay = 200;

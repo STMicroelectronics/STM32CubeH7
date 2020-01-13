@@ -133,7 +133,7 @@ FatFS, File system, SD Card, SDRAM
 
   - This example runs on STM32H747xx/STM32H757xx device.
     
-  - This example has been tested with STMicroelectronics STM32H747I-DISCO revD 
+  - This example has been tested with STMicroelectronics STM32H747I-DISCO  
     discovery boards and can be easily tailored to any other supported device 
     and development board.
     

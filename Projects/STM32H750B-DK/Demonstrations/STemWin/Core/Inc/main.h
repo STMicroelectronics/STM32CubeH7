@@ -58,7 +58,6 @@
 /* DISCO includes component */
 #include "stm32h750b_discovery.h"
 #include "stm32h750b_discovery_sdram.h"
-#include "stm32h750b_discovery_lcd.h"
 #include "stm32h750b_discovery_ts.h"
 #include "stm32h750b_discovery_audio.h"
 #include "stm32h750b_discovery_qspi.h"

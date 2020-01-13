@@ -13,13 +13,13 @@ AboutWheelElementBase::AboutWheelElementBase()
     smallText.setPosition(0, 9, 180, 26);
     smallText.setColor(touchgfx::Color::getColorFrom24BitRGB(85, 85, 85));
     smallText.setLinespacing(0);
-    smallText.setTypedText(TypedText(T_ABOUTSMALLSTRUCTURE));
+    smallText.setTypedText(touchgfx::TypedText(T_ABOUTSMALLSTRUCTURE));
 
     largeText.setPosition(0, 6, 180, 31);
     largeText.setVisible(false);
     largeText.setColor(touchgfx::Color::getColorFrom24BitRGB(0, 114, 187));
     largeText.setLinespacing(0);
-    largeText.setTypedText(TypedText(T_ABOUTLARGERUN));
+    largeText.setTypedText(touchgfx::TypedText(T_ABOUTLARGERUN));
 
     add(smallText);
     add(largeText);

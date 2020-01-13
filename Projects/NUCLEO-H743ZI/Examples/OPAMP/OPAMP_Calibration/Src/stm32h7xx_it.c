@@ -173,7 +173,7 @@ void DACx_CHANNELa_DMA_IRQHandler(void)
   */
 void EXTI15_10_IRQHandler(void)
 {
-  HAL_GPIO_EXTI_IRQHandler(USER_BUTTON_PIN);
+  HAL_GPIO_EXTI_IRQHandler(BUTTON_USER_PIN);
 }
 
 /**

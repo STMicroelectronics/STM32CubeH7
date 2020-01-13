@@ -50,7 +50,7 @@ uint8_t *DEMO_HID_menu[] = {
 };
 
 /* Private function prototypes ----------------------------------------------- */
-static void HID_DEMO_ProbeKey(JOYState_TypeDef state);
+static void HID_DEMO_ProbeKey(uint32_t state);
 static void USBH_MouseDemo(USBH_HandleTypeDef * phost);
 static void USBH_KeybdDemo(USBH_HandleTypeDef * phost);
 static void HID_MenuThread(void const *argument);
@@ -77,11 +77,11 @@ void HID_MenuInit(void)
               8 * configMINIMAL_STACK_SIZE);
   osThreadCreate(osThread(Menu_Thread), NULL);
 
-  BSP_LCD_SetTextColor(LCD_COLOR_GREEN);
-  BSP_LCD_DisplayStringAtLine(18,
+  GUI_SetTextColor(GUI_COLOR_GREEN);
+  GUI_DisplayStringAtLine(18,
                               (uint8_t *)
                               "Use [Joystick Left/Right] to scroll up/down");
-  BSP_LCD_DisplayStringAtLine(19,
+  GUI_DisplayStringAtLine(19,
                               (uint8_t *)
                               "Use [Joystick Up/Down] to scroll HID menu");
 }
@@ -113,8 +113,8 @@ void HID_MenuThread(void const *argument)
       {
       case HID_DEMO_IDLE:
         HID_SelectItem(DEMO_HID_menu, 0);
-        BSP_LCD_SetTextColor(LCD_COLOR_GREEN);
-        BSP_LCD_DisplayStringAtLine(18,
+        GUI_SetTextColor(GUI_COLOR_GREEN);
+        GUI_DisplayStringAtLine(18,
                               (uint8_t *)
                               "Use [Joystick Left/Right] to scroll up/down");
         hid_demo.state = HID_DEMO_WAIT;
@@ -166,7 +166,7 @@ void HID_MenuThread(void const *argument)
         }
         else
         {
-          LCD_ErrLog("No supported HID device!\n");
+          LCD_ErrTrace("No supported HID device!\n");
           hid_demo.state = HID_DEMO_WAIT;
         }
         osSemaphoreRelease(MenuEvent);
@@ -202,8 +202,8 @@ void HID_MenuThread(void const *argument)
       if (Appli_state == APPLICATION_DISCONNECT)
       {
         Appli_state = APPLICATION_IDLE;
-        LCD_LOG_ClearTextZone();
-        LCD_ErrLog("HID device disconnected!\n");
+        UTIL_LCD_TRACE_ClearTextZone();
+        LCD_ErrTrace("HID device disconnected!\n");
         hid_demo.state = HID_DEMO_IDLE;
         hid_demo.select = 0;
       }
@@ -230,26 +230,26 @@ void USBH_HID_EventCallback(USBH_HandleTypeDef * phost)
   */
 void HID_SelectItem(uint8_t ** menu, uint8_t item)
 {
-  BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
+  GUI_SetTextColor(GUI_COLOR_WHITE);
 
   switch (item)
   {
   case 0:
-    BSP_LCD_SetBackColor(LCD_COLOR_MAGENTA);
-    BSP_LCD_DisplayStringAtLine(20, menu[0]);
-    BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-    BSP_LCD_DisplayStringAtLine(21, menu[1]);
+    GUI_SetBackColor(GUI_COLOR_MAGENTA);
+    GUI_DisplayStringAtLine(20, menu[0]);
+    GUI_SetBackColor(GUI_COLOR_BLUE);
+    GUI_DisplayStringAtLine(21, menu[1]);
     break;
 
   case 1:
-    BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-    BSP_LCD_DisplayStringAtLine(20, menu[0]);
-    BSP_LCD_SetBackColor(LCD_COLOR_MAGENTA);
-    BSP_LCD_DisplayStringAtLine(21, menu[1]);
-    BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
+    GUI_SetBackColor(GUI_COLOR_BLUE);
+    GUI_DisplayStringAtLine(20, menu[0]);
+    GUI_SetBackColor(GUI_COLOR_MAGENTA);
+    GUI_DisplayStringAtLine(21, menu[1]);
+    GUI_SetBackColor(GUI_COLOR_BLUE);
     break;
   }
-  BSP_LCD_SetBackColor(LCD_COLOR_BLACK);
+  GUI_SetBackColor(GUI_COLOR_BLACK);
 }
 
 /**
@@ -257,7 +257,7 @@ void HID_SelectItem(uint8_t ** menu, uint8_t item)
   * @param  state: Joystick state
   * @retval None
   */
-static void HID_DEMO_ProbeKey(JOYState_TypeDef state)
+static void HID_DEMO_ProbeKey(uint32_t state)
 {
   /* Handle Menu inputs */
   if ((state == JOY_UP) && (hid_demo.select > 0))
@@ -273,55 +273,33 @@ static void HID_DEMO_ProbeKey(JOYState_TypeDef state)
     hid_demo.select |= 0x80;
   }
 }
-
 /**
   * @brief  EXTI line detection callbacks.
   * @param  GPIO_Pin: Specifies the pins connected EXTI line
   * @retval None
   */
-void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+void BSP_JOY_Callback(JOY_TypeDef JOY, JOYPin_TypeDef JoyPin)
 {
-  __IO JOYState_TypeDef JoyState = JOY_NONE;
-
-  if (GPIO_Pin == MFX_IRQOUT_PIN)
+  HID_DEMO_ProbeKey(JoyPin);
+  
+  if((hid_demo.state != HID_DEMO_MOUSE) && (hid_demo.state != HID_DEMO_KEYBOARD))
   {
-    /* The different functionalities of MFX (TS, Joystick, SD detection, etc. )
-     * can be configured in exti mode to generate an IRQ on given events. The
-     * MFX IRQ_OUT pin is unique and common to all functionalities, so if
-     * several functionalities are configured in exit mode, the MCU has to
-     * enquire MFX about the IRQ source (see BSP_IO_ITGetStatus).
-     * Communication with Mfx is done by I2C. Often the sw requires ISRs (irq
-     * service routines) to be quick while communication with I2C can be
-     * considered relatively long (hundreds of usec depending on I2C clk). In
-     * order to avoid to use "blocking I2C communication" on interrupt service
-     * routines it's suggested (as alternative to this implementation) to use
-     * dedicated semaphore */
-
-    /* Get the Joystick State */
-    JoyState = BSP_JOY_GetState();
-
-    HID_DEMO_ProbeKey(JoyState);
-
-    if((hid_demo.state != HID_DEMO_MOUSE) && (hid_demo.state != HID_DEMO_KEYBOARD))
+    switch (JoyPin)
     {
-      switch (JoyState)
-      {
-      case JOY_LEFT:
-        LCD_LOG_ScrollBack();
-        break;
-
-      case JOY_RIGHT:
-        LCD_LOG_ScrollForward();
-        break;
-
-      default:
-        break;
-      }
+    case JOY_LEFT:
+      UTIL_LCD_TRACE_ScrollBack();
+      break;
+      
+    case JOY_RIGHT:
+      UTIL_LCD_TRACE_ScrollForward();
+      break;
+      
+    default:
+      break;
     }
-    /* Clear joystick interrupt pending bits */
-    BSP_IO_ITClear();
-    osSemaphoreRelease(MenuEvent);
   }
+  osSemaphoreRelease(MenuEvent);
+
 }
 
 /**

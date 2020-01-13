@@ -30,6 +30,7 @@ FATFS USBDISKFatFs;           /* File system object for USB disk logical drive *
 FIL MyFile;                   /* File object */
 char USBDISKPath[4];          /* USB Host logical drive path */
 USBH_HandleTypeDef hUSB_Host; /* USB Host handle */
+BSP_IO_Init_t init;
 
 typedef enum {
   USBDISK_CONNECTED, 
@@ -72,7 +73,6 @@ int main(void)
   BSP_LED_Init(LED1);
   BSP_LED_Init(LED3);  
   
-   BSP_IO_Init();
    
   /* Enable the USB voltage level detector */
   HAL_PWREx_EnableUSBVoltageDetector();

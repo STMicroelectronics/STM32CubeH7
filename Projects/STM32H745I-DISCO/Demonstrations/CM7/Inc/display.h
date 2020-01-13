@@ -24,6 +24,8 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm32h745i_discovery_lcd.h"
 #include "graphics.h"
+#include "basic_gui.h"
+
 /* Exported variables --------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
 #define BUTTON_STATE_OFF            0U 

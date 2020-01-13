@@ -270,118 +270,118 @@ void HAL_SD_DriveTransciver_1_8V_Callback(FlagStatus status)
   * @brief  Initializes MFX low level.
   * @retval None
   */
-void MFX_IO_Init(void)
-{
-  
-  hI2C.Instance              = I2C1;
-  hI2C.Init.Timing           = ((uint32_t)0x40912732);
-  hI2C.Init.OwnAddress1      = 0x72;
-  hI2C.Init.AddressingMode   = I2C_ADDRESSINGMODE_7BIT;
-  hI2C.Init.DualAddressMode  = I2C_DUALADDRESS_ENABLE;
-  hI2C.Init.OwnAddress2      = 0;
-  hI2C.Init.OwnAddress2Masks = I2C_OA2_NOMASK;
-  hI2C.Init.GeneralCallMode  = I2C_GENERALCALL_ENABLE;
-  hI2C.Init.NoStretchMode    = I2C_NOSTRETCH_DISABLE;
-  
-  /* Init the I2C */
-  HAL_I2C_Init(&hI2C);  
-}
-
-/**
-  * @brief  DeInitializes MFX low level.
-  * @retval None
-  */
-void MFX_IO_DeInit(void)
-{
-}
-
-/**
-  * @brief  Configures MFX low level interrupt.
-  * @retval None
-  */
-void MFX_IO_ITConfig(void)
-{
-}
-
-/**
-  * @brief  MFX writes single data.
-  * @param  Addr: I2C address
-  * @param  Reg: Register address 
-  * @param  Value: Data to be written
-  * @retval None
-  */
-void MFX_IO_Write(uint16_t Addr, uint8_t Reg, uint8_t Value)
-{
-  HAL_StatusTypeDef status = HAL_OK;
-
-  status = HAL_I2C_Mem_Write(&hI2C, (uint8_t)Addr, (uint16_t)Reg, I2C_MEMADD_SIZE_8BIT, &Value, 1, 100); 
-
-  /* Check the communication status */
-  if(status != HAL_OK)
-  {
-    return;
-  }
-}
-
-/**
-  * @brief  MFX reads single data.
-  * @param  Addr: I2C address
-  * @param  Reg: Register address 
-  * @retval Read data
-  */
-uint8_t MFX_IO_Read(uint16_t Addr, uint8_t Reg)
-{
-  HAL_StatusTypeDef status = HAL_OK;
-  uint8_t Value = 0;
-  
-  status = HAL_I2C_Mem_Read(&hI2C, (uint8_t)Addr, Reg, I2C_MEMADD_SIZE_8BIT, &Value, 1, 1000);
-  
-  /* Check the communication status */
-  if(status != HAL_OK)
-  {
-    return 0;
-  }
-  return Value;   
-}
-
-/**
-  * @brief  MFX reads multiple data.
-  * @param  Addr: I2C address
-  * @param  Reg: Register address 
-  * @param  Buffer: Pointer to data buffer
-  * @param  Length: Length of the data
-  * @retval Number of read data
-  */
-uint16_t MFX_IO_ReadMultiple(uint16_t Addr, uint8_t Reg, uint8_t *Buffer, uint16_t Length)
-{
-  return 0;
-}
-
-/**
-  * @brief  MFX delay 
-  * @param  Delay: Delay in ms
-  * @retval None
-  */
-void MFX_IO_Delay(uint32_t Delay)
-{
-  HAL_Delay(Delay);
-}
-
-/**
-  * @brief  Used by Lx family but requested for MFX component compatibility.
-  * @retval None
-  */
-void MFX_IO_Wakeup(void) 
-{
-}
-
-/**
-  * @brief  Used by Lx family but requested for MXF component compatibility.
-  * @retval None
-  */
-void MFX_IO_EnableWakeupPin(void) 
-{
-}
+//void MFX_IO_Init(void)
+//{
+//  
+//  hI2C.Instance              = I2C1;
+//  hI2C.Init.Timing           = ((uint32_t)0x40912732);
+//  hI2C.Init.OwnAddress1      = 0x72;
+//  hI2C.Init.AddressingMode   = I2C_ADDRESSINGMODE_7BIT;
+//  hI2C.Init.DualAddressMode  = I2C_DUALADDRESS_ENABLE;
+//  hI2C.Init.OwnAddress2      = 0;
+//  hI2C.Init.OwnAddress2Masks = I2C_OA2_NOMASK;
+//  hI2C.Init.GeneralCallMode  = I2C_GENERALCALL_ENABLE;
+//  hI2C.Init.NoStretchMode    = I2C_NOSTRETCH_DISABLE;
+//  
+//  /* Init the I2C */
+//  HAL_I2C_Init(&hI2C);  
+//}
+//
+///**
+//  * @brief  DeInitializes MFX low level.
+//  * @retval None
+//  */
+//void MFX_IO_DeInit(void)
+//{
+//}
+//
+///**
+//  * @brief  Configures MFX low level interrupt.
+//  * @retval None
+//  */
+//void MFX_IO_ITConfig(void)
+//{
+//}
+//
+///**
+//  * @brief  MFX writes single data.
+//  * @param  Addr: I2C address
+//  * @param  Reg: Register address 
+//  * @param  Value: Data to be written
+//  * @retval None
+//  */
+//void MFX_IO_Write(uint16_t Addr, uint8_t Reg, uint8_t Value)
+//{
+//  HAL_StatusTypeDef status = HAL_OK;
+//
+//  status = HAL_I2C_Mem_Write(&hI2C, (uint8_t)Addr, (uint16_t)Reg, I2C_MEMADD_SIZE_8BIT, &Value, 1, 100); 
+//
+//  /* Check the communication status */
+//  if(status != HAL_OK)
+//  {
+//    return;
+//  }
+//}
+//
+///**
+//  * @brief  MFX reads single data.
+//  * @param  Addr: I2C address
+//  * @param  Reg: Register address 
+//  * @retval Read data
+//  */
+//uint8_t MFX_IO_Read(uint16_t Addr, uint8_t Reg)
+//{
+//  HAL_StatusTypeDef status = HAL_OK;
+//  uint8_t Value = 0;
+//  
+//  status = HAL_I2C_Mem_Read(&hI2C, (uint8_t)Addr, Reg, I2C_MEMADD_SIZE_8BIT, &Value, 1, 1000);
+//  
+//  /* Check the communication status */
+//  if(status != HAL_OK)
+//  {
+//    return 0;
+//  }
+//  return Value;   
+//}
+//
+///**
+//  * @brief  MFX reads multiple data.
+//  * @param  Addr: I2C address
+//  * @param  Reg: Register address 
+//  * @param  Buffer: Pointer to data buffer
+//  * @param  Length: Length of the data
+//  * @retval Number of read data
+//  */
+//uint16_t MFX_IO_ReadMultiple(uint16_t Addr, uint8_t Reg, uint8_t *Buffer, uint16_t Length)
+//{
+//  return 0;
+//}
+//
+///**
+//  * @brief  MFX delay 
+//  * @param  Delay: Delay in ms
+//  * @retval None
+//  */
+//void MFX_IO_Delay(uint32_t Delay)
+//{
+//  HAL_Delay(Delay);
+//}
+//
+///**
+//  * @brief  Used by Lx family but requested for MFX component compatibility.
+//  * @retval None
+//  */
+//void MFX_IO_Wakeup(void) 
+//{
+//}
+//
+///**
+//  * @brief  Used by Lx family but requested for MXF component compatibility.
+//  * @retval None
+//  */
+//void MFX_IO_EnableWakeupPin(void) 
+//{
+//}
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
 

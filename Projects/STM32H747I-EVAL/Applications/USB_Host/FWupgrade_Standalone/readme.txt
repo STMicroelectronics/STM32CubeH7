@@ -141,11 +141,11 @@ Middleware, Firmware upgrade, USB Host, IAP, Binary
 
   - This application runs on STM32H7xx devices.
 
-  - This application has been tested with STMicroelectronics STM32H747I-EVAL RevB
+  - This application has been tested with STMicroelectronics STM32H747I-EVAL 
     evaluation boards and can be easily tailored to any other supported device
     and development board.
 
-  - STM32H747I-EVAL RevB Set-up
+  - STM32H747I-EVAL  Set-up
     - Plug the USB key into the STM32H747I-EVAL board through 'USB micro A-Male
       to A-Female' cable to the connector:
       - CN14 : to use USB High Speed (HS)

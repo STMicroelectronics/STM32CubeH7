@@ -1893,7 +1893,7 @@ static void _cbButton_bottom(WM_MESSAGE * pMsg)
 static void _cbCalibrationScreen(WM_MESSAGE * pMsg) {
   WM_HWIN hItem;
   int Id, NCode;
-  TS_StateTypeDef TS_State = {0};
+  TS_State_t TS_State = {0};
 
   switch (pMsg->MsgId) {
 
@@ -1929,10 +1929,10 @@ static void _cbCalibrationScreen(WM_MESSAGE * pMsg) {
       switch(NCode) {
       case WM_NOTIFICATION_CLICKED:
         top_pressed = 1;
-        BSP_TS_GetState(&TS_State);
+        BSP_TS_GetState(0,&TS_State);
 
-        data1.b.A1 = TS_State.touchX[0];
-        data2.b.A2 = TS_State.touchY[0];
+        data1.b.A1 = TS_State.TouchX;
+        data2.b.A2 = TS_State.TouchY;
         break;
       }
       break;
@@ -1940,10 +1940,10 @@ static void _cbCalibrationScreen(WM_MESSAGE * pMsg) {
       switch(NCode) {
       case WM_NOTIFICATION_CLICKED:
         bottom_pressed = 1;
-        BSP_TS_GetState(&TS_State);
+        BSP_TS_GetState(0,&TS_State);
 
-        data1.b.B1 = TS_State.touchX[0];
-        data2.b.B2 = TS_State.touchY[0];
+        data1.b.B1 = TS_State.TouchX;
+        data2.b.B2 = TS_State.TouchY;
         data2.b.IsCalibrated = 1;
         break;
       }

@@ -26,7 +26,9 @@
 #include "stm32h747i_discovery_lcd.h"
 #include "stm32h747i_discovery_sdram.h"
 #include "stm32h747i_discovery_camera.h"
-
+#include "stm32h747i_discovery_bus.h"
+#include "otm8009a.h"
+#include "basic_gui.h"
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
 /* LCD Frame Buffer address */
@@ -34,7 +36,7 @@
 #define LCD_FRAME_BUFFER                  0xD0000000 /* LCD Frame buffer of size 800x480 in ARGB8888 */
 
 #define CAMERA_FRAME_BUFFER               0xD0177000
-#define LCD_FRAME_BUFFER                  0xD0000000
+
 
 #define ARGB8888_BYTE_PER_PIXEL  4
 

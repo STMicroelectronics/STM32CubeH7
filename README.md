@@ -15,14 +15,17 @@ In this FW Package, the modules **Middlewares/ST/TouchGFX** **Middlewares/ST/STe
 
 ## Boards available
   * STM32H7
+    * [NUCLEO-H7A3ZI-Q](https://www.st.com/en/product/nucleo-h7a3zi-q.html)
     * [NUCLEO-H743ZI](https://www.st.com/en/product/nucleo-h743zi.html)
     * [NUCLEO-H743ZI2](https://www.st.com/en/product/nucleo-h743zi.html)
     * [NUCLEO-H753ZI](https://www.st.com/en/product/nucleo-h753zi.html)
     * [NUCLEO-H753ZI2](https://www.st.com/en/product/nucleo-h753zi.html)
     * [NUCLEO-H745ZI-Q](https://www.st.com/en/product/nucleo-h745zi-q.html)
-    * [NUCLEO-H755ZI-Q](https://www.st.com/en/product/nucleo-h755zi-q.html)	
+    * [NUCLEO-H755ZI-Q](https://www.st.com/en/product/nucleo-h755zi-q.html)
+    * [STM32H7B3I-DK](https://www.st.com/en/product/stm32h7b3i-dk.html)
+    * [STM32H7B3I-EVAL](https://www.st.com/en/product/stm32h7b3i-eval.html)
     * [STM32H743I-EVAL](https://www.st.com/en/product/stm32h743i-eval.html)
-    * [STM32H743I-EVAL2](https://www.st.com/en/product/stm32h743i-eval.html)	
+    * [STM32H743I-EVAL2](https://www.st.com/en/product/stm32h743i-eval.html)
     * [STM32H753I-EVAL](https://www.st.com/en/product/stm32h753i-eval.html)
     * [STM32H753I-EVAL2](https://www.st.com/en/product/stm32h753i-eval.html)
     * [STM32H745I-DISCO](https://www.st.com/en/product/stm32h745i-disco.html)

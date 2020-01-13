@@ -6,7 +6,7 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics.
+  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
   * All rights reserved.</center></h2>
   *
   * This software component is licensed by ST under BSD 3-Clause license,
@@ -30,23 +30,18 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
-#define BUFFER_SIZE         ((uint32_t)0x100)
+#define SRAM_BUFFER_SIZE         ((uint32_t)0x1000)
 #define WRITE_READ_ADDR     ((uint32_t)0x0800)
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-/* Buffer location should aligned to cache line size (32 bytes) */
-ALIGN_32BYTES (uint32_t sram_aRxBuffer[BUFFER_SIZE]);
-ALIGN_32BYTES (uint32_t sram_aTxBuffer[BUFFER_SIZE]);
-uint8_t ubSramWrite = 0, ubSramRead = 0, ubSramInit = 0;
-/* DMA transfer complete flag */
-__IO uint32_t uwMDMA_SRAM_Transfer_Complete = 0;
+ALIGN_32BYTES (uint32_t sram_aTxBuffer[SRAM_BUFFER_SIZE]);
+ALIGN_32BYTES (uint32_t sram_aRxBuffer[SRAM_BUFFER_SIZE]);
+uint32_t ubSramWrite = 0, ubSramRead = 0, ubSramInit = 0;
+uint32_t TransferCplt;
 /* Private function prototypes -----------------------------------------------*/
 static void SRAM_SetHint(void);
-static void SRAM_DMA_SetHint(void);
 static void Fill_Buffer(uint32_t *pBuffer, uint32_t uwBufferLength, uint32_t uwOffset);
 static uint8_t Buffercmp(uint32_t* pBuffer1, uint32_t* pBuffer2, uint16_t BufferLength);
-static void SRAM_DeactivateSharedPins(void);
-
 /* Private functions ---------------------------------------------------------*/
 
 /**
@@ -58,81 +53,74 @@ void SRAM_demo (void)
 {
   SRAM_SetHint();
 
-  /* Disable the LCD to avoid the refrech from the SDRAM */
-  BSP_LCD_DisplayOff();
-
   /*##-1- Configure the SRAM device ##########################################*/
   /* SRAM device configuration */
-  if(BSP_SRAM_Init() != SRAM_OK)
+  if(BSP_SRAM_Init(0) != BSP_ERROR_NONE)
   {
     ubSramInit++;
   }
 
   /*##-2- SRAM memory read/write access ######################################*/
   /* Fill the buffer to write */
-  Fill_Buffer(sram_aTxBuffer, BUFFER_SIZE, 0xA255C20F);
-  /* Clear the buffer to read */
-  Fill_Buffer(sram_aRxBuffer, BUFFER_SIZE, 0x0000);
+  Fill_Buffer(sram_aTxBuffer, SRAM_BUFFER_SIZE, 0xC20FC20F);
 
   /* Write data to the SRAM memory */
-  if(BSP_SRAM_WriteData(SRAM_DEVICE_ADDR + WRITE_READ_ADDR, (uint16_t *)sram_aTxBuffer, BUFFER_SIZE * 2) != SRAM_OK)
+  if(HAL_SRAM_Write_16b(&hsram[0], (uint32_t *)(SRAM_DEVICE_ADDR + WRITE_READ_ADDR), (uint16_t *)sram_aTxBuffer, 2*SRAM_BUFFER_SIZE) != BSP_ERROR_NONE)
   {
     ubSramWrite++;
   }
 
   /* Read back data from the SRAM memory */
-  if(BSP_SRAM_ReadData(SRAM_DEVICE_ADDR + WRITE_READ_ADDR, (uint16_t *)sram_aRxBuffer, BUFFER_SIZE * 2) != SRAM_OK)
+  if(HAL_SRAM_Read_16b(&hsram[0], (uint32_t *)(SRAM_DEVICE_ADDR + WRITE_READ_ADDR), (uint16_t *)sram_aRxBuffer, 2*SRAM_BUFFER_SIZE) != BSP_ERROR_NONE)
   {
     ubSramRead++;
   }
 
   /*##-3- Checking data integrity ############################################*/
-  /* Enable the LCD */
-  BSP_LCD_DisplayOn();
 
   if(ubSramInit != 0)
   {
-    BSP_LCD_DisplayStringAt(20, 100, (uint8_t *)"SRAM Initialization : FAILED.", LEFT_MODE);
-    BSP_LCD_DisplayStringAt(20, 115, (uint8_t *)"SRAM Test Aborted.", LEFT_MODE);
+    GUI_DisplayStringAt(20, 100, (uint8_t *)"SRAM Initialization : FAILED.", LEFT_MODE);
+    GUI_DisplayStringAt(20, 115, (uint8_t *)"SRAM Test Aborted.", LEFT_MODE);
   }
   else
   {
-    BSP_LCD_DisplayStringAt(20, 100, (uint8_t *)"SRAM Initialization : OK.", LEFT_MODE);
+    GUI_DisplayStringAt(20, 100, (uint8_t *)"SRAM Initialization : OK.", LEFT_MODE);
   }
   if(ubSramWrite != 0)
   {
-    BSP_LCD_DisplayStringAt(20, 115, (uint8_t *)"SRAM WRITE : FAILED.", LEFT_MODE);
-    BSP_LCD_DisplayStringAt(20, 130, (uint8_t *)"SRAM Test Aborted.", LEFT_MODE);
+    GUI_DisplayStringAt(20, 115, (uint8_t *)"SRAM WRITE : FAILED.", LEFT_MODE);
+    GUI_DisplayStringAt(20, 130, (uint8_t *)"SRAM Test Aborted.", LEFT_MODE);
   }
   else
   {
-    BSP_LCD_DisplayStringAt(20, 115, (uint8_t *)"SRAM WRITE : OK.", LEFT_MODE);
+    GUI_DisplayStringAt(20, 115, (uint8_t *)"SRAM WRITE : OK.", LEFT_MODE);
   }
   if(ubSramRead != 0)
   {
-    BSP_LCD_DisplayStringAt(20, 130, (uint8_t *)"SRAM READ : FAILED.", LEFT_MODE);
-    BSP_LCD_DisplayStringAt(20, 145, (uint8_t *)"SRAM Test Aborted.", LEFT_MODE);
+    GUI_DisplayStringAt(20, 130, (uint8_t *)"SRAM READ : FAILED.", LEFT_MODE);
+    GUI_DisplayStringAt(20, 145, (uint8_t *)"SRAM Test Aborted.", LEFT_MODE);
   }
   else
   {
-    BSP_LCD_DisplayStringAt(20, 130, (uint8_t *)"SRAM READ : OK.", LEFT_MODE);
+    GUI_DisplayStringAt(20, 130, (uint8_t *)"SRAM READ : OK.", LEFT_MODE);
   }
 
-  if(Buffercmp(sram_aRxBuffer, sram_aTxBuffer, BUFFER_SIZE) > 0)
+  if(Buffercmp(sram_aRxBuffer, sram_aTxBuffer, SRAM_BUFFER_SIZE) > 0)
   {
-    BSP_LCD_DisplayStringAt(20, 145, (uint8_t *)"SRAM COMPARE : FAILED.", LEFT_MODE);
-    BSP_LCD_DisplayStringAt(20, 160, (uint8_t *)"SRAM Test Aborted.", LEFT_MODE);
+    GUI_DisplayStringAt(20, 145, (uint8_t *)"SRAM COMPARE : FAILED.", LEFT_MODE);
+    GUI_DisplayStringAt(20, 160, (uint8_t *)"SRAM Test Aborted.", LEFT_MODE);
   }
   else
   {
-    BSP_LCD_DisplayStringAt(20, 145, (uint8_t *)"SRAM Test : OK.", LEFT_MODE);
+    GUI_DisplayStringAt(20, 145, (uint8_t *)"SRAM Test : OK.", LEFT_MODE);
   }
-
+  ButtonState = 0;
   while (1)
   {
     if(CheckForUserInput() > 0)
     {
-      SRAM_DeactivateSharedPins();
+      ButtonState = 0;
       return;
     }
   }
@@ -145,107 +133,81 @@ void SRAM_demo (void)
   */
 void SRAM_DMA_demo (void)
 {
-  SRAMTest = 1;
-  SRAM_DMA_SetHint();
+  SRAM_SetHint();
 
-  /* -1- SDRAM device configuration */
-  if (BSP_SRAM_Init() != SRAM_OK)
+  /*##-1- Configure the SRAM device ##########################################*/
+  /* SRAM device configuration */
+  if(BSP_SRAM_Init(0) != BSP_ERROR_NONE)
   {
-    BSP_LCD_DisplayStringAt(20, 115, (uint8_t *)"SRAM Initialization : FAILED.", LEFT_MODE);
-    BSP_LCD_DisplayStringAt(20, 130, (uint8_t *)"SRAM Test Aborted.", LEFT_MODE);
-  }
-  else
-  {
-    BSP_LCD_DisplayStringAt(20, 100, (uint8_t *)"SRAM Initialization : OK.", LEFT_MODE);
+    ubSramInit++;
   }
 
   /*##-2- SRAM memory read/write access ######################################*/
   /* Fill the buffer to write */
-  Fill_Buffer(sram_aTxBuffer, BUFFER_SIZE, 0xAC44A50F);
-  /* Clear the buffer to read */
-  Fill_Buffer(sram_aRxBuffer, BUFFER_SIZE, 0x0000);
+  Fill_Buffer(sram_aTxBuffer, SRAM_BUFFER_SIZE, 0xC20FC20F);
 
-  /* -3- Write data to the SDRAM memory using DMA */
-  uwMDMA_SRAM_Transfer_Complete = 0;
-  if(BSP_SRAM_WriteData_DMA(SRAM_DEVICE_ADDR + WRITE_READ_ADDR, (uint16_t *)sram_aTxBuffer, BUFFER_SIZE * 2) != SRAM_OK)
+  /* Write data to the SRAM memory */
+  if(HAL_SRAM_Write_DMA(&hsram[0], (uint32_t *)(SRAM_DEVICE_ADDR + WRITE_READ_ADDR), sram_aTxBuffer, SRAM_BUFFER_SIZE) != BSP_ERROR_NONE)
   {
-    BSP_LCD_DisplayStringAt(20, 115, (uint8_t *)"SRAM WRITE dma : FAILED.", LEFT_MODE);
-    BSP_LCD_DisplayStringAt(20, 130, (uint8_t *)"SRAM Test Aborted.", LEFT_MODE);
+    ubSramWrite++;
+  }
+  while(TransferCplt == 0);
+  TransferCplt = 0;
+  /* Read back data from the SRAM memory */
+  if(HAL_SRAM_Read_DMA(&hsram[0], (uint32_t *)(SRAM_DEVICE_ADDR + WRITE_READ_ADDR), sram_aRxBuffer, SRAM_BUFFER_SIZE) != BSP_ERROR_NONE)
+  {
+    ubSramRead++;
+  }
+  while(TransferCplt == 0);
+  TransferCplt = 0;
+
+  if(ubSramInit != 0)
+  {
+    GUI_DisplayStringAt(20, 100, (uint8_t *)"SRAM Initialization : FAILED.", LEFT_MODE);
+    GUI_DisplayStringAt(20, 115, (uint8_t *)"SRAM Test Aborted.", LEFT_MODE);
   }
   else
   {
-    BSP_LCD_DisplayStringAt(20, 115, (uint8_t *)"SRAM WRITE DMA : REQUESTED", LEFT_MODE);
+    GUI_DisplayStringAt(20, 100, (uint8_t *)"SRAM Initialization : OK.", LEFT_MODE);
   }
-
-  /* Wait until DMA transfer is complete */
-  while (!uwMDMA_SRAM_Transfer_Complete)
-  {}
-  BSP_LCD_DisplayStringAt(20, 130, (uint8_t *)"SRAM WRITE DMA : COMPLETED", LEFT_MODE);
-
-  /* -4- Read back data from the SDRAM memory using DMA */
-  uwMDMA_SRAM_Transfer_Complete = 0;
-  if(BSP_SRAM_ReadData_DMA(SRAM_DEVICE_ADDR + WRITE_READ_ADDR, (uint16_t *)sram_aRxBuffer, BUFFER_SIZE * 2) != SRAM_OK)
+  if(ubSramWrite != 0)
   {
-    BSP_LCD_DisplayStringAt(20, 145, (uint8_t *)"SRAM  READ DMA : FAILED", LEFT_MODE);
-    BSP_LCD_DisplayStringAt(20, 160, (uint8_t *)"SRAM  Test Aborted", LEFT_MODE);
+    GUI_DisplayStringAt(20, 115, (uint8_t *)"SRAM WRITE : FAILED.", LEFT_MODE);
+    GUI_DisplayStringAt(20, 130, (uint8_t *)"SRAM Test Aborted.", LEFT_MODE);
   }
   else
   {
-    BSP_LCD_DisplayStringAt(20, 145, (uint8_t *)"SRAM READ  DMA : REQUESTED", LEFT_MODE);
+    GUI_DisplayStringAt(20, 115, (uint8_t *)"SRAM WRITE : OK.", LEFT_MODE);
   }
-
-  /* Wait until DMA transfer is complete */
-  while (!uwMDMA_SRAM_Transfer_Complete)
-  {}
-  BSP_LCD_DisplayStringAt(20, 160, (uint8_t *)"SRAM READ  DMA : COMPLETED", LEFT_MODE);
-
-  /* Invalidate Data Cache to get the updated content of the SRAM*/
-  SCB_InvalidateDCache_by_Addr((uint32_t *)sram_aRxBuffer, BUFFER_SIZE*4);
-
-  /* -5- Compare both buffers */
-  if(Buffercmp(sram_aRxBuffer, sram_aTxBuffer, BUFFER_SIZE) > 0)
+  if(ubSramRead != 0)
   {
-    BSP_LCD_DisplayStringAt(20, 175, (uint8_t *)"SRAM COMPARE : FAILED.", LEFT_MODE);
-    BSP_LCD_DisplayStringAt(20, 190, (uint8_t *)"SRAM Test Aborted.", LEFT_MODE);
+    GUI_DisplayStringAt(20, 130, (uint8_t *)"SRAM READ : FAILED.", LEFT_MODE);
+    GUI_DisplayStringAt(20, 145, (uint8_t *)"SRAM Test Aborted.", LEFT_MODE);
   }
   else
   {
-    BSP_LCD_DisplayStringAt(20, 175, (uint8_t *)"SRAM TEST      : SUCCESSFULL", LEFT_MODE);
+    GUI_DisplayStringAt(20, 130, (uint8_t *)"SRAM READ : OK.", LEFT_MODE);
   }
 
+  if(Buffercmp(sram_aRxBuffer, sram_aTxBuffer, SRAM_BUFFER_SIZE) > 0)
+  {
+    GUI_DisplayStringAt(20, 145, (uint8_t *)"SRAM COMPARE : FAILED.", LEFT_MODE);
+    GUI_DisplayStringAt(20, 160, (uint8_t *)"SRAM Test Aborted.", LEFT_MODE);
+  }
+  else
+  {
+    GUI_DisplayStringAt(20, 145, (uint8_t *)"SRAM Test : OK.", LEFT_MODE);
+  }
+
+  ButtonState = 0;
   while (1)
   {
-    if (CheckForUserInput() > 0)
+    if(CheckForUserInput() > 0)
     {
-      SRAMTest = 0;
-      SRAM_DeactivateSharedPins();
+      ButtonState = 0;
       return;
     }
   }
-}
-
-/**
-  * @brief  DMA conversion complete callback
-  * @note   This function is executed when the transfer complete interrupt
-  *         is generated
-  * @retval None
-  */
-void HAL_SRAM_DMA_XferCpltCallback(MDMA_HandleTypeDef *hmdma)
-{
-  /* Set transfer complete flag */
-  uwMDMA_SRAM_Transfer_Complete = 1;
-}
-
-/**
-  * @brief  DMA transfer complete error callback.
-  * @param  hdma: DMA handle
-  * @retval None
-  */
-
-void HAL_SRAM_DMA_XferErrorCallback(MDMA_HandleTypeDef *hmdma)
-{
-  BSP_LCD_SetTextColor(LCD_COLOR_RED);
-  BSP_LCD_DisplayStringAt(20, 215, (uint8_t *)"MDMA ERROR", LEFT_MODE);
 }
 
 /**
@@ -255,57 +217,30 @@ void HAL_SRAM_DMA_XferErrorCallback(MDMA_HandleTypeDef *hmdma)
   */
 static void SRAM_SetHint(void)
 {
+  uint32_t x_size, y_size;
+
+  BSP_LCD_GetXSize(0, &x_size);
+  BSP_LCD_GetYSize(0, &y_size);
+
   /* Clear the LCD */
-  BSP_LCD_Clear(LCD_COLOR_WHITE);
+  GUI_Clear(GUI_COLOR_WHITE);
 
   /* Set LCD Demo description */
-  BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
-  BSP_LCD_FillRect(0, 0, BSP_LCD_GetXSize(), 80);
-  BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
-  BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-  BSP_LCD_SetFont(&Font24);
-  BSP_LCD_DisplayStringAt(0, 0, (uint8_t *)"SRAM", CENTER_MODE);
-  BSP_LCD_SetFont(&Font12);
-  BSP_LCD_DisplayStringAt(0, 30, (uint8_t *)"This example shows how to write", CENTER_MODE);
-  BSP_LCD_DisplayStringAt(0, 45, (uint8_t *)"and read data on the SRAM", CENTER_MODE);
+  GUI_FillRect(0, 0, x_size, 80, GUI_COLOR_BLUE);
+  GUI_SetTextColor(GUI_COLOR_WHITE);
+  GUI_SetBackColor(GUI_COLOR_BLUE);
+  GUI_SetFont(&Font24);
+  GUI_DisplayStringAt(0, 0, (uint8_t *)"SRAM", CENTER_MODE);
+  GUI_SetFont(&Font12);
+  GUI_DisplayStringAt(0, 30, (uint8_t *)"This example shows how to write", CENTER_MODE);
+  GUI_DisplayStringAt(0, 45, (uint8_t *)"and read data on the SRAM", CENTER_MODE);
 
    /* Set the LCD Text Color */
-  BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
-  BSP_LCD_DrawRect(10, 90, BSP_LCD_GetXSize() - 20, BSP_LCD_GetYSize()- 100);
-  BSP_LCD_DrawRect(11, 91, BSP_LCD_GetXSize() - 22, BSP_LCD_GetYSize()- 102);
+  GUI_DrawRect(10, 90, x_size - 20, y_size- 100, GUI_COLOR_BLUE);
+  GUI_DrawRect(11, 91, x_size - 22, y_size- 102, GUI_COLOR_BLUE);
 
-  BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
-  BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
-}
-
-/**
-  * @brief  Display SRAM DMA Demo Hint
-  * @param  None
-  * @retval None
-  */
-static void SRAM_DMA_SetHint(void)
-{
-  /* Clear the LCD */
-  BSP_LCD_Clear(LCD_COLOR_WHITE);
-
-  /* Set LCD Demo description */
-  BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
-  BSP_LCD_FillRect(0, 0, BSP_LCD_GetXSize(), 80);
-  BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
-  BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-  BSP_LCD_SetFont(&Font24);
-  BSP_LCD_DisplayStringAt(0, 0, (uint8_t *)"SRAM MDMA", CENTER_MODE);
-  BSP_LCD_SetFont(&Font12);
-  BSP_LCD_DisplayStringAt(0, 30, (uint8_t *)"This example shows how to write", CENTER_MODE);
-  BSP_LCD_DisplayStringAt(0, 45, (uint8_t *)"and read data on the SRAM using MDMA mode", CENTER_MODE);
-
-   /* Set the LCD Text Color */
-  BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
-  BSP_LCD_DrawRect(10, 90, BSP_LCD_GetXSize() - 20, BSP_LCD_GetYSize()- 100);
-  BSP_LCD_DrawRect(11, 91, BSP_LCD_GetXSize() - 22, BSP_LCD_GetYSize()- 102);
-
-  BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
-  BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
+  GUI_SetTextColor(GUI_COLOR_BLACK);
+  GUI_SetBackColor(GUI_COLOR_WHITE);
 }
 
 /**
@@ -317,14 +252,14 @@ static void SRAM_DMA_SetHint(void)
   */
 static void Fill_Buffer(uint32_t *pBuffer, uint32_t uwBufferLength, uint32_t uwOffset)
 {
-  uint32_t tmpIndex = 0;
+  uint32_t tmpindex = 0;
 
   /* Put in global buffer different values */
-  for (tmpIndex = 0; tmpIndex < uwBufferLength; tmpIndex++ )
+  for (tmpindex = 0; tmpindex < uwBufferLength; tmpindex++ )
   {
-    pBuffer[tmpIndex] = tmpIndex + uwOffset;
+    pBuffer[tmpindex] = tmpindex + uwOffset;
   }
-  /* Clean Data Cache to update the content of the SRAM */
+   /* Clean Data Cache to update the content of the SDRAM */
   SCB_CleanDCache_by_Addr((uint32_t*)pBuffer, uwBufferLength*4);
 }
 
@@ -337,6 +272,8 @@ static void Fill_Buffer(uint32_t *pBuffer, uint32_t uwBufferLength, uint32_t uwO
   */
 static uint8_t Buffercmp(uint32_t* pBuffer1, uint32_t* pBuffer2, uint16_t BufferLength)
 {
+  /* Invalidate Data Cache to get the updated content of the SRAM*/
+  SCB_CleanInvalidateDCache_by_Addr((uint32_t *)pBuffer2, BufferLength*4);
   while (BufferLength--)
   {
     if (*pBuffer1 != *pBuffer2)
@@ -352,19 +289,18 @@ static uint8_t Buffercmp(uint32_t* pBuffer1, uint32_t* pBuffer2, uint16_t Buffer
 }
 
 /**
-  * @brief  Deactivate shared Pins between SRAM and SAI.
-  * @param  None
+  * @brief  DMA transfer complete callback.
+  * @param  hmdma pointer to a SRAM_HandleTypeDef structure that contains
+  *                the configuration information for SRAM module.
   * @retval None
   */
-static void SRAM_DeactivateSharedPins(void)
+void HAL_SRAM_DMA_XferCpltCallback(MDMA_HandleTypeDef *hmdma)
 {
-  uint32_t pin;
-
-  /* Shared Pin between SRAM and SAI Audio (GPIOE) */
-  pin   = GPIO_PIN_3 | GPIO_PIN_4 | GPIO_PIN_5;
-
-  HAL_GPIO_DeInit(GPIOE, pin);
+  /* Prevent unused argument(s) compilation warning */
+  UNUSED(hmdma);
+  TransferCplt = 1;
 }
+
 
 /**
   * @}

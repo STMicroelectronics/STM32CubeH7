@@ -1,9 +1,9 @@
 /**
   @page Templates  Description of the Templates example
-  
+
   @verbatim
   ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
-  * @file    readme.txt 
+  * @file    readme.txt
   * @author  MCD Application Team
   * @brief   Description of the Template example.
   ******************************************************************************
@@ -23,32 +23,32 @@
 @par Example Description
 
 This projects provides a reference template that can be used to build any firmware application with execution from external memory
- 
-This projects is configured for STM32H750xx devices using STM32CubeH7 HAL and running on 
+
+This projects is configured for STM32H750xx devices using STM32CubeH7 HAL and running on
 STM32H750B-DISCO board from STMicroelectronics.
-  
+
 This application provide different configuration with linker files which allows different eXecution schemas
   Supported configuration by STM32H750B-DISCO:
     - XiP From QSPI, Data on Internal SRAM
     - XiP From QSPI, Data on External SDRAM
     - BootROM : Execution From External SDRAM , Data on Internal SRAM
-    
+
   Note : In BootROM configuration , application code is initially stored on SPI nor or eMMC flash then loaded to the SDRAM after boot
   Make sure that choosen config matches ExtMem_Boot config in memory.h file.
-      
+
 @note Care must be taken when using HAL_Delay(), this function provides accurate delay (in milliseconds)
       based on variable incremented in SysTick ISR. This implies that if HAL_Delay() is called from
       a peripheral ISR process, then the SysTick interrupt must have higher priority (numerically lower)
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
-      
+
 @note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
-At the beginning of the main program the HAL_Init() function is called to reset 
+At the beginning of the main program the HAL_Init() function is called to reset
 all the peripherals, initialize the Flash interface and the systick.
 The SystemClock_Config() function is used to configure the system clock for STM32H750xx Devices :
-The CPU at 400MHz 
+The CPU at 400MHz
 The HCLK for D1 Domain AXI and AHB3 peripherals , D2 Domain AHB1/AHB2 peripherals and D3 Domain AHB4  peripherals at 200MHz.
 The APB clock dividers for D1 Domain APB3 peripherals, D2 Domain APB1 and APB2 peripherals and D3 Domain APB4 peripherals to  run at 100MHz.
 
@@ -67,33 +67,36 @@ The APB clock dividers for D1 Domain APB3 peripherals, D2 Domain APB1 and APB2 p
 
 @par Directory contents
 
- - "Templates/Inc": contains the Templates firmware header files 
-    - Templates/Inc/main.h                   Main configuration file
-    - Templates/Inc/stm32h7xx_it.h           Interrupt handlers header file
-    - Templates/Inc/stm32h7xx_hal_conf.h     HAL Configuration file 
-
+ - "Templates/Inc": contains the Templates firmware header files
+    - Templates/Inc/main.h                          Main configuration file
+    - Templates/Inc/stm32h7xx_it.h                  Interrupt handlers header file
+    - Templates/Inc/stm32h7xx_hal_conf.h            HAL Configuration file
+	- Templates/Inc/stm32h750b_discovery_conf.h     Board Configuration file
+	- Templates/Inc/mt25tl01g_conf.h                MT25TL01G (QSPI) Configuration file
+	- Templates/Inc/mt48lc4m32b2_conf.h             MT48LC4M32B2 (SDRAM) Configuration file
+    - Templates/Inc/ft5336_conf.h                   FT5336 Configuration file
  - "Templates/Src": contains the Templates firmware source files
-    - Templates/Src/main.c                   Main program 
+    - Templates/Src/main.c                   Main program
     - Templates/Src/stm32h7xx_hal_msp.c      Microcontroller specific packages initialization file.
     - Templates/Src/stm32h7xx_it.c           Interrupt handlers
     - Templates/Src/system_stm32h7xx.c       STM32H7xx system clock configuration file
 
 
-@par Hardware and Software environment  
+@par Hardware and Software environment
 
   - This example runs on STM32H750xx devices.
-    
+
   - This example has been tested with STMicroelectronics STM32H750B-DISCO
-    boards and can be easily tailored to any other supported device 
+    boards and can be easily tailored to any other supported device
     and development board.
 
- 
+
 @par How to use it ?
 
 In order to make the program work, you must do the following:
 
   1. Select required configuration in memory.h in Templates\ExtMem_Boot\Inc template.
-     The default configuration is: 
+     The default configuration is:
      - DATA_AREA set to USE_INTERNAL_SRAM
      - CODE_AREA set to USE_QSPI
   2. Program the internal Flash with the ExtMem_Boot (see below).
@@ -126,7 +129,7 @@ In order to load the application to the external memory:
         - If BINARY_AREA is USE_MMC then use the STM32CubeProgarmmer tool, select eMMC e loader "MTFC4GACAJCN_STM32H750B-DISCO"
           and load the Project.bin (application binary output file) to the eMMC memory at the address 0xA0000000.
         - In order to debug the  external memory application, user shall attach the debugger, and perform a reset
-  
+
  * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
  */
-                                   
+

@@ -26,6 +26,7 @@
 #include "stm32h745i_discovery.h"
 #include "stm32h745i_discovery_sdram.h"
 #include "stm32h745i_discovery_lcd.h"
+#include "basic_gui.h"
 
 #include "stdio.h"
 

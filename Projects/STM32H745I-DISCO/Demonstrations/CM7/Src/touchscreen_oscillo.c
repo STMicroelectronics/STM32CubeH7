@@ -38,7 +38,8 @@
 /* Private Structures and Enumerations ------------------------------------------------------------*/
 
 /* Global variables ---------------------------------------------------------*/
-TS_StateTypeDef  TS_State = {0};
+TS_State_t  TS_State;
+TS_Init_t   hTS;
 
 uint32_t AutoMode = 0;
 uint32_t AutoModeCountDown = 100;
@@ -52,9 +53,18 @@ uint32_t AutoChangeDelay = 0;
 uint32_t SG_InitTouchScreen(void)
 {  
   uint32_t ret = DEMO_OK;
-  
+  uint32_t x_size, y_size;
+
+  BSP_LCD_GetXSize(0, &x_size);
+  BSP_LCD_GetYSize(0, &y_size);
+
+  hTS.Width = x_size;
+  hTS.Height = y_size;
+  hTS.Orientation =TS_SWAP_XY ;
+  hTS.Accuracy = 5;
+
   /* Touchscreen initialization */
-  if(BSP_TS_Init(BSP_LCD_GetXSize(), BSP_LCD_GetYSize()) != TS_OK)
+  if(BSP_TS_Init(0, &hTS) != BSP_ERROR_NONE)
   {
     ret = DEMO_ERROR;
   }
@@ -74,9 +84,9 @@ SG_WaveButtonIndex_e SG_GetWaveButtonIndex(SG_SwitchButtonWidgetTypeDef *pButton
   SG_WaveButtonIndex_e waveButtonIndex = SG_MAX_WAVE_BUTTON_INDEX;
   
   /* Check the touch screen coordinates */
-  BSP_TS_GetState(&TS_State);
+  BSP_TS_GetState(0, &TS_State);
 
-  if(TS_State.touchDetected)
+  if(TS_State.TouchDetected)
   {
     AutoMode = 0;
     AutoModeCountDown = 200;
@@ -84,8 +94,8 @@ SG_WaveButtonIndex_e SG_GetWaveButtonIndex(SG_SwitchButtonWidgetTypeDef *pButton
     /* Only take into account the first touch so far */
 
     /* Get X and Y position of the first touch post calibrated */
-    x = TS_State.touchX[0];
-    y = TS_State.touchY[0];
+    x = TS_State.TouchX;
+    y = TS_State.TouchY;
     
     for(buttonIndex = 0; buttonIndex < buttonsNumber; buttonIndex++)
     {
@@ -134,9 +144,9 @@ SG_UpDownButtonIndex_e SG_GetUpDownButtonIndex(ButtonWidgetTypeDef *pButton, uin
   SG_UpDownButtonIndex_e upDownButtonIndex = SG_MAX_UPDOWN_BUTTON_INDEX;
   
   /* Check the touch screen coordinates */
-  BSP_TS_GetState(&TS_State);
+  BSP_TS_GetState(0, &TS_State);
   
-  if(TS_State.touchDetected)
+  if(TS_State.TouchDetected)
   {
     AutoMode = 0;
     AutoModeCountDown = 200;
@@ -144,8 +154,8 @@ SG_UpDownButtonIndex_e SG_GetUpDownButtonIndex(ButtonWidgetTypeDef *pButton, uin
     /* Only take into account the first touch so far */
 
     /* Get X and Y position of the first touch post calibrated */
-    x = TS_State.touchX[0];
-    y = TS_State.touchY[0];
+    x = TS_State.TouchX;
+    y = TS_State.TouchY;
     
     for(buttonIndex = 0; buttonIndex < buttonsNumber; buttonIndex++)
     {
@@ -202,16 +212,16 @@ void SG_UpdateGenericButtons(ButtonWidgetTypeDef *pButton)
   uint16_t x, y;
   
   /* Check the touch screen coordinates */
-  BSP_TS_GetState(&TS_State);
+  BSP_TS_GetState(0, &TS_State);
   
-  if(TS_State.touchDetected)
+  if(TS_State.TouchDetected)
   {
     /* One or dual touch have been detected          */
     /* Only take into account the first touch so far */
     
     /* Get X and Y position of the first touch post calibrated */
-    x = TS_State.touchX[0];
-    y = TS_State.touchY[0];
+    x = TS_State.TouchX;
+    y = TS_State.TouchY;
     
     if ((x > pButton[0].buttonParams.Xpos) &&
         (x < (pButton[0].buttonParams.Xpos + pButton[0].buttonParams.Width)))

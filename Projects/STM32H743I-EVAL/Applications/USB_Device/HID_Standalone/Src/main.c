@@ -71,8 +71,7 @@ int main(void)
   BSP_LED_Init(LED_BLUE);
 
   /* Configure Joystick in GPIO mode */
-  BSP_JOY_Init(JOY_MODE_GPIO);
-
+  BSP_JOY_Init(JOY1, JOY_MODE_GPIO, JOY_ALL);
   /* Configure Key button for remote wakeup */
   BSP_PB_Init(BUTTON_WAKEUP, BUTTON_MODE_EXTI);
 

@@ -33,7 +33,7 @@
 /* Private typedef -----------------------------------------------------------*/
 
 /* Private define ------------------------------------------------------------*/
-#define MJPEG_VID_BUFFER_SIZE ((uint32_t)(1024 *96))
+#define MJPEG_VID_BUFFER_SIZE ((uint32_t)(1024 *64))
 #define MJPEG_AUD_BUFFER_SIZE ((uint32_t)(1024 *16))
 
 
@@ -110,17 +110,17 @@ int main(void)
   BSP_LED_Init(LED3);
  
  /*Initialize The SDRAM */  
-  BSP_SDRAM_Init();  
+  BSP_SDRAM_Init(0);  
 
   /* Initialize the LCD */
-  BSP_LCD_Init();
-  BSP_LCD_LayerDefaultInit(0, LCD_FRAME_BUFFER);
-  BSP_LCD_SelectLayer(0);   
-  BSP_LCD_Clear(LCD_COLOR_WHITE); 
-  BSP_LCD_SetFont(&Font24);
+  BSP_LCD_Init(0, LCD_ORIENTATION_LANDSCAPE);
+  GUI_SetFuncDriver(&LCD_Driver);
+  GUI_SetLayer(0);   
+  GUI_Clear(GUI_COLOR_WHITE); 
+  GUI_SetFont(&Font24);
   
-  LCD_X_Size = BSP_LCD_GetXSize();
-  LCD_Y_Size = BSP_LCD_GetYSize();
+  BSP_LCD_GetXSize(0 ,&LCD_X_Size);
+  BSP_LCD_GetYSize(0 ,&LCD_Y_Size);
   
   /*##-2- Initialize the HW JPEG Codec  ######################################*/
   /* Init the HAL JPEG driver */
@@ -133,7 +133,7 @@ int main(void)
     /*##-4- Init the SD Card #################################################*/
     SD_Initialize();
     
-    if(BSP_SD_IsDetected())
+    if(BSP_SD_IsDetected(0))
     {    
       /*##-5- Register the file system object to the FatFs module ##############*/
       if(f_mount(&SDFatFs, (TCHAR const*)SDPath, 0) == FR_OK)
@@ -327,10 +327,10 @@ static void DMA2D_CopyBuffer(uint32_t *pSrc, uint32_t *pDst, uint16_t ImageWidth
   uint32_t xPos, yPos, destination;       
   
   /*##-1- calculate the destination transfer address  ############*/
-  xPos = (BSP_LCD_GetXSize() - JPEG_Info.ImageWidth)/2;
-  yPos = (BSP_LCD_GetYSize() - JPEG_Info.ImageHeight)/2;     
+  xPos = (LCD_X_Size - JPEG_Info.ImageWidth)/2;
+  yPos = (LCD_Y_Size - JPEG_Info.ImageHeight)/2;     
   
-  destination = (uint32_t)pDst + ((yPos * BSP_LCD_GetXSize()) + xPos) * 4;
+  destination = (uint32_t)pDst + ((yPos * LCD_X_Size) + xPos) * 4;
  
   HAL_DMA2D_PollForTransfer(&DMA2D_Handle, 25);  /* wait for the previous DMA2D transfer to ends */
   /* copy the new decoded frame to the LCD Frame buffer*/
@@ -340,7 +340,7 @@ static void DMA2D_CopyBuffer(uint32_t *pSrc, uint32_t *pDst, uint16_t ImageWidth
 
 static void SD_Initialize(void)
 {  
-  BSP_SD_Init();
+  BSP_SD_Init(0);
 }
 
 /**
@@ -352,27 +352,27 @@ static void LCD_BriefDisplay(void)
 {
   char message[64];
 
-  BSP_LCD_SetFont(&Font24);
-  BSP_LCD_Clear(LCD_COLOR_WHITE);
-  BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-  BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
-  BSP_LCD_FillRect(0, 0, BSP_LCD_GetXSize(), 112);  
-  BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
-  BSP_LCD_DisplayStringAtLine(1, (uint8_t *)"     MJPEG Video Decoding example");
-  BSP_LCD_SetFont(&Font16);
-  BSP_LCD_DisplayStringAtLine(4, (uint8_t *)"       This example shows how to Decode and display");
-  BSP_LCD_DisplayStringAtLine(5, (uint8_t *)"       an MJPEG video file located on the uSD");
+  GUI_SetFont(&Font24);
+  GUI_Clear(GUI_COLOR_WHITE);
+  GUI_SetBackColor(GUI_COLOR_BLUE);
+  GUI_SetTextColor(GUI_COLOR_BLUE);
+  GUI_FillRect(0, 0, LCD_X_Size, 112, GUI_COLOR_WHITE);  
+  GUI_SetTextColor(GUI_COLOR_WHITE);
+  GUI_DisplayStringAtLine(1, (uint8_t *)"     MJPEG Video Decoding example");
+  GUI_SetFont(&Font16);
+  GUI_DisplayStringAtLine(4, (uint8_t *)"       This example shows how to Decode and display");
+  GUI_DisplayStringAtLine(5, (uint8_t *)"       an MJPEG video file located on the uSD");
   
-  BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
-  BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
+  GUI_SetBackColor(GUI_COLOR_WHITE);
+  GUI_SetTextColor(GUI_COLOR_BLUE);
   
   /* JPEG resolution */
   sprintf(message, "Video Resolution            = %lu x %lu", JPEG_Info.ImageWidth, JPEG_Info.ImageHeight);
-  BSP_LCD_DisplayStringAtLine(10, (uint8_t *)message);
+  GUI_DisplayStringAtLine(10, (uint8_t *)message);
   
   /* JPEG Quality */
   sprintf(message, "JPEG Quality                =   %lu",JPEG_Info.ImageQuality );
-  BSP_LCD_DisplayStringAtLine(11, (uint8_t *)message);
+  GUI_DisplayStringAtLine(11, (uint8_t *)message);
   
   /* JPEG Chroma Sampling */
   if(JPEG_Info.ChromaSubsampling  == JPEG_420_SUBSAMPLING)
@@ -388,15 +388,15 @@ static void LCD_BriefDisplay(void)
     sprintf(message, "ChromaSubsampling           =  4:4:4");
   }
   
-  BSP_LCD_DisplayStringAtLine(12, (uint8_t *)message);
+  GUI_DisplayStringAtLine(12, (uint8_t *)message);
   
   /* Decoding approximative decoding Frame rate */
   sprintf(message, "Average Decoding Frame Rate =   %lu fps", FrameRate);
-  BSP_LCD_DisplayStringAtLine(13, (uint8_t *)message);
+  GUI_DisplayStringAtLine(13, (uint8_t *)message);
   
   /* Number of decoded frames */
   sprintf(message, "Number of Frames            =   %lu", AVI_Handel.aviInfo.TotalFrame);
-  BSP_LCD_DisplayStringAtLine(14, (uint8_t *)message);
+  GUI_DisplayStringAtLine(14, (uint8_t *)message);
   
 }
 
@@ -409,13 +409,13 @@ static void LCD_FileErrorDisplay(void)
 {
 
   
-  BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
-  BSP_LCD_SetTextColor(LCD_COLOR_WHITE); 
-  BSP_LCD_SetTextColor(LCD_COLOR_RED);
-  BSP_LCD_SetFont(&Font16);
-  BSP_LCD_DisplayStringAtLine(26, (uint8_t *)"Unable to open MJPEG video file video.avi");
-  BSP_LCD_DisplayStringAtLine(27, (uint8_t *)"Please Check that an MJPEG file named video.avi");
-  BSP_LCD_DisplayStringAtLine(28, (uint8_t *)"is stored on the uSD");
+  GUI_SetBackColor(GUI_COLOR_WHITE);
+  GUI_SetTextColor(GUI_COLOR_WHITE); 
+  GUI_SetTextColor(GUI_COLOR_RED);
+  GUI_SetFont(&Font16);
+  GUI_DisplayStringAtLine(26, (uint8_t *)"Unable to open MJPEG video file video.avi");
+  GUI_DisplayStringAtLine(27, (uint8_t *)"Please Check that an MJPEG file named video.avi");
+  GUI_DisplayStringAtLine(28, (uint8_t *)"is stored on the uSD");
   
   Error_Handler();  
 }

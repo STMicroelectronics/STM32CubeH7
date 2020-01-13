@@ -26,7 +26,9 @@
 #include "stm32h747i_eval.h"
 #include "stm32h747i_eval_lcd.h"
 #include "stm32h747i_eval_sdram.h"
+#include "basic_gui.h"
 
+#define LAYER0_ADDRESS        0xD0000000
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/

@@ -26,9 +26,11 @@
 #include "usbh_core.h"
 #include "stm32h743i_eval.h"
 #include "stm32h743i_eval_io.h"
-#include "lcd_log.h"
+#include "basic_gui.h"
 #include "usbh_hid.h"
 #include "usbh_hid_parser.h"
+#include "lcd_trace.h"
+#include "utilities_conf.h"
 
 /* Exported types ------------------------------------------------------------*/
 typedef enum {

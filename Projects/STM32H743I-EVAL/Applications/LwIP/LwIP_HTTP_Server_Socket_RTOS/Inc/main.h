@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    LwIP/LwIP_HTTP_Server_Netconn_RTOS/Inc/main.h 
+  * @file    LwIP/LwIP_HTTP_Server_Netconn_RTOS/Inc/main.h
   * @author  MCD Application Team
   * @brief   Header for main.c module
   ******************************************************************************
@@ -28,6 +28,8 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm32h7xx_hal.h"
 #include "stm32h743i_eval.h"
+#include "stm32h743i_eval_sdram.h"
+#include "basic_gui.h"
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
@@ -38,7 +40,7 @@
 #define IP_ADDR1   168
 #define IP_ADDR2   0
 #define IP_ADDR3   10
-   
+
 /*NETMASK*/
 #define NETMASK_ADDR0   255
 #define NETMASK_ADDR1   255
@@ -52,7 +54,7 @@
 #define GW_ADDR3   1
 
 /* Exported macro ------------------------------------------------------------*/
-/* Exported functions ------------------------------------------------------- */  
+/* Exported functions ------------------------------------------------------- */
 
 
 #ifdef __cplusplus

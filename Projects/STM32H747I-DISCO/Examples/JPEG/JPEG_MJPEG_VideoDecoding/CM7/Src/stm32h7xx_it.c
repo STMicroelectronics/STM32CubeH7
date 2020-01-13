@@ -34,7 +34,6 @@
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 extern JPEG_HandleTypeDef    JPEG_Handle;
-extern SD_HandleTypeDef uSdHandle;
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 
@@ -170,18 +169,6 @@ void MDMA_IRQHandler()
   HAL_MDMA_IRQHandler(JPEG_Handle.hdmain);
   HAL_MDMA_IRQHandler(JPEG_Handle.hdmaout);  
 }
-
-/**
-* @brief  This function handles SDMMC interrupt request.
-* @param  None
-* @retval None
-*/
-void SDMMC1_IRQHandler(void)
-{
-
-  HAL_SD_IRQHandler(&uSdHandle);
-}
-
 /**
   * @}
   */

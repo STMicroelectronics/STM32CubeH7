@@ -45,7 +45,7 @@ be returned to user (through variable 'SECTORError').
 Once this operation is finished, sector word programming operation will be performed 
 in the FLASH memory. The written data is then read back and checked.
 
-The STM32H743I-EVAL board revB LEDs can be used to monitor the transfer status:
+The STM32H743I-EVAL board  LEDs can be used to monitor the transfer status:
  - LED1 is ON when there are no errors detected after data programming 
  - LED3 is Toggle when there are errors detected after data programming 
  - LED3 is ON when there is an issue during erase or program procedure

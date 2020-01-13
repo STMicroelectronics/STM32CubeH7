@@ -111,7 +111,7 @@ LED3 is ON when there are an error.
 
   - This example runs on STM32H745xx devices.
   
-  - This example has been tested with NUCLEO-H745ZI-Q rev.A board with SMPS (SD Convertor) power supply config and can be
+  - This example has been tested with NUCLEO-H745ZI-Q  board with SMPS (SD Convertor) power supply config and can be
     easily tailored to any other supported device and development board.
     
   - NUCLEO-H745ZI-Q Set-up

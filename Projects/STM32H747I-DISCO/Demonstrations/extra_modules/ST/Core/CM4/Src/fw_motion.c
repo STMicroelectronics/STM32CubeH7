@@ -23,7 +23,7 @@
 
 #include <stm32h747i_discovery.h>
 #include <stm32h747i_discovery_camera.h>
-
+#include <stm32h747i_discovery_bus.h>
 #include <FreeRTOS.h>
 #include <task.h>
 #include <queue.h>
@@ -41,7 +41,7 @@ static bool motion_initialize(void)
     struct ipc_msg msg;
 
     /* initialize the camera */
-    if (BSP_CAMERA_Init(RESOLUTION_R160x120) != CAMERA_OK)
+    if (BSP_CAMERA_Init(0,CAMERA_R160x120,CAMERA_PF_RGB565) != BSP_ERROR_NONE)
         msg.m.state = IPC_CAMERA_ERROR;
     else {
         frames_q = xQueueCreate(16, sizeof(struct ipc_msg));
@@ -71,7 +71,7 @@ static void motion_mainloop(void)
         configASSERT(size == sizeof(msg));
 
         if (msg.m.command == IPC_CAMERA_ACQUIRE) {
-            BSP_CAMERA_ContinuousStart((uint8_t*)CAMERA_FRAME_BUFFER);
+            BSP_CAMERA_Start(0, (uint8_t*)CAMERA_FRAME_BUFFER,CAMERA_MODE_CONTINUOUS);
             break;
         }
     }
@@ -96,16 +96,16 @@ static void motion_mainloop(void)
         ipc_sendmsg(&msg, sizeof(msg));
 
         /* resume capture */
-        BSP_CAMERA_Resume();
+        BSP_CAMERA_Resume(0);
     }
 }
 
-void BSP_CAMERA_FrameEventCallback(void)
+void BSP_CAMERA_FrameEventCallback(uint32_t Instance)
 {
     portBASE_TYPE px = pdFALSE;
     struct ipc_msg msg;
 
-    BSP_CAMERA_Suspend();
+    BSP_CAMERA_Suspend(0);
 
     xQueueSendFromISR(frames_q, &msg, &px);
     portEND_SWITCHING_ISR(px);

@@ -78,7 +78,7 @@ USBD_StorageTypeDef USBD_DISK_fops = {
   */
 int8_t STORAGE_Init(uint8_t lun)
 {
-  BSP_SD_Init();
+  BSP_SD_Init(0);
   return 0;
 }
 
@@ -95,9 +95,9 @@ int8_t STORAGE_GetCapacity(uint8_t lun, uint32_t * block_num,
   HAL_SD_CardInfoTypeDef info;
   int8_t ret = -1;
 
-  if (BSP_SD_IsDetected() != SD_NOT_PRESENT)
+  if (BSP_SD_IsDetected(0) != SD_NOT_PRESENT)
   {
-    BSP_SD_GetCardInfo(&info);
+    BSP_SD_GetCardInfo(0,&info);
 
     *block_num = info.LogBlockNbr - 1;
     *block_size = info.LogBlockSize;
@@ -116,16 +116,16 @@ int8_t STORAGE_IsReady(uint8_t lun)
   static int8_t prev_status = 0;
   int8_t ret = -1;
 
-  if (BSP_SD_IsDetected() != SD_NOT_PRESENT)
+  if (BSP_SD_IsDetected(0) != SD_NOT_PRESENT)
   {
     if (prev_status < 0)
     {
-      BSP_SD_Init();
+      BSP_SD_Init(0);
       prev_status = 0;
 
     }
 
-    if (BSP_SD_GetCardState() == SD_TRANSFER_OK)
+    if (BSP_SD_GetCardState(0) == SD_TRANSFER_OK)
     {
       ret = 0;
     }
@@ -159,12 +159,12 @@ int8_t STORAGE_Read(uint8_t lun, uint8_t * buf, uint32_t blk_addr,
 {
   int8_t ret = -1;
 
-  if (BSP_SD_IsDetected() != SD_NOT_PRESENT)
+  if (BSP_SD_IsDetected(0) != SD_NOT_PRESENT)
   {
-    BSP_SD_ReadBlocks((uint32_t *) buf, blk_addr, blk_len, 1000);
+    BSP_SD_ReadBlocks(0,(uint32_t *) buf, blk_addr, blk_len);
 
     /* Wait until SD card is ready to use for new operation */
-    while (BSP_SD_GetCardState() != SD_TRANSFER_OK)
+    while (BSP_SD_GetCardState(0) != SD_TRANSFER_OK)
     {
     }
 
@@ -185,12 +185,12 @@ int8_t STORAGE_Write(uint8_t lun, uint8_t * buf, uint32_t blk_addr,
 {
   int8_t ret = -1;
 
-  if (BSP_SD_IsDetected() != SD_NOT_PRESENT)
+  if (BSP_SD_IsDetected(0) != SD_NOT_PRESENT)
   {
-    BSP_SD_WriteBlocks((uint32_t *) buf, blk_addr, blk_len, 1000);
+    BSP_SD_WriteBlocks(0,(uint32_t *) buf, blk_addr, blk_len);
 
     /* Wait until SD card is ready to use for new operation */
-    while (BSP_SD_GetCardState() != SD_TRANSFER_OK)
+    while (BSP_SD_GetCardState(0) != SD_TRANSFER_OK)
     {
     }
 

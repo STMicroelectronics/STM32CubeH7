@@ -25,6 +25,7 @@
 #include "main_common.h"
 #include "stm32h745i_discovery.h"
 #include "stm32h745i_discovery_qspi.h"
+#include "stm32h745i_discovery_sdram.h"
 #include "display_menu.h"
 #include "graphics.h"
 #include "touchscreen.h"

@@ -62,7 +62,7 @@ int main(void)
      */
   HAL_Init();
 
-  /* Configure the system clock to 200 MHz */
+  /* Configure the system clock to 400 MHz */
   SystemClock_Config();
 
   /* -1- Enable GPIO Clock (to be able to program the configuration registers) */

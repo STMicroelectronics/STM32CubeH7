@@ -46,7 +46,7 @@
 #define HAL_DMA2D_MODULE_ENABLED
 #define HAL_DSI_MODULE_ENABLED
 /* #define HAL_ETH_MODULE_ENABLED */
-/* #define HAL_EXTI_MODULE_ENABLED */
+#define HAL_EXTI_MODULE_ENABLED 
 /* #define HAL_FDCAN_MODULE_ENABLED */
 #define HAL_FLASH_MODULE_ENABLED 
 #define HAL_GPIO_MODULE_ENABLED
@@ -157,7 +157,7 @@
 #define  VDD_VALUE                    ((uint32_t)3300) /*!< Value of VDD in mv */
 #define  TICK_INT_PRIORITY            ((uint32_t)0x0F) /*!< tick interrupt priority */
 #define  USE_RTOS                     0
-/*#define  USE_SD_TRANSCEIVER         0U */            /*!< use uSD Transceiver */
+/*#define  USE_SD_TRANSCEIVER           0U */            /*!< use uSD Transceiver */
 
 /* ########################### Ethernet Configuration ######################### */
 #define ETH_TX_DESC_CNT         4  /* number of Ethernet Tx DMA descriptors */
@@ -169,6 +169,10 @@
 #define ETH_MAC_ADDR3    ((uint8_t)0x00)
 #define ETH_MAC_ADDR4    ((uint8_t)0x00)
 #define ETH_MAC_ADDR5    ((uint8_t)0x00)
+
+/*#define USE_HAL_UART_REGISTER_CALLBACKS          1U*/
+//#define USE_HAL_SAI_REGISTER_CALLBACKS           1U
+/*#define USE_HAL_I2C_REGISTER_CALLBACKS           1U*/
 
 /* ########################## Assert Selection ############################## */
 /**

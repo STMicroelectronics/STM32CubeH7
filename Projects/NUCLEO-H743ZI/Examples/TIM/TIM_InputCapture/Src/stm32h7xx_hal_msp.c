@@ -89,4 +89,3 @@ void HAL_TIM_IC_MspInit(TIM_HandleTypeDef *htim)
   */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
-

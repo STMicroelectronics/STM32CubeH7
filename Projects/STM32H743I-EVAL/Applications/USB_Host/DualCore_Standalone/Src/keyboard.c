@@ -55,7 +55,7 @@ void HID_KeyboardMenuProcess(void)
   {
   case HID_KEYBOARD_IDLE:
     demo.keyboard_state = HID_KEYBOARD_START;
-    BSP_LCD_ClearStringLine(17);
+    GUI_ClearStringLine(17);
     Demo_SelectItem(DEMO_KEYBOARD_menu, 0);
     demo.select = 0;
     break;
@@ -76,9 +76,9 @@ void HID_KeyboardMenuProcess(void)
           break;
 
         case 1: /* return */
-          LCD_LOG_ClearTextZone();
+          UTIL_LCD_TRACE_ClearTextZone();
           demo.state = DEMO_IDLE;
-          LCD_UsrLogY("> HID application closed.\n");
+          LCD_UsrTrace("> HID application closed.\n");
           demo.select = 0;
           break;
 
@@ -106,13 +106,13 @@ void HID_KeyboardMenuProcess(void)
   */
 static void USR_KEYBRD_Init(void)
 {
-  LCD_LOG_ClearTextZone();
-  BSP_LCD_SetTextColor(LCD_COLOR_YELLOW);
+  UTIL_LCD_TRACE_ClearTextZone();
+  GUI_SetTextColor(GUI_COLOR_YELLOW);
 
-  BSP_LCD_DisplayStringAtLine(4,
+  GUI_DisplayStringAtLine(4,
                               (uint8_t *)
                               "Use Keyboard to type characters:                                                            ");
-  BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
+  GUI_SetTextColor(GUI_COLOR_WHITE);
 
   KeybrdCharYpos = KYBRD_FIRST_LINE;
   KeybrdCharXpos = KYBRD_FIRST_COLUMN;
@@ -134,7 +134,7 @@ void USR_KEYBRD_ProcessData(uint8_t data)
 
     if (KeybrdCharYpos > KYBRD_LAST_LINE)
     {
-      LCD_LOG_ClearTextZone();
+      UTIL_LCD_TRACE_ClearTextZone();
       KeybrdCharYpos = KYBRD_FIRST_LINE;
       KeybrdCharXpos = KYBRD_FIRST_COLUMN;
     }
@@ -172,12 +172,12 @@ void USR_KEYBRD_ProcessData(uint8_t data)
       {
       }
     }
-    BSP_LCD_DisplayChar(CurrentLastXpos[KeybrdCharYpos], KeybrdCharYpos, ' ');
+    GUI_DisplayChar(CurrentLastXpos[KeybrdCharYpos], KeybrdCharYpos, ' ');
   }
   else
   {
     /* Update the cursor position on LCD */
-    BSP_LCD_DisplayChar(KeybrdCharXpos, KeybrdCharYpos, data);
+    GUI_DisplayChar(KeybrdCharXpos, KeybrdCharYpos, data);
 
     /* Increment char X position */
     KeybrdCharXpos += SMALL_FONT_COLUMN_WIDTH;
@@ -194,10 +194,10 @@ void USR_KEYBRD_ProcessData(uint8_t data)
 
     if (KeybrdCharYpos > KYBRD_LAST_LINE)
     {
-      LCD_LOG_ClearTextZone();
+      UTIL_LCD_TRACE_ClearTextZone();
       KeybrdCharYpos = KYBRD_FIRST_LINE;
       /* Start New Display of the cursor position on LCD */
-      BSP_LCD_DisplayChar(KeybrdCharXpos, KeybrdCharYpos, data);
+      GUI_DisplayChar(KeybrdCharXpos, KeybrdCharYpos, data);
     }
   }
 }

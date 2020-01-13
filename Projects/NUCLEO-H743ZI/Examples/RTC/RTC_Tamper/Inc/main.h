@@ -23,7 +23,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32h7xx_hal.h"
-#include "stm32h7xx_nucleo_144.h"
+#include "stm32h7xx_nucleo.h"
 #include <stdio.h>
 
 /* Exported types ------------------------------------------------------------*/

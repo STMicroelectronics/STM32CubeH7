@@ -90,15 +90,15 @@ int main(void)
   /* Configure TAMPER Button */
   BSP_PB_Init(BUTTON_TAMPER, BUTTON_MODE_GPIO);   
 
-  BSP_SD_Init();
+  BSP_SD_Init(0);
 
-  while(BSP_SD_IsDetected() != SD_PRESENT)
+  while(BSP_SD_IsDetected(0) != SD_PRESENT)
   {
-        BSP_LCD_SetTextColor(LCD_COLOR_RED);
-        BSP_LCD_DisplayStringAtLine(8, (uint8_t*)"  Please insert SD Card                  ");
+        GUI_SetTextColor(GUI_COLOR_RED);
+        GUI_DisplayStringAtLine(8, (uint8_t*)"  Please insert SD Card                  ");
   }
   
-  BSP_LCD_Clear(LCD_COLOR_BLACK);
+  GUI_Clear(GUI_COLOR_BLACK);
   
   /*##-2- Link the SD Card disk I/O driver ###################################*/
 
@@ -111,9 +111,9 @@ int main(void)
       if(pDirectoryFiles[counter] == NULL)
       {
         /* Set the Text Color */
-        BSP_LCD_SetTextColor(LCD_COLOR_RED);
+        GUI_SetTextColor(GUI_COLOR_RED);
         
-        BSP_LCD_DisplayStringAtLine(8, (uint8_t*)"  Cannot allocate memory ");
+        GUI_DisplayStringAtLine(8, (uint8_t*)"  Cannot allocate memory ");
         
         while(1)
         {
@@ -130,7 +130,7 @@ int main(void)
       {
         free(pDirectoryFiles[counter]);
       }
-      BSP_LCD_DisplayStringAtLine(8, (uint8_t*)"  No Bitmap files...      ");
+      GUI_DisplayStringAtLine(8, (uint8_t*)"  No Bitmap files...      ");
       while(1)
       {
       }
@@ -157,18 +157,18 @@ int main(void)
         sprintf ((char*)str, "Media/%-11.11s", pDirectoryFiles[counter]);
  
         /* Set LCD foreground Layer */
-        BSP_LCD_SelectLayer(1);
+        GUI_SetLayer(1);
          
         /* Open a file and copy its content to an internal buffer */
         Storage_OpenReadFile(uwInternelBuffer, (const char*)str);
         
         /* Write bmp file on LCD frame buffer */
-        BSP_LCD_DrawBitmap(0, 0, uwInternelBuffer);  
+        GUI_DrawBitmap(0, 0, uwInternelBuffer);  
         
         /* Configure the transparency for background layer : Increase the transparency */
         for (transparency = 0; transparency < 255; (transparency++))
         {        
-          BSP_LCD_SetTransparency(1, transparency);
+          BSP_LCD_SetTransparency(0, 1, transparency);
           
           /* Insert a delay of display */
           HAL_Delay(2);
@@ -182,14 +182,14 @@ int main(void)
         /* Configure the transparency for foreground layer : decrease the transparency */
         for (transparency = 255; transparency > 0; transparency--)
         {        
-          BSP_LCD_SetTransparency(1, transparency);
+          BSP_LCD_SetTransparency(0, 1, transparency);
           
           /* Insert a delay of display */
           HAL_Delay(2);
         }
 
         /* Clear the Foreground Layer */ 
-        BSP_LCD_Clear(LCD_COLOR_BLACK);
+        GUI_Clear(GUI_COLOR_BLACK);
         
         /* Jump to the next image */  
         counter++;
@@ -201,7 +201,7 @@ int main(void)
         if ((Storage_CheckBitmapFile((const char*)str, &uwBmplen) == 0) || (counter < (ubNumberOfFiles)))
         {         
           /* Connect the Output Buffer to LCD Background Layer  */
-          BSP_LCD_SelectLayer(0);
+          GUI_SetLayer(0);
           
           /* Format the string */  
           sprintf ((char*)str, "Media/%-11.11s", pDirectoryFiles[counter]);
@@ -210,12 +210,12 @@ int main(void)
           Storage_OpenReadFile(uwInternelBuffer, (const char*)str);
           
           /* Write bmp file on LCD frame buffer */
-          BSP_LCD_DrawBitmap(0, 0, uwInternelBuffer);
+          GUI_DrawBitmap(0, 0, uwInternelBuffer);
           
           /* Configure the transparency for background layer : decrease the transparency */  
           for (transparency = 0; transparency < 255; (transparency++))
           {        
-            BSP_LCD_SetTransparency(0, transparency);
+            BSP_LCD_SetTransparency( 0, 0, transparency);
             
             /* Insert a delay of display */
             HAL_Delay(2);
@@ -230,24 +230,24 @@ int main(void)
           /* Configure the transparency for background layer : Increase the transparency */
           for (transparency = 255; transparency > 0; transparency--)
           {        
-            BSP_LCD_SetTransparency(0, transparency);
+            BSP_LCD_SetTransparency( 0, 0, transparency);
             
             /* Insert a delay of display */
             HAL_Delay(2);
           }
 
           /* Clear the Background Layer */
-          BSP_LCD_Clear(LCD_COLOR_BLACK);
+          GUI_Clear(GUI_COLOR_BLACK);
 
           counter++;   
         }
         else if (Storage_CheckBitmapFile((const char*)str, &uwBmplen) == 0)
         {
           /* Set the Text Color */
-          BSP_LCD_SetTextColor(LCD_COLOR_RED); 
+          GUI_SetTextColor(GUI_COLOR_RED); 
           
-          BSP_LCD_DisplayStringAtLine(7, (uint8_t *) str);        
-          BSP_LCD_DisplayStringAtLine(8, (uint8_t*)"    File type not supported. "); 
+          GUI_DisplayStringAtLine(7, (uint8_t *) str);        
+          GUI_DisplayStringAtLine(8, (uint8_t*)"    File type not supported. "); 
           while(1)
           {
           }      
@@ -263,35 +263,46 @@ int main(void)
   * @retval None
   */
 static void LCD_Config(void)
-{
-  /* LCD Initialization */ 
-  /* Two layers are used in this application but not simultaneously 
-     so "LCD_MAX_PCLK" is recommended to programme the maximum PCLK = 25,16 MHz */
-  BSP_LCD_Init();
+ {
+  int32_t lcd_status = BSP_ERROR_NONE;
+  BSP_LCD_LayerConfig_t config;
 
-  /* LCD Initialization */ 
-  BSP_LCD_LayerDefaultInit(0, LCD_FB_START_ADDRESS);
-  BSP_LCD_LayerDefaultInit(1, LCD_FB_START_ADDRESS+(BSP_LCD_GetXSize()*BSP_LCD_GetYSize()*4));
+  /* Initialize LCD BACKGROUND layer: activated by default */
+  BSP_LCD_Init(0, LCD_ORIENTATION_LANDSCAPE);
+  while(lcd_status != BSP_ERROR_NONE);
+  GUI_SetFuncDriver(&LCD_Driver);
 
-  /* Enable the LCD */ 
-  BSP_LCD_DisplayOn(); 
-  
-  /* Select the LCD Background Layer  */
-  BSP_LCD_SelectLayer(0);
+  /* Clear the Background Layer */
+  GUI_Clear(GUI_COLOR_BLACK);
 
-  /* Clear the Background Layer */ 
-  BSP_LCD_Clear(LCD_COLOR_BLACK);  
-  
-  /* Select the LCD Foreground Layer  */
-  BSP_LCD_SelectLayer(1);
+  /* Initialize LCD FOREGROUND layer */
+  config.Address = LCD_BG_LAYER_ADDRESS;
+  config.PixelFormat = LTDC_PIXEL_FORMAT_ARGB8888;
+  config.X0          = 0;
+  config.X1          = LCD_DEFAULT_WIDTH;
+  config.Y0          = 0;
+  config.Y1          = LCD_DEFAULT_HEIGHT;
 
-  /* Clear the Foreground Layer */ 
-  BSP_LCD_Clear(LCD_COLOR_BLACK);
-  
+  BSP_LCD_ConfigLayer(0, LTDC_ACTIVE_LAYER_FOREGROUND, &config);
+
+  /* Select the LCD Foreground Layer */
+  BSP_LCD_SetActiveLayer(0, LTDC_ACTIVE_LAYER_FOREGROUND);
+  GUI_SetLayer(LTDC_ACTIVE_LAYER_FOREGROUND);
+
+  /* Clear the Foreground Layer */
+  GUI_Clear(GUI_COLOR_BLACK);
+
   /* Configure the transparency for foreground and background :
-     Increase the transparency */
-  BSP_LCD_SetTransparency(0, 0);
-  BSP_LCD_SetTransparency(1, 100);
+  Increase the transparency */
+  BSP_LCD_SetTransparency(0, LTDC_ACTIVE_LAYER_BACKGROUND, 0);
+  BSP_LCD_SetTransparency(0, LTDC_ACTIVE_LAYER_FOREGROUND, 100);
+
+  /* Set Font */
+  GUI_SetFont(&Font16);
+
+  /* Set the Text and Back Color */
+  GUI_SetTextColor(GUI_COLOR_RED);
+  GUI_SetBackColor(GUI_COLOR_BLACK);
 }
 
 /**

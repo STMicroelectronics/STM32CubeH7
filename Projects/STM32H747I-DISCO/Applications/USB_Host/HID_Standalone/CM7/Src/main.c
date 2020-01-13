@@ -80,8 +80,7 @@ int main(void)
   HAL_HSEM_Release(HSEM_ID_0,0);
 
   /* Initialize IO expander */
-  BSP_JOY_Init(JOY_MODE_GPIO);
-
+  BSP_JOY_Init(JOY1,JOY_MODE_GPIO,JOY_ALL);
   /* Init HID Application */
   HID_InitApplication();
 
@@ -103,13 +102,13 @@ int main(void)
     /* USB Host Background task */
     USBH_Process(&hUSBHost);
 
-    /* MSC Menu Process */
+    /* HID Menu Process */
     HID_MenuProcess();
   }
 }
 
 /**
-  * @brief  MSC application Init.
+  * @brief  HID application Init.
   * @param  None
   * @retval None
   */
@@ -120,27 +119,18 @@ static void HID_InitApplication(void)
   BSP_LED_Init(LED3);
 
   /* Initialize the LCD */
-  BSP_LCD_Init();
-
-  /* LCD Layer Initialization */
-  BSP_LCD_LayerDefaultInit(1, LCD_FB_START_ADDRESS);
-
-  /* Select the LCD Layer */
-  BSP_LCD_SelectLayer(1);
-
-  /* Enable the display */
-  BSP_LCD_DisplayOn();
-
-  /* Init the LCD Log module */
-  LCD_LOG_Init();
+  BSP_LCD_Init(0,LCD_ORIENTATION_LANDSCAPE);
+  GUI_SetFuncDriver(&LCD_Driver);
+    /* Initialize the LCD Log module */
+  UTIL_LCD_TRACE_Init();
 
 #ifdef USE_USB_HS
-  LCD_LOG_SetHeader((uint8_t *) " USB OTG HS HID Host");
+  UTIL_LCD_TRACE_SetHeader((uint8_t *) " USB OTG HS HID Host");
 #else
-  LCD_LOG_SetHeader((uint8_t *) " USB OTG FS HID Host");
+  UTIL_LCD_TRACE_SetHeader((uint8_t *) " USB OTG FS HID Host");
 #endif
-
-  LCD_UsrLog("USB Host library started.\n");
+  
+  LCD_UsrTrace("USB Host library started.\n");
 
   /* Start HID Interface */
   HID_MenuInit();

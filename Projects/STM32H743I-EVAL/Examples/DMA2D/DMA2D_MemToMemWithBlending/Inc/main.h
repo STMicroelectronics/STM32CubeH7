@@ -24,6 +24,8 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm32h743i_eval.h"
 #include "stm32h743i_eval_lcd.h"
+#include "stm32h743i_eval_sdram.h"
+#include "basic_gui.h"
 
 #define LAYER_SIZE_X      240
 #define LAYER_SIZE_Y      130

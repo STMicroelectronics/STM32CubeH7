@@ -24,9 +24,8 @@
 #endif
 #include "app_ethernet.h"
 #include "ethernetif.h"
-#ifdef USE_LCD
-#include "Log/lcd_log.h"
-#endif
+
+
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -54,7 +53,7 @@ void ethernet_link_status_updated(struct netif *netif)
 #elif defined(USE_LCD)
     uint8_t iptxt[20];
     sprintf((char *)iptxt, "%s", ip4addr_ntoa(netif_ip4_addr(netif)));
-    LCD_UsrLog ("Static IP address: %s\n", iptxt);
+    LCD_UsrTrace ("Static IP address: %s\n", iptxt);
 #else
     BSP_LED_On(LED1);
     BSP_LED_Off(LED2);
@@ -66,7 +65,7 @@ void ethernet_link_status_updated(struct netif *netif)
     /* Update DHCP state machine */
     DHCP_state = DHCP_LINK_DOWN;
 #elif defined(USE_LCD)
-    LCD_UsrLog ("The network cable is not connected \n"); 
+    LCD_UsrTrace ("The network cable is not connected \n"); 
 #else
     BSP_LED_Off(LED1);
     BSP_LED_On(LED2); 
@@ -102,7 +101,7 @@ void DHCP_Thread(void const * argument)
         ip_addr_set_zero_ip4(&netif->gw);    
         DHCP_state = DHCP_WAIT_ADDRESS;
 #ifdef USE_LCD  
-        LCD_UsrLog ("  State: Looking for DHCP server ...\n");
+        LCD_UsrTrace ("  State: Looking for DHCP server ...\n");
 #else
         BSP_LED_Off(LED1);
         BSP_LED_Off(LED2);
@@ -118,7 +117,7 @@ void DHCP_Thread(void const * argument)
          
 #ifdef USE_LCD 
           sprintf((char *)iptxt, "%s", ip4addr_ntoa(netif_ip4_addr(netif)));  
-          LCD_UsrLog ("IP address assigned by a DHCP server: %s\n", iptxt);
+          LCD_UsrTrace ("IP address assigned by a DHCP server: %s\n", iptxt);
 #else
           BSP_LED_On(LED1);
           BSP_LED_Off(LED2);
@@ -144,8 +143,8 @@ void DHCP_Thread(void const * argument)
              
 #ifdef USE_LCD  
             sprintf((char *)iptxt, "%s", ip4addr_ntoa(netif_ip4_addr(netif)));
-            LCD_UsrLog ("DHCP Timeout !! \n");
-            LCD_UsrLog ("Static IP address: %s\n", iptxt); 
+            LCD_UsrTrace ("DHCP Timeout !! \n");
+            LCD_UsrTrace ("Static IP address: %s\n", iptxt); 
 #else
             BSP_LED_On(LED1);
             BSP_LED_Off(LED2);
@@ -160,7 +159,7 @@ void DHCP_Thread(void const * argument)
       dhcp_stop(netif);
       DHCP_state = DHCP_OFF;
 #ifdef USE_LCD  
-      LCD_UsrLog ("The network cable is not connected \n"); 
+      LCD_UsrTrace ("The network cable is not connected \n"); 
 #else
       BSP_LED_Off(LED1);
       BSP_LED_On(LED2);

@@ -266,21 +266,25 @@ uint8_t BSP_Config(void)
                                                                   , (HAL_RCC_GetPCLK2Freq()/1000000U) );
 
   /* Initialize the SDRAM memory */
-  if ((RetVal = BSP_SDRAM_Init()) != SDRAM_OK)
+  if ((RetVal = BSP_SDRAM_Init(0)) != BSP_ERROR_NONE)
   {
     printf("Failed to initialize the SDRAM !! (Error %d)\n", RetVal);
     return 0;
   }
 
   /* Initialize the NOR QuadSPI flash */
-  if ((RetVal = BSP_QSPI_Init()) != QSPI_OK)
+  BSP_QSPI_Init_t init ;
+  init.InterfaceMode=MT25TL01G_QPI_MODE;
+  init.TransferRate= MT25TL01G_DTR_TRANSFER ;
+  init.DualFlashMode= MT25TL01G_DUALFLASH_ENABLE;
+  if ((RetVal = BSP_QSPI_Init(0,&init)) != BSP_ERROR_NONE)
   {
     printf("Failed to initialize the QSPI !! (Error %d)\n", RetVal);
     return 0;
   }
   else
   {
-    if((RetVal = BSP_QSPI_EnableMemoryMappedMode()) != QSPI_OK)
+    if((RetVal = BSP_QSPI_EnableMemoryMappedMode(0)) != BSP_ERROR_NONE)
     {
       printf("Failed to configure the QSPI !! (Error %d)\n", RetVal);
       return 0;
@@ -289,23 +293,27 @@ uint8_t BSP_Config(void)
 
   /* Initialize the Touch screen */
   LCD_LL_Reset(); /* LCD controller need to be initialized */
-  TS_IO_Init();
+  TS_Init_t hTS;
+  hTS.Width = 800;
+  hTS.Height = 480;
+  hTS.Orientation = TS_SWAP_XY | TS_SWAP_Y;
+  hTS.Accuracy = 5;
   do
   {
-    RetVal = BSP_TS_Init(800, 480);
+    RetVal = BSP_TS_Init(0, &hTS);
     HAL_Delay(100);
     counter--;
   }
-  while (counter && (RetVal != TS_OK));
+  while (counter && (RetVal != BSP_ERROR_NONE));
 
-  if(RetVal != TS_OK)
+  if(RetVal != BSP_ERROR_NONE)
   {
     printf("Failed to initialize TS !! (Error %d)\n", RetVal);
     return 0;
   }
 
-  RetVal = BSP_TS_ITConfig();
-  if(RetVal != TS_OK)
+  RetVal =  BSP_TS_EnableIT(0);;
+  if(RetVal != BSP_ERROR_NONE)
   {
     printf("Failed to initialize TS (IT) !! (Error %d)\n", RetVal);
     return 0;
@@ -334,33 +342,33 @@ uint8_t BSP_Config(void)
 uint8_t BSP_TouchUpdate(void)
 {
   static GUI_PID_STATE TS_State = {0, 0, 0, 0};
-  __IO TS_StateTypeDef  ts;
+  __IO TS_State_t  ts;
   uint16_t xDiff, yDiff;
 
-  BSP_TS_GetState((TS_StateTypeDef *)&ts);
+  BSP_TS_GetState(0,(TS_State_t *)&ts);
 
-  ts.touchX[0] = TouchScreen_Get_Calibrated_X(ts.touchX[0]);
-  ts.touchY[0] = TouchScreen_Get_Calibrated_Y(ts.touchY[0]);
+  ts.TouchX = TouchScreen_Get_Calibrated_X(ts.TouchX);
+  ts.TouchY = TouchScreen_Get_Calibrated_Y(ts.TouchY);
 
-  if((ts.touchX[0] >= LCD_GetXSize()) ||(ts.touchY[0] >= LCD_GetYSize()) )
+  if((ts.TouchX >= LCD_GetXSize()) ||(ts.TouchY >= LCD_GetYSize()) )
   {
-    ts.touchX[0] = 0;
-    ts.touchY[0] = 0;
+    ts.TouchX = 0;
+    ts.TouchY = 0;
   }
 
-  xDiff = (TS_State.x > ts.touchX[0]) ? (TS_State.x - ts.touchX[0]) : (ts.touchX[0] - TS_State.x);
-  yDiff = (TS_State.y > ts.touchY[0]) ? (TS_State.y - ts.touchY[0]) : (ts.touchY[0] - TS_State.y);
+  xDiff = (TS_State.x > ts.TouchX) ? (TS_State.x - ts.TouchX) : (ts.TouchX - TS_State.x);
+  yDiff = (TS_State.y > ts.TouchY) ? (TS_State.y - ts.TouchY) : (ts.TouchY - TS_State.y);
 
-  if((TS_State.Pressed != ts.touchDetected ) ||
+  if((TS_State.Pressed != ts.TouchDetected ) ||
      (xDiff > 8 )||
        (yDiff > 8))
   {
-    TS_State.Pressed = ts.touchDetected;
+    TS_State.Pressed = ts.TouchDetected;
     TS_State.Layer = 0;
-    if(ts.touchDetected)
+    if(ts.TouchDetected)
     {
-      TS_State.x = ts.touchX[0];
-      TS_State.y = ts.touchY[0] ;
+      TS_State.x = ts.TouchX;
+      TS_State.y = ts.TouchY ;
       GUI_TOUCH_StoreStateEx(&TS_State);
     }
     else
@@ -435,18 +443,22 @@ static int BSP_VerifyData(const uint64_t *pData, const uint64_t *pFlash, uint32_
 int BSP_ResourcesCopy(WM_HWIN hItem, FIL * pResFile, uint32_t Address)
 {
   int RetErr = 0;
-  QSPI_Info QSPIInfo;
+  BSP_QSPI_Info_t QSPIInfo;
   uint32_t file_size = 0;
   uint32_t numOfReadBytes = 0, FlashAddr = 0, nbTotalBytes = 0;
-  uint8_t ospiStatus = QSPI_OK;
+  int32_t ospiStatus = BSP_ERROR_NONE;
   uint8_t *pSdData = 0;
   int sector = 0, nb_sectors = 0;
 
   /* Sop Memory Mapping mode */
-  BSP_QSPI_DeInit();
+  BSP_QSPI_DeInit(0);
 
   /* Re-initialize NOR OctoSPI flash to exit memory-mapped mode */
-  if (BSP_QSPI_Init() != QSPI_OK)
+  BSP_QSPI_Init_t init ;
+  init.InterfaceMode=MT25TL01G_QPI_MODE;
+  init.TransferRate= MT25TL01G_DTR_TRANSFER ;
+  init.DualFlashMode= MT25TL01G_DUALFLASH_ENABLE;
+  if (BSP_QSPI_Init(0,&init) != BSP_ERROR_NONE)
   {
     /* Initialization Error */
     return -1;
@@ -459,8 +471,8 @@ int BSP_ResourcesCopy(WM_HWIN hItem, FIL * pResFile, uint32_t Address)
   QSPIInfo.ProgPageSize       = (uint32_t)0x00;
   QSPIInfo.ProgPagesNumber    = (uint32_t)0x00;
 
-  ospiStatus = BSP_QSPI_GetInfo(&QSPIInfo);
-  if (ospiStatus != QSPI_OK)
+  ospiStatus = BSP_QSPI_GetInfo(0,&QSPIInfo);
+  if (ospiStatus != BSP_ERROR_NONE)
   {
     RetErr = -1;
     goto exit;
@@ -510,15 +522,15 @@ int BSP_ResourcesCopy(WM_HWIN hItem, FIL * pResFile, uint32_t Address)
       goto exit;
     }
 
-    ospiStatus = BSP_QSPI_Erase_Block(FlashAddr);
-    if (ospiStatus != QSPI_OK)
+    ospiStatus = BSP_QSPI_EraseBlock(0,FlashAddr,MT25TL01G_ERASE_4K);
+    if (ospiStatus != BSP_ERROR_NONE)
     {
       RetErr = -1;
       goto exit;
     }
 
-    ospiStatus = BSP_QSPI_Write((uint8_t *)pSdData, FlashAddr, numOfReadBytes);
-    if (ospiStatus != QSPI_OK)
+    ospiStatus = BSP_QSPI_Write(0,(uint8_t *)pSdData, FlashAddr, numOfReadBytes);
+    if (ospiStatus != BSP_ERROR_NONE)
     {
       RetErr = -1;
       goto exit;
@@ -527,11 +539,11 @@ int BSP_ResourcesCopy(WM_HWIN hItem, FIL * pResFile, uint32_t Address)
     /* Wait the end of write operation */
     do
     {
-      ospiStatus = BSP_QSPI_GetStatus();
-    } while (ospiStatus == QSPI_BUSY);
+      ospiStatus = BSP_QSPI_GetStatus(0);
+    } while (ospiStatus == BSP_ERROR_BUSY);
 
     /* Check the write operation correctness */
-    if (ospiStatus != QSPI_OK)
+    if (ospiStatus != BSP_ERROR_NONE)
     {
       RetErr = -1;
       goto exit;
@@ -552,13 +564,13 @@ exit:
   }
   
   /* Reconfigure memory mapped mode */
-  if(BSP_QSPI_EnableMemoryMappedMode() != QSPI_OK)
+  if(BSP_QSPI_EnableMemoryMappedMode(0) != BSP_ERROR_NONE)
   {
     RetErr = -1;
   }
 
   if(RetErr)
-    printf("\nFailed : Error=%d, ospiStatus=%d !!\n", RetErr, ospiStatus);
+    printf("\nFailed : Error=%d, ospiStatus=%d !!\n", RetErr, (int)ospiStatus);
 
   GUI_Exec();
 

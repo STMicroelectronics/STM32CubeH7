@@ -189,7 +189,7 @@ Repeat blocks
 
   - This example runs on STM32H743xx devices.
   
-  - This example has been tested with STM32H743I-EVAL board revB and can be
+  - This example has been tested with STM32H743I-EVAL board  and can be
     easily tailored to any other supported device and development board.    
 
 @par How to use it ?

@@ -383,7 +383,8 @@ static const int _aOrientation[] =
   */ 
 static void _DMA_Index2ColorBulk(void * pIndex, LCD_COLOR * pColor, U32 NumItems, U8 SizeOfIndex, U32 PixelFormat);
 static void _DMA_Color2IndexBulk(LCD_COLOR * pColor, void * pIndex, U32 NumItems, U8 SizeOfIndex, U32 PixelFormat);
-
+static int32_t DSI_IO_Write(uint16_t ChannelNbr, uint16_t Reg, uint8_t *pData, uint16_t Size);
+static int32_t DSI_IO_Read(uint16_t ChannelNbr, uint16_t Reg, uint8_t *pData, uint16_t Size);
 /* Color conversion routines using DMA2D */
 DEFINE_DMA2D_COLORCONVERSION(M8888I, LTDC_PIXEL_FORMAT_ARGB8888)
 /* Internal pixel format of emWin is 32 bit, because of that ARGB8888 */
@@ -501,7 +502,7 @@ static void LCD_LL_Reset(void)
   * @brief  Initialize the BSP LCD Msp.
   * Application can surcharge if needed this function implementation
   */
-void BSP_LCD_MspInit(void)
+void LCD_MspInit(void)
 {
   /** @brief Enable the LTDC clock */
   __HAL_RCC_LTDC_CLK_ENABLE();
@@ -579,7 +580,9 @@ static void LCD_LL_Init(void)
   static DSI_LPCmdTypeDef          LPCmd;
   static DSI_PLLInitTypeDef        PLLInit;
   static DSI_PHY_TimerTypeDef      PhyTimings;
-  
+   OTM8009A_IO_t              IOCtx;
+  static OTM8009A_Object_t   OTM8009AObj;
+  static void                     *Lcd_CompObj = NULL;
   /* Toggle Hardware Reset of the DSI LCD using
   * its XRES signal (active low) */
   LCD_LL_Reset();
@@ -590,7 +593,7 @@ static void LCD_LL_Init(void)
   * - clocked
   * - NVIC IRQ related to IP blocks enabled
   */
-  BSP_LCD_MspInit();
+  LCD_MspInit();
   
   /* LCD clock configuration */
   /* LCD clock configuration */
@@ -675,7 +678,14 @@ static void LCD_LL_Init(void)
   PhyTimings.StopWaitTime = 10;
   HAL_DSI_ConfigPhyTimer(&hdsi, &PhyTimings);
   
-  OTM8009A_Init(OTM8009A_FORMAT_RBG565, LCD_ORIENTATION_LANDSCAPE);
+ /* Configure the audio driver */
+  IOCtx.Address     = 0;
+  IOCtx.GetTick     = BSP_GetTick;
+  IOCtx.WriteReg    = DSI_IO_Write;
+  IOCtx.ReadReg     = DSI_IO_Read;
+  OTM8009A_RegisterBusIO(&OTM8009AObj, &IOCtx);
+  Lcd_CompObj=(&OTM8009AObj);
+  OTM8009A_Init(Lcd_CompObj, OTM8009A_FORMAT_RBG565, OTM8009A_ORIENTATION_LANDSCAPE);
   
   LPCmd.LPGenShortWriteNoP    = DSI_LP_GSW0P_DISABLE;
   LPCmd.LPGenShortWriteOneP   = DSI_LP_GSW1P_DISABLE;
@@ -1931,7 +1941,55 @@ void LCD_X_Config(void)
                      0x00);
   
 }
+/**
+  * @brief  DCS or Generic short/long write command
+  * @param  ChannelNbr Virtual channel ID
+  * @param  Reg Register to be written
+  * @param  pData pointer to a buffer of data to be write
+  * @param  Size To precise command to be used (short or long)
+  * @retval BSP status
+  */
+static int32_t DSI_IO_Write(uint16_t ChannelNbr, uint16_t Reg, uint8_t *pData, uint16_t Size)
+{
+  int32_t ret = BSP_ERROR_NONE;
 
+  if(Size <= 1U)
+  {
+    if(HAL_DSI_ShortWrite(&hdsi, ChannelNbr, DSI_DCS_SHORT_PKT_WRITE_P1, Reg, (uint32_t)pData[Size]) != HAL_OK)
+    {
+      ret = BSP_ERROR_BUS_FAILURE;
+    }
+  }
+  else
+  {
+    if(HAL_DSI_LongWrite(&hdsi, ChannelNbr, DSI_DCS_LONG_PKT_WRITE, Size, (uint32_t)Reg, pData) != HAL_OK)
+    {
+      ret = BSP_ERROR_BUS_FAILURE;
+    }
+  }
+
+  return ret;
+}
+
+/**
+  * @brief  DCS or Generic read command
+  * @param  ChannelNbr Virtual channel ID
+  * @param  Reg Register to be read
+  * @param  pData pointer to a buffer to store the payload of a read back operation.
+  * @param  Size  Data size to be read (in byte).
+  * @retval BSP status
+  */
+static int32_t DSI_IO_Read(uint16_t ChannelNbr, uint16_t Reg, uint8_t *pData, uint16_t Size)
+{
+  int32_t ret = BSP_ERROR_NONE;
+
+  if(HAL_DSI_Read(&hdsi, ChannelNbr, pData, Size, DSI_DCS_SHORT_PKT_READ, Reg, pData) != HAL_OK)
+  {
+    ret = BSP_ERROR_BUS_FAILURE;
+  }
+
+  return ret;
+}
 /**
   * @brief  This function handles DSI global interrupt request.
   * @param  None

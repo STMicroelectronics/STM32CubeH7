@@ -33,6 +33,9 @@
 #include "flash_if.h"
 #include "command.h"
 
+
+
+
 /* Exported types ------------------------------------------------------------*/
 typedef enum {
   APPLICATION_IDLE = 0,  

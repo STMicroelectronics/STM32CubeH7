@@ -57,7 +57,7 @@ const Diskio_drvTypeDef SD_Driver = {
 static DSTATUS SD_CheckStatus(BYTE lun)
 {
   Stat = STA_NOINIT;
-  if (BSP_SD_GetCardState() == MSD_OK)
+  if (BSP_SD_GetCardState(0) == SD_TRANSFER_OK)
   {
     Stat &= ~STA_NOINIT;
   }
@@ -105,7 +105,7 @@ DRESULT SD_read(BYTE lun, BYTE * buff, DWORD sector, UINT count)
   if ( flag==0)
   {
     /*GetSD Info*/
-    BSP_SD_GetCardInfo(&CardInfo);
+    BSP_SD_GetCardInfo(0,&CardInfo);
 
     /*Get Block Size*/
     BlockSize=CardInfo.LogBlockSize;
@@ -114,7 +114,7 @@ DRESULT SD_read(BYTE lun, BYTE * buff, DWORD sector, UINT count)
 
   /* Clean and Invalidate data cache */
   SCB_CleanInvalidateDCache_by_Addr((uint32_t *)(buff), (count * BlockSize) * 8);
-  BSP_SD_ReadBlocks_DMA((uint32_t*)buff,(uint32_t) (sector), count);
+  BSP_SD_ReadBlocks_DMA(0,(uint32_t*)buff,(uint32_t) (sector), count);
 
   /* Wait for Rx Transfer completion */
   while (readstatus == 0)
@@ -122,7 +122,7 @@ DRESULT SD_read(BYTE lun, BYTE * buff, DWORD sector, UINT count)
   }
 
   readstatus = 0;
-  while(BSP_SD_GetCardState()!= MSD_OK)
+  while(BSP_SD_GetCardState(0)!= SD_TRANSFER_OK)
   {
     if (timeout-- == 0)
     {
@@ -153,7 +153,7 @@ DRESULT SD_write(BYTE lun, const BYTE * buff, DWORD sector, UINT count)
   if ( flag==0)
   {
     /*GetSD Info*/
-    BSP_SD_GetCardInfo(&CardInfo);
+    BSP_SD_GetCardInfo(0,&CardInfo);
     /*Get Block Size*/
     BlockSize=CardInfo.LogBlockSize;
     flag =1;
@@ -161,14 +161,14 @@ DRESULT SD_write(BYTE lun, const BYTE * buff, DWORD sector, UINT count)
 
   /*Clean DataCache */
   SCB_CleanDCache_by_Addr((uint32_t*)buff,(count * BlockSize) * 8);
-  BSP_SD_WriteBlocks_DMA((uint32_t *) buff, (uint32_t) (sector), count) ;
+  BSP_SD_WriteBlocks_DMA(0,(uint32_t *) buff, (uint32_t) (sector), count) ;
 
   /* Wait for Tx Transfer completion */
   while (writestatus == 0);
   writestatus = 0;
 
   /* wait until the Write operation is finished */
-  while (BSP_SD_GetCardState() != MSD_OK)
+  while (BSP_SD_GetCardState(0) != SD_TRANSFER_OK)
   {
   }
   res = RES_OK;
@@ -201,14 +201,14 @@ DRESULT SD_ioctl(BYTE lun, BYTE cmd, void *buff)
 
     /* Get number of sectors on the disk (DWORD) */
   case GET_SECTOR_COUNT:
-    BSP_SD_GetCardInfo(&CardInfo);
+    BSP_SD_GetCardInfo(0,&CardInfo);
     *(DWORD *) buff = CardInfo.LogBlockNbr;
     res = RES_OK;
     break;
 
     /* Get R/W sector size (WORD) */
   case GET_SECTOR_SIZE:
-    BSP_SD_GetCardInfo(&CardInfo);
+    BSP_SD_GetCardInfo(0,&CardInfo);
     *(WORD *) buff = CardInfo.LogBlockSize;
     BlockSize=CardInfo.LogBlockSize;
     res = RES_OK;
@@ -216,7 +216,7 @@ DRESULT SD_ioctl(BYTE lun, BYTE cmd, void *buff)
 
     /* Get erase block size in unit of sector (DWORD) */
   case GET_BLOCK_SIZE:
-    BSP_SD_GetCardInfo(&CardInfo);
+    BSP_SD_GetCardInfo(0,&CardInfo);
     *(DWORD *) buff = CardInfo.LogBlockSize;
     BlockSize=CardInfo.LogBlockSize;
     res = RES_OK;
@@ -237,7 +237,7 @@ DRESULT SD_ioctl(BYTE lun, BYTE cmd, void *buff)
 * @param None
 * @retval None
 */
-void BSP_SD_WriteCpltCallback(void)
+void BSP_SD_WriteCpltCallback(uint32_t Instance)
 {
   writestatus = 1;
 }
@@ -247,7 +247,7 @@ void BSP_SD_WriteCpltCallback(void)
 * @param None
 * @retval None
 */
-void BSP_SD_ReadCpltCallback(void)
+void BSP_SD_ReadCpltCallback(uint32_t Instance)
 {
   readstatus = 1;
 }

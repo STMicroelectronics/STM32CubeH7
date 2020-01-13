@@ -70,12 +70,11 @@ int main(void)
        - Low Level Initialization
      */
   HAL_Init();
-  
   /* Add Cortex-M4 user application code here */ 
 
   /* Infinite loop */
   while (1)
-  {
+  {   
   }
 }
 

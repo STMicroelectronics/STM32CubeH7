@@ -37,20 +37,17 @@ typedef enum
 }ShieldStatus;
 
 /* Private define -------------------------------------------------------------*/
-#define BUTTON_USER BUTTON_KEY
 
 /* Private macro -------------------------------------------------------------*/
 /* Private variables -----------------------------------------------------------*/
 uint8_t DemoIndex = 0;
 uint8_t UserButtonPressed = 0x00;
 uint32_t LedToggleDelay = 0x00;
-
+uint32_t ButtonState = 0;
 /* Private function prototypes -----------------------------------------------*/
 static void SystemClock_Config(void);
 static ShieldStatus TFT_ShieldDetect(void);
-#ifdef ADAFRUIT_TFT_JOY_SD_ID802
 static void Display_DemoDescription(void);
-#endif /* ADAFRUIT_TFT_JOY_SD_ID802 */
 
 static void CPU_CACHE_Enable(void);
 
@@ -70,8 +67,9 @@ BSP_DemoTypedef  BSP_examples[]=
 int main(void)
 {
   int32_t timeout;
-  uint8_t count = 0;
 
+  static char dataOut[64];
+  COM_InitTypeDef COM_Init;
   /* System Init, System clock, voltage scaling and L1-Cache configuration are done by CPU1 (Cortex-M7)
      in the meantime Domain D2 is put in STOP mode(Cortex-M4 in deep-sleep)
   */
@@ -111,26 +109,20 @@ int main(void)
      the adafruit 1.8" TFT shield is available. */
   if(TFT_ShieldDetect() == SHIELD_DETECTED)
   {
-#if defined(ADAFRUIT_TFT_JOY_SD_ID802)
-    BSP_LED_Init(LED2);
-    BSP_LED_Init(LED3);
-
     /* Initialize the LCD */
-    BSP_LCD_Init();
-
+    ADAFRUIT_802_LCD_Init(0, LCD_ORIENTATION_PORTRAIT);    
+    GUI_SetFuncDriver(&LCD_Driver);
     Display_DemoDescription();
-
+    
     while (1)
     {
-      BSP_LED_Toggle(LED2);
-      HAL_Delay(100);
       if(BSP_PB_GetState(BUTTON_USER) != RESET)
       {
         HAL_Delay(10);
         while (BSP_PB_GetState(BUTTON_USER) != RESET);
-
+        
         BSP_examples[DemoIndex++].DemoFunc();
-
+        
         if(DemoIndex >= COUNT_OF_EXAMPLE(BSP_examples))
         {
           DemoIndex = 0;
@@ -138,47 +130,54 @@ int main(void)
         Display_DemoDescription();
       }
     }
-#endif /* ADAFRUIT_TFT_JOY_SD_ID802 */
-  }
+  }  
   else /* there is no AdaFruit shield 802 connected */
   {
-    /* Initialize Led1 on STM32H7xx-Nucleo ------------------*/
-    BSP_LED_Init(LED1);  /* this is in conflict with Adafruit shield */
+    /* Initialize Led1 on STM32H7xx-Nucleo_144 ------------------*/
+    BSP_LED_Init(LED1); 
     BSP_LED_Init(LED2);
     BSP_LED_Init(LED3);
 
+    /* Initialize COM port on STM32H7xx-Nucleo_144 ------------------*/
+    COM_Init.BaudRate   = 115200;
+    COM_Init.WordLength = COM_WORDLENGTH_8B;
+    COM_Init.StopBits   = COM_STOPBITS_1;
+    COM_Init.Parity     = COM_PARITY_NONE;
+    COM_Init.HwFlowCtl  = COM_HWCONTROL_NONE;
+    BSP_COM_Init(COM1, &COM_Init);
+    
+    sprintf(dataOut, "\r\n LED2 OFF\r\n Press Key button to put it ON\r\n ");
+    printf("%s", dataOut);
+    
     /* 0. Wait for User button to be pressed -------------------------------------*/
-    while (BSP_PB_GetState(BUTTON_USER) != KEY_PRESSED)
-    {
-      /* Toggle LED2 */
-      BSP_LED_Toggle(LED2);
-      HAL_Delay(200);
-    }
-    /* Wait for User button is released */
-    while (BSP_PB_GetState(BUTTON_USER) != KEY_NOT_PRESSED)
+    while(CheckForUserInput() == 0)
     {}
-
-    BSP_LED_Off(LED2);
-
+    /* Toggle LED2 */
+    BSP_LED_Toggle(LED2);
+    
     /* Infinite loop */
     while (1)
     {
-      if(UserButtonPressed==0x01)
-      {
-        count++;
-        LedToggleDelay += 20*count;
-        UserButtonPressed = 0x00;
-        if(LedToggleDelay>500)
-        {
-          LedToggleDelay = 20;
-          count = 0;
-        }
-      }
-      /* Toggle LED1 & LED3 */
-      BSP_LED_Toggle(LED1);
-      HAL_Delay(LedToggleDelay);
-      BSP_LED_Toggle(LED3);
-      HAL_Delay(LedToggleDelay);
+      while(CheckForUserInput() == 0)
+      {}
+        /* LED1 and LED3 On */
+      BSP_LED_On(LED1);
+      BSP_LED_On(LED3);
+        
+        sprintf(dataOut, "\r\n LED1 and LED3 ON\r\n Press Key button to put them OFF\r\n ");
+        printf("%s", dataOut);
+        ButtonState = 0;
+        
+        
+        while(CheckForUserInput() == 0)
+        {}
+        /* LED1 and LED3 Off */
+        BSP_LED_Off(LED1);
+        BSP_LED_Off(LED3);
+        
+        sprintf(dataOut, "\r\n LED1 and LED3 OFF\r\n Press Key button to put them ON\r\n ");
+        printf("%s", dataOut);
+        ButtonState = 0;
     }
   }
 }
@@ -273,7 +272,7 @@ static void SystemClock_Config(void)
 }
 
 
-#if defined(ADAFRUIT_TFT_JOY_SD_ID802)
+
 /**
   * @brief  Display main demo messages.
   * @param  None
@@ -282,34 +281,38 @@ static void SystemClock_Config(void)
 static void Display_DemoDescription(void)
 {
   uint8_t desc[50];
-
-  BSP_LCD_SetFont(&LCD_DEFAULT_FONT);
-
-  /* Clear the LCD */
-  BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
-  BSP_LCD_Clear(LCD_COLOR_WHITE);
-
+  uint32_t x_size;
+  uint32_t y_size;
+  
+  ADAFRUIT_802_LCD_GetXSize(0, &x_size);
+  ADAFRUIT_802_LCD_GetYSize(0, &y_size);
+   GUI_SetFont(&Font8);
+  /* Clear the LCD */ 
+  GUI_SetBackColor(GUI_COLOR_WHITE); 
+  GUI_Clear(GUI_COLOR_WHITE);
+  
   /* Set the LCD Text Color */
-  BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
-
+  GUI_SetTextColor(GUI_COLOR_BLUE);  
+  
   /* Display LCD messages */
-  BSP_LCD_DisplayStringAt(0, 10, (uint8_t *)"STM32H745ZI BSP", CENTER_MODE);
-  BSP_LCD_DisplayStringAt(0, 25, (uint8_t *)"Drivers examples", CENTER_MODE);
-
+  GUI_DisplayStringAt(0, 10, (uint8_t *)"STM32H745ZI-Q BSP", CENTER_MODE);
+  GUI_DisplayStringAt(0, 25, (uint8_t *)"Drivers examples", CENTER_MODE);
+  
   /* Draw Bitmap */
-  BSP_LCD_DrawBitmap((BSP_LCD_GetXSize() - 80)/2, 35, (uint8_t *)stlogo);
-
-  BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()- 15, (uint8_t *)"Copyright (c) STM 2018", CENTER_MODE);
-
-  BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
-  BSP_LCD_FillRect(0, BSP_LCD_GetYSize()/2 + 15, BSP_LCD_GetXSize(), 40);
-  BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
-  BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-  BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()/2 + 25, (uint8_t *)"Use User Button to start", CENTER_MODE);
+  GUI_DrawBitmap((x_size - 80)/2, 35, (uint8_t *)stlogo);
+  
+  GUI_DisplayStringAt(0, y_size- 15, (uint8_t *)"Copyright (c) STM 2018", CENTER_MODE);
+  
+  GUI_SetTextColor(GUI_COLOR_BLUE);
+  GUI_FillRect(0, y_size/2 + 15, x_size, 40, GUI_COLOR_BLUE);
+  GUI_SetTextColor(GUI_COLOR_WHITE);
+  GUI_SetBackColor(GUI_COLOR_BLUE); 
+  GUI_DisplayStringAt(0, y_size/2 + 25, (uint8_t *)"Use User Button to start", CENTER_MODE);
   sprintf((char *)desc,"%s example", BSP_examples[DemoIndex].DemoName);
-  BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()/2 + 40, (uint8_t *)desc, CENTER_MODE);
+  GUI_DisplayStringAt(0, y_size/2 + 40, (uint8_t *)desc, CENTER_MODE); 
+
 }
-#endif /* ADAFRUIT_TFT_JOY_SD_ID802 */
+
 
 /**
   * @brief  Check for user input.
@@ -341,16 +344,17 @@ static ShieldStatus TFT_ShieldDetect(void)
   GPIO_InitTypeDef  GPIO_InitStruct;
 
   /* Enable GPIO clock */
-  NUCLEO_ADCx_GPIO_CLK_ENABLE();
-
-  GPIO_InitStruct.Pin = NUCLEO_ADCx_GPIO_PIN ;
+ 
+  //ADAFRUIT_802_ADCx_GPIO_CLK_ENABLE;
+   __HAL_RCC_GPIOB_CLK_ENABLE();
+  GPIO_InitStruct.Pin  = /*ADAFRUIT_802_ADCx_GPIO_PIN*/GPIO_PIN_1 ;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_PULLDOWN;
-  HAL_GPIO_Init(NUCLEO_ADCx_GPIO_PORT , &GPIO_InitStruct);
-
+  HAL_GPIO_Init(GPIOB/*ADAFRUIT_802_ADCx_GPIO_PORT*/ , &GPIO_InitStruct);
+  
   HAL_Delay(1);
-
-  if(HAL_GPIO_ReadPin(NUCLEO_ADCx_GPIO_PORT , NUCLEO_ADCx_GPIO_PIN ) != 0)
+  
+  if(HAL_GPIO_ReadPin(GPIOB/*ADAFRUIT_802_ADCx_GPIO_PORT*/ ,/*ADAFRUIT_802_ADCx_GPIO_PIN*/GPIO_PIN_1 ) != 0)
   {
     return SHIELD_DETECTED;
   }
@@ -367,7 +371,7 @@ static ShieldStatus TFT_ShieldDetect(void)
   */
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
-  if(GPIO_Pin==USER_BUTTON_PIN)
+  if(GPIO_Pin==BUTTON_USER_PIN)
   {
     UserButtonPressed = 0x01;
   }

@@ -36,7 +36,7 @@
 
 
 /* Private variables ---------------------------------------------------------*/ 
-extern LTDC_HandleTypeDef hltdc_discovery;
+extern LTDC_HandleTypeDef hlcd_ltdc;
 DMA2D_HandleTypeDef       DMA2D_Handle;
 __IO uint32_t pending_buffer = 0;
 
@@ -51,22 +51,19 @@ void LCD_BlendImage(uint32_t *pSrc, uint32_t *pDst, uint32_t Xpos, uint32_t Ypos
 void SG_InitDisplay(void)
 {  
   /* Initialize the LCD */
-  BSP_LCD_Init();
+  BSP_LCD_Init(0, LCD_ORIENTATION_LANDSCAPE);
+
+  GUI_SetFuncDriver(&LCD_Driver);
   
-  BSP_LCD_LayerDefaultInit(0, LCD_FB_START_ADDRESS); 
-  
-  /* Set LCD Foreground Layer  */
-  BSP_LCD_SelectLayer(0);
-  
-  BSP_LCD_SetBrightness(100);
-  BSP_LCD_DisplayOn();
+  BSP_LCD_SetBrightness(0, 100);
+  BSP_LCD_DisplayOn(0);
   
   /* Set LCD Font  */
-  BSP_LCD_SetFont(&Font16);
+  GUI_SetFont(&Font16);
   
   /* Clear the LCD */
-  BSP_LCD_Clear(0x00000000);
-  BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
+  GUI_Clear(0x00000000);
+  GUI_SetTextColor(GUI_COLOR_WHITE);
   
   /* Enable IRQ */
   HAL_NVIC_SetPriority(LTDC_IRQn, 0x0F, 0x0F); 
@@ -86,7 +83,7 @@ void SG_DisplaySwitchButton(SG_SwitchButtonWidgetTypeDef *pButton,uint32_t *pDst
   uint32_t inputOffset;
   uint32_t X_size;
   
-  X_size = BSP_LCD_GetXSize();
+  BSP_LCD_GetXSize(0, &X_size);
   inputOffset =  X_size - pButton->buttonParams.Width;
 
   pSrc = (uint32_t *)((ButtonState == BUTTON_STATE_OFF) ? pButton->Off_FrameBuffer : pButton->On_FrameBuffer);
@@ -106,7 +103,7 @@ void SG_DisplayButton(ButtonWidgetTypeDef *pButton, uint32_t *pDst)
   uint32_t inputOffset;
   uint32_t X_size;
   
-  X_size = BSP_LCD_GetXSize();
+  BSP_LCD_GetXSize(0, &X_size);
   inputOffset =  X_size - pButton->buttonParams.Width;
   
   /* Blend switch buttons image on the Screen */
@@ -121,7 +118,7 @@ void SG_DisplayWaveButtons(SG_SwitchButtonWidgetTypeDef *pButton, uint32_t butto
   uint32_t Y_size;
   uint32_t buttonYPosition;
   
-  Y_size = BSP_LCD_GetYSize(); 
+  BSP_LCD_GetYSize(0, &Y_size); 
   
   /* Set the buttons Y positions */
   buttonYPosition = (Y_size /4);
@@ -143,21 +140,21 @@ void SG_DisplayWaveButtons(SG_SwitchButtonWidgetTypeDef *pButton, uint32_t butto
     }
     SG_DisplaySwitchButton(&pButton[buttonIndex],(uint32_t *)LCD_FRAME_BUFFER, pButton[buttonIndex].State); 
   }
-  BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
-  BSP_LCD_SetBackColor(LCD_COLOR_LIGHTGRAY);
+  GUI_SetTextColor(GUI_COLOR_BLUE);
+  GUI_SetBackColor(GUI_COLOR_LIGHTGRAY);
 
-  BSP_LCD_SetFont(&Font16);
-  BSP_LCD_DisplayStringAt(SG_WAVE_BUTTON_XPOSITION-2, 45,(uint8_t *)" Signal Type ", LEFT_MODE);
-  BSP_LCD_DrawRect(SG_WAVE_BUTTON_XPOSITION-4, 41, pButton[1].buttonParams.Xpos + 70, 160);
-  BSP_LCD_DrawRect(SG_WAVE_BUTTON_XPOSITION-3, 42, pButton[1].buttonParams.Xpos + 68, 158);
+  GUI_SetFont(&Font16);
+  GUI_DisplayStringAt(SG_WAVE_BUTTON_XPOSITION-2, 45,(uint8_t *)" Signal Type ", LEFT_MODE);
+  GUI_DrawRect(SG_WAVE_BUTTON_XPOSITION-4, 41, pButton[1].buttonParams.Xpos + 70, 160, GUI_COLOR_LIGHTGRAY);
+  GUI_DrawRect(SG_WAVE_BUTTON_XPOSITION-3, 42, pButton[1].buttonParams.Xpos + 68, 158, GUI_COLOR_LIGHTGRAY);
 
-  BSP_LCD_DisplayStringAt(SG_WAVE_BUTTON_XPOSITION+160, 45,(uint8_t *) " Signal Params ", LEFT_MODE);
-  BSP_LCD_DrawRect(SG_WAVE_BUTTON_XPOSITION+150, 41, 190, 160);
-  BSP_LCD_DrawRect(SG_WAVE_BUTTON_XPOSITION+150+1, 42, 188, 158);
+  GUI_DisplayStringAt(SG_WAVE_BUTTON_XPOSITION+160, 45,(uint8_t *) " Signal Params ", LEFT_MODE);
+  GUI_DrawRect(SG_WAVE_BUTTON_XPOSITION+150, 41, 190, 160, GUI_COLOR_LIGHTGRAY);
+  GUI_DrawRect(SG_WAVE_BUTTON_XPOSITION+150+1, 42, 188, 158, GUI_COLOR_LIGHTGRAY);
   
-  BSP_LCD_DisplayStringAt(SG_WAVE_BUTTON_XPOSITION+360, 45,(uint8_t *) "  Status ", LEFT_MODE);
-  BSP_LCD_DrawRect(SG_WAVE_BUTTON_XPOSITION+350, 41, 120, 160);
-  BSP_LCD_DrawRect(SG_WAVE_BUTTON_XPOSITION+351, 42, 118, 158);
+  GUI_DisplayStringAt(SG_WAVE_BUTTON_XPOSITION+360, 45,(uint8_t *) "  Status ", LEFT_MODE);
+  GUI_DrawRect(SG_WAVE_BUTTON_XPOSITION+350, 41, 120, 160, GUI_COLOR_LIGHTGRAY);
+  GUI_DrawRect(SG_WAVE_BUTTON_XPOSITION+351, 42, 118, 158, GUI_COLOR_LIGHTGRAY);
 }   
 
 
@@ -197,13 +194,13 @@ void SG_DisplayUpDownButtons(ButtonWidgetTypeDef *pButton, uint32_t buttonsNumbe
   */
 void SG_DisplayFrequencyIcon(uint32_t Xpos, uint32_t Ypos, uint32_t Width, uint32_t Height, uint8_t *Frequency)
 {
-  BSP_LCD_SetFont(&Font16);
-  BSP_LCD_SetTextColor(LCD_COLOR_DARKGRAY); 
-  BSP_LCD_FillRect(Xpos, Ypos, Width, Height);  
-  BSP_LCD_SetTextColor(LCD_COLOR_ORANGE);
-  BSP_LCD_SetBackColor(LCD_COLOR_DARKGRAY);
-  BSP_LCD_DisplayStringAt(Xpos + Width/4-6, Ypos+5,(uint8_t *) "FREQUENCY", LEFT_MODE);
-  BSP_LCD_DisplayStringAt(Xpos+ Width/4-10, Ypos+Height/2+4, Frequency, LEFT_MODE);
+  GUI_SetFont(&Font16);
+  GUI_SetTextColor(GUI_COLOR_DARKGRAY); 
+  GUI_FillRect(Xpos, Ypos, Width, Height, GUI_COLOR_DARKGRAY);  
+  GUI_SetTextColor(GUI_COLOR_ORANGE);
+  GUI_SetBackColor(GUI_COLOR_DARKGRAY);
+  GUI_DisplayStringAt(Xpos + Width/4-6, Ypos+5,(uint8_t *) "FREQUENCY", LEFT_MODE);
+  GUI_DisplayStringAt(Xpos+ Width/4-10, Ypos+Height/2+4, Frequency, LEFT_MODE);
   
 }   
 
@@ -214,13 +211,13 @@ void SG_DisplayFrequencyIcon(uint32_t Xpos, uint32_t Ypos, uint32_t Width, uint3
   */
 void SG_DisplayAmplitudeIcon(uint32_t Xpos, uint32_t Ypos, uint32_t Width, uint32_t Height, uint8_t *Amplitude)
 {
-  BSP_LCD_SetFont(&Font16);
-  BSP_LCD_SetTextColor(LCD_COLOR_DARKGRAY); 
-  BSP_LCD_FillRect(Xpos, Ypos, Width, Height);  
-  BSP_LCD_SetTextColor(LCD_COLOR_ORANGE);
-  BSP_LCD_SetBackColor(LCD_COLOR_DARKGRAY);
-  BSP_LCD_DisplayStringAt(Xpos + Width/4-6, Ypos+5, (uint8_t *)"AMPLITUDE", LEFT_MODE);
-  BSP_LCD_DisplayStringAt(Xpos+ Width/4+10, Ypos+Height/2+4, Amplitude, LEFT_MODE);
+  GUI_SetFont(&Font16);
+  GUI_SetTextColor(GUI_COLOR_DARKGRAY); 
+  GUI_FillRect(Xpos, Ypos, Width, Height, GUI_COLOR_DARKGRAY);  
+  GUI_SetTextColor(GUI_COLOR_ORANGE);
+  GUI_SetBackColor(GUI_COLOR_DARKGRAY);
+  GUI_DisplayStringAt(Xpos + Width/4-6, Ypos+5, (uint8_t *)"AMPLITUDE", LEFT_MODE);
+  GUI_DisplayStringAt(Xpos+ Width/4+10, Ypos+Height/2+4, Amplitude, LEFT_MODE);
 }   
 
 /**
@@ -256,10 +253,13 @@ void SG_SwitchWaveButtonState(SG_SwitchButtonWidgetTypeDef *pButton, uint32_t bu
 void SG_DisplayBackgroundImage(BackgroundWidgetTypeDef *pImage,uint32_t buttonsNumber)
 {
   uint32_t i;
+  uint32_t y_size;
 
   pending_buffer = 1;
+  
+  BSP_LCD_GetYSize(0, &y_size);
   /* Set LTDC Line Event  */
-  HAL_LTDC_ProgramLineEvent(&hltdc_discovery, BSP_LCD_GetYSize()/2);  
+  HAL_LTDC_ProgramLineEvent(&hlcd_ltdc, y_size/2);  
   while(pending_buffer != 0)
   {
   }
@@ -280,11 +280,11 @@ void LCD_BlendImage(uint32_t *pSrc, uint32_t *pDst, uint32_t Xpos, uint32_t Ypos
   uint32_t destination;
   uint32_t X_size;
   
-  X_size = BSP_LCD_GetXSize();
+  BSP_LCD_GetXSize(0, &X_size);
   
   pending_buffer = 1;
   /* Set LTDC Line Event  */
-  HAL_LTDC_ProgramLineEvent(&hltdc_discovery, 0);  
+  HAL_LTDC_ProgramLineEvent(&hlcd_ltdc, 0);  
   while(pending_buffer != 0) {}
 
   /* Init DMA2D */
@@ -327,10 +327,10 @@ void LCD_CopyImage(uint32_t *pSrc,uint32_t *pDst, uint32_t Xpos, uint32_t Ypos, 
   uint32_t destination;
   uint32_t X_size;
   
-  X_size = BSP_LCD_GetXSize();
+  BSP_LCD_GetXSize(0, &X_size);
   pending_buffer = 1;
   /* Set LTDC Line Event  */
-  HAL_LTDC_ProgramLineEvent(&hltdc_discovery, 0);  
+  HAL_LTDC_ProgramLineEvent(&hlcd_ltdc, 0);  
   while(pending_buffer != 0) {}
   
   

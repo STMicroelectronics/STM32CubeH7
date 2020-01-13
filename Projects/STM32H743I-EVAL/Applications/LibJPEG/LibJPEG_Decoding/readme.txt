@@ -97,7 +97,7 @@ Display, Graphic, LibJPEG, Decoding, Flash memory, DMA2D, ARGB8888, LCD, RGB, BM
 
   - This application runs on stm32h743xx devices.
     
-  - This application has been tested with STMicroelectronics STM32H743I-EVAL RevB
+  - This application has been tested with STMicroelectronics STM32H743I-EVAL 
     evaluation boards and can be easily tailored to any other supported device 
     and development board.
     

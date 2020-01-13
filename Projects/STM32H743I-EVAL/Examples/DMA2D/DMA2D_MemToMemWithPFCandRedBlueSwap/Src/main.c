@@ -64,7 +64,7 @@ static void MPU_Config(void);
 int main(void)
 {
   HAL_StatusTypeDef hal_status = HAL_OK;
-  uint8_t  lcd_status = LCD_OK;
+  uint8_t  lcd_status = BSP_ERROR_NONE;
 
   /* Configure the MPU attributes as Write Through for SDRAM*/
   MPU_Config();
@@ -93,13 +93,13 @@ int main(void)
 
   /*##-1- Initialize the LCD #################################################*/
   /* LTDC, DSI initialization and LCD screen initialization */
-  lcd_status = BSP_LCD_Init();
-  BSP_LCD_LayerDefaultInit(0, LCD_FRAME_BUFFER);   
-  OnError_Handler(lcd_status != LCD_OK);
+  lcd_status = BSP_LCD_Init(0, LCD_ORIENTATION_LANDSCAPE);
+  GUI_SetFuncDriver(&LCD_Driver);   
+  OnError_Handler(lcd_status != BSP_ERROR_NONE);
 
   /* Get the LCD width and height */
-  LCD_X_Size = BSP_LCD_GetXSize();
-  LCD_Y_Size = BSP_LCD_GetYSize();
+  BSP_LCD_GetXSize(0,&LCD_X_Size);
+  BSP_LCD_GetYSize(0,&LCD_Y_Size);
 
 
   offset_address_image_in_lcd_buffer =  ((((LCD_Y_Size - IMAGE_SIZE_Y) / 2) * LCD_X_Size)
@@ -107,13 +107,13 @@ int main(void)
                                                      * ARGB8888_BYTE_PER_PIXEL;  
   
   /* Prepare using DMA2D the LCD frame buffer for display : LCD buffer clear and user message priniting*/
-  BSP_LCD_Clear(LCD_COLOR_GRAY);
-  BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
-  BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-  BSP_LCD_SetFont(&Font16);
+  GUI_Clear(GUI_COLOR_GRAY);
+  GUI_SetTextColor(GUI_COLOR_WHITE);
+  GUI_SetBackColor(GUI_COLOR_BLUE);
+  GUI_SetFont(&Font16);
 
   /* Print example description */
-  BSP_LCD_DisplayStringAt(0, 440, (uint8_t *)"DMA2D_MemToMemWithPFCandRedBlueSwap example", CENTER_MODE);
+  GUI_DisplayStringAt(0, 440, (uint8_t *)"DMA2D_MemToMemWithPFCandRedBlueSwap example", CENTER_MODE);
 
   HAL_Delay(100);
 
@@ -126,11 +126,11 @@ int main(void)
     
     if(RedBlueSwap_Config == DMA2D_RB_REGULAR)
     {
-      BSP_LCD_DisplayStringAt(0, 40, (uint8_t *)"Red and Blue Swap : OFF", CENTER_MODE);
+      GUI_DisplayStringAt(0, 40, (uint8_t *)"Red and Blue Swap : OFF", CENTER_MODE);
     }
     else
     {
-      BSP_LCD_DisplayStringAt(0, 40, (uint8_t *)"Red and Blue Swap : ON ", CENTER_MODE);
+      GUI_DisplayStringAt(0, 40, (uint8_t *)"Red and Blue Swap : ON ", CENTER_MODE);
     }   
     
     /*##-2- DMA2D configuration ###############################################*/

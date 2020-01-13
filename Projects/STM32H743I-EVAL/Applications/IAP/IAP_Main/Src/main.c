@@ -28,7 +28,7 @@
 /* Exported variables --------------------------------------------------------*/
 /* UART handler declaration */
 UART_HandleTypeDef UartHandle;
-
+COM_InitTypeDef COM_Init;
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -201,7 +201,7 @@ void IAP_Init(void)
   UartHandle.Init.HwFlowCtl = UART_HWCONTROL_NONE;
   UartHandle.Init.Mode = UART_MODE_RX | UART_MODE_TX;
     
-  BSP_COM_Init(COM1, &UartHandle);
+  BSP_COM_Init(COM1, &COM_Init);
 
 }
 

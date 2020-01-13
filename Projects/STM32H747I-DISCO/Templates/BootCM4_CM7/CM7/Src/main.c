@@ -98,7 +98,6 @@ int main(void)
   {
     Error_Handler();
   }
-
   /* Add Cortex-M7 user application code here */ 
 
   /* Infinite loop */

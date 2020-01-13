@@ -25,9 +25,14 @@
 #include "stm32h7xx_hal.h"
 #include "stm32h747i_discovery.h"
 #include "stm32h747i_discovery_lcd.h"
+#include "stm32h747i_discovery_sdram.h"
+#include "stm32h747i_discovery_bus.h"
 
+#include "basic_gui.h"
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
+#define LCD_FRAME_BUFFER        0xD0000000
+
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */
 void Toggle_Leds(void);
