@@ -68,6 +68,11 @@ int main(void)
   /* Configure the system clock to 400 MHz */
   SystemClock_Config();
 
+  BSP_LED_Init(LED_GREEN);
+  BSP_LED_Init(LED_ORANGE);
+
+  BSP_LED_On(LED_GREEN);
+
   /* Copy CM4 code from Flash to D2_SRAM memory */
   memcpy((void *)D2_AXISRAM_BASE,  &cm4_code, 0x20000);
 
@@ -80,11 +85,11 @@ int main(void)
 
   /* Add Cortex-M7 user application code here */ 
 
-
-
   /* Infinite loop */
   while (1)
   {
+	  BSP_LED_Toggle(LED_ORANGE);
+	  HAL_Delay(300);
   }
 }
 

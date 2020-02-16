@@ -42,7 +42,8 @@
   */
 int main(void)
 {
-
+  /* Configure the Cortex-M4 ART Base address to D2_AXISRAM_BASE : 0x10000000 : */
+  __HAL_ART_CONFIG_BASE_ADDRESS(D2_AXISRAM_BASE);
  
  /*System clock, voltage scaling configuration done only once by Cortex-M7*/
   
@@ -57,15 +58,17 @@ int main(void)
      */
   HAL_Init();
 
-  /* Configure the Cortex-M4 ART Base address to D2_AXISRAM_BASE : 0x10000000 : */
-  __HAL_ART_CONFIG_BASE_ADDRESS(D2_AXISRAM_BASE);
+  BSP_LED_Init(LED_RED);
+  BSP_LED_Init(LED_BLUE);
 
   /* Add Cortex-M4 user application code here */ 
-
+  BSP_LED_On(LED_RED);
                         
   /* Infinite loop */
   while (1)
   {
+	  BSP_LED_Toggle(LED_BLUE);
+	  HAL_Delay(1000);
   }
 }
 
