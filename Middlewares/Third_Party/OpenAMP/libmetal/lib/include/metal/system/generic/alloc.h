@@ -16,7 +16,8 @@
 #ifndef __METAL_GENERIC_ALLOC__H__
 #define __METAL_GENERIC_ALLOC__H__
 
-#include <stdlib.h>
+//#include <stdlib.h>
+#include "mchf_pro_board.h"
 
 #ifdef __cplusplus
 extern "C" {
