@@ -396,7 +396,7 @@ int riff_seekInChunk(riff_handle *rh, size_t c_pos){
 	}
 	rh->pos = rh->c_pos_start + RIFF_CHUNK_DATA_OFFSET + c_pos;
 	rh->c_pos = c_pos;
-	size_t r = rh->fp_seek(rh->fh, rh->pos); //seek never fails, but pos might be invalid to read from
+	rh->fp_seek(rh->fh, rh->pos); //seek never fails, but pos might be invalid to read from
 	return RIFF_ERROR_NONE;
 }
 
@@ -559,37 +559,24 @@ const char *riff_errorToString(int e){
 	switch (e){
 		case RIFF_ERROR_NONE:
 			return riff_es[RIFF_ERROR_NONE];
-			break;
 		case RIFF_ERROR_EOC:
 			return riff_es[RIFF_ERROR_EOC];
-			break;
 		case RIFF_ERROR_EOCL:
 			return riff_es[RIFF_ERROR_EOCL];
-			break;
 		case RIFF_ERROR_EXDAT:
 			return riff_es[RIFF_ERROR_EXDAT];
-			break;
-
 		case RIFF_ERROR_ILLID:
 			return riff_es[RIFF_ERROR_ILLID];
-			break;
 		case RIFF_ERROR_ICSIZE:
 			return riff_es[RIFF_ERROR_ICSIZE];
-			break;
 		case RIFF_ERROR_EOF:
 			return riff_es[RIFF_ERROR_EOF];
-			break;
 		case RIFF_ERROR_ACCESS:
 			return riff_es[RIFF_ERROR_ACCESS];
-			break;
 		case RIFF_ERROR_INVALID_HANDLE:
 			return riff_es[RIFF_ERROR_INVALID_HANDLE];
-			break;
-
-
 		default:
 			return  riff_es[9];
-			break;
 	}
 }
 

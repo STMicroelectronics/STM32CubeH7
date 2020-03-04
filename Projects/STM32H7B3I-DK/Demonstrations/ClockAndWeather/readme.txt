@@ -48,7 +48,7 @@
 To load the demonstration, use STM32CubeProgrammer to program both internal Flash and external OSPI memory.
 
 In order to program the demonstration you must do the following:
-2- Open STM32CubeProgrammer, go to "External loaders" menu then check "MX25LM51245G_STM32H7B3I-DISCO.stldr" box 
+2- Open STM32CubeProgrammer, go to "External loaders" menu then check "MX25LM51245G_STM32H7B3I_DISCO" box
 3- Connect the STM32H7B3I-DK board to PC with USB cable through CN14 and click on STM32CubeProgrammer "Connect" button
 4- Use the generated hex file  with STM32CubeProgrammer to program both internal Flash and external OSPI memory:
    - From Erasing and programming Menu browse to select the hex file
@@ -56,11 +56,13 @@ In order to program the demonstration you must do the following:
    
    You can also use the script "program_hexfile.bat" (available within the binaries package) to directly program this hex file into 
    the STM32H7B3I-DK board.
-   This script will invoke the STM32CubeProgrammer with the correct OSPI flasher (MX25LM51245G_STM32H7B3I-DISCO)  
+   This script will invoke the STM32CubeProgrammer with the correct OSPI flasher (MX25LM51245G_STM32H7B3I_DISCO)
    
-5- copy the config template provided under "/Media" in a SD card storage at root folder
+5- copy the config template provided under "/Media/ClockAndWeather" in a SD card storage at root folder
 6- Plug the Media storage in CN4.
 -> The internal Flash and the external OSPI are now programmed and the demonstration is shown on the board.
+7- To get the time and weather forecast for a specific cities make sure before running the demo to add the config file (cw_cfg.ini)
+   under SD card at root folder and fill the location field with cities names. (ex: location = sydney).
 
 
 The binary and Media demonstration files are available from the STM32H7B3I-DK page in the Binary Delivery section.

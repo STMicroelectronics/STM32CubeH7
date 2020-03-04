@@ -93,7 +93,7 @@ typedef struct
 /** @addtogroup STM32H7B3I_DK_SDRAM_Exported_Variables
   * @{
   */
-extern SDRAM_HandleTypeDef hsdram[SDRAM_INSTANCES_NBR];
+extern SDRAM_HandleTypeDef hsdram[];
 /**
   * @}
   */

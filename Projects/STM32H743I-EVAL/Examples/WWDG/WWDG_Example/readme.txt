@@ -40,10 +40,10 @@ GPIO, DMA and NVIC). You may update this function to change WWDG configuration.
 The reset scope control bit should be set before enabling the WWDG to ensure 
 a wide system reset.
 
-The WWDG timeout is set to 11 ms and the refresh window is set to 120.
-The WWDG counter is refreshed each 40ms in the main program infinite loop to 
+The WWDG timeout is set to 671ms and the refresh window is set to 419ms.
+The WWDG counter is refreshed each 253ms in the main program infinite loop to 
 prevent a WWDG reset.
-LED2 is also toggled each 250ms indicating that the program is running.
+LED2 is also toggled each 253ms indicating that the program is running.
 
 An EXTI Line is connected to a GPIO pin, and configured to generate an interrupt
 on the rising edge of the signal.

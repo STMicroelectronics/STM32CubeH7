@@ -66,7 +66,7 @@
 /** @defgroup STM32H7B3I_EVAL_SRAM_Exported_Variables SRAM Exported Variables
   * @{
   */
-SRAM_HandleTypeDef hsram;
+SRAM_HandleTypeDef hsram[SRAM_INSTANCES_NBR];
 /**
   * @}
   */
@@ -111,7 +111,7 @@ int32_t BSP_SRAM_Init(uint32_t Instance)
   {
 #if (USE_HAL_SRAM_REGISTER_CALLBACKS == 0)
     /* Msp SRAM initialization */
-    SRAM_MspInit(&hsram);
+    SRAM_MspInit(&hsram[Instance]);
 #else
     /* Register the SRAM MSP Callbacks */
     if(IsMspCallbacksValid == 0U)
@@ -125,7 +125,7 @@ int32_t BSP_SRAM_Init(uint32_t Instance)
     {
 #endif /* USE_HAL_SRAM_REGISTER_CALLBACKS */
       /* __weak function can be rewritten by the application */
-      if(MX_SRAM_BANK3_Init(&hsram) != HAL_OK)
+      if(MX_SRAM_BANK3_Init(&hsram[Instance]) != HAL_OK)
       {
         ret = BSP_ERROR_NO_INIT;
       }
@@ -153,13 +153,13 @@ int32_t BSP_SRAM_DeInit(uint32_t Instance)
   else
   {
     /* SRAM device de-initialization */
-    hsram.Instance = FMC_NORSRAM_DEVICE;
-    hsram.Extended = FMC_NORSRAM_EXTENDED_DEVICE;
+    hsram[Instance].Instance = FMC_NORSRAM_DEVICE;
+    hsram[Instance].Extended = FMC_NORSRAM_EXTENDED_DEVICE;
 
-    (void)HAL_SRAM_DeInit(&hsram);
+    (void)HAL_SRAM_DeInit(&hsram[Instance]);
 #if (USE_HAL_SRAM_REGISTER_CALLBACKS == 0)
       /* SRAM controller de-initialization */
-      SRAM_MspDeInit(&hsram);
+      SRAM_MspDeInit(&hsram[Instance]);
 #endif /* (USE_HAL_SRAM_REGISTER_CALLBACKS == 0) */
   }
 
@@ -232,11 +232,11 @@ int32_t BSP_SRAM_RegisterDefaultMspCallbacks (uint32_t Instance)
   else
   {
     /* Register MspInit/MspDeInit Callbacks */
-    if(HAL_SRAM_RegisterCallback(&hsram, HAL_SRAM_MSP_INIT_CB_ID, SRAM_MspInit) != HAL_OK)
+    if(HAL_SRAM_RegisterCallback(&hsram[Instance], HAL_SRAM_MSP_INIT_CB_ID, SRAM_MspInit) != HAL_OK)
     {
       ret = BSP_ERROR_PERIPH_FAILURE;
     }
-    else if(HAL_SRAM_RegisterCallback(&hsram, HAL_SRAM_MSP_DEINIT_CB_ID, SRAM_MspDeInit) != HAL_OK)
+    else if(HAL_SRAM_RegisterCallback(&hsram[Instance], HAL_SRAM_MSP_DEINIT_CB_ID, SRAM_MspDeInit) != HAL_OK)
     {
       ret = BSP_ERROR_PERIPH_FAILURE;
     }
@@ -267,11 +267,11 @@ int32_t BSP_SRAM_RegisterMspCallbacks (uint32_t Instance, BSP_SRAM_Cb_t *CallBac
   else
   {
     /* Register MspInit/MspDeInit Callbacks */
-    if(HAL_SRAM_RegisterCallback(&hsram, HAL_SRAM_MSP_INIT_CB_ID, CallBacks->pMspInitCb) != HAL_OK)
+    if(HAL_SRAM_RegisterCallback(&hsram[Instance], HAL_SRAM_MSP_INIT_CB_ID, CallBacks->pMspInitCb) != HAL_OK)
     {
       ret = BSP_ERROR_PERIPH_FAILURE;
     }
-    else if(HAL_SRAM_RegisterCallback(&hsram, HAL_SRAM_MSP_DEINIT_CB_ID, CallBacks->pMspDeInitCb) != HAL_OK)
+    else if(HAL_SRAM_RegisterCallback(&hsram[Instance], HAL_SRAM_MSP_DEINIT_CB_ID, CallBacks->pMspDeInitCb) != HAL_OK)
     {
       ret = BSP_ERROR_PERIPH_FAILURE;
     }
@@ -295,7 +295,7 @@ void BSP_SRAM_IRQHandler(uint32_t Instance)
   /* Prevent unused argument(s) compilation warning */
   UNUSED(Instance);
 
-  HAL_MDMA_IRQHandler(hsram.hmdma);
+  HAL_MDMA_IRQHandler(hsram[Instance].hmdma);
 }
 
 /**

@@ -86,7 +86,7 @@ Connectivity, USART, Asynchronous mode, RS-232, baud rate, Interrupt, HyperTermi
     to respectively RX and TX pins of PC UART (could be done through a USB to UART adapter) :
     - Connect STM32 MCU board USART1 TX pin (GPIO PB.06 connected to pin 14 of CN10 connector)
       to PC COM port RX signal
-    - Connect STM32 MCU board USART1 RX pin (GPIO PA.07 connected to pin 16 of CN10 connector)
+    - Connect STM32 MCU board USART1 RX pin (GPIO PB.07 connected to pin 16 of CN10 connector)
       to PC COM port TX signal
     - Connect STM32 MCU board GND to PC COM port GND signal
     

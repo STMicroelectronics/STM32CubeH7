@@ -69,9 +69,9 @@ protected:
     struct trackList
     {
         touchgfx::Unicode::UnicodeChar  songName[MAX_SONG_NAME_LENGTH];
-        int                             trackLength                     = 0;
-        int                             id                              = 0;
-        bool                            selected                        = false;
+        int                             trackLength;
+        int                             id;
+        bool                            selected;
     };
 
     trackList tracks[MAX_NUMBER_OF_SONGS];
@@ -91,7 +91,7 @@ protected:
     int tickCnt;
     int psTicks;
     int psCountDownCnt;
-    int elapsedTime = 0;
+    int elapsedTime;
 };
 
 #endif // MODEL_HPP

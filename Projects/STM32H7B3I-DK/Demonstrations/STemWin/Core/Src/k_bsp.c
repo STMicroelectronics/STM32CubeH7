@@ -120,7 +120,7 @@ static void ConfigureExternalRam(void)
   /* Initialize the SDRAM memory */
   if ((RetVal = BSP_SDRAM_Init(0)) != BSP_ERROR_NONE)
   {
-    printf("Failed to initialize the SDRAM !! (Error %d)\n", RetVal);
+    printf("Failed to initialize the SDRAM !! (Error %ld)\n", RetVal);
     Error_Handler();
   }
 }
@@ -136,12 +136,12 @@ static void ConfigureExternalRom(void)
   Flash.TransferRate  = BSP_OSPI_NOR_DTR_TRANSFER;
   if((RetVal = BSP_OSPI_NOR_Init(0, &Flash)) != BSP_ERROR_NONE)
   {
-    printf("Failed to initialize the OSPI !! (Error %d)\n", RetVal);
+    printf("Failed to initialize the OSPI !! (Error %ld)\n", RetVal);
     Error_Handler();
   }
   if((RetVal = BSP_OSPI_NOR_EnableMemoryMappedMode(0)) != BSP_ERROR_NONE)
   {
-    printf("Failed to configure MM Mode for OSPI !! (Error %d)\n", RetVal);
+    printf("Failed to configure MM Mode for OSPI !! (Error %ld)\n", RetVal);
     Error_Handler();
   }
 }
@@ -175,7 +175,7 @@ uint8_t k_BspInit(void)
   /* Initialize the SDRAM memory */
   if ((RetVal = BSP_SDRAM_Init(0)) != 0)
   {
-    printf("Failed to initialize the SDRAM !! (Error %d)\n", RetVal);
+    printf("Failed to initialize the SDRAM !! (Error %ld)\n", RetVal);
     return 0;
   }
 
@@ -200,7 +200,7 @@ uint8_t k_BspInit(void)
 
   if(RetVal != BSP_ERROR_NONE)
   {
-    printf("Failed to initialize TS !! (Error %d)\n", RetVal);
+    printf("Failed to initialize TS !! (Error %ld)\n", RetVal);
     return 0;
   }
 
@@ -208,7 +208,7 @@ uint8_t k_BspInit(void)
   RetVal = BSP_TS_EnableIT(0);
   if(RetVal != BSP_ERROR_NONE)
   {
-    printf("Failed to initialize TS (IT) !! (Error %d)\n", RetVal);
+    printf("Failed to initialize TS (IT) !! (Error %ld)\n", RetVal);
     return 0;
   }
 #endif /* USE_TS_INT */

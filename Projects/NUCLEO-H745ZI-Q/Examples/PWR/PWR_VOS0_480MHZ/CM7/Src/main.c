@@ -250,7 +250,7 @@ static void SystemClock_Config_480MHz(void)
   RCC_OscInitStruct.PLL.PLLQ = 4;
 
   RCC_OscInitStruct.PLL.PLLVCOSEL = RCC_PLL1VCOWIDE;
-  RCC_OscInitStruct.PLL.PLLRGE = RCC_PLL1VCIRANGE_2;
+  RCC_OscInitStruct.PLL.PLLRGE = RCC_PLL1VCIRANGE_1;
   ret = HAL_RCC_OscConfig(&RCC_OscInitStruct);
   if(ret != HAL_OK)
   {
@@ -301,7 +301,7 @@ static void SystemClock_Config_400MHz(void)
   RCC_OscInitStruct.PLL.PLLQ = 4;
 
   RCC_OscInitStruct.PLL.PLLVCOSEL = RCC_PLL1VCOWIDE;
-  RCC_OscInitStruct.PLL.PLLRGE = RCC_PLL1VCIRANGE_2;
+  RCC_OscInitStruct.PLL.PLLRGE = RCC_PLL1VCIRANGE_1;
   ret = HAL_RCC_OscConfig(&RCC_OscInitStruct);
   if(ret != HAL_OK)
   {

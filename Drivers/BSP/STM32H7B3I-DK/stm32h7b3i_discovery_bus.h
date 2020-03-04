@@ -110,7 +110,7 @@ int32_t BSP_GetTick(void);
 int32_t BSP_I2C4_RegisterDefaultMspCallbacks (void);
 int32_t BSP_I2C4_RegisterMspCallbacks (BSP_I2C_Cb_t *Callback);
 #endif /* USE_HAL_I2C_REGISTER_CALLBACKS */
-HAL_StatusTypeDef MX_I2C4_Init(I2C_HandleTypeDef *phi2c, uint32_t timing);
+HAL_StatusTypeDef MX_I2C4_Init(I2C_HandleTypeDef *hI2c, uint32_t timing);
 /**
   * @}
   */

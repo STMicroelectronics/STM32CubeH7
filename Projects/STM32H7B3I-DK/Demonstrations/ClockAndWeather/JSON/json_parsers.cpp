@@ -118,7 +118,7 @@ int extractWeatherData(const char *json_string, struct weatherData* data)
     bool firstDataSet = true;
     bool rainPresent = false;
 
-    bool dataDay;
+    bool dataDay = false;
 
     int clockCnt = 0;
     double temporaryWindeSpeed;

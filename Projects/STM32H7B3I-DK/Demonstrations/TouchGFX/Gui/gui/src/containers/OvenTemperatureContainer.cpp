@@ -279,7 +279,7 @@ int OvenTemperatureContainer::squareRoot(int x)
         return x;
     }
 
-    int start = 1, end = x, ans;
+    int start = 1, end = x, ans = 0;
     while (start <= end)
     {
         int mean = (start + end) / 2;

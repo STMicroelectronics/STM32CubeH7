@@ -30,7 +30,7 @@ The STM32Cube demonstration platform is built around the FreeRTOS real-time oper
 system and offers a large scope of use cases based on the STM32Cube HAL BSP and several
 middleware components.
 
-The demonstration's executables STM32Cube_Demo-STM32H7B3I-DK-VX.Y.Z.hex can be flashed 
+The demonstration's executables STM32Cube_Demo-STM32H7B3I-DK-V1.0.0.hex can be flashed
 to the target using the STM32CubeProgrammer.
 
 Multimedia content is also available in the Storage(SDCard) folder within the demonstration 
@@ -45,11 +45,13 @@ Storage
 	   |   music.wav
 	   |   Corporate Inspiration.mp3
 	   |   ST Life augmented.mp3
+
 	Pictures\BMP_480x272
 	\---
 	   |   image06.bmp
 	   |   image07.bmp
 	   |   image08.bmp
+
 	Video
 	\---
 	   |   video0_480_272.avi
@@ -57,12 +59,14 @@ Storage
 	   |   video2_480_272.avi
 	   |   video3_480_272.avi
 
+    cw_cfg.ini: clock and weather configuration file
+
 
 Binary files:
-  STM32Cube_Demo-STM32H7B3I-DK-V1.0.0.hex    STM32H7B3I-DK Demonstration Full binary file 
+  STM32Cube_Demo-STM32H7B3I-DK-V1.0.0.hex: STM32H7B3I-DK Demonstration Full binary file
   program_hexfile.bat: Allows to directly program this hex file into the STM32H7B3I-DK board.
   This script will invoke the STM32CubeProgrammer with the correct OSPI flasher 
- (MX25LM51245G_STM32H7B3I-DISCO) 
+ (MX25LM51245G_STM32H7B3I_DISCO)
 
 The demonstration starts Menu Launcher by displaying the supported demos icons.
 The user can slide the icons bar and select between six demonstrations:
@@ -82,7 +86,7 @@ For more details on the supported demos, please refer to the readme.txt file for
 To load the demonstration, use STM32CubeProgrammer to program both internal Flash and external OSPI memory.
 
 In order to program the demonstration you must do the following:
-2- Open STM32CubeProgrammer, go to "External loaders" menu then check "MX25LM51245G_STM32H7B3I-DISCO.stldr" box 
+2- Open STM32CubeProgrammer, go to "External loaders" menu then check "MX25LM51245G_STM32H7B3I_DISCO" box
 3- Connect the STM32H7B3I-DK board to PC with USB cable through CN14 and click on STM32CubeProgrammer "Connect" button
 4- Use the generated hex file  with STM32CubeProgrammer to program both internal Flash and external OSPI memory:
    - From Erasing and programming Menu browse to select the hex file
@@ -90,7 +94,7 @@ In order to program the demonstration you must do the following:
    
    You can also use the script "program_hexfile.bat" (available within the binaries package) to directly program this hex file into 
    the STM32H7B3I-DK board.
-   This script will invoke the STM32CubeProgrammer with the correct OSPI flasher (MX25LM51245G_STM32H7B3I-DISCO)    
+   This script will invoke the STM32CubeProgrammer with the correct OSPI flasher (MX25LM51245G_STM32H7B3I_DISCO)
 
 -> The internal Flash and the external OSPI are now programmed and the demonstration is shown on the board.
 

@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    SPI_FullDuplex_ComIT/Inc/main.h
+  * @file    Examples_LL/SPI/SPI_FullDuplex_ComIT/Inc/main.h
   * @author  MCD Application Team
   * @brief   Header for main.c module
   ******************************************************************************
@@ -25,6 +25,7 @@
 /* LL drivers common to all LL examples */
 #include "stm32h7xx_ll_bus.h"
 #include "stm32h7xx_ll_gpio.h"
+#include "stm32h7xx_ll_exti.h"
 #include "stm32h7xx_ll_pwr.h"
 #include "stm32h7xx_ll_rcc.h"
 #include "stm32h7xx_ll_spi.h"
@@ -37,15 +38,19 @@
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
 
-/* Definition LED1*/
-#define LED_OK_PIN                              LL_GPIO_PIN_0
-#define LED_OK_GPIO_PORT                        GPIOB
-#define LED_OK_GPIO_CLK_ENABLE()                LL_AHB4_GRP1_EnableClock(LL_AHB4_GRP1_PERIPH_GPIOB)
+/**
+  * @brief LED1 
+  */
+#define LED1_PIN                           LL_GPIO_PIN_0
+#define LED1_GPIO_PORT                     GPIOB
+#define LED1_GPIO_CLK_ENABLE()             LL_AHB4_GRP1_EnableClock(LL_AHB4_GRP1_PERIPH_GPIOB)
 
-/* Definition LED3*/
-#define LED_ERROR_PIN                           LL_GPIO_PIN_14
-#define LED_ERROR_GPIO_PORT                     GPIOB
-#define LED_ERROR_GPIO_CLK_ENABLE()             LL_AHB4_GRP1_EnableClock(LL_AHB4_GRP1_PERIPH_GPIOB)
+/**
+  * @brief Toggle periods for various blinking modes
+  */
+#define LED_BLINK_FAST  200
+#define LED_BLINK_SLOW  500
+#define LED_BLINK_ERROR 1000
 
 /*SPIx_Master*/
 
@@ -76,6 +81,22 @@
 #define SPIx_SLAVE_MOSI_AF                  LL_GPIO_AF_8
 
 
+/**
+  * @brief Key push-button
+  */
+#define USER_BUTTON_PIN                         LL_GPIO_PIN_13
+#define USER_BUTTON_GPIO_PORT                   GPIOC
+#define USER_BUTTON_GPIO_CLK_ENABLE()           LL_AHB4_GRP1_EnableClock(LL_AHB4_GRP1_PERIPH_GPIOC)   
+#define USER_BUTTON_EXTI_LINE                   LL_EXTI_LINE_13
+#define USER_BUTTON_EXTI_IRQn                   EXTI15_10_IRQn
+#define USER_BUTTON_EXTI_LINE_ENABLE()          LL_EXTI_EnableIT_0_31(USER_BUTTON_EXTI_LINE)   
+#define USER_BUTTON_EXTI_FALLING_TRIG_ENABLE()  LL_EXTI_EnableFallingTrig_0_31(USER_BUTTON_EXTI_LINE)   
+#define USER_BUTTON_SYSCFG_SET_EXTI()           do {                                                                     \
+                                                  LL_APB4_GRP1_EnableClock(LL_APB4_GRP1_PERIPH_SYSCFG);                  \
+                                                  LL_SYSCFG_SetEXTISource(LL_SYSCFG_EXTI_PORTC, LL_SYSCFG_EXTI_LINE13);  \
+                                                } while(0)
+#define USER_BUTTON_IRQHANDLER                  EXTI15_10_IRQHandler
+
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */
 void SPI1_Rx_Callback(void);
@@ -86,6 +107,7 @@ void SPI_TransferError_Callback(void);
 void SPI6_Rx_Callback(void);
 void SPI6_Tx_Callback(void);
 void SPI6_EOT_Callback(void);
+void UserButton_Callback(void);
 
 #endif /* __MAIN_H */
 

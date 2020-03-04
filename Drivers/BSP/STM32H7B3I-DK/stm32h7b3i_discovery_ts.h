@@ -165,20 +165,6 @@ typedef struct
 #endif /* (USE_TS_GESTURE > 0) */
 
 /**
- *  @brief TS_TouchEventTypeDef
- *  Define Possible touch events kind as returned values
- *  by touch screen IC Driver.
- */
-typedef enum
-{
-  TOUCH_EVENT_NO_EVT        = 0x00, /*!< Touch Event : undetermined */
-  TOUCH_EVENT_PRESS_DOWN    = 0x01, /*!< Touch Event Press Down */
-  TOUCH_EVENT_LIFT_UP       = 0x02, /*!< Touch Event Lift Up */
-  TOUCH_EVENT_CONTACT       = 0x03, /*!< Touch Event Contact */
-  TOUCH_EVENT_NB_MAX        = 0x04  /*!< max number of touch events kind */
-} TS_TouchEventTypeDef;
-
-/**
   * @}
   */
 

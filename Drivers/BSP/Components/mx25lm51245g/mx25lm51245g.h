@@ -72,6 +72,13 @@
 #define MX25LM51245G_OK                           (0)
 #define MX25LM51245G_ERROR                        (-1)
 
+/**
+  * @brief  re-definition of legacy memory mapped functions
+  */
+#define MX25LM51245G_EnableMemoryMappedModeDTR MX25LM51245G_EnableDTRMemoryMappedMode
+#define MX25LM51245G_EnableMemoryMappedModeSTR MX25LM51245G_EnableSTRMemoryMappedMode
+
+
 /******************************************************************************
   * @brief  MX25LM51245G Commands
   ****************************************************************************/
@@ -273,33 +280,10 @@ typedef enum {
 } MX25LM51245G_Transfer_t;
 
 typedef enum {
-  MX25LM51245G_DUALquad_DISABLE = HAL_OSPI_DUALQUAD_DISABLE, /*!<  Single quad mode                 */
-  MX25LM51245G_DUALquad_ENABLE = HAL_OSPI_DUALQUAD_ENABLE    /*!<  Dual quad mode                   */
-} MX25LM51245G_DualQuad_t;
-
-typedef enum {
   MX25LM51245G_ERASE_4K = 0,                 /*!< 4K size Sector erase                          */
   MX25LM51245G_ERASE_64K,                    /*!< 64K size Block erase                          */
   MX25LM51245G_ERASE_BULK                    /*!< Whole bulk erase                              */
 } MX25LM51245G_Erase_t;
-
-typedef enum {
-  MX25LM51245G_BURST_READ_WRAP_16 = 1,       /*!< 16 bytes boundary aligned                     */
-  MX25LM51245G_BURST_READ_WRAP_32,           /*!< 32 bytes boundary aligned                     */
-  MX25LM51245G_BURST_READ_WRAP_64,           /*!< 64 bytes boundary aligned                     */
-  MX25LM51245G_BURST_READ_WRAP_NONE          /*!< Disable wrap function */
-} MX25LM51245G_WrapLength_t;
-
-typedef enum {
-  MX25LM51245G_CR_ODS_146 = 0,              /*!< Output driver strength 146 ohms                */
-  MX25LM51245G_CR_ODS_76,                   /*!< Output driver strength 76 ohms                 */
-  MX25LM51245G_CR_ODS_52,                   /*!< Output driver strength 52 ohms                 */
-  MX25LM51245G_CR_ODS_41,                   /*!< Output driver strength 41 ohms                 */
-  MX25LM51245G_CR_ODS_34,                   /*!< Output driver strength 43 ohms                 */
-  MX25LM51245G_CR_ODS_30,                   /*!< Output driver strength 30 ohms                 */
-  MX25LM51245G_CR_ODS_26,                   /*!< Output driver strength 26 ohms                 */
-  MX25LM51245G_CR_ODS_24                    /*!< Output driver strength 24 ohms (default)       */
-} MX25LM51245G_ODS_t;
 
 typedef enum {
   MX25LM51245G_3BYTES_SIZE = 0,              /*!< 3 Bytes address mode                           */

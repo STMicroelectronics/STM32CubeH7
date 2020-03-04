@@ -291,6 +291,60 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef *huart)
 }
 
 /**
+* @brief  OTDF BSP Init
+* @param  hotfdec_region : OTDF REGION handle
+* @retval None
+*/
+void HAL_OTFDEC_MspInit(OTFDEC_HandleTypeDef *hotfdec_region)
+{
+	if ((hotfdec_region->Instance == OTFDEC1))
+	{
+          /* Enable OTFDEC1 clock */
+          __HAL_RCC_OTFDEC1_CLK_ENABLE();
+          
+          /* Force the OTFDEC1 Periheral Reset */
+          __HAL_RCC_OTFDEC1_FORCE_RESET();
+          __HAL_RCC_OTFDEC1_RELEASE_RESET();
+          
+          /*Enable and set OTFDEC1 Interrupt to the highest priority*/
+          HAL_NVIC_SetPriority(OTFDEC1_IRQn, 0x0F, 0);
+          HAL_NVIC_EnableIRQ(OTFDEC1_IRQn);
+	}
+	else
+	{
+          /* Enable OTFDEC2 clock */
+          __HAL_RCC_OTFDEC2_CLK_ENABLE();
+          
+          /* Force the OTFDEC2 Periheral Reset */
+          __HAL_RCC_OTFDEC2_FORCE_RESET();
+          __HAL_RCC_OTFDEC2_RELEASE_RESET();
+          
+          /*Enable and set OTFDEC2 Interrupt to the highest priority*/
+          HAL_NVIC_SetPriority(OTFDEC2_IRQn, 0x0F, 0);
+          HAL_NVIC_EnableIRQ(OTFDEC2_IRQn);
+	}
+}
+
+/**
+* @brief  OTDF BSP DeInit
+* @param  hotfdec_region : OTDF REGION handle
+* @retval None
+*/
+void HAL_OTFDEC_MspDeInit(OTFDEC_HandleTypeDef *hotfdec_region)
+{
+	if ((hotfdec_region->Instance == OTFDEC1) )
+	{
+		/* Enable OTFDEC1 clock */
+		__HAL_RCC_OTFDEC1_CLK_DISABLE();
+	}
+	else
+	{
+		/* Enable OTFDEC2 clock */
+		__HAL_RCC_OTFDEC2_CLK_DISABLE();
+	}
+}
+
+/**
   * @}
   */
 

@@ -21,20 +21,15 @@
   @endverbatim
 
 @par Example Description
-This example describes how to decrypt data located on the OCTOSPI external flash using the OTFDEC peripheral
-You can also use CRYP for ciphering any other DATA. But it is mandatory to uncomment "#define HAL_CRYP_MODULE_ENABLED", in the stm32h7xx_hal_conf.h
+This example describes how to decrypt data located on the OCTOSPI external flash using the OTFDEC peripheral.
+Data used in this example are alredy encrypted with the embedded crypto IP standard AES-128 counter mode.
+You can also use crypto for encrypting any other Data. But it is mandatory to uncomment "#define HAL_CRYP_MODULE_ENABLED", in the stm32h7xx_hal_conf.h.
+You can refer to OTFDEC_ExcutingAESInstructions example to see how to encrypt with the embedded crypto IP.
 The USART1 is used to verify that decryption is done correctly.
-The USART1 is configured as follows:
-    - BaudRate = 9600 baud
-    - Word Length = 8 Bits (7 data bit + 1 parity bit)
-    - One Stop Bit
-    - None parity
-    - Hardware flow control disabled (RTS and CTS signals)
-    - Reception and transmission are enabled in the time
 
 This projects is configured for STM32H7B3xxQ devices using STM32CubeH7 HAL and running on
 STM32H7B3I-EVAL board from STMicroelectronics.
-The example requires to connect the board to an HyperTerminal PC application through USART1 connector (CN2).
+The example requires to connect the board to an HyperTerminal PC application through USART1 connector.
 
 At the beginning of the main program the HAL_Init() function is called to reset
 all the peripherals, initialize the Flash interface and the systick.
@@ -103,12 +98,13 @@ Then, OTFDEC will decrypt these data which will be printed on an HyperTerminal t
       cable to the ST-LINK V3.0 connector to the PC serial port if you want
       to display data on the HyperTerminal.
 
-  - HyperTerminal configuration:
-    - Data Length = 7 Bits
-    - One Stop Bit
-    - None parity
-    - BaudRate = 9600 baud
-    - Flow control: None
+  - HyperTerminal configuration
+      - Word Length = 8 Bits (7 data bit + 1 parity bit) : 
+       BE CAREFUL : Program 7 data bits + 1 parity bit in PC HyperTerminal
+      - Stop Bit    = One Stop bit
+      - Parity      = ODD parity
+      - BaudRate    = 115200 baud
+      - Hardware flow control disabled (RTS and CTS signals)
 
 @par How to use it ?
 

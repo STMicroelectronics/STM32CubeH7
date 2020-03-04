@@ -71,6 +71,10 @@ int unixtime = 1546560000; /*2019-01-04 00:00:00*/
 uint8_t retry_request = 0;
 /* Private function prototypes -----------------------------------------------*/
 extern int extractDateTime(char *json_string, char* date_time, char* day_of_week, int *unixtime);
+static void Clock_And_Weather_Thread(void const *argument);
+static int config_reader(void* user, const char* section, const char* name,
+                           const char* value);
+static inline int16_t string_to_encryption(char *s);
 /* Private functions ---------------------------------------------------------*/
 
 /**
@@ -603,7 +607,7 @@ int Get_Date_Time(char* date_time)
   * @param  s: pointer to string
   * @retval access point security mode, an error code otherwise
   */
-static inline uint16_t string_to_encryption(char *s)
+static inline int16_t string_to_encryption(char *s)
 {
   
   if (strcmp(s, "Open") == 0) 

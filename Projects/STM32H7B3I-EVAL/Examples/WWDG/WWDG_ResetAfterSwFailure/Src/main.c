@@ -72,9 +72,9 @@ int main(void)
   /* Configure the system clock to 280 MHz */
   SystemClock_Config();
 
-  /* Configure LED1 and LED3 */
+  /* Configure LED1 and LED2 */
   BSP_LED_Init(LED1);
-  BSP_LED_Init(LED3);
+  BSP_LED_Init(LED2);
 
   /* Configure Tamper push-button */
   BSP_PB_Init(BUTTON_TAMPER, BUTTON_MODE_EXTI);
@@ -102,14 +102,14 @@ int main(void)
 
       Timing calculation:
       a) WWDG clock counter period (in ms) = (4096 * 128) / (PCLK1 / 1000)
-                                          ~= 0,4096 ms
-      b) WWDG timeout (in ms)  = (127 + 1) * 0,4096
-                              ~= 53 ms
-      --> After refresh, WWDG will expire after 53 ms and generate reset if
+                                          ~= 3,744 ms
+      b) WWDG timeout (in ms)  = (127 + 1) * 3,744
+                              ~= 479 ms
+      --> After refresh, WWDG will expire after 479 ms and generate reset if
       counter is not reloaded.
       c) Time to enter inside window
-      Window timeout (in ms) = (127 - 80 + 1) * 0,4096
-                            ~= 20 ms */
+      Window timeout (in ms) = (127 - 80 + 1) * 3,744
+                            ~= 179 ms */
   WwdgHandle.Instance = WWDG1;
   WwdgHandle.Init.Prescaler = WWDG_PRESCALER_128;
   WwdgHandle.Init.Window    = 0x50;
@@ -227,8 +227,8 @@ static void SystemClock_Config(void)
   */
 static void Error_Handler(void)
 {
-  /* Turn LED3 on */
-  BSP_LED_On(LED3);
+  /* Turn LED2 on */
+  BSP_LED_On(LED2);
   while(1)
   {
   }

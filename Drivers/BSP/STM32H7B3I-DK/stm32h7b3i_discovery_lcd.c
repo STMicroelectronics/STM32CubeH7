@@ -1107,6 +1107,7 @@ int32_t BSP_LCD_FillRGBRect(uint32_t Instance, uint32_t Xpos, uint32_t Ypos, uin
 int32_t BSP_LCD_DrawHLine(uint32_t Instance, uint32_t Xpos, uint32_t Ypos, uint32_t Length, uint32_t Color)
 {
   uint32_t  Xaddress;
+  uint32_t tmp_length = Length;
 
   /* Get the line address */
   Xaddress = hlcd_ltdc.LayerCfg[Lcd_Ctx[Instance].ActiveLayer].FBStartAdress + (Lcd_Ctx[Instance].BppFactor*((Lcd_Ctx[Instance].XSize*Ypos) + Xpos));
@@ -1114,9 +1115,9 @@ int32_t BSP_LCD_DrawHLine(uint32_t Instance, uint32_t Xpos, uint32_t Ypos, uint3
   /* Write line */
   if((Xpos + Length) > Lcd_Ctx[Instance].XSize)
   {
-    Length = Lcd_Ctx[Instance].XSize - Xpos;
+    tmp_length = Lcd_Ctx[Instance].XSize - Xpos;
   }
-  LL_FillBuffer(Instance, (uint32_t *)Xaddress, Length, 1, 0, Color);
+  LL_FillBuffer(Instance, (uint32_t *)Xaddress, tmp_length, 1, 0, Color);
 
   return BSP_ERROR_NONE;
 }
@@ -1133,6 +1134,7 @@ int32_t BSP_LCD_DrawHLine(uint32_t Instance, uint32_t Xpos, uint32_t Ypos, uint3
 int32_t BSP_LCD_DrawVLine(uint32_t Instance, uint32_t Xpos, uint32_t Ypos, uint32_t Length, uint32_t Color)
 {
   uint32_t  Xaddress;
+  uint32_t tmp_length = Length;
 
   /* Get the line address */
   Xaddress = (hlcd_ltdc.LayerCfg[Lcd_Ctx[Instance].ActiveLayer].FBStartAdress) + (Lcd_Ctx[Instance].BppFactor*((Lcd_Ctx[Instance].XSize*Ypos) + Xpos));
@@ -1140,9 +1142,9 @@ int32_t BSP_LCD_DrawVLine(uint32_t Instance, uint32_t Xpos, uint32_t Ypos, uint3
   /* Write line */
   if((Ypos + Length) > Lcd_Ctx[Instance].YSize)
   {
-    Length = Lcd_Ctx[Instance].YSize - Ypos;
+    tmp_length = Lcd_Ctx[Instance].YSize - Ypos;
   }
-  LL_FillBuffer(Instance, (uint32_t *)Xaddress, 1, Length, (Lcd_Ctx[Instance].XSize - 1U), Color);
+  LL_FillBuffer(Instance, (uint32_t *)Xaddress, 1, tmp_length, (Lcd_Ctx[Instance].XSize - 1U), Color);
 
   return BSP_ERROR_NONE;
 }

@@ -121,7 +121,7 @@
                 </option>
                 <option>
                     <name>OGUseCmsis</name>
-                    <state>1</state>
+                    <state>0</state>
                 </option>
                 <option>
                     <name>OGUseCmsisDspLib</name>
@@ -351,18 +351,9 @@
                     <name>CCIncludePath2</name>
                     <state>$PROJ_DIR$\..\Config</state>
                     <state>$PROJ_DIR$\..\Core\inc</state>
-                    <state>$PROJ_DIR$\..\Gui\Core\video_player</state>
                     <state>$PROJ_DIR$\..\Gui\STemWin_Addons</state>
                     <state>$PROJ_DIR$\..\Gui\Target</state>
-                    <state>$PROJ_DIR$\..\Modules\Common</state>
-                    <state>$PROJ_DIR$\..\Modules\audio_player</state>
-                    <state>$PROJ_DIR$\..\Modules\audio_player\Inc</state>
-                    <state>$PROJ_DIR$\..\Modules\audio_player\App</state>
-                    <state>$PROJ_DIR$\..\Modules\audio_player\Addons\Common\Inc</state>
-                    <state>$PROJ_DIR$\..\Modules\audio_player\Addons\SRC236\Inc</state>
-                    <state>$PROJ_DIR$\..\Modules\audio_player\Addons\SRC441\Inc</state>
-                    <state>$PROJ_DIR$\..\Modules\video_player</state>
-                    <state>$PROJ_DIR$\..\Modules\dual_core</state>
+                    <state>$PROJ_DIR$\..\..\..\..\..\Drivers\CMSIS\Include</state>
                     <state>$PROJ_DIR$\..\..\extra_modules\STIPC\Core\Common\Inc</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\Drivers\CMSIS\Device\ST\STM32H7xx\Include</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Inc</state>
@@ -375,9 +366,6 @@
                     <state>$PROJ_DIR$\..\..\..\..\..\Middlewares\Third_Party\FreeRTOS\Source\portable\IAR\ARM_CM7\r0p1</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\Middlewares\Third_Party\FreeRTOS\Source\include</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\Middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS</state>
-                    <state>$PROJ_DIR$\..\..\..\..\..\Middlewares\ST\STM32_Audio\Addons\PDM\Inc</state>
-                    <state>$PROJ_DIR$\..\..\..\..\..\Middlewares\ST\STM32_USB_Host_Library\Core\Inc</state>
-                    <state>$PROJ_DIR$\..\..\..\..\..\Middlewares\ST\STM32_USB_Host_Library\Class\MSC\Inc</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\Utilities\CPU</state>
                 </option>
                 <option>
@@ -837,8 +825,6 @@
                     <state>--keep demo_icon</state>
                     <state>--image_input $PROJ_DIR$\..\Core\Src\assets\stemwin_logo.bmp,demo_logo,demo_logo_section,32</state>
                     <state>--keep demo_logo</state>
-                    <state>--diag_warning Lt009</state>
-                    <state>--diag_suppress Lt009</state>
                 </option>
                 <option>
                     <name>IlinkLowLevelInterfaceSlave</name>
@@ -1294,7 +1280,6 @@
                     <state>STM32H7B3xxQ</state>
                     <state>USE_STM32H7B3I_DK</state>
                     <state>USE_STM32H7B3I_DK_OOB</state>
-                    <state>BSP_USE_CMSIS_OS</state>
                     <state>USE_TS_INT</state>
                     <state>USE_SDCARD</state>
                 </option>
@@ -1361,7 +1346,7 @@
                 </option>
                 <option>
                     <name>CCDebugInfo</name>
-                    <state>0</state>
+                    <state>1</state>
                 </option>
                 <option>
                     <name>IEndianMode</name>
@@ -1423,20 +1408,10 @@
                     <name>CCIncludePath2</name>
                     <state>$PROJ_DIR$\..\Config</state>
                     <state>$PROJ_DIR$\..\Core\inc</state>
-                    <state>$PROJ_DIR$\..\Gui\Core\video_player</state>
                     <state>$PROJ_DIR$\..\Gui\STemWin_Addons</state>
                     <state>$PROJ_DIR$\..\Gui\Target</state>
-                    <state>$PROJ_DIR$\..\Modules\Common</state>
-                    <state>$PROJ_DIR$\..\Modules\audio_player</state>
-                    <state>$PROJ_DIR$\..\Modules\audio_player\Inc</state>
-                    <state>$PROJ_DIR$\..\Modules\audio_player\App</state>
-                    <state>$PROJ_DIR$\..\Modules\audio_player\Addons\Common\Inc</state>
-                    <state>$PROJ_DIR$\..\Modules\audio_player\Addons\SRC236\Inc</state>
-                    <state>$PROJ_DIR$\..\Modules\audio_player\Addons\SRC441\Inc</state>
-                    <state>$PROJ_DIR$\..\Modules\video_player</state>
-                    <state>$PROJ_DIR$\..\Modules\dual_core</state>
-                    <state>$PROJ_DIR$\..\..\extra_modules\STIPC\Core\Common\Inc</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\Drivers\CMSIS\Include</state>
+                    <state>$PROJ_DIR$\..\..\extra_modules\STIPC\Core\Common\Inc</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\Drivers\CMSIS\Device\ST\STM32H7xx\Include</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Inc</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\STM32H7B3I-DK</state>
@@ -1448,9 +1423,6 @@
                     <state>$PROJ_DIR$\..\..\..\..\..\Middlewares\Third_Party\FreeRTOS\Source\portable\IAR\ARM_CM7\r0p1</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\Middlewares\Third_Party\FreeRTOS\Source\include</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\Middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS</state>
-                    <state>$PROJ_DIR$\..\..\..\..\..\Middlewares\ST\STM32_Audio\Addons\PDM\Inc</state>
-                    <state>$PROJ_DIR$\..\..\..\..\..\Middlewares\ST\STM32_USB_Host_Library\Core\Inc</state>
-                    <state>$PROJ_DIR$\..\..\..\..\..\Middlewares\ST\STM32_USB_Host_Library\Class\MSC\Inc</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\Utilities\CPU</state>
                 </option>
                 <option>
@@ -1910,8 +1882,6 @@
                     <state>--keep demo_icon</state>
                     <state>--image_input $PROJ_DIR$\..\Core\Src\assets\stemwin_logo.bmp,demo_logo,demo_logo_section,32</state>
                     <state>--keep demo_logo</state>
-                    <state>--diag_warning Lt009</state>
-                    <state>--diag_suppress Lt009</state>
                 </option>
                 <option>
                     <name>IlinkLowLevelInterfaceSlave</name>
@@ -2166,13 +2136,7 @@
                     <name>$PROJ_DIR$\..\Core\Src\k_module.c</name>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\Core\Src\k_rtc.c</name>
-                </file>
-                <file>
                     <name>$PROJ_DIR$\..\Core\Src\main.c</name>
-                </file>
-                <file>
-                    <name>$PROJ_DIR$\..\Config\sd_diskio.c</name>
                 </file>
                 <file>
                     <name>$PROJ_DIR$\..\Core\Src\stm32h7xx_hal_msp.c</name>
@@ -2489,15 +2453,6 @@
                 <file>
                     <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\Components\mx25lm51245g\mx25lm51245g.c</name>
                 </file>
-                <file>
-                    <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\Components\stmpe811\stmpe811.c</name>
-                </file>
-                <file>
-                    <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\Components\stmpe811\stmpe811_reg.c</name>
-                </file>
-                <file>
-                    <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\Components\wm8994\wm8994.c</name>
-                </file>
             </group>
             <group>
                 <name>STM32H7B3I-DK</name>
@@ -2634,7 +2589,7 @@
             <group>
                 <name>Drivers</name>
                 <file>
-                    <name>$PROJ_DIR$\..\Core\Src\usbh_diskio.c</name>
+                    <name>$PROJ_DIR$\..\Core\Src\sd_diskio.c</name>
                 </file>
             </group>
             <group>

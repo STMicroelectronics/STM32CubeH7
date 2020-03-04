@@ -29,11 +29,11 @@ two instances in the same board by using interruptions.
   |        ____________________   |
   |       |     SPI1           |  |
   |       |                    |  |
-  |       |PB3 : CN7.D23   SCK |__|_____________
+  |       |PB5 : CN7.D22   MOSI|__|_____________
   |       |                    |  |             |
   |       |PB4 : CN7.D25   MISO|__|_______      |
   |       |                    |  |       |     |
-  |       |PB5 : CN7.D22   MOSI|__|__     |     |
+  |       |PB3 : CN7.D23    SCK|__|__     |     |
   |       |                    |  |  |    |     |
   |       |____________________|  |  |    |     |
   | SPI Master                    |  |    |     |
@@ -62,8 +62,6 @@ The CPU at 280 MHz.
 The HCLK for CD Domain AXI and AHB3 peripherals, CD Domain AHB1/AHB2 peripherals and SRD Domain AHB4 peripherals at 280 MHz.
 The APB clock dividers for CD Domain APB3 peripherals, CD Domain APB1 and APB2 peripherals and SRD Domain APB4 peripherals to run at 280 MHz/2.
 
-Then, two functions are called in order to initiate LED_OK (LED1) & LED_ERROR (LED3).
-
 The configuration of GPIO pins belong to SPI1 is ensured by the GPIOPins_SPI1_Config() function.
 With the same way, the configuration of GPIO pins belong to SPI6 is ensured by the GPIOPins_SPI6_Config() function.
 
@@ -82,15 +80,16 @@ SPI1_RxBuffer. At the same time, SPI Slave transmits SPIx_TxBuffer and receives 
 The callback functions (SPI1_Tx_Callback, SPI1_Rx_Callback,SPI6_Tx_Callback, SPI6_Rx_Callback, SPI1_EOT_Callback,
 SPI6_EOT_Callback and SPI_TransferError_Callback) update
 the variables SPI1_ReceiveIndex, SPI1_TransmitIndex, SPI6_ReceiveIndex, SPI6_TransmitIndex and SPIx_NbDataToTransmit
-used in the main function to check the transfer status.
+used in the main function to check the transfer status. Variables SPI1_XfrCompleteDetect, SPI6_XfrCompleteDetect
+and SPIx_XfrErrorDetect are used in the main function to check that transfers are completed and with no transfer error.
 Finally, SPIx_TxBuffer and SPI6_RxBuffer are compared through Buffercmp() in order to check buffers correctness.
 
-STM32 board's LEDs can be used to monitor the transfer status:
+STM32 board's LED1 can be used to monitor the transfer status:
+ - LED1 blinks Fast (200ms) waiting User push-button to be pressed to start the transfer.
  - LED1 turns ON when the transmission and reception process is complete with success.
- - LED3 turns ON when there is an error in transmission/reception process.
+ - LED1 blinks Slowly (1s) when there is an error in transmission/reception process.
 
-
-@note SPI1&SPI6 instanceS used and associated resources can be updated in "main.c"
+@note SPI1 & SPI6 instanceS used and associated resources can be updated in "main.c"
       file depending on hardware configuration used.
 
 @note Some code parts can be executed in the ITCM-RAM (64 KB) which decrease critical task execution time, compared
@@ -124,10 +123,10 @@ STM32 board's LEDs can be used to monitor the transfer status:
 
   - This example runs on STM32H7A3xxQ devices.
 
-  - This example has been tested with Nucleo-H7A3ZI-Q boards and can be
+  - This example has been tested with NUCLEO-H7A3ZI-Q boards and can be
     easily tailored to any other supported device and development board.
 
-  - Nucleo-H7A3ZI-Q Set-up
+  - NUCLEO-H7A3ZI-Q Set-up
     - Connect Master Instance [PB3 : CN7.D23] to Slave Instance [PA5 : CN7.D13]
     - Connect Master Instance [PB4 : CN7.D25] to Slave Instance [PA6 : CN7.D12]
     - Connect Master Instance [PB5 : CN7.D22] to Slave Instance [PA7 : CN7.D11]

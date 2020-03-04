@@ -10,9 +10,10 @@
 extern osMessageQId   LPModeEvent;
 extern __IO uint16_t GUITaskResumed ;
 
-Model::Model() : modelListener(0), musicVolume(70), songLength(524), songDuration(0), playSong(false), psCountDown(false), numberOfSongs(10), repeat(false), shuffle(false), tickCnt(0), psTicks(0), psCountDownCnt(5)
+Model::Model() : modelListener(0), musicVolume(70), songLength(524), songDuration(0), playSong(false), psCountDown(false), numberOfSongs(10),
+                 repeat(false), shuffle(false), tickCnt(0), psTicks(0), psCountDownCnt(5),elapsedTime(0)
 {
-   
+    memset(tracks,0x0,sizeof(trackList));
 }
 
 void Model::tick()

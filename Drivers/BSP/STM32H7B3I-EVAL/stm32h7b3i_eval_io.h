@@ -169,14 +169,14 @@ extern EXTI_HandleTypeDef              hio_exti;
 int32_t BSP_IO_Init(uint32_t Instance, BSP_IO_Init_t *Init);
 int32_t BSP_IO_DeInit(uint32_t Instance);
 
-int32_t BSP_IO_GetIT(uint32_t Instance, uint32_t Pins);
-int32_t BSP_IO_ClearIT(uint32_t Instance, uint32_t Pins);
+int32_t BSP_IO_GetIT(uint32_t Instance, uint32_t IoPin);
+int32_t BSP_IO_ClearIT(uint32_t Instance, uint32_t IO_Pins_To_Clear);
 
-int32_t BSP_IO_WritePin(uint32_t Instance, uint32_t Pin, uint32_t PinState);
-int32_t BSP_IO_ReadPin(uint32_t Instance, uint32_t Pin);
-int32_t BSP_IO_TogglePin(uint32_t Instance, uint32_t Pin);
+int32_t BSP_IO_WritePin(uint32_t Instance, uint32_t IoPin, uint32_t PinState);
+int32_t BSP_IO_ReadPin(uint32_t Instance, uint32_t IoPin);
+int32_t BSP_IO_TogglePin(uint32_t Instance, uint32_t IoPin);
 
-int32_t BSP_IOEXPANDER_Init(uint32_t Instance, uint32_t Functions);
+int32_t BSP_IOEXPANDER_Init(uint32_t Instance, uint32_t Function);
 int32_t BSP_IOEXPANDER_DeInit(uint32_t Instance);
 void BSP_IOEXPANDER_ITConfig(void);
 void BSP_IO_IRQHandler(uint32_t Instance);

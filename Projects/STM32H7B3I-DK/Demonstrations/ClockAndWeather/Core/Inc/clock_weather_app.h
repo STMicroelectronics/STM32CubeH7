@@ -118,19 +118,15 @@ typedef struct cw_config_s {
   
 void WIFI_Init(void);
 int NET_Init(void);
-static void Clock_And_Weather_Thread(void const *argument);
 ES_WIFI_Status_t WIFI_Get_Access_Points(ES_WIFI_APs_t *APs);
 int8_t WIFI_Connect(char *ssid, uint8_t *password, uint16_t encryption );
 char* get_location(uint8_t location);
 int Get_Json_Weather_Forecast(char* City, const char* metric, char** jsondata);
 int Get_Date_Time(char* date_time);
-static inline uint16_t string_to_encryption(char *s);
 int RTC_Init(void);
 int Set_RTC(char* currentTime);
 int SD_Load_Custom_Cities(void);
 void CalendarUpdate(char* currentTime);
-static int config_reader(void* user, const char* section, const char* name,
-                           const char* value);
 int custom_cities_nbr(void);
 char* CityName(int City);
 char* getUTC_Date_Time(void);
