@@ -232,10 +232,10 @@ typedef struct
 /** @addtogroup STM32H7B3I_DK_LOW_LEVEL_Exported_Variables
   * @{
   */
-extern EXTI_HandleTypeDef hpb_exti[];
+extern EXTI_HandleTypeDef hpb_exti[BUTTONn];
 #if (USE_BSP_COM_FEATURE > 0)
-extern UART_HandleTypeDef hcom_uart[];
-extern USART_TypeDef* COM_USART[];
+extern UART_HandleTypeDef hcom_uart[COMn];
+extern USART_TypeDef* COM_USART[COMn];
 #endif
 /**
   * @}

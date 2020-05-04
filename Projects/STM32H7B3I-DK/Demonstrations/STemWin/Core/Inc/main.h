@@ -52,7 +52,6 @@
  /* Kernel includes components */
 #include "k_module.h"
 #include "storage.h"
-#include "k_rtc.h"
 #include "k_bsp.h"
 
 /* utilities and standard includes components */

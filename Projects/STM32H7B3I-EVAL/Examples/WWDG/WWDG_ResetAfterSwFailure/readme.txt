@@ -42,11 +42,11 @@ GPIO, DMA and NVIC). You may update this function to change WWDG configuration.
 The reset scope control bit should be set before enabling the WWDG to ensure
 a wide system reset.
 
-The WWDG timeout is set to 53 ms and the refresh window is set to 33 ms.
+The WWDG timeout is set to 479 ms and the refresh window is set to 300 ms.
 This means that, each cycle, the WWDG refresh must happen:
- - After 53 ms - 33 ms = 20 ms
- - Before 53 ms
-The WWDG counter is refreshed each 40ms in the main program infinite loop to
+ - After 479 ms - 300 ms = 179 ms
+ - Before 479 ms
+The WWDG counter is refreshed each 180ms in the main program infinite loop to
 prevent a WWDG reset.
 LED1 is toggling at same frequency, indicating that the program is running.
 
@@ -67,7 +67,7 @@ If the WWDG reset is generated, after the system resumes from reset, LED1 is tur
 If the EXTI Line event does not occur, the WWDG counter is indefinitely refreshed
 in the main program infinite loop, and there is no WWDG reset.
 
-LED3 is turned ON and remains ON if any error occurs.
+LED2 is turned ON and remains ON if any error occurs.
 
 @note Care must be taken when using HAL_Delay(), this function provides accurate delay (in milliseconds)
       based on variable incremented in SysTick ISR. This implies that if HAL_Delay() is called from

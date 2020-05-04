@@ -57,12 +57,12 @@
 
 In order to make the program work, you must do the following :
  - Open STM32CubeProgrammer and click on connect
- - Go to external loaders menu then select MX25LM51245G_STM32H7B3I-DISCO to program external OSPI memory
+ - Go to external loaders menu then select MX25LM51245G_STM32H7B3I_DISCO to program external OSPI memory
  - From Erasing and programming Menu browse to select the hex file then click on start programming
   
  Or you can also use the script "program_hexfile.bat" (available within the binaries package) to directly program 
  this hex file into the STM32H7B3I-DK board.
- This script will invoke the STM32CubeProgrammer with the correct OSPI flasher (MX25LM51245G_STM32H7B3I-DISCO)  
+ This script will invoke the STM32CubeProgrammer with the correct OSPI flasher (MX25LM51245G_STM32H7B3I_DISCO)
 
 @par Hardware and Software environment
 

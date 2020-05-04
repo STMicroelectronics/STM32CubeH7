@@ -31,11 +31,17 @@ static avi_parser_t   media_parser;
 static osThreadId audio_play_handle;
 static osMessageQId audio_msg_queue;
 uint32_t audio_chunks = 0;
+
 #ifdef AUDIO_BUFFER_LOCATION
+#if defined ( __ICCARM__ )
 #pragma location=AUDIO_BUFFER_LOCATION
+#pragma data_alignment=32
+#elif defined (__CC_ARM )
+__attribute__((section(".RAM_D3"))) __attribute__ ((aligned (32)))
 #endif
-#pragma data_alignment = 4
 uint8_t  AudioPlayBuffer[AUDIO_NBR_CHUNKS * AUDIO_CHUNK_SIZE];
+#endif
+
 uint32_t frame_rate;
 uint32_t stream_rate;
 uint32_t pause_time;

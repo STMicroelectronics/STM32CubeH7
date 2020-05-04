@@ -165,20 +165,17 @@ uint8_t BspInit(void)
   RetVal = BSP_OSPI_NOR_Init(0, &Flash);
   if(RetVal != BSP_ERROR_NONE)
   {
-    printf("Failed to initialize the OSPI !! (Error %d)\n", RetVal);
     return 0;
   }
   RetVal = BSP_OSPI_NOR_EnableMemoryMappedMode(0);
   if(RetVal != BSP_ERROR_NONE)
   {
-    printf("Failed to configure MM Mode for the OSPI !! (Error %d)\n", RetVal);
     return 0;
   }
   
   /* Initialize the SDRAM memory */
   if ((RetVal = BSP_SDRAM_Init(0)) != BSP_ERROR_NONE)
   {
-    printf("Failed to initialize the SDRAM !! (Error %d)\n", RetVal);
     return 0;
   }
 

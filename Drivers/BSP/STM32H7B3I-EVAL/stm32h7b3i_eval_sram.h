@@ -81,7 +81,7 @@ typedef struct
 /** @addtogroup STM32H7B3I_EVAL_SRAM_Exported_Variables
   * @{
   */
-extern SRAM_HandleTypeDef hsram;
+extern SRAM_HandleTypeDef hsram[SRAM_INSTANCES_NBR];
 /**
   * @}
   */

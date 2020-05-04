@@ -149,6 +149,23 @@ void SysTick_Handler(void)
 /******************************************************************************/
 
 /**
+  * @brief  This function handles external lines 15 to 10 interrupt request.
+  * @param  None
+  * @retval None
+  */
+void USER_BUTTON_IRQHANDLER(void)
+{
+  /* Manage Flags */
+  if(LL_EXTI_IsActiveFlag_0_31(USER_BUTTON_EXTI_LINE) != RESET)
+  {
+    LL_EXTI_ClearFlag_0_31(USER_BUTTON_EXTI_LINE);
+
+    /* Manage code in main.c */
+    UserButton_Callback(); 
+  }
+}
+
+/**
   * @brief  This function handles SPI1 interrupt request.
   * @param  None
   * @retval None

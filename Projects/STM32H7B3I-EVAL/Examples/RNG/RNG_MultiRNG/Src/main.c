@@ -129,7 +129,7 @@ int main(void)
         /* Random number generation error */
         Error_Handler();
       }
-      snprintf( dataOut, MAX_BUF_SIZE, "\r\nRandom 32bits %d = 0x%X \r\n", counter, aRandom32bit[counter]);
+      snprintf( dataOut, MAX_BUF_SIZE, "\r\nRandom 32bits %lu = 0x%lX \r\n", counter, aRandom32bit[counter]);
       printf("%s", dataOut);
       if(counter == 7)
       {
@@ -278,7 +278,7 @@ static void Error_Handler(void)
   * @param  line: assert_param error line source number
   * @retval None
   */
-void assert_failed(char *file, uint32_t line)
+void assert_failed(uint8_t *file, uint32_t line)
 {
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */

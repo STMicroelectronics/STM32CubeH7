@@ -1059,12 +1059,6 @@
     <group>
         <name>Application</name>
         <group>
-            <name>Doc</name>
-            <file>
-                <name>$PROJ_DIR$\..\readme.txt</name>
-            </file>
-        </group>
-        <group>
             <name>EWARM</name>
             <file>
                 <name>$PROJ_DIR$\startup_stm32h7b3xxq.s</name>
@@ -1309,6 +1303,12 @@
         </group>
     </group>
     <group>
+        <name>Doc</name>
+        <file>
+            <name>$PROJ_DIR$\..\readme.txt</name>
+        </file>
+    </group>
+    <group>
         <name>Drivers</name>
         <group>
             <name>BSP</name>
@@ -1333,15 +1333,6 @@
                     <name>MX25LM51245G</name>
                     <file>
                         <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\Components\mx25lm51245g\mx25lm51245g.c</name>
-                    </file>
-                </group>
-                <group>
-                    <name>STMPE811</name>
-                    <file>
-                        <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\Components\stmpe811\stmpe811.c</name>
-                    </file>
-                    <file>
-                        <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\Components\stmpe811\stmpe811_reg.c</name>
                     </file>
                 </group>
             </group>
@@ -1398,9 +1389,6 @@
             </file>
             <file>
                 <name>$PROJ_DIR$\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_gpio.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_hcd.c</name>
             </file>
             <file>
                 <name>$PROJ_DIR$\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_i2c.c</name>

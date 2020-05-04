@@ -108,7 +108,7 @@ void WasherContainer::fadeAnimationEnddedHandler(const FadeAnimator<TextArea>& t
 
 void WasherContainer::setProgramTextAndTime(int16_t item)
 {
-    int totalTime;
+    int totalTime = 0;
 
     switch (item)
     {

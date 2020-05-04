@@ -291,7 +291,7 @@ void HRTIM_Config(void)
 	/* Time base master configuration */
 	time_base_config_master.Mode = HRTIM_MODE_CONTINUOUS;
 	time_base_config_master.Period = 0xFFFF;
-	time_base_config_master.PrescalerRatio = HRTIM_PRESCALERRATIO_MUL32;
+	time_base_config_master.PrescalerRatio = HRTIM_PRESCALERRATIO_DIV1;
 	time_base_config_master.RepetitionCounter = 0;
 	
 	HAL_HRTIM_TimeBaseConfig(&hhrtim,HRTIM_TIMERINDEX_MASTER,&time_base_config_master);
@@ -303,7 +303,7 @@ void HRTIM_Config(void)
 	timer_config_master.HalfModeEnable = HRTIM_HALFMODE_DISABLED;
 	timer_config_master.StartOnSync = HRTIM_SYNCSTART_DISABLED;
 	timer_config_master.ResetOnSync = HRTIM_SYNCRESET_DISABLED;
-  timer_config_master.DACSynchro = HRTIM_DACSYNC_DACTRIGOUT_1;
+        timer_config_master.DACSynchro = HRTIM_DACSYNC_DACTRIGOUT_1;
 	timer_config_master.PreloadEnable = HRTIM_PRELOAD_ENABLED;
 	timer_config_master.UpdateGating = HRTIM_UPDATEGATING_INDEPENDENT;
 	timer_config_master.BurstMode = HRTIM_TIMERBURSTMODE_MAINTAINCLOCK;

@@ -102,7 +102,6 @@ typedef enum AutoDemoEvent_e
 
 /* Exported macros -----------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */
-void Error_Handler(void);
 void BSP_ErrorHandler(void);
 
 #ifdef __cplusplus

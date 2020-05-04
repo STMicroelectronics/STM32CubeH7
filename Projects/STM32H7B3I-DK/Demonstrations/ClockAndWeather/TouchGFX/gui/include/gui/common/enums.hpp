@@ -32,4 +32,4 @@ enum CITY_WEATHER
 //     NUMBERS_OF_CITYS
 };
 
-#endif // ENUMS_HPP 
+#endif // ENUMS_HPP

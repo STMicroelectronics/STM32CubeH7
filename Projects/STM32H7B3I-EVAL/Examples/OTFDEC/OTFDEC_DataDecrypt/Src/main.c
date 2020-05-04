@@ -75,6 +75,7 @@ static void SystemClock_Config(void);
 static void CPU_CACHE_Enable(void);
 void Error_Handler(void);
 static uint8_t Ref_CRC_computation(uint32_t * keyin);
+static void UART_Config(void);
 
 #ifdef __GNUC__
 /* With GCC/RAISONANCE, small printf (option LD Linker->Libraries->Small printf
@@ -94,30 +95,33 @@ int main(void)
 {
   /* Enable the CPU Cache */
   CPU_CACHE_Enable();
-
+  
   /* STM32H7xx HAL library initialization:
        - Configure the Systick to generate an interrupt each 1 msec
        - Set NVIC Group Priority to 4
        - Low Level Initialization
      */
   HAL_Init();
-
+  
   /* Configure the system clock to 280 MHz */
   SystemClock_Config();
-
-  /* Enable OTFD1 clock */
-  __HAL_RCC_OTFDEC1_CLK_ENABLE();
-
-  /* Init OCTOSPI */
+  
+  /* Configure usart to print messages */
+  UART_Config(); 
+  printf("\n\r OTFDEC DATA Decrypt Example: \n\r");
+  
+  /* Init OSPI */
   OSPI_Init(NomberOfLine[0],OCTOSPI_INSTANCE_1) ;
+
+  /* Erase OSPI */
   OSPI_Erase(OCTOSPI_INSTANCE_1);
-
-  /* Writing Crypted DATA*/
+  
+  /* Writing Crypted DATA in the OSPI memory*/
   OSPI_Write( Cipher,START_ADRESS_OTFDEC1_REGION3- START_ADRESS_OCTOSPI1, PAGE_SIZE,OCTOSPI_INSTANCE_1);
-
+  
   /* Activate memory mapping */
   OSPI_MemoryMap(OCTOSPI_INSTANCE_1);
-
+  
   /* Init Region3 Of OTFDEC1 */
   OtfdecHandle.Instance = OTFDEC1;
   if (HAL_OTFDEC_Init(&OtfdecHandle) != HAL_OK)
@@ -155,22 +159,9 @@ int main(void)
     Error_Handler();
   }
 
-  UartHandle.Instance          = USART1;
-  UartHandle.Init.BaudRate     = 9600;
-  UartHandle.Init.WordLength   = UART_WORDLENGTH_8B;
-  UartHandle.Init.StopBits     = UART_STOPBITS_1;
-  UartHandle.Init.Parity       = UART_PARITY_NONE;
-  UartHandle.Init.HwFlowCtl    = UART_HWCONTROL_NONE;
-  UartHandle.Init.Mode         = UART_MODE_TX_RX;
-  UartHandle.Init.OverSampling = UART_OVERSAMPLING_16;
-  HAL_UART_Init(&UartHandle);
-
   /* Output a message on Hyperterminal using printf function */
-  printf("\n\r OTFDEC DATA Decrypt Example: \n\r");
   printf((char*)START_ADRESS_OTFDEC1_REGION3,"**\n\r");
   printf("\n\r** Test finished successfully. ** \n\r");
-
-  /* Add your application code here */
 
   /* Infinite loop */
   while (1)
@@ -311,6 +302,35 @@ static uint8_t Ref_CRC_computation(uint32_t * keyin)
 }
 
 /**
+  * @brief  Configures the USARTx and associated pins.
+  * @param  None
+  * @retval None
+  */
+static void UART_Config(void)
+{
+  /*##-1- Configure the UART peripheral ######################################*/
+  /* Put the USART peripheral in the Asynchronous mode (UART Mode) */
+  /* UART configured as follows:
+      - Word Length = 8 Bits (7 data bit + 1 parity bit) : 
+       BE CAREFUL : Program 7 data bits + 1 parity bit in PC HyperTerminal
+      - Stop Bit    = One Stop bit
+      - Parity      = ODD parity
+      - BaudRate    = 115200 baud
+      - Hardware flow control disabled (RTS and CTS signals) */
+  UartHandle.Instance          = USARTx;
+
+  UartHandle.Init.BaudRate     = 115200U;
+  UartHandle.Init.Mode         = UART_MODE_TX_RX;
+  UartHandle.Init.Parity       = UART_PARITY_ODD;
+  UartHandle.Init.StopBits     = UART_STOPBITS_1;
+  UartHandle.Init.WordLength   = UART_WORDLENGTH_8B;
+  UartHandle.Init.HwFlowCtl    = UART_HWCONTROL_NONE;
+  UartHandle.Init.OverSampling = UART_OVERSAMPLING_16;
+
+  HAL_UART_Init(&UartHandle);  
+}
+
+/**
   * @brief  CPU L1-Cache enable.
   * @param  None
   * @retval None
@@ -323,6 +343,7 @@ static void CPU_CACHE_Enable(void)
   /* Enable D-Cache */
   SCB_EnableDCache();
 }
+
 /**
   * @brief  Retargets the C library printf function to the USART.
   * @param  None

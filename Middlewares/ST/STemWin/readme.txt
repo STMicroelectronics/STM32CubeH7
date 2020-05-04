@@ -13,7 +13,7 @@ CAUTION: Some steps described below (e.g. license display, download start) may
 
 Please follow the steps below in order to obtain it:
 1. Click on the link below to be redirected to the MW web page on ST servers.
-   https://www.st.com/en/licensed-software/stemwin-mw.html?softwareProduct=STemWIN-MW&softwareVersion=5.32.0
+   https://www.st.com/en/licensed-software/stemwin-mw.html?softwareProduct=STemWIN-MW&softwareVersion=5.44.70
 2. The terms of the license shall be displayed on your screen (this may take a few seconds).
    Once you have read them carefully and accepted them click on the "ACCEPT" button.
 3. You will be then prompted to login/register or to provide your name and e-mail.

@@ -41,7 +41,7 @@ __IO FlagStatus AlarmStatus = RESET;
 RTC_HandleTypeDef RtcHandle;
 
 /* Buffer used for displaying Time */
-uint8_t aShowTime[] = "hh:ms:ss";
+uint8_t aShowTime[50] = "hh:ms:ss";
 
 /* Private function prototypes -----------------------------------------------*/
 static void SystemClock_Config(void);

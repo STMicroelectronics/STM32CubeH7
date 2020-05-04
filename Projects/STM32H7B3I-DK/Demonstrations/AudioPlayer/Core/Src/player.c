@@ -83,6 +83,8 @@ static uint8_t WavToSrcTmpBuffer[SRC236_FRAME_SIZE_MAX*2*2]; /* SRC_FRAME_SIZE (
 
 /* Private function prototypes -----------------------------------------------*/
 static uint8_t PLAYER_StreamInit(uint32_t AudioFreq, uint32_t Device, uint32_t BitsPerSample, uint32_t ChannelsNbr, uint32_t Volume);
+static AUDIO_ErrorTypeDef PLAYER_GetFileHeaderInfo(char* file_name, Audio_InfoTypeDef *info);
+static AUDIO_ErrorTypeDef PLAYER_TransfertFromMemPool(uint16_t Offset_frames,  uint16_t length_frames);
 /* Audio SRC module parameters for memory allocation*/
 void *pSrc236PersistentMem;
 void *pSrc441PersistentMem;
@@ -414,7 +416,7 @@ AUDIO_ErrorTypeDef PLAYER_TransfertToMemPool(void)
 {
   uint32_t DecSampNbBytes = 0; /* bytes per sample */
   uint32_t DecNumChannels = 0; /* stereo channels*/
-  uint32_t decsize;            /* returned output decoder size in bytes*/
+  uint32_t decsize = 0;            /* returned output decoder size in bytes*/
 
   /* Loop1: Write MemPool and Fill Buffer1 from Audio file at start */
 
@@ -908,7 +910,7 @@ unsigned int Dec_ReadDataCallback(void *    pCompressedData,        /* [OUT] Bit
  /* data number read */
   uint32_t NumberOfData = 0;
 
-  error_dec = f_read(&AudioFile, pCompressedData, nDataSizeInChars, (uint32_t*)(&NumberOfData));
+  error_dec = f_read(&AudioFile, pCompressedData, nDataSizeInChars, (void*)(&NumberOfData));
   if (error_dec != FR_OK)
   {
     /* no data available */

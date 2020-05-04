@@ -48,7 +48,7 @@ public:
 
     void getWeatherData(weatherData *weather, int CityVal);
 
-    void wifiConnection(bool succesful);
+    virtual void wifiConnection(bool succesful);
     
     int getCitiesNbr();
     

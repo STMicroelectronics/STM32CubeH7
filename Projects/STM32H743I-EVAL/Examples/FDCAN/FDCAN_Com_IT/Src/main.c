@@ -38,6 +38,8 @@ FDCAN_RxHeaderTypeDef RxHeader;
 uint8_t RxData[16];
 FDCAN_TxHeaderTypeDef TxHeader;
 uint8_t TxData[] = {0x10, 0x32, 0x54, 0x76, 0x98, 0x00, 0x11, 0x22, 0x33, 0x44, 0x55, 0x66, 0x77, 0x88, 0x99, 0x00};
+__IO uint32_t Notification_flag = 0;
+__IO uint32_t Transmission_flag = 0;
 
 /* Private function prototypes -----------------------------------------------*/
 static void SystemClock_Config(void);
@@ -150,6 +152,39 @@ int main(void)
   /* Infinite loop */
   while (1)
   {
+    /* check on the transmission flag */
+    if (Transmission_flag == 1)
+    {
+      BSP_LED_Off(LED1);
+
+      /* Add messages to TX FIFO */
+      HAL_FDCAN_AddMessageToTxFifoQ(&hfdcan, &TxHeader, &TxData[0]);
+      HAL_FDCAN_AddMessageToTxFifoQ(&hfdcan, &TxHeader, &TxData[8]);
+
+      HAL_Delay(5);
+
+      Transmission_flag = 0;
+    }
+
+    /* check on the watermark notification flag */
+    if (Notification_flag == 1)
+    {
+      /* Retreive Rx messages from RX FIFO0 */
+      HAL_FDCAN_GetRxMessage(&hfdcan, FDCAN_RX_FIFO0, &RxHeader, RxData);
+      HAL_FDCAN_GetRxMessage(&hfdcan, FDCAN_RX_FIFO0, &RxHeader, &RxData[8]);
+
+      /* Compare payload to expected data */
+      if (BufferCmp8b(TxData, RxData, 16) != 0)
+      {
+        Error_Handler();
+      }
+      else
+      {
+        BSP_LED_On(LED1);
+      }
+
+      Notification_flag = 0;
+    }
   }
 }
 
@@ -157,22 +192,7 @@ void HAL_FDCAN_RxFifo0Callback(FDCAN_HandleTypeDef *hfdcan, uint32_t RxFifo0ITs)
 {
   if((RxFifo0ITs & FDCAN_IT_RX_FIFO0_WATERMARK) != RESET)
   {
-    /* Retreive Rx messages from RX FIFO0 */
-    HAL_FDCAN_GetRxMessage(hfdcan, FDCAN_RX_FIFO0, &RxHeader, RxData);
-    HAL_FDCAN_GetRxMessage(hfdcan, FDCAN_RX_FIFO0, &RxHeader, &RxData[8]);
-
-    /* Compare payload to expected data */
-    if (BufferCmp8b(TxData, RxData, 16) != 0)
-    {
-      Error_Handler();
-    }
-    else
-    {
-      BSP_LED_On(LED1);
-
-      /* Activate Rx FIFO 0 watermark notification */
-      HAL_FDCAN_ActivateNotification(hfdcan, FDCAN_IT_RX_FIFO0_WATERMARK, 0);
-    }
+    Notification_flag = 1;
   }
 }
 
@@ -211,11 +231,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
   if (GPIO_Pin == BUTTON_TAMPER_PIN)
   {
-    BSP_LED_Off(LED1);
-
-    /* Add messages to TX FIFO */
-    HAL_FDCAN_AddMessageToTxFifoQ(&hfdcan, &TxHeader, &TxData[0]);
-    HAL_FDCAN_AddMessageToTxFifoQ(&hfdcan, &TxHeader, &TxData[8]);
+    Transmission_flag = 1;
   }
 }
 

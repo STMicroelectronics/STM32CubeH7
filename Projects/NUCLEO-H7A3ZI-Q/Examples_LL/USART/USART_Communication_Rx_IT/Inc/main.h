@@ -39,7 +39,7 @@
 
 /* Define used to enable Virtual Com Port use : 
      USE_VCP_CONNECTION == 0
-       USART1 instance is used. (TX on PB.06, RX on PA.07)
+       USART1 instance is used. (TX on PB.06, RX on PB.07)
        (requires wiring USART1 TX/Rx Pins to PC connection (could be achieved thanks to a USB to UART adapter)
      USE_VCP_CONNECTION == 1
        USART3 instance is used. (TX on PD.08, RX on PD.09)
@@ -52,7 +52,7 @@
    depending on selected USART instance. */
 #if (USE_VCP_CONNECTION == 0) 
 
-/* USART1 instance is used. (TX on PB.06, RX on PA.07)
+/* USART1 instance is used. (TX on PB.06, RX on PB.07)
    (requires wiring USART1 TX/Rx Pins to USB to UART adapter) */
 #define USARTx_INSTANCE               USART1
 #define USARTx_CLK_ENABLE()           LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_USART1)

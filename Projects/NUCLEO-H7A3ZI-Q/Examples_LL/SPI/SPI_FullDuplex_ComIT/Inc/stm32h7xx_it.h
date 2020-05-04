@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    SPI_FullDuplex_ComIT/Inc/stm32h7xx_it.h
+  * @file    Examples_LL/SPI/SPI_FullDuplex_ComIT/Inc/stm32h7xx_it.h
   * @author  MCD Application Team
   * @brief   This file contains the headers of the interrupt handlers.
   ******************************************************************************
@@ -26,6 +26,8 @@
 #endif
 
 /* Includes ------------------------------------------------------------------*/
+#include "main.h"
+
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
 /* Exported macro ------------------------------------------------------------*/
@@ -40,6 +42,7 @@ void SVC_Handler(void);
 void DebugMon_Handler(void);
 void PendSV_Handler(void);
 void SysTick_Handler(void);
+void USER_BUTTON_IRQHANDLER(void);
 void SPI1_IRQHandler(void);
 void SPI6_IRQHandler(void);
 

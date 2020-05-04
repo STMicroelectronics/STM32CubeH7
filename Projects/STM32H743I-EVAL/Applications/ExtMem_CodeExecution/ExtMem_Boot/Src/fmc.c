@@ -305,11 +305,11 @@ uint32_t NOR_Startup(void)
   /* NOR device configuration */
   /* Timing configuration derived from system clock */  
 
-  Timing.AddressSetupTime      = 4;
-  Timing.AddressHoldTime       = 3;
-  Timing.DataSetupTime         = 8;
-  Timing.BusTurnAroundDuration = 1;
-  Timing.CLKDivision           = 2;
+  Timing.AddressSetupTime      = 9;
+  Timing.AddressHoldTime       = 1;
+  Timing.DataSetupTime         = 5;
+  Timing.BusTurnAroundDuration = 4;
+  Timing.CLKDivision           = 4;
   Timing.DataLatency           = 2;
   Timing.AccessMode            = FMC_ACCESS_MODE_A;
   

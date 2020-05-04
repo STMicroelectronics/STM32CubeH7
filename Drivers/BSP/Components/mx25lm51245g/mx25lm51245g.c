@@ -468,7 +468,7 @@ int32_t MX25LM51245G_ChipErase(OSPI_HandleTypeDef *Ctx, MX25LM51245G_Interface_t
   * @param  AddressSize Address size
   * @retval OSPI memory status
   */
-int32_t MX25LM51245G_EnableMemoryMappedModeSTR(OSPI_HandleTypeDef *Ctx, MX25LM51245G_Interface_t Mode, MX25LM51245G_AddressSize_t AddressSize)
+int32_t MX25LM51245G_EnableSTRMemoryMappedMode(OSPI_HandleTypeDef *Ctx, MX25LM51245G_Interface_t Mode, MX25LM51245G_AddressSize_t AddressSize)
 {
   OSPI_RegularCmdTypeDef      s_command = {0};
   OSPI_MemoryMappedTypeDef s_mem_mapped_cfg = {0};
@@ -532,7 +532,7 @@ int32_t MX25LM51245G_EnableMemoryMappedModeSTR(OSPI_HandleTypeDef *Ctx, MX25LM51
   * @note   Only OPI mode support DTR transfer rate
   * @retval OSPI memory status
   */
-int32_t MX25LM51245G_EnableMemoryMappedModeDTR(OSPI_HandleTypeDef *Ctx, MX25LM51245G_Interface_t Mode)
+int32_t MX25LM51245G_EnableDTRMemoryMappedMode(OSPI_HandleTypeDef *Ctx, MX25LM51245G_Interface_t Mode)
 {
   /* Prevent unused argument(s) compilation warning */
   UNUSED(Mode);

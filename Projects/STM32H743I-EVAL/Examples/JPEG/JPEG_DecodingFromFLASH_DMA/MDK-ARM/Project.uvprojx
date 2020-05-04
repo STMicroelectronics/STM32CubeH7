@@ -16,7 +16,7 @@
         <TargetCommonOption>
           <Device>STM32H743XIHx</Device>
           <Vendor>STMicroelectronics</Vendor>
-          <PackID>STMicroelectronics.STM32H7xx_DFP.0.0.9</PackID>
+          <PackID>STMicroelectronics.STM32H7xx_DFP.0.0.4</PackID>
           <PackURL>http://www.ST.com/</PackURL>
           <Cpu>IRAM(0x20000000-0x2001FFFF) IRAM2(0x24000000-0x2407FFFF) IROM(0x8000000-0x81FFFFF) CLOCK(12000000) FPU3(DFPU) CPUTYPE("Cortex-M7") ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
@@ -184,6 +184,7 @@
             <hadXRAM>0</hadXRAM>
             <uocXRam>0</uocXRam>
             <RvdsVP>3</RvdsVP>
+            <RvdsMve>0</RvdsMve>
             <hadIRAM2>1</hadIRAM2>
             <hadIROM2>0</hadIROM2>
             <StupSel>8</StupSel>
@@ -337,7 +338,7 @@
               <MiscControls>--C99</MiscControls>
               <Define>USE_HAL_DRIVER,STM32H743xx,USE_STM32H743I_EVAL,USE_IOEXPANDER</Define>
               <Undefine></Undefine>
-              <IncludePath>../Inc;../../../../../../Drivers/CMSIS/Include;../../../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../../../../../../Drivers/STM32H7xx_HAL_Driver/Inc;../../../../../../Drivers/BSP/STM32H743I-EVAL;../../../../../../Drivers/BSP/Components/Common;../../../../../../Utilities/Log;../../../../../../Utilities/Fonts;../../../../../../Utilities/BASIC_GUI;../../../../../../Utilities/CPU</IncludePath>
+              <IncludePath>../Inc;../../../../../../Drivers/CMSIS/Include;../../../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../../../../../../Drivers/STM32H7xx_HAL_Driver/Inc;../../../../../../Drivers/BSP/STM32H743I-EVAL;../../../../../../Drivers/BSP/Components/Common;../../../../../../Utilities/Log;../../../../../../Utilities/Fonts;../../../../../../Utilities/Basic_GUI;../../../../../../Utilities/CPU;../../../../../../Utilities/Basic_GUI</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>

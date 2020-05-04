@@ -460,16 +460,18 @@ static void DMA2D_CopyBuffer(uint32_t *pSrc, uint32_t *pDst, uint16_t x, uint16_
 static void Display_Init(uint32_t step)
 {
   uint32_t x_size, y_size;
-  BSP_LCD_GetXSize(0, &x_size);
-  BSP_LCD_GetYSize(0, &y_size);
+
   if(step == FIRST_RUN)
   {
     /* Initialize and configure the LCD */
     BSP_LCD_Init(0, LCD_ORIENTATION_LANDSCAPE);
-    GUI_SetLayer(1);
+    GUI_SetFuncDriver(&LCD_Driver);    
     GUI_SetBackColor(GUI_COLOR_WHITE);
     GUI_Clear(GUI_COLOR_WHITE);
   }
+
+  BSP_LCD_GetXSize(0, &x_size);
+  BSP_LCD_GetYSize(0, &y_size);
   
   /* Set description */
   GUI_SetTextColor(GUI_COLOR_BLUE);

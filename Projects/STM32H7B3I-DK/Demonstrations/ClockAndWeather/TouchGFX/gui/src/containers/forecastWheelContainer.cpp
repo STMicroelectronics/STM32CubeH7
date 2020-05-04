@@ -66,7 +66,7 @@ void forecastWheelContainer::setDateAndTime(const char* currentTime, int32_t tim
 {
     int year, month, day;
 
-    char temp[4];
+    char temp[5];
 
     const uint16_t WEEKDAYNAME_SIZE = 10;
     Unicode::UnicodeChar weekdayName[WEEKDAYNAME_SIZE];
@@ -74,7 +74,7 @@ void forecastWheelContainer::setDateAndTime(const char* currentTime, int32_t tim
     Unicode::UnicodeChar monthName[MONTHNAME_SIZE];
 
     memcpy(temp, &currentTime[0], 4);
-    temp[3] = '\0';
+    temp[4] = '\0';
     year = atoi(temp);
 
     memcpy(temp, &currentTime[5], 2);

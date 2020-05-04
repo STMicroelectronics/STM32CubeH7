@@ -754,7 +754,7 @@
         </tr>
         <tr align="center">
           <td style="background-repeat: no-repeat;background-position: right center;background-color: #39A9DC;color: #FFF;"
-            rowspan="186">
+            rowspan="188">
             <p id="Examples">Examples</p>
           </td>
           <td rowspan="1" align="left">
@@ -3078,7 +3078,7 @@
           <td>-</td>
         </tr>
         <tr align="center">
-          <td rowspan="2" align="left">
+          <td colspan="1" rowspan="4" align="left">
             <p id="OTFDEC">OTFDEC</p>
           </td>
           <td align="left">
@@ -3117,6 +3117,42 @@
           <td>-</td>
           <td>-</td>
           <td>-</td>
+        </tr>
+        <tr>
+          <td>OTFDEC_EncryptionDecryption</td>
+          <td>This example shows how to use OTFDEC to encrypt, decrypt and
+            execute PI calculation algorithm stored in external NOR flash<br>
+            The USART1 is used to verify that decryption and executing
+            instruction are done correctly.</td>
+          <td style="text-align: center; width: 123px;"><font color="green" size="5">X</font></td>
+          <td style="text-align: center; width: 107px;">-</td>
+          <td style="text-align: center;">-</td>
+          <td style="text-align: center;">-</td>
+          <td style="text-align: center;">-</td>
+          <td style="text-align: center;">-</td>
+          <td style="text-align: center;">-</td>
+          <td style="text-align: center;">-</td>
+          <td style="text-align: center;">-</td>
+          <td style="text-align: center;">-</td>
+        </tr>
+        <tr>
+          <td>OTFDEC_ExecutingAesInstruction</td>
+          <td>This example shows how to use OTFDEC to decrypt and execute PI
+            calculation algorithm stored in external NOR flash<br>
+            using the embedded crypto IP standard AES-128 counter mode to
+            encrypt the binary image<br>
+            The USART1 is used to verify that decryption and executing
+            instruction are done correctly.</td>
+          <td style="text-align: center;"><font color="green" size="5">X</font></td>
+          <td style="text-align: center;">-</td>
+          <td style="text-align: center;">-</td>
+          <td style="text-align: center;">-</td>
+          <td style="text-align: center;">-</td>
+          <td style="text-align: center;">-</td>
+          <td style="text-align: center;">-</td>
+          <td style="text-align: center;">-</td>
+          <td style="text-align: center;">-</td>
+          <td style="text-align: center;">-</td>
         </tr>
         <tr align="center">
           <td rowspan="1" align="left">
@@ -4184,8 +4220,8 @@
         </tr>
         <tr style="background-repeat: no-repeat;background-position: right center;background-color: #39A9DC;color: #FFF;"
           align="center">
-          <td colspan="3"><b>Total number of examples: 548</b></td>
-          <td>68</td>
+          <td colspan="3"><b>Total number of examples: 550</b></td>
+          <td>70</td>
           <td>27</td>
           <td>13</td>
           <td>61</td>
@@ -4406,7 +4442,7 @@
           <td rowspan="1" align="left">
             <p id="RNG">RNG</p>
           </td>
-          <td align="left">
+          <td style="height: 51px;" align="left">
             <p id="RNG_GenerateRandomNumbers">RNG_GenerateRandomNumbers</p>
           </td>
           <td align="left"> Configuration of the RNG to generate 32-bit long
@@ -4717,7 +4753,7 @@
           </td>
           <td align="left"> How to implement thread creation using CMSIS RTOS
             API with execution from external memory.</td>
-          <td>-</td>
+          <td><font color="green" size="5">X</font></td>
           <td><span style="color: green;"></span><font color="green" size="5">X</font></td>
           <td>-</td>
           <td>-</td>
@@ -4732,7 +4768,7 @@
           <td>ExtMem_Application\LedToggling</td>
           <td>This application provides sample LED toogling program with
             execution from external memory.</td>
-          <td style="text-align: center;">-</td>
+          <td style="text-align: center;"><font color="green" size="5">X</font></td>
           <td style="height: 34px; text-align: center;"><font color="green" size="5">X</font></td>
           <td style="text-align: center;">-</td>
           <td style="text-align: center;">-</td>
@@ -4748,7 +4784,8 @@
           <td>This directory contains a set of sources files and pre-configured
             projects that describes how to build an application for execution
             from external memory using the ExtMem_Boot firmware.</td>
-          <td style="text-align: center;"><span style="color: white;"><font size="5">-</font></span>-</td>
+          <td style="text-align: center;"><span style="color: white;"></span><font
+              color="green" size="5">X</font></td>
           <td style="text-align: center;"><font color="green" size="5">X</font></td>
           <td style="text-align: center;">-</td>
           <td style="text-align: center;">-</td>
@@ -6068,8 +6105,8 @@
         </tr>
         <tr style="background-repeat: no-repeat;background-position: right center;background-color: #39A9DC;color: #FFF;"
           align="center">
-          <td colspan="3"><b>Total number of applications: 164</b></td>
-          <td>10</td>
+          <td colspan="3"><b>Total number of applications: 167</b></td>
+          <td>13</td>
           <td>17</td>
           <td>7</td>
           <td>27</td>
@@ -6112,6 +6149,7 @@
         <tr align="center">
           <td colspan="1" rowspan="3">STM32H747I-EVAL/<br>
             STM32H747I-DISCO/<br>
+            STM32H7B3I-EVAL/<br>
             STM32H7B3I-DK</td>
           <td align="left">
             <p id="ClockAndWeather">EmbeddedWizard</p>
@@ -6120,7 +6158,7 @@
                 size="2">demonstration</font></span> showcases a GUI created
             with Embedded Wizard using STMicroelectronics' graphic accelerator
             DMA2D. </td>
-          <td>-</td>
+          <td><font color="green" size="5">X</font></td>
           <td><font color="green" size="5">X</font></td>
           <td>-</td>
           <td><font color="green" size="5">X</font></td>
@@ -6138,7 +6176,7 @@
           <td align="left"> The STM32Cube demonstration platform comes on top of
             the STM32Cube(TM) as a firmware package that offers a full set of
             software components based on a modular architecture. </td>
-          <td>-</td>
+          <td><font color="green" size="5">X</font></td>
           <td><font color="green" size="5">X</font></td>
           <td>-</td>
           <td><font color="green" size="5">X</font></td>
@@ -6158,7 +6196,7 @@
             operating system and uses almost the whole STM32 capability to offer
             a large scope of usage based on the STM32Cube HAL BSP and several
             middleware components. </td>
-          <td>-</td>
+          <td><font color="green" size="5">X</font></td>
           <td><font color="green" size="5">X</font></td>
           <td>-</td>
           <td><font color="green" size="5">X</font></td>
@@ -6256,15 +6294,16 @@
           <td>-</td>
         </tr>
         <tr>
-          <td style="text-align: center;" colspan="1" rowspan="4">STM32H7B3I-DK</td>
+          <td style="text-align: center;" colspan="1" rowspan="4">STM32H7B3I-DK/<br>
+            STM32H7B3I-EVAL</td>
           <td>AudioPlayer</td>
-          <td style="height: 85px;">The audio player application provides a
-            complete audio solution based on the STM32H7B3xx and and the
-            TouchGFX APIs.<br>
+          <td style="height: 85px; width: 550px;">The audio player application
+            provides a complete audio solution based on the STM32H7B3xx and and
+            the TouchGFX APIs.<br>
             It delivers a high-quality music experience. It supports playing
             music in WAV and mp3 formats but may be extended to support other
             compressed formats such as WMA audio format.</td>
-          <td style="text-align: center;">-</td>
+          <td style="text-align: center;"><font color="green" size="5">X</font></td>
           <td style="text-align: center;"><font color="green" size="5">X</font></td>
           <td><br>
           </td>
@@ -6288,7 +6327,7 @@
           <td style="height: 17px;">The Clock&amp;Weather module provides a
             clock and weather application based on the STM32H7xxx and the Touch
             GFX APIs</td>
-          <td style="text-align: center;">-</td>
+          <td style="text-align: center;"><font color="green" size="5">X</font></td>
           <td style="text-align: center;"><font color="green" size="5">X</font></td>
           <td><br>
           </td>
@@ -6314,7 +6353,7 @@
             From the Home UI screen you can select either to view the
             temperature in the two rooms, or the state of devices by pressing on
             either kitchen or bathroom buttons.</td>
-          <td style="text-align: center;">-</td>
+          <td style="text-align: center;"><font color="green" size="5">X</font></td>
           <td style="text-align: center;"><font color="green" size="5">X</font></td>
           <td><br>
           </td>
@@ -6358,9 +6397,9 @@
         </tr>
         <tr style="background-repeat: no-repeat;background-position: right center;background-color: #39A9DC;color: #FFF;"
           align="center">
-          <td colspan="3"><b>Total number of demonstrations: 21<br>
+          <td colspan="3"><b>Total number of demonstrations: 27<br>
             </b></td>
-          <td>0</td>
+          <td>6</td>
           <td>7</td>
           <td>1</td>
           <td>4</td>
@@ -6373,8 +6412,9 @@
         </tr>
         <tr style="background-repeat: no-repeat;background-position: right center;background-color: #39A9DC;color: #FFF;"
           align="center">
-          <td colspan="4"><b>Total number of projects: 789</b></td>
-          <td>80</td>
+          <td colspan="4"><b>Total number of projects: 800<br>
+            </b></td>
+          <td>91</td>
           <td>55</td>
           <td>23</td>
           <td>97</td>

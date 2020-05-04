@@ -102,18 +102,18 @@ int main(void)
   /*##-2- Init & Start WWDG peripheral ######################################*/
   /*  Configuration:
       1] Set WWDG counter to maximum 0x7F (127 cycles)  and window to 0x50 (80 cycles)
-      2] Set Prescaler to 8 (2^3) 
+      2] Set Prescaler to 128 (2^7)
 
       Timing calculation:
-      a) WWDG clock counter period (in ms) = (4096 * 8) / (PCLK1 / 1000)
-                                           = 0,4096 ms 
-      b) WWDG timeout (in ms) = (127 + 1) * 0,4096
-                              ~= 52,42 ms
-      => After refresh, WWDG will expires after 52,42 ms and generate reset if 
+      a) WWDG clock counter period (in ms) = (4096 * 128) / (PCLK1 / 1000)
+                                          ~= 5,242 ms
+      b) WWDG timeout (in ms)  = (127 + 1) * 5,242
+                              ~= 671 ms
+      --> After refresh, WWDG will expire after 671 ms and generate reset if
       counter is not reloaded.
       c) Time to enter inside window
-      Window timeout (in ms) = (127 - 80 + 1) * 0,4096
-                             = 19,66 ms */
+      Window timeout (in ms) = (127 - 80 + 1) * 5,242
+                            ~= 252 ms */
   WwdgHandle.Instance = WWDG1;
   WwdgHandle.Init.Prescaler = WWDG_PRESCALER_128;
   WwdgHandle.Init.Window    = 0x50;

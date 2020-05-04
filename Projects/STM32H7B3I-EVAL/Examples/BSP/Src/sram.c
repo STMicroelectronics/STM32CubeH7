@@ -68,13 +68,13 @@ void SRAM_demo (void)
   Fill_Buffer(sram_aTxBuffer, BUFFER_SIZE, 0xC20FC20F);
 
   /* Write data to the SRAM memory */
-  if(HAL_SRAM_Write_32b(&hsram, (uint32_t *)(SRAM_DEVICE_ADDR + WRITE_READ_ADDR), sram_aTxBuffer, BUFFER_SIZE) != BSP_ERROR_NONE)
+  if(HAL_SRAM_Write_32b(&hsram[0], (uint32_t *)(SRAM_DEVICE_ADDR + WRITE_READ_ADDR), sram_aTxBuffer, BUFFER_SIZE) != BSP_ERROR_NONE)
   {
     ubSramWrite++;
   }
 
   /* Read back data from the SRAM memory */
-  if(HAL_SRAM_Read_32b(&hsram, (uint32_t *)(SRAM_DEVICE_ADDR + WRITE_READ_ADDR), sram_aRxBuffer, BUFFER_SIZE) != BSP_ERROR_NONE)
+  if(HAL_SRAM_Read_32b(&hsram[0], (uint32_t *)(SRAM_DEVICE_ADDR + WRITE_READ_ADDR), sram_aRxBuffer, BUFFER_SIZE) != BSP_ERROR_NONE)
   {
     ubSramRead++;
   }

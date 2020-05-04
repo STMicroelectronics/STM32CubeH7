@@ -310,16 +310,19 @@ int32_t BSP_LED_DeInit(Led_TypeDef Led)
   */
 int32_t BSP_LED_On(Led_TypeDef Led)
 {
-  int32_t ret = BSP_ERROR_NONE;
+  int32_t ret;
 
   if(Led == LED1)
   {
-   HAL_GPIO_WritePin (LED_PORT [Led], (uint16_t)LED_PIN [Led], GPIO_PIN_RESET);
+    HAL_GPIO_WritePin (LED_PORT [Led], (uint16_t)LED_PIN [Led], GPIO_PIN_RESET);
+    ret = BSP_ERROR_NONE;
   }
   else
   {
 #if (USE_BSP_IO_CLASS > 0)
    ret = BSP_IO_WritePin(0, LED_PIN[Led], IO_PIN_RESET);
+#else
+   ret = BSP_ERROR_FEATURE_NOT_SUPPORTED;
 #endif /* (USE_BSP_IO_CLASS > 0) */
   }
   return ret;
@@ -337,15 +340,18 @@ int32_t BSP_LED_On(Led_TypeDef Led)
   */
 int32_t BSP_LED_Off(Led_TypeDef Led)
 {
-  int32_t ret = BSP_ERROR_NONE;
+  int32_t ret;
   if(Led == LED1)
   {
-   HAL_GPIO_WritePin (LED_PORT [Led], (uint16_t)LED_PIN [Led], GPIO_PIN_SET);
+    HAL_GPIO_WritePin (LED_PORT [Led], (uint16_t)LED_PIN [Led], GPIO_PIN_SET);
+    ret = BSP_ERROR_NONE;
   }
   else
   {
 #if (USE_BSP_IO_CLASS > 0)
    ret = BSP_IO_WritePin(0, LED_PIN[Led], IO_PIN_SET);
+#else
+   ret = BSP_ERROR_FEATURE_NOT_SUPPORTED;
 #endif /* (USE_BSP_IO_CLASS > 0) */
   }
   return ret;
@@ -363,15 +369,18 @@ int32_t BSP_LED_Off(Led_TypeDef Led)
   */
 int32_t BSP_LED_Toggle(Led_TypeDef Led)
 {
-  int32_t ret = BSP_ERROR_NONE;
+  int32_t ret;
   if(Led == LED1)
   {
-   HAL_GPIO_TogglePin(LED_PORT[Led], (uint16_t)LED_PIN[Led]);
+    HAL_GPIO_TogglePin(LED_PORT[Led], (uint16_t)LED_PIN[Led]);
+    ret = BSP_ERROR_NONE;
   }
   else
   {
 #if (USE_BSP_IO_CLASS > 0)
    ret = BSP_IO_TogglePin(0, LED_PIN[Led]);
+#else
+   ret = BSP_ERROR_FEATURE_NOT_SUPPORTED;
 #endif /* (USE_BSP_IO_CLASS > 0) */
   }
   return ret;
@@ -389,7 +398,7 @@ int32_t BSP_LED_Toggle(Led_TypeDef Led)
   */
 int32_t BSP_LED_GetState (Led_TypeDef Led)
 {
-  int32_t ret = BSP_ERROR_NONE;
+  int32_t ret;
 
   if(Led == LED1)
   {
@@ -399,6 +408,8 @@ int32_t BSP_LED_GetState (Led_TypeDef Led)
   {
 #if (USE_BSP_IO_CLASS > 0)
    ret = BSP_IO_ReadPin(0, LED_PIN[Led]);
+#else
+   ret = BSP_ERROR_FEATURE_NOT_SUPPORTED;
 #endif /* (USE_BSP_IO_CLASS > 0) */
   }
 

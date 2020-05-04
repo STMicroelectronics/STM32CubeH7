@@ -113,8 +113,8 @@ typedef struct
 /** @addtogroup STM32H7B3I_EVAL_SD_Exported_Variables
   * @{
   */
-extern SD_HandleTypeDef   hsd_sdmmc[];
-extern EXTI_HandleTypeDef hsd_exti[];
+extern SD_HandleTypeDef   hsd_sdmmc[SD_INSTANCES_NBR];
+extern EXTI_HandleTypeDef hsd_exti[SD_INSTANCES_NBR];
 
 /**
   * @}
