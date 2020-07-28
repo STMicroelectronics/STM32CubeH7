@@ -2319,9 +2319,9 @@ __STATIC_INLINE void SCB_EnableDCache (void)
 __STATIC_INLINE void SCB_DisableDCache (void)
 {
   #if defined (__DCACHE_PRESENT) && (__DCACHE_PRESENT == 1U)
-    uint32_t ccsidr;
-    uint32_t sets;
-    uint32_t ways;
+    register uint32_t ccsidr;
+    register uint32_t sets;
+    register uint32_t ways;
 
     SCB->CSSELR = 0U; /*(0U << 1U) | 0U;*/  /* Level 1 data cache */
     __DSB();
@@ -2357,9 +2357,9 @@ __STATIC_INLINE void SCB_DisableDCache (void)
 __STATIC_INLINE void SCB_InvalidateDCache (void)
 {
   #if defined (__DCACHE_PRESENT) && (__DCACHE_PRESENT == 1U)
-    uint32_t ccsidr;
-    uint32_t sets;
-    uint32_t ways;
+    register uint32_t ccsidr;
+    register uint32_t sets;
+    register uint32_t ways;
 
     SCB->CSSELR = 0U; /*(0U << 1U) | 0U;*/  /* Level 1 data cache */
     __DSB();
@@ -2392,9 +2392,9 @@ __STATIC_INLINE void SCB_InvalidateDCache (void)
 __STATIC_INLINE void SCB_CleanDCache (void)
 {
   #if defined (__DCACHE_PRESENT) && (__DCACHE_PRESENT == 1U)
-    uint32_t ccsidr;
-    uint32_t sets;
-    uint32_t ways;
+    register uint32_t ccsidr;
+    register uint32_t sets;
+    register uint32_t ways;
 
      SCB->CSSELR = 0U; /*(0U << 1U) | 0U;*/  /* Level 1 data cache */
    __DSB();
@@ -2427,9 +2427,9 @@ __STATIC_INLINE void SCB_CleanDCache (void)
 __STATIC_INLINE void SCB_CleanInvalidateDCache (void)
 {
   #if defined (__DCACHE_PRESENT) && (__DCACHE_PRESENT == 1U)
-    uint32_t ccsidr;
-    uint32_t sets;
-    uint32_t ways;
+    register uint32_t ccsidr;
+    register uint32_t sets;
+    register uint32_t ways;
 
     SCB->CSSELR = 0U; /*(0U << 1U) | 0U;*/  /* Level 1 data cache */
     __DSB();
@@ -2464,9 +2464,9 @@ __STATIC_INLINE void SCB_CleanInvalidateDCache (void)
 __STATIC_INLINE void SCB_InvalidateDCache_by_Addr (uint32_t *addr, int32_t dsize)
 {
   #if defined (__DCACHE_PRESENT) && (__DCACHE_PRESENT == 1U)
-     int32_t op_size = dsize;
-    uint32_t op_addr = (uint32_t)addr;
-     int32_t linesize = 32;                /* in Cortex-M7 size of cache line is fixed to 8 words (32 bytes) */
+    register int32_t op_size = dsize;
+    register uint32_t op_addr = (uint32_t)addr;
+    register int32_t linesize = 32;                /* in Cortex-M7 size of cache line is fixed to 8 words (32 bytes) */
 
     __DSB();
 
@@ -2491,9 +2491,9 @@ __STATIC_INLINE void SCB_InvalidateDCache_by_Addr (uint32_t *addr, int32_t dsize
 __STATIC_INLINE void SCB_CleanDCache_by_Addr (uint32_t *addr, int32_t dsize)
 {
   #if defined (__DCACHE_PRESENT) && (__DCACHE_PRESENT == 1U)
-     int32_t op_size = dsize;
-    uint32_t op_addr = (uint32_t) addr;
-     int32_t linesize = 32;                /* in Cortex-M7 size of cache line is fixed to 8 words (32 bytes) */
+    register int32_t op_size = dsize;
+    register uint32_t op_addr = (uint32_t) addr;
+    register int32_t linesize = 32;                /* in Cortex-M7 size of cache line is fixed to 8 words (32 bytes) */
 
     __DSB();
 
@@ -2518,9 +2518,9 @@ __STATIC_INLINE void SCB_CleanDCache_by_Addr (uint32_t *addr, int32_t dsize)
 __STATIC_INLINE void SCB_CleanInvalidateDCache_by_Addr (uint32_t *addr, int32_t dsize)
 {
   #if defined (__DCACHE_PRESENT) && (__DCACHE_PRESENT == 1U)
-     int32_t op_size = dsize;
-    uint32_t op_addr = (uint32_t) addr;
-     int32_t linesize = 32;                /* in Cortex-M7 size of cache line is fixed to 8 words (32 bytes) */
+    register int32_t op_size = dsize;
+    register uint32_t op_addr = (uint32_t) addr;
+    register int32_t linesize = 32;                /* in Cortex-M7 size of cache line is fixed to 8 words (32 bytes) */
 
     __DSB();
 
