@@ -65,6 +65,11 @@ These steps are repeated in an infinite loop.
 @Note It is recommended to enable the cache and maintain its coherence.
               Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
               Please refer to the AN4839 "Level 1 cache on STM32F7 Series and STM32H7 Series"
+
+@par Keywords
+
+Power, PWR, Standby mode, Interrupt, EXTI, Wakeup, Wakeup pin, Low Power, External reset, Button
+
 @par Directory contents 
 
   - PWR/PWR_STANDBY/Inc/stm32h7xx_conf.h         HAL Configuration file

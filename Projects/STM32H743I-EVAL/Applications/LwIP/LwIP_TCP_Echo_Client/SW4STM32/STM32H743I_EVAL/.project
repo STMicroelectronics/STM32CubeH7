@@ -66,9 +66,9 @@
 			<locationURI>PARENT-2-PROJECT_LOC/Src/tcp_echoclient.c</locationURI>
 		</link>
 		<link>
-			<name>Application/Utilities/basic_gui.c</name>
+			<name>Application/Utilities/stm32_lcd.c</name>
 			<type>1</type>
-			<locationURI>PARENT-7-PROJECT_LOC/Utilities/Basic_GUI/basic_gui.c</locationURI>
+			<locationURI>PARENT-7-PROJECT_LOC/Utilities/lcd/stm32_lcd.c</locationURI>
 		</link>
 		<link>
 			<name>Application/Utilities/lcd_trace.c</name>
@@ -120,15 +120,15 @@
 			<type>1</type>
 			<locationURI>PARENT-7-PROJECT_LOC/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_eth.c</locationURI>
 		</link>
-			<link>
-			<name>Drivers/STM32H7xx_HAL_Driver/stm32h7xx_hal_exti.c</name>
-			<type>1</type>
-			<locationURI>PARENT-7-PROJECT_LOC/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_exti.c</locationURI>
-		</link>
 		<link>
 			<name>Drivers/STM32H7xx_HAL_Driver/stm32h7xx_hal_eth_ex.c</name>
 			<type>1</type>
 			<locationURI>PARENT-7-PROJECT_LOC/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_eth_ex.c</locationURI>
+		</link>
+		<link>
+			<name>Drivers/STM32H7xx_HAL_Driver/stm32h7xx_hal_exti.c</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_exti.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32H7xx_HAL_Driver/stm32h7xx_hal_gpio.c</name>
@@ -189,7 +189,7 @@
 			<name>Drivers/STM32H7xx_HAL_Driver/stm32h7xx_hal_tim_ex.c</name>
 			<type>1</type>
 			<locationURI>PARENT-7-PROJECT_LOC/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_tim_ex.c</locationURI>
-		</link>		
+		</link>
 		<link>
 			<name>Drivers/STM32H7xx_HAL_Driver/stm32h7xx_hal_uart.c</name>
 			<type>1</type>
@@ -206,6 +206,11 @@
 			<locationURI>PARENT-7-PROJECT_LOC/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_fmc.c</locationURI>
 		</link>
 		<link>
+			<name>Drivers/BSP/Components/is42s32800g.c</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Drivers/BSP/Components/is42s32800g/is42s32800g.c</locationURI>
+		</link>
+		<link>
 			<name>Drivers/BSP/Components/lan8742.c</name>
 			<type>1</type>
 			<locationURI>PARENT-7-PROJECT_LOC/Drivers/BSP/Components/lan8742/lan8742.c</locationURI>
@@ -219,11 +224,6 @@
 			<name>Drivers/BSP/Components/stmpe811.c</name>
 			<type>1</type>
 			<locationURI>PARENT-7-PROJECT_LOC/Drivers/BSP/Components/stmpe811/stmpe811.c</locationURI>
-		</link>
-		<link>
-			<name>Drivers/BSP/Components/is42s32800g.c</name>
-			<type>1</type>
-			<locationURI>PARENT-7-PROJECT_LOC/Drivers/BSP/Components/is42s32800g/is42s32800g.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/BSP/STM32H743I_EVAL/stm32h743i_eval.c</name>
@@ -284,16 +284,6 @@
 			<name>Middlewares/LwIP/Api/tcpip.c</name>
 			<type>1</type>
 			<locationURI>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/LwIP/src/api/tcpip.c</locationURI>
-		</link>
-		<link>
-			<name>Middlewares/LwIP/Apps/fs.c</name>
-			<type>1</type>
-			<locationURI>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/LwIP/src/apps/httpd/fs.c</locationURI>
-		</link>
-		<link>
-			<name>Middlewares/LwIP/Apps/httpd.c</name>
-			<type>1</type>
-			<locationURI>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/LwIP/src/apps/httpd/httpd.c</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/LwIP/Core/def.c</name>

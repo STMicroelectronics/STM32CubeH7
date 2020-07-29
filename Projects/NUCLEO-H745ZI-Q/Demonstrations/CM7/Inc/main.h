@@ -29,7 +29,7 @@
 #include "adafruit_802_lcd.h"
 #include "adafruit_802_sd.h"
 #include "stm32h7xx_nucleo_bus.h"
-#include "basic_gui.h"
+#include "stm32_lcd.h"
 /* FatFs includes component */
 #include "ff_gen_drv.h"
 #include "sd_diskio.h"

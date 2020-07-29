@@ -101,6 +101,10 @@ LED2 is ON when there are an error.
 @note The application need to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
+@par Keywords
+
+Timers, DMA, PWM, Frequency, Duty Cycle, Waveform, Oscilloscope, Output, Signal
+
 @par Directory contents 
 
   - TIM/TIM_DMA/Common/Src/system_stm32h7xx.c      STM32H7xx system configuration source file

@@ -1,5 +1,5 @@
 /**
-  @page Demo   STM32H7B3I-EVAL Audio Player Demonstration Firmware
+  @page AudioPlayer   STM32H7B3I-EVAL Audio Player Demonstration Firmware
  
   @verbatim
   ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
@@ -20,7 +20,7 @@
   ******************************************************************************
   @endverbatim
 
-@par Audio Player Demonstration Overview
+@par Demo Description
 
  The audio player application provides a complete audio solution based on the STM32H7B3xx and and the TouchGFX APIs.
  It delivers a high-quality music experience. It supports playing music in WAV and mp3 formats but may
@@ -41,7 +41,7 @@
   - This demonstration runs on STM32H7B3xx devices.    
   - This demonstration has been tested with STMicroelectronics STM32H7B3I-EVAL boards and can be easily 
     tailored to any other supported device and development board.
-     
+
 @par How to use it ? 
 
 To load the demonstration, use STM32CubeProgrammer to program both internal Flash and external OSPI memory.
@@ -64,6 +64,10 @@ In order to program the demonstration you must do the following:
 
 The binary and Media demonstration files are available from the STM32H7B3I-EVAL page in the Binary Delivery section.
 Please refer to : www.st.com/en/product/STM32H7B3I-EVAL.html
+
+@par Keywords
+
+Audio, Graphics, TouchGFX, FreeRTOS, FatFS, Demonstration, Player, WAV, MP3
 
 @Note If the  application is using the DTCM/ITCM memories (@0x20000000/ 0x0000000: not cacheable and only accessible
       by the Cortex M7 and the  MDMA), no need for cache maintenance when the Cortex M7 and the MDMA access these RAMs.

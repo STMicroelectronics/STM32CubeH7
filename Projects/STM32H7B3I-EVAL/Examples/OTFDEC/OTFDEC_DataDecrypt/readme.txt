@@ -1,5 +1,5 @@
 /**
-  @page  Description of OTFDEC Data Decryption example
+  @page OTFDEC_DataDecrypt Description of OTFDEC Data Decryption example
 
   @verbatim
   ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
@@ -21,6 +21,7 @@
   @endverbatim
 
 @par Example Description
+
 This example describes how to decrypt data located on the OCTOSPI external flash using the OTFDEC peripheral.
 Data used in this example are alredy encrypted with the embedded crypto IP standard AES-128 counter mode.
 You can also use crypto for encrypting any other Data. But it is mandatory to uncomment "#define HAL_CRYP_MODULE_ENABLED", in the stm32h7xx_hal_conf.h.
@@ -68,6 +69,10 @@ Then, OTFDEC will decrypt these data which will be printed on an HyperTerminal t
 @Note It is recommended to enable the cache and maintain its coherence.
               Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
               Please refer to the AN4839 "Level 1 cache on STM32F7 Series and STM32H7 Series"
+
+@par Keywords
+
+Security, Cryptography, OTFDEC, OCTOSPI, CRYP, Cipher, external flash, Data decryption, HyperTerminal
 
 @par Directory contents
 

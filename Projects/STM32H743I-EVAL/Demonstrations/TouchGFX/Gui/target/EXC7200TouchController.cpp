@@ -20,7 +20,8 @@ void EXC7200TouchController::init()
 
 }
 
-static int32_t lastTime, lastX, lastY;
+static int32_t lastX, lastY;
+static uint32_t lastTime;
 
 bool EXC7200TouchController::sampleTouch(int32_t& x, int32_t& y)
 {

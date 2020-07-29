@@ -1,9 +1,9 @@
 /**
-  @page TIM_6steps Timers Synchronization example
+  @page TIM_6Steps Timers Synchronization example
   
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    TIM/TIM_6steps/readme.txt 
+  * @file    TIM/TIM_6Steps/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the TIM 6 Steps example.
 
@@ -94,15 +94,19 @@ The following Table describes the TIM1 Channels states:
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
 
+@par Keywords
+
+Timers, 6 steps, PWM, Duty Cycle, Waveform, Oscilloscope, Output, Signal, commutation, timing mode
+
 @par Directory contents 
 
-  - TIM/TIM_6steps/Inc/stm32h7xx_hal_conf.h    HAL configuration file
-  - TIM/TIM_6steps/Inc/stm32h7xx_it.h          Interrupt handlers header file
-  - TIM/TIM_6steps/Inc/main.h                  Header for main.c module  
-  - TIM/TIM_6steps/Src/stm32h7xx_it.c          Interrupt handlers
-  - TIM/TIM_6steps/Src/main.c                  Main program
-  - TIM/TIM_6steps/Src/stm32h7xx_hal_msp.c     HAL MSP file
-  - TIM/TIM_6steps/Src/system_stm32h7xx.c      STM32H7xx system source file
+  - TIM/TIM_6Steps/Inc/stm32h7xx_hal_conf.h    HAL configuration file
+  - TIM/TIM_6Steps/Inc/stm32h7xx_it.h          Interrupt handlers header file
+  - TIM/TIM_6Steps/Inc/main.h                  Header for main.c module  
+  - TIM/TIM_6Steps/Src/stm32h7xx_it.c          Interrupt handlers
+  - TIM/TIM_6Steps/Src/main.c                  Main program
+  - TIM/TIM_6Steps/Src/stm32h7xx_hal_msp.c     HAL MSP file
+  - TIM/TIM_6Steps/Src/system_stm32h7xx.c      STM32H7xx system source file
 
 @par Hardware and Software environment
 

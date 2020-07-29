@@ -26,7 +26,7 @@ extern "C" {
 
 #ifndef GENERATOR_WAKAAMACLIENT_CLOUD
 #define NET_MBEDTLS_HOST_SUPPORT
-#endif
+#endif /* GENERATOR_WAKAAMACLIENT_CLOUD */
 
 
 #include "net_conf_template.h"
@@ -35,7 +35,7 @@ extern "C" {
 #if 0
 #undef NET_MBEDTLS_HOST_SUPPORT
 #define NET_MBEDTLS_WIFI_MODULE_SUPPORT
-#endif
+#endif /* 9 */
 int32_t wifi_probe(void **ll_drv_obj);
 void    SPI_WIFI_ISR(void);
 

@@ -69,7 +69,7 @@ STM32H7B3I-DK board's LEDs can be used to monitor the transfer status:
 
 @par Keywords
 
-Display, Graphic, DMA2D, LCD, ARGB8888, Blending, Register to memory, LTDC, Pixel
+Display, Graphics, DMA2D, LCD, ARGB8888, Blending, Register to memory, LTDC, Pixel
 
 @par Directory contents
 

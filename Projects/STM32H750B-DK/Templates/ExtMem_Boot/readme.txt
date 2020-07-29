@@ -47,10 +47,6 @@ The ExtMem_Boot program is located at 0x08000000 (Internal flash).
  
 Please Refer to the bellow "Table 1. IAP implementation on STM32H750B-DISCO" for different configurations and corresponding settings.
                                   
-@par Keywords
-
-Middleware, External Memory Boot, Loader, Boot
-
 At the beginning of the main program the HAL_Init() function is called to reset 
 all the peripherals, initialize the Flash interface and the systick.
 The SystemClock_Config() function is used to configure the system clock for STM32H750xx Devices :
@@ -79,6 +75,10 @@ The APB clock dividers for D1 Domain APB3 peripherals, D2 Domain APB1 and APB2 p
       Depending on the use case it is also possible to configure the cache attributes using the MPU.
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
+
+@par Keywords
+
+External, Memory, Boot, Loader, XiP, BootROM, Value line
 
 @par Directory contents
 

@@ -1,5 +1,5 @@
 /**
-  @page Demo   STM32H7B3I-DK Video Player Demonstration Firmware
+  @page VideoPlayer   STM32H7B3I-DK Video Player Demonstration Firmware
  
   @verbatim
   ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
@@ -20,7 +20,7 @@
   ******************************************************************************
   @endverbatim
 
-@par Video Player Demonstration Overview
+@par Demo Description
 
  The video player module provides a video solution based on the STM32H7xxx and the Touch GFX APIs.
  You can use the *.avi files provided under "Utilities/Media/Video" or any other ones.
@@ -40,7 +40,7 @@
   - This demonstration has been tested with STMicroelectronics STM32H7B3I-DK
     boards and can be easily tailored to any other supported device 
     and development board.
-     
+
 @par How to use it ? 
 
 To load the demonstration, use STM32CubeProgrammer to program both internal Flash and external OSPI memory.
@@ -63,6 +63,10 @@ In order to program the demonstration you must do the following:
 
 The binary and Media demonstration files are available from the STM32H7B3I-DK page in the Binary Delivery section.
 Please refer to : www.st.com/en/product/STM32H7B3I-DK.html
+
+@par Keywords
+
+Graphics, TouchGFX, FreeRTOS, FatFS, Demonstration, Video, Player, AVI, MJPEG, JPEG
 
 @Note If the  application is using the DTCM/ITCM memories (@0x20000000/ 0x0000000: not cacheable and only accessible
       by the Cortex M7 and the  MDMA), no need for cache maintenance when the Cortex M7 and the MDMA access these RAMs.

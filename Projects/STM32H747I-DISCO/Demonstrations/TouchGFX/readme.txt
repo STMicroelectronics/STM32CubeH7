@@ -1,5 +1,5 @@
 /**
-  @page Demo   TouchGFX Demonstration for STM32H747 Discovery board
+  @page TouchGFX   TouchGFX Demonstration for STM32H747 Discovery board
  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
@@ -18,11 +18,9 @@
   *                             www.st.com/SLA0044
   *
   ******************************************************************************
-/**
+  @endverbatim
 
-@endverbatim
-
-@par Description
+@par Demo Description
 
 This is the official TouchGFX demonstration for the STM32H747 Discovery board.
 For more details please refer to the full demonstration readme.txt file ../readme.txt
@@ -39,6 +37,10 @@ The demonstration features the following modules:
     - Home Automation
     - Date and Clock
     - Hardware integration (Junction temperature sensor and LCD brightness)
+
+@par Keywords
+
+Demonstration, TouchGFX
 
 @par How to use it ?
 

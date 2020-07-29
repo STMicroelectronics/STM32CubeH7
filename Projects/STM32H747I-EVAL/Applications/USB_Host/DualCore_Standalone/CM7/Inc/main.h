@@ -34,7 +34,7 @@
 #include "usbh_hid.h"
 #include "usbh_hid_parser.h"
 #include "lcd_trace.h"
-#include "basic_gui.h"
+#include "stm32_lcd.h"
 #include "utilities_conf.h"
 /* Exported types ------------------------------------------------------------*/
 typedef enum {

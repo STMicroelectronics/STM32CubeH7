@@ -91,6 +91,10 @@ LED3 is ON when there are an error.
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
 
+@par Keywords
+
+Timer, Output, signal, PWM, Oscilloscope, Frequency, Duty cycle, Waveform
+
 @par Directory contents
   
     - TIM/TIM_PWMOutput/CM7/Inc/main.h                Main configuration file for Cortex-M7

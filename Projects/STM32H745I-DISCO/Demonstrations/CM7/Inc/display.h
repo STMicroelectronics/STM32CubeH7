@@ -24,7 +24,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm32h745i_discovery_lcd.h"
 #include "graphics.h"
-#include "basic_gui.h"
+#include "stm32_lcd.h"
 
 /* Exported variables --------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/

@@ -111,6 +111,10 @@ To port a LL example to the targeted board:
             - For DTCM RAM select: ../STM32H743ZITx_FLASH_DTCMRAM.ld
             - For D1-AXI SRAM select: ../STM32H743ZITx_FLASH_RAM_D1.ld
 
+@par Keywords
+
+System, LL template, Clock Configuration, HSE bypass mode, System clock, Oscillator, PLL
+
 @par Directory contents
 
   - Templates_LL/Inc/stm32h7xx_it.h          Interrupt handlers header file

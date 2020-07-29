@@ -1,9 +1,9 @@
 /**
-  @page HRTIM/HRTIM_Arbitary_Waveform HRTIM Arbitary Waveform example
+  @page HRTIM_Arbitrary_Waveform HRTIM Arbitary Waveform example
   
   @verbatim
   ********************* COPYRIGHT(c) 2017 STMicroelectronics *******************
-  * @file    HRTIM/HRTIM_Arbitary_Waveform/readme.txt 
+  * @file    HRTIM/HRTIM_Arbitrary_Waveform/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the HRTIM1 Arbitary waveform generation
   ******************************************************************************
@@ -72,15 +72,19 @@ The waveforms can be displayed using an oscilloscope.
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
 
+@par Keywords
+
+HRTIM, Timer, Logical operation, Set source, Reset source, Arbitrary, Waveforms, Oscilloscope
+
 @par Directory contents 
 
-  - HRTIM/HRTIM_Arbitary_Waveform/Inc/stm32h7xx_hal_conf.h    HAL configuration file
-  - HRTIM/HRTIM_Arbitary_Waveform/Inc/stm32h7xx_it.h          Interrupt handlers header file
-  - HRTIM/HRTIM_Arbitary_Waveform/Inc/main.h                  Header for main.c module  
-  - HRTIM/HRTIM_Arbitary_Waveform/Src/stm32h7xx_it.c          Interrupt handlers
-  - HRTIM/HRTIM_Arbitary_Waveform/Src/main.c                  Main program
-  - HRTIM/HRTIM_Arbitary_Waveform/Src/stm32h7xx_hal_msp.c     HAL MSP file
-  - HRTIM/HRTIM_Arbitary_Waveform/Src/system_stm32h7xx.c      STM32H7xx system source file
+  - HRTIM/HRTIM_Arbitrary_Waveform/Inc/stm32h7xx_hal_conf.h    HAL configuration file
+  - HRTIM/HRTIM_Arbitrary_Waveform/Inc/stm32h7xx_it.h          Interrupt handlers header file
+  - HRTIM/HRTIM_Arbitrary_Waveform/Inc/main.h                  Header for main.c module  
+  - HRTIM/HRTIM_Arbitrary_Waveform/Src/stm32h7xx_it.c          Interrupt handlers
+  - HRTIM/HRTIM_Arbitrary_Waveform/Src/main.c                  Main program
+  - HRTIM/HRTIM_Arbitrary_Waveform/Src/stm32h7xx_hal_msp.c     HAL MSP file
+  - HRTIM/HRTIM_Arbitrary_Waveform/Src/system_stm32h7xx.c      STM32H7xx system source file
 
 
 @par Hardware and Software environment

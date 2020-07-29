@@ -58,11 +58,11 @@ void Joystick_demo (void)
   
   if (status != BSP_ERROR_NONE)
   {
-    GUI_SetBackColor(GUI_COLOR_WHITE); 
-    GUI_SetTextColor(GUI_COLOR_RED);
-    GUI_DisplayStringAt(0, y_size- 70, (uint8_t *)"ERROR", CENTER_MODE);
-    GUI_DisplayStringAt(0, y_size- 55, (uint8_t *)"Joystick cannot", CENTER_MODE);
-    GUI_DisplayStringAt(0, y_size- 40, (uint8_t *)"be initialized", CENTER_MODE);
+    UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_WHITE); 
+    UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_RED);
+    UTIL_LCD_DisplayStringAt(0, y_size- 70, (uint8_t *)"ERROR", CENTER_MODE);
+    UTIL_LCD_DisplayStringAt(0, y_size- 55, (uint8_t *)"Joystick cannot", CENTER_MODE);
+    UTIL_LCD_DisplayStringAt(0, y_size- 40, (uint8_t *)"be initialized", CENTER_MODE);
   }
   
   while (1)
@@ -88,22 +88,22 @@ void Joystick_demo (void)
 static void Joystick_SetHint(void)
 {
   /* Clear the LCD */ 
-  GUI_Clear(GUI_COLOR_WHITE);
+  UTIL_LCD_Clear(UTIL_LCD_COLOR_WHITE);
   
   /* Set Joystick Demo description */
-  GUI_FillRect(0, 0, x_size, 40, GUI_COLOR_BLUE);
-  GUI_SetTextColor(GUI_COLOR_WHITE);
-  GUI_SetBackColor(GUI_COLOR_BLUE); 
-  GUI_SetFont(&Font24);
+  UTIL_LCD_FillRect(0, 0, x_size, 40, UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_BLUE); 
+  UTIL_LCD_SetFont(&Font24);
 
-  GUI_SetFont(&Font12);
-  GUI_DisplayStringAt(0, 10, (uint8_t *)"Joystick Demo", CENTER_MODE);
-  GUI_DisplayStringAt(0, 25, (uint8_t *)"Move the pointer", CENTER_MODE);
+  UTIL_LCD_SetFont(&Font12);
+  UTIL_LCD_DisplayStringAt(0, 10, (uint8_t *)"Joystick Demo", CENTER_MODE);
+  UTIL_LCD_DisplayStringAt(0, 25, (uint8_t *)"Move the pointer", CENTER_MODE);
 
   
   /* Set the LCD Text Color */
-  GUI_DrawRect(10, 50, x_size - 20, y_size- 60, GUI_COLOR_BLUE);
-  GUI_DrawRect(11, 51, x_size - 22, y_size- 61, GUI_COLOR_BLUE);
+  UTIL_LCD_DrawRect(10, 50, x_size - 20, y_size- 60, UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_DrawRect(11, 51, x_size - 22, y_size- 61, UTIL_LCD_COLOR_BLUE);
 }
 
 /**
@@ -148,25 +148,25 @@ void Joystick_SetCursorPosition(void)
     break;           
   }
   
-  GUI_SetBackColor(GUI_COLOR_WHITE);
-  GUI_SetTextColor(GUI_COLOR_BLUE);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_WHITE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_BLUE);
   
   if(JoyState == JOY_SEL)
   {
-    GUI_SetTextColor(GUI_COLOR_RED);
-    GUI_DisplayChar(xPtr, yPtr, 'X');
+    UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_RED);
+    UTIL_LCD_DisplayChar(xPtr, yPtr, 'X');
   }
   else if(JoyState == JOY_NONE)
   {
-    GUI_SetTextColor(GUI_COLOR_BLUE);
-    GUI_DisplayChar(xPtr, yPtr, 'X');   
+    UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_BLUE);
+    UTIL_LCD_DisplayChar(xPtr, yPtr, 'X');   
   }
   else
   {
-    GUI_SetTextColor(GUI_COLOR_WHITE);
-    GUI_DisplayChar(old_xPtr, old_yPtr, 'X');
-    GUI_SetTextColor(GUI_COLOR_BLUE); 
-    GUI_DisplayChar(xPtr, yPtr, 'X');
+    UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
+    UTIL_LCD_DisplayChar(old_xPtr, old_yPtr, 'X');
+    UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_BLUE); 
+    UTIL_LCD_DisplayChar(xPtr, yPtr, 'X');
     
     old_xPtr = xPtr;
     old_yPtr = yPtr;

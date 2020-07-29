@@ -104,7 +104,7 @@ int main(void)
   /*##-1- Initialize the LCD #################################################*/
   /* LTDC, DSI initialization and LCD screen initialization */
   lcd_status = BSP_LCD_Init(0, LCD_ORIENTATION_LANDSCAPE);
-  GUI_SetFuncDriver(&LCD_Driver);
+  UTIL_LCD_SetFuncDriver(&LCD_Driver);
   OnError_Handler(lcd_status != BSP_ERROR_NONE);
 
   /* Get the LCD width and height */
@@ -117,13 +117,13 @@ int main(void)
                                                      * ARGB8888_BYTE_PER_PIXEL;  
   
   /* Prepare using DMA2D the LCD frame buffer for display : LCD buffer clear and user message priniting*/
-  GUI_Clear(GUI_COLOR_GRAY);
-  GUI_SetTextColor(GUI_COLOR_WHITE);
-  GUI_SetBackColor(GUI_COLOR_BLUE);
-  GUI_SetFont(&Font16);
+  UTIL_LCD_Clear(UTIL_LCD_COLOR_GRAY);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_SetFont(&Font16);
 
   /* Print example description */
-  GUI_DisplayStringAt(0, 100, (uint8_t *)"DMA2D_BlendingWithAlphaInversion example", CENTER_MODE);
+  UTIL_LCD_DisplayStringAt(0, 100, (uint8_t *)"DMA2D_BlendingWithAlphaInversion example", CENTER_MODE);
   HAL_Delay(100);
 
   /*Initialize Alpha Inversion setting*/
@@ -141,11 +141,11 @@ int main(void)
 
     if(AlphaInvert_Config == DMA2D_REGULAR_ALPHA)
     {
-      GUI_DisplayStringAt(0, 420, (uint8_t *)"Display Blended Image: Foreground Alpha inversion  OFF", CENTER_MODE);
+      UTIL_LCD_DisplayStringAt(0, 420, (uint8_t *)"Display Blended Image: Foreground Alpha inversion  OFF", CENTER_MODE);
     }
     else
     {
-      GUI_DisplayStringAt(0, 420, (uint8_t *)"Display Blended Image: Foreground Alpha inversion  ON ", CENTER_MODE);      
+      UTIL_LCD_DisplayStringAt(0, 420, (uint8_t *)"Display Blended Image: Foreground Alpha inversion  ON ", CENTER_MODE);      
     }
   
     /*##-3- Start DMA2D transfer in interrupt mode ################################################*/

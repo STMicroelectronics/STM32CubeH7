@@ -59,8 +59,8 @@ namespace fileinput
 static FIL f1; /* The single File object */
 static FIL f2; /* The single File object */
 
-static char full_path[_MAX_LFN];
-static char parent_dir[_MAX_LFN];
+static char full_path[_MAX_LFN + 2];
+static char parent_dir[_MAX_LFN + 2];
 static int level = -1;
 static int num_files = 0;
 
@@ -281,17 +281,17 @@ int getFileListRAccumulator(const char* const dirname, const char* ext, DirEntry
             }
             if ((fno.fattrib & AM_DIR) != 0)
             {
-                char newdirname[53];
-                snprintf(newdirname, 53, "%s/%s", dirname, fno.fname);
+                char newdirname[_MAX_LFN + 2];
+                snprintf(newdirname, _MAX_LFN + 2 , "%s/%s", dirname, fno.fname);
                 getFileListRAccumulator(newdirname, ext, filelist, length, current);
             }
             else
             {
                 if (stristr(fno.fname, ext))
                 {
-                    char path[53];
-                    snprintf(path, 53, "%s/%s", dirname, fno.fname);
-                    strncpy(filelist[current].name, path, 53);
+                    char path[_MAX_LFN + 2];
+                    snprintf(path, _MAX_LFN + 2 , "%s/%s", dirname, fno.fname);
+                    strncpy(filelist[current].name, path, 50);
                     filelist[current].isDirectory = false;
                     current++;
                 }

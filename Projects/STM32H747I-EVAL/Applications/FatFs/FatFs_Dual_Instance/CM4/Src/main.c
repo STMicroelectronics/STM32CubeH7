@@ -89,6 +89,9 @@ int main(void)
 
    BSP_LED_Init(LED_ORANGE);
    BSP_LED_Init(LED_BLUE);
+   
+   /* Enable the USB voltage level detector */
+   HAL_PWREx_EnableUSBVoltageDetector();
 
    /*##-1- Init Host Library ################################################*/
    USBH_Init(&hUSB_Host, USBH_UserProcess, 0);
@@ -98,9 +101,6 @@ int main(void)
 
    /*##-3- Start Host Process ###############################################*/
    USBH_Start(&hUSB_Host);
-
-   /* Enable the USB voltage level detector */
-   HAL_PWREx_EnableUSBVoltageDetector();
 
    /*##-4- Run Application (Blocking mode) ##################################*/
    while (1)

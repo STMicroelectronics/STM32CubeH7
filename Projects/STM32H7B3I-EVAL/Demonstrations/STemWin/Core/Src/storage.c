@@ -540,6 +540,33 @@ void BSP_SD_DetectCallback(uint32_t Instance, uint32_t Status)
 }
 #endif /* USE_SDCARD */
 
+#ifdef SDCARD_LOW_SPEED
+/**
+  * @brief  Initializes the SDMMC1 peripheral.
+  * @param  hsd SD handle
+  * @retval HAL status
+  */
+HAL_StatusTypeDef MX_SDMMC1_SD_Init(SD_HandleTypeDef *hsd)
+{
+  HAL_StatusTypeDef ret = HAL_OK;
+  /* uSD device interface configuration */
+  hsd->Instance                 = SDMMC1;
+  hsd->Init.ClockEdge           = SDMMC_CLOCK_EDGE_RISING;
+  hsd->Init.ClockPowerSave      = SDMMC_CLOCK_POWER_SAVE_DISABLE;
+  hsd->Init.BusWide             = SDMMC_BUS_WIDE_1B;
+  hsd->Init.HardwareFlowControl = SDMMC_HARDWARE_FLOW_CONTROL_DISABLE;
+  hsd->Init.ClockDiv            = SDMMC_NSpeed_CLK_DIV * 4;
+  hsd->Init.TranceiverPresent   = SDMMC_TRANSCEIVER_NOT_PRESENT;
+
+  /* HAL SD initialization */
+  if(HAL_SD_Init(hsd) != HAL_OK)
+  {
+    ret = HAL_ERROR;
+  }
+
+  return ret;
+}
+#endif
 /**
   * @}
   */

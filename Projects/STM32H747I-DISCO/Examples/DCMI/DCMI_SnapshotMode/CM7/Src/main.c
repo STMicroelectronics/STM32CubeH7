@@ -100,7 +100,7 @@ int main(void)
   /* Proceed to LTDC, DSI and LCD screen initialization with the configuration filled in above */
   /* for stageNb == 1 */
   BSP_LCD_Init(0, LCD_ORIENTATION_LANDSCAPE);
-  GUI_SetFuncDriver(&LCD_Driver);
+  UTIL_LCD_SetFuncDriver(&LCD_Driver);
   /* Get LCD width and height*/  
   BSP_LCD_GetXSize(0,&LcdResX);
   BSP_LCD_GetYSize(0,&LcdResY);  
@@ -110,13 +110,13 @@ int main(void)
     
   /* Prepare using DMA2D the 800x480 LCD frame buffer to display background color black */
   /* and title of the example                                                           */
-  GUI_Clear(GUI_COLOR_BLACK);
-  GUI_SetTextColor(GUI_COLOR_WHITE);
-  GUI_SetBackColor(GUI_COLOR_BLUE);
-  GUI_SetFont(&Font16);
+  UTIL_LCD_Clear(UTIL_LCD_COLOR_BLACK);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_SetFont(&Font16);
 
   /* Print example description */
-  GUI_DisplayStringAt(0, 440, (uint8_t *)"DCMI Snapshot example", CENTER_MODE);   
+  UTIL_LCD_DisplayStringAt(0, 440, (uint8_t *)"DCMI Snapshot example", CENTER_MODE);   
 
   /*## Camera Initialization and capture start ############################*/
   /* Initialize the Camera in QVGA mode */
@@ -148,8 +148,8 @@ int main(void)
   {
   }
   
-  GUI_ClearStringLine(460);
-  GUI_DisplayStringAt(0, 460, (uint8_t *)"Capture OK - Test End", CENTER_MODE);
+  UTIL_LCD_ClearStringLine(460);
+  UTIL_LCD_DisplayStringAt(0, 460, (uint8_t *)"Capture OK - Test End", CENTER_MODE);
 
   while (1)
   {

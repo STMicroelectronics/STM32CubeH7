@@ -28,7 +28,7 @@
 #include "stm32h747i_discovery_lcd.h"
 #include "stm32h747i_discovery_sdram.h"
 #include "stm32h747i_discovery_sd.h"
-#include "basic_gui.h"
+#include "stm32_lcd.h"
 /* Jpeg includes component */
 #include <stdint.h>
 #include <string.h>

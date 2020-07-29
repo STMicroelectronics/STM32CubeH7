@@ -124,6 +124,10 @@ STM32H743I-EVAL board LEDs are used to monitor the program execution status:
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
 
+@par Keywords
+
+Analog, ADC, Analog to Digital, Dual mode, Interleaved, Continuous conversion, Software Trigger, DMA, Measurement
+
 @par Directory contents
 
   - ADC/ADC_DualModeInterleaved/Inc/stm32h7xx_hal_conf.h    HAL configuration file

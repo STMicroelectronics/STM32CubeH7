@@ -60,7 +60,7 @@ For more details about the STM32Cube USB Device library, please refer to UM1734
 
 @par Keywords
 
-Connectivity, USB Device, HID, Full Speed, Mouse, Remote Wakeup
+Connectivity, USB_Device, USB, HID, Full Speed, Mouse, Remote Wakeup
 
 @par Directory contents
 

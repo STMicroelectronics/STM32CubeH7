@@ -88,23 +88,23 @@ void Camera_demo (void)
   Camera_SetHint();
   CameraTest = 1;
 
-  GUI_Clear(GUI_COLOR_WHITE);
+  UTIL_LCD_Clear(UTIL_LCD_COLOR_WHITE);
   /* Display USB initialization message */
-  GUI_SetBackColor(GUI_COLOR_WHITE);
-  GUI_SetTextColor(GUI_COLOR_DARKBLUE);
-  GUI_SetFont(&Font24);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_WHITE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_DARKBLUE);
+  UTIL_LCD_SetFont(&Font24);
 
   CameraResIndex = 0;
 
   /* Initialize the Camera */
   if(BSP_CAMERA_Init(0, CameraResolution[CameraResIndex], CAMERA_PF_RGB565) != BSP_ERROR_NONE)
   {
-    GUI_SetTextColor(GUI_COLOR_RED);
-    GUI_DisplayStringAt(20, (y_size - 24), (uint8_t *)" NO CAMERA CONNECTED", CENTER_MODE);
+    UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_RED);
+    UTIL_LCD_DisplayStringAt(20, (y_size - 24), (uint8_t *)" NO CAMERA CONNECTED", CENTER_MODE);
   }
   else
   {
-    GUI_DisplayStringAt(20, (y_size - 24), (uint8_t *)"CAMERA CONTINUOUS MODE", CENTER_MODE);
+    UTIL_LCD_DisplayStringAt(20, (y_size - 24), (uint8_t *)"CAMERA CONTINUOUS MODE", CENTER_MODE);
     /* Wait for the camera initialization after HW reset*/
     HAL_Delay(100);
 
@@ -113,36 +113,36 @@ void Camera_demo (void)
     /* Start the Camera Capture */
     BSP_CAMERA_Start(0, (uint8_t *)CAMERA_FRAME_BUFFER, CAMERA_MODE_CONTINUOUS);
 
-    GUI_SetTextColor(GUI_COLOR_RED);
+    UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_RED);
 
     /* Test Camera Zooming */
     if(Cap.Zoom != 1)
     {
-      GUI_DisplayStringAt(0, 0, (uint8_t *)"Camera Zoom feature not supported", CENTER_MODE);
+      UTIL_LCD_DisplayStringAt(0, 0, (uint8_t *)"Camera Zoom feature not supported", CENTER_MODE);
       HAL_Delay(2000);
     }
     else
     {
       HAL_Delay(2000);
-      GUI_DisplayStringAt(0, 0, (uint8_t *)"Zoom x2", CENTER_MODE);
+      UTIL_LCD_DisplayStringAt(0, 0, (uint8_t *)"Zoom x2", CENTER_MODE);
       BSP_CAMERA_Stop(0);
       BSP_CAMERA_SetZoom(0, CAMERA_ZOOM_x2);
       BSP_CAMERA_Start(0, (uint8_t *)CAMERA_FRAME_BUFFER, CAMERA_MODE_CONTINUOUS);
       HAL_Delay(2000);
 
-      GUI_DisplayStringAt(0, 0, (uint8_t *)"Zoom x4", CENTER_MODE);
+      UTIL_LCD_DisplayStringAt(0, 0, (uint8_t *)"Zoom x4", CENTER_MODE);
       BSP_CAMERA_Stop(0);
       BSP_CAMERA_SetZoom(0, CAMERA_ZOOM_x4);
       BSP_CAMERA_Start(0, (uint8_t *)CAMERA_FRAME_BUFFER, CAMERA_MODE_CONTINUOUS);
       HAL_Delay(2000);
 
-      GUI_DisplayStringAt(0, 0, (uint8_t *)"Zoom x8", CENTER_MODE);
+      UTIL_LCD_DisplayStringAt(0, 0, (uint8_t *)"Zoom x8", CENTER_MODE);
       BSP_CAMERA_Stop(0);
       BSP_CAMERA_SetZoom(0, CAMERA_ZOOM_x8);
       BSP_CAMERA_Start(0, (uint8_t *)CAMERA_FRAME_BUFFER, CAMERA_MODE_CONTINUOUS);
       HAL_Delay(2000);
 
-      GUI_DisplayStringAt(0, 0, (uint8_t *)"Zoom x1", CENTER_MODE);
+      UTIL_LCD_DisplayStringAt(0, 0, (uint8_t *)"Zoom x1", CENTER_MODE);
       BSP_CAMERA_Stop(0);
       BSP_CAMERA_SetZoom(0, CAMERA_ZOOM_x1);
       BSP_CAMERA_Start(0, (uint8_t *)CAMERA_FRAME_BUFFER, CAMERA_MODE_CONTINUOUS);
@@ -153,23 +153,23 @@ void Camera_demo (void)
       BSP_CAMERA_SetResolution(0, CameraResolution[CameraResIndex]);
       HAL_Delay(100);
       /* Start the Camera Capture */
-      GUI_Clear(GUI_COLOR_WHITE);
+      UTIL_LCD_Clear(UTIL_LCD_COLOR_WHITE);
       BSP_CAMERA_Start(0, (uint8_t *)CAMERA_FRAME_BUFFER, CAMERA_MODE_CONTINUOUS);
 
       HAL_Delay(2000);
-      GUI_DisplayStringAt(0, 0, (uint8_t *)"Zoom x2", CENTER_MODE);
+      UTIL_LCD_DisplayStringAt(0, 0, (uint8_t *)"Zoom x2", CENTER_MODE);
       BSP_CAMERA_Stop(0);
       BSP_CAMERA_SetZoom(0, CAMERA_ZOOM_x2);
       BSP_CAMERA_Start(0, (uint8_t *)CAMERA_FRAME_BUFFER, CAMERA_MODE_CONTINUOUS);
       HAL_Delay(2000);
 
-      GUI_DisplayStringAt(0, 0, (uint8_t *)"Zoom x4", CENTER_MODE);
+      UTIL_LCD_DisplayStringAt(0, 0, (uint8_t *)"Zoom x4", CENTER_MODE);
       BSP_CAMERA_Stop(0);
       BSP_CAMERA_SetZoom(0, CAMERA_ZOOM_x4);
       BSP_CAMERA_Start(0, (uint8_t *)CAMERA_FRAME_BUFFER, CAMERA_MODE_CONTINUOUS);
       HAL_Delay(2000);
 
-      GUI_DisplayStringAt(0, 0, (uint8_t *)"Zoom x1", CENTER_MODE);
+      UTIL_LCD_DisplayStringAt(0, 0, (uint8_t *)"Zoom x1", CENTER_MODE);
       BSP_CAMERA_Stop(0);
       BSP_CAMERA_SetZoom(0, CAMERA_ZOOM_x1);
       BSP_CAMERA_Start(0, (uint8_t *)CAMERA_FRAME_BUFFER, CAMERA_MODE_CONTINUOUS);
@@ -180,17 +180,17 @@ void Camera_demo (void)
       BSP_CAMERA_SetResolution(0, CameraResolution[CameraResIndex]);
       HAL_Delay(100);
       /* Start the Camera Capture */
-      GUI_Clear(GUI_COLOR_WHITE);
+      UTIL_LCD_Clear(UTIL_LCD_COLOR_WHITE);
       BSP_CAMERA_Start(0, (uint8_t *)CAMERA_FRAME_BUFFER, CAMERA_MODE_CONTINUOUS);
 
       HAL_Delay(2000);
-      GUI_DisplayStringAt(0, 0, (uint8_t *)"Zoom x2", CENTER_MODE);
+      UTIL_LCD_DisplayStringAt(0, 0, (uint8_t *)"Zoom x2", CENTER_MODE);
       BSP_CAMERA_Stop(0);
       BSP_CAMERA_SetZoom(0, CAMERA_ZOOM_x2);
       BSP_CAMERA_Start(0, (uint8_t *)CAMERA_FRAME_BUFFER, CAMERA_MODE_CONTINUOUS);
       HAL_Delay(2000);
 
-      GUI_DisplayStringAt(0, 0, (uint8_t *)"Zoom x1", CENTER_MODE);
+      UTIL_LCD_DisplayStringAt(0, 0, (uint8_t *)"Zoom x1", CENTER_MODE);
       BSP_CAMERA_Stop(0);
       BSP_CAMERA_SetZoom(0, CAMERA_ZOOM_x1);
       BSP_CAMERA_Start(0, (uint8_t *)CAMERA_FRAME_BUFFER, CAMERA_MODE_CONTINUOUS);
@@ -201,7 +201,7 @@ void Camera_demo (void)
       BSP_CAMERA_SetResolution(0, CameraResolution[CameraResIndex]);
       HAL_Delay(100);
       /* Start the Camera Capture */
-      GUI_Clear(GUI_COLOR_WHITE);
+      UTIL_LCD_Clear(UTIL_LCD_COLOR_WHITE);
       BSP_CAMERA_Start(0, (uint8_t *)CAMERA_FRAME_BUFFER, CAMERA_MODE_CONTINUOUS);
       HAL_Delay(2000);
 
@@ -210,7 +210,7 @@ void Camera_demo (void)
       BSP_CAMERA_SetResolution(0, CameraResolution[CameraResIndex]);
       HAL_Delay(100);
       /* Start the Camera Capture */
-      GUI_Clear(GUI_COLOR_WHITE);
+      UTIL_LCD_Clear(UTIL_LCD_COLOR_WHITE);
       BSP_CAMERA_Start(0, (uint8_t *)CAMERA_FRAME_BUFFER, CAMERA_MODE_CONTINUOUS);
       HAL_Delay(2000);
     }
@@ -219,16 +219,16 @@ void Camera_demo (void)
     BSP_CAMERA_Stop(0);
     BSP_CAMERA_SetResolution(0, CameraResolution[CameraResIndex]);
     /* Start the Camera Capture */
-    GUI_Clear(GUI_COLOR_WHITE);
+    UTIL_LCD_Clear(UTIL_LCD_COLOR_WHITE);
     if(Cap.MirrorFlip != 1)
     {
-      GUI_DisplayStringAt(0, 0, (uint8_t *)"Camera MirrorFlip feature not supported", CENTER_MODE);
+      UTIL_LCD_DisplayStringAt(0, 0, (uint8_t *)"Camera MirrorFlip feature not supported", CENTER_MODE);
       HAL_Delay(2000);
     }
     else
     {
-      GUI_DisplayStringAt(0, 0, (uint8_t *)"                                               ", CENTER_MODE);
-      GUI_DisplayStringAt(0, 0, (uint8_t *)"Camera Mirror/Flip TEST", CENTER_MODE);
+      UTIL_LCD_DisplayStringAt(0, 0, (uint8_t *)"                                               ", CENTER_MODE);
+      UTIL_LCD_DisplayStringAt(0, 0, (uint8_t *)"Camera Mirror/Flip TEST", CENTER_MODE);
       BSP_CAMERA_Start(0, (uint8_t *)CAMERA_FRAME_BUFFER, CAMERA_MODE_CONTINUOUS);
       /* Test Camera Mirror/Flip */
       while(MirrorFlipIndex < 4)
@@ -246,14 +246,14 @@ void Camera_demo (void)
     HAL_Delay(2000);
     if(Cap.HueDegree != 1)
     {
-      GUI_DisplayStringAt(0, 0, (uint8_t *)"Camera Hue degree feature not supported", CENTER_MODE);
+      UTIL_LCD_DisplayStringAt(0, 0, (uint8_t *)"Camera Hue degree feature not supported", CENTER_MODE);
       HAL_Delay(2000);
     }
     else
     {
       BSP_CAMERA_Stop(0);
-      GUI_DisplayStringAt(0, 0, (uint8_t *)"                                               ", CENTER_MODE);
-      GUI_DisplayStringAt(0, 0, (uint8_t *)"Camera Hue Degree TEST", CENTER_MODE);
+      UTIL_LCD_DisplayStringAt(0, 0, (uint8_t *)"                                               ", CENTER_MODE);
+      UTIL_LCD_DisplayStringAt(0, 0, (uint8_t *)"Camera Hue Degree TEST", CENTER_MODE);
       BSP_CAMERA_Start(0, (uint8_t *)CAMERA_FRAME_BUFFER, CAMERA_MODE_CONTINUOUS);
 
       /* Test Camera Hue Degree */
@@ -271,14 +271,14 @@ void Camera_demo (void)
 
     if(Cap.LightMode != 1)
     {
-      GUI_DisplayStringAt(0, 0, (uint8_t *)"Camera Light Mode feature not supported", CENTER_MODE);
+      UTIL_LCD_DisplayStringAt(0, 0, (uint8_t *)"Camera Light Mode feature not supported", CENTER_MODE);
       HAL_Delay(2000);
     }
     else
     {
       BSP_CAMERA_Stop(0);
-      GUI_DisplayStringAt(0, 0, (uint8_t *)"                                               ", CENTER_MODE);
-      GUI_DisplayStringAt(0, 0, (uint8_t *)"Camera Light Mode TEST", CENTER_MODE);
+      UTIL_LCD_DisplayStringAt(0, 0, (uint8_t *)"                                               ", CENTER_MODE);
+      UTIL_LCD_DisplayStringAt(0, 0, (uint8_t *)"Camera Light Mode TEST", CENTER_MODE);
       BSP_CAMERA_Start(0, (uint8_t *)CAMERA_FRAME_BUFFER, CAMERA_MODE_CONTINUOUS);
       /* Test Camera Light Mode */
       while(lightIndex < 5)
@@ -294,14 +294,14 @@ void Camera_demo (void)
 
     if(Cap.Contrast != 1)
     {
-      GUI_DisplayStringAt(0, 0, (uint8_t *)"Camera Contrast feature not supported", CENTER_MODE);
+      UTIL_LCD_DisplayStringAt(0, 0, (uint8_t *)"Camera Contrast feature not supported", CENTER_MODE);
       HAL_Delay(2000);
     }
     else
     {
       BSP_CAMERA_Stop(0);
-      GUI_DisplayStringAt(0, 0, (uint8_t *)"                                               ", CENTER_MODE);
-      GUI_DisplayStringAt(0, 0, (uint8_t *)"Camera Contrast TEST", CENTER_MODE);
+      UTIL_LCD_DisplayStringAt(0, 0, (uint8_t *)"                                               ", CENTER_MODE);
+      UTIL_LCD_DisplayStringAt(0, 0, (uint8_t *)"Camera Contrast TEST", CENTER_MODE);
       BSP_CAMERA_Start(0, (uint8_t *)CAMERA_FRAME_BUFFER, CAMERA_MODE_CONTINUOUS);
       /* Test Contrast */
       while(ContrastIndex < 5)
@@ -317,14 +317,14 @@ void Camera_demo (void)
 
     if(Cap.Saturation != 1)
     {
-      GUI_DisplayStringAt(0, 0, (uint8_t *)"Camera Saturation feature not supported", CENTER_MODE);
+      UTIL_LCD_DisplayStringAt(0, 0, (uint8_t *)"Camera Saturation feature not supported", CENTER_MODE);
       HAL_Delay(2000);
     }
     else
     {
       BSP_CAMERA_Stop(0);
-      GUI_DisplayStringAt(0, 0, (uint8_t *)"                                               ", CENTER_MODE);
-      GUI_DisplayStringAt(0, 0, (uint8_t *)"Camera Saturation TEST", CENTER_MODE);
+      UTIL_LCD_DisplayStringAt(0, 0, (uint8_t *)"                                               ", CENTER_MODE);
+      UTIL_LCD_DisplayStringAt(0, 0, (uint8_t *)"Camera Saturation TEST", CENTER_MODE);
       BSP_CAMERA_Start(0, (uint8_t *)CAMERA_FRAME_BUFFER, CAMERA_MODE_CONTINUOUS);
       /* Test Saturation */
       while(SaturationIndex < 5)
@@ -341,14 +341,14 @@ void Camera_demo (void)
 
     if(Cap.Brightness != 1)
     {
-      GUI_DisplayStringAt(0, 0, (uint8_t *)"Camera Brightness feature not supported", CENTER_MODE);
+      UTIL_LCD_DisplayStringAt(0, 0, (uint8_t *)"Camera Brightness feature not supported", CENTER_MODE);
       HAL_Delay(2000);
     }
     else
     {
       BSP_CAMERA_Stop(0);
-      GUI_DisplayStringAt(0, 0, (uint8_t *)"                                               ", CENTER_MODE);
-      GUI_DisplayStringAt(0, 0, (uint8_t *)"Camera Brightness TEST", CENTER_MODE);
+      UTIL_LCD_DisplayStringAt(0, 0, (uint8_t *)"                                               ", CENTER_MODE);
+      UTIL_LCD_DisplayStringAt(0, 0, (uint8_t *)"Camera Brightness TEST", CENTER_MODE);
       BSP_CAMERA_Start(0, (uint8_t *)CAMERA_FRAME_BUFFER, CAMERA_MODE_CONTINUOUS);
 
       /* Test Brightness */
@@ -365,14 +365,14 @@ void Camera_demo (void)
 
     if(Cap.ColorEffect != 1)
     {
-      GUI_DisplayStringAt(0, 0, (uint8_t *)"Camera Special Effect feature not supported", CENTER_MODE);
+      UTIL_LCD_DisplayStringAt(0, 0, (uint8_t *)"Camera Special Effect feature not supported", CENTER_MODE);
       HAL_Delay(2000);
     }
     else
     {
       BSP_CAMERA_Stop(0);
-      GUI_DisplayStringAt(0, 0, (uint8_t *)"                                               ", CENTER_MODE);
-      GUI_DisplayStringAt(0, 0, (uint8_t *)"Camera Special Effect TEST                 ", CENTER_MODE);
+      UTIL_LCD_DisplayStringAt(0, 0, (uint8_t *)"                                               ", CENTER_MODE);
+      UTIL_LCD_DisplayStringAt(0, 0, (uint8_t *)"Camera Special Effect TEST                 ", CENTER_MODE);
       BSP_CAMERA_Start(0, (uint8_t *)CAMERA_FRAME_BUFFER, CAMERA_MODE_CONTINUOUS);
       /* Test Camera Special Effects */
       while(EffectIndex < 7)
@@ -388,19 +388,19 @@ void Camera_demo (void)
 
     if(Cap.NightMode != 1)
     {
-      GUI_DisplayStringAt(0, 0, (uint8_t *)"Camera Night Mode feature not supported", CENTER_MODE);
+      UTIL_LCD_DisplayStringAt(0, 0, (uint8_t *)"Camera Night Mode feature not supported", CENTER_MODE);
       HAL_Delay(2000);
     }
     else
     {
       BSP_CAMERA_Stop(0);
-      GUI_DisplayStringAt(0, 0, (uint8_t *)"CAMERA NIGHT MODE ENABLED                  ", CENTER_MODE);
+      UTIL_LCD_DisplayStringAt(0, 0, (uint8_t *)"CAMERA NIGHT MODE ENABLED                  ", CENTER_MODE);
       BSP_CAMERA_Start(0, (uint8_t *)CAMERA_FRAME_BUFFER, CAMERA_MODE_CONTINUOUS);
       BSP_CAMERA_EnableNightMode(0);
       HAL_Delay(2000);
 
       BSP_CAMERA_Stop(0);
-      GUI_DisplayStringAt(0, 0, (uint8_t *)"CAMERA NIGHT MODE DISABLED                 ", CENTER_MODE);
+      UTIL_LCD_DisplayStringAt(0, 0, (uint8_t *)"CAMERA NIGHT MODE DISABLED                 ", CENTER_MODE);
       BSP_CAMERA_Start(0, (uint8_t *)CAMERA_FRAME_BUFFER, CAMERA_MODE_CONTINUOUS);
       BSP_CAMERA_DisableNightMode(0);
       HAL_Delay(2000);
@@ -432,20 +432,20 @@ static void Camera_SetHint(void)
   BSP_LCD_GetYSize(0, &y_size);
 
   /* Clear the LCD */
-  GUI_Clear(GUI_COLOR_WHITE);
+  UTIL_LCD_Clear(UTIL_LCD_COLOR_WHITE);
 
   /* Set Camera Demo description */
-  GUI_FillRect(0, 0, x_size, 120, GUI_COLOR_BLUE);
-  GUI_SetTextColor(GUI_COLOR_WHITE);
-  GUI_SetBackColor(GUI_COLOR_BLUE);
-  GUI_SetFont(&Font24);
-  GUI_DisplayStringAt(0, 0, (uint8_t *)"CAMERA EXAMPLE", CENTER_MODE);
-  GUI_SetFont(&Font12);
-  GUI_DisplayStringAt(0, 30, (uint8_t *)"     Press User button for next menu     ", CENTER_MODE);
+  UTIL_LCD_FillRect(0, 0, x_size, 120, UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_SetFont(&Font24);
+  UTIL_LCD_DisplayStringAt(0, 0, (uint8_t *)"CAMERA EXAMPLE", CENTER_MODE);
+  UTIL_LCD_SetFont(&Font12);
+  UTIL_LCD_DisplayStringAt(0, 30, (uint8_t *)"     Press User button for next menu     ", CENTER_MODE);
 
   /* Set the LCD Text Color */
-  GUI_DrawRect(10, 130, x_size - 20, y_size - 130, GUI_COLOR_BLUE);
-  GUI_DrawRect(11, 131, x_size - 22, y_size - 132, GUI_COLOR_BLUE);
+  UTIL_LCD_DrawRect(10, 130, x_size - 20, y_size - 130, UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_DrawRect(11, 131, x_size - 22, y_size - 132, UTIL_LCD_COLOR_BLUE);
 }
 
 /**

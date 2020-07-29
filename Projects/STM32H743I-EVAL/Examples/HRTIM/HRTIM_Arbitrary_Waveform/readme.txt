@@ -1,9 +1,9 @@
 /**
-  @page HRTIM/HRTIM_Arbitary_Waveform HRTIM Arbitary Waveform example
+  @page HRTIM_Arbitrary_Waveform HRTIM Arbitary Waveform example
   
   @verbatim
   ********************* COPYRIGHT(c) 2017 STMicroelectronics *******************
-  * @file    HRTIM/HRTIM_Arbitary_Waveform/readme.txt 
+  * @file    HRTIM/HRTIM_Arbitrary_Waveform/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the HRTIM1 Arbitary waveform generation
   ******************************************************************************
@@ -75,6 +75,10 @@ The waveforms can be displayed using an oscilloscope.
       Depending on the use case it is also possible to configure the cache attributes using the MPU.
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
+
+@par Keywords
+
+HRTIM, Timer, Logical operation, Set source, Reset source, Arbitrary, Waveforms, Oscilloscope
 
 @par Directory contents 
 

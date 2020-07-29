@@ -360,30 +360,30 @@ static void SG_InitGeneratorMenu(void)
   SG_DisplayBackgroundImage(BackgroundImage,1); 
   
   /* Display Demo title */
-  GUI_SetTextColor(GUI_COLOR_GREEN);
-  GUI_SetBackColor(GUI_COLOR_GRAY);
-  GUI_SetFont(&Font24);
-  GUI_DisplayStringAt(0, 2,(uint8_t *)"SIGNALS GENERATOR", CENTER_MODE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_GREEN);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_GRAY);
+  UTIL_LCD_SetFont(&Font24);
+  UTIL_LCD_DisplayStringAt(0, 2,(uint8_t *)"SIGNALS GENERATOR", CENTER_MODE);
   
-  GUI_SetTextColor(GUI_COLOR_BLUE);
-  GUI_SetBackColor(0xFFCCCFF2);
-  GUI_SetFont(&Font16);
-  GUI_DisplayStringAt(0, 210,(uint8_t *)" Press User Button to enter STANDBY mode ", CENTER_MODE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_SetBackColor(0xFFCCCFF2);
+  UTIL_LCD_SetFont(&Font16);
+  UTIL_LCD_DisplayStringAt(0, 210,(uint8_t *)" Press User Button to enter STANDBY mode ", CENTER_MODE);
 
 
-  GUI_SetTextColor(GUI_COLOR_WHITE);  
-  GUI_FillRect(6, 233 , 466, 34, GUI_COLOR_WHITE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);  
+  UTIL_LCD_FillRect(6, 233 , 466, 34, UTIL_LCD_COLOR_WHITE);
   
-  GUI_SetTextColor(GUI_COLOR_DARKMAGENTA);
-  GUI_SetBackColor(GUI_COLOR_WHITE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_DARKMAGENTA);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_WHITE);
 
-  GUI_DrawRect(3, 230 , 472, 40, GUI_COLOR_WHITE);
-  GUI_DrawRect(4, 231 , 470, 38, GUI_COLOR_WHITE);
+  UTIL_LCD_DrawRect(3, 230 , 472, 40, UTIL_LCD_COLOR_WHITE);
+  UTIL_LCD_DrawRect(4, 231 , 470, 38, UTIL_LCD_COLOR_WHITE);
   
-  GUI_SetFont(&Font20);
-  GUI_DisplayStringAt(20, 234,(uint8_t *) "           STM32H745           ", LEFT_MODE);
-  GUI_SetFont(&Font16);
-  GUI_DisplayStringAt(20, 251,(uint8_t *)"    Dual core STM32 Microcontroller    ", LEFT_MODE);
+  UTIL_LCD_SetFont(&Font20);
+  UTIL_LCD_DisplayStringAt(20, 234,(uint8_t *) "           STM32H745           ", LEFT_MODE);
+  UTIL_LCD_SetFont(&Font16);
+  UTIL_LCD_DisplayStringAt(20, 251,(uint8_t *)"    Dual core STM32 Microcontroller    ", LEFT_MODE);
 
 
   
@@ -604,13 +604,13 @@ static void SG_SetWaveFormat(void)
       sprintf(status_freq , "Freq: ------ HZ");
     }
     
-    GUI_SetFont(&Font12);
-    GUI_SetTextColor(GUI_COLOR_GREEN);
-    GUI_SetBackColor(GUI_COLOR_BLACK);  
-    GUI_DisplayStringAt(364, 156, (uint8_t*)status_type, LEFT_MODE);  
-    GUI_DisplayStringAt(364, 172, (uint8_t*)status_freq, LEFT_MODE);
+    UTIL_LCD_SetFont(&Font12);
+    UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_GREEN);
+    UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_BLACK);  
+    UTIL_LCD_DisplayStringAt(364, 156, (uint8_t*)status_type, LEFT_MODE);  
+    UTIL_LCD_DisplayStringAt(364, 172, (uint8_t*)status_freq, LEFT_MODE);
     sprintf((char*)status_msg ,"Ampl: %lu mV", (waveAmplitude));
-    GUI_DisplayStringAt(364, 188, (uint8_t*)status_msg, LEFT_MODE);   
+    UTIL_LCD_DisplayStringAt(364, 188, (uint8_t*)status_msg, LEFT_MODE);   
     
   }
   else
@@ -618,12 +618,12 @@ static void SG_SetWaveFormat(void)
     
     LCD_CopyImage((uint32_t*)sig_none,(uint32_t *)LCD_FRAME_BUFFER, 360,70, 112, 80, DMA2D_INPUT_ARGB8888, 0);
     
-    GUI_SetFont(&Font12);
-    GUI_SetTextColor(GUI_COLOR_GREEN);
-    GUI_SetBackColor(GUI_COLOR_BLACK);
-    GUI_DisplayStringAt(364, 156,(uint8_t *) "Type:   N.A    ", LEFT_MODE);
-    GUI_DisplayStringAt(364, 172,(uint8_t *) "Freq: ------ HZ", LEFT_MODE);
-    GUI_DisplayStringAt(364, 188,(uint8_t *) "Ampl: ------ mV", LEFT_MODE);
+    UTIL_LCD_SetFont(&Font12);
+    UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_GREEN);
+    UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_BLACK);
+    UTIL_LCD_DisplayStringAt(364, 156,(uint8_t *) "Type:   N.A    ", LEFT_MODE);
+    UTIL_LCD_DisplayStringAt(364, 172,(uint8_t *) "Freq: ------ HZ", LEFT_MODE);
+    UTIL_LCD_DisplayStringAt(364, 188,(uint8_t *) "Ampl: ------ mV", LEFT_MODE);
   }
   
   
@@ -644,10 +644,10 @@ static void SG_EnterGeneratorLowPowerMode(void)
   
   if(BSP_PB_GetState(BUTTON_USER) != RESET)
   {
-    GUI_SetTextColor(GUI_COLOR_RED);
-    GUI_SetBackColor(GUI_COLOR_LIGHTGRAY);
-    GUI_SetFont(&Font12);
-    GUI_DisplayStringAt(0, 212,(uint8_t *) "   The D1 Domain will Enter STANDBY mode after 3 seconds ...   ", CENTER_MODE);
+    UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_RED);
+    UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_LIGHTGRAY);
+    UTIL_LCD_SetFont(&Font12);
+    UTIL_LCD_DisplayStringAt(0, 212,(uint8_t *) "   The D1 Domain will Enter STANDBY mode after 3 seconds ...   ", CENTER_MODE);
     
     /* -2- Configure EXTI15_10 (connected to PC.13 pin) to interrupt CPU1 and CPU2 */
     /* Enable GPIOC clock */
@@ -714,25 +714,25 @@ static void SG_StartGeneratorProcess(void)
   {      
     if (count %2 ==0)
     {
-      GUI_SetFont(&Font12);
-      GUI_SetTextColor(GUI_COLOR_RED); 
+      UTIL_LCD_SetFont(&Font12);
+      UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_RED); 
       sprintf((char*)msg , "!!!AUTO!!!");
-      GUI_SetBackColor(GUI_COLOR_WHITE);
-      GUI_DisplayStringAt(400,240, msg, LEFT_MODE);
+      UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_WHITE);
+      UTIL_LCD_DisplayStringAt(400,240, msg, LEFT_MODE);
     }
     else
     {
-      GUI_SetFont(&Font12);
-      GUI_SetTextColor(GUI_COLOR_WHITE); 
-      GUI_FillRect(400, 240, 70, 15, GUI_COLOR_WHITE);  
+      UTIL_LCD_SetFont(&Font12);
+      UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE); 
+      UTIL_LCD_FillRect(400, 240, 70, 15, UTIL_LCD_COLOR_WHITE);  
     }
     
   } 
   else
   {
-    GUI_SetFont(&Font12);
-    GUI_SetTextColor(GUI_COLOR_WHITE); 
-    GUI_FillRect(400, 240, 70, 15, GUI_COLOR_WHITE);  
+    UTIL_LCD_SetFont(&Font12);
+    UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE); 
+    UTIL_LCD_FillRect(400, 240, 70, 15, UTIL_LCD_COLOR_WHITE);  
   }
 
 

@@ -78,6 +78,10 @@ int main(void)
   /*##-1- Link the USB Host disk I/O driver ##################################*/
   if(FATFS_LinkDriver(&USBH_Driver, USBDISKPath) == 0)
   {
+	  
+	/* Enable the USB voltage level detector */
+    HAL_PWREx_EnableUSBVoltageDetector();
+	
     /*##-2- Init Host Library ################################################*/
     USBH_Init(&hUSB_Host, USBH_UserProcess, 0);
     
@@ -86,10 +90,7 @@ int main(void)
     
     /*##-4- Start Host Process ###############################################*/
     USBH_Start(&hUSB_Host);
-    
-    /* Enable the USB voltage level detector */
-    HAL_PWREx_EnableUSBVoltageDetector();
-  
+     
     /*##-5- Run Application (Blocking mode) ##################################*/
     while (1)
     {
@@ -290,6 +291,8 @@ static void SystemClock_Config(void)
   PeriphClkInitStruct.PLL3.PLL3P = 2;
   PeriphClkInitStruct.PLL3.PLL3R = 2;
   PeriphClkInitStruct.PLL3.PLL3Q = 7; /* 336/7 =48Mhz*/
+  PeriphClkInitStruct.PLL3.PLL3VCOSEL = RCC_PLL3VCOMEDIUM;
+  PeriphClkInitStruct.PLL3.PLL3RGE = RCC_PLL3VCIRANGE_0;
   
   
   PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_USB;

@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    lcd.h
   * @author  MCD Application Team
-  * @brief   This file contains all the functions prototypes for the LCD driver.   
+  * @brief   This file contains all the functions prototypes for the LCD driver.
   ******************************************************************************
   * @attention
   *
@@ -15,7 +15,7 @@
   *                        opensource.org/licenses/BSD-3-Clause
   *
   ******************************************************************************
-  */ 
+  */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef LCD_H
@@ -23,11 +23,11 @@
 
 #ifdef __cplusplus
  extern "C" {
-#endif 
+#endif
 
 /* Includes ------------------------------------------------------------------*/
 #include <stdint.h>
-   
+
 /** @addtogroup BSP
   * @{
   */
@@ -50,11 +50,11 @@
 #define LCD_PIXEL_FORMAT_ARGB4444        0x00000004U   /*!< ARGB4444 LTDC pixel format */
 #define LCD_PIXEL_FORMAT_L8              0x00000005U   /*!< L8 LTDC pixel format       */
 #define LCD_PIXEL_FORMAT_AL44            0x00000006U   /*!< AL44 LTDC pixel format     */
-#define LCD_PIXEL_FORMAT_AL88            0x00000007U   /*!< AL88 LTDC pixel format     */  
+#define LCD_PIXEL_FORMAT_AL88            0x00000007U   /*!< AL88 LTDC pixel format     */
 /**
   * @}
   */
- 
+
 /** @defgroup LCD_Exported_Types
   * @{
   */
@@ -65,7 +65,7 @@
 typedef struct
 {
   int32_t ( *DrawBitmap      ) (uint32_t, uint32_t, uint32_t, uint8_t *);
-  int32_t ( *FillRGBRect     ) (uint32_t, uint32_t, uint32_t, uint8_t*, uint32_t, uint32_t);  
+  int32_t ( *FillRGBRect     ) (uint32_t, uint32_t, uint32_t, uint8_t*, uint32_t, uint32_t);
   int32_t ( *DrawHLine       ) (uint32_t, uint32_t, uint32_t, uint32_t, uint32_t);
   int32_t ( *DrawVLine       ) (uint32_t, uint32_t, uint32_t, uint32_t, uint32_t);
   int32_t ( *FillRect        ) (uint32_t, uint32_t, uint32_t, uint32_t, uint32_t, uint32_t);
@@ -75,7 +75,7 @@ typedef struct
   int32_t ( *GetYSize        ) (uint32_t, uint32_t *);
   int32_t ( *SetLayer        ) (uint32_t, uint32_t);
   int32_t ( *GetFormat       ) (uint32_t, uint32_t *);
-} GUI_Drv_t;
+} LCD_UTILS_Drv_t;
 
 typedef struct
 {
@@ -85,15 +85,15 @@ typedef struct
   int32_t (*ReadID           )(void*, uint32_t*);
   int32_t (*DisplayOn        )(void*);
   int32_t (*DisplayOff       )(void*);
-  int32_t (*SetBrightness    )(void*, uint32_t); 
-  int32_t (*GetBrightness    )(void*, uint32_t*);   
+  int32_t (*SetBrightness    )(void*, uint32_t);
+  int32_t (*GetBrightness    )(void*, uint32_t*);
   int32_t (*SetOrientation   )(void*, uint32_t);
   int32_t (*GetOrientation   )(void*, uint32_t*);
 
   /* Drawing functions*/
-  int32_t ( *SetCursor       ) (void*, uint32_t, uint32_t); 
+  int32_t ( *SetCursor       ) (void*, uint32_t, uint32_t);
   int32_t ( *DrawBitmap      ) (void*, uint32_t, uint32_t, uint8_t *);
-  int32_t ( *FillRGBRect     ) (void*, uint32_t, uint32_t, uint8_t*, uint32_t, uint32_t);  
+  int32_t ( *FillRGBRect     ) (void*, uint32_t, uint32_t, uint8_t*, uint32_t, uint32_t);
   int32_t ( *DrawHLine       ) (void*, uint32_t, uint32_t, uint32_t, uint32_t);
   int32_t ( *DrawVLine       ) (void*, uint32_t, uint32_t, uint32_t, uint32_t);
   int32_t ( *FillRect        ) (void*, uint32_t, uint32_t, uint32_t, uint32_t, uint32_t);

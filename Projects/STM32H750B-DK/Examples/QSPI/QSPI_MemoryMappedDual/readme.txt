@@ -66,6 +66,10 @@ The code enter a infinite while loop as soon as a comparison error occurs or an 
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
 
+@par Keywords
+
+Memory, QSPI, Erase, Read, Write, Mapped, Dual
+
 @par Directory contents 
 
   - QSPI/QSPI_MemoryMappedDual/Inc/stm32h7xx_hal_conf.h HAL configuration file

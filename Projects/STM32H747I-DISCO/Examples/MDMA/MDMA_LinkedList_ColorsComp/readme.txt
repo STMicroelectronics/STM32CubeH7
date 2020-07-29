@@ -1,5 +1,5 @@
 ﻿/**
-  @page MDMA linked list for colors decomposing example description
+  @page MDMA_LinkedList_ColorsComp MDMA linked list for colors decomposing example description
   
   @verbatim
   ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
@@ -111,6 +111,9 @@ The check could be done using this macro : __HAL_RCC_GET_FLAG(RCC_FLAG_D2CKRDY).
 @note The example need to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
+@par Keywords
+
+System, MDMA, Linked List, Display, LCD, SW Request, Image, Colors, Extract, Resize, Decimate, ARGB8888, Pixel
 
 @par Directory contents
 

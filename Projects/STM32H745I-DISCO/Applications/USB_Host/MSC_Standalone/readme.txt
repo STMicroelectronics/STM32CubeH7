@@ -90,7 +90,7 @@ requirements, such as:
 
 @par Keywords
 
-Connectivity, USB Host, MSC, Mass Storage, Full Speed, High Speed, BOT, SCSI, Removable drive, FatFs,
+Connectivity, USB_Host, USB, MSC, Mass Storage, Full Speed, High Speed, BOT, SCSI, Removable drive,
 File system, Write, Read, Format
 
 

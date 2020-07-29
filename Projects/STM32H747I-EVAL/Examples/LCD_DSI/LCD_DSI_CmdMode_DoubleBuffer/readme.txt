@@ -82,7 +82,7 @@ buffer while a second image is displayed.
 
 @par Keywords
 
-Graphic, Display, LCD, DSI, MIPI Alliance, Command mode, Double Buffering, LTDC, DMA2D, QVGA, ARGB8888
+Graphics, Display, LCD, DSI, MIPI Alliance, Command mode, Double Buffering, LTDC, DMA2D, QVGA, ARGB8888
 
 @par Directory contents
 

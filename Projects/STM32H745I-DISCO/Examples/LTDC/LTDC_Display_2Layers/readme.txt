@@ -97,7 +97,7 @@ STM32H745I Disco board's LED can be used to monitor the transfer status:
 
 @par Keywords
 
-Display, LTDC, Display Controller, TFT, LCD, Graphic, RGB888, 2 Layers, RGB, 
+Display, LTDC, Display Controller, TFT, LCD, Graphics, RGB888, 2 Layers, RGB, 
 
 
 @Note Cortex-M7, If the  application is using the DTCM/ITCM memories (@0x20000000/ 0x0000000: not cacheable and only accessible

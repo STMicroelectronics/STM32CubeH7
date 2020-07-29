@@ -90,9 +90,11 @@ The SystemClock_Config() function is used to set the Flash latency and  to confi
 For more details about FreeRTOS implementation on STM32Cube, please refer to UM1722 "Developing Applications 
 on STM32Cube with RTOS".
 
+@par Keywords
+
+RTOS, FreeRTOS, multiprocessor, Thread,  HSEM, Semaphore, Software Semaphore, Hardware Semaphore, Priorities, Notification, Interrupt
 
 @par Directory contents
-
 
     - FreeRTOS/FreeRTOS_HwSemaphoreCoreSync/Commmon/Src/system_stm32h7xx.c  STM32H7xx system configuration source file
     - FreeRTOS/FreeRTOS_HwSemaphoreCoreSync/Commmon/Inc/FreeRTOSConfig.h    FreeRTOS Configuration file

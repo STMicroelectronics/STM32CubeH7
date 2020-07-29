@@ -124,8 +124,6 @@ This projects is configured for STM32H745xx devices using STM32CubeH7 HAL and ru
 NUCLEO-H745ZI-Q board from STMicroelectronics.
 
 
-
-
 @note Care must be taken when using HAL_Delay(), this function provides accurate delay (in milliseconds)
       based on variable incremented in SysTick ISR. This implies that if HAL_Delay() is called from
       a peripheral ISR process, then the SysTick interrupt must have higher priority (numerically lower)
@@ -147,6 +145,10 @@ NUCLEO-H745ZI-Q board from STMicroelectronics.
 
 @note The application need to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
+
+@par Keywords
+
+System, Power, PWR, Voltage scaling, VOS0, Over clocking, LDO, multiprocessor
 
 @par Directory contents
 

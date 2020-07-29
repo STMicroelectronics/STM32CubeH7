@@ -17,6 +17,16 @@
   ******************************************************************************
   @endverbatim
 
+### 17-Jan-2020 ###
+========================
+   + Add in template directory the files :
+     - aes_alt_template.[c/h] : mbed TLS AES Hw crypto using HAL/CRYP API
+
+### 10-Dec-2019 ###
+========================
+   + Upgrade to use mbedTLS V2.16.2
+
+
 ### 21-Dec-2018 ###
 ========================
    + Upgrade to use mbedTLS V2.14.1

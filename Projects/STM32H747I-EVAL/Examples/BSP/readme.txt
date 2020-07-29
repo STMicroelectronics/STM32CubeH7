@@ -108,6 +108,11 @@ flash memory using QSPI communication.
 ** Potentiometer **
 This example shows how to get the potentiometer’s voltage level.
 
+@par Keywords
+
+BSP, Board support package, DMA, Audio play, Headphone, Audio record, microphone, Touchscreen, Joystick, LCD, MDMA,
+SD Card, SRAM, SDRAM, NOR, EEPROM, QSPI, QUADSPI, Potentiometer, Display, LED, Button
+
 @par Directory contents
 
   - BSP/Common/Src/system_stm32h7xx.c     STM32H7xx system configuration source file

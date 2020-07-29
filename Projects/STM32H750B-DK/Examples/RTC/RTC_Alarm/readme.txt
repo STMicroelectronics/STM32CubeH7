@@ -84,6 +84,10 @@ STM32H750B-DISCO board from STMicroelectronics.
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
 
+@par Keywords
+
+System, RTC, Alarm, Wakeup timer, Backup domain, Counter, LSE, LSI
+
 @par Directory contents
 
  - "RTC/RTC_Alarm/Inc": contains the example firmware header files

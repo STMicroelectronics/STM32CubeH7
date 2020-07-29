@@ -32,7 +32,7 @@
 #include "stm32h745i_discovery_audio.h"
 #include "stm32h745i_discovery_qspi.h"
 #include "stm32h745i_discovery_mmc.h"
-#include "basic_gui.h"
+#include "stm32_lcd.h"
 
 
 

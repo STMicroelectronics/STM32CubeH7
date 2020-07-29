@@ -65,7 +65,7 @@ extern "C" {
 
 #ifndef GENERATOR_WAKAAMACLIENT_CLOUD
 #define  NET_MBEDTLS_HOST_SUPPORT
-#endif
+#endif /* GENERATOR_WAKAAMACLIENT_CLOUD */
 
 #include "net_conf_template.h"
 

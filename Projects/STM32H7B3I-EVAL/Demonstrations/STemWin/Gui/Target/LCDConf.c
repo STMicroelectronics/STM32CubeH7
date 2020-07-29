@@ -501,13 +501,21 @@ static void LCD_LL_Init(void)
   hltdc.Init.Backcolor.Green = 0;
   hltdc.Init.Backcolor.Red = 0;
 
+  /* RK070ER9427 typical PCLK is 33.3 MHz so the PLL3R is configured to provide this clock */
+  /* RK070ER9427 LCD clock configuration */
+  /* PLL3_VCO Input = HSE_VALUE/PLL3M = 2 Mhz */
+  /* PLL3_VCO Output = PLL3_VCO Input * PLL3N = 400 Mhz */
+  /* PLLLCDCLK = PLL3_VCO Output/PLL3R = 400/12 = 33.3Mhz */
+  /* LTDC clock frequency = PLLLCDCLK = 33.3 Mhz */
   periph_clk_init_struct.PeriphClockSelection = RCC_PERIPHCLK_LTDC;
   periph_clk_init_struct.PLL3.PLL3M = 12;
-  periph_clk_init_struct.PLL3.PLL3N = 400;
+  periph_clk_init_struct.PLL3.PLL3N = 200;
   periph_clk_init_struct.PLL3.PLL3FRACN = 0;
   periph_clk_init_struct.PLL3.PLL3P = 2;
   periph_clk_init_struct.PLL3.PLL3Q = 2;
-  periph_clk_init_struct.PLL3.PLL3R = 24;
+  periph_clk_init_struct.PLL3.PLL3R = 12;
+  periph_clk_init_struct.PLL3.PLL3VCOSEL = RCC_PLL3VCOMEDIUM;
+  periph_clk_init_struct.PLL3.PLL3RGE = RCC_PLL3VCIRANGE_0;
   HAL_RCCEx_PeriphCLKConfig(&periph_clk_init_struct);
 
   /* Polarity */

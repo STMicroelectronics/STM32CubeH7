@@ -100,7 +100,12 @@ This example shows how to erase, write and read the SDRAM memory in DMA mode.
 This example provides of how to write, read and buffers compare for external 
 flash memory using QSPI communication.
 
-      
+
+@par Keywords
+
+BSP, Board support package, DMA, Audio play, Headphone, Audio record, microphone, Touchscreen, Joystick, LCD, LTDC, DMA2D, MDMA,
+SD Card, SDRAM, QSPI, QUADSPI, Display, LED, Button
+
 @par Directory contents 
 
   - BSP/Common/Src/system_stm32h7xx.c     STM32H7xx system configuration source file 

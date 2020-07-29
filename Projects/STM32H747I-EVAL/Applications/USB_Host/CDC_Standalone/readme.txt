@@ -119,7 +119,7 @@ requirements, such as:
 
 @par Keywords
 
-Connectivity, USB Host, Full Speed, High Speed, CDC, PSTN, HyperTerminal, VCP, Com port,
+Connectivity, USB_Host, USB, UART, Full Speed, High Speed, CDC, PSTN, HyperTerminal, VCP, Com port
 
 
 

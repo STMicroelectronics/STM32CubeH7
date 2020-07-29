@@ -62,10 +62,6 @@ The APB clock dividers for D1 Domain APB3 peripherals, D2 Domain APB1 and APB2 p
 
 For details about this application, refer to UM1713 "STM32Cube interfacing with LwIP and applications"
 
-@par Keywords
-
-Connectivity, LwIP, Ethernet, HTTP Server, Netconn, TCP/IP, FreeRTOS, DHCP	
-
 @Note  The internal DMA of the Ethernet peripheral can't access the DTCM memory (@0x20000000)
        of the STM32H7, All data accessible by the Ethernet DMA must be located in the D1 or D2 SRAM.
        For more details please refer to "ethernetif.c" file.
@@ -85,6 +81,11 @@ Connectivity, LwIP, Ethernet, HTTP Server, Netconn, TCP/IP, FreeRTOS, DHCP
       Depending on the use case it is also possible to configure the cache attributes using the MPU.
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
+
+
+@par Keywords
+
+Connectivity, LwIP, Ethernet, HTTP Server, Netconn, TCP/IP, FreeRTOS, DHCP
 
 @par Directory contents
 

@@ -53,10 +53,6 @@ In case of error, LED3 is toggling at a frequency of 1Hz.
       to have correct HAL operation.
 
 
-@par Keywords
-
-Analog, RNG, Random, FIPS PUB 140-2, Analog Random number generator, Entropy, Period
-
 @Note If the  application is using the DTCM/ITCM memories (@0x20000000/ 0x0000000: not cacheable and only accessible
       by the Cortex M7 and the MDMA), no need for cache maintenance when the Cortex M7 and the MDMA access these RAMs.
       If the application needs to use DMA(or other masters) based access or requires more RAM, then the user has to:
@@ -68,6 +64,10 @@ Analog, RNG, Random, FIPS PUB 140-2, Analog Random number generator, Entropy, Pe
 @Note It is recommended to enable the cache and maintain its coherence.
               Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
               Please refer to the AN4839 "Level 1 cache on STM32F7 Series and STM32H7 Series"
+
+@par Keywords
+
+Analog, RNG, Random, FIPS PUB 140-2, Analog Random number generator, Entropy, Period
 
 @par Directory contents 
 

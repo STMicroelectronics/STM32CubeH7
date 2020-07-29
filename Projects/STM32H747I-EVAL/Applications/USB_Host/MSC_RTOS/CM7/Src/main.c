@@ -199,7 +199,7 @@ static void MSC_InitApplication(void)
 
   /* Initialize the LCD */
   BSP_LCD_Init(0, LCD_ORIENTATION_LANDSCAPE);
-  GUI_SetFuncDriver(&LCD_Driver);
+  UTIL_LCD_SetFuncDriver(&LCD_Driver);
 
   /* Initialize the LCD Log module */
   UTIL_LCD_TRACE_Init();
@@ -287,6 +287,8 @@ void SystemClock_Config(void)
   PeriphClkInitStruct.PLL3.PLL3P = 2;
   PeriphClkInitStruct.PLL3.PLL3Q = 10;
   PeriphClkInitStruct.PLL3.PLL3R = 18;
+  PeriphClkInitStruct.PLL3.PLL3VCOSEL = RCC_PLL3VCOWIDE;
+  PeriphClkInitStruct.PLL3.PLL3RGE = RCC_PLL3VCIRANGE_2;
 
   PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_USB;
   PeriphClkInitStruct.UsbClockSelection = RCC_USBCLKSOURCE_PLL3;

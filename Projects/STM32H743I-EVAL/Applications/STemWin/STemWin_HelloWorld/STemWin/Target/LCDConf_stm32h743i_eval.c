@@ -546,6 +546,12 @@ static void LCD_LL_Init(void)
   hltdc.Init.Backcolor.Green = 0;
   hltdc.Init.Backcolor.Red = 0;
   
+  /* AMPIRE640480 typical PCLK is 25 MHz so the PLL3R is configured to provide this clock */ 
+  /* AMPIRE640480 LCD clock configuration */
+  /* PLL3_VCO Input = HSE_VALUE/PLL3M = 5 Mhz */
+  /* PLL3_VCO Output = PLL3_VCO Input * PLL3N = 800 Mhz */
+  /* PLLLCDCLK = PLL3_VCO Output/PLL3R = 800/32 = 25Mhz */
+  /* LTDC clock frequency = PLLLCDCLK = 25 Mhz */  
   periph_clk_init_struct.PeriphClockSelection = RCC_PERIPHCLK_LTDC;
   periph_clk_init_struct.PLL3.PLL3M = 5;		
   periph_clk_init_struct.PLL3.PLL3N = 160;
@@ -553,6 +559,8 @@ static void LCD_LL_Init(void)
   periph_clk_init_struct.PLL3.PLL3P = 2;
   periph_clk_init_struct.PLL3.PLL3Q = 2;
   periph_clk_init_struct.PLL3.PLL3R = 32;
+  periph_clk_init_struct.PLL3.PLL3VCOSEL = RCC_PLL3VCOWIDE;
+  periph_clk_init_struct.PLL3.PLL3RGE = RCC_PLL3VCIRANGE_2;
   HAL_RCCEx_PeriphCLKConfig(&periph_clk_init_struct); 
   
   /* Polarity */

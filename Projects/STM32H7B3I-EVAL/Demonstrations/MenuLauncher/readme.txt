@@ -1,5 +1,5 @@
 /**
-  @page Demo   STM32H7B3I-EVAL Menu Launcher Demonstration Firmware
+  @page MenuLauncher   STM32H7B3I-EVAL Menu Launcher Demonstration Firmware
  
   @verbatim
   ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
@@ -20,7 +20,7 @@
   ******************************************************************************
   @endverbatim
 
-@par Menu Launcher Demonstration Overview
+@par Demo Description
 
 The Menu Launcher application is a sliding icons bar solution which provides a menu of supported demos.
 It's based on the STM32H7B3xx and and the TouchGFX APIs. 
@@ -31,6 +31,10 @@ When selecting a demo, an overview is displayed and the user can choose between 
 Note:
 before running any demo, make sure that the selected demo is already programmed.
 For more details on the supported demos, please refer to the readme.txt files delivered with the demos packages.
+
+@par Keywords
+
+Demonstration, MenuLauncher
 
 @par How to use it?
 

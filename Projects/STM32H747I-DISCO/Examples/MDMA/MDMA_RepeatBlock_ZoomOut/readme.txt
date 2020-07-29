@@ -1,5 +1,5 @@
 ﻿/**
-  @page MDMA RepeatBlock ZoomOut example descreption
+  @page MDMA_RepeatBlock_ZoomOut MDMA RepeatBlock ZoomOut example descreption
   
   @verbatim
   ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
@@ -134,7 +134,9 @@ STM32H747I Disco board's LED can be used to monitor the transfer status:
 @note The example need to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
-Display, Graphic, MDMA, LCD, DMA2D, SDRAM, RGB565, Memory to memory, LTDC, Pixel, non-contiguous,
+@par Keywords
+
+Display, Graphics, MDMA, LCD, DMA2D, SDRAM, RGB565, Memory to memory, LTDC, Pixel, non-contiguous,
 Repeat blocks
 
 @par Directory contents

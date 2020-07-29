@@ -131,47 +131,47 @@ int main(void)
   HAL_LTDC_ProgramLineEvent(&hlcd_ltdc, 0); 
 
 
-  GUI_SetFuncDriver(&LCD_Driver);
-  GUI_SetLayer(0);
-  GUI_Clear(GUI_COLOR_BLACK);  
+  UTIL_LCD_SetFuncDriver(&LCD_Driver);
+  UTIL_LCD_SetLayer(0);
+  UTIL_LCD_Clear(UTIL_LCD_COLOR_BLACK);  
 
   /* Copy texture to be displayed on LCD from Flash to SDRAM */
   CopyPicture((uint32_t *)&image_320x240_argb8888, (uint32_t *)LCD_FRAME_BUFFER, 240, 100, 320, 240);
 
   /* Prepare area to display frame number in the image displayed on LCD */
-  GUI_SetTextColor(GUI_COLOR_BLUE);
-  GUI_FillRect(0, 400, LCD_X_Size, 80, GUI_COLOR_BLUE);
-  GUI_SetTextColor(GUI_COLOR_WHITE);
-  GUI_SetBackColor(GUI_COLOR_BLUE);
-  GUI_SetFont(&Font16);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_FillRect(0, 400, LCD_X_Size, 80, UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_SetFont(&Font16);
 
   /* Display title */
-  GUI_DisplayStringAt(0, 420, (uint8_t *) "LCD_DSI_ULPM_Data example", CENTER_MODE);
-  GUI_DisplayStringAt(0, 440, (uint8_t *) "Press TAMPER button to enter ULPM", CENTER_MODE);
+  UTIL_LCD_DisplayStringAt(0, 420, (uint8_t *) "LCD_DSI_ULPM_Data example", CENTER_MODE);
+  UTIL_LCD_DisplayStringAt(0, 440, (uint8_t *) "Press TAMPER button to enter ULPM", CENTER_MODE);
 
-  GUI_SetTextColor(GUI_COLOR_WHITE);
-  GUI_SetBackColor(GUI_COLOR_BLUE);
-  GUI_SetFont(&Font16);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_SetFont(&Font16);
 
   /* Infinite loop */
   while (1)
   {
     /* Clear previous line */
-    GUI_ClearStringLine(460);
+    UTIL_LCD_ClearStringLine(460);
 
     /* New text to display */
     sprintf(str_display, ">> Frame Nb : %lu", frameCnt);
 
     /* Print updated frame number */
-    GUI_DisplayStringAt(0, 460, (uint8_t *)str_display, CENTER_MODE);
+    UTIL_LCD_DisplayStringAt(0, 460, (uint8_t *)str_display, CENTER_MODE);
 
     if (CheckForUserInput() > 0)
     {
       /* Clear previous line */
-      GUI_SetTextColor(GUI_COLOR_GREEN);
-      GUI_ClearStringLine(440);
-      GUI_DisplayStringAt(0, 440, (uint8_t *) "          Enter ULPM - switch Off LCD 6 seconds          ", CENTER_MODE);
-      GUI_SetTextColor(GUI_COLOR_WHITE);
+      UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_GREEN);
+      UTIL_LCD_ClearStringLine(440);
+      UTIL_LCD_DisplayStringAt(0, 440, (uint8_t *) "          Enter ULPM - switch Off LCD 6 seconds          ", CENTER_MODE);
+      UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
 
       HAL_Delay(1000);
       /* Display Off with ULPM management Data lane only integrated */
@@ -191,8 +191,8 @@ int main(void)
       
       HAL_Delay(6000);
 
-      GUI_ClearStringLine(440);
-      GUI_DisplayStringAt(0, 440, (uint8_t *) " Exited ULPM with success - Press To enter Again ULPM. ", CENTER_MODE);
+      UTIL_LCD_ClearStringLine(440);
+      UTIL_LCD_DisplayStringAt(0, 440, (uint8_t *) " Exited ULPM with success - Press To enter Again ULPM. ", CENTER_MODE);
       
       /* Exit ultra low power mode (data lane only integrated) */
       HAL_DSI_ExitULPMData(&hlcd_dsi);
@@ -223,13 +223,13 @@ static uint8_t CheckForUserInput(void)
     do
     {
       /* Clear previous line */
-      GUI_ClearStringLine(460);
+      UTIL_LCD_ClearStringLine(460);
 
       /* New text to display */
       sprintf(str_display, ">> Frame Nb : %lu", frameCnt);
 
       /* Print updated frame number */
-      GUI_DisplayStringAt(0, 460, (uint8_t *)str_display, CENTER_MODE);
+      UTIL_LCD_DisplayStringAt(0, 460, (uint8_t *)str_display, CENTER_MODE);
 
     } while (BSP_PB_GetState(BUTTON_TAMPER) == GPIO_PIN_RESET);
 

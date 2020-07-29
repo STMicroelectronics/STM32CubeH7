@@ -112,6 +112,10 @@ STM32H747I Eval board's LEDs can be used to monitor the transfer status:
 @note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
+@par Keywords
+
+System, MDMA, DMA, DMA2D, Linked list, Display, Image, LCD, SDRAM, Transfer, Memory to memory, Flash, Frame buffer, Mirror effect, Rotation
+
 @par Directory contents 
 
   - MDMA/MDMA_DMA2D_Triggering/Common/Src/system_stm32h7xx.c     STM32H7xx system configuration source file 

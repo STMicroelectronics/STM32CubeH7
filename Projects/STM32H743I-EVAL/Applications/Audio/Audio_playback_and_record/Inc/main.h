@@ -35,7 +35,7 @@
 #include "ff.h"    
 #include "ff_gen_drv.h"
 #include "usbh_diskio.h"
-#include "basic_gui.h"
+#include "stm32_lcd.h"
 #include "lcd_trace.h"
 #include "utilities_conf.h"
 /* Exported Defines ----------------------------------------------------------*/

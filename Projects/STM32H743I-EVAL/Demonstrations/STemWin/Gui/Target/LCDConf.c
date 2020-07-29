@@ -262,11 +262,14 @@ void DMA2D_IRQHandler(void);
 #endif
      
 /* Define the offset of the frame to be used */
-     #define FRAMEBUFFER_SIZE  (XSIZE_PHYS * YSIZE_PHYS * 2)
+#define FRAMEBUFFER_SIZE  (XSIZE_PHYS * YSIZE_PHYS * 2)
 #if defined ( __ICCARM__ )
+#pragma data_alignment=32
 #pragma location="framebuffer"
-#elif !defined(WIN32)
-__attribute__((section(".framebuffer")))
+#elif defined(__CC_ARM)
+__attribute__((section(".framebuffer"), zero_init)) __attribute__ ((aligned (32)))
+#elif defined(__GNUC__)
+__attribute__((section(".framebuffer"))) __attribute__ ((aligned (32)))
 #endif
 static U8 Framebuffers[GUI_NUM_LAYERS][(NUM_BUFFERS * FRAMEBUFFER_SIZE)];
 
@@ -666,6 +669,8 @@ static void LCD_LL_Init(void)
   periph_clk_init_struct.PLL3.PLL3P = 2;
   periph_clk_init_struct.PLL3.PLL3Q = 2;	
   periph_clk_init_struct.PLL3.PLL3FRACN = 0;
+  periph_clk_init_struct.PLL3.PLL3VCOSEL = RCC_PLL3VCOWIDE;
+  periph_clk_init_struct.PLL3.PLL3RGE = RCC_PLL3VCIRANGE_2;
   HAL_RCCEx_PeriphCLKConfig(&periph_clk_init_struct); 
   
   /* Polarity */

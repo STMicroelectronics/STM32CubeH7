@@ -73,6 +73,9 @@ int main(void)
 
   /* Init Dual Core Application */
   DUAL_InitApplication();
+  
+  /* Enable the USB voltage level detector */
+  HAL_PWREx_EnableUSBVoltageDetector();
 
   /* Init HS Core */
   USBH_Init(&hUSBHost_HS, USBH_HS_UserProcess, 1);
@@ -87,9 +90,6 @@ int main(void)
   /* Start Host Process */
   USBH_Start(&hUSBHost_FS);
   USBH_Start(&hUSBHost_HS);
-
-  /* Enable the USB voltage level detector */
-  HAL_PWREx_EnableUSBVoltageDetector();
 
   /* Run Application (Blocking mode) */
   while (1)
@@ -117,7 +117,7 @@ static void DUAL_InitApplication(void)
   BSP_JOY_Init(JOY1, JOY_MODE_EXTI, JOY_ALL);
   /* Initialize the LCD */
   BSP_LCD_Init(0, LCD_ORIENTATION_LANDSCAPE);
-  GUI_SetFuncDriver(&LCD_Driver);
+  UTIL_LCD_SetFuncDriver(&LCD_Driver);
 
 
 
@@ -274,6 +274,8 @@ void SystemClock_Config(void)
   PeriphClkInitStruct.PLL3.PLL3P = 2;
   PeriphClkInitStruct.PLL3.PLL3Q = 10;
   PeriphClkInitStruct.PLL3.PLL3R = 18;
+  PeriphClkInitStruct.PLL3.PLL3VCOSEL = RCC_PLL3VCOWIDE;
+  PeriphClkInitStruct.PLL3.PLL3RGE = RCC_PLL3VCIRANGE_2;
 
   PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_USB;
   PeriphClkInitStruct.UsbClockSelection = RCC_USBCLKSOURCE_PLL3;

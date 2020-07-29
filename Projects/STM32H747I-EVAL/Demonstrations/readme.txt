@@ -1,5 +1,5 @@
 ﻿/**
-  @page STM32H747I-EVAL Demonstration Firmware
+  @page Demonstrations Demonstration Firmware
  
   @verbatim
   ******************************************************************************
@@ -21,7 +21,7 @@
   ******************************************************************************
   @endverbatim
 
-@par Demonstration Description
+@par Demo Description
 
 The STM32Cube demonstration platform comes on top of the STM32Cube(TM) as a firmware
 package that offers a full set of software components based on a modular architecture.

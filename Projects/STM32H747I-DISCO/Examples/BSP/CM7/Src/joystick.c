@@ -147,26 +147,26 @@ static void Joystick_SetCursorPosition()
     break;
   }
 
-  GUI_SetBackColor(GUI_COLOR_WHITE);
-  GUI_SetTextColor(GUI_COLOR_BLUE);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_WHITE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_BLUE);
 
   if(Joy_State == JOY_SEL)
   {
-    GUI_SetTextColor(GUI_COLOR_RED);
-    GUI_DisplayChar(xPtr, yPtr, 'X');
+    UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_RED);
+    UTIL_LCD_DisplayChar(xPtr, yPtr, 'X');
 
   }
   else if(Joy_State == JOY_NONE)
   {
-    GUI_SetTextColor(GUI_COLOR_BLUE);
-    GUI_DisplayChar(xPtr, yPtr, 'X');
+    UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_BLUE);
+    UTIL_LCD_DisplayChar(xPtr, yPtr, 'X');
   }
   else
   {
-    GUI_SetTextColor(GUI_COLOR_WHITE);
-    GUI_DisplayChar(old_xPtr, old_yPtr, 'X');
-    GUI_SetTextColor(GUI_COLOR_BLUE);
-    GUI_DisplayChar(xPtr, yPtr, 'X');
+    UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
+    UTIL_LCD_DisplayChar(old_xPtr, old_yPtr, 'X');
+    UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_BLUE);
+    UTIL_LCD_DisplayChar(xPtr, yPtr, 'X');
 
     old_xPtr = xPtr;
     old_yPtr = yPtr;
@@ -184,22 +184,22 @@ static void Joystick_SetHint(void)
   BSP_LCD_GetYSize(0, &y_size);
 
   /* Clear the LCD */
-  GUI_Clear(GUI_COLOR_WHITE);
+  UTIL_LCD_Clear(UTIL_LCD_COLOR_WHITE);
 
   /* Set Joystick Demo description */
-  GUI_FillRect(0, 0, x_size, 80, GUI_COLOR_BLUE);
-  GUI_SetTextColor(GUI_COLOR_WHITE);
-  GUI_SetBackColor(GUI_COLOR_BLUE);
-  GUI_SetFont(&Font24);
-  GUI_DisplayStringAt(0, 0, (uint8_t *)"Joystick", CENTER_MODE);
-  GUI_SetFont(&Font12);
-  GUI_DisplayStringAt(0, 30, (uint8_t *)"Please use the joystick to move", CENTER_MODE);
-  GUI_DisplayStringAt(0, 45, (uint8_t *)"the pointer inside the rectangle", CENTER_MODE);
-  GUI_DisplayStringAt(0, 60, (uint8_t *)"Press Tamper push-button to switch to next menu", CENTER_MODE);
+  UTIL_LCD_FillRect(0, 0, x_size, 80, UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_SetFont(&Font24);
+  UTIL_LCD_DisplayStringAt(0, 0, (uint8_t *)"Joystick", CENTER_MODE);
+  UTIL_LCD_SetFont(&Font12);
+  UTIL_LCD_DisplayStringAt(0, 30, (uint8_t *)"Please use the joystick to move", CENTER_MODE);
+  UTIL_LCD_DisplayStringAt(0, 45, (uint8_t *)"the pointer inside the rectangle", CENTER_MODE);
+  UTIL_LCD_DisplayStringAt(0, 60, (uint8_t *)"Press Tamper push-button to switch to next menu", CENTER_MODE);
 
   /* Set the LCD Text Color */
-  GUI_DrawRect(10, 90, x_size - 20, y_size- 100, GUI_COLOR_BLUE);
-  GUI_DrawRect(11, 91, x_size - 22, y_size- 102, GUI_COLOR_BLUE);
+  UTIL_LCD_DrawRect(10, 90, x_size - 20, y_size- 100, UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_DrawRect(11, 91, x_size - 22, y_size- 102, UTIL_LCD_COLOR_BLUE);
 }
 /**
   * @}

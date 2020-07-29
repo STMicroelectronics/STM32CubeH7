@@ -73,6 +73,10 @@ is low( connected to GND) the PWM signals are generated, if the level of the Fau
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
 
+@par Keywords
+
+HRTIM, Timer, Fault event, Waveforms, PWM, Oscilloscope
+
 @par Directory contents 
 
   - HRTIM/HRTIM_FaultEvent/Inc/stm32h7xx_hal_conf.h    HAL configuration file

@@ -86,7 +86,7 @@ int main()
   /* Set LCD Foreground Layer  */
   BSP_LCD_SetActiveLayer(0, 1);
 
-  GUI_SetFuncDriver(&LCD_Driver);
+  UTIL_LCD_SetFuncDriver(&LCD_Driver);
 
   UTIL_LCD_TRACE_Init();
   UTIL_LCD_TRACE_SetHeader((uint8_t*)"mbedTLS: SSL Server Application");

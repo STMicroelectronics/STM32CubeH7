@@ -27,7 +27,8 @@
 #endif
 
 /* Includes ------------------------------------------------------------------*/
-#include "stm32f7xx_hal.h"
+/* Update the below line with adequate hal file. ie: #include "stm32f7xx_hal.h" */
+#include "stm32xxxx_hal.h"
    
 /** @addtogroup BSP
   * @{

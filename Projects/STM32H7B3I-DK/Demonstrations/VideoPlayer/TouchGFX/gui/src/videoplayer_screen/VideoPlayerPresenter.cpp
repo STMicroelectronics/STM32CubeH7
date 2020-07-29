@@ -1,5 +1,5 @@
-#include <gui/VideoPlayer_screen/VideoPlayerView.hpp>
-#include <gui/VideoPlayer_screen/VideoPlayerPresenter.hpp>
+#include <gui/videoplayer_screen/VideoPlayerView.hpp>
+#include <gui/videoplayer_screen/VideoPlayerPresenter.hpp>
 
 #include <stdlib.h>
 

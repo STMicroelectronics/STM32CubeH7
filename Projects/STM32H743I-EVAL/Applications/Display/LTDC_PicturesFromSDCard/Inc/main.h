@@ -26,7 +26,7 @@
 #include "stm32h743i_eval_io.h"
 #include "stm32h743i_eval_lcd.h"
 #include "stm32h743i_eval_sdram.h"
-#include "basic_gui.h"
+#include "stm32_lcd.h"
 #include "fatfs_storage.h"
 
 /* FatFs includes component */

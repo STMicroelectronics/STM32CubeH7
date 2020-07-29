@@ -586,6 +586,8 @@ static void LCD_LL_Init(void)
   PeriphClkInitStruct.PLL3.PLL3Q = 6;
   PeriphClkInitStruct.PLL3.PLL3R = 8;
 #endif /* GUI_NUM_LAYERS */
+  PeriphClkInitStruct.PLL3.PLL3VCOSEL = RCC_PLL3VCOMEDIUM;
+  PeriphClkInitStruct.PLL3.PLL3RGE = RCC_PLL3VCIRANGE_0;
   HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct);
 
   /* Base address of DSI Host/Wrapper registers to be set before calling De-Init */

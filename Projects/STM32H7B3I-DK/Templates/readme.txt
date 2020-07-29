@@ -83,6 +83,10 @@ to enhance the performance in case of use of AXI interface with several masters.
 				- For DTCM RAM select: ../STM32H7B3LIHXQ_FLASH.ld
 				- For CD-AXI SRAM select: ../STM32H7B3LIHXQ_FLASH_SRAM1.ld
 
+@par Keywords
+
+System, HAL template, Clock Configuration, HSE, System clock, Oscillator, PLL
+
 @par Directory contents
 
   - Templates/Src/main.c                       Main program

@@ -128,9 +128,9 @@ int main(void)
    /* Initialize the LCD   */
   BSP_LCD_Init(0, LCD_ORIENTATION_LANDSCAPE);
   
-  GUI_SetFuncDriver(&LCD_Driver);     
-  GUI_SetLayer(0);   
-  GUI_Clear(GUI_COLOR_WHITE);  
+  UTIL_LCD_SetFuncDriver(&LCD_Driver);     
+  UTIL_LCD_SetLayer(0);   
+  UTIL_LCD_Clear(UTIL_LCD_COLOR_WHITE);  
   
   /* Get the LCD Width and Height */
   BSP_LCD_GetXSize(0, &LCD_X_Size);  

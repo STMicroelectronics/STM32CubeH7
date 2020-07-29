@@ -64,7 +64,9 @@ typedef uint32_t (fnSetPositionCallback_TypeDef)( uint32_t Pos);
 
 /*-- Audio Codecs --*/
 #define __WAV_DECODER__
+#if !defined (__GNUC__)
 #define __MP3_DECODER__
+#endif
 
 
 /* Exported macro ------------------------------------------------------------*/

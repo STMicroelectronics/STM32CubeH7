@@ -77,6 +77,10 @@ Use ST-link utility to change this option byte back to "Not swapped" if needed.
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
 
+@par Keywords
+
+Memory, FLASH, Swap, Bank, Dual bank, Program, Sector, LED
+
 @par Directory contents 
 
   - FLASH/FLASH_EraseProgram/Inc/stm32h7xx_hal_conf.h        HAL Configuration file  

@@ -72,6 +72,10 @@ during process.
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
 
+@par Keywords
+
+Analog, ADC, DAC, Analog to Digital, Digital to Analog, monitor, Continuous conversion, Measurement, Voltage, LED
+
 @par Directory contents 
 
   - ADC/ADC_DAC_Interconnect/Inc/stm32h7xx_hal_conf.h    HAL configuration file

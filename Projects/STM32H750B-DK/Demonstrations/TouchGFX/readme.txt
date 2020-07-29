@@ -1,5 +1,5 @@
 /**
-  @page Demo   STM32H750B-DK TouchGFX Demonstration Firmware
+  @page TouchGFX   STM32H750B-DK TouchGFX Demonstration Firmware
  
   @verbatim
   ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
@@ -38,6 +38,10 @@ The demonstration features the following modules:
 	- Washing Machine UI with video
 	- Home UI
 	- About Screen with video from USB
+
+@par Keywords
+
+Demonstration, TouchGFX
 
 @par How to use it ?
 

@@ -74,6 +74,10 @@ STM32 board's LEDs can be used to monitor the application status:
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
 
+@par Keywords
+
+FatFs, RAM disk, SRAM, File system, FAT Volume, Format, Mount, Read, Write
+
 @par Directory contents
  
   - FatFs/FatFs_RAMDisk/Inc/stm32h7xx_hal_conf.h    HAL configuration file

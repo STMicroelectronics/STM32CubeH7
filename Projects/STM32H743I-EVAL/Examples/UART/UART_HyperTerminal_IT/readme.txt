@@ -1,9 +1,9 @@
 /**
-  @page UART_Hyperterminal_IT UART Hyperterminal IT example
+  @page UART_HyperTerminal_IT UART Hyperterminal IT example
   
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    UART/UART_Hyperterminal_IT/readme.txt 
+  * @file    UART/UART_HyperTerminal_IT/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the UART Hyperterminal IT example.
   ******************************************************************************
@@ -122,6 +122,10 @@ The UART is configured as follows:
       Depending on the use case it is also possible to configure the cache attributes using the MPU.
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
+
+@par Keywords
+
+Connectivity, UART, Printf, Baud rate, RS-232, HyperTerminal, Full-duplex, HyperTerminal, Transmission, Reception, Asynchronous, Interrupt
 
 @par Directory contents 
 

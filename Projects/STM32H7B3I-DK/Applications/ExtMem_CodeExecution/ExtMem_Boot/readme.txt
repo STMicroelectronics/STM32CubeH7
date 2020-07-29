@@ -1,9 +1,9 @@
 /**
-  @page Boot Templates for External memory code execution Readme file
+  @page ExtMem_Boot External memory code execution Readme file
 
   @verbatim
   ******************************************************************************
-  * @file    Templates/ExtMem_Boot/readme.txt
+  * @file    ExtMem_Boot/readme.txt
   * @author  MCD Application Team
   * @brief   Description of implementation of the AN5188 (External memory boot
   *          with reduced internal flash) on STM32H7xx devices.
@@ -48,10 +48,6 @@ The ExtMem_Boot program is located at 0x08000000 (Internal flash).
  
 Please Refer to the bellow "Table 1. IAP implementation on STM32H7B3I_DISCO" for different configurations and corresponding settings.
                                   
-@par Keywords
-
-Middleware, External Memory Boot, Loader, Boot
-
 At the beginning of the main program the HAL_Init() function is called to reset
 all the peripherals, initialize the Flash interface and the systick.
 The SystemClock_Config() function is used to configure the system clock for STM32H7B0xxQ Devices :
@@ -90,6 +86,10 @@ to enhance the performance in case of use of AXI interface with several masters.
       Depending on the use case, it is also possible to configure the cache attributes using the MPU.
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series and STM32H7 Series"
+
+@par Keywords
+
+External, Memory, OSPI, SDMMC, SD Card, Boot, Loader, XiP, BootROM, Value line
 
 @par Directory contents
 
@@ -188,11 +188,6 @@ In order to load the application to the external memory:
       - Run & debug the program:
       - For an XiP configuration (eXecute in Place from OSPI):
           - Using EWARM or MDK-ARM : Load project image from the IDE: Project->Debug
-          - Using SW4STM32 :
-            - Open the STM32CubeProgrammer tool
-            - Select the OSPI external flash loader "MX25LM51245G_STM32H7B3I-DISCO" in case of XiP from OSPI
-            - From Erasing & Programming menu, browse and open the output binary file relative to your application
-            - Load the file into the external OSPI flash using "Start Programming" at the address APPLICATION_ADDRESS (0x90000000)
 
       - For a BootROM configuration (BootROM external SDRAM):
         - If BINARY_AREA is USE_SPI_NOR then use the STM32CubeProgarmmer tool, select OSPI external flash loader "MX25LM51245G_STM32H7B3I-DISCO"

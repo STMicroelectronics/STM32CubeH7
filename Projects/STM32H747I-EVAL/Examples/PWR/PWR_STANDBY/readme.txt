@@ -108,6 +108,10 @@ These steps are repeated in an infinite loop.
 @note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.      
 
+@par Keywords
+
+System, Power, PWR, multiprocessor, Standby mode, Interrupt, EXTI, Wakeup, Wakeup pin, Low Power, External reset, Button
+
 @par Directory contents
 
   - PWR/PWR_STANDBY/Common/Src/system_stm32h7xx.c    STM32H7xx system configuration source file

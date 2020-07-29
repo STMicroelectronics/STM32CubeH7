@@ -35,22 +35,22 @@
 
 struct net_tls_data
 {
-    const char_t *tls_ca_certs;  /**< Socket option. */
-    const char_t *tls_ca_crl;    /**< Socket option. */
-    const char_t *tls_dev_cert;  /**< Socket option. */
-    const char_t *tls_dev_key;   /**< Socket option. */
-    const uint8_t *tls_dev_pwd;         /**< Socket option. */
-    size_t tls_dev_pwd_len;       /**< Socket option / meta. */
-    bool tls_srv_verification;    /**< Socket option. */
-    const char_t *tls_srv_name;           /**< Socket option. */
-    /* mbedTLS objects */
-    mbedtls_ssl_context ssl;
-    mbedtls_ssl_config conf;
-    uint32_t flags;
-    mbedtls_x509_crt cacert;
-    mbedtls_x509_crt clicert;
-    mbedtls_pk_context pkey;
-    const mbedtls_x509_crt_profile *tls_cert_prof;  /**< Socket option. */
+  const char_t *tls_ca_certs;  /**< Socket option. */
+  const char_t *tls_ca_crl;    /**< Socket option. */
+  const char_t *tls_dev_cert;  /**< Socket option. */
+  const char_t *tls_dev_key;   /**< Socket option. */
+  const uint8_t *tls_dev_pwd;         /**< Socket option. */
+  size_t tls_dev_pwd_len;       /**< Socket option / meta. */
+  bool tls_srv_verification;    /**< Socket option. */
+  const char_t *tls_srv_name;           /**< Socket option. */
+  /* mbedTLS objects */
+  mbedtls_ssl_context ssl;
+  mbedtls_ssl_config conf;
+  uint32_t flags;
+  mbedtls_x509_crt cacert;
+  mbedtls_x509_crt clicert;
+  mbedtls_pk_context pkey;
+  const mbedtls_x509_crt_profile *tls_cert_prof;  /**< Socket option. */
 } ;
 
 void net_tls_init(void);

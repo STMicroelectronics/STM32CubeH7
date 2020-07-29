@@ -27,7 +27,7 @@
 #include "stm32h750b_discovery_ts.h"
 #include "stm32h750b_discovery_sdram.h"
 #include <stdlib.h>
-#include "basic_gui.h"
+#include "stm32_lcd.h"
 #include "lcd_trace.h"
 
 /* FatFs includes component */

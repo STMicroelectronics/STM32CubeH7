@@ -108,6 +108,10 @@ To port a LL example to the targeted board:
 				- For DTCM RAM select: ../STM32H7B3LIHXQ_FLASH.ld
 				- For CD-AXI SRAM select: ../STM32H7B3LIHXQ_FLASH_SRAM1.ld
 
+@par Keywords
+
+System, LL template, Clock Configuration, HSE, System clock, Oscillator, PLL
+
 @par Directory contents
 
   - Templates_LL/Inc/stm32h7xx_it.h          Interrupt handlers header file

@@ -116,7 +116,7 @@ int main(void)
   }
 
   /*link board LCD drivers to BASIC GUI LCD drivers*/
-  GUI_SetFuncDriver(&LCD_Driver);
+  UTIL_LCD_SetFuncDriver(&LCD_Driver);
 
   /* Display example brief   */
   LCD_BriefDisplay();
@@ -149,10 +149,10 @@ int main(void)
           /*##-9- Close the JPEG file #######################################*/
           f_close(&JPEG_File);
 
-          GUI_SetBackColor(GUI_COLOR_WHITE);
-          GUI_SetTextColor(GUI_COLOR_BLACK);
-          GUI_SetFont(&Font16);
-          GUI_DisplayStringAtLine(20,(uint8_t*)" JPEG file encoded and saved on the uSD");
+          UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_WHITE);
+          UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_BLACK);
+          UTIL_LCD_SetFont(&Font16);
+          UTIL_LCD_DisplayStringAtLine(20,(uint8_t*)" JPEG file encoded and saved on the uSD");
 
           /* Encoding accomplished successfully */
           BSP_LED_On(LED1);
@@ -289,15 +289,15 @@ static void CPU_CACHE_Enable(void)
   */
 static void LCD_BriefDisplay(void)
 {
-  GUI_Clear(GUI_COLOR_WHITE);
-  GUI_SetBackColor(GUI_COLOR_BLUE);
-  GUI_SetTextColor(GUI_COLOR_BLUE);
-  GUI_FillRect(0, 177, 640, 112,GUI_COLOR_BLUE);
-  GUI_SetTextColor(GUI_COLOR_WHITE);
-  GUI_DisplayStringAtLine(9, (uint8_t *)"   JPEG Encoding from Flash With DMA Method");
-  GUI_SetFont(&Font16);
-  GUI_DisplayStringAtLine(16, (uint8_t *)"This example shows how to Encode (with DMA model)");
-  GUI_DisplayStringAtLine(17, (uint8_t *)"and save a JPEG file in uSD");
+  UTIL_LCD_Clear(UTIL_LCD_COLOR_WHITE);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_FillRect(0, 177, 640, 112,UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
+  UTIL_LCD_DisplayStringAtLine(9, (uint8_t *)"   JPEG Encoding from Flash With DMA Method");
+  UTIL_LCD_SetFont(&Font16);
+  UTIL_LCD_DisplayStringAtLine(16, (uint8_t *)"This example shows how to Encode (with DMA model)");
+  UTIL_LCD_DisplayStringAtLine(17, (uint8_t *)"and save a JPEG file in uSD");
 }
 
 /**
@@ -307,11 +307,11 @@ static void LCD_BriefDisplay(void)
   */
 static void LCD_SizesErrorDisplay(void)
 {
-  GUI_SetBackColor(GUI_COLOR_WHITE);
-  GUI_SetTextColor(GUI_COLOR_WHITE);
-  GUI_SetTextColor(GUI_COLOR_RED);
-  GUI_SetFont(&Font16);
-  GUI_DisplayStringAtLine(27, (uint8_t *)"Input Sizes of the RGB image doesn't meet the requirements");
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_WHITE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_RED);
+  UTIL_LCD_SetFont(&Font16);
+  UTIL_LCD_DisplayStringAtLine(27, (uint8_t *)"Input Sizes of the RGB image doesn't meet the requirements");
 }
 
 /**  - The LED1 is On if the test ends properly.
@@ -321,12 +321,12 @@ static void LCD_SizesErrorDisplay(void)
   */
 static void LCD_FileErrorDisplay(void)
 {
-  GUI_SetBackColor(GUI_COLOR_WHITE);
-  GUI_SetTextColor(GUI_COLOR_WHITE);
-  GUI_SetTextColor(GUI_COLOR_RED);
-  GUI_SetFont(&Font16);
-  GUI_DisplayStringAtLine(27, (uint8_t *)"Unable to create a new jpeg file on the uSD");
-  GUI_DisplayStringAtLine(28, (uint8_t *)"Check that a valid uSD is connected to CN28 connector");
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_WHITE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_RED);
+  UTIL_LCD_SetFont(&Font16);
+  UTIL_LCD_DisplayStringAtLine(27, (uint8_t *)"Unable to create a new jpeg file on the uSD");
+  UTIL_LCD_DisplayStringAtLine(28, (uint8_t *)"Check that a valid uSD is connected to CN28 connector");
 }
 
 static void SD_Initialize(void)

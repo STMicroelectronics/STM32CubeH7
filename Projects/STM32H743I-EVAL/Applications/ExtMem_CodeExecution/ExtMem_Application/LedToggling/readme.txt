@@ -62,6 +62,10 @@ This application provide different configuration with linker files which allows 
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
 
+@par Keywords
+
+External Memory, code execution, Loader, Boot, XiP, BootROM, Value line, GPIO, LED, Toggle
+
 @par Directory contents
 
  - "LedToggling/Inc": contains the FreeRTOS firmware header files

@@ -87,6 +87,10 @@ Configuration of TIM4 in One Pulse Mode
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
 
+@par Keywords
+
+Timer, Output, signals, One Pulse, PWM, Oscilloscope, External signal, Autoreload, Waveform
+
 @par Directory contents 
 
   - TIM/TIM_OnePulse/Inc/stm32h7xx_hal_conf.h    HAL configuration file

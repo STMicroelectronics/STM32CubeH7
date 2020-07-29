@@ -103,20 +103,20 @@ int main(void)
 
   BSP_LCD_GetYSize(0, &LCD_Y_Size);
 
-  GUI_SetFuncDriver(&LCD_Driver);
+  UTIL_LCD_SetFuncDriver(&LCD_Driver);
 
   offset_address_area_blended_image_in_lcd_buffer =  ((((LCD_Y_Size - IMAGE_SIZE_Y) / 2) * LCD_X_Size)
                                                      + ((LCD_X_Size - IMAGE_SIZE_X) / 2))
                                                      * ARGB8888_BYTE_PER_PIXEL;
 
   /* Prepare using DMA2D the LCD frame buffer for display : LCD buffer clear and user message priniting*/
-  GUI_Clear(GUI_COLOR_GRAY);
-  GUI_SetTextColor(GUI_COLOR_WHITE);
-  GUI_SetBackColor(GUI_COLOR_BLUE);
-  GUI_SetFont(&Font16);
+  UTIL_LCD_Clear(UTIL_LCD_COLOR_GRAY);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_SetFont(&Font16);
 
   /* Print example description */
-  GUI_DisplayStringAt(0, 100, (uint8_t *)"ChromART Blending With Alpha Inversion example", CENTER_MODE);
+  UTIL_LCD_DisplayStringAt(0, 100, (uint8_t *)"ChromART Blending With Alpha Inversion example", CENTER_MODE);
   HAL_Delay(100);
 
   /*Initialize Alpha Inversion setting*/
@@ -132,11 +132,11 @@ int main(void)
 
     if(AlphaInvert_Config == DMA2D_REGULAR_ALPHA)
     {
-      GUI_DisplayStringAt(0, 420, (uint8_t *)"Display Blended Image: Foreground Alpha inversion  OFF", CENTER_MODE);
+      UTIL_LCD_DisplayStringAt(0, 420, (uint8_t *)"Display Blended Image: Foreground Alpha inversion  OFF", CENTER_MODE);
     }
     else
     {
-      GUI_DisplayStringAt(0, 420, (uint8_t *)"Display Blended Image: Foreground Alpha inversion  ON ", CENTER_MODE);
+      UTIL_LCD_DisplayStringAt(0, 420, (uint8_t *)"Display Blended Image: Foreground Alpha inversion  ON ", CENTER_MODE);
     }
      /*##-2- Configure DMA2D : Configure foreground and background layers ##############*/
     DMA2D_Config(AlphaInvert_Config);
@@ -360,6 +360,8 @@ static void SystemClock_Config(void)
   PeriphClkInitStruct.PLL3.PLL3P = 2;
   PeriphClkInitStruct.PLL3.PLL3Q = 2;
   PeriphClkInitStruct.PLL3.PLL3R = 12;
+  PeriphClkInitStruct.PLL3.PLL3VCOSEL = RCC_PLL3VCOMEDIUM;
+  PeriphClkInitStruct.PLL3.PLL3RGE = RCC_PLL3VCIRANGE_0;
   HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct);
 
     /*

@@ -95,7 +95,7 @@ int main(void)
   {
     /* Initialize the LCD */
     ADAFRUIT_802_LCD_Init(0, LCD_ORIENTATION_PORTRAIT);
-    GUI_SetFuncDriver(&LCD_Driver);
+    UTIL_LCD_SetFuncDriver(&LCD_Driver);
 
     /* Configure SD card */
     SDCard_Config();
@@ -225,30 +225,30 @@ static void TFT_DisplayMenu(void)
   JOYPin_TypeDef tmp;
 
   /* Set Menu font */
-  GUI_SetFont(&Font12);
+  UTIL_LCD_SetFont(&Font12);
 
   /* Set Back color */
-  GUI_SetBackColor(GUI_COLOR_WHITE);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_WHITE);
 
   /* Set Text color */
-  GUI_SetTextColor(GUI_COLOR_RED);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_RED);
   /* Display message */
-  GUI_DisplayStringAtLine(1, (uint8_t*)" NUCLEO-H7A3ZI-Q  ");
-  GUI_DisplayStringAtLine(2, (uint8_t*)"      DEMO        ");
+  UTIL_LCD_DisplayStringAtLine(1, (uint8_t*)" NUCLEO-H7A3ZI-Q  ");
+  UTIL_LCD_DisplayStringAtLine(2, (uint8_t*)"      DEMO        ");
 
   /* Set Text color */
-  GUI_SetTextColor(GUI_COLOR_BLUE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_BLUE);
   /* Display message */
-  GUI_DisplayStringAtLine(4, (uint8_t*)"Display images      ");
-  GUI_DisplayStringAtLine(6, (uint8_t*)"stored under uSD    ");
-  GUI_DisplayStringAtLine(8, (uint8_t*)"on TFT LCD          ");
+  UTIL_LCD_DisplayStringAtLine(4, (uint8_t*)"Display images      ");
+  UTIL_LCD_DisplayStringAtLine(6, (uint8_t*)"stored under uSD    ");
+  UTIL_LCD_DisplayStringAtLine(8, (uint8_t*)"on TFT LCD          ");
 
   /* Set Text color */
-  GUI_SetTextColor(GUI_COLOR_BLACK);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_BLACK);
 
   /* Display message */
-  GUI_DisplayStringAtLine(11, (uint8_t*)"  Press JOY DOWN   ");
-  GUI_DisplayStringAtLine(12, (uint8_t*)"  to continue...   ");
+  UTIL_LCD_DisplayStringAtLine(11, (uint8_t*)"  Press JOY DOWN   ");
+  UTIL_LCD_DisplayStringAtLine(12, (uint8_t*)"  to continue...   ");
 
   /* Wait for JOY_DOWN is pressed */
   while (ADAFRUIT_802_JOY_GetState(JOY1) != JOY_DOWN)
@@ -256,18 +256,18 @@ static void TFT_DisplayMenu(void)
   HAL_Delay(200);
 
   /* Set Text color */
-  GUI_SetTextColor(GUI_COLOR_BLACK);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_BLACK);
   /* Display message */
-  GUI_DisplayStringAtLine(4,  (uint8_t*)"                   ");
-  GUI_DisplayStringAtLine(6,  (uint8_t*)"  Press Joystick   ");
+  UTIL_LCD_DisplayStringAtLine(4,  (uint8_t*)"                   ");
+  UTIL_LCD_DisplayStringAtLine(6,  (uint8_t*)"  Press Joystick   ");
 
   /* Set Text color */
-  GUI_SetTextColor(GUI_COLOR_BLUE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_BLUE);
   /* Display message */
-  GUI_DisplayStringAtLine(8,  (uint8_t*)"  UP for:          ");
-  GUI_DisplayStringAtLine(9,  (uint8_t*)"  Manual Mode      ");
-  GUI_DisplayStringAtLine(11, (uint8_t*)"  DOWN for:        ");
-  GUI_DisplayStringAtLine(12, (uint8_t*)"  Automatic Mode   ");
+  UTIL_LCD_DisplayStringAtLine(8,  (uint8_t*)"  UP for:          ");
+  UTIL_LCD_DisplayStringAtLine(9,  (uint8_t*)"  Manual Mode      ");
+  UTIL_LCD_DisplayStringAtLine(11, (uint8_t*)"  DOWN for:        ");
+  UTIL_LCD_DisplayStringAtLine(12, (uint8_t*)"  Automatic Mode   ");
 
   /* Wait until Joystick is released */
   while (ADAFRUIT_802_JOY_GetState(JOY1) == JOY_DOWN)
@@ -282,34 +282,34 @@ static void TFT_DisplayMenu(void)
   }
 
   /* LCD Clear */
-  GUI_Clear(GUI_COLOR_WHITE);
+  UTIL_LCD_Clear(UTIL_LCD_COLOR_WHITE);
 
   /* JOY_UP is pressed: Display Manual mode menu #############################*/
   if(tmp == JOY_UP )
   {
     /* Set Text color */
-    GUI_SetTextColor(GUI_COLOR_RED);
+    UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_RED);
     /* Display message */
-    GUI_DisplayStringAtLine(3,  (uint8_t*)"   Manual Mode   ");
-    GUI_DisplayStringAtLine(5,  (uint8_t*)"    Selected     ");
+    UTIL_LCD_DisplayStringAtLine(3,  (uint8_t*)"   Manual Mode   ");
+    UTIL_LCD_DisplayStringAtLine(5,  (uint8_t*)"    Selected     ");
 
     /* Set Text color */
-    GUI_SetTextColor(GUI_COLOR_BLUE);
+    UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_BLUE);
     /* Display message */
-    GUI_DisplayStringAtLine(9,  (uint8_t*)"RIGHT: Next image");
-    GUI_DisplayStringAtLine(10, (uint8_t*)"LEFT : Previous  ");
-    GUI_DisplayStringAtLine(11, (uint8_t*)"SEL  : Switch to ");
-    GUI_DisplayStringAtLine(12, (uint8_t*)"automatic mode   ");
+    UTIL_LCD_DisplayStringAtLine(9,  (uint8_t*)"RIGHT: Next image");
+    UTIL_LCD_DisplayStringAtLine(10, (uint8_t*)"LEFT : Previous  ");
+    UTIL_LCD_DisplayStringAtLine(11, (uint8_t*)"SEL  : Switch to ");
+    UTIL_LCD_DisplayStringAtLine(12, (uint8_t*)"automatic mode   ");
     JoystickValue = 2;
   }
   /* JOY_DOWN is pressed: Display Automatic mode menu ########################*/
   else if (tmp == JOY_DOWN)
   {
     /* Set Text color */
-    GUI_SetTextColor(GUI_COLOR_RED);
+    UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_RED);
     /* Display message */
-    GUI_DisplayStringAtLine(3,  (uint8_t*)"  Automatic Mode  ");
-    GUI_DisplayStringAtLine(5,  (uint8_t*)"     Selected     ");
+    UTIL_LCD_DisplayStringAtLine(3,  (uint8_t*)"  Automatic Mode  ");
+    UTIL_LCD_DisplayStringAtLine(5,  (uint8_t*)"     Selected     ");
 
     JoystickValue = 1;
     HAL_Delay(200);
@@ -513,20 +513,20 @@ static void SDCard_Config(void)
 static void TFT_DisplayErrorMessage(uint8_t message)
 {
   /* LCD Clear */
-  GUI_Clear(GUI_COLOR_WHITE);
+  UTIL_LCD_Clear(UTIL_LCD_COLOR_WHITE);
   /* Set Error Message Font */
-  GUI_SetFont(&Font12);
+  UTIL_LCD_SetFont(&Font12);
   /* Set Text and Back colors */
-  GUI_SetBackColor(GUI_COLOR_GRAY);
-  GUI_SetTextColor(GUI_COLOR_RED);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_GRAY);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_RED);
 
   if(message == SD_CARD_NOT_FORMATTED)
   {
     /* Display message */
-    GUI_DisplayStringAtLine(5, (uint8_t*)" SD Card is not    ");
-    GUI_DisplayStringAtLine(6, (uint8_t*)" FAT formatted.    ");
-    GUI_DisplayStringAtLine(7, (uint8_t*)" Please Format the ");
-    GUI_DisplayStringAtLine(8, (uint8_t*)" microSD card.     ");
+    UTIL_LCD_DisplayStringAtLine(5, (uint8_t*)" SD Card is not    ");
+    UTIL_LCD_DisplayStringAtLine(6, (uint8_t*)" FAT formatted.    ");
+    UTIL_LCD_DisplayStringAtLine(7, (uint8_t*)" Please Format the ");
+    UTIL_LCD_DisplayStringAtLine(8, (uint8_t*)" microSD card.     ");
     while (1)
     {
     }
@@ -534,10 +534,10 @@ static void TFT_DisplayErrorMessage(uint8_t message)
   if(message == SD_CARD_FILE_NOT_SUPPORTED)
   {
     /* Display message */
-    GUI_DisplayStringAtLine(5, (uint8_t*)"                   ");
-    GUI_DisplayStringAtLine(6, (uint8_t*)" File type is not  ");
-    GUI_DisplayStringAtLine(7, (uint8_t*)" supported.        ");
-    GUI_DisplayStringAtLine(8, (uint8_t*)"                   ");
+    UTIL_LCD_DisplayStringAtLine(5, (uint8_t*)"                   ");
+    UTIL_LCD_DisplayStringAtLine(6, (uint8_t*)" File type is not  ");
+    UTIL_LCD_DisplayStringAtLine(7, (uint8_t*)" supported.        ");
+    UTIL_LCD_DisplayStringAtLine(8, (uint8_t*)"                   ");
     while(1)
     {
     }
@@ -545,10 +545,10 @@ static void TFT_DisplayErrorMessage(uint8_t message)
   if(message == SD_CARD_OPEN_FAIL)
   {
     /* Display message */
-    GUI_DisplayStringAtLine(5, (uint8_t*)"                   ");
-    GUI_DisplayStringAtLine(6, (uint8_t*)" Open directory    ");
-    GUI_DisplayStringAtLine(7, (uint8_t*)" fails.            ");
-    GUI_DisplayStringAtLine(8, (uint8_t*)"                   ");
+    UTIL_LCD_DisplayStringAtLine(5, (uint8_t*)"                   ");
+    UTIL_LCD_DisplayStringAtLine(6, (uint8_t*)" Open directory    ");
+    UTIL_LCD_DisplayStringAtLine(7, (uint8_t*)" fails.            ");
+    UTIL_LCD_DisplayStringAtLine(8, (uint8_t*)"                   ");
     while(1)
     {
     }
@@ -556,10 +556,10 @@ static void TFT_DisplayErrorMessage(uint8_t message)
   if(message == FATFS_NOT_MOUNTED)
   {
     /* Display message */
-    GUI_DisplayStringAtLine(5, (uint8_t*)"                   ");
-    GUI_DisplayStringAtLine(6, (uint8_t*)" Cannot mount      ");
-    GUI_DisplayStringAtLine(7, (uint8_t*)" FatFs on Drive.   ");
-    GUI_DisplayStringAtLine(8, (uint8_t*)"                   ");
+    UTIL_LCD_DisplayStringAtLine(5, (uint8_t*)"                   ");
+    UTIL_LCD_DisplayStringAtLine(6, (uint8_t*)" Cannot mount      ");
+    UTIL_LCD_DisplayStringAtLine(7, (uint8_t*)" FatFs on Drive.   ");
+    UTIL_LCD_DisplayStringAtLine(8, (uint8_t*)"                   ");
     while (1)
     {
     }
@@ -567,10 +567,10 @@ static void TFT_DisplayErrorMessage(uint8_t message)
   if(message == BSP_SD_INIT_FAILED)
   {
     /* Display message */
-    GUI_DisplayStringAtLine(5, (uint8_t*)"                   ");
-    GUI_DisplayStringAtLine(6, (uint8_t*)" SD Init           ");
-    GUI_DisplayStringAtLine(7, (uint8_t*)" fails.            ");
-    GUI_DisplayStringAtLine(8, (uint8_t*)"                   ");
+    UTIL_LCD_DisplayStringAtLine(5, (uint8_t*)"                   ");
+    UTIL_LCD_DisplayStringAtLine(6, (uint8_t*)" SD Init           ");
+    UTIL_LCD_DisplayStringAtLine(7, (uint8_t*)" fails.            ");
+    UTIL_LCD_DisplayStringAtLine(8, (uint8_t*)"                   ");
     while(1)
     {
     }
@@ -578,10 +578,10 @@ static void TFT_DisplayErrorMessage(uint8_t message)
   if(message == SD_CARD_NO_FILE)
   {
     /* Display message */
-    GUI_DisplayStringAtLine(5, (uint8_t*)"                   ");
-    GUI_DisplayStringAtLine(6, (uint8_t*)" NO image found     ");
-    GUI_DisplayStringAtLine(7, (uint8_t*)" in the SD card.   ");
-    GUI_DisplayStringAtLine(8, (uint8_t*)"                   ");
+    UTIL_LCD_DisplayStringAtLine(5, (uint8_t*)"                   ");
+    UTIL_LCD_DisplayStringAtLine(6, (uint8_t*)" NO image found     ");
+    UTIL_LCD_DisplayStringAtLine(7, (uint8_t*)" in the SD card.   ");
+    UTIL_LCD_DisplayStringAtLine(8, (uint8_t*)"                   ");
     while(1)
     {
     }

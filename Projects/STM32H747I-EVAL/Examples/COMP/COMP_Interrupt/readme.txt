@@ -85,6 +85,10 @@ The SystemClock_Config() function is used to set the Flash latency and  to confi
 @note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
+@par Keywords
+
+comparator, analog, stop mode, voltage compare, wakeup trigger, comparator interrupt.
+
 @par Directory contents 
 
   - COMP/COMP_Interrupt/Common/Src/system_stm32h7xx.c     STM32H7xx system configuration file

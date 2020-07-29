@@ -1,9 +1,9 @@
 /**
-  @page OpenAMP_PingPong OpenAMP Pingpong example
+  @page OpenAMP_RTOS_PingPong OpenAMP Pingpong example
 
   @verbatim
   ******************************************************************************
-  * @file    OpenAMP/OpenAMP_RTOSPingPong/readme.txt
+  * @file    OpenAMP/OpenAMP_RTOS_PingPong/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the OpenAMP PingPong  Application using FreeRTOS.
   ******************************************************************************
@@ -93,7 +93,9 @@ In this example:
        ===> cause: the resource_table is a shared memory between CM4 and CM7 thus it should be volatile to avoid
                    compiler optimizations.
 
+@par Keywords
 
+OpenAMP, multiprocessor, HSEM, Inter processor communication, Communication channel, Mixed mode, RTOS, Baremetal, Message, HSEM, IPC, Mailbox, PingPong
 
 @par Directory contents
     - OpenAMP/OpenAMP_PingPong/CM7/Src/main_cm7.c               Main CM7 program

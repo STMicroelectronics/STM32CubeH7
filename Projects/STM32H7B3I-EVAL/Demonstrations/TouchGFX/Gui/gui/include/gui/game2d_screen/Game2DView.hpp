@@ -3,7 +3,7 @@
 
 #include <gui_generated/game2d_screen/Game2DViewBase.hpp>
 #include <gui/game2d_screen/Game2DPresenter.hpp>
-#include <gui/game2D_screen/ParallaxBackground.hpp>
+#include <gui/game2d_screen/ParallaxBackground.hpp>
 #include <touchgfx/widgets/TouchArea.hpp>
 
 class Game2DView : public Game2DViewBase

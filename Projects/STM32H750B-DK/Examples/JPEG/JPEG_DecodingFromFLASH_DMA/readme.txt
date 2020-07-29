@@ -82,7 +82,7 @@ The example performs the following actions :
 
 @par Keywords
 
-Display, Graphic, JPEG, Decoding, Flash memory, LTDC, DMA, MDMA, DMA2D, ARGB8888, Hardware decoding, LCD, YCbCr, RGB
+Display, Graphics, JPEG, Decoding, Flash memory, LTDC, DMA, MDMA, DMA2D, ARGB8888, Hardware decoding, LCD, YCbCr, RGB
       
 
 

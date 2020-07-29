@@ -106,7 +106,7 @@ int main(void)
 
   BSP_LCD_GetYSize(0, &LCD_Y_Size);
 
-  GUI_SetFuncDriver(&LCD_Driver);
+  UTIL_LCD_SetFuncDriver(&LCD_Driver);
 
   /* Display example brief   */
   LCD_BriefDisplay();
@@ -228,6 +228,8 @@ static void SystemClock_Config(void)
   PeriphClkInitStruct.PLL3.PLL3P = 2;
   PeriphClkInitStruct.PLL3.PLL3Q = 2;
   PeriphClkInitStruct.PLL3.PLL3R = 12;
+  PeriphClkInitStruct.PLL3.PLL3VCOSEL = RCC_PLL3VCOMEDIUM;
+  PeriphClkInitStruct.PLL3.PLL3RGE = RCC_PLL3VCIRANGE_0;
   HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct);
 
     /*
@@ -302,12 +304,12 @@ static void CPU_CACHE_Enable(void)
   */
 static void LCD_BriefDisplay(void)
 {
-  GUI_Clear(GUI_COLOR_WHITE);
-  GUI_SetTextColor(GUI_COLOR_BLUE);
-  GUI_SetFont(&Font16);
-  GUI_DisplayStringAt(0, LINE(2), (uint8_t *)"JPEG Decoding from Flash With DMA", CENTER_MODE);
-  GUI_DisplayStringAt(0, LINE(5), (uint8_t *)"This example shows how to Decode (with DMA)", CENTER_MODE);
-  GUI_DisplayStringAt(0, LINE(6), (uint8_t *)"and  display a JPEG file", CENTER_MODE);
+  UTIL_LCD_Clear(UTIL_LCD_COLOR_WHITE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_SetFont(&Font16);
+  UTIL_LCD_DisplayStringAt(0, LINE(2), (uint8_t *)"JPEG Decoding from Flash With DMA", CENTER_MODE);
+  UTIL_LCD_DisplayStringAt(0, LINE(5), (uint8_t *)"This example shows how to Decode (with DMA)", CENTER_MODE);
+  UTIL_LCD_DisplayStringAt(0, LINE(6), (uint8_t *)"and  display a JPEG file", CENTER_MODE);
 }
 
 /**

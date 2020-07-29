@@ -27,6 +27,9 @@ This application is a part of the Demonstration using STM32Cube firmware. It con
 the common source code between CM4 and CM7 cores and define the communication protocol
 between both cores.
 
+@par Keywords
+
+Demonstration, Common, CM4, CM7, Communication protocol
 
 @par How to use
 

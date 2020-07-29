@@ -158,13 +158,13 @@ void REC_SingleBuff_demo(void)
         BSP_AUDIO_OUT_Play(0, (uint8_t*)&PlayBuffer[0], 2*AUDIO_BUFFER_SIZE);
         BSP_AUDIO_OUT_GetState(0, &AudioOutState);
         BSP_AUDIO_IN_GetState(2, &AudioInState);
-        GUI_SetFont(&Font12);
+        UTIL_LCD_SetFont(&Font12);
         sprintf((char*)text, "   FREQ: %6lu         ", *AudioFreq_ptr);
-        GUI_DisplayStringAt(20, y_size - 50, (uint8_t *)text, CENTER_MODE);
+        UTIL_LCD_DisplayStringAt(20, y_size - 50, (uint8_t *)text, CENTER_MODE);
         sprintf((char*)text, "%s   ", Audio_Out_State[AudioOutState]);
-        GUI_DisplayStringAt(20, y_size - 34, (uint8_t *)text, CENTER_MODE);
+        UTIL_LCD_DisplayStringAt(20, y_size - 34, (uint8_t *)text, CENTER_MODE);
         sprintf((char*)text, "%s   ", Audio_In_State[AudioInState]);
-        GUI_DisplayStringAt(20, y_size - 18, (uint8_t *)text, CENTER_MODE);
+        UTIL_LCD_DisplayStringAt(20, y_size - 18, (uint8_t *)text, CENTER_MODE);
         PlaybackStarted = 1;
       }
       AudioBufferOffset  = BUFFER_OFFSET_NONE;
@@ -191,7 +191,7 @@ void REC_SingleBuff_demo(void)
           PlaybackStarted = 0;
 
           sprintf((char*)text, "        FREQ: %6lu         ", *AudioFreq_ptr);
-          GUI_DisplayStringAt(0, y_size - 50, (uint8_t *)text, CENTER_MODE);
+          UTIL_LCD_DisplayStringAt(0, y_size - 50, (uint8_t *)text, CENTER_MODE);
         }
         break;
       case 2:
@@ -208,7 +208,7 @@ void REC_SingleBuff_demo(void)
           PlaybackStarted = 0;
 
           sprintf((char*)text, "        FREQ: %6lu         ", *AudioFreq_ptr);
-          GUI_DisplayStringAt(0, y_size - 50, (uint8_t *)text, CENTER_MODE);
+          UTIL_LCD_DisplayStringAt(0, y_size - 50, (uint8_t *)text, CENTER_MODE);
         }
         break;
 
@@ -266,22 +266,22 @@ void REC_MultiBuff_demo(void)
   BSP_TS_Init(0, &hTS);
   BSP_TS_EnableIT(0);
 
-  GUI_SetBackColor(GUI_COLOR_ORANGE);
-  GUI_SetTextColor(GUI_COLOR_BLACK);
-  GUI_SetFont(&Font24);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_ORANGE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_BLACK);
+  UTIL_LCD_SetFont(&Font24);
 
-  GUI_FillRect(80, 200, 80, 50, GUI_COLOR_ORANGE);
-  GUI_FillRect(170, 200, 20, 50, GUI_COLOR_GREEN);
-  GUI_FillRect(200, 200, 20, 50, GUI_COLOR_GREEN);
-  GUI_DisplayStringAt(90, 215, (uint8_t *)"MIC1", LEFT_MODE);
+  UTIL_LCD_FillRect(80, 200, 80, 50, UTIL_LCD_COLOR_ORANGE);
+  UTIL_LCD_FillRect(170, 200, 20, 50, UTIL_LCD_COLOR_GREEN);
+  UTIL_LCD_FillRect(200, 200, 20, 50, UTIL_LCD_COLOR_GREEN);
+  UTIL_LCD_DisplayStringAt(90, 215, (uint8_t *)"MIC1", LEFT_MODE);
 
-  GUI_FillRect(280, 200, 80, 50, GUI_COLOR_ORANGE);
-  GUI_FillRect(370, 200, 20, 50, GUI_COLOR_GREEN);
-  GUI_FillRect(400, 200, 20, 50, GUI_COLOR_GREEN);
-  GUI_DisplayStringAt(290, 215, (uint8_t *)"MIC2", LEFT_MODE);
+  UTIL_LCD_FillRect(280, 200, 80, 50, UTIL_LCD_COLOR_ORANGE);
+  UTIL_LCD_FillRect(370, 200, 20, 50, UTIL_LCD_COLOR_GREEN);
+  UTIL_LCD_FillRect(400, 200, 20, 50, UTIL_LCD_COLOR_GREEN);
+  UTIL_LCD_DisplayStringAt(290, 215, (uint8_t *)"MIC2", LEFT_MODE);
 
-  GUI_SetBackColor(GUI_COLOR_WHITE);
-  GUI_SetTextColor(GUI_COLOR_BLACK);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_WHITE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_BLACK);
 
 
   AudioFreq_ptr = AudioFreq+2; /* AUDIO_FREQUENCY_16K; */
@@ -409,9 +409,9 @@ void TS_AudioUpdate(void)
         HAL_Delay(100);
         if(MicPauseResume.Mic1_Paused == 0)
         {
-          GUI_FillRect(170, 200, 20, 50, GUI_COLOR_WHITE);
-          GUI_FillRect(200, 200, 20, 50, GUI_COLOR_WHITE);
-          GUI_FillPolygon(Points1, 3, GUI_COLOR_GREEN);
+          UTIL_LCD_FillRect(170, 200, 20, 50, UTIL_LCD_COLOR_WHITE);
+          UTIL_LCD_FillRect(200, 200, 20, 50, UTIL_LCD_COLOR_WHITE);
+          UTIL_LCD_FillPolygon(Points1, 3, UTIL_LCD_COLOR_GREEN);
           BSP_AUDIO_IN_PauseChannels(2, AUDIO_IN_DEVICE_DIGITAL_MIC1);
           MicPauseResume.Mic1_Paused = 1;
           for(i = 0; i < AUDIO_BUFFER_SIZE/2; i++)
@@ -421,9 +421,9 @@ void TS_AudioUpdate(void)
         }
         else
         {
-          GUI_FillPolygon(Points1, 3, GUI_COLOR_WHITE);
-          GUI_FillRect(170, 200, 20, 50, GUI_COLOR_GREEN);
-          GUI_FillRect(200, 200, 20, 50, GUI_COLOR_GREEN);
+          UTIL_LCD_FillPolygon(Points1, 3, UTIL_LCD_COLOR_WHITE);
+          UTIL_LCD_FillRect(170, 200, 20, 50, UTIL_LCD_COLOR_GREEN);
+          UTIL_LCD_FillRect(200, 200, 20, 50, UTIL_LCD_COLOR_GREEN);
           BSP_AUDIO_IN_ResumeChannels(2, AUDIO_IN_DEVICE_DIGITAL_MIC1);
           MicPauseResume.Mic1_Paused = 0;
         }
@@ -434,9 +434,9 @@ void TS_AudioUpdate(void)
         HAL_Delay(100);
         if(MicPauseResume.Mic2_Paused == 0)
         {
-          GUI_FillRect(370, 200, 20, 50, GUI_COLOR_WHITE);
-          GUI_FillRect(400, 200, 20, 50, GUI_COLOR_WHITE);
-          GUI_FillPolygon(Points2, 3, GUI_COLOR_GREEN);
+          UTIL_LCD_FillRect(370, 200, 20, 50, UTIL_LCD_COLOR_WHITE);
+          UTIL_LCD_FillRect(400, 200, 20, 50, UTIL_LCD_COLOR_WHITE);
+          UTIL_LCD_FillPolygon(Points2, 3, UTIL_LCD_COLOR_GREEN);
           BSP_AUDIO_IN_PauseChannels(2, AUDIO_IN_DEVICE_DIGITAL_MIC2);
           MicPauseResume.Mic2_Paused = 1;
           for(i = 0; i < AUDIO_BUFFER_SIZE/2; i++)
@@ -446,9 +446,9 @@ void TS_AudioUpdate(void)
         }
         else
         {
-          GUI_FillPolygon(Points2, 3, GUI_COLOR_WHITE);
-          GUI_FillRect(370, 200, 20, 50, GUI_COLOR_GREEN);
-          GUI_FillRect(400, 200, 20, 50, GUI_COLOR_GREEN);
+          UTIL_LCD_FillPolygon(Points2, 3, UTIL_LCD_COLOR_WHITE);
+          UTIL_LCD_FillRect(370, 200, 20, 50, UTIL_LCD_COLOR_GREEN);
+          UTIL_LCD_FillRect(400, 200, 20, 50, UTIL_LCD_COLOR_GREEN);
           BSP_AUDIO_IN_ResumeChannels(2, AUDIO_IN_DEVICE_DIGITAL_MIC2);
           BSP_AUDIO_IN_PauseChannels(2, AUDIO_IN_DEVICE_DIGITAL_MIC1);
           BSP_AUDIO_IN_ResumeChannels(2, AUDIO_IN_DEVICE_DIGITAL_MIC1);
@@ -465,22 +465,22 @@ void TS_AudioUpdate(void)
     if((MicPauseResume.Mic1_Paused == 0) && (MicPauseResume.Mic2_Paused == 0))
     {
       sprintf((char*)text, "MIC1: Active  MIC2: Active");
-      GUI_DisplayStringAt(0, 140, (uint8_t *)text, CENTER_MODE);
+      UTIL_LCD_DisplayStringAt(0, 140, (uint8_t *)text, CENTER_MODE);
     }
     else if((MicPauseResume.Mic1_Paused == 1) && (MicPauseResume.Mic2_Paused == 0))
     {
       sprintf((char*)text, "MIC1: Paused  MIC2: Active");
-      GUI_DisplayStringAt(0, 140, (uint8_t *)text, CENTER_MODE);
+      UTIL_LCD_DisplayStringAt(0, 140, (uint8_t *)text, CENTER_MODE);
     }
     else if((MicPauseResume.Mic1_Paused == 0) && (MicPauseResume.Mic2_Paused == 1))
     {
       sprintf((char*)text, "MIC1: Active  MIC2: Paused");
-      GUI_DisplayStringAt(0, 140, (uint8_t *)text, CENTER_MODE);
+      UTIL_LCD_DisplayStringAt(0, 140, (uint8_t *)text, CENTER_MODE);
     }
     else /*     if((MicPauseResume.Mic1_Paused == 1) && (MicPauseResume.Mic2_Paused == 1)) */
     {
       sprintf((char*)text, "MIC1: Paused  MIC2: Paused");
-      GUI_DisplayStringAt(0, 140, (uint8_t *)text, CENTER_MODE);
+      UTIL_LCD_DisplayStringAt(0, 140, (uint8_t *)text, CENTER_MODE);
     }
   }
 }
@@ -516,28 +516,28 @@ static void AudioLoopback_SetHint(uint8_t Index)
   BSP_LCD_GetYSize(0, &y_size);
 
   /* Clear the LCD */
-  GUI_Clear(GUI_COLOR_WHITE);
+  UTIL_LCD_Clear(UTIL_LCD_COLOR_WHITE);
 
   /* Set Audio Demo description */
-  GUI_FillRect(0, 0, x_size, 90, GUI_COLOR_BLUE);
-  GUI_SetTextColor(GUI_COLOR_WHITE);
-  GUI_SetBackColor(GUI_COLOR_BLUE);
-  GUI_SetFont(&Font12);
+  UTIL_LCD_FillRect(0, 0, x_size, 90, UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_SetFont(&Font12);
 
   if(Index == 0)
   {
-    GUI_DisplayStringAt(0, 0, (uint8_t *)"DFSDM RECORDING & SAI PLAYING in Single buffer mode ", CENTER_MODE);
-    GUI_DisplayStringAt(0, 60, (uint8_t *)"Use touch screen +/- to change Frequency    ", CENTER_MODE);
+    UTIL_LCD_DisplayStringAt(0, 0, (uint8_t *)"DFSDM RECORDING & SAI PLAYING in Single buffer mode ", CENTER_MODE);
+    UTIL_LCD_DisplayStringAt(0, 60, (uint8_t *)"Use touch screen +/- to change Frequency    ", CENTER_MODE);
   }
   else
   {
-    GUI_DisplayStringAt(0, 0, (uint8_t *)"DFSDM RECORDING & SAI PLAYING in Multi buffer mode ", CENTER_MODE);
-    GUI_DisplayStringAt(0, 60, (uint8_t *)"Use touch screen to Pause/Resume MIC1/MIC2    ", CENTER_MODE);
+    UTIL_LCD_DisplayStringAt(0, 0, (uint8_t *)"DFSDM RECORDING & SAI PLAYING in Multi buffer mode ", CENTER_MODE);
+    UTIL_LCD_DisplayStringAt(0, 60, (uint8_t *)"Use touch screen to Pause/Resume MIC1/MIC2    ", CENTER_MODE);
   }
-  GUI_DisplayStringAt(0, 30, (uint8_t *)"Press TAMPER button for next menu          ", CENTER_MODE);
+  UTIL_LCD_DisplayStringAt(0, 30, (uint8_t *)"Press TAMPER button for next menu          ", CENTER_MODE);
 
-  GUI_DrawRect(10, 100, x_size - 20, y_size - 100, GUI_COLOR_BLUE);
-  GUI_DrawRect(11, 101, x_size - 22, y_size - 102, GUI_COLOR_BLUE);
+  UTIL_LCD_DrawRect(10, 100, x_size - 20, y_size - 100, UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_DrawRect(11, 101, x_size - 22, y_size - 102, UTIL_LCD_COLOR_BLUE);
 }
 
 /**

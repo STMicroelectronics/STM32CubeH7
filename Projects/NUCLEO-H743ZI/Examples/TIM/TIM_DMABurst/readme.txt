@@ -74,6 +74,10 @@ The PWM waveform can be displayed using an oscilloscope.
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
 
+@par Keywords
+
+Timer, DMA, Burst mode, Duty Cycle, Waveform, Oscilloscope, Output, Signal, PWM
+
 @par Directory contents  
 
   - TIM/TIM_DMABurst/Inc/stm32h7xx_hal_conf.h    HAL configuration file

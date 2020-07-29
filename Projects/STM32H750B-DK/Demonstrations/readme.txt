@@ -1,5 +1,5 @@
 /**
-  @page Demo STM32H750B-DK Demonstration Firmware
+  @page Demonstrations STM32H750B-DK Demonstration Firmware
  
   @verbatim
   ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
@@ -172,7 +172,7 @@ the system info window. The info contains:
  
 @par Keywords
 
-Demonstration, FreeRTOS, RTOS, Middleware, wav, Video Player, avi, MP3, Audio player, Graphic,
+Demonstration, STemWin, FreeRTOS, RTOS, WAV, Video Player, AVI, JPEG, MJPEG, MP3, Audio player, Graphics,
 Game, System, CPU, SAI, QSPI, SD, 
 
 @par Hardware and Software environment

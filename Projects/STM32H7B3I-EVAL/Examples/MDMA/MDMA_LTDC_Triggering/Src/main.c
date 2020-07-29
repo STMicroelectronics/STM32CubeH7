@@ -65,7 +65,7 @@ DMA_HandleTypeDef DMA_Handlel2;
 LPTIM_HandleTypeDef  LptimHandle;
 
 /* ARGB8888 Default Color used to clear the LCD */
-uint32_t LCD_Fill_Color = GUI_COLOR_BLACK;
+uint32_t LCD_Fill_Color = UTIL_LCD_COLOR_BLACK;
 
 __IO uint32_t MDMA_TransferErrorDetected = 0;
 
@@ -149,9 +149,9 @@ int main(void)
   BSP_LCD_Init(0,LCD_ORIENTATION_LANDSCAPE);
 
   /* Link Board LCD drivers to BASIC GUI LCD drivers*/
-  GUI_SetFuncDriver(&LCD_Driver);
+  UTIL_LCD_SetFuncDriver(&LCD_Driver);
 
-  GUI_Clear(GUI_COLOR_BLACK);
+  UTIL_LCD_Clear(UTIL_LCD_COLOR_BLACK);
 
   /* Get the LCD Width and Height */
   BSP_LCD_GetXSize(0,&LCD_X_Size);

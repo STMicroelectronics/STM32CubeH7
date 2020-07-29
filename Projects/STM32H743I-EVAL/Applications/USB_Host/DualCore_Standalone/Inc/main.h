@@ -23,7 +23,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stdio.h"
-#include "basic_gui.h"
+#include "stm32_lcd.h"
 #include "usbh_core.h"
 #include "stm32h743i_eval.h"
 #include "stm32h743i_eval_io.h"

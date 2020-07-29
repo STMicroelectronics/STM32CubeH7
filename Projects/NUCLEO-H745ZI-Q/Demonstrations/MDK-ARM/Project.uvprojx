@@ -16,8 +16,8 @@
         <TargetCommonOption>
           <Device>STM32H745ZITx:CM4</Device>
           <Vendor>STMicroelectronics</Vendor>
-          <PackID>Keil.STM32H7xx_DFP.2.2.6</PackID>
-          <PackURL>http://www.keil.com/pack</PackURL>
+          <PackID>Keil.STM32H7xx_DFP.2.4.1</PackID>
+          <PackURL>https://www.keil.com/pack/</PackURL>
           <Cpu>IRAM(0x20000000,0x00020000) IRAM2(0x24000000,0x00080000) IROM(0x08000000,0x00200000) CPUTYPE("Cortex-M4") FPU2 CLOCK(12000000) ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile></StartupFile>
@@ -184,6 +184,7 @@
             <hadXRAM>0</hadXRAM>
             <uocXRam>0</uocXRam>
             <RvdsVP>2</RvdsVP>
+            <RvdsMve>0</RvdsMve>
             <hadIRAM2>1</hadIRAM2>
             <hadIROM2>0</hadIROM2>
             <StupSel>8</StupSel>
@@ -997,9 +998,9 @@
           <GroupName>Utilities</GroupName>
           <Files>
             <File>
-              <FileName>basic_gui.c</FileName>
+              <FileName>stm32_lcd.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\Utilities\Basic_GUI\basic_gui.c</FilePath>
+              <FilePath>..\..\..\..\Utilities\lcd\stm32_lcd.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1018,8 +1019,8 @@
         <TargetCommonOption>
           <Device>STM32H745ZITx:CM7</Device>
           <Vendor>STMicroelectronics</Vendor>
-          <PackID>Keil.STM32H7xx_DFP.2.2.6</PackID>
-          <PackURL>http://www.keil.com/pack</PackURL>
+          <PackID>Keil.STM32H7xx_DFP.2.4.1</PackID>
+          <PackURL>https://www.keil.com/pack/</PackURL>
           <Cpu>IROM(0x08000000-0x80FFFFF) IRAM(0x24000000-0x2400FFFF) IRAM2(0x00000000-0xFFFF) CLOCK(12000000) FPU3(DFPU) CPUTYPE("Cortex-M7") ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile></StartupFile>
@@ -1186,6 +1187,7 @@
             <hadXRAM>0</hadXRAM>
             <uocXRam>0</uocXRam>
             <RvdsVP>3</RvdsVP>
+            <RvdsMve>0</RvdsMve>
             <hadIRAM2>1</hadIRAM2>
             <hadIROM2>0</hadIROM2>
             <StupSel>8</StupSel>
@@ -1339,7 +1341,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32H745xx,CORE_CM7,USE_STM32H7XX_NUCLEO_144_MB1363,ADAFRUIT_TFT_JOY_SD_ID802</Define>
               <Undefine></Undefine>
-              <IncludePath>../CM7/Inc;../../../../Drivers/CMSIS/Include;../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../../../../Drivers/STM32H7xx_HAL_Driver/Inc;../../../../Drivers/BSP/STM32H7xx_Nucleo;../../../../Drivers/BSP/Adafruit_Shield;../../../../Drivers/BSP/Components/st7735;../../../../Drivers/BSP/Components/Common;../../../../Middlewares/Third_Party/FatFs/src;../../../../Middlewares/Third_Party/FatFs/src/drivers;../../../../Utilities/Basic_GUI;../Common/Inc</IncludePath>
+              <IncludePath>../CM7/Inc;../../../../Drivers/CMSIS/Include;../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../../../../Drivers/STM32H7xx_HAL_Driver/Inc;../../../../Drivers/BSP/STM32H7xx_Nucleo;../../../../Drivers/BSP/Adafruit_Shield;../../../../Drivers/BSP/Components/st7735;../../../../Drivers/BSP/Components/Common;../../../../Middlewares/Third_Party/FatFs/src;../../../../Middlewares/Third_Party/FatFs/src/drivers;../../../../Utilities/LCD;../Common/Inc</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -1723,9 +1725,9 @@
           <GroupName>Utilities</GroupName>
           <Files>
             <File>
-              <FileName>basic_gui.c</FileName>
+              <FileName>stm32_lcd.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\Utilities\Basic_GUI\basic_gui.c</FilePath>
+              <FilePath>..\..\..\..\Utilities\lcd\stm32_lcd.c</FilePath>
             </File>
           </Files>
         </Group>

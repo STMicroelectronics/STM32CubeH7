@@ -93,7 +93,7 @@ The example performs the following actions :
 
 @par Keywords
 
-Display, Graphic, JPEG, Decoding, Flash memory, DSI, LTDC, DMA, DMA2D, MDMA, ARGB8888, Hardware decoding, LCD, YCbCr, RGB, HDMI
+Display, Graphics, JPEG, Decoding, Flash memory, DSI, LTDC, DMA, DMA2D, MDMA, ARGB8888, Hardware decoding, LCD, YCbCr, RGB, HDMI
 FatFS, File system, SD Card, SDRAM
 
 @par Directory contents

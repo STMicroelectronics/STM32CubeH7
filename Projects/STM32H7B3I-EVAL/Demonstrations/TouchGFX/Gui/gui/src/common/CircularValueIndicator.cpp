@@ -2,7 +2,7 @@
 #include <BitmapDatabase.hpp>
 #include <touchgfx/canvas_widget_renderer/CanvasWidgetRenderer.hpp>
 #include <touchgfx/Color.hpp>
-#include <Texts/TextKeysAndLanguages.hpp>
+#include <texts/TextKeysAndLanguages.hpp>
 
 CircularValueIndicator::CircularValueIndicator()
 {

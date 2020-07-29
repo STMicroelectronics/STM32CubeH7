@@ -58,6 +58,10 @@ or pause the currently running module.
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
 
+@par Keywords
+
+Graphics, Display, STemWin, LTDC, LCD, GUI, Touch screen
+
 @par Directory contents
 
   - STemWin/STemWin_HelloWorld/STemWin/Target/GUIConf.h                      Header for GUIConf.c

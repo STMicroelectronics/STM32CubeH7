@@ -78,13 +78,6 @@ requirements, such as:
    Debug messages are displayed on the uart terminal using ST-Link.
 
 
-@par Keywords
-
-Connectivity, USB Host, MSC, Mass Storage, Full Speed, High Speed, BOT, SCSI, Removable drive, FatFs,
-File system, Write, Read, Format
-
-
-
 @Note If the  application is using the DTCM/ITCM memories (@0x20000000/ 0x0000000: not cacheable and only accessible
       by the Cortex M7 and the  MDMA), no need for cache maintenance when the Cortex M7 and the MDMA access these RAMs.
       If the application needs to use DMA(or other masters) based access or requires more RAM, then  the user has to:
@@ -97,6 +90,11 @@ File system, Write, Read, Format
       Depending on the use case it is also possible to configure the cache attributes using the MPU.
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
+
+@par Keywords
+
+Connectivity, USB_Host, USB, MSC, Mass Storage, Full Speed, High Speed, BOT, SCSI, Removable drive, FatFs,
+File system, Write, Read, Format
 
 @par Directory contents
 
@@ -127,8 +125,8 @@ File system, Write, Read, Format
   - STM32H7B3I-EVAL Set-up
     - Plug the USB key into the STM32H7B3I-EVAL board through 'USB micro A-Male
       to A-Female' cable to the connector:
-      - CN8 : to use USB High speed (HS).Make sure that JP19 is fitted in USBHS position and JP10 is fitted.
-      - CN27: to use USB High speed OTG IP in full speed (HS_IN_FS)
+      - CN8 : to use USB High speed (HS), Make sure that JP9, JP11 and JP19 are fitted in USBHS position and that JP10 and JP16 are fitted.
+      - CN27: to use USB High speed OTG IP in full speed (HS_IN_FS).
   -Connect ST-Link cable to the PC USB port to display data on the HyperTerminal.
     A virtual COM port will then appear in the HyperTerminal:
 

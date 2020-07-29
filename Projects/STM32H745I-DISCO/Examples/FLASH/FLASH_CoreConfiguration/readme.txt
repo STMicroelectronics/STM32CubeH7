@@ -1,5 +1,5 @@
 /**
-  @page Templates  Description of the Templates FLASH_CoreConfiguration example
+  @page FLASH_CoreConfiguration  Description of the FLASH_CoreConfiguration example
 
   @verbatim
   ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
@@ -56,6 +56,10 @@ The SystemClock_Config() function is used to set the Flash latency and  to confi
 
 @note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
+
+@par Keywords
+
+Memory, Flash, Configure, Program, Copy, Bank, Dual Bank, Execute
 
 @par Directory contents
 

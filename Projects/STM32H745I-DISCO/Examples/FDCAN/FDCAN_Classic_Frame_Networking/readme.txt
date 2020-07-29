@@ -91,6 +91,10 @@ Press on User Push Button again to send CAN Frame to command LEDn+1 ON, all othe
 @Note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
+@par Keywords
+
+FDCAN, Networking, Classic, CAN
+
 @par Directory contents
 
   - FDCAN/FDCAN_Classic_Frame_Networking/Common/Src/system_stm32h7xx.c  STM32H7xx system configuration file

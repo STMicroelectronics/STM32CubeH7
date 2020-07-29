@@ -29,7 +29,7 @@
 #include "stm32h7xx_nucleo.h"
 #include "adafruit_802_sd.h"
 #include "adafruit_802_lcd.h"
-#include "basic_gui.h"
+#include "stm32_lcd.h"
 
 /* Exported types ------------------------------------------------------------*/
 typedef struct

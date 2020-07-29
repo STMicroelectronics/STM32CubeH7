@@ -1,5 +1,5 @@
 /**
-  @page ExtMem_CodeExecution Boot application for External memory execution Readme file
+  @page ExtMem_Boot Boot application for External memory execution Readme file
 
   @verbatim
   ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
@@ -64,9 +64,6 @@ to enhance the performance in case of use of AXI interface with several masters.
       placed above function declaration, or using the toolchain GUI (file options) to execute a whole source file in
 	  the ITCM-RAM.
 
-@par Keywords
-Middleware, External Memory Boot, Loader, Boot
-
 @note For the chosen configuration check the approriate JP positions 
 - Make sure JP4 and JP23 are in OCTOSPI1 position.
 - Make sure JP2 is in SRAM position.
@@ -95,6 +92,9 @@ Middleware, External Memory Boot, Loader, Boot
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series and STM32H7 Series"
 
+@par Keywords
+
+External, OSPI, Memory, Boot, Loader, XiP, BootROM, Value line
 
 @par Directory contents
 

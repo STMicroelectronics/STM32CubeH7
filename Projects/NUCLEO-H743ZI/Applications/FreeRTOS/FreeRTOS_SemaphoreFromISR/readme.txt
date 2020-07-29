@@ -20,9 +20,9 @@
   ******************************************************************************
   @endverbatim
 
-@par application Description
+@par Application Description
 
-This application shows how to use semaphore from ISR with CMSIS RTOS API .
+How to use semaphore from ISR with CMSIS RTOS API.
 
 At the beginning of the main program the HAL_Init() function is called to reset 
 all the peripherals and initialize the Flash interface.
@@ -68,6 +68,10 @@ on STM32Cube with RTOS".
       Depending on the use case it is also possible to configure the cache attributes using the MPU.
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
+
+@par Keywords
+
+RTOS, FreeRTOS, Thread, Semaphore, Priorities, Button, LED, Interrupt
 
 @par Directory contents
 

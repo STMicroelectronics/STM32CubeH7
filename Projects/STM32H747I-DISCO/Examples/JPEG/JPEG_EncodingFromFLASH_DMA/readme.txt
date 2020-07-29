@@ -94,7 +94,7 @@ The example performs the following actions :
 
 @par Keywords
 
-Display, Graphic, JPEG, Encoding, Flash memory, DMA, ARGB8888, Hardware Encoding, LCD, YCbCr, RGB,
+Display, Graphics, JPEG, Encoding, Flash memory, DMA, ARGB8888, Hardware Encoding, LCD, YCbCr, RGB,
 SD Card, SDRAM
 
 @par Directory contents

@@ -65,6 +65,10 @@ The APB clock dividers for D1 Domain APB3 peripherals, D2 Domain APB1 and APB2 p
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
 
+@par Keywords
+
+Template, External, Memory, Boot, Loader, XiP, BootROM, Value line
+
 @par Directory contents
 
  - "Templates/Inc": contains the Templates firmware header files

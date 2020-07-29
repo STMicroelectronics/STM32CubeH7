@@ -75,6 +75,9 @@ int main(void)
   
   /* Init Audio Application */
   Audio_InitApplication();
+  
+  /* Enable the USB voltage level detector */
+  HAL_PWREx_EnableUSBVoltageDetector();
 
   /* Init Host Library */
   USBH_Init(&hUSBHost, USBH_UserProcess, 0);
@@ -84,9 +87,6 @@ int main(void)
 
   /* Start Host Process */
   USBH_Start(&hUSBHost);
-
-  /* Enable the USB voltage level detector */
-  HAL_PWREx_EnableUSBVoltageDetector();
 
   /* Run Application (Blocking mode) */
   while (1)
@@ -114,11 +114,11 @@ static void Audio_InitApplication(void)
 
   /* Initialize the LCD */
   BSP_LCD_Init(0, LCD_ORIENTATION_LANDSCAPE);
-  GUI_SetFuncDriver(&LCD_Driver);
+  UTIL_LCD_SetFuncDriver(&LCD_Driver);
 
 
   /* Selects the LCD Layer */
-   GUI_SetLayer(0);
+   UTIL_LCD_SetLayer(0);
 
 
   /* Initialize the LCD Log module */
@@ -263,10 +263,10 @@ void SystemClock_Config(void)
   RCC_ClkInitStruct.APB3CLKDivider = RCC_APB3_DIV2;
   HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_4);
 
-  /*activate CSI clock mondatory for I/O Compensation Cell*/
+  /*activate CSI clock mandatory for I/O Compensation Cell*/
   __HAL_RCC_CSI_ENABLE() ;
 
-  /* Enable SYSCFG clock mondatory for I/O Compensation Cell */
+  /* Enable SYSCFG clock mandatory for I/O Compensation Cell */
   __HAL_RCC_SYSCFG_CLK_ENABLE() ;
 
   /* Enables the I/O Compensation Cell */

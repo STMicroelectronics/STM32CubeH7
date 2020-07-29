@@ -94,7 +94,7 @@ Each image is displayed for two seconds.
 
 @par Keywords
 
-Graphic, Display, DMA2D, LCD , DSI, MIPI Alliance, Command mode, Partial refresh, LTDC, QVGA, ARGB8888, layer
+Graphics, Display, DMA2D, LCD , DSI, MIPI Alliance, Command mode, Partial refresh, LTDC, QVGA, ARGB8888, layer
 
 @par Directory contents
 

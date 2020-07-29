@@ -142,9 +142,9 @@ AUDIO_ErrorTypeDef AUDIO_Process(void)
       prev_elapsed_time = elapsed_time;
       sprintf((char *)str, "[%02lu:%02lu]", elapsed_time / 60,
               elapsed_time % 60);
-      GUI_SetTextColor(GUI_COLOR_CYAN);
-      GUI_DisplayStringAt(263, LINE(8), str, LEFT_MODE);
-      GUI_SetTextColor(GUI_COLOR_WHITE);
+      UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_CYAN);
+      UTIL_LCD_DisplayStringAt(263, LINE(8), str, LEFT_MODE);
+      UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
     }
     break;
 
@@ -167,13 +167,13 @@ AUDIO_ErrorTypeDef AUDIO_Process(void)
     break;
 
   case AUDIO_STATE_PAUSE:
-    GUI_DisplayStringAt(250, LINE(14), (uint8_t *) "  [PAUSE]", LEFT_MODE);
+    UTIL_LCD_DisplayStringAt(250, LINE(14), (uint8_t *) "  [PAUSE]", LEFT_MODE);
     USBH_AUDIO_Suspend(&hUSBHost);
     audio_state = AUDIO_STATE_WAIT;
     break;
 
   case AUDIO_STATE_RESUME:
-    GUI_DisplayStringAt(250, LINE(14), (uint8_t *) "  [PLAY ]", LEFT_MODE);
+    UTIL_LCD_DisplayStringAt(250, LINE(14), (uint8_t *) "  [PLAY ]", LEFT_MODE);
     USBH_AUDIO_Resume(&hUSBHost);
     audio_state = AUDIO_STATE_PLAY;
     break;
@@ -271,28 +271,28 @@ static AUDIO_ErrorTypeDef AUDIO_GetFileInfo(uint16_t file_idx,
     if (f_read(&wav_file, info, sizeof(WAV_InfoTypedef), (void *)&bytesread) ==
         FR_OK)
     {
-      GUI_SetTextColor(GUI_COLOR_WHITE);
+      UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
       sprintf((char *)str, "Playing file (%d/%d): %s",
               file_idx + 1, FileList.ptr, (char *)FileList.file[file_idx].name);
-      GUI_ClearStringLine(4);
-      GUI_DisplayStringAtLine(4, str);
+      UTIL_LCD_ClearStringLine(4);
+      UTIL_LCD_DisplayStringAtLine(4, str);
 
-      GUI_SetTextColor(GUI_COLOR_CYAN);
+      UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_CYAN);
       sprintf((char *)str, "Sample rate : %lu Hz", info->SampleRate);
-      GUI_ClearStringLine(6);
-      GUI_DisplayStringAtLine(6, str);
+      UTIL_LCD_ClearStringLine(6);
+      UTIL_LCD_DisplayStringAtLine(6, str);
 
       sprintf((char *)str, "Channels number : %d", info->NbrChannels);
-      GUI_ClearStringLine(7);
-      GUI_DisplayStringAtLine(7, str);
+      UTIL_LCD_ClearStringLine(7);
+      UTIL_LCD_DisplayStringAtLine(7, str);
 
       duration = info->FileSize / info->ByteRate;
       sprintf((char *)str, "File Size : %lu MB [%02lu:%02lu]",
               info->FileSize / 1024 / 1024, duration / 60, duration % 60);
-      GUI_ClearStringLine(8);
-      GUI_DisplayStringAtLine(8, str);
-      GUI_DisplayStringAt(263, LINE(8), (uint8_t *) "[00:00]", LEFT_MODE);
-      GUI_SetTextColor(GUI_COLOR_WHITE);
+      UTIL_LCD_ClearStringLine(8);
+      UTIL_LCD_DisplayStringAtLine(8, str);
+      UTIL_LCD_DisplayStringAt(263, LINE(8), (uint8_t *) "[00:00]", LEFT_MODE);
+      UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
       return AUDIO_ERROR_NONE;
     }
     f_close(&wav_file);
@@ -311,7 +311,7 @@ void USBH_AUDIO_FrequencySet(USBH_HandleTypeDef * phost)
   {
     /* Start first read */
     USBH_AUDIO_Play(&hUSBHost, &buffer_ctl.buff[0], wav_info.FileSize);
-    GUI_DisplayStringAt(250, LINE(14), (uint8_t *) "  [PLAY ]", LEFT_MODE);
+    UTIL_LCD_DisplayStringAt(250, LINE(14), (uint8_t *) "  [PLAY ]", LEFT_MODE);
     audio_state = AUDIO_STATE_PLAY;
   }
 }

@@ -42,7 +42,7 @@ when the define USE_VOS0_480MHZ_OVERCLOCK (in main.h) is set to one then :
 
 @note Over clocking the system to 480MHz is only possible with PWR VOS0 voltage scaling.
       In order to switch to voltage scaling zero (VOS0), the following sequence must be respected :
-      - First enable the CYSCFG clock using __HAL_RCC_SYSCFG_CLK_ENABLE macro
+      - First enable the SYSCFG clock using __HAL_RCC_SYSCFG_CLK_ENABLE macro
       - Using __HAL_PWR_VOLTAGESCALING_CONFIG Set voltage scaling 1 (VOS1) and wait for VOSRDY flag to be set
       - once in VOS1 scale, switch to VOS0 using __HAL_PWR_VOLTAGESCALING_CONFIG and wait again on VOSRDY flag.
 
@@ -104,6 +104,10 @@ when the define USE_VOS0_480MHZ_OVERCLOCK (in main.h) is set to one then :
       Depending on the use case it is also possible to configure the cache attributes using the MPU.
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
+
+@par Keywords
+
+System, Cortex, floating-point unit, FPU, Double-precision, Fractal, Julia set, Equation, Complex plan, Real numbers, Pixel, Color, Button
 
 @par Directory contents
 

@@ -54,9 +54,6 @@ NUCLEO-H7A3ZI-Q board's LEDs are used to monitor the example status:
 @note The example needs to ensure that the SysTick time base is always set to 1 millisecond
  to have correct HAL operation.
 
-@par Keywords
-
-Security, CRC, CRC Polynomial, IEC 60870-5, hardware CRC, user-defined, generating polynomial
 
 @Note If the  application is using the DTCM/ITCM memories (@0x20000000/0x0000000: not cacheable and only accessible
       by the Cortex M7 and the MDMA), no need for cache maintenance when the Cortex M7 and the MDMA access these RAMs.
@@ -69,6 +66,11 @@ Security, CRC, CRC Polynomial, IEC 60870-5, hardware CRC, user-defined, generati
 @Note It is recommended to enable the cache and maintain its coherence.
               Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
               Please refer to the AN4839 "Level 1 cache on STM32F7 Series and STM32H7 Series"
+
+@par Keywords
+
+Security, CRC, CRC Polynomial, IEC 60870-5, hardware CRC, user-defined, generating polynomial
+
 @par Directory contents 
   
   - CRC/CRC_UserDefinedPolynomial/Inc/stm32h7xx_hal_conf.h    HAL configuration file

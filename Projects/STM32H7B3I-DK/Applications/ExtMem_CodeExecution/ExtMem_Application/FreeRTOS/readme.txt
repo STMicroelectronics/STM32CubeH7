@@ -1,9 +1,9 @@
 /**
-  @page FreeRTOS_ThreadCreation FreeRTOS Thread Creation application
+  @page FreeRTOS FreeRTOS application
 
   @verbatim
   ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
-  * @file    FreeRTOS/FreeRTOS_ThreadCreation/readme.txt
+  * @file    FreeRTOS/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the FreeRTOS Thread Creation application with execution from external memory
   *          AN5188.
@@ -58,11 +58,6 @@ This application provide different configuration with linker files which allows 
 For more details about FreeRTOS implementation on STM32Cube, please refer to UM1722 "Developing Applications
 on STM32Cube with RTOS".
 
-
-@par Keywords
-
-Middleware, RTOS, FreeRTOS, Thread
-
 @Note If the  application is using the DTCM/ITCM memories (@0x20000000/ 0x0000000: not cacheable and only accessible
       by the Cortex M7 and the  MDMA), no need for cache maintenance when the Cortex M7 and the MDMA access these RAMs.
       If the application needs to use DMA(or other masters) based access or requires more RAM, then  the user has to:
@@ -75,6 +70,10 @@ Middleware, RTOS, FreeRTOS, Thread
       Depending on the use case, it is also possible to configure the cache attributes using the MPU.
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series and STM32H7 Series"
+
+@par Keywords
+
+External Memory, OSPI, code execution, Loader, Boot, XiP, BootROM, Value line, RTOS
 
 @par Directory contents
 
@@ -124,11 +123,6 @@ In order to load the application to the external memory:
       - Run & debug the program:
       - For an XiP configuration (eXecute in Place from OSPI):
           - Using EWARM or MDK-ARM : Load project image from the IDE: Project->Debug
-          - Using SW4STM32 :
-            - Open the STM32CubeProgrammer tool
-            - Select the OSPI external flash loader "MX25LM51245G_STM32H7B3I-DISCO" in case of XiP from OSPI
-            - From Erasing & Programming menu, browse and open the output binary file relative to your application
-            - Load the file into the external OSPI flash using "Start Programming" at the address APPLICATION_ADDRESS (0x90000000)
 
       - For a BootROM configuration (BootROM external SDRAM):
         - If BINARY_AREA is USE_SPI_NOR then use the STM32CubeProgarmmer tool, select OSPI external flash loader "MX25LM51245G_STM32H7B3I-DISCO"

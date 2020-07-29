@@ -47,7 +47,7 @@ uint8_t *MSC_main_menu[] = {
 */
 void Menu_Init(void)
 {
-  GUI_SetTextColor(GUI_COLOR_GREEN);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_GREEN);
   USBH_UsrLog("Connect your MSC Device");
   msc_demo.state = MSC_DEMO_WAIT;
 }

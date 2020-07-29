@@ -68,17 +68,17 @@ void AUDIO_MenuProcess(void)
   switch (audio_demo.state)
   {
   case AUDIO_DEMO_IDLE:
-    GUI_SetTextColor(GUI_COLOR_GREEN);
-    GUI_DisplayStringAtLine(16,
+    UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_GREEN);
+    UTIL_LCD_DisplayStringAtLine(16,
                                 (uint8_t *)
                                 "                                                 ");
-    GUI_DisplayStringAtLine(17,
+    UTIL_LCD_DisplayStringAtLine(17,
                                 (uint8_t *)
                                 "Use [Joystick Left/Right] to scroll up/down       ");
-    GUI_DisplayStringAtLine(18,
+    UTIL_LCD_DisplayStringAtLine(18,
                                 (uint8_t *)
                                 "Use [Joystick Up/Down] to scroll audio menu      ");
-    GUI_SetTextColor(GUI_COLOR_WHITE);
+    UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
 
     AUDIO_MenuSelectItem(AUDIO_main_menu, 0);
     audio_demo.state = AUDIO_DEMO_WAIT;
@@ -104,17 +104,17 @@ void AUDIO_MenuProcess(void)
 
         case 1:
           /* Display HMI messages */
-          GUI_SetTextColor(GUI_COLOR_GREEN);
-          GUI_DisplayStringAtLine(14,
+          UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_GREEN);
+          UTIL_LCD_DisplayStringAtLine(14,
                                       (uint8_t *)
                                       "                                             ");
-          GUI_DisplayStringAtLine(15,
+          UTIL_LCD_DisplayStringAtLine(15,
                                       (uint8_t *)
                                       "                                             ");
-          GUI_DisplayStringAtLine(16,
+          UTIL_LCD_DisplayStringAtLine(16,
                                       (uint8_t *)
                                       "Use [User Tamper] To Stop and return from player");
-          GUI_SetTextColor(GUI_COLOR_WHITE);
+          UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
 
           /* Set PLAYBACK state and start playing 1st file */
           audio_state = AUDIO_STATE_IDLE;
@@ -161,14 +161,14 @@ void AUDIO_MenuProcess(void)
         }
         else
         {
-          GUI_SetTextColor(GUI_COLOR_YELLOW);
-          GUI_DisplayStringAtLine(10, (uint8_t *) "[  UP   ] : Volume +");
-          GUI_DisplayStringAtLine(11, (uint8_t *) "[ DOWN  ] : Volume -");
-          GUI_DisplayStringAtLine(12, (uint8_t *) "[ LEFT  ] : Previous");
-          GUI_DisplayStringAtLine(13, (uint8_t *) "[ RIGHT ] : Next");
-          GUI_DisplayStringAtLine(14,
+          UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_YELLOW);
+          UTIL_LCD_DisplayStringAtLine(10, (uint8_t *) "[  UP   ] : Volume +");
+          UTIL_LCD_DisplayStringAtLine(11, (uint8_t *) "[ DOWN  ] : Volume -");
+          UTIL_LCD_DisplayStringAtLine(12, (uint8_t *) "[ LEFT  ] : Previous");
+          UTIL_LCD_DisplayStringAtLine(13, (uint8_t *) "[ RIGHT ] : Next");
+          UTIL_LCD_DisplayStringAtLine(14,
                                       (uint8_t *) "[  SEL  ] : Pause/Resume");
-          GUI_SetTextColor(GUI_COLOR_WHITE);
+          UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
         }
       }
       else                      /* Not idle */
@@ -206,43 +206,43 @@ void AUDIO_MenuProcess(void)
   */
 void AUDIO_MenuSelectItem(uint8_t ** menu, uint8_t item)
 {
-  GUI_SetTextColor(GUI_COLOR_WHITE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
 
   switch (item)
   {
   case 0:
-    GUI_SetBackColor(GUI_COLOR_MAGENTA);
-    GUI_DisplayStringAtLine(19, menu[0]);
-    GUI_SetBackColor(GUI_COLOR_BLUE);
-    GUI_DisplayStringAtLine(20, menu[1]);
-    GUI_DisplayStringAtLine(21, menu[2]);
+    UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_MAGENTA);
+    UTIL_LCD_DisplayStringAtLine(19, menu[0]);
+    UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_BLUE);
+    UTIL_LCD_DisplayStringAtLine(20, menu[1]);
+    UTIL_LCD_DisplayStringAtLine(21, menu[2]);
     break;
 
   case 1:
-    GUI_SetBackColor(GUI_COLOR_BLUE);
-    GUI_DisplayStringAtLine(19, menu[0]);
-    GUI_SetBackColor(GUI_COLOR_MAGENTA);
-    GUI_DisplayStringAtLine(20, menu[1]);
-    GUI_SetBackColor(GUI_COLOR_BLUE);
-    GUI_DisplayStringAtLine(21, menu[2]);
+    UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_BLUE);
+    UTIL_LCD_DisplayStringAtLine(19, menu[0]);
+    UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_MAGENTA);
+    UTIL_LCD_DisplayStringAtLine(20, menu[1]);
+    UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_BLUE);
+    UTIL_LCD_DisplayStringAtLine(21, menu[2]);
     break;
 
   case 2:
-    GUI_SetBackColor(GUI_COLOR_BLUE);
-    GUI_DisplayStringAtLine(19, menu[0]);
-    GUI_DisplayStringAtLine(20, menu[1]);
-    GUI_SetBackColor(GUI_COLOR_MAGENTA);
-    GUI_DisplayStringAtLine(21, menu[2]);
+    UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_BLUE);
+    UTIL_LCD_DisplayStringAtLine(19, menu[0]);
+    UTIL_LCD_DisplayStringAtLine(20, menu[1]);
+    UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_MAGENTA);
+    UTIL_LCD_DisplayStringAtLine(21, menu[2]);
     break;
 
   default:
-    GUI_SetBackColor(GUI_COLOR_BLUE);
-    GUI_DisplayStringAtLine(19, menu[0]);
-    GUI_DisplayStringAtLine(20, menu[1]);
-    GUI_DisplayStringAtLine(21, menu[2]);
+    UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_BLUE);
+    UTIL_LCD_DisplayStringAtLine(19, menu[0]);
+    UTIL_LCD_DisplayStringAtLine(20, menu[1]);
+    UTIL_LCD_DisplayStringAtLine(21, menu[2]);
     break;
   }
-  GUI_SetBackColor(GUI_COLOR_BLACK);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_BLACK);
 }
 
 /**
@@ -373,7 +373,7 @@ static uint8_t Audio_ShowWavFiles(void)
 
   if ((FileList.ptr > 0) && (BSP_SD_IsDetected(0)))
   {
-    GUI_SetTextColor(GUI_COLOR_WHITE);
+    UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
     LCD_UsrTrace("audio file(s) [ROOT]:\n\n");
 
     for (i = 0; i < FileList.ptr; i++)
@@ -394,7 +394,7 @@ static uint8_t Audio_ShowWavFiles(void)
       LCD_DbgTrace((char *)FileList.file[i].name);
       LCD_DbgTrace("\n");
     }
-    GUI_SetTextColor(GUI_COLOR_WHITE);
+    UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
     LCD_UsrTrace("\nEnd of files list.\n");
     return 0;
   }
@@ -415,7 +415,7 @@ static void LCD_ClearTextZone(void)
 
   for (i = 0; i < 12; i++)
   {
-    GUI_ClearStringLine(i + 3);
+    UTIL_LCD_ClearStringLine(i + 3);
   }
 }
 

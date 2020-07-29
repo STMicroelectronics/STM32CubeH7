@@ -130,10 +130,10 @@ static void LCD_Config(void)
  
 
   /* Set Foreground Layer */
-  GUI_SetLayer(0);
+  UTIL_LCD_SetLayer(0);
   
   /* Clear the LCD Background layer */
-  GUI_Clear(GUI_COLOR_WHITE); 
+  UTIL_LCD_Clear(UTIL_LCD_COLOR_WHITE); 
 
 }
 
@@ -267,7 +267,7 @@ static void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLR = 2;
   /* PLL_VCO Input = HSE_VALUE/PLL_M = 5 Mhz */
   /* PLL_VCO Output = PLL_VCO Input * PLL_N = 800 Mhz */
-  /* SDMMC Kernel Clock = PLL3_VCO Output/PLL_Q = 800/4 = 200 Mhz */
+  /* SDMMC Kernel Clock = PLL1_VCO Output/PLL_Q = 800/4 = 200 Mhz */
   RCC_OscInitStruct.PLL.PLLQ = 4;
    
   RCC_OscInitStruct.PLL.PLLVCOSEL = RCC_PLL1VCOWIDE;

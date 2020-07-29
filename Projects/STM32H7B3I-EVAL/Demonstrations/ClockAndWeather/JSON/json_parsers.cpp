@@ -4,10 +4,10 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
-
+#include "FreeRTOS.h"
 #include <gui/common/structs.hpp>
 
-static jsmntok_t t[2200];
+static jsmntok_t* t = NULL;
 
 int extractWeatherData(const char *json_string, struct weatherData* data);
 int jsoneq(const char *json, jsmntok_t *tok, const char *s);
@@ -20,12 +20,24 @@ int extractWeatherData(const char *json_string, struct weatherData* data)
     int i;
     int r;
     jsmn_parser p;
-
+	int token_size = 0;
     int timezone;
 
     jsmn_init(&p);
-    r = jsmn_parse(&p, json_string, strlen(json_string), t,
-        sizeof(t) / sizeof(t[0]));
+    
+    /* Passing NULL instead of the tokens array would not store parsing results, 
+  but instead the function will return the value of tokens needed to parse the given string. 
+  This can be useful if you don’t know yet how many tokens to allocate. */
+  
+  token_size = jsmn_parse(&p, json_string, strlen(json_string), NULL,
+                          sizeof(t) / sizeof(t[0]));
+  
+  t = (jsmntok_t*) pvPortMalloc(token_size * sizeof(jsmntok_t));
+  
+  jsmn_init(&p);
+  
+  r = jsmn_parse(&p, json_string, strlen(json_string), t, token_size);
+  
     if (r < 0) {
         return 1;
     }
@@ -279,7 +291,9 @@ int extractWeatherData(const char *json_string, struct weatherData* data)
     if (!rainPresent)
     {
         data->rain = 0;
-    }    
+    }
+    /* deallocating the memory*/
+  	vPortFree(t);    
     return EXIT_SUCCESS;
 }
 
@@ -323,10 +337,21 @@ int extractDateTime(char *json_string, char* date_time, char* day_of_week, int *
   int i;
   int r;
   jsmn_parser p;
+  int token_size = 0;
   
   jsmn_init(&p);
-  r = jsmn_parse(&p, json_string, strlen(json_string), t,
-                 sizeof(t) / sizeof(t[0]));
+  
+   /* Passing NULL instead of the tokens array would not store parsing results, 
+  but instead the function will return the value of tokens needed to parse the given string. 
+  This can be useful if you don’t know yet how many tokens to allocate. */
+  token_size = jsmn_parse(&p, json_string, strlen(json_string), NULL,
+                          sizeof(t) / sizeof(t[0]));
+  
+  t = (jsmntok_t*) pvPortMalloc(token_size * sizeof(jsmntok_t));
+  
+  jsmn_init(&p);
+  
+  r = jsmn_parse(&p, json_string, strlen(json_string), t, token_size);
   if (r < 0) 
   {
     return 1;
@@ -359,6 +384,7 @@ int extractDateTime(char *json_string, char* date_time, char* day_of_week, int *
             i++;
     }
   }
-  
+   /* deallocating the memory*/
+  vPortFree(t); 
   return 0;
 }

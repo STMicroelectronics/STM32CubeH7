@@ -337,7 +337,7 @@
               <MiscControls>--C99</MiscControls>
               <Define>USE_HAL_DRIVER,STM32H743xx,USE_STM32H7XX_NUCLEO_144_MB1364,ADAFRUIT_TFT_JOY_SD_ID802</Define>
               <Undefine></Undefine>
-              <IncludePath>../Inc;../../../../Drivers/CMSIS/Include;../../../../Drivers/CMSIS/Include;../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../../../../Drivers/STM32H7xx_HAL_Driver/Inc;../../../../Drivers/BSP/STM32H7xx_Nucleo;../../../../Drivers/BSP/Adafruit_Shield;../../../../Drivers/BSP/Components/st7735;../../../../Drivers/BSP/Components/Common;../../../../Middlewares/Third_Party/FatFs/src;../../../../Middlewares/Third_Party/FatFs/src/drivers;../../../../Utilities/Basic_GUI</IncludePath>
+              <IncludePath>../Inc;../../../../Drivers/CMSIS/Include;../../../../Drivers/CMSIS/Include;../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../../../../Drivers/STM32H7xx_HAL_Driver/Inc;../../../../Drivers/BSP/STM32H7xx_Nucleo;../../../../Drivers/BSP/Adafruit_Shield;../../../../Drivers/BSP/Components/st7735;../../../../Drivers/BSP/Components/Common;../../../../Middlewares/Third_Party/FatFs/src;../../../../Middlewares/Third_Party/FatFs/src/drivers;../../../../Utilities/LCD</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -617,9 +617,9 @@
           <GroupName>Utilities</GroupName>
           <Files>
             <File>
-              <FileName>basic_gui.c</FileName>
+              <FileName>stm32_lcd.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\Utilities\Basic_GUI\basic_gui.c</FilePath>
+              <FilePath>..\..\..\..\Utilities\lcd\stm32_lcd.c</FilePath>
             </File>
           </Files>
         </Group>

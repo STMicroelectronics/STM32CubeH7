@@ -35,9 +35,9 @@
 
    + Display on LCD
      o To draw and fill a basic shapes (dot, line, rectangle, circle, ellipse, .. bitmap)
-       on LCD and display text, utility basic_gui.c/.h must be called. Once the LCD is initialized,
-       user should call GUI_SetFuncDriver() API to link board LCD drivers to BASIC GUI LCD drivers.
-       The basic gui services, defined in basic_gui utility, are ready for use.
+       on LCD and display text, utility stm32_lcd.c/.h must be called. Once the LCD is initialized,
+       user should call UTIL_LCD_SetFuncDriver() API to link board LCD drivers to UTIL LCD drivers.
+       The basic lcd services, defined in lcd utility, are ready for use.
 
   Note:
   --------
@@ -92,7 +92,7 @@ ADAFRUIT_802_LCD_Ctx_t      Lcd_Ctx[LCD_INSTANCES_NBR];
 /** @addtogroup ADAFRUIT_802_LCD_Exported_Variables
   * @{
   */
-const GUI_Drv_t LCD_Driver =
+const LCD_UTILS_Drv_t LCD_Driver =
 {
   ADAFRUIT_802_LCD_DrawBitmap,
   ADAFRUIT_802_LCD_FillRGBRect,

@@ -92,7 +92,7 @@ Device's end address is the end address of the flash memory and it is dependent 
 
 @par Keywords
 
-Middleware, USB Device, DFU, Firmware upgrade
+Connectivity, USB_Device, USB, DFU, Firmware upgrade
 
 @par Directory contents
 

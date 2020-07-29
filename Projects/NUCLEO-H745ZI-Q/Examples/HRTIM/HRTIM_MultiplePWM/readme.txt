@@ -89,6 +89,10 @@ The PWM waveforms can be displayed using an oscilloscope.
 @note The example need to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
+@par Keywords
+
+HRTIM, Timer, PWM, Duty cycle, Waveforms, Oscilloscope
+
 @par Directory contents
 
     - HRTIM/HRTIM_MultiplePWM/CM7/Inc/main.h                Main configuration file for Cortex-M7

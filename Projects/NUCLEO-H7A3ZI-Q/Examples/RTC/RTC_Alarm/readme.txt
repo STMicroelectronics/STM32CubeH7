@@ -83,6 +83,7 @@ In case of error, LED3 is toggled with a period of 100 milliseconds.
 @par Keywords
 
 System, RTC, Alarm, wakeup timer, Backup domain, Counter, LSE, LSI
+
 @par Directory contents 
 
  - "RTC/RTC_Alarm/Inc": contains the example firmware header files

@@ -1,9 +1,9 @@
 /**
-  @page Demo   STM32H743I-EVAL ToucGFX Demonstration Firmware
+  @page TouchGFX   STM32H743I-EVAL ToucGFX Demonstration Firmware
  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    Demonstration/readme.txt 
+  * @file    TouchGFX/readme.txt 
   * @author  MCD Application Team 
   * @brief   Description of STM32H743I-EVAL ToucGFX Demonstration
   ******************************************************************************
@@ -19,6 +19,15 @@ Please refer to :
 
 www.st.com/en/product/stm32h743i-eval.html
 
+@par Keywords
+
+Demonstration, FreeRTOS, RTOS, Graphics, TouchGFX, GUI, WAV, Video Player, AVI, JPEG, MJPEG, Audio player, RTC, potentiometer, graphical stack
+
+@par Hardware and Software environment
+
+  - This demonstration runs on STM32H743xx devices.    
+  - This demonstration has been tested with STMicroelectronics STM32H743I-EVAL
+    boards.
 
  * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
  */

@@ -34,7 +34,7 @@
 #include "stm32h7b3i_discovery_ospi.h"
 #include "stm32h7b3i_discovery_camera.h"
 #include "stm32h7b3i_discovery_eeprom.h"
-#include "basic_gui.h"
+#include "stm32_lcd.h"
 
 /* Exported types ------------------------------------------------------------*/
 typedef struct

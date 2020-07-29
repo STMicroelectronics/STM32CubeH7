@@ -87,7 +87,7 @@ For more details about the STM32Cube USB Device library, please refer to UM1734
 
 @par Keywords
 
-Connectivity, USB Device, HID, Full Speed, High Speed, CDC, OTG, enumeration, jostick, mouse
+Connectivity, USB_Device, USB, HID, Full Speed, High Speed, CDC, OTG, Enumeration, Joystick, Mouse
 
 @Note For the Cortex-M7, If the  application is using the DTCM/ITCM memories (@0x20000000/ 0x0000000: not cacheable and only accessible
       by the Cortex M7 and the  MDMA), no need for cache maintenance when the Cortex M7 and the MDMA access these RAMs.

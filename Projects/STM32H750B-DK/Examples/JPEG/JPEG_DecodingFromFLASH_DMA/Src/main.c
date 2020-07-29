@@ -98,8 +98,8 @@ int main(void)
   {
     Error_Handler();
   }
-  GUI_SetFuncDriver(&LCD_Driver);;
-  GUI_Clear(GUI_COLOR_WHITE);
+  UTIL_LCD_SetFuncDriver(&LCD_Driver);;
+  UTIL_LCD_Clear(UTIL_LCD_COLOR_WHITE);
   /* Get the LCD Width */
   BSP_LCD_GetXSize(0,&LCD_X_Size);  
 

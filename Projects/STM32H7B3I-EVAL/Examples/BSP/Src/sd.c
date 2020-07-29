@@ -123,10 +123,10 @@ static void SD_demo(uint32_t Mode)
   /* Check if the SD card is plugged in the slot */
   if(BSP_SD_IsDetected(0) == SD_NOT_PRESENT)
   {
-    GUI_SetTextColor(GUI_COLOR_RED);
-    GUI_DisplayStringAt(20, y_size - 30, (uint8_t *)"SD1 Not Connected", LEFT_MODE);
-    GUI_DisplayStringAt(20, 100, (uint8_t *)"Plug a SD card to CN28 connector", LEFT_MODE);
-    GUI_DisplayStringAt(20, 115, (uint8_t *)"Or press TAMPER button to quit test", LEFT_MODE);
+    UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_RED);
+    UTIL_LCD_DisplayStringAt(20, y_size - 30, (uint8_t *)"SD1 Not Connected", LEFT_MODE);
+    UTIL_LCD_DisplayStringAt(20, 100, (uint8_t *)"Plug a SD card to CN28 connector", LEFT_MODE);
+    UTIL_LCD_DisplayStringAt(20, 115, (uint8_t *)"Or press TAMPER button to quit test", LEFT_MODE);
   }
   while(BSP_SD_IsDetected(0) == SD_NOT_PRESENT)
   {
@@ -138,15 +138,15 @@ static void SD_demo(uint32_t Mode)
     }
   }
 
-  GUI_SetTextColor(GUI_COLOR_GREEN);
-  GUI_DisplayStringAt(20, y_size - 30, (uint8_t *)" SD1 Connected    ", LEFT_MODE);
-  GUI_DisplayStringAt(20, 100, (uint8_t *)"                                ", LEFT_MODE);
-  GUI_DisplayStringAt(20, 115, (uint8_t *)"                                   ", LEFT_MODE);
-  GUI_SetTextColor(GUI_COLOR_BLACK);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_GREEN);
+  UTIL_LCD_DisplayStringAt(20, y_size - 30, (uint8_t *)" SD1 Connected    ", LEFT_MODE);
+  UTIL_LCD_DisplayStringAt(20, 100, (uint8_t *)"                                ", LEFT_MODE);
+  UTIL_LCD_DisplayStringAt(20, 115, (uint8_t *)"                                   ", LEFT_MODE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_BLACK);
   SD1_state = BSP_SD_Init(0);
   if(SD1_state == BSP_ERROR_NONE)
   {
-    GUI_DisplayStringAt(20, 100, (uint8_t *)"SD1 INITIALIZATION : OK.", LEFT_MODE);
+    UTIL_LCD_DisplayStringAt(20, 100, (uint8_t *)"SD1 INITIALIZATION : OK.", LEFT_MODE);
 
     SD1_state = BSP_SD_Erase(0, BLOCK_START_ADDR, BLOCK_START_ADDR + NUM_OF_BLOCKS);
     /* Wait until SD card is ready to use for new operation */
@@ -154,12 +154,12 @@ static void SD_demo(uint32_t Mode)
 
     if(SD1_state != BSP_ERROR_NONE)
     {
-      GUI_DisplayStringAt(20, 115, (uint8_t *)"SD1 ERASE : FAILED.", LEFT_MODE);
-      GUI_DisplayStringAt(20, 130, (uint8_t *)"SD1 Test Aborted.", LEFT_MODE);
+      UTIL_LCD_DisplayStringAt(20, 115, (uint8_t *)"SD1 ERASE : FAILED.", LEFT_MODE);
+      UTIL_LCD_DisplayStringAt(20, 130, (uint8_t *)"SD1 Test Aborted.", LEFT_MODE);
     }
     else
     {
-      GUI_DisplayStringAt(20, 115, (uint8_t *)"SD1 ERASE : OK.", LEFT_MODE);
+      UTIL_LCD_DisplayStringAt(20, 115, (uint8_t *)"SD1 ERASE : OK.", LEFT_MODE);
 
       /* Fill the buffer to write */
       Fill_Buffer(aTxBuffer, BUFFER_WORDS_SIZE, 0x22FF);
@@ -188,12 +188,12 @@ static void SD_demo(uint32_t Mode)
 
       if(SD1_state != BSP_ERROR_NONE)
       {
-        GUI_DisplayStringAt(20, 130, (uint8_t *)"SD1 WRITE : FAILED.", LEFT_MODE);
-        GUI_DisplayStringAt(20, 145, (uint8_t *)"SD1 Test Aborted.", LEFT_MODE);
+        UTIL_LCD_DisplayStringAt(20, 130, (uint8_t *)"SD1 WRITE : FAILED.", LEFT_MODE);
+        UTIL_LCD_DisplayStringAt(20, 145, (uint8_t *)"SD1 Test Aborted.", LEFT_MODE);
       }
       else
       {
-        GUI_DisplayStringAt(20, 130, (uint8_t *)"SD1 WRITE : OK.", LEFT_MODE);
+        UTIL_LCD_DisplayStringAt(20, 130, (uint8_t *)"SD1 WRITE : OK.", LEFT_MODE);
         SCB_CleanDCache_by_Addr((uint32_t*)aRxBuffer, BUFFER_WORDS_SIZE*4);
         if(Mode == SD_DMA_MODE)
         {
@@ -219,20 +219,20 @@ static void SD_demo(uint32_t Mode)
 
         if(SD1_state != BSP_ERROR_NONE)
         {
-          GUI_DisplayStringAt(20, 145, (uint8_t *)"SD1 READ : FAILED.", LEFT_MODE);
-          GUI_DisplayStringAt(20, 160, (uint8_t *)"SD1 Test Aborted.", LEFT_MODE);
+          UTIL_LCD_DisplayStringAt(20, 145, (uint8_t *)"SD1 READ : FAILED.", LEFT_MODE);
+          UTIL_LCD_DisplayStringAt(20, 160, (uint8_t *)"SD1 Test Aborted.", LEFT_MODE);
         }
         else
         {
-          GUI_DisplayStringAt(20, 145, (uint8_t *)"SD1 READ : OK.", LEFT_MODE);
+          UTIL_LCD_DisplayStringAt(20, 145, (uint8_t *)"SD1 READ : OK.", LEFT_MODE);
           if(Buffercmp(aTxBuffer, aRxBuffer, BUFFER_WORDS_SIZE) > 0)
           {
-            GUI_DisplayStringAt(20, 160, (uint8_t *)"SD1 COMPARE : FAILED.", LEFT_MODE);
-            GUI_DisplayStringAt(20, 175, (uint8_t *)"SD1 Test Aborted.", LEFT_MODE);
+            UTIL_LCD_DisplayStringAt(20, 160, (uint8_t *)"SD1 COMPARE : FAILED.", LEFT_MODE);
+            UTIL_LCD_DisplayStringAt(20, 175, (uint8_t *)"SD1 Test Aborted.", LEFT_MODE);
           }
           else
           {
-            GUI_DisplayStringAt(20, 160, (uint8_t *)"SD1 COMPARE : OK.", LEFT_MODE);
+            UTIL_LCD_DisplayStringAt(20, 160, (uint8_t *)"SD1 COMPARE : OK.", LEFT_MODE);
           }
         }
       }
@@ -266,13 +266,13 @@ void BSP_SD_DetectCallback(uint32_t Instance, uint32_t Status)
     /* Check if the SD card is plugged in the slot */
     if(Status == SD_PRESENT)
     {
-      GUI_SetTextColor(GUI_COLOR_GREEN);
-      GUI_DisplayStringAt(20, y_size - 30, (uint8_t *)" SD1 Connected    ", LEFT_MODE);
+      UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_GREEN);
+      UTIL_LCD_DisplayStringAt(20, y_size - 30, (uint8_t *)" SD1 Connected    ", LEFT_MODE);
     }
     else
     {
-      GUI_SetTextColor(GUI_COLOR_RED);
-      GUI_DisplayStringAt(20, y_size - 30, (uint8_t *)"SD1 Not Connected", LEFT_MODE);
+      UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_RED);
+      UTIL_LCD_DisplayStringAt(20, y_size - 30, (uint8_t *)"SD1 Not Connected", LEFT_MODE);
     }
   }
 }
@@ -318,36 +318,36 @@ static void SD_SetHint(uint32_t Mode)
   BSP_LCD_GetYSize(0, &y_size);
 
   /* Clear the LCD */
-  GUI_Clear(GUI_COLOR_WHITE);
+  UTIL_LCD_Clear(UTIL_LCD_COLOR_WHITE);
 
   /* Set LCD Demo description */
-  GUI_FillRect(0, 0, x_size, 87, GUI_COLOR_BLUE);
-  GUI_SetTextColor(GUI_COLOR_WHITE);
-  GUI_SetBackColor(GUI_COLOR_BLUE);
-  GUI_SetFont(&Font24);
+  UTIL_LCD_FillRect(0, 0, x_size, 87, UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_SetFont(&Font24);
   if(Mode == SD_DMA_MODE)
   {
-    GUI_DisplayStringAt(0, 0, (uint8_t *)"SD1: DMA MODE", CENTER_MODE);
+    UTIL_LCD_DisplayStringAt(0, 0, (uint8_t *)"SD1: DMA MODE", CENTER_MODE);
   }
   else if(Mode == SD_IT_MODE)
   {
-    GUI_DisplayStringAt(0, 0, (uint8_t *)"SD1: IT MODE", CENTER_MODE);
+    UTIL_LCD_DisplayStringAt(0, 0, (uint8_t *)"SD1: IT MODE", CENTER_MODE);
   }
   else
   {
-    GUI_DisplayStringAt(0, 0, (uint8_t *)"SD1: POLLING MODE", CENTER_MODE);
+    UTIL_LCD_DisplayStringAt(0, 0, (uint8_t *)"SD1: POLLING MODE", CENTER_MODE);
   }
-  GUI_SetFont(&Font12);
-  GUI_DisplayStringAt(0, 30, (uint8_t *)"This example shows how to write", CENTER_MODE);
-  GUI_DisplayStringAt(0, 45, (uint8_t *)"and read data on the microSD and also", CENTER_MODE);
-  GUI_DisplayStringAt(0, 60, (uint8_t *)"how to detect the presence of the card", CENTER_MODE);
+  UTIL_LCD_SetFont(&Font12);
+  UTIL_LCD_DisplayStringAt(0, 30, (uint8_t *)"This example shows how to write", CENTER_MODE);
+  UTIL_LCD_DisplayStringAt(0, 45, (uint8_t *)"and read data on the microSD and also", CENTER_MODE);
+  UTIL_LCD_DisplayStringAt(0, 60, (uint8_t *)"how to detect the presence of the card", CENTER_MODE);
 
    /* Set the LCD Text Color */
-  GUI_DrawRect(10, 92, x_size - 20, y_size- 100, GUI_COLOR_BLUE);
-  GUI_DrawRect(11, 93, x_size - 22, y_size- 102, GUI_COLOR_BLUE);
+  UTIL_LCD_DrawRect(10, 92, x_size - 20, y_size- 100, UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_DrawRect(11, 93, x_size - 22, y_size- 102, UTIL_LCD_COLOR_BLUE);
 
-  GUI_SetTextColor(GUI_COLOR_BLACK);
-  GUI_SetBackColor(GUI_COLOR_WHITE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_BLACK);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_WHITE);
  }
 
 /**

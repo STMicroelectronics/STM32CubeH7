@@ -75,6 +75,10 @@ generation is stopped.
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
 
+@par Keywords
+
+LPTIM, Timer, Low Power, Counter, PWM, Duty Cycle, External signals generator, Stop mode, Wake up, Button, Interrupt, LSE, Output, Waveform, Oscilloscope
+
 @par Directory contents  
 
   - LPTIM/LPTIM_PWMExternalClock/Inc/stm32h7xx_hal_conf.h    HAL configuration file

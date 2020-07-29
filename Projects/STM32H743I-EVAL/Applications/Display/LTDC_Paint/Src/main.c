@@ -112,17 +112,17 @@ int main(void)
   /*##-1- LCD Initialization #################################################*/ 
   /* Initialize the LCD */
   BSP_LCD_Init(0, LCD_ORIENTATION_LANDSCAPE);
-  GUI_SetFuncDriver(&LCD_Driver);
+  UTIL_LCD_SetFuncDriver(&LCD_Driver);
   /* Background Layer Initialization */
   
   /* Set Foreground Layer */
-  GUI_SetLayer(0);
+  UTIL_LCD_SetLayer(0);
   
   /* Enable the LCD */
   BSP_LCD_DisplayOn(0);
   
   /* Clear the LCD Background layer */
-  GUI_Clear(GUI_COLOR_WHITE);
+  UTIL_LCD_Clear(UTIL_LCD_COLOR_WHITE);
   
   BSP_LCD_GetXSize(0, &x_size);
   BSP_LCD_GetYSize(0, &y_size);
@@ -138,6 +138,9 @@ int main(void)
   
   /* Set the source of USB clock (PLL3*/
   __HAL_RCC_USB_CONFIG(RCC_USBCLKSOURCE_PLL3);
+  
+  /* Enable the USB voltage level detector */
+  HAL_PWREx_EnableUSBVoltageDetector();
 
   /* Init Host Library */
   if (USBH_Init(&hUSB_Host, USBH_UserProcess, 0) != USBH_OK)
@@ -155,10 +158,7 @@ int main(void)
     /* USB Initialization Error */
     Error_Handler();
   }
-  
-  /* Enable the USB voltage level detector */
-  HAL_PWREx_EnableUSBVoltageDetector();
-  
+   
   /*##-4- Link the USB Mass Storage disk I/O driver ##########################*/
   if(FATFS_LinkDriver(&USBH_Driver, USB_Path) != 0) 
   {
@@ -238,78 +238,78 @@ static void GetPosition(void)
   
   if ((TS_State.TouchDetected) & (x > (67 + Radius)) & (y > (7 + Radius) ) & ( x < (x_size-(7  + Radius )) ) & (y < (y_size-(67 + Radius )) ))
   {
-    GUI_FillCircle((x), (y), Radius,GUI_GetTextColor());
+    UTIL_LCD_FillCircle((x), (y), Radius,UTIL_LCD_GetTextColor());
   }
   else if ((TS_State.TouchDetected) & (x > 0 ) & ( x < 50 ))
   { 
     if ((TS_State.TouchDetected) & ( y > 0 ) & ( y < color_width ))
     {
-      GUI_SetTextColor(GUI_COLOR_WHITE);
+      UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
       Update_Size(Radius);
     }
     else if ((TS_State.TouchDetected) & ( y > color_width ) & (y < (2 * color_width)))
     {
-      GUI_SetTextColor(GUI_COLOR_YELLOW);
+      UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_YELLOW);
       Update_Size(Radius);
     }
     else if ((TS_State.TouchDetected) & (y > (2 * color_width)) & (y < (3 * color_width)))
     {
-      GUI_SetTextColor(GUI_COLOR_ORANGE);
+      UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_ORANGE);
       Update_Size(Radius);
     }
     else if ((TS_State.TouchDetected) & (y > (3 * color_width)) & (y < (4 * color_width)))
     {
-      GUI_SetTextColor(GUI_COLOR_LIGHTMAGENTA);
+      UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_LIGHTMAGENTA);
       Update_Size(Radius);
     }
     else if ((TS_State.TouchDetected) & (y > (4 * color_width)) & (y < (5 * color_width)))
     {
-      GUI_SetTextColor(GUI_COLOR_DARKGREEN);
+      UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_DARKGREEN);
       Update_Size(Radius);
     }
     else if ((TS_State.TouchDetected) & (y > (5 * color_width)) &(y < (6 * color_width)))
     {
-      GUI_SetTextColor(GUI_COLOR_GREEN);
+      UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_GREEN);
       Update_Size(Radius);
     }
     else if ((TS_State.TouchDetected) & (y > (6 * color_width)) &(y < (7 * color_width)))
     {
-      GUI_SetTextColor(GUI_COLOR_BROWN);
+      UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_BROWN);
       Update_Size(Radius);
     }
     else if ((TS_State.TouchDetected) & (y > (7 * color_width)) & (y < (8 * color_width)))
     {
-      GUI_SetTextColor(GUI_COLOR_RED);
+      UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_RED);
       Update_Size(Radius);
     }
     else if ((TS_State.TouchDetected) & (y > (8 * color_width)) & (y < (9 * color_width)))
     {
-      GUI_SetTextColor(GUI_COLOR_DARKMAGENTA);
+      UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_DARKMAGENTA);
       Update_Size(Radius);
     }
     else if ((TS_State.TouchDetected) & (y > (9 * color_width)) & (y < (10 * color_width)))
     {
-      GUI_SetTextColor(GUI_COLOR_CYAN);
+      UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_CYAN);
       Update_Size(Radius);
     }
     else if ((TS_State.TouchDetected) & (y > (10 * color_width)) & (y < (11 * color_width)))
     {
-      GUI_SetTextColor(GUI_COLOR_DARKBLUE);
+      UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_DARKBLUE);
       Update_Size(Radius);
     }
     else if ((TS_State.TouchDetected) & (y > (11 * color_width)) & (y < (12 * color_width)))
     {
-      GUI_SetTextColor(GUI_COLOR_BLACK);
+      UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_BLACK);
       Update_Size(Radius);
     }    
     else if ((TS_State.TouchDetected) &  (y > (12 * color_width)) & (y < (13 * color_width)))
     {
       /* Get the current text color */
-      color = GUI_GetTextColor();
-      GUI_SetTextColor(GUI_COLOR_WHITE);
+      color = UTIL_LCD_GetTextColor();
+      UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
       /* Clear the working window */
-      GUI_FillRect(68, 8, (x_size - 75), (y_size - 75), GUI_COLOR_WHITE);
-      GUI_SetTextColor(color);
+      UTIL_LCD_FillRect(68, 8, (x_size - 75), (y_size - 75), UTIL_LCD_COLOR_WHITE);
+      UTIL_LCD_SetTextColor(color);
     }
     else
     {
@@ -362,10 +362,10 @@ static void GetPosition(void)
 static void Draw_Menu(void)
 { 
   /* Set background Layer */
-  GUI_SetLayer(0);
+  UTIL_LCD_SetLayer(0);
   
 /* Clear the LCD */
-  GUI_Clear(GUI_COLOR_WHITE);  
+  UTIL_LCD_Clear(UTIL_LCD_COLOR_WHITE);  
 
 
 
@@ -384,32 +384,32 @@ static void Draw_Menu(void)
   }
   
   /* Draw save image */
-  GUI_DrawBitmap(310, (y_size - 50), (uint8_t *)save);
+  UTIL_LCD_DrawBitmap(310, (y_size - 50), (uint8_t *)save);
 
   /* Set Black as text color */
-  GUI_SetTextColor(GUI_COLOR_BLACK);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_BLACK);
   
   /* Draw working window */
-  GUI_DrawRect(61, 0, (x_size - 61), (y_size - 60), GUI_COLOR_BLACK);
-  GUI_DrawRect(63, 3, (x_size - 66), (y_size - 66), GUI_COLOR_BLACK);
-  GUI_DrawRect(65, 5, (x_size - 70), (y_size - 70), GUI_COLOR_BLACK);
-  GUI_DrawRect(67, 7, (x_size - 74), (y_size - 74), GUI_COLOR_BLACK);
+  UTIL_LCD_DrawRect(61, 0, (x_size - 61), (y_size - 60), UTIL_LCD_COLOR_BLACK);
+  UTIL_LCD_DrawRect(63, 3, (x_size - 66), (y_size - 66), UTIL_LCD_COLOR_BLACK);
+  UTIL_LCD_DrawRect(65, 5, (x_size - 70), (y_size - 70), UTIL_LCD_COLOR_BLACK);
+  UTIL_LCD_DrawRect(67, 7, (x_size - 74), (y_size - 74), UTIL_LCD_COLOR_BLACK);
   
   /* Draw size icons */
-  GUI_FillRect(60, (y_size - 48), 250, 48, GUI_COLOR_BLACK);
-  GUI_SetTextColor(GUI_COLOR_WHITE);
-  GUI_FillCircle(95, (y_size - 24), 20, GUI_COLOR_WHITE);
-  GUI_FillCircle(145, (y_size - 24), 15, GUI_COLOR_WHITE);
-  GUI_FillCircle(195, (y_size - 24), 10, GUI_COLOR_WHITE);
-  GUI_FillCircle(245, (y_size - 24), 5, GUI_COLOR_WHITE);
-  GUI_FillCircle(295, (y_size - 24), 2, GUI_COLOR_WHITE);  
+  UTIL_LCD_FillRect(60, (y_size - 48), 250, 48, UTIL_LCD_COLOR_BLACK);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
+  UTIL_LCD_FillCircle(95, (y_size - 24), 20, UTIL_LCD_COLOR_WHITE);
+  UTIL_LCD_FillCircle(145, (y_size - 24), 15, UTIL_LCD_COLOR_WHITE);
+  UTIL_LCD_FillCircle(195, (y_size - 24), 10, UTIL_LCD_COLOR_WHITE);
+  UTIL_LCD_FillCircle(245, (y_size - 24), 5, UTIL_LCD_COLOR_WHITE);
+  UTIL_LCD_FillCircle(295, (y_size - 24), 2, UTIL_LCD_COLOR_WHITE);  
   
-  GUI_SetTextColor(GUI_COLOR_DARKRED);
-  GUI_SetFont(&Font8);
-  GUI_DisplayStringAt(360, (y_size - 55), (uint8_t *)"Selected Color  Size", LEFT_MODE);  
-  GUI_SetTextColor(GUI_COLOR_BLACK); 
-  GUI_FillRect(380, (y_size - 40), 30, 30, GUI_COLOR_BLACK);  
-  GUI_FillCircle(450, (y_size- 24), Radius, GUI_COLOR_BLACK); 
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_DARKRED);
+  UTIL_LCD_SetFont(&Font8);
+  UTIL_LCD_DisplayStringAt(360, (y_size - 55), (uint8_t *)"Selected Color  Size", LEFT_MODE);  
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_BLACK); 
+  UTIL_LCD_FillRect(380, (y_size - 40), 30, 30, UTIL_LCD_COLOR_BLACK);  
+  UTIL_LCD_FillCircle(450, (y_size- 24), Radius, UTIL_LCD_COLOR_BLACK); 
 }
 
 /**
@@ -424,8 +424,8 @@ void Save_Picture(void)
   uint32_t sourceAddress;
   uint32_t index = 0;
 
-  GUI_SetTextColor(GUI_COLOR_DARKRED);
-  GUI_SetFont(&Font20);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_DARKRED);
+  UTIL_LCD_SetFont(&Font20);
 
   sourceAddress = LCD_LAYER_0_ADDRESS + ((x_size * (y_size - 61) + 60) * 4);
    
@@ -447,7 +447,7 @@ void Save_Picture(void)
   
   if (Appli_state == APPLICATION_RUNNIG)
   {
-    GUI_DisplayStringAt(10, (y_size-40), (uint8_t *)"Saving ...", RIGHT_MODE);
+    UTIL_LCD_DisplayStringAt(10, (y_size-40), (uint8_t *)"Saving ...", RIGHT_MODE);
     
     HAL_DMA2D_DeInit(&hlcd_dma2d);
     HAL_DMA2D_Init(&hlcd_dma2d);
@@ -506,7 +506,7 @@ void Save_Picture(void)
       if((res1 != FR_OK) || (res2 != FR_OK) || (byteswritten == 0))
       {
         /* 'image' file Write or EOF Error */
-        GUI_DisplayStringAt(10, (y_size-40), (uint8_t *)" Aborted...", RIGHT_MODE);
+        UTIL_LCD_DisplayStringAt(10, (y_size-40), (uint8_t *)" Aborted...", RIGHT_MODE);
         /* Wait for 2s */
         HAL_Delay(2000);
       }
@@ -516,8 +516,8 @@ void Save_Picture(void)
         f_close(&MyFile);
         /* Success of the demo: no error occurrence */
         BSP_LED_On(LED1);
-        GUI_SetTextColor(GUI_COLOR_DARKGREEN);
-        GUI_DisplayStringAt(10, (y_size-40), (uint8_t *)" Saved    ", RIGHT_MODE);
+        UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_DARKGREEN);
+        UTIL_LCD_DisplayStringAt(10, (y_size-40), (uint8_t *)" Saved    ", RIGHT_MODE);
         /* Wait for 2s */
         HAL_Delay(2000);
       }
@@ -526,7 +526,7 @@ void Save_Picture(void)
   else
   {
     /* USB not connected */
-    GUI_DisplayStringAt(10, (y_size-40), (uint8_t *)"USB KO... ", RIGHT_MODE);
+    UTIL_LCD_DisplayStringAt(10, (y_size-40), (uint8_t *)"USB KO... ", RIGHT_MODE);
     /* Wait for 2s */
     HAL_Delay(2000);
   }
@@ -559,8 +559,10 @@ HAL_StatusTypeDef MX_LTDC_ClockConfig(LTDC_HandleTypeDef *hltdc)
     periph_clk_init_struct.PLL3.PLL3N = 336;
     periph_clk_init_struct.PLL3.PLL3FRACN = 0;
     periph_clk_init_struct.PLL3.PLL3P = 2;
-    periph_clk_init_struct.PLL3.PLL3Q = 7;  
-   return  HAL_RCCEx_PeriphCLKConfig(&periph_clk_init_struct); 
+    periph_clk_init_struct.PLL3.PLL3Q = 7;
+    periph_clk_init_struct.PLL3.PLL3VCOSEL = RCC_PLL3VCOMEDIUM;
+    periph_clk_init_struct.PLL3.PLL3RGE = RCC_PLL3VCIRANGE_0;
+   return  HAL_RCCEx_PeriphCLKConfig(&periph_clk_init_struct);
   
 }
 
@@ -588,12 +590,12 @@ static void Update_Color(void)
   static uint32_t color;
   
   /* Get the current text color */
-  color = GUI_GetTextColor();
+  color = UTIL_LCD_GetTextColor();
   /* Update the selected color icon */
-  GUI_FillRect(380, (y_size-40), 30, 30, color);
-  GUI_SetTextColor(GUI_COLOR_BLACK);    
-  GUI_DrawRect(380, (y_size-40), 30, 30, color);
-  GUI_SetTextColor(color); 
+  UTIL_LCD_FillRect(380, (y_size-40), 30, 30, color);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_BLACK);    
+  UTIL_LCD_DrawRect(380, (y_size-40), 30, 30, color);
+  UTIL_LCD_SetTextColor(color); 
 }
 
 /**
@@ -609,15 +611,15 @@ static void Update_Size(uint8_t size)
   BSP_LCD_GetXSize(0, &x_size);
   BSP_LCD_GetYSize(0, &y_size);
   /* Get the current text color */ 
-  color = GUI_GetTextColor();
+  color = UTIL_LCD_GetTextColor();
   /* Update the selected size icon */
-  GUI_SetTextColor(GUI_COLOR_WHITE);
-  GUI_FillCircle(450, (y_size -24), 20, GUI_COLOR_WHITE);
-  GUI_SetTextColor(color);  
-  GUI_FillCircle(450, (y_size-24), size, GUI_COLOR_WHITE);
-  GUI_SetTextColor(GUI_COLOR_BLACK);    
-  GUI_DrawCircle(450, (y_size-24), size, GUI_COLOR_BLACK);
-  GUI_SetTextColor(color);  
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
+  UTIL_LCD_FillCircle(450, (y_size -24), 20, UTIL_LCD_COLOR_WHITE);
+  UTIL_LCD_SetTextColor(color);  
+  UTIL_LCD_FillCircle(450, (y_size-24), size, UTIL_LCD_COLOR_WHITE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_BLACK);    
+  UTIL_LCD_DrawCircle(450, (y_size-24), size, UTIL_LCD_COLOR_BLACK);
+  UTIL_LCD_SetTextColor(color);  
 }
 
 /**

@@ -54,7 +54,7 @@ void HID_KeyboardMenuProcess(void)
   {
   case HID_KEYBOARD_IDLE:
     hid_demo.keyboard_state = HID_KEYBOARD_START;
-    GUI_ClearStringLine(18);
+    UTIL_LCD_ClearStringLine(18);
     HID_SelectItem(DEMO_KEYBOARD_menu, 0);
     hid_demo.select = 0;
     prev_select = 0;
@@ -77,8 +77,8 @@ void HID_KeyboardMenuProcess(void)
 
         case 1:                /* Return */
           UTIL_LCD_TRACE_ClearTextZone();
-          GUI_SetTextColor(GUI_COLOR_GREEN);
-          GUI_DisplayStringAtLine(18,
+          UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_GREEN);
+          UTIL_LCD_DisplayStringAtLine(18,
                               (uint8_t *)
                               "Use [Joystick Left/Right] to scroll up/down");
           hid_demo.state = HID_DEMO_REENUMERATE;
@@ -110,12 +110,12 @@ void HID_KeyboardMenuProcess(void)
 static void USR_KEYBRD_Init(void)
 {
   UTIL_LCD_TRACE_ClearTextZone();
-  GUI_SetTextColor(GUI_COLOR_YELLOW);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_YELLOW);
 
-  GUI_DisplayStringAtLine(4,
+  UTIL_LCD_DisplayStringAtLine(4,
                               (uint8_t *)
                               "Use Keyboard to type characters:                                                            ");
-  GUI_SetTextColor(GUI_COLOR_WHITE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
 
   KeybrdCharYpos = KYBRD_FIRST_LINE;
   KeybrdCharXpos = KYBRD_FIRST_COLUMN;
@@ -175,12 +175,12 @@ void USR_KEYBRD_ProcessData(uint8_t data)
       {
       }
     }
-    GUI_DisplayChar(CurrentLastXpos[KeybrdCharYpos], KeybrdCharYpos, ' ');
+    UTIL_LCD_DisplayChar(CurrentLastXpos[KeybrdCharYpos], KeybrdCharYpos, ' ');
   }
   else
   {
     /* Update the cursor position on LCD */
-    GUI_DisplayChar(KeybrdCharXpos, KeybrdCharYpos, data);
+    UTIL_LCD_DisplayChar(KeybrdCharXpos, KeybrdCharYpos, data);
 
     /* Increment char X position */
     KeybrdCharXpos += SMALL_FONT_COLUMN_WIDTH;
@@ -200,7 +200,7 @@ void USR_KEYBRD_ProcessData(uint8_t data)
       UTIL_LCD_TRACE_ClearTextZone();
       KeybrdCharYpos = KYBRD_FIRST_LINE;
       /* Start New Display of the cursor position on LCD */
-      GUI_DisplayChar(KeybrdCharXpos, KeybrdCharYpos, data);
+      UTIL_LCD_DisplayChar(KeybrdCharXpos, KeybrdCharYpos, data);
     }
   }
 }

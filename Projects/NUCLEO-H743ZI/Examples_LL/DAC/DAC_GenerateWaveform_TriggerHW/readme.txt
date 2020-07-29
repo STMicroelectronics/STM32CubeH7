@@ -44,7 +44,7 @@ DMA and timer are configured and activated to transfer data and trig DAC convers
 Then, the DAC is configured and activated: waveform is generated on DAC output
 indefinitely.
 DAC channel output value is provided by DMA transfer, a new value is loaded
-at each trigger from trimer.
+at each trigger from timer.
 Finally, LED is turned-on.
 
 Connection needed:
@@ -54,7 +54,10 @@ Other peripheral used:
   1 GPIO for push button
   1 GPIO for DAC channel output PA.04 (Arduino connector CN8 pin A2, Morpho connector CN7 pin 32)
   For waveform voltage generation: 1 DMA channel, 1 timer.
-  
+
+@par Keywords
+
+Analog, DAC, Waveform, Voltage output, Oscilloscope, Signal, Hardware trigger, DMA, Timer, Sinus
 
 @par Directory contents 
 

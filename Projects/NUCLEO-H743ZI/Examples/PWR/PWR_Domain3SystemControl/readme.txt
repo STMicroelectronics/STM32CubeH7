@@ -152,6 +152,10 @@ or to tramsmit the received data if no error occurred.
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
 
+@par Keywords
+
+System, Power, PWR, Stop mode, Domain 3, D3SRAM, BDMA, DMAMUX, I2C, transmit, receive, Interrupt, Wakeup, Low Power, EXTI, Button, Led
+
 @par Directory contents 
 
   - PWR/PWR_Domain3SystemControl/Inc/stm32h7xx_conf.h         HAL Configuration file

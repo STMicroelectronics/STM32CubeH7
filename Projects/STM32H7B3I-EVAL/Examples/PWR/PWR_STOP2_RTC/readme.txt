@@ -76,6 +76,10 @@ These steps are repeated in an infinite loop.
       Please refer to the AN4838 “Managing memory protection unit (MPU) in STM32 MCUs”
       Please refer to the AN4839 “Level 1 cache on STM32F7 Series”
 
+@par Keywords
+
+System, Power, PWR, Stop mode, Stop2, Interrupt, EXTI, Wakeup, Low Power, RTC, LSI
+
 @par Directory contents
 
   - PWR/PWR_STOP2_RTC/Inc/stm32h7xx_conf.h         HAL Configuration file

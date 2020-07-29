@@ -41,8 +41,6 @@ The SystemClock_Config() function is used to set the Flash latency and  to confi
     and D3 Domain APB4 peripherals to run at 100MHz.
   
 
-
-
 @note For Cortex-M7, Some code parts (for instance ISR routines, vector table, critical routines )
       can be executed from the ITCM-RAM (64 KB) allowing zero wait state access.
       Which decreases critical task execution time compared to code execution from internal Flash memory. 
@@ -72,9 +70,12 @@ The SystemClock_Config() function is used to set the Flash latency and  to confi
 @note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
+@par Keywords
+
+System, HAL template, multiprocessor, Clock Configuration, HSE, System clock, Oscillator, PLL
+
 @par Directory contents 
 
- 
   - Templates/BootCM4_CM7Gated/Common/Src/system_stm32h7xx.c     STM32H7xx system configuration file
   
   - Templates/BootCM4_CM7Gated/CM7/Src/main.c                 Main program for Cortex-M7

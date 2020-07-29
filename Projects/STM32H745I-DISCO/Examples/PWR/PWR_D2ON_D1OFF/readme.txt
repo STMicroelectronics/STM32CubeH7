@@ -88,7 +88,7 @@ Two LEDs are used in this example:
 
 @par Keywords
 
-Power, STANDBY mode, RUN mode, Domains
+Power, STANDBY mode, RUN mode, multiprocessor, Domains
 
 @par Directory contents 
 

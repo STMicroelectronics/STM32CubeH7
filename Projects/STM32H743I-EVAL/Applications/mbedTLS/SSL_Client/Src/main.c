@@ -85,7 +85,7 @@ int main()
   BSP_LCD_ConfigLayer(0, 1, &config);
   BSP_LCD_SetActiveLayer(0, 1);
 
-  GUI_SetFuncDriver(&LCD_Driver);
+  UTIL_LCD_SetFuncDriver(&LCD_Driver);
 
   UTIL_LCD_TRACE_Init();
   UTIL_LCD_TRACE_SetHeader((uint8_t*)"mbedTLS: SSL Client Application");

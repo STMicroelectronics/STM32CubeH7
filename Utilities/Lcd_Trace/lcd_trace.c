@@ -107,10 +107,10 @@ UTIL_LCD_TRACE_Status_t UTIL_LCD_TRACE_Init (void)
   UTIL_LCD_TRACE_DeInit();
 
   /* Set background color */
-  GUI_SetBackColor(LCD_TRACE_BACKGROUND_COLOR);
+  UTIL_LCD_SetBackColor(LCD_TRACE_BACKGROUND_COLOR);
 
   /* Clear the LCD */
-  GUI_Clear(LCD_TRACE_BACKGROUND_COLOR);
+  UTIL_LCD_Clear(LCD_TRACE_BACKGROUND_COLOR);
 
   BSP_LCD_GetYSize(0, &y_size);
   LcdTrace_Ctx.YWindowSize = ((y_size - (LCD_TRACE_HEADER_FONT.Height * 3U) - \
@@ -156,18 +156,18 @@ void UTIL_LCD_TRACE_SetHeader (uint8_t *Header)
   BSP_LCD_GetXSize(0, &x_size);
 
   /* Set the LCD Font */
-  GUI_SetFont (&LCD_TRACE_HEADER_FONT);
-  GUI_FillRect(0, 0, x_size, LCD_TRACE_HEADER_FONT.Height * 3, LCD_TRACE_SOLID_BACKGROUND_COLOR);
+  UTIL_LCD_SetFont (&LCD_TRACE_HEADER_FONT);
+  UTIL_LCD_FillRect(0, 0, x_size, LCD_TRACE_HEADER_FONT.Height * 3, LCD_TRACE_SOLID_BACKGROUND_COLOR);
 
   /* Set the LCD Text Color */
-  GUI_SetTextColor(LCD_TRACE_SOLID_TEXT_COLOR);
-  GUI_SetBackColor(LCD_TRACE_SOLID_BACKGROUND_COLOR);
+  UTIL_LCD_SetTextColor(LCD_TRACE_SOLID_TEXT_COLOR);
+  UTIL_LCD_SetBackColor(LCD_TRACE_SOLID_BACKGROUND_COLOR);
 
-  GUI_DisplayStringAt(0, LCD_TRACE_HEADER_FONT.Height, Header, CENTER_MODE);
+  UTIL_LCD_DisplayStringAt(0, LCD_TRACE_HEADER_FONT.Height, Header, CENTER_MODE);
 
-  GUI_SetBackColor(LCD_TRACE_BACKGROUND_COLOR);
-  GUI_SetTextColor(LCD_TRACE_TEXT_COLOR);
-  GUI_SetFont (&LCD_TRACE_TEXT_FONT);
+  UTIL_LCD_SetBackColor(LCD_TRACE_BACKGROUND_COLOR);
+  UTIL_LCD_SetTextColor(LCD_TRACE_TEXT_COLOR);
+  UTIL_LCD_SetFont (&LCD_TRACE_TEXT_FONT);
 }
 
 /**
@@ -183,19 +183,19 @@ void UTIL_LCD_TRACE_SetFooter(uint8_t *Footer)
   BSP_LCD_GetYSize(0, &y_size);
 
   /* Set the LCD Font */
-  GUI_SetFont (&LCD_TRACE_FOOTER_FONT);
+  UTIL_LCD_SetFont (&LCD_TRACE_FOOTER_FONT);
 
-  GUI_FillRect(0, y_size - LCD_TRACE_FOOTER_FONT.Height - 4, x_size, LCD_TRACE_FOOTER_FONT.Height + 4, LCD_TRACE_SOLID_BACKGROUND_COLOR);
+  UTIL_LCD_FillRect(0, y_size - LCD_TRACE_FOOTER_FONT.Height - 4, x_size, LCD_TRACE_FOOTER_FONT.Height + 4, LCD_TRACE_SOLID_BACKGROUND_COLOR);
 
   /* Set the LCD Text Color */
-  GUI_SetTextColor(LCD_TRACE_SOLID_TEXT_COLOR);
-  GUI_SetBackColor(LCD_TRACE_SOLID_BACKGROUND_COLOR);
+  UTIL_LCD_SetTextColor(LCD_TRACE_SOLID_TEXT_COLOR);
+  UTIL_LCD_SetBackColor(LCD_TRACE_SOLID_BACKGROUND_COLOR);
 
-  GUI_DisplayStringAt(0, y_size - LCD_TRACE_FOOTER_FONT.Height, Footer, CENTER_MODE);
+  UTIL_LCD_DisplayStringAt(0, y_size - LCD_TRACE_FOOTER_FONT.Height, Footer, CENTER_MODE);
 
-  GUI_SetBackColor(LCD_TRACE_BACKGROUND_COLOR);
-  GUI_SetTextColor(LCD_TRACE_TEXT_COLOR);
-  GUI_SetFont (&LCD_TRACE_TEXT_FONT);
+  UTIL_LCD_SetBackColor(LCD_TRACE_BACKGROUND_COLOR);
+  UTIL_LCD_SetTextColor(LCD_TRACE_TEXT_COLOR);
+  UTIL_LCD_SetFont (&LCD_TRACE_TEXT_FONT);
 }
 
 /**
@@ -208,7 +208,7 @@ void UTIL_LCD_TRACE_ClearTextZone(void)
 
   for (i= 0 ; i < YWINDOW_SIZE; i++)
   {
-    GUI_ClearStringLine(i + YWINDOW_MIN);
+    UTIL_LCD_ClearStringLine(i + YWINDOW_MIN);
   }
 
   UTIL_LCD_TRACE_DeInit();
@@ -225,7 +225,7 @@ UTIL_LCD_TRACE_PUTCHAR
 
   BSP_LCD_GetXSize(0, &x_size);
 
-  sFONT *cFont = GUI_GetFont();
+  sFONT *cFont = UTIL_LCD_GetFont();
   uint32_t idx;
 
   if(LcdTrace_Ctx.Lock == DISABLE)
@@ -304,8 +304,8 @@ void UTIL_LCD_TRACE_UpdateDisplay (void)
   if((LcdTrace_Ctx.CacheBufferYptrBottom  < (YWINDOW_SIZE -1)) &&
      (LcdTrace_Ctx.CacheBufferYptrBottom  >= LcdTrace_Ctx.CacheBufferYptrTop))
   {
-    GUI_SetTextColor(LCD_CacheBuffer[cnt + LcdTrace_Ctx.CacheBufferYptrBottom].Color);
-    GUI_DisplayStringAtLine ((YWINDOW_MIN + LcdTrace_Ctx.CacheBufferYptrBottom),
+    UTIL_LCD_SetTextColor(LCD_CacheBuffer[cnt + LcdTrace_Ctx.CacheBufferYptrBottom].Color);
+    UTIL_LCD_DisplayStringAtLine ((YWINDOW_MIN + LcdTrace_Ctx.CacheBufferYptrBottom),
                            (uint8_t *)(LCD_CacheBuffer[cnt + LcdTrace_Ctx.CacheBufferYptrBottom].Line));
   }
   else
@@ -326,8 +326,8 @@ void UTIL_LCD_TRACE_UpdateDisplay (void)
     {
       index = (cnt + ptr )% LCD_CACHE_DEPTH ;
 
-      GUI_SetTextColor(LCD_CacheBuffer[index].Color);
-      GUI_DisplayStringAtLine ((cnt + YWINDOW_MIN),
+      UTIL_LCD_SetTextColor(LCD_CacheBuffer[index].Color);
+      UTIL_LCD_DisplayStringAtLine ((cnt + YWINDOW_MIN),
                              (uint8_t *)(LCD_CacheBuffer[index].Line));
     }
   }

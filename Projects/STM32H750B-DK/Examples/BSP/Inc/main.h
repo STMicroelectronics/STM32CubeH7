@@ -31,7 +31,7 @@
 #include "stm32h750b_discovery_audio.h"
 #include "stm32h750b_discovery_mmc.h"
 #include "stm32h750b_discovery_sdram.h"
-#include "basic_gui.h"
+#include "stm32_lcd.h"
 
 /* Exported variables --------------------------------------------------------*/
 extern const unsigned char stlogo[];

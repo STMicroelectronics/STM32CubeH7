@@ -1,5 +1,5 @@
 ﻿/**
-  @page  GFXMMU_DisplayCircularShape example
+  @page GFXMMU_DisplayCircularShape GFXMMU Display Circular Shape example
 
   @verbatim
   ******************** (C) COPYRIGHT 2018 STMicroelectronics *******************
@@ -23,7 +23,6 @@
 @par Example Description
 
 This example describe how to enable and use the GFXMMU functionality to display an image with circular shape.
-
 
 
 At the beginning of the main program the HAL_Init() function is called to reset
@@ -67,6 +66,11 @@ STM32H7B3I Eval board's LED can be used to monitor the transfer status:
 @Note It is recommended to enable the cache and maintain its coherence.
               Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
               Please refer to the AN4839 "Level 1 cache on STM32F7 Series and STM32H7 Series"
+
+@par Keywords
+
+Graphics, GFXMMU, Display, Image, LCD, Circular shape, ARGB8888, Escalator effect
+
 
 @par Directory contents
 

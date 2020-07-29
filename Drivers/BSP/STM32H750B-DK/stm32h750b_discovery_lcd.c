@@ -112,7 +112,7 @@ static TIM_HandleTypeDef hlcd_tim;
 /** @defgroup STM32H750B_DK_LCD_Private_TypesDefinitions Private TypesDefinitions
   * @{
   */
-const GUI_Drv_t LCD_Driver =
+const LCD_UTILS_Drv_t LCD_Driver =
 {
   BSP_LCD_DrawBitmap,
   BSP_LCD_FillRGBRect,

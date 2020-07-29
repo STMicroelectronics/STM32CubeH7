@@ -107,6 +107,10 @@ under the CM7/Inc and CM4/Inc directories.
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
 
+@par Keywords
+
+FatFs, SDMMC, eMMC card, File system, FAT Volume, Format, Read, Write, HyperTerminal, multiprocessor
+
 @par Directory contents
 
   - FatFs_Shared_Device/CM4/Inc/main.h                     CM4 Main program header file 

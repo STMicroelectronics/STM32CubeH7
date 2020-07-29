@@ -1,5 +1,5 @@
 /**
-  @page Description of OTFDEC Encryption Decryption example
+  @page OTFDEC_EncryptionDecryption Description of OTFDEC Encryption Decryption example
 
   @verbatim
   ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
@@ -22,6 +22,7 @@
   @endverbatim
 
 @par Example Description
+
 This example shows how to use OTFDEC to encrypt, decrypt and execute PI calculation algorithm stored in external NOR flash
 The USART1 is used to verify that decryption and executing instruction are done correctly.
 
@@ -30,7 +31,7 @@ all the peripherals, initialize the Flash interface and the systick.
 The SystemClock_Config() function is used to configure the system clock for STM32H7B3xxQ Devices :
 The CPU at 280MHz
 The HCLK for CD Domain AXI and AHB3 peripherals , CD Domain AHB1/AHB2 peripherals and SRD Domain AHB4  peripherals at 280MHz.
-The APB clock dividers for CD Domain APB3 peripherals, CD Domain APB1 and APB2 peripherals and SRD Domain APB4 peripherals to run at 70MHz.
+The APB clock dividers for CD Domain APB3 peripherals, CD Domain APB1 and APB2 peripherals and SRD Domain APB4 peripherals to run at 140MHz.
 
 In this example a code computing PI value has been compiled to be executing from external NOR flash, the hex file has been converted to an array file in ospi1_code.c
 The OTFDEC is used to encrypt the binary image using the OTFDEC RSS services resetAndGenerateKeys and resetAndEncrypt. After each call of the OTFDEC service, a system reset is triggered
@@ -77,6 +78,10 @@ The result of the PI computation is displayed on serial terminal via the UART1 i
               Even though the user must manage the cache coherence for read accesses.
               Please refer to the AN4838 “Managing memory protection unit (MPU) in STM32 MCUs”
               Please refer to the AN4839 “Level 1 cache on STM32H7 Series”
+
+@par Keywords
+
+Security, Cryptography, OTFDEC, OCTOSPI, CRYP, Cipher, external flash, NOR, execute instruction, decryption, encryption, HyperTerminal
 
 @par Directory contents
 

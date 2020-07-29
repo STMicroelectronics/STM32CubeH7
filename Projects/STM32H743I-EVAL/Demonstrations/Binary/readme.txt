@@ -1,5 +1,5 @@
 /**
-  @page Demo   STM32H743I-EVAL Demonstration Firmware
+  @page Demonstrations   STM32H743I-EVAL Demonstration Firmware
  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************

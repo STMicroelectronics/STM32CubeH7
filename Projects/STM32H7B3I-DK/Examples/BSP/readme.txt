@@ -1,5 +1,5 @@
 /**
-  @page   Description of the BSP example
+  @page BSP  Description of the BSP example
 
   @verbatim
   ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
@@ -131,6 +131,11 @@ Plug an I2C RF EEPROM memory (M24LR64) on CN16 connector
       Depending on the use case, it is also possible to configure the cache attributes using the MPU.
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series and STM32H7 Series"
+
+@par Keywords
+
+BSP, Board support package, DMA, Polling, Interruption, Audio play, Headphone, Audio record, SAI, DFSDM, microphone, Touchscreen,
+LCD, LTDC, SD card, EEPROM, SDRAM, OSPI, OCTOSPI, Display, LED, Button
 
 @par Directory contents
 

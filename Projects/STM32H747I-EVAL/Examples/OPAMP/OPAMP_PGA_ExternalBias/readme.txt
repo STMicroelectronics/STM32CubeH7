@@ -109,6 +109,10 @@ The SystemClock_Config() function is used to set the Flash latency and  to confi
 @note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
+@par Keywords
+
+Analog, OPAMP, PGA, Bias voltage, Amplify, Amplitude, DAC, Button, Led, Output, Voltage, Oscilloscope
+
 @par Directory contents 
 
   - OPAMP/OPAMP_PGA_ExternalBias/Common/Src/system_stm32h7xx.c     STM32H7xx system configuration file

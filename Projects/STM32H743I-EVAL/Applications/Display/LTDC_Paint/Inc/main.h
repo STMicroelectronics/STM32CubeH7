@@ -31,7 +31,7 @@
 /* FatFs includes component */
 #include "ff_gen_drv.h"
 #include "usbh_diskio.h"
-#include "basic_gui.h"
+#include "stm32_lcd.h"
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/

@@ -27,7 +27,7 @@
 #include "stm32h7b3i_eval_lcd.h"
 #include "stm32h7b3i_eval_sdram.h"
 #include "stm32h7b3i_eval_ts.h"
-#include "basic_gui.h"
+#include "stm32_lcd.h"
 #include <stdlib.h>
 #include "fatfs_storage.h"
 

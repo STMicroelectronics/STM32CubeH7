@@ -132,6 +132,10 @@ STM32 board's LEDs can be used to monitor the transfer status:
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
 
+@par Keywords
+
+Connectivity, SPI, Full-duplex, DMA, Transmission, Reception, Master, Slave, MISO, MOSI
+
 @par Directory contents 
 
   - SPI/SPI_FullDuplex_ComDMA/Common/Src/system_stm32h7xx.c  STM32H7xx system configuration source file 

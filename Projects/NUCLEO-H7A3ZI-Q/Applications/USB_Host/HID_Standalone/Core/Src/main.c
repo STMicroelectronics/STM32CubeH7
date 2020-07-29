@@ -111,8 +111,9 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_USART3_UART_Init();
-  MX_USB_HOST_Init();
+  
   HAL_PWREx_EnableUSBVoltageDetector();
+  MX_USB_HOST_Init();
 
   /* USER CODE BEGIN 2 */
 

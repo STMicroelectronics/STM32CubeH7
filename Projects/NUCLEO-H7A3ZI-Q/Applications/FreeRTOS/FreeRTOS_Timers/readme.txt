@@ -59,7 +59,7 @@ on STM32Cube with RTOS".
 
 @par Keywords
 
-Middleware, RTOS, FreeRTOS, Thread, Timer
+RTOS, FreeRTOS, Thread, Timer
 
 @par Directory contents
     - FreeRTOS/FreeRTOS_Timers/Src/main.c                       Main program

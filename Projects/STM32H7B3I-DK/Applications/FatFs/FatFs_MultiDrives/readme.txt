@@ -68,9 +68,6 @@ STM32H7B3I-DK's LED can be used to monitor the application status:
   - LED3 is ON when any error occurs.
   - LED3 toggle when SD card is unplugged.
 
-@par Keywords
-
-Middleware, SD Card, SDRAM, FatFs, File system, FAT Volume, Format, Mount, Read, Write, multidrives
 
 @note Care must be taken when using HAL_Delay(), this function provides accurate delay (in milliseconds)
       based on variable incremented in SysTick ISR. This implies that if HAL_Delay() is called from
@@ -93,6 +90,10 @@ Middleware, SD Card, SDRAM, FatFs, File system, FAT Volume, Format, Mount, Read,
       Depending on the use case it is also possible to configure the cache attributes using the MPU.
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series and STM32H7 Series"
+
+@par Keywords
+
+FatFs, SDMMC, SD Card, SDRAM, File system, FAT Volume, Format, Mount, Read, Write, multidrives
 
 @par Directory contents
 

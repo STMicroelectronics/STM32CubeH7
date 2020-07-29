@@ -1,5 +1,5 @@
 /**
-  @page FatFs_uSD_DMA_Standalone   Dual FatFs instances using uSD card drive on CM7 and USB Host on CM4
+  @page FatFs_Dual_Instance   Dual FatFs instances using uSD card drive on CM7 and USB Host on CM4
 
   @verbatim
   ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
@@ -111,6 +111,10 @@ the applications will handle the plug/unplug events.
       Depending on the use case it is also possible to configure the cache attributes using the MPU.
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
+
+@par Keywords
+
+FatFs, SDMMC, USB, Dual drive, microSD, uSD, File system, FAT Volume, Format, Read, Write
 
 @par Directory contents
 

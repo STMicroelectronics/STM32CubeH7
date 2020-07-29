@@ -56,17 +56,17 @@ int32_t MMC_state ;
 
   MMC_state = BSP_MMC_Init(0);
 
-  GUI_SetTextColor(GUI_COLOR_BLACK);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_BLACK);
 
   if(MMC_state != BSP_ERROR_NONE)
   {
-    GUI_SetTextColor(GUI_COLOR_RED);
-    GUI_DisplayStringAt(20, 100, (uint8_t *)"MMC INITIALIZATION : FAIL.", LEFT_MODE);
-    GUI_DisplayStringAt(20, 115, (uint8_t *)"MMC Test Aborted.", LEFT_MODE);
+    UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_RED);
+    UTIL_LCD_DisplayStringAt(20, 100, (uint8_t *)"MMC INITIALIZATION : FAIL.", LEFT_MODE);
+    UTIL_LCD_DisplayStringAt(20, 115, (uint8_t *)"MMC Test Aborted.", LEFT_MODE);
   }
   else
   {
-    GUI_DisplayStringAt(20, 100, (uint8_t *)"MMC INITIALIZATION : OK.", LEFT_MODE);
+    UTIL_LCD_DisplayStringAt(20, 100, (uint8_t *)"MMC INITIALIZATION : OK.", LEFT_MODE);
 
     MMC_state = BSP_MMC_Erase(0,BLOCK_START_ADDR, (MMC_BLOCKSIZE * NUM_OF_BLOCKS));
     while(BSP_MMC_GetCardState(0) != MMC_TRANSFER_OK)
@@ -75,13 +75,13 @@ int32_t MMC_state ;
 
     if(MMC_state != BSP_ERROR_NONE)
     {
-      GUI_SetTextColor(GUI_COLOR_RED);
-      GUI_DisplayStringAt(20, 115, (uint8_t *)"MMC ERASE : FAILED.", LEFT_MODE);
-      GUI_DisplayStringAt(20, 130, (uint8_t *)"MMC Test Aborted.", LEFT_MODE);
+      UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_RED);
+      UTIL_LCD_DisplayStringAt(20, 115, (uint8_t *)"MMC ERASE : FAILED.", LEFT_MODE);
+      UTIL_LCD_DisplayStringAt(20, 130, (uint8_t *)"MMC Test Aborted.", LEFT_MODE);
     }
     else
     {
-      GUI_DisplayStringAt(20, 115, (uint8_t *)"MMC ERASE : OK.", LEFT_MODE);
+      UTIL_LCD_DisplayStringAt(20, 115, (uint8_t *)"MMC ERASE : OK.", LEFT_MODE);
 
       /* Fill the buffer to write */
       Fill_Buffer(aTxBuffer, BUFFER_WORDS_SIZE, 0x22FF);
@@ -93,13 +93,13 @@ int32_t MMC_state ;
       }
       if(MMC_state != BSP_ERROR_NONE)
       {
-        GUI_SetTextColor(GUI_COLOR_RED);
-        GUI_DisplayStringAt(20, 130, (uint8_t *)"MMC WRITE : FAILED.", LEFT_MODE);
-        GUI_DisplayStringAt(20, 145, (uint8_t *)"MMC Test Aborted.", LEFT_MODE);
+        UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_RED);
+        UTIL_LCD_DisplayStringAt(20, 130, (uint8_t *)"MMC WRITE : FAILED.", LEFT_MODE);
+        UTIL_LCD_DisplayStringAt(20, 145, (uint8_t *)"MMC Test Aborted.", LEFT_MODE);
       }
       else
       {
-        GUI_DisplayStringAt(20, 130, (uint8_t *)"MMC WRITE : OK.", LEFT_MODE);
+        UTIL_LCD_DisplayStringAt(20, 130, (uint8_t *)"MMC WRITE : OK.", LEFT_MODE);
         MMC_state = BSP_MMC_ReadBlocks(0,(uint32_t *)aRxBuffer, BLOCK_START_ADDR, NUM_OF_BLOCKS);
 
         /* Wait until MMC cards are ready to use for new operation */
@@ -108,23 +108,23 @@ int32_t MMC_state ;
         }
         if(MMC_state != BSP_ERROR_NONE)
         {
-          GUI_SetTextColor(GUI_COLOR_RED);
-          GUI_DisplayStringAt(20, 145, (uint8_t *)"MMC READ : FAILED.", LEFT_MODE);
-          GUI_DisplayStringAt(20, 160, (uint8_t *)"MMC Test Aborted.", LEFT_MODE);
+          UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_RED);
+          UTIL_LCD_DisplayStringAt(20, 145, (uint8_t *)"MMC READ : FAILED.", LEFT_MODE);
+          UTIL_LCD_DisplayStringAt(20, 160, (uint8_t *)"MMC Test Aborted.", LEFT_MODE);
         }
         else
         {
-          GUI_DisplayStringAt(20, 145, (uint8_t *)"MMC READ : OK.", LEFT_MODE);
+          UTIL_LCD_DisplayStringAt(20, 145, (uint8_t *)"MMC READ : OK.", LEFT_MODE);
           if(Buffercmp(aTxBuffer, aRxBuffer, BUFFER_WORDS_SIZE) > 0)
           {
-            GUI_SetTextColor(GUI_COLOR_RED);
-            GUI_DisplayStringAt(20, 160, (uint8_t *)"MMC COMPARE : FAILED.", LEFT_MODE);
-            GUI_DisplayStringAt(20, 175, (uint8_t *)"MMC Test Aborted.", LEFT_MODE);
+            UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_RED);
+            UTIL_LCD_DisplayStringAt(20, 160, (uint8_t *)"MMC COMPARE : FAILED.", LEFT_MODE);
+            UTIL_LCD_DisplayStringAt(20, 175, (uint8_t *)"MMC Test Aborted.", LEFT_MODE);
           }
           else
           {
-            GUI_SetTextColor(GUI_COLOR_GREEN);
-            GUI_DisplayStringAt(20, 160, (uint8_t *)"MMC TEST : OK.", LEFT_MODE);
+            UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_GREEN);
+            UTIL_LCD_DisplayStringAt(20, 160, (uint8_t *)"MMC TEST : OK.", LEFT_MODE);
           }
         }
       }
@@ -175,27 +175,27 @@ static void MMC_SetHint(void)
   BSP_LCD_GetXSize(0, &x_size);
   BSP_LCD_GetYSize(0, &y_size);
   /* Clear the LCD */
-  GUI_Clear(GUI_COLOR_WHITE);
+  UTIL_LCD_Clear(UTIL_LCD_COLOR_WHITE);
 
   /* Set LCD Demo description */
-  GUI_SetTextColor(GUI_COLOR_BLUE);
-  GUI_FillRect(0, 0, x_size, 80, GUI_COLOR_BLUE);
-  GUI_SetTextColor(GUI_COLOR_WHITE);
-  GUI_SetBackColor(GUI_COLOR_BLUE);
-  GUI_SetFont(&Font24);
-  GUI_DisplayStringAt(0, 0, (uint8_t *)"MMC", CENTER_MODE);
-  GUI_SetFont(&Font12);
-  GUI_DisplayStringAt(0, 30, (uint8_t *)"This example shows how to write", CENTER_MODE);
-  GUI_DisplayStringAt(0, 45, (uint8_t *)"and read data on the microMMC and also", CENTER_MODE);
-  GUI_DisplayStringAt(0, 60, (uint8_t *)"how to detect the presence of the card", CENTER_MODE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_FillRect(0, 0, x_size, 80, UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_SetFont(&Font24);
+  UTIL_LCD_DisplayStringAt(0, 0, (uint8_t *)"MMC", CENTER_MODE);
+  UTIL_LCD_SetFont(&Font12);
+  UTIL_LCD_DisplayStringAt(0, 30, (uint8_t *)"This example shows how to write", CENTER_MODE);
+  UTIL_LCD_DisplayStringAt(0, 45, (uint8_t *)"and read data on the microMMC and also", CENTER_MODE);
+  UTIL_LCD_DisplayStringAt(0, 60, (uint8_t *)"how to detect the presence of the card", CENTER_MODE);
 
   /* Set the LCD Text Color */
-  GUI_SetTextColor(GUI_COLOR_BLUE);
-  GUI_DrawRect(10, 90, x_size - 20, y_size - 100, GUI_COLOR_BLUE);
-  GUI_DrawRect(11, 91, x_size - 22, y_size - 102, GUI_COLOR_BLUE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_DrawRect(10, 90, x_size - 20, y_size - 100, UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_DrawRect(11, 91, x_size - 22, y_size - 102, UTIL_LCD_COLOR_BLUE);
 
-  GUI_SetTextColor(GUI_COLOR_BLACK);
-  GUI_SetBackColor(GUI_COLOR_WHITE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_BLACK);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_WHITE);
  }
 
 /**

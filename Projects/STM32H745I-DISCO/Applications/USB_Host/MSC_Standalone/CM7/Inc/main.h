@@ -27,7 +27,7 @@
 #include "stm32h745i_discovery.h"
 #include  "lcd_trace.h"
 #include "utilities_conf.h"
-#include "basic_gui.h"
+#include "stm32_lcd.h"
 #include "usbh_msc.h"
 #include "ff.h"
 #include "ff_gen_drv.h"

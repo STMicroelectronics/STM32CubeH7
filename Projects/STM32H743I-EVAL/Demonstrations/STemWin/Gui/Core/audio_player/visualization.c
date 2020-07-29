@@ -30,30 +30,42 @@
 
 /* Private defines -----------------------------------------------------------*/
 #if defined ( __ICCARM__ )
+#pragma data_alignment=32
 #pragma location="viz_front_buffer"
-#elif !defined(WIN32)
-__attribute__((section(".viz_front_buffer")))
+#elif defined(__CC_ARM)
+__attribute__((section(".viz_front_buffer"), zero_init)) __attribute__ ((aligned (32)))
+#elif defined(__GNUC__)
+__attribute__((section(".viz_front_buffer"))) __attribute__ ((aligned (32)))
 #endif
 static uint8_t front_buffer[VIZ_WIDTH * VIZ_HEIGHT];
 
 #if defined ( __ICCARM__ )
+#pragma data_alignment=32
 #pragma location="viz_back_buffer"
-#elif !defined(WIN32)
-__attribute__((section(".viz_back_buffer")))
+#elif defined(__CC_ARM)
+__attribute__((section(".viz_back_buffer"), zero_init)) __attribute__ ((aligned (32)))
+#elif defined(__GNUC__)
+__attribute__((section(".viz_back_buffer"))) __attribute__ ((aligned (32)))
 #endif
 static uint8_t back_buffer[VIZ_WIDTH * VIZ_HEIGHT];
 
 #if defined ( __ICCARM__ )
+#pragma data_alignment=32
 #pragma location="viz_deform_x_buffer"
-#elif !defined(WIN32)
-__attribute__((section(".viz_deform_x_buffer")))
+#elif defined(__CC_ARM)
+__attribute__((section(".viz_deform_x_buffer"), zero_init)) __attribute__ ((aligned (32)))
+#elif defined(__GNUC__)
+__attribute__((section(".viz_deform_x_buffer"))) __attribute__ ((aligned (32)))
 #endif
 static int16_t deform_offset_x[VIZ_WIDTH * VIZ_HEIGHT];
 
 #if defined ( __ICCARM__ )
+#pragma data_alignment=32
 #pragma location="viz_deform_y_buffer"
-#elif !defined(WIN32)
-__attribute__((section(".viz_deform_y_buffer")))
+#elif defined(__CC_ARM)
+__attribute__((section(".viz_deform_y_buffer"), zero_init)) __attribute__ ((aligned (32)))
+#elif defined(__GNUC__)
+__attribute__((section(".viz_deform_y_buffer"))) __attribute__ ((aligned (32)))
 #endif
 static int16_t deform_offset_y[VIZ_WIDTH * VIZ_HEIGHT];
 

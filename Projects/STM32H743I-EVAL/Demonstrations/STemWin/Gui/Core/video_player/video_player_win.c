@@ -119,7 +119,9 @@ static FILELIST_FileTypeDef VideoList;
 #if defined ( __ICCARM__ )
 #pragma data_alignment=32
 #pragma location="video_buffers"
-#else
+#elif defined(__CC_ARM)
+__attribute__((section(".video_buffers"), zero_init)) __attribute__ ((aligned (32)))
+#elif defined(__GNUC__)
 __attribute__((section(".video_buffers"))) __attribute__ ((aligned (32)))
 #endif
 uint8_t VideoBuffer[AVI_VIDEO_BUF_SIZE];
@@ -127,7 +129,9 @@ uint8_t VideoBuffer[AVI_VIDEO_BUF_SIZE];
 #if defined ( __ICCARM__ )
 #pragma data_alignment=32
 #pragma location="audio_buffers"
-#else
+#elif defined(__CC_ARM)
+__attribute__((section(".audio_buffers"), zero_init)) __attribute__ ((aligned (32)))
+#elif defined(__GNUC__)
 __attribute__((section(".audio_buffers"))) __attribute__ ((aligned (32)))
 #endif
 uint8_t AudioBuffer[AUDIO_BUFFER_SIZE + 8];

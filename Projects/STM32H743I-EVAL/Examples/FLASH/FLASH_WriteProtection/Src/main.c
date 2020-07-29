@@ -74,24 +74,24 @@ int main(void)
   /*##-1- Initialize the LCD #################################################*/
   /* Initialize the LCD */
   BSP_LCD_Init(0, LCD_ORIENTATION_LANDSCAPE);
-  GUI_SetFuncDriver(&LCD_Driver);
+  UTIL_LCD_SetFuncDriver(&LCD_Driver);
   /* Set LCD Foreground Layer  */
-  GUI_SetLayer(0);
+  UTIL_LCD_SetLayer(0);
   /* Set LCD font */
-  GUI_SetFont(&Font20);
+  UTIL_LCD_SetFont(&Font20);
 
   /*##-2- Display messages on LCD ############################################*/
   /* Clear the LCD */
-  GUI_Clear(GUI_COLOR_WHITE);
+  UTIL_LCD_Clear(UTIL_LCD_COLOR_WHITE);
 
   /* Set the LCD Text Color */
-  GUI_SetTextColor(GUI_COLOR_BLUE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_BLUE);
 
   /* Display test name on LCD */
-  GUI_DisplayStringAtLine(0, (uint8_t *)"   Flash Write  ");
-  GUI_DisplayStringAtLine(1, (uint8_t *)"   protection test  ");
-  GUI_DisplayStringAtLine(2, (uint8_t *)"    Press User  ");
-  GUI_DisplayStringAtLine(3, (uint8_t *)"   Tamper-button  ");
+  UTIL_LCD_DisplayStringAtLine(0, (uint8_t *)"   Flash Write  ");
+  UTIL_LCD_DisplayStringAtLine(1, (uint8_t *)"   protection test  ");
+  UTIL_LCD_DisplayStringAtLine(2, (uint8_t *)"    Press User  ");
+  UTIL_LCD_DisplayStringAtLine(3, (uint8_t *)"   Tamper-button  ");
 
   while (1)
   {
@@ -152,20 +152,20 @@ int main(void)
       if (SectorsWRPStatus == 0)
       {
         /* Set the LCD Text Color */
-        GUI_SetTextColor(GUI_COLOR_GREEN);
+        UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_GREEN);
 
-        GUI_DisplayStringAtLine(5, (uint8_t *)"    Write     ");
-        GUI_DisplayStringAtLine(6, (uint8_t *)"  protection is   ");
-        GUI_DisplayStringAtLine(7, (uint8_t *)"     disabled     ");
+        UTIL_LCD_DisplayStringAtLine(5, (uint8_t *)"    Write     ");
+        UTIL_LCD_DisplayStringAtLine(6, (uint8_t *)"  protection is   ");
+        UTIL_LCD_DisplayStringAtLine(7, (uint8_t *)"     disabled     ");
       }
       else
       {
         /* Set the LCD Text Color */
-        GUI_SetTextColor(GUI_COLOR_RED);
+        UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_RED);
 
-        GUI_DisplayStringAtLine(5, (uint8_t *)"    Write     ");
-        GUI_DisplayStringAtLine(6, (uint8_t *)"  protection is   ");
-        GUI_DisplayStringAtLine(7, (uint8_t *)"   not disabled   ");
+        UTIL_LCD_DisplayStringAtLine(5, (uint8_t *)"    Write     ");
+        UTIL_LCD_DisplayStringAtLine(6, (uint8_t *)"  protection is   ");
+        UTIL_LCD_DisplayStringAtLine(7, (uint8_t *)"   not disabled   ");
       }
     }
     else
@@ -210,20 +210,20 @@ int main(void)
       if (SectorsWRPStatus == FLASH_WRP_SECTORS)
       {
         /* Set the LCD Text Color */
-        GUI_SetTextColor(GUI_COLOR_GREEN);
+        UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_GREEN);
       
-        GUI_DisplayStringAtLine(5, (uint8_t *)"    Write     ");
-        GUI_DisplayStringAtLine(6, (uint8_t *)"  protection is   ");
-        GUI_DisplayStringAtLine(7, (uint8_t *)"     enabled    ");
+        UTIL_LCD_DisplayStringAtLine(5, (uint8_t *)"    Write     ");
+        UTIL_LCD_DisplayStringAtLine(6, (uint8_t *)"  protection is   ");
+        UTIL_LCD_DisplayStringAtLine(7, (uint8_t *)"     enabled    ");
       }
       else
       {
         /* Set the LCD Text Color */
-        GUI_SetTextColor(GUI_COLOR_RED);
+        UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_RED);
 
-        GUI_DisplayStringAtLine(5, (uint8_t *)"    Write     ");
-        GUI_DisplayStringAtLine(6, (uint8_t *)"  protection is   ");
-        GUI_DisplayStringAtLine(7, (uint8_t *)"   not enabled    ");
+        UTIL_LCD_DisplayStringAtLine(5, (uint8_t *)"    Write     ");
+        UTIL_LCD_DisplayStringAtLine(6, (uint8_t *)"  protection is   ");
+        UTIL_LCD_DisplayStringAtLine(7, (uint8_t *)"   not enabled    ");
       }
     }
   }

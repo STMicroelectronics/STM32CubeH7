@@ -100,8 +100,8 @@ int main(void)
     Error_Handler();
   }
   
-  GUI_SetFuncDriver(&LCD_Driver);
-  GUI_SetLayer(0);
+  UTIL_LCD_SetFuncDriver(&LCD_Driver);
+  UTIL_LCD_SetLayer(0);
 
   
   /* Get the LCD Width */
@@ -278,14 +278,14 @@ static void MPU_Config(void)
   */
 static void LCD_BriefDisplay(void)
 {
-  GUI_Clear(GUI_COLOR_WHITE);
-  GUI_FillRect(0, 0, LCD_X_Size, 80, GUI_COLOR_BLUE);
-  GUI_SetBackColor(GUI_COLOR_BLUE);
-  GUI_SetTextColor(GUI_COLOR_WHITE);
-  GUI_SetFont(&Font16);
-  GUI_DisplayStringAt(0, LINE(2), (uint8_t *)"JPEG Decoding from Flash With DMA", CENTER_MODE);
-  GUI_DisplayStringAt(0, LINE(3), (uint8_t *)"This example shows how to Decode (with DMA)", CENTER_MODE);
-  GUI_DisplayStringAt(0, LINE(4), (uint8_t *)"and  display a JPEG file", CENTER_MODE);
+  UTIL_LCD_Clear(UTIL_LCD_COLOR_WHITE);
+  UTIL_LCD_FillRect(0, 0, LCD_X_Size, 80, UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
+  UTIL_LCD_SetFont(&Font16);
+  UTIL_LCD_DisplayStringAt(0, LINE(2), (uint8_t *)"JPEG Decoding from Flash With DMA", CENTER_MODE);
+  UTIL_LCD_DisplayStringAt(0, LINE(3), (uint8_t *)"This example shows how to Decode (with DMA)", CENTER_MODE);
+  UTIL_LCD_DisplayStringAt(0, LINE(4), (uint8_t *)"and  display a JPEG file", CENTER_MODE);
 }
 
 /**

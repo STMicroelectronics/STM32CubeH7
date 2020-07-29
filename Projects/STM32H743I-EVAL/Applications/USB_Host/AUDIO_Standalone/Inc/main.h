@@ -30,7 +30,7 @@
 #include "stm32h743i_eval_sd.h"
 #include "ff_gen_drv.h"
 #include "sd_diskio_dma.h"
-#include "basic_gui.h"
+#include "stm32_lcd.h"
 #include "lcd_trace.h"
 #include "utilities_conf.h"
 

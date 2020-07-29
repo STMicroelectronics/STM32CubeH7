@@ -24,7 +24,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm32h747i_discovery.h"
 #include "stm32h747i_discovery_lcd.h"
-#include "basic_gui.h"
+#include "stm32_lcd.h"
 #define LAYER_SIZE_X      240
 #define LAYER_SIZE_Y      130
 #define LAYER_BYTE_PER_PIXEL  2

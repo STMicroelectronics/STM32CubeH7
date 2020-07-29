@@ -78,6 +78,10 @@ when the define USE_VOS0_480MHZ_OVERCLOCK (in main.h) is set to one then :
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
 
+@par Keywords
+
+System, Power, PWR, Voltage scaling, VOS0, Over clocking, LDO
+
 @par Directory contents 
 
   - PWR/PWR_VOS0_480MHZ/Inc/stm32h7xx_hal_conf.h    HAL configuration file

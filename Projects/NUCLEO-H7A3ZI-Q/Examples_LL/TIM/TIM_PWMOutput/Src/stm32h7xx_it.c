@@ -153,7 +153,7 @@ void SysTick_Handler(void)
 */
 void TIM3_IRQHandler(void)
 {
-  /* Check whether CC1 interrupt is pending */
+  /* Check whether CC3 interrupt is pending */
   if(LL_TIM_IsActiveFlag_CC3(TIM3) == 1)
   {
     /* Clear the update interrupt flag*/

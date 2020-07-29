@@ -121,7 +121,7 @@ STM32H747I-EVAL board's LEDs can be used to monitor the transfer status:
 
 @par Keywords
 
-Display, Graphic, DMA2D, LCD, SRAM, ARGB4444, Blending, Alpha Inversion, Memory to memory, Foreground,
+Display, Graphics, DMA2D, LCD, SRAM, ARGB4444, Blending, Alpha Inversion, Memory to memory, Foreground,
 Background, RGB565, LTDC, DSI, Pixel
 
 

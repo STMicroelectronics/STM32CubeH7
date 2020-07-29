@@ -111,10 +111,10 @@ int main(void)
     Error_Handler();
   }
   /*link board LCD drivers to BASIC GUI LCD drivers*/
-  GUI_SetFuncDriver(&LCD_Driver);
+  UTIL_LCD_SetFuncDriver(&LCD_Driver);
 
-  GUI_Clear(GUI_COLOR_WHITE);
-  GUI_SetFont(&Font24);
+  UTIL_LCD_Clear(UTIL_LCD_COLOR_WHITE);
+  UTIL_LCD_SetFont(&Font24);
   /* Get the LCD width and height */
   BSP_LCD_GetXSize(0,&LCD_X_Size);
   BSP_LCD_GetYSize(0,&LCD_Y_Size);
@@ -318,27 +318,27 @@ static void LCD_BriefDisplay(void)
 {
   char message[64];
 
-  GUI_SetFont(&Font24);
-  GUI_Clear(GUI_COLOR_WHITE);
-  GUI_SetBackColor(GUI_COLOR_BLUE);
-  GUI_SetTextColor(GUI_COLOR_BLUE);
-  GUI_FillRect(0, 0, LCD_X_Size, 112,GUI_COLOR_BLUE);
-  GUI_SetTextColor(GUI_COLOR_WHITE);
-  GUI_DisplayStringAtLine(1, (uint8_t *)"     MJPEG Video Decoding example");
-  GUI_SetFont(&Font16);
-  GUI_DisplayStringAtLine(4, (uint8_t *)"       This example shows how to Decode and display");
-  GUI_DisplayStringAtLine(5, (uint8_t *)"  an MJPEG video file located on the OSPI external Flash");
+  UTIL_LCD_SetFont(&Font24);
+  UTIL_LCD_Clear(UTIL_LCD_COLOR_WHITE);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_FillRect(0, 0, LCD_X_Size, 112,UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
+  UTIL_LCD_DisplayStringAtLine(1, (uint8_t *)"     MJPEG Video Decoding example");
+  UTIL_LCD_SetFont(&Font16);
+  UTIL_LCD_DisplayStringAtLine(4, (uint8_t *)"       This example shows how to Decode and display");
+  UTIL_LCD_DisplayStringAtLine(5, (uint8_t *)"  an MJPEG video file located on the OSPI external Flash");
 
-  GUI_SetBackColor(GUI_COLOR_WHITE);
-  GUI_SetTextColor(GUI_COLOR_BLUE);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_WHITE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_BLUE);
 
   /* JPEG resolution */
   sprintf(message, "Video Resolution            = %lu x %lu", JPEG_Info.ImageWidth, JPEG_Info.ImageHeight);
-  GUI_DisplayStringAtLine(10, (uint8_t *)message);
+  UTIL_LCD_DisplayStringAtLine(10, (uint8_t *)message);
 
   /* JPEG Quality */
   sprintf(message, "JPEG Quality                =   %lu",JPEG_Info.ImageQuality );
-  GUI_DisplayStringAtLine(11, (uint8_t *)message);
+  UTIL_LCD_DisplayStringAtLine(11, (uint8_t *)message);
 
   /* JPEG Chroma Sampling */
   if(JPEG_Info.ChromaSubsampling  == JPEG_420_SUBSAMPLING)
@@ -354,15 +354,15 @@ static void LCD_BriefDisplay(void)
     sprintf(message, "ChromaSubsampling           =  4:4:4");
   }
 
-  GUI_DisplayStringAtLine(12, (uint8_t *)message);
+  UTIL_LCD_DisplayStringAtLine(12, (uint8_t *)message);
 
   /* Decoding approximative decoding Frame rate */
   sprintf(message, "Average Decoding Frame Rate =   %lu fps", FrameRate);
-  GUI_DisplayStringAtLine(13, (uint8_t *)message);
+  UTIL_LCD_DisplayStringAtLine(13, (uint8_t *)message);
 
   /* Number of decoded frames */
   sprintf(message, "Number of Frames            =   %lu", AVI_Handel.aviInfo.TotalFrame);
-  GUI_DisplayStringAtLine(14, (uint8_t *)message);
+  UTIL_LCD_DisplayStringAtLine(14, (uint8_t *)message);
 
 }
 
@@ -373,12 +373,12 @@ static void LCD_BriefDisplay(void)
   */
 static void LCD_FileErrorDisplay(void)
 {
-  GUI_SetBackColor(GUI_COLOR_WHITE);
-  GUI_SetTextColor(GUI_COLOR_WHITE);
-  GUI_SetTextColor(GUI_COLOR_RED);
-  GUI_SetFont(&Font16);
-  GUI_DisplayStringAtLine(26, (uint8_t *)"Unable to open AVI MJPEG video file");
-  GUI_DisplayStringAtLine(27, (uint8_t *)"Check that an MJPEG avi is Flashed to the OSPI @0x90000000");
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_WHITE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_RED);
+  UTIL_LCD_SetFont(&Font16);
+  UTIL_LCD_DisplayStringAtLine(26, (uint8_t *)"Unable to open AVI MJPEG video file");
+  UTIL_LCD_DisplayStringAtLine(27, (uint8_t *)"Check that an MJPEG avi is Flashed to the OSPI @0x90000000");
 
   Error_Handler();
 }

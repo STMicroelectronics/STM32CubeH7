@@ -20,10 +20,11 @@
   ******************************************************************************
   @endverbatim
 
-@par Example Description
+@par Application Description
 
-
-This application shows how to use  embedded hardware semaphore to send nofification between cores. 
+This application is a part of the USB Device Library package using STM32Cube firmware. It describes how to use
+USB device application based on the STM32H7xx multi core support feature integrating the Mass Storage Class (MSC)
+and Human Interface (HID) in the same project.
 
 CPU1 (Cortex-M7) and CPU2 (Cortex-M4) are booting at once (with respect to configured boot Flash options)
 System Init, System clock, voltage scaling and L1-Cache configuration are done by CPU1 (Cortex-M7).
@@ -98,9 +99,12 @@ This configuration is done by the Cortex-M7 in the function "SystemClock_Config"
 @note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
+@par Keywords
+
+Connectivity, USB_Device, USB, SDMMC, HID, Full Speed, FS, High Speed, HS, Mouse, Button, Tamper, Button, Bulk Only Transfer, BOT, SCSI, microSD, SD, MSC, Storage
+
 @par Directory contents 
 
- 
   - Applications/USB_Device/HID_MSC_Standalone_CoreSync/Common/Src/system_stm32h7xx.c   STM32H7xx system configuration file
   
   - Applications/USB_Device/HID_MSC_Standalone_CoreSync/CM7/Src/main.c                  Main program                

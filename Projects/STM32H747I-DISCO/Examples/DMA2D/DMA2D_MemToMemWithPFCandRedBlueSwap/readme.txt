@@ -112,7 +112,7 @@ STM32H747I-DISCO board's LEDs can be used to monitor the transfer status:
 
 @par Keywords
 
-Display, Graphic, DMA2D, LCD, SRAM, RGB565, Blending, Memory to memory, Pixel Format Conversion,
+Display, Graphics, DMA2D, LCD, SRAM, RGB565, Blending, Memory to memory, Pixel Format Conversion,
 Red Blue swap, LTDC, DSI, Pixel
 
 

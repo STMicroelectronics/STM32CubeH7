@@ -23,20 +23,52 @@
 extern "C" {
 #endif
 
-/* Network radio results */
-typedef struct net_cellular_radio_results_s
+#ifdef NET_CELLULAR_CREDENTIAL_V2
+
+/* SIM socket type */
+#define NET_SIM_SLOT_MODEM_SOCKET        0    /* Modem Socket SIM Slot   */
+#define NET_SIM_SLOT_MODEM_EMBEDDED_SIM  1    /* Modem Embedded SIM Slot */
+#define NET_CELLULAR_MAX_SUPPORTED_SLOT  2   /* Number max of supported SIM slot */
+#define NET_CELLULAR_DEFAULT_SIM_SLOT   NET_SIM_SLOT_MODEM_SOCKET   /* Default SIM Slot   */
+
+typedef char_t net_sim_slot_type_t ;
+
+/* SIM Slot parameters */
+typedef struct net_cellular_sim_slot_s
 {
-    int8_t  signal_level_db;
-} net_cellular_radio_results_t;
+  net_sim_slot_type_t  sim_slot_type;   /* sim slot type                               */
+  char_t                *apn;           /* APN (string)                                */
+  char_t               cid;             /* CID (1-9)                                   */
+  char_t                *username;      /* username: empty string => no username       */
+  char_t                *password;      /* password (used only is username is defined) */
+} net_cellular_sim_slot_t;
 
 /* Credential configuration */
 typedef struct net_cellular_credentials_s
 {
-    const char *apn;
-    const char *username;
-    const char *password;
-    bool use_internal_sim;
+  uint8_t sim_socket_nb;                                                /* number of sim slot used */
+  net_cellular_sim_slot_t  sim_slot[NET_CELLULAR_MAX_SUPPORTED_SLOT];    /* sim slot parameters     */
 } net_cellular_credentials_t;
+
+#else /*NET_CELLULAR_CREDENTIAL_V2 */
+
+/* Credential configuration */
+typedef struct net_cellular_credentials_s
+{
+  const char_t *apn;
+  const char_t *username;
+  const char_t *password;
+  bool_t use_internal_sim;
+} net_cellular_credentials_t;
+
+#endif /* NET_CELLULAR_CREDENTIAL_V2 */
+
+
+/* Network radio results */
+typedef struct net_cellular_radio_results_s
+{
+  int8_t  signal_level_db;
+} net_cellular_radio_results_t;
 
 /* network extension for Cellular class interface */
 int32_t net_cellular_set_credentials(net_if_handle_t *pnetif, const net_cellular_credentials_t *credentials);

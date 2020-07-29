@@ -27,7 +27,7 @@
 #include "stm32h747i_discovery_sdram.h"
 #include "stm32h747i_discovery_bus.h"
 #include "stm32h747i_discovery_ts.h"
-#include "basic_gui.h"
+#include "stm32_lcd.h"
 
 #include <stdint.h>
 #include <string.h>

@@ -67,18 +67,18 @@ void AUDIO_MenuProcess(void)
 
       AudioDemo.state = AUDIO_DEMO_WAIT;
 
-      GUI_SetFont(&LCD_TRACE_HEADER_FONT);
-      GUI_ClearStringLine(13);     /* Clear touch screen buttons dedicated zone */
-      GUI_ClearStringLine(14);
-      GUI_ClearStringLine(15);
-      GUI_SetTextColor(GUI_COLOR_CYAN);
-      GUI_FillPolygon(PlaybackLogoPoints, 3, GUI_COLOR_CYAN);                 /* Playback sign */
-      GUI_FillCircle((TOUCH_RECORD_XMAX+TOUCH_RECORD_XMIN)/2, /* Record circle */
+      UTIL_LCD_SetFont(&LCD_TRACE_HEADER_FONT);
+      UTIL_LCD_ClearStringLine(13);     /* Clear touch screen buttons dedicated zone */
+      UTIL_LCD_ClearStringLine(14);
+      UTIL_LCD_ClearStringLine(15);
+      UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_CYAN);
+      UTIL_LCD_FillPolygon(PlaybackLogoPoints, 3, UTIL_LCD_COLOR_CYAN);                 /* Playback sign */
+      UTIL_LCD_FillCircle((TOUCH_RECORD_XMAX+TOUCH_RECORD_XMIN)/2, /* Record circle */
                          (TOUCH_RECORD_YMAX+TOUCH_RECORD_YMIN)/2,
-                         (TOUCH_RECORD_XMAX-TOUCH_RECORD_XMIN)/2,GUI_COLOR_CYAN);
-      GUI_SetTextColor(GUI_COLOR_GREEN);
-      GUI_SetFont(&LCD_TRACE_TEXT_FONT);
-      GUI_DisplayStringAtLine(15, (uint8_t *)"Use touch screen to enter playback or record menu");
+                         (TOUCH_RECORD_XMAX-TOUCH_RECORD_XMIN)/2,UTIL_LCD_COLOR_CYAN);
+      UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_GREEN);
+      UTIL_LCD_SetFont(&LCD_TRACE_TEXT_FONT);
+      UTIL_LCD_DisplayStringAtLine(15, (uint8_t *)"Use touch screen to enter playback or record menu");
       break;
 
     case AUDIO_DEMO_WAIT:
@@ -256,7 +256,7 @@ static void LCD_ClearTextZone(void)
 
   for(i= 0; i < 13; i++)
   {
-    GUI_ClearStringLine(i + 3);
+    UTIL_LCD_ClearStringLine(i + 3);
   }
 }
 

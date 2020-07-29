@@ -30,48 +30,7 @@ extern "C" {
 /* Exported types ------------------------------------------------------------*/
 /* Exported variables --------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
-/* Comment if MBEDTLS on host side is not used */
-/* #define NET_MBEDTLS_HOST_SUPPORT */
 
-/* Uncomment if device supports Secure TCP connection */
-/* #define NET_MBEDTLS_DEVICE_SUPPORT */
-
-#ifdef NET_USE_RTOS
-#include "cmsis_os.h"
-#define NET_CALLOC net_calloc
-#define NET_MALLOC pvPortMalloc
-#define NET_FREE   vPortFree
-#else
-#define NET_MALLOC malloc
-#define NET_CALLOC calloc
-#define NET_FREE  free
-#endif /* NET_USE_RTOS */
-
-
-/* MbedTLS configuration */
-#ifdef NET_MBEDTLS_HOST_SUPPORT
-#define NET_MBEDTLS_DEBUG_LEVEL 1
-
-#if !defined(MBEDTLS_CONFIG_FILE)
-#define MBEDTLS_CONFIG_FILE "mbedtls/config.h"
-#endif /* MBEDTLS_CONFIG_FILE */
-#endif /* NET_MBEDTLS_HOST_SUPPORT */
-
-
-#define NET_MAX_SOCKETS_NBR            5
-
-#define NET_IF_NAME_LEN                128
-#define NET_DEVICE_NAME_LEN            64
-#define NET_DEVICE_ID_LEN              64
-#define NET_DEVICE_VER_LEN             64
-
-
-#define NET_SOCK_DEFAULT_RECEIVE_TO    60000
-#define NET_SOCK_DEFAULT_SEND_TO       60000
-#define NET_UDP_MAX_SEND_BLOCK_TO      1024
-#define NET_USE_DEFAULT_INTERFACE      1
-
-#ifdef  ENABLE_NET_DBG
 #define NET_DBG_INFO(...)  
 #define NET_DBG_ERROR(...)  
 #define NET_DBG_PRINT(...)  
@@ -79,18 +38,9 @@ extern "C" {
 #define NET_PRINT(...)  
 #define NET_PRINT_WO_CR(...)   
 #define NET_WARNING(...)  
-#else
-#define NET_DBG_INFO(...)                                
-#define NET_DBG_ERROR(...)  
-#define NET_DBG_PRINT(...)  
-#define NET_ASSERT(test,s)  
-#define NET_PRINT(...)  
 
-#define NET_PRINT_WO_CR(...)   
 
-#define NET_WARNING(...)                               
-#endif /* ENABLE_NET_DBG_INFO */
-
+#include "net_conf_template.h"
 #ifdef __cplusplus
 }
 #endif

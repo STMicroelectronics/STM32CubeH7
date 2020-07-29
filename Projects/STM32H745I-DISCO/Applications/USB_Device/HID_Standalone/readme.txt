@@ -106,6 +106,10 @@ compiler preprocessor (already done in the preconfigured projects provided with 
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
 
+@par Keywords
+
+Connectivity, USB_Device, USB, HID, Full Speed, Mouse, Joystick, Button, Remote Wakeup
+
 @par Directory contents
 
   - USB_Device/HID_Standalone/Common/CM7/Src/system_stm32h7xx.c      STM32H7xx system clock configuration file

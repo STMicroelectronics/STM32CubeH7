@@ -78,6 +78,8 @@ int main(void)
 
     /* Configure Key button for remote wakeup */
   BSP_PB_Init(BUTTON_TAMPER, BUTTON_MODE_EXTI);
+  
+  HAL_PWREx_EnableUSBVoltageDetector();
 
   /* Init Device Library */
   USBD_Init(&USBD_Device, &HID_Desc, 0);
@@ -87,8 +89,6 @@ int main(void)
 
   /* Start Device Process */
   USBD_Start(&USBD_Device);
-
-  HAL_PWREx_EnableUSBVoltageDetector();
 
   BSP_LED_On(LED_ORANGE);
 

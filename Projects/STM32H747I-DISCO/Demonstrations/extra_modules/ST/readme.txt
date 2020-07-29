@@ -1,5 +1,5 @@
 ﻿/**
-  @page extra_modules\ST
+  @page ST
   
   @verbatim
   ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
@@ -25,8 +25,11 @@
 
 This application is a part of the Demonstration using STM32Cube firmware. It describes how to 
 allow the fractal video to turn on CM4.
-  
-	
+
+@par Keywords
+
+Demonstration, multiprocessor, Fractal video, CM4
+
 @par Hardware and Software environment
 
   - This application runs on STM32H747xx devices.

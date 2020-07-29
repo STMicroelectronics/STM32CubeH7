@@ -1,4 +1,4 @@
-#include <gui/game2D_screen/CollectibleItem.hpp>
+#include <gui/game2d_screen/CollectibleItem.hpp>
 #include <BitmapDatabase.hpp>
 
 CollectibleItem::CollectibleItem() :

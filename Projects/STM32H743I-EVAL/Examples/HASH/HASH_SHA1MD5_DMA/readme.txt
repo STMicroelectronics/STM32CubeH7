@@ -70,6 +70,10 @@ In case the MD5 digest is computed correctly the blue LED (LED4) is turned ON.
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
 
+@par Keywords
+
+System, Security, HASH, SHA1, MD5, Digest, DMA
+
 @par Directory contents 
 
   - HASH/HASH_SHA1MD5_DMA/Inc/stm32h7xx_hal_conf.h    HAL configuration file

@@ -290,6 +290,8 @@ static void SystemClock_Config(void)
   PeriphClkInitStruct.PLL3.PLL3P = 2;
   PeriphClkInitStruct.PLL3.PLL3R = 2;
   PeriphClkInitStruct.PLL3.PLL3Q = 7; /* 336/7 =48Mhz*/
+  PeriphClkInitStruct.PLL3.PLL3VCOSEL = RCC_PLL3VCOMEDIUM;
+  PeriphClkInitStruct.PLL3.PLL3RGE = RCC_PLL3VCIRANGE_0;
   
   
   PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_USB;

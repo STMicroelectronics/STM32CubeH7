@@ -26,7 +26,7 @@
 #include "stm32h743i_eval_lcd.h"
 #include <stdlib.h>
 #include "fatfs_storage.h"
-#include "basic_gui.h"
+#include "stm32_lcd.h"
 /* FatFs includes component */
 #include "ff_gen_drv.h"
 #include "sd_diskio.h"

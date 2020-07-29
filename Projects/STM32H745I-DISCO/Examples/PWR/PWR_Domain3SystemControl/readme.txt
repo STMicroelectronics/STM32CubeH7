@@ -155,6 +155,10 @@ must be	properly defined to be aligned to L1-CACHE line size (32 bytes).
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
 
+@par Keywords
+
+System, Power, PWR, Stop mode, multiprocessor, Domain 3, D3SRAM, BDMA, DMAMUX, I2C, transmit, receive, Interrupt, Wakeup, Low Power, EXTI, Button, Led
+
 @par Directory contents
 
   - PWR/PWR_Domain3SystemControl/Common/Src/system_stm32h7xx.c    STM32H7xx system configuration source file

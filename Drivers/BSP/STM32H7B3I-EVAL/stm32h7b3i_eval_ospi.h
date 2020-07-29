@@ -58,7 +58,7 @@ typedef struct
 {
   pOSPI_CallbackTypeDef  pMspInitCb;
   pOSPI_CallbackTypeDef  pMspDeInitCb;
-}BSP_OSPI_NOR_Cb_t;
+}BSP_OSPI_Cb_t;
 #endif /* (USE_HAL_OSPI_REGISTER_CALLBACKS == 1) */
 
 typedef struct
@@ -201,7 +201,7 @@ extern OSPI_NOR_Ctx_t     Ospi_Nor_Ctx[];
 int32_t BSP_OSPI_NOR_Init                        (uint32_t Instance, BSP_OSPI_NOR_Init_t *Init);
 int32_t BSP_OSPI_NOR_DeInit                      (uint32_t Instance);
 #if (USE_HAL_OSPI_REGISTER_CALLBACKS == 1)
-int32_t BSP_OSPI_NOR_RegisterMspCallbacks        (uint32_t Instance, BSP_OSPI_NOR_Cb_t *CallBacks);
+int32_t BSP_OSPI_NOR_RegisterMspCallbacks        (uint32_t Instance, BSP_OSPI_Cb_t *CallBacks);
 int32_t BSP_OSPI_NOR_RegisterDefaultMspCallbacks (uint32_t Instance);
 #endif /* (USE_HAL_OSPI_REGISTER_CALLBACKS == 1) */
 int32_t BSP_OSPI_NOR_Read                        (uint32_t Instance, uint8_t* pData, uint32_t ReadAddr, uint32_t Size);

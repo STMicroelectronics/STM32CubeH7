@@ -63,15 +63,15 @@
 #endif
 
 #if !defined (USE_NUCLEO_H745ZI_Q) && !defined (USE_NUCLEO_H743ZI) && !defined (USE_NUCLEO_H743ZI2) &&\
-    !defined (USE_NUCLEO_H7A3ZI_Q)
+    !defined (USE_NUCLEO_H7A3ZI_Q) && !defined (USE_NUCLEO_H723ZG)
  #error "Board Part number not defined!! Add one of the following define within stm32h7xx_nucleo_conf.h file:\
-         USE_NUCLEO_H745ZI_Q, USE_NUCLEO_H743ZI, USE_NUCLEO_H743ZI2, USE_NUCLEO_H7A3ZI_Q"
+         USE_NUCLEO_H745ZI_Q, USE_NUCLEO_H743ZI, USE_NUCLEO_H743ZI2, USE_NUCLEO_H7A3ZI_Q, USE_NUCLEO_H723ZG"
 #endif
 
 /** @defgroup STM32H7XX_NUCLEO_LOW_LEVEL_Exported_Types LOW LEVEL Exported Types
   * @{
   */
-#if defined (USE_NUCLEO_H745ZI_Q) || defined (USE_NUCLEO_H743ZI2) || defined (USE_NUCLEO_H7A3ZI_Q)
+#if defined (USE_NUCLEO_H745ZI_Q) || defined (USE_NUCLEO_H743ZI2) || defined (USE_NUCLEO_H7A3ZI_Q) || defined (USE_NUCLEO_H723ZG)
 typedef enum
 {
   LED1 = 0,
@@ -160,7 +160,6 @@ typedef struct
 #endif /* (USE_HAL_UART_REGISTER_CALLBACKS == 1) */
 
 #define MX_UART_InitTypeDef COM_InitTypeDef
-
 #endif
 
 /**
@@ -172,10 +171,10 @@ typedef struct
   */
 
 /**
-  * @brief STM32H7XX NUCLEO BSP Driver version number V1.0.0
+  * @brief STM32H7XX NUCLEO BSP Driver version number V1.1.0
   */
 #define STM32H7XX_NUCLEO_BSP_VERSION_MAIN   (0x01U) /*!< [31:24] main version */
-#define STM32H7XX_NUCLEO_BSP_VERSION_SUB1   (0x00U) /*!< [23:16] sub1 version */
+#define STM32H7XX_NUCLEO_BSP_VERSION_SUB1   (0x01U) /*!< [23:16] sub1 version */
 #define STM32H7XX_NUCLEO_BSP_VERSION_SUB2   (0x00U) /*!< [15:8]  sub2 version */
 #define STM32H7XX_NUCLEO_BSP_VERSION_RC     (0x00U) /*!< [7:0]  release candidate */
 #define STM32H7XX_NUCLEO_BSP_VERSION        ((STM32H7XX_NUCLEO_BSP_VERSION_MAIN << 24)\
@@ -186,12 +185,14 @@ typedef struct
 /** @defgroup STM32H7XX_NUCLEO_LOW_LEVEL_LED LOW LEVEL LED
   * @{
   */
+#define LEDn                                    3U
+
 #define LED1_PIN                                GPIO_PIN_0
 #define LED1_GPIO_PORT                          GPIOB
 #define LED1_GPIO_CLK_ENABLE()                  __HAL_RCC_GPIOB_CLK_ENABLE()
 #define LED1_GPIO_CLK_DISABLE()                 __HAL_RCC_GPIOB_CLK_DISABLE()
 
-#if defined (USE_NUCLEO_H745ZI_Q) || defined (USE_NUCLEO_H743ZI2) || defined (USE_NUCLEO_H7A3ZI_Q)
+#if defined (USE_NUCLEO_H745ZI_Q) || defined (USE_NUCLEO_H743ZI2) || defined (USE_NUCLEO_H7A3ZI_Q) || defined (USE_NUCLEO_H723ZG)
 #define LED2_PIN                                GPIO_PIN_1
 #define LED2_GPIO_PORT                          GPIOE
 #define LED2_GPIO_CLK_ENABLE()                  __HAL_RCC_GPIOE_CLK_ENABLE()
@@ -218,6 +219,7 @@ typedef struct
 /* Button state */
 #define BUTTON_RELEASED                    0U
 #define BUTTON_PRESSED                     1U
+#define BUTTONn                            1U
 
 /**
  * @brief Key push-button
@@ -240,6 +242,8 @@ typedef struct
  * @brief Definition for COM port1, connected to USART3
  */
 #if (USE_BSP_COM_FEATURE > 0)
+
+#define COMn                          1U
 #define COM1_UART                     USART3
 #define COM1_CLK_ENABLE()             __HAL_RCC_USART3_CLK_ENABLE()
 #define COM1_CLK_DISABLE()            __HAL_RCC_USART3_CLK_DISABLE()

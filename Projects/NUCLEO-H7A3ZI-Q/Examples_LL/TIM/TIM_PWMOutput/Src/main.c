@@ -385,7 +385,7 @@ void TimerCaptureCompare_Callback(void)
   CNT = LL_TIM_GetCounter(TIM3);
   ARR = LL_TIM_GetAutoReload(TIM3);
   
-  if (LL_TIM_OC_GetCompareCH1(TIM3) > ARR )
+  if (LL_TIM_OC_GetCompareCH3(TIM3) > ARR )
   {
     /* If capture/compare setting is greater than autoreload, there is a counter overflow and counter restarts from 0.
        Need to add full period to counter value (ARR+1)  */

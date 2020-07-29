@@ -66,10 +66,10 @@ void Touchscreen_Calibration(void)
   
   if (status != BSP_ERROR_NONE)
   {
-    GUI_SetBackColor(GUI_COLOR_WHITE); 
-    GUI_SetTextColor(GUI_COLOR_RED);
-    GUI_DisplayStringAt(0, XSize - 95, (uint8_t *)"ERROR", CENTER_MODE);
-    GUI_DisplayStringAt(0,YSize - 80, (uint8_t *)"Touchscreen cannot be initialized", CENTER_MODE);
+    UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_WHITE); 
+    UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_RED);
+    UTIL_LCD_DisplayStringAt(0, XSize - 95, (uint8_t *)"ERROR", CENTER_MODE);
+    UTIL_LCD_DisplayStringAt(0,YSize - 80, (uint8_t *)"Touchscreen cannot be initialized", CENTER_MODE);
   }
   
   while (1)
@@ -107,20 +107,20 @@ void Touchscreen_Calibration(void)
 static void TouchscreenCalibration_SetHint(void)
 {
   /* Clear the LCD */ 
-  GUI_Clear(GUI_COLOR_WHITE);
+  UTIL_LCD_Clear(UTIL_LCD_COLOR_WHITE);
   
   /* Set Touchscreen Demo description */
-  GUI_SetTextColor(GUI_COLOR_BLACK);
-  GUI_SetBackColor(GUI_COLOR_WHITE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_BLACK);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_WHITE);
 
   uint32_t XSize = 0, YSize = 0;
   BSP_LCD_GetXSize(0, &XSize);
   BSP_LCD_GetYSize(0, &YSize);
     
-  GUI_SetFont(&Font12);
-  GUI_DisplayStringAt(0, YSize/2 - 27, (uint8_t *)"Before using the Touchscreen", CENTER_MODE);
-  GUI_DisplayStringAt(0, YSize/2 - 12, (uint8_t *)"you need to calibrate it.", CENTER_MODE);
-  GUI_DisplayStringAt(0, YSize/2 + 3, (uint8_t *)"Press on the black circles", CENTER_MODE);
+  UTIL_LCD_SetFont(&Font12);
+  UTIL_LCD_DisplayStringAt(0, YSize/2 - 27, (uint8_t *)"Before using the Touchscreen", CENTER_MODE);
+  UTIL_LCD_DisplayStringAt(0, YSize/2 - 12, (uint8_t *)"you need to calibrate it.", CENTER_MODE);
+  UTIL_LCD_DisplayStringAt(0, YSize/2 + 3, (uint8_t *)"Press on the black circles", CENTER_MODE);
 }
 
 /**
@@ -134,10 +134,10 @@ static void TouchscreenCalibration_SetHint(void)
 static void GetPhysValues(int16_t LogX, int16_t LogY, int16_t *pPhysX, int16_t *pPhysY) 
 {
   /* Draw the ring */
-  GUI_SetTextColor(GUI_COLOR_BLACK);
-  GUI_FillCircle(LogX, LogY, 5, GUI_COLOR_BLACK);
-  GUI_SetTextColor(GUI_COLOR_WHITE);
-  GUI_FillCircle(LogX, LogY, 2, GUI_COLOR_WHITE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_BLACK);
+  UTIL_LCD_FillCircle(LogX, LogY, 5, UTIL_LCD_COLOR_BLACK);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
+  UTIL_LCD_FillCircle(LogX, LogY, 2, UTIL_LCD_COLOR_WHITE);
   
   /* Wait until touch is pressed */
   WaitForPressedState(1);
@@ -148,8 +148,8 @@ static void GetPhysValues(int16_t LogX, int16_t LogY, int16_t *pPhysX, int16_t *
   
   /* Wait until touch is released */
   WaitForPressedState(0);
-  GUI_SetTextColor(GUI_COLOR_WHITE);
-  GUI_FillCircle(LogX, LogY, 5, GUI_COLOR_WHITE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
+  UTIL_LCD_FillCircle(LogX, LogY, 5, UTIL_LCD_COLOR_WHITE);
 }
 
 /**

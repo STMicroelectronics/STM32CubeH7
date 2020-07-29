@@ -114,13 +114,13 @@ static void BSP_Config(void)
 
   /* Initialize the LCD */
   BSP_LCD_Init(0, LCD_ORIENTATION_LANDSCAPE);
-  GUI_SetFuncDriver(&LCD_Driver);
+  UTIL_LCD_SetFuncDriver(&LCD_Driver);
 
   /* Initialize LCD Log module */
   UTIL_LCD_TRACE_Init();
 
   /* Show Header and Footer texts */
-  UTIL_LCD_TRACE_SetHeader((uint8_t *)"UDP Echo Server");
+  UTIL_LCD_TRACE_SetHeader((uint8_t *)"UDP Echo Client");
   UTIL_LCD_TRACE_SetFooter((uint8_t *)"STM32H743I-EVAL board");
 
   LCD_UsrTrace("  State: Ethernet Initialization ...\n");

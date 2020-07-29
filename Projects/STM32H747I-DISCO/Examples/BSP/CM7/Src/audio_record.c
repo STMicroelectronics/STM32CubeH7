@@ -86,19 +86,19 @@ void AudioRecord_demo(void)
   BSP_LCD_GetYSize(0, &y_size);
 
   /* Clear the LCD */
-  GUI_Clear(GUI_COLOR_WHITE);
+  UTIL_LCD_Clear(UTIL_LCD_COLOR_WHITE);
   /* Set Audio Demo description */
-  GUI_FillRect(0, 0, x_size, 90, GUI_COLOR_BLUE);
-  GUI_SetTextColor(GUI_COLOR_WHITE);
-  GUI_SetBackColor(GUI_COLOR_BLUE);
-  GUI_SetFont(&Font24);
-  GUI_DisplayStringAt(0, 0, (uint8_t *)"AUDIO RECORD SAI PDM EXAMPLE", CENTER_MODE);
-  GUI_SetFont(&Font16);
-  GUI_DisplayStringAt(0, 24, (uint8_t *)"Make sure the SW2 is in position PDM ", CENTER_MODE);
-  GUI_DisplayStringAt(0, 40,  (uint8_t *)"Press User button for next menu", CENTER_MODE);
+  UTIL_LCD_FillRect(0, 0, x_size, 90, UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_SetFont(&Font24);
+  UTIL_LCD_DisplayStringAt(0, 0, (uint8_t *)"AUDIO RECORD SAI PDM EXAMPLE", CENTER_MODE);
+  UTIL_LCD_SetFont(&Font16);
+  UTIL_LCD_DisplayStringAt(0, 24, (uint8_t *)"Make sure the SW2 is in position PDM ", CENTER_MODE);
+  UTIL_LCD_DisplayStringAt(0, 40,  (uint8_t *)"Press User button for next menu", CENTER_MODE);
   /* Set the LCD Text Color */
-  GUI_DrawRect(10, 100, x_size - 20, y_size - 110, GUI_COLOR_BLUE);
-  GUI_DrawRect(11, 101, x_size - 22, y_size - 112, GUI_COLOR_BLUE);
+  UTIL_LCD_DrawRect(10, 100, x_size - 20, y_size - 110, UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_DrawRect(11, 101, x_size - 22, y_size - 112, UTIL_LCD_COLOR_BLUE);
 
   AudioFreq_ptr = AudioFreq+2; /* AUDIO_FREQUENCY_16K; */
 
@@ -125,11 +125,11 @@ void AudioRecord_demo(void)
   BSP_AUDIO_OUT_SetDevice(0, AUDIO_OUT_DEVICE_HEADPHONE);
 
   /* Start Recording */
-  GUI_DisplayStringAt(0, 190, (uint8_t *)"Start Recording ", CENTER_MODE);
+  UTIL_LCD_DisplayStringAt(0, 190, (uint8_t *)"Start Recording ", CENTER_MODE);
   BSP_AUDIO_IN_RecordPDM(1, (uint8_t*)&recordPDMBuf, 2*AUDIO_IN_PDM_BUFFER_SIZE);
 
   /* Play the recorded buffer*/
-  GUI_DisplayStringAt(0, 220, (uint8_t *)"Play the recorded buffer... ", CENTER_MODE);
+  UTIL_LCD_DisplayStringAt(0, 220, (uint8_t *)"Play the recorded buffer... ", CENTER_MODE);
   BSP_AUDIO_OUT_Play(0, (uint8_t*)&RecPlayback[0], 2*RECORD_BUFFER_SIZE);
   while (1)
   {

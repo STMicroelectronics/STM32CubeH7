@@ -64,6 +64,10 @@ To change the direction of counting switch the inputs 1 & 2 of LPTIM1.
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
 
+@par Keywords
+
+LPTIM, Timer, Low Power, GPIO, Encoder mode, Up counting, Down counting, Phase, LED
+
 @par Directory contents
 
   - LPTIM/LPTIM_Encoder/Inc/stm32h7xx_hal_conf.h    HAL configuration file

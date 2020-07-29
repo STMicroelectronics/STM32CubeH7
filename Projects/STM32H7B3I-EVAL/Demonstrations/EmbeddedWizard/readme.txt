@@ -1,5 +1,5 @@
 /**
-  @page Demo STM32H7B3I-EVAL Embedded Wizard GUI Demonstration Firmware
+  @page EmbeddedWizard STM32H7B3I-EVAL Embedded Wizard GUI Demonstration Firmware
  
   @verbatim
   *********************** (C) COPYRIGHT 2019 TARA Systems **********************

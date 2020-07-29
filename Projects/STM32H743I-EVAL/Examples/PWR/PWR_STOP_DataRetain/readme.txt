@@ -90,6 +90,10 @@ These steps are repeated in an infinite loop.
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
 
+@par Keywords
+
+System, Power, PWR, Standby mode, Stop mode, Data retain, D3SRAM, Interrupt, EXTI, Wakeup, Low Power, RTC, LSI, Led
+
 @par Directory contents 
 
   - PWR/PWR_STOP_DataRetain/Inc/stm32h7xx_conf.h         HAL Configuration file

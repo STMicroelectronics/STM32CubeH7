@@ -29,7 +29,7 @@
 #include "display.h"
 #include "graphics.h"
 #include "touchscreen.h"
-#include "basic_gui.h"
+#include "stm32_lcd.h"
 
 
 /* Exported types ------------------------------------------------------------*/

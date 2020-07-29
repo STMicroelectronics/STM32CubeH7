@@ -97,10 +97,10 @@ int main(void)
   /*##-1- Initialize the LCD #################################################*/
   /* LTDC, DSI initialization and LCD screen initialization */
   lcd_status = BSP_LCD_Init(0, LCD_ORIENTATION_LANDSCAPE);
-  GUI_SetFuncDriver(&LCD_Driver);   
+  UTIL_LCD_SetFuncDriver(&LCD_Driver);   
   OnError_Handler(lcd_status != BSP_ERROR_NONE);
   
-  GUI_Clear(GUI_COLOR_WHITE);
+  UTIL_LCD_Clear(UTIL_LCD_COLOR_WHITE);
   
   /* Get the LCD width */
   BSP_LCD_GetXSize(0, &LCD_X_Size);  

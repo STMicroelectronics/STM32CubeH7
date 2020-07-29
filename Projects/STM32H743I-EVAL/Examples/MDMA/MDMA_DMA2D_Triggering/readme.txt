@@ -51,7 +51,7 @@ In an infinite loop, each time a DMA2D transfer is started to copy a new image.
 As the MDMA Request is set to DMA2D Transfer complete flag each time the DMA2D ends
 transferring an image to the Top-center of the LCD frame buffer, the MDMA will use 
 this DMA2D destination image to transfer it to the bottom-center of the LCD frame buffer 
-with 180° rotation an mirror effect.
+with 180° rotation and mirror effect.
 A delay of 2sec is inserted after each DMA2D transfer
 
 AS consequence user can check that every 2sec a new image is transferred to the 
@@ -86,7 +86,7 @@ STM32H743I Eval board's LEDs can be used to monitor the transfer status:
       to have correct HAL operation.
 
 @Note If the  application is using the DTCM/ITCM memories (@0x20000000/ 0x0000000: not cacheable and only accessible
-      by the Cortex M7 and the  MDMA), no need for cache maintenance when the Cortex M7 and the MDMA access these RAMs.
+      by the Cortex M7 and the MDMA), no need for cache maintenance when the Cortex M7 and the MDMA access these RAMs.
       If the application needs to use DMA(or other masters) based access or requires more RAM, then  the user has to:
               - Use a non TCM SRAM. (example : D1 AXI-SRAM @ 0x24000000)
               - Add a cache maintenance mechanism to ensure the cache coherence between CPU and other masters(DMAs,DMA2D,LTDC,MDMA).
@@ -97,6 +97,10 @@ STM32H743I Eval board's LEDs can be used to monitor the transfer status:
       Depending on the use case it is also possible to configure the cache attributes using the MPU.
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
+
+@par Keywords
+
+System, MDMA, DMA, DMA2D, Linked list, Display, Image, LCD, SDRAM, Transfer, Memory to memory, Flash, Frame buffer, Mirror effect, Rotation
 
 @par Directory contents 
 

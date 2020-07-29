@@ -74,10 +74,6 @@ In case of errors the red led is on.
 
 For more details about this application, refer to UM1723 "STM32Cube mbedTLS application".
 
-@par Keywords
-
-Security, Middleware, mbedTLS, SSL Client, Crypto, TCP/IP, LwIP, AES 128,
-AES 192, AES 256, Triple DES, MD5, SHA-1, RNG
 
 @Note If the  application is using the DTCM/ITCM memories (@0x20000000/ 0x0000000: not cacheable and only accessible
       by the Cortex M7 and the  MDMA), no need for cache maintenance when the Cortex M7 and the MDMA access these RAMs.
@@ -91,6 +87,11 @@ AES 192, AES 256, Triple DES, MD5, SHA-1, RNG
       Depending on the use case it is also possible to configure the cache attributes using the MPU.
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
+
+@par Keywords
+
+Security, mbedTLS, HASH, RNG, CRYP, SSL Client, Crypto, TCP/IP, LwIP, AES 128,
+AES 192, AES 256, Triple DES, MD5, SHA-1
 
 @par Directory contents
 

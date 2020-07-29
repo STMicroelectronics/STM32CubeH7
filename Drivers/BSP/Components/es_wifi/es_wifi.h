@@ -38,9 +38,6 @@
 #define ES_WIFI_PAYLOAD_SIZE     1200
 #define ES_WIFI_MAX_SO_TIMEOUT  30000
 
-/* Exported macro-------------------------------------------------------------*/
-#define MIN(a, b)  (((a) < (b)) ? (a) : (b))
-
 typedef int8_t (*IO_Init_Func)(uint16_t );
 typedef int8_t (*IO_DeInit_Func)( void);
 typedef void (*IO_Delay_Func)(uint32_t);
@@ -165,10 +162,10 @@ typedef struct {
 typedef struct {
   uint8_t SSID[ES_WIFI_MAX_SSID_NAME_SIZE + 1];  /*!< Network public name for ESP AP mode */
   uint8_t Pass[ES_WIFI_MAX_PSWD_NAME_SIZE + 1];  /*!< Network password for ESP AP mode */
-  ES_WIFI_SecurityType_t Security;          /*!< Security of Wi-Fi spot. This parameter can be a value of \ref ESP8266_Ecn_t enumeration */
+  ES_WIFI_SecurityType_t Security;          /*!< Security of Wi-Fi access point */
   uint8_t Channel;                          /*!< Channel Wi-Fi is operating at */
   uint8_t MaxConnections;                   /*!< Max number of stations that are allowed to connect to ESP AP, between 1 and 4 */
-  uint8_t Hidden;                           /*!< Set to 1 if network is hidden (not broadcast) or zero if noz */
+  uint8_t Hidden;                           /*!< Set to 1 if network is hidden (not broadcast) or zero if visible */
 } ES_WIFI_APConfig_t;
 
 typedef struct {
@@ -309,6 +306,8 @@ ES_WIFI_Status_t  ES_WIFI_ReceiveData(ES_WIFIObject_t *Obj, uint8_t Socket, uint
 ES_WIFI_Status_t  ES_WIFI_ReceiveDataFrom(ES_WIFIObject_t *Obj, uint8_t Socket, uint8_t *pdata, uint16_t Reqlen, uint16_t *Receivedlen, uint32_t Timeout, uint8_t *IPaddr, uint16_t *pPort);
 ES_WIFI_Status_t  ES_WIFI_ActivateAP(ES_WIFIObject_t *Obj, ES_WIFI_APConfig_t *ApConfig);
 ES_WIFI_APState_t ES_WIFI_WaitAPStateChange(ES_WIFIObject_t *Obj);
+ES_WIFI_Status_t  ES_WIFI_PeerInfo(ES_WIFIObject_t *Obj, uint8_t Socket, uint8_t *IPaddr, uint16_t *pPort);
+ES_WIFI_Status_t  ES_WIFI_SockInfo(ES_WIFIObject_t *Obj, uint8_t Socket, uint8_t *IPaddr, uint16_t *pPort);
 
 #if (ES_WIFI_USE_FIRMWAREUPDATE == 1)
 ES_WIFI_Status_t  ES_WIFI_OTA_Upgrade(ES_WIFIObject_t *Obj, uint8_t *link);

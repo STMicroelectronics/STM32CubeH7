@@ -25,7 +25,7 @@
 #include "stm32h745i_discovery.h"
 #include "stm32h745i_discovery_lcd.h"
 #include "stm32h745i_discovery_sdram.h"
-#include "basic_gui.h"
+#include "stm32_lcd.h"
 
 #define LAYER_SIZE_X      240
 #define LAYER_SIZE_Y      130

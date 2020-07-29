@@ -66,6 +66,10 @@ In this example, HCLK is configured at 400 MHz.
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
 
+@par Keywords
+
+Hardware semaphore, Semaphore, HSEM, Lock, Unlock, Take, Release, Process, LED
+
 @par Directory contents 
 
   - HSEM/HSEM_ReadLock/Inc/stm32h7xx_hal_conf.h    HAL configuration file

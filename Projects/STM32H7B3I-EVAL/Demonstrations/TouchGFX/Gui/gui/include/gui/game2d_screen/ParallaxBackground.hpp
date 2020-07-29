@@ -4,7 +4,7 @@
 #include <touchgfx/containers/Container.hpp>
 #include <touchgfx/widgets/Image.hpp>
 #include <touchgfx/widgets/AnimatedImage.hpp>
-#include <gui/game2D_screen/CollectibleItem.hpp>
+#include <gui/game2d_screen/CollectibleItem.hpp>
 
 using namespace touchgfx;
 

@@ -1,5 +1,5 @@
 /**
-  @page Demo   STM32H743I-EVAL STemWin Demonstration Firmware
+  @page STemWin   STM32H743I-EVAL STemWin Demonstration Firmware
  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
@@ -87,7 +87,7 @@ Below you find an overview of the different offered module in the STemWin demons
  The Rocket Game shows the graphic performance of the Chrom-ART.
  Control the Rocket by moving it on the screen. The player has to collect
  the maximum number of coins to get the best score.
- For demonstartion not touching the rocket will lead to a game that is not ending.
+ For demonstration not touching the rocket will lead to a game that is not ending.
  The CPU load metrics are displayed on the middle of top screen. 
  
  + System Info
@@ -97,7 +97,7 @@ Below you find an overview of the different offered module in the STemWin demons
 
 @par Keywords
 
-Demonstration, FreeRTOS, RTOS, Middleware, wav, Video Player, avi, Audio player, Graphic,
+Demonstration, STemWin, FreeRTOS, RTOS, WAV, Video Player, JPEG, MJPEG, AVI, Audio player, Graphics,
 Game, System, CPU, SAI, QSPI, SD, 
 
 @par Hardware and Software environment

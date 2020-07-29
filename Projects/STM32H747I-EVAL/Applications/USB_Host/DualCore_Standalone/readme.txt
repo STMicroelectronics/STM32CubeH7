@@ -103,7 +103,7 @@ requirements, such as:
 
 @par Keywords
 
-Connectivity, USB Host, HID, MSC, Full Speed, High Speed, OTG, enumeration, mass storage, mouse, USB Stick
+Connectivity, USB_Host, USB, HID, MSC, Full Speed, High Speed, OTG, enumeration, mass storage, mouse, USB Stick
 
 
 

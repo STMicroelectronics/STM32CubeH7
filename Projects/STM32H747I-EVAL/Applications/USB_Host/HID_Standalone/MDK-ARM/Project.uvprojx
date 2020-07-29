@@ -337,7 +337,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32H747xx,USE_STM32H747I_EVAL,CORE_CM7,CH7,USE_USB_FS</Define>
               <Undefine></Undefine>
-              <IncludePath>../CM7/Inc;../../../../../../Drivers/CMSIS/Include;../../../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../../../../../../Drivers/STM32H7xx_HAL_Driver/Inc;../../../../../../Drivers/BSP/STM32H747I-EVAL;../../../../../../Drivers/BSP/Components/mfxstm32l152;../../../../../../Drivers/BSP/Components/Common;../../../../../../Drivers/BSP/Components;../../../../../../Middlewares/ST/STM32_USB_Host_Library/Class/HID/Inc;../../../../../../Middlewares/ST/STM32_USB_Host_Library/Core/Inc;../../../../../../Utilities/Fonts;../../../../../../Utilities/Basic_GUI;../../../../../../Drivers/BSP/Components/otm8009a;../../../../../../Drivers/BSP/Components/stmpe811;../../../../../../Utilities/Lcd_Trace</IncludePath>
+              <IncludePath>../CM7/Inc;../../../../../../Drivers/CMSIS/Include;../../../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../../../../../../Drivers/STM32H7xx_HAL_Driver/Inc;../../../../../../Drivers/BSP/STM32H747I-EVAL;../../../../../../Drivers/BSP/Components/mfxstm32l152;../../../../../../Drivers/BSP/Components/Common;../../../../../../Drivers/BSP/Components;../../../../../../Middlewares/ST/STM32_USB_Host_Library/Class/HID/Inc;../../../../../../Middlewares/ST/STM32_USB_Host_Library/Core/Inc;../../../../../../Utilities/Fonts;../../../../../../Utilities/LCD;../../../../../../Drivers/BSP/Components/otm8009a;../../../../../../Drivers/BSP/Components/stmpe811;../../../../../../Utilities/Lcd_Trace</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -821,9 +821,9 @@
           <GroupName>Utilities</GroupName>
           <Files>
             <File>
-              <FileName>basic_gui.c</FileName>
+              <FileName>stm32_lcd.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\..\Utilities\Basic_GUI\basic_gui.c</FilePath>
+              <FilePath>..\..\..\..\..\..\Utilities\lcd\stm32_lcd.c</FilePath>
             </File>
             <File>
               <FileName>lcd_trace.c</FileName>
@@ -1168,7 +1168,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32H747xx,USE_STM32H747I_EVAL,CORE_CM7,CH7,USE_USB_HS</Define>
               <Undefine></Undefine>
-              <IncludePath>../CM7/Inc;../../../../../../Drivers/CMSIS/Include;../../../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../../../../../../Drivers/STM32H7xx_HAL_Driver/Inc;../../../../../../Drivers/BSP/STM32H747I-EVAL;../../../../../../Drivers/BSP/Components/mfxstm32l152;../../../../../../Drivers/BSP/Components/Common;../../../../../../Drivers/BSP/Components;../../../../../../Middlewares/ST/STM32_USB_Host_Library/Class/HID/Inc;../../../../../../Middlewares/ST/STM32_USB_Host_Library/Core/Inc;../../../../../../Utilities/Fonts;../../../../../../Utilities/Basic_GUI;../../../../../../Utilities/Lcd_Trace</IncludePath>
+              <IncludePath>../CM7/Inc;../../../../../../Drivers/CMSIS/Include;../../../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../../../../../../Drivers/STM32H7xx_HAL_Driver/Inc;../../../../../../Drivers/BSP/STM32H747I-EVAL;../../../../../../Drivers/BSP/Components/mfxstm32l152;../../../../../../Drivers/BSP/Components/Common;../../../../../../Drivers/BSP/Components;../../../../../../Middlewares/ST/STM32_USB_Host_Library/Class/HID/Inc;../../../../../../Middlewares/ST/STM32_USB_Host_Library/Core/Inc;../../../../../../Utilities/Fonts;../../../../../../Utilities/LCD;../../../../../../Utilities/Lcd_Trace</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -1652,9 +1652,9 @@
           <GroupName>Utilities</GroupName>
           <Files>
             <File>
-              <FileName>basic_gui.c</FileName>
+              <FileName>stm32_lcd.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\..\Utilities\Basic_GUI\basic_gui.c</FilePath>
+              <FilePath>..\..\..\..\..\..\Utilities\lcd\stm32_lcd.c</FilePath>
             </File>
             <File>
               <FileName>lcd_trace.c</FileName>
@@ -2828,9 +2828,9 @@
           </GroupOption>
           <Files>
             <File>
-              <FileName>basic_gui.c</FileName>
+              <FileName>stm32_lcd.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\..\Utilities\Basic_GUI\basic_gui.c</FilePath>
+              <FilePath>..\..\..\..\..\..\Utilities\lcd\stm32_lcd.c</FilePath>
             </File>
             <File>
               <FileName>lcd_trace.c</FileName>

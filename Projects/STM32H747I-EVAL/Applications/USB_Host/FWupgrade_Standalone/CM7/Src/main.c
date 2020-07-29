@@ -118,6 +118,9 @@ int main(void)
 
   /* Init FW upgrade Application */
   FW_InitApplication();
+  
+  /* Enable the USB voltage level detector */
+  HAL_PWREx_EnableUSBVoltageDetector();
 
   /* Init Host Library */
   USBH_Init(&hUSB_Host, USBH_UserProcess, 0);
@@ -127,9 +130,6 @@ int main(void)
 
   /* Start Host Process */
   USBH_Start(&hUSB_Host);
-
-  /* Enable the USB voltage level detector */
-  HAL_PWREx_EnableUSBVoltageDetector();
 
   /* Run Application (Blocking mode) */
   while (1)
@@ -270,6 +270,8 @@ void SystemClock_Config(void)
   PeriphClkInitStruct.PLL3.PLL3P = 2;
   PeriphClkInitStruct.PLL3.PLL3Q = 10;
   PeriphClkInitStruct.PLL3.PLL3R = 18;
+  PeriphClkInitStruct.PLL3.PLL3VCOSEL = RCC_PLL3VCOWIDE;
+  PeriphClkInitStruct.PLL3.PLL3RGE = RCC_PLL3VCIRANGE_2;
 
   PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_USB;
   PeriphClkInitStruct.UsbClockSelection = RCC_USBCLKSOURCE_PLL3;

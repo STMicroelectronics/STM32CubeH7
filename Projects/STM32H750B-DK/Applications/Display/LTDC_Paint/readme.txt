@@ -84,7 +84,7 @@ Notes:
 
 @par Keywords
 
-Display, LTCD, Pictures, USB, BMP, Background, Foreground, Layers, Touchscreen, Calibration
+Graphics, Display, LTCD, USB, Pictures, BMP, Background, Foreground, Layers, Touchscreen, Calibration
 
 @Note If the  application is using the DTCM/ITCM memories (@0x20000000/ 0x0000000: not cacheable and only accessible
       by the Cortex M7 and the  MDMA), no need for cache maintenance when the Cortex M7 and the MDMA access these RAMs.

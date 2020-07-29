@@ -19,8 +19,8 @@
 
 /* Define to prevent recursive inclusion -------------------------------------*/
 
-#ifndef  __GUI_AVI_H
-#define  __GUI_AVI_H
+#ifndef  __UTIL_LCD_AVI_H
+#define  __UTIL_LCD_AVI_H
 
 #include "main.h"
 #include <string.h>

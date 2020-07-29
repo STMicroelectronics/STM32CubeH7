@@ -47,9 +47,6 @@ NUCLEO-H7A3ZI-Q's LED1 can be used to monitor the transfer status:
 - LED1 is turn on if DMA data is transferred correctly.
 - LED1 is blinking every 1 sec in case of error.
 
-@par Keywords
-
-System, DMA, Data Transfer, Memory to memory, Stream, Flash, SRAM
 
 @Note If the  application is using the DTCM/ITCM memories (@0x20000000/0x0000000: not cacheable and only accessible
       by the Cortex M7 and the MDMA), no need for cache maintenance when the Cortex M7 and the MDMA access these RAMs.
@@ -62,6 +59,10 @@ System, DMA, Data Transfer, Memory to memory, Stream, Flash, SRAM
 @Note It is recommended to enable the cache and maintain its coherence.
               Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
               Please refer to the AN4839 "Level 1 cache on STM32F7 Series and STM32H7 Series"
+
+@par Keywords
+
+System, DMA, Data Transfer, Memory to memory, Stream, Flash, SRAM
 
 @par Directory contents 
 

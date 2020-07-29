@@ -34,7 +34,7 @@
 #include "stm32h747i_discovery_qspi.h"
 #include "stm32h747i_discovery_camera.h"
 #include "stm32h747i_discovery_sdram.h"
-#include "basic_gui.h"
+#include "stm32_lcd.h"
 /* Exported types ------------------------------------------------------------*/
 typedef struct
 {

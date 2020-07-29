@@ -18,6 +18,19 @@
 This file contains template files that provide some alternate implementation for
 mbedTLS algorithms.
 
+aes_alt_template.[c/h]
+-------------------------
+Implements the mbedTLS AES crypto symmetric algorithm using the HAL/CRYP API.
+As it is generic on ST families, you may have to :
+- fill the appropriate hal header file.
+for instance, stm32<xxxxx>_hal.h becomes stm32f4xx_hal.h for F4
+
+- Make sure your mbed TLS config file enables the flag MBEDTLS_AES_ALT.
+
+- Files need to be copied at user level and renamed to "aes_alt.[c/h]"
+
+Note this implementation is thread-safe ready and can be run from different threads.
+
 net_sockets_template.c
 -------------------------
 implements of the mbedTLS networking API using the LwIP TCP/IP Stack.

@@ -71,6 +71,10 @@ uint32_t SDMMC_Startup(void)
             return MEMORY_ERROR;
           }
         }
+        else
+        {
+          return MEMORY_ERROR;
+        }
       }
     }
     else

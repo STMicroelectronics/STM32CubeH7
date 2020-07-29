@@ -25,7 +25,7 @@
 
 #include "stm32h7b3i_discovery.h"
 #include "stm32h7b3i_discovery_lcd.h"
-#include "basic_gui.h"
+#include "stm32_lcd.h"
 #include <stdlib.h>
 #include "fatfs_storage.h"
 

@@ -71,9 +71,9 @@
 			<locationURI>PARENT-2-PROJECT_LOC/Src/stm32h7xx_it.c</locationURI>
 		</link>
 		<link>
-			<name>Application/Utilities/basic_gui.c</name>
+			<name>Application/Utilities/stm32_lcd.c</name>
 			<type>1</type>
-			<locationURI>PARENT-7-PROJECT_LOC/Utilities/Basic_GUI/basic_gui.c</locationURI>
+			<locationURI>PARENT-7-PROJECT_LOC/Utilities/lcd/stm32_lcd.c</locationURI>
 		</link>
 		<link>
 			<name>Application/Utilities/lcd_trace.c</name>
@@ -111,6 +111,21 @@
 			<locationURI>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/FreeRTOS/Source/timers.c</locationURI>
 		</link>
 		<link>
+			<name>Drivers/BSP/Components/exc7200.c</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Drivers/BSP/Components/exc7200/exc7200.c</locationURI>
+		</link>
+		<link>
+			<name>Drivers/BSP/Components/exc7200_reg.c</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Drivers/BSP/Components/exc7200/exc7200_reg.c</locationURI>
+		</link>
+		<link>
+			<name>Drivers/BSP/Components/is42s32800g.c</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Drivers/BSP/Components/is42s32800g/is42s32800g.c</locationURI>
+		</link>
+		<link>
 			<name>Drivers/BSP/Components/lan8742.c</name>
 			<type>1</type>
 			<locationURI>PARENT-7-PROJECT_LOC/Drivers/BSP/Components/lan8742/lan8742.c</locationURI>
@@ -119,11 +134,6 @@
 			<name>Drivers/BSP/Components/mfxstm32l152.c</name>
 			<type>1</type>
 			<locationURI>PARENT-7-PROJECT_LOC/Drivers/BSP/Components/mfxstm32l152/mfxstm32l152.c</locationURI>
-		</link>
-		<link>
-			<name>Drivers/BSP/Components/is42s32800g.c</name>
-			<type>1</type>
-			<locationURI>PARENT-7-PROJECT_LOC/Drivers/BSP/Components/is42s32800g/is42s32800g.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/BSP/Components/stmpe811.c</name>
@@ -135,20 +145,10 @@
 			<type>1</type>
 			<locationURI>PARENT-7-PROJECT_LOC/Drivers/BSP/Components/ts3510/ts3510.c</locationURI>
 		</link>
-			<link>
+		<link>
 			<name>Drivers/BSP/Components/ts3510_reg.c</name>
 			<type>1</type>
 			<locationURI>PARENT-7-PROJECT_LOC/Drivers/BSP/Components/ts3510/ts3510_reg.c</locationURI>
-		</link>
-		<link>
-			<name>Drivers/BSP/Components/exc7200.c</name>
-			<type>1</type>
-			<locationURI>PARENT-7-PROJECT_LOC/Drivers/BSP/Components/exc7200/exc7200.c</locationURI>
-		</link>
-		<link>
-			<name>Drivers/BSP/Components/exc7200_reg.c</name>
-			<type>1</type>
-			<locationURI>PARENT-7-PROJECT_LOC/Drivers/BSP/Components/exc7200/exc7200_reg.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/BSP/STM32H743I_EVAL/stm32h743i_eval.c</name>
@@ -471,14 +471,14 @@
 			<locationURI>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/LwIP/src/core/ipv4/ip4_frag.c</locationURI>
 		</link>
 		<link>
-			<name>Middlewares/LwIP/apps/httpd/fs.c</name>
+			<name>Middlewares/LwIP/apps/http/fs.c</name>
 			<type>1</type>
-			<locationURI>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/LwIP/src/apps/httpd/fs.c</locationURI>
+			<locationURI>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/LwIP/src/apps/http/fs.c</locationURI>
 		</link>
 		<link>
-			<name>Middlewares/LwIP/apps/httpd/httpd.c</name>
+			<name>Middlewares/LwIP/apps/http/httpd.c</name>
 			<type>1</type>
-			<locationURI>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/LwIP/src/apps/httpd/httpd.c</locationURI>
+			<locationURI>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/LwIP/src/apps/http/httpd.c</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>

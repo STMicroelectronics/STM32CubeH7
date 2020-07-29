@@ -66,7 +66,7 @@ on STM32Cube with RTOS".
 
 @par Keywords
 
-Middleware, RTOS, FreeRTOS, Thread
+RTOS, FreeRTOS, Thread
 
 @par Directory contents
     - FreeRTOS/FreeRTOS_ThreadCreation/Src/main.c                       Main program

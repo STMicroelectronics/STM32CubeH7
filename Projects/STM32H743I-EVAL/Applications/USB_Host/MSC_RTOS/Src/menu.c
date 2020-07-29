@@ -70,11 +70,11 @@ void Menu_Init(void)
 #endif
   osThreadCreate(osThread(Menu_Thread), NULL);
 
-  GUI_SetTextColor(GUI_COLOR_GREEN);
-  GUI_DisplayStringAtLine(15,
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_GREEN);
+  UTIL_LCD_DisplayStringAtLine(15,
                               (uint8_t *)
                               "Use [Joystick Left/Right] to scroll up/down");
-  GUI_DisplayStringAtLine(16,
+  UTIL_LCD_DisplayStringAtLine(16,
                               (uint8_t *)
                               "Use [Joystick Up/Down] to scroll MSC menu");
 }
@@ -169,37 +169,37 @@ static void MSC_MenuThread(void const *argument)
   */
 static void MSC_SelectItem(uint8_t ** menu, uint8_t item)
 {
-  GUI_SetTextColor(GUI_COLOR_WHITE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
 
   switch (item)
   {
   case 0:
-    GUI_SetBackColor(GUI_COLOR_MAGENTA);
-    GUI_DisplayStringAtLine(17, menu[0]);
-    GUI_SetBackColor(GUI_COLOR_BLUE);
-    GUI_DisplayStringAtLine(18, menu[1]);
-    GUI_DisplayStringAtLine(19, menu[2]);
+    UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_MAGENTA);
+    UTIL_LCD_DisplayStringAtLine(17, menu[0]);
+    UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_BLUE);
+    UTIL_LCD_DisplayStringAtLine(18, menu[1]);
+    UTIL_LCD_DisplayStringAtLine(19, menu[2]);
     break;
 
   case 1:
-    GUI_SetBackColor(GUI_COLOR_BLUE);
-    GUI_DisplayStringAtLine(17, menu[0]);
-    GUI_SetBackColor(GUI_COLOR_MAGENTA);
-    GUI_DisplayStringAtLine(18, menu[1]);
-    GUI_SetBackColor(GUI_COLOR_BLUE);
-    GUI_DisplayStringAtLine(19, menu[2]);
+    UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_BLUE);
+    UTIL_LCD_DisplayStringAtLine(17, menu[0]);
+    UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_MAGENTA);
+    UTIL_LCD_DisplayStringAtLine(18, menu[1]);
+    UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_BLUE);
+    UTIL_LCD_DisplayStringAtLine(19, menu[2]);
     break;
 
   case 2:
-    GUI_SetBackColor(GUI_COLOR_BLUE);
-    GUI_DisplayStringAtLine(17, menu[0]);
-    GUI_SetBackColor(GUI_COLOR_BLUE);
-    GUI_DisplayStringAtLine(18, menu[1]);
-    GUI_SetBackColor(GUI_COLOR_MAGENTA);
-    GUI_DisplayStringAtLine(19, menu[2]);
+    UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_BLUE);
+    UTIL_LCD_DisplayStringAtLine(17, menu[0]);
+    UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_BLUE);
+    UTIL_LCD_DisplayStringAtLine(18, menu[1]);
+    UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_MAGENTA);
+    UTIL_LCD_DisplayStringAtLine(19, menu[2]);
     break;
   }
-  GUI_SetBackColor(GUI_COLOR_BLACK);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_BLACK);
 }
 
 /**

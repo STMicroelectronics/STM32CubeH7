@@ -121,10 +121,10 @@ int main(void)
   /*##-1- Initialize the LCD #################################################*/
   /* Initialize the LCD */
   BSP_LCD_Init(0, LCD_ORIENTATION_LANDSCAPE);
-  GUI_SetFuncDriver(&LCD_Driver);
-  GUI_SetLayer(0);      
-  GUI_Clear(COLOR_GRAY);
-  GUI_SetFont(&Font24);
+  UTIL_LCD_SetFuncDriver(&LCD_Driver);
+  UTIL_LCD_SetLayer(0);      
+  UTIL_LCD_Clear(COLOR_GRAY);
+  UTIL_LCD_SetFont(&Font24);
   
   BSP_LCD_GetXSize(0, &LCD_X_Size);
   BSP_LCD_GetYSize(0, &LCD_Y_Size);  

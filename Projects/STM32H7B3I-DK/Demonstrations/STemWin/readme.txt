@@ -1,5 +1,5 @@
 /**
-  @page Demo   STM32H7B3I-DK STemWin Demonstration Firmware
+  @page STemWin   STM32H7B3I-DK STemWin Demonstration Firmware
  
   @verbatim
   ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
@@ -73,7 +73,7 @@ Below you find an overview of the different offered modules in the STemWin demon
 
 @par Keywords
 
-Demonstration, FreeRTOS, RTOS, Middleware, Graphic,Game, System, CPU, OSPI, SC Card, 
+Demonstration, STemWin, FreeRTOS, RTOS, Graphics, Game, System, CPU, OSPI 
 
 @par Hardware and Software environment
 

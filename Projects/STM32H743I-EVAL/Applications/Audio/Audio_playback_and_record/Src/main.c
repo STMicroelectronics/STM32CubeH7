@@ -81,6 +81,9 @@ int main(void)
   /* Touchscreen initialization */
   BSP_TS_Init(0, hTS);
 
+  /* Enable the USB voltage level detector */
+  HAL_PWREx_EnableUSBVoltageDetector();
+  
   /* Init Host Library */
   if (USBH_Init(&hUSB_Host, USBH_UserProcess, 0) != USBH_OK)
   {
@@ -97,9 +100,6 @@ int main(void)
     /* USB Initialization Error */
     Error_Handler();
   }
-
-  /* Enable the USB voltage level detector */
-  HAL_PWREx_EnableUSBVoltageDetector();
 
   /* Init storage */
   if (AUDIO_StorageInit() != FR_OK)
@@ -131,8 +131,8 @@ int main(void)
 static void AUDIO_InitApplication(void)
 {
   BSP_LCD_Init(0, LCD_ORIENTATION_LANDSCAPE);
-  GUI_SetFuncDriver(&LCD_Driver);
-  GUI_SetLayer(0);
+  UTIL_LCD_SetFuncDriver(&LCD_Driver);
+  UTIL_LCD_SetLayer(0);
   /* Enable the display */
   BSP_LCD_DisplayOn(0);
 

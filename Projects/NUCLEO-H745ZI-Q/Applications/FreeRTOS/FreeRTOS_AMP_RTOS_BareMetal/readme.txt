@@ -74,6 +74,11 @@ on STM32Cube with RTOS".
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
 
+@par Keywords
+
+RTOS, FreeRTOS, multiprocessor, thread, AMP, Asymmetric Multi Processing, Baremetal, Dual core, Message, Task, Shared memory
+
+
 @par Directory contents
 
 

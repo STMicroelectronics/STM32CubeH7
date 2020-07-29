@@ -121,6 +121,10 @@ NUCLEO-H743ZI board LEDs are used to monitor the program execution status:
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
 
+@par Keywords
+
+Analog, ADC, Analog to Digital, Regular conversion, Injected conversion, Continuous conversion, software-triggered, Timer-triggered, Measurement, Voltage, Button
+
 @par Directory contents 
 
   - ADC/ADC_Regular_injected_groups/Inc/stm32h7xx_hal_conf.h    HAL configuration file

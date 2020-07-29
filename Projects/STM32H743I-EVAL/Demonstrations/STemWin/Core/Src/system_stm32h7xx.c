@@ -80,7 +80,7 @@
 /*!< Uncomment the following line if you need to use external SRAM or SDRAM mounted
      on EVAL board as data memory  */
 /*#define DATA_IN_ExtSRAM */
-/*#define DATA_IN_ExtSDRAM*/
+/*#define DATA_IN_ExtSDRAM */
 
 /*!< Uncomment the following line if you need to use initialized data in D2 domain SRAM  */
 /* #define DATA_IN_D2_SRAM */
@@ -229,14 +229,17 @@ void SystemInit (void)
   (void) tmpreg;
 #endif /* DATA_IN_D2_SRAM */
 
+/*
+   * Disable the FMC bank1 (enabled after reset).
+   * This, prevents CPU speculation access on this bank which blocks the use of FMC during
+   * 24us. During this time the others FMC master (such as LTDC) cannot use it!
+   */
+  FMC_Bank1_R->BTCR[0] = 0x000030D2;
 
 #if defined (DATA_IN_ExtSRAM) || defined (DATA_IN_ExtSDRAM)
   SystemInit_ExtMemCtl(); 
 #endif /* DATA_IN_ExtSRAM || DATA_IN_ExtSDRAM */
 
-  /* Disable NOR/PSRAM bank1 to avoid cortex m7 speculative accesses (producing visual glitches) */
-  FMC_Bank1_R->BTCR[0] = 0x000030D2;
-  
   /* Configure the Vector Table location add offset address ------------------*/
 #ifdef VECT_TAB_SRAM
   SCB->VTOR = D1_AXISRAM_BASE  | VECT_TAB_OFFSET;       /* Vector Table Relocation in Internal SRAM */
@@ -379,7 +382,7 @@ void SystemInit_ExtMemCtl(void)
 
   /* Enable GPIOD, GPIOE, GPIOF, GPIOG, GPIOH and GPIOI interface 
       clock */
-  RCC->D3AHB1ENR |= 0x000001F8;
+  RCC->AHB1ENR |= 0x000001F8;
   /* Connect PDx pins to FMC Alternate function */
   GPIOD->AFR[0]  = 0x000000CC;
   GPIOD->AFR[1]  = 0xCC000CCC;
@@ -451,7 +454,7 @@ void SystemInit_ExtMemCtl(void)
   
 /*-- FMC Configuration ------------------------------------------------------*/
   /* Enable the FMC interface clock */
-  (RCC->D1AHB1ENR |= (RCC_D1AHB1ENR_FMCEN));
+  (RCC->AHB2ENR |= (RCC_AHB3ENR_FMCEN));
   /*SDRAM Timing and access interface configuration*/
     /*LoadToActiveDelay  = 2
     ExitSelfRefreshDelay = 6

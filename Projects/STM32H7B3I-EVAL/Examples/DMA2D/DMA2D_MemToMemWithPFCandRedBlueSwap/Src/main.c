@@ -98,20 +98,20 @@ int main(void)
   BSP_LCD_GetXSize(0,&LCD_X_Size);
   BSP_LCD_GetYSize(0,&LCD_Y_Size);
 
-  GUI_SetFuncDriver(&LCD_Driver);
+  UTIL_LCD_SetFuncDriver(&LCD_Driver);
 
   offset_address_image_in_lcd_buffer =  ((((LCD_Y_Size - IMAGE_SIZE_Y) / 2) * LCD_X_Size)
                                                      + ((LCD_X_Size - IMAGE_SIZE_X) / 2))
                                                      * ARGB8888_BYTE_PER_PIXEL;  
   
   /* Prepare using DMA2D the LCD frame buffer for display : LCD buffer clear and user message priniting*/
-  GUI_Clear(GUI_COLOR_GRAY);
-  GUI_SetTextColor(GUI_COLOR_WHITE);
-  GUI_SetBackColor(GUI_COLOR_BLUE);
-  GUI_SetFont(&Font16);
+  UTIL_LCD_Clear(UTIL_LCD_COLOR_GRAY);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_SetFont(&Font16);
 
   /* Print example description */
-  GUI_DisplayStringAt(0, 440, (uint8_t *)"DMA2D_MemToMemWithPFCandRedBlueSwap example", CENTER_MODE);
+  UTIL_LCD_DisplayStringAt(0, 440, (uint8_t *)"DMA2D_MemToMemWithPFCandRedBlueSwap example", CENTER_MODE);
 
   HAL_Delay(100);
 
@@ -124,11 +124,11 @@ int main(void)
     
     if(RedBlueSwap_Config == DMA2D_RB_REGULAR)
     {   
-      GUI_DisplayStringAt(0, 40, (uint8_t *)"Red and Blue Swap : OFF", CENTER_MODE);
+      UTIL_LCD_DisplayStringAt(0, 40, (uint8_t *)"Red and Blue Swap : OFF", CENTER_MODE);
     }
     else
     {   
-      GUI_DisplayStringAt(0, 40, (uint8_t *)"Red and Blue Swap : ON ", CENTER_MODE);
+      UTIL_LCD_DisplayStringAt(0, 40, (uint8_t *)"Red and Blue Swap : ON ", CENTER_MODE);
     }   
     
     /*##-2- DMA2D configuration ###############################################*/

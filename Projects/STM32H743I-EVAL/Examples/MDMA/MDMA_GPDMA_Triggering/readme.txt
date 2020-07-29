@@ -25,7 +25,7 @@
 This example describes how to use the MDMA with HW trigger set to D2 Domain GP-DMA
 transfer complete flag.
 
-Note that the MDMA has access to the  D-TCM RAM (Data Tightly Coupled Memory located @0x20000000) 
+Note that the MDMA has access to the D-TCM RAM (Data Tightly Coupled Memory located @0x20000000) 
 which is not the case of the D2 domain GP-DMAs. 
 This examples shows how to receive data using a D2 GP-DMA
 (DMA1 stream 5 in this case) and transfer these data automatically to the D-TCM RAM
@@ -72,7 +72,7 @@ destination "aMDMA_RxBuffer" buffer.
 
 
 the received MDMA Buffer "aMDMA_RxBuffer" is then sent back to the user using UART 
-in polling model as the DMA1 has no access to the DTCM RAM where the  buffer "aMDMA_RxBuffer" 
+in polling model as the DMA1 has no access to the DTCM RAM where the buffer "aMDMA_RxBuffer" 
 is located.
     
 In the final step an ending message is sent to the user. 
@@ -114,6 +114,10 @@ The UART is configured as follows:
       Depending on the use case it is also possible to configure the cache attributes using the MPU.
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
+
+@par Keywords
+
+System, MDMA, DMA, GPDMA, Stream, DTCM RAM, Transfer, UART, HyperTerminal, Triggering, Message, Polling mode
 
 @par Directory contents 
 

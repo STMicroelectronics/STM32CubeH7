@@ -116,6 +116,10 @@ copy the pictures stored in PC directory "/Utilities/Media/Pictures".
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series and STM32H7 Series"
 
+@par Keywords
+
+Graphics, Display, LTCD, Pictures, SD Card, BMP, Background, Foreground, Layers
+
 @par Directory contents
 
   - Display/LTDC_PicturesFromSDCard/Src/main.c                       Main program

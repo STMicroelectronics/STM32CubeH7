@@ -71,6 +71,9 @@ void STORAGE_Init(void)
   osThreadDef(STORAGE_Thread, StorageThread, osPriorityNormal, 0, 1024);
   osThreadCreate (osThread(STORAGE_Thread), NULL);
 
+  /* Enable the USB voltage level detector */
+  HAL_PWREx_EnableUSBVoltageDetector();
+  
   /* Init Host Library */
   USBH_Init(&hUSBHost, USBH_UserProcess, 0);
 
@@ -79,9 +82,6 @@ void STORAGE_Init(void)
 
   /* Start Host Process */
   USBH_Start(&hUSBHost);
-
-  /* Enable the USB voltage level detector */
-  HAL_PWREx_EnableUSBVoltageDetector();
 
   /**** SDMMC Initialization ****/
   /* Enable SD Interrupt mode */

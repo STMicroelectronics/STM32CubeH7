@@ -129,6 +129,8 @@ HAL_StatusTypeDef MX_LTDC_ClockConfig(LTDC_HandleTypeDef *hltdc)
   periph_clk_init_struct.PLL3.PLL3P = 2;
   periph_clk_init_struct.PLL3.PLL3Q = 2;
   periph_clk_init_struct.PLL3.PLL3FRACN = 0;
+  periph_clk_init_struct.PLL3.PLL3VCOSEL = RCC_PLL3VCOWIDE;
+  periph_clk_init_struct.PLL3.PLL3RGE = RCC_PLL3VCIRANGE_2;
   return(HAL_RCCEx_PeriphCLKConfig(&periph_clk_init_struct));
 
    

@@ -98,7 +98,7 @@ int main(void)
   {
     /* Initialize the LCD */
     ADAFRUIT_802_LCD_Init(0, LCD_ORIENTATION_PORTRAIT);
-    GUI_SetFuncDriver(&LCD_Driver);
+    UTIL_LCD_SetFuncDriver(&LCD_Driver);
 
     Display_DemoDescription();
 
@@ -261,31 +261,31 @@ static void Display_DemoDescription(void)
   ADAFRUIT_802_LCD_GetXSize(0, &x_size);
   ADAFRUIT_802_LCD_GetYSize(0, &y_size);
 
-  GUI_SetFont(&Font8);
+  UTIL_LCD_SetFont(&Font8);
 
   /* Clear the LCD */
-  GUI_SetBackColor(GUI_COLOR_WHITE);
-  GUI_Clear(GUI_COLOR_WHITE);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_WHITE);
+  UTIL_LCD_Clear(UTIL_LCD_COLOR_WHITE);
 
   /* Set the LCD Text Color */
-  GUI_SetTextColor(GUI_COLOR_BLUE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_BLUE);
 
   /* Display LCD messages */
-  GUI_DisplayStringAt(0, 10, (uint8_t *)"STM32H7A3ZIQ BSP", CENTER_MODE);
-  GUI_DisplayStringAt(0, 25, (uint8_t *)"Drivers examples", CENTER_MODE);
+  UTIL_LCD_DisplayStringAt(0, 10, (uint8_t *)"STM32H7A3ZIQ BSP", CENTER_MODE);
+  UTIL_LCD_DisplayStringAt(0, 25, (uint8_t *)"Drivers examples", CENTER_MODE);
 
   /* Draw Bitmap */
-  GUI_DrawBitmap((x_size - 80)/2, 35, (uint8_t *)stlogo);
+  UTIL_LCD_DrawBitmap((x_size - 80)/2, 35, (uint8_t *)stlogo);
 
-  GUI_DisplayStringAt(0, y_size- 15, (uint8_t *)"Copyright (c) STM 2019", CENTER_MODE);
+  UTIL_LCD_DisplayStringAt(0, y_size- 15, (uint8_t *)"Copyright (c) STM 2019", CENTER_MODE);
 
-  GUI_SetTextColor(GUI_COLOR_BLUE);
-  GUI_FillRect(0, y_size/2 + 15, x_size, 40, GUI_COLOR_BLUE);
-  GUI_SetTextColor(GUI_COLOR_WHITE);
-  GUI_SetBackColor(GUI_COLOR_BLUE);
-  GUI_DisplayStringAt(0, y_size/2 + 25, (uint8_t *)"Use User Button to start", CENTER_MODE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_FillRect(0, y_size/2 + 15, x_size, 40, UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_DisplayStringAt(0, y_size/2 + 25, (uint8_t *)"Use User Button to start", CENTER_MODE);
   sprintf((char *)desc,"%s example", BSP_examples[DemoIndex].DemoName);
-  GUI_DisplayStringAt(0, y_size/2 + 40, (uint8_t *)desc, CENTER_MODE);
+  UTIL_LCD_DisplayStringAt(0, y_size/2 + 40, (uint8_t *)desc, CENTER_MODE);
 }
 
 

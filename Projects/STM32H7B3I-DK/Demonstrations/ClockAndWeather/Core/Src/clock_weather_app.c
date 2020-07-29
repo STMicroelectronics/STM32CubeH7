@@ -40,31 +40,32 @@ const char *open_weather_map_keys[] =   { "5b49eb541b132bf109874f38e3e706eb",
 					  "66b53307a7cbded0e503a14055b5d52e",
                                           "7d20bf295f600f3a6f24ac1175db9431" };
 
+extern osMessageQId GUIEvent;
+extern uint8_t password_ascii[64];
+extern uint8_t ssid_ascii[32]; 
+extern uint8_t encryption_ascii[30];
+extern RTC_HandleTypeDef RtcHandle;
+extern RNG_HandleTypeDef RngHandle;
+extern int32_t es_wifi_driver(net_if_handle_t * pnetif);
+
 char SDPath[4];
 FATFS SDFatFs;
 cw_config_t default_cfg;
 
 net_if_handle_t netif;
 net_event_handler_t net_handler;
-extern int32_t es_wifi_driver(net_if_handle_t * pnetif);
 net_if_driver_init_func es_wifi_driver_ptr = &es_wifi_driver;
-extern ES_WIFIObject_t    EsWifiObj;
-ES_WIFI_APs_t APs;
-
+net_wifi_scan_results_t APs[MAX_LISTED_AP];
 osMessageQId ClockAndWeatherEvent = 0;
-extern osMessageQId GUIEvent;
 
-extern uint8_t password_ascii[64];
-extern uint8_t ssid_ascii[32]; 
-extern uint8_t encryption_ascii[30];
-extern RTC_HandleTypeDef RtcHandle;
 
-uint8_t HTTP_Response[15 *1024];
+uint8_t HTTP_Response[20 * 1024];
 char_t  WEATHER_SERVER [] = "api.openweathermap.org";
 
-static char UTC_Date_Time[30] = "2000-01-01 00:00:00";
-char* jsondata;
+static char UTC_Date_Time[64] = "2000-01-01 00:00:00";
 static uint32_t osKernelSysTick_Start = 0;
+
+char* jsondata;
 char  City_Date_Time_Buff[80];
 char day_of_week[2]= {0};
 int unixtime = 1546560000; /*2019-01-04 00:00:00*/
@@ -74,7 +75,6 @@ extern int extractDateTime(char *json_string, char* date_time, char* day_of_week
 static void Clock_And_Weather_Thread(void const *argument);
 static int config_reader(void* user, const char* section, const char* name,
                            const char* value);
-static inline int16_t string_to_encryption(char *s);
 /* Private functions ---------------------------------------------------------*/
 
 /**
@@ -117,14 +117,14 @@ static void Clock_And_Weather_Thread(void const *argument)
       case UPDATE_WIFI_AP:
         memset(&APs, 0, sizeof(APs));
         
-        if( WIFI_Get_Access_Points(&APs) != ES_WIFI_STATUS_ERROR)
+        if( WIFI_Get_Access_Points(&APs[0]) == NET_OK)
         {
           osMessagePut ( GUIEvent, UPDATE_WIFI_AP_DONE , 0);
         }
         break;
         
       case CONNECTING_TO_WIFI:
-        if (WIFI_Connect((char*) ssid_ascii, password_ascii, string_to_encryption((char*)encryption_ascii)) != NET_OK)
+         if (WIFI_Connect((char*) ssid_ascii, password_ascii, net_wifi_string_to_security((char*)encryption_ascii)) != NET_OK)
         {
           osMessagePut ( GUIEvent, CONNECTING_TO_WIFI_ERROR , 0);
         }
@@ -392,15 +392,16 @@ int NET_Init(void)
   * @param  APs: pointer Access points structure
   * @retval ES Wifi status
   */
-ES_WIFI_Status_t WIFI_Get_Access_Points(ES_WIFI_APs_t *APs)
+int32_t WIFI_Get_Access_Points(net_wifi_scan_results_t *APs)
 {
-  /*List Available access points*/
-  if (ES_WIFI_ListAccessPoints(netif.pdrv->context,APs) != ES_WIFI_STATUS_OK)
+  int32_t ret;
+  ret = net_wifi_scan(&netif,NET_WIFI_SCAN_PASSIVE,NULL);
+  if (ret == NET_OK)
   {
-    return  ES_WIFI_STATUS_ERROR;
+    ret = net_wifi_get_scan_results(&netif,APs,MAX_LISTED_AP);
+    if (ret > 0) ret= NET_OK;
   }
-  
-  return ES_WIFI_STATUS_OK;
+  return ret;
 }
 
 /**
@@ -411,7 +412,7 @@ ES_WIFI_Status_t WIFI_Get_Access_Points(ES_WIFI_APs_t *APs)
   * @param  encryption : security mode
   * @retval 0 in case of success, an error code otherwise
   */
-int8_t WIFI_Connect(char *ssid, uint8_t *password, uint16_t encryption )
+int8_t WIFI_Connect(char *ssid, uint8_t *password, int32_t encryption )
 {  
   net_wifi_credentials_t  Credentials = 
   {
@@ -434,7 +435,7 @@ int8_t WIFI_Connect(char *ssid, uint8_t *password, uint16_t encryption )
   {
     if(net_if_disconnect(&netif)!= NET_OK)
     {
-      return  ES_WIFI_STATUS_ERROR;
+      return  -1;
     }
   }
   
@@ -465,8 +466,13 @@ int Get_Json_Weather_Forecast(char* City, const char* metric, char** jsondata)
   char ch = '{';
   int32_t ret = 0;
   
+  /* Used for storing Random 32bit Number */
+  uint32_t aRandom32bit[1];
+  
   int lower = 0, upper = 13;
-  int num = (rand() % (upper - lower + 1)) + lower;
+  HAL_RNG_GenerateRandomNumber(&RngHandle, &aRandom32bit[0]);
+  
+  int num = (aRandom32bit[0] % (upper - lower + 1)) + lower;
   
   memset((char *)&HTTP_Response, 0, sizeof(HTTP_Response));
   
@@ -590,6 +596,8 @@ int Get_Date_Time(char* date_time)
   
   sprintf(date_time, "%s", current_date_time);
   
+  osKernelSysTick_Start = osKernelSysTick();
+  
   tmp = current_date_time;
   strcpy(curr_time, strchr(tmp, 'T') + 1);
   current_date_time[strlen(current_date_time) - strlen(curr_time) - 1] = '\0';
@@ -599,46 +607,6 @@ int Get_Date_Time(char* date_time)
   
   net_closesocket(sock);
   return 0;
-}
-
-/**
-
-  * @brief  Convert string to access point security mode
-  * @param  s: pointer to string
-  * @retval access point security mode, an error code otherwise
-  */
-static inline int16_t string_to_encryption(char *s)
-{
-  
-  if (strcmp(s, "Open") == 0) 
-  {
-    return ES_WIFI_SEC_OPEN;
-  }
-  if (strcmp(s, "WEP") == 0) 
-  {
-    return ES_WIFI_SEC_WEP;
-  }
-  if (strcmp(s, "WPA") == 0) 
-  {
-    return ES_WIFI_SEC_WPA;
-  }
-  if (strcmp(s, "WPA2") == 0) 
-  {
-    return ES_WIFI_SEC_WPA2;
-  }
-  if (strcmp(s, "WPA-WPA2") == 0) 
-  {
-    return ES_WIFI_SEC_WPA_WPA2;
-  }
-  if (strcmp(s, "WPA2-TKIP") == 0) 
-  {
-    return ES_WIFI_SEC_WPA2_TKIP;
-  }
-  if (strcmp(s, "Unknown") == 0) 
-  {
-    return ES_WIFI_SEC_UNKNOWN;
-  }
-  return -1;
 }
 
 /**
@@ -797,7 +765,11 @@ char* getCity_Date_Time(int32_t timezone)
    
    rawtime = unixtime + timezone + ((HAL_GetTick() - osKernelSysTick_Start) / 1000 );
    
-   ts = *gmtime(&rawtime);
+#if defined(__CC_ARM) /* !< ARM Compiler */
+  localtime_r(&rawtime, &ts);
+#else
+  ts = *gmtime(&rawtime);
+#endif
    
    strftime(City_Date_Time_Buff, sizeof(City_Date_Time_Buff), "%Y-%m-%d %H:%M:%S", &ts);
    

@@ -96,6 +96,10 @@ LED1 is toggled with a timing defined by the HAL_Delay() API.
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
 
+@par Keywords
+
+RCC, System, Clock Configuration, HSE bypass mode, HSI, CSI, System clock, Oscillator, PLL, Button, MCO
+
 @par Directory contents 
 
   - RCC/RCC_ClockConfig/Common/Src/system_stm32h7xx.c     STM32H7xx system configuration file

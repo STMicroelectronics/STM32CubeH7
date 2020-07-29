@@ -115,32 +115,32 @@ AUDIO_ErrorTypeDef AUDIO_REC_Start(void)
     {
       AudioState = AUDIO_STATE_PRERECORD;
 
-      GUI_SetTextColor(GUI_COLOR_WHITE);
+      UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
       sprintf((char *)str, "Recording file: %s",
               (char *)REC_WAVE_NAME);
-      GUI_ClearStringLine(4);
-      GUI_DisplayStringAtLine(4, str);
+      UTIL_LCD_ClearStringLine(4);
+      UTIL_LCD_DisplayStringAtLine(4, str);
 
-      GUI_SetTextColor(GUI_COLOR_CYAN);
+      UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_CYAN);
       sprintf((char *)str,  "Sample rate : %d Hz", (int)AUDIO_FREQUENCY_44K);
-      GUI_ClearStringLine(6);
-      GUI_DisplayStringAtLine(6, str);
+      UTIL_LCD_ClearStringLine(6);
+      UTIL_LCD_DisplayStringAtLine(6, str);
 
       sprintf((char *)str,  "Channels number : %d", (int)2);/*DEFAULT_AUDIO_IN_CHANNEL_NBR*/
-      GUI_ClearStringLine(7);
-      GUI_DisplayStringAtLine(7, str);
+      UTIL_LCD_ClearStringLine(7);
+      UTIL_LCD_DisplayStringAtLine(7, str);
 
       sprintf((char *)str,  "Volume : %d ", (int)uwVolume);
-      GUI_ClearStringLine(7);
-      GUI_DisplayStringAtLine(7, str);
+      UTIL_LCD_ClearStringLine(7);
+      UTIL_LCD_DisplayStringAtLine(7, str);
 
       sprintf((char *)str, "File Size :");
-      GUI_ClearStringLine(8);
-      GUI_DisplayStringAtLine(8, str);
+      UTIL_LCD_ClearStringLine(8);
+      UTIL_LCD_DisplayStringAtLine(8, str);
 
       AUDIO_REC_DisplayButtons();
 
-      GUI_DisplayStringAt(247, LINE(6), (uint8_t *)"  [     ]", LEFT_MODE);
+      UTIL_LCD_DisplayStringAt(247, LINE(6), (uint8_t *)"  [     ]", LEFT_MODE);
       {
         if(byteswritten != 0)
         {
@@ -220,13 +220,13 @@ AUDIO_ErrorTypeDef AUDIO_REC_Process(void)
   case AUDIO_STATE_RECORD:
     if (display_update)
     {
-      GUI_SetTextColor(GUI_COLOR_RED);    /* Display red record circle */
-      GUI_FillCircle((TOUCH_RECORD_XMAX+TOUCH_RECORD_XMIN)/2,
+      UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_RED);    /* Display red record circle */
+      UTIL_LCD_FillCircle((TOUCH_RECORD_XMAX+TOUCH_RECORD_XMIN)/2,
                          (TOUCH_RECORD_YMAX+TOUCH_RECORD_YMIN)/2,
-                         (TOUCH_RECORD_XMAX-TOUCH_RECORD_XMIN)/2,GUI_COLOR_RED);
-      GUI_SetFont(&LCD_TRACE_TEXT_FONT);
-      GUI_SetTextColor(GUI_COLOR_YELLOW);
-      GUI_DisplayStringAt(247, LINE(6), (uint8_t *)"  [RECORD]", LEFT_MODE);
+                         (TOUCH_RECORD_XMAX-TOUCH_RECORD_XMIN)/2,UTIL_LCD_COLOR_RED);
+      UTIL_LCD_SetFont(&LCD_TRACE_TEXT_FONT);
+      UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_YELLOW);
+      UTIL_LCD_DisplayStringAt(247, LINE(6), (uint8_t *)"  [RECORD]", LEFT_MODE);
       display_update = 0;
     }
 
@@ -268,8 +268,8 @@ AUDIO_ErrorTypeDef AUDIO_REC_Process(void)
                  AUDIO_IN_PCM_BUFFER_SIZE,
                  (void*)&byteswritten) != FR_OK)
       {
-        GUI_SetTextColor(GUI_COLOR_RED);
-        GUI_DisplayStringAtLine(14, (uint8_t *)"RECORD FAIL");
+        UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_RED);
+        UTIL_LCD_DisplayStringAtLine(14, (uint8_t *)"RECORD FAIL");
         return AUDIO_ERROR_IO;
       }
       BufferCtl.fptr += byteswritten;
@@ -282,25 +282,25 @@ AUDIO_ErrorTypeDef AUDIO_REC_Process(void)
     {
       prev_elapsed_time = elapsed_time;
       sprintf((char *)str, "[%02d:%02d]", (int)(elapsed_time /60), (int)(elapsed_time%60));
-      GUI_SetTextColor(GUI_COLOR_YELLOW);
-      GUI_DisplayStringAt(263, LINE(8), str, LEFT_MODE);
+      UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_YELLOW);
+      UTIL_LCD_DisplayStringAt(263, LINE(8), str, LEFT_MODE);
       sprintf((char *)str, "%4d KB", (int)((int32_t)BufferCtl.fptr/1024));
-      GUI_DisplayStringAt(83, LINE(8), str, LEFT_MODE);
+      UTIL_LCD_DisplayStringAt(83, LINE(8), str, LEFT_MODE);
     }
     break;
 
   case AUDIO_STATE_STOP:
     /* Stop recorder */
     BSP_AUDIO_IN_Stop(0);
-    GUI_SetTextColor(GUI_COLOR_CYAN);   /* Display blue cyan record circle */
-    GUI_FillCircle((TOUCH_RECORD_XMAX+TOUCH_RECORD_XMIN)/2,
+    UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_CYAN);   /* Display blue cyan record circle */
+    UTIL_LCD_FillCircle((TOUCH_RECORD_XMAX+TOUCH_RECORD_XMIN)/2,
                        (TOUCH_RECORD_YMAX+TOUCH_RECORD_YMIN)/2,
-                       (TOUCH_RECORD_XMAX-TOUCH_RECORD_XMIN)/2,GUI_COLOR_CYAN);
-    GUI_SetTextColor(GUI_COLOR_RED);
-    GUI_FillRect(TOUCH_STOP_XMIN, TOUCH_STOP_YMIN , /* Stop rectangle */
+                       (TOUCH_RECORD_XMAX-TOUCH_RECORD_XMIN)/2,UTIL_LCD_COLOR_CYAN);
+    UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_RED);
+    UTIL_LCD_FillRect(TOUCH_STOP_XMIN, TOUCH_STOP_YMIN , /* Stop rectangle */
                      TOUCH_STOP_XMAX - TOUCH_STOP_XMIN,
-                     TOUCH_STOP_YMAX - TOUCH_STOP_YMIN,GUI_COLOR_RED);
-    GUI_SetTextColor(GUI_COLOR_CYAN);
+                     TOUCH_STOP_YMAX - TOUCH_STOP_YMIN,UTIL_LCD_COLOR_RED);
+    UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_CYAN);
     display_update = 1;
     HAL_Delay(150);
     if(f_lseek(&WavFile, 0) == FR_OK)
@@ -315,14 +315,14 @@ AUDIO_ErrorTypeDef AUDIO_REC_Process(void)
       else
       {
         audio_error = AUDIO_ERROR_IO;
-        GUI_SetTextColor(GUI_COLOR_RED);
-        GUI_DisplayStringAtLine(14, (uint8_t *)"RECORD FAIL");
+        UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_RED);
+        UTIL_LCD_DisplayStringAtLine(14, (uint8_t *)"RECORD FAIL");
       }
     }
     else
     {
-      GUI_SetTextColor(GUI_COLOR_RED);
-      GUI_DisplayStringAtLine(14, (uint8_t *)"RECORD FAIL");
+      UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_RED);
+      UTIL_LCD_DisplayStringAtLine(14, (uint8_t *)"RECORD FAIL");
       audio_error = AUDIO_ERROR_IO;
     }
     AudioState = AUDIO_STATE_IDLE;
@@ -331,29 +331,29 @@ AUDIO_ErrorTypeDef AUDIO_REC_Process(void)
     break;
 
   case AUDIO_STATE_PAUSE:
-    GUI_SetTextColor(GUI_COLOR_RED);    /* Displays red pause rectangles */
-    GUI_FillRect(TOUCH_PAUSE_XMIN, TOUCH_PAUSE_YMIN , 15, TOUCH_PAUSE_YMAX - TOUCH_PAUSE_YMIN,GUI_COLOR_RED);
-    GUI_FillRect(TOUCH_PAUSE_XMIN + 20, TOUCH_PAUSE_YMIN, 15, TOUCH_PAUSE_YMAX - TOUCH_PAUSE_YMIN,GUI_COLOR_RED);
-    GUI_SetTextColor(GUI_COLOR_CYAN);   /* Display blue cyan record circle */
-    GUI_FillCircle((TOUCH_RECORD_XMAX+TOUCH_RECORD_XMIN)/2,
+    UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_RED);    /* Displays red pause rectangles */
+    UTIL_LCD_FillRect(TOUCH_PAUSE_XMIN, TOUCH_PAUSE_YMIN , 15, TOUCH_PAUSE_YMAX - TOUCH_PAUSE_YMIN,UTIL_LCD_COLOR_RED);
+    UTIL_LCD_FillRect(TOUCH_PAUSE_XMIN + 20, TOUCH_PAUSE_YMIN, 15, TOUCH_PAUSE_YMAX - TOUCH_PAUSE_YMIN,UTIL_LCD_COLOR_RED);
+    UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_CYAN);   /* Display blue cyan record circle */
+    UTIL_LCD_FillCircle((TOUCH_RECORD_XMAX+TOUCH_RECORD_XMIN)/2,
                        (TOUCH_RECORD_YMAX+TOUCH_RECORD_YMIN)/2,
-                       (TOUCH_RECORD_XMAX-TOUCH_RECORD_XMIN)/2,GUI_COLOR_CYAN);
-    GUI_SetTextColor(GUI_COLOR_YELLOW);
-    GUI_DisplayStringAt(247, LINE(6), (uint8_t *)"  [PAUSE] ", LEFT_MODE);
+                       (TOUCH_RECORD_XMAX-TOUCH_RECORD_XMIN)/2,UTIL_LCD_COLOR_CYAN);
+    UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_YELLOW);
+    UTIL_LCD_DisplayStringAt(247, LINE(6), (uint8_t *)"  [PAUSE] ", LEFT_MODE);
     BSP_AUDIO_IN_Pause(1);
     AudioState = AUDIO_STATE_WAIT;
     break;
 
   case AUDIO_STATE_RESUME:
-    GUI_SetTextColor(GUI_COLOR_CYAN);    /* Displays blue cyan pause rectangles */
-    GUI_FillRect(TOUCH_PAUSE_XMIN, TOUCH_PAUSE_YMIN , 15, TOUCH_PAUSE_YMAX - TOUCH_PAUSE_YMIN,GUI_COLOR_CYAN);
-    GUI_FillRect(TOUCH_PAUSE_XMIN + 20, TOUCH_PAUSE_YMIN, 15, TOUCH_PAUSE_YMAX - TOUCH_PAUSE_YMIN,GUI_COLOR_CYAN);
-    GUI_SetTextColor(GUI_COLOR_RED);    /* Display red record circle */
-    GUI_FillCircle((TOUCH_RECORD_XMAX+TOUCH_RECORD_XMIN)/2,
+    UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_CYAN);    /* Displays blue cyan pause rectangles */
+    UTIL_LCD_FillRect(TOUCH_PAUSE_XMIN, TOUCH_PAUSE_YMIN , 15, TOUCH_PAUSE_YMAX - TOUCH_PAUSE_YMIN,UTIL_LCD_COLOR_CYAN);
+    UTIL_LCD_FillRect(TOUCH_PAUSE_XMIN + 20, TOUCH_PAUSE_YMIN, 15, TOUCH_PAUSE_YMAX - TOUCH_PAUSE_YMIN,UTIL_LCD_COLOR_CYAN);
+    UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_RED);    /* Display red record circle */
+    UTIL_LCD_FillCircle((TOUCH_RECORD_XMAX+TOUCH_RECORD_XMIN)/2,
                        (TOUCH_RECORD_YMAX+TOUCH_RECORD_YMIN)/2,
-                       (TOUCH_RECORD_XMAX-TOUCH_RECORD_XMIN)/2,GUI_COLOR_RED);
-    GUI_SetTextColor(GUI_COLOR_YELLOW);
-    GUI_DisplayStringAt(247, LINE(6), (uint8_t *)"  [RECORD]", LEFT_MODE);
+                       (TOUCH_RECORD_XMAX-TOUCH_RECORD_XMIN)/2,UTIL_LCD_COLOR_RED);
+    UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_YELLOW);
+    UTIL_LCD_DisplayStringAt(247, LINE(6), (uint8_t *)"  [RECORD]", LEFT_MODE);
     BSP_AUDIO_IN_Resume(1);
     AudioState = AUDIO_STATE_RECORD;
     break;
@@ -591,24 +591,24 @@ static uint32_t WavProcess_HeaderUpdate(uint8_t* pHeader, WAVE_FormatTypeDef* pW
   */
 static void AUDIO_REC_DisplayButtons(void)
 {
-  GUI_SetFont(&LCD_TRACE_HEADER_FONT);
-  GUI_ClearStringLine(13);            /* Clear dedicated zone */
-  GUI_ClearStringLine(14);
-  GUI_ClearStringLine(15);
+  UTIL_LCD_SetFont(&LCD_TRACE_HEADER_FONT);
+  UTIL_LCD_ClearStringLine(13);            /* Clear dedicated zone */
+  UTIL_LCD_ClearStringLine(14);
+  UTIL_LCD_ClearStringLine(15);
 
-  GUI_SetTextColor(GUI_COLOR_CYAN);
-  GUI_FillCircle((TOUCH_RECORD_XMAX+TOUCH_RECORD_XMIN)/2, /* Record circle */
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_CYAN);
+  UTIL_LCD_FillCircle((TOUCH_RECORD_XMAX+TOUCH_RECORD_XMIN)/2, /* Record circle */
                      (TOUCH_RECORD_YMAX+TOUCH_RECORD_YMIN)/2,
-                     (TOUCH_RECORD_XMAX-TOUCH_RECORD_XMIN)/2,GUI_COLOR_CYAN);
-  GUI_FillRect(TOUCH_PAUSE_XMIN, TOUCH_PAUSE_YMIN , 15, TOUCH_PAUSE_YMAX - TOUCH_PAUSE_YMIN,GUI_COLOR_CYAN);    /* Pause rectangles */
-  GUI_FillRect(TOUCH_PAUSE_XMIN + 20, TOUCH_PAUSE_YMIN, 15, TOUCH_PAUSE_YMAX - TOUCH_PAUSE_YMIN,GUI_COLOR_CYAN);
-  GUI_FillRect(TOUCH_STOP_XMIN, TOUCH_STOP_YMIN , /* Stop rectangle */
+                     (TOUCH_RECORD_XMAX-TOUCH_RECORD_XMIN)/2,UTIL_LCD_COLOR_CYAN);
+  UTIL_LCD_FillRect(TOUCH_PAUSE_XMIN, TOUCH_PAUSE_YMIN , 15, TOUCH_PAUSE_YMAX - TOUCH_PAUSE_YMIN,UTIL_LCD_COLOR_CYAN);    /* Pause rectangles */
+  UTIL_LCD_FillRect(TOUCH_PAUSE_XMIN + 20, TOUCH_PAUSE_YMIN, 15, TOUCH_PAUSE_YMAX - TOUCH_PAUSE_YMIN,UTIL_LCD_COLOR_CYAN);
+  UTIL_LCD_FillRect(TOUCH_STOP_XMIN, TOUCH_STOP_YMIN , /* Stop rectangle */
                    TOUCH_STOP_XMAX - TOUCH_STOP_XMIN,
-                   TOUCH_STOP_YMAX - TOUCH_STOP_YMIN,GUI_COLOR_CYAN);
-  GUI_SetTextColor(GUI_COLOR_GREEN);
-  GUI_SetFont(&LCD_TRACE_TEXT_FONT);
-  GUI_DisplayStringAtLine(15, (uint8_t *)"Use record button to start record, stop to exit");
-  GUI_SetTextColor(GUI_COLOR_CYAN);
+                   TOUCH_STOP_YMAX - TOUCH_STOP_YMIN,UTIL_LCD_COLOR_CYAN);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_GREEN);
+  UTIL_LCD_SetFont(&LCD_TRACE_TEXT_FONT);
+  UTIL_LCD_DisplayStringAtLine(15, (uint8_t *)"Use record button to start record, stop to exit");
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_CYAN);
 }
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

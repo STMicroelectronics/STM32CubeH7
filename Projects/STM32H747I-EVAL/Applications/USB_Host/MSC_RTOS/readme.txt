@@ -1,5 +1,5 @@
 /**
-  @page MSC_Standalone USB Host Mass Storage (MSC) application
+  @page MSC_RTOS USB Host Mass Storage (MSC) application
 
   @verbatim
   ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
@@ -105,7 +105,7 @@ requirements, such as:
 
 @par Keywords
 
-Connectivity, USB Host, MSC, Mass Storage, Full Speed, High Speed, BOT, SCSI, Removable drive, FatFs,
+Connectivity, USB_Host, USB, MSC, Mass Storage, RTOS, Full Speed, High Speed, BOT, SCSI, Removable drive,
 File system, Write, Read, Format
 
 

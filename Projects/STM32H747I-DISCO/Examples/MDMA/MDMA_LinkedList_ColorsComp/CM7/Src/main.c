@@ -110,10 +110,10 @@ int main(void)
   /*##-1- Initialize the LCD #################################################*/
   /* Initialize the LCD */
   BSP_LCD_Init(0, LCD_ORIENTATION_LANDSCAPE);
-  GUI_SetFuncDriver(&LCD_Driver);
-  GUI_SetLayer(0); 
-  GUI_Clear(GUI_COLOR_WHITE); 
-  GUI_SetFont(&Font24);
+  UTIL_LCD_SetFuncDriver(&LCD_Driver);
+  UTIL_LCD_SetLayer(0); 
+  UTIL_LCD_Clear(UTIL_LCD_COLOR_WHITE); 
+  UTIL_LCD_SetFont(&Font24);
   
   BSP_LCD_GetXSize(0, &LCD_X_Size);
   BSP_LCD_GetYSize(0, &LCD_Y_Size);
@@ -402,14 +402,14 @@ static void Error_Handler(void)
 
 static void DisplayColor(void)
 {      
-  GUI_SetTextColor(GUI_COLOR_RED);
-  GUI_DisplayStringAt(80 , LCD_Y_Size - (IMAGE_HEIGHT/2) - 40 , (uint8_t *)"Red", LEFT_MODE); 
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_RED);
+  UTIL_LCD_DisplayStringAt(80 , LCD_Y_Size - (IMAGE_HEIGHT/2) - 40 , (uint8_t *)"Red", LEFT_MODE); 
   
-  GUI_SetTextColor(GUI_COLOR_GREEN);        
-  GUI_DisplayStringAt(160 + (IMAGE_WIDTH/2) , LCD_Y_Size - (IMAGE_HEIGHT/2) - 40, (uint8_t *)"Green", LEFT_MODE); 
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_GREEN);        
+  UTIL_LCD_DisplayStringAt(160 + (IMAGE_WIDTH/2) , LCD_Y_Size - (IMAGE_HEIGHT/2) - 40, (uint8_t *)"Green", LEFT_MODE); 
   
-  GUI_SetTextColor(GUI_COLOR_BLUE);        
-  GUI_DisplayStringAt(240 + IMAGE_WIDTH  , LCD_Y_Size - (IMAGE_HEIGHT/2) - 40, (uint8_t *)"Blue", LEFT_MODE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_BLUE);        
+  UTIL_LCD_DisplayStringAt(240 + IMAGE_WIDTH  , LCD_Y_Size - (IMAGE_HEIGHT/2) - 40, (uint8_t *)"Blue", LEFT_MODE);
 }
 /**
   * @brief  System Clock Configuration

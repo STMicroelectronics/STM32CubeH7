@@ -24,7 +24,7 @@
 
 This application provides a description on how to use STM32Cube firmware with FatFs 
 middleware component as a generic FAT file system module and STM32 USB On-The-Go
-(OTG) host library, in Full Speed (FS) and High Speed (HS)  modes,
+(OTG) host library, in Full Speed (FS) and High Speed (HS) modes,
 in order to develop an application exploiting FatFs offered features with USB disk drive configuration.
 
 At the beginning of the main program the HAL_Init() function is called to reset 
@@ -87,6 +87,10 @@ STM32 Eval board's LEDs can be used to monitor the application status:
       Depending on the use case it is also possible to configure the cache attributes using the MPU.
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
+
+@par Keywords
+
+Connectivity, FatFS, USB Host, FAT, File system, Full Speed, High Speed, HS-IN-FS, RTOS
 
 @par Directory contents
  

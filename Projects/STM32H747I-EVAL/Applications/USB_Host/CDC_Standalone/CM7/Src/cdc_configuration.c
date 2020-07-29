@@ -164,17 +164,17 @@ static void ReturnFromConfigurationMenu(void)
   */
 static void ConfigurationMenu_Init(void)
 {
-  GUI_SetTextColor(GUI_COLOR_GREEN);
-  GUI_DisplayStringAtLine(13,
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_GREEN);
+  UTIL_LCD_DisplayStringAtLine(13,
                               (uint8_t *)
                               "                                           ");
-  GUI_DisplayStringAtLine(14,
+  UTIL_LCD_DisplayStringAtLine(14,
                               (uint8_t *)
                               "[User Tamper] to switch menu                  ");
-  GUI_DisplayStringAtLine(15,
+  UTIL_LCD_DisplayStringAtLine(15,
                               (uint8_t *)
                               "[Joystick Left/Right] to change settings   ");
-  GUI_DisplayStringAtLine(16,
+  UTIL_LCD_DisplayStringAtLine(16,
                               (uint8_t *)
                               "[Joystick Up/Down] to change settings items");
   CDC_ChangeSelectMode(CDC_SELECT_CONFIG);
@@ -308,191 +308,191 @@ void CDC_SelectSettingsItem(uint8_t item)
 {
   uint8_t str_temp[40];
 
-  GUI_SetTextColor(GUI_COLOR_WHITE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
 
   switch (item)
   {
   case 0:
     {
-      GUI_SetBackColor(GUI_COLOR_MAGENTA);
-      GUI_DisplayStringAtLine(9, (uint8_t *) MSG_BITS_PER_SECOND);
+      UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_MAGENTA);
+      UTIL_LCD_DisplayStringAtLine(9, (uint8_t *) MSG_BITS_PER_SECOND);
       if (LineCoding.b.dwDTERate <= 9600)
         sprintf((char *)str_temp, "         %lu", LineCoding.b.dwDTERate);
       else if (LineCoding.b.dwDTERate <= 57600)
         sprintf((char *)str_temp, "        %lu", LineCoding.b.dwDTERate);
       else
         sprintf((char *)str_temp, "       %lu", LineCoding.b.dwDTERate);
-      GUI_DisplayStringAtLine(9, str_temp);
+      UTIL_LCD_DisplayStringAtLine(9, str_temp);
 
       /* Display the data bits */
-      GUI_SetBackColor(GUI_COLOR_BLUE);
-      GUI_DisplayStringAtLine(10, (uint8_t *) MSG_DATA_BITS);
+      UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_BLUE);
+      UTIL_LCD_DisplayStringAtLine(10, (uint8_t *) MSG_DATA_BITS);
       sprintf((char *)str_temp, "            %d", LineCoding.b.bDataBits);
-      GUI_DisplayStringAtLine(10, str_temp);
+      UTIL_LCD_DisplayStringAtLine(10, str_temp);
 
       /* Display the parity bits */
-      GUI_DisplayStringAtLine(11, (uint8_t *) MSG_PARITY);
+      UTIL_LCD_DisplayStringAtLine(11, (uint8_t *) MSG_PARITY);
       if (LineCoding.b.bParityType == 2)
         sprintf((char *)str_temp, "          %s",
                 ParityArray[LineCoding.b.bParityType]);
       else
         sprintf((char *)str_temp, "         %s",
                 ParityArray[LineCoding.b.bParityType]);
-      GUI_DisplayStringAtLine(11, str_temp);
+      UTIL_LCD_DisplayStringAtLine(11, str_temp);
 
       /* Display the Stop bits */
-      GUI_DisplayStringAtLine(12, (uint8_t *) MSG_STOP_BITS);
+      UTIL_LCD_DisplayStringAtLine(12, (uint8_t *) MSG_STOP_BITS);
       sprintf((char *)str_temp, "            %s",
               StopBitsArray[LineCoding.b.bCharFormat]);
-      GUI_DisplayStringAtLine(12, str_temp);
+      UTIL_LCD_DisplayStringAtLine(12, str_temp);
     }
     break;
 
   case 1:
     {
-      GUI_SetBackColor(GUI_COLOR_BLUE);
-      GUI_DisplayStringAtLine(9, (uint8_t *) MSG_BITS_PER_SECOND);
+      UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_BLUE);
+      UTIL_LCD_DisplayStringAtLine(9, (uint8_t *) MSG_BITS_PER_SECOND);
       if (LineCoding.b.dwDTERate <= 9600)
         sprintf((char *)str_temp, "         %lu", LineCoding.b.dwDTERate);
       else if (LineCoding.b.dwDTERate <= 57600)
         sprintf((char *)str_temp, "        %lu", LineCoding.b.dwDTERate);
       else
         sprintf((char *)str_temp, "       %lu", LineCoding.b.dwDTERate);
-      GUI_DisplayStringAtLine(9, str_temp);
-      GUI_DisplayStringAtLine(9, str_temp);
+      UTIL_LCD_DisplayStringAtLine(9, str_temp);
+      UTIL_LCD_DisplayStringAtLine(9, str_temp);
 
       /* Display the data bits */
-      GUI_SetBackColor(GUI_COLOR_MAGENTA);
-      GUI_DisplayStringAtLine(10, (uint8_t *) MSG_DATA_BITS);
+      UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_MAGENTA);
+      UTIL_LCD_DisplayStringAtLine(10, (uint8_t *) MSG_DATA_BITS);
       sprintf((char *)str_temp, "            %d", LineCoding.b.bDataBits);
-      GUI_DisplayStringAtLine(10, str_temp);
+      UTIL_LCD_DisplayStringAtLine(10, str_temp);
 
 
       /* Display the parity bits */
-      GUI_SetBackColor(GUI_COLOR_BLUE);
-      GUI_DisplayStringAtLine(11, (uint8_t *) MSG_PARITY);
+      UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_BLUE);
+      UTIL_LCD_DisplayStringAtLine(11, (uint8_t *) MSG_PARITY);
       if (LineCoding.b.bParityType == 2)
         sprintf((char *)str_temp, "          %s",
                 ParityArray[LineCoding.b.bParityType]);
       else
         sprintf((char *)str_temp, "         %s",
                 ParityArray[LineCoding.b.bParityType]);
-      GUI_DisplayStringAtLine(11, str_temp);
+      UTIL_LCD_DisplayStringAtLine(11, str_temp);
 
       /* Display the Stop bits */
-      GUI_DisplayStringAtLine(12, (uint8_t *) MSG_STOP_BITS);
+      UTIL_LCD_DisplayStringAtLine(12, (uint8_t *) MSG_STOP_BITS);
       sprintf((char *)str_temp, "            %s",
               StopBitsArray[LineCoding.b.bCharFormat]);
-      GUI_DisplayStringAtLine(12, str_temp);
+      UTIL_LCD_DisplayStringAtLine(12, str_temp);
     }
     break;
 
   case 2:
     {
-      GUI_SetBackColor(GUI_COLOR_BLUE);
-      GUI_DisplayStringAtLine(9, (uint8_t *) MSG_BITS_PER_SECOND);
+      UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_BLUE);
+      UTIL_LCD_DisplayStringAtLine(9, (uint8_t *) MSG_BITS_PER_SECOND);
       if (LineCoding.b.dwDTERate <= 9600)
         sprintf((char *)str_temp, "         %lu", LineCoding.b.dwDTERate);
       else if (LineCoding.b.dwDTERate <= 57600)
         sprintf((char *)str_temp, "        %lu", LineCoding.b.dwDTERate);
       else
         sprintf((char *)str_temp, "       %lu", LineCoding.b.dwDTERate);
-      GUI_DisplayStringAtLine(9, str_temp);
+      UTIL_LCD_DisplayStringAtLine(9, str_temp);
 
       /* Display the data bits */
-      GUI_DisplayStringAtLine(10, (uint8_t *) MSG_DATA_BITS);
+      UTIL_LCD_DisplayStringAtLine(10, (uint8_t *) MSG_DATA_BITS);
       sprintf((char *)str_temp, "            %d", LineCoding.b.bDataBits);
-      GUI_DisplayStringAtLine(10, str_temp);
+      UTIL_LCD_DisplayStringAtLine(10, str_temp);
 
       /* Display the parity bits */
-      GUI_SetBackColor(GUI_COLOR_MAGENTA);
-      GUI_DisplayStringAtLine(11, (uint8_t *) MSG_PARITY);
+      UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_MAGENTA);
+      UTIL_LCD_DisplayStringAtLine(11, (uint8_t *) MSG_PARITY);
       if (LineCoding.b.bParityType == 2)
         sprintf((char *)str_temp, "          %s",
                 ParityArray[LineCoding.b.bParityType]);
       else
         sprintf((char *)str_temp, "         %s",
                 ParityArray[LineCoding.b.bParityType]);
-      GUI_DisplayStringAtLine(11, str_temp);
+      UTIL_LCD_DisplayStringAtLine(11, str_temp);
 
       /* Display the Stop bits */
-      GUI_SetBackColor(GUI_COLOR_BLUE);
-      GUI_DisplayStringAtLine(12, (uint8_t *) MSG_STOP_BITS);
+      UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_BLUE);
+      UTIL_LCD_DisplayStringAtLine(12, (uint8_t *) MSG_STOP_BITS);
       sprintf((char *)str_temp, "            %s",
               StopBitsArray[LineCoding.b.bCharFormat]);
-      GUI_DisplayStringAtLine(12, str_temp);
+      UTIL_LCD_DisplayStringAtLine(12, str_temp);
     }
     break;
 
   case 3:
     {
-      GUI_SetBackColor(GUI_COLOR_BLUE);
-      GUI_DisplayStringAtLine(9, (uint8_t *) MSG_BITS_PER_SECOND);
+      UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_BLUE);
+      UTIL_LCD_DisplayStringAtLine(9, (uint8_t *) MSG_BITS_PER_SECOND);
       if (LineCoding.b.dwDTERate <= 9600)
         sprintf((char *)str_temp, "         %lu", LineCoding.b.dwDTERate);
       else if (LineCoding.b.dwDTERate <= 57600)
         sprintf((char *)str_temp, "        %lu", LineCoding.b.dwDTERate);
       else
         sprintf((char *)str_temp, "       %lu", LineCoding.b.dwDTERate);
-      GUI_DisplayStringAtLine(9, str_temp);
-      GUI_DisplayStringAtLine(9, str_temp);
+      UTIL_LCD_DisplayStringAtLine(9, str_temp);
+      UTIL_LCD_DisplayStringAtLine(9, str_temp);
 
       /* Display the data bits */
-      GUI_DisplayStringAtLine(10, (uint8_t *) MSG_DATA_BITS);
+      UTIL_LCD_DisplayStringAtLine(10, (uint8_t *) MSG_DATA_BITS);
       sprintf((char *)str_temp, "            %d", LineCoding.b.bDataBits);
-      GUI_DisplayStringAtLine(10, str_temp);
+      UTIL_LCD_DisplayStringAtLine(10, str_temp);
 
       /* Display the parity bits */
-      GUI_DisplayStringAtLine(11, (uint8_t *) MSG_PARITY);
+      UTIL_LCD_DisplayStringAtLine(11, (uint8_t *) MSG_PARITY);
       if (LineCoding.b.bParityType == 2)
         sprintf((char *)str_temp, "          %s",
                 ParityArray[LineCoding.b.bParityType]);
       else
         sprintf((char *)str_temp, "         %s",
                 ParityArray[LineCoding.b.bParityType]);
-      GUI_DisplayStringAtLine(11, str_temp);
+      UTIL_LCD_DisplayStringAtLine(11, str_temp);
 
       /* Display the Stop bits */
-      GUI_SetBackColor(GUI_COLOR_MAGENTA);
-      GUI_DisplayStringAtLine(12, (uint8_t *) MSG_STOP_BITS);
+      UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_MAGENTA);
+      UTIL_LCD_DisplayStringAtLine(12, (uint8_t *) MSG_STOP_BITS);
       sprintf((char *)str_temp, "            %s",
               StopBitsArray[LineCoding.b.bCharFormat]);
-      GUI_DisplayStringAtLine(12, str_temp);
+      UTIL_LCD_DisplayStringAtLine(12, str_temp);
     }
     break;
 
   default:
-    GUI_SetBackColor(GUI_COLOR_BLUE);
-    GUI_DisplayStringAtLine(9, (uint8_t *) MSG_BITS_PER_SECOND);
+    UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_BLUE);
+    UTIL_LCD_DisplayStringAtLine(9, (uint8_t *) MSG_BITS_PER_SECOND);
     if (LineCoding.b.dwDTERate <= 9600)
       sprintf((char *)str_temp, "         %lu", LineCoding.b.dwDTERate);
     else if (LineCoding.b.dwDTERate <= 57600)
       sprintf((char *)str_temp, "        %lu", LineCoding.b.dwDTERate);
     else
       sprintf((char *)str_temp, "       %lu", LineCoding.b.dwDTERate);
-    GUI_DisplayStringAtLine(9, str_temp);
-    GUI_DisplayStringAtLine(9, str_temp);
+    UTIL_LCD_DisplayStringAtLine(9, str_temp);
+    UTIL_LCD_DisplayStringAtLine(9, str_temp);
 
     /* Display the data bits */
-    GUI_DisplayStringAtLine(10, (uint8_t *) MSG_DATA_BITS);
+    UTIL_LCD_DisplayStringAtLine(10, (uint8_t *) MSG_DATA_BITS);
     sprintf((char *)str_temp, "            %d", LineCoding.b.bDataBits);
-    GUI_DisplayStringAtLine(10, str_temp);
+    UTIL_LCD_DisplayStringAtLine(10, str_temp);
 
     /* Display the parity bits */
-    GUI_DisplayStringAtLine(11, (uint8_t *) MSG_PARITY);
+    UTIL_LCD_DisplayStringAtLine(11, (uint8_t *) MSG_PARITY);
     if (LineCoding.b.bParityType == 2)
       sprintf((char *)str_temp, "          %s",
               ParityArray[LineCoding.b.bParityType]);
     else
       sprintf((char *)str_temp, "         %s",
               ParityArray[LineCoding.b.bParityType]);
-    GUI_DisplayStringAtLine(11, str_temp);
+    UTIL_LCD_DisplayStringAtLine(11, str_temp);
 
     /* Display the Stop bits */
-    GUI_DisplayStringAtLine(12, (uint8_t *) MSG_STOP_BITS);
+    UTIL_LCD_DisplayStringAtLine(12, (uint8_t *) MSG_STOP_BITS);
     sprintf((char *)str_temp, "            %s",
             StopBitsArray[LineCoding.b.bCharFormat]);
-    GUI_DisplayStringAtLine(12, str_temp);
+    UTIL_LCD_DisplayStringAtLine(12, str_temp);
     break;
   }
 }
@@ -506,7 +506,7 @@ void CDC_AdjustSettingMenu(void)
 {
   uint8_t str_temp[40];
 
-  GUI_SetBackColor(GUI_COLOR_MAGENTA);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_MAGENTA);
 
   if (CdcSettingsState.select != PrevSelect)
   {
@@ -528,7 +528,7 @@ void CDC_AdjustSettingMenu(void)
       sprintf((char *)str_temp, "       %lu",
               BaudRateValue[CdcSettingsState.settings.BaudRateIdx]);
 
-    GUI_DisplayStringAtLine(9, str_temp);
+    UTIL_LCD_DisplayStringAtLine(9, str_temp);
 
     LineCoding.b.dwDTERate =
       BaudRateValue[CdcSettingsState.settings.BaudRateIdx];
@@ -539,7 +539,7 @@ void CDC_AdjustSettingMenu(void)
     Prev_DataBitsIdx = CdcSettingsState.settings.DataBitsIdx;
     sprintf((char *)str_temp, "            %d",
             DataBitsValue[CdcSettingsState.settings.DataBitsIdx]);
-    GUI_DisplayStringAtLine(10, str_temp);
+    UTIL_LCD_DisplayStringAtLine(10, str_temp);
     LineCoding.b.bDataBits =
       DataBitsValue[CdcSettingsState.settings.DataBitsIdx];
   }
@@ -553,7 +553,7 @@ void CDC_AdjustSettingMenu(void)
     else
       sprintf((char *)str_temp, "         %s",
               (uint8_t *) ParityArray[CdcSettingsState.settings.ParityIdx]);
-    GUI_DisplayStringAtLine(11, str_temp);
+    UTIL_LCD_DisplayStringAtLine(11, str_temp);
     LineCoding.b.bParityType = CdcSettingsState.settings.ParityIdx;
   }
 
@@ -562,10 +562,10 @@ void CDC_AdjustSettingMenu(void)
     Prev_StopBitsIdx = CdcSettingsState.settings.StopBitsIdx;
     sprintf((char *)str_temp, "            %s",
             StopBitsArray[CdcSettingsState.settings.StopBitsIdx]);
-    GUI_DisplayStringAtLine(12, str_temp);
+    UTIL_LCD_DisplayStringAtLine(12, str_temp);
     LineCoding.b.bCharFormat = CdcSettingsState.settings.StopBitsIdx;
   }
-  GUI_SetBackColor(GUI_COLOR_BLUE);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_BLUE);
 }
 
 /**

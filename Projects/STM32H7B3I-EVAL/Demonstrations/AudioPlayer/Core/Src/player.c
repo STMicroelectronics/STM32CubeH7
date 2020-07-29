@@ -900,7 +900,7 @@ uint32_t PLAYER_SeekToTime(uint32_t NewTime)
 * @param  pUserData: optional parameter (not used in this version)
 * @retval return the decode frame.
 */
-unsigned int Dec_ReadDataCallback(void *    pCompressedData,        /* [OUT] Bitbuffer */
+uint32_t Dec_ReadDataCallback(void *    pCompressedData,        /* [OUT] Bitbuffer */
                                   uint32_t  nDataSizeInChars,       /* sizeof(Bitbuffer) */
                                   void *    pUserData               /* Application-supplied parameter */ )
 {

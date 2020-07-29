@@ -82,21 +82,21 @@ static void LCD_SetHint(void)
   ADAFRUIT_802_LCD_GetXSize(0, &x_size);
   
   /* Clear the LCD */ 
-  GUI_Clear(GUI_COLOR_WHITE);
+  UTIL_LCD_Clear(UTIL_LCD_COLOR_WHITE);
   
   /* Set Joystick Demo description */
-  GUI_FillRect(0, 0, x_size, 55, GUI_COLOR_BLUE);
-  GUI_SetTextColor(GUI_COLOR_WHITE);
-  GUI_SetBackColor(GUI_COLOR_BLUE); 
-  GUI_SetFont(&Font24);
+  UTIL_LCD_FillRect(0, 0, x_size, 55, UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_BLUE); 
+  UTIL_LCD_SetFont(&Font24);
 
-  GUI_SetFont(&Font12);
-  GUI_DisplayStringAt(0, 10, (uint8_t *)"LCD Demo", CENTER_MODE);
-  GUI_DisplayStringAt(0, 25, (uint8_t *)"Use User BUTTON to", CENTER_MODE);
-  GUI_DisplayStringAt(0, 40, (uint8_t *)"display next page", CENTER_MODE);
+  UTIL_LCD_SetFont(&Font12);
+  UTIL_LCD_DisplayStringAt(0, 10, (uint8_t *)"LCD Demo", CENTER_MODE);
+  UTIL_LCD_DisplayStringAt(0, 25, (uint8_t *)"Use User BUTTON to", CENTER_MODE);
+  UTIL_LCD_DisplayStringAt(0, 40, (uint8_t *)"display next page", CENTER_MODE);
 
-  GUI_SetTextColor(GUI_COLOR_BLUE);
-  GUI_SetBackColor(GUI_COLOR_WHITE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_WHITE);
 }
 
 /**
@@ -113,75 +113,75 @@ static void LCD_Show_Feature(uint8_t feature)
   ADAFRUIT_802_LCD_GetXSize(0, &x_size);
   ADAFRUIT_802_LCD_GetXSize(0, &y_size);
   
-  GUI_SetBackColor(GUI_COLOR_WHITE);  
-  GUI_SetTextColor(GUI_COLOR_WHITE);    
-  GUI_FillRect(0, 60, x_size, y_size - 40, GUI_COLOR_WHITE);
-  GUI_SetTextColor(GUI_COLOR_BLACK);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_WHITE);  
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);    
+  UTIL_LCD_FillRect(0, 60, x_size, y_size - 40, UTIL_LCD_COLOR_WHITE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_BLACK);
 
   switch (feature)
   {
   case 0:
     /* Text Feature */
-    GUI_SetFont(&Font24);
-    GUI_DisplayStringAt(14, 80, (uint8_t *)"Font24", LEFT_MODE); 
-    GUI_SetFont(&Font20);
-    GUI_DisplayStringAt(0, 105, (uint8_t *)"Font20", CENTER_MODE); 
-    GUI_SetFont(&Font16);
-    GUI_DisplayStringAt(14, 130, (uint8_t *)"Font16", RIGHT_MODE); 
+    UTIL_LCD_SetFont(&Font24);
+    UTIL_LCD_DisplayStringAt(14, 80, (uint8_t *)"Font24", LEFT_MODE); 
+    UTIL_LCD_SetFont(&Font20);
+    UTIL_LCD_DisplayStringAt(0, 105, (uint8_t *)"Font20", CENTER_MODE); 
+    UTIL_LCD_SetFont(&Font16);
+    UTIL_LCD_DisplayStringAt(14, 130, (uint8_t *)"Font16", RIGHT_MODE); 
     break;
     
   case 1:
     /* Draw misc. Shapes part 1*/
-    GUI_SetTextColor(GUI_COLOR_BLACK); 
-    GUI_DrawRect(20, 70, 40 , 20, GUI_COLOR_BLACK);
-    GUI_FillRect(70, 70, 40 , 20, GUI_COLOR_BLACK); 
+    UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_BLACK); 
+    UTIL_LCD_DrawRect(20, 70, 40 , 20, UTIL_LCD_COLOR_BLACK);
+    UTIL_LCD_FillRect(70, 70, 40 , 20, UTIL_LCD_COLOR_BLACK); 
     
-    GUI_SetTextColor(GUI_COLOR_BLUE); 
-    GUI_DrawCircle(40, 120, 20, GUI_COLOR_BLUE);
-    GUI_FillCircle(90, 120, 20, GUI_COLOR_BLUE);
+    UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_BLUE); 
+    UTIL_LCD_DrawCircle(40, 120, 20, UTIL_LCD_COLOR_BLUE);
+    UTIL_LCD_FillCircle(90, 120, 20, UTIL_LCD_COLOR_BLUE);
      
-    GUI_SetTextColor(GUI_COLOR_RED); 
-    GUI_DrawLine (20, 70, 20+40 , 70+20, GUI_COLOR_RED);
-    GUI_DrawLine (20, 70+20, 20+40 , 70, GUI_COLOR_RED);
-    GUI_DrawHLine(20, 120, 40, GUI_COLOR_RED);
-    GUI_DrawVLine(40, 100, 40, GUI_COLOR_RED);
+    UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_RED); 
+    UTIL_LCD_DrawLine (20, 70, 20+40 , 70+20, UTIL_LCD_COLOR_RED);
+    UTIL_LCD_DrawLine (20, 70+20, 20+40 , 70, UTIL_LCD_COLOR_RED);
+    UTIL_LCD_DrawHLine(20, 120, 40, UTIL_LCD_COLOR_RED);
+    UTIL_LCD_DrawVLine(40, 100, 40, UTIL_LCD_COLOR_RED);
     break;
  
   case 2:
     /* Draw misc. Shapes part 2*/
-    GUI_SetTextColor(GUI_COLOR_GREEN); 
-    GUI_DrawPolygon(Points, 3, GUI_COLOR_GREEN);
-    GUI_FillPolygon(Points2, 3, GUI_COLOR_GREEN);
+    UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_GREEN); 
+    UTIL_LCD_DrawPolygon(Points, 3, UTIL_LCD_COLOR_GREEN);
+    UTIL_LCD_FillPolygon(Points2, 3, UTIL_LCD_COLOR_GREEN);
     
-    GUI_SetTextColor(GUI_COLOR_RED); 
-    GUI_DrawEllipse(x_size - 100, 110, 20, 30, GUI_COLOR_RED);
-    GUI_FillEllipse(x_size - 40, 110, 20, 30, GUI_COLOR_RED);
+    UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_RED); 
+    UTIL_LCD_DrawEllipse(x_size - 100, 110, 20, 30, UTIL_LCD_COLOR_RED);
+    UTIL_LCD_FillEllipse(x_size - 40, 110, 20, 30, UTIL_LCD_COLOR_RED);
     break;
   
   case 3:
     /* Set Orientation and Draw Bitmap */
-    GUI_Clear(GUI_COLOR_WHITE);
-    GUI_DrawBitmap(20, 70, (uint8_t *)stlogo);
+    UTIL_LCD_Clear(UTIL_LCD_COLOR_WHITE);
+    UTIL_LCD_DrawBitmap(20, 70, (uint8_t *)stlogo);
     HAL_Delay(1000);
     
     ADAFRUIT_802_LCD_DeInit(0);
     ADAFRUIT_802_LCD_Init(0, LCD_ORIENTATION_LANDSCAPE); 
-    GUI_DrawBitmap(20, 70, (uint8_t *)stlogo);
+    UTIL_LCD_DrawBitmap(20, 70, (uint8_t *)stlogo);
     HAL_Delay(1000);    
     
     ADAFRUIT_802_LCD_DeInit(0);
     ADAFRUIT_802_LCD_Init(0, LCD_ORIENTATION_PORTRAIT_ROT180); 
-    GUI_DrawBitmap(20, 70, (uint8_t *)stlogo);
+    UTIL_LCD_DrawBitmap(20, 70, (uint8_t *)stlogo);
     HAL_Delay(1000);     
     
     ADAFRUIT_802_LCD_DeInit(0);
     ADAFRUIT_802_LCD_Init(0, LCD_ORIENTATION_LANDSCAPE_ROT180);
-    GUI_DrawBitmap(20, 70, (uint8_t *)stlogo);
+    UTIL_LCD_DrawBitmap(20, 70, (uint8_t *)stlogo);
     HAL_Delay(1000);    
 
     ADAFRUIT_802_LCD_DeInit(0);
     ADAFRUIT_802_LCD_Init(0, LCD_ORIENTATION_PORTRAIT); 
-    GUI_DrawBitmap(20, 70, (uint8_t *)stlogo);
+    UTIL_LCD_DrawBitmap(20, 70, (uint8_t *)stlogo);
     HAL_Delay(1000);
     break;
   }

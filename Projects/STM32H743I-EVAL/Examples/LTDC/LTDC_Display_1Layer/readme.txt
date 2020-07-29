@@ -126,7 +126,7 @@ STM32H743I Eval board's LED can be used to monitor the transfer status:
 
 @par Keywords
 
-Display, LTDC, Display Controller, TFT, LCD, Graphic, RGB888, 1 Layer, RGB, 
+Display, LTDC, Display Controller, TFT, LCD, Graphics, RGB888, 1 Layer, RGB, 
 
 
 @Note If the  application is using the DTCM/ITCM memories (@0x20000000/ 0x0000000: not cacheable and only accessible

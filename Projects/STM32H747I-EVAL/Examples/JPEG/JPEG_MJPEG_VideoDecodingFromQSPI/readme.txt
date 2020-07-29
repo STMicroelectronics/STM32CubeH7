@@ -1,5 +1,5 @@
 /**
-  @page MJPEG_VideoDecoding : MJPEG video decoding from QSPI Flash example
+  @page JPEG_MJPEG_VideoDecodingFromQSPI : MJPEG video decoding from QSPI Flash example
   
   @verbatim
   ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
@@ -114,7 +114,7 @@ The example performs the following actions :
 
 @par Keywords
 
-Display, Graphic, MJPEG, Video, Decoding, LCD, LTDC, DSI, DMA2D, QSPI, JPEG Hardware Decoder, HDMI
+Display, Graphics, JPEG, MJPEG, Video, Decoding, LCD, LTDC, DSI, DMA2D, QSPI, JPEG Hardware Decoder, HDMI
 DMA, FatFS, File system, avi, YCbCr, RGB
 
 

@@ -77,7 +77,7 @@ requirements, such as:
 
 @par Keywords
 
-Connectivity, USB Host, HID, Human Interface, Full Speed, High Speed, Mouse, Keyboard
+Connectivity, USB_Host, USB, HID, Human Interface, Full Speed, High Speed, Mouse, Keyboard
 
 
 

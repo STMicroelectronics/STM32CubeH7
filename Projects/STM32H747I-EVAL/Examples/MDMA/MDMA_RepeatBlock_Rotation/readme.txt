@@ -1,5 +1,5 @@
 /**
-  @page MDMA Repeat BLock Transfer Rotation example descreption
+  @page MDMA_RepeatBlock_Rotation MDMA Repeat BLock Transfer Rotation example descreption
   
   @verbatim
   ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
@@ -189,7 +189,7 @@ STM32H747I Eval board's LED can be used to monitor the transfer status:
 
 @par Keywords
 
-Display, Graphic, MDMA, DMA2D, LCD, SDRAM, RGB565, Memory to memory, LTDC, Pixel, non contiguous,
+Display, Graphics, MDMA, DMA2D, LCD, SDRAM, RGB565, Memory to memory, LTDC, Pixel, non contiguous,
 Repeat blocks
 
 @par Directory contents

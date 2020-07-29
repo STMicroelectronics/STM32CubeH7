@@ -1,5 +1,5 @@
 /**
-  @page Demo   STM32H747I-DISCO STemWin Demonstration Firmware
+  @page STemWin   STM32H747I-DISCO STemWin Demonstration Firmware
  
   @verbatim
   ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
@@ -105,8 +105,8 @@ Below you find an overview of the different offered module in the STemWin demons
 
 @par Keywords
 
-Demonstration, FreeRTOS, RTOS, Middleware, wav, Video Player, avi, Audio player, Graphic,
-Game, System, CPU, SAI, QSPI, SD, 
+Demonstration, STemWin, FreeRTOS, RTOS, WAV, Video Player, AVI, JPEG, MJPEG, Audio player, Graphics,
+Game, System, CPU, SAI, QSPI, SD, multiprocessor 
 
 @par Hardware and Software environment
 

@@ -183,6 +183,10 @@ or to tramsmit the received data if no error occurred.
 @note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
+@par Keywords
+
+System, Power, PWR, multiprocessor, Stop mode, Domain 3, D3SRAM, BDMA, DMAMUX, I2C, transmit, receive, Interrupt, Wakeup, Low Power, EXTI, Button, Led
+
 @par Directory contents 
 
   - PWR/PWR_Domain3SystemControl/Common/Src/system_stm32h7xx.c    STM32H7xx system configuration source file

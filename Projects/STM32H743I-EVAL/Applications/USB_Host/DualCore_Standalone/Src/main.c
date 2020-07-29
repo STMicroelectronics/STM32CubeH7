@@ -74,6 +74,9 @@ int main(void)
   /* Init Dual Core Application */
   DUAL_InitApplication();
 
+  /* Enable the USB voltage level detector */
+  HAL_PWREx_EnableUSBVoltageDetector();
+  
   /* Init HS Core */
   USBH_Init(&hUSBHost_HS, USBH_HS_UserProcess, 1);
 
@@ -87,9 +90,6 @@ int main(void)
   /* Start Host Process */
   USBH_Start(&hUSBHost_FS);
   USBH_Start(&hUSBHost_HS);
-
-  /* Enable the USB voltage level detector */
-  HAL_PWREx_EnableUSBVoltageDetector();
 
   /* Run Application (Blocking mode)*/
   while (1)
@@ -118,7 +118,7 @@ static void DUAL_InitApplication(void)
   
   /* Initialize the LCD */
   BSP_LCD_Init(0, LCD_ORIENTATION_LANDSCAPE);
-  GUI_SetFuncDriver(&LCD_Driver);
+  UTIL_LCD_SetFuncDriver(&LCD_Driver);
   /* Init the LCD Log module */
   UTIL_LCD_TRACE_Init();
 
@@ -270,6 +270,8 @@ void SystemClock_Config(void)
   PeriphClkInitStruct.PLL3.PLL3FRACN = 0;
   PeriphClkInitStruct.PLL3.PLL3P = 2;
   PeriphClkInitStruct.PLL3.PLL3Q = 7;
+  PeriphClkInitStruct.PLL3.PLL3VCOSEL = RCC_PLL3VCOMEDIUM;
+  PeriphClkInitStruct.PLL3.PLL3RGE = RCC_PLL3VCIRANGE_0;
 
   PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_USB;
   PeriphClkInitStruct.UsbClockSelection = RCC_USBCLKSOURCE_PLL3;
@@ -290,10 +292,10 @@ void SystemClock_Config(void)
   RCC_ClkInitStruct.APB3CLKDivider = RCC_APB3_DIV2;
   HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_4);
 
-  /*activate CSI clock mondatory for I/O Compensation Cell*/
+  /* Activate CSI clock is mandatory for I/O Compensation Cell */
   __HAL_RCC_CSI_ENABLE() ;
 
-  /* Enable SYSCFG clock mondatory for I/O Compensation Cell */
+  /* Enable SYSCFG clock is mandatory for I/O Compensation Cell */
   __HAL_RCC_SYSCFG_CLK_ENABLE() ;
 
   /* Enables the I/O Compensation Cell */

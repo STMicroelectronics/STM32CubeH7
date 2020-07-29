@@ -150,7 +150,7 @@ void SystemInit (void)
 
   /*SEVONPEND enabled so that an interrupt coming from the CPU(n) interrupt signal is
     detectable by the CPU after a WFI/WFE instruction.*/ 
- SCB->SCR |= SCB_SCR_SEVONPEND_Pos;
+ SCB->SCR |= SCB_SCR_SEVONPEND_Msk;
 
 #ifdef CORE_CM7 
   /* Reset the RCC clock configuration to the default reset state ------------*/
@@ -210,6 +210,16 @@ void SystemInit (void)
     *((__IO uint32_t*)0x51008108) = 0x00000001U;
   }
   
+
+
+/*
+   * Disable the FMC bank1 (enabled after reset).
+   * This, prevents CPU speculation access on this bank which blocks the use of FMC during
+   * 24us. During this time the others FMC master (such as LTDC) cannot use it!
+   */
+  FMC_Bank1_R->BTCR[0] = 0x000030D2;
+
+
 #if defined (DATA_IN_ExtSDRAM)
   SystemInit_ExtMemCtl(); 
 #endif /* DATA_IN_ExtSDRAM */

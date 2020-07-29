@@ -244,29 +244,29 @@ int main(void)
     if (DisplyMainMenu == 1)
     {
       /* Clear the LCD */
-      GUI_Clear(GUI_COLOR_BLACK);
+      UTIL_LCD_Clear(UTIL_LCD_COLOR_BLACK);
       
-      GUI_SetTextColor(GUI_COLOR_WHITE);
-      GUI_FillRect(0,0,480,60, GUI_COLOR_WHITE);
+      UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
+      UTIL_LCD_FillRect(0,0,480,60, UTIL_LCD_COLOR_WHITE);
       /* Display background image */
       DisplayMenuImages(MenuImages,4); 
       /* Display Demo title */
       
-      GUI_SetTextColor(GUI_COLOR_LIGHTBLUE);
-      GUI_SetBackColor(GUI_COLOR_WHITE);
-      GUI_SetFont(&Font24);
-      GUI_DisplayStringAt(30, 16,(uint8_t *) "STM32H745", LEFT_MODE);
+      UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_LIGHTBLUE);
+      UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_WHITE);
+      UTIL_LCD_SetFont(&Font24);
+      UTIL_LCD_DisplayStringAt(30, 16,(uint8_t *) "STM32H745", LEFT_MODE);
 
-      GUI_SetTextColor(GUI_COLOR_DARKBLUE);
-      GUI_SetBackColor(GUI_COLOR_WHITE);
-      GUI_SetFont(&Font16);
-      GUI_DisplayStringAt(32, 36,(uint8_t *) "Discovery Kit", LEFT_MODE);
+      UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_DARKBLUE);
+      UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_WHITE);
+      UTIL_LCD_SetFont(&Font16);
+      UTIL_LCD_DisplayStringAt(32, 36,(uint8_t *) "Discovery Kit", LEFT_MODE);
       
-      GUI_SetTextColor(GUI_COLOR_GRAY);
-      GUI_SetBackColor(GUI_COLOR_BLACK);
+      UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_GRAY);
+      UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_BLACK);
 
-      GUI_SetFont(&Font12);
-      GUI_DisplayStringAt(2, 256,(uint8_t *) "Copyright (c) STMicroelectronics 2018", RIGHT_MODE);
+      UTIL_LCD_SetFont(&Font12);
+      UTIL_LCD_DisplayStringAt(2, 256,(uint8_t *) "Copyright (c) STMicroelectronics 2018", RIGHT_MODE);
       DisplyMainMenu = 0;
     }
 
@@ -303,28 +303,28 @@ static void InitMainMenu(void)
   BSP_TS_Init(0, &hTS);
 
 
-  GUI_SetTextColor(GUI_COLOR_WHITE);
-  GUI_FillRect(0,0,480,60, GUI_COLOR_WHITE);  
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
+  UTIL_LCD_FillRect(0,0,480,60, UTIL_LCD_COLOR_WHITE);  
 
   /* Display background image */
   DisplayMenuImages(MenuImages,4); 
   /* Display Demo title */
 
-  GUI_SetTextColor(GUI_COLOR_LIGHTBLUE);
-  GUI_SetBackColor(GUI_COLOR_WHITE);
-  GUI_SetFont(&Font24);
-  GUI_DisplayStringAt(30, 16,(uint8_t *) "STM32H745", LEFT_MODE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_LIGHTBLUE);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_WHITE);
+  UTIL_LCD_SetFont(&Font24);
+  UTIL_LCD_DisplayStringAt(30, 16,(uint8_t *) "STM32H745", LEFT_MODE);
   
-  GUI_SetTextColor(GUI_COLOR_DARKBLUE);
-  GUI_SetBackColor(GUI_COLOR_WHITE);
-  GUI_SetFont(&Font16);
-  GUI_DisplayStringAt(32, 36,(uint8_t *) "Discovery Kit", LEFT_MODE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_DARKBLUE);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_WHITE);
+  UTIL_LCD_SetFont(&Font16);
+  UTIL_LCD_DisplayStringAt(32, 36,(uint8_t *) "Discovery Kit", LEFT_MODE);
 
-  GUI_SetTextColor(GUI_COLOR_GRAY);
-  GUI_SetBackColor(GUI_COLOR_BLACK);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_GRAY);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_BLACK);
   
-  GUI_SetFont(&Font12);
-  GUI_DisplayStringAt(2, 256,(uint8_t *) "Copyright (c) STMicroelectronics 2018", RIGHT_MODE);
+  UTIL_LCD_SetFont(&Font12);
+  UTIL_LCD_DisplayStringAt(2, 256,(uint8_t *) "Copyright (c) STMicroelectronics 2018", RIGHT_MODE);
  
 }
 
@@ -372,11 +372,11 @@ void MenuSelection(void)
       }
       else
       {
-        GUI_SetTextColor(GUI_COLOR_RED);
-        GUI_SetBackColor(GUI_COLOR_BLACK);
+        UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_RED);
+        UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_BLACK);
         
-        GUI_SetFont(&Font12);
-        GUI_DisplayStringAt(0, 50, (uint8_t *)" Please Load Oscilloscope binary! ", CENTER_MODE);
+        UTIL_LCD_SetFont(&Font12);
+        UTIL_LCD_DisplayStringAt(0, 50, (uint8_t *)" Please Load Oscilloscope binary! ", CENTER_MODE);
       }
    
     }
@@ -399,11 +399,11 @@ void MenuSelection(void)
       }
       else
       {
-        GUI_SetTextColor(GUI_COLOR_RED);
-        GUI_SetBackColor(GUI_COLOR_BLACK);
+        UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_RED);
+        UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_BLACK);
         
-        GUI_SetFont(&Font12);
-        GUI_DisplayStringAt(0, 50,(uint8_t *) "   Please Load Coremark binary!   ", CENTER_MODE);
+        UTIL_LCD_SetFont(&Font12);
+        UTIL_LCD_DisplayStringAt(0, 50,(uint8_t *) "   Please Load Coremark binary!   ", CENTER_MODE);
 
       }
     }    
@@ -414,23 +414,23 @@ void MenuSelection(void)
 void SystemInformationsSlide(void)
 {
   /* Clear the LCD */
-  GUI_Clear(GUI_COLOR_BLACK);
+  UTIL_LCD_Clear(UTIL_LCD_COLOR_BLACK);
   
   /* Display background image */
   DisplayMenuImages(&MenuImages[4],5); 
   
   /* Display Slide title */
-  GUI_SetTextColor(GUI_COLOR_WHITE);
-  GUI_SetBackColor(GUI_COLOR_BLACK);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_BLACK);
   
-  GUI_SetFont(&Font24);
-  GUI_DisplayStringAt(0, 16,(uint8_t *) "System Information", CENTER_MODE);
+  UTIL_LCD_SetFont(&Font24);
+  UTIL_LCD_DisplayStringAt(0, 16,(uint8_t *) "System Information", CENTER_MODE);
   
-  GUI_SetTextColor(GUI_COLOR_GRAY);
-  GUI_SetBackColor(GUI_COLOR_BLACK);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_GRAY);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_BLACK);
   
-  GUI_SetFont(&Font12);
-  GUI_DisplayStringAt(2, 256,(uint8_t *) "Copyright (c) STMicroelectronics 2018", RIGHT_MODE);
+  UTIL_LCD_SetFont(&Font12);
+  UTIL_LCD_DisplayStringAt(2, 256,(uint8_t *) "Copyright (c) STMicroelectronics 2018", RIGHT_MODE);
   
   BSP_TS_GetState(0, &TS_State);
   

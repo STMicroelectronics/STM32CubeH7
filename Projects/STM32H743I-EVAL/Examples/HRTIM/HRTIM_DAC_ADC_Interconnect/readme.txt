@@ -71,6 +71,10 @@ The TIMA waveform and the DAC1 CH1 waveform can be displayed using an oscillosco
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
 
+@par Keywords
+
+HRTIM, Timer, ADC, DAC, Interconnection, Timer-triggered, Synchronous, Waveforms, Triangular, Oscilloscope
+
 @par Directory contents 
 
   - HRTIM/HRTIM_DAC_ADC_Interconnect/Inc/stm32h7xx_hal_conf.h    HAL configuration file

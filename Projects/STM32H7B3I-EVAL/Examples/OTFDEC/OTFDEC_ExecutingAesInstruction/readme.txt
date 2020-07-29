@@ -1,5 +1,5 @@
 /**
-  @page Description of OTFDEC Executing AES Instruction example
+  @page OTFDEC_ExecutingAesInstruction Description of OTFDEC Executing AES Instruction example
 
   @verbatim
   ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
@@ -22,6 +22,7 @@
   @endverbatim
 
 @par Example Description
+
 This example shows how to use OTFDEC to decrypt and execute PI calculation algorithm stored in external NOR flash
 using the embedded crypto IP standard AES-128 counter mode to encrypt the binary image
 The USART1 is used to verify that decryption and executing instruction are done correctly.
@@ -31,7 +32,7 @@ all the peripherals, initialize the Flash interface and the systick.
 The SystemClock_Config() function is used to configure the system clock for STM32H7B3xxQ Devices :
 The CPU at 280MHz
 The HCLK for CD Domain AXI and AHB3 peripherals , CD Domain AHB1/AHB2 peripherals and SRD Domain AHB4  peripherals at 280MHz.
-The APB clock dividers for CD Domain APB3 peripherals, CD Domain APB1 and APB2 peripherals and SRD Domain APB4 peripherals to run at 70MHz.
+The APB clock dividers for CD Domain APB3 peripherals, CD Domain APB1 and APB2 peripherals and SRD Domain APB4 peripherals to run at 140MHz.
 
 
 In this example a code computing PI value has been compiled to be executing from external NOR flash, the hex file has been converted to an array file in ospi1_code.c
@@ -69,6 +70,10 @@ The result of the PI computation is displayed on serial terminal via the UART1 i
               Even though the user must manage the cache coherence for read accesses.
               Please refer to the AN4838 “Managing memory protection unit (MPU) in STM32 MCUs”
               Please refer to the AN4839 “Level 1 cache on STM32H7 Series”
+
+@par Keywords
+
+Security, Cryptography, OTFDEC, OCTOSPI, CRYP, Cipher, AES, external flash, execute instruction, decryption, HyperTerminal
 
 @par Directory contents
 

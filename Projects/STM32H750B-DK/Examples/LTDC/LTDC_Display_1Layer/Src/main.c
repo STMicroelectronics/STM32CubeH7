@@ -195,6 +195,8 @@ static void LCD_Config(void)
   periph_clk_init_struct.PLL3.PLL3P = 2;
   periph_clk_init_struct.PLL3.PLL3Q = 2;
   periph_clk_init_struct.PLL3.PLL3R = 83;
+  periph_clk_init_struct.PLL3.PLL3VCOSEL = RCC_PLL3VCOWIDE;
+  periph_clk_init_struct.PLL3.PLL3RGE = RCC_PLL3VCIRANGE_2;
   HAL_RCCEx_PeriphCLKConfig(&periph_clk_init_struct);    
  
   /* LTDC Initialization -------------------------------------------------------*/

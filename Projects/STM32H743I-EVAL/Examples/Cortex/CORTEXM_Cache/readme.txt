@@ -101,6 +101,10 @@ Cache Maintenance:
 @note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
+@par Keywords
+
+System, Cortex, Memory regions, Cache, MPU, Write-Through, write-back, write-allocate, WBWA, Cache policy, CPU, DMA
+
 @par Directory contents 
 
   - CortexM/CORTEXM_Cache/Src/main.c                 Main program

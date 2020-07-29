@@ -111,6 +111,10 @@ STM32H747I-EVAL board from STMicroelectronics.
 @note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
+@par Keywords
+
+Security, Cryptography, CRYPT, AES, GCM, DMA, AESGCM, MAC, Cypher, Galois, Counter, USART
+
 @par Directory contents 
   
    - CRYP/CRYP_AESGCM//Common/Src/system_stm32h7xx.c   STM32H7xx system configuration file

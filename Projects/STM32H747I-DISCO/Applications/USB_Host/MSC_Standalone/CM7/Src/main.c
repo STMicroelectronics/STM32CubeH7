@@ -87,6 +87,9 @@ int main(void)
   /* Init MSC Application */
   MSC_InitApplication();
 
+  /* Enable the USB voltage level detector */
+  HAL_PWREx_EnableUSBVoltageDetector();
+  
   /* Init Host Library */
   USBH_Init(&hUSBHost, USBH_UserProcess, 0);
 
@@ -95,10 +98,6 @@ int main(void)
 
   /* Start Host Process */
   USBH_Start(&hUSBHost);
-
-  /* Enable the USB voltage level detector */
-
-  HAL_PWREx_EnableUSBVoltageDetector();
 
   /* Run Application (Blocking mode) */
   while (1)
@@ -126,7 +125,7 @@ static void MSC_InitApplication(void)
 
   /* Initialize the LCD */
   BSP_LCD_Init(0,LCD_ORIENTATION_LANDSCAPE);
-  GUI_SetFuncDriver(&LCD_Driver);
+  UTIL_LCD_SetFuncDriver(&LCD_Driver);
 
 
     /* Initialize the LCD Log module */

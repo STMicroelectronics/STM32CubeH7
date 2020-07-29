@@ -207,6 +207,14 @@ void SystemInit (void)
   tmpreg = RCC->AHB2ENR;
   (void) tmpreg;
 #endif /* DATA_IN_CD_AHB_SRAM */
+
+/*
+   * Disable the FMC bank1 (enabled after reset).
+   * This, prevents CPU speculation access on this bank which blocks the use of FMC during
+   * 24us. During this time the others FMC master (such as LTDC) cannot use it!
+   */
+  FMC_Bank1_R->BTCR[0] = 0x000030D2;
+
   /* Configure the Vector Table location add offset address for cortex-M7 ------------------*/
 #if defined(VECT_TAB_SRAM)
   SCB->VTOR = CD_AXISRAM1_BASE  | VECT_TAB_OFFSET; /* Vector Table Relocation in Internal CD AXI-RAM */

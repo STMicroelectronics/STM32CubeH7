@@ -83,10 +83,6 @@ file depending hardware configuration used.
 @note The application need to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
-@par Keywords
-
-Connectivity, Memory, EEPROM, I2C, SCL, SDA, Fast mode plus, DMA, Read, Write
-
 @Note If the  application is using the DTCM/ITCM memories (@0x20000000/ 0x0000000: not cacheable and only accessible
       by the Cortex M7 and the MDMA), no need for cache maintenance when the Cortex M7 and the MDMA access these RAMs.
       If the application needs to use DMA(or other masters) based access or requires more RAM, then the user has to:
@@ -99,6 +95,10 @@ Connectivity, Memory, EEPROM, I2C, SCL, SDA, Fast mode plus, DMA, Read, Write
       Depending on the use case it is also possible to configure the cache attributes using the MPU.
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series and STM32H7 Series"
+
+@par Keywords
+
+Connectivity, Memory, EEPROM, I2C, SCL, SDA, Fast mode plus, DMA, Read, Write
 
 @par Directory contents 
 

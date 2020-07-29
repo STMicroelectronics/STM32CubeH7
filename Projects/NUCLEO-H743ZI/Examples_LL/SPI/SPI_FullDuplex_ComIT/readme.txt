@@ -135,6 +135,10 @@ STM32 board's LEDs can be used to monitor the transfer status:
                 - For D1-AXI SRAM select: ../STM32H743ZITx_FLASH_RAM_D1.ld
 
 
+@par Keywords
+
+Connectivity, SPI, Full-duplex, Interrupt, Transmission, Reception, Master, Slave, MISO, MOSI
+
 @par Directory contents
 
   - SPI/SPI_FullDuplex_ComIT/Src/main.c            Main program

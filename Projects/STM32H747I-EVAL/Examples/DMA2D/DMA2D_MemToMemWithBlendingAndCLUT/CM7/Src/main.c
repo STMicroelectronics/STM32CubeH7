@@ -104,8 +104,8 @@ int main(void)
   lcd_status = BSP_LCD_Init(0, LCD_ORIENTATION_LANDSCAPE);   
   OnError_Handler(lcd_status != BSP_ERROR_NONE);
 	
-  GUI_SetFuncDriver(&LCD_Driver);
-  GUI_Clear(GUI_COLOR_BLACK);
+  UTIL_LCD_SetFuncDriver(&LCD_Driver);
+  UTIL_LCD_Clear(UTIL_LCD_COLOR_BLACK);
 
   HAL_Delay(100);
 

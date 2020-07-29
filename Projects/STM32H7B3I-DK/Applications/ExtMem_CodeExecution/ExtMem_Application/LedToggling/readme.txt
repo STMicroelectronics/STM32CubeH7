@@ -1,9 +1,9 @@
 /**
-  @page GPIO_IOToggle GPIO IO Toggle example
+  @page LedToggling Led Toggling Application
   
   @verbatim
   ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
-  * @file    GPIO/GPIO_IOToggle/readme.txt 
+  * @file    LedToggling/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the GPIO IO Toggle example.
   ******************************************************************************
@@ -60,7 +60,12 @@ to have correct HAL operation.
               Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
               Please refer to the AN4839 "Level 1 cache on STM32F7 Series and STM32H7 Series"
 
-@par Directory contents 
+@par Keywords
+
+External Memory, code execution, Loader, Boot, XiP, BootROM, Value line, GPIO, LED, Toggle
+
+@par Directory contents
+
   - GPIO/GPIO_IOToggle/Inc/main.h                       Header for main.c module  
   - GPIO/GPIO_IOToggle/Inc/stm32h7b3i_discovery_conf.h  STM32H7B3I-DISCO board configuration file
   - GPIO/GPIO_IOToggle/Inc/stm32h7xx_hal_conf.h         HAL configuration file
@@ -106,11 +111,6 @@ In order to load this example to the external memory:
       - Run & debug the program:
       - For an XiP configuration (eXecute in Place from OSPI):
           - Using EWARM or MDK-ARM : Load project image from the IDE: Project->Debug
-          - Using SW4STM32 :
-            - Open the STM32CubeProgrammer tool
-            - Select the OSPI external flash loader "" in case of XiP from OSPI
-            - From Erasing & Programming menu, browse and open the output binary file relative to your application
-            - Load the file into the external OSPI flash using "Start Programming" at the address APPLICATION_ADDRESS (0x90000000)
 
       - For a BootROM configuration (BootROM external SDRAM):
         - If BINARY_AREA is USE_SPI_NOR then use the STM32CubeProgarmmer tool, select OSPI external flash loader "MX25LM51245G_STM32H7B3I-DISCO"

@@ -62,6 +62,8 @@
   2.a. Rx Buffers number must be between ETH_RX_DESC_CNT and 2*ETH_RX_DESC_CNT
   2.b. Rx Buffers must have the same size: ETH_RX_BUFFER_SIZE, this value must
        passed to ETH DMA in the init field (EthHandle.Init.RxBuffLen)
+  2.c  The RX Ruffers addresses and sizes must be properly defined to be aligned
+       to L1-CACHE line size (32 bytes).
 */
 
 #if defined ( __ICCARM__ ) /*!< IAR Compiler */
@@ -154,7 +156,7 @@ static void low_level_init(struct netif *netif)
   netif->hwaddr[5] =  ETH_MAC_ADDR5;
   
   /* maximum transfer unit */
-  netif->mtu = 1500;
+  netif->mtu = ETH_MAX_PAYLOAD;
   
   /* device capabilities */
   /* don't set NETIF_FLAG_ETHARP if this device is not an ethernet one */
@@ -248,7 +250,7 @@ static void low_level_init(struct netif *netif)
   */
 static err_t low_level_output(struct netif *netif, struct pbuf *p)
 {
-  uint32_t i=0, framelen = 0;
+  uint32_t i=0;
   struct pbuf *q;
   err_t errval = ERR_OK;
   ETH_BufferTypeDef Txbuffer[ETH_TX_DESC_CNT];
@@ -262,8 +264,7 @@ static err_t low_level_output(struct netif *netif, struct pbuf *p)
     
     Txbuffer[i].buffer = q->payload;
     Txbuffer[i].len = q->len;
-    framelen += q->len;
-    
+
     if(i>0)
     {
       Txbuffer[i-1].next = &Txbuffer[i];
@@ -277,7 +278,7 @@ static err_t low_level_output(struct netif *netif, struct pbuf *p)
     i++;
   }
 
-  TxConfig.Length = framelen;
+  TxConfig.Length = p->tot_len;
   TxConfig.TxBuffer = Txbuffer;
 
   HAL_ETH_Transmit(&EthHandle, &TxConfig, ETH_DMA_TRANSMIT_TIMEOUT);
@@ -296,11 +297,18 @@ static err_t low_level_output(struct netif *netif, struct pbuf *p)
 static struct pbuf * low_level_input(struct netif *netif)
 {
   struct pbuf *p = NULL;
-  ETH_BufferTypeDef RxBuff;
-  uint32_t framelength = 0;
+  ETH_BufferTypeDef RxBuff[ETH_RX_DESC_CNT];
+  uint32_t framelength = 0, i = 0;;
   struct pbuf_custom* custom_pbuf;
+
+  memset(RxBuff, 0 , ETH_RX_DESC_CNT*sizeof(ETH_BufferTypeDef));
   
-  if(HAL_ETH_GetRxDataBuffer(&EthHandle, &RxBuff) == HAL_OK) 
+  for(i = 0; i < ETH_RX_DESC_CNT -1; i++)
+  {
+    RxBuff[i].next=&RxBuff[i+1];
+  }
+
+  if(HAL_ETH_GetRxDataBuffer(&EthHandle, RxBuff) == HAL_OK)
   {
     HAL_ETH_GetRxDataLength(&EthHandle, &framelength);
 
@@ -308,12 +316,15 @@ static struct pbuf * low_level_input(struct netif *netif)
     HAL_ETH_BuildRxDescriptors(&EthHandle);
 
     /* Invalidate data cache for ETH Rx Buffers */
-    SCB_InvalidateDCache_by_Addr((uint32_t *)RxBuff.buffer, framelength);
+    SCB_InvalidateDCache_by_Addr((uint32_t *)RxBuff->buffer, framelength);
     
     custom_pbuf  = (struct pbuf_custom*)LWIP_MEMPOOL_ALLOC(RX_POOL);
-    custom_pbuf->custom_free_function = pbuf_free_custom;
+    if(custom_pbuf != NULL)
+    {
+      custom_pbuf->custom_free_function = pbuf_free_custom;
 
-    p = pbuf_alloced_custom(PBUF_RAW, framelength, PBUF_REF, custom_pbuf, RxBuff.buffer, ETH_RX_BUFFER_SIZE);
+      p = pbuf_alloced_custom(PBUF_RAW, framelength, PBUF_REF, custom_pbuf, RxBuff->buffer, framelength);
+    }
 
   }
   
@@ -340,8 +351,6 @@ void ethernetif_input( void const * argument )
     {
       do
       {
-        LOCK_TCPIP_CORE();
-        
         p = low_level_input( netif );
         if (p != NULL)
         {
@@ -351,8 +360,6 @@ void ethernetif_input( void const * argument )
           }
         }
 
-        UNLOCK_TCPIP_CORE();
-        
       }while(p!=NULL);
     }
   }
@@ -410,8 +417,6 @@ err_t ethernetif_init(struct netif *netif)
 void pbuf_free_custom(struct pbuf *p)
 {
   struct pbuf_custom* custom_pbuf = (struct pbuf_custom*)p;
-  /* invalidate data cache: lwIP and/or application may have written into buffer */
-  SCB_InvalidateDCache_by_Addr((uint32_t *)p->payload, p->tot_len);
   LWIP_MEMPOOL_FREE(RX_POOL, custom_pbuf);
 }
 

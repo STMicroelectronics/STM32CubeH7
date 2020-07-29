@@ -71,6 +71,9 @@ Nucleo-H7A3ZI-Q's LEDs can be used to monitor the application status:
 For more details about FreeRTOS implementation on STM32Cube, please refer to UM1722 "Developing Applications 
 on STM32Cube with RTOS".
 
+@par Keywords
+
+RTOS, FreeRTOS, Thread, Message, Queues
 
 @par Directory contents
     - FreeRTOS/FreeRTOS_Queues/Src/main.c                       Main program

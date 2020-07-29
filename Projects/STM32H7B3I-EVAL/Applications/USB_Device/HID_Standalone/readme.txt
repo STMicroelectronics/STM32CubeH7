@@ -65,7 +65,7 @@ compiler preprocessor (already done in the preconfigured projects provided with 
 
 @par Keywords
 
-Connectivity, USB Device, HID, Full Speed, Mouse, Remote Wakeup
+Connectivity, USB_Device, USB, HID, Full Speed, Mouse, Remote Wakeup
 
 @par Directory contents
 
@@ -93,7 +93,7 @@ Connectivity, USB Device, HID, Full Speed, Mouse, Remote Wakeup
 
   - STM32H7B3I-EVAL  board Set-up
     - Connect the STM32H7B3I-EVAL  board to the PC through micro A-Male to standard A Male cable connected to the connector.
-     - CN8  : to use USB High speed (HS)
+     - CN8  : to use USB High speed (HS), Make sure that JP9, JP11 and JP19 are fitted in USBHS position and that JP10 and JP16 are fitted.
      - CN27 : to use USB High speed OTG IP in full speed (HS_IN_FS)
 
     - Press the Tamper push-button  to move the cursor.

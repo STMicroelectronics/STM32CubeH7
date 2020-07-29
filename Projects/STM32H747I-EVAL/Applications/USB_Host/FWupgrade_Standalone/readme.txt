@@ -91,7 +91,7 @@ application is built by the following configuration settings:
 
 @par Keywords
 
-Middleware, Firmware upgrade, USB Host, IAP, Binary
+Connectivity, USB_Host, USB, Firmware upgrade, IAP, Binary
 
 
 

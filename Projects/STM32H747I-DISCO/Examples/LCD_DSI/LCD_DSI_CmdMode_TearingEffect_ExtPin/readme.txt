@@ -95,7 +95,7 @@ Each image is displayed for two seconds.
 
 @par Keywords
 
-Graphic, Display, LCD, DMA2D, DSI, MIPI Alliance, Command mode, Tearing effect, Partial refresh, Single buffer,
+Graphics, Display, LCD, DMA2D, DSI, MIPI Alliance, Command mode, Tearing effect, Partial refresh, Single buffer,
 LTDC, QVGA, ARGB8888, GPIO, External pin
 
 @par Directory contents

@@ -113,7 +113,7 @@ int main(void)
 
   /* Initialize the LCD */
   BSP_LCD_Init(0, LCD_ORIENTATION_LANDSCAPE);
-  GUI_SetFuncDriver(&LCD_Driver);
+  UTIL_LCD_SetFuncDriver(&LCD_Driver);
 
   Display_DemoDescription();
 
@@ -240,76 +240,76 @@ static void Display_DemoDescription(void)
   uint32_t x_size;
   uint32_t y_size;
 
-  GUI_SetFont(&GUI_DEFAULT_FONT);
+  UTIL_LCD_SetFont(&UTIL_LCD_DEFAULT_FONT);
 
   /* Clear the LCD */
-  GUI_SetBackColor(GUI_COLOR_WHITE);
-  GUI_Clear(GUI_COLOR_WHITE);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_WHITE);
+  UTIL_LCD_Clear(UTIL_LCD_COLOR_WHITE);
 
   /* Set the LCD Text Color */
-  GUI_SetTextColor(GUI_COLOR_DARKBLUE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_DARKBLUE);
 
   /* Display LCD messages */
-  GUI_DisplayStringAt(0, 10, (uint8_t *)"STM32H7B3I BSP", CENTER_MODE);
-  GUI_DisplayStringAt(0, 35, (uint8_t *)"Drivers examples", CENTER_MODE);
+  UTIL_LCD_DisplayStringAt(0, 10, (uint8_t *)"STM32H7B3I BSP", CENTER_MODE);
+  UTIL_LCD_DisplayStringAt(0, 35, (uint8_t *)"Drivers examples", CENTER_MODE);
 
   BSP_LCD_GetXSize(0, &x_size);
   BSP_LCD_GetYSize(0, &y_size);
 
   /* Draw Bitmap */
-  GUI_DrawBitmap((x_size - 80)/2, 65, (uint8_t *)stlogo);
+  UTIL_LCD_DrawBitmap((x_size - 80)/2, 65, (uint8_t *)stlogo);
 
-  GUI_SetFont(&Font12);
-  GUI_DisplayStringAt(0, y_size - 20, (uint8_t *)"Copyright (c) STMicroelectronics 2019", CENTER_MODE);
+  UTIL_LCD_SetFont(&Font12);
+  UTIL_LCD_DisplayStringAt(0, y_size - 20, (uint8_t *)"Copyright (c) STMicroelectronics 2019", CENTER_MODE);
 
-  GUI_SetFont(&Font16);
-  BSP_LCD_FillRect(0, 0, y_size/2 - 15, x_size, 122, GUI_COLOR_BLUE);
-  GUI_SetTextColor(GUI_COLOR_WHITE);
-  GUI_SetBackColor(GUI_COLOR_BLUE);
-  GUI_DisplayStringAt(0, y_size / 2 , (uint8_t *)"Press TAMPER button to start :", CENTER_MODE);
+  UTIL_LCD_SetFont(&Font16);
+  BSP_LCD_FillRect(0, 0, y_size/2 - 15, x_size, 122, UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_DisplayStringAt(0, y_size / 2 , (uint8_t *)"Press TAMPER button to start :", CENTER_MODE);
   sprintf(desc,"%s example", BSP_examples[DemoIndex].DemoName);
-  GUI_DisplayStringAt(0, y_size/2 + 15, (uint8_t *)desc, CENTER_MODE);
+  UTIL_LCD_DisplayStringAt(0, y_size/2 + 15, (uint8_t *)desc, CENTER_MODE);
 
   if(BSP_examples[DemoIndex].DemoIndex == 4)
   {
-    GUI_DisplayStringAt(0, y_size/2 + 45, (uint8_t *)"Make sure JP5 is in POTPA0_C position", CENTER_MODE);
+    UTIL_LCD_DisplayStringAt(0, y_size/2 + 45, (uint8_t *)"Make sure JP5 is in POTPA0_C position", CENTER_MODE);
   }
   else if(BSP_examples[DemoIndex].DemoIndex == 5)
   {
-    GUI_DisplayStringAt(0, y_size/2 + 45, (uint8_t *)"Make sure JP4 and JP23 are in OSPI1 position", CENTER_MODE);
+    UTIL_LCD_DisplayStringAt(0, y_size/2 + 45, (uint8_t *)"Make sure JP4 and JP23 are in OSPI1 position", CENTER_MODE);
   }
   else if(BSP_examples[DemoIndex].DemoIndex == 6)
   {
-    GUI_DisplayStringAt(0, y_size/2 + 45, (uint8_t *)"Make sure:", LEFT_MODE);
-    GUI_DisplayStringAt(0, y_size/2 + 60, (uint8_t *)"JP14, JP26, JP27, JP28 and JP34 are fitted for SAI test", LEFT_MODE);
-    GUI_DisplayStringAt(0, y_size/2 + 75, (uint8_t *)"JP7, JP8, JP9 and JP11 are in I2S position, JP18 is fitted and ", LEFT_MODE);
-    GUI_DisplayStringAt(0, y_size/2 + 90, (uint8_t *)"JP16 and JP39 are removed for I2S test", LEFT_MODE);
+    UTIL_LCD_DisplayStringAt(0, y_size/2 + 45, (uint8_t *)"Make sure:", LEFT_MODE);
+    UTIL_LCD_DisplayStringAt(0, y_size/2 + 60, (uint8_t *)"JP14, JP26, JP27, JP28 and JP34 are fitted for SAI test", LEFT_MODE);
+    UTIL_LCD_DisplayStringAt(0, y_size/2 + 75, (uint8_t *)"JP7, JP8, JP9 and JP11 are in I2S position, JP18 is fitted and ", LEFT_MODE);
+    UTIL_LCD_DisplayStringAt(0, y_size/2 + 90, (uint8_t *)"JP16 and JP39 are removed for I2S test", LEFT_MODE);
   }
   else if((BSP_examples[DemoIndex].DemoIndex == 7) || (BSP_examples[DemoIndex].DemoIndex == 8))
   {
-    GUI_DisplayStringAt(0, y_size/2 + 45, (uint8_t *)"Make sure JP14, JP26, JP27, JP28 and JP34 are fitted", CENTER_MODE);
-    GUI_DisplayStringAt(0, y_size/2 + 60, (uint8_t *)"Make sure JP19 and JP35 are in DFSDM position", CENTER_MODE);
+    UTIL_LCD_DisplayStringAt(0, y_size/2 + 45, (uint8_t *)"Make sure JP14, JP26, JP27, JP28 and JP34 are fitted", CENTER_MODE);
+    UTIL_LCD_DisplayStringAt(0, y_size/2 + 60, (uint8_t *)"Make sure JP19 and JP35 are in DFSDM position", CENTER_MODE);
   }
   else if(BSP_examples[DemoIndex].DemoIndex == 9)
   {
-    GUI_DisplayStringAt(0, y_size/2 + 45, (uint8_t *)"Make sure JP1, JP6, JP7, JP17 and JP32 are in DCMI position", CENTER_MODE);
-    GUI_DisplayStringAt(0, y_size/2 + 60, (uint8_t *)"Make sure JP2 and JP35 are removed", CENTER_MODE);
+    UTIL_LCD_DisplayStringAt(0, y_size/2 + 45, (uint8_t *)"Make sure JP1, JP6, JP7, JP17 and JP32 are in DCMI position", CENTER_MODE);
+    UTIL_LCD_DisplayStringAt(0, y_size/2 + 60, (uint8_t *)"Make sure JP2 and JP35 are removed", CENTER_MODE);
   }
   else if((BSP_examples[DemoIndex].DemoIndex > 9) && (BSP_examples[DemoIndex].DemoIndex < 13))
   {
-    GUI_DisplayStringAt(0, y_size/2 + 45, (uint8_t *)"Make sure JP12 and JP15 are in SDIO1 postion", CENTER_MODE);
+    UTIL_LCD_DisplayStringAt(0, y_size/2 + 45, (uint8_t *)"Make sure JP12 and JP15 are in SDIO1 postion", CENTER_MODE);
   }
   else if(BSP_examples[DemoIndex].DemoIndex == 14)
   {
-    GUI_DisplayStringAt(0, y_size/2 + 45, (uint8_t *)"Make sure JP32 and JP35 are in NOR position", CENTER_MODE);
+    UTIL_LCD_DisplayStringAt(0, y_size/2 + 45, (uint8_t *)"Make sure JP32 and JP35 are in NOR position", CENTER_MODE);
   }
   else if(BSP_examples[DemoIndex].DemoIndex == 16)
   {
-    GUI_DisplayStringAt(0, y_size/2 + 45, (uint8_t *)"Make sure JP2 and JP12 are in SRAM position", CENTER_MODE);
+    UTIL_LCD_DisplayStringAt(0, y_size/2 + 45, (uint8_t *)"Make sure JP2 and JP12 are in SRAM position", CENTER_MODE);
   }
   else if((BSP_examples[DemoIndex].DemoIndex == 7) || (BSP_examples[DemoIndex].DemoIndex == 17))
   {
-    GUI_DisplayStringAt(0, y_size/2 + 45, (uint8_t *)"Make sure JP14, JP26, JP27, JP28 and JP34 are fitted", CENTER_MODE);
+    UTIL_LCD_DisplayStringAt(0, y_size/2 + 45, (uint8_t *)"Make sure JP14, JP26, JP27, JP28 and JP34 are fitted", CENTER_MODE);
   }
   else
   {

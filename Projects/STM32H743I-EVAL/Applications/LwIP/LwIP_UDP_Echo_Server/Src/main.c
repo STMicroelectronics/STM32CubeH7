@@ -112,7 +112,7 @@ static void BSP_Config(void)
 
   /* Initialize the LCD */
   BSP_LCD_Init(0, LCD_ORIENTATION_LANDSCAPE);
-  GUI_SetFuncDriver(&LCD_Driver);
+  UTIL_LCD_SetFuncDriver(&LCD_Driver);
 
   /* Initialize LCD Log module */
   UTIL_LCD_TRACE_Init();

@@ -266,16 +266,16 @@ int getFileListRAccumulator(const char* const dirname, const char* ext, DirEntry
             }
             if ((fno.fattrib & AM_DIR) != 0)
             {
-                char newdirname[53];
-                snprintf(newdirname, 53, "%s/%s", dirname, fno.fname);
+                char newdirname[300];
+                snprintf(newdirname, 300, "%s/%s", dirname, fno.fname);
                 getFileListRAccumulator(newdirname, ext, filelist, length, current);
             }
             else
             {
                 if (stristr(fno.fname, ext))
                 {
-                    char path[53];
-                    snprintf(path, 53, "%s/%s", dirname, fno.fname);
+                    char path[300];
+                    snprintf(path, 300, "%s/%s", dirname, fno.fname);
                     strncpy(filelist[current].name, path, 53);
                     filelist[current].isDirectory = false;
                     current++;

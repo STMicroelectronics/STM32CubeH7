@@ -75,6 +75,10 @@ LED3 is on as soon as an error is returned by HAL API
 @note The example need to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
+@par Keywords
+
+Memory, QSPI, Erase, Read, Write, Mapped, Dual
+
 @par Directory contents
   
     - QSPI/QSPI_MemoryMappedDual/CM7/Inc/main.h                Main configuration file for Cortex-M7

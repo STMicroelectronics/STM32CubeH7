@@ -59,7 +59,7 @@ Plug a headphone to hear the sound
        the flash at @0x90080000 using STM32CubeProgrammer utility
 
  ** AUDIO RECORD **
-This example shows how to record an audio stream from microphnes mounted on STM32H750B-DISCO
+This example shows how to record an audio stream from microphones mounted on STM32H750B-DISCO
 and play it using the DMA circular mode and how to handle the buffer update.
 Plug a headphone to hear the sound.  
 
@@ -84,7 +84,12 @@ This example shows how to erase, write and read the SDRAM memory in DMA mode.
       Depending on the use case it is also possible to configure the cache attributes using the MPU.
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
-      
+
+@par Keywords
+
+BSP, Board support package, DMA, Audio play, Headphone, Audio record, microphone, Touchscreen, LCD, LTDC,
+MMC, SDRAM, QSPI, QUADSPI, Display, LED, Button
+
 @par Directory contents 
 
   - BSP/Src/system_stm32h7xx.c     STM32H7xx system configuration source file 

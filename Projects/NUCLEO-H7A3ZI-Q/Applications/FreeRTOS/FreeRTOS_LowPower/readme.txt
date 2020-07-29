@@ -81,6 +81,10 @@ The RTOS tick is suppressed while the MCU is in its low power state.
 For more details about FreeRTOS implementation on STM32Cube, please refer to UM1722 "Developing Applications
 on STM32Cube with RTOS".
 
+@par Keywords
+
+RTOS, FreeRTOS, Thread, Queue, Low power, Sleep mode, Blocked state, Transmit, Receive
+
 @par Directory contents
     - FreeRTOS/FreeRTOS_LowPower/Src/main.c                       Main program
     - FreeRTOS/FreeRTOS_LowPower/Src/app_FreeRTOS.c               Code for freertos applications

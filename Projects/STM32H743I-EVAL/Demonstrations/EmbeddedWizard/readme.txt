@@ -1,5 +1,5 @@
 /**
-  @page Demo   STM32H743I-EVAL EmbeddedWizard Demonstration Firmware
+  @page EmbeddedWizard   STM32H743I-EVAL EmbeddedWizard Demonstration Firmware
 
 @par Demo Description
 For more details please refer to the EmbeddedWizard subsection in the full demonstration readme.txt file ../readme.txt

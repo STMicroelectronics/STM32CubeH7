@@ -88,9 +88,6 @@ The following steps are performed to scroll all the images stored in the SD Card
 
 - LED3 toggles in a forever loop when the uSD disk I/O driver is not Linked correctly.
 
-@par Keywords
-
-Display, LTCD, Pictures, SD Card, BMP, Background, Foreground, Layers,
 
 @Note If the  application is using the DTCM/ITCM memories (@0x20000000/ 0x0000000: not cacheable and only accessible
       by the Cortex M7 and the  MDMA), no need for cache maintenance when the Cortex M7 and the MDMA access these RAMs.
@@ -104,6 +101,10 @@ Display, LTCD, Pictures, SD Card, BMP, Background, Foreground, Layers,
       Depending on the use case, it is also possible to configure the cache attributes using the MPU.
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series and STM32H7 Series"
+
+@par Keywords
+
+Graphics, Display, LTCD, Pictures, SD Card, BMP, Background, Foreground, Layers,
 
 @par Directory contents
 

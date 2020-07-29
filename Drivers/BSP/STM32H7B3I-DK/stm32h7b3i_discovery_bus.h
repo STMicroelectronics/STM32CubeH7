@@ -29,6 +29,9 @@
  /* Includes ------------------------------------------------------------------*/
 #include "stm32h7b3i_discovery_conf.h"
 #include "stm32h7b3i_discovery_errno.h"
+#if defined(BSP_USE_CMSIS_OS)
+#include "cmsis_os.h"
+#endif
 /** @addtogroup BSP
   * @{
   */

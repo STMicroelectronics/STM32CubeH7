@@ -90,6 +90,10 @@ The UART is configured as follows:
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
 
+@par Keywords
+
+Connectivity, UART, Printf, Baud rate, RS-232, HyperTerminal, full-duplex, HyperTerminal, Transmission, Reception, Asynchronous
+
 @par Directory contents 
 
   - UART/UART_Printf/Inc/stm32h7xx_hal_conf.h    HAL configuration file

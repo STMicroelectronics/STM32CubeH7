@@ -13,7 +13,7 @@ typedef void* FileHdl;
 //Directory entry. Name and type.
 struct DirEntry
 {
-    char name[50];
+    char name[64];
     bool isDirectory;
 };
 

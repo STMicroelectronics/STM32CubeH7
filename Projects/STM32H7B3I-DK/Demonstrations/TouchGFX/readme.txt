@@ -1,5 +1,5 @@
 /**
-  @page Demo   STM32H7B3I-DK TouchGFX Demonstration Firmware
+  @page TouchGFX   STM32H7B3I-DK TouchGFX Demonstration Firmware
  
   @verbatim
   ******************************************************************************
@@ -52,6 +52,9 @@
  ----------------------------------------------------------
  Available from bathroom screen. allowing to control the temperature, jet and light.
 
+@par Keywords
+
+Demonstration, TouchGFX
 
 @par How to use it?
 

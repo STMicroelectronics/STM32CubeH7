@@ -86,7 +86,7 @@ while 'front_buffer' pointer is used to select image to display in front buffer.
 
 @par Keywords
 
-Graphic, Display, LCD, DMA2D, DSI, MIPI Alliance, Video mode, Double buffering, LTDC, QVGA, ARGB8888, SDRAM
+Graphics, Display, LCD, DMA2D, DSI, MIPI Alliance, Video mode, Double buffering, LTDC, QVGA, ARGB8888, SDRAM
 
 
 @par Directory contents

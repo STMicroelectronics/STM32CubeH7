@@ -68,7 +68,7 @@ ALIGN_32BYTES (static AUDIO_OUT_BufferTypeDef  BufferCtl) __attribute__((section
 /* SRC: Sample Rate Converter variables */
 static uint8_t SrcTypeSelected;     /* 236, 441, None */
 static uint8_t SrcIterations_Frame; /* number of SRC iterations per frame */
-static uint32_t AudioReadSize;      /* number of bytes to retrieve from µSD*/
+static uint32_t AudioReadSize;      /* number of bytes to retrieve from ÂµSD*/
 /*BUFFERs for Audio Module interface*/
 static  buffer_t InputBuffer;
 static  buffer_t *pInputBuffer = &InputBuffer;
@@ -902,7 +902,7 @@ uint32_t PLAYER_SeekToTime(uint32_t NewTime)
 * @param  pUserData: optional parameter (not used in this version)
 * @retval return the decode frame.
 */
-unsigned int Dec_ReadDataCallback(void *    pCompressedData,        /* [OUT] Bitbuffer */
+uint32_t Dec_ReadDataCallback(void *    pCompressedData,        /* [OUT] Bitbuffer */
                                   uint32_t  nDataSizeInChars,       /* sizeof(Bitbuffer) */
                                   void *    pUserData               /* Application-supplied parameter */ )
 {

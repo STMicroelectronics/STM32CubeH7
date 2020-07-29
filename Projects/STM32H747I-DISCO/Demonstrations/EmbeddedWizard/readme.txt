@@ -104,7 +104,7 @@ This GUI application has been developed and tested with Embedded Wizard 8.30.
 
 @par Keywords
 
-GUI, HMI, Display, Graphic, Chrom-ART, DMA2D, RGB565, LCD, RGB, Embedded Wizard
+GUI, HMI, Display, Graphics, Chrom-ART, DMA2D, RGB565, LCD, RGB, Embedded Wizard
 
 
 @par Directory contents

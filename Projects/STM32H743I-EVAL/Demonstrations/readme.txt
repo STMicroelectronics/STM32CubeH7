@@ -1,5 +1,5 @@
 /**
-  @page Demo   STM32H743I-EVAL Demonstration Firmware
+  @page Demonstrations  STM32H743I-EVAL Demonstration Firmware
  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
@@ -208,7 +208,7 @@ TouchGFX demonstration:
       
 @par Keywords
 
-Demonstration, FreeRTOS, RTOS, Middleware, wav, Video Player, avi, Audio player, Graphic,
+Demonstration, FreeRTOS, RTOS, WAV, Video Player, AVI, JPEG, MJPEG, Audio player, Graphics,
 Game, System, CPU, SAI, QSPI, SD, 
 
 @par Hardware and Software environment

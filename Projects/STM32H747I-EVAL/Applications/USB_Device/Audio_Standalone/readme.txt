@@ -1,9 +1,9 @@
 /**
-  @page AUDIO_Standalone USB Device AUDIO application
+  @page Audio_Standalone USB Device AUDIO application
 
   @verbatim
   ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
-  * @file    USB_Device/AUDIO_Standalone/readme.txt
+  * @file    USB_Device/Audio_Standalone/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the USB Device AUDIO application.
   ******************************************************************************
@@ -107,7 +107,7 @@ requirements, such as:
 
 @par Keywords
 
-Middleware, USB Device, Audio, Streaming, SAI, Full speed, PCM
+Connectivity, USB_Device, USB, SAI, Audio, Streaming, Full speed, PCM
 
 
 

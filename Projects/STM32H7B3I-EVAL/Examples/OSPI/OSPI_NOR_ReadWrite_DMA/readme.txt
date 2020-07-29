@@ -60,6 +60,10 @@ LED_YELLOW is on as soon as an error is returned by HAL API
               Please refer to the AN4838 “Managing memory protection unit (MPU) in STM32 MCUs”
               Please refer to the AN4839 “Level 1 cache on STM32F7 Series”
 
+@par Keywords
+
+Memory, OSPI, OCTOSPI, Erase, Write, sector, NOR, DMA
+
 @par Directory contents 
 
   - OSPI/OSPI_NOR_ReadWrite_DMA/Src/main.c                 Main program

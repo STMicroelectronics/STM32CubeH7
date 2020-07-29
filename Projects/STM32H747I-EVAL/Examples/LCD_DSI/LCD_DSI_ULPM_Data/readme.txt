@@ -95,7 +95,7 @@ The check could be done using this macro : __HAL_RCC_GET_FLAG(RCC_FLAG_D2CKRDY).
 
 @par Keywords
 
-Graphic, Display, LCD, DSI, MIPI Alliance, Ultra low power mode, Tearing effect, Partial refresh, Single buffer,
+Graphics, Display, LCD, DSI, MIPI Alliance, Ultra low power mode, Tearing effect, Partial refresh, Single buffer,
 LTDC, DMA2D , WVGA, ARGB8888, SDRAM, Burst mode
 
 @par Directory contents

@@ -42,22 +42,65 @@ This software component is licensed by ST under BSD 3-Clause license, the “Lic
 <div class="col-sm-12 col-lg-8">
 <h1 id="update-history">Update History</h1>
 <div class="collapse">
-<input type="checkbox" id="collapse-section2" checked aria-hidden="true"> <label for="collapse-section2" aria-hidden="true"><strong>V1.0.1 / 16-January-2020</strong></label>
+<input type="checkbox" id="collapse-section5" checked aria-hidden="true"> <label for="collapse-section5" aria-hidden="true"><strong>V2.1.0 / 30-April-2020</strong></label>
 <div>
 <h2 id="main-changes">Main Changes</h2>
+<ul>
+<li>Update BSP_BUS APIs with protection against RTOS multithread usage (under BSP_USE_CMSIS_OS pre-processor conditional define)</li>
+</ul>
+<h2 id="dependencies">Dependencies</h2>
+<ul>
+<li>Components/common v7.0.0</li>
+</ul>
+</div>
+</div>
+<div class="collapse">
+<input type="checkbox" id="collapse-section4" aria-hidden="true"> <label for="collapse-section4" aria-hidden="true"><strong>V2.0.1 / 19-March-2020</strong></label>
+<div>
+<h2 id="main-changes-1">Main Changes</h2>
+<ul>
+<li>Fix warnings when using HAL OSPI Register Callbacks</li>
+</ul>
+<h2 id="dependencies-1">Dependencies</h2>
+<ul>
+<li>Components/common v7.0.0</li>
+</ul>
+</div>
+</div>
+<div class="collapse">
+<input type="checkbox" id="collapse-section3" aria-hidden="true"> <label for="collapse-section3" aria-hidden="true"><strong>V2.0.0 / 25-February-2020</strong></label>
+<div>
+<h2 id="main-changes-2">Main Changes</h2>
+<ul>
+<li>Rename GUI_Drv_t into UTILS_LCD_Drv_t</li>
+</ul>
+<h2 id="backward-compatibility">Backward Compatibility</h2>
+<ul>
+<li>This version breaks the compatibility with previous versions</li>
+</ul>
+<h2 id="dependencies-2">Dependencies</h2>
+<ul>
+<li>Components/common v7.0.0</li>
+</ul>
+</div>
+</div>
+<div class="collapse">
+<input type="checkbox" id="collapse-section2" aria-hidden="true"> <label for="collapse-section2" aria-hidden="true"><strong>V1.0.1 / 16-January-2020</strong></label>
+<div>
+<h2 id="main-changes-3">Main Changes</h2>
 <ul>
 <li>Minor updates to fix misra warnings</li>
 </ul>
 </div>
 </div>
 <div class="collapse">
-<input type="checkbox" id="collapse-section1" checked aria-hidden="true"> <label for="collapse-section1" aria-hidden="true"><strong>V1.0.0 / 30-October-2019</strong></label>
+<input type="checkbox" id="collapse-section1" aria-hidden="true"> <label for="collapse-section1" aria-hidden="true"><strong>V1.0.0 / 30-October-2019</strong></label>
 <div>
-<h2 id="main-changes-1">Main Changes</h2>
+<h2 id="main-changes-4">Main Changes</h2>
 <ul>
 <li>First official release of STM32H7B3I-EVAL BSP drivers in line with STM32Cube BSP drivers development guidelines (UM2298)</li>
 </ul>
-<h2 id="dependencies">Dependencies</h2>
+<h2 id="dependencies-3">Dependencies</h2>
 <p>This software release is compatible with:</p>
 <ul>
 <li>BSP common drivers <strong>V6.0.0</strong> or above</li>

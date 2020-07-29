@@ -128,12 +128,14 @@ void HAL_SPDIFRX_MspInit(SPDIFRX_HandleTypeDef *hspdif)
   AUDIO_SPDIFRX_CLK_ENABLE();
   
 	PeriphClkInitStruct.SpdifrxClockSelection = RCC_SPDIFRXCLKSOURCE_PLL3;
-  PeriphClkInitStruct.PLL3.PLL3P = 1;
+  PeriphClkInitStruct.PLL3.PLL3P = 2;
   PeriphClkInitStruct.PLL3.PLL3Q = 1;
 	PeriphClkInitStruct.PLL3.PLL3R = 1;
-	PeriphClkInitStruct.PLL3.PLL3N = 100;
+	PeriphClkInitStruct.PLL3.PLL3N = 200;
 	PeriphClkInitStruct.PLL3.PLL3FRACN = 0;
 	PeriphClkInitStruct.PLL3.PLL3M = 25;
+    PeriphClkInitStruct.PLL3.PLL3VCOSEL = RCC_PLL3VCOMEDIUM;
+    PeriphClkInitStruct.PLL3.PLL3RGE = RCC_PLL3VCIRANGE_0;
 	
   HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct);
   

@@ -24,23 +24,18 @@
 extern "C" {
 #endif
 
-#include <stdint.h>
-void ethernetif_low_init(void (*event_callback)(void), void (*buffer_output_callback)(uint8_t *));
-void  ethernetif_low_deinit(void);
-
-int16_t ethernetif_low_inputsize(void);
-int16_t ethernetif_low_input(uint8_t *payload, uint16_t len);
-int16_t ethernetif_low_output(uint8_t *payload, uint16_t len);
-
-void ethernetif_low_get_mac_addr(uint8_t *MACAddr_in);
-uint8_t ethernetif_low_get_link_status(void);
 
 #define NET_USE_RTOS
 #define NET_USE_HARDWARE_CHKSUM
+#define ETHERNET_MAC_GENERATION_FROM_SHA256
 
-#ifndef GENERATOR_WAKAAMACLIENT_CLOUD
+
+#ifdef GENERATOR_WAKAAMACLIENT_CLOUD
+#define USE_TINY_DTLS
+#else
 #define NET_MBEDTLS_HOST_SUPPORT
-#endif
+#endif /* GENERATOR_WAKAAMACLIENT_CLOUD */
+
 
 #include "net_conf_template.h"
 

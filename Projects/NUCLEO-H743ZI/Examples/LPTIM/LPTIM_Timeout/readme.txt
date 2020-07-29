@@ -70,6 +70,10 @@ Once the system is woken up it remains in run mode. The led keeps toggling each 
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
 
+@par Keywords
+
+LPTIMER, Timer, Low Power Timer, Trigger, LSE, Timeout, Wake up, Stop mode, Run mode, Led
+
 @par Directory contents  
 
   - LPTIM/LPTIM_Timeout/Inc/stm32h7xx_hal_conf.h    HAL configuration file

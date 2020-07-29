@@ -8,7 +8,7 @@ mainScreenPresenter::mainScreenPresenter(mainScreenView& v)
 
 void mainScreenPresenter::activate()
 {
-  model->setFirmwareVersion("V1.0.0"); 
+  model->setFirmwareVersion("V1.0.1"); 
 }
 
 void mainScreenPresenter::deactivate()

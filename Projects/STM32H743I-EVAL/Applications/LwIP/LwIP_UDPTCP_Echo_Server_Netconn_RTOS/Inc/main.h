@@ -31,7 +31,7 @@
 #include "stm32h743i_eval_lcd.h" 
 #include "stm32h743i_eval_sdram.h"
 //#ifdef USE_LCD
-#include "basic_gui.h"
+#include "stm32_lcd.h"
 #include  "lcd_trace.h"
 #include "utilities_conf.h"
 //#endif

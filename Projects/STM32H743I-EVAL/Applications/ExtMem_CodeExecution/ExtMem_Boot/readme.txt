@@ -1,5 +1,5 @@
 /**
-  @page ExtMem_CodeExecution Boot application for External memory execution Readme file
+  @page ExtMem_Boot Boot application for External memory execution Readme file
 
   @verbatim
   ******************************************************************************
@@ -50,10 +50,6 @@ The ExtMem_Boot program is located at 0x08000000 (Internal flash).
 
 Please Refer to the bellow "Table 1. IAP implementation on STM32H743I-EVAL" for different configurations and corresponding settings.
 
-@par Keywords
-
-Middleware, External Memory Boot, Loader, Boot
-
 @Note If the user code size exceeds the DTCM-RAM size or starts from internal cacheable memories (SRAM1 and SRAM2),that is shared between several processors,
       then it is highly recommended to enable the CPU cache and maintain its coherence at application level.
       In case of constraints it is possible to configure the MPU as "Write through/not shareable" to guarantee the cache coherence at write access but the user
@@ -81,6 +77,11 @@ Middleware, External Memory Boot, Loader, Boot
       Depending on the use case it is also possible to configure the cache attributes using the MPU.
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
+
+
+@par Keywords
+
+External, Memory, QSPI, SDMCC, SD Card, Boot, Loader, XiP, BootROM, Value line
 
 @par Directory contents
 

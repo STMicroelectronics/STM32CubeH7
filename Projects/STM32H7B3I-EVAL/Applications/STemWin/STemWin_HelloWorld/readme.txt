@@ -61,6 +61,10 @@ Note that the following user files may need to be updated:
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
 
+@par Keywords
+
+Graphics, Display, STemWin, LTDC, LCD, HelloWorld, GUI
+
 @par Directory contents
 
   - STemWin/STemWin_HelloWorld/STemWin/Target/GUIConf.h                  Header for GUIConf.c

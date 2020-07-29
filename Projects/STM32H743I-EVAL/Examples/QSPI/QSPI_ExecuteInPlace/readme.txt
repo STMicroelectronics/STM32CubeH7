@@ -66,6 +66,10 @@ this example if the previous setting of the QSPI memory is dual mode.
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
 
+@par Keywords
+
+Memory, QSPI, Execute in place, Erase, section, sector, memory-mapped mode
+
 @par Directory contents 
 
   - QSPI/QSPI_ExecuteInPlace/Inc/stm32h7xx_hal_conf.h HAL configuration file

@@ -25,6 +25,19 @@
 
 =======
 
+### 17-January-2020 ###
+=========================
+  + Fix compile error in the GCC CM7_MPU port caused by a duplicated variable declaration
+      - Source/portable/GCC/ARM_CM7_MPU/r0p1/port.c
+
+### 13-December-2019 ###
+=========================
+  + Remove warnings thrown by EWARM for CM33/CM23 ports
+      - IAR/ARM_CM23/non_secure/portmacro.h
+      - IAR/ARM_CM23_NTZ/non_secure/portmacro.h
+      - IAR/ARM_CM33/non_secure/portmacro.h
+      - IAR/ARM_CM33_NTZ/non_secure/portmacro.h
+
 ### 19-July-2019 ###
 =========================
   + Fix runtime error in the  IAR/CM4_MPU port

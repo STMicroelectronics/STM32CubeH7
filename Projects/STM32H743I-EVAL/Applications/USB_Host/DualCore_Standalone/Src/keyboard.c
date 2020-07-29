@@ -55,7 +55,7 @@ void HID_KeyboardMenuProcess(void)
   {
   case HID_KEYBOARD_IDLE:
     demo.keyboard_state = HID_KEYBOARD_START;
-    GUI_ClearStringLine(17);
+    UTIL_LCD_ClearStringLine(17);
     Demo_SelectItem(DEMO_KEYBOARD_menu, 0);
     demo.select = 0;
     break;
@@ -107,12 +107,12 @@ void HID_KeyboardMenuProcess(void)
 static void USR_KEYBRD_Init(void)
 {
   UTIL_LCD_TRACE_ClearTextZone();
-  GUI_SetTextColor(GUI_COLOR_YELLOW);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_YELLOW);
 
-  GUI_DisplayStringAtLine(4,
+  UTIL_LCD_DisplayStringAtLine(4,
                               (uint8_t *)
                               "Use Keyboard to type characters:                                                            ");
-  GUI_SetTextColor(GUI_COLOR_WHITE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
 
   KeybrdCharYpos = KYBRD_FIRST_LINE;
   KeybrdCharXpos = KYBRD_FIRST_COLUMN;
@@ -172,12 +172,12 @@ void USR_KEYBRD_ProcessData(uint8_t data)
       {
       }
     }
-    GUI_DisplayChar(CurrentLastXpos[KeybrdCharYpos], KeybrdCharYpos, ' ');
+    UTIL_LCD_DisplayChar(CurrentLastXpos[KeybrdCharYpos], KeybrdCharYpos, ' ');
   }
   else
   {
     /* Update the cursor position on LCD */
-    GUI_DisplayChar(KeybrdCharXpos, KeybrdCharYpos, data);
+    UTIL_LCD_DisplayChar(KeybrdCharXpos, KeybrdCharYpos, data);
 
     /* Increment char X position */
     KeybrdCharXpos += SMALL_FONT_COLUMN_WIDTH;
@@ -197,7 +197,7 @@ void USR_KEYBRD_ProcessData(uint8_t data)
       UTIL_LCD_TRACE_ClearTextZone();
       KeybrdCharYpos = KYBRD_FIRST_LINE;
       /* Start New Display of the cursor position on LCD */
-      GUI_DisplayChar(KeybrdCharXpos, KeybrdCharYpos, data);
+      UTIL_LCD_DisplayChar(KeybrdCharXpos, KeybrdCharYpos, data);
     }
   }
 }

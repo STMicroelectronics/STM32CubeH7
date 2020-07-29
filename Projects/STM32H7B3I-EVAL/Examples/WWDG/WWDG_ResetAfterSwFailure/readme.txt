@@ -90,6 +90,10 @@ LED2 is turned ON and remains ON if any error occurs.
       Please refer to the AN4838 “Managing memory protection unit (MPU) in STM32 MCUs”
       Please refer to the AN4839 “Level 1 cache on STM32F7 Series and STM32H7 Series ”
 
+@par Keywords
+
+System, WWDG, Downcounter, MCU Reset, Timeout, Software fault
+
 @par Directory contents
 
   - WWDG/WWDG_ResetAfterSwFailure/Inc/stm32h7xx_hal_conf.h    HAL configuration file

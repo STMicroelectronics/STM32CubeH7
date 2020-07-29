@@ -104,6 +104,11 @@ This example shows how to get the potentiometer’s voltage level.
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
 
+@par Keywords
+
+BSP, Board support package, DMA, Audio play, Headphone, Audio record, microphone, Touchscreen, Joystick, LCD, LTDC, DMA2D, MDMA,
+SD Card, NOR, SRAM, SDRAM, EEPROM, Potentiometer, LOG, QSPI, QUADSPI, HyperRAM, Display, LED, Button
+
 @par Directory contents
 
   - BSP/Src/main.c                 Main program

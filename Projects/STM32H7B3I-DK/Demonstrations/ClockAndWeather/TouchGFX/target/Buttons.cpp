@@ -2,7 +2,7 @@
 #include <stdint.h>
 #include "stm32h7b3i_discovery.h"
 #include <FreeRTOS.h>
-#include <Queue.h>
+#include <queue.h>
 
 using namespace touchgfx;
 

@@ -31,8 +31,7 @@
 /* Common Config */
 #define USBD_MAX_NUM_INTERFACES               1
 #define USBD_MAX_NUM_CONFIGURATION            1
-#define USBD_MAX_STR_DESC_SIZ                 0x100
-#define USBD_SUPPORT_USER_STRING_DESC         0
+#define USBD_MAX_STR_DESC_SIZ                 64
 #define USBD_SELF_POWERED                     1
 #define USBD_DEBUG_LEVEL                      0
 
@@ -41,10 +40,19 @@
 
 /* Exported macro ------------------------------------------------------------*/
 /* Memory management macros */
-#define USBD_malloc               malloc
-#define USBD_free                 free
-#define USBD_memset               memset
-#define USBD_memcpy               memcpy
+/** Alias for memory allocation. */
+#define USBD_malloc         (void *)USBD_static_malloc
+
+/** Alias for memory release. */
+#define USBD_free           USBD_static_free
+
+/** Alias for memory set. */
+#define USBD_memset         memset
+
+/** Alias for memory copy. */
+#define USBD_memcpy         memcpy
+/** Alias for delay. */
+#define USBD_Delay          HAL_Delay
 
 /* DEBUG macros */
 #if (USBD_DEBUG_LEVEL > 0)
@@ -72,6 +80,8 @@
 #endif
 
 /* Exported functions ------------------------------------------------------- */
+void *USBD_static_malloc(uint32_t size);
+void USBD_static_free(void *p);
 
 #endif /* __USBD_CONF_H */
 

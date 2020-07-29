@@ -37,7 +37,7 @@
 #include "stm32h7b3i_eval_audio.h"
 #include "stm32h7b3i_eval_ospi.h"
 #include "stm32h7b3i_eval_camera.h"
-#include "basic_gui.h"
+#include "stm32_lcd.h"
 
 /* Exported types ------------------------------------------------------------*/
 typedef struct

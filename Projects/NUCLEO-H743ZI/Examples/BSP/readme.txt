@@ -51,9 +51,6 @@ At the beginning of each example the blue led (led2) blinks waiting the user but
 At the end of the three examples when pushing the user button the application loops 
 to the beginning (first examples). 
 
-@par Keywords
-
-Board Support Package, BSP, Adafruit, TFT, LCD, Joystick, SD Card
 
 @Note If the  application is using the DTCM/ITCM memories (@0x20000000/ 0x0000000: not cacheable and only accessible
       by the Cortex M7 and the  MDMA), no need for cache maintenance when the Cortex M7 and the MDMA access these RAMs.
@@ -74,6 +71,9 @@ Board Support Package, BSP, Adafruit, TFT, LCD, Joystick, SD Card
       Glitches that could lead to Master/Slave desynchronization. This config allows SPI Master to keep
       control on output state even if it is disabled.
 
+@par Keywords
+
+Board Support Package, BSP, Adafruit, TFT, LCD, Joystick, SD Card
 
 @par Directory contents
 

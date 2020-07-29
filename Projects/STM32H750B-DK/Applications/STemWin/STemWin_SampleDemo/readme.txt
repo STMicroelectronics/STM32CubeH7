@@ -39,7 +39,7 @@ or pause the currently running module.
 	   
 @par Keywords
 
-Middleware, Display, STemWin, SampleDemo, LCD, GUI
+Graphics, Display, STemWin, LTDC, LCD, GUI, Touch screen
 
 @Note If the  application is using the DTCM/ITCM memories (@0x20000000/ 0x0000000: not cacheable and only accessible
       by the Cortex M7 and the  MDMA), no need for cache maintenance when the Cortex M7 and the MDMA access these RAMs.

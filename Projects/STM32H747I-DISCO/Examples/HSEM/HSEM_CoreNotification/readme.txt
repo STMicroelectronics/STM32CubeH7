@@ -82,6 +82,10 @@ The SystemClock_Config() function is used to set the Flash latency and  to confi
 @note The application need to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
+@par Keywords
+
+multiprocessor, Semaphore, HSEM, Notification, Cores, Take, Release, Send
+
 @par Directory contents 
 
   - HSEM/HSEM_CoreNotification/Common/Src/system_stm32h7xx.c   STM32H7xx system configuration source file

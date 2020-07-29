@@ -28,7 +28,7 @@
 #include "adafruit_802.h"
 #include "adafruit_802_sd.h"
 #include "adafruit_802_lcd.h"
-#include "../../../../../Utilities/Basic_GUI/basic_gui.h"
+#include "stm32_lcd.h"
 
 /* Exported types ------------------------------------------------------------*/
 typedef struct

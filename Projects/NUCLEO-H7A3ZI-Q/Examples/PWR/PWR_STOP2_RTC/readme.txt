@@ -1,5 +1,5 @@
 /**
-  @page PWR_Standby PWR_STOP2_RTC example
+  @page PWR_STOP2_RTC PWR_STOP2_RTC example
   
   @verbatim
   ******************************************************************************
@@ -81,6 +81,10 @@ These steps are repeated in an infinite loop.
 @Note It is recommended to enable the cache and maintain its coherence.
               Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
               Please refer to the AN4839 "Level 1 cache on STM32F7 Series and STM32H7 Series"
+
+@par Keywords
+
+Power, PWR, Stop mode, Stop2, Interrupt, EXTI, Wakeup, Low Power, RTC, External reset, LSI
 
 @par Directory contents 
 

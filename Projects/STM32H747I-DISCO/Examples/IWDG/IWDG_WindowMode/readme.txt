@@ -84,6 +84,10 @@ in the main program infinite loop, and there is no IWDG reset.
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
 
+@par Keywords
+
+System, IWDG, Timeout, Reload Counter, MCU Reset, Downcounter, LSI, Timer, Measure Frequency, Window
+
 @par Directory contents 
 
   - IWDG/IWDG_WindowMode/Common/Src/system_stm32h7xx.c     STM32H7xx system configuration file

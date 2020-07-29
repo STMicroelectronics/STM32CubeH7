@@ -1,5 +1,5 @@
 /**
-  @page FatFs_uSD_Standalone   FatFs with uSD card drive application
+  @page FatFS_uSD_Standalone   FatFs with uSD card drive application
   
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
@@ -70,6 +70,10 @@ STM32 Nucleo board's LEDs can be used to monitor the application status:
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
 
+@par Keywords
+
+FatFs, SDMMC, SD Card, File system, FAT Volume, Format, Mount, Read, Write
+
 @par Directory contents 
 
   - FatFs/FatFs_uSD/Inc/stm32h7xx_hal_conf.h    HAL configuration file
@@ -77,12 +81,12 @@ STM32 Nucleo board's LEDs can be used to monitor the application status:
   - FatFs/FatFs_uSD/Inc/main.h                  Main program header file
   - FatFs/FatFs_uSD/Src/sd_diskio.h             uSD diskio header file
   - FatFs/FatFs_uSD/Inc/ffconf.h                FAT file system module configuration file
+  - FatFs/FatFs_uSD/Inc/stm32h7xx_nucleo_conf.h BSP configuration file
   - FatFs/FatFs_uSD/Src/stm32h7xx_it.c          Interrupt handlers
   - FatFs/FatFs_uSD/Src/main.c                  Main program
   - FatFs/FatFs_uSD/Src/sd_diskio.c             FatFs uSD diskio driver
   - FatFs/FatFs_uSD/Src/system_stm32h7xx.c      stm32h7xx system clock configuration file
 
-        
 @par Hardware and Software environment  
 
   - This application runs on STM32H743XXX devices.

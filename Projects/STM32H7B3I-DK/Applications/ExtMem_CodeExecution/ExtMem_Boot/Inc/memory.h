@@ -98,9 +98,9 @@
 
   @endverbatim
 */
-#define DATA_AREA           USE_EXTERNAL_SDRAM  // USE_INTERNAL_SRAM   //     
-#define CODE_AREA           USE_OSPI            // USE_EXTERNAL_SDRAM  //         
-//#define BINARY_AREA         USE_SPI_NOR         // USE_SDMMC //       
+#define DATA_AREA           USE_INTERNAL_SRAM      
+#define CODE_AREA           USE_OSPI                    
+/*#define BINARY_AREA         USE_SDMMC*/       
    
 #if (BINARY_AREA == USE_SDMMC)
   #define BINARY_SIZE          33000U

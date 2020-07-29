@@ -469,8 +469,10 @@ static void LCD_Config(void)
   PeriphClkInitStruct.PLL3.PLL3FRACN = 0;
   PeriphClkInitStruct.PLL3.PLL3P = 2;
   PeriphClkInitStruct.PLL3.PLL3Q = 2;
-  PeriphClkInitStruct.PLL3.PLL3R = 32;  
-  HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct);     
+  PeriphClkInitStruct.PLL3.PLL3R = 32;
+  PeriphClkInitStruct.PLL3.PLL3VCOSEL = RCC_PLL3VCOWIDE;
+  PeriphClkInitStruct.PLL3.PLL3RGE = RCC_PLL3VCIRANGE_2;
+  HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct);
  
   /* LTDC Initialization -------------------------------------------------------*/
   /* DeInit */

@@ -193,7 +193,7 @@
 /** @defgroup STM32H747I_EVAL_LCD_Exported_Variables Exported Variables
   * @{
   */
-extern const GUI_Drv_t LCD_Driver;
+extern const LCD_UTILS_Drv_t LCD_Driver;
 /**
   * @}
   */

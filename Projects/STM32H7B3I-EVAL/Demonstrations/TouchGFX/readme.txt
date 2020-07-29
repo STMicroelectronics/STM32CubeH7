@@ -1,5 +1,5 @@
 /**
-  @page Demo   STM32H7B3I-EVAL Touch GFX Demonstration Firmware
+  @page TouchGFX   STM32H7B3I-EVAL Touch GFX Demonstration Firmware
  
   @verbatim
   ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
@@ -53,7 +53,11 @@ scale, and change the opacity of a 3D cube.
  --------------------
  The 2048 Puzzle Game shows high quality graphics and smooth
  animations.
- 
+
+@par Keywords
+
+Demonstration, TouchGFX
+
 @par How to use it?
 
 In order to make the program work, you must do the following :

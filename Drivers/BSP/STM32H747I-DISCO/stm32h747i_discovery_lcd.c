@@ -118,7 +118,7 @@ static LCD_Drv_t                *Lcd_Drv = NULL;
 /** @defgroup STM32H747I_DISCO_LCD_Private_TypesDefinitions Private TypesDefinitions
   * @{
   */
-const GUI_Drv_t LCD_Driver =
+const LCD_UTILS_Drv_t LCD_Driver =
 {
   BSP_LCD_DrawBitmap,
   BSP_LCD_FillRGBRect,

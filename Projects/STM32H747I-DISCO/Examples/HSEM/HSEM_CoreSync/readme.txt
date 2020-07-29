@@ -1,5 +1,5 @@
 /**
-  @page HSEMA_CoreSync HSEM CoreSync example
+  @page HSEM_CoreSync HSEM CoreSync example
   
   @verbatim
   ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
@@ -88,6 +88,10 @@ The SystemClock_Config() function is used to set the Flash latency and  to confi
       
 @note The application need to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
+
+@par Keywords
+
+multiprocessor, Semaphore, HSEM, Synchronize, Cores, Take, Release
 
 @par Directory contents 
 

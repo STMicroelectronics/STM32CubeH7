@@ -36,7 +36,7 @@ uint32_t audio_chunks = 0;
 #if defined ( __ICCARM__ )
 #pragma location=AUDIO_BUFFER_LOCATION
 #pragma data_alignment=32
-#elif defined (__CC_ARM )
+#else
 __attribute__((section(".RAM_D3"))) __attribute__ ((aligned (32)))
 #endif
 uint8_t  AudioPlayBuffer[AUDIO_NBR_CHUNKS * AUDIO_CHUNK_SIZE];

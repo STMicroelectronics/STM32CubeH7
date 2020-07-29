@@ -105,7 +105,7 @@ LED3 ON: an error occurred.
       
 @par Keywords
 
-Graphic, Display, LCD, DSI, MIPI Alliance, Ultra low power mode, Tearing effect, Partial refresh, Single buffer,
+Graphics, Display, LCD, DSI, MIPI Alliance, Ultra low power mode, Tearing effect, Partial refresh, Single buffer,
 LTDC,DMA2D, WVGA, ARGB8888, SDRAM, Burst mode, Data lane, clock lane
 
 

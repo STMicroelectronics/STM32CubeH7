@@ -112,6 +112,10 @@ displaying taped characters.
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
 
+@par Keywords
+
+Connectivity, USB_Host, USB, HID, Human Interface, Full Speed, High Speed, Mouse, Keyboard
+
 @par Directory contents
 
   - USB_Host/HID_Standalone/Common/CM7/Src/system_stm32h7xx.c      STM32H7xx system clock configuration file

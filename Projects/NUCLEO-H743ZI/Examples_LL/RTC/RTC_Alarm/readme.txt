@@ -58,6 +58,10 @@ and aShowDate variables (watch or live watch).
 - LED2 is turned ON when the RTC Alarm is generated correctly.
 - LED3 is toggling : This indicates that the system generates an error.
 
+@par Keywords
+
+System, RTC, Alarm, Wakeup timer, Backup domain, Counter, LSE, LSI
+
 @par Directory contents
 
   - RTC/RTC_Alarm/Inc/stm32h7xx_it.h          Interrupt handlers header file

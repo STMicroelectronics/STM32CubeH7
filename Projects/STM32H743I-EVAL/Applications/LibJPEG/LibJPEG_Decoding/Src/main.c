@@ -119,15 +119,15 @@ static void LCD_Config(void)
 //  BSP_IO_Init(0, &Init);
   //BSP_LCD_LayerDefaultInit(0, LCD_FB_START_ADDRESS);
   BSP_LCD_Init(0, LCD_ORIENTATION_LANDSCAPE);
-  GUI_SetFuncDriver(&LCD_Driver);
+  UTIL_LCD_SetFuncDriver(&LCD_Driver);
   /* Set Foreground Layer */
-  GUI_SetLayer(0);
+  UTIL_LCD_SetLayer(0);
 
   /* Set Display window */
   //BSP_LCD_SetLayerWindow(0, 0, 0, IMAGE_WIDTH, IMAGE_HEIGHT);
   
   /* Clear the LCD Background layer */
-  GUI_Clear(GUI_COLOR_WHITE); 
+  UTIL_LCD_Clear(UTIL_LCD_COLOR_WHITE); 
 
 }
 
@@ -267,7 +267,7 @@ static void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLR = 2;
   /* PLL_VCO Input = HSE_VALUE/PLL_M = 5 Mhz */
   /* PLL_VCO Output = PLL_VCO Input * PLL_N = 800 Mhz */
-  /* SDMMC Kernel Clock = PLL3_VCO Output/PLL_Q = 800/4 = 200 Mhz */
+  /* SDMMC Kernel Clock = PLL1_VCO Output/PLL_Q = 800/4 = 200 Mhz */
   RCC_OscInitStruct.PLL.PLLQ = 4;
    
   RCC_OscInitStruct.PLL.PLLVCOSEL = RCC_PLL1VCOWIDE;

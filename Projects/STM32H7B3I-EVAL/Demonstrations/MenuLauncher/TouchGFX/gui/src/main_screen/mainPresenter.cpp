@@ -9,6 +9,7 @@ mainPresenter::mainPresenter(mainView& v)
 void mainPresenter::activate()
 {
     HAL::getInstance()->setFrameRateCompensation(true);
+    model->setFirmwareVersion("V1.0.1");
 }
 
 void mainPresenter::deactivate()

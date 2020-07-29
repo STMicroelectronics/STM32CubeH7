@@ -479,6 +479,7 @@ static void LCD_Config(void)
   PeriphClkInitStruct.PLL3.PLL3P = 10;
   PeriphClkInitStruct.PLL3.PLL3Q = 10;
   PeriphClkInitStruct.PLL3.PLL3R = 33;
+  PeriphClkInitStruct.PLL3.PLL3RGE = RCC_PLL3VCIRANGE_0;
   PeriphClkInitStruct.PLL3.PLL3VCOSEL = RCC_PLL3VCOMEDIUM;
  HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct);
 

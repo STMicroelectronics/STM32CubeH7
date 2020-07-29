@@ -107,7 +107,7 @@
 /** @defgroup STM32H743I_EVAL_LCD_Private_TypesDefinitions Private Types Definitions
   * @{
   */
-const GUI_Drv_t LCD_Driver =
+const LCD_UTILS_Drv_t LCD_Driver =
 {
   BSP_LCD_DrawBitmap,
   BSP_LCD_FillRGBRect,

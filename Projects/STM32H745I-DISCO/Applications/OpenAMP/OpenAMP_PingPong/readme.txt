@@ -90,6 +90,9 @@ In this application:
        ===> cause: the resource_table is a shared memory between CM4 and CM7 thus it should be volatile to avoid
                    compiler optimizations.
 
+@par Keywords
+
+OpenAMP, multiprocessor, HSEM, Inter processor communication, Communication channel, Mixed mode, Baremetal, Message, IPC, Mailbox, Pingpong
 
 @par Directory contents
     - OpenAMP/OpenAMP_PingPong/CM7/Src/main_cm7.c               Main CM7 program

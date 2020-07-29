@@ -109,8 +109,8 @@ int main(void)
     Error_Handler();
   }  
   
-  GUI_SetFuncDriver(&LCD_Driver);
-  GUI_SetLayer(0);
+  UTIL_LCD_SetFuncDriver(&LCD_Driver);
+  UTIL_LCD_SetLayer(0);
   
   /* Get the LCD Width */
   BSP_LCD_GetXSize(0, &LCD_X_Size);
@@ -238,15 +238,15 @@ static void SystemClock_Config(void)
   */
 static void LCD_BriefDisplay(void)
 {
-  GUI_Clear(GUI_COLOR_WHITE);
-  GUI_SetBackColor(GUI_COLOR_BLUE);
-  GUI_SetTextColor(GUI_COLOR_BLUE);
-  GUI_FillRect(0, 0, LCD_X_Size, 112, GUI_COLOR_BLUE);    
-  GUI_SetTextColor(GUI_COLOR_WHITE);
-  GUI_DisplayStringAt(0, LINE(2), (uint8_t *)"LCD_DSI_VideoMode_SingleBuffer", CENTER_MODE);
-  GUI_SetFont(&Font16);    
-  GUI_DisplayStringAt(0, LINE(5), (uint8_t *)"This example shows how to display images", CENTER_MODE);    
-  GUI_DisplayStringAt(0, LINE(6), (uint8_t *)"on LCD DSI using same buffer for display and for draw", CENTER_MODE);
+  UTIL_LCD_Clear(UTIL_LCD_COLOR_WHITE);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_FillRect(0, 0, LCD_X_Size, 112, UTIL_LCD_COLOR_BLUE);    
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
+  UTIL_LCD_DisplayStringAt(0, LINE(2), (uint8_t *)"LCD_DSI_VideoMode_SingleBuffer", CENTER_MODE);
+  UTIL_LCD_SetFont(&Font16);    
+  UTIL_LCD_DisplayStringAt(0, LINE(5), (uint8_t *)"This example shows how to display images", CENTER_MODE);    
+  UTIL_LCD_DisplayStringAt(0, LINE(6), (uint8_t *)"on LCD DSI using same buffer for display and for draw", CENTER_MODE);
 }
 /**
   * @brief  Converts a line to an ARGB8888 pixel format.

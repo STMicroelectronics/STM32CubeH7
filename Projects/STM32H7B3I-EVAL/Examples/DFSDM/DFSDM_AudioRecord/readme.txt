@@ -109,6 +109,10 @@ to enhance the performance in case of use of AXI interface with several masters.
               Please refer to the AN4838 “Managing memory protection unit (MPU) in STM32 MCUs”
               Please refer to the AN4839 “Level 1 cache on STM32H7 Series”
 
+@par Keywords
+
+Audio, DFSDM, Audio record, Digital Microphone, Stereo, MP34DT01, DMA, PDM, Filter, Playback, Audio codec, SAI
+
 @par Directory contents
 
   - DFSDM/DFSDM_AudioRecord/Src/main.c                 Main program

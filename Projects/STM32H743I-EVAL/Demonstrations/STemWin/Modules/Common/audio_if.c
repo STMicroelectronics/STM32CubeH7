@@ -37,7 +37,9 @@ static AUDIO_IFTypeDef  AudioIf;
 #if defined ( __ICCARM__ )
 #pragma data_alignment=32
 #pragma location="audio_buffers"
-#else
+#elif defined(__CC_ARM)
+__attribute__((section(".audio_buffers"), zero_init)) __attribute__ ((aligned (32)))
+#elif defined(__GNUC__)
 __attribute__((section(".audio_buffers"))) __attribute__ ((aligned (32)))
 #endif
 AUDIO_ProcessTypdef haudio;

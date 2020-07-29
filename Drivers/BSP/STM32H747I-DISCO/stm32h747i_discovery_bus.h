@@ -29,6 +29,9 @@
  /* Includes ------------------------------------------------------------------*/
 #include "stm32h747i_discovery_conf.h"
 
+#if defined(BSP_USE_CMSIS_OS)
+#include "cmsis_os.h"
+#endif
 /** @addtogroup BSP
   * @{
   */

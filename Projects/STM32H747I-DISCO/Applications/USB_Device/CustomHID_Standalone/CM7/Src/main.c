@@ -102,6 +102,8 @@ int main(void)
   BSP_LED_Init(LED3);
   BSP_LED_Init(LED4);
 
+  HAL_PWREx_EnableUSBVoltageDetector();
+
   /* Init Device Library */
   USBD_Init(&USBD_Device, &HID_Desc, 0);
 
@@ -113,8 +115,6 @@ int main(void)
 
   /* Start Device Process */
   USBD_Start(&USBD_Device);
-
-  HAL_PWREx_EnableUSBVoltageDetector();
 
   while (1)
   {
@@ -189,6 +189,8 @@ void SystemClock_Config(void)
   PeriphClkInitStruct.PLL3.PLL3P = 2;
   PeriphClkInitStruct.PLL3.PLL3R = 2;
   PeriphClkInitStruct.PLL3.PLL3Q = 7;
+  PeriphClkInitStruct.PLL3.PLL3VCOSEL = RCC_PLL3VCOMEDIUM;
+  PeriphClkInitStruct.PLL3.PLL3RGE = RCC_PLL3VCIRANGE_0;
 
   PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_USB;
   PeriphClkInitStruct.UsbClockSelection = RCC_USBCLKSOURCE_PLL3;

@@ -149,8 +149,8 @@ int main(void)
  /*##-1- LCD Configuration ##################################################*/
   /* Initialize the LCD   */
   BSP_LCD_Init(0, LCD_ORIENTATION_LANDSCAPE);
-  GUI_SetFuncDriver(&LCD_Driver);
-  GUI_SetLayer(0);
+  UTIL_LCD_SetFuncDriver(&LCD_Driver);
+  UTIL_LCD_SetLayer(0);
   LCD_BriefDisplay();
 
   BSP_LCD_GetXSize(0, &x_size);
@@ -208,17 +208,17 @@ int main(void)
       BSP_LED_Off(LED1);
 
       sprintf((char*)text, "%lu ms",score_fpu);
-      GUI_SetTextColor(GUI_COLOR_WHITE);
-      GUI_DisplayStringAt(440 + 32, 370 + 68 , (uint8_t *)"         ", LEFT_MODE);
-      GUI_DisplayStringAt(440 + 32, 370 + 68 , (uint8_t *)text, LEFT_MODE);
+      UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
+      UTIL_LCD_DisplayStringAt(440 + 32, 370 + 68 , (uint8_t *)"         ", LEFT_MODE);
+      UTIL_LCD_DisplayStringAt(440 + 32, 370 + 68 , (uint8_t *)text, LEFT_MODE);
 
       sprintf((char*)text, "Zoom : %lu",CurrentZoom);
-      GUI_SetTextColor(GUI_COLOR_WHITE);
-      GUI_DisplayStringAt(440 + 8 , 370 + 8 , (uint8_t *)"           ", LEFT_MODE);
-      GUI_DisplayStringAt(440 + 8 , 370 + 8 , (uint8_t *)text, LEFT_MODE);
+      UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
+      UTIL_LCD_DisplayStringAt(440 + 8 , 370 + 8 , (uint8_t *)"           ", LEFT_MODE);
+      UTIL_LCD_DisplayStringAt(440 + 8 , 370 + 8 , (uint8_t *)text, LEFT_MODE);
 #if (USE_VOS0_480MHZ_OVERCLOCK == 1)
       sprintf((char*)text,"System Clock = %lu MHz",SystemClock_MHz);
-      GUI_DisplayStringAt(2, 50, (uint8_t *)text, CENTER_MODE);
+      UTIL_LCD_DisplayStringAt(2, 50, (uint8_t *)text, CENTER_MODE);
 #endif /* (USE_VOS0_480MHZ_OVERCLOCK == 1) */
 
 
@@ -329,12 +329,12 @@ static void Touch_Handler(void)
         }
 
         /*Clear Fractal Display area */
-        GUI_SetBackColor(GUI_COLOR_BLACK);
-        GUI_SetTextColor(GUI_COLOR_BLACK);
-        GUI_FillRect( 2, 112 + 1, 640 - 4, 254,GUI_COLOR_BLACK);
+        UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_BLACK);
+        UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_BLACK);
+        UTIL_LCD_FillRect( 2, 112 + 1, 640 - 4, 254,UTIL_LCD_COLOR_BLACK);
 
-        GUI_SetBackColor(0xFF0080FF);
-        GUI_SetTextColor(GUI_COLOR_WHITE);
+        UTIL_LCD_SetBackColor(0xFF0080FF);
+        UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
 
         print_Size();
         CurrentZoom = 100;
@@ -367,12 +367,12 @@ static void Touch_Handler(void)
         }
 
         /*Clear Fractal Display area */
-        GUI_SetBackColor(GUI_COLOR_BLACK);
-        GUI_SetTextColor(GUI_COLOR_BLACK);
-        GUI_FillRect( 2, 112 + 1, 640 - 4, 254,GUI_COLOR_BLACK);
+        UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_BLACK);
+        UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_BLACK);
+        UTIL_LCD_FillRect( 2, 112 + 1, 640 - 4, 254,UTIL_LCD_COLOR_BLACK);
 
-        GUI_SetBackColor(0xFF0080FF);
-        GUI_SetTextColor(GUI_COLOR_WHITE);
+        UTIL_LCD_SetBackColor(0xFF0080FF);
+        UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
 
         print_Size();
         CurrentZoom = 100;
@@ -461,9 +461,9 @@ void BSP_PB_Callback(Button_TypeDef Button)
 static void print_Size(void)
 {
   sprintf((char*)text, "%u x %u",XSize,YSize);
-  GUI_SetTextColor(GUI_COLOR_WHITE);
-  GUI_DisplayStringAt(64, 370 + 24 , (uint8_t *)"Size", LEFT_MODE);
-  GUI_DisplayStringAt(24, 370 + 48 , (uint8_t *)text, LEFT_MODE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
+  UTIL_LCD_DisplayStringAt(64, 370 + 24 , (uint8_t *)"Size", LEFT_MODE);
+  UTIL_LCD_DisplayStringAt(24, 370 + 48 , (uint8_t *)text, LEFT_MODE);
 
 }
 
@@ -528,48 +528,48 @@ static void LCD_BriefDisplay(void)
   char message[64];
 #endif
 
-  GUI_SetFont(&Font24);
-  GUI_Clear(GUI_COLOR_WHITE);
-  GUI_FillRect(2, 2, 640 - 4, 112 - 2,0xFF0080FF);
-  GUI_SetBackColor(0xFF0080FF);
+  UTIL_LCD_SetFont(&Font24);
+  UTIL_LCD_Clear(UTIL_LCD_COLOR_WHITE);
+  UTIL_LCD_FillRect(2, 2, 640 - 4, 112 - 2,0xFF0080FF);
+  UTIL_LCD_SetBackColor(0xFF0080FF);
   /*Title*/
-  GUI_SetTextColor(GUI_COLOR_WHITE);
-  GUI_DisplayStringAt(2, 24, (uint8_t *)"STM32H7xx Fractal Benchmark", CENTER_MODE);
-  GUI_DisplayStringAt(2, 72, (uint8_t *)SCORE_FPU_MODE, CENTER_MODE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
+  UTIL_LCD_DisplayStringAt(2, 24, (uint8_t *)"STM32H7xx Fractal Benchmark", CENTER_MODE);
+  UTIL_LCD_DisplayStringAt(2, 72, (uint8_t *)SCORE_FPU_MODE, CENTER_MODE);
 #if (USE_VOS0_480MHZ_OVERCLOCK == 1)
   sprintf((char*)message,"System Clock = %lu MHz",SystemClock_MHz);
-  GUI_DisplayStringAt(2, 50, (uint8_t *)message, CENTER_MODE);
-  GUI_SetFont(&Font12);
-  GUI_DisplayStringAt(2, 94, (uint8_t *)"Press Tamper button to switch the System Clock 400MHz/480MHz", CENTER_MODE);
-  GUI_SetFont(&Font24);
+  UTIL_LCD_DisplayStringAt(2, 50, (uint8_t *)message, CENTER_MODE);
+  UTIL_LCD_SetFont(&Font12);
+  UTIL_LCD_DisplayStringAt(2, 94, (uint8_t *)"Press Tamper button to switch the System Clock 400MHz/480MHz", CENTER_MODE);
+  UTIL_LCD_SetFont(&Font24);
 
 #else
-  GUI_DisplayStringAt(2, 50, (uint8_t *)"System Clock = 400MHz", CENTER_MODE);
+  UTIL_LCD_DisplayStringAt(2, 50, (uint8_t *)"System Clock = 400MHz", CENTER_MODE);
 #endif
 
   /*Fractal Display area */
-  GUI_SetBackColor(GUI_COLOR_BLACK);
-  GUI_SetTextColor(GUI_COLOR_BLACK);
-  GUI_FillRect(2, 112 + 1, 640 - 4, 254,GUI_COLOR_BLACK);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_BLACK);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_BLACK);
+  UTIL_LCD_FillRect(2, 112 + 1, 640 - 4, 254,UTIL_LCD_COLOR_BLACK);
 
 
 
   /*image Size*/
-  GUI_SetBackColor(0xFF0080FF);
-  GUI_SetTextColor(0xFF0080FF);
-  GUI_FillRect(2, 370, 180 - 2, 112 - 4,0xFF0080FF);
+  UTIL_LCD_SetBackColor(0xFF0080FF);
+  UTIL_LCD_SetTextColor(0xFF0080FF);
+  UTIL_LCD_FillRect(2, 370, 180 - 2, 112 - 4,0xFF0080FF);
 
   /*Button area */
-  GUI_SetBackColor(0xFF0080FF);
-  GUI_SetTextColor(0xFF0080FF);
-  GUI_FillRect(182, 370, 260 - 2, 112 - 4,0xFF0080FF);
+  UTIL_LCD_SetBackColor(0xFF0080FF);
+  UTIL_LCD_SetTextColor(0xFF0080FF);
+  UTIL_LCD_FillRect(182, 370, 260 - 2, 112 - 4,0xFF0080FF);
 
   /*Calculation Time*/
-  GUI_SetBackColor(0xFF0080FF);
-  GUI_SetTextColor(0xFF0080FF);
-  GUI_FillRect(442, 370, 200 - 4, 112 - 4,0xFF0080FF);
-  GUI_SetTextColor(GUI_COLOR_WHITE);
-  GUI_DisplayStringAt(440 + 32, 370 + 48 , (uint8_t *)"Duration:", LEFT_MODE);
+  UTIL_LCD_SetBackColor(0xFF0080FF);
+  UTIL_LCD_SetTextColor(0xFF0080FF);
+  UTIL_LCD_FillRect(442, 370, 200 - 4, 112 - 4,0xFF0080FF);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
+  UTIL_LCD_DisplayStringAt(440 + 32, 370 + 48 , (uint8_t *)"Duration:", LEFT_MODE);
 
 }
 

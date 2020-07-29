@@ -68,9 +68,6 @@ as well as passing data between an interrupt and protected/restricted task.
 For more details about FreeRTOS implementation on STM32Cube, please refer to UM1722 "Developing Applications 
 on STM32Cube with RTOS".
 
-@par Keywords
-
-Middleware, RTOS, FreeRTOS, MPU
 
 @Note If the  application is using the DTCM/ITCM memories (@0x20000000/ 0x0000000: not cacheable and only accessible
       by the Cortex M7 and the  MDMA), no need for cache maintenance when the Cortex M7 and the MDMA access these RAMs.
@@ -84,6 +81,10 @@ Middleware, RTOS, FreeRTOS, MPU
       Depending on the use case it is also possible to configure the cache attributes using the MPU.
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
+
+@par Keywords
+
+RTOS, FreeRTOS, MPU
 
 @par Directory contents
     - FreeRTOS/FreeRTOS_MPU/Src/main.c                       Main program

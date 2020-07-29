@@ -125,8 +125,8 @@ int main(void)
   /*##-1- Initialize the LCD #################################################*/
   /* Initialize the LCD */
   BSP_LCD_Init(0, LCD_ORIENTATION_LANDSCAPE);
-  GUI_SetFuncDriver(&LCD_Driver);
-  GUI_SetFont(&GUI_DEFAULT_FONT);
+  UTIL_LCD_SetFuncDriver(&LCD_Driver);
+  UTIL_LCD_SetFont(&UTIL_LCD_DEFAULT_FONT);
   Display_DemoDescription();
   /* Wait For User inputs */
   while (1)
@@ -261,32 +261,32 @@ static void Display_DemoDescription(void)
   BSP_LCD_GetXSize(0, &x_size);
   BSP_LCD_GetYSize(0, &y_size);
   /* Set LCD Foreground Layer  */
-  GUI_SetFont(&GUI_DEFAULT_FONT);
+  UTIL_LCD_SetFont(&UTIL_LCD_DEFAULT_FONT);
 
   /* Clear the LCD */
-  GUI_SetBackColor(GUI_COLOR_WHITE);
-  GUI_Clear(GUI_COLOR_WHITE);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_WHITE);
+  UTIL_LCD_Clear(UTIL_LCD_COLOR_WHITE);
 
   /* Set the LCD Text Color */
-  GUI_SetTextColor(GUI_COLOR_DARKBLUE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_DARKBLUE);
 
   /* Display LCD messages */
-  GUI_DisplayStringAt(0, 10, (uint8_t *)"STM32H747I BSP", CENTER_MODE);
-  GUI_DisplayStringAt(0, 35, (uint8_t *)"Drivers examples", CENTER_MODE);
+  UTIL_LCD_DisplayStringAt(0, 10, (uint8_t *)"STM32H747I BSP", CENTER_MODE);
+  UTIL_LCD_DisplayStringAt(0, 35, (uint8_t *)"Drivers examples", CENTER_MODE);
 
   /* Draw Bitmap */
-  GUI_DrawBitmap((x_size - 80)/2, 65, (uint8_t *)stlogo);
+  UTIL_LCD_DrawBitmap((x_size - 80)/2, 65, (uint8_t *)stlogo);
 
-  GUI_SetFont(&Font12);
-  GUI_DisplayStringAt(0, y_size - 20, (uint8_t *)"Copyright (c) STMicroelectronics 2018", CENTER_MODE);
+  UTIL_LCD_SetFont(&Font12);
+  UTIL_LCD_DisplayStringAt(0, y_size - 20, (uint8_t *)"Copyright (c) STMicroelectronics 2018", CENTER_MODE);
 
-  GUI_SetFont(&Font16);
-  BSP_LCD_FillRect(0, 0, y_size/2 + 15, x_size, 60, GUI_COLOR_BLUE);
-  GUI_SetTextColor(GUI_COLOR_WHITE);
-  GUI_SetBackColor(GUI_COLOR_BLUE);
-  GUI_DisplayStringAt(0, y_size / 2 + 30, (uint8_t *)"Press Wakeup button to start :", CENTER_MODE);
+  UTIL_LCD_SetFont(&Font16);
+  BSP_LCD_FillRect(0, 0, y_size/2 + 15, x_size, 60, UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_DisplayStringAt(0, y_size / 2 + 30, (uint8_t *)"Press Wakeup button to start :", CENTER_MODE);
   sprintf(desc,"%s example", BSP_examples[DemoIndex].DemoName);
-  GUI_DisplayStringAt(0, y_size/2 + 45, (uint8_t *)desc, CENTER_MODE);
+  UTIL_LCD_DisplayStringAt(0, y_size/2 + 45, (uint8_t *)desc, CENTER_MODE);
 }
 
 /**

@@ -1,5 +1,5 @@
 /**
-  @page Demo   STM32H7B3I-EVAL STemWin Demonstration Firmware
+  @page STemWin   STM32H7B3I-EVAL STemWin Demonstration Firmware
  
   @verbatim
   ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
@@ -73,7 +73,7 @@ Below you find an overview of the different offered modules in the STemWin demon
 
 @par Keywords
 
-Demonstration, FreeRTOS, RTOS, Middleware, Graphic,Game, System, CPU, OSPI, SC Card, 
+Demonstration, STemWin, FreeRTOS, RTOS, Graphics, Game, System, CPU, OSPI 
 
 @par Hardware and Software environment
 
@@ -107,7 +107,7 @@ Below is the listing of BMP file :
        |   image07.bmp
        |   image08.bmp
 
-6- Plug the Media storage in CN28.
+6- Plug the Media storage in CN28 and make sure that JP12 and JP15 are in SDIO1 position.
 -> The internal Flash and the external OSPI are now programmed and the demonstration is shown on the board.
 
 

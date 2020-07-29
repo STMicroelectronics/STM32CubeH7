@@ -82,7 +82,7 @@ buffer is used to draw and display image.
 
 @par Keywords
 
-Graphic, Display, DMA2D , LCD, DSI, MIPI Alliance, Command mode, Single Buffer, LTDC, QVGA, ARGB8888, V-Sync
+Graphics, Display, DMA2D , LCD, DSI, MIPI Alliance, Command mode, Single Buffer, LTDC, QVGA, ARGB8888, V-Sync
 
 @par Directory contents
 

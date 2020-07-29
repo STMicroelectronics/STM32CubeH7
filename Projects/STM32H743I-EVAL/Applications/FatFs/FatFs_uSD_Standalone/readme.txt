@@ -77,6 +77,10 @@ STM32 Eval board's LEDs can be used to monitor the application status:
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
 
+@par Keywords
+
+FatFs, SDMMC, SD Card, File system, FAT Volume, Format, Mount, Read, Write
+
 @par Directory contents 
 
   - FatFs/FatFs_uSD_Standalone/Inc/stm32h7xx_hal_conf.h    HAL configuration file

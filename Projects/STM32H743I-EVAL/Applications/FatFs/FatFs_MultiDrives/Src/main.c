@@ -88,10 +88,8 @@ int main(void)
   /* Configure the system clock to 400 MHz */
   SystemClock_Config();
   
-
   /* Enable the USB voltage level detector */
   HAL_PWREx_EnableUSBVoltageDetector();
-
   
   /* Configure LED1, LED2, LED3 and LED4*/
   BSP_LED_Init(LED1);
@@ -428,6 +426,8 @@ static void SystemClock_Config(void)
   PeriphClkInitStruct.PLL3.PLL3P = 2;
   PeriphClkInitStruct.PLL3.PLL3R = 2;
   PeriphClkInitStruct.PLL3.PLL3Q = 7; /* 336/7 =48Mhz*/
+  PeriphClkInitStruct.PLL3.PLL3VCOSEL = RCC_PLL3VCOMEDIUM;
+  PeriphClkInitStruct.PLL3.PLL3RGE = RCC_PLL3VCIRANGE_0;
   
   
   PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_USB;

@@ -59,6 +59,10 @@ In case of error, LED2 is toggling at a frequency of 1Hz.
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
 
+@par Keywords
+
+RNG, Random, FIPS PUB 140-2, Analog Random number generator, Entropy, Period
+
 @par Directory contents 
 
   - RNG/RNG_MultiRNG/Inc/stm32h7xx_hal_conf.h    HAL configuration file

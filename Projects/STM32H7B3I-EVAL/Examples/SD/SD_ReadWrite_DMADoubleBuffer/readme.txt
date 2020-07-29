@@ -68,6 +68,10 @@ STM32H7B3I-EVAL  board's LEDs can be used to monitor the transfer status:
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series and STM32H7 Series"
 
+@par Keywords
+
+Storage, SD, SDMMC, Read Write, Block, sector, DMA, Double Buffer
+
 @par Directory contents
 
   - SD/SD_ReadWrite_DMA/Inc/stm32h7xx_hal_conf.h    HAL configuration file

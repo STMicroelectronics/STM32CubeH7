@@ -32,7 +32,7 @@ The CPU at 400MHz
 The HCLK for D1 Domain AXI and AHB3 peripherals , D2 Domain AHB1/AHB2 peripherals and D3 Domain AHB4  peripherals at 200MHz.
 The APB clock dividers for D1 Domain APB3 peripherals, D2 Domain APB1 and APB2 peripherals and D3 Domain APB4 peripherals to  run at 100MHz
 
-In the first part of the example the UART is configured for reception with Rx FIFO thhreshold 
+In the first part of the example the UART is configured for reception with Rx FIFO threshold 
 set to one 1 QUARTER and enter the CPU to Stop Mode. 
 The UART FIFO threshold interruption is enabled and ,by default, the UART FIFO full is disabled.
 The user has to send 4 bytes from the HyperTerminal. at the 4th recieved byte
@@ -102,6 +102,10 @@ The UART is configured as follows:
       Depending on the use case it is also possible to configure the cache attributes using the MPU.
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
+
+@par Keywords
+
+Connectivity, UART, Baud rate, RS-232, Full-duplex, Parity, Stop bit, Transmission, Reception, FIFO, Threshold, Interruption, STOP, Low power, Wakeup, HyperTerminal
 
 @par Directory contents 
 

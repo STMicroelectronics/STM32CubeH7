@@ -64,7 +64,11 @@ extern "C" {
 /******************************************************************************
  * LCD trace Configuration
  ******************************************************************************/
+#ifdef USE_LCD
 #define USE_LCD_TRACE                            1U
+#else
+#define USE_LCD_TRACE                            0U
+#endif /* USE_LCD */
 
 /* Enable LCD scrolling */
 #define     LCD_SCROLL_ENABLED                   1U
@@ -75,11 +79,11 @@ extern "C" {
 #define     LCD_TRACE_TEXT_FONT                  Font20
 
 /* Define the LCD TRACE Colors  */
-#define     LCD_TRACE_BACKGROUND_COLOR           GUI_COLOR_WHITE
-#define     LCD_TRACE_TEXT_COLOR                 GUI_COLOR_DARKBLUE
-#define     LCD_TRACE_SOLID_BACKGROUND_COLOR     GUI_COLOR_BLUE
-#define     LCD_TRACE_SOLID_TEXT_COLOR           GUI_COLOR_WHITE
-#define     LCD_TRACE_DEFAULT_COLOR              GUI_COLOR_WHITE
+#define     LCD_TRACE_BACKGROUND_COLOR           UTIL_LCD_COLOR_WHITE
+#define     LCD_TRACE_TEXT_COLOR                 UTIL_LCD_COLOR_DARKBLUE
+#define     LCD_TRACE_SOLID_BACKGROUND_COLOR     UTIL_LCD_COLOR_BLUE
+#define     LCD_TRACE_SOLID_TEXT_COLOR           UTIL_LCD_COLOR_WHITE
+#define     LCD_TRACE_DEFAULT_COLOR              UTIL_LCD_COLOR_WHITE
 
 /* Define the cache depth */
 #define     CACHE_SIZE                           100U

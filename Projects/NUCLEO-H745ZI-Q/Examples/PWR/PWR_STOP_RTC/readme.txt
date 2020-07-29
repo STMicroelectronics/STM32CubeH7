@@ -143,7 +143,7 @@ The above scenario is repeated in an infinite loop.
 
 @par Keywords
 
-Power, PWR, Stop mode, Interrupt, EXTI, Wakeup, Low Power, RTC, External reset, LSI, 
+Power, PWR, Stop mode, multiprocessor, Interrupt, EXTI, Wakeup, Low Power, RTC, External reset, LSI, 
 
 @par Directory contents 
 

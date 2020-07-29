@@ -19,7 +19,7 @@
   ******************************************************************************
   @endverbatim
 
-@par application Description
+@par Application Description
 
 This application describes the software solution for substituting standalone EEPROM
 by emulating the EEPROM mechanism using the on-chip Flash of STM32H7A3xxQ devices.
@@ -68,10 +68,6 @@ NUCLEO-H7A3ZI-Q 's LEDs can be used to monitor the application status:
       When the CPU Data Cache is enabled, user should ensure cache maintenance after erase operations.
 
 
-@par Keywords
-
-EEPROM, Emulation, Flash, Program, Erase, Sectors, OPCODE
-
 @Note If the  application is using the DTCM/ITCM memories (@0x20000000/ 0x0000000: not cacheable and only accessible
       by the Cortex M7 and the  MDMA), no need for cache maintenance when the Cortex M7 and the MDMA access these RAMs.
       If the application needs to use DMA(or other masters) based access or requires more RAM, then  the user has to:
@@ -85,8 +81,11 @@ EEPROM, Emulation, Flash, Program, Erase, Sectors, OPCODE
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 and STM32H7 Series"
 
-@par Directory contents
+@par Keywords
 
+EEPROM, Emulation, Flash, Program, Erase, Sectors, OPCODE
+
+@par Directory contents
 
  - EEPROM_Emulation/Inc/stm32h7xx_hal_conf.h          HAL Configuration file
  - EEPROM_Emulation/Inc/main.h                        Header for main.c module

@@ -13,7 +13,7 @@
 
 #include "cmsis_os.h"
 #include <FreeRTOS.h>
-#include <Queue.h>
+#include <queue.h>
 
 /***********************************************************
  ******         24 Bits Per Pixel Support            *******
@@ -463,19 +463,20 @@ void SystemClock_Config(void)
     /* RK070ER9427 LCD clock configuration */
     /* LCD clock configuration */
     /* PLL3_VCO Input = HSE_VALUE/PLL3M = 1 Mhz */
-    /* PLL3_VCO Output = PLL3_VCO Input * PLL3N = 480 Mhz*/
-    /* PLLLCDCLK = PLL3_VCO Output/PLL3R = 480/14 = 34.28 Mhz */
-    /* PLLUSBCLK = PLL3_VCO Output/PLL3Q = 480/10 = 48 Mhz */
-    /* LTDC clock frequency = 34.28 Mhz */
+    /* PLL3_VCO Output = PLL3_VCO Input * PLL3N = 288 Mhz */
+    /* PLLLCDCLK = PLL3_VCO Output/PLL3R = 288/9 = 32 Mhz */
+    /* PLLUSBCLK = PLL3_VCO Output/PLL3Q = 288/6 = 48 Mhz */
+    /* LTDC clock frequency = 24 Mhz */
     /* USB clock frequency = 48 Mhz */
     PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_LTDC;
     PeriphClkInitStruct.PLL3.PLL3M = 24;
-    PeriphClkInitStruct.PLL3.PLL3N = 480;
+    PeriphClkInitStruct.PLL3.PLL3N = 288;
     PeriphClkInitStruct.PLL3.PLL3P = 2;
-    PeriphClkInitStruct.PLL3.PLL3Q = 10;
-    PeriphClkInitStruct.PLL3.PLL3R = 14;
-    PeriphClkInitStruct.PLL3.PLL3VCOSEL = 0;
+    PeriphClkInitStruct.PLL3.PLL3Q = 6;
+    PeriphClkInitStruct.PLL3.PLL3R = 9;
+    PeriphClkInitStruct.PLL3.PLL3VCOSEL = RCC_PLL3VCOMEDIUM;
     PeriphClkInitStruct.PLL3.PLL3FRACN = 0;
+    PeriphClkInitStruct.PLL3.PLL3RGE = RCC_PLL3VCIRANGE_0;
     if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct) != HAL_OK)
     {
         while (1)

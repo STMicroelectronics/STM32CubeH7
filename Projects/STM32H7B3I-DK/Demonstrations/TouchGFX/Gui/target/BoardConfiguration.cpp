@@ -15,7 +15,7 @@
 
 #include "cmsis_os.h"
 #include <FreeRTOS.h>
-#include <Queue.h>
+#include <queue.h>
 
 /***********************************************************
  ******         24 Bits Per Pixel Support            *******
@@ -389,8 +389,9 @@ void SystemClock_Config(void)
     PeriphClkInitStruct.PLL3.PLL3P = 2;
     PeriphClkInitStruct.PLL3.PLL3Q = 6;
     PeriphClkInitStruct.PLL3.PLL3R = 30;
-    PeriphClkInitStruct.PLL3.PLL3VCOSEL = 0;
+    PeriphClkInitStruct.PLL3.PLL3VCOSEL = RCC_PLL3VCOMEDIUM;
     PeriphClkInitStruct.PLL3.PLL3FRACN = 0;
+	PeriphClkInitStruct.PLL3.PLL3RGE = RCC_PLL3VCIRANGE_0;
     if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct) != HAL_OK)
     {
         while (1)

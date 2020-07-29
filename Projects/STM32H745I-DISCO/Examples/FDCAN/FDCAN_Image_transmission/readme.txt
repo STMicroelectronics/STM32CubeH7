@@ -1,5 +1,5 @@
 /**
-  @page Description of the FDCAN Image transmission example
+  @page FDCAN_Image_transmission Description of the FDCAN Image transmission example
   
   @verbatim
   ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
@@ -101,7 +101,7 @@ If an error is encountered LED2 is turned ON.
 
 @note The measured communication time includes:
        - Adding messages to Tx FIFO
-       - Trasmission (propagation time)
+       - Transmission (propagation time)
        - Retrieving messages from Rx FIFO
        - Sending acknowledgment of receipt every 16 messages
 
@@ -133,6 +133,10 @@ If an error is encountered LED2 is turned ON.
 
 @Note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
+
+@par Keywords
+
+FDCAN,  multiprocessor, Bit Rate Switching, BRS, Image, Transmit, Receive, Timing, Button
 
 @par Directory contents 
 

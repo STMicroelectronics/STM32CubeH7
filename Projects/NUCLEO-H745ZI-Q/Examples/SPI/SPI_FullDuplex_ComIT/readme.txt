@@ -1,5 +1,5 @@
 /**
-  @page SPI_FullDuplex_ComDMA SPI Full Duplex IT example
+  @page SPI_FullDuplex_ComIT SPI Full Duplex IT example
 
   @verbatim
   ******************** (C) COPYRIGHT 2018 STMicroelectronics *******************
@@ -119,6 +119,10 @@ STM32 board's LEDs can be used to monitor the transfer status:
       Depending on the use case it is also possible to configure the cache attributes using the MPU.
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
+
+@par Keywords
+
+Connectivity, SPI, Full-duplex, Interrupt, Transmission, Reception, Master, Slave, MISO, MOSI
 
 @par Directory contents 
 

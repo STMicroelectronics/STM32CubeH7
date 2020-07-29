@@ -73,6 +73,10 @@ The NUCLEO-H743ZI board LEDs can be used to monitor the transfer status:
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
 
+@par Keywords
+
+Memory, FLASH, Erase, Program, Sector, Mass Erase
+
 @par Directory contents 
 
   - FLASH/FLASH_EraseProgram/Inc/stm32h7xx_hal_conf.h        HAL Configuration file  

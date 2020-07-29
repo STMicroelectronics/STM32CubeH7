@@ -1,5 +1,5 @@
 /**
-  @page MDMA Repeat BLock Transfer Rotation example descreption
+  @page MDMA_RepeatBlock_Rotation MDMA Repeat BLock Transfer Rotation example descreption
   
   @verbatim
   ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
@@ -172,7 +172,7 @@ STM32H745I Disco board's LED can be used to monitor the transfer status:
 
 @par Keywords
 
-Display, Graphic, MDMA, LCD, SDRAM, RGB565, Memory to memory, LTDC, Pixel, non contiguous,
+Display, Graphics, MDMA, LCD, SDRAM, RGB565, Memory to memory, LTDC, Pixel, non contiguous,
 Repeat blocks
 
 @Note For the Cortex-M7, if the application is using the DTCM/ITCM memories (@0x20000000/ 0x0000000: not cacheable and only accessible

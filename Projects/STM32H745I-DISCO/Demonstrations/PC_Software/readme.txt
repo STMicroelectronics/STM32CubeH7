@@ -1,11 +1,11 @@
 /**
-  @page Demo   STM32H745-Discovery Demonstration Firmware
+  @page PC_Software STM32H745I-DISCO Oscilloscope_SignalsGenerator Demonstration PC application
 
   @verbatim
   ******************************************************************************
   * @file    readme.txt
   * @author  MCD Application Team
-  * @brief   Description of STM32H745-Discovery Demonstration
+  * @brief   Description of STM32H745I-DISCO Oscilloscope_SignalsGenerator Demonstration PC application
   ******************************************************************************
   * @attention
   *
@@ -21,18 +21,13 @@
   @endverbatim
 
 @par Demo Description
- This project describe a Graphical Unit Interface made using C#, able to communicate with STM32H7.
- The GUI is composed of 4 parts :
+
+  - Dedicated PC GUI for STM32H745I-DISCO Oscilloscope_SignalsGenerator Demonstration:
+    - Available under \..\..\..\..\Utilities\PC_Software\Oscilloscope
+
  
- 1. Communication Part
-    In this part, the user have to select the serial port in the computer is connected to the MCU,
-    also he have to set the bauld rate of the UART communication to 115200 bit/s. */
 
- 2. Oscilloscope Settings
-    In this part , the user have to selest the conversion frequency  [Auto or 500 Samples/S ==> 16 M Samples/S].
-
- 4. Oscilloscope Control
-    In this part, there is 3 buttons porting the action to start,stop or close the oscilloscope .
+ 
 
  * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
  */

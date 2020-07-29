@@ -2,7 +2,7 @@
 #define ROOM_CONTROL_HPP
 
 #include <touchgfx/widgets/Image.hpp>
-#include <touchgfx/widgets/button.hpp>
+#include <touchgfx/widgets/Button.hpp>
 #include <touchgfx/containers/Container.hpp>
 
 using namespace touchgfx;

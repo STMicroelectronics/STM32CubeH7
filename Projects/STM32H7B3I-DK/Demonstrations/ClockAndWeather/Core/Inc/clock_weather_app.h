@@ -27,8 +27,6 @@ extern "C" {
 /* Includes ------------------------------------------------------------------*/
 #include "stm32h7xx_hal.h"
 #include "net_connect.h"
-#include "net_conf_es_wifi_spi.h"
-#include "es_wifi.h"
 #include "ini.h"
 #include "net_internals.h"
 #include <stdlib.h>
@@ -112,14 +110,15 @@ typedef struct cw_config_s {
 #endif 
   
 #define RETRY_REQUEST_NUMBER                    10
+#define MAX_LISTED_AP                           10
   
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions --------------------------------------------------------*/
   
 void WIFI_Init(void);
 int NET_Init(void);
-ES_WIFI_Status_t WIFI_Get_Access_Points(ES_WIFI_APs_t *APs);
-int8_t WIFI_Connect(char *ssid, uint8_t *password, uint16_t encryption );
+int32_t  WIFI_Get_Access_Points(net_wifi_scan_results_t *APs);
+int8_t WIFI_Connect(char *ssid, uint8_t *password, int32_t encryption );
 char* get_location(uint8_t location);
 int Get_Json_Weather_Forecast(char* City, const char* metric, char** jsondata);
 int Get_Date_Time(char* date_time);

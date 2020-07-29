@@ -20,56 +20,74 @@
 #include "net_connect.h"
 #include "net_internals.h"
 
+#define NET_IN_RANGE(c, lo, up)  (((c) >= (lo)) && ((c) <= (up)))
+#define NET_IS_PRINT(c)          (NET_IN_RANGE(c, 0x20, 0x7f))
+#define NET_ISDIGIT(c)           (NET_IN_RANGE(c, '0', '9'))
+#define NET_ISXDIGIT(c)          (NET_ISDIGIT(c) || NET_IN_RANGE(c, 'a', 'f') || NET_IN_RANGE(c, 'A', 'F'))
+#define NET_ISLOWER(c)           (NET_IN_RANGE(c, 'a', 'z'))
+#define NET_ISSPACE(c)           (((c) == ' ')\
+                                  || ((c) == '\f') || ((c) == '\n') || ((c) == '\r') || ((c) == '\t') || ((c) == '\v'))
 /**
   * @brief  Function description
   * @param  Params
   * @retval socket status
   */
-char_t *net_ntoa_r(const net_in_addr_t *addr, char_t *buf, int32_t buflen)
+#if !defined(NET_USE_LWIP_DEFINITIONS)
+char_t *net_ntoa_r(const net_ip_addr_t *addr, char_t *buf, int32_t buflen)
 {
-    uint32_t s_addr;
-    char_t inv[3];
-    char_t *rp;
-    uint8_t *ap;
-    uint8_t rem;
-    uint8_t i;
-    int32_t len = 0;
+  uint32_t NET_S_ADDR;
+  uint8_t     val;
+  char_t inv[3];
+  uint8_t *ap;
+  uint8_t rem;
+  uint8_t i;
+  int32_t len = 0;
+  char_t *buf_ret;
 
-    s_addr = S_ADDR(*addr);
+  NET_S_ADDR = addr->addr;
 
-    rp = buf;
-    ap = (uint8_t *)&s_addr;
-    for (uint8_t n = 0; n < (uint8_t) 4; n++)
+  ap = (uint8_t *)&NET_S_ADDR;
+  for (uint8_t n = 0; n < (uint8_t) 4; n++)
+  {
+    i = 0;
+    val = ap[n];
+    do
     {
-        i = 0;
-        do
-        {
-            rem = *ap % (uint8_t)10;
-            *ap /= (uint8_t)10;
-            inv[i] = (uint8_t)'0' + rem;
-            i++;
-        } while (*ap != 0U);
-        while (i != 0U)
-        {
-            i--;
-            if (len++ >= buflen)
-            {
-                return NULL;
-            }
-            *rp = (signed char) inv[i];
-            rp++;
-        }
-        if (len++ >= buflen)
-        {
-            return NULL;
-        }
-        *rp = (signed char) '.';
-        rp++;
-        ap++;
+      rem = val % 10U;
+      val /=  10U;
+      inv[i] = (char_t)'0' + rem;
+      i++;
+    } while (val != 0U);
+
+    while (i != 0U)
+    {
+      i--;
+      if (len < buflen)
+      {
+        buf[len] = inv[i];
+        len++;
+      }
     }
-    --rp;
-    *rp = 0;
-    return buf;
+
+    if ((n < 3U) && (len < buflen))
+    {
+      buf[len] = (char_t) '.';
+      len++;
+    }
+  }
+
+  if (len < buflen)
+  {
+    buf[len] = (char_t) '\0';
+    buf_ret = buf;
+
+  }
+  else
+  {
+    buf_ret = NULL;
+  }
+
+  return buf_ret;
 }
 
 /**
@@ -77,10 +95,10 @@ char_t *net_ntoa_r(const net_in_addr_t *addr, char_t *buf, int32_t buflen)
   * @param  Params
   * @retval socket status
   */
-char_t *net_ntoa(const net_in_addr_t *addr)
+char_t *net_ntoa(const net_ip_addr_t *addr)
 {
-    static char_t str[16];
-    return net_ntoa_r(addr, str, 16);
+  static char_t str[16];
+  return net_ntoa_r(addr, str, 16);
 }
 
 /**
@@ -88,135 +106,166 @@ char_t *net_ntoa(const net_in_addr_t *addr)
   * @param  Params
   * @retval socket status
   */
-int32_t net_aton(int32_t af, const char_t *cp, net_in_addr_t *addr)
+int32_t net_aton(const char_t *ptr, net_ip_addr_t *addr)
 {
-    uint32_t val;
-    uint32_t base;
-    char_t c0;
-    uint32_t parts[4];
-    uint32_t *pp = parts;
+  uint32_t val = 0;
+  uint32_t base;
+  char_t c0;
+  const char_t      *cp =  ptr;
+  uint32_t parts[4];
+  uint32_t *pp = parts;
+  int32_t ret = 1;
+  int32_t done;
 
-    if (af != NET_AF_INET)
+  c0 = *cp;
+  done = 0;
+  for (;;)
+  {
+    /*
+     * Collect number up to ``.''.
+     * Values are specified as for C:
+     * 0x=hex, 0=octal, 1-9=decimal.
+     */
+    if (done == 1)
     {
-        return -1;
+      break;
     }
 
-    c0 = *cp;
-    for (;;)
+    if (!NET_ISDIGIT(c0))
     {
-        /*
-         * Collect number up to ``.''.
-         * Values are specified as for C:
-         * 0x=hex, 0=octal, 1-9=decimal.
-         */
-        if (!NET_ISDIGIT(c0))
+      ret = 0;
+      done = 1;
+    }
+    else
+    {
+      val = 0;
+      base = 10;
+      if (c0 == '0')
+      {
+        ++cp;
+        c0 = (char_t) * cp;
+        if ((c0 == (char_t) 'x') || (c0 == (char_t) 'X'))
         {
-            return (0);
-        }
-        val = 0;
-        base = 10;
-        if (c0 == '0')
-        {
-            c0 = (char) *++cp;
-            if (c0 == 'x' || c0 == 'X')
-            {
-                base = 16;
-                c0 = (char) *++cp;
-            }
-            else
-            {
-                base = 8;
-            }
-        }
-        for (;;)
-        {
-            if (NET_ISDIGIT(c0))
-            {
-                val = (val * base) + (uint32_t)c0 - (uint32_t) '0';
-                c0 = (char) *++cp;
-            }
-            else if ((base == 16U) && NET_ISXDIGIT(c0))
-            {
-                val = (val << 4) | ((uint32_t)c0 + 10U - (uint32_t)(NET_ISLOWER(c0) ? 'a' : 'A'));
-                c0 = (char) *++cp;
-            }
-            else
-            {
-                break;
-            }
-        }
-        if (c0 == '.')
-        {
-            /*
-             * Internet format:
-             *  a.b.c.d
-             *  a.b.c   (with c treated as 16 bits)
-             *  a.b (with b treated as 24 bits)
-             */
-            if (pp >= parts + 3)
-            {
-                return (0);
-            }
-            *pp++ = val;
-            c0 = (char) *++cp;
+          base = 16;
+          ++cp;
+          c0 = (char_t) * cp;
         }
         else
         {
-            break;
+          base = 8;
         }
+      }
+
+      for (;;)
+      {
+        if (NET_ISDIGIT(c0))
+        {
+          val = (val * base) + (uint32_t)c0 - (uint32_t) '0';
+          ++cp;
+          c0 = (char_t) * cp;
+        }
+        else if ((base == 16U) && NET_ISXDIGIT(c0))
+        {
+          val = (val << 4) | ((uint32_t)c0 + 10U - (uint32_t)(NET_ISLOWER(c0) ? 'a' : 'A'));
+          ++cp;
+          c0 = (char_t) * cp;
+        }
+        else
+        {
+          break;
+        }
+      }
+
+      if (c0 == '.')
+      {
+        /*
+         * Internet format:
+         *  a.b.c.d
+         *  a.b.c   (with c treated as 16 bits)
+         *  a.b (with b treated as 24 bits)
+         */
+        if (pp >= (parts + 3))
+        {
+          ret = 0;
+          done = 1;
+        }
+        else
+        {
+          *pp = val;
+          pp++;
+          ++cp;
+          c0 = (char_t) * cp;
+        }
+      }
+      else
+      {
+        done = 1;
+      }
     }
-    /*
-     * Check for trailing characters.
-     */
-    if (c0 != '\0' && (NET_ISSPACE(c0) == false))
-    {
-        return (0);
-    }
+  }
+  /*
+   * Check for trailing characters.
+   */
+  if ((c0 != (char_t)'\0') && (NET_ISSPACE((c0)) == false))
+  {
+    ret = 0;
+  }
+  else
+
     /*
      * Concoct the address according to
      * the number of parts specified.
      */
+  {
     switch (pp - parts + 1)
     {
 
-    case 0:
-        return (0);       /* initial nondigit */
-
-    case 1:             /* a -- 32 bits */
+      case 0:
+        ret = 0;      /* initial nondigit */
         break;
 
-    case 2:             /* a.b -- 8.24 bits */
+      case 1:             /* a -- 32 bits */
+        break;
+
+      case 2:             /* a.b -- 8.24 bits */
         if (val > 0xffffffUL)
         {
-            return (0);
+          ret = 0;
         }
         val |= parts[0] << 24;
         break;
 
-    case 3:             /* a.b.c -- 8.8.16 bits */
+      case 3:             /* a.b.c -- 8.8.16 bits */
         if (val > 0xffffU)
         {
-            return (0);
+          ret = 0;
+          break;
         }
         val |= (parts[0] << 24) | (parts[1] << 16);
         break;
 
-    case 4:             /* a.b.c.d -- 8.8.8.8 bits */
+      case 4:             /* a.b.c.d -- 8.8.8.8 bits */
         if (val > 0xffU)
         {
-            return (0);
+          ret = 0;
+          break;
         }
         val |= (parts[0] << 24) | (parts[1] << 16) | (parts[2] << 8);
         break;
-    default:
+      default:
+        ret = 0;
         break;
     }
+  }
 
+  if (ret == 1)
+  {
     if (addr != NULL)
     {
-        S_ADDR(*addr) = NET_HTONL(val);
+      addr->addr = NET_HTONL(val);
     }
-    return (1);
+  }
+  return ret;
 }
 
 /**
@@ -226,17 +275,45 @@ int32_t net_aton(int32_t af, const char_t *cp, net_in_addr_t *addr)
   */
 int32_t net_aton_r(const char_t *cp)
 {
-    net_in_addr_t val;
-    int32_t       ret;
-    if (net_aton(NET_AF_INET, cp, &val) != 0)
-    {
-        ret = (int32_t) S_ADDR(val);
-    }
-    else
-    {
-        ret = 0;
-    }
-    return (ret);
+  net_ip_addr_t val;
+  int32_t       ret;
+  val.addr = 0;
+  if (net_aton(cp, &val) != 0)
+  {
+    ret = (int32_t) val.addr;
+  }
+  else
+  {
+    ret = 0;
+  }
+  return (ret);
+}
+
+#endif /* NET_USE_LWIP_DEFINITIONS */
+
+
+uint16_t    net_get_port(net_sockaddr_t      *addr)
+{
+  /*cstat -MISRAC2012-Rule-11.3 -MISRAC2012-Rule-11.8 */
+  return (NET_NTOHS(((net_sockaddr_in_t *)addr)->sin_port));
+  /*cstat +MISRAC2012-Rule-11.3 +MISRAC2012-Rule-11.8 +MISRAC2012-Rule-10.8 Cast */
+}
+void    net_set_port(net_sockaddr_t      *addr, uint16_t port)
+{
+  /*cstat -MISRAC2012-Rule-11.3 Cast */
+  ((net_sockaddr_in_t *)addr)->sin_port        = NET_HTONS(port);
+  /*cstat +MISRAC2012-Rule-11.3 Cast */
+}
+
+net_ip_addr_t    net_get_ip_addr(net_sockaddr_t      *addr)
+{
+  net_ip_addr_t ipaddr;
+  uint32_t              addrv;
+  /*cstat -MISRAC2012-Rule-11.3 Cast */
+  addrv = ((net_sockaddr_in_t *)addr)->sin_addr.s_addr;
+  /*cstat +MISRAC2012-Rule-11.3 Cast */
+  NET_COPY(ipaddr, addrv);
+  return ipaddr;
 }
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

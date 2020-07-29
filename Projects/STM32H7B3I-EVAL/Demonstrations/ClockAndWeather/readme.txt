@@ -1,5 +1,5 @@
 /**
-  @page Demo   STM32H7B3I-EVAL Clock and Weather Demonstration Firmware
+  @page ClockAndWeather STM32H7B3I-EVAL Clock and Weather Demonstration Firmware
  
   @verbatim
   ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
@@ -20,10 +20,9 @@
   ******************************************************************************
   @endverbatim
 
-@par Clock and Weather Demonstration Overview
+@par Demo Description
 
- The Clock&Weather module provides a clock and weather application based on the STM32H7xxx and 
- the Touch GFX APIs
+ This module provides a WiFi clock and weather application based on TouchGFX.
 
 
 @par Clock and Weather Demonstration feature
@@ -41,7 +40,7 @@
   - This demonstration has been tested with STMicroelectronics STM32H7B3I-EVAL
     boards and can be easily tailored to any other supported device 
     and development board.
-     
+
 @par How to use it ? 
 
 To load the demonstration, use STM32CubeProgrammer to program both internal Flash and external OSPI memory.
@@ -65,6 +64,10 @@ In order to program the demonstration you must do the following:
 
 The binary and Media demonstration files are available from the STM32H7B3I-EVAL page in the Binary Delivery section.
 Please refer to : www.st.com/en/product/STM32H7B3I-EVAL.html
+
+@par Keywords
+
+Graphics, Connectivity, WiFi, TouchGFX, FreeRTOS, FatFS, Demonstration, Clock, Weather 
 
 @Note If the  application is using the DTCM/ITCM memories (@0x20000000/ 0x0000000: not cacheable and only accessible
       by the Cortex M7 and the  MDMA), no need for cache maintenance when the Cortex M7 and the MDMA access these RAMs.

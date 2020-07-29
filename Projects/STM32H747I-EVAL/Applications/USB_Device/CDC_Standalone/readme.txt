@@ -117,6 +117,9 @@ and with baudrates higher than 9600, there might be communication errors.
 For more details about the STM32Cube USB Device library, please refer to UM1734
 "STM32Cube USB Device library".
 
+@par Keywords
+
+Connectivity, USB_Device, USB, UART, Full Speed, High Speed, CDC, PSTN,  USB-to-RS232, Bridge, VCP, Com port
 
 @par USB Library Configuration
 

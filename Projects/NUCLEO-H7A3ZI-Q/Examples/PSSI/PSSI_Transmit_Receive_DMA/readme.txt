@@ -149,7 +149,7 @@ If the Slave board is used the "#define MASTER_BOARD" must be commented.
 
 @par Keywords
 
-Tansmission, Reception, PSSI, DMA, Slave,Clock
+Transmission, Reception, PSSI, DMA, Slave,Clock
 
 @par Directory contents 
    PSSI/PSSI_Transmit_Receive_DMA/Inc/stm32h7xx_hal_conf.h    HAL configuration file

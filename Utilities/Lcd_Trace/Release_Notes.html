@@ -38,9 +38,33 @@
 <div class="col-sm-12 col-lg-8">
 <h1 id="update-history">Update History</h1>
 <div class="collapse">
-<input type="checkbox" id="collapse-section2" aria-hidden="true"> <label for="collapse-section2" aria-hidden="true">V1.1.0 / 27-November-2019</label>
+<input type="checkbox" id="collapse-section3" checked aria-hidden="true"> <label for="collapse-section3" aria-hidden="true">V2.0.0 / 26-February-2020</label>
 <div>
 <h2 id="main-changes">Main Changes</h2>
+<ul>
+<li>lcd_trace.h
+<ul>
+<li>Include stm32_lcd.h instead of basi_gui.h file no longer used.</li>
+</ul></li>
+<li>lcd_trace.c
+<ul>
+<li>Replace GUI_* with UTILS_LCD_*</li>
+</ul></li>
+</ul>
+<h2 id="backward-compatibility">Backward compatibility</h2>
+<ul>
+<li>This version breaks the compatibility with previous ones</li>
+</ul>
+<h2 id="dependencies">dependencies</h2>
+<ul>
+<li>Utilities\common v1.4.0</li>
+</ul>
+</div>
+</div>
+<div class="collapse">
+<input type="checkbox" id="collapse-section2" aria-hidden="true"> <label for="collapse-section2" aria-hidden="true">V1.1.0 / 27-November-2019</label>
+<div>
+<h2 id="main-changes-1">Main Changes</h2>
 <ul>
 <li>lcd_trace.h
 <ul>
@@ -52,7 +76,7 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section1" aria-hidden="true"> <label for="collapse-section1" aria-hidden="true">V1.0.0 / 30-October-2019</label>
 <div>
-<h2 id="main-changes-1">Main Changes</h2>
+<h2 id="main-changes-2">Main Changes</h2>
 <ul>
 <li>First official release of LCD TRACE utility based on legacy LCD LOG utility</li>
 </ul>

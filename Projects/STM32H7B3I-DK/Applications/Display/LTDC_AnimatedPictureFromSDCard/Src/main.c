@@ -88,10 +88,10 @@ int main(void)
 
   while(BSP_SD_IsDetected(0) != SD_PRESENT)
   {
-    GUI_DisplayStringAtLine(8, (uint8_t*)" Please insert SD Card and reset the board ");
+    UTIL_LCD_DisplayStringAtLine(8, (uint8_t*)" Please insert SD Card and reset the board ");
   }
 
-  GUI_Clear(GUI_COLOR_BLACK);
+  UTIL_LCD_Clear(UTIL_LCD_COLOR_BLACK);
 
   /*##-2- Link the SD Card disk I/O driver ###################################*/
   if(FATFS_LinkDriver(&SD_Driver, SD_Path) != 0)
@@ -106,7 +106,7 @@ int main(void)
       pDirectoryFiles[counter] = malloc(MAX_BMP_FILE_NAME);
       if(pDirectoryFiles[counter] == NULL)
       {
-        GUI_DisplayStringAtLine(8, (uint8_t*)"  Cannot allocate memory ");
+        UTIL_LCD_DisplayStringAtLine(8, (uint8_t*)"  Cannot allocate memory ");
         while(1)
         {
         }
@@ -116,20 +116,20 @@ int main(void)
     /*##-4- Display Background picture #######################################*/
     /* Select Background Layer  */
     BSP_LCD_SetActiveLayer(0, LTDC_ACTIVE_LAYER_BACKGROUND);
-    GUI_SetLayer(LTDC_ACTIVE_LAYER_BACKGROUND);
+    UTIL_LCD_SetLayer(LTDC_ACTIVE_LAYER_BACKGROUND);
 
     /* Register the file system object to the FatFs module */
     if(f_mount(&SD_FatFs, (TCHAR const*)SD_Path, 0) != FR_OK)
     {
       /* FatFs Initialization Error */
-      GUI_DisplayStringAtLine(8, (uint8_t*)"  FatFs Initialization Error ");
+      UTIL_LCD_DisplayStringAtLine(8, (uint8_t*)"  FatFs Initialization Error ");
     }
     else
     {
       /* Open directory */
       if (f_opendir(&directory, (TCHAR const*)"/BACK") != FR_OK)
       {
-        GUI_DisplayStringAtLine(8, (uint8_t*)"    Open directory.. fails      ");
+        UTIL_LCD_DisplayStringAtLine(8, (uint8_t*)"    Open directory.. fails      ");
         while(1)
         {
         }
@@ -145,7 +145,7 @@ int main(void)
     }
     else
     {
-      GUI_DisplayStringAtLine(8, (uint8_t*)"    File type not supported. ");
+      UTIL_LCD_DisplayStringAtLine(8, (uint8_t*)"    File type not supported. ");
       while(1)
       {
       }
@@ -154,7 +154,7 @@ int main(void)
     /*##-5- Display Foreground picture #######################################*/
     /* Select Foreground Layer  */
     BSP_LCD_SetActiveLayer(0, LTDC_ACTIVE_LAYER_FOREGROUND);
-    GUI_SetLayer(LTDC_ACTIVE_LAYER_FOREGROUND);
+    UTIL_LCD_SetLayer(LTDC_ACTIVE_LAYER_FOREGROUND);
 
     /* Decrease the foreground transparency */
     BSP_LCD_SetTransparency(0, LTDC_ACTIVE_LAYER_FOREGROUND, 200);
@@ -169,7 +169,7 @@ int main(void)
         free(pDirectoryFiles[counter]);
       }
 
-      GUI_DisplayStringAtLine(8, (uint8_t*)"    No Bitmap files...      ");
+      UTIL_LCD_DisplayStringAtLine(8, (uint8_t*)"    No Bitmap files...      ");
       while(1)
       {
       }
@@ -204,8 +204,8 @@ int main(void)
       }
       else
       {
-        GUI_DisplayStringAtLine(7, (uint8_t *) str);
-        GUI_DisplayStringAtLine(8, (uint8_t*)"    File type not supported. ");
+        UTIL_LCD_DisplayStringAtLine(7, (uint8_t *) str);
+        UTIL_LCD_DisplayStringAtLine(8, (uint8_t*)"    File type not supported. ");
         while(1)
         {
         }
@@ -227,7 +227,7 @@ static void LCD_Config(void)
   /* Initialize LCD BACKGROUND layer: activated by default */
   lcd_status = BSP_LCD_Init(0, LCD_ORIENTATION_LANDSCAPE);
   while(lcd_status != BSP_ERROR_NONE);
-  GUI_SetFuncDriver(&LCD_Driver);
+  UTIL_LCD_SetFuncDriver(&LCD_Driver);
 
   /* Initialize LCD FOREGROUND layer */
   config.Address = LCD_BG_LAYER_ADDRESS;
@@ -240,17 +240,17 @@ static void LCD_Config(void)
 
   /* Select the LCD Foreground Layer */
   BSP_LCD_SetActiveLayer(0, LTDC_ACTIVE_LAYER_BACKGROUND);
-  GUI_SetLayer(LTDC_ACTIVE_LAYER_BACKGROUND);
+  UTIL_LCD_SetLayer(LTDC_ACTIVE_LAYER_BACKGROUND);
   /* Clear the Background Layer */
-  GUI_Clear(GUI_COLOR_WHITE);
+  UTIL_LCD_Clear(UTIL_LCD_COLOR_WHITE);
 
   /* Set LCD Foreground Layer  */
   /* Select the LCD Foreground Layer */
   BSP_LCD_SetActiveLayer(0, LTDC_ACTIVE_LAYER_FOREGROUND);
-  GUI_SetLayer(LTDC_ACTIVE_LAYER_FOREGROUND);
+  UTIL_LCD_SetLayer(LTDC_ACTIVE_LAYER_FOREGROUND);
 
   /* Clear the Foreground Layer */
-  GUI_Clear(GUI_COLOR_BLACK);
+  UTIL_LCD_Clear(UTIL_LCD_COLOR_BLACK);
 
   /* Configure and enable the Color Keying feature */
   BSP_LCD_SetColorKeying(0, LTDC_ACTIVE_LAYER_FOREGROUND, 0);
@@ -259,11 +259,11 @@ static void LCD_Config(void)
   BSP_LCD_SetTransparency(0, LTDC_ACTIVE_LAYER_FOREGROUND, 100);
 
   /* Set Font */
-  GUI_SetFont(&Font16);
+  UTIL_LCD_SetFont(&Font16);
 
   /* Set the Text and Back Color */
-  GUI_SetTextColor(GUI_COLOR_RED);
-  GUI_SetBackColor(GUI_COLOR_BLACK);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_RED);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_BLACK);
 }
 
 /**

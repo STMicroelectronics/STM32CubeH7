@@ -292,11 +292,11 @@ int32_t BSP_OSPI_NOR_RegisterDefaultMspCallbacks (uint32_t Instance)
   else
   {
     /* Register MspInit/MspDeInit Callbacks */
-    if(HAL_OSPI_RegisterCallback(&hospi_nor[Instance], HAL_OSPI_MSPINIT_CB_ID, OSPI_NOR_MspInit) != HAL_OK)
+    if(HAL_OSPI_RegisterCallback(&hospi_nor[Instance], HAL_OSPI_MSP_INIT_CB_ID, OSPI_NOR_MspInit) != HAL_OK)
     {
       ret = BSP_ERROR_PERIPH_FAILURE;
     }
-    else if(HAL_OSPI_RegisterCallback(&hospi_nor[Instance], HAL_OSPI_MSPDEINIT_CB_ID, OSPI_NOR_MspDeInit) != HAL_OK)
+    else if(HAL_OSPI_RegisterCallback(&hospi_nor[Instance], HAL_OSPI_MSP_DEINIT_CB_ID, OSPI_NOR_MspDeInit) != HAL_OK)
     {
       ret = BSP_ERROR_PERIPH_FAILURE;
     }
@@ -316,7 +316,7 @@ int32_t BSP_OSPI_NOR_RegisterDefaultMspCallbacks (uint32_t Instance)
   * @param CallBacks    pointer to MspInit/MspDeInit callbacks functions
   * @retval BSP status
   */
-int32_t BSP_OSPI_NOR_RegisterMspCallbacks (uint32_t Instance, BSP_OSPI_NOR_Cb_t *CallBacks)
+int32_t BSP_OSPI_NOR_RegisterMspCallbacks (uint32_t Instance, BSP_OSPI_Cb_t *CallBacks)
 {
   int32_t ret = BSP_ERROR_NONE;
 
@@ -328,11 +328,11 @@ int32_t BSP_OSPI_NOR_RegisterMspCallbacks (uint32_t Instance, BSP_OSPI_NOR_Cb_t 
   else
   {
     /* Register MspInit/MspDeInit Callbacks */
-    if(HAL_OSPI_RegisterCallback(&hospi_nor[Instance], HAL_OSPI_MSPINIT_CB_ID, CallBacks->pMspInitCb) != HAL_OK)
+    if(HAL_OSPI_RegisterCallback(&hospi_nor[Instance], HAL_OSPI_MSP_INIT_CB_ID, CallBacks->pMspInitCb) != HAL_OK)
     {
       ret = BSP_ERROR_PERIPH_FAILURE;
     }
-    else if(HAL_OSPI_RegisterCallback(&hospi_nor[Instance], HAL_OSPI_MSPDEINIT_CB_ID, CallBacks->pMspDeInitCb) != HAL_OK)
+    else if(HAL_OSPI_RegisterCallback(&hospi_nor[Instance], HAL_OSPI_MSP_DEINIT_CB_ID, CallBacks->pMspDeInitCb) != HAL_OK)
     {
       ret = BSP_ERROR_PERIPH_FAILURE;
     }

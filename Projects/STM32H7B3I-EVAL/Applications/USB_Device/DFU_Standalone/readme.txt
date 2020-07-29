@@ -99,7 +99,7 @@ Device's end address is the end address of the flash memory and it is dependent 
 
 @par Keywords
 
-Middleware, USB Device, DFU, Firmware upgrade
+Connectivity, USB_Device, USB, DFU, Firmware upgrade
 
 @par Directory contents
 
@@ -133,7 +133,7 @@ Middleware, USB Device, DFU, Firmware upgrade
       The install of required device driver is available under:
       "Program Files\STMicroelectronics\Software\DfuSe v3.0.5\Bin\Driver\Win8.1" directory.
     - Connect the STM32H7B3I-EVAL board  to the PC through micro A-Male to standard A Male cable connected to the connector:
-     - CN8  : to use USB High speed (HS)
+     - CN8  : to use USB High speed (HS), Make sure that JP9, JP11 and JP19 are fitted in USBHS position and that JP10 and JP16 are fitted.
      - CN27 : to use USB High speed OTG IP in full speed (HS_IN_FS)
 
 

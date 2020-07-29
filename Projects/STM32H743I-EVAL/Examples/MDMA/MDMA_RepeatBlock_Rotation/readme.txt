@@ -1,9 +1,9 @@
 /**
-  @page MDMA Repeat BLock Transfer Rotation example descreption
+  @page MDMA_RepeatBlock_Rotation MDMA Repeat BLock Transfer Rotation example description
   
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    MDMA/__INTERNAL_MDMA_RepeatBlock_Rotation/readme.txt 
+  * @file    MDMA/MDMA_RepeatBlock_Rotation/readme.txt 
   * @author  MCD Application Team  
   * @brief   Description of the MDMA Repeat BLock Rotation Transfer example.
   ******************************************************************************
@@ -156,11 +156,6 @@ STM32H743I Eval board's LED can be used to monitor the transfer status:
 @note The example need to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
-@par Keywords
-
-Display, Graphic, MDMA, LCD, SDRAM, RGB565, Memory to memory, LTDC, Pixel, non contiguous,
-Repeat blocks
-
 @Note If the  application is using the DTCM/ITCM memories (@0x20000000/ 0x0000000: not cacheable and only accessible
       by the Cortex M7 and the  MDMA), no need for cache maintenance when the Cortex M7 and the MDMA access these RAMs.
       If the application needs to use DMA(or other masters) based access or requires more RAM, then  the user has to:
@@ -173,6 +168,11 @@ Repeat blocks
       Depending on the use case it is also possible to configure the cache attributes using the MPU.
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
+
+@par Keywords
+
+System, Display, Graphics, MDMA, LCD, SDRAM, RGB565, Memory to memory, LTDC, Pixel, non contiguous,
+Repeat blocks
 
 @par Directory contents
 

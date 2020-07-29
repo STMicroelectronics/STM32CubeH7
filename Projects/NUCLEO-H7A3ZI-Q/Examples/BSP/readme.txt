@@ -80,6 +80,10 @@ The program checks the presence of Adafruit shield by reading the state of pin P
               Please refer to the AN4838 “Managing memory protection unit (MPU) in STM32 MCUs”
               Please refer to the AN4839 “Level 1 cache on STM32F7 Series and STM32H7 Series
 
+@par Keywords
+
+Board Support Package, BSP, Adafruit, TFT, LCD, Joystick, SD Card
+
 @par Directory contents
 
   - Src/main.c                       Main program

@@ -37,7 +37,7 @@
 #include "stm32h747i_eval_ts.h"
 #include "stm32h747i_eval_audio.h"
 #include "stm32h747i_eval_qspi.h"
-#include "../../../../../../Utilities/Basic_GUI/basic_gui.h"
+#include "stm32_lcd.h"
 /* Exported types ------------------------------------------------------------*/
 typedef struct
 {

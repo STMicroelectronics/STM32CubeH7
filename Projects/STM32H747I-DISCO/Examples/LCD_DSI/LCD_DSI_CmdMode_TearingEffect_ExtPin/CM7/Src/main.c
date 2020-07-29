@@ -103,7 +103,7 @@ static void MPU_Config(void);
 
 void LCD_MspInit(void);
 
-const GUI_Drv_t LCD_GUI_Driver =
+const LCD_UTILS_Drv_t LCD_UTIL_Driver =
 {
   BSP_LCD_DrawBitmap,
   BSP_LCD_FillRGBRect,
@@ -179,7 +179,7 @@ int main(void)
 
   /* Initialize LTDC layer 0 iused for Hint */  
   LCD_LayertInit(0, LCD_FRAME_BUFFER);     
-  GUI_SetFuncDriver(&LCD_GUI_Driver);
+  UTIL_LCD_SetFuncDriver(&LCD_UTIL_Driver);
 
   /* Update pitch : the draw is done on the whole physical X Size */
   HAL_LTDC_SetPitch(&hlcd_ltdc, Lcd_Ctx[0].XSize, 0);
@@ -454,6 +454,8 @@ static uint8_t LCD_Init(void){
   PeriphClkInitStruct.PLL3.PLL3P = 2;
   PeriphClkInitStruct.PLL3.PLL3Q = 2;  
   PeriphClkInitStruct.PLL3.PLL3R = 19;
+  PeriphClkInitStruct.PLL3.PLL3VCOSEL = RCC_PLL3VCOWIDE;
+  PeriphClkInitStruct.PLL3.PLL3RGE = RCC_PLL3VCIRANGE_2;
   HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct);   
   
   /* Base address of DSI Host/Wrapper registers to be set before calling De-Init */
@@ -714,16 +716,16 @@ void LCD_MspInit(void)
   */
 static void LCD_BriefDisplay(void)
 {
-  GUI_SetFont(&Font24);  
-  GUI_SetTextColor(GUI_COLOR_BLUE); 
-  GUI_FillRect(0, 0, Lcd_Ctx[0].XSize, 112,GUI_COLOR_BLUE);  
-  GUI_SetTextColor(GUI_COLOR_WHITE);
-  GUI_FillRect(0, 112, Lcd_Ctx[0].XSize, 368, GUI_COLOR_WHITE);
-  GUI_SetBackColor(GUI_COLOR_BLUE);
-  GUI_DisplayStringAtLine(1, (uint8_t *)"   LCD_DSI_CmdMode_TearingEffect_ExtPin");
-  GUI_SetFont(&Font16);
-  GUI_DisplayStringAtLine(4, (uint8_t *)"This example shows how to display images on LCD DSI and prevent");
-  GUI_DisplayStringAtLine(5, (uint8_t *)"Tearing Effect using DSI_TE pin ");
+  UTIL_LCD_SetFont(&Font24);  
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_BLUE); 
+  UTIL_LCD_FillRect(0, 0, Lcd_Ctx[0].XSize, 112,UTIL_LCD_COLOR_BLUE);  
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
+  UTIL_LCD_FillRect(0, 112, Lcd_Ctx[0].XSize, 368, UTIL_LCD_COLOR_WHITE);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_DisplayStringAtLine(1, (uint8_t *)"   LCD_DSI_CmdMode_TearingEffect_ExtPin");
+  UTIL_LCD_SetFont(&Font16);
+  UTIL_LCD_DisplayStringAtLine(4, (uint8_t *)"This example shows how to display images on LCD DSI and prevent");
+  UTIL_LCD_DisplayStringAtLine(5, (uint8_t *)"Tearing Effect using DSI_TE pin ");
   
 }
 

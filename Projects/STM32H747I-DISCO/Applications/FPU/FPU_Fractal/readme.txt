@@ -166,6 +166,9 @@ The check could be done using this macro : __HAL_RCC_GET_FLAG(RCC_FLAG_D2CKRDY).
 @note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
+@par Keywords
+
+System, Cortex, floating-point unit, FPU, Double-precision, Fractal, Julia set, Equation, Complex plan, Real numbers, Pixel, Color, Graphics, Display, Button
 
 @par Directory contents
 

@@ -558,6 +558,8 @@ static uint8_t LCD_Init(void)
 #else
 #error Unknown USE_BPP
 #endif
+    PeriphClkInitStruct.PLL3.PLL3VCOSEL = RCC_PLL3VCOWIDE;
+    PeriphClkInitStruct.PLL3.PLL3RGE = RCC_PLL3VCIRANGE_2;
     HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct);
     /* Base address of DSI Host/Wrapper registers to be set before calling De-Init */
     hdsi.Instance = DSI;

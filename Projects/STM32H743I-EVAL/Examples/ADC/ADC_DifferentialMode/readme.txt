@@ -67,6 +67,10 @@ during process.
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
 
+@par Keywords
+
+Analog, ADC, Analog to Digital, Differential Mode, Continuous conversion, Measurement, Voltage
+
 @par Directory contents 
 
   - ADC/ADC_DifferentialMode/Inc/stm32h7xx_hal_conf.h    HAL configuration file

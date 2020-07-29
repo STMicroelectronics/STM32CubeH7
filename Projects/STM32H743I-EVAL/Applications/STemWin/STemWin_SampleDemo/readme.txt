@@ -20,7 +20,7 @@
   ******************************************************************************
    @endverbatim
 
-@par Description
+@par Application Description
 
 This directory contains a set of source files that implement a sample
 demonstration application allowing to show some of the STemWin Library capabilities 
@@ -45,12 +45,6 @@ or pause the currently running module.
 @note Care must be taken when HAL_RCCEx_PeriphCLKConfig() is used to select the RTC clock source; in this 
       case the Backup domain will be reset in order to modify the RTC Clock source, as consequence RTC  
       registers (including the backup registers) and RCC_BDCR register are set to their reset values.
-	   
-@par Keywords
-
-Middleware, Display, STemWin, HelloWorld, LCD, GUI, Demonstration, Touch screen
-
-
 
 @Note If the  application is using the DTCM/ITCM memories (@0x20000000/ 0x0000000: not cacheable and only accessible
       by the Cortex M7 and the  MDMA), no need for cache maintenance when the Cortex M7 and the MDMA access these RAMs.
@@ -64,6 +58,10 @@ Middleware, Display, STemWin, HelloWorld, LCD, GUI, Demonstration, Touch screen
       Depending on the use case it is also possible to configure the cache attributes using the MPU.
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
+
+@par Keywords
+
+Graphics, Display, STemWin, LTDC, LCD, GUI, Touch screen
 
 @par Directory contents 
 

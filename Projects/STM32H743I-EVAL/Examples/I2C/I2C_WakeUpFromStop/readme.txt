@@ -116,6 +116,10 @@ file depending hardware configuration used.
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
 
+@par Keywords
+
+Connectivity, I2C, Communication, Trasmission, Reception, Master, Slave, Wake up, Low-power, Stop mode, Interrupt
+
 @par Directory contents 
 
   - I2C/I2C_WakeUpFromStop/Inc/stm32h7xx_hal_conf.h    HAL configuration file

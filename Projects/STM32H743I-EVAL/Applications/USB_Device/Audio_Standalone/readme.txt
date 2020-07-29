@@ -1,9 +1,9 @@
 /**
-  @page AUDIO_Standalone USB Device AUDIO application
+  @page Audio_Standalone USB Device AUDIO application
   
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    USB_Device/AUDIO_Standalone/readme.txt 
+  * @file    USB_Device/Audio_Standalone/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the USB Device AUDIO application.
   ******************************************************************************
@@ -88,12 +88,6 @@ file “usbd_conf.h” available under the project includes directory, in a way to f
 requirements, such as:      
  - USBD_AUDIO_FREQ, specifying the sampling rate conversion from original audio file sampling rate to the
    sampling rate supported by the device.   
-    
-         
-@par Keywords
-
-Middleware, USB Device, Audio, Streaming, SAI, Full speed, PCM
-         
 
 
 @Note If the  application is using the DTCM/ITCM memories (@0x20000000/ 0x0000000: not cacheable and only accessible
@@ -108,6 +102,10 @@ Middleware, USB Device, Audio, Streaming, SAI, Full speed, PCM
       Depending on the use case it is also possible to configure the cache attributes using the MPU.
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
+
+@par Keywords
+
+Connectivity, USB_Device, USB, SAI, Audio, Streaming, Full speed, PCM
 
 @par Directory contents
 

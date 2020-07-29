@@ -15,7 +15,7 @@
 
 #include "cmsis_os.h"
 #include <FreeRTOS.h>
-#include <Queue.h>
+#include <queue.h>
 
 /***********************************************************
  ******         24 Bits Per Pixel Support            *******
@@ -46,10 +46,12 @@ extern "C" {
 
 #include "bsp.h"
 int RTC_Init(void);
+int RNG_Init(void);
 /* RTC handler declaration */
 RTC_HandleTypeDef RtcHandle;
 LTDC_HandleTypeDef hltdc;
 DMA2D_HandleTypeDef hdma2d;
+RNG_HandleTypeDef RngHandle;
 }
 
 //LCD Configuration Defines
@@ -391,8 +393,9 @@ void SystemClock_Config(void)
     PeriphClkInitStruct.PLL3.PLL3P = 2;
     PeriphClkInitStruct.PLL3.PLL3Q = 6;
     PeriphClkInitStruct.PLL3.PLL3R = 30;
-    PeriphClkInitStruct.PLL3.PLL3VCOSEL = 0;
+    PeriphClkInitStruct.PLL3.PLL3VCOSEL = RCC_PLL3VCOMEDIUM;
     PeriphClkInitStruct.PLL3.PLL3FRACN = 0;
+    PeriphClkInitStruct.PLL3.PLL3RGE = RCC_PLL3VCIRANGE_0;
     if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct) != HAL_OK)
     {
         while (1)
@@ -486,6 +489,9 @@ void hw_init()
      
     /* Initialize RTC */
      RTC_Init();
+     
+     /* Initialize RNG */
+     RNG_Init();  
 }
 
 #if !defined(USE_BPP) || USE_BPP==16
@@ -650,3 +656,65 @@ void HAL_RTC_MspDeInit(RTC_HandleTypeDef *hrtc)
   /*##-1- Reset peripherals ##################################################*/
   __HAL_RCC_RTC_DISABLE();
 }
+
+int RNG_Init(void)
+{
+  /* Configure the RNG peripheral */
+  RngHandle.Instance = RNG;
+  
+   /* DeInitialize the RNG peripheral */
+  if (HAL_RNG_DeInit(&RngHandle) != HAL_OK)
+  {
+    /* DeInitialization Error */
+    return 1;
+  }    
+
+  /* Initialize the RNG peripheral */
+  if (HAL_RNG_Init(&RngHandle) != HAL_OK)
+  {
+    /* Initialization Error */
+    return 1;
+  }
+  return 0;
+}
+
+/**
+  * @brief RNG MSP Initialization
+  *        This function configures the hardware resources used in this example:
+  *           - Peripheral's clock enable
+  * @param hrng: RNG handle pointer
+  * @retval None
+  */
+void HAL_RNG_MspInit(RNG_HandleTypeDef *hrng)
+{
+ RCC_PeriphCLKInitTypeDef PeriphClkInitStruct;
+
+  /*Select PLL output as RNG clock source */
+  PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_RNG;
+  PeriphClkInitStruct.RngClockSelection = RCC_RNGCLKSOURCE_PLL;
+  if(HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct))
+  {
+    /* Initialization Error */
+    while(1);
+  }
+
+  /* RNG Peripheral clock enable */
+  __HAL_RCC_RNG_CLK_ENABLE();
+
+}
+
+/**
+  * @brief RNG MSP De-Initialization
+  *        This function freeze the hardware resources used in this example:
+  *          - Disable the Peripheral's clock
+  * @param hrng: RNG handle pointer
+  * @retval None
+  */
+void HAL_RNG_MspDeInit(RNG_HandleTypeDef *hrng)
+{
+  /* Enable RNG reset state */
+  __HAL_RCC_RNG_FORCE_RESET();
+
+  /* Release RNG from reset state */
+  __HAL_RCC_RNG_RELEASE_RESET();
+} 

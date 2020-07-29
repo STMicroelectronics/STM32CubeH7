@@ -22,7 +22,7 @@
 
 @par Application Description
 
-This application shows how to use  embedded hardware semaphore to send nofification between cores. 
+This application shows how to use  embedded hardware semaphore to send notification between cores.
 
 CPU1 (Cortex-M7) and CPU2 (Cortex-M4) are booting at once (with respect to configured boot Flash options)
 System Init, System clock, voltage scaling and L1-Cache configuration are done by CPU1 (Cortex-M7).
@@ -48,7 +48,7 @@ In this example:
     - CPU2(CM4) Creates a task looping on waiting for a Software Semaphore and toggling LED3.
     - CPU2(CM4) activates HSEM Notification and wait for Notification to be send by CPU1(CM7).
 
-    - If CPU2(CM4) receives the HSEM Notification , it releases the SW Semaphore.
+    - If CPU2(CM4) receives the HSEM Notification, it releases the SW Semaphore.
     - When the SW Semaphore is released, CPU2 toggles LED3    
     
 STM32H747I-DISCO board's LEDs can be used to monitor the execution status:
@@ -90,9 +90,11 @@ The SystemClock_Config() function is used to set the Flash latency and  to confi
 For more details about FreeRTOS implementation on STM32Cube, please refer to UM1722 "Developing Applications 
 on STM32Cube with RTOS".
 
+@par Keywords
+
+RTOS, FreeRTOS, multiprocessor, Thread, HSEM, Semaphore, Software Semaphore, Hardware Semaphore, Priorities, Notification, Interrupt
 
 @par Directory contents
-
 
     - FreeRTOS/FreeRTOS_HwSemaphoreCoreSync/Commmon/Src/system_stm32h7xx.c  STM32H7xx system configuration source file
     - FreeRTOS/FreeRTOS_HwSemaphoreCoreSync/Commmon/Inc/FreeRTOSConfig.h    FreeRTOS Configuration file

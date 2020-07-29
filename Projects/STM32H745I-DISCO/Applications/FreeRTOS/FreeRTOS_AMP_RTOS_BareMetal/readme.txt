@@ -74,8 +74,11 @@ on STM32Cube with RTOS".
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
 
-@par Directory contents
+@par Keywords
 
+RTOS, FreeRTOS, Thread, multiprocessor, Dual, Baremetal, Message, Shared memory
+
+@par Directory contents
 
     - FreeRTOS/FreeRTOS_AMP_RTOS_BareMetal/Commmon/Src/system_stm32h7xx.c  STM32H7xx system configuration source file
 

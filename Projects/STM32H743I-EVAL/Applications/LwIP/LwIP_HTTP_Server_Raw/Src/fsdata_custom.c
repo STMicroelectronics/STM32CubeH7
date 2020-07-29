@@ -19,7 +19,7 @@
   
 #include "lwip/apps/fs.h"
 #include "lwip/def.h"
-#include "httpd/fsdata.h"
+#include "http/fsdata.h"
 
 
 #define file_NULL (struct fsdata_file *) NULL

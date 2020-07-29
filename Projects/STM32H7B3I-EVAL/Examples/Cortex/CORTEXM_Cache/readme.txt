@@ -106,6 +106,10 @@ Cache Maintenance:
 @note Please refer to the SDEN-1068427 “Cortex-M7 (AT610) and Cortex-M7 with FPU (AT611) Software Developer Errata Notice"
       issued on 28-Nov-2018 (version 8.0) by ARM (erratum #1259864).
 
+@par Keywords
+
+System, Cortex, Memory regions, Cache, MPU, Write-Through, write-back, write-allocate, WBWA, Cache policy, CPU, DMA
+
 @par Directory contents
 
   - CortexM/CORTEXM_Cache/Src/main.c                  Main program

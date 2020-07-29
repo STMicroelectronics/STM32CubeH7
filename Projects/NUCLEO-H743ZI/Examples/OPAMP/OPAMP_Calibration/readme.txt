@@ -1,5 +1,5 @@
 /**
-  @page OPAMP calibration example
+  @page OPAMP_Calibration example
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    OPAMP/OPAMP_CALIBRATION/readme.txt 
@@ -83,6 +83,10 @@ LED3 is ON and example is stopped(using infinite loop) when there is an error.
       Depending on the use case it is also possible to configure the cache attributes using the MPU.
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
+
+@par Keywords
+
+Analog, OPAMP, follower, calibration, Timer, TIM, DAC, Signals generation, Waveform, Amplitude
 
 @par Directory contents 
 

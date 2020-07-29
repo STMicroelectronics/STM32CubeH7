@@ -17,7 +17,7 @@
 
 const char* encryption_status[]={"Open", "WEP", "WPA", "WPA2", "WPA-WPA2", "WPA2-TKIP", "Unknown"};
 
-extern ES_WIFI_APs_t APs;
+extern net_wifi_scan_results_t  APs[];
 extern osMessageQId ClockAndWeatherEvent;
 extern char* jsondata;
 
@@ -433,35 +433,6 @@ void Model::getWeather(weatherData *weather, int CityVal)
   weather->timezone = 0;
 }
 
-static inline char *encryption_to_string(ES_WIFI_SecurityType_t encryption)
-{
-  switch(encryption)
-  {
-  case ES_WIFI_SEC_OPEN:
-    //return "Open";
-    return (char*) encryption_status[0];
-  case ES_WIFI_SEC_WEP:
-    //    return "WEP";
-    return (char*) encryption_status[1];
-  case ES_WIFI_SEC_WPA:
-    //    return "WPA";
-    return (char*) encryption_status[2];
-  case ES_WIFI_SEC_WPA2:
-    //    return "WPA2";
-    return (char*) encryption_status[3];
-  case ES_WIFI_SEC_WPA_WPA2:
-    //    return "WPA-WPA2";
-    return (char*) encryption_status[4];
-  case ES_WIFI_SEC_WPA2_TKIP:
-    //    return "WPA2-TKIP";
-    return (char*) encryption_status[5];
-  case ES_WIFI_SEC_UNKNOWN:
-    //    return "Unknown";
-    return (char*) encryption_status[6];
-  }
-  return (char*) encryption_status[6];
-}
-
 static inline int rssi_to_strength(int16_t RSSI)
 {
   if(RSSI >= -50)
@@ -485,21 +456,21 @@ static inline int rssi_to_strength(int16_t RSSI)
 
 void Model::updateWifi()
 {
-  numberOfWifiAccesPoints = APs.nbr;
-  
-  for (int cnt = 0; cnt < numberOfWifiAccesPoints; cnt++)
+  for (int cnt = 0; cnt < MAX_LISTED_AP; cnt++)
   {
+    if (APs[cnt].ssid.value[0] == 0) break;
     wifiAccessPoints[cnt].id = cnt;
-    touchgfx::Unicode::snprintf(wifiAccessPoints[cnt].ssid, 32, (const char*)APs.AP[cnt].SSID);
-    touchgfx::Unicode::snprintf(wifiAccessPoints[cnt].encryption, 30, encryption_to_string(APs.AP[cnt].Security));
-    wifiAccessPoints[cnt].signalStrength = rssi_to_strength(APs.AP[cnt].RSSI);
-    
-    if ((APs.AP[cnt].Security != ES_WIFI_SEC_OPEN) && (APs.AP[cnt].Security != ES_WIFI_SEC_UNKNOWN))
-    {
-      wifiAccessPoints[cnt].encrypted = true;
-    }
-    
+    touchgfx::Unicode::snprintf(wifiAccessPoints[cnt].ssid, 32, (const char*)APs[cnt].ssid.value);
+    touchgfx::Unicode::snprintf(wifiAccessPoints[cnt].encryption, 30,net_wifi_security_to_string(APs[cnt].security));
+    wifiAccessPoints[cnt].signalStrength = rssi_to_strength(APs[cnt].rssi);
+
+    if ((APs[cnt].security != NET_WIFI_SM_OPEN) && (APs[cnt].security != NET_WIFI_SM_UNKNOWN))
+     {
+       wifiAccessPoints[cnt].encrypted = true;
+     }
+    numberOfWifiAccesPoints=cnt+1;
   }
+    
   modelListener->updateWiFiInformaion(wifiAccessPoints, numberOfWifiAccesPoints);
 
 }
@@ -576,20 +547,21 @@ char* Model::getCityName(int CityVal)
 }
 
 void Model::updateWifiSignalStrength(void)
-{
+{  
   if(getIsWifiConected())
+  {
+    for(int i = 0; i < numberOfWifiAccesPoints; i++)
+    {
+      if(touchgfx::Unicode::strncmp(currentConnectedWifi.wifi.ssid, wifiAccessPoints[i].ssid, 32) == 0)
       {
-        for(int i = 0; i < numberOfWifiAccesPoints; i++)
-        {
-          if(touchgfx::Unicode::strncmp(currentConnectedWifi.wifi.ssid, wifiAccessPoints[i].ssid, 32) == 0)
-          {
-            currentConnectedWifi.wifi.signalStrength = wifiAccessPoints[i].signalStrength;
-            modelListener->updateWifiIcon(currentConnectedWifi.wifi.signalStrength);
-            break;
-          }
-        }
+        currentConnectedWifi.wifi.signalStrength = wifiAccessPoints[i].signalStrength;
+        modelListener->updateWifiIcon(currentConnectedWifi.wifi.signalStrength);
+        break;
       }
+    }
+  }
 }
+
 void Model::returnToMenuLanucher()
 {
     HAL_NVIC_SystemReset();

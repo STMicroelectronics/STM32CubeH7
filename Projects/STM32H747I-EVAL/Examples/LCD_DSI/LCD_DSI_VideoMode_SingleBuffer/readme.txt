@@ -85,7 +85,7 @@ buffer is used to draw and display image.
 
 @par Keywords
 
-Graphic, Display, LCD,DMA2D , DSI, MIPI Alliance, Video mode, Single buffer, LTDC, QVGA, ARGB8888, SDRAM
+Graphics, Display, LCD,DMA2D , DSI, MIPI Alliance, Video mode, Single buffer, LTDC, QVGA, ARGB8888, SDRAM
 
 @par Directory contents
 

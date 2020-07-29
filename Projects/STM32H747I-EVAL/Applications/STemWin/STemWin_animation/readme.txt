@@ -1,5 +1,5 @@
 ﻿/**
-  @page STemWin animation Readme file
+  @page STemWin_animation STemWin animation Readme file
  
   @verbatim
   ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
@@ -78,6 +78,10 @@ The check could be done using this macro : __HAL_RCC_GET_FLAG(RCC_FLAG_D2CKRDY).
       Depending on the use case it is also possible to configure the cache attributes using the MPU.
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
+
+@par Keywords
+
+Graphics, Display, STemWin, LTDC, Animation, Objects
 
 @par Directory contents 
 

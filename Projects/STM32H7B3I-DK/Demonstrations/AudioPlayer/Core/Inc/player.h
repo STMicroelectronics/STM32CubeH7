@@ -106,7 +106,7 @@ uint32_t PLAYER_GetFileLength(void);
 uint32_t PLAYER_SetFilePosition(uint32_t Position);
 uint32_t PLAYER_SeekToTime(uint32_t NewTime);
 AUDIO_ErrorTypeDef PLAYER_GetFileInfo(char * file_name, Audio_InfoTypeDef *AudioInfoData);
-unsigned int Dec_ReadDataCallback(void* pCompressedData, uint32_t nDataSizeInChars, void* pUserData);
+uint32_t Dec_ReadDataCallback(void* pCompressedData, uint32_t nDataSizeInChars, void* pUserData);
 AUDIO_ErrorTypeDef PLAYER_OutputBufferCbkProc(uint16_t offset);
 AUDIO_ErrorTypeDef PLAYER_TransfertToMemPool(void);
 int32_t  PLAYER_GetAvailableSizeMemPool(void);

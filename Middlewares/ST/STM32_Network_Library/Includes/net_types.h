@@ -19,7 +19,16 @@
 
 #ifndef NET_TYPES_H
 #define NET_TYPES_H
-typedef unsigned char char_t;
+
+#include "stdint.h"
+#include "stdbool.h"
+
+/*cstat -MISRAC2012-Dir-4.6_b */
+typedef char        char_t;
+typedef unsigned char        uchar_t;
+/*cstat +MISRAC2012-Dir-4.6_b */
+
+typedef bool        bool_t;
 
 
 #endif /* NET_TYPES_H */

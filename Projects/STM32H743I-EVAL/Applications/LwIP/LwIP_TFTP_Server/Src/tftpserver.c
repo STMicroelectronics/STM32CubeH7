@@ -317,6 +317,7 @@ void rrq_recv_callback(void *arg, struct udp_pcb *upcb, struct pbuf *p,
     tftp_cleanup_rd(upcb, args);
 
     pbuf_free(p);
+    return;
   }
 
   /* if the whole file has not yet been sent then continue  */

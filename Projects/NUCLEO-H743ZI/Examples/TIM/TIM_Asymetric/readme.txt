@@ -76,6 +76,10 @@ TIM1 is configured to generating the reference signal on Channel1 used by TIM8:
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
 
+@par Keywords
+
+Timer, PWM, Asymetric signal, Duty Cycle, Waveform, Oscilloscope, Output, Signal, commutation, timing mode
+
 @par Directory contents 
 
   - TIM/TIM_Asymetric/Inc/stm32h7xx_hal_conf.h    HAL configuration file

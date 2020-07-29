@@ -30,7 +30,7 @@ In this example two boards are used to send/receive data by using the LPUART so
 there are two examples to compile one for each board.
 To compile the Domain 3 system control in low power mode example: Uncomment 
 LOW_POWER_BOARD define in the common.h file.
-To compile the I2C transmit, receive and verify data example: Comment 
+To compile the LPUART transmit, receive and verify data example: Comment 
 LOW_POWER_BOARD define in the common.h file.
 
 First Board:
@@ -182,6 +182,10 @@ or to tramsmit the received data if no error occurred.
       
 @note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
+
+@par Keywords
+
+System, Power, multiprocessor, PWR, Stop mode, Domain 3, D3SRAM, BDMA, DMAMUX, LPUART, transmit, receive, Interrupt, Wakeup, Low Power, EXTI, Button, Led
 
 @par Directory contents 
 

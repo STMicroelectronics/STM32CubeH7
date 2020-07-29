@@ -261,7 +261,7 @@ int32_t MT25TL01G_PageProgram(QSPI_HandleTypeDef *Ctx, MT25TL01G_Interface_t Mod
     s_command.InstructionMode = QSPI_INSTRUCTION_1_LINE;
     s_command.Instruction     = MT25TL01G_PAGE_PROG_CMD;
     s_command.AddressMode     = QSPI_ADDRESS_1_LINE;
-    s_command.DataMode        = QSPI_ADDRESS_1_LINE;
+    s_command.DataMode        = QSPI_DATA_1_LINE;
     break;
 
   case MT25TL01G_SPI_2IO_MODE :               /*  1-2-2 commands */

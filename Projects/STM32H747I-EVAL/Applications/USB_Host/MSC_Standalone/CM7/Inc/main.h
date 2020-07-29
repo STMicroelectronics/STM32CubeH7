@@ -32,7 +32,7 @@
 #include "usbh_diskio.h"
 #include "lcd_trace.h"
 #include "utilities_conf.h"
-#include "basic_gui.h"
+#include "stm32_lcd.h"
 /* Exported types ------------------------------------------------------------*/
 typedef enum {
   MSC_DEMO_IDLE = 0,

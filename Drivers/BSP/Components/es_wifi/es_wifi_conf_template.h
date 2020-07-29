@@ -72,6 +72,15 @@ extern osMutexId es_wifi_mutex;
 #define ES_WIFI_USE_SPI                             0
 #define ES_WIFI_USE_UART                            (!ES_WIFI_USE_SPI)
 
+/* Definitions of Country codes for "CN" AT command */
+/* Allows to change WiFi channels range */
+#define ES_WIFI_COUNTRY_FR "FR/0" /* allows WiFi channels 1-13 */
+#define ES_WIFI_COUNTRY_JP "JP/0" /* allows WiFi channels 1-14 (channel 14 low power) */
+#define ES_WIFI_COUNTRY_CA "CA/0" /* allows WiFi channels 1-12 (channel 12 low power) */
+#define ES_WIFI_COUNTRY_US "US/0" /* allows WiFi channels 1-11 (set by default) */
+/* define ES_WIFI_COUNTRY to one of ES_WIFI_COUNTRY_FR, ES_WIFI_COUNTRY_JP, ... */
+/* define it only if country is not US (US is the default setting) */
+/* #define ES_WIFI_COUNTRY    ES_WIFI_COUNTRY_FR */
 
 #ifdef __cplusplus
 }

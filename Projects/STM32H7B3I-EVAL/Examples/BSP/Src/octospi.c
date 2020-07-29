@@ -79,7 +79,7 @@ static uint8_t RMABuffercmp(uint8_t* pBuffer1, uint8_t* pBuffer2, uint32_t Buffe
 void OSPI_demo (void)
 {
   OSPI_SetHint();
-  GUI_SetFont(&Font20);
+  UTIL_LCD_SetFont(&Font20);
 
   /* Fill the buffer for write operation *************************************/
   Fill_Buffer(qspi_aTxBuffer, BUFFER_SIZE, TEST_VALUE_START);
@@ -95,15 +95,15 @@ void OSPI_demo (void)
   /* Read the OSPI memory info */
   if(BSP_OSPI_NOR_GetInfo(0, &pOSPI_Info) != BSP_ERROR_NONE)
   {
-    GUI_DisplayStringAt(Xpos, Ypos, (uint8_t*)"TEST Get INFO : FAILED", LEFT_MODE);
+    UTIL_LCD_DisplayStringAt(Xpos, Ypos, (uint8_t*)"TEST Get INFO : FAILED", LEFT_MODE);
   }
   /* Test the correctness */
   else if((pOSPI_Info.FlashSize != 0x4000000) || (pOSPI_Info.EraseSectorSize != 0x10000)  ||
           (pOSPI_Info.ProgPageSize != 0x100)  || (pOSPI_Info.EraseSectorsNumber != 0x400) ||
           (pOSPI_Info.ProgPagesNumber != 262144))
   {
-    GUI_DisplayStringAt(Xpos, Ypos, (uint8_t*)"OSPI GET INFO : FAILED.", LEFT_MODE);
-    GUI_DisplayStringAt(Xpos, Ypos + 20, (uint8_t*)"OSPI Test Aborted.", LEFT_MODE);
+    UTIL_LCD_DisplayStringAt(Xpos, Ypos, (uint8_t*)"OSPI GET INFO : FAILED.", LEFT_MODE);
+    UTIL_LCD_DisplayStringAt(Xpos, Ypos + 20, (uint8_t*)"OSPI Test Aborted.", LEFT_MODE);
   }
   else
   {
@@ -146,7 +146,7 @@ static void OSPI_STR_Mode(void)
   {
     if(BSP_OSPI_NOR_ConfigFlash(0, Flash.InterfaceMode, Flash.TransferRate) != BSP_ERROR_NONE)
     {
-      GUI_DisplayStringAt(Xpos, Ypos, (uint8_t*)"Config flash Failed.", LEFT_MODE);
+      UTIL_LCD_DisplayStringAt(Xpos, Ypos, (uint8_t*)"Config flash Failed.", LEFT_MODE);
     }
 
     BSP_OSPI_NOR_GetStatus(0);
@@ -155,7 +155,7 @@ static void OSPI_STR_Mode(void)
     {
       if(BSP_OSPI_NOR_Erase_Block(0, OPI_START_ADDRESS + i*block_size, MX25LM51245G_ERASE_64K) != BSP_ERROR_NONE)
       {
-        GUI_DisplayStringAt(Xpos, Ypos, (uint8_t*)"Erase Failed.", LEFT_MODE);
+        UTIL_LCD_DisplayStringAt(Xpos, Ypos, (uint8_t*)"Erase Failed.", LEFT_MODE);
       }
       while(BSP_OSPI_NOR_GetStatus(0) == BSP_ERROR_BUSY);
     }
@@ -164,16 +164,16 @@ static void OSPI_STR_Mode(void)
     {
       if(BSP_OSPI_NOR_Write(0, qspi_aTxBuffer, OPI_START_ADDRESS + i*BUFFER_SIZE, BUFFER_SIZE) != BSP_ERROR_NONE)
       {
-        GUI_DisplayStringAt(Xpos, Ypos, (uint8_t*)"WRITE : FAILED.", LEFT_MODE);
+        UTIL_LCD_DisplayStringAt(Xpos, Ypos, (uint8_t*)"WRITE : FAILED.", LEFT_MODE);
         NEXT_LINE
-        GUI_DisplayStringAt(Xpos, Ypos, (uint8_t*)"Test Aborted.", LEFT_MODE);
+        UTIL_LCD_DisplayStringAt(Xpos, Ypos, (uint8_t*)"Test Aborted.", LEFT_MODE);
       }
 
       if(BSP_OSPI_NOR_Read(0, qspi_aRxBuffer, OPI_START_ADDRESS + i*BUFFER_SIZE, BUFFER_SIZE) != BSP_ERROR_NONE)
       {
-        GUI_DisplayStringAt(Xpos, Ypos, (uint8_t*)"Read : FAILED.", LEFT_MODE);
+        UTIL_LCD_DisplayStringAt(Xpos, Ypos, (uint8_t*)"Read : FAILED.", LEFT_MODE);
         NEXT_LINE
-          GUI_DisplayStringAt(Xpos, Ypos, (uint8_t*)"Test Aborted.", LEFT_MODE);
+          UTIL_LCD_DisplayStringAt(Xpos, Ypos, (uint8_t*)"Test Aborted.", LEFT_MODE);
       }
 
       if(RMABuffercmp(qspi_aRxBuffer, qspi_aTxBuffer, (uint32_t)BUFFER_SIZE, &Offset) != 0)
@@ -184,19 +184,19 @@ static void OSPI_STR_Mode(void)
 
     if(error_code == 0)
     {
-      GUI_SetTextColor(GUI_COLOR_BLACK);
-      GUI_DisplayStringAt(20, 100, (uint8_t*)"STR COMPARE:", LEFT_MODE);
-      GUI_SetTextColor(GUI_COLOR_GREEN);
-      GUI_DisplayStringAt(20, j*20 + 120, (uint8_t*)InterfaceModeText[j], LEFT_MODE);
+      UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_BLACK);
+      UTIL_LCD_DisplayStringAt(20, 100, (uint8_t*)"STR COMPARE:", LEFT_MODE);
+      UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_GREEN);
+      UTIL_LCD_DisplayStringAt(20, j*20 + 120, (uint8_t*)InterfaceModeText[j], LEFT_MODE);
     }
     else
     {
-      GUI_SetTextColor(GUI_COLOR_RED);
-      GUI_DisplayStringAt(20, j*20 + 120, (uint8_t*)InterfaceModeText[j], LEFT_MODE);
+      UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_RED);
+      UTIL_LCD_DisplayStringAt(20, j*20 + 120, (uint8_t*)InterfaceModeText[j], LEFT_MODE);
       error_code = 0;
     }
   }
-  GUI_SetTextColor(GUI_COLOR_BLACK);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_BLACK);
 }
 
 static void OSPI_STR_MM_Mode(void)
@@ -221,7 +221,7 @@ static void OSPI_STR_MM_Mode(void)
   {
     if(BSP_OSPI_NOR_ConfigFlash(0, Flash.InterfaceMode, Flash.TransferRate) != BSP_ERROR_NONE)
     {
-      GUI_DisplayStringAt(Xpos, Ypos, (uint8_t*)"Config flash Failed.", LEFT_MODE);
+      UTIL_LCD_DisplayStringAt(Xpos, Ypos, (uint8_t*)"Config flash Failed.", LEFT_MODE);
     }
 
     BSP_OSPI_NOR_GetStatus(0);
@@ -230,7 +230,7 @@ static void OSPI_STR_MM_Mode(void)
     {
       if(BSP_OSPI_NOR_Erase_Block(0, OPI_START_ADDRESS + i*block_size, MX25LM51245G_ERASE_64K) != BSP_ERROR_NONE)
       {
-        GUI_DisplayStringAt(Xpos, Ypos, (uint8_t*)"Erase Failed.", LEFT_MODE);
+        UTIL_LCD_DisplayStringAt(Xpos, Ypos, (uint8_t*)"Erase Failed.", LEFT_MODE);
       }
       while(BSP_OSPI_NOR_GetStatus(0) == BSP_ERROR_BUSY);
     }
@@ -239,9 +239,9 @@ static void OSPI_STR_MM_Mode(void)
     {
       if(BSP_OSPI_NOR_Write(0, qspi_aTxBuffer, OPI_START_ADDRESS + i*BUFFER_SIZE, BUFFER_SIZE) != BSP_ERROR_NONE)
       {
-        GUI_DisplayStringAt(Xpos, Ypos, (uint8_t*)"WRITE : FAILED.", LEFT_MODE);
+        UTIL_LCD_DisplayStringAt(Xpos, Ypos, (uint8_t*)"WRITE : FAILED.", LEFT_MODE);
         NEXT_LINE
-          GUI_DisplayStringAt(Xpos, Ypos, (uint8_t*)"Test Aborted.", LEFT_MODE);
+          UTIL_LCD_DisplayStringAt(Xpos, Ypos, (uint8_t*)"Test Aborted.", LEFT_MODE);
       }
     }
 
@@ -264,19 +264,19 @@ static void OSPI_STR_MM_Mode(void)
 
     if(error_code == 0)
     {
-      GUI_SetTextColor(GUI_COLOR_BLACK);
-      GUI_DisplayStringAt(20, 160, (uint8_t*)"MM STR COMPARE:", LEFT_MODE);
-      GUI_SetTextColor(GUI_COLOR_GREEN);
-      GUI_DisplayStringAt(20, j*20 + 180, (uint8_t*)InterfaceModeText[j], LEFT_MODE);
+      UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_BLACK);
+      UTIL_LCD_DisplayStringAt(20, 160, (uint8_t*)"MM STR COMPARE:", LEFT_MODE);
+      UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_GREEN);
+      UTIL_LCD_DisplayStringAt(20, j*20 + 180, (uint8_t*)InterfaceModeText[j], LEFT_MODE);
     }
     else
     {
-      GUI_SetTextColor(GUI_COLOR_RED);
-      GUI_DisplayStringAt(20, j*20 + 180, (uint8_t*)InterfaceModeText[j], LEFT_MODE);
+      UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_RED);
+      UTIL_LCD_DisplayStringAt(20, j*20 + 180, (uint8_t*)InterfaceModeText[j], LEFT_MODE);
       error_code = 0;
     }
   }
-  GUI_SetTextColor(GUI_COLOR_BLACK);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_BLACK);
 }
 
 static void OSPI_DTR_Mode(void)
@@ -300,7 +300,7 @@ static void OSPI_DTR_Mode(void)
   {
     if(BSP_OSPI_NOR_Erase_Block(0, i*block_size + OPI_START_ADDRESS, MX25LM51245G_ERASE_64K) != BSP_ERROR_NONE)
     {
-      GUI_DisplayStringAt(Xpos, Ypos, (uint8_t*)"Erase Failed.", LEFT_MODE);
+      UTIL_LCD_DisplayStringAt(Xpos, Ypos, (uint8_t*)"Erase Failed.", LEFT_MODE);
     }
     while(BSP_OSPI_NOR_GetStatus(0) == BSP_ERROR_BUSY);
   }
@@ -309,15 +309,15 @@ static void OSPI_DTR_Mode(void)
   {
     if(BSP_OSPI_NOR_Write(0, qspi_aTxBuffer, i*BUFFER_SIZE + OPI_START_ADDRESS, BUFFER_SIZE) != BSP_ERROR_NONE)
     {
-      GUI_DisplayStringAt(Xpos, Ypos, (uint8_t*)"WRITE : FAILED.", LEFT_MODE);
+      UTIL_LCD_DisplayStringAt(Xpos, Ypos, (uint8_t*)"WRITE : FAILED.", LEFT_MODE);
       NEXT_LINE
-        GUI_DisplayStringAt(Xpos, Ypos, (uint8_t*)"Test Aborted.", LEFT_MODE);
+        UTIL_LCD_DisplayStringAt(Xpos, Ypos, (uint8_t*)"Test Aborted.", LEFT_MODE);
     }
     if(BSP_OSPI_NOR_Read(0, qspi_aRxBuffer, i*BUFFER_SIZE + OPI_START_ADDRESS, BUFFER_SIZE) != BSP_ERROR_NONE)
     {
-      GUI_DisplayStringAt(Xpos, Ypos, (uint8_t*)"Read : FAILED.", LEFT_MODE);
+      UTIL_LCD_DisplayStringAt(Xpos, Ypos, (uint8_t*)"Read : FAILED.", LEFT_MODE);
       NEXT_LINE
-        GUI_DisplayStringAt(Xpos, Ypos, (uint8_t*)"Test Aborted.", LEFT_MODE);
+        UTIL_LCD_DisplayStringAt(Xpos, Ypos, (uint8_t*)"Test Aborted.", LEFT_MODE);
     }
     if(RMABuffercmp(qspi_aRxBuffer, qspi_aTxBuffer, (uint32_t)BUFFER_SIZE, &Offset) != 0)
     {
@@ -326,19 +326,19 @@ static void OSPI_DTR_Mode(void)
   }
   if(error_code == 0)
   {
-    GUI_SetTextColor(GUI_COLOR_BLACK);
-    GUI_DisplayStringAt(20, 100, (uint8_t*)"DTR COMPARE:", RIGHT_MODE);
-    GUI_SetTextColor(GUI_COLOR_GREEN);
-    GUI_DisplayStringAt(20, 120, (uint8_t*)InterfaceModeText[1], RIGHT_MODE);
+    UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_BLACK);
+    UTIL_LCD_DisplayStringAt(20, 100, (uint8_t*)"DTR COMPARE:", RIGHT_MODE);
+    UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_GREEN);
+    UTIL_LCD_DisplayStringAt(20, 120, (uint8_t*)InterfaceModeText[1], RIGHT_MODE);
   }
   else
   {
-    GUI_SetTextColor(GUI_COLOR_RED);
-    GUI_DisplayStringAt(20, 120, (uint8_t*)InterfaceModeText[1], RIGHT_MODE);
+    UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_RED);
+    UTIL_LCD_DisplayStringAt(20, 120, (uint8_t*)InterfaceModeText[1], RIGHT_MODE);
     error_code = 0;
   }
 
-  GUI_SetTextColor(GUI_COLOR_BLACK);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_BLACK);
 }
 
 static void OSPI_DTR_MM_Mode(void)
@@ -362,7 +362,7 @@ static void OSPI_DTR_MM_Mode(void)
   {
     if(BSP_OSPI_NOR_Erase_Block(0, i*block_size + OPI_START_ADDRESS, MX25LM51245G_ERASE_64K) != BSP_ERROR_NONE)
     {
-      GUI_DisplayStringAt(Xpos, Ypos, (uint8_t*)"Erase Failed.", LEFT_MODE);
+      UTIL_LCD_DisplayStringAt(Xpos, Ypos, (uint8_t*)"Erase Failed.", LEFT_MODE);
     }
     while(BSP_OSPI_NOR_GetStatus(0) == BSP_ERROR_BUSY);
   }
@@ -371,9 +371,9 @@ static void OSPI_DTR_MM_Mode(void)
   {
     if(BSP_OSPI_NOR_Write(0, qspi_aTxBuffer, i*BUFFER_SIZE + OPI_START_ADDRESS, BUFFER_SIZE) != BSP_ERROR_NONE)
     {
-      GUI_DisplayStringAt(Xpos, Ypos, (uint8_t*)"WRITE : FAILED.", LEFT_MODE);
+      UTIL_LCD_DisplayStringAt(Xpos, Ypos, (uint8_t*)"WRITE : FAILED.", LEFT_MODE);
       NEXT_LINE
-        GUI_DisplayStringAt(Xpos, Ypos, (uint8_t*)"Test Aborted.", LEFT_MODE);
+        UTIL_LCD_DisplayStringAt(Xpos, Ypos, (uint8_t*)"Test Aborted.", LEFT_MODE);
     }
   }
     BSP_OSPI_NOR_EnableMemoryMappedMode(0);
@@ -394,19 +394,19 @@ static void OSPI_DTR_MM_Mode(void)
    BSP_OSPI_NOR_DisableMemoryMappedMode(0);
   if(error_code == 0)
   {
-    GUI_SetTextColor(GUI_COLOR_BLACK);
-    GUI_DisplayStringAt(20, 160, (uint8_t*)"MM DTR COMPARE:", RIGHT_MODE);
-    GUI_SetTextColor(GUI_COLOR_GREEN);
-    GUI_DisplayStringAt(20, 180, (uint8_t*)InterfaceModeText[1], RIGHT_MODE);
+    UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_BLACK);
+    UTIL_LCD_DisplayStringAt(20, 160, (uint8_t*)"MM DTR COMPARE:", RIGHT_MODE);
+    UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_GREEN);
+    UTIL_LCD_DisplayStringAt(20, 180, (uint8_t*)InterfaceModeText[1], RIGHT_MODE);
   }
   else
   {
-    GUI_SetTextColor(GUI_COLOR_RED);
-    GUI_DisplayStringAt(20, 180, (uint8_t*)InterfaceModeText[1], RIGHT_MODE);
+    UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_RED);
+    UTIL_LCD_DisplayStringAt(20, 180, (uint8_t*)InterfaceModeText[1], RIGHT_MODE);
     error_code = 0;
   }
 
-  GUI_SetTextColor(GUI_COLOR_BLACK);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_BLACK);
 }
 
 /**
@@ -422,24 +422,24 @@ static void OSPI_SetHint(void)
   BSP_LCD_GetYSize(0, &y_size);
 
   /* Clear the LCD */
-  GUI_Clear(GUI_COLOR_WHITE);
+  UTIL_LCD_Clear(UTIL_LCD_COLOR_WHITE);
 
   /* Set LCD Demo description */
-  GUI_FillRect(0, 0, x_size, 80, GUI_COLOR_BLUE);
-  GUI_SetTextColor(GUI_COLOR_WHITE);
-  GUI_SetBackColor(GUI_COLOR_BLUE);
-  GUI_SetFont(&Font24);
-  GUI_DisplayStringAt(0, 0, (uint8_t*)"OSPI", CENTER_MODE);
-  GUI_SetFont(&Font12);
-  GUI_DisplayStringAt(0, 30, (uint8_t*)"This example shows how to write", CENTER_MODE);
-  GUI_DisplayStringAt(0, 45, (uint8_t*)"and read data on OSPI memory", CENTER_MODE);
+  UTIL_LCD_FillRect(0, 0, x_size, 80, UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_SetFont(&Font24);
+  UTIL_LCD_DisplayStringAt(0, 0, (uint8_t*)"OSPI", CENTER_MODE);
+  UTIL_LCD_SetFont(&Font12);
+  UTIL_LCD_DisplayStringAt(0, 30, (uint8_t*)"This example shows how to write", CENTER_MODE);
+  UTIL_LCD_DisplayStringAt(0, 45, (uint8_t*)"and read data on OSPI memory", CENTER_MODE);
 
   /* Set the LCD Text Color */
-  GUI_DrawRect(10, 90, x_size - 20, y_size- 100, GUI_COLOR_BLUE);
-  GUI_DrawRect(11, 91, x_size - 22, y_size- 102, GUI_COLOR_BLUE);
+  UTIL_LCD_DrawRect(10, 90, x_size - 20, y_size- 100, UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_DrawRect(11, 91, x_size - 22, y_size- 102, UTIL_LCD_COLOR_BLUE);
 
-  GUI_SetTextColor(GUI_COLOR_BLACK);
-  GUI_SetBackColor(GUI_COLOR_WHITE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_BLACK);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_WHITE);
 }
 
 /**

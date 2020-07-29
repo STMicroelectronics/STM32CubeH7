@@ -1,5 +1,5 @@
 /**
-  @page MDMA RepeatBlock ZoomOut example descreption
+  @page MDMA_RepeatBlock_ZoomOut MDMA RepeatBlock ZoomOut example descreption
   
   @verbatim
   ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
@@ -121,7 +121,9 @@ STM32H745I DISCO board's LED can be used to monitor the transfer status:
 @note The example need to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
-Display, Graphic, MDMA, LCD, SDRAM, RGB565, Memory to memory, LTDC, Pixel, non-contiguous,
+@par Keywords
+
+Display, Graphics, MDMA, LCD, SDRAM, RGB565, Memory to memory, LTDC, Pixel, non-contiguous,
 Repeat blocks
 
 @Note For the Cortex-M7, if the application is using the DTCM/ITCM memories (@0x20000000/ 0x0000000: not cacheable and only accessible
@@ -134,8 +136,8 @@ Repeat blocks
  
 @Note It is recommended to enable the cache and maintain its coherence.
       Depending on the use case it is also possible to configure the cache attributes using the MPU.
-      Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
-      Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
+                   Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
+                   Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
 
 @par Directory contents
 

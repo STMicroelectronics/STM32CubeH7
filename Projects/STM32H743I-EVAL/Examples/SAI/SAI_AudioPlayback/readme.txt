@@ -68,6 +68,10 @@ If an error occured LED3 is turned ON.
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
 
+@par Keywords
+
+Audio, SAI, DMA, Circular mode, conversion, PDM format, PCM format, audio protocol, playback, codec, WM8994, Buffer update, play, headphone
+
 @par Directory contents  
 
   - SAI/SAI_AudioPlayback/Src/main.c                  Main program

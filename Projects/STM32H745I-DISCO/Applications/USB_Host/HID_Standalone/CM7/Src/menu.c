@@ -133,26 +133,26 @@ void HID_MenuProcess(void)
   */
 void HID_SelectItem(uint8_t ** menu, uint8_t item)
 {
-  GUI_SetTextColor(GUI_COLOR_WHITE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
 
   switch (item)
   {
   case 0:
-    GUI_SetBackColor(GUI_COLOR_MAGENTA);
-    GUI_DisplayStringAtLine(20, menu[0]);
-    GUI_SetBackColor(GUI_COLOR_BLUE);
-    GUI_DisplayStringAtLine(21, menu[1]);
+    UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_MAGENTA);
+    UTIL_LCD_DisplayStringAtLine(20, menu[0]);
+    UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_BLUE);
+    UTIL_LCD_DisplayStringAtLine(21, menu[1]);
     break;
 
   case 1:
-    GUI_SetBackColor(GUI_COLOR_BLUE);
-    GUI_DisplayStringAtLine(20, menu[0]);
-    GUI_SetBackColor(GUI_COLOR_MAGENTA);
-    GUI_DisplayStringAtLine(21, menu[1]);
-    GUI_SetBackColor(GUI_COLOR_BLUE);
+    UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_BLUE);
+    UTIL_LCD_DisplayStringAtLine(20, menu[0]);
+    UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_MAGENTA);
+    UTIL_LCD_DisplayStringAtLine(21, menu[1]);
+    UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_BLUE);
     break;
   }
-  GUI_SetBackColor(GUI_COLOR_BLACK);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_BLACK);
 }
 
 /**

@@ -60,6 +60,9 @@ u16_t ADC_Handler(int iIndex, char *pcInsert, int iInsertLen)
     uint32_t ADCVal = 0;
 
     ADCVal = BSP_POT_GetLevel(POT1);
+    
+    /*Convert ADC value from % to regular conversion result */
+    ADCVal = (ADCVal * 0xFFF) / 100;
 
     /* convert to Voltage,  step = 0.8 mV */
     ADCVal = (uint32_t)(ADCVal * 0.8);

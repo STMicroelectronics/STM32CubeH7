@@ -85,7 +85,7 @@ If an error is encountered LED3 is turned ON.
 
 @note The measured communication time includes:
        - Adding messages to Tx FIFO
-       - Trasmission (propagation time)
+       - Transmission (propagation time)
        - Retrieving messages from Rx FIFO
        - Sending acknowledgment of receipt every 32 messages
 
@@ -110,6 +110,10 @@ If an error is encountered LED3 is turned ON.
       Depending on the use case it is also possible to configure the cache attributes using the MPU.
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
+
+@par Keywords
+
+FDCAN, Bit Rate Switching, BRS, Image, Transmit, Receive, Timing, Button
 
 @par Directory contents 
 

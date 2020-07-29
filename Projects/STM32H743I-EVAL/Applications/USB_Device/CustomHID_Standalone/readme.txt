@@ -88,6 +88,10 @@ compiler preprocessor (already done in the preconfigured projects provided with 
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
 
+@par Keywords
+
+Connectivity, USB_Device, USB, HID, Full Speed, High Speed, Joystick, Mouse, OTG
+
 @par Directory contents
 
   - USB_Device/CustomHID_Standalone/Src/main.c                  Main program

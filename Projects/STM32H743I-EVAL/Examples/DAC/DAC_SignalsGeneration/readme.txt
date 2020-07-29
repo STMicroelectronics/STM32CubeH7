@@ -68,6 +68,10 @@ STM32H743I-EVAL board's LEDs can be used to monitor the process status:
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
 
+@par Keywords
+
+Analog, DAC, Signals generation, DMA, Triangle, Escalator, Waveform, Amplitude, Oscilloscope, Button
+
 @par Directory contents 
 
   - DAC/DAC_SignalsGeneration/Inc/stm32h7xx_hal_conf.h    HAL configuration file

@@ -41,8 +41,8 @@
 /* Private variables ---------------------------------------------------------*/
 /* 
 @Note: This interface is implemented to operate in zero-copy mode only:
-        - Rx buffers are allocated statically and passed directly to the LwIP stack
-          they will return back to DMA after been processed by the stack.
+        - Rx buffers are allocated statically and passed directly to the LwIP stack,
+          they will return back to ETH DMA after been processed by the stack.
         - Tx Buffers will be allocated from LwIP stack memory heap, 
           then passed to ETH HAL driver.
 
@@ -55,6 +55,8 @@
   2.a. Rx Buffers number must be between ETH_RX_DESC_CNT and 2*ETH_RX_DESC_CNT
   2.b. Rx Buffers must have the same size: ETH_RX_BUFFER_SIZE, this value must
        passed to ETH DMA in the init field (EthHandle.Init.RxBuffLen)
+  2.c  The RX Ruffers addresses and sizes must be properly defined to be aligned
+       to L1-CACHE line size (32 bytes).
 */
 
 #if defined ( __ICCARM__ ) /*!< IAR Compiler */
@@ -116,7 +118,7 @@ LWIP_MEMPOOL_DECLARE(RX_POOL, 10, sizeof(struct pbuf_custom), "Zero-copy RX PBUF
   *        for this ethernetif
   */
 static void low_level_init(struct netif *netif)
-{ 
+{
   uint32_t idx = 0;
   uint8_t macaddress[6]= {ETH_MAC_ADDR0, ETH_MAC_ADDR1, ETH_MAC_ADDR2, ETH_MAC_ADDR3, ETH_MAC_ADDR4, ETH_MAC_ADDR5};
   
@@ -131,15 +133,15 @@ static void low_level_init(struct netif *netif)
   HAL_ETH_Init(&EthHandle);
   
   /* set MAC hardware address length */
-  netif->hwaddr_len = ETHARP_HWADDR_LEN;
+  netif->hwaddr_len = ETH_HWADDR_LEN;
   
   /* set MAC hardware address */
-  netif->hwaddr[0] =  0x02;
-  netif->hwaddr[1] =  0x00;
-  netif->hwaddr[2] =  0x00;
-  netif->hwaddr[3] =  0x00;
-  netif->hwaddr[4] =  0x00;
-  netif->hwaddr[5] =  0x00;
+  netif->hwaddr[0] =  ETH_MAC_ADDR0;
+  netif->hwaddr[1] =  ETH_MAC_ADDR1;
+  netif->hwaddr[2] =  ETH_MAC_ADDR2;
+  netif->hwaddr[3] =  ETH_MAC_ADDR3;
+  netif->hwaddr[4] =  ETH_MAC_ADDR4;
+  netif->hwaddr[5] =  ETH_MAC_ADDR5;
   
   /* maximum transfer unit */
   netif->mtu = ETH_MAX_PAYLOAD;
@@ -183,12 +185,12 @@ static void low_level_init(struct netif *netif)
   *
   * @note Returning ERR_MEM here if a DMA queue of your MAC is full can lead to
   *       strange results. You might consider waiting for space in the DMA queue
-  *       to become availale since the stack doesn't retry to send a packet
+  *       to become available since the stack doesn't retry to send a packet
   *       dropped because of memory failure (except for the TCP timers).
   */
 static err_t low_level_output(struct netif *netif, struct pbuf *p)
 {
-  uint32_t i=0, framelen = 0;
+  uint32_t i=0;
   struct pbuf *q;
   err_t errval = ERR_OK;
   ETH_BufferTypeDef Txbuffer[ETH_TX_DESC_CNT];
@@ -202,8 +204,7 @@ static err_t low_level_output(struct netif *netif, struct pbuf *p)
     
     Txbuffer[i].buffer = q->payload;
     Txbuffer[i].len = q->len;
-    framelen += q->len;
-    
+
     if(i>0)
     {
       Txbuffer[i-1].next = &Txbuffer[i];
@@ -213,13 +214,13 @@ static err_t low_level_output(struct netif *netif, struct pbuf *p)
     {
       Txbuffer[i].next = NULL;
     }
-    
+
     i++;
   }
 
-  TxConfig.Length = framelen;
+  TxConfig.Length = p->tot_len;
   TxConfig.TxBuffer = Txbuffer;
-  
+
   HAL_ETH_Transmit(&EthHandle, &TxConfig, ETH_DMA_TRANSMIT_TIMEOUT);
   
   return errval;
@@ -236,25 +237,34 @@ static err_t low_level_output(struct netif *netif, struct pbuf *p)
 static struct pbuf * low_level_input(struct netif *netif)
 {
   struct pbuf *p = NULL;
-  ETH_BufferTypeDef RxBuff;
-  uint32_t framelength = 0;
+  ETH_BufferTypeDef RxBuff[ETH_RX_DESC_CNT];
+  uint32_t framelength = 0, i = 0;;
   struct pbuf_custom* custom_pbuf;
+
+  memset(RxBuff, 0 , ETH_RX_DESC_CNT*sizeof(ETH_BufferTypeDef));
+
+  for(i = 0; i < ETH_RX_DESC_CNT -1; i++)
+  {
+    RxBuff[i].next=&RxBuff[i+1];
+  }
   
   if (HAL_ETH_IsRxDataAvailable(&EthHandle))
   {
-    HAL_ETH_GetRxDataBuffer(&EthHandle, &RxBuff);
+    HAL_ETH_GetRxDataBuffer(&EthHandle, RxBuff);
     HAL_ETH_GetRxDataLength(&EthHandle, &framelength);
     
     /* Build Rx descriptor to be ready for next data reception */
 	HAL_ETH_BuildRxDescriptors(&EthHandle);
 
     /* Invalidate data cache for ETH Rx Buffers */
-    SCB_InvalidateDCache_by_Addr((uint32_t *)RxBuff.buffer, framelength);
+    SCB_InvalidateDCache_by_Addr((uint32_t *)RxBuff->buffer, framelength);
     
     custom_pbuf  = (struct pbuf_custom*)LWIP_MEMPOOL_ALLOC(RX_POOL);
-    custom_pbuf->custom_free_function = pbuf_free_custom;
-
-    p = pbuf_alloced_custom(PBUF_RAW, framelength, PBUF_REF, custom_pbuf, RxBuff.buffer, ETH_RX_BUFFER_SIZE);
+    if(custom_pbuf != NULL)
+    {
+      custom_pbuf->custom_free_function = pbuf_free_custom;
+      p = pbuf_alloced_custom(PBUF_RAW, framelength, PBUF_REF, custom_pbuf, RxBuff->buffer, framelength);
+    }
     
     return p;
   }
@@ -310,7 +320,7 @@ void ethernetif_input(struct netif *netif)
 err_t ethernetif_init(struct netif *netif)
 {
   LWIP_ASSERT("netif != NULL", (netif != NULL));
-  
+
 #if LWIP_NETIF_HOSTNAME
   /* Initialize interface hostname */
   netif->hostname = "lwip";
@@ -339,8 +349,6 @@ err_t ethernetif_init(struct netif *netif)
 void pbuf_free_custom(struct pbuf *p)
 {
   struct pbuf_custom* custom_pbuf = (struct pbuf_custom*)p;
-  /* Invalidate data cache: lwIP and/or application may have written into buffer */
-  SCB_InvalidateDCache_by_Addr((uint32_t *)p->payload, p->tot_len);
   LWIP_MEMPOOL_FREE(RX_POOL, custom_pbuf);
 }
 

@@ -58,10 +58,14 @@ extern "C" {
 #define UNSUPPORTED_EXTRA_FORMAT_BYTES    9     /** @brief Valid Wave File TAG */
 #define INVALID_FACT_CHUNK_ID            10     /** @brief Valid Wave File TAG */
 
-#if !defined (__GNUC__)
+#if defined (__GNUC__)
+#undef LITTLE_ENDIAN
+#undef BIG_ENDIAN
+#endif
+
 #define LITTLE_ENDIAN                     0
 #define BIG_ENDIAN                        1
-#endif
+
 
 /* Audio Parsing Constants */
 #define  CHUNK_ID             0x52494646  /* correspond to the letters 'RIFF' */

@@ -1,5 +1,5 @@
 /**
-  @page Demo   STM32H745-Discovery Demonstration Firmware
+  @page Demonstrations   STM32H745-Discovery Demonstration Firmware
 
   @verbatim
   ******************************************************************************
@@ -105,7 +105,7 @@ this GUI is available under .\PC_Software
 
 @par Keywords
 
-Demonstration, Oscilloscope, Analog, ADC,DAC, DMA, Timers, UART, RAM, signals generation.
+Demonstration, multiprocessor, Oscilloscope, Analog, ADC,DAC, DMA, Timers, UART, RAM, signals generation.
 
 @par Hardware and Software environment
 

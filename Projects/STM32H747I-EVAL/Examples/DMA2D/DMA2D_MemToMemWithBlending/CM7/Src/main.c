@@ -110,18 +110,18 @@ int main(void)
   /*##-1- Initialize the LCD #################################################*/
   /* Proceed to LTDC and LCD screen initialization */
   lcd_status = BSP_LCD_Init(0, LCD_ORIENTATION_LANDSCAPE);
-  GUI_SetFuncDriver(&LCD_Driver);
+  UTIL_LCD_SetFuncDriver(&LCD_Driver);
   OnError_Handler(lcd_status != BSP_ERROR_NONE);
 
   /* Prepare using DMA2D the 640x480 LCD frame buffer to display background color black */
   /* and title of the example                                                           */
-  GUI_Clear(GUI_COLOR_BLACK);
-  GUI_SetTextColor(GUI_COLOR_WHITE);
-  GUI_SetBackColor(GUI_COLOR_BLUE);
-  GUI_SetFont(&Font16);
+  UTIL_LCD_Clear(UTIL_LCD_COLOR_BLACK);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_SetFont(&Font16);
 
   /* Print example description */
-  GUI_DisplayStringAt(0, 100, (uint8_t *)"DMA2D_MemToMemWithBlending example", CENTER_MODE);
+  UTIL_LCD_DisplayStringAt(0, 100, (uint8_t *)"DMA2D_MemToMemWithBlending example", CENTER_MODE);
 
   HAL_Delay(100);
 
@@ -130,7 +130,7 @@ int main(void)
 
     /*##-2- Copy Foreground image in center of LCD frame buffer ################################################*/
 
-    GUI_DisplayStringAt(0, 420, (uint8_t *)"Display Foreground Image :           life.augmented", CENTER_MODE);
+    UTIL_LCD_DisplayStringAt(0, 420, (uint8_t *)"Display Foreground Image :           life.augmented", CENTER_MODE);
     /* Blocking copy Foreground image buffer to LCD frame buffer center area */
     /* Using the DMA2D in polling mode                            */
     lcd_status = CopyImageToLcdFrameBuffer((void*)&(RGB565_240x130_1[0]),
@@ -143,7 +143,7 @@ int main(void)
 
     /*##-3- Copy Background image in center of LCD frame buffer ################################################*/
 
-    GUI_DisplayStringAt(0, 420, (uint8_t *)"Display Background Image :                  ST Logo", CENTER_MODE);
+    UTIL_LCD_DisplayStringAt(0, 420, (uint8_t *)"Display Background Image :                  ST Logo", CENTER_MODE);
     /* Blocking copy Background image buffer to LCD frame buffer center area */
     /* Using the DMA2D in polling mode  */
     lcd_status = CopyImageToLcdFrameBuffer((void*)&(RGB565_240x130_2[0]),
@@ -158,7 +158,7 @@ int main(void)
     /* Turn LED4 Off */
     BSP_LED_Off(LED4);
 
-    GUI_DisplayStringAt(0, 420, (uint8_t *)"Display Blended Image    : ST Logo + life.augmented", CENTER_MODE);
+    UTIL_LCD_DisplayStringAt(0, 420, (uint8_t *)"Display Blended Image    : ST Logo + life.augmented", CENTER_MODE);
     /*##-5- Configure DMA2D : Configure foreground and background ##############*/
     DMA2D_Config();
 

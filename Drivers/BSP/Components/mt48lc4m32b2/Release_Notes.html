@@ -35,14 +35,23 @@ This software component is licensed by ST under BSD 3-Clause license, the “Lic
 <a href="https://opensource.org/licenses/BSD-3-Clause">https://opensource.org/licenses/BSD-3-Clause</a>
 </center>
 <h1 id="purpose">Purpose</h1>
-<p>This driver provides a set of SDRAM functions offered by MT48LC4M32B2 component</p>
+<p>This driver provides a set of SDRAM functions offered by MT48LC4M32B2 component. The mt48lc4m32b2_conf_template.h must be copied to application level, renamed into mt48lc4m32b2_conf.h and updated with adequate information.</p>
 </div>
 <div class="col-sm-12 col-lg-8">
 <h1 id="update-history">Update History</h1>
 <div class="collapse">
-<input type="checkbox" id="collapse-section1" checked aria-hidden="true"> <label for="collapse-section1" aria-hidden="true"><strong>V1.0.0 / 14-October-2019</strong></label>
+<input type="checkbox" id="collapse-section2" checked aria-hidden="true"> <label for="collapse-section2" aria-hidden="true"><strong>V1.0.1 / 07-Mai-2020</strong></label>
 <div>
 <h2 id="main-changes">Main Changes</h2>
+<ul>
+<li>mt48lc4m32b2_conf_template.h: Remove reference to F7 HAL as drivers can be used with all families.</li>
+</ul>
+</div>
+</div>
+<div class="collapse">
+<input type="checkbox" id="collapse-section1" aria-hidden="true"> <label for="collapse-section1" aria-hidden="true"><strong>V1.0.0 / 14-October-2019</strong></label>
+<div>
+<h2 id="main-changes-1">Main Changes</h2>
 <ul>
 <li>First Official release of MT48LC4M32B2 BSP drivers in line with STM32Cube BSP drivers development guidelines (UM2298)</li>
 <li>The component drivers are composed of

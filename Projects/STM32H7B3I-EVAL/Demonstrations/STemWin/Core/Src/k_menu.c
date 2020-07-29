@@ -179,7 +179,7 @@ static void _cbButton_info(WM_MESSAGE * pMsg)
 static void _cbBk(WM_MESSAGE * pMsg)
 {
   int Id, NCode;
-  RTC_HandleTypeDef RtcHandle;
+
   WM_HWIN hItem;
 
   switch (pMsg->MsgId)

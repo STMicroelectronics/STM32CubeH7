@@ -5,7 +5,7 @@
 #include <gui/videoplayer_screen/VideoPlayerPresenter.hpp>
 #include <gui/containers/track.hpp>
 
-#include <widgets/mjpegreader.hpp>
+#include <widgets/MJPEGReader.hpp>
 
 #ifdef _MSC_VER
 #define strcat strcat_s

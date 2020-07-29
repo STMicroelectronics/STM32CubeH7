@@ -27,7 +27,7 @@
 #include "stm32h747i_eval_lcd.h"
 #include "stm32h747i_eval_ts.h"
 
-#include "basic_gui.h"
+#include "stm32_lcd.h"
 
 #include <stdint.h>
 #include <string.h>

@@ -81,9 +81,9 @@ void Camera_demo (void)
 
   /*## Camera Initialization and start capture ############################*/
 
-  GUI_SetBackColor(GUI_COLOR_BLUE);
-  GUI_SetTextColor(GUI_COLOR_WHITE);
-  GUI_DisplayStringAt(0, ysize - CAMERA_STATUS_TEXT_POS, (uint8_t *)"Wait for camera initialization...", CENTER_MODE);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
+  UTIL_LCD_DisplayStringAt(0, ysize - CAMERA_STATUS_TEXT_POS, (uint8_t *)"Wait for camera initialization...", CENTER_MODE);
   CameraChangeResolutionAsked = 1;
   /* Infinite loop */
   while (exit == 0)
@@ -92,34 +92,34 @@ void Camera_demo (void)
     {
       CameraChangeResolutionAsked = 0;
 
-      GUI_SetBackColor(GUI_COLOR_WHITE);
-      GUI_SetTextColor(GUI_COLOR_BLUE);
+      UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_WHITE);
+      UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_BLUE);
 
       switch (CameraResolution[index_resolution])
       {
         case CAMERA_R160x120:
           /* Initialize the Camera */
           camera_status = BSP_CAMERA_Init(0,CameraResolution[0],CAMERA_PF_RGB565);
-          GUI_DisplayStringAt(0, ysize - CAMERA_STATUS_TEXT_POS, (uint8_t *)"       QQVGA camera stream       ", CENTER_MODE);
+          UTIL_LCD_DisplayStringAt(0, ysize - CAMERA_STATUS_TEXT_POS, (uint8_t *)"       QQVGA camera stream       ", CENTER_MODE);
           break;
 
         case CAMERA_R320x240:
           /* Initialize the Camera */
           camera_status = BSP_CAMERA_Init(0,CameraResolution[1],CAMERA_PF_RGB565);
-          GUI_DisplayStringAt(0, ysize - CAMERA_STATUS_TEXT_POS, (uint8_t *)"       QVGA camera stream        ", CENTER_MODE);
+          UTIL_LCD_DisplayStringAt(0, ysize - CAMERA_STATUS_TEXT_POS, (uint8_t *)"       QVGA camera stream        ", CENTER_MODE);
           break;
 
         case CAMERA_R480x272:
 
           /* Initialize the Camera */
           camera_status = BSP_CAMERA_Init(0,CameraResolution[2],CAMERA_PF_RGB565);
-          GUI_DisplayStringAt(0, ysize - CAMERA_STATUS_TEXT_POS, (uint8_t *)"      480x272 camera stream      ", CENTER_MODE);
+          UTIL_LCD_DisplayStringAt(0, ysize - CAMERA_STATUS_TEXT_POS, (uint8_t *)"      480x272 camera stream      ", CENTER_MODE);
           break;
 
         case CAMERA_R640x480:
           /* Initialize the Camera */
           camera_status = BSP_CAMERA_Init(0,CameraResolution[3],CAMERA_PF_RGB565);
-          GUI_DisplayStringAt(0, ysize - CAMERA_STATUS_TEXT_POS, (uint8_t *)"        VGA camera stream        ", CENTER_MODE);
+          UTIL_LCD_DisplayStringAt(0, ysize - CAMERA_STATUS_TEXT_POS, (uint8_t *)"        VGA camera stream        ", CENTER_MODE);
           break;
 
         default :
@@ -128,7 +128,7 @@ void Camera_demo (void)
 
       if (camera_status != BSP_ERROR_NONE)
       {
-        GUI_DisplayStringAt(0, ysize - CAMERA_STATUS_TEXT_POS - 15, (uint8_t *)"        CAMERA INIT ERROR        ", CENTER_MODE);
+        UTIL_LCD_DisplayStringAt(0, ysize - CAMERA_STATUS_TEXT_POS - 15, (uint8_t *)"        CAMERA INIT ERROR        ", CENTER_MODE);
         HAL_Delay(2000);
         break ;
       }
@@ -141,27 +141,27 @@ void Camera_demo (void)
     {
       brightness++;
       BSP_CAMERA_SetBrightness(0,brightness);
-      GUI_DisplayStringAt(0, ysize - CAMERA_STATUS_TEXT_POS, (uint8_t *)"        Brightness change        ", CENTER_MODE);
+      UTIL_LCD_DisplayStringAt(0, ysize - CAMERA_STATUS_TEXT_POS, (uint8_t *)"        Brightness change        ", CENTER_MODE);
       HAL_Delay(500);
     }
      while( contrast < CAMERA_CONTRAST_MAX)
     {
       contrast++;
       BSP_CAMERA_SetContrast(0,contrast);
-      GUI_DisplayStringAt(0, ysize - CAMERA_STATUS_TEXT_POS, (uint8_t *)"          Contrast change        ", CENTER_MODE);
+      UTIL_LCD_DisplayStringAt(0, ysize - CAMERA_STATUS_TEXT_POS, (uint8_t *)"          Contrast change        ", CENTER_MODE);
       HAL_Delay(500);
     }
     BSP_CAMERA_EnableNightMode(0);
-    GUI_DisplayStringAt(0, ysize - CAMERA_STATUS_TEXT_POS, (uint8_t *)"          Night Mode ON        ", CENTER_MODE);
+    UTIL_LCD_DisplayStringAt(0, ysize - CAMERA_STATUS_TEXT_POS, (uint8_t *)"          Night Mode ON        ", CENTER_MODE);
     HAL_Delay(1000);
     BSP_CAMERA_DisableNightMode(0);
-    GUI_DisplayStringAt(0, ysize - CAMERA_STATUS_TEXT_POS, (uint8_t *)"          Night Mode OFF        ", CENTER_MODE);
+    UTIL_LCD_DisplayStringAt(0, ysize - CAMERA_STATUS_TEXT_POS, (uint8_t *)"          Night Mode OFF        ", CENTER_MODE);
     HAL_Delay(1000);
     BSP_CAMERA_SetMirrorFlip(0,CAMERA_MIRRORFLIP_NONE);
-    GUI_DisplayStringAt(0, ysize - CAMERA_STATUS_TEXT_POS, (uint8_t *)"          MirrorFlip None        ", CENTER_MODE);
+    UTIL_LCD_DisplayStringAt(0, ysize - CAMERA_STATUS_TEXT_POS, (uint8_t *)"          MirrorFlip None        ", CENTER_MODE);
     HAL_Delay(1000);
     BSP_CAMERA_SetMirrorFlip(0,CAMERA_MIRRORFLIP_FLIP);
-    GUI_DisplayStringAt(0, ysize - CAMERA_STATUS_TEXT_POS, (uint8_t *)"          MIRRORFLIP FLIP        ", CENTER_MODE);
+    UTIL_LCD_DisplayStringAt(0, ysize - CAMERA_STATUS_TEXT_POS, (uint8_t *)"          MIRRORFLIP FLIP        ", CENTER_MODE);
     HAL_Delay(1000);
     BSP_LED_Toggle(LED4);
 
@@ -209,18 +209,18 @@ void Camera_demo (void)
 static void Camera_SetHint(void)
 {
   /* Clear the LCD */
-  GUI_Clear(GUI_COLOR_WHITE);
-  GUI_SetTextColor(GUI_COLOR_BLUE);
-  GUI_FillRect(0, 0, xsize, 80,GUI_COLOR_BLUE);
-  GUI_SetTextColor(GUI_COLOR_WHITE);
-  GUI_SetBackColor(GUI_COLOR_BLUE);
-  GUI_SetFont(&Font24);
-  GUI_DisplayStringAt(0, 0, (uint8_t *)"CAMERA EXAMPLE", CENTER_MODE);
-  GUI_SetFont(&Font16);
-  GUI_DisplayStringAt(0, 30, (uint8_t *)"     Press  Wakeup button for next resolution     ", CENTER_MODE);
+  UTIL_LCD_Clear(UTIL_LCD_COLOR_WHITE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_FillRect(0, 0, xsize, 80,UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_SetFont(&Font24);
+  UTIL_LCD_DisplayStringAt(0, 0, (uint8_t *)"CAMERA EXAMPLE", CENTER_MODE);
+  UTIL_LCD_SetFont(&Font16);
+  UTIL_LCD_DisplayStringAt(0, 30, (uint8_t *)"     Press  Wakeup button for next resolution     ", CENTER_MODE);
 
-  GUI_DrawRect(10, 90, xsize - 20, ysize - 100,GUI_COLOR_BLUE);
-  GUI_DrawRect(11, 91, xsize - 22, ysize - 102,GUI_COLOR_BLUE);
+  UTIL_LCD_DrawRect(10, 90, xsize - 20, ysize - 100,UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_DrawRect(11, 91, xsize - 22, ysize - 102,UTIL_LCD_COLOR_BLUE);
 }
 
 /**

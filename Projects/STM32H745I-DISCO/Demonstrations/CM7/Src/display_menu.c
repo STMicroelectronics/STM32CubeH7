@@ -57,13 +57,13 @@ void InitMenuDisplay(void)
   BSP_LCD_SetBrightness(0, 100);
   BSP_LCD_DisplayOn(0);
   
-  GUI_SetFuncDriver(&LCD_Driver);
+  UTIL_LCD_SetFuncDriver(&LCD_Driver);
   /* Set LCD Font  */
-  GUI_SetFont(&Font16);
+  UTIL_LCD_SetFont(&Font16);
   
   /* Clear the LCD */
-  GUI_Clear(GUI_COLOR_BLACK);
-  GUI_SetTextColor(GUI_COLOR_WHITE);
+  UTIL_LCD_Clear(UTIL_LCD_COLOR_BLACK);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
   
   /* Enable IRQ */
   HAL_NVIC_SetPriority(LTDC_IRQn, 0x0F, 0x0F); 

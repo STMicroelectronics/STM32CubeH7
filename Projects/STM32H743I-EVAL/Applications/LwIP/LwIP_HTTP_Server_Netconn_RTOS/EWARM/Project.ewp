@@ -11,7 +11,7 @@
             <name>General</name>
             <archiveVersion>3</archiveVersion>
             <data>
-                <version>30</version>
+                <version>31</version>
                 <wantNonLocal>1</wantNonLocal>
                 <debug>1</debug>
                 <option>
@@ -66,7 +66,7 @@
                 </option>
                 <option>
                     <name>OGLastSavedByProductVersion</name>
-                    <state>8.20.2.14834</state>
+                    <state>8.30.1.17146</state>
                 </option>
                 <option>
                     <name>GeneralEnableMisra</name>
@@ -112,7 +112,7 @@
                 </option>
                 <option>
                     <name>RTConfigPath2</name>
-                    <state>$TOOLKIT_DIR$\INC\c\DLib_Config_Full.h</state>
+                    <state>$TOOLKIT_DIR$\inc\c\DLib_Config_Full.h</state>
                 </option>
                 <option>
                     <name>GBECoreSlave</name>
@@ -202,6 +202,11 @@
                 </option>
                 <option>
                     <name>TrustZone</name>
+                    <state>0</state>
+                </option>
+                <option>
+                    <name>TrustZoneModes</name>
+                    <version>0</version>
                     <state>0</state>
                 </option>
             </data>
@@ -353,8 +358,8 @@
                     <state>$PROJ_DIR$/../../../../../../Drivers/STM32H7xx_HAL_Driver/Inc</state>
                     <state>$PROJ_DIR$/../../../../../../Drivers/BSP/STM32H743I-EVAL</state>
                     <state>$PROJ_DIR$/../../../../../../Drivers/BSP/Components/Common</state>
-					<state>$PROJ_DIR$/../../../../../../Utilities/Lcd_Trace</state>
-                    <state>$PROJ_DIR$/../../../../../../Utilities/Basic_GUI</state>
+                    <state>$PROJ_DIR$/../../../../../../Utilities/Lcd_Trace</state>
+                    <state>$PROJ_DIR$/../../../../../../Utilities/LCD</state>
                     <state>$PROJ_DIR$/../../../../../../Drivers/BSP/Components</state>
                     <state>$PROJ_DIR$/../../../../../../Middlewares/Third_Party/LwIP/src/include/</state>
                     <state>$PROJ_DIR$/../../../../../../Middlewares/Third_Party/LwIP/system</state>
@@ -363,7 +368,6 @@
                     <state>$PROJ_DIR$/../../../../../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS</state>
                     <state>$PROJ_DIR$/../../../../../../Middlewares/Third_Party/FreeRTOS/Source/include</state>
                     <state>$PROJ_DIR$/../../../../../../Utilities</state>
-					
                 </option>
                 <option>
                     <name>CCStdIncCheck</name>
@@ -697,7 +701,7 @@
             <name>ILINK</name>
             <archiveVersion>0</archiveVersion>
             <data>
-                <version>20</version>
+                <version>21</version>
                 <wantNonLocal>1</wantNonLocal>
                 <debug>1</debug>
                 <option>
@@ -1009,6 +1013,10 @@
                     <name>IlinkLocaleSelect</name>
                     <state>1</state>
                 </option>
+                <option>
+                    <name>IlinkTrustzoneImportLibraryOut</name>
+                    <state>###Unitialized###</state>
+                </option>
             </data>
         </settings>
         <settings>
@@ -1070,7 +1078,7 @@
         <group>
             <name>Utilities</name>
             <file>
-                <name>$PROJ_DIR$\..\..\..\..\..\..\Utilities\Basic_GUI\basic_gui.c</name>
+                <name>$PROJ_DIR$\..\..\..\..\..\..\Utilities\lcd\stm32_lcd.c</name>
             </file>
             <file>
                 <name>$PROJ_DIR$\..\..\..\..\..\..\Utilities\Lcd_Trace\lcd_trace.c</name>
@@ -1171,7 +1179,7 @@
             <file>
                 <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_eth_ex.c</name>
             </file>
-			<file>
+            <file>
                 <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_exti.c</name>
             </file>
             <file>
@@ -1294,12 +1302,12 @@
             <group>
                 <name>apps</name>
                 <group>
-                    <name>httpd</name>
+                    <name>http</name>
                     <file>
-                        <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\LwIP\src\apps\httpd\fs.c</name>
+                        <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\LwIP\src\apps\http\fs.c</name>
                     </file>
                     <file>
-                        <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\LwIP\src\apps\httpd\httpd.c</name>
+                        <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\LwIP\src\apps\http\httpd.c</name>
                     </file>
                 </group>
             </group>
@@ -1397,8 +1405,5 @@
     </group>
     <group>
         <name>Utilities</name>
-        <file>
-            <name>$PROJ_DIR$\..\..\..\..\..\..\Utilities\Basic_GUI\basic_gui.c</name>
-        </file>
     </group>
 </project>

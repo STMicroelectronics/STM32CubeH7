@@ -559,6 +559,8 @@ static void LCD_LL_Init(void)
   PeriphClkInitStruct.PLL3.PLL3N = 240;
   PeriphClkInitStruct.PLL3.PLL3P = 1;
   PeriphClkInitStruct.PLL3.PLL3Q = 5;
+  PeriphClkInitStruct.PLL3.PLL3VCOSEL = RCC_PLL3VCOMEDIUM;
+  PeriphClkInitStruct.PLL3.PLL3RGE = RCC_PLL3VCIRANGE_0;
 #if (NUM_BUFFERS > 1) && (GUI_NUM_LAYERS > 1)
 #if (FB_BYTES_PER_PIXEL == 4)
   PeriphClkInitStruct.PLL3.PLL3R = 15;  /* 16 MHz */

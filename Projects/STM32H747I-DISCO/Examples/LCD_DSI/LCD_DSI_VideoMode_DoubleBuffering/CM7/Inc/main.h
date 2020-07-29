@@ -26,7 +26,7 @@
 #include "stm32h747i_discovery.h"
 #include "stm32h747i_discovery_lcd.h"
 #include "stm32h747i_discovery_sdram.h"
-#include "basic_gui.h"
+#include "stm32_lcd.h"
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/

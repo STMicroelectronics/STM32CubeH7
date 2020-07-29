@@ -4,11 +4,12 @@
 | CMSIS Device                    | Apache License 2.0   | ARM Limited - STMicroelectronics |
 | STM32H7 HAL                     | BSD-3-Clause         | STMicroelectronics |
 | BSP STM32H7xx_Nucleo            | BSD-3-Clause         | STMicroelectronics |
-| BSP STM32H7B3I_EVAL             | BSD-3-Clause         | STMicroelectronics |
-| BSP STM32H7B3I_DK               | BSD-3-Clause         | STMicroelectronics |
-| BSP STM32H743I_EVAL             | BSD-3-Clause         | STMicroelectronics |
+| BSP STM32H735G-DK               | BSD-3-Clause         | STMicroelectronics |
+| BSP STM32H7B3I-EVAL             | BSD-3-Clause         | STMicroelectronics |
+| BSP STM32H7B3I-DK               | BSD-3-Clause         | STMicroelectronics |
+| BSP STM32H743I-EVAL             | BSD-3-Clause         | STMicroelectronics |
 | BSP STM32H745I-DISCO            | BSD-3-Clause         | STMicroelectronics |
-| BSP STM32H747I_EVAL             | BSD-3-Clause         | STMicroelectronics |
+| BSP STM32H747I-EVAL             | BSD-3-Clause         | STMicroelectronics |
 | BSP STM32H747I-DISCO            | BSD-3-Clause         | STMicroelectronics |
 | BSP STM32H750B-DK               | BSD-3-Clause         | STMicroelectronics |
 | BSP Components                  | BSD-3-Clause         | STMicroelectronics |

@@ -1,5 +1,5 @@
 /**
-  @page Demo   Demo NUCLEO-H7A3ZI-Q
+  @page Demonstrations   Demonstrations NUCLEO-H7A3ZI-Q
 
   @verbatim
   ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
@@ -111,6 +111,9 @@ access to uSD card to parse bmp images:
       Please refer to the AN4838 “Managing memory protection unit (MPU) in STM32 MCUs”
       Please refer to the AN4839 “Level 1 cache on STM32F7 Series and STM32H7 Series”
 
+@par Keywords
+
+Demonstrations, Adafruit, Shield, TFT, Joystick, SD Card, Display
 
 @par Directory contents
 

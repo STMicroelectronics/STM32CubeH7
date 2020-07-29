@@ -1,9 +1,9 @@
 /**
-  @page TIM_6steps Timers Synchronization example
+  @page TIM_6Steps Timers Synchronization example
   
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    TIM/TIM_6steps/readme.txt 
+  * @file    TIM/TIM_6Steps/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the TIM 6 Steps example.
 
@@ -92,6 +92,10 @@ The following Table describes the TIM1 Channels states:
       Depending on the use case it is also possible to configure the cache attributes using the MPU.
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
+
+@par Keywords
+
+Timers, 6 steps, PWM, Duty Cycle, Waveform, Oscilloscope, Output, Signal, commutation, timing mode
 
 @par Directory contents 
 

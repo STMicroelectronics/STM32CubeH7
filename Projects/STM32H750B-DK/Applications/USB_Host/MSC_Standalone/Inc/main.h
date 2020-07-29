@@ -26,7 +26,7 @@
 #include "usbh_core.h"
 #include "stm32h750b_discovery.h"
 #include  "lcd_trace.h"
-#include "basic_gui.h"
+#include "stm32_lcd.h"
 #include "utilities_conf.h"
 #include "usbh_msc.h"
 #include "ff.h"

@@ -222,7 +222,7 @@ typedef struct
 /** @addtogroup STM32H745I_DISCO_LCD_Exported_Variables
 * @{
 */
-extern const GUI_Drv_t LCD_Driver;
+extern const LCD_UTILS_Drv_t LCD_Driver;
 extern DMA2D_HandleTypeDef hlcd_dma2d;
 extern LTDC_HandleTypeDef  hlcd_ltdc;
 extern BSP_LCD_Ctx_t       LcdCtx[];

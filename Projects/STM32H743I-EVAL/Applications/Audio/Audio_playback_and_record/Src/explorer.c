@@ -123,7 +123,7 @@ uint8_t AUDIO_ShowWavFiles(void)
   {
     if(FileList.ptr > 0)
     {
-      GUI_SetTextColor(GUI_COLOR_WHITE);
+      UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
       LCD_UsrTrace("audio file(s) [ROOT]:\n\n");
 
       for(i = 0; i < FileList.ptr; i++)
@@ -133,7 +133,7 @@ uint8_t AUDIO_ShowWavFiles(void)
         LCD_DbgTrace((char *)FileList.file[i].name);
         LCD_DbgTrace("\n");
       }
-      GUI_SetTextColor(GUI_COLOR_WHITE);
+      UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
       LCD_UsrTrace("\nEnd of files list.\n");
     }
   }

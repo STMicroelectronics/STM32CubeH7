@@ -2,7 +2,7 @@
 #define MJPEG_WIDGET_HPP
 
 #include <touchgfx/widgets/PixelDataWidget.hpp>
-#include <widgets/fileinput.hpp>
+#include <widgets/FileInput.hpp>
 
 namespace touchgfx
 {

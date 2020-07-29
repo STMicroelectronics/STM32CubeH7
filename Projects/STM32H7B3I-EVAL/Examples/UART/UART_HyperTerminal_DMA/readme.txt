@@ -123,6 +123,10 @@ The UART is configured as follows:
               Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
               Please refer to the AN4839 "Level 1 cache on STM32F7 Series and STM32H7 Series"
 
+@par Keywords
+
+Connectivity, UART, Printf, Baud rate, RS-232, HyperTerminal, full-duplex, HyperTerminal, DMA, Transmission, Reception, Asynchronous
+
 @par Directory contents
 
   - UART/UART_HyperTerminal_DMA/Incstm32h7b3i_eval_conf.h   STM32H7B3I_EVAL board configuration file

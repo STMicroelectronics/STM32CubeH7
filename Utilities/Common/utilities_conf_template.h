@@ -104,11 +104,11 @@ extern "C" {
 #define     LCD_TRACE_TEXT_FONT                  Font20
 
 /* Define the LCD TRACE Colors  */
-#define     LCD_TRACE_BACKGROUND_COLOR           GUI_COLOR_WHITE
-#define     LCD_TRACE_TEXT_COLOR                 GUI_COLOR_DARKBLUE
-#define     LCD_TRACE_SOLID_BACKGROUND_COLOR     GUI_COLOR_BLUE
-#define     LCD_TRACE_SOLID_TEXT_COLOR           GUI_COLOR_WHITE
-#define     LCD_TRACE_DEFAULT_COLOR              GUI_COLOR_WHITE
+#define     LCD_TRACE_BACKGROUND_COLOR           UTILS_LCD_COLOR_WHITE
+#define     LCD_TRACE_TEXT_COLOR                 UTILS_LCD_COLOR_DARKBLUE
+#define     LCD_TRACE_SOLID_BACKGROUND_COLOR     UTILS_LCD_COLOR_BLUE
+#define     LCD_TRACE_SOLID_TEXT_COLOR           UTILS_LCD_COLOR_WHITE
+#define     LCD_TRACE_DEFAULT_COLOR              UTILS_LCD_COLOR_WHITE
 
 /* Define the cache depth */
 #define     CACHE_SIZE                           100U

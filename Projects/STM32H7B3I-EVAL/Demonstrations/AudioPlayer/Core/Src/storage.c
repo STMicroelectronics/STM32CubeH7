@@ -534,7 +534,11 @@ FRESULT Storage_ParseAudioFiles(char *dirname)
       {
         if((fno.fattrib & AM_DIR) == 0)
         {
+#if !defined (__GNUC__)
           if((strstr(fno.fname, "wav")) || (strstr(fno.fname, "WAV"))  || (strstr(fno.fname, "mp3")) || (strstr(fno.fname, "MP3")))
+#else
+          if((strstr(fno.fname, "wav")) || (strstr(fno.fname, "WAV")))
+#endif
           {
             strncpy((char *)FileList.file[FileList.ptr].name, (char *)fno.fname, FILEMGR_FILE_NAME_SIZE);
             strncat((char *)FileList.file[FileList.ptr].full_name, dirname, strlen(dirname));

@@ -1,9 +1,9 @@
 /**
-  @page IAP/IAP_Main AN4657 STM32H7xx In-Application Programming using the USART Readme file
+  @page IAP_Main AN4657 STM32H7xx In-Application Programming using the USART Readme file
   
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    IAP/IAP_Main/readme.txt 
+  * @file    IAP_Main/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of implementation of the AN4657 (in-application programming
   *          using the USART (IAP)) on STM32H7xx devices.
@@ -117,6 +117,10 @@
       Depending on the use case it is also possible to configure the cache attributes using the MPU.
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
+
+@par Keywords
+
+In-Application Programming, IAP, Flash, Bank, USART, Binary, Address, Vector table, Application, Button
 
 @par Directory contents
 

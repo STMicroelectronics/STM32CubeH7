@@ -1,4 +1,4 @@
-#include <gui/game2D_screen/ParallaxBackground.hpp>
+#include <gui/game2d_screen/ParallaxBackground.hpp>
 #include <BitmapDatabase.hpp>
 
 ParallaxBackground::ParallaxBackground(int16_t width, int16_t height) :

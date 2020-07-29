@@ -207,10 +207,10 @@ void CDC_SendFile_ProbeKey(uint32_t state)
 
 static void SendFileMenu_Init(void)
 {
-  GUI_SetTextColor(GUI_COLOR_GREEN); 
-  GUI_DisplayStringAtLine(14, (uint8_t *)"                                           ");  
-  GUI_DisplayStringAtLine(15, (uint8_t *)"[User Tamper] to switch menu                  ");
-  GUI_DisplayStringAtLine(16, (uint8_t *)"[Joystick Up/Down] to change settings items");
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_GREEN); 
+  UTIL_LCD_DisplayStringAtLine(14, (uint8_t *)"                                           ");  
+  UTIL_LCD_DisplayStringAtLine(15, (uint8_t *)"[User Tamper] to switch menu                  ");
+  UTIL_LCD_DisplayStringAtLine(16, (uint8_t *)"[Joystick Up/Down] to change settings items");
   CDC_ChangeSelectMode(CDC_SELECT_FILE);
 }
 
@@ -274,19 +274,19 @@ static void CDC_ShowFiles(uint8_t offset, uint8_t select)
   
   if(offset < FileList.ptr)
   {
-    GUI_SetTextColor(GUI_COLOR_WHITE);
+    UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
     for (i = 4; i < 14; i++)
     {
-      GUI_SetBackColor(GUI_COLOR_BLACK);
-      GUI_DisplayStringAtLine(i, BLANK_LINE);
+      UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_BLACK);
+      UTIL_LCD_DisplayStringAtLine(i, BLANK_LINE);
       
       if((i - 4) < FileList.ptr - offset)
       {
         if(i == (select + 4))
         {
-          GUI_SetBackColor(GUI_COLOR_MAGENTA);
+          UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_MAGENTA);
         }
-        GUI_DisplayStringAtLine(i, FileList.file[i-4 + offset].name);    
+        UTIL_LCD_DisplayStringAtLine(i, FileList.file[i-4 + offset].name);    
       }
     }
   }

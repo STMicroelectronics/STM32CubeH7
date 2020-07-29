@@ -70,9 +70,6 @@ Nucleo-H7A3ZI-Q board LEDs are used to monitor the transfer status:
 - Once the transmission/reception processes are completed LED2 is turned off.
 - If there is an initialization or transfer error, LED3 is turned on.
 
-@par Keywords
-
-Connectivity, UART, Baud rate, RS-232, Full-duplex, Polling, Parity, Stop bit, Transmission, Reception.
 
 At the beginning of the main program the HAL_Init() function is called to reset
 all the peripherals, initialize the Flash interface and the systick.
@@ -116,6 +113,10 @@ position of the transmitted data.
 @Note It is recommended to enable the cache and maintain its coherence.
               Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
               Please refer to the AN4839 "Level 1 cache on STM32F7 Series and STM32H7 Series"
+
+@par Keywords
+
+Connectivity, UART, Baud rate, RS-232, Full-duplex, Polling, Parity, Stop bit, Transmission, Reception.
 
 @par Directory contents 
 

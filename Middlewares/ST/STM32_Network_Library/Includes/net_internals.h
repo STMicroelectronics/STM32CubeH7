@@ -20,9 +20,12 @@
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef NET_INTERNALS_H
 #define NET_INTERNALS_H
+
 #include "net_core.h"
 #ifdef  NET_MBEDTLS_HOST_SUPPORT
+/*cstat -MISRAC* -DEFINE-* -CERT-EXP19*  */
 #include "net_mbedtls.h"
+/*cstat +MISRAC* +DEFINE-* +CERT-EXP19*  */
 #endif /* NET_MBEDTLS_HOST_SUPPORT */
 #endif /* NET_INTERNALS_H */
 

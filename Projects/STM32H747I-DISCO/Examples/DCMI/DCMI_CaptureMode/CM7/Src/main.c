@@ -72,7 +72,7 @@ static __IO int32_t dma2d_pending_copy = 0;
 int32_t LCD_GetXSize(uint32_t Instance, uint32_t *XSize);
 int32_t LCD_GetYSize(uint32_t Instance, uint32_t *YSize);
 
-const GUI_Drv_t LCD_GUI_Driver =
+const LCD_UTILS_Drv_t LCD_UTIL_Driver =
 {
   BSP_LCD_DrawBitmap,
   BSP_LCD_FillRGBRect,
@@ -164,7 +164,7 @@ int main(void)
   Lcd_Ctx[0].XSize = 800;  
   Lcd_Ctx[0].YSize = 480;
 
-  GUI_SetFuncDriver(&LCD_GUI_Driver);
+  UTIL_LCD_SetFuncDriver(&LCD_UTIL_Driver);
   LCD_GetXSize(0,&LcdResX);
   LCD_GetYSize(0,&LcdResY);
   /* Disable DSI Wrapper in order to access and configure the LTDC */
@@ -200,12 +200,12 @@ int main(void)
       /* Reset and power down camera to be sure camera is Off prior start */
       cameraState = CAMERA_STATE_CAPTURE_ONGOING; 
         
-      GUI_Clear(GUI_COLOR_WHITE);
+      UTIL_LCD_Clear(UTIL_LCD_COLOR_WHITE);
       /* Display USB initialization message */
-      GUI_SetBackColor(GUI_COLOR_WHITE); 
-      GUI_SetTextColor(GUI_COLOR_DARKBLUE);
-      GUI_SetFont(&Font24);
-      GUI_DisplayStringAt(20, (LcdResY- 24), (uint8_t *)"CAMERA CONTINUOUS MODE", CENTER_MODE);  
+      UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_WHITE); 
+      UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_DARKBLUE);
+      UTIL_LCD_SetFont(&Font24);
+      UTIL_LCD_DisplayStringAt(20, (LcdResY- 24), (uint8_t *)"CAMERA CONTINUOUS MODE", CENTER_MODE);  
       
       pending_buffer = 0;
       active_area = LEFT_AREA; 
@@ -429,6 +429,8 @@ static uint8_t LCD_Init(void){
   PeriphClkInitStruct.PLL3.PLL3P = 2;
   PeriphClkInitStruct.PLL3.PLL3Q = 2;  
   PeriphClkInitStruct.PLL3.PLL3R = 19;
+  PeriphClkInitStruct.PLL3.PLL3VCOSEL = RCC_PLL3VCOWIDE;
+  PeriphClkInitStruct.PLL3.PLL3RGE = RCC_PLL3VCIRANGE_2;
   HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct);   
   
   /* Base address of DSI Host/Wrapper registers to be set before calling De-Init */

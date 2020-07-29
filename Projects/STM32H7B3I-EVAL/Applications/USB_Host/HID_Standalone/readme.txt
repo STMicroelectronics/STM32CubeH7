@@ -82,12 +82,6 @@ requirements, such as:
    Debug messages are displayed on the uart terminal using ST-Link.
 
 
-@par Keywords
-
-Connectivity, USB Host, HID, Human Interface, Full Speed, High Speed, Mouse, Keyboard
-
-
-
 @Note If the  application is using the DTCM/ITCM memories (@0x20000000/ 0x0000000: not cacheable and only accessible
       by the Cortex M7 and the  MDMA), no need for cache maintenance when the Cortex M7 and the MDMA access these RAMs.
       If the application needs to use DMA(or other masters) based access or requires more RAM, then  the user has to:
@@ -99,7 +93,11 @@ Connectivity, USB Host, HID, Human Interface, Full Speed, High Speed, Mouse, Key
 @Note It is recommended to enable the cache and maintain its coherence.
       Depending on the use case it is also possible to configure the cache attributes using the MPU.
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
-      Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
+      Please refer to the AN4839 "Level 1 cache on STM32F7 Series and STM32H7 Series"
+
+@par Keywords
+
+Connectivity, USB_Host, USB, HID, Human Interface, Full Speed, High Speed, Mouse, Keyboard
 
 @par Directory contents
 
@@ -131,14 +129,14 @@ Connectivity, USB Host, HID, Human Interface, Full Speed, High Speed, Mouse, Key
   - STM32H7B3I-EVAL Set-up
     - Plug the USB key into the STM32H7B3I-EVAL board through 'USB micro A-Male
       to A-Female' cable to the connector:
-      - CN8 : to use USB High speed (HS).Make sure that JP19 is fitted in USBHS position and JP10 is fitted.
+      - CN8 : to use USB High speed (HS), Make sure that JP9, JP11 and JP19 are fitted in USBHS position and that JP10 and JP16 are fitted.
       - CN27: to use USB High speed OTG IP in full speed (HS_IN_FS)
   -Connect ST-Link cable to the PC USB port to display data on the HyperTerminal.
     A virtual COM port will then appear in the HyperTerminal:
 
-@note Make sure that jumper JP20, JP21 are fitted.
+@note Make sure that jumpers JP20 and JP21 are fitted.
 
-     - Hyperterminal configuration:
+      - Hyperterminal configuration:
       - Data Length = 8 Bits
       - One Stop Bit
       - No parity

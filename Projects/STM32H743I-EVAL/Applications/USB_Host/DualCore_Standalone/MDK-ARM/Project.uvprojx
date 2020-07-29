@@ -337,7 +337,7 @@
               <MiscControls></MiscControls>
               <Define>STM32H743xx,USE_HAL_DRIVER,USE_USB_HS,USE_USB_FS,USE_IOEXPANDER</Define>
               <Undefine></Undefine>
-              <IncludePath>../Inc;../../../../../../Drivers/CMSIS/Include;../../../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../../../../../../Drivers/STM32H7xx_HAL_Driver/Inc;../../../../../../Middlewares/ST/STM32_USB_Host_Library/Core/Inc;../../../../../../Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Inc;../../../../../../Middlewares/ST/STM32_USB_Host_Library/Class/HID/Inc;../../../../../../Drivers/BSP/Components/Common;../../../../../../Drivers/BSP/STM32H743I-EVAL;../../../../../../Middlewares/Third_Party/FatFs/src;../../../../../../Utilities/Basic_GUI;../../../../../../Utilities/Lcd_Trace</IncludePath>
+              <IncludePath>../Inc;../../../../../../Drivers/CMSIS/Include;../../../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../../../../../../Drivers/STM32H7xx_HAL_Driver/Inc;../../../../../../Middlewares/ST/STM32_USB_Host_Library/Core/Inc;../../../../../../Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Inc;../../../../../../Middlewares/ST/STM32_USB_Host_Library/Class/HID/Inc;../../../../../../Drivers/BSP/Components/Common;../../../../../../Drivers/BSP/STM32H743I-EVAL;../../../../../../Middlewares/Third_Party/FatFs/src;../../../../../../Utilities/LCD;../../../../../../Utilities/Lcd_Trace</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -412,9 +412,9 @@
           <GroupName>Utilities</GroupName>
           <Files>
             <File>
-              <FileName>basic_gui.c</FileName>
+              <FileName>stm32_lcd.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\..\Utilities\Basic_GUI\basic_gui.c</FilePath>
+              <FilePath>..\..\..\..\..\..\Utilities\lcd\stm32_lcd.c</FilePath>
             </File>
             <File>
               <FileName>lcd_trace.c</FileName>

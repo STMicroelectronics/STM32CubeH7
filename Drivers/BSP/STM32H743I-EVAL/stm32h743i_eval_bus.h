@@ -29,6 +29,9 @@
  /* Includes ------------------------------------------------------------------*/
 #include "stm32h743i_eval_conf.h"
 #include "stm32h743i_eval_errno.h"
+#if defined(BSP_USE_CMSIS_OS)
+#include "cmsis_os.h"
+#endif
 /** @addtogroup BSP
   * @{
   */

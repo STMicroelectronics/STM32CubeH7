@@ -1,5 +1,5 @@
 /**
-  @page MSC_Standalone USB Host Mass Storage (MSC) application
+  @page MSC_RTOS USB Host Mass Storage (MSC) application
   
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
@@ -88,14 +88,6 @@ requirements, such as:
    By default debug messages are displayed on the debugger IO terminal; to redirect the Library
    messages on the LCD screen, lcd_log.c driver need to be added to the application sources.
 
-
-@par Keywords
-
-Connectivity, USB Host, MSC, Mass Storage, Full Speed, High Speed, BOT, SCSI, Removable drive, FatFs,
-File system, Write, Read, Format
-
-
-
 Since this is an RTOS based application, built around FreeRTOS and CMSIS-OS wrapping layer common APIs,
 the RTOS is enabled by setting, #define USBH_USE_OS      1
 
@@ -111,6 +103,11 @@ the RTOS is enabled by setting, #define USBH_USE_OS      1
       Depending on the use case it is also possible to configure the cache attributes using the MPU.
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
+
+@par Keywords
+
+Connectivity, USB_Host, USB, MSC, Mass Storage, RTOS, Full Speed, High Speed, BOT, SCSI, Removable drive,
+File system, Write, Read, Format
 
 @par Directory contents
 

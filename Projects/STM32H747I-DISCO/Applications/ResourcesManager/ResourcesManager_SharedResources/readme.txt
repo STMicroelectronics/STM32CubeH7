@@ -1,5 +1,5 @@
 ﻿/**
-  @page ResourcesManager SharedResources application
+  @page ResourcesManager_SharedResources ResourcesManager SharedResources application
   
   @verbatim
   ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
@@ -95,8 +95,11 @@ The SystemClock_Config() function is used to set the Flash latency and  to confi
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
 
-@par Directory contents
+@par Keywords
 
+ResourcesManager, multiprocessor, Resource share, Dual
+
+@par Directory contents
 
     - ResourcesManager/ResourcesManager_SharedResources/Commmon/Src/system_stm32h7xx.c  STM32H7xx system configuration source file
 	

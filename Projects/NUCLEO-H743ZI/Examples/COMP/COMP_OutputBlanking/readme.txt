@@ -96,6 +96,10 @@ Comparator output signal expected:
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
 
+@par Keywords
+
+Analog, comparator, output blanking, voltage compare, timer, timer-triggered, PWM, wave generator.
+
 @par Directory contents 
 
   - COMP/COMP_OutputBlanking/Inc/stm32h7xx_hal_conf.h   HAL configuration file

@@ -88,7 +88,7 @@ STM32H747I-EVAL board's LEDs can be used to monitor the transfer status:
 
 @par Keywords
 
-Display, Graphic, DMA2D, LCD, DSI, SRAM, ARGB4444, Memory to Memory
+Display, Graphics, DMA2D, LCD, DSI, SRAM, ARGB4444, Memory to Memory
 
 @Note For the Cortex-M7, if the application is using the DTCM/ITCM memories (@0x20000000/ 0x0000000: not cacheable and only accessible
       by the Cortex-M7 and the  MDMA), no need for cache maintenance when the Cortex M7 and the MDMA access these RAMs.

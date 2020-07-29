@@ -63,6 +63,9 @@ Other peripheral used:
   1 GPIO for analog input of comparator: PB.02
   EXTI line 20 (connected to COMP1 output)
 
+@par Keywords
+
+Analog, Comparator, Stop mode, Voltage compare, Voltage level, Vref, Interrupt.
 
 @par Directory contents
 

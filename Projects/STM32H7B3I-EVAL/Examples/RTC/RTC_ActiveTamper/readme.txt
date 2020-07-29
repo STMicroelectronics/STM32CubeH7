@@ -1,5 +1,5 @@
 /**
-  @page RTC_Standby RTC_ActiveTamper example
+  @page RTC_ActiveTamper RTC ActiveTamper example
 
   @verbatim
   ******************************************************************************
@@ -68,6 +68,10 @@ One of the below scenario should occur :
 @Note It is recommended to enable the cache and maintain its coherence.
               Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
               Please refer to the AN4839 "Level 1 cache on STM32F7 Series and STM32H7 Series"
+
+@par Keywords
+
+System, RTC, Tamper, Active Tamper, Reset, LSE
 
 @par Directory contents
 

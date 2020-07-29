@@ -28,7 +28,7 @@
 #include "stm32h743i_eval_lcd.h"
 #include "stm32h743i_eval_sdram.h"
 #include "stm32h743i_eval_qspi.h"
-#include "basic_gui.h"
+#include "stm32_lcd.h"
 
 /* Jpeg includes component */
 #include <stdint.h>

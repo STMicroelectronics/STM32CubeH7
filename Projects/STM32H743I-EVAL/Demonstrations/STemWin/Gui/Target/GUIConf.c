@@ -48,9 +48,12 @@ Purpose     : Display controller initialization
 
 /* Define the memory table to use by STemWin */
 #if defined ( __ICCARM__ )
+#pragma data_alignment=32
 #pragma location="STemWinMemPool"
-#elif !defined(WIN32)
-__attribute__((section(".STemWinMemPool")))
+#elif defined(__CC_ARM)
+__attribute__((section(".STemWinMemPool"), zero_init)) __attribute__ ((aligned (32)))
+#elif defined(__GNUC__)
+__attribute__((section(".STemWinMemPool"))) __attribute__ ((aligned (32)))
 #endif
 U32 aMemory[GUI_NUMBYTES / 4];
 

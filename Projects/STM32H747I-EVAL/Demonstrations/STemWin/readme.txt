@@ -1,5 +1,5 @@
-/**
-  @page Demo   STM32H747I-EVAL STemWin Demonstration
+﻿/**
+  @page STemWin   STM32H747I-EVAL STemWin Demonstration
  
   @verbatim
   ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
@@ -73,9 +73,9 @@ Below you find an overview of the different offered module in the STemWin demons
 
  ++ Graphical Effect
  -------------------
- The Graphic effect module demonstrates the platforms computing capabilities
+ The Graphic effect module demonstrates the platforms computing capabilities
  to render a real-time effect at full screen resolution.
-  The implemented filters are
+    The implemented filters are
   - Edge detection filter
   - Smoothing filter
   - Sharping filter
@@ -106,7 +106,7 @@ Below you find an overview of the different offered module in the STemWin demons
 
 @par Keywords
 
-Demonstration, FreeRTOS, RTOS, Middleware, wav, Video Player, avi, Audio player, Graphic,
+Demonstration, STemWin, multiprocessor, FreeRTOS, RTOS, WAV, Video Player, AVI, JPEG, MJPEG, Audio player, Graphics,
 Game, System, CPU, SAI, QSPI, SD, 
 
 @par Hardware and Software environment
@@ -119,7 +119,7 @@ Game, System, CPU, SAI, QSPI, SD,
      
 @par How to use it ? 
 
-The QSPI external flash loader is not integrated with supported toolchains, its only supported with 
+The QSPI external flash loader is not integrated with supported toolchains, its only supported with 
 STM32CubeProgrammer.
 To load the demonstration, use STM32CubeProgrammer to program both internal Flash and external QSPI memory.
 
@@ -127,7 +127,7 @@ In order to program the demonstration you must do the following:
 1- Open STM32CubeProgrammer, click on setting icon from the bar menu then check
    "MT25TL01G_STM32H7xxI-EVAL" box 
 2- Connect the STM32H747I-EVAL board to PC with USB cable through CN23
-3- Use "STM32CubeDemo_STM32H747I-EVAL_VX.Y.Z.hex" file provided under Binary with STM32 STM32CubeProgrammer
+3- Use "STM32CubeDemo_STM32H747I-EVAL_VX.Y.Z.hex" file provided under Binary with STM32 STM32CubeProgrammer
    to program both internal Flash and external QSPI memory.
    
 4- copy the audio and video files provided under "/Media" in a media storage

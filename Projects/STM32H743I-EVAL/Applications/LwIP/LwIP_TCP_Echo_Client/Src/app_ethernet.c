@@ -152,9 +152,6 @@ void DHCP_Process(struct netif *netif)
         {
           DHCP_state = DHCP_TIMEOUT;
 
-          /* Stop DHCP */
-          dhcp_stop(netif);
-
           /* Static address used */
           IP_ADDR4(&ipaddr, IP_ADDR0 ,IP_ADDR1 , IP_ADDR2 , IP_ADDR3 );
           IP_ADDR4(&netmask, NETMASK_ADDR0, NETMASK_ADDR1, NETMASK_ADDR2, NETMASK_ADDR3);
@@ -175,8 +172,6 @@ void DHCP_Process(struct netif *netif)
     break;
   case DHCP_LINK_DOWN:
     {
-      /* Stop DHCP */
-      dhcp_stop(netif);
       DHCP_state = DHCP_OFF;
 #ifdef USE_LCD
       LCD_UsrTrace ("The network cable is not connected \n");

@@ -58,6 +58,10 @@ If an error occured LED2 is turned ON.
 @note This example does not use the BSP_AUDIO driver so the MspInit is coded in the 
       stm32h7xx_hal_msp.c.
 
+@par Keywords
+
+Audio, SAI, DMA, Circular mode, conversion, PDM format, PCM format, audio protocol, playback, codec, WM8994, Buffer update, play, headphone
+
 @par Directory contents  
 
   - SAI/SAI_AudioPlayback/CM7/Src/main.c                  Main program

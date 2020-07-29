@@ -1,9 +1,9 @@
 /**
-  @page TIM_6steps Timers Synchronization example
+  @page TIM_6Steps Timers Synchronization example
   
   @verbatim
   ******************************************************************************
-  * @file    TIM/TIM_6steps/readme.txt 
+  * @file    TIM/TIM_6Steps/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the TIM 6 Steps example.
 
@@ -75,9 +75,6 @@ The following Table describes the TIM1 Channels states:
    
 @endverbatim
 
-@par Keywords
-
-Timers, 6 steps, PWM, Duty Cycle, Waveform, Oscilloscope, Output, Signal, commutation, timing mode
 
 @note Care must be taken when using HAL_Delay(), this function provides accurate delay (in milliseconds)
       based on variable incremented in SysTick ISR. This implies that if HAL_Delay() is called from
@@ -99,6 +96,10 @@ Timers, 6 steps, PWM, Duty Cycle, Waveform, Oscilloscope, Output, Signal, commut
 @Note It is recommended to enable the cache and maintain its coherence.
               Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
               Please refer to the AN4839 "Level 1 cache on STM32F7 Series and STM32H7 Series"
+
+@par Keywords
+
+Timers, 6 steps, PWM, Duty Cycle, Waveform, Oscilloscope, Output, Signal, commutation, timing mode
 
 @par Directory contents 
 

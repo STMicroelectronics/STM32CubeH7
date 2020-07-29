@@ -53,17 +53,17 @@ void SG_InitDisplay(void)
   /* Initialize the LCD */
   BSP_LCD_Init(0, LCD_ORIENTATION_LANDSCAPE);
 
-  GUI_SetFuncDriver(&LCD_Driver);
+  UTIL_LCD_SetFuncDriver(&LCD_Driver);
   
   BSP_LCD_SetBrightness(0, 100);
   BSP_LCD_DisplayOn(0);
   
   /* Set LCD Font  */
-  GUI_SetFont(&Font16);
+  UTIL_LCD_SetFont(&Font16);
   
   /* Clear the LCD */
-  GUI_Clear(0x00000000);
-  GUI_SetTextColor(GUI_COLOR_WHITE);
+  UTIL_LCD_Clear(0x00000000);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
   
   /* Enable IRQ */
   HAL_NVIC_SetPriority(LTDC_IRQn, 0x0F, 0x0F); 
@@ -140,21 +140,21 @@ void SG_DisplayWaveButtons(SG_SwitchButtonWidgetTypeDef *pButton, uint32_t butto
     }
     SG_DisplaySwitchButton(&pButton[buttonIndex],(uint32_t *)LCD_FRAME_BUFFER, pButton[buttonIndex].State); 
   }
-  GUI_SetTextColor(GUI_COLOR_BLUE);
-  GUI_SetBackColor(GUI_COLOR_LIGHTGRAY);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_LIGHTGRAY);
 
-  GUI_SetFont(&Font16);
-  GUI_DisplayStringAt(SG_WAVE_BUTTON_XPOSITION-2, 45,(uint8_t *)" Signal Type ", LEFT_MODE);
-  GUI_DrawRect(SG_WAVE_BUTTON_XPOSITION-4, 41, pButton[1].buttonParams.Xpos + 70, 160, GUI_COLOR_LIGHTGRAY);
-  GUI_DrawRect(SG_WAVE_BUTTON_XPOSITION-3, 42, pButton[1].buttonParams.Xpos + 68, 158, GUI_COLOR_LIGHTGRAY);
+  UTIL_LCD_SetFont(&Font16);
+  UTIL_LCD_DisplayStringAt(SG_WAVE_BUTTON_XPOSITION-2, 45,(uint8_t *)" Signal Type ", LEFT_MODE);
+  UTIL_LCD_DrawRect(SG_WAVE_BUTTON_XPOSITION-4, 41, pButton[1].buttonParams.Xpos + 70, 160, UTIL_LCD_COLOR_LIGHTGRAY);
+  UTIL_LCD_DrawRect(SG_WAVE_BUTTON_XPOSITION-3, 42, pButton[1].buttonParams.Xpos + 68, 158, UTIL_LCD_COLOR_LIGHTGRAY);
 
-  GUI_DisplayStringAt(SG_WAVE_BUTTON_XPOSITION+160, 45,(uint8_t *) " Signal Params ", LEFT_MODE);
-  GUI_DrawRect(SG_WAVE_BUTTON_XPOSITION+150, 41, 190, 160, GUI_COLOR_LIGHTGRAY);
-  GUI_DrawRect(SG_WAVE_BUTTON_XPOSITION+150+1, 42, 188, 158, GUI_COLOR_LIGHTGRAY);
+  UTIL_LCD_DisplayStringAt(SG_WAVE_BUTTON_XPOSITION+160, 45,(uint8_t *) " Signal Params ", LEFT_MODE);
+  UTIL_LCD_DrawRect(SG_WAVE_BUTTON_XPOSITION+150, 41, 190, 160, UTIL_LCD_COLOR_LIGHTGRAY);
+  UTIL_LCD_DrawRect(SG_WAVE_BUTTON_XPOSITION+150+1, 42, 188, 158, UTIL_LCD_COLOR_LIGHTGRAY);
   
-  GUI_DisplayStringAt(SG_WAVE_BUTTON_XPOSITION+360, 45,(uint8_t *) "  Status ", LEFT_MODE);
-  GUI_DrawRect(SG_WAVE_BUTTON_XPOSITION+350, 41, 120, 160, GUI_COLOR_LIGHTGRAY);
-  GUI_DrawRect(SG_WAVE_BUTTON_XPOSITION+351, 42, 118, 158, GUI_COLOR_LIGHTGRAY);
+  UTIL_LCD_DisplayStringAt(SG_WAVE_BUTTON_XPOSITION+360, 45,(uint8_t *) "  Status ", LEFT_MODE);
+  UTIL_LCD_DrawRect(SG_WAVE_BUTTON_XPOSITION+350, 41, 120, 160, UTIL_LCD_COLOR_LIGHTGRAY);
+  UTIL_LCD_DrawRect(SG_WAVE_BUTTON_XPOSITION+351, 42, 118, 158, UTIL_LCD_COLOR_LIGHTGRAY);
 }   
 
 
@@ -194,13 +194,13 @@ void SG_DisplayUpDownButtons(ButtonWidgetTypeDef *pButton, uint32_t buttonsNumbe
   */
 void SG_DisplayFrequencyIcon(uint32_t Xpos, uint32_t Ypos, uint32_t Width, uint32_t Height, uint8_t *Frequency)
 {
-  GUI_SetFont(&Font16);
-  GUI_SetTextColor(GUI_COLOR_DARKGRAY); 
-  GUI_FillRect(Xpos, Ypos, Width, Height, GUI_COLOR_DARKGRAY);  
-  GUI_SetTextColor(GUI_COLOR_ORANGE);
-  GUI_SetBackColor(GUI_COLOR_DARKGRAY);
-  GUI_DisplayStringAt(Xpos + Width/4-6, Ypos+5,(uint8_t *) "FREQUENCY", LEFT_MODE);
-  GUI_DisplayStringAt(Xpos+ Width/4-10, Ypos+Height/2+4, Frequency, LEFT_MODE);
+  UTIL_LCD_SetFont(&Font16);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_DARKGRAY); 
+  UTIL_LCD_FillRect(Xpos, Ypos, Width, Height, UTIL_LCD_COLOR_DARKGRAY);  
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_ORANGE);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_DARKGRAY);
+  UTIL_LCD_DisplayStringAt(Xpos + Width/4-6, Ypos+5,(uint8_t *) "FREQUENCY", LEFT_MODE);
+  UTIL_LCD_DisplayStringAt(Xpos+ Width/4-10, Ypos+Height/2+4, Frequency, LEFT_MODE);
   
 }   
 
@@ -211,13 +211,13 @@ void SG_DisplayFrequencyIcon(uint32_t Xpos, uint32_t Ypos, uint32_t Width, uint3
   */
 void SG_DisplayAmplitudeIcon(uint32_t Xpos, uint32_t Ypos, uint32_t Width, uint32_t Height, uint8_t *Amplitude)
 {
-  GUI_SetFont(&Font16);
-  GUI_SetTextColor(GUI_COLOR_DARKGRAY); 
-  GUI_FillRect(Xpos, Ypos, Width, Height, GUI_COLOR_DARKGRAY);  
-  GUI_SetTextColor(GUI_COLOR_ORANGE);
-  GUI_SetBackColor(GUI_COLOR_DARKGRAY);
-  GUI_DisplayStringAt(Xpos + Width/4-6, Ypos+5, (uint8_t *)"AMPLITUDE", LEFT_MODE);
-  GUI_DisplayStringAt(Xpos+ Width/4+10, Ypos+Height/2+4, Amplitude, LEFT_MODE);
+  UTIL_LCD_SetFont(&Font16);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_DARKGRAY); 
+  UTIL_LCD_FillRect(Xpos, Ypos, Width, Height, UTIL_LCD_COLOR_DARKGRAY);  
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_ORANGE);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_DARKGRAY);
+  UTIL_LCD_DisplayStringAt(Xpos + Width/4-6, Ypos+5, (uint8_t *)"AMPLITUDE", LEFT_MODE);
+  UTIL_LCD_DisplayStringAt(Xpos+ Width/4+10, Ypos+Height/2+4, Amplitude, LEFT_MODE);
 }   
 
 /**

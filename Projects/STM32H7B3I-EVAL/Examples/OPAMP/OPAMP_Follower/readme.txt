@@ -59,6 +59,10 @@ Test Description:
               Please refer to the AN4838 “Managing memory protection unit (MPU) in STM32 MCUs”
               Please refer to the AN4839 “Level 1 cache on STM32F7 Series”
 
+@par Keywords
+
+Analog, OPAMP, follower, DAC, Signals generation, Waveform, Amplitude
+
 @par Directory contents 
 
   - OPAMP/OPAMP_Follower/Inc/stm32h7xx_hal_conf.h    HAL configuration file

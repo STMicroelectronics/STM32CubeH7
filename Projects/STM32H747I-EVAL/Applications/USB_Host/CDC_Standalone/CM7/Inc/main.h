@@ -33,7 +33,7 @@
 #include "ff_gen_drv.h"
 #include "sd_diskio.h"
 #include "lcd_trace.h"
-#include "basic_gui.h"
+#include "stm32_lcd.h"
 #include "utilities_conf.h"
 
 

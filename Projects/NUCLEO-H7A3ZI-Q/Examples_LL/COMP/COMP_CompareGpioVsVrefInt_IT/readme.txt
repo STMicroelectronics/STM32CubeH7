@@ -78,6 +78,11 @@ Other peripheral used:
 @Note It is recommended to enable the cache and maintain its coherence.
               Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
               Please refer to the AN4839 "Level 1 cache on STM32F7 Series and STM32H7 Series"
+
+@par Keywords
+
+Analog, Comparator, Stop mode, Voltage compare, Voltage level, Vref, Interrupt.
+
 @par Directory contents 
 
   - COMP/COMP_CompareGpioVsVrefInt_IT/Inc/stm32h7xx_it.h          Interrupt handlers header file

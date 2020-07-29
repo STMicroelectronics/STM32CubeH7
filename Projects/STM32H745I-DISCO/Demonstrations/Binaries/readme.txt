@@ -17,7 +17,7 @@ Please refer to :
 
 www.st.com/en/product/stm32h745i-disco.html
 
-The EEMBC’s CoreMark® sub-demonstration is provided as hex file only (no source code) STM32H7xx_EEMBC.hex
+The EEMBC® CoreMark® sub-demonstration is provided as hex file only (no source code) STM32H7xx_EEMBC.hex
 
 For more details about this demonstration, please refer to the full demonstration readme.txt file ../readme.txt
 

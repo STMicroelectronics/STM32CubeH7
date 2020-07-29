@@ -82,6 +82,10 @@ present example).
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
 
+@par Keywords
+
+Timer, Low Power, LSI, Pulse Counter, External signal generator, Stop mode, Wake up, Interrupt, LED
+
 @par Directory contents
 
     - LPTIM/LPTIM_PulseCounter/CM7/Inc/main.h                Main configuration file for Cortex-M7

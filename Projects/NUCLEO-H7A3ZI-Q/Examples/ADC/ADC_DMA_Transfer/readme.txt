@@ -53,6 +53,10 @@ STM32 board LED can be used to monitor the conversion:
 @note The application need to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
+@par Keywords
+
+Analog, ADC, DMA, Continuous conversion, Circular, Measurement, Voltage
+
 @par Directory contents 
 
   - ADC/ADC_DMA_Transfer/Inc/stm32h7xx_hal_conf.h    HAL configuration file

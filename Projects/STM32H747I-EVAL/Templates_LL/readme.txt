@@ -97,6 +97,9 @@ To port a LL example to the targeted board:
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
 
+@par Keywords
+
+System, LL template, multiprocessor, Clock Configuration, HSE, System clock, Oscillator, PLL
 
 @par Directory contents
 
@@ -114,7 +117,6 @@ To port a LL example to the targeted board:
   - Templates_LL/CM4/Src/stm32h7xx_it.c          Interrupt handlers for cortex-M7
   - Templates_LL/CM4/Src/main.c                  Main programfor cortex-M7
   
-
 
 @par Hardware and Software environment
 

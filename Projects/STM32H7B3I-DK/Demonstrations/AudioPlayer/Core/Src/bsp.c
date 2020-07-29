@@ -156,7 +156,6 @@ void MPU_Config(void)
 uint8_t BspInit(void)
 {
   int32_t RetVal = 0;
-  static __IO uint32_t BckRegValue = 0;
   BSP_OSPI_NOR_Init_t Flash;
   
   Flash.InterfaceMode = BSP_OSPI_NOR_OPI_MODE;
