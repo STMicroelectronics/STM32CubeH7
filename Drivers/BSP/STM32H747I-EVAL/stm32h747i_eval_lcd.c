@@ -444,10 +444,16 @@ int32_t BSP_LCD_InitHDMI(uint32_t Instance, uint32_t Format)
     Lcd_Ctx[Instance].XSize       = hdmi_timing.HACT;
     Lcd_Ctx[Instance].YSize       = hdmi_timing.VACT;
     Lcd_Ctx[Instance].PixelFormat = LCD_PIXEL_FORMAT_RGB888;
+    Lcd_Ctx[Instance].BppFactor = 4U;
 
     /* Toggle Hardware Reset of the DSI LCD using
     * its XRES signal (active low) */
     BSP_LCD_Reset(Instance);
+
+    /* Initializes peripherals instance value */
+    hlcd_ltdc.Instance = LTDC;
+    hlcd_dma2d.Instance = DMA2D;
+    hlcd_dsi.Instance = DSI;
 
     if(ADV7533_Probe() != BSP_ERROR_NONE)
     {
@@ -500,6 +506,7 @@ int32_t BSP_LCD_InitHDMI(uint32_t Instance, uint32_t Format)
       hlcd_dsi.Init.NumberOfLanes = DSI_TWO_DATA_LANES;
       /* Set the TX escape clock division ratio */
       hlcd_dsi.Init.TXEscapeCkdiv = 3U;
+      hlcd_dsi.Init.AutomaticClockLaneControl = DSI_AUTO_CLK_LANE_CTRL_DISABLE;
 
       /* Configure the DSI PLL */
       dsiPllInit.PLLNDIV    = 65U;
@@ -545,8 +552,8 @@ int32_t BSP_LCD_InitHDMI(uint32_t Instance, uint32_t Format)
       hDsiVideoMode.VerticalFrontPorch        = hdmi_timing.VFP;
       hDsiVideoMode.VerticalActive            = hdmi_timing.VACT; /* Value depending on display format */
 
-      /* Enable or disable sending LP command while streaming is active in video mode */
-      hDsiVideoMode.LPCommandEnable = DSI_LP_COMMAND_ENABLE; /* Enable sending commands in mode LP (Low Power) */
+      /* Disable or disable sending LP command while streaming is active in video mode */
+      hDsiVideoMode.LPCommandEnable = DSI_LP_COMMAND_DISABLE; /* Disable sending commands in mode LP (Low Power) */
 
       /* Largest packet size possible to transmit in LP mode in VSA, VBP, VFP regions */
       /* Only useful when sending LP packets is allowed while streaming is active in video mode */
@@ -558,12 +565,16 @@ int32_t BSP_LCD_InitHDMI(uint32_t Instance, uint32_t Format)
 
       /* Specify for each region of the video frame, if the transmission of command in LP mode is allowed in this region */
       /* while streaming is active in video mode                                                                         */
-      hDsiVideoMode.LPHorizontalFrontPorchEnable = DSI_LP_HFP_ENABLE;   /* Allow sending LP commands during HFP period */
-      hDsiVideoMode.LPHorizontalBackPorchEnable  = DSI_LP_HBP_ENABLE;   /* Allow sending LP commands during HBP period */
-      hDsiVideoMode.LPVerticalActiveEnable       = DSI_LP_VACT_ENABLE;  /* Allow sending LP commands during VACT period */
-      hDsiVideoMode.LPVerticalFrontPorchEnable   = DSI_LP_VFP_ENABLE;   /* Allow sending LP commands during VFP period */
-      hDsiVideoMode.LPVerticalBackPorchEnable    = DSI_LP_VBP_ENABLE;   /* Allow sending LP commands during VBP period */
-      hDsiVideoMode.LPVerticalSyncActiveEnable   = DSI_LP_VSYNC_ENABLE; /* Allow sending LP commands during VSync = VSA period */
+      hDsiVideoMode.LPHorizontalFrontPorchEnable = DSI_LP_HFP_DISABLE;
+      hDsiVideoMode.LPHorizontalBackPorchEnable  = DSI_LP_HBP_DISABLE;
+      hDsiVideoMode.LPVerticalActiveEnable       = DSI_LP_VACT_DISABLE;
+      hDsiVideoMode.LPVerticalFrontPorchEnable   = DSI_LP_VFP_DISABLE;
+      hDsiVideoMode.LPVerticalBackPorchEnable    = DSI_LP_VBP_DISABLE;
+      hDsiVideoMode.LPVerticalSyncActiveEnable   = DSI_LP_VSYNC_DISABLE;
+
+
+      /* No acknowledge at the end of a frame */
+      hDsiVideoMode.FrameBTAAcknowledgeEnable    = DSI_FBTAA_DISABLE;
 
       /* Configure DSI Video mode timings with settings set above */
       (void)HAL_DSI_ConfigVideoMode(&(hlcd_dsi), &(hDsiVideoMode));
@@ -596,6 +607,18 @@ int32_t BSP_LCD_InitHDMI(uint32_t Instance, uint32_t Format)
         return BSP_ERROR_PERIPH_FAILURE;
       }
 #endif /* DATA_IN_ExtSDRAM */
+
+      /** @brief NVIC configuration for LTDC interrupt that is now enabled */
+      HAL_NVIC_SetPriority(LTDC_IRQn, 0x0F, 0);
+      HAL_NVIC_EnableIRQ(LTDC_IRQn);
+
+      /** @brief NVIC configuration for DMA2D interrupt that is now enabled */
+      HAL_NVIC_SetPriority(DMA2D_IRQn, 0x0F, 0);
+      HAL_NVIC_EnableIRQ(DMA2D_IRQn);
+
+      /** @brief NVIC configuration for DSI interrupt that is now enabled */
+      HAL_NVIC_SetPriority(DSI_IRQn, 0x0F, 0);
+      HAL_NVIC_EnableIRQ(DSI_IRQn);
 
       ret = BSP_ERROR_NONE;
     }
@@ -687,6 +710,7 @@ __weak HAL_StatusTypeDef MX_DSIHOST_DSI_Init(DSI_HandleTypeDef *hdsi, uint32_t W
   VidCfg.LPVerticalFrontPorchEnable    = DSI_LP_VFP_ENABLE;
   VidCfg.LPVerticalBackPorchEnable     = DSI_LP_VBP_ENABLE;
   VidCfg.LPVerticalSyncActiveEnable    = DSI_LP_VSYNC_ENABLE;
+  VidCfg.FrameBTAAcknowledgeEnable     = DSI_FBTAA_DISABLE;
 
   if (HAL_DSI_ConfigVideoMode(hdsi, &VidCfg) != HAL_OK)
   {
@@ -772,6 +796,9 @@ __weak HAL_StatusTypeDef MX_LTDC_ClockConfig(LTDC_HandleTypeDef *hltdc)
   PeriphClkInitStruct.PLL3.PLL3P      = 2U;
   PeriphClkInitStruct.PLL3.PLL3Q      = 2U;
   PeriphClkInitStruct.PLL3.PLL3R      = 24U;
+  PeriphClkInitStruct.PLL3.PLL3RGE    = RCC_PLLCFGR_PLL3RGE_2;
+  PeriphClkInitStruct.PLL3.PLL3VCOSEL = RCC_PLL3VCOWIDE;
+  PeriphClkInitStruct.PLL3.PLL3FRACN  = 0U;
   return HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct);
 }
 
@@ -787,10 +814,13 @@ __weak HAL_StatusTypeDef MX_LTDC_ClockConfig2(LTDC_HandleTypeDef *hltdc)
 
   PeriphClkInitStruct.PeriphClockSelection    = RCC_PERIPHCLK_LTDC;
   PeriphClkInitStruct.PLL3.PLL3M      = 1U;
-  PeriphClkInitStruct.PLL3.PLL3N      = 720U;
+  PeriphClkInitStruct.PLL3.PLL3N      = 13U;
   PeriphClkInitStruct.PLL3.PLL3P      = 2U;
   PeriphClkInitStruct.PLL3.PLL3Q      = 2U;
-  PeriphClkInitStruct.PLL3.PLL3R      = 64U;
+  PeriphClkInitStruct.PLL3.PLL3R      = 12U;
+  PeriphClkInitStruct.PLL3.PLL3RGE    = RCC_PLLCFGR_PLL3RGE_2;
+  PeriphClkInitStruct.PLL3.PLL3VCOSEL = RCC_PLL3VCOWIDE;
+  PeriphClkInitStruct.PLL3.PLL3FRACN  = 0U;
   return HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct);
 }
 
@@ -1220,10 +1250,7 @@ int32_t BSP_LCD_GetXSize(uint32_t Instance, uint32_t *XSize)
   }
   else if(Lcd_Drv->GetXSize != NULL)
   {
-    if(Lcd_Drv->GetXSize(Lcd_CompObj, XSize) != BSP_ERROR_NONE)
-    {
-      ret = BSP_ERROR_COMPONENT_FAILURE;
-    }
+    *XSize = Lcd_Ctx[Instance].XSize;
   }
 
   return ret;
@@ -1245,10 +1272,7 @@ int32_t BSP_LCD_GetYSize(uint32_t Instance, uint32_t *YSize)
   }
   else if(Lcd_Drv->GetYSize != NULL)
   {
-    if(Lcd_Drv->GetYSize(Lcd_CompObj, YSize) != BSP_ERROR_NONE)
-    {
-      ret = BSP_ERROR_COMPONENT_FAILURE;
-    }
+    *YSize = Lcd_Ctx[Instance].YSize;
   }
 
   return ret;
@@ -1389,7 +1413,7 @@ int32_t BSP_LCD_DrawBitmap(uint32_t Instance, uint32_t Xpos, uint32_t Ypos, uint
   bit_pixel = (uint32_t)pBmp[28] + ((uint32_t)pBmp[29] << 8);
 
   /* Set the address */
-  Address = hlcd_ltdc.LayerCfg[Lcd_Ctx[Instance].ActiveLayer].FBStartAdress + (((Lcd_Ctx[Instance].XSize*Ypos) + Xpos)*Lcd_Ctx[Instance].BppFactor); /*(Lcd_Ctx[Instance].PixelFormat << 1)*/
+  Address = hlcd_ltdc.LayerCfg[Lcd_Ctx[Instance].ActiveLayer].FBStartAdress + (((Lcd_Ctx[Instance].XSize*Ypos) + Xpos)*Lcd_Ctx[Instance].BppFactor);
 
   /* Get the layer pixel format */
   if ((bit_pixel/8U) == 4U)
@@ -1718,6 +1742,7 @@ static void LCD_InitSequence(void)
   gpio_init_structure.Pin       = LCD_BL_CTRL_PIN;
   gpio_init_structure.Mode      = GPIO_MODE_OUTPUT_PP;
   gpio_init_structure.Speed     = GPIO_SPEED_FREQ_HIGH;
+  gpio_init_structure.Pull      = GPIO_NOPULL;
   HAL_GPIO_Init(LCD_BL_CTRL_GPIO_PORT, &gpio_init_structure);
   /* Assert back-light LCD_BL_CTRL pin */
   HAL_GPIO_WritePin(LCD_BL_CTRL_GPIO_PORT, LCD_BL_CTRL_PIN, GPIO_PIN_SET);
@@ -1728,6 +1753,7 @@ static void LCD_InitSequence(void)
   gpio_init_structure.Pin       = LCD_TE_PIN;
   gpio_init_structure.Mode      = GPIO_MODE_INPUT;
   gpio_init_structure.Speed     = GPIO_SPEED_FREQ_HIGH;
+  gpio_init_structure.Pull      = GPIO_NOPULL;
   HAL_GPIO_Init(LCD_TE_GPIO_PORT, &gpio_init_structure);
   /* Assert back-light LCD_BL_CTRL pin */
   HAL_GPIO_WritePin(LCD_TE_GPIO_PORT, LCD_TE_PIN, GPIO_PIN_SET);

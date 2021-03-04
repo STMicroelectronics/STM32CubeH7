@@ -34,6 +34,8 @@
  4. Oscilloscope Control
     In this part, there is 3 buttons porting the action to start,stop or close the oscilloscope .
 
+  In order to install this PC application, please unzip the "Oscilloscope_setup.zip" file then run "setup.exe"
+
  * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
  */
 

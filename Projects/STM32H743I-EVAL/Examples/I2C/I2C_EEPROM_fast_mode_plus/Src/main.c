@@ -150,7 +150,7 @@ int main(void)
     /* Wait for the end of the transmission signaled using the callback HAL_I2C_MemTxCpltCallback */
     while((I2C_Tx_Complete_Flag == 0) && (I2C_Error_Flag == 0))
     {
-      /* wait untill I2C transmission ends or error */
+      /* wait until I2C transmission ends or error */
     }
     
     /* Turn LED1 on: Transfer in transmission process is correct */
@@ -183,7 +183,7 @@ int main(void)
   /* Wait for the end of the reception signaled using the callback HAL_I2C_MemRxCpltCallback*/
   while((I2C_Rx_Complete_Flag == 0) && (I2C_Error_Flag == 0))
   {
-    /* wait untill I2C Reception ends or error */
+    /* wait until I2C Reception ends or error */
   }
   
   /* Turn LED2 on: Transfer in reception process is correct */

@@ -94,7 +94,7 @@ int main(void)
 
   while (1)
   {
-    /* Test if user an action occured on the Wkup/Tamper push-button */
+    /* Test if user an action occurred on the Wkup/Tamper push-button */
     if (UserButtonStatus == 1)
     {
       UserButtonStatus = 0;

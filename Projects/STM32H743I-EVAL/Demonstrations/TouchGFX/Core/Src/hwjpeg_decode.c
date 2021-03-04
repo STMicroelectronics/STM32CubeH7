@@ -198,7 +198,7 @@ static void DMA2D_YCbCr_To_RGB_2(uint32_t *pSrc, uint32_t chroma,
     DMA2D->OMAR    = (uint32_t)destination;
     DMA2D->FGMAR   = (uint32_t)pSrc;
 
-    /* Start the transfer, no interrtups */
+    /* Start the transfer, no interrupts */
     DMA2D->CR |= 1;
 
     /* Poll until transfer is done */

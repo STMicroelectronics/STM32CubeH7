@@ -2330,7 +2330,7 @@ int32_t BSP_AUDIO_IN_GetChannelsNbr(uint32_t Instance, uint32_t *ChannelNbr)
 /**
   * @brief  Set the current audio in volume level.
   * @param  Instance  AUDIO IN Instance. It can be 0 when SAI is used
-  * @param  Volume    Volume level to be returnd
+  * @param  Volume    Volume level to be returned
   * @retval BSP status
   */
 int32_t BSP_AUDIO_IN_SetVolume(uint32_t Instance, uint32_t Volume)
@@ -2357,7 +2357,7 @@ int32_t BSP_AUDIO_IN_SetVolume(uint32_t Instance, uint32_t Volume)
 /**
   * @brief  Get the current audio in volume level.
   * @param  Instance  AUDIO IN Instance. It can be 0 when SAI is used
-  * @param  Volume    Volume level to be returnd
+  * @param  Volume    Volume level to be returned
   * @retval BSP status
   */
 int32_t BSP_AUDIO_IN_GetVolume(uint32_t Instance, uint32_t *Volume)

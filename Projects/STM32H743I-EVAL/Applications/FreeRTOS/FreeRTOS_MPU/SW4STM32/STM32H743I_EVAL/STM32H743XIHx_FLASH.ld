@@ -5,7 +5,7 @@
 **  File        : LinkerScript.ld
 **
 **  Abstract    : Linker script for STM32H743XIHx Device with
-**                2048KByte FLASH, 127KByte RAM
+**                2048KByte FLASH, 128KByte RAM
 **
 **                Set heap size, stack size and stack location according
 **                to application requirements.
@@ -36,7 +36,7 @@
 ENTRY(Reset_Handler)
 
 /* Highest address of the user mode stack */
-_estack = 0x2000FE00;    /* end of RAM */
+_estack = 0x2001FFFF;    /* end of RAM */
 /* Generate a link error if heap and stack don't fit into RAM */
 _Min_Heap_Size = 0x200;      /* required amount of heap  */
 _Min_Stack_Size = 0x400; /* required amount of stack */
@@ -44,19 +44,21 @@ _Min_Stack_Size = 0x400; /* required amount of stack */
 /* Specify the memory areas */
 MEMORY
 {
-FLASH (rx)      : ORIGIN = 0x08004000, LENGTH = 2032K
-Privileged_FLASH (rx)      : ORIGIN = 0x08000000, LENGTH = 16K
-RAM (xrw)      : ORIGIN = 0x20000200, LENGTH = 63K
-Privileged_RAM (xrw)      : ORIGIN = 0x20000000, LENGTH = 512
+FLASH (rx)      : ORIGIN = 0x08009000, LENGTH = 2012K
+Privileged_FLASH (rx)      : ORIGIN = 0x08000000, LENGTH = 32K
+System_calls_FLASH (rx)      : ORIGIN = 0x08008000, LENGTH = 4K
+RAM (xrw)      : ORIGIN = 0x20008000, LENGTH = 96K
+Privileged_RAM (xrw)      : ORIGIN = 0x20000000, LENGTH = 32K
 ITCMRAM (xrw)      : ORIGIN = 0x00000000, LENGTH = 64K
 }
 
 /* Variables used by FreeRTOS-MPU. */
-_Privileged_Functions_Region_Size = 16K;
-_Privileged_Data_Region_Size = 512;
+_Privileged_Functions_Region_Size = 32K;
+_system_calls_Region_Size = 4K;
+_Privileged_Data_Region_Size = 32K;
 
 __FLASH_segment_start__ = ORIGIN( Privileged_FLASH );
-__FLASH_segment_end__ = __FLASH_segment_start__ + LENGTH( Privileged_FLASH ) + LENGTH( FLASH );
+__FLASH_segment_end__ = __FLASH_segment_start__ + LENGTH( Privileged_FLASH ) + LENGTH( System_calls_FLASH ) + LENGTH( FLASH );
 
 __privileged_functions_start__ = ORIGIN( Privileged_FLASH );
 __privileged_functions_end__ = __privileged_functions_start__ + _Privileged_Functions_Region_Size;
@@ -67,6 +69,8 @@ __SRAM_segment_end__ = __SRAM_segment_start__ + LENGTH( Privileged_RAM ) + LENGT
 __privileged_data_start__ = ORIGIN( Privileged_RAM );
 __privileged_data_end__ = __privileged_data_start__ + _Privileged_Data_Region_Size;
 
+__syscalls_flash_start__ = ORIGIN( System_calls_FLASH );
+__syscalls_flash_end__ = __syscalls_flash_start__ + _system_calls_Region_Size;
 
 /* Define output sections */
 SECTIONS
@@ -86,6 +90,14 @@ SECTIONS
     *(privileged_functions*)
     . = ALIGN(4);
   } >Privileged_FLASH
+  
+    .freertos_system_calls : 
+  {
+    . = ALIGN(4);
+    *(freertos_system_calls)
+    *(freertos_system_calls*)
+    . = ALIGN(4);
+  } >System_calls_FLASH
 
   /* The program code and other data goes into FLASH */
   .text :
@@ -150,7 +162,7 @@ SECTIONS
     . = ALIGN(4);
     _epbss = .;
   } >Privileged_RAM
-  
+ 
   /* used by the startup to initialize data */
   _sipdata = LOADADDR(.pdata);
 
@@ -158,8 +170,8 @@ SECTIONS
   {
     . = ALIGN(4);
     _spdata = .;
-    *(privileged_initialized_data)
-    *(privileged_initialized_data*)
+    *(privileged_data)
+    *(privileged_data*)
     . = ALIGN(4);
     _epdata = .;
   } >Privileged_RAM AT> Privileged_FLASH
@@ -203,7 +215,7 @@ SECTIONS
   . = ALIGN(4);
   .bss :
   {
-    /* This is used by the startup in order to initialize the .bss secion */
+    /* This is used by the startup in order to initialize the .bss section */
     _sbss = .;         /* define a global symbol at bss start */
     __bss_start__ = _sbss;
     *(.bss)
@@ -226,7 +238,6 @@ SECTIONS
     . = ALIGN(8);
   } >RAM
 
-  
 
   /* Remove information from the standard libraries */
   /DISCARD/ :

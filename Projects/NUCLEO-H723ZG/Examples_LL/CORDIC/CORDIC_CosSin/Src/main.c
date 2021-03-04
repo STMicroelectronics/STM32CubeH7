@@ -230,7 +230,7 @@ static void MX_GPIO_Init(void)
 }
 
 /**
-  * @brief  Check delta betwen two values is below threshold
+  * @brief  Check delta between two values is below threshold
   * @param  VarA First input variable
   * @param  VarB Second input variable
   * @param  MaxError Maximum delta allowed between VarA and VarB

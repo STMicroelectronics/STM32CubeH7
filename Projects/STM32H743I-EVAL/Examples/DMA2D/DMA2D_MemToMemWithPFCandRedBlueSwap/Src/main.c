@@ -163,7 +163,7 @@ int main(void)
 /**
   * @brief DMA2D configuration.
   * @param  RedBlueSwapConfig can be DMA2D_RB_REGULAR or DMA2D_RB_SWAP
-  * @note  This function Configure tha DMA2D peripheral :
+  * @note  This function Configure the DMA2D peripheral :
   *        1) Configure the transfer mode : memory to memory with PFC
   *        2) Configure the output color mode as ARGB8888
   *        3) Configure the output OutputOffset to LCD width - image width

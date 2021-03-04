@@ -48,8 +48,16 @@
 #define BSP_QSPI_Interface_t            MT25TL01G_Interface_t
 #define BSP_QSPI_Transfer_t             MT25TL01G_Transfer_t
 #define BSP_QSPI_DualFlash_t            MT25TL01G_DualFlash_t
-#define BSP_QSPI_Erase_t                MT25TL01G_Erase_t
 #define BSP_QSPI_ODS_t                  MT25TL01G_ODS_t
+
+typedef enum
+{
+  BSP_QSPI_ERASE_8K   =  MT25TL01G_ERASE_4K ,       /*!< 8K size Sector erase = 2 x 4K as Dual flash mode is used for this board   */
+  BSP_QSPI_ERASE_64K  =  MT25TL01G_ERASE_32K ,      /*!< 64K size Sector erase = 2 x 32K as Dual flash mode is used for this board */
+  BSP_QSPI_ERASE_128K =  MT25TL01G_ERASE_64K ,      /*!< 128K size Sector erase = 2 x 64K as Dual mode is used for this board      */
+  BSP_QSPI_ERASE_CHIP =  MT25TL01G_ERASE_CHIP       /*!< Whole chip erase */
+
+} BSP_QSPI_Erase_t;
 
 typedef enum
 {
@@ -118,16 +126,10 @@ typedef struct
 /* Definition for QSPI Flash ID */
 #define BSP_QSPI_FLASH_ID            QSPI_FLASH_ID_1
 
-/* QSPI erase types */
-#define BSP_QSPI_ERASE_4K            (MT25TL01G_Erase_t)MT25TL01G_ERASE_4K
-#define BSP_QSPI_ERASE_32K           (MT25TL01G_Erase_t)MT25TL01G_ERASE_32K
-#define BSP_QSPI_ERASE_64K           (MT25TL01G_Erase_t)MT25TL01G_ERASE_64K
-#define BSP_QSPI_ERASE_CHIP          (MT25TL01G_Erase_t)MT25TL01G_ERASE_CHIP
-
-/* QSPI block sizes */
-#define BSP_QSPI_BLOCK_4K            MT25TL01G_SECTOR_4K
-#define BSP_QSPI_BLOCK_32K           MT25TL01G_BLOCK_32K
-#define BSP_QSPI_BLOCK_64K           MT25TL01G_BLOCK_64K
+/* QSPI block sizes for dual flash */
+#define BSP_QSPI_BLOCK_8K            MT25TL01G_SECTOR_4K
+#define BSP_QSPI_BLOCK_64K           MT25TL01G_BLOCK_32K
+#define BSP_QSPI_BLOCK_128K          MT25TL01G_BLOCK_64K
 
 /* Definition for QSPI clock resources */
 #define QSPI_CLK_ENABLE()              __HAL_RCC_QSPI_CLK_ENABLE()

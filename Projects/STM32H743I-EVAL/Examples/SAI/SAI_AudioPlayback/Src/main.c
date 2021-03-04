@@ -168,7 +168,7 @@ int main(void)
   /* Start loopback */
   while(1)
   {
-    /* Wait Rx half transfert event */
+    /* Wait Rx half transfer event */
     while(bufferStatus != BUFFER_OFFSET_HALF);
 
     /* Convert the first half of PDM data to PCM */
@@ -180,7 +180,7 @@ int main(void)
     /* Initialize Rx buffer status */
     bufferStatus &= BUFFER_OFFSET_NONE;
 
-    /* Wait Rx transfert complete event */
+    /* Wait Rx transfer complete event */
     while(bufferStatus != BUFFER_OFFSET_FULL);
 
     /* Convert the second half of PDM data to PCM */

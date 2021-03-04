@@ -35,8 +35,15 @@
 #define USE_CAMERA_SENSOR_OV9655         1
 #endif
 
+#ifndef USE_CAMERA_SENSOR_OV5640
+#define USE_CAMERA_SENSOR_OV5640         1
+#endif
+
 #if (USE_CAMERA_SENSOR_OV9655 == 1)
 #include "../Components/ov9655/ov9655.h"
+#endif
+#if (USE_CAMERA_SENSOR_OV5640 == 1)
+#include "../Components/ov5640/ov5640.h"
 #endif
 
 #include "camera.h"
@@ -58,6 +65,7 @@
   */
 typedef struct
 {
+  uint32_t CameraId;
   uint32_t Resolution;
   uint32_t PixelFormat;
   uint32_t LightMode;
@@ -170,6 +178,8 @@ typedef struct
 
 
 #define CAMERA_OV9655_ADDRESS           0x60U
+#define CAMERA_OV5640_ADDRESS           0x78U
+
 /**
   * @}
   */
@@ -234,6 +244,7 @@ int32_t BSP_CAMERA_DisableNightMode(uint32_t Instance);
 
 int32_t BSP_CAMERA_HwReset(uint32_t Instance);
 int32_t BSP_CAMERA_PwrDown(uint32_t Instance);
+int32_t BSP_CAMERA_PwrUp(uint32_t Instance);
 void    BSP_CAMERA_LineEventCallback(uint32_t Instance);
 void    BSP_CAMERA_FrameEventCallback(uint32_t Instance);
 void    BSP_CAMERA_VsyncEventCallback(uint32_t Instance);

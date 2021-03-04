@@ -176,7 +176,7 @@ __ALIGN_BEGIN uint8_t USBD_DFU_DeviceDesc[USB_LEN_DEV_DESC] __ALIGN_END =
   * @{
   */
 
-/** USB lang indentifier descriptor. */
+/** USB lang identifier descriptor. */
 __ALIGN_BEGIN uint8_t USBD_LangIDDesc[USB_LEN_LANGID_STR_DESC] __ALIGN_END =
 {
      USB_LEN_LANGID_STR_DESC,

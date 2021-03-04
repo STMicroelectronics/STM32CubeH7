@@ -550,7 +550,7 @@ int32_t MT25TL01G_ReadStatusRegister(QSPI_HandleTypeDef *Ctx, MT25TL01G_Interfac
   QSPI_CommandTypeDef s_command;
   /* Initialize the read flag status register command */
   s_command.InstructionMode   = (Mode == MT25TL01G_QPI_MODE) ? QSPI_INSTRUCTION_4_LINES : QSPI_INSTRUCTION_1_LINE;
-  s_command.Instruction       = MT25TL01G_READ_FLAG_STATUS_REG_CMD;
+  s_command.Instruction       = MT25TL01G_READ_STATUS_REG_CMD;
   s_command.AddressMode       = QSPI_ADDRESS_NONE;
   s_command.AlternateByteMode = QSPI_ALTERNATE_BYTES_NONE;
   s_command.DataMode          = (Mode == MT25TL01G_QPI_MODE) ? QSPI_DATA_4_LINES : QSPI_DATA_1_LINE;

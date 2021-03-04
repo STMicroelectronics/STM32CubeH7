@@ -84,7 +84,7 @@
   * @{
   */
 #if (USE_HAL_SD_REGISTER_CALLBACKS == 1)
-/* Is Msp Callbacks registred */
+/* Is Msp Callbacks registered */
 static uint32_t   IsMspCallbacksValid[SD_INSTANCES_NBR] = {0};
 #endif
 typedef void (* BSP_EXTI_LineCallback) (void);

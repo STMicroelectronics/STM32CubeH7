@@ -126,7 +126,7 @@ Connectivity, USB_Device, USB, HID, Full Speed, Mouse, Joystick, Button, Remote 
 
 In order to make the program work, you must do the following :
 
-  1. Select required configuration in memory.h in ExtMem_CodeExecution\ExtMem_Boot\Inc.
+  1. Select required configuration in memory.h in Templates\ExtMem_Boot\Inc template.
      The default configuration is the right one: 
      - DATA_AREA set to USE_INTERNAL_SRAM
      - CODE_AREA set to USE_QSPI

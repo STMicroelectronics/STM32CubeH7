@@ -17,6 +17,28 @@
   ******************************************************************************
   @endverbatim
 
+### 25-August-2020 ###
+========================
+   + Update GCM templates with Additional data not 4 bytes aligned
+   (default configuration enabled by define : STM32_AAD_ANY_LENGTH_SUPPORT)
+
+### 02-April-2020 ###
+========================
+   + Add in template directory the files :
+    - Update aes_alt_template.[c/h]
+    - gcm_alt_template.[c/h] : mbed TLS GCM Hw crypto using HAL/CRYP API
+    - ccm_alt_template.[c/h] : mbed TLS CCM Hw crypto using HAL/CRYP API
+    - cryp_stm32.[c/h] : ST file with commom procedures on crypto processor
+
+    - sha1_alt_template.[c/h] : mbed TLS Sha1 Hw crypto using HAL/CRYP API
+    - sha256_alt_template.[c/h] : mbed TLS Sha256 Hw crypto using HAL/CRYP API
+    - md5_alt_template.[c/h] : mbed TLS MD5 Hw crypto using HAL/CRYP API
+    - hash_stm32.[c/h] : ST file with commom procedures on hash processor
+
+   + Fix GCM selftest by skipping tests with IV out of the values supported by HW.
+   Hw implementation limit IV to a length of 96-bits.
+   It is the value recommended for situations in which efficiency is critical.
+
 ### 17-Jan-2020 ###
 ========================
    + Add in template directory the files :

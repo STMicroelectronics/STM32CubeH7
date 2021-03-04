@@ -106,7 +106,7 @@ int main(void)
       2) by calling HAL API function HAL_RCC_GetSysClockFreq()
       3) each time HAL_RCC_ClockConfig() is called to configure the system clock frequency     
   --------------------------------------------------------------------------- */
-  /* Compute the value to be set in ARR regiter to generate signal frequency at 8.78 Khz */
+  /* Compute the value to be set in ARR register to generate signal frequency at 8.78 Khz */
   TimerPeriod = ((SystemCoreClock/2) / 17570 ) - 1;
   /* Compute CCR1 value to generate a duty cycle at 50% for channel 1 */
   Channel1Pulse = (uint16_t) (((uint32_t) 5 * (TimerPeriod - 1)) / 10);

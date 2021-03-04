@@ -209,7 +209,7 @@ static void _OnPaint_back(BUTTON_Handle hObj)
 }
 
 /**
-  * @brief  Paints foreward button
+  * @brief  Paints forward button
   * @param  hObj: button handle
   * @retval None
   */
@@ -295,7 +295,7 @@ static void _cbButton_chromart(WM_MESSAGE * pMsg)
 }
 
 /**
-  * @brief  callback for foreward button
+  * @brief  callback for forward button
   * @param  pMsg: pointer to data structure of type WM_MESSAGE
   * @retval None
   */
@@ -1199,7 +1199,7 @@ static void _AddEntireFolder(char *Foldername)
 }
 
 /**
-  * @brief  Video window Starup
+  * @brief  Video window Startup
   * @param  hWin: pointer to the parent handle.
   * @param  xpos: X position 
   * @param  ypos: Y position

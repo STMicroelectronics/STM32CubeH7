@@ -126,7 +126,7 @@ int main(void)
   {
     if(HAL_FDCAN_GetRxFifoFillLevel(&hfdcan, FDCAN_RX_FIFO0) != 0)
     {
-      /* Retreive Rx messages from RX FIFO0 */
+      /* Retrieve Rx messages from RX FIFO0 */
       HAL_FDCAN_GetRxMessage(&hfdcan, FDCAN_RX_FIFO0, &RxHeader, &RxData[idx]);
       idx += 64; /* Data length per message is 64 bytes */
       counter++;
@@ -187,7 +187,7 @@ int main(void)
   {
     if(HAL_FDCAN_GetRxFifoFillLevel(&hfdcan, FDCAN_RX_FIFO0) != 0)
     {
-      /* Retreive Rx messages from RX FIFO0 */
+      /* Retrieve Rx messages from RX FIFO0 */
       HAL_FDCAN_GetRxMessage(&hfdcan, FDCAN_RX_FIFO0, &RxHeader, &RxData[idx]);
       idx += 64; /* Data length per message is 64 bytes */
       counter++;

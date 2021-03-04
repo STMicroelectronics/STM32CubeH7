@@ -119,7 +119,7 @@ According to the Ref Manual :
 The LAR address register represents the next Linked list Node address.
 As consequence the Liked list transfer nodes must be 64 bits aligned and must be in the AXI address space.
 */
-/* 32-bytes Alignement is needed for cache maintenance purpose */
+/* 32-bytes Alignment is needed for cache maintenance purpose */
 ALIGN_32BYTES( MDMA_LinkNodeTypeDef Xfer_Node1);
 ALIGN_32BYTES( MDMA_LinkNodeTypeDef Xfer_Node2);
 /*****************************************************/
@@ -212,7 +212,7 @@ int main(void)
 }
 
 /**
-  * @brief  MDMA Liked List transfer configuraion
+  * @brief  MDMA Liked List transfer configuration
   * @note   This function configure the DMA for a linked list transfer.
   *         The linked list contains 3 nodes.
   *         Node 0 transfer parameters are configured within the Handle init parameters.

@@ -222,7 +222,7 @@ void REC_PDM_demo(void)
   *         Playback:
   *          - Audio OUT instance: 0 (SAI)
   *          - Audio OUT Device  : headphone
-  * @note  In this mode, data are proccessed internally in BSP audio drivers and
+  * @note  In this mode, data are processed internally in BSP audio drivers and
   *        copied to user buffer.
   * @retval None
   */
@@ -364,8 +364,8 @@ void REC_SingleBuff_demo(void)
   *         Playback:
   *          - Audio OUT instance: 0 (SAI)
   *          - Audio OUT Device  : headphone
-  * @note  In this mode, data are proccessed at application level. The BSP drivers
-  *        return only the data aquisition status (completed or half completed)
+  * @note  In this mode, data are processed at application level. The BSP drivers
+  *        return only the data acquisition status (completed or half completed)
   * @retval None
   */
 void REC_MultiBuff_demo(void)

@@ -192,7 +192,7 @@ int main(void)
 }
 
 /**
-  * @brief  MDMA Repeat blocks ransfer configuraion
+  * @brief  MDMA Repeat blocks ransfer configuration
   * @note   This function configure the DMA for a Repeat BLock transfer.
   * @retval None
   */
@@ -439,7 +439,7 @@ static void Error_Handler(void)
 
 /**
   * @brief LCD configuration.
-  * @note  This function Configure tha LTDC peripheral :
+  * @note  This function Configure the LTDC peripheral :
   *        1) Configure the Pixel Clock for the LCD
   *        2) Configure the LTDC Timing and Polarity
   *        3) Configure the LTDC Layer 2 :

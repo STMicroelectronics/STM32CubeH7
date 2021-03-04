@@ -110,11 +110,18 @@ int main(void)
   BSP_LED_Init(LED3);
 
    /* Initialize the LCD   */
-  if(BSP_LCD_Init(0, LCD_ORIENTATION_LANDSCAPE) != BSP_ERROR_NONE)
+#if (USE_LCD_CTRL_ADV7533 > 0)
+  /* check if a HDMI monitor is connected through DSI-HDMI bridge(Board MB1232 )*/
+  if(BSP_LCD_InitHDMI(0,HDMI_FORMAT_720_576)!= BSP_ERROR_NONE)
+#endif /* (USE_LCD_CTRL_ADV7533 > 0) */
   {
-    Error_Handler();
-  } 
-  
+    /* check KoD LCD pannel (Board MB1166 ) */
+    if(BSP_LCD_Init(0, LCD_ORIENTATION_LANDSCAPE) != BSP_ERROR_NONE)
+    {
+      Error_Handler();
+    }
+  }
+
   UTIL_LCD_SetFuncDriver(&LCD_Driver);
   UTIL_LCD_SetLayer(0);
 

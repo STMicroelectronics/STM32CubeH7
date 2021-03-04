@@ -130,7 +130,7 @@ void USBH_CDC_ReceiveCallback(USBH_HandleTypeDef *phost)
 }
 
 /**
-  * @brief  Displays recieved data
+  * @brief  Displays received data
   * @param  data: Keyboard data to be displayed
   * @retval None
   */

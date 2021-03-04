@@ -522,7 +522,7 @@ int BSP_ResourcesCopy(WM_HWIN hItem, FIL * pResFile, uint32_t Address)
       goto exit;
     }
 
-    ospiStatus = BSP_QSPI_EraseBlock(0,FlashAddr,MT25TL01G_ERASE_4K);
+    ospiStatus = BSP_QSPI_EraseBlock(0,FlashAddr,BSP_QSPI_ERASE_8K);
     if (ospiStatus != BSP_ERROR_NONE)
     {
       RetErr = -1;

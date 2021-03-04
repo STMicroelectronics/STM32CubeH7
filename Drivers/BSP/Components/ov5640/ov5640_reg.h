@@ -3,7 +3,7 @@
   * @file    ov5640_reg.h
   * @author  MCD Application Team
   * @brief   Header of ov5640_reg.c
-  *          
+  *
   ******************************************************************************
   * @attention
   *
@@ -16,7 +16,7 @@
   *                        opensource.org/licenses/BSD-3-Clause
   *
   ******************************************************************************
-  */ 
+  */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef OV5640_REG_H
@@ -25,18 +25,18 @@
 #include <cmsis_compiler.h>
 
 #ifdef __cplusplus
- extern "C" {
-#endif 
+extern "C" {
+#endif
 
-/* Includes ------------------------------------------------------------------*/   
+/* Includes ------------------------------------------------------------------*/
 /** @addtogroup BSP
   * @{
-  */ 
+  */
 
 /** @addtogroup Components
   * @{
-  */ 
-  
+  */
+
 /** @addtogroup OV5640
   * @{
   */
@@ -44,21 +44,21 @@
 /** @defgroup OV5640_Exported_Types
   * @{
   */
-     
+
 /**
   * @}
-  */ 
+  */
 
 /** @defgroup OV5640_Exported_Constants OV5640 Exported Constants
   * @{
   */
 
-/** 
-  * @brief  OV5640 ID  
-  */  
+/**
+  * @brief  OV5640 ID
+  */
 #define  OV5640_ID                                 0x5640U
-/** 
-  * @brief  OV5640 Registers  
+/**
+  * @brief  OV5640 Registers
   */
 /* system and IO pad control [0x3000 ~ 0x3052]        */
 #define OV5640_SYSREM_RESET00                      0x3000U
@@ -89,7 +89,7 @@
 #define OV5640_SC_PLL_CONTRL1                      0x3035U
 #define OV5640_SC_PLL_CONTRL2                      0x3036U
 #define OV5640_SC_PLL_CONTRL3                      0x3037U
-#define OV5640_SC_PLL_CONTRL4                      0x3038U    
+#define OV5640_SC_PLL_CONTRL4                      0x3038U
 #define OV5640_SC_PLL_CONTRL5                      0x3039U
 #define OV5640_SC_PLLS_CTRL0                       0x303AU
 #define OV5640_SC_PLLS_CTRL1                       0x303BU
@@ -98,13 +98,13 @@
 #define OV5640_IO_PAD_VALUE00                      0x3050U
 #define OV5640_IO_PAD_VALUE01                      0x3051U
 #define OV5640_IO_PAD_VALUE02                      0x3052U
-                                                   
+
 /* SCCB control [0x3100 ~ 0x3108]                       */
 #define OV5640_SCCB_ID                             0x3100U
 #define OV5640_SCCB_SYSTEM_CTRL0                   0x3102U
 #define OV5640_SCCB_SYSTEM_CTRL1                   0x3103U
 #define OV5640_SYSTEM_ROOT_DIVIDER                 0x3108U
-                                                   
+
 /* SRB control [0x3200 ~ 0x3213]                        */
 #define OV5640_GROUP_ADDR0                         0x3200U
 #define OV5640_GROUP_ADDR1                         0x3201U
@@ -112,7 +112,7 @@
 #define OV5640_GROUP_ADDR3                         0x3203U
 #define OV5640_SRM_GROUP_ACCESS                    0x3212U
 #define OV5640_SRM_GROUP_STATUS                    0x3213U
-                                                   
+
 /* AWB gain control [0x3400 ~ 0x3406]                   */
 #define OV5640_AWB_R_GAIN_MSB                      0x3400U
 #define OV5640_AWB_R_GAIN_LSB                      0x3401U
@@ -121,7 +121,7 @@
 #define OV5640_AWB_B_GAIN_MSB                      0x3404U
 #define OV5640_AWB_B_GAIN_LSB                      0x3405U
 #define OV5640_AWB_MANUAL_CONTROL                  0x3406U
-                                                   
+
 /* AEC/AGC control [0x3500 ~ 0x350D]                    */
 #define OV5640_AEC_PK_EXPOSURE_19_16               0x3500U
 #define OV5640_AEC_PK_EXPOSURE_HIGH                0x3501U
@@ -131,7 +131,7 @@
 #define OV5640_AEC_PK_REAL_GAIN_LOW                0x350BU
 #define OV5640_AEC_PK_VTS_HIGH                     0x350CU
 #define OV5640_AEC_PK_VTS_LOW                      0x350DU
-                                                   
+
 /* VCM control [0x3600 ~ 0x3606]                        */
 #define OV5640_VCM_CONTROL_0                       0x3602U
 #define OV5640_VCM_CONTROL_1                       0x3603U
@@ -171,10 +171,10 @@
 
 /* AEC/AGC power down domain control [0x3A00 ~ 0x3A25] */
 #define OV5640_AEC_CTRL00                          0x3A00U
-#define OV5640_AEC_CTRL01                          0x3A01U 
-#define OV5640_AEC_CTRL02                          0x3A02U 
+#define OV5640_AEC_CTRL01                          0x3A01U
+#define OV5640_AEC_CTRL02                          0x3A02U
 #define OV5640_AEC_CTRL03                          0x3A03U
-#define OV5640_AEC_CTRL04                          0x3A04U    
+#define OV5640_AEC_CTRL04                          0x3A04U
 #define OV5640_AEC_CTRL05                          0x3A05U
 #define OV5640_AEC_CTRL06                          0x3A06U
 #define OV5640_AEC_CTRL07                          0x3A07U
@@ -185,23 +185,23 @@
 #define OV5640_AEC_AEC_CTRL0C                      0x3A0CU
 #define OV5640_AEC_CTRL0D                          0x3A0DU
 #define OV5640_AEC_CTRL0E                          0x3A0EU
-#define OV5640_AEC_CTRL0F                          0x3A0FU               
-#define OV5640_AEC_CTRL10                          0x3A10U               
-#define OV5640_AEC_CTRL11                          0x3A11U               
+#define OV5640_AEC_CTRL0F                          0x3A0FU
+#define OV5640_AEC_CTRL10                          0x3A10U
+#define OV5640_AEC_CTRL11                          0x3A11U
 #define OV5640_AEC_CTRL13                          0x3A13U
 #define OV5640_AEC_MAX_EXPO_HIGH                   0x3A14U
 #define OV5640_AEC_MAX_EXPO_LOW                    0x3A15U
 #define OV5640_AEC_CTRL17                          0x3A17U
-#define OV5640_AEC_GAIN_CEILING_HIGH               0x3A18U                   
+#define OV5640_AEC_GAIN_CEILING_HIGH               0x3A18U
 #define OV5640_AEC_GAIN_CEILING_LOW                0x3A19U
 #define OV5640_AEC_DIFF_MIN                        0x3A1AU
 #define OV5640_AEC_CTRL1B                          0x3A1BU
 #define OV5640_LED_ADD_ROW_HIGH                    0x3A1CU
 #define OV5640_LED_ADD_ROW_LOW                     0x3A1DU
 #define OV5640_AEC_CTRL1E                          0x3A1EU
-#define OV5640_AEC_CTRL1F                          0x3A1FU               
-#define OV5640_AEC_CTRL20                          0x3A20U               
-#define OV5640_AEC_CTRL21                          0x3A21U               
+#define OV5640_AEC_CTRL1F                          0x3A1FU
+#define OV5640_AEC_CTRL20                          0x3A20U
+#define OV5640_AEC_CTRL21                          0x3A21U
 #define OV5640_AEC_CTRL25                          0x3A25U
 
 /* strobe control [0x3B00 ~ 0x3B0C]                      */
@@ -218,7 +218,7 @@
 #define OV5640_FREX_RST_LENGTH                     0x3B0AU
 #define OV5640_STROBE_WIDTH_HIGH                   0x3B0BU
 #define OV5640_STROBE_WIDTH_LOW                    0x3B0CU
-                                                   
+
 /* 50/60Hz detector control [0x3C00 ~ 0x3C1E]            */
 #define OV5640_5060HZ_CTRL00                       0x3C00U
 #define OV5640_5060HZ_CTRL01                       0x3C01U
@@ -261,11 +261,11 @@
 #define OV5640_BLC_CTRL03                          0x4003U
 #define OV5640_BLC_CTRL04                          0x4004U
 #define OV5640_BLC_CTRL05                          0x4005U
-                                                   
+
 /* frame control [0x4201 ~ 0x4202]                       */
 #define OV5640_FRAME_CTRL01                        0x4201U
 #define OV5640_FRAME_CTRL02                        0x4202U
-                                                   
+
 /* format control [0x4300 ~ 0x430D]                      */
 #define OV5640_FORMAT_CTRL00                       0x4300U
 #define OV5640_FORMAT_CTRL01                       0x4301U
@@ -304,7 +304,7 @@
 #define OV5640_JPEG_LENGTH_BYTE2                   0x4415U
 #define OV5640_JPEG_LENGTH_BYTE1                   0x4416U
 #define OV5640_JFIFO_OVERFLOW                      0x4417U
-                                                         
+
 /* VFIFO control [0x4600 ~ 0x460D]                       */
 #define OV5640_VFIFO_CTRL00                        0x4600U
 #define OV5640_VFIFO_HSIZE_HIGH                    0x4602U
@@ -313,7 +313,7 @@
 #define OV5640_VFIFO_VSIZE_LOW                     0x4605U
 #define OV5640_VFIFO_CTRL0C                        0x460CU
 #define OV5640_VFIFO_CTRL0D                        0x460DU
-                                                         
+
 /* DVP control [0x4709 ~ 0x4745]                         */
 #define OV5640_DVP_VSYNC_WIDTH0                    0x4709U
 #define OV5640_DVP_VSYNC_WIDTH1                    0x470AU
@@ -321,7 +321,7 @@
 #define OV5640_PAD_LEFT_CTRL                       0x4711U
 #define OV5640_PAD_RIGHT_CTRL                      0x4712U
 #define OV5640_JPG_MODE_SELECT                     0x4713U
-#define OV5640_656_DUMMY_LINE                      0x4714U
+#define OV5640_656_DUMMY_LINE                      0x4715U
 #define OV5640_CCIR656_CTRL                        0x4719U
 #define OV5640_HSYNC_CTRL00                        0x471BU
 #define OV5640_DVP_VSYN_CTRL                       0x471DU
@@ -341,7 +341,7 @@
 #define OV5640_POLARITY_CTRL                       0x4740U
 #define OV5640_TEST_PATTERN                        0x4741U
 #define OV5640_DATA_ORDER                          0x4745U
-                                                         
+
 /* MIPI control [0x4800 ~ 0x4837]                        */
 #define OV5640_MIPI_CTRL00                         0x4800U
 #define OV5640_MIPI_CTRL01                         0x4801U
@@ -370,19 +370,19 @@
 #define OV5640_MIN_CLK_ZERO_UI                     0x482CU
 #define OV5640_MIN_CLK_PREPARE_UI                  0x482DU
 #define OV5640_MIN_CLK_POST_UI                     0x482EU
-#define OV5640_MIN_CLK_TRAIl_UI                    0x482FU
+#define OV5640_MIN_CLK_TRAIL_UI                    0x482FU
 #define OV5640_MIN_LPX_PCLK_UI                     0x4830U
 #define OV5640_MIN_HS_PREPARE_UI                   0x4831U
 #define OV5640_MIN_HS_EXIT_UI                      0x4832U
 #define OV5640_PCLK_PERIOD                         0x4837U
-                                                         
+
 /* ISP frame control [0x4901 ~ 0x4902]                   */
 #define OV5640_ISP_FRAME_CTRL01                    0x4901U
 #define OV5640_ISP_FRAME_CTRL02                    0x4902U
-                                                         
+
 /* ISP top control [0x5000 ~ 0x5063]                     */
 #define OV5640_ISP_CONTROL00                       0x5000U
-#define OV5640_ISP_CONTROL01                       0x5001U    
+#define OV5640_ISP_CONTROL01                       0x5001U
 #define OV5640_ISP_CONTROL03                       0x5003U
 #define OV5640_ISP_CONTROL05                       0x5005U
 #define OV5640_ISP_MISC0                           0x501DU
@@ -409,25 +409,25 @@
 #define OV5640_ISP_SENSOR_BIAS_I                   0x5061U
 #define OV5640_ISP_SENSOR_GAIN1_I                  0x5062U
 #define OV5640_ISP_SENSOR_GAIN2_I                  0x5063U
-                                                         
+
 /* AWB control [0x5180 ~ 0x51D0]                         */
-#define OV5640_AWB_CTRL00                          0x5180U 
+#define OV5640_AWB_CTRL00                          0x5180U
 #define OV5640_AWB_CTRL01                          0x5181U
 #define OV5640_AWB_CTRL02                          0x5182U
 #define OV5640_AWB_CTRL03                          0x5183U
 #define OV5640_AWB_CTRL04                          0x5184U
-#define OV5640_AWB_CTRL05                          0x5185U  
+#define OV5640_AWB_CTRL05                          0x5185U
 #define OV5640_AWB_CTRL06                          0x5186U     /* Advanced AWB control registers: 0x5186 ~ 0x5190 */
-#define OV5640_AWB_CTRL07                          0x5187U   
-#define OV5640_AWB_CTRL08                          0x5188U   
-#define OV5640_AWB_CTRL09                          0x5189U   
-#define OV5640_AWB_CTRL10                          0x518AU   
-#define OV5640_AWB_CTRL11                          0x518BU   
-#define OV5640_AWB_CTRL12                          0x518CU   
-#define OV5640_AWB_CTRL13                          0x518DU   
-#define OV5640_AWB_CTRL14                          0x518EU   
-#define OV5640_AWB_CTRL15                          0x518FU     
-#define OV5640_AWB_CTRL16                          0x5190U         
+#define OV5640_AWB_CTRL07                          0x5187U
+#define OV5640_AWB_CTRL08                          0x5188U
+#define OV5640_AWB_CTRL09                          0x5189U
+#define OV5640_AWB_CTRL10                          0x518AU
+#define OV5640_AWB_CTRL11                          0x518BU
+#define OV5640_AWB_CTRL12                          0x518CU
+#define OV5640_AWB_CTRL13                          0x518DU
+#define OV5640_AWB_CTRL14                          0x518EU
+#define OV5640_AWB_CTRL15                          0x518FU
+#define OV5640_AWB_CTRL16                          0x5190U
 #define OV5640_AWB_CTRL17                          0x5191U
 #define OV5640_AWB_CTRL18                          0x5192U
 #define OV5640_AWB_CTRL19                          0x5193U
@@ -438,9 +438,9 @@
 #define OV5640_AWB_CTRL24                          0x5198U
 #define OV5640_AWB_CTRL25                          0x5199U
 #define OV5640_AWB_CTRL26                          0x519AU
-#define OV5640_AWB_CTRL27                          0x519BU   
-#define OV5640_AWB_CTRL28                          0x519CU   
-#define OV5640_AWB_CTRL29                          0x519DU  
+#define OV5640_AWB_CTRL27                          0x519BU
+#define OV5640_AWB_CTRL28                          0x519CU
+#define OV5640_AWB_CTRL29                          0x519DU
 #define OV5640_AWB_CTRL30                          0x519EU
 #define OV5640_AWB_CURRENT_R_GAIN_HIGH             0x519FU
 #define OV5640_AWB_CURRENT_R_GAIN_LOW              0x51A0U
@@ -452,7 +452,7 @@
 #define OV5640_AWB_AVERAGE_G                       0x51A6U
 #define OV5640_AWB_AVERAGE_B                       0x51A7U
 #define OV5640_AWB_CTRL74                          0x5180U
-                                                         
+
 /* CIP control [0x5300 ~ 0x530F]                         */
 #define OV5640_CIP_SHARPENMT_TH1                   0x5300U
 #define OV5640_CIP_SHARPENMT_TH2                   0x5301U
@@ -470,7 +470,7 @@
 #define OV5640_CIP_EDGE_MT_AUTO                    0x530DU
 #define OV5640_CIP_DNS_TH_AUTO                     0x530EU
 #define OV5640_CIP_SHARPEN_TH_AUTO                 0x530FU
-                                                         
+
 /* CMX control [0x5380 ~ 0x538B]                         */
 #define OV5640_CMX_CTRL                            0x5380U
 #define OV5640_CMX1                                0x5381U
@@ -484,7 +484,7 @@
 #define OV5640_CMX9                                0x5389U
 #define OV5640_CMXSIGN_HIGH                        0x538AU
 #define OV5640_CMXSIGN_LOW                         0x538BU
-                                                         
+
 /* gamma control [0x5480 ~ 0x5490]                       */
 #define OV5640_GAMMA_CTRL00                        0x5480U
 #define OV5640_GAMMA_YST00                         0x5481U
@@ -503,7 +503,7 @@
 #define OV5640_GAMMA_YST0D                         0x548EU
 #define OV5640_GAMMA_YST0E                         0x548FU
 #define OV5640_GAMMA_YST0F                         0x5490U
-                                                         
+
 /* SDE control [0x5580 ~ 0x558C]                         */
 #define OV5640_SDE_CTRL0                           0x5580U
 #define OV5640_SDE_CTRL1                           0x5581U
@@ -518,7 +518,7 @@
 #define OV5640_SDE_CTRL10                          0x558AU
 #define OV5640_SDE_CTRL11                          0x558BU
 #define OV5640_SDE_CTRL12                          0x558CU
-                                                         
+
 /* scale control [0x5600 ~ 0x5606]                       */
 #define OV5640_SCALE_CTRL0                         0x5600U
 #define OV5640_SCALE_CTRL1                         0x5601U
@@ -527,8 +527,8 @@
 #define OV5640_SCALE_CTRL4                         0x5604U
 #define OV5640_SCALE_CTRL5                         0x5605U
 #define OV5640_SCALE_CTRL6                         0x5606U
-                                                         
-                                                         
+
+
 /* AVG control [0x5680 ~ 0x56A2]                         */
 #define OV5640_X_START_HIGH                        0x5680U
 #define OV5640_X_START_LOW                         0x5681U
@@ -565,7 +565,7 @@
 #define OV5640_AVG_WIN_33                          0x56A0U
 #define OV5640_AVG_READOUT                         0x56A1U
 #define OV5640_AVG_WEIGHT_SUM                      0x56A2U
-                                                         
+
 /* LENC control [0x5800 ~ 0x5849]                        */
 #define OV5640_GMTRX00                             0x5800U
 #define OV5640_GMTRX01                             0x5801U
@@ -641,7 +641,7 @@
 #define OV5640_G_HSCALE_LOW                        0x5847U
 #define OV5640_G_VSCALE_HIGH                       0x5848U
 #define OV5640_G_VSCALE_LOW                        0x5849U
-                                                         
+
 /* AFC control [0x6000 ~ 0x603F]                         */
 #define OV5640_AFC_CTRL00                          0x6000U
 #define OV5640_AFC_CTRL01                          0x6001U
@@ -714,8 +714,8 @@
 
 /************** Generic Function  *******************/
 
-typedef int32_t (*OV5640_Write_Func)(void *, uint16_t, uint8_t*, uint16_t);
-typedef int32_t (*OV5640_Read_Func) (void *, uint16_t, uint8_t*, uint16_t);
+typedef int32_t (*OV5640_Write_Func)(void *, uint16_t, uint8_t *, uint16_t);
+typedef int32_t (*OV5640_Read_Func)(void *, uint16_t, uint8_t *, uint16_t);
 
 typedef struct
 {
@@ -725,11 +725,11 @@ typedef struct
 } ov5640_ctx_t;
 
 /*******************************************************************************
-* Register      : Generic - All
-* Address       : Generic - All
-* Bit Group Name: None
-* Permission    : W
-*******************************************************************************/
+  * Register      : Generic - All
+  * Address       : Generic - All
+  * Bit Group Name: None
+  * Permission    : W
+  *******************************************************************************/
 int32_t ov5640_write_reg(ov5640_ctx_t *ctx, uint16_t reg, uint8_t *pdata, uint16_t length);
 int32_t ov5640_read_reg(ov5640_ctx_t *ctx, uint16_t reg, uint8_t *pdata, uint16_t length);
 
@@ -739,7 +739,7 @@ int32_t ov5640_register_get(ov5640_ctx_t *ctx, uint16_t reg, uint8_t *value);
 
 /**
   * @}
-  */    
+  */
 #ifdef __cplusplus
 }
 #endif
@@ -747,14 +747,14 @@ int32_t ov5640_register_get(ov5640_ctx_t *ctx, uint16_t reg, uint8_t *value);
 #endif /* OV5640_REG_H */
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

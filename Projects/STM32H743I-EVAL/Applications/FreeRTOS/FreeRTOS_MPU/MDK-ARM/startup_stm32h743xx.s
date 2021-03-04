@@ -1,6 +1,6 @@
 ;******************** (C) COPYRIGHT 2017 STMicroelectronics ********************
 ;* File Name          : startup_stm32h743xx.s
-;* Author             : MCD Application Team
+;* @author  MCD Application Team
 ;* Description        : STM32H7xx devices vector table for MDK-ARM toolchain. 
 ;*                      This module performs:
 ;*                      - Set the initial SP
@@ -428,7 +428,7 @@ Default_Handler PROC
                 EXPORT  LPTIM4_IRQHandler                 [WEAK]                                            
                 EXPORT  LPTIM5_IRQHandler                 [WEAK]                                            
                 EXPORT  LPUART1_IRQHandler                [WEAK]                                                  
-                EXPORT  CRS_IRQHandler                    [WEAK]                                   
+                EXPORT  CRS_IRQHandler                    [WEAK]
                 EXPORT  ECC_IRQHandler                    [WEAK] 				
                 EXPORT  SAI4_IRQHandler                   [WEAK]                                                                                     
                 EXPORT  WAKEUP_PIN_IRQHandler             [WEAK] 
@@ -569,7 +569,7 @@ LPTIM3_IRQHandler
 LPTIM4_IRQHandler                                                                 
 LPTIM5_IRQHandler                                                                 
 LPUART1_IRQHandler                                                                                                                         
-CRS_IRQHandler                                                            
+CRS_IRQHandler
 ECC_IRQHandler                                                            
 SAI4_IRQHandler      
 WAKEUP_PIN_IRQHandler

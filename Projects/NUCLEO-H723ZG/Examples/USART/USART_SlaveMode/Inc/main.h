@@ -71,7 +71,7 @@
 #define SPIx_MOSI_AF                GPIO_AF5_SPI1
 
 
-/* Size of Trasmission buffer */
+/* Size of Transmission buffer */
 #define TXBUFFERSIZE                (COUNTOF(aTxBuffer) - 1)
 /* Size of Reception buffer */
 #define RXBUFFERSIZE                TXBUFFERSIZE

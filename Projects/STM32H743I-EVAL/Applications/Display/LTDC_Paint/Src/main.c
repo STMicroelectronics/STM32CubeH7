@@ -488,7 +488,7 @@ void Save_Picture(void)
           HAL_DMA2D_PollForTransfer(&hlcd_dma2d, 25);
         }
         
-        /*As the hlcd_dma2d destiantion address is located in the D1 AXI-SRAM which 
+        /*As the hlcd_dma2d destination address is located in the D1 AXI-SRAM which 
         is cacheable, it is necessary to invalidate the data cache the hlcd_dma2d transfer 
         before saving these data to the bmp file using the CPU */
         SCB_InvalidateDCache_by_Addr((uint32_t *)CONVERTED_LINE_BUFFER, ((x_size-60)*3)); 
@@ -545,14 +545,14 @@ HAL_StatusTypeDef MX_LTDC_ClockConfig(LTDC_HandleTypeDef *hltdc)
 {
   static RCC_PeriphCLKInitTypeDef  periph_clk_init_struct;
   
-    /* In case of double layers the bandwidth is arround 80MBytesPerSec => 20MHz (<25MHz) */
+    /* In case of double layers the bandwidth is around 80MBytesPerSec => 20MHz (<25MHz) */
     /* so the PLL3R is configured to provide this clock */
     /* AMPIRE640480 LCD clock configuration */
     /* PLL3_VCO Input = HSE_VALUE/PLL3M = 1 Mhz */
     /* PLL3_VCO Output = PLL3_VCO Input * PLL3N = 336 Mhz */
     /* PLLLCDCLK = PLL3_VCO Output/PLL3R = 336/16 = 21Mhz */
     /* LTDC clock frequency = PLLLCDCLK = 21 Mhz */     
-    /* USB uses same pll3 as clock frequency and PLL3Q as devider: USB clock frequency = 48 Mhz */ 
+    /* USB uses same pll3 as clock frequency and PLL3Q as divider: USB clock frequency = 48 Mhz */ 
     periph_clk_init_struct.PLL3.PLL3R = 16;
     periph_clk_init_struct.PeriphClockSelection = RCC_PERIPHCLK_LTDC;
     periph_clk_init_struct.PLL3.PLL3M = 25;    

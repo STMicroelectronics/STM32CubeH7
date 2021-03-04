@@ -112,7 +112,7 @@ Reset_Handler:
 /* Zero fill the bss segment. */  
   INIT_BSS _sbss, _ebss
 
-/* Call the clock system intitialization function.*/
+/* Call the clock system initialization function.*/
   bl  SystemInit   
 /* Call static constructors */
     bl __libc_init_array

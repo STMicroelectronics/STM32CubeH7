@@ -20,8 +20,8 @@ N.V. a Dutch company with a Swiss branch and its headquarters in Plan-
 les-Ouates, Geneva, 39 Chemin du Champ des Filles, Switzerland for the
 purposes of creating libraries for ARM Cortex-M-based 32-bit microcon_
 troller products commercialized by Licensee only, sublicensed and dis_
-tributed under the terms and conditions of the End User License Agree_
-ment supplied by STMicroelectronics International N.V.
+tributed under the terms and conditions of the End User License Agreement
+supplied by STMicroelectronics International N.V.
 Full source code is available at: www.segger.com
 
 We appreciate your understanding and fairness.

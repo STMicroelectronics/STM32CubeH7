@@ -57,7 +57,7 @@ Note If the  application is using the DTCM/ITCM memories (@0x20000000/0x0000000:
 
 @par Keywords
 
-Mathimatic, CORDIC, sine, cosine, DMA, math, PI, radians, Trigonometric
+Mathematic, CORDIC, sine, cosine, DMA, math, PI, radians, Trigonometric
 
 @par Directory contents
 

@@ -38,6 +38,7 @@
 #define LCD_LAYER_0_ADDRESS                 0xD0000000U
 #define LCD_LAYER_1_ADDRESS                 0xD0200000U
 /* Camera sensors defines */
+#define USE_CAMERA_SENSOR_OV5640            0U
 #define USE_CAMERA_SENSOR_OV9655            0U
 
 /* Audio codecs defines */

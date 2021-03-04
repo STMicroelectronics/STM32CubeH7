@@ -156,7 +156,7 @@ int main(void)
         LL_mDelay(100);
         LED_Off();
         LL_mDelay(100);
-        /* Increase tollerance (FELIM value) until no more warning */
+        /* Increase tolerance (FELIM value) until no more warning */
         LL_CRS_DisableFreqErrorCounter();
         felim = LL_CRS_GetFreqErrorLimit();
         LL_CRS_SetFreqErrorLimit(felim + 1);
@@ -329,7 +329,7 @@ static void UserButton_Init(void)
   */
 void Enable_Sync_Reference_Clock(void)
 {
-  /* To enable LSE, before it is neccessary to:
+  /* To enable LSE, before it is necessary to:
      - Reset the Back up Domain */
   LL_PWR_EnableBkUpAccess();
 

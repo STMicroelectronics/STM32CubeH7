@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    ov5640_reg.c
   * @author  MCD Application Team
-  * @brief   This file provides unitary register function to control the OV5640 
-  *          Camera driver.   
+  * @brief   This file provides unitary register function to control the OV5640
+  *          Camera driver.
   ******************************************************************************
   * @attention
   *
@@ -24,13 +24,13 @@
 /** @addtogroup BSP
   * @{
   */
-  
+
 /** @addtogroup Components
   * @{
-  */ 
+  */
 
 /** @addtogroup OV5640
-  * @brief     This file provides a set of functions needed to drive the 
+  * @brief     This file provides a set of functions needed to drive the
   *            OV5640 Camera sensor.
   * @{
   */
@@ -40,7 +40,7 @@
   * @param  ctx component contex
   * @param  reg Register to read from
   * @param  pdata Pointer to data buffer
-  * @param  length Number of data to read  
+  * @param  length Number of data to read
   * @retval Component status
   */
 int32_t ov5640_read_reg(ov5640_ctx_t *ctx, uint16_t reg, uint8_t *pdata, uint16_t length)
@@ -53,7 +53,7 @@ int32_t ov5640_read_reg(ov5640_ctx_t *ctx, uint16_t reg, uint8_t *pdata, uint16_
   * @param  ctx component contex
   * @param  reg Register to write to
   * @param  pdata Pointer to data buffer
-  * @param  length Number of data to write  
+  * @param  length Number of data to write
   * @retval Component status
   */
 int32_t ov5640_write_reg(ov5640_ctx_t *ctx, uint16_t reg, uint8_t *data, uint16_t length)

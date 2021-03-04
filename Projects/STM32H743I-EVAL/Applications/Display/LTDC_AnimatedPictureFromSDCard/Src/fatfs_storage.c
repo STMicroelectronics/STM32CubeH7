@@ -104,7 +104,7 @@ uint32_t Storage_Init(void)
   * @param  DirName: the Directory name to open
   * @param  FileName: the file name to open
   * @param  BufferAddress: A pointer to a buffer to copy the file to
-  * @param  FileLen: the File lenght
+  * @param  FileLen: the File length
   * @retval err: Error status (0=> success, 1=> fail)
   */
 uint32_t Storage_OpenReadFile(uint8_t *Address, const char* BmpName)
@@ -175,7 +175,7 @@ uint32_t Storage_OpenReadFile(uint8_t *Address, const char* BmpName)
   * @param  DirName: the Directory name to open
   * @param  FileName: the file name to open
   * @param  BufferAddress: A pointer to a buffer to copy the file to
-  * @param  FileLen: the File lenght
+  * @param  FileLen: the File length
   * @retval err: Error status (0=> success, 1=> fail)
   */
 uint32_t Storage_CheckBitmapFile(const char* BmpName, uint32_t *FileLen)

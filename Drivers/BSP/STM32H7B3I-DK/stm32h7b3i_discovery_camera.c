@@ -312,7 +312,7 @@ int32_t BSP_CAMERA_DeInit(uint32_t Instance)
   {
     hcamera_dcmi.Instance = DCMI;
 
-    /* First stop the camera to insure all data are transfered */
+    /* First stop the camera to insure all data are transferred */
     if(BSP_CAMERA_Stop(Instance) != BSP_ERROR_NONE)
     {
       ret = BSP_ERROR_PERIPH_FAILURE;

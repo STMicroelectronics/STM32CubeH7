@@ -156,7 +156,7 @@ void LoginWidget::handleClickEvent(const touchgfx::ClickEvent &evt)
         //Begin tracking
         for (int i = 0; i < NR_OF_MARKERS; i++)
         {
-            if (hitBoxes[i].getRect().intersect(evt.getX(), evt.getY()) && !input.contains(i)) //we havent' already been there: we never will have, since we either failed (clear) or continued (change screen)
+            if (hitBoxes[i].getRect().intersect(evt.getX(), evt.getY()) && !input.contains(i)) //we haven't already been there: we never will have, since we either failed (clear) or continued (change screen)
             {
                 //begin first line
                 line[0].updateStart((hitBoxes[i].getX() + hitBoxes[i].getWidth() / 2), (hitBoxes[i].getY() + hitBoxes[i].getHeight() / 2));

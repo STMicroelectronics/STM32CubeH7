@@ -47,6 +47,13 @@
  extern uint32_t SystemCoreClock;
 #endif
 
+/*-------------------- specific defines -------------------*/
+#ifdef USE_CMSIS_V2
+#ifndef CMSIS_device_header
+#define CMSIS_device_header "stm32h7xx.h"
+#endif /* CMSIS_device_header */
+#endif /* USE_CMSIS_V2 */
+
 #define configUSE_PREEMPTION                    1
 #define configUSE_IDLE_HOOK                     0
 #define configUSE_TICK_HOOK                     0
@@ -87,7 +94,7 @@
 #define configMAX_CO_ROUTINE_PRIORITIES         ( 2 )
 
 /* Software timer definitions. */
-#define configUSE_TIMERS                        0
+#define configUSE_TIMERS                        1
 #define configTIMER_TASK_PRIORITY               ( 2 )
 #define configTIMER_QUEUE_LENGTH                10
 #define configTIMER_TASK_STACK_DEPTH            ( configMINIMAL_STACK_SIZE * 2 )
@@ -104,6 +111,12 @@ to exclude the API function. */
 #define INCLUDE_xQueueGetMutexHolder            1
 #define INCLUDE_xTaskGetSchedulerState          1
 #define INCLUDE_eTaskGetState                   1
+
+#ifdef USE_CMSIS_V2
+#define INCLUDE_xTimerPendFunctionCall          1
+#define INCLUDE_uxTaskGetStackHighWaterMark     1
+#define INCLUDE_xTaskGetCurrentTaskHandle       1
+#endif /* USE_CMSIS_V2 */
 
 /* Cortex-M specific definitions. */
 #ifdef __NVIC_PRIO_BITS
@@ -138,7 +151,11 @@ header file. */
    standard names. */
 #define vPortSVCHandler    SVC_Handler
 #define xPortPendSVHandler PendSV_Handler
+
+#ifndef USE_CMSIS_V2
 #define xPortSysTickHandler SysTick_Handler
+#endif /* USE_CMSIS_V2 */
+
 
 #endif /* FREERTOS_CONFIG_H */
 

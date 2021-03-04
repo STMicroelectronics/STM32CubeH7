@@ -137,7 +137,7 @@ uint32_t JPEG_Encode_DMA(JPEG_HandleTypeDef *hjpeg, FIL *bmpfile, FIL *jpgfile)
 }
 
 /**
-  * @brief JPEG Ouput Data BackGround processing .
+  * @brief JPEG Output Data BackGround processing .
   * @param hjpeg: JPEG handle pointer
   * @retval 1 : if JPEG processing has finiched, 0 : if JPEG processing still ongoing
   */
@@ -263,7 +263,7 @@ void HAL_JPEG_EncodeCpltCallback(JPEG_HandleTypeDef *hjpeg)
 /*
   * @brief Read and reorder MAX_INPUT_LINES lines from BMP file and fill data buffer
   * @param file: pointer to the source file name
-  * @param file: pointer to the Data Buffer Adress
+  * @param file: pointer to the Data Buffer address
   * @param file: pointer to the Data Buffer Size
   * @retval None
   */

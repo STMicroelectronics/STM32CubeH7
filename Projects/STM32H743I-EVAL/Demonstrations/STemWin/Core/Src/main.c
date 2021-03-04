@@ -182,7 +182,7 @@ static void GUIThread(void const * argument)
   /* Show the main menu */
   k_InitMenu();  
   
-  /* Display immediatly the Menu */
+  /* Display immediately the Menu */
   GUI_Exec();
   
   /* Gui background Task */

@@ -109,7 +109,7 @@ int main(void)
   
   while(1)
   {
-    /* D2 domain must be OFF. If D2 domain standby flag doesen't set and domain clock doesen't 
+    /* D2 domain must be OFF. If D2 domain standby flag doesn't set and domain clock doesn't 
        stalled then return Error */ 
     if((__HAL_PWR_GET_FLAG(PWR_FLAG_SB_D2) == RESET) || (__HAL_RCC_GET_FLAG(RCC_FLAG_D2CKRDY) != RESET))
     {
@@ -117,7 +117,7 @@ int main(void)
     }
     else
     {
-      /* Test passed toogle LED1 */
+      /* Test passed toggle LED1 */
       HAL_Delay(100);
       BSP_LED_Toggle(LED1);
     }

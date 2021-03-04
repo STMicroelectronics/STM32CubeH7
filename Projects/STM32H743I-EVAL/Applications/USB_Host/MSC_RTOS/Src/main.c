@@ -375,14 +375,14 @@ static void MPU_Config(void)
   */
 HAL_StatusTypeDef MX_LTDC_ClockConfig(LTDC_HandleTypeDef *hltdc)
 {
-  /* In case of double layers the bandwidth is arround 80MBytesPerSec => 20MHz (<25MHz) */
+  /* In case of double layers the bandwidth is around 80MBytesPerSec => 20MHz (<25MHz) */
   /* so the PLL3R is configured to provide this clock */
   /* AMPIRE640480 LCD clock configuration */
   /* PLL3_VCO Input = HSE_VALUE/PLL3M = 1 Mhz */
   /* PLL3_VCO Output = PLL3_VCO Input * PLL3N = 336 Mhz */
   /* PLLLCDCLK = PLL3_VCO Output/PLL3R = 336/16 = 21Mhz */
   /* LTDC clock frequency = PLLLCDCLK = 21 Mhz */
-  /* USB uses same pll3 as clock frequency and PLL3Q as devider: USB clock frequency = 48 Mhz */
+  /* USB uses same pll3 as clock frequency and PLL3Q as divider: USB clock frequency = 48 Mhz */
   RCC_PeriphCLKInitTypeDef periph_clk_init_struct;
   periph_clk_init_struct.PLL3.PLL3R = 16;
   periph_clk_init_struct.PeriphClockSelection = RCC_PERIPHCLK_LTDC;

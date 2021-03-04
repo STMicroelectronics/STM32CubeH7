@@ -91,12 +91,12 @@ The LAR address register represents the next Linked list Node address.
 As consequence the Linked list transfer nodes must be 64 bits aligned and 
 must be in the AXI address space.
 */
-/* 32-bytes Alignement is needed for cache maintenance purpose */
+/* 32-bytes Alignment is needed for cache maintenance purpose */
 ALIGN_32BYTES(MDMA_LinkNodeTypeDef Xfer_Node);
 ALIGN_32BYTES(MDMA_LinkNodeTypeDef Xfer_DummyNode);
 
-/*List of the images to be transfered to the LCD frame buffer using the MDMA upon an LTDC Line Interrupt Flag*/
-/* 32-bytes Alignement is needed for cache maintenance purpose */
+/*List of the images to be transferred to the LCD frame buffer using the MDMA upon an LTDC Line Interrupt Flag*/
+/* 32-bytes Alignment is needed for cache maintenance purpose */
 ALIGN_32BYTES(uint32_t Nodes_SourceAddress[MDMA_IMAGE_NB]);
                                      
 /* Private function prototypes -----------------------------------------------*/
@@ -158,7 +158,7 @@ int main(void)
   /* LCD Offset calculatd versus the image width */  
   LCD_Offset = (LCD_X_Size - IMAGE_WIDTH) * ARGB8888_BYTES_PER_PIXEL;
 
-  /*List of the images to be transfered to the LCD frame buffer using the MDMA upon an LTDC Line Interrupt Flag*/
+  /*List of the images to be transferred to the LCD frame buffer using the MDMA upon an LTDC Line Interrupt Flag*/
    Nodes_SourceAddress[0] = (uint32_t)Image01;
    Nodes_SourceAddress[1] = (uint32_t)Image02;
    Nodes_SourceAddress[2] = (uint32_t)Image03;
@@ -334,7 +334,7 @@ static void MDMA_Config(void)
   
   /* Node 2 : Dummy node (inserted to able to wait for Node 1 source address update done by DMA1 stream 0 transfer) 
     For this node the MDMA transfer trigger is set to DMA1 stream1 Transfer complete flag.
-    Knowing that DMA1 stream1 (circular) transfer is a dummy transfer triggerd by DMA1 Stream0
+    Knowing that DMA1 stream1 (circular) transfer is a dummy transfer triggered by DMA1 Stream0
     transfer event
   */
   mdmaLinkNodeConfig.Init.Request              = MDMA_REQUEST_DMA1_Stream1_TC;

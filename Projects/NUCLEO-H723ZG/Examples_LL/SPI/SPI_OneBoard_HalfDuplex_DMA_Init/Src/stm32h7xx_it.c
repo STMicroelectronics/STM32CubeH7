@@ -174,7 +174,7 @@ void DMA1_Stream7_IRQHandler(void)
   if(LL_DMA_IsActiveFlag_TC7(DMA1))
   {
     LL_DMA_ClearFlag_TC7(DMA1);
-    /* Call function Tranmission complete Callback */
+    /* Call function Transmission complete Callback */
     DMA1_TransmitComplete_Callback();
   }
   else if(LL_DMA_IsActiveFlag_TE7(DMA1))

@@ -11,7 +11,7 @@
             <name>General</name>
             <archiveVersion>3</archiveVersion>
             <data>
-                <version>30</version>
+                <version>31</version>
                 <wantNonLocal>1</wantNonLocal>
                 <debug>1</debug>
                 <option>
@@ -66,7 +66,7 @@
                 </option>
                 <option>
                     <name>OGLastSavedByProductVersion</name>
-                    <state>8.20.2.14834</state>
+                    <state>8.30.1.17146</state>
                 </option>
                 <option>
                     <name>GeneralEnableMisra</name>
@@ -112,7 +112,7 @@
                 </option>
                 <option>
                     <name>RTConfigPath2</name>
-                    <state>$TOOLKIT_DIR$\INC\c\DLib_Config_Full.h</state>
+                    <state>$TOOLKIT_DIR$\inc\c\DLib_Config_Full.h</state>
                 </option>
                 <option>
                     <name>GBECoreSlave</name>
@@ -204,6 +204,11 @@
                     <name>TrustZone</name>
                     <state>0</state>
                 </option>
+                <option>
+                    <name>TrustZoneModes</name>
+                    <version>0</version>
+                    <state>0</state>
+                </option>
             </data>
         </settings>
         <settings>
@@ -214,13 +219,11 @@
                 <wantNonLocal>1</wantNonLocal>
                 <debug>1</debug>
                 <option>
-                    <name>CCOptimizationNoSizeConstraints</name>
-                    <state>0</state>
-                </option>
-                <option>
                     <name>CCDefines</name>
                     <state>USE_HAL_DRIVER</state>
                     <state>STM32H747xx</state>
+                    <state>MPU_DISABLE_CACHE__N</state>
+                    <state>QSPI_LOW_FREQ__N</state>
                     <state>USE_STM32H747I_EVAL</state>
                     <state>USE_PWR_LDO_SUPPLY__N</state>
                     <state>USE_TS_INT</state>
@@ -238,7 +241,7 @@
                 </option>
                 <option>
                     <name>CCPreprocLine</name>
-                    <state>0</state>
+                    <state>1</state>
                 </option>
                 <option>
                     <name>CCListCFile</name>
@@ -448,6 +451,10 @@
                 </option>
                 <option>
                     <name>IccFloatSemantics</name>
+                    <state>0</state>
+                </option>
+                <option>
+                    <name>CCOptimizationNoSizeConstraints</name>
                     <state>0</state>
                 </option>
                 <option>
@@ -669,7 +676,7 @@
                 </option>
                 <option>
                     <name>OOCOutputFile</name>
-                    <state>$PROJ_DIR$\..\Binary\MenuLauncher-STM32H747I-EVAL_V1.0.0.hex</state>
+                    <state>$PROJ_DIR$\..\Binary\MenuLauncher-STM32H747I-EVAL_V1.1.0.hex</state>
                 </option>
                 <option>
                     <name>OOCCommandLineProducer</name>
@@ -707,7 +714,7 @@
             <name>ILINK</name>
             <archiveVersion>0</archiveVersion>
             <data>
-                <version>20</version>
+                <version>21</version>
                 <wantNonLocal>1</wantNonLocal>
                 <debug>1</debug>
                 <option>
@@ -724,7 +731,7 @@
                 </option>
                 <option>
                     <name>IlinkOutputFile</name>
-                    <state>MenuLauncher-STM32H747I-EVAL_V1.0.0.out</state>
+                    <state>MenuLauncher.out</state>
                 </option>
                 <option>
                     <name>IlinkDebugInfoEnable</name>
@@ -1022,6 +1029,10 @@
                 <option>
                     <name>IlinkLocaleSelect</name>
                     <state>1</state>
+                </option>
+                <option>
+                    <name>IlinkTrustzoneImportLibraryOut</name>
+                    <state>MenuLauncher_import_lib.o</state>
                 </option>
             </data>
         </settings>

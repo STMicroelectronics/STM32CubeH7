@@ -198,7 +198,7 @@ http://www.adafruit.com/blog/2012/04/26/new-product-adafruit-1-8-18-bit-color-tf
 
 In order to make the program work, you must do the following :
  - Open your preferred toolchain
- - For each target configuartion (STM32H745I_Nucleo_CM4 first then STM32H745I_Nucleo_CM7) :
+ - For each target configuration (STM32H745I_Nucleo_CM4 first then STM32H745I_Nucleo_CM7) :
      - Rebuild all files
      - Load images into target memory
  - Run the demonstration

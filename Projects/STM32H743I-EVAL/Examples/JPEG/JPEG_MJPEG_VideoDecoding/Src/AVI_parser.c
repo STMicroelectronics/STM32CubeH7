@@ -285,7 +285,7 @@ AVISTATUS __AVI_Init( AVI_CONTEXT * pavi, uint8_t *buf, uint32_t size)
   * @param  VideoBufferSize: video buffer size
   * @param  pAudioBuffer   : audio buffer
   * @param  AudioBufferSize: audio buffer size
-* @retval AVI status (0 : no Error, 1: Error occured)
+* @retval AVI status (0 : no Error, 1: Error occurred)
   */
 uint32_t AVI_ParserInit(AVI_CONTEXT * pavi, FIL *file, uint8_t *pVideoBuffer, uint32_t VideoBufferSize, uint8_t *pAudioBuffer, uint32_t AudioBufferSize)
 {

@@ -147,7 +147,7 @@ int main(void)
     /* Wait for two messages received */
     while (HAL_FDCAN_GetRxFifoFillLevel(&hfdcan, FDCAN_RX_FIFO0) < 2) {}
     
-    /* Retreive Rx messages from RX FIFO0 */
+    /* Retrieve Rx messages from RX FIFO0 */
     HAL_FDCAN_GetRxMessage(&hfdcan, FDCAN_RX_FIFO0, &RxHeader, RxData);
     HAL_FDCAN_GetRxMessage(&hfdcan, FDCAN_RX_FIFO0, &RxHeader, &RxData[8]);
     

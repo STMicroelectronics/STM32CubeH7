@@ -26,6 +26,8 @@ This demonstration is provided as binary only (no source code)
 
 The Full demonstration binary files are available from the STM32H735G-DK page in the Binary Delivery section.
 Please refer to : www.st.com/en/product/stm32h735g-dk.html
+Direct link: 
+https://www.st.com/resource/en/compiled_demos/stm32h735g-dk_demo.zip
 
 This Demo MenuLauncher must be programmed into the oard first to allow running this sub-demo
 

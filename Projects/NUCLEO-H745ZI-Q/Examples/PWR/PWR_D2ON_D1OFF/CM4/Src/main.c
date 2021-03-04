@@ -67,7 +67,7 @@ int main(void)
     
   while(1)
   {
-    /* Test passed toogle LED2 each 100 ms */
+    /* Test passed toggle LED2 each 100 ms */
     HAL_Delay(100);
     BSP_LED_Toggle(LED2);
   }

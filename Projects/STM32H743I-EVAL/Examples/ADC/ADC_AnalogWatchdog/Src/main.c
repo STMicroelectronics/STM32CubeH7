@@ -6,7 +6,7 @@
   *          peripheral to perform conversions with analog watchdog and 
   *          interruptions. Other peripherals used: DMA, TIM (ADC group regular
   *          conversions triggered by TIM, ADC group regular conversion data
-  *          transfered by DMA).
+  *          transferred by DMA).
   ******************************************************************************
   * @attention
   *

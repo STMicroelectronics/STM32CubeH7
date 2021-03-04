@@ -160,14 +160,14 @@ In order to use the auto-test mode :
     input (PA0,CN9 Connector pin A2).
 
 On PC side, you must do the following :
-  - Setup your Oscilloscope PC application (Oscilloscope_SignalsGenerator\PC_Software\setup.exe)
-  - Run your Oscilloscope "Serial Oscilloscope"
+  - Setup your Oscilloscope PC application (\Utilities\PC_Software\Oscilloscope\setup.exe)
+  - Run the "Serial Oscilloscope" application on your PC
   - Configure your UART communication in the GUI by selecting the Serial Port and Baude rate(115200),
-  - Start the connexion between the Board and the GUI 
+  - Connect a (Type A to Micro-B) USB cable from the STM32H735G-DK board (Connector CN15) to the PC 
+  - Start the connexion between the Board and the PC GUI using the dedicated PC GUI button 
   - Configure the desired sampling rate frequency.
-  - Put an external signal with amplitude less than 3.3 V to the input (PA0,CN9 Connector pin A2)..
+  - Put an external signal with amplitude less than 3.3 V to the input (PA0,CN9 Connector pin A2 of the STM32H735G-DK board)..
   - Click on Start Scope button.
-
 
   In order to detect the signal frequency, you must do the following
   - Select a scope view presenting a full period on your screen,
@@ -177,6 +177,8 @@ On PC side, you must do the following :
 
 The Full demonstration binary files are available from the STM32H735G-DK page in the Binary Delivery section.
 Please refer to : www.st.com/en/product/stm32h735g-dk.html
+Direct link: 
+https://www.st.com/resource/en/compiled_demos/stm32h735g-dk_demo.zip
 
 This Demo MenuLauncher must be programmed into the oard first to allow running this sub-demo
 

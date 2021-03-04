@@ -22,7 +22,7 @@
 
 This application implements on STM32H753I-EVAL board a set of cryptographic features
 through mbed TLS selftest functions of individual mbed TLS components selectively
-choosen in a single configuration file "mbedtls_config.h".
+chosen in a single configuration file "mbedtls_config.h".
 
 This application contains in particular proprietary implementations (xxx_alt.c
 alternate files) with adaptation layers (HAL API) which activates the
@@ -135,8 +135,8 @@ Src
 
 In order to make the program work, you must do the following:
  - Open your preferred toolchain
- - Optionaly, select the destination of the log messages (LCD or Hyperterminal)
- - Optionaly, disable/enable others mbed TLS components
+ - Optionally, select the destination of the log messages (LCD or Hyperterminal)
+ - Optionally, disable/enable others mbed TLS components
  - Rebuild all files and load your image into target memory
 
     - Connect the STM32H753I-EVAL board to the PC through 'USB micro B-Male

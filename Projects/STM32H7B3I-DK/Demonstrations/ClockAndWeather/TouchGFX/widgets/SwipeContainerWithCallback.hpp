@@ -13,7 +13,7 @@
   ******************************************************************************
   */
 
-#ifndef SWIPECONTAINERWITHCALLBACK_HHP
+#ifndef SWIPECONTAINERWITHCALLBACK_HPP
 #define SWIPECONTAINERWITHCALLBACK_HPP
 
 #include <touchgfx/containers/ListLayout.hpp>

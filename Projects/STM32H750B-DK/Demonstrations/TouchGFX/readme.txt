@@ -49,6 +49,8 @@ Please use STM32CubeProgrammer utility to flash the application's HEX file to th
 
 The binary and Media demonstration files are available from the STM32H750B-DK page in the Binary Delivery section.
 Please refer to : www.st.com/en/product/stm32h750b-dk.html
+Direct link:
+https://www.st.com/resource/en/compiled_demos/stm32h750b-dk_demo.zip
 
 * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
 */

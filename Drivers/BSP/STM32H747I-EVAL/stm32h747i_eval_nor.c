@@ -128,7 +128,7 @@ int32_t BSP_NOR_Init(uint32_t Instance)
     }
     else
     {
-      /* Msp callbacks already registerd */
+      /* Msp callbacks already registered */
     }
 #else
     /* Msp NOR initialization */

@@ -863,6 +863,7 @@ int32_t BSP_LCD_GetYSize(uint32_t Instance, uint32_t *YSize)
   */
 int32_t BSP_LCD_DisplayOn(uint32_t Instance)
 {
+  GPIO_InitTypeDef gpio_init_structure;
   int32_t ret = BSP_ERROR_NONE;
 
   if(Instance >= LCD_INSTANCES_NBR)
@@ -873,10 +874,17 @@ int32_t BSP_LCD_DisplayOn(uint32_t Instance)
   {
     __HAL_LTDC_ENABLE(&hlcd_ltdc);
 
-	/* Assert LCD_DISP_EN pin */
+    /* Assert LCD_DISP_EN pin */
     HAL_GPIO_WritePin(LCD_DISP_EN_GPIO_PORT, LCD_DISP_EN_PIN, GPIO_PIN_SET);
-	/* Assert LCD_BL_CTRL pin */
-    HAL_GPIO_WritePin(LCD_BL_CTRL_GPIO_PORT, LCD_BL_CTRL_PIN, GPIO_PIN_SET);
+
+    /* re-connect the BL pin to the brightness TIMER */
+    gpio_init_structure.Mode      = GPIO_MODE_AF_PP;
+    gpio_init_structure.Pull      = GPIO_NOPULL;
+    gpio_init_structure.Speed     = GPIO_SPEED_FREQ_MEDIUM;
+    gpio_init_structure.Alternate = LCD_TIMx_CHANNEL_AF;
+    gpio_init_structure.Pin       = LCD_BL_CTRL_PIN; /* BL_CTRL */
+
+    HAL_GPIO_Init(LCD_BL_CTRL_GPIO_PORT, &gpio_init_structure);
   }
 
   return ret;
@@ -889,6 +897,7 @@ int32_t BSP_LCD_DisplayOn(uint32_t Instance)
   */
 int32_t BSP_LCD_DisplayOff(uint32_t Instance)
 {
+  GPIO_InitTypeDef gpio_init_structure;
   int32_t ret = BSP_ERROR_NONE;
 
   if(Instance >= LCD_INSTANCES_NBR)
@@ -897,10 +906,16 @@ int32_t BSP_LCD_DisplayOff(uint32_t Instance)
   }
   else
   {
+    gpio_init_structure.Mode      = GPIO_MODE_OUTPUT_PP;
+    gpio_init_structure.Pull      = GPIO_NOPULL;
+    gpio_init_structure.Speed     = GPIO_SPEED_FREQ_MEDIUM;
+    gpio_init_structure.Pin       = LCD_BL_CTRL_PIN; /* BL_CTRL */
+    HAL_GPIO_Init(LCD_BL_CTRL_GPIO_PORT, &gpio_init_structure);
+
     __HAL_LTDC_DISABLE(&hlcd_ltdc);
-	/* Assert LCD_DISP_EN pin */
+    /* Assert LCD_DISP_EN pin */
     HAL_GPIO_WritePin(LCD_DISP_EN_GPIO_PORT, LCD_DISP_EN_PIN, GPIO_PIN_RESET);
-	/* Assert LCD_BL_CTRL pin */
+    /* Assert LCD_BL_CTRL pin */
     HAL_GPIO_WritePin(LCD_BL_CTRL_GPIO_PORT, LCD_BL_CTRL_PIN, GPIO_PIN_RESET);
   }
 
@@ -1308,8 +1323,8 @@ static void LL_ConvertLineToRGB(uint32_t Instance, uint32_t *pSrc, uint32_t *pDs
 
 /*******************************************************************************
                        BSP Routines:
-					   LTDC
-					   DMA2D
+                       LTDC
+                       DMA2D
 *******************************************************************************/
 /**
   * @brief  Initialize the BSP LTDC Msp.

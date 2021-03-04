@@ -47,6 +47,10 @@
  extern uint32_t SystemCoreClock;
 #endif
 
+/*-------------------- specific defines -------------------*/
+#ifndef CMSIS_device_header
+#define CMSIS_device_header "stm32h7xx.h"
+#endif /* CMSIS_device_header */
 
 #define configUSE_PREEMPTION			1
 #define configUSE_IDLE_HOOK			0
@@ -107,6 +111,10 @@ to exclude the API function. */
 #define INCLUDE_xTimerPendFunctionCall          1
 #define INCLUDE_uxTaskGetStackHighWaterMark     1
 #define INCLUDE_xSemaphoreGetMutexHolder        1
+#define INCLUDE_xTaskGetCurrentTaskHandle       1
+
+#define INCLUDE_eTaskGetState                   1
+
 
 /* Cortex-M specific definitions. */
 #ifdef __NVIC_PRIO_BITS
@@ -141,7 +149,6 @@ header file. */
 standard names. */
 #define vPortSVCHandler SVC_Handler
 #define xPortPendSVHandler PendSV_Handler
-#define xPortSysTickHandler SysTick_Handler
 
 #endif /* FREERTOS_CONFIG_H */
 

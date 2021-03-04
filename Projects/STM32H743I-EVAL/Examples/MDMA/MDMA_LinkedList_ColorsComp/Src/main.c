@@ -42,7 +42,7 @@ __IO uint32_t TransferCompleteDetected = 0;
 
 uint32_t LCD_X_Size = 0, LCD_Y_Size = 0;
 
-/* 32-bytes Alignement is needed for cache maintenance purpose */
+/* 32-bytes Alignment is needed for cache maintenance purpose */
 ALIGN_32BYTES(MDMA_LinkNodeTypeDef Xfer_Node0_1);
 ALIGN_32BYTES(MDMA_LinkNodeTypeDef Xfer_Node0_2);
 ALIGN_32BYTES(MDMA_LinkNodeTypeDef Xfer_Node0_3);
@@ -151,12 +151,12 @@ int main(void)
     }
   }     
   
-  /* Infinit loop */
+  /* Infinite loop */
   while (1);    
 }
 
 /**
-  * @brief  MDMA Linked List transfer configuraion
+  * @brief  MDMA Linked List transfer configuration
   * @note   This function configure the DMA for a Repeat BLock transfer.
   * @param  None
   * @retval None

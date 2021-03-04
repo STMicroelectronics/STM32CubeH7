@@ -61,7 +61,7 @@ uint32_t Input_frameIndex;
 /**
   * @brief  Decode_DMA
   * @param hjpeg: JPEG handle pointer
-  * @param  FrameSourceAddress    : video buffer adress.
+  * @param  FrameSourceAddress    : video buffer address.
   * @param  DestAddress : YCbCr destination Frame Buffer Address.
   * @retval None
   */

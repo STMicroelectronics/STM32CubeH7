@@ -174,23 +174,23 @@ void SystemInit (void)
   RCC->SRDCFGR = 0x00000000;
 
   /* Reset PLLCKSELR register */
-  RCC->PLLCKSELR = 0x00000000;
+  RCC->PLLCKSELR = 0x02020200;
 
   /* Reset PLLCFGR register */
-  RCC->PLLCFGR = 0x00000000;
+  RCC->PLLCFGR = 0x01FF0000;
   /* Reset PLL1DIVR register */
-  RCC->PLL1DIVR = 0x00000000;
+  RCC->PLL1DIVR = 0x01010280;
   /* Reset PLL1FRACR register */
   RCC->PLL1FRACR = 0x00000000;
 
   /* Reset PLL2DIVR register */
-  RCC->PLL2DIVR = 0x00000000;
+  RCC->PLL2DIVR = 0x01010280;
 
   /* Reset PLL2FRACR register */
 
   RCC->PLL2FRACR = 0x00000000;
   /* Reset PLL3DIVR register */
-  RCC->PLL3DIVR = 0x00000000;
+  RCC->PLL3DIVR = 0x01010280;
 
   /* Reset PLL3FRACR register */
   RCC->PLL3FRACR = 0x00000000;

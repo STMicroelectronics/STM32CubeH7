@@ -49,6 +49,9 @@
 #endif
 
 /*-------------------- specific defines -------------------*/
+#ifndef CMSIS_device_header
+#define CMSIS_device_header "stm32h7xx.h"
+#endif /* CMSIS_device_header */
 
  /* No secure feature is used the configENABLE_TRUSTZONE should be set to 0
   *
@@ -124,6 +127,7 @@ to exclude the API function. */
 #define INCLUDE_eTaskGetState                   1
 #define INCLUDE_uxTaskGetStackHighWaterMark     1
 #define INCLUDE_xTimerPendFunctionCall          1
+#define INCLUDE_xTaskGetCurrentTaskHandle       1
 
 /* The highest interrupt priority that can be used by any interrupt service
 routine that makes calls to interrupt safe FreeRTOS API functions.  DO NOT CALL
@@ -146,7 +150,6 @@ header file. */
 
 #define vPortSVCHandler    SVC_Handler
 #define xPortPendSVHandler PendSV_Handler
-#define xPortSysTickHandler SysTick_Handler
 
 /* USER CODE BEGIN Defines */
 /* Section where parameter definitions can be added (for instance, to override default ones in FreeRTOS.h) */

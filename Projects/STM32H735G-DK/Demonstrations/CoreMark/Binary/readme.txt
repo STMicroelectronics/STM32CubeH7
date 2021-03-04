@@ -19,6 +19,9 @@ Please refer to :
 
 www.st.com/en/product/stm32h735g-dk.html
 
+Direct link: 
+https://www.st.com/resource/en/compiled_demos/stm32h735g-dk_demo.zip
+
 The EEMBC(R) CoreMark(R) sub-demonstration is provided as hex file only (no source code)
 
 

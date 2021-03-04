@@ -95,9 +95,9 @@ int main(void)
   OSPIHandle.Init.ClockPrescaler        = 4;
   OSPIHandle.Init.SampleShifting        = HAL_OSPI_SAMPLE_SHIFTING_NONE;
   OSPIHandle.Init.DelayHoldQuarterCycle = HAL_OSPI_DHQC_ENABLE;
-  OSPIHandle.Init.DelayBlockBypass      = HAL_OSPI_DELAY_BLOCK_BYPASSED;
-  OSPIHandle.Init.ChipSelectBoundary    = 0;
-  OSPIHandle.Init.Refresh               = 250;
+  OSPIHandle.Init.DelayBlockBypass      = HAL_OSPI_DELAY_BLOCK_USED;
+  OSPIHandle.Init.ChipSelectBoundary    = 23;
+  OSPIHandle.Init.Refresh               = 250; /* The chip select should be released every 4µs */
 
   if (HAL_OSPI_Init(&OSPIHandle) != HAL_OK)
   {

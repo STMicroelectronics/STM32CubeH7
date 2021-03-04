@@ -99,7 +99,7 @@ void HAL_LTDC_MspInit(LTDC_HandleTypeDef *hltdc)
   
   /*##-2- Configure peripheral GPIO ##########################################*/
   /******************** LTDC Pins configuration *************************/
-  /* LTDC pins configuraiton: PI12 -- 15 */  
+  /* LTDC pins configuration: PI12 -- 15 */  
   GPIO_Init_Structure.Pin       = GPIO_PIN_12 | GPIO_PIN_13 | GPIO_PIN_14 | GPIO_PIN_15; 
   GPIO_Init_Structure.Mode      = GPIO_MODE_AF_PP;
   GPIO_Init_Structure.Pull      = GPIO_NOPULL;
@@ -107,7 +107,7 @@ void HAL_LTDC_MspInit(LTDC_HandleTypeDef *hltdc)
   GPIO_Init_Structure.Alternate = GPIO_AF14_LTDC;  
   HAL_GPIO_Init(GPIOI, &GPIO_Init_Structure);
 
-  /* LTDC pins configuraiton: PJ0 -- 15 */  
+  /* LTDC pins configuration: PJ0 -- 15 */  
   GPIO_Init_Structure.Pin       = GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3 | \
                                   GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_6 | GPIO_PIN_7 | \
                                   GPIO_PIN_8 | GPIO_PIN_9 | GPIO_PIN_10 | GPIO_PIN_11 | \
@@ -118,7 +118,7 @@ void HAL_LTDC_MspInit(LTDC_HandleTypeDef *hltdc)
   GPIO_Init_Structure.Alternate = GPIO_AF14_LTDC;  
   HAL_GPIO_Init(GPIOJ, &GPIO_Init_Structure);  
 
-  /* LTDC pins configuraiton: PK0 -- 7 */  
+  /* LTDC pins configuration: PK0 -- 7 */  
   GPIO_Init_Structure.Pin       = GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3 | \
                                   GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_6 | GPIO_PIN_7; 
   GPIO_Init_Structure.Mode      = GPIO_MODE_AF_PP;

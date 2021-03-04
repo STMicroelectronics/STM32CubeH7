@@ -97,7 +97,7 @@ void SSL_Server(void const *argument)
   /*
    * This demonstration program uses embedded test certificates.
    * Using mbedtls_x509_crt_parse_file() to read the server and CA certificates
-   * resuires the implmentation of the File I/O API using the FatFs, that is 
+   * resuires the implementation of the File I/O API using the FatFs, that is 
    * not implemented yet.
    */
 

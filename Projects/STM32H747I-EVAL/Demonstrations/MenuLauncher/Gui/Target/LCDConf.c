@@ -575,16 +575,16 @@ static void LCD_LL_Init(void)
   /* LCD clock configuration */
   /* PLL3_VCO Input = HSE_VALUE/PLL3M = 1 Mhz */
   /* PLL3_VCO Output = PLL3_VCO Input * PLL3N = 288 Mhz */
-  /* PLLLCDCLK = PLL3_VCO Output/PLL3R = 288/8 = 36 Mhz */
-  /* PLLUSBCLK = PLL3_VCO Output/PLL3Q = 288/6 = 48 Mhz */
-  /* LTDC clock frequency = 36 Mhz */
+  /* PLLLCDCLK = PLL3_VCO Output/PLL3R = 240/6 = 40 Mhz */
+  /* PLLUSBCLK = PLL3_VCO Output/PLL3Q = 240/5 = 48 Mhz */
+  /* LTDC clock frequency = 40 Mhz */
   /* USB clock frequency = 48 Mhz */
   PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_LTDC;
   PeriphClkInitStruct.PLL3.PLL3M = 25;
-  PeriphClkInitStruct.PLL3.PLL3N = 288;
+  PeriphClkInitStruct.PLL3.PLL3N = 240;
   PeriphClkInitStruct.PLL3.PLL3P = 1;
-  PeriphClkInitStruct.PLL3.PLL3Q = 6;
-  PeriphClkInitStruct.PLL3.PLL3R = 8;
+  PeriphClkInitStruct.PLL3.PLL3Q = 5;
+  PeriphClkInitStruct.PLL3.PLL3R = 6;
 #endif /* GUI_NUM_LAYERS */
   PeriphClkInitStruct.PLL3.PLL3VCOSEL = RCC_PLL3VCOMEDIUM;
   PeriphClkInitStruct.PLL3.PLL3RGE = RCC_PLL3VCIRANGE_0;
@@ -596,7 +596,7 @@ static void LCD_LL_Init(void)
   HAL_DSI_DeInit(&(hdsi));
 
   /* We have HSE value at 25MHz and we want data lane at 500Mbps */
-  PLLInit.PLLNDIV  = 100;
+  PLLInit.PLLNDIV  = 99;
   PLLInit.PLLIDF   = DSI_PLL_IN_DIV5;
   PLLInit.PLLODF   = DSI_PLL_OUT_DIV1;
 
@@ -793,6 +793,9 @@ static void _DMA2D_ExecOperation(void)
     /* Semaphore timed out */
     Error_Handler();
   }
+#if !defined(MPU_DISABLE_CACHE)
+  SCB_CleanInvalidateDCache();
+#endif /* !MPU_DISABLE_CACHE */
 }
 
 /**
@@ -823,6 +826,10 @@ static void _DMA_Copy(int LayerIndex, void * pSrc, void * pDst, int xSize, int y
   DMA2D->OOR     = OffLineDst;
   DMA2D->FGPFCCR = PixelFormat;
   DMA2D->NLR     = (U32)(xSize << 16) | (U16)ySize;
+
+#if !defined(MPU_DISABLE_CACHE)
+  SCB_CleanInvalidateDCache();
+#endif /* !MPU_DISABLE_CACHE */
 
   /* Start the transfer, and enable the transfer complete IT */
   DMA2D->CR |= DMA2D_CR_START;
@@ -855,6 +862,10 @@ static void _DMA_CopyRGB565(const void * pSrc, void * pDst, int xSize, int ySize
   DMA2D->OOR     = OffLineDst;
   DMA2D->FGPFCCR = LTDC_PIXEL_FORMAT_RGB565;
   DMA2D->NLR     = (U32)(xSize << 16) | (U16)ySize;
+
+#if !defined(MPU_DISABLE_CACHE)
+  SCB_CleanInvalidateDCache();
+#endif /* !MPU_DISABLE_CACHE */
 
   /* Start the transfer, and enable the transfer complete IT */
   DMA2D->CR |= DMA2D_CR_START;
@@ -893,6 +904,10 @@ static void _DMA_Fill(int LayerIndex, void * pDst, int xSize, int ySize, int Off
   DMA2D->OPFCCR  = PixelFormat;
   DMA2D->NLR     = (U32)(xSize << 16) | (U16)ySize;
 
+#if !defined(MPU_DISABLE_CACHE)
+  SCB_CleanInvalidateDCache();
+#endif /* !MPU_DISABLE_CACHE */
+
   /* Start the transfer, and enable the transfer complete IT */
   DMA2D->CR |= DMA2D_CR_START;
 
@@ -927,6 +942,10 @@ static void _DMA_AlphaBlendingBulk(LCD_COLOR * pColorFG, LCD_COLOR * pColorBG, L
   DMA2D->BGPFCCR = LTDC_PIXEL_FORMAT_ARGB8888;
   DMA2D->OPFCCR  = LTDC_PIXEL_FORMAT_ARGB8888;
   DMA2D->NLR     = (U32)(NumItems << 16) | 1;
+
+#if !defined(MPU_DISABLE_CACHE)
+  SCB_CleanInvalidateDCache();
+#endif /* !MPU_DISABLE_CACHE */
 
   /* Start the transfer, and enable the transfer complete IT */
   DMA2D->CR |= DMA2D_CR_START;
@@ -965,6 +984,10 @@ static void _DMA_MixColorsBulk(LCD_COLOR * pColorFG, LCD_COLOR * pColorBG, LCD_C
   DMA2D->OPFCCR  = LTDC_PIXEL_FORMAT_ARGB8888;
   DMA2D->NLR     = (U32)(NumItems << 16) | 1;
 
+#if !defined(MPU_DISABLE_CACHE)
+  SCB_CleanInvalidateDCache();
+#endif /* !MPU_DISABLE_CACHE */
+
   /* Start the transfer, and enable the transfer complete IT */
   DMA2D->CR |= DMA2D_CR_START;
 
@@ -996,6 +1019,10 @@ static void _DMA_ConvertColor(void * pSrc, void * pDst,  U32 PixelFormatSrc, U32
   DMA2D->FGPFCCR = PixelFormatSrc;
   DMA2D->OPFCCR  = PixelFormatDst;
   DMA2D->NLR     = (U32)(NumItems << 16) | 1;
+
+#if !defined(MPU_DISABLE_CACHE)
+  SCB_CleanInvalidateDCache();
+#endif /* !MPU_DISABLE_CACHE */
 
   /* Start the transfer, and enable the transfer complete IT */
   DMA2D->CR |= DMA2D_CR_START;
@@ -1030,6 +1057,10 @@ static void _DMA_DrawBitmapL8(void * pSrc, void * pDst,  U32 OffSrc, U32 OffDst,
   DMA2D->FGPFCCR = LTDC_PIXEL_FORMAT_L8;
   DMA2D->OPFCCR  = PixelFormatDst;
   DMA2D->NLR     = (U32)(xSize << 16) | ySize;
+
+#if !defined(MPU_DISABLE_CACHE)
+  SCB_CleanInvalidateDCache();
+#endif /* !MPU_DISABLE_CACHE */
 
   /* Start the transfer, and enable the transfer complete IT */
   DMA2D->CR |= DMA2D_CR_START;
@@ -1067,6 +1098,10 @@ static void _DMA_DrawAlphaBitmap(void * pDst, const void * pSrc, int xSize, int 
   DMA2D->BGPFCCR = PixelFormat;
   DMA2D->OPFCCR  = PixelFormat;
   DMA2D->NLR     = (U32)(xSize << 16) | (U16)ySize;
+
+#if !defined(MPU_DISABLE_CACHE)
+  SCB_CleanInvalidateDCache();
+#endif /* !MPU_DISABLE_CACHE */
 
   /* Start the transfer, and enable the transfer complete IT */
   DMA2D->CR |= DMA2D_CR_START;
@@ -1717,12 +1752,9 @@ int LCD_X_DisplayDriver(unsigned LayerIndex, unsigned Cmd, void * pData)
 }
 
 static void _ClearCacheHook(U32 LayerMask) {
- int i;
- for (i = 0; i < GUI_NUM_LAYERS; i++) {
-  if (LayerMask & (1 << i)) {
-    SCB_CleanDCache_by_Addr ((uint32_t *)LCD_GetBufferAddress(i, 0),XSIZE_PHYS * YSIZE_PHYS * sizeof(U32)/* * NUM_VSCREENS * NUM_BUFFERS*/);
-  }
- }
+#if !defined(MPU_DISABLE_CACHE)
+    SCB_CleanInvalidateDCache();
+#endif /* !MPU_DISABLE_CACHE */
 }
 
 /**
@@ -1926,6 +1958,10 @@ static void DMA2D_CopyBufferWithAlpha_filter(void * pSrc, void * pDst)
   /*  Set up size */
   DMA2D->NLR     = (U32)(800 << 16) | (U16)480;
 
+#if !defined(MPU_DISABLE_CACHE)
+  SCB_CleanInvalidateDCache();
+#endif /* !MPU_DISABLE_CACHE */
+
   /* Start transfer */
   DMA2D->CR |= DMA2D_CR_START;
 
@@ -2110,6 +2146,10 @@ void DMA2D_CopyBuffer_YCbCr_To_RGB(int LayerIndex, const void * pSrc, const void
   DMA2D->NLR     = (U32)(xSize << 16) | (U16)ySize;
   DMA2D->OMAR    = Destination;
   DMA2D->FGMAR   = (U32)pSrc;
+
+#if !defined(MPU_DISABLE_CACHE)
+  SCB_CleanInvalidateDCache();
+#endif /* !MPU_DISABLE_CACHE */
 
   /* Start the transfer, and enable the transfer complete IT */
   DMA2D->CR |= DMA2D_CR_START;

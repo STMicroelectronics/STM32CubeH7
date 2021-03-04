@@ -220,7 +220,7 @@ static BaseType_t xAreMessageBufferAMPTasksStillRunning( void )
   return xDemoStatus;
 }
 
-/* Check task fonction 
+/* Check task function 
    */
 static void prvCheckTask( void *pvParameters )
 {
@@ -382,7 +382,7 @@ static void CPU_CACHE_Enable(void)
 }
 
 /**
-  * @brief  Configure the MPU attributes as Not Cachable for Internal D3SRAM.
+  * @brief  Configure the MPU attributes as Not Cacheable for Internal D3SRAM.
   * @note   The Base Address is 0x38000000 (D3_SRAM_BASE).
   *         The Configured Region Size is 64KB because same as D3SRAM size.
   * @param  None

@@ -57,7 +57,7 @@ The RTC is configured as follow:
 
 Two LEDs are used in this program:
   - LED1: To indicate the CM7 status. LED1 is ON when CM7 is in RUN mode or 
-          when a configuration error occured during program execution.
+          when a configuration error occurred during program execution.
           LED1 is OFF when CM7 enters STANDBY mode.       
   - LED2: To indicate the CM4 status. LED2 is ON when CM4 is in RUN mode  
           and LED2 is OFF when CM4 enters STANDBY mode. 
@@ -137,7 +137,7 @@ System, Power, PWR, Standby mode, multiprocessor, Interrupt, EXTI, Wakeup, Low P
 
 In order to make the program work, you must do the following :
  - Open your preferred toolchain 
- - For each target configuartion (STM32H745ZI_Nucleo_CM7 and STM32H745ZI_Nucleo_CM4) : 
+ - For each target configuration (STM32H745ZI_Nucleo_CM7 and STM32H745ZI_Nucleo_CM4) : 
      - Rebuild all files 
      - Load images into target memory
  - After loading the two images, you have to reset the board in order to boot (Cortex-M7) 

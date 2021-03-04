@@ -43,7 +43,7 @@ After compiling CM4 target the user is aimed to copy the STM32H747I_CM4.bin file
 exist under PWR_D2ON_D1OFF\Toolchain\STM32H745ZI_Nucleo_CM4\Exe\STM32H745ZI_Nucleo_CM4.bin
 in the Flash memory at 0x08080000 address by using the STM32CubeProgrammer.
 To do this go to STM32CubeProgrammer->Erasing & Programming  then load your binary file and set the start address at 
-0x08080000 and finaly click Start Programing button.
+0x08080000 and finally click Start Programming button.
 
 After a system RESET or a CM7 core debugging the following steps will be done:
   - HAL_Init() function is called to reset all the peripherals, initialize the 
@@ -130,9 +130,9 @@ In order to make the program work, you must do the following :
      - Load the STM32H745ZI_Nucleo_CM4.bin generated file to the Flash memory at 0x08080000 address 
        using the STM32CubeProgrammer.
        Go to Erasing and Programming menu then set the start address at 
-       0x08080000, select the file path for STM32H745ZI_Nucleo_CM4.bin generated file and finaly click Start Programming button.
+       0x08080000, select the file path for STM32H745ZI_Nucleo_CM4.bin generated file and finally click Start Programming button.
 
-  - For CM7 target configuartion (STM32H745ZI_Nucleo_CM7) : 
+  - For CM7 target configuration (STM32H745ZI_Nucleo_CM7) : 
      - Rebuild all files 
      - Load images into target memory
  - After loading the two images, you have to reset the board in order to boot (Cortex-M7) 

@@ -125,7 +125,7 @@ Board Support Package, BSP, Adafruit, TFT, LCD, Joystick, SD Card
 
 In order to make the program work, you must do the following :
  - Open your preferred toolchain 
- - For each target configuartion (STM32H745I_Nucleo_CM7 and STM32H745I_Nucleo_CM4) : 
+ - For each target configuration (STM32H745I_Nucleo_CM7 and STM32H745I_Nucleo_CM4) : 
      - Rebuild all files 
      - Load images into target memory
  - Run the example

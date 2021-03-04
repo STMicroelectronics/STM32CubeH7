@@ -389,7 +389,7 @@ static void UpdateScore(int score)
 }
 
 /**
-  * @brief  This funciton is used to move a sprite on the X and Y axis
+  * @brief  This function is used to move a sprite on the X and Y axis
   * @param  pSprite: pointer to data structure of type SPRITE
   * @retval None
   */

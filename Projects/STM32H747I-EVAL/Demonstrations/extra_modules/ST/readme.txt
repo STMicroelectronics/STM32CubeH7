@@ -48,6 +48,11 @@ The binary files are available from the STM32H747I-EVAL page in the Binary Deliv
 Please refer to :
 
 www.st.com/en/product/stm32h747i-eval.html
+
+Direct Link:
+https://www.st.com/resource/en/compiled_demos/stm32h757i-eval_demo.zip
+
+Notes: STM32H747I-EVAL and STM32H757I-EVAL boards are sharing the same demonstration binaries
  
  * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
  */

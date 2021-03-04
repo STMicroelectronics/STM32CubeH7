@@ -136,7 +136,7 @@ uint32_t JPEG_Encode_DMA(JPEG_HandleTypeDef *hjpeg, uint32_t RGBImageBufferAddre
 }
 
 /**
-  * @brief JPEG Ouput Data BackGround processing .
+  * @brief JPEG Output Data BackGround processing .
   * @param hjpeg: JPEG handle pointer
   * @retval 1 : if JPEG processing has finiched, 0 : if JPEG processing still ongoing
   */

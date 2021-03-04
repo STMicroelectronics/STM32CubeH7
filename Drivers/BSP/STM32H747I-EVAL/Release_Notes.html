@@ -38,11 +38,19 @@ This software component is licensed by ST under BSD 3-Clause license, the “Lic
 <div class="col-sm-12 col-lg-8">
 <h1 id="update-history"><strong>Update History</strong></h1>
 <div class="collapse">
-<input type="checkbox" id="collapse-section4" checked aria-hidden="true"> <label for="collapse-section4" aria-hidden="true"><strong>V3.1.0 / 03-March-2020</strong></label>
+<input type="checkbox" id="collapse-section6" checked aria-hidden="true"> <label for="collapse-section6" aria-hidden="true"><strong>V3.3.0 / 29-January-2021</strong></label>
 <div>
 <h2 id="main-changes">Main Changes</h2>
 <ul>
-<li>Update BSP_BUS APIs with protection against RTOS multithread usage (under BSP_USE_CMSIS_OS pre-processor conditional define)</li>
+<li>Add explicit definition of “BSP_QSPI_Erase_t” type with 8KB, 64KB and 128KB erase size
+<ul>
+<li>Notes:
+<ul>
+<li>The STM32H747I-EVAL comes with a dual flash QSPI, the erase size for each flash is 4KB, 32KB and 64KB</li>
+<li>From BSP top view these two flash are seen as a single one with twice the size</li>
+</ul></li>
+</ul></li>
+<li>Minor typo fixes in comments</li>
 </ul>
 <h2 id="dependencies">Dependencies</h2>
 <ul>
@@ -51,15 +59,25 @@ This software component is licensed by ST under BSD 3-Clause license, the “Lic
 </div>
 </div>
 <div class="collapse">
-<input type="checkbox" id="collapse-section3" aria-hidden="true"> <label for="collapse-section3" aria-hidden="true"><strong>V3.0.0 / 25-February-2020</strong></label>
+<input type="checkbox" id="collapse-section5" checked aria-hidden="true"> <label for="collapse-section5" aria-hidden="true"><strong>V3.2.0 / 29-September-2020</strong></label>
 <div>
 <h2 id="main-changes-1">Main Changes</h2>
 <ul>
-<li>Rename GUI_Drv_t into UTILS_LCD_Drv_t</li>
-</ul>
-<h2 id="backward-compatibility">Backward Compatibility</h2>
+<li>Update stm32h747i_discovery_lcd.c:
 <ul>
-<li>This version breaks the compatibility with previous versions</li>
+<li>Fix MX_DSIHOST_DSI_Init API implementation : add missed “FrameBTAAcknowledgeEnable” parameter setting</li>
+<li>Fix LCD_InitSequence API implementation: add missed “gpio_init_structure.Pull” parameter setting</li>
+<li>Fix MX_LTDC_ClockConfig API implementation: Add “PLL3.PLL3RGE”, “PLL3.PLL3VCOSEL” and “PLL3.PLL3FRACN” parameters settings</li>
+<li>Add support of DSI to HDMI bridge (daughter board MB1232.A):
+<ul>
+<li>Update and rework BSP_LCD_InitHDMI API implementation</li>
+<li>Update MX_LTDC_ClockConfig2 API implementation to set the correct PLL3 settings in case of DSI-HDMI bridge</li>
+<li>Upodate BSP_LCD_GetXSize and BSP_LCD_GetYSize APIs implementation to get the XSize and YSize information from the LCD context variable instead of the LCD panel object</li>
+</ul></li>
+</ul></li>
+<li><p>Update stm32h747i_eval_qspi.c: Update BSP_QSPI_Init and MX_QSPI_Init APIs implementation to fix typo in comments describing the clock default settings</p></li>
+<li><p>Update stm32h747i_eval_ts.c: Update BSP_TS_EnableIT API implementation to fix TS interrupt edge</p></li>
+<li><p>Add License.md file</p></li>
 </ul>
 <h2 id="dependencies-1">Dependencies</h2>
 <ul>
@@ -68,9 +86,39 @@ This software component is licensed by ST under BSD 3-Clause license, the “Lic
 </div>
 </div>
 <div class="collapse">
-<input type="checkbox" id="collapse-section2" aria-hidden="true"> <label for="collapse-section2" aria-hidden="true"><strong>V2.0.0 / 25-November-2019</strong></label>
+<input type="checkbox" id="collapse-section4" aria-hidden="true"> <label for="collapse-section4" aria-hidden="true"><strong>V3.1.0 / 03-March-2020</strong></label>
 <div>
 <h2 id="main-changes-2">Main Changes</h2>
+<ul>
+<li>Update BSP_BUS APIs with protection against RTOS multithread usage (under BSP_USE_CMSIS_OS pre-processor conditional define)</li>
+</ul>
+<h2 id="dependencies-2">Dependencies</h2>
+<ul>
+<li>Components/common v7.0.0</li>
+</ul>
+</div>
+</div>
+<div class="collapse">
+<input type="checkbox" id="collapse-section3" aria-hidden="true"> <label for="collapse-section3" aria-hidden="true"><strong>V3.0.0 / 25-February-2020</strong></label>
+<div>
+<h2 id="main-changes-3">Main Changes</h2>
+<ul>
+<li>Rename GUI_Drv_t into UTILS_LCD_Drv_t</li>
+</ul>
+<h2 id="backward-compatibility">Backward Compatibility</h2>
+<ul>
+<li>This version breaks the compatibility with previous versions</li>
+</ul>
+<h2 id="dependencies-3">Dependencies</h2>
+<ul>
+<li>Components/common v7.0.0</li>
+</ul>
+</div>
+</div>
+<div class="collapse">
+<input type="checkbox" id="collapse-section2" aria-hidden="true"> <label for="collapse-section2" aria-hidden="true"><strong>V2.0.0 / 25-November-2019</strong></label>
+<div>
+<h2 id="main-changes-4">Main Changes</h2>
 <ul>
 <li>First official release of STM32H747I-EVAL BSP drivers in line with STM32Cube BSP drivers development guidelines (UM2298)</li>
 </ul>
@@ -79,7 +127,7 @@ This software component is licensed by ST under BSD 3-Clause license, the “Lic
 <div class="collapse">
 <input type="checkbox" id="collapse-section1" aria-hidden="true"> <label for="collapse-section1" aria-hidden="true"><strong>V1.0.0 / 05-April-2019</strong></label>
 <div>
-<h2 id="main-changes-3">Main Changes</h2>
+<h2 id="main-changes-5">Main Changes</h2>
 <ul>
 <li>First official release</li>
 </ul>

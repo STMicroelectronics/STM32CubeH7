@@ -60,7 +60,11 @@
  * Notice: This is applicable only for cortex M7 based platform.
  */
 
+#if defined(MPU_DISABLE_CACHE)
+#define ENABLE_SD_DMA_CACHE_MAINTENANCE  0
+#else
 #define ENABLE_SD_DMA_CACHE_MAINTENANCE  1
+#endif /* !MPU_DISABLE_CACHE */
 
 
 /* Private variables ---------------------------------------------------------*/

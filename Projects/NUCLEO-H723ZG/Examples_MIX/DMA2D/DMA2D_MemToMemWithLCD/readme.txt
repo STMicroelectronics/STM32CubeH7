@@ -38,7 +38,7 @@ The source buffer in format RGB565 and size 128x160 located in Flash is copied
 in Memory to Memory mode by the DMA2D to the LCD.
 
 In this basic example, the goal is to show how to set some of the DMA2D peripheral
-parameters thru DMAD LL APIs:
+parameters through DMAD LL APIs:
   - input and output image format, alpha value
   - origin and destination buffers addresses
   - transfer size

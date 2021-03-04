@@ -136,7 +136,7 @@ int main(void)
           /*##-7- JPEG decoding with IT model (Not Blocking ) Method ###########*/
           JPEG_Decode_IT(&JPEG_Handle, &JPEG_File, JPEG_OUTPUT_DATA_BUFFER);
           
-          /*##-8- Wait till end of JPEG decoding and perfom Input Processing in BackGround  #*/
+          /*##-8- Wait till end of JPEG decoding and perform Input Processing in BackGround  #*/
           do
           {
             

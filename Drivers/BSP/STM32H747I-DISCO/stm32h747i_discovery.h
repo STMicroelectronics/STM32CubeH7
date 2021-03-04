@@ -171,10 +171,10 @@ typedef enum
  #define USE_STM32H747I_DISCO
 #endif
 /**
- * @brief STM32H747I Discovery BSP Driver version number V3.1.0
+ * @brief STM32H747I Discovery BSP Driver version number V3.5.0
  */
 #define STM32H747I_DISCO_BSP_VERSION_MAIN   (0x03) /*!< [31:24] main version */
-#define STM32H747I_DISCO_BSP_VERSION_SUB1   (0x01) /*!< [23:16] sub1 version */
+#define STM32H747I_DISCO_BSP_VERSION_SUB1   (0x05) /*!< [23:16] sub1 version */
 #define STM32H747I_DISCO_BSP_VERSION_SUB2   (0x00) /*!< [15:8]  sub2 version */
 #define STM32H747I_DISCO_BSP_VERSION_RC     (0x00) /*!< [7:0]  release candidate */
 #define STM32H747I_DISCO_BSP_VERSION        ((STM32H747I_DISCO_BSP_VERSION_MAIN << 24)\
@@ -306,8 +306,10 @@ typedef enum
   * @{
   */
 extern EXTI_HandleTypeDef hpb_exti[];
+#if (USE_BSP_COM_FEATURE > 0)
 extern UART_HandleTypeDef hcom_uart[];
 extern USART_TypeDef* COM_USART[];
+#endif
 
 /**
   * @}

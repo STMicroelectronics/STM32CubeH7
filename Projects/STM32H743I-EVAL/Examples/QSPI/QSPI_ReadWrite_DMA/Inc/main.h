@@ -160,7 +160,7 @@
 
 /* Default dummy clocks cycles */
 #define DUMMY_CLOCK_CYCLES_READ              8
-#define DUMMY_CLOCK_CYCLES_READ_QUAD         10
+#define DUMMY_CLOCK_CYCLES_READ_QUAD         8
 
 #define DUMMY_CLOCK_CYCLES_READ_DTR          6
 #define DUMMY_CLOCK_CYCLES_READ_QUAD_DTR     8

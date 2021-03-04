@@ -212,6 +212,8 @@ int32_t OV9655_SetPixelFormat(OV9655_Object_t *pObj, uint32_t PixelFormat)
   else
   {
     /* Set specific parameters for each PixelFormat */
+    tmp &= ~0x03U; /* Reset Bit[0:1] corresponding to pixel format selection */
+
     switch (PixelFormat)
     {
     case OV9655_YUV422:
@@ -219,6 +221,39 @@ int32_t OV9655_SetPixelFormat(OV9655_Object_t *pObj, uint32_t PixelFormat)
       if(ov9655_write_reg(&pObj->Ctx, OV9655_COMMON_CTRL7, &tmp, 1) != OV9655_OK)
       {
         ret = OV9655_ERROR;
+      }
+      else
+      {
+        if(ov9655_read_reg(&pObj->Ctx, OV9655_TSLB, &tmp, 1) != OV9655_OK)
+        {
+          ret = OV9655_ERROR;
+        }
+        else
+        {
+          tmp &= ~(1 << 5); /* Clear bit 5: Output bit-wise reverse */
+          tmp &= ~(3 << 2); /* Clear bits 3:2: YUV output sequence is 0:yuyv */
+
+          if(ov9655_write_reg(&pObj->Ctx, OV9655_TSLB, &tmp, 1) != OV9655_OK)
+          {
+            ret = OV9655_ERROR;
+          }
+          else
+          {
+            if(ov9655_read_reg(&pObj->Ctx, OV9655_COMMON_CTRL15, &tmp, 1) != OV9655_OK)
+            {
+              ret = OV9655_ERROR;
+            }
+            else
+            {
+                tmp |=  (3 << 6); /* Data format - output full range enable 3: [00] to [FF] */
+                tmp &= ~(3 << 4); /* Clear bits 5:4: RGB 555/565 option */
+            }
+            if(ov9655_write_reg(&pObj->Ctx, OV9655_COMMON_CTRL15, &tmp, 1) != OV9655_OK)
+            {
+              ret = OV9655_ERROR;
+            }
+          }
+        }
       }
       break;
     case OV9655_RGB565:
@@ -1014,10 +1049,18 @@ int32_t OV9655_MirrorFlipConfig(OV9655_Object_t *pObj, uint32_t Config)
   }
   else
   {
-    tmp = (uint8_t)(Config << 3);
-    if(ov9655_write_reg(&pObj->Ctx, OV9655_MIRROR_VFLIP, &tmp, 1) != OV9655_OK)
+    if(ov9655_read_reg(&pObj->Ctx, OV9655_MIRROR_VFLIP, &tmp, 1) != OV9655_OK)
     {
       ret = OV9655_ERROR;
+    }
+    else
+    {
+      tmp &= ~(3U << 4U);    /* Clear Bit[5:4] Mirror/VFlip */
+      tmp |= (Config << 4U); /* Configure Bit[5:4] Mirror/VFlip */
+      if(ov9655_write_reg(&pObj->Ctx, OV9655_MIRROR_VFLIP, &tmp, 1) != OV9655_OK)
+      {
+        ret = OV9655_ERROR;
+      }
     }
   }
 

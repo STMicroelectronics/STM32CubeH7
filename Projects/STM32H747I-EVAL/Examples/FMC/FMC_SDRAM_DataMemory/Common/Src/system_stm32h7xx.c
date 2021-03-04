@@ -213,13 +213,6 @@ void SystemInit (void)
   }
   
 
-/*
-   * Disable the FMC bank1 (enabled after reset).
-   * This, prevents CPU speculation access on this bank which blocks the use of FMC during
-   * 24us. During this time the others FMC master (such as LTDC) cannot use it!
-   */
-  FMC_Bank1_R->BTCR[0] = 0x000030D2;
-
 #if defined (DATA_IN_ExtSRAM) || defined (DATA_IN_ExtSDRAM)
   SystemInit_ExtMemCtl(); 
 #endif /* DATA_IN_ExtSRAM || DATA_IN_ExtSDRAM */

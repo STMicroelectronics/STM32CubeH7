@@ -137,7 +137,7 @@ int main(void)
     int position = UpdatePointer;
     UpdatePointer = -1;
     
-    /* Upate the first or the second part of the buffer */
+    /* Update the first or the second part of the buffer */
     for(int i = 0; i < PLAY_BUFF_SIZE/2; i++)
     {
       PlayBuff[i+position] = *(uint16_t *)(AUDIO_FILE_ADDRESS + PlaybackPosition);

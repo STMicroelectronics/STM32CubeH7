@@ -72,7 +72,7 @@ int main(void)
   BSP_LED_Init(LED3);
 
   
-  /* Unlock tha User Flash area */
+  /* Unlock the User Flash area */
   HAL_FLASH_Unlock();
   
   HAL_FLASH_OB_Unlock();

@@ -112,13 +112,13 @@ int main(void)
     /* 3 - Compare Transmit data to received data : Master to Slave ***********/
     if(BufferCmp(SPIx_TxBuffer, SPI6_RxBuffer, SPIx_NbDataToTransmit))
     {
-      /* Turn On LED_ERROR: uncorrect received data */
+      /* Turn On LED_ERROR: incorrect received data */
       Error_Handler();
     }
     /* 4 - Compare Transmit data to received data : Slave to Master ***********/
     if(BufferCmp(SPIx_TxBuffer, SPI1_RxBuffer, SPIx_NbDataToTransmit))
     {
-      /* Turn On LED_ERROR: uncorrect received data */
+      /* Turn On LED_ERROR: incorrect received data */
       Error_Handler();
     }
   }

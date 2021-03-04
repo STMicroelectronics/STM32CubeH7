@@ -94,15 +94,15 @@ Transmission_Reception Process : (Slave)
   NUCLEO-H723ZG board's LEDs can be used to monitor the Transfer status:
   LED1 is On to indicate that the Transmission_Reception process is finished correctly.
   LED2 is On when Transmit is done and receive is ongoing
-  LED3 is On there are errors while transmiting /receiving data or the received data is false.
+  LED3 is On there are errors while transmitting /receiving data or the received data is false.
 
 
 Master Simulation Process :
 
   We choose :
-  The TIM1 that will generate the clock to allow the slave to transmit and recieve data
+  The TIM1 that will generate the clock to allow the slave to transmit and receive data
   The PSSI as an IP that will in infinite loop :
-   1- Receive the data from the PSSI_Slave wich is "Hello from Slave"
+   1- Receive the data from the PSSI_Slave which is "Hello from Slave"
    2- Verify that is a request from a Slave
    3- Modify it by adding ": received, from Master"
    4- Transmit "Hello from Slave: received, from Master"
@@ -110,7 +110,7 @@ Master Simulation Process :
   NUCLEO-H723ZG board's LEDs can be used to monitor the Transfer status:
   LED1 is On for 1s to indicate that the Reception_Transmission process is finished correctly.
   LED2 is On when receive is ongoing
-  LED3 is On there are errors while receiving/transmiting data.
+  LED3 is On there are errors while receiving/transmitting data.
 
 
 The user can choose between Master and Slave through "#define MASTER_BOARD"

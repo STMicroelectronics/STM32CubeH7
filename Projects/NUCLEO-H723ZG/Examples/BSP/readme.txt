@@ -22,7 +22,7 @@
 
 This example provides a short description of how to use the BSP drivers.
 The STM32H7xx_Nucleo offers the Leds' and COM services.
-Tha Adafruit (reference 802) offers LCD, Joystick and SD services.
+The Adafruit (reference 802) offers LCD, Joystick and SD services.
 
 At the beginning of the main program the HAL_Init() function is called to reset
 all the peripherals, initialize the Flash interface and the systick.
@@ -34,7 +34,7 @@ The APB clock dividers for D1 Domain APB3 peripherals, D2 Domain APB1 and APB2 p
 The program checks the presence of Adafruit shield by reading the state of pin PB.01:
 1- The shield is available
   The following demos can be accessed by pressing Key Button:
-  - Joystik: Use Joystik buttons to move "x" inside a rectangle displayed on LCD
+  - Joystick: Use Joystick buttons to move "x" inside a rectangle displayed on LCD
   - LCD: Several shapes and images are displayed on the LCD
   - SD:
       + SD block erase

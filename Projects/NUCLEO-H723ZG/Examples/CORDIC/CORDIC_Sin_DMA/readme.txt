@@ -53,7 +53,7 @@ STM32 board LED is used to monitor the example status:
 
 @par Keywords
 
-Mathimatic, CORDIC, sine, cosine, DMA, math, PI, radians, Trigonometric
+Mathematic, CORDIC, sine, cosine, DMA, math, PI, radians, Trigonometric
 
 @par Directory contents
 

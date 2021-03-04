@@ -167,23 +167,23 @@ void SystemInit (void)
   RCC->SRDCFGR = 0x00000000;
 
   /* Reset PLLCKSELR register */
-  RCC->PLLCKSELR = 0x00000000;
+  RCC->PLLCKSELR = 0x02020200;
 
   /* Reset PLLCFGR register */
-  RCC->PLLCFGR = 0x00000000;
+  RCC->PLLCFGR = 0x01FF0000;
   /* Reset PLL1DIVR register */
-  RCC->PLL1DIVR = 0x00000000;
+  RCC->PLL1DIVR = 0x01010280;
   /* Reset PLL1FRACR register */
   RCC->PLL1FRACR = 0x00000000;
 
   /* Reset PLL2DIVR register */
-  RCC->PLL2DIVR = 0x00000000;
+  RCC->PLL2DIVR = 0x01010280;
 
   /* Reset PLL2FRACR register */
 
   RCC->PLL2FRACR = 0x00000000;
   /* Reset PLL3DIVR register */
-  RCC->PLL3DIVR = 0x00000000;
+  RCC->PLL3DIVR = 0x01010280;
 
   /* Reset PLL3FRACR register */
   RCC->PLL3FRACR = 0x00000000;
@@ -200,13 +200,6 @@ void SystemInit (void)
   tmpreg = RCC->AHB2ENR;
   (void) tmpreg;
 #endif /* DATA_IN_CD_AHB_SRAM */
-
-/*
-   * Disable the FMC bank1 (enabled after reset).
-   * This, prevents CPU speculation access on this bank which blocks the use of FMC during
-   * 24us. During this time the others FMC master (such as LTDC) cannot use it!
-   */
-  FMC_Bank1_R->BTCR[0] = 0x000030D2;
 
   /* Configure the Vector Table location add offset address for cortex-M7 ------------------*/
 #ifdef VECT_TAB_SRAM

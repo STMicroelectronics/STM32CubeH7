@@ -95,7 +95,7 @@ AUDIOPLAYER_ErrorTypdef  AUDIOPLAYER_Init(uint8_t volume)
 
 BSP_AUDIO_Init_t AudioPlayInit;
 
-   /* Try to Init Audio interface in diffrent config in case of failure */
+   /* Try to Init Audio interface in different config in case of failure */
   AudioPlayInit.Device = AUDIO_OUT_DEVICE_AUTO;
   AudioPlayInit.ChannelsNbr = 2;
   AudioPlayInit.SampleRate = AUDIO_FREQUENCY_48K;
@@ -115,7 +115,7 @@ BSP_AUDIO_Init_t AudioPlayInit;
     /* Enable CRC to Unlock Audio add-ons */
   __HAL_RCC_CRC_CLK_ENABLE();
   
-  /* Retreive stored settings*/
+  /* Retrieve stored settings*/
   AUDIO_EQ_Bands[0].gainDb = RTC_BkupRestoreParameter(AUDIOPLAYER_EQU1_BKP);
   AUDIO_EQ_Bands[1].gainDb = RTC_BkupRestoreParameter(AUDIOPLAYER_EQU2_BKP);    
   AUDIO_EQ_Bands[2].gainDb = RTC_BkupRestoreParameter(AUDIOPLAYER_EQU3_BKP);   

@@ -246,7 +246,7 @@ void Error_Handler(void)
 
 
 /**
-  * @brief  Init the DMA2D for YCbCr to ARGB8888 Convertion .
+  * @brief  Init the DMA2D for YCbCr to ARGB8888 Conversion .
   * @param  xsize: Image width
   * @param  ysize: Image Height
   * @param  ChromaSampling: YCbCr CHroma sampling : 4:2:0, 4:2:2 or 4:4:4  

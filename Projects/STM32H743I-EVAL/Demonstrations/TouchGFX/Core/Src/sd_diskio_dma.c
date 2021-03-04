@@ -55,7 +55,7 @@
 
 
 /*
- * when using cachable memory region, it may be needed to maintain the cache
+ * when using cacheable memory region, it may be needed to maintain the cache
  * validity. Enable the define below to activate a cache maintenance at each
  * read and write operation.
  * Notice: This is applicable only for cortex M7 based platform.
@@ -197,7 +197,7 @@ DRESULT SD_read(BYTE lun, BYTE *buff, DWORD sector, UINT count)
                     res = RES_OK;
 #if (ENABLE_SD_DMA_CACHE_MAINTENANCE == 1)
                     /*
-                    * Invalidate the chache before reading into the buffer,  to get actual data
+                    * Invalidate the cache before reading into the buffer,  to get actual data
                     */
                     uint32_t alignedAddr = (uint32_t)buff & ~0x1F;
                     SCB_InvalidateDCache_by_Addr((uint32_t*)alignedAddr, count*BLOCKSIZE + ((uint32_t)buff - alignedAddr));
@@ -261,7 +261,7 @@ DRESULT SD_write(BYTE lun, const BYTE *buff, DWORD sector, UINT count)
   {
 #if (ENABLE_SD_DMA_CACHE_MAINTENANCE == 1)
     /*
-     * Invalidate the chache before writting into the buffer.
+     * Invalidate the cache before writing into the buffer.
      * This is not needed if the memory region is configured as W/T.
      */
     alignedAddr = (uint32_t)buff & ~0x1F;

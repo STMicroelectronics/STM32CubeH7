@@ -137,7 +137,7 @@ SECTIONS
   . = ALIGN(4);
   .bss :
   {
-    /* This is used by the startup in order to initialize the .bss secion */
+    /* This is used by the startup in order to initialize the .bss section */
     _sbss = .;         /* define a global symbol at bss start */
     __bss_start__ = _sbss;
     *(.bss)
@@ -180,7 +180,7 @@ SECTIONS
   . = ALIGN(4);
   .bss_RAM_D2 :
   {
-    /* This is used by the startup in order to initialize the .bss secion */
+    /* This is used by the startup in order to initialize the .bss section */
     _sbss_RAM_D2 = .;         /* define a global symbol at bss start */
     __bss_start__ = _sbss_RAM_D2;
     *(.bss_RAM_D2)
@@ -214,7 +214,7 @@ SECTIONS
   . = ALIGN(4);
   .bss_RAM_D3 :
   {
-    /* This is used by the startup in order to initialize the .bss secion */
+    /* This is used by the startup in order to initialize the .bss section */
     _sbss_RAM_D3 = .;         /* define a global symbol at bss start */
     __bss_start__ = _sbss_RAM_D3;
     *(.bss_RAM_D3)

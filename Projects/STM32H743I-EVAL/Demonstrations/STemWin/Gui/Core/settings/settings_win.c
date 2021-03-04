@@ -76,7 +76,7 @@ static const GUI_WIDGET_CREATE_INFO _aDialog[] =
   { TEXT_CreateIndirect, "   -EVAL  ",  ID_TEXT_BOARD_2,  37,  315, 100, 20, 0, 0x0, 0 },
   { TEXT_CreateIndirect, " STM32H7", ID_TEXT_CORE_1,     195, 310, 100, 20, 0, 0x0, 0 },
   { TEXT_CreateIndirect, " 400MHz", ID_TEXT_CPU_1,       360, 310, 100, 20, 0, 0x0, 0 },
-  { TEXT_CreateIndirect, "V1.6.0", ID_TEXT_VERSION_1,    520, 310, 100, 20, 0, 0x0, 0 }, 
+  { TEXT_CreateIndirect, "V1.8.0", ID_TEXT_VERSION_1,    520, 310, 100, 20, 0, 0x0, 0 },
   
   { TEXT_CreateIndirect, "Copyright (c) STMicroelectronics 2017", ID_TEXT_COPYRIGHT, 400, 450, 240, 20, 0, 0x0, 0 },
 };

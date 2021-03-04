@@ -344,6 +344,8 @@ Upon Paper Cutter demonstration pick up, four options are available:
 
 The binary and Media demonstration files are available from the STM32H747I-DISCO page in the Binary Delivery section.
 Please refer to : www.st.com/en/product/stm32h747i-disco.html
+Direct link:
+https://www.st.com/resource/en/compiled_demos/stm32h747i-disco_demo.zip
 
 @par Hardware and Software environment
 

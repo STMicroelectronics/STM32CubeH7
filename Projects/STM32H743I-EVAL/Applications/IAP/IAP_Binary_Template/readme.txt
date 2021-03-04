@@ -88,7 +88,7 @@ In order to load the SysTick application with the IAP, you must do the following
 
  - Open your preferred toolchain 
  - Rebuild all projects files
- - A binary file "STM32H743I-EVAL_SysTick.bin" will be generated in build ouput folder.  
+ - A binary file "STM32H743I-EVAL_SysTick.bin" will be generated in build output folder.  
    - For Keil an extract conversion step is required using "axftobin.bat"
  - Finally load this image with IAP application
 

@@ -70,7 +70,7 @@ int main(void)
   SystemClock_Config();
 
   /* This sample code shows how to use STM32H7xx ADC HAL API to configure the
-     ADC to retreive battery level,
+     ADC to retrieve battery level,
      4 steps are required. */
 
   /* Turn LED3 on */

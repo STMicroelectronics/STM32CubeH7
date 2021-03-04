@@ -102,7 +102,9 @@ System, HAL template, multiprocessor, Clock Configuration, HSE, System clock, Os
   - This example has been tested with STMicroelectronics STM32H745I-DISCO
     boards and can be easily tailored to any other supported device 
     and development board.
-
+  - User Option Bytes requirement (with STM32CubeProgrammer tool)
+     BOOT_CM4(BCM4) = 1                 Enable cortex M4 Boot  
+     BOOT_CM7(BCM7) = 0                 Disable cortex M7 Boot 
 
 @par How to use it ? 
 

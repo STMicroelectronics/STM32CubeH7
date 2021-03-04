@@ -36,7 +36,7 @@
 /* Timer handler declaration */
 TIM_HandleTypeDef    TimHandle;
 
-/* Prescaler value declartion*/
+/* Prescaler value declaration*/
 uint32_t uwPrescalerValue = 0;
 
 /* Timer One Pulse Configuration Structure declaration */

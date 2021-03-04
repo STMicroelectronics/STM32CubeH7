@@ -37,6 +37,8 @@ This STM32H7 demonstration is running on STM32H750B-DK board
 
 The binary and Media demonstration files are available from the STM32H750B-DK page in the Binary Delivery section.
 Please refer to : www.st.com/en/product/stm32h750b-dk.html
+Direct link:
+https://www.st.com/resource/en/compiled_demos/stm32h750b-dk_demo.zip
 		 
 The demonstration's executables STM32Cube_Demo-STM32H750B-DK-V1.0.0_FULL.hex can be flashed 
 to the target using the STM32CubeProgrammer.

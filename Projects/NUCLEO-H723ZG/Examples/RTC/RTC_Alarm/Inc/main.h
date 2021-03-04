@@ -29,7 +29,7 @@
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
 /* Defines related to Clock configuration */
-/* Uncomment to enable the adaquate Clock Source */
+/* Uncomment to enable the adequate Clock Source */
 #define RTC_CLOCK_SOURCE_LSI
 /*#define RTC_CLOCK_SOURCE_LSE*/
 

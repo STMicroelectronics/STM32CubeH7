@@ -178,7 +178,7 @@ System, Power, PWR, Voltage scaling, VOS0, Over clocking, LDO, multiprocessor
 
 In order to make the program work, you must do the following :
  - Open your preferred toolchain
- - For each target configuartion (STM32H745ZI_Nucleo_CM7 and STM32H745ZI_Nucleo_CM4) :
+ - For each target configuration (STM32H745ZI_Nucleo_CM7 and STM32H745ZI_Nucleo_CM4) :
      - Rebuild all files
      - Load images into target memory
  - After loading the two images, you have to reset the board in order to boot (Cortex-M7) and CPU2 (Cortex-M4) at once.

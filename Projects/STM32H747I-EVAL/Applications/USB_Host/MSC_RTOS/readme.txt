@@ -110,8 +110,8 @@ File system, Write, Read, Format
 
 
 
-Since this is an RTOS based application, built around FreeRTOS and CMSIS-OS wrapping layer common APIs,
-the RTOS is enabled by setting, #define USBH_USE_OS      1
+@Note Since this is an RTOS based application, built around FreeRTOS and CMSIS-OS wrapping layer common APIs,
+      the RTOS is enabled by setting, #define USBH_USE_OS      1
 
 @Note If the  application is using the DTCM/ITCM memories (@0x20000000/ 0x0000000: not cacheable and only accessible
       by the Cortex M7 and the  MDMA), no need for cache maintenance when the Cortex M7 and the MDMA access these RAMs.

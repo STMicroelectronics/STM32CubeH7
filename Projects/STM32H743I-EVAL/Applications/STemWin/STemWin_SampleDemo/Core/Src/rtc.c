@@ -78,7 +78,7 @@ void HAL_RTC_MspInit(RTC_HandleTypeDef *hrtc)
 {
   RCC_OscInitTypeDef Osc;
   
-  /*##-1- Configue LSE as RTC clock soucre ###################################*/ 
+  /*##-1- Configure LSE as RTC clock source ###################################*/ 
   Osc.OscillatorType = RCC_OSCILLATORTYPE_LSE;
   Osc.LSEState = RCC_LSE_ON;
   Osc.HSIState = RCC_HSI_OFF;

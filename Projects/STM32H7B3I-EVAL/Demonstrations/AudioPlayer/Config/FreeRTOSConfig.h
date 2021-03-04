@@ -132,8 +132,8 @@ void PostSleepProcessing(uint32_t *ulExpectedIdleTime);
 #endif /* defined(__ICCARM__) || defined(__CC_ARM) || defined(__GNUC__) */
 
 #if configUSE_TICKLESS_IDLE == 1
-#define configPRE_SLEEP_PROCESSING                        PreSleepProcessing
-#define configPOST_SLEEP_PROCESSING                       PostSleepProcessing
+#define configPRE_SLEEP_PROCESSING(xModifiableIdleTime)   PreSleepProcessing(&xModifiableIdleTime)
+#define configPOST_SLEEP_PROCESSING(xModifiableIdleTime)  PostSleepProcessing(&xModifiableIdleTime)
 #endif /* configUSE_TICKLESS_IDLE == 1 */
 
 /* IMPORTANT: This define MUST be commented when used with STM32Cube firmware,

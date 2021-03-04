@@ -86,7 +86,7 @@ const Diskio_drvTypeDef  SD_Driver =
 
 /**
   * @brief  Initialize the SDCARD through the FATFS, copy binary to its execution
-  *         area and finaly free no more needed ressources.
+  *         area and finally free no more needed resources.
   * @param  None
   * @retval None
   */

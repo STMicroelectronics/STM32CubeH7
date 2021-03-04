@@ -90,7 +90,7 @@ uint8_t msc_file_operations(void)
       /* Compare read data with the expected data */
       if((bytesread == bytesWritten))
       {
-        USBH_UsrLog("INFO : FatFs data compare SUCCES");
+        USBH_UsrLog("INFO : FatFs data compare SUCCESS");
       }
       else
       {

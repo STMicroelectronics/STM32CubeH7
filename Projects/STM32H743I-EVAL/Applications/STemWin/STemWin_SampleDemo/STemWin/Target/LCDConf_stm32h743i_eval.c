@@ -752,7 +752,7 @@ static void CUSTOM_FillRect(int LayerIndex, int x0, int y0, int x1, int y1, U32 
   U32 BufferSize, AddrDst;
   int xSize, ySize;
 
-  /* Data Cahce management */
+  /* Data Cache management */
   if (GUI_GetDrawMode() == GUI_DM_XOR) 
   {		
     LCD_SetDevFunc(LayerIndex, LCD_DEVFUNC_FILLRECT, NULL);

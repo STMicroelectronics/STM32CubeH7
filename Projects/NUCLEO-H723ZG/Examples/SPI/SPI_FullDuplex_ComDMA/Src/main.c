@@ -110,7 +110,7 @@ int main(void)
   SpiHandle.Init.CRCLength         = SPI_CRC_LENGTH_8BIT;
   SpiHandle.Init.NSS               = SPI_NSS_SOFT;
   SpiHandle.Init.NSSPMode          = SPI_NSS_PULSE_DISABLE;
-  SpiHandle.Init.MasterKeepIOState = SPI_MASTER_KEEP_IO_STATE_ENABLE;  /* Recommanded setting to avoid glitches */
+  SpiHandle.Init.MasterKeepIOState = SPI_MASTER_KEEP_IO_STATE_ENABLE;  /* Recommended setting to avoid glitches */
 
 #ifdef MASTER_BOARD
   SpiHandle.Init.Mode = SPI_MODE_MASTER;

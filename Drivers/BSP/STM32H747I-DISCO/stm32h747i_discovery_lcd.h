@@ -57,7 +57,7 @@
   */
 #define LCD_INSTANCES_NBR          1
 /**
-  * @brief  HDMI Foramt
+  * @brief  HDMI Format
   */
 #define HDMI_FORMAT_720_480              0x00U /* 720_480 format choice of HDMI display */
 #define HDMI_FORMAT_720_576              0x01U /* 720_576 format choice of HDMI display */
@@ -124,7 +124,7 @@
 #define LCD_COLOR_RGB565_BLACK                0x0000U
 #define LCD_COLOR_RGB565_BROWN                0xA145U
 #define LCD_COLOR_RGB565_ORANGE               0xFD20U
-/* Defintion of Official ST COLOR */
+/* Definition of Official ST COLOR */
 #define LCD_COLOR_RGB565_ST_BLUE_DARK         0x0001U
 #define LCD_COLOR_RGB565_ST_BLUE              0x01EBU
 #define LCD_COLOR_RGB565_ST_BLUE_LIGHT        0x06A7U
@@ -164,7 +164,7 @@
 #define LCD_COLOR_ARGB8888_BLACK              0xFF000000UL
 #define LCD_COLOR_ARGB8888_BROWN              0xFFA52A2AUL
 #define LCD_COLOR_ARGB8888_ORANGE             0xFFFFA500UL
-/* Defintion of Official ST Colors */
+/* Definition of Official ST Colors */
 #define LCD_COLOR_ARGB8888_ST_BLUE_DARK       0xFF002052UL
 #define LCD_COLOR_ARGB8888_ST_BLUE            0xFF39A9DCUL
 #define LCD_COLOR_ARGB8888_ST_BLUE_LIGHT      0xFFD1E4F3UL

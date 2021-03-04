@@ -33,7 +33,7 @@
        communication layer configuration to start the TS use. The LCD size properties
        (x and y) are passed as parameters.
      o If TS interrupt mode is desired, you must configure the TS interrupt mode
-       by calling the function BSP_TS_ITConfig(). The TS interrupt mode is generated
+       by calling the function BSP_TS_EnableIT(). The TS interrupt mode is generated
        as an external interrupt whenever a touch is detected.
        The interrupt mode internally uses the IO functionalities driver driven by
        the IO expander, to configure the IT line.
@@ -249,7 +249,7 @@ int32_t BSP_TS_EnableIT(uint32_t Instance)
       /* Configure TS IT line IO */
       io_init_structure.Pin  = TS_INT_PIN;
       io_init_structure.Pull = IO_PULLUP;
-      io_init_structure.Mode = IO_MODE_IT_LOW_LEVEL;
+      io_init_structure.Mode = IO_MODE_IT_FALLING_EDGE;
 
       if(BSP_IO_Init(0, &io_init_structure) != BSP_ERROR_NONE)
       {

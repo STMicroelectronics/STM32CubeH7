@@ -204,7 +204,7 @@ int main(void)
       {
         if(TxCplt != 0)
         {
-          /* Toogle Led Orange, Transfer of Buffer OK */
+          /* Toggle Led Orange, Transfer of Buffer OK */
           BSP_LED_Toggle(LED_ORANGE);
           
           /* Transfer of Buffer completed */
@@ -218,7 +218,7 @@ int main(void)
           {
             stop_time = HAL_GetTick();
             printf(" - Write Time(ms): %lu  -  Write Speed: %02.2f MB/s  \n", stop_time - start_time, (float)((float)(DATA_SIZE>>10)/(float)(stop_time - start_time)));
-            /* All data are transfered */
+            /* All data are transferred */
             step++;
           }
         }
@@ -257,7 +257,7 @@ int main(void)
       {
         if(RxCplt != 0)
         {
-          /* Toogle Led Orange, Transfer of Buffer OK */
+          /* Toggle Led Orange, Transfer of Buffer OK */
           BSP_LED_Toggle(LED_ORANGE);
           /* Transfer of Buffer completed */
           index++;
@@ -270,7 +270,7 @@ int main(void)
           {
             stop_time = HAL_GetTick();
             printf(" - Read Time(ms): %lu  -  Read Speed: %02.2f MB/s  \n", stop_time - start_time, (float)((float)(DATA_SIZE>>10)/(float)(stop_time - start_time)));
-            /* All data are transfered */
+            /* All data are transferred */
             step++;
           }
         }
@@ -292,7 +292,7 @@ int main(void)
           Error_Handler();
         }
         printf(" - Check data OK  \n");
-        /* Toogle Green LED, Check Transfer OK */
+        /* Toggle Green LED, Check Transfer OK */
         BSP_LED_Toggle(LED_GREEN);
         step = 0;
       }

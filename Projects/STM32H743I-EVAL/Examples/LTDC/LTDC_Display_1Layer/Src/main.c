@@ -178,7 +178,7 @@ static void SystemClock_Config(void)
 
 /**
   * @brief LCD Configuration.
-  * @note  This function Configure tha LTDC peripheral :
+  * @note  This function Configure the LTDC peripheral :
   *        1) Configure the Pixel Clock for the LCD
   *        2) Configure the LTDC Timing and Polarity
   *        3) Configure the LTDC Layer 1 :

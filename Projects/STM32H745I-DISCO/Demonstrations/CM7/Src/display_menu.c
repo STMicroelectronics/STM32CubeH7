@@ -42,6 +42,7 @@ __IO uint32_t pending_buffer = 0;
 
 /* Private function prototypes -----------------------------------------------*/
 void LCD_BlendImage(uint32_t *pSrc, uint32_t *pDst, uint32_t Xpos, uint32_t Ypos, uint32_t Width, uint32_t Height, uint32_t ColorMode, uint32_t InputOffset);
+void DisplayButton(ButtonWidgetTypeDef *pButton, uint32_t *pDst);
 /* Exported functions ---------------------------------------------------------*/
 /**
   * @brief  Initialize the Display

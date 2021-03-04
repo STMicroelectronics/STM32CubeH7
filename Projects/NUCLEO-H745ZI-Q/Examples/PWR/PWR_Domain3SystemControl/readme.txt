@@ -87,11 +87,11 @@ Board 2: transmit chunks, then receiving and verifying them.
 
 How to run:
   - Compile the program with LOW_POWER_BOARD define, then load it in the first 
-    board (CM7 code : target configuartion STM32H745ZI_Nucleo_CM7 and CM4 code target
-    configuartion STM32H745ZI_Nucleo_CM4).
+    board (CM7 code : target configuration STM32H745ZI_Nucleo_CM7 and CM4 code target
+    configuration STM32H745ZI_Nucleo_CM4).
   - Compile the program without LOW_POWER_BOARD define, then load it in the 
-    second board (CM7 code : target configuartion STM32H745ZI_Nucleo_CM7 and CM4
-     code target configuartion STM32H745ZI_Nucleo_CM4).
+    second board (CM7 code : target configuration STM32H745ZI_Nucleo_CM7 and CM4
+     code target configuration STM32H745ZI_Nucleo_CM4).
   - Connect the two boards as shown in the picture above and start them.
   - LED2 in the first board will set ON for 3 seconds, then it will turn Off 
     to indicate that the CM4 core is entered into low power mode.
@@ -218,7 +218,7 @@ System, Power, multiprocessor, PWR, Stop mode, Domain 3, D3SRAM, BDMA, DMAMUX, L
 
 In order to make the program work, you must do the following :
  - Open your preferred toolchain 
- - For each target configuartion (STM32H745ZI_Nucleo_CM7 and STM32H745ZI_Nucleo_CM4) : 
+ - For each target configuration (STM32H745ZI_Nucleo_CM7 and STM32H745ZI_Nucleo_CM4) : 
      - Rebuild all files with LOW_POWER_BOARD compile swicth (in common.h file)
      - Load images into target memory in 1st board.
      - Rebuild all files without LOW_POWER_BOARD swicth (in common.h file)

@@ -136,7 +136,7 @@ System, LL template, multiprocessor, Clock Configuration, HSE bypass mode,System
 
 In order to make the program work, you must do the following :
  - Open your preferred toolchain 
- - For each target configuartion (STM32H745I_Nucleo_CM4 first then STM32H745I_Nucleo_CM7) : 
+ - For each target configuration (STM32H745I_Nucleo_CM4 first then STM32H745I_Nucleo_CM7) : 
      - Rebuild all files 
      - Load images into target memory
  - After loading the two images, you have to reset the board in order to boot (Cortex-M7) and CPU2 (Cortex-M4) at once.

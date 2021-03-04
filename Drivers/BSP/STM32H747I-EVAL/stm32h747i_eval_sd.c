@@ -892,7 +892,7 @@ static void SD_RxCpltCallback(SD_HandleTypeDef *hsd)
 #if (USE_SD_TRANSCEIVER != 0U)
 /**
   * @brief  Enable the SD Transciver 1.8V Mode Callback.
-  * @param  status Tranceiver 1.8V status
+  * @param  status Transceiver 1.8V status
   * @retval None
   */
 static void SD_DriveTransceiver_1_8V_Callback(FlagStatus status)

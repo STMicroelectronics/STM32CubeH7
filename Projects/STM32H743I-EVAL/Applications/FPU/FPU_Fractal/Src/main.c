@@ -40,7 +40,7 @@ DMA2D_HandleTypeDef    DMA2D_Handle;
 
 extern LTDC_HandleTypeDef  hltdc_eval;
 TS_Init_t *hTS;
-/* 32-bytes Alignement is needed for cache maintenance purpose */
+/* 32-bytes Alignment is needed for cache maintenance purpose */
 ALIGN_32BYTES(uint32_t L8_CLUT[ITERATION]);
 ALIGN_32BYTES(uint32_t  buffer[LCD_X_SIZE * LCD_Y_SIZE / 4]);
 
@@ -391,7 +391,7 @@ static void SystemClockChange_Handler(void)
 
   if(SystemClock_changed != 0)
   {
-    /*siwtch off the display during the system clock change */
+    /*switch off the display during the system clock change */
     BSP_LCD_DisplayOff();
 
     /* Select HSE  as system clock source to allow modification of the PLL configuration */
@@ -436,7 +436,7 @@ static void SystemClockChange_Handler(void)
 
     SystemClock_changed = 0;
 
-    /*siwtch off the display during the system clock change */
+    /*switch off the display during the system clock change */
     BSP_LCD_DisplayOn();
 
   }

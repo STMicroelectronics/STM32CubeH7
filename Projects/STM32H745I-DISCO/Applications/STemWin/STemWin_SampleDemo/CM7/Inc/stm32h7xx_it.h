@@ -43,6 +43,7 @@ void DebugMon_Handler(void);
 void PendSV_Handler(void);
 void SysTick_Handler(void);
 void TIM3_IRQHandler(void);
+void LTDC_IRQHandler(void);
 
 #ifdef __cplusplus
 }

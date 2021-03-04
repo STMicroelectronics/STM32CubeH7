@@ -138,7 +138,7 @@ int main(void)
   SpiHandle1.Init.CRCLength         = SPI_CRC_LENGTH_8BIT;
   SpiHandle1.Init.NSS               = SPI_NSS_SOFT;
   SpiHandle1.Init.NSSPMode          = SPI_NSS_PULSE_DISABLE;
-  SpiHandle1.Init.MasterKeepIOState = SPI_MASTER_KEEP_IO_STATE_ENABLE;  /* Recommanded setting to avoid glitches */
+  SpiHandle1.Init.MasterKeepIOState = SPI_MASTER_KEEP_IO_STATE_ENABLE;  /* Recommended setting to avoid glitches */
 
   if(HAL_SPI_Init(&SpiHandle1) != HAL_OK)
   {

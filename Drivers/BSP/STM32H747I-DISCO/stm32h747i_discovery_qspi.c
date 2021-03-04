@@ -464,7 +464,8 @@ int32_t BSP_QSPI_Write(uint32_t Instance, uint8_t *pData, uint32_t WriteAddr, ui
 
 /**
   * @brief  Erases the specified block of the QSPI memory.
-  *         MT25TL01G support 4K, 32K, 64K size block erase commands.
+  *         MT25TL01G support 4K, 32K, 64K size block erase commands for each Die.
+  *           i.e 8K, 64K, 128K at BSP level (see BSP_QSPI_Erase_t type definition)
   * @param  Instance     QSPI instance
   * @param  BlockAddress Block address to erase
   * @param  BlockSize    Erase Block size
@@ -493,7 +494,7 @@ int32_t BSP_QSPI_EraseBlock(uint32_t Instance, uint32_t BlockAddress, BSP_QSPI_E
     else
     {
       /* Issue Block Erase command */
-      if(MT25TL01G_BlockErase(&hqspi, QSPI_Ctx[Instance].InterfaceMode, BlockAddress, BlockSize) != MT25TL01G_OK)
+      if(MT25TL01G_BlockErase(&hqspi, QSPI_Ctx[Instance].InterfaceMode, BlockAddress, (MT25TL01G_Erase_t)BlockSize) != MT25TL01G_OK)
       {
         ret = BSP_ERROR_COMPONENT_FAILURE;
       }

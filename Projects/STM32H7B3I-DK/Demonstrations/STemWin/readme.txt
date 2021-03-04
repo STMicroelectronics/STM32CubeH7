@@ -113,6 +113,8 @@ Below is the listing of BMP file :
 
 The binary and Media demonstration files are available from the STM32H7B3I-DK page in the Binary Delivery section.
 Please refer to : www.st.com/en/product/STM32H7B3I-DK.html
+Direct link: 
+https://www.st.com/resource/en/compiled_demos/stm32h7b3i-dk_demo.zip
 
 @Note If the  application is using the DTCM/ITCM memories (@0x20000000/ 0x0000000: not cacheable and only accessible
       by the Cortex M7 and the  MDMA), no need for cache maintenance when the Cortex M7 and the MDMA access these RAMs.

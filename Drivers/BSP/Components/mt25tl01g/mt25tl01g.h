@@ -215,7 +215,7 @@ typedef enum
 #define MT25TL01G_SECTOR_ERASE_CMD                     0xD8
 #define MT25TL01G_SECTOR_ERASE_4_BYTE_ADDR_CMD         0xDC
 
-#define MT25TL01G_DIE_ERASE_CMD                        0xC4
+#define MT25TL01G_DIE_ERASE_CMD                        0xC7
 
 #define MT25TL01G_PROG_ERASE_RESUME_CMD                0x7A
 #define MT25TL01G_PROG_ERASE_SUSPEND_CMD               0x75

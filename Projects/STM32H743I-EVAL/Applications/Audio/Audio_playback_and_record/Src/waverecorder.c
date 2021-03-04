@@ -73,7 +73,7 @@ static void AUDIO_REC_DisplayButtons(void);
 /*
   Four MEMS microphone MP34DT01 mounted on STM32H743I-EVAL are connected
   to the DFSDM peripheral. In this application, only two MEMS microphonr are used.
-  The SAI is configured in master transmiter mode to play the recorded data.
+  The SAI is configured in master transmitter mode to play the recorded data.
   In this mode, the SAI provides the clock to the WM8994.
 
   Data acquisition is performed in 16-bit PCM format and using SAI DMA mode.

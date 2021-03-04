@@ -116,7 +116,7 @@ int32_t BSP_SDRAM_Init(uint32_t Instance)
 /**
   * @brief  Initializes the SDRAM device.
   * @param  Instance  SDRAM Instance
-  * @param  DataLength Data legth; Could be:
+  * @param  DataLength Data length; Could be:
   *         SDRAM_DATA_LENGTH_32B
   *         SDRAM_DATA_LENGTH_16B
   * @retval BSP status

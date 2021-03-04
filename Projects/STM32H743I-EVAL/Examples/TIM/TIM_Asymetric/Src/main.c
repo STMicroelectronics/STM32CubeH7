@@ -3,7 +3,7 @@
   * @file    TIM/TIM_Asymetric/Src/main.c
   * @author  MCD Application Team
   * @brief   This sample code shows how to use STM32H7xx TIM HAL API to generate
-  *          an asymetric signal.
+  *          an asymmetric signal.
   ******************************************************************************
   * @attention
   *
@@ -82,10 +82,10 @@ int main(void)
 
   /*##-1- Configure the TIM peripheral #######################################*/ 
   /* --------------------------------------------------------------------------- 
-     TIM8 is configured to generate an Asymetric signal with a programmable 
+     TIM8 is configured to generate an Asymmetric signal with a programmable 
    Phase-Shifted signal on TIM8_CH2:
    - TIM8 Channel 1 is configured in PWM2 mode
-   - TIM8 Channel 2 is configured in Asymetric PWM2 mode
+   - TIM8 Channel 2 is configured in Asymmetric PWM2 mode
    - The counter mode is center aligned mode
    - The pulse length and the phase shift are programmed consecutively in TIM8_CCR2 and TIM8_CCR1.
     
@@ -99,7 +99,7 @@ int main(void)
     TIM1 and TIM8 signals are at frequency of  ((SystemCoreClock/2) / (PWM_FREQUENCY + 1))  
        
     TIM8 is gerating a signal with the following caracteristics:
-    - Pulse lenght = (TIM8_CCR1 + TIM8_CCR2) / TIM8_CLK
+    - Pulse length = (TIM8_CCR1 + TIM8_CCR2) / TIM8_CLK
     - Phase shift = TIM8_CCR1/TIM8_CLK
       with TIM8_CLK = ((SystemCoreClock/2) / (Period + 1)), as the prescaler is equal to zero.
   

@@ -40,19 +40,19 @@ This software component is licensed by ST under BSD 3-Clause license, the “Lic
 <div class="col-sm-12 col-lg-8">
 <h1 id="update-history">Update History</h1>
 <div class="collapse">
-<input type="checkbox" id="collapse-section3" checked aria-hidden="true"> <label for="collapse-section3" aria-hidden="true"><strong>V2.0.0 / 30-October-2019</strong></label>
+<input type="checkbox" id="collapse-section5" checked aria-hidden="true"> <label for="collapse-section5" aria-hidden="true"><strong>V2.2.0 / 15-December-2020</strong></label>
 <div>
 <h2 id="main-changes">Main Changes</h2>
 <ul>
-<li>First Official Release version of OV9655 Camera sensor Component in line with STM32Cube BSP drivers development guidelines (UM2298)</li>
-<li>The component drivers are composed of
+<li>Fix Mirror/Flip setting in OV9655_MirrorFlipConfig API:
 <ul>
-<li>component core drivers files: ov9655.h/.c</li>
-<li>component register drivers files: ov9655_regs.h/.c</li>
+<li>Clear Bit[4:5] corresponding to mirror/flip selection before applaying the new configuration</li>
 </ul></li>
 </ul>
 <h2 id="backward-compatibility">Backward Compatibility</h2>
-<p>This version breaks the compatibility with previous versions</p>
+<ul>
+<li>None</li>
+</ul>
 <h2 id="dependencies">Dependencies</h2>
 <p>This software release is compatible with:</p>
 <ul>
@@ -61,18 +61,61 @@ This software component is licensed by ST under BSD 3-Clause license, the “Lic
 </div>
 </div>
 <div class="collapse">
-<input type="checkbox" id="collapse-section2" checked aria-hidden="true"> <label for="collapse-section2" aria-hidden="true"><strong>V1.0.1 / 07-April-2017</strong></label>
+<input type="checkbox" id="collapse-section4" aria-hidden="true"> <label for="collapse-section4" aria-hidden="true"><strong>V2.1.0 / 30-September-2020</strong></label>
 <div>
 <h2 id="main-changes-1">Main Changes</h2>
+<ul>
+<li>Fix pixel format setting in OV9655_SetPixelFormat API:
+<ul>
+<li>Clear Bit[0:1] corresponding to pixel format selection before applaying the new configuration</li>
+<li>Update registers TSLB and COMMON15 required for setting YUV format</li>
+</ul></li>
+</ul>
+<h2 id="backward-compatibility-1">Backward Compatibility</h2>
+<ul>
+<li>None</li>
+</ul>
+<h2 id="dependencies-1">Dependencies</h2>
+<p>This software release is compatible with:</p>
+<ul>
+<li>BSP Common v6.0.0 or above</li>
+</ul>
+</div>
+</div>
+<div class="collapse">
+<input type="checkbox" id="collapse-section3" aria-hidden="true"> <label for="collapse-section3" aria-hidden="true"><strong>V2.0.0 / 30-October-2019</strong></label>
+<div>
+<h2 id="main-changes-2">Main Changes</h2>
+<ul>
+<li>First Official Release version of OV9655 Camera sensor Component in line with STM32Cube BSP drivers development guidelines (UM2298)</li>
+<li>The component drivers are composed of
+<ul>
+<li>component core drivers files: ov9655.h/.c</li>
+<li>component register drivers files: ov9655_regs.h/.c</li>
+</ul></li>
+</ul>
+<h2 id="backward-compatibility-2">Backward Compatibility</h2>
+<p>This version breaks the compatibility with previous versions</p>
+<h2 id="dependencies-2">Dependencies</h2>
+<p>This software release is compatible with:</p>
+<ul>
+<li>BSP Common v6.0.0 or above</li>
+</ul>
+</div>
+</div>
+<div class="collapse">
+<input type="checkbox" id="collapse-section2" aria-hidden="true"> <label for="collapse-section2" aria-hidden="true"><strong>V1.0.1 / 07-April-2017</strong></label>
+<div>
+<h2 id="main-changes-3">Main Changes</h2>
 <ul>
 <li>Update comments to be used for PDSC generation</li>
 </ul>
 </div>
 </div>
 <div class="collapse">
-<input type="checkbox" id="collapse-section1" checked aria-hidden="true"> <label for="collapse-section1" aria-hidden="true"><strong>V1.0.0 / 25-June-2015</strong></label>
+<input type="checkbox" id="collapse-section1" aria-hidden="true"> <label for="collapse-section1" aria-hidden="true"><strong>V1.0.0 / 25-June-2015</strong></label>
 <div>
-<h2 id="main-changes-2">Main Changes</h2>
+<h2 id="main-changes-4">Main Changes</h2>
 <ul>
 <li>First official release of <strong>OV9655</strong> Camera sensor driver</li>
 </ul>

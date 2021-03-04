@@ -7,6 +7,7 @@ var searchData=
   ['cd_5fstate',['cd_state',['../group__mci__interface__gr.html#af47e73979b028c86c7c1fbe39b095140',1,'ARM_MCI_CAPABILITIES']]],
   ['ce_5flines',['ce_lines',['../group__nand__interface__gr.html#ad5dd0fcdd7f6d5e5cd739f73323a2b11',1,'ARM_NAND_CAPABILITIES']]],
   ['ce_5fmanual',['ce_manual',['../group__nand__interface__gr.html#a2b8044d986995b183b057217643466bf',1,'ARM_NAND_CAPABILITIES']]],
+  ['ch',['ch',['../group__wifi__management__gr.html#acbcf5f8de7895ca456bb39fbcccde1d1',1,'ARM_WIFI_CONFIG_t::ch()'],['../group__wifi__management__gr.html#acbcf5f8de7895ca456bb39fbcccde1d1',1,'ARM_WIFI_SCAN_INFO_t::ch()'],['../group__wifi__management__gr.html#acbcf5f8de7895ca456bb39fbcccde1d1',1,'ARM_WIFI_NET_INFO_t::ch()']]],
   ['checksum_5foffload_5frx_5ficmp',['checksum_offload_rx_icmp',['../group__eth__mac__interface__gr.html#a142179445bfdbaaaf0d451f277fb0e96',1,'ARM_ETH_MAC_CAPABILITIES']]],
   ['checksum_5foffload_5frx_5fip4',['checksum_offload_rx_ip4',['../group__eth__mac__interface__gr.html#a0051111be2e389c3161da1c444746216',1,'ARM_ETH_MAC_CAPABILITIES']]],
   ['checksum_5foffload_5frx_5fip6',['checksum_offload_rx_ip6',['../group__eth__mac__interface__gr.html#a674b2306c64901e924b3cb7bb882f32f',1,'ARM_ETH_MAC_CAPABILITIES']]],

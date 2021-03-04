@@ -147,7 +147,7 @@ int32_t BSP_OSPI_NOR_Init(uint32_t Instance, BSP_OSPI_NOR_Init_t *Init)
       {
 #endif /* USE_HAL_OSPI_REGISTER_CALLBACKS */
 
-        /* Get Flash informations of one memory */
+        /* Get Flash information of one memory */
         (void)MX25LM51245G_GetFlashInfo(&pInfo);
 
         /* Fill config structure */

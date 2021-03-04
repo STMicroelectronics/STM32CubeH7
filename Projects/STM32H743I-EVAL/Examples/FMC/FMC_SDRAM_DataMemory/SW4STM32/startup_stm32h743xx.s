@@ -62,7 +62,7 @@ defined in linker script */
 Reset_Handler:
   ldr   sp, =__initial_spTop     /* set stack pointer */
 
-/* Call the clock system intitialization function.*/
+/* Call the clock system initialization function.*/
   bl  SystemInit
 
 /* Copy the data segment initializers from flash to SRAM */  

@@ -74,10 +74,6 @@ STM32H747I-EVAL board's LEDs are used to monitor the example status:
   - LED3 toggle with a period of one second when  there is an error occurred.
 
 
-@par Keywords
-
-Audio, DFSDM, Audio record, Digital Microphone, Stereo, MP34DT01, DMA, PDM, Filter, Playback, Audio codec, SAI
-
 This projects is configured for STM32H747xx devices using STM32CubeH7 HAL and running on 
 STM32H747I-EVAL board from STMicroelectronics.
 
@@ -119,6 +115,10 @@ The SystemClock_Config() function is used to set the Flash latency and  to confi
       
 @note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
+
+@par Keywords
+
+Audio, DFSDM, Audio record, Digital Microphone, Stereo, MP34DT01, DMA, PDM, Filter, Playback, Audio codec, SAI
 
 @par Directory contents
 

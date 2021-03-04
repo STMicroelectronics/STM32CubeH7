@@ -131,8 +131,8 @@ int main(void)
     Error_Handler();
   }
 
-  /* Start Monitor : Enable latching failing informations
-     Failing informations : * Failing address
+  /* Start Monitor : Enable latching failing information
+     Failing information : * Failing address
                             * Failing Data Low
                             * Failing Data High
                             * Hamming bits injected

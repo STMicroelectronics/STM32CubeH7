@@ -76,6 +76,16 @@ typedef struct
 #endif
 
 /**
+  * @brief SD interface bus width selection
+  *        4-bit wide data bus can be disabled to avoid conflict with
+  *        camera pins (PC9 and PC11) on the Disco board.
+  *        1-bit (SDMMC_D0) databus width will be used instead.
+  */
+#ifndef USE_SD_BUS_WIDE_4B
+#define USE_SD_BUS_WIDE_4B       1U
+#endif
+
+/**
   * @brief  SD transfer state definition
   */
 #define   SD_TRANSFER_OK         0U
@@ -137,7 +147,7 @@ int32_t BSP_SD_IsDetected(uint32_t Instance);
 void    BSP_SD_DETECT_IRQHandler(uint32_t Instance);
 void    BSP_SD_IRQHandler(uint32_t Instance);
 
-/* These functions can be modified in case the current settings (e.g. DMA stream ot IT)
+/* These functions can be modified in case the current settings (e.g. DMA stream or IT)
    need to be changed for specific application needs */
 void BSP_SD_AbortCallback(uint32_t Instance);
 void BSP_SD_WriteCpltCallback(uint32_t Instance);

@@ -79,7 +79,7 @@
 #define UTIL_LCD_COLOR_BROWN         0xFFA52A2AUL
 #define UTIL_LCD_COLOR_ORANGE        0xFFFFA500UL
 
-/* Defintion of Official ST Colors */
+/* Definition of Official ST Colors */
 #define UTIL_LCD_COLOR_ST_BLUE_DARK   0xFF002052UL
 #define UTIL_LCD_COLOR_ST_BLUE        0xFF39A9DCUL
 #define UTIL_LCD_COLOR_ST_BLUE_LIGHT  0xFFD1E4F3UL

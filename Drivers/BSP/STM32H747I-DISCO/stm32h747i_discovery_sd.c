@@ -178,10 +178,12 @@ int32_t BSP_SD_Init(uint32_t Instance)
         {
           ret = BSP_ERROR_PERIPH_FAILURE;
         }
+#if (USE_SD_BUS_WIDE_4B > 0)
         else if(HAL_SD_ConfigWideBusOperation(&hsd_sdmmc[Instance], SDMMC_BUS_WIDE_4B) != HAL_OK)
         {
           ret = BSP_ERROR_PERIPH_FAILURE;
         }
+#endif
         else
         {
           /* Switch to High Speed mode if the card support this mode */
@@ -261,7 +263,11 @@ __weak HAL_StatusTypeDef MX_SDMMC1_SD_Init(SD_HandleTypeDef *hsd)
   hsd->Instance                 = SDMMC1;
   hsd->Init.ClockEdge           = SDMMC_CLOCK_EDGE_RISING;
   hsd->Init.ClockPowerSave      = SDMMC_CLOCK_POWER_SAVE_DISABLE;
+#if (USE_SD_BUS_WIDE_4B > 0)
   hsd->Init.BusWide             = SDMMC_BUS_WIDE_4B;
+#else
+  hsd->Init.BusWide             = SDMMC_BUS_WIDE_1B;
+#endif
   hsd->Init.HardwareFlowControl = SDMMC_HARDWARE_FLOW_CONTROL_DISABLE;
 #if (USE_SD_TRANSCEIVER >0)
   hsd->Init.TranceiverPresent   = SDMMC_TRANSCEIVER_PRESENT;
@@ -842,7 +848,7 @@ static void SD_MspInit(SD_HandleTypeDef *hsd)
 
   if(hsd == &hsd_sdmmc[0])
   {
-
+#if (USE_SD_BUS_WIDE_4B > 0)
 /* SD pins are in conflict with Camera pins on the Disco board
 	   therefore Camera must be power down before using the BSP SD
 	   To power down the camera , Set GPIOJ pin 14 to high
@@ -859,6 +865,7 @@ static void SD_MspInit(SD_HandleTypeDef *hsd)
 
   /* Set the camera POWER_DOWN pin (active high) */
   HAL_GPIO_WritePin(GPIOJ, GPIO_PIN_14, GPIO_PIN_SET);
+#endif
 
   /* Enable SDIO clock */
   __HAL_RCC_SDMMC1_CLK_ENABLE();
@@ -876,9 +883,15 @@ static void SD_MspInit(SD_HandleTypeDef *hsd)
   gpio_init_structure.Speed     = GPIO_SPEED_FREQ_VERY_HIGH;
   gpio_init_structure.Alternate = GPIO_AF12_SDIO1;
 
+#if (USE_SD_BUS_WIDE_4B > 0)
   /* SDMMC GPIO CLKIN PB8, D0 PC8, D1 PC9, D2 PC10, D3 PC11, CK PC12, CMD PD2 */
   /* GPIOC configuration */
   gpio_init_structure.Pin = GPIO_PIN_8 | GPIO_PIN_9 | GPIO_PIN_10 | GPIO_PIN_11 | GPIO_PIN_12;
+#else
+/* SDMMC GPIO CLKIN PB8, D0 PC8, CK PC12, CMD PD2 */
+  /* GPIOC configuration */
+  gpio_init_structure.Pin = GPIO_PIN_8 | GPIO_PIN_12;
+#endif
 
   HAL_GPIO_Init(GPIOC, &gpio_init_structure);
 
@@ -920,12 +933,16 @@ static void SD_MspDeInit(SD_HandleTypeDef *hsd)
     /* Disable SDMMC1 clock */
     __HAL_RCC_SDMMC1_CLK_DISABLE();
 
+#if (USE_SD_BUS_WIDE_4B > 0)
     /* GPIOJ configuration */
     gpio_init_structure.Pin       = GPIO_PIN_14;
     HAL_GPIO_DeInit(GPIOJ, gpio_init_structure.Pin);
 
     /* GPIOC configuration */
     gpio_init_structure.Pin = GPIO_PIN_8 | GPIO_PIN_9 | GPIO_PIN_10 | GPIO_PIN_11 | GPIO_PIN_12;
+#else
+    gpio_init_structure.Pin = GPIO_PIN_8 | GPIO_PIN_12;
+#endif
     HAL_GPIO_DeInit(GPIOC, gpio_init_structure.Pin);
 
     /* GPIOD configuration */

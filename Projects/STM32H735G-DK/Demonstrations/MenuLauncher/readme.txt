@@ -41,6 +41,8 @@ Demonstration, FreeRTOS, RTOS, Graphics, TouchGFX, MenuLauncher, GUI
 
 The Full demonstration binary files are available from the STM32H735G-DK page in the Binary Delivery section.
 Please refer to : www.st.com/en/product/stm32h735g-dk.html
+Direct link: 
+https://www.st.com/resource/en/compiled_demos/stm32h735g-dk_demo.zip
 
 In order program this sub-demo into the STM32H735G-DK board :
  - Open STM32CubeProgrammer and click on connect

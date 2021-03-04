@@ -169,7 +169,7 @@ int main(void)
     /* check on the watermark notification flag */
     if (Notification_flag == 1)
     {
-      /* Retreive Rx messages from RX FIFO0 */
+      /* Retrieve Rx messages from RX FIFO0 */
       HAL_FDCAN_GetRxMessage(&hfdcan, FDCAN_RX_FIFO0, &RxHeader, RxData);
       HAL_FDCAN_GetRxMessage(&hfdcan, FDCAN_RX_FIFO0, &RxHeader, &RxData[8]);
 

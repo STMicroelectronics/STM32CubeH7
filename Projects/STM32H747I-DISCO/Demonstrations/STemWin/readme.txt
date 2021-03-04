@@ -135,6 +135,8 @@ In order to program the demonstration you must do the following:
 
 The binary and Media demonstration files are available from the STM32H747I-DISCO page in the Binary Delivery section.
 Please refer to : www.st.com/en/product/stm32h747i-disco.html
+Direct link:
+https://www.st.com/resource/en/compiled_demos/stm32h747i-disco_demo.zip
 
 @Note If the  application is using the DTCM/ITCM memories (@0x20000000/ 0x0000000: not cacheable and only accessible
       by the Cortex M7 and the  MDMA), no need for cache maintenance when the Cortex M7 and the MDMA access these RAMs.

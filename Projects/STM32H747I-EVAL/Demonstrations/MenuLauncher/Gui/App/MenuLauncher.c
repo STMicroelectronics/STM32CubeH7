@@ -97,12 +97,12 @@ extern osMessageQId AutoDemoEvent;
  * EmbeddedWizard Demonstration context
  */
 #define EWIZ_FIRMWARE_FILE_NAME         "EWIZ_firmware.bin"
-#define EWIZ_FIRMWARE_VERSION           0xC3010000
+#define EWIZ_FIRMWARE_VERSION           0xC3010100
 #define EWIZ_FIRMWARE_ADDRESS           0x080A0000
 #define EWIZ_FIRMWARE_OFFSET            0x400
 #define EWIZ_FIRMWARE_MAX_SIZE          (3 * 128 * 1024)
 #define EWIZ_RESOURCES_FILE_NAME        "EWIZ_resources.bin"
-#define EWIZ_RESOURCES_VERSION          0xD3010000
+#define EWIZ_RESOURCES_VERSION          0xD3010100
 #define EWIZ_RESOURCES_ADDRESS          0x92600000
 #define EWIZ_RESOURCES_OFFSET           0x0
 #define EWIZ_RESOURCES_MAX_SIZE         (30 * 1024 * 1024)

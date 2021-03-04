@@ -66,7 +66,7 @@ The LAR address register represents the next Linked list Node address.
 As consequence the Linked list transfer nodes must be 64 bits aligned and 
 must be in the AXI address space.
 */
-/* 32-bytes Alignement is needed for cache maintenance purpose */
+/* 32-bytes Alignment is needed for cache maintenance purpose */
 ALIGN_32BYTES(MDMA_LinkNodeTypeDef Xfer_Node);
 
 /* Private function prototypes -----------------------------------------------*/

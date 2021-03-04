@@ -59,8 +59,8 @@ AUDIOPLAYER_ErrorTypdef  AUDIOPLAYER_Init(uint8_t volume)
 {
   portENTER_CRITICAL();
   
-  /* Try to Init Audio interface in diffrent config in case of failure */
-  AudioPlayInit.Device = AUDIO_OUT_DEVICE_AUTO;
+  /* Try to Init Audio interface in different config in case of failure */
+  AudioPlayInit.Device = AUDIO_OUT_DEVICE_HEADPHONE;
   AudioPlayInit.ChannelsNbr = 2;
   AudioPlayInit.SampleRate = AUDIO_FREQUENCY_48K;
   AudioPlayInit.BitsPerSample = AUDIO_RESOLUTION_16B;
@@ -198,7 +198,7 @@ AUDIOPLAYER_ErrorTypdef  AUDIOPLAYER_DeInit(void)
 AUDIOPLAYER_ErrorTypdef  AUDIOPLAYER_Stop(void)
 {
   haudio.out.state = AUDIOPLAYER_STOP;
-  BSP_AUDIO_OUT_Stop(CODEC_PDWN_SW); 
+  BSP_AUDIO_OUT_Stop(0); 
   f_close(&wav_file);
   return AUDIOPLAYER_ERROR_NONE;
 }

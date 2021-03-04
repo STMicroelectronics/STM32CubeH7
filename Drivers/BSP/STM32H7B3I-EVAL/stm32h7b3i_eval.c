@@ -1057,7 +1057,7 @@ static const IRQn_Type JOY1_IRQn[JOY_KEY_NUMBER] = {JOY1_SEL_EXTI_IRQn,
         }
 
         gpio_init_structure.Pin = JOY1_PIN[joykey];
-        gpio_init_structure.Pull = GPIO_PULLUP;
+        gpio_init_structure.Pull = GPIO_NOPULL;
         gpio_init_structure.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
 
         if (JoyMode == JOY_MODE_GPIO)
@@ -1192,7 +1192,7 @@ int32_t BSP_JOY_GetState(JOY_TypeDef JOY)
     {
       if(JOY == JOY1)
       {
-        if (HAL_GPIO_ReadPin(JOY1_PORT[joykey], JOY1_PIN[joykey]) != GPIO_PIN_RESET)
+        if (HAL_GPIO_ReadPin(JOY1_PORT[joykey], JOY1_PIN[joykey]) != GPIO_PIN_SET)
         {
           /* Return Code Joystick key pressed */
           return (int32_t)key_pressed;

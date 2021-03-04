@@ -71,7 +71,7 @@
 
 @note The example shows how to use the DMA2D blending with alpha inversion set on the foreground layer.
       Nevertheless the same parameter can be applied on the background DMA2D input layer 
-      or/and at the ouput level depending of the user application requirements.
+      or/and at the output level depending of the user application requirements.
 
 STM32H743I-EVAL board's LEDs can be used to monitor the transfer status:
  - LED1 is ON when the DMA2D transfer is complete.

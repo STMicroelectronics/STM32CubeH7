@@ -45,12 +45,10 @@ STM32H735G-DK Demonstration features :
 
 This STM32H7 demonstration is running on STM32H735G-DK-DK board 
 
-  - 'STM32Cube_Demo-STM32H735G-DK-V1.0.0.hex' : 
-       - an out of the box Demo integrating the StemWin 
-       - TouchGFX demonstration module .
-
 The binary and demonstration files are available from the STM32H735G-DK-DK page in the Binary Delivery section.
 Please refer to : www.st.com/en/product/stm32h735g-dk.html
+Direct link: 
+https://www.st.com/resource/en/compiled_demos/stm32h735g-dk_demo.zip
 		 
 The demonstration's executables STM32Cube_Demo-STM32H735G-DK-V1.0.0.hex can be flashed 
 to the target using the STM32CubeProgrammer.
@@ -98,9 +96,19 @@ The Demo purpose is to promote the analog peripherals of the STM32H7xx devices
      To change the oscilloscope settings, visualize the acquired signals
      and perform mathematical processing.
 
+     On PC side, you must do the following :
+       - Setup your Oscilloscope PC application (\PC_Software\setup.exe)
+       - Run the "Serial Oscilloscope" application on your PC
+       - Configure your UART communication in the GUI by selecting the Serial Port and Baude rate(115200),
+       - Connect a (Type A to Micro-B) USB cable from the STM32H735G-DK board (Connector CN15) to the PC 
+       - Start the connexion between the Board and the PC GUI using the dedicated PC GUI button 
+       - Configure the desired sampling rate frequency.
+       - Put an external signal with amplitude less than 3.3 V to the input (PA0,CN9 Connector pin A2 of the STM32H735G-DK board)..
+       - Click on Start Scope button.
+
   - Signal Generator (with AutoTest mode):
       Using the DAC to generate different test signal patterns.
-      Configuration using HMI on LCD display
+      Configuration using STM32H735G-DK HMI on LCD display
       Signal Type : DC, Square, Sine, Triangle, Escalator or Noise
       Signal Frequency : 5,000 KHz to 130,000 KHz
       Signal Amplitude  : 0,100 V to 3,300 V

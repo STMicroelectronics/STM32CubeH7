@@ -161,7 +161,7 @@ int main(void)
 
 /**
   * @brief DMA2D configuration.
-  * @note  This function Configure tha DMA2D peripheral :
+  * @note  This function Configure the DMA2D peripheral :
   *        1) Configure the transfer mode : memory to memory
   *        2) Configure the output color mode as RGB565
   *        3) Configure the transfer from FLASH to SRAM   

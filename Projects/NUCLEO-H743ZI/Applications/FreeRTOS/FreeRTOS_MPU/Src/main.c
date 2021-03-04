@@ -122,7 +122,18 @@ to gain access to the queue.  See the comments in the tasks themselves for
 further information. */
 QueueHandle_t xGlobalScopeCheckQueue = NULL;
 
-#if defined ( __GNUC__ )
+#if defined (__CC_ARM)
+const uint32_t * __FLASH_segment_start__= ( uint32_t * ) 0x08000000UL;
+const uint32_t * __FLASH_segment_end__ = ( uint32_t * )0x081FFFFFUL;
+const uint32_t * __SRAM_segment_start__= ( uint32_t * )0x20000000UL;
+const uint32_t * __SRAM_segment_end__= ( uint32_t * )0x2001FFFFUL;
+const uint32_t * __privileged_functions_start__= ( uint32_t * )0x08000000UL;
+const uint32_t * __privileged_functions_end__= ( uint32_t * )0x08007FFFUL;
+const uint32_t * __privileged_data_start__= ( uint32_t * )0x20000000UL;
+const uint32_t * __privileged_data_end__= ( uint32_t * )0x20007FFFUL;
+const uint32_t * __syscalls_flash_start__= ( uint32_t * )0x08008000UL;
+const uint32_t * __syscalls_flash_end__= ( uint32_t * )0x08008FFFUL;
+#elif defined (__GNUC__)
 extern uint32_t __FLASH_segment_start__[];
 extern uint32_t __FLASH_segment_end__[];
 extern uint32_t __SRAM_segment_end__[];
@@ -131,14 +142,15 @@ extern uint32_t __privileged_functions_end__[];
 extern uint32_t __privileged_data_start__[];
 extern uint32_t __privileged_data_end__[];
 #else
-const uint32_t * __FLASH_segment_start__ = ( uint32_t * ) 0x08000000UL;
-const uint32_t * __FLASH_segment_end__ = ( uint32_t * ) 0x081FFFFFUL;
-const uint32_t * __SRAM_segment_start__ = ( uint32_t * ) 0x20000000UL;
-const uint32_t * __SRAM_segment_end__ = ( uint32_t * ) 0x2000FFFFUL;
-const uint32_t * __privileged_functions_start__ = ( uint32_t * ) 0x08000000UL;
-const uint32_t * __privileged_functions_end__ = ( uint32_t * ) 0x08003FFFUL;
-const uint32_t * __privileged_data_start__ = ( uint32_t * ) 0x20000000UL;
-const uint32_t * __privileged_data_end__ = ( uint32_t * ) 0x200001FFUL;
+extern uint32_t __FLASH_segment_start__[];
+extern uint32_t __FLASH_segment_end__[];
+extern uint32_t __SRAM_segment_end__[];
+extern uint32_t __privileged_functions_start__[];
+extern uint32_t __privileged_functions_end__[];
+extern uint32_t __privileged_data_start__[];
+extern uint32_t __privileged_data_end__[];
+extern uint32_t __syscalls_flash_start__[];
+extern uint32_t __syscalls_flash_end__  [];
 #endif
 
 /* Data used by the 'Check' task. ---------------------------*/

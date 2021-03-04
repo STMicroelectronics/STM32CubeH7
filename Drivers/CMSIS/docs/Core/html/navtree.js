@@ -4,7 +4,7 @@ var NAVTREE =
     [ "Overview", "index.html", [
       [ "Processor Support", "index.html#ref_v6-v8M", [
         [ "Cortex-M Reference Manuals", "index.html#ref_man_sec", null ],
-        [ "Armv8-M Architecture", "index.html#ARMv8M", null ]
+        [ "Armv8-M and Armv8.1-M Architecture", "index.html#ARMv8M", null ]
       ] ],
       [ "Tested and Verified Toolchains", "index.html#tested_tools_sec", null ]
     ] ],
@@ -35,8 +35,8 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"group__mpu__defines.html#gab23596306119e7831847bd9683de3934",
-"unionxPSR__Type.html#af14df16ea0690070c45b95f2116b7a0a"
+"group__intrinsic__SIMD__gr.html#gaf2f5a9132dcfc6d01d34cd971c425713",
+"structTPI__Type.html#ac3956fe93987b725d89d3be32738da12"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

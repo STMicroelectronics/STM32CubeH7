@@ -121,7 +121,7 @@ int main(void)
 
 /**
   * @brief DMA2D configuration.
-  * @note  This function Configure tha DMA2D peripheral :
+  * @note  This function Configure the DMA2D peripheral :
   *        1) Configure the transfer mode : register to memory
   *        2) Configure the color to be used to fill user defined area.
   * @retval
@@ -239,7 +239,7 @@ static void MPU_Config(void)
 
 /**
   * @brief LCD configuration.
-  * @note  This function Configure tha LTDC peripheral :
+  * @note  This function Configure the LTDC peripheral :
   *        1) Configure the Pixel Clock for the LCD
   *        2) Configure the LTDC Timing and Polarity
   *        3) Configure the LTDC Layer 2 :

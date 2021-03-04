@@ -43,7 +43,7 @@ In this test, this is the scenario:
  - in main program, wait for 1 sec and reconfigure source to LSE
  - Interrupt is raised to indicate a SYNC OK and then power on LED1
  - Toggle quickly LED1 when SYNC WARN is detected
- - Increase tollerance (FELIM value) when SYNC WARN is detected
+ - Increase tolerance (FELIM value) when SYNC WARN is detected
  - At the end of the test LED1 should stay ON
 
  

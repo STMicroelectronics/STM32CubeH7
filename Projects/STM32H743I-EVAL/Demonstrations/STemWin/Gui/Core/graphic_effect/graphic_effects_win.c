@@ -74,7 +74,7 @@ static unsigned int SrcImageIdx = 0;
 static unsigned int init_module = 0;
 static unsigned int init_touch = 0;
 
-/* Backgound bitmaps array */
+/* Background bitmaps array */
 static const GUI_BITMAP *aBackgoundBitmaps[] = 
 {
   &bmImage1_640x480,

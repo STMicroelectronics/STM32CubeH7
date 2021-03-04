@@ -27,10 +27,9 @@ int extractWeatherData(const char *json_string, struct weatherData* data)
     
     /* Passing NULL instead of the tokens array would not store parsing results, 
   but instead the function will return the value of tokens needed to parse the given string. 
-  This can be useful if you don’t know yet how many tokens to allocate. */
+  This can be useful if you donâ€™t know yet how many tokens to allocate. */
   
-  token_size = jsmn_parse(&p, json_string, strlen(json_string), NULL,
-                          sizeof(t) / sizeof(t[0]));
+  token_size = jsmn_parse(&p, json_string, strlen(json_string), NULL,0);
   
   t = (jsmntok_t*) pvPortMalloc(token_size * sizeof(jsmntok_t));
   
@@ -343,9 +342,8 @@ int extractDateTime(char *json_string, char* date_time, char* day_of_week, int *
   
    /* Passing NULL instead of the tokens array would not store parsing results, 
   but instead the function will return the value of tokens needed to parse the given string. 
-  This can be useful if you don’t know yet how many tokens to allocate. */
-  token_size = jsmn_parse(&p, json_string, strlen(json_string), NULL,
-                          sizeof(t) / sizeof(t[0]));
+  This can be useful if you donâ€™t know yet how many tokens to allocate. */
+  token_size = jsmn_parse(&p, json_string, strlen(json_string), NULL, 0);
   
   t = (jsmntok_t*) pvPortMalloc(token_size * sizeof(jsmntok_t));
   

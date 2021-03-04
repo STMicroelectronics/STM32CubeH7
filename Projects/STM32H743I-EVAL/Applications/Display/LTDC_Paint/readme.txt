@@ -73,8 +73,8 @@ Notes:
       and the next touch in any positions of the LCD screen leads second save 
       operation.
       This limitation is only relative to ampire 480x272 LCD device.
-  -   USB and LTDC share same pll3 as clock source: USB uses PLL3Q as devider to get 48 Mhz 
-      and LTDC used PLL3R as devider to get needed frequency.
+  -   USB and LTDC share same pll3 as clock source: USB uses PLL3Q as divider to get 48 Mhz 
+      and LTDC used PLL3R as divider to get needed frequency.
 
 @note Care must be taken when using HAL_Delay(), this function provides accurate delay (in milliseconds)
       based on variable incremented in SysTick ISR. This implies that if HAL_Delay() is called from

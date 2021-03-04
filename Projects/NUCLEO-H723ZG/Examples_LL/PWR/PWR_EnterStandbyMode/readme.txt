@@ -29,7 +29,7 @@ The HCLK for D1 Domain AXI and AHB3 peripherals, D2 Domain AHB1/AHB2 peripherals
 The APB clock dividers for D1 Domain APB3 peripherals, D2 Domain APB1 and APB2 peripherals and D3 Domain APB4 peripherals to run at 520 MHz/4.
 
 In the associated software, the system clock is set to 520 MHz, an EXTI line
-is connected to the User push-button thru PC.13 and configured to generate an 
+is connected to the User push-button through PC.13 and configured to generate an 
 interrupt on falling edge upon key press.
 LED1 is toggled each 200 ms in order to indicate that MCU is in RUN mode.
 

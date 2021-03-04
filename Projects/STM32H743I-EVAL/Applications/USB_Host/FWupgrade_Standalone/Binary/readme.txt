@@ -49,7 +49,7 @@
 This directory contains a binary to be loaded into Flash memory using Device 
 Firmware Upgrade application.
    
-This binary is a simple LED toggling applicaion, it starts toggling LED1 and LED3
+This binary is a simple LED toggling application, it starts toggling LED1 and LED3
 alternatively with LED2 and LED4. The 4 LEDs lights one by one for a period of 100 ms
 and the cycle repeats giving the running light appearance.
 The system Timer (Systick) is used for to generate the delay.

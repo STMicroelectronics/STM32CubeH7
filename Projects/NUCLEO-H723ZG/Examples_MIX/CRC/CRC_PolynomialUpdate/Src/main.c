@@ -124,7 +124,7 @@ int main(void)
 
   /*##-2- Compute the CRC of "aDataBuffer" ###################################*/
   /* First computation is done using 8-bit generating Polynomial (CRC_POLYNOMIAL_8B) 
-     as configured in CRC handle, wtih HAL_CRC_Init */
+     as configured in CRC handle, with HAL_CRC_Init */
   uwCRCValue = HAL_CRC_Calculate(&CrcHandle, (uint32_t *)&aDataBuffer, BUFFER_SIZE);
 
   /*##-3- Compare the CRC value to the Expected one ##########################*/

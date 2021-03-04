@@ -66,11 +66,6 @@ In an infinite loop, LED1 toggles spaced out over 500ms delay, except when tick 
 @note The application needs to ensure that the HAL time base is always set to 1 millisecond
       to have correct HAL operation.
 
-@par Keywords
-
-System, RTC Alarm, Time base, HAL
-
-
 @Note If the  application is using the DTCM/ITCM memories (@0x20000000/ 0x0000000: not cacheable and only accessible
       by the Cortex M7 and the  MDMA), no need for cache maintenance when the Cortex M7 and the MDMA access these RAMs.
       If the application needs to use DMA(or other masters) based access or requires more RAM, then  the user has to:

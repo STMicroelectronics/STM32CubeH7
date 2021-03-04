@@ -30,7 +30,7 @@
 
 /* S70KL1281 memory */
 /* Size of the HyperRAM */
-#define OSPI_HYPERRAM_SIZE          23
+#define OSPI_HYPERRAM_SIZE          24
 #define OSPI_HYPERRAM_INCR_SIZE     256
 
 /* Timing of the HyperRAM */

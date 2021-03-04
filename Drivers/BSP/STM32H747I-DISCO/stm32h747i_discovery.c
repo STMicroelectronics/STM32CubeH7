@@ -761,7 +761,7 @@ int32_t BSP_JOY_GetState(JOY_TypeDef JOY,uint32_t JoyPin)
     {
       if(JOY == JOY1)
       {
-        if (HAL_GPIO_ReadPin(JOY1_PORT[joykey], JOY1_PIN[joykey]) != GPIO_PIN_RESET)
+        if (HAL_GPIO_ReadPin(JOY1_PORT[joykey], JOY1_PIN[joykey]) != GPIO_PIN_SET)
         {
           /* Return Code Joystick key pressed */
           return (int32_t)key_pressed;

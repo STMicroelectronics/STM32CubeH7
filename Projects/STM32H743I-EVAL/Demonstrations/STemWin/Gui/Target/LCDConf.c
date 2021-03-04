@@ -86,7 +86,7 @@ osSemaphoreId        LcdUpdateSemaphoreId = 0;
 void DMA2D_IRQHandler(void);
 
 
-/* Choose Layer 0 color conversion depending of the color mode choosed */
+/* Choose Layer 0 color conversion depending of the color mode chosen */
 #if   (COLOR_MODE_0 == CMS_ARGB8888)
   #define COLOR_CONVERSION_0 GUICC_M8888I
 #elif (COLOR_MODE_0 == CMS_RGB888)
@@ -107,7 +107,7 @@ void DMA2D_IRQHandler(void);
   #error Illegal color mode 0!
 #endif
 
-/* Choose Choose Layer 0 gui driver depending of the color mode choosed */
+/* Choose Choose Layer 0 gui driver depending of the color mode chosen */
 #if   (COLOR_MODE_0 == CMS_ARGB8888)
   #if   (ORIENTATION_0 == ROTATION_0)
     #define DISPLAY_DRIVER_0   GUIDRV_LIN_32
@@ -154,7 +154,7 @@ void DMA2D_IRQHandler(void);
   #endif
 #endif
 
-/* Choose Layer 1 color conversion depending of the color mode orientation choosed */
+/* Choose Layer 1 color conversion depending of the color mode orientation chosen */
 #if (GUI_NUM_LAYERS > 1)
 #if   (COLOR_MODE_1 == CMS_ARGB8888)
   #define COLOR_CONVERSION_1 GUICC_M8888I
@@ -176,7 +176,7 @@ void DMA2D_IRQHandler(void);
   #error Illegal color mode 0!
 #endif
 
-/* Choose Choose Layer 1 gui driver depending of the color mode/orientation choosed */
+/* Choose Choose Layer 1 gui driver depending of the color mode/orientation chosen */
 #if   (COLOR_MODE_1 == CMS_ARGB8888)
   #if   (ORIENTATION_1 == ROTATION_0)
     #define DISPLAY_DRIVER_1   GUIDRV_LIN_32
@@ -712,7 +712,7 @@ static void _DMA2D_ExecOperation(void)
   }
   else
   {	  
-	  /* If no concurent operation, do not wait */
+	  /* If no concurrent operation, do not wait */
 	  if ( TransferInProgress == 0 )
 		  return;
 	  /* Wait until the transfer is done */
@@ -837,7 +837,7 @@ static void _DMA_Fill(int LayerIndex, void * pDst, int xSize, int ySize, int Off
 /**
   * @brief  DMA2D Alpha blending bulk
   * @param  pColorFG : Foregroung color
-  * @param  pColorBG : Backgroung color
+  * @param  pColorBG : Background color
   * @param  pColorDst: Destination color
   * @param  NumItems : Number of lines
   * @retval None
@@ -873,7 +873,7 @@ static void _DMA_AlphaBlendingBulk(LCD_COLOR * pColorFG, LCD_COLOR * pColorBG, L
 /**
   * @brief  Mixing bulk colors
   * @param  pColorFG : Foregroung color
-  * @param  pColorBG : Backgroung color
+  * @param  pColorBG : Background color
   * @param  pColorDst: Destination color
   * @param  Intens   : Color intensity
   * @param  NumItems : Number of lines

@@ -248,7 +248,7 @@ static void UART_Config(void)
   }
 
   /*##-2- Start the UART transmission process #####################################*/
-  /* Send "TxBuffer" buffer throught the UART to the user */
+  /* Send "TxBuffer" buffer through the UART to the user */
   if(HAL_UART_Transmit_DMA(&UartHandle, (uint8_t*)aTxStartMessage, TXSTARTMESSAGESIZE)!= HAL_OK)
   {
     /* Transfer error in transmission process */

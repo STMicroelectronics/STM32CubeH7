@@ -652,7 +652,7 @@ void visualization_initialize(void)
 
 /**
   * @brief  Visualisation initialisation
-  * @param  p : Pointer to pallette to use
+  * @param  p : Pointer to palette to use
   * @retval None
   */
 void visualization_set_palette(struct viz_palette* p)

@@ -84,7 +84,7 @@ int main(void)
   /* Configure LED3 */
   BSP_LED_Init(LED3);
 
-  /* Compute the value of ARR regiter to generate signal frequency at 17.57 Khz */
+  /* Compute the value of ARR register to generate signal frequency at 17.57 Khz */
   uwTimerPeriod = (uint32_t)((SystemCoreClock/2 / 17570) - 1);
   /* Compute CCR1 value to generate a duty cycle at 75% */
   aCCValue_Buffer[0] = (uint32_t)(((uint32_t) 75 * (uwTimerPeriod - 1)) / 100);

@@ -136,7 +136,7 @@ __weak HAL_StatusTypeDef MX_SPI1_Init(SPI_HandleTypeDef *phspi, uint32_t baudrat
   phspi->Init.NSS               = SPI_NSS_SOFT;
   phspi->Init.TIMode            = SPI_TIMODE_DISABLE;
   phspi->Init.Mode              = SPI_MODE_MASTER;
-  phspi->Init.MasterKeepIOState = SPI_MASTER_KEEP_IO_STATE_ENABLE;  /* Recommanded setting to avoid glitches */
+  phspi->Init.MasterKeepIOState = SPI_MASTER_KEEP_IO_STATE_ENABLE;  /* Recommended setting to avoid glitches */
   
   phspi->Init.FifoThreshold              = SPI_FIFO_THRESHOLD_01DATA;
   phspi->Init.CRCLength                  = SPI_CRC_LENGTH_8BIT;
@@ -157,11 +157,11 @@ __weak HAL_StatusTypeDef MX_SPI1_Init(SPI_HandleTypeDef *phspi, uint32_t baudrat
   * @param  Length data length
   * @retval BSP status
   */
-int32_t BSP_SPI1_Send(uint8_t *pTxData, uint32_t Legnth)
+int32_t BSP_SPI1_Send(uint8_t *pTxData, uint32_t Length)
 {
   int32_t ret = BSP_ERROR_NONE;
   
-  if(HAL_SPI_Transmit(&hbus_spi1, pTxData, (uint16_t)Legnth, BUS_SPI1_TIMEOUT_MAX) != HAL_OK)
+  if(HAL_SPI_Transmit(&hbus_spi1, pTxData, (uint16_t)Length, BUS_SPI1_TIMEOUT_MAX) != HAL_OK)
   {
     ret = BSP_ERROR_BUS_FAILURE;
   }
@@ -175,11 +175,11 @@ int32_t BSP_SPI1_Send(uint8_t *pTxData, uint32_t Legnth)
   * @param  Length data length
   * @retval BSP status
   */
-int32_t BSP_SPI1_Recv(uint8_t *pRxData, uint32_t Legnth)
+int32_t BSP_SPI1_Recv(uint8_t *pRxData, uint32_t Length)
 {
   int32_t ret = BSP_ERROR_NONE;
   
-  if(HAL_SPI_Receive(&hbus_spi1, pRxData, (uint16_t)Legnth, BUS_SPI1_TIMEOUT_MAX) != HAL_OK)
+  if(HAL_SPI_Receive(&hbus_spi1, pRxData, (uint16_t)Length, BUS_SPI1_TIMEOUT_MAX) != HAL_OK)
   {
     ret = BSP_ERROR_BUS_FAILURE;
   }
@@ -194,11 +194,11 @@ int32_t BSP_SPI1_Recv(uint8_t *pRxData, uint32_t Legnth)
   * @param  Length data length
   * @retval BSP status
   */
-int32_t BSP_SPI1_SendRecv(uint8_t *pTxData, uint8_t *pRxData, uint32_t Legnth)
+int32_t BSP_SPI1_SendRecv(uint8_t *pTxData, uint8_t *pRxData, uint32_t Length)
 {
   int32_t ret = BSP_ERROR_NONE;
   
-  if(HAL_SPI_TransmitReceive(&hbus_spi1, pTxData, pRxData, (uint16_t)Legnth, BUS_SPI1_TIMEOUT_MAX) != HAL_OK)
+  if(HAL_SPI_TransmitReceive(&hbus_spi1, pTxData, pRxData, (uint16_t)Length, BUS_SPI1_TIMEOUT_MAX) != HAL_OK)
   {
     ret = BSP_ERROR_BUS_FAILURE;
   }

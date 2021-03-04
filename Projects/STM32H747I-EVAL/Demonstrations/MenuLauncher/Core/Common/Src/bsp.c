@@ -35,8 +35,8 @@ BSP_QSPI_Init_t init ;
 TS_Init_t hTS;
 /* Private typedef -----------------------------------------------------------*/
 /* Private defines -----------------------------------------------------------*/
-#define DEMO_DESCRITION                 "Out Of the Box Demonstration V1.0.0"
-#define STML_DESCRITION                 "ST Menu Launcher V1.0.0"
+#define DEMO_DESCRITION                 "Out Of the Box Demonstration V1.1.0"
+#define STML_DESCRITION                 "ST Menu Launcher V1.1.0"
 #define BOARD_NAME                      "STM32H747I-EVAL_MB1246"
 
 #define HSEM_ID_0                       (0U) /* HW semaphore 0*/
@@ -514,7 +514,7 @@ int BSP_ResourcesCopy(WM_HWIN hItem, FIL * pResFile, uint32_t Address)
       goto exit;
     }
 
-    ospiStatus = BSP_QSPI_EraseBlock(0,FlashAddr,MT25TL01G_ERASE_4K);
+    ospiStatus = BSP_QSPI_EraseBlock(0,FlashAddr,BSP_QSPI_ERASE_8K);
     if (ospiStatus != BSP_ERROR_NONE)
     {
       RetErr = -1;
@@ -928,6 +928,34 @@ int BSP_FlashUpdate(uint32_t Address, uint8_t *pData, uint32_t Size)
   ff_free(SectorData);
   return Ret;
 }
+
+#if defined (QSPI_LOW_FREQ)
+/**
+  * @brief  Initializes the QSPI interface.
+  * @param  hQspi       QSPI handle
+  * @param  Config      QSPI configuration structure
+  * @retval BSP status
+  */
+HAL_StatusTypeDef MX_QSPI_Init(QSPI_HandleTypeDef *hQspi, MX_QSPI_Init_t *Config)
+{
+  /* patch Prescaler to lower frequency */
+  Config->ClockPrescaler = 5;
+
+  /* QSPI initialization */
+  /* QSPI freq = SYSCLK /(1 + ClockPrescaler) Mhz */
+  hQspi->Instance                = QUADSPI;
+  hQspi->Init.ClockPrescaler     = Config->ClockPrescaler;
+  hQspi->Init.FifoThreshold      = 1;
+  hQspi->Init.SampleShifting     = Config->SampleShifting;
+  hQspi->Init.FlashSize          = Config->FlashSize;
+  hQspi->Init.ChipSelectHighTime = QSPI_CS_HIGH_TIME_4_CYCLE; /* Min 50ns for nonRead */
+  hQspi->Init.ClockMode          = QSPI_CLOCK_MODE_0;
+  hQspi->Init.FlashID            = QSPI_FLASH_ID_1;
+  hQspi->Init.DualFlash          = Config->DualFlashMode;
+
+  return HAL_QSPI_Init(hQspi);
+}
+#endif /* QSPI_LOW_FREQ */
 
 /**
   * @}

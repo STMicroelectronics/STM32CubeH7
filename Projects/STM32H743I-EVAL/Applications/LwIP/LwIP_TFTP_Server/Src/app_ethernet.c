@@ -45,7 +45,7 @@ uint8_t DHCP_state = DHCP_OFF;
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 /**
-  * @brief  Notify the User about the nework interface config status
+  * @brief  Notify the User about the network interface config status
   * @param  netif: the network interface
   * @retval None
   */

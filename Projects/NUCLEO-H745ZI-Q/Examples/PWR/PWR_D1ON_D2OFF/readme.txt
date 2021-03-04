@@ -45,7 +45,7 @@ and __HAL_PWR_GET_FLAG(PWR_FLAG_SB_D2) macros.
 Two LEDs are used in this program:
   - LED1: Toggle each 100 ms by CM7 core if D2 domain is in Standby mode (test passed).
   - LED2: Set ON by CM7 core if D2 domain is in RUN mode or if a configuration
-          error occured (test failed).
+          error occurred (test failed).
 
 @note This example can not be used in DEBUG mode due to the fact that 
       the Cortex-M7 and Cortex-M4 cores are no longer clocked during 

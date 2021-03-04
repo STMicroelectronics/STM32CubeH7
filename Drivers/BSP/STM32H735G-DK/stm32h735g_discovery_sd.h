@@ -141,7 +141,7 @@ int32_t BSP_SD_GetCardState(uint32_t Instance);
 int32_t BSP_SD_GetCardInfo(uint32_t Instance, BSP_SD_CardInfo *CardInfo);
 int32_t BSP_SD_IsDetected(uint32_t Instance);
 
-/* These functions can be modified in case the current settings (e.g. DMA stream ot IT)
+/* These functions can be modified in case the current settings (e.g. DMA stream or IT)
    need to be changed for specific application needs */
 void BSP_SD_AbortCallback(uint32_t Instance);
 void BSP_SD_WriteCpltCallback(uint32_t Instance);

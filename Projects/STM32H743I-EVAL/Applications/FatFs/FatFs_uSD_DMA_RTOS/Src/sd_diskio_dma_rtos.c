@@ -49,7 +49,7 @@
 
 
 /*
- * when using cachable memory region, it may be needed to maintain the cache
+ * when using cacheable memory region, it may be needed to maintain the cache
  * validity. Enable the define below to activate a cache maintenance at each
  * read and write operation.
  * Notice: This is applicable only for cortex M7 based platform.

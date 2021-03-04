@@ -53,7 +53,7 @@ static void osTimerCallback(void const *argument)
 unsigned long mbedtls_timing_hardclock( void )
 {
    /* retrieve the CPU cycles using the Cortex-M DWT->CYCCNT register
-    * avaialable only starting from CM3
+    * available only starting from CM3
     */
 
 #if (__CORTEX_M >= 0x03U)

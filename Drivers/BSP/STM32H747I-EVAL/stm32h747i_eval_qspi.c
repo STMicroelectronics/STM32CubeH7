@@ -113,8 +113,8 @@ int32_t BSP_QSPI_Init(uint32_t Instance, BSP_QSPI_Init_t *Init)
   BSP_QSPI_Info_t pInfo;
   MX_QSPI_Init_t qspi_init;
   /* Table to handle clock prescalers:
-  1: For STR mode to reach max 108Mhz
-  3: For DTR mode to reach max 54Mhz
+  1: For STR mode to reach max 100Mhz
+  3: For DTR mode to reach max 50Mhz
   */
   static const uint32_t PrescalerTab[2] = {1, 3};
 
@@ -244,7 +244,7 @@ int32_t BSP_QSPI_DeInit(uint32_t Instance)
 __weak HAL_StatusTypeDef MX_QSPI_Init(QSPI_HandleTypeDef *hQspi, MX_QSPI_Init_t *Config)
 {
   /* QSPI initialization */
-  /* QSPI freq = SYSCLK /(1 + ClockPrescaler) Mhz */
+  /* QSPI freq = HCLK /(1 + ClockPrescaler) Mhz */
   hQspi->Instance                = QUADSPI;
   hQspi->Init.ClockPrescaler     = Config->ClockPrescaler;
   hQspi->Init.FifoThreshold      = 1;
@@ -441,7 +441,8 @@ int32_t BSP_QSPI_Write(uint32_t Instance, uint8_t *pData, uint32_t WriteAddr, ui
 
 /**
   * @brief  Erases the specified block of the QSPI memory.
-  *         MT25TL01G support 4K, 32K, 64K size block erase commands.
+  *         MT25TL01G support 4K, 32K, 64K size block erase commands for each Die.
+  *           i.e 8K, 64K, 128K at BSP level (see BSP_QSPI_Erase_t type definition)
   * @param  Instance     QSPI instance
   * @param  BlockAddress Block address to erase
   * @param  BlockSize    Erase Block size
@@ -470,7 +471,7 @@ int32_t BSP_QSPI_EraseBlock(uint32_t Instance, uint32_t BlockAddress, BSP_QSPI_E
     else
     {
       /* Issue Block Erase command */
-      if(MT25TL01G_BlockErase(&hqspi, QSPI_Ctx[Instance].InterfaceMode, BlockAddress, BlockSize) != MT25TL01G_OK)
+      if(MT25TL01G_BlockErase(&hqspi, QSPI_Ctx[Instance].InterfaceMode, BlockAddress, (MT25TL01G_Erase_t)BlockSize) != MT25TL01G_OK)
       {
         ret = BSP_ERROR_COMPONENT_FAILURE;
       }

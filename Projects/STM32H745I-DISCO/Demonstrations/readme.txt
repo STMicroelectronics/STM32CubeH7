@@ -140,6 +140,8 @@ In order to make the demonstration work, you must do the following :
   
 The Full demonstration binary files are available from the STM32H745I-DISCO page in the Binary Delivery section.
 Please refer to : www.st.com/en/product/stm32h745i-disco.html
+Direct link:
+https://www.st.com/resource/en/compiled_demos/stm32h745i-disco_demo.zip 
 
   - STM32CubeDemo_Prod_STM32H745I-DISCO_v1.0.0_FULL.hex --> Full ready to use STM32H745I-DISCO demonstration hex file
     including internal flash and external flash (QSPI) images

@@ -58,10 +58,6 @@ NUCLEO-H743ZI board's LEDs are used to monitor the example status:
 @note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
-@par Keywords
-
-Security, CRC, CRC Polynomial, IEC 60870-5, hardware CRC, user-defined, generating polynomial
-
 @Note If the  application is using the DTCM/ITCM memories (@0x20000000/ 0x0000000: not cacheable and only accessible
       by the Cortex M7 and the  MDMA), no need for cache maintenance when the Cortex M7 and the MDMA access these RAMs.
       If the application needs to use DMA(or other masters) based access or requires more RAM, then  the user has to:

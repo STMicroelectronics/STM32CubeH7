@@ -48,7 +48,7 @@ In this example TIM1 and TIM8 input clock (TIM8CLK) is set to APB2 clock (2*PCLK
 TIM1 and TIM8 signals are at frequency of  ((SystemCoreClock/2) / (Period + 1))  
                
 TIM8 is generating a signal with the following caracteristics:
-  - Pulse lenght = (TIM8_CCR1 + TIM8_CCR2) / TIM8_CLK
+  - Pulse length = (TIM8_CCR1 + TIM8_CCR2) / TIM8_CLK
   - Phase shift = TIM8_CCR2/TIM8_CLK
  with TIM8_CLK = ((SystemCoreClock/2) / (Period + 1)), as the prescaler is equal to zero. 
  The Pulse is low level of the output signal of Channel 2 because TIM cannel is configured as Asymetric PWM2 mode.

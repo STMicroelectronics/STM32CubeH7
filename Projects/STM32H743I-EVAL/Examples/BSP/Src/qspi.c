@@ -104,7 +104,7 @@ void QSPI_demo (void)
       UTIL_LCD_DisplayStringAt(20, 115, (uint8_t*)"QSPI GET INFO : OK.   ", LEFT_MODE);
 
       /*##-3- Erase QSPI memory ################################################*/
-      if(BSP_QSPI_EraseBlock(0,WRITE_READ_ADDR,MT25TL01G_ERASE_4K) != BSP_ERROR_NONE)
+      if(BSP_QSPI_EraseBlock(0,WRITE_READ_ADDR,BSP_QSPI_ERASE_8K) != BSP_ERROR_NONE)
       {
         UTIL_LCD_DisplayStringAt(20, 130, (uint8_t*)"QSPI ERASE : FAILED.", LEFT_MODE);
         UTIL_LCD_DisplayStringAt(20, 145, (uint8_t*)"QSPI Test Aborted.", LEFT_MODE);
