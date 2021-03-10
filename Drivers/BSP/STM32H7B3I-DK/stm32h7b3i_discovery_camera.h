@@ -162,8 +162,8 @@ typedef struct
 #define CAMERA_NIGHT_MODE_SET           0x00U   /* Disable night mode         */
 #define CAMERA_NIGHT_MODE_RESET         0x01U   /* Enable night mode          */
 
-#define CAMERA_IRQHandler               DCMI_IRQHandler
-#define CAMERA_DMA_IRQHandler           DMA2_Stream1_IRQHandler
+#define BSP_CAMERA_IRQHandler               DCMI_IRQHandler
+#define BSP_CAMERA_DMA_IRQHandler           DMA2_Stream1_IRQHandler
 
 
 #define CAMERA_OV9655_ADDRESS           0x60U
