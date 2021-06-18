@@ -7249,11 +7249,11 @@ typedef struct
              {                                                                                                                           \
                 if((__CSICalibrationValue__) == RCC_CSICALIBRATION_DEFAULT)                                                              \
                 {                                                                                                                        \
-                  MODIFY_REG(RCC->HSICFGR, HAL_RCC_REV_Y_CSITRIM_Msk, ((uint32_t)0x10) << HAL_RCC_REV_Y_CSITRIM_Pos);                    \
+                  MODIFY_REG(RCC->CSICFGR, HAL_RCC_REV_Y_CSITRIM_Msk, ((uint32_t)0x10) << HAL_RCC_REV_Y_CSITRIM_Pos);                    \
                 }                                                                                                                        \
                 else                                                                                                                     \
                 {                                                                                                                        \
-                  MODIFY_REG(RCC->HSICFGR, HAL_RCC_REV_Y_CSITRIM_Msk, (uint32_t)(__CSICalibrationValue__) << HAL_RCC_REV_Y_CSITRIM_Pos); \
+                  MODIFY_REG(RCC->CSICFGR, HAL_RCC_REV_Y_CSITRIM_Msk, (uint32_t)(__CSICalibrationValue__) << HAL_RCC_REV_Y_CSITRIM_Pos); \
                 }                                                                                                                        \
              }                                                                                                                           \
              else                                                                                                                        \
