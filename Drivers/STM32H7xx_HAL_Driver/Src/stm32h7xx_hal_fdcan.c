@@ -3224,7 +3224,7 @@ HAL_StatusTypeDef HAL_FDCAN_GetProtocolStatus(FDCAN_HandleTypeDef *hfdcan, FDCAN
   /* Fill the protocol status structure */
   ProtocolStatus->LastErrorCode = (StatusReg & FDCAN_PSR_LEC);
   ProtocolStatus->DataLastErrorCode = ((StatusReg & FDCAN_PSR_DLEC) >> FDCAN_PSR_DLEC_Pos);
-  ProtocolStatus->Activity = (StatusReg & FDCAN_PSR_ACT);
+  ProtocolStatus->Activity = (StatusReg & FDCAN_PSR_ACT) >> FDCAN_PSR_ACT_Pos;
   ProtocolStatus->ErrorPassive = ((StatusReg & FDCAN_PSR_EP) >> FDCAN_PSR_EP_Pos);
   ProtocolStatus->Warning = ((StatusReg & FDCAN_PSR_EW) >> FDCAN_PSR_EW_Pos);
   ProtocolStatus->BusOff = ((StatusReg & FDCAN_PSR_BO) >> FDCAN_PSR_BO_Pos);
