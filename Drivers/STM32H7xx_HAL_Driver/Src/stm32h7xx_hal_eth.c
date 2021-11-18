@@ -1479,6 +1479,8 @@ void HAL_ETH_IRQHandler(ETH_HandleTypeDef *heth)
   {
     if(__HAL_ETH_DMA_GET_IT_SOURCE(heth, ETH_DMACIER_RIE))
     {
+      /* Clear the Eth DMA Rx IT pending bits */
+      __HAL_ETH_DMA_CLEAR_IT(heth, ETH_DMACSR_RI | ETH_DMACSR_NIS);
 
 #if (USE_HAL_ETH_REGISTER_CALLBACKS == 1)
       /*Call registered Receive complete callback*/
@@ -1487,9 +1489,6 @@ void HAL_ETH_IRQHandler(ETH_HandleTypeDef *heth)
       /* Receive complete callback */
       HAL_ETH_RxCpltCallback(heth);
 #endif  /* USE_HAL_ETH_REGISTER_CALLBACKS */
-
-      /* Clear the Eth DMA Rx IT pending bits */
-      __HAL_ETH_DMA_CLEAR_IT(heth, ETH_DMACSR_RI | ETH_DMACSR_NIS);
     }
   }
 
@@ -1498,6 +1497,9 @@ void HAL_ETH_IRQHandler(ETH_HandleTypeDef *heth)
   {
     if(__HAL_ETH_DMA_GET_IT_SOURCE(heth, ETH_DMACIER_TIE))
     {
+      /* Clear the Eth DMA Tx IT pending bits */
+      __HAL_ETH_DMA_CLEAR_IT(heth, ETH_DMACSR_TI | ETH_DMACSR_NIS);
+
 #if (USE_HAL_ETH_REGISTER_CALLBACKS == 1)
         /*Call registered Transmit complete callback*/
         heth->TxCpltCallback(heth);
@@ -1505,9 +1507,6 @@ void HAL_ETH_IRQHandler(ETH_HandleTypeDef *heth)
       /* Transfer complete callback */
       HAL_ETH_TxCpltCallback(heth);
 #endif  /* USE_HAL_ETH_REGISTER_CALLBACKS */
-
-      /* Clear the Eth DMA Tx IT pending bits */
-      __HAL_ETH_DMA_CLEAR_IT(heth, ETH_DMACSR_TI | ETH_DMACSR_NIS);
     }
   }
 
