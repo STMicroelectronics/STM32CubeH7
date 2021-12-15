@@ -9,7 +9,17 @@
   *           + IO operation functions
   *           + Peripheral Control functions
   *           + Peripheral State and Errors functions
+  ******************************************************************************
+  * @attention
   *
+  * Copyright (c) 2017 STMicroelectronics.
+  * All rights reserved.
+  *
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
+  *
+  ******************************************************************************
   @verbatim
   ==============================================================================
                     ##### How to use this driver #####
@@ -129,17 +139,6 @@
   are set to the corresponding weak functions.
 
   @endverbatim
-  ******************************************************************************
-  * @attention
-  *
-  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics.
-  * All rights reserved.</center></h2>
-  *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
-  *
   ******************************************************************************
   */
 
@@ -1479,8 +1478,6 @@ void HAL_ETH_IRQHandler(ETH_HandleTypeDef *heth)
   {
     if(__HAL_ETH_DMA_GET_IT_SOURCE(heth, ETH_DMACIER_RIE))
     {
-      /* Clear the Eth DMA Rx IT pending bits */
-      __HAL_ETH_DMA_CLEAR_IT(heth, ETH_DMACSR_RI | ETH_DMACSR_NIS);
 
 #if (USE_HAL_ETH_REGISTER_CALLBACKS == 1)
       /*Call registered Receive complete callback*/
@@ -1489,6 +1486,9 @@ void HAL_ETH_IRQHandler(ETH_HandleTypeDef *heth)
       /* Receive complete callback */
       HAL_ETH_RxCpltCallback(heth);
 #endif  /* USE_HAL_ETH_REGISTER_CALLBACKS */
+
+      /* Clear the Eth DMA Rx IT pending bits */
+      __HAL_ETH_DMA_CLEAR_IT(heth, ETH_DMACSR_RI | ETH_DMACSR_NIS);
     }
   }
 
@@ -1497,9 +1497,6 @@ void HAL_ETH_IRQHandler(ETH_HandleTypeDef *heth)
   {
     if(__HAL_ETH_DMA_GET_IT_SOURCE(heth, ETH_DMACIER_TIE))
     {
-      /* Clear the Eth DMA Tx IT pending bits */
-      __HAL_ETH_DMA_CLEAR_IT(heth, ETH_DMACSR_TI | ETH_DMACSR_NIS);
-
 #if (USE_HAL_ETH_REGISTER_CALLBACKS == 1)
         /*Call registered Transmit complete callback*/
         heth->TxCpltCallback(heth);
@@ -1507,6 +1504,9 @@ void HAL_ETH_IRQHandler(ETH_HandleTypeDef *heth)
       /* Transfer complete callback */
       HAL_ETH_TxCpltCallback(heth);
 #endif  /* USE_HAL_ETH_REGISTER_CALLBACKS */
+
+      /* Clear the Eth DMA Tx IT pending bits */
+      __HAL_ETH_DMA_CLEAR_IT(heth, ETH_DMACSR_TI | ETH_DMACSR_NIS);
     }
   }
 
@@ -1561,7 +1561,7 @@ void HAL_ETH_IRQHandler(ETH_HandleTypeDef *heth)
 
 #if (USE_HAL_ETH_REGISTER_CALLBACKS == 1)
     /* Call registered MAC Error callback*/
-    heth->DMAErrorCallback(heth);
+    heth->MACErrorCallback(heth);
 #else
     /* Ethernet MAC Error callback */
     HAL_ETH_MACErrorCallback(heth);
@@ -3026,4 +3026,3 @@ static void ETH_InitCallbacksToDefault(ETH_HandleTypeDef *heth)
   * @}
   */
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

@@ -8,13 +8,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -146,7 +145,7 @@ int main(void)
           /*##-7- JPEG Encoding with DMA (Not Blocking ) Method ################*/
           JPEG_Encode_DMA(&JPEG_Handle, RGB_ImageAddress, RGB_IMAGE_SIZE, &JPEG_File);
           
-          /*##-8- Wait till end of JPEG encoding and perfom Input/Output Processing in BackGround  #*/
+          /*##-8- Wait till end of JPEG encoding and perform Input/Output Processing in BackGround  #*/
           do
           {
             JPEG_EncodeInputHandler(&JPEG_Handle);
@@ -306,6 +305,21 @@ static void MPU_Config(void)
   /* Disable the MPU */
   HAL_MPU_Disable();
 
+  /* Configure the MPU as Strongly ordered for not defined regions */
+  MPU_InitStruct.Enable = MPU_REGION_ENABLE;
+  MPU_InitStruct.BaseAddress = 0x00;
+  MPU_InitStruct.Size = MPU_REGION_SIZE_4GB;
+  MPU_InitStruct.AccessPermission = MPU_REGION_NO_ACCESS;
+  MPU_InitStruct.IsBufferable = MPU_ACCESS_NOT_BUFFERABLE;
+  MPU_InitStruct.IsCacheable = MPU_ACCESS_NOT_CACHEABLE;
+  MPU_InitStruct.IsShareable = MPU_ACCESS_SHAREABLE;
+  MPU_InitStruct.Number = MPU_REGION_NUMBER0;
+  MPU_InitStruct.TypeExtField = MPU_TEX_LEVEL0;
+  MPU_InitStruct.SubRegionDisable = 0x87;
+  MPU_InitStruct.DisableExec = MPU_INSTRUCTION_ACCESS_DISABLE;
+
+  HAL_MPU_ConfigRegion(&MPU_InitStruct);
+
   /* Configure the MPU attributes as WT for SDRAM */
   MPU_InitStruct.Enable = MPU_REGION_ENABLE;
   MPU_InitStruct.BaseAddress = SDRAM_DEVICE_ADDR;
@@ -314,7 +328,7 @@ static void MPU_Config(void)
   MPU_InitStruct.IsBufferable = MPU_ACCESS_NOT_BUFFERABLE;
   MPU_InitStruct.IsCacheable = MPU_ACCESS_CACHEABLE;
   MPU_InitStruct.IsShareable = MPU_ACCESS_NOT_SHAREABLE;
-  MPU_InitStruct.Number = MPU_REGION_NUMBER0;
+  MPU_InitStruct.Number = MPU_REGION_NUMBER1;
   MPU_InitStruct.TypeExtField = MPU_TEX_LEVEL0;
   MPU_InitStruct.SubRegionDisable = 0x00;
   MPU_InitStruct.DisableExec = MPU_INSTRUCTION_ACCESS_ENABLE;
@@ -437,7 +451,7 @@ void RGB_GetInfo(JPEG_ConfTypeDef *pInfo)
   pInfo->ImageWidth         = RGB_IMAGE_WIDTH;
   pInfo->ImageHeight        = RGB_IMAGE_HEIGHT;
 
-  /* Jpeg Encoding Setting to be setted by users */
+  /* Jpeg Encoding Setting to be set by users */
   pInfo->ChromaSubsampling  = JPEG_CHROMA_SAMPLING;
   pInfo->ColorSpace         = JPEG_COLOR_SPACE;
   pInfo->ImageQuality       = JPEG_IMAGE_QUALITY;
@@ -455,4 +469,3 @@ void RGB_GetInfo(JPEG_ConfTypeDef *pInfo)
 /**
   * @}
   */
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

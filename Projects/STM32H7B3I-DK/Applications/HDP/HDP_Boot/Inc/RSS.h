@@ -13,13 +13,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -119,7 +118,7 @@ RSS_Version_t RSS_getVersion(void);
 /** Get RSS status.
 *
 * \return status
-* \retval RSS_OK          Last operation succeded\n
+* \retval RSS_OK          Last operation succeeded\n
 *         RSS_ERROR       Last operation failed \n
 *         RSS_DISABLED    RSS/Security not activated
 */
@@ -214,20 +213,13 @@ void 		RSS_resetAndActivateIPs(uint32_t address);
 
 typedef struct
 {
-	RSS_Version_t   (*getVersion)(void);
-	RSS_Status_t    (*getStatus)(void);
-	uint8_t*		(*getCertificate)(void);
-	uint32_t		(*getCertificateSize)(void);
-	void 			(*setVectors)(unsigned int vectors);
-	void 			(*exitSecureArea)(unsigned int vectors, unsigned int jtagState);
-	void 			(*resetAndInitializeSecureAreas)(uint32_t nbAreas, RSS_SecureArea_t* areas);
-	void  			(*resetAndDestroyPCROPArea)(RSS_FlashBank_et bank);
-	void 			(*SMI_resetAndInstallModules)(RSS_FWLicense_t* license,
-                                                RSS_ModuleHeader_t* moduleHeader,
-                                                unsigned char* encryptedModules);
-#ifdef HW_IP_ENABLEMENT
-	void  			(*resetAndActivateIPs)(uint32_t address);
-#endif /* HW_IP_ENABLEMENT */
+  RSS_Version_t        (*getVersion)(void);
+  uint32_t             reserved1 ;
+  uint32_t             reserved2;
+  uint32_t             reserved3;
+  uint32_t             reserved4;
+  void                 (*exitSecureArea)(unsigned int vectors, unsigned int jtagState);
+  void                 (*resetAndInitializeSecureAreas)(uint32_t nbAreas, RSS_SecureArea_t* areas);
 }RSS_API_Table_t;
 
 #define RSS ((RSS_API_Table_t*)0x1FF09500)

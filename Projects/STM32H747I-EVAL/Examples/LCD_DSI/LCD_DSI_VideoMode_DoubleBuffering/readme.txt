@@ -9,13 +9,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   @endverbatim
@@ -120,10 +119,10 @@ Graphics, Display, LCD, DMA2D, DSI, MIPI Alliance, Video mode, Double buffering,
 
 In order to make the program work, you must do the following :
  - Open your preferred toolchain 
- - For each target configuartion (STM32H747I_EVAL_CM4 first then STM32H747I_EVAL_CM7) : 
+ - For each target configuration (STM32H747I_EVAL_CM4 first then STM32H747I_EVAL_CM7) : 
      - Rebuild all files 
      - Load images into target memory
- - Mount either the KoD LCD pannel (Board MB1166 ) or the DSI-HDMI bridge(Board MB1232 )
+ - Mount either the KoD LCD panel (Board MB1166 ) or the DSI-HDMI bridge(Board MB1232 )
    to the DSI connector (CN15). 
  - if using the DSI-HDMI bridge then connect a HDMI monitor using a HDMI cable to the 
    MB1232 board.  
@@ -131,5 +130,5 @@ In order to make the program work, you must do the following :
  - Run the example
 
 
- * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
+
  */

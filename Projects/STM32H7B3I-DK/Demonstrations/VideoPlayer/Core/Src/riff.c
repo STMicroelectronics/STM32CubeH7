@@ -543,7 +543,7 @@ int riff_levelValidate(struct riff_handle *rh){
 		if(r != RIFF_ERROR_NONE){
 			if(r == RIFF_ERROR_EOCL) //just end of list
 				break;
-			//error occured, was probably printed already
+			//error occurred, was probably printed already
 			return r;
 		}
 	}

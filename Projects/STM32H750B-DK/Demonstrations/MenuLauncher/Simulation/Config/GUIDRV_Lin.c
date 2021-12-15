@@ -156,7 +156,7 @@ static void _SetPixelIndex(GUI_DEVICE * pDevice, int x, int y, int PixelIndex) {
       //
       // Write into hardware ... Adapt to your system
       //
-      // TBD by customer...
+      // Should be done by customer...
       //
     }
     #if (LCD_MIRROR_X == 0) && (LCD_MIRROR_Y == 0) && (LCD_SWAP_XY == 0)
@@ -195,7 +195,7 @@ static unsigned int _GetPixelIndex(GUI_DEVICE * pDevice, int x, int y) {
       //
       // Write into hardware ... Adapt to your system
       //
-      // TBD by customer...
+      // Should be done by customer...
       //
       PixelIndex = 0;
     }
@@ -637,7 +637,7 @@ static void * _GetDevData(GUI_DEVICE * pDevice, int Index) {
   #if GUI_SUPPORT_MEMDEV
     switch (Index) {
     case LCD_DEVDATA_MEMDEV:
-      return (void *)&GUI_MEMDEV_DEVICE_16; // TBD: Has to be adapted to the right memory device depending on the used color depth!
+      return (void *)&GUI_MEMDEV_DEVICE_16; // Has to be adapted to the right memory device depending on the used color depth!
     }
   #else
     GUI_USE_PARA(Index);

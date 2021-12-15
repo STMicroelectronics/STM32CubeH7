@@ -9,13 +9,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   @endverbatim
@@ -60,7 +59,7 @@ Three LEDs are used in this program:
           and LED1 is OFF when CM7 enters STANDBY mode.       
   - LED2: To indicate the CM4 status. LED2 is ON when CM4 is in RUN mode  
           and LED2 is OFF when CM4 enters STANDBY mode. 
-  - LED3: To indicate if a configuration error occured during program execution.
+  - LED3: To indicate if a configuration error occurred during program execution.
 
 When the system enters STANDBY mode then current consumption can be measured.
 
@@ -151,12 +150,12 @@ System, Power, PWR, multiprocessor, Standby mode, Interrupt, EXTI, Wakeup, Low P
 
 In order to make the program work, you must do the following :
  - Open your preferred toolchain
- - For each target configuartion (STM32H747_DISCO_CM7 and STM32H747_DISCO_CM4) : 
+ - For each target configuration (STM32H747_DISCO_CM7 and STM32H747_DISCO_CM4) : 
      - Rebuild all files 
      - Load images into target memory
  - After loading the two images, you have to reset the board in order to boot (Cortex-M7) and CPU2 (Cortex-M4) at once.
  - Run the example
 
 
- * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
+
  */

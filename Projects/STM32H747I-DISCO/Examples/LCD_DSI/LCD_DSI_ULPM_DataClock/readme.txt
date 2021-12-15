@@ -12,13 +12,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   @endverbatim
@@ -71,7 +70,7 @@ The LTDC is reading continuously the LCD Frame buffer from SDRAM, sent it to DSI
 via the DSI DPHY to the KoD display that decodes DSI packets and refresh its internal Graphic RAM to display on glass.
 
 The Frame number display is managed by Line Event callback in which the Frame number is incremented
-each time a line event occurs. When entering to ULPM, The Frame number is unchanged untill the
+each time a line event occurs. When entering to ULPM, The Frame number is unchanged until the
 exit from this mode.
 
 LED4 ON: DSI PHY Data and clock lane in ULPM mode
@@ -141,12 +140,12 @@ LTDC,DMA2D, WVGA, ARGB8888, SDRAM, Burst mode, Data lane, clock lane
 
 In order to make the program work, you must do the following :
  - Open your preferred toolchain 
- - For each target configuartion (STM32H747I_DISCO_CM4 first then STM32H747I_DISCO_CM7) : 
+ - For each target configuration (STM32H747I_DISCO_CM4 first then STM32H747I_DISCO_CM7) : 
      - Rebuild all files 
      - Load images into target memory
  - After loading the two images, you have to reset the board in order to boot (Cortex-M7) and CPU2 (Cortex-M4) at once.
  - Run the example
 
 
- * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
+
  */

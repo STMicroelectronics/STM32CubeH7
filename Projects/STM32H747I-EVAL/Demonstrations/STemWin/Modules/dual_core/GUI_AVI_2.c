@@ -6,13 +6,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under Ultimate Liberty license
-  * SLA0044, the "License"; You may not use this file except in compliance with
-  * the License. You may obtain a copy of the License at:
-  *                             www.st.com/SLA0044
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -296,7 +295,7 @@ static AVISTATUS _AVI_Init(AVI_CONTEXT* pavi, U8 *buf, U16 size)
   return res;
 }
 
-/* TODO: shared resource across threads */
+/* shared resource across threads */
 #if defined ( __ICCARM__ )
 #pragma data_alignment=4
 #pragma location="sdio_heap"
@@ -720,4 +719,3 @@ int GUI_AVI_GetInfo2(GUI_AVI_HANDLE havi, GUI_AVI_INFO * pInfo)
   return 0;
 }
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

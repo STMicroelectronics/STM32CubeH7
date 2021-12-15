@@ -46,7 +46,7 @@ public:
         BAR_TOP_ONLY
     };
 
-    AudioPlayerView(); //todo fast forward and rewind?
+    AudioPlayerView(); //fast forward and rewind?
     virtual ~AudioPlayerView() { }
 
     virtual void setupScreen();

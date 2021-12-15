@@ -9,13 +9,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   @endverbatim
@@ -87,11 +86,11 @@ Board 2: transmit chunks, then receiving and verifying them.
 
 How to run:
   - Compile the program with LOW_POWER_BOARD define, then load it in the first 
-    board (CM7 code : target configuartion STM32H747I_EVAL_CM7 and CM4 code target
-    configuartion STM32H747I_EVAL_CM4).
+    board (CM7 code : target configuration STM32H747I_EVAL_CM7 and CM4 code target
+    configuration STM32H747I_EVAL_CM4).
   - Compile the program without LOW_POWER_BOARD define, then load it in the 
-    second board (CM7 code : target configuartion STM32H747I_EVAL_CM7 and CM4
-     code target configuartion STM32H747I_EVAL_CM4).
+    second board (CM7 code : target configuration STM32H747I_EVAL_CM7 and CM4
+     code target configuration STM32H747I_EVAL_CM4).
   - Connect the two boards as shown in the picture above and start them.
   - LED2 in the first board will set ON for 3 seconds, then it will turn Off 
     to indicate that the CM4 core is entered into low power mode.
@@ -141,7 +140,7 @@ The BDMA channel 7 is configured in peripheral to memory mode to ensure data tra
 data register to the D3SRAM (@0x38000000). 
 After receiving 5 chunks of data, the BDMA transfer complete interrupt is generated and the system
 is waking up from Stop mode to send-back the received data if no error occurred.
-Finaly the system will restart automatically the reception process and re-enter STOP mode again.
+Finally the system will restart automatically the reception process and re-enter STOP mode again.
 
 The DMAMUX request generator block is configured using function "HAL_DMAEx_ConfigMuxRequestGenerator" 
 with the following parameters :
@@ -219,7 +218,7 @@ System, Power, PWR, multiprocessor, Stop mode, Domain 3, D3SRAM, BDMA, DMAMUX, I
 
 In order to make the program work, you must do the following :
  - Open your preferred toolchain 
- - For each target configuartion (STM32H747I_EVAL_CM7 and STM32H747I_EVAL_CM4) : 
+ - For each target configuration (STM32H747I_EVAL_CM7 and STM32H747I_EVAL_CM4) : 
      - Rebuild all files with LOW_POWER_BOARD compile swicth (in common.h file)
      - Load images into target memory in 1st board.
      - Rebuild all files without LOW_POWER_BOARD swicth (in common.h file)
@@ -231,5 +230,5 @@ In order to make the program work, you must do the following :
      
 
 
- * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
+
  */

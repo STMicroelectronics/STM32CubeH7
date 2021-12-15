@@ -23,6 +23,6 @@ Direct link:
 https://www.st.com/resource/en/compiled_demos/stm32h735g-dk_demo.zip
 
 
- * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
+
  */
  

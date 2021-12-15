@@ -32,6 +32,6 @@ Demonstration, FreeRTOS, RTOS, Graphics, TouchGFX, GUI, WAV, Video Player, AVI, 
   - This demonstration has been tested with STMicroelectronics STM32H743I-EVAL
     boards.
 
- * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
+
  */
  

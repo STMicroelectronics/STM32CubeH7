@@ -6,13 +6,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under Ultimate Liberty license
-  * SLA0044, the "License"; You may not use this file except in compliance with
-  * the License. You may obtain a copy of the License at:
-  *                             www.st.com/SLA0044
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -435,7 +434,7 @@ static void LCD_LL_Reset(void)
   
   HAL_Delay(20); /* wait 20 ms */
   
-  /* Desactivate XRES */
+  /* Deactivate XRES */
   HAL_GPIO_WritePin(GPIOG, GPIO_PIN_3, GPIO_PIN_SET);
   
   /* Wait for 300 ms after releasing XRES before sending commands */
@@ -906,7 +905,7 @@ static void _DMA_Fill(int LayerIndex, void * pDst, int xSize, int ySize, int Off
 /**
   * @brief  DMA2D Alpha blending bulk
   * @param  pColorFG : Foregroung color
-  * @param  pColorBG : Backgroung color
+  * @param  pColorBG : Background color
   * @param  pColorDst: Destination color
   * @param  NumItems : Number of lines
   * @retval None
@@ -941,7 +940,7 @@ static void _DMA_AlphaBlendingBulk(LCD_COLOR * pColorFG, LCD_COLOR * pColorBG, L
 /**
   * @brief  Mixing bulk colors
   * @param  pColorFG : Foregroung color
-  * @param  pColorBG : Backgroung color
+  * @param  pColorBG : Background color
   * @param  pColorDst: Destination color
   * @param  Intens   : Color intensity
   * @param  NumItems : Number of lines
@@ -2119,5 +2118,4 @@ void DMA2D_CopyBuffer_YCbCr_To_RGB(int LayerIndex, const void * pSrc, const void
   osMutexRelease(osDeviceMutex);
 }
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
 

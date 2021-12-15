@@ -5,11 +5,14 @@
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <title>Release Notes for Projects of STM32CubeH7 Firmware Package</title>
-  <style type="text/css">
-      code{white-space: pre-wrap;}
-      span.smallcaps{font-variant: small-caps;}
-      span.underline{text-decoration: underline;}
-      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
   </style>
   <link rel="stylesheet" href="../_htmresc/mini-st.css" />
   <!--[if lt IE 9]>
@@ -29,8 +32,6 @@
 </center>
 </div>
 </div>
-<h1 id="license">License</h1>
-<p>The projects covered by these release notes are delivered under different licenses. Details of applicable license for each project are provided in the table of the "Contents" section below.</p>
 <h1 id="purpose">Purpose</h1>
 <p>The projects are a set of applicative tasks that aim to explain and provide use cases of the different products features based on the products hardware (Boards, STM32 Core(s) features, interconnections and peripherals) and built around the different firmware components. They can be directly used or adapted by the STM32CubeH7 Firmware Package users. They provide basic functionalities, show main features or demonstrate performance. They are provided with preconfigured projects for the main supported toolchains.</p>
 <p>In the STM32CubeH7 Firmware Package, the projects are organized in a sequential scheme based on the following levels:</p>
@@ -63,18 +64,62 @@
 <li><a href="https://www.st.com/content/ccc/resource/technical/document/user_manual/group1/a1/59/6c/60/d9/49/49/c3/DM00440740/files/DM00440740.pdf/jcr:content/translations/en.DM00440740.pdf">UM2298</a>: STM32Cube BSP drivers development guidelines</li>
 </ul>
 </div>
-<div class="col-sm-12 col-lg-8">
-<h1 id="update-history">Update History</h1>
+<section id="update-history" class="col-sm-12 col-lg-8">
+<h1>Update History</h1>
 <div class="collapse">
-<input type="checkbox" id="collapse-section11" checked aria-hidden="true"> <label for="collapse-section11" aria-hidden="true"><strong>V1.9.0 / 12-February-2021</strong></label>
-<div>
+<input type="checkbox" id="collapse-section12" checked aria-hidden="true"> <label for="collapse-section12" aria-hidden="true"><strong>V1.9.1 / 06-December-2021</strong></label>
 <h2 id="main-changes">Main Changes</h2>
+<h3 id="patch-release">Patch release</h3>
+<ul>
+<li>General updates to fix known defects and implementation enhancements</li>
+<li>All source files: update disclaimer to add reference to the new license agreement.</li>
+<li>Update all firmware projects by adding dedicated MPU configuration to avoid Cortex-M7 speculative access on external memories.
+<ul>
+<li>Refer to ARM recommendation regarding Cortex-M7 speculative access: <a href="https://developer.arm.com/documentation/ddi0489/f/memory-system/speculative-accesses/considerations-for-system-design">Link</a></li>
+<li>"Arm recommends that you set those regions to have all of the following attributes with the MPU:
+<ul>
+<li>Device or Strongly-ordered.</li>
+<li>Execute Never.</li>
+</ul></li>
+</ul></li>
+<li><strong>Demonstrations</strong>
+<ul>
+<li>Fix hard-fault in the Oscilloscope sub-demo.</li>
+</ul></li>
+<li><strong>PWR Example</strong>
+<ul>
+<li>Flash memory needs to be configured in low power mode before entering STOP2.</li>
+</ul></li>
+<li><strong>USB Applications</strong>
+<ul>
+<li>USB Audio Host: Update SD disk IO driver file to use the DMA for STM32H743I_EVAL board</li>
+<li>USB device Audio application: fix issue on USB audio interface file for STM32H743I Eval board</li>
+<li>usbd_conf.c: fix USB FIFO setting in DMA mode</li>
+<li>USB Host HID: Fix heap size issue on STM32H743I Eval board</li>
+<li>STM32H743I-EVAL USB Device applications: Update linker files to use SRAM instead of DTCM memory</li>
+<li>Enable the MCO clk for external USB PHY in USB host examples</li>
+<li>Configuration of a non-cacheable region via MPU for USB host application in case USB dma was enabled</li>
+<li>Configuration of a non-cacheable region via MPU for USB device application in case USB dma was enabled</li>
+<li>Updating the binary files with the RAM address memory configuration instead of DTCRAM</li>
+<li>Fix issue with audio recording including a hard fault.</li>
+<li>EE_ReadVariable() update to be aligned with the specific Flash word Size:
+<ul>
+<li>256 bits for STM32H74x/5X devices (8x 32bits words).</li>
+<li>128 bits for STM32H7Ax/BX devices (4x 32bits words).</li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<div class="collapse">
+<input type="checkbox" id="collapse-section11" aria-hidden="true"> <label for="collapse-section11" aria-hidden="true"><strong>V1.9.0 / 12-February-2021</strong></label>
+<div>
+<h2 id="main-changes-1">Main Changes</h2>
 <h3 id="maintenance-release">Maintenance release</h3>
 <ul>
 <li><p>General updates to fix known defects and implementation enhancements</p></li>
 <li><p>Fix minor issues related to English typo in comments</p></li>
 <li><p>Update FreeRTOS based applications for FreeRTOS v10.3.1_20200831</p></li>
-<li>Minor Fixes for EWARM, MDK-ARM, SW4STM32 and CubeIDE projects to:
+<li><p>Minor Fixes for EWARM, MDK-ARM, SW4STM32 and CubeIDE projects to:</p>
 <ul>
 <li>Remove extra path</li>
 <li>Fix wrong case sensitive path</li>
@@ -86,12 +131,12 @@
 <li><p>Update “Dual Core” template projects readme file to add description of Option Bytes configuration using STM32CubeIDE</p></li>
 <li><p>Update STM32H7B3I-DK projects with correct RCC reset value in system_stm32h7xx.c file</p></li>
 <li><p>Template projects migrated to Arm Compiler 6 with MDK-ARM 5.29 (“AC5-like Warnings” mode)</p></li>
-<li>Update STM32H743I-EVAL demonstration to add a MenuLauncher</li>
-<li>Add HDP application to STM32H7B3I-EVAL, STM32H7B3I-DK and STM32H735G-DK boards:
+<li><p>Update STM32H743I-EVAL demonstration to add a MenuLauncher</p></li>
+<li><p>Add HDP application to STM32H7B3I-EVAL, STM32H7B3I-DK and STM32H735G-DK boards:</p>
 <ul>
 <li>This application provides a full description of how to use an RSS service to jump from secure area to non secure area. It shows also how to set, use and remove a single secure area.</li>
 </ul></li>
-<li>Update STM32H750B-DK projects to avoid stopping the FMC-SDRAM during the system initialization
+<li><p>Update STM32H750B-DK projects to avoid stopping the FMC-SDRAM during the system initialization</p>
 <ul>
 <li>Note:
 <ul>
@@ -764,7 +809,7 @@
 <h2 id="known-limitations">Known Limitations</h2>
 <ul>
 <li><p>Only template projects migrated to Arm Compiler 6 with MDK-ARM 5.29 or upper version (“AC5-like Warnings” mode)</p></li>
-<li><strong>LwIP</strong>-based applications come with
+<li><p><strong>LwIP</strong>-based applications come with</p>
 <ul>
 <li>known compilation warning on EWARM V8.30
 <ul>
@@ -773,25 +818,25 @@
 </ul></li>
 <li>Known compilation warning on STM32CubeIDE with GCC compiler v9 (These warnings will be fixed in next release)</li>
 </ul></li>
-<li><strong>OpenAMP</strong>-based applications (available on STM32H745I-DISCO, STM32H747I-DISCO and STM32H747I-EVAL) come with known compilation warning
+<li><p><strong>OpenAMP</strong>-based applications (available on STM32H745I-DISCO, STM32H747I-DISCO and STM32H747I-EVAL) come with known compilation warning</p>
 <ul>
 <li>Related to the OpenAmp third party stack</li>
 <li>Related to ST application implementation For warning details please refer to the corresponding applications readme.txt files</li>
 </ul></li>
-<li>STM32H747I-DISCO, STM32H747I-EVAL, STM32H743I-EVAL and STM32H750B-DK TouchGFX demonstrations as well as the Libjpeg applications come with known compilation warnings on SW4STM32 IDE:
+<li><p>STM32H747I-DISCO, STM32H747I-EVAL, STM32H743I-EVAL and STM32H750B-DK TouchGFX demonstrations as well as the Libjpeg applications come with known compilation warnings on SW4STM32 IDE:</p>
 <ul>
 <li>Warnings related to the Libjpeg third party MW</li>
 </ul></li>
-<li><strong>STM32H743I-EVAL</strong>
+<li><p><strong>STM32H743I-EVAL</strong></p>
 <ul>
 <li>MenuLauncher project is provided for EWARM IDE only (not provided for SW4STM32 and MDK-ARM)</li>
 </ul></li>
-<li><strong>STM32H7B3I-DK</strong>
+<li><p><strong>STM32H7B3I-DK</strong></p>
 <ul>
 <li>MDK-ARM project for <strong>TouchGFX Demonstrations</strong> comes with known compilation warning related to TouchGFX Middleware</li>
 <li>Known compilation warning on STM32CubeIDE with GCC compiler v9 (These warnings will be fixed in next release)</li>
 </ul></li>
-<li><strong>STM32H7B3I-EVAL</strong>
+<li><p><strong>STM32H7B3I-EVAL</strong></p>
 <ul>
 <li>Known compilation warning on STM32CubeIDE with GCC compiler v9 (These warnings will be fixed in next release)</li>
 </ul></li>
@@ -839,7 +884,7 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section10" aria-hidden="true"> <label for="collapse-section10" aria-hidden="true"><strong>V1.8.0 / 29-May-2020</strong></label>
 <div>
-<h2 id="main-changes-1">Main Changes</h2>
+<h2 id="main-changes-2">Main Changes</h2>
 <h3 id="first-official-release-to-support-stm32h723xx33xx25xx35xx30xx30xxq-new-devices-and-boards">First official release to support STM32H723xx/33xx/25xx/35xx/30xx/30xxQ new devices and boards</h3>
 <p>Official release with support of STM32H723xx/33xx/25xx/35xx/30xx/30xxQ new devices</p>
 <p>Add support of NUCLEO-H723ZG and STM32H735G-DK boards with dedicated template HAL/LL projects, examples, applications and demonstrations</p>
@@ -1615,7 +1660,7 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section9" aria-hidden="true"> <label for="collapse-section9" aria-hidden="true"><strong>V1.7.0 / 14-February-2020</strong></label>
 <div>
-<h2 id="main-changes-2">Main Changes</h2>
+<h2 id="main-changes-3">Main Changes</h2>
 <h3 id="maintenance-release-1">Maintenance release</h3>
 <p>Add support of the value line STM32H7B0 devices over STM32H7B3I-EVAL board</p>
 <p>Add STM32H7B3I-EVAL, STM32H743I-EVAL and STM32H747I-EVAL demonstrations source code</p>
@@ -2185,31 +2230,31 @@
 <p>Note: in the tables above, project categories <strong>highlighted</strong> have changed since previous release.</p>
 <h2 id="known-limitations-2">Known Limitations</h2>
 <ul>
-<li>OpenAMP-based applications (available on STM32H745I-DISCO, STM32H747I-DISCO and STM32H747I-EVAL) come with known compilation warning
+<li><p>OpenAMP-based applications (available on STM32H745I-DISCO, STM32H747I-DISCO and STM32H747I-EVAL) come with known compilation warning</p>
 <ul>
 <li>Related to the OpenAmp third party stack</li>
 <li>Related to ST application implementation For warning details please refer to the corresponding applications readme.txt files</li>
 </ul></li>
-<li>STM32H747I-DISCO and STM32H750B-DK TouchGFX demonstrations come with known compilation warnings on SW4STM32 IDE:
+<li><p>STM32H747I-DISCO and STM32H750B-DK TouchGFX demonstrations come with known compilation warnings on SW4STM32 IDE:</p>
 <ul>
 <li>Warnings related to the Libjpeg third party MW</li>
 </ul></li>
-<li><strong>LwIP</strong>-based applications (available on NUCLEO-H743ZI and STM32H743I-EVAL) come with known compilation warning on EWARM V8.30
+<li><p><strong>LwIP</strong>-based applications (available on NUCLEO-H743ZI and STM32H743I-EVAL) come with known compilation warning on EWARM V8.30</p>
 <ul>
 <li>Related to the combination of LWIP third party stack and EWARM V8.30</li>
 </ul></li>
 <li><p>No impact of these warnings on the functional behavior</p></li>
-<li><strong>STM32H7B3I-EVAL</strong>
+<li><p><strong>STM32H7B3I-EVAL</strong></p>
 <ul>
 <li>STM32CubeIDE project is not provided for <strong>AudioPlayer Demonstrations</strong></li>
 <li>STM32CubeIDE project is not provided for <strong>STemWin Demonstrations</strong></li>
 </ul></li>
-<li><strong>STM32H7B3I-DK</strong>
+<li><p><strong>STM32H7B3I-DK</strong></p>
 <ul>
 <li>STM32CubeIDE project is not provided for <strong>AudioPlayer Demonstrations</strong></li>
 <li>STM32CubeIDE project is not provided for <strong>VideoPlayer Demonstrations</strong></li>
 </ul></li>
-<li><strong>STM32H743I-EVAL</strong>
+<li><p><strong>STM32H743I-EVAL</strong></p>
 <ul>
 <li>SW4STM32 project is not provided for <strong>TouchGFX Demonstrations</strong></li>
 <li>Keil project is not provided for <strong>STemWin Demonstrations</strong></li>
@@ -2246,7 +2291,7 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section8" aria-hidden="true"> <label for="collapse-section8" aria-hidden="true"><strong>V1.6.0 / 06-December-2019</strong></label>
 <div>
-<h2 id="main-changes-3">Main Changes</h2>
+<h2 id="main-changes-4">Main Changes</h2>
 <h3 id="first-official-release-to-support-stm32h7a3b3xxb0xx-new-devices-and-boards">First official release to support STM32H7A3/B3xx/B0xx new devices and boards</h3>
 <p>Official release with support of STM32H7A3/B3xx/B0xx new devices</p>
 <p>Add support of NUCLEO-H7A3ZI-Q, STM32H7B3I-DK and STM32H7B3I-EVAL boards with dedicated template HAL/LL projects, examples, applications and demonstrations</p>
@@ -2829,16 +2874,16 @@
 <p>Note: in the tables above, project categories <strong>highlighted</strong> have changed since previous release.</p>
 <h2 id="known-limitations-3">Known Limitations</h2>
 <ul>
-<li>OpenAMP-based applications (available on STM32H745I-DISCO, STM32H747I-DISCO and STM32H747I-EVAL) come with known compilation warning
+<li><p>OpenAMP-based applications (available on STM32H745I-DISCO, STM32H747I-DISCO and STM32H747I-EVAL) come with known compilation warning</p>
 <ul>
 <li>Related to the OpenAmp third party stack</li>
 <li>Related to ST application implementation For warning details please refer to the corresponding applications readme.txt files</li>
 </ul></li>
-<li>STM32H747I-DISCO and STM32H750B-DK TouchGFX demonstrations come with known compilation warnings on SW4STM32 IDE:
+<li><p>STM32H747I-DISCO and STM32H750B-DK TouchGFX demonstrations come with known compilation warnings on SW4STM32 IDE:</p>
 <ul>
 <li>Warnings related to the Libjpeg third party MW</li>
 </ul></li>
-<li><strong>LwIP</strong>-based applications (available on NUCLEO-H743ZI and STM32H743I-EVAL) come with known compilation warning on EWARM V8.30
+<li><p><strong>LwIP</strong>-based applications (available on NUCLEO-H743ZI and STM32H743I-EVAL) come with known compilation warning on EWARM V8.30</p>
 <ul>
 <li>Related to the combination of LWIP third party stack and EWARM V8.30</li>
 </ul></li>
@@ -2884,7 +2929,7 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section7" aria-hidden="true"> <label for="collapse-section7" aria-hidden="true"><strong>V1.5.0 / 28-June-2019</strong></label>
 <div>
-<h2 id="main-changes-4">Main Changes</h2>
+<h2 id="main-changes-5">Main Changes</h2>
 <h3 id="maintenance-release-2">Maintenance release</h3>
 <ul>
 <li>Add <strong>Dual Core</strong> demonstrations source code with preconfigured projects on EWARM, MDK-ARM and SW4STM32 IDEs:
@@ -3522,12 +3567,12 @@
 <p>Note: in the tables above, project categories <strong>highlighted</strong> have changed since previous release.</p>
 <h2 id="known-limitations-4">Known Limitations</h2>
 <ul>
-<li>OpenAMP-based applications (available on STM32H745I-DISCO, STM32H747I-DISCO and STM32H747I-EVAL) come with known compilation warning
+<li><p>OpenAMP-based applications (available on STM32H745I-DISCO, STM32H747I-DISCO and STM32H747I-EVAL) come with known compilation warning</p>
 <ul>
 <li>Related to the OpenAmp third party stack</li>
 <li>Related to ST application implementation For warning details please refer to the corresponding applications readme.txt files</li>
 </ul></li>
-<li>STM32H750B-DK TouchGFX demonstration comes with known compilation warnings on MDK-ARM IDE:
+<li><p>STM32H750B-DK TouchGFX demonstration comes with known compilation warnings on MDK-ARM IDE:</p>
 <ul>
 <li>Warnings related to the TouchGFX MW file RepeatButtonTrigger.hpp :
 <ul>
@@ -3535,12 +3580,12 @@
 </ul></li>
 <li>These warnings will be fixed in th next TouchGFX MW version</li>
 </ul></li>
-<li>STM32H747I-EVAL, STM32H747I-DISCO and STM32H750B-DK TouchGFX demonstrations come with known compilation warnings on SW4STM32 IDE:
+<li><p>STM32H747I-EVAL, STM32H747I-DISCO and STM32H750B-DK TouchGFX demonstrations come with known compilation warnings on SW4STM32 IDE:</p>
 <ul>
 <li>Warnings related to the Libjpeg third party MW</li>
 </ul></li>
 <li><p>No impact of these warnings on the functional behavior</p></li>
-<li>STM32H743I-EVAL TouchGFX sub-demonstration is provided as binaries only.
+<li><p>STM32H743I-EVAL TouchGFX sub-demonstration is provided as binaries only.</p>
 <ul>
 <li>The source code for this demonstration will be available in next STM32CubeH7 releases</li>
 </ul></li>
@@ -3575,9 +3620,9 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section6" aria-hidden="true"> <label for="collapse-section6" aria-hidden="true"><strong>V1.4.0 / 05-April-2019</strong></label>
 <div>
-<h2 id="main-changes-5">Main Changes</h2>
+<h2 id="main-changes-6">Main Changes</h2>
 <ul>
-<li>First official release to support STM32H7 <strong>Rev.V</strong> all lines:
+<li><p>First official release to support STM32H7 <strong>Rev.V</strong> all lines:</p>
 <ul>
 <li><strong>Dual Core</strong> lines: <strong>STM32H745xx/H755xx/H747xx/H757xx</strong></li>
 <li><strong>Value line</strong>: STM32H750xx</li>
@@ -3859,17 +3904,17 @@
 </ul></li>
 <li>Demonstrations
 <ul>
-<li>Rename root folder to STM32H743I-EVAL to align with board RPN</li>
-<li>General updates to fix known defects and enhancements implementation</li>
-<li>Update startup_stm32h743xx.s (EWARM, MDK-ARM and SW4STM32) to align with the template startup files</li>
-<li>Update stm32h7xx_hal_conf.h to align with the template</li>
-<li>Update system_stm32h7xx.c to align with the template</li>
-<li>Update projects (EWARM, MDK-ARM and SW4STM32) to use new STemWin libraries : v544_20180322_cm7</li>
-<li>Update projects (EWARM, MDK-ARM and SW4STM32) use new PDM libraries : v3.1.0</li>
-<li>Add cache maintenance to videoplayer module</li>
-<li>Align to the latest FreeRTOS version FreeRTOS_v10.0.1</li>
+<li><p>Rename root folder to STM32H743I-EVAL to align with board RPN</p></li>
+<li><p>General updates to fix known defects and enhancements implementation</p></li>
+<li><p>Update startup_stm32h743xx.s (EWARM, MDK-ARM and SW4STM32) to align with the template startup files</p></li>
+<li><p>Update stm32h7xx_hal_conf.h to align with the template</p></li>
+<li><p>Update system_stm32h7xx.c to align with the template</p></li>
+<li><p>Update projects (EWARM, MDK-ARM and SW4STM32) to use new STemWin libraries : v544_20180322_cm7</p></li>
+<li><p>Update projects (EWARM, MDK-ARM and SW4STM32) use new PDM libraries : v3.1.0</p></li>
+<li><p>Add cache maintenance to videoplayer module</p></li>
+<li><p>Align to the latest FreeRTOS version FreeRTOS_v10.0.1</p></li>
 <li><p>Binaries files removed from this package, refer to note bellow</p></li>
-<li>Note:
+<li><p>Note:</p>
 <ul>
 <li>The binary and Media demonstration files are available from the STM32H743I-EVAL page in the Binary Delivery section.
 <ul>
@@ -4337,11 +4382,11 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section5" aria-hidden="true"> <label for="collapse-section5" aria-hidden="true"><strong>V1.3.2 / 31-January-2019</strong></label>
 <div>
-<h2 id="main-changes-6">Main Changes</h2>
-<h3 id="patch-release">Patch release</h3>
+<h2 id="main-changes-7">Main Changes</h2>
+<h3 id="patch-release-1">Patch release</h3>
 <ul>
 <li><p>Patch release to add definition of UID_BASE (Unique device ID register base address) to the CMSIS STM32H7xx include files.</p></li>
-<li><strong>CMSIS</strong>
+<li><p><strong>CMSIS</strong></p>
 <ul>
 <li>CMSIS STM32H7xx include files : stm32h743xx.h, stm32h750xx.h and stm32h753xx.h.</li>
 </ul></li>
@@ -4463,11 +4508,11 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section4" aria-hidden="true"> <label for="collapse-section4" aria-hidden="true"><strong>V1.3.1 / 18-January-2019</strong></label>
 <div>
-<h2 id="main-changes-7">Main Changes</h2>
-<h3 id="patch-release-1">Patch release</h3>
+<h2 id="main-changes-8">Main Changes</h2>
+<h3 id="patch-release-2">Patch release</h3>
 <ul>
 <li><p>Patch release to Fix LwIP and mbedTLS applications : enhance Ethernet zero-copy feature allowing to fix ping behavior.</p></li>
-<li><strong>Projects</strong>
+<li><p><strong>Projects</strong></p>
 <ul>
 <li>STM32H743I_EVAL LwIP and mbedTLS applications : under STM32H743I_EVAL/Applications\LwIP and STM32H743I_EVAL/Applications\mbedTLS
 <ul>
@@ -4620,7 +4665,7 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section3" aria-hidden="true"> <label for="collapse-section3" aria-hidden="true"><strong>V1.3.0 / 29-June-2018</strong></label>
 <div>
-<h2 id="main-changes-8">Main Changes</h2>
+<h2 id="main-changes-9">Main Changes</h2>
 <ul>
 <li><strong>Add support for STM32H750xx value line</strong>
 <ul>
@@ -4786,7 +4831,7 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section2" aria-hidden="true"> <label for="collapse-section2" aria-hidden="true"><strong>V1.2.0 / 29-December-2017</strong></label>
 <div>
-<h2 id="main-changes-9">Main Changes</h2>
+<h2 id="main-changes-10">Main Changes</h2>
 <h3 id="maintenance-release-3">Maintenance release</h3>
 <ul>
 <li>Update projects to support new FatFs, MbedTLS and LwIP versions.</li>
@@ -4828,7 +4873,7 @@
 <li>Demonstrations
 <ul>
 <li><p>Align demonstration to the latest FatFs version R0.12c (ST modified 20171110)</p></li>
-<li>Note:
+<li><p>Note:</p>
 <ul>
 <li>Demonstrations Firmware for STM32H743I_EVAL provided within this package, don’t embed:
 <ul>
@@ -4964,14 +5009,14 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section1" aria-hidden="true"> <label for="collapse-section1" aria-hidden="true"><strong>V1.1.0 / 31-August-2017</strong></label>
 <div>
-<h2 id="main-changes-10">Main Changes</h2>
+<h2 id="main-changes-11">Main Changes</h2>
 <h3 id="maintenance-release-4">Maintenance release</h3>
 <ul>
-<li>Update projects to support new FatFs and STemWin versions.</li>
-<li>Add new FreeRTOS MPU application running on STM32H743I_EVAL and STM32H7xx_Nucleo_144, only EWARM Toolchain is supported.</li>
-<li>Add FWupgrade_Standalone and HID_LPM_Standalone applications running on STM32H743I_EVAL.</li>
+<li><p>Update projects to support new FatFs and STemWin versions.</p></li>
+<li><p>Add new FreeRTOS MPU application running on STM32H743I_EVAL and STM32H7xx_Nucleo_144, only EWARM Toolchain is supported.</p></li>
+<li><p>Add FWupgrade_Standalone and HID_LPM_Standalone applications running on STM32H743I_EVAL.</p></li>
 <li><p>Add Demonstration Firmware for STM32H743I_EVAL.</p></li>
-<li><strong>Note:</strong>
+<li><p><strong>Note:</strong></p>
 <ul>
 <li><strong>Demonstrations Firmware for STM32H743I_EVAL provided within this package, don’t embed:</strong></li>
 <li><strong>TouchGFX demonstration module. Free evaluation version of the TouchGFX demonstration, based on Draupner Graphics’ commercial graphic library, is available at <a href="https://www.touchgfx.com/product/supported-stm32-kits">www.touchgfx.com/stmicroelectronics</a></strong></li>
@@ -4991,10 +5036,10 @@
 <p><strong>STM32H743I-EVAL</strong></p>
 <ul>
 <li><p>Applications: Maintenance release</p></li>
-<li>Demonstrations
+<li><p>Demonstrations</p>
 <ul>
 <li><p>Official demonstration firmware release</p></li>
-<li>Note:
+<li><p>Note:</p>
 <ul>
 <li>Demonstrations Firmware for STM32H743I_EVAL provided within this package, don’t embed:
 <ul>
@@ -5003,8 +5048,8 @@
 </ul></li>
 </ul></li>
 </ul></li>
-<li>HAL Examples :Maintenance release</li>
-<li>HAL Templates
+<li><p>HAL Examples :Maintenance release</p></li>
+<li><p>HAL Templates</p>
 <ul>
 <li>Adjust PLL fractional computation</li>
 </ul></li>
@@ -5125,7 +5170,7 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section0" aria-hidden="true"> <label for="collapse-section0" aria-hidden="true"><strong>V1.0.0 / 21-April-2017</strong></label>
 <div>
-<h2 id="main-changes-11">Main Changes</h2>
+<h2 id="main-changes-12">Main Changes</h2>
 <p><strong>First official release of STM32CubeH7 (STM32Cube for STM32H7 Series)</strong></p>
 <p><strong>NUCLEO-H743ZI</strong>: First official release</p>
 <p><strong>STM32H743I-EVAL</strong>: First official release</p>
@@ -5242,7 +5287,7 @@
 </ul>
 </div>
 </div>
-</div>
+</section>
 </div>
 <footer class="sticky">
 <p>For complete documentation on STM32H7xx,visit: [<a href="http://www.st.com/stm32h7">www.st.com/stm32h7</a>]</p>

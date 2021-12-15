@@ -6,13 +6,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under Ultimate Liberty license
-  * SLA0044, the "License"; You may not use this file except in compliance with
-  * the License. You may obtain a copy of the License at:
-  *                             www.st.com/SLA0044
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -1425,7 +1424,7 @@ static void SetAlarmOnRTC(void)
 }
 
 /**
-  * @brief  Get the rigth alarm to set
+  * @brief  Get the right alarm to set
   * @param  none 
   * @retval int
   */
@@ -2049,7 +2048,7 @@ static void Startup(WM_HWIN hWin, uint16_t xpos, uint16_t ypos)
   k_GetTime(&Time);
   k_GetDate(&Date);
 
-  /* Initialise the alarmOnRTC stucture */
+  /* Initialise the alarmOnRTC structure */
   AlarmOnRTC.IndexAlarmOnRTC = (-1);
   AlarmOnRTC.Alarm_A_IsSet = 0;
   AlarmOnRTC.Alarm_B_IsSet = 0; 
@@ -2073,5 +2072,4 @@ static void Startup(WM_HWIN hWin, uint16_t xpos, uint16_t ypos)
   * @}
   */
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
 

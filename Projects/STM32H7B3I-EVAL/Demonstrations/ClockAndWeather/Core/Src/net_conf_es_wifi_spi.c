@@ -8,13 +8,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2017 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under Ultimate Liberty license
-  * SLA0044, the "License"; You may not use this file except in compliance with
-  * the License. You may obtain a copy of the License at:
-  *                             www.st.com/SLA0044
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -225,7 +224,7 @@ static uint32_t SPI_WIFI_MspInit(SPI_HandleTypeDef *hspi)
     GPIO_Init.Mode      = GPIO_MODE_AF_PP;
     GPIO_Init.Pull      = GPIO_NOPULL;
     GPIO_Init.Speed     = GPIO_SPEED_FREQ_MEDIUM;
-    GPIO_Init.Alternate = GPIO_AF5_SPI4;                /*TBD*/
+    GPIO_Init.Alternate = GPIO_AF5_SPI4;
     HAL_GPIO_Init(GPIOE, &GPIO_Init);
 
     /* configure SPI MOSI pin */
@@ -233,7 +232,7 @@ static uint32_t SPI_WIFI_MspInit(SPI_HandleTypeDef *hspi)
     GPIO_Init.Mode      = GPIO_MODE_AF_PP;
     GPIO_Init.Pull      = GPIO_NOPULL;
     GPIO_Init.Speed     = GPIO_SPEED_FREQ_MEDIUM;
-    GPIO_Init.Alternate = GPIO_AF5_SPI4;                /*TBD*/
+    GPIO_Init.Alternate = GPIO_AF5_SPI4;
     HAL_GPIO_Init(GPIOE, &GPIO_Init);
 
     /* configure SPI MISO pin */
@@ -241,7 +240,7 @@ static uint32_t SPI_WIFI_MspInit(SPI_HandleTypeDef *hspi)
     GPIO_Init.Mode      = GPIO_MODE_AF_PP;
     GPIO_Init.Pull      = GPIO_PULLUP;
     GPIO_Init.Speed     = GPIO_SPEED_FREQ_MEDIUM;
-    GPIO_Init.Alternate = GPIO_AF5_SPI4;                /*TBD*/
+    GPIO_Init.Alternate = GPIO_AF5_SPI4;
     HAL_GPIO_Init(GPIOE, &GPIO_Init);
     
     return ret;
@@ -671,4 +670,3 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 /**
   * @}
   */
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

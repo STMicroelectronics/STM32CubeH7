@@ -9,13 +9,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   @endverbatim
@@ -35,13 +34,13 @@ The APB clock dividers for CD Domain APB3 peripherals, CD Domain APB1 and APB2 p
 In the first part of the example the UART is configured for reception with Rx FIFO thhreshold
 set to one 1 QUARTER and enter the CPU to Stop Mode.
 The UART FIFO threshold interruption is enabled and ,by default, the UART FIFO full is disabled.
-The user has to send 4 bytes from the HyperTerminal. at the 4th recieved byte
+The user has to send 4 bytes from the HyperTerminal. at the 4th received byte
 the UART FIFO will reach the quarter level which will generate an interruption and wake-up the CPU.
 
 In the second part of the example, the UART is configured for reception with
 FIFO threshold interruption disabled and FIFO full enabled. then the CPU goes to stop mode.
 The user has to send 16 bytes (size of the UART FIFO) from the HyperTerminal.
-at the 16th recieved byte, the UART FIFO will be full which will generate an interruption and wake-up the CPU.
+at the 16th received byte, the UART FIFO will be full which will generate an interruption and wake-up the CPU.
 
 
 Board: STM32H7B3I-EVAL
@@ -146,5 +145,5 @@ In order to make the program work, you must do the following :
  - Rebuild all files and load your image into target memory
  - Run the example
 
- * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
+
  */

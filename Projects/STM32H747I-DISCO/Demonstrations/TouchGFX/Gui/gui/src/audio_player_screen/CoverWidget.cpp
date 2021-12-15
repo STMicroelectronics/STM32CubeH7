@@ -52,7 +52,7 @@ CoverWidget::CoverWidget() :
     progressKnob.setVisible(false);
     progressBackground.setVisible(false);
 
-    // TODO setTouchable true to enable audio seek.
+    //setTouchable true to enable audio seek.
     setTouchable(true);
     
     add(progressBackground);

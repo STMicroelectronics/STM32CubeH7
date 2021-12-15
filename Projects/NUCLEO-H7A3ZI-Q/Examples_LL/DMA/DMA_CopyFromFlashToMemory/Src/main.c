@@ -9,13 +9,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics. 
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the 
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -92,7 +91,7 @@ int main(void)
 
   /* Configure DMA2 Stream 0                                     */
   /* Enable DMA2 clock                                           */
-  /* Configure the DMA functionnal parameters :                  */
+  /* Configure the DMA functional parameters :                  */
   /*        - Transfer memory word to memory word in normal mode */
   /*        - Memory and Periph increment mode                   */
   /* Configure NVIC for DMA transfer complete/error interrupts   */
@@ -122,15 +121,15 @@ int main(void)
      SCB_InvalidateDCache_by_Addr((uint32_t *) aDST_Buffer, sizeof(aDST_Buffer) );
 
     /* DMA transfer completed */
-    /* Verify the data transfered */
+    /* Verify the data transferred */
     if (Buffercmp((uint32_t*)aSRC_Const_Buffer, (uint32_t*)aDST_Buffer, BUFFER_SIZE) != 0)
     {
-      /* DMA data transfered not correctly */
+      /* DMA data transferred not correctly */
       LED_Blinking(LED_BLINK_ERROR);
     }
     else
     {
-      /* DMA data transfered correctly*/
+      /* DMA data transferred correctly*/
       LED_On();
     }
   }
@@ -146,7 +145,7 @@ int main(void)
   *         Flash memory(aSRC_Const_Buffer) to Internal SRAM(aDST_Buffer).
   * @note   This function is used to :
   *         -1- Enable DMA2 clock
-  *         -2- Configure the DMA functionnal parameters
+  *         -2- Configure the DMA functional parameters
   *         -3- Configure NVIC for DMA transfer complete/error interrupts
   * @note   Peripheral configuration is minimal configuration from reset values.
   *         Thus, some useless LL unitary functions calls below are provided as
@@ -159,7 +158,7 @@ void Configure_DMA(void)
   /* (1) Enable the clock of DMA2 */
   LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_DMA2);
 
-  /* (2) Configure the DMA functionnal parameters */
+  /* (2) Configure the DMA functional parameters */
   /* Configuration of the DMA parameters can be done using unitary functions or using the specific configure function */ 
   /* Unitary Functions */
 
@@ -416,4 +415,3 @@ void assert_failed(uint8_t *file, uint32_t line)
   * @}
   */
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

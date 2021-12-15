@@ -73,7 +73,7 @@ void ControlsView::setupScreen()
     updateBrightnessText(75);
 
     brightnessPercentageText.setTypedText(TypedText(T_CONTROLS_BRIGHTNESS_PERCENTAGE));
-    brightnessPercentageText.moveTo(brightnessText.getRect().right() + 6, brightnessText.getY() + 50); //TODO use setBaseline
+    brightnessPercentageText.moveTo(brightnessText.getRect().right() + 6, brightnessText.getY() + 50); //Use setBaseline
     brightnessPercentageText.setColor(Color::getColorFrom24BitRGB(0xFF, 0xFF, 0xFF));
     brightnessScreen.add(brightnessPercentageText);
 

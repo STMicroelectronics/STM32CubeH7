@@ -6,13 +6,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -371,7 +370,7 @@ uint32_t GestureId = GESTURE_ID_NO_GESTURE;
     /* Erase previous information on bottom text bar */
     UTIL_LCD_FillRect(0, y_size - 80, x_size, 80, UTIL_LCD_COLOR_BLUE);
 
-    /* Desactivate drawing footprint of touch 1 and touch 2 until validated against boundaries of touch pad values */
+    /* Deactivate drawing footprint of touch 1 and touch 2 until validated against boundaries of touch pad values */
     drawTouch1 = drawTouch2 = 0;
 
     /* Get X and Y position of the first touch post calibrated */
@@ -696,4 +695,3 @@ uint8_t TouchScreen_GetTouchPosition(void)
 /**
   * @}
   */
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

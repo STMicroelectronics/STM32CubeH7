@@ -9,13 +9,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2018 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2018 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   @endverbatim
@@ -141,7 +140,7 @@ The BDMA channel 7 is configured in peripheral to memory mode to ensure data tra
 data register to the D3SRAM (@0x38000000). 
 After receiving 5 chunks of data, the BDMA transfer complete interrupt is generated and the system
 is waking up from Stop mode to send-back the received data if no error occurred.
-Finaly the system will restart automatically the reception process and re-enter STOP mode again.
+Finally the system will restart automatically the reception process and re-enter STOP mode again.
 
 The DMAMUX request generator block is configured using function "HAL_DMAEx_ConfigMuxRequestGenerator" 
 with the following parameters :
@@ -230,5 +229,5 @@ In order to make the program work, you must do the following :
      
 
 
- * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
+
  */

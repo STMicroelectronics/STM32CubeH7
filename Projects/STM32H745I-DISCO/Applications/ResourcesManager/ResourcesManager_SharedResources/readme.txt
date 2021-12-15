@@ -9,13 +9,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under Ultimate Liberty license
-  * SLA0044, the "License"; You may not use this file except in compliance with
-  * the License. You may obtain a copy of the License at:
-  *                             www.st.com/SLA0044
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   @endverbatim
@@ -121,7 +120,7 @@ ResourcesManager, multiprocessor, Resource share, Dual
 
   - This example runs on STM32H745xx devices.
     
-  - This application has been tested with STM32H745I_DISCO  board with SMPS (SD Convertor) power supply config and can be
+  - This application has been tested with STM32H745I_DISCO  board with SMPS (SD Converter) power supply config and can be
     easily tailored to any other supported device and development board.
 
 @par How to use it ? 
@@ -132,5 +131,5 @@ In order to make the program work, you must do the following :
  - Reset the Board so the 2 CPUs start running their respective code.
 
 
- * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
+
  */

@@ -193,7 +193,7 @@ void AudioPlayerView::onAction(Action action)
         topBar.setBackgroundVisible(true);
         bottomBar.setVisible(false);
         coverImage.setVisible(true);
-        coverImage.moveTo((HAL::DISPLAY_WIDTH - folderWidget.getWidth()) + 65, coverImage.getY() + 35); //todo mkj: Cover image is moved to the right part of the screen.
+        coverImage.moveTo((HAL::DISPLAY_WIDTH - folderWidget.getWidth()) + 65, coverImage.getY() + 35); //Cover image is moved to the right part of the screen.
         nextButton.setVisible(false);
         prevButton.setVisible(false);
         playButton.setVisible(false);

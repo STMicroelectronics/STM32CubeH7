@@ -63,7 +63,7 @@ void Equalizer::drag(const Slider& slider, int value)
     sliderValue.setVisible(true);
     sliderValue.moveTo(slider.getX() - 28, equalizerSlider.getIndicatorY() + 60);
 
-    Unicode::snprintf(sliderValueBuffer, 5, "%d", value); //todo
+    Unicode::snprintf(sliderValueBuffer, 5, "%d", value);
 
     sliderValueText.setVisible(true);
     sliderValueText.moveTo(slider.getX() - 70, equalizerSlider.getIndicatorY() + 62);

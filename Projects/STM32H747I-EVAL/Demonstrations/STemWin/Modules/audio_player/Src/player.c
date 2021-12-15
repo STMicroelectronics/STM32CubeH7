@@ -6,13 +6,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under Ultimate Liberty license
-  * SLA0044, the "License"; You may not use this file except in compliance with
-  * the License. You may obtain a copy of the License at:
-  *                             www.st.com/SLA0044
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -951,7 +950,7 @@ AUDIO_ErrorTypeDef PLAYER_DeInit(PLAYER_HANDLE_h pHandle)
 
   if(NULL != Instance)
   {
-    /* Immediatly stop HW */
+    /* Immediately stop HW */
     if(Instance->CurrentAudioState != AUDIO_STATE_INIT)
     {
       BSP_AUDIO_OUT_DeInit(0);
@@ -1257,12 +1256,12 @@ AUDIO_ErrorTypeDef PLAYER_Start(PLAYER_HANDLE_h pHandle, char *file_name)
   /* Configure the Decoder task priority */
   if (Instance->InputFileInfo.FileExtension=='3')
   {
-    /* Swith MP3 decoder priority to Low */
+    /* Switch MP3 decoder priority to Low */
     osThreadSetPriority(Instance->DecThreadInfo.AudioDecThreadId, AUDIO_DEC_THREAD_PRIORITY_L);
   }
   else
   {
-    /* Swith WAV decoder priority to High */
+    /* Switch WAV decoder priority to High */
     osThreadSetPriority(Instance->DecThreadInfo.AudioDecThreadId, AUDIO_DEC_THREAD_PRIORITY_H);
   }
 
@@ -1363,7 +1362,7 @@ AUDIO_ErrorTypeDef DecodeAudioBuffer(PLAYER_Instance_t *Instance, uint16_t nb_bu
 
     if(Instance->Decoder.CurrentDecoderState == DECODER_STATE_STOP)
     {
-      /* Someone asked to immediatly stop decoder */
+      /* Someone asked to immediately stop decoder */
       return AUDIO_ERROR_NONE;
     }
 
@@ -1879,4 +1878,3 @@ void FWK_MEMPOOL_Unlock(FWK_MEMPOOL_t *pMemPool)
   * @}
   */
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

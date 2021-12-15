@@ -6,13 +6,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -82,7 +81,7 @@ int main(void)
   HAL_Delay(2000); 
   BSP_LED_Off(LED3);
   
-  /* CM4 takes HW sempahore 0 to inform CM7 that he finished his job */
+  /* CM4 takes HW semaphore 0 to inform CM7 that he finished his job */
   HAL_HSEM_FastTake(HSEM_ID_0);
   /* Do not forget to release the HW semaphore 0 once needed */
   HAL_HSEM_Release(HSEM_ID_0, 0); 
@@ -126,4 +125,3 @@ void assert_failed(uint8_t *file, uint32_t line)
   * @}
   */
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

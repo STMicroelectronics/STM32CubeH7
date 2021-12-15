@@ -121,7 +121,7 @@ protected:
     Callback<HomeControlScreenView, const FadeAnimator<TextArea>&> textFadeEndedCallback;
     void textFadeEndedHandler(const FadeAnimator<TextArea>& src);
 
-    // The Callback registers when the showing which buttoms can be pressed is done
+    // The Callback registers when the showing which buttons can be pressed is done
     Callback<HomeControlScreenView, const FadeAnimator<Image>&> imageFadeCallback;
     void imageFadeHandler(const FadeAnimator<Image>& src);
 

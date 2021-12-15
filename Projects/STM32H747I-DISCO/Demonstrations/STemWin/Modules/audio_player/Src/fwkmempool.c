@@ -6,16 +6,15 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under Ultimate Liberty license
-  * SLA0044, the "License"; You may not use this file except in compliance with
-  * the License. You may obtain a copy of the License at:
-  *                             www.st.com/SLA0044
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
-*/
+  */
 /* Includes ------------------------------------------------------------------*/
 #include "fwkmempool.h"
 
@@ -244,7 +243,7 @@ int32_t FWK_MEMPOOL_GetState (FWK_MEMPOOL_t *pMemPool)
     if((MemPoolFreeSpc > pMemPool->buffSze)
          && (pMemPool->readPtr >= pMemPool->writePtr))
     {
-      /* It might happen that we continue reading while no more data are writen!
+      /* It might happen that we continue reading while no more data are written!
        * This would be giving a MemPoolFreeSpc value greater than the MemPool
        * Buffer Size. This is why the check is for value equal or greater than
        * the MemPool buffer size here below.
@@ -432,4 +431,3 @@ int32_t FWK_MEMPOOL_GetAvailableSize (FWK_MEMPOOL_t *pMemPool, int32_t *pSize)
 * @}
 */
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

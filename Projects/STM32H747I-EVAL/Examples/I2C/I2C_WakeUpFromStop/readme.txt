@@ -9,13 +9,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   @endverbatim
@@ -70,7 +69,7 @@ the configuration of the needed I2C resources according to the used hardware
 (CLOCK, GPIO and NVIC). You may update this function to change I2C configuration.
 
 The I2C communication is then initiated.
-The project is splitted in two parts: the Master instance and the Slave instance.
+The project is split in two parts: the Master instance and the Slave instance.
 - Master instance : I2C4 (managed by CM7)
   The HAL_I2C_Master_Receive_IT() and the HAL_I2C_Master_Transmit_IT() functions
   allow respectively the reception and the transmission of a predefined data buffer
@@ -126,7 +125,7 @@ file depending hardware configuration used.
 
 @par Keywords
 
-Connectivity, I2C, Communication, Trasmission, Reception, SCL, SDA, Low power, Stop mode, Wake up, Interrupt
+Connectivity, I2C, Communication, Transmission, Reception, SCL, SDA, Low power, Stop mode, Wake up, Interrupt
 
 @par Directory contents
 
@@ -161,11 +160,11 @@ Connectivity, I2C, Communication, Trasmission, Reception, SCL, SDA, Low power, S
 
 In order to make the program work, you must do the following :
  - Open your preferred toolchain
- - For each target configuartion (STM32H747I_EVAL_CM7 and STM32H747I_EVAL_CM4) :
+ - For each target configuration (STM32H747I_EVAL_CM7 and STM32H747I_EVAL_CM4) :
      - Rebuild all files
      - Load images into target memory
  - After loading the two images, you have to reset the board in order to boot (Cortex-M7) and CPU2 (Cortex-M4) at once.
  - Run the example
 
- * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
+
  */

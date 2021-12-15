@@ -6,13 +6,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under Ultimate Liberty license
-  * SLA0044, the "License"; You may not use this file except in compliance with
-  * the License. You may obtain a copy of the License at:
-  *                             www.st.com/SLA0044
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -112,7 +111,7 @@ BSP_AUDIO_Init_t AudioPlayInit;
     /* Enable CRC to Unlock Audio add-ons */
   __HAL_RCC_CRC_CLK_ENABLE();
   
-  /* Retreive stored settings*/
+  /* Retrieve stored settings*/
   AUDIO_EQ_Bands[0].gainDb = RTC_BkupRestoreParameter(AUDIOPLAYER_EQU1_BKP);
   AUDIO_EQ_Bands[1].gainDb = RTC_BkupRestoreParameter(AUDIOPLAYER_EQU2_BKP);    
   AUDIO_EQ_Bands[2].gainDb = RTC_BkupRestoreParameter(AUDIOPLAYER_EQU3_BKP);   
@@ -612,4 +611,3 @@ __weak AUDIOPLAYER_ErrorTypdef  AUDIOPLAYER_NotifyError(void)
   * @}
   */
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

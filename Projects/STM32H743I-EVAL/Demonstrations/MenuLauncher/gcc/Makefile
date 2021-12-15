@@ -134,7 +134,7 @@ c_compiler_options += -g3 \
                     -mno-thumb-interwork -std=c99 \
                     $(no_libs) \
                     -Os -fno-strict-aliasing -fdata-sections -ffunction-sections -fstack-usage
-#TODO removed -Wall
+#removed -Wall
 
 c_compiler_options += $(float_options)
 
@@ -144,7 +144,7 @@ cpp_compiler_options += -g3 -mthumb \
                     -mno-thumb-interwork -fno-rtti -fno-exceptions  \
                     -Os -fno-strict-aliasing -fdata-sections -ffunction-sections -fstack-usage
 
-#TODO removed -Wall
+#removed -Wall
 
 cpp_compiler_options += $(float_options)
 

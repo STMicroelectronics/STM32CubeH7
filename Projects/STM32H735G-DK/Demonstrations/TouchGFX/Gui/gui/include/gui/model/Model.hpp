@@ -173,7 +173,7 @@ protected:
     /* Variable which determines if the pop-up intro should be shown*/
     bool showIntro;
 
-    /* Varibles to handle the states of the kitchen elements*/
+    /* Variables to handle the states of the kitchen elements*/
     bool showLight;
     bool showPot;
     bool showOven;
@@ -189,7 +189,7 @@ protected:
     int16_t ovenTimerMinute;
     uint16_t ovenTemperature;
 
-    /* Varibles to handle the states of the bathroom elements*/
+    /* Variables to handle the states of the bathroom elements*/
     bool washerUIEntered;
     bool bathtubUIEntered;
     bool bathroomUIEntered;

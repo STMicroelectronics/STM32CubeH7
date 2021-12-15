@@ -1,4 +1,4 @@
-/**
+﻿/**
   @page Demonstrations Demonstration Firmware
  
   @verbatim
@@ -9,14 +9,12 @@
   ******************************************************************************
   * @attention
   *
-  
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under Ultimate Liberty license
-  * SLA0044, the "License"; You may not use this file except in compliance with
-  * the License. You may obtain a copy of the License at:
-  *                             www.st.com/SLA0044
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   @endverbatim
@@ -75,6 +73,10 @@ When a Sub-Demo is selected, the Menu Launcher will Display demo overview and ju
 when selecting start button.
 For more details on the supported demos, please refer to the readme.txt file for each demo.
 
+@par Keywords
+
+Demonstrations, Adafruit, Shield, TFT, Joystick, SD Card, Display 
+
 @par Hardware and Software environment
 
   - This demonstration runs on STM32H7B3xx devices.    
@@ -117,6 +119,6 @@ https://www.st.com/resource/en/compiled_demos/stm32h7b3i-dk_demo.zip
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series and STM32H7 Series"
       
- * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
+
  */
  

@@ -6,13 +6,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -288,7 +287,7 @@ AVISTATUS __AVI_Init( AVI_CONTEXT * pavi, uint8_t *buf, uint32_t size)
   * @brief  parse AVI file header
   * @param  pavi: AVI context
   * @param  AVI_FileAddress:   AVI file address 
-  * @retval AVI status (0 : no Error, 1: Error occured)
+  * @retval AVI status (0 : no Error, 1: Error occurred)
   */
 uint32_t AVI_ParserInit(AVI_CONTEXT * pavi, uint32_t AVI_FileAddress)
 {
@@ -367,4 +366,3 @@ uint32_t AVI_GetFrame(AVI_CONTEXT * pavi)
 
 
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

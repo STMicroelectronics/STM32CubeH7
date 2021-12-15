@@ -6,13 +6,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under Ultimate Liberty license
-  * SLA0044, the "License"; You may not use this file except in compliance with
-  * the License. You may obtain a copy of the License at:
-  *                             www.st.com/SLA0044
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -29,7 +28,8 @@ pFunction JumpToApplication;
 uint32_t JumpAddress;
 #define HSEM_ID_0 (0U) /* HW semaphore 0*/
 
-/* Private function prototypes ----------------------------------------------- */
+/* Private function prototypes -----------------------------------------------*/
+static void MPU_Config(void);
 static void SystemClock_Config(void);
 static void CPU_CACHE_Enable(void);
 void Error_Handler(void);
@@ -43,7 +43,10 @@ void Error_Handler(void);
   */
 int main(void)
 {
-  int32_t timeout;  
+  int32_t timeout;
+
+  /* Configure the MPU attributes */
+  MPU_Config();
 
   /* Enable the CPU Cache */
   CPU_CACHE_Enable();
@@ -69,19 +72,19 @@ int main(void)
 
   /* Configure the system clock */
   SystemClock_Config();
-  
-  /* When system initialization is finished, Cortex-M7 will release (wakeup) Cortex-M4  by means of 
+
+  /* When system initialization is finished, Cortex-M7 will release (wakeup) Cortex-M4  by means of
   HSEM notification. Cortex-M4 release could be also ensured by any Domain D2 wakeup source (SEV,EXTI..).
   */
-  
+
   /*HW semaphore Clock enable*/
   __HAL_RCC_HSEM_CLK_ENABLE();
-  
+
   /*Take HSEM */
-  HAL_HSEM_FastTake(HSEM_ID_0);   
-  /*Release HSEM in order to notify the CPU2(CM4)*/     
+  HAL_HSEM_FastTake(HSEM_ID_0);
+  /*Release HSEM in order to notify the CPU2(CM4)*/
   HAL_HSEM_Release(HSEM_ID_0,0);
-  
+
   /* wait until CPU2 wakes up from stop mode */
   timeout = 0xFFFF;
   while((__HAL_RCC_GET_FLAG(RCC_FLAG_D2CKRDY) == RESET) && (timeout-- > 0));
@@ -89,7 +92,7 @@ int main(void)
   {
     Error_Handler();
   }
-  
+
   /* -2- Unlock the Flash to enable the flash control register access
    * ************ */
   HAL_FLASH_Unlock();
@@ -103,7 +106,7 @@ int main(void)
     /* Test if user code is programmed starting from USBD_DFU_APP_DEFAULT_ADD
      * address */
     if (((*(__IO uint32_t *) USBD_DFU_APP_DEFAULT_ADD) & 0x2FFE0000) ==
-        0x20000000)
+        0x24000000)
     {
       /* Jump to user application */
       JumpAddress = *(__IO uint32_t *) (USBD_DFU_APP_DEFAULT_ADD + 4);
@@ -116,7 +119,7 @@ int main(void)
   }
 
   HAL_PWREx_EnableUSBVoltageDetector();
-  
+
   /* Otherwise enters DFU mode to allow user programming his application */
   /* Init Device Library */
   USBD_Init(&USBD_Device, &DFU_Desc, 0);
@@ -173,8 +176,8 @@ void SystemClock_Config(void)
   /*!< Supply configuration update enable */
   HAL_PWREx_ConfigSupply(PWR_DIRECT_SMPS_SUPPLY);
 
-  /* The voltage scaling allows optimizing the power consumption when the device is 
-     clocked below the maximum system frequency, to update the voltage scaling value 
+  /* The voltage scaling allows optimizing the power consumption when the device is
+     clocked below the maximum system frequency, to update the voltage scaling value
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
 
@@ -246,6 +249,7 @@ void Error_Handler(void)
   }
 }
 
+
 /**
   * @brief  CPU L1-Cache enable.
   * @param  None
@@ -258,6 +262,53 @@ static void CPU_CACHE_Enable(void)
 
   /* Enable D-Cache */
   SCB_EnableDCache();
+}
+
+
+/**
+  * @brief  Configure the MPU attributes
+  * @param  None
+  * @retval None
+  */
+static void MPU_Config(void)
+{
+  MPU_Region_InitTypeDef MPU_InitStruct;
+
+  /* Disable the MPU */
+  HAL_MPU_Disable();
+
+  /* Configure the MPU as Strongly ordered for not defined regions */
+  MPU_InitStruct.Enable = MPU_REGION_ENABLE;
+  MPU_InitStruct.BaseAddress = 0x00;
+  MPU_InitStruct.Size = MPU_REGION_SIZE_4GB;
+  MPU_InitStruct.AccessPermission = MPU_REGION_NO_ACCESS;
+  MPU_InitStruct.IsBufferable = MPU_ACCESS_NOT_BUFFERABLE;
+  MPU_InitStruct.IsCacheable = MPU_ACCESS_NOT_CACHEABLE;
+  MPU_InitStruct.IsShareable = MPU_ACCESS_SHAREABLE;
+  MPU_InitStruct.Number = MPU_REGION_NUMBER0;
+  MPU_InitStruct.TypeExtField = MPU_TEX_LEVEL0;
+  MPU_InitStruct.SubRegionDisable = 0x87;
+  MPU_InitStruct.DisableExec = MPU_INSTRUCTION_ACCESS_DISABLE;
+
+  HAL_MPU_ConfigRegion(&MPU_InitStruct);
+
+  /* Configure the MPU attributes as Normal Non Cacheable for SRAM1 */
+  MPU_InitStruct.Enable = MPU_REGION_ENABLE;
+  MPU_InitStruct.BaseAddress = 0x24000000;
+  MPU_InitStruct.Size = MPU_REGION_SIZE_512KB;
+  MPU_InitStruct.AccessPermission = MPU_REGION_FULL_ACCESS;
+  MPU_InitStruct.IsBufferable = MPU_ACCESS_NOT_BUFFERABLE;
+  MPU_InitStruct.IsCacheable = MPU_ACCESS_NOT_CACHEABLE;
+  MPU_InitStruct.IsShareable = MPU_ACCESS_NOT_SHAREABLE;
+  MPU_InitStruct.Number = MPU_REGION_NUMBER1;
+  MPU_InitStruct.TypeExtField = MPU_TEX_LEVEL1;
+  MPU_InitStruct.SubRegionDisable = 0x00;
+  MPU_InitStruct.DisableExec = MPU_INSTRUCTION_ACCESS_ENABLE;
+
+  HAL_MPU_ConfigRegion(&MPU_InitStruct);
+
+  /* Enable the MPU */
+  HAL_MPU_Enable(MPU_PRIVILEGED_DEFAULT);
 }
 
 #ifdef  USE_FULL_ASSERT
@@ -281,4 +332,3 @@ void assert_failed(uint8_t * file, uint32_t line)
 }
 #endif
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

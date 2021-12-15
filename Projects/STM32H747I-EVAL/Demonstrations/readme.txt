@@ -9,14 +9,12 @@
   ******************************************************************************
   * @attention
   *
-  
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under Ultimate Liberty license
-  * SLA0044, the "License"; You may not use this file except in compliance with
-  * the License. You may obtain a copy of the License at:
-  *                             www.st.com/SLA0044
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   @endverbatim
@@ -259,7 +257,7 @@ is a scrolling list.
 
  ++ Temperature
  ---------------
- This option allows to fix temperature fo the washing, it goes between cold and 95 degree.
+ This option allows to fix temperature for the washing, it goes between cold and 95 degree.
 
  ++ Finish
  -----------
@@ -294,7 +292,7 @@ Upon Paper Cutter demonstration pick up, four options are available:
  ++ Output Format
  -----------------
  This custom allows to choose the size of th paper, different din paper formats are available from A3 to A8 on the right side of the screen,
- On the left side a graphical representation of the paper which user can manualy pick his preferred din paper format. 
+ On the left side a graphical representation of the paper which user can manually pick his preferred din paper format. 
  Once wanted dimension selected, click on the green circular green 'OK' button to save the choice.
  To cancel the choice, on the bottom right size, click on the cancel button.
 
@@ -349,6 +347,11 @@ https://www.st.com/resource/en/compiled_demos/stm32h757i-eval_demo.zip
 
 Notes: STM32H747I-EVAL and STM32H757I-EVAL boards are sharing the same demonstration binaries
 
+
+@par Keywords
+
+Demonstrations, Adafruit, Shield, TFT, Joystick, SD Card, Display 
+
 @par Hardware and Software environment
 
  1 - The jumpers configuration is as follows:
@@ -387,6 +390,6 @@ Notes: STM32H747I-EVAL and STM32H757I-EVAL boards are sharing the same demonstra
   - This application has been tested with STM32H747I-EVAL board and can be
     tailored to any other supported device and development board.
 
- * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
+
  */
  

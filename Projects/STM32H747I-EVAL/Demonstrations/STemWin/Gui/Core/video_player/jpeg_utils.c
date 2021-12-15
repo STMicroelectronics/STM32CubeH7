@@ -83,13 +83,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -102,7 +101,7 @@
   */
 
 /** @defgroup JPEG JPEG
-* @brief JPEG YCbCr blocks <-> RGB conversion utilties  
+* @brief JPEG YCbCr blocks <-> RGB conversion utilities  
 * @{
 */
 
@@ -414,7 +413,7 @@ static void JPEG_InitPostProcColorTables(void);
   * @param  BlockIndex : index of the input buffer first block in the final image.
   * @param  DataCount  : number of bytes in the input buffer .
   * @param  ConvertedDataCount  : number of converted bytes from input buffer.  
-  * @retval Number of blcoks converted from RGB to YCbCr
+  * @retval Number of blocks converted from RGB to YCbCr
   */
 static uint32_t JPEG_ARGB_MCU_YCbCr420_ConvertBlocks (uint8_t *pInBuffer, 
                                       uint8_t *pOutBuffer, 
@@ -559,7 +558,7 @@ static uint32_t JPEG_ARGB_MCU_YCbCr420_ConvertBlocks (uint8_t *pInBuffer,
   * @param  BlockIndex : index of the input buffer first block in the final image.
   * @param  DataCount  : number of bytes in the input buffer .
   * @param  ConvertedDataCount  : number of converted bytes from input buffer.  
-  * @retval Number of blcoks converted from RGB to YCbCr
+  * @retval Number of blocks converted from RGB to YCbCr
   */
 static uint32_t JPEG_ARGB_MCU_YCbCr422_ConvertBlocks (uint8_t *pInBuffer, 
                                       uint8_t *pOutBuffer, 
@@ -672,7 +671,7 @@ static uint32_t JPEG_ARGB_MCU_YCbCr422_ConvertBlocks (uint8_t *pInBuffer,
   * @param  BlockIndex : index of the input buffer first block in the final image.
   * @param  DataCount  : number of bytes in the input buffer .
   * @param  ConvertedDataCount  : number of converted bytes from input buffer.  
-  * @retval Number of blcoks converted from RGB to YCbCr
+  * @retval Number of blocks converted from RGB to YCbCr
   */
 static uint32_t JPEG_ARGB_MCU_YCbCr444_ConvertBlocks (uint8_t *pInBuffer, 
                                       uint8_t *pOutBuffer, 
@@ -763,7 +762,7 @@ static uint32_t JPEG_ARGB_MCU_YCbCr444_ConvertBlocks (uint8_t *pInBuffer,
   * @param  BlockIndex : index of the input buffer first block in the final image.
   * @param  DataCount  : number of bytes in the input buffer .
   * @param  ConvertedDataCount  : number of converted bytes from input buffer.  
-  * @retval Number of blcoks converted from RGB to Gray
+  * @retval Number of blocks converted from RGB to Gray
   */
 static uint32_t JPEG_ARGB_MCU_Gray_ConvertBlocks(uint8_t *pInBuffer, 
                                       uint8_t *pOutBuffer, 
@@ -851,7 +850,7 @@ static uint32_t JPEG_ARGB_MCU_Gray_ConvertBlocks(uint8_t *pInBuffer,
   * @param  BlockIndex : index of the input buffer first block in the final image.
   * @param  DataCount  : number of bytes in the input buffer .
   * @param  ConvertedDataCount  : number of converted bytes from input buffer.  
-  * @retval Number of blcoks converted from RGB to YCCK
+  * @retval Number of blocks converted from RGB to YCCK
   */
 static uint32_t JPEG_ARGB_MCU_YCCK_ConvertBlocks(uint8_t *pInBuffer, 
                                       uint8_t *pOutBuffer, 
@@ -1095,7 +1094,7 @@ HAL_StatusTypeDef JPEG_GetEncodeColorConvertFunc(JPEG_ConfTypeDef *pJpegInfo, JP
   * @param  BlockIndex : index of the input buffer first block in the final image.
   * @param  DataCount  : number of bytes in the input buffer .
   * @param  ConvertedDataCount  : number of converted bytes from input buffer.  
-  * @retval Number of blcoks converted from YCbCr to RGB 
+  * @retval Number of blocks converted from YCbCr to RGB 
   */
 
 static uint32_t JPEG_MCU_YCbCr420_ARGB_ConvertBlocks(uint8_t *pInBuffer, 
@@ -1280,7 +1279,7 @@ static uint32_t JPEG_MCU_YCbCr420_ARGB_ConvertBlocks(uint8_t *pInBuffer,
   * @param  BlockIndex : index of the input buffer first block in the final image.
   * @param  DataCount  : number of bytes in the input buffer .
   * @param  ConvertedDataCount  : number of converted bytes from input buffer.  
-  * @retval Number of blcoks converted from YCbCr to RGB 
+  * @retval Number of blocks converted from YCbCr to RGB 
   */
 static uint32_t JPEG_MCU_YCbCr422_ARGB_ConvertBlocks(uint8_t *pInBuffer, 
                                       uint8_t *pOutBuffer,
@@ -1411,7 +1410,7 @@ static uint32_t JPEG_MCU_YCbCr422_ARGB_ConvertBlocks(uint8_t *pInBuffer,
   * @param  BlockIndex : index of the input buffer first block in the final image.
   * @param  DataCount  : number of bytes in the input buffer .
   * @param  ConvertedDataCount  : number of converted bytes from input buffer.  
-  * @retval Number of blcoks converted from YCbCr to RGB 
+  * @retval Number of blocks converted from YCbCr to RGB 
   */
 static uint32_t JPEG_MCU_YCbCr444_ARGB_ConvertBlocks(uint8_t *pInBuffer, 
                                       uint8_t *pOutBuffer,
@@ -1516,7 +1515,7 @@ static uint32_t JPEG_MCU_YCbCr444_ARGB_ConvertBlocks(uint8_t *pInBuffer,
   * @param  BlockIndex : index of the input buffer first block in the final image.
   * @param  DataCount  : number of bytes in the input buffer .
   * @param  ConvertedDataCount  : number of converted bytes from input buffer.  
-  * @retval Number of blcoks converted from YCbCr to RGB 
+  * @retval Number of blocks converted from YCbCr to RGB 
   */
 static uint32_t JPEG_MCU_Gray_ARGB_ConvertBlocks(uint8_t *pInBuffer, 
                                       uint8_t *pOutBuffer,
@@ -1593,7 +1592,7 @@ static uint32_t JPEG_MCU_Gray_ARGB_ConvertBlocks(uint8_t *pInBuffer,
   * @param  BlockIndex : index of the input buffer first block in the final image.
   * @param  DataCount  : number of bytes in the input buffer .
   * @param  ConvertedDataCount  : number of converted bytes from input buffer.  
-  * @retval Number of blcoks converted from CMYK to RGB 
+  * @retval Number of blocks converted from CMYK to RGB 
   */
 static uint32_t JPEG_MCU_YCCK_ARGB_ConvertBlocks(uint8_t *pInBuffer, 
                                       uint8_t *pOutBuffer, 
@@ -1971,4 +1970,3 @@ static uint8_t *JPEG_Set_K_Blocks(uint8_t *pMCUBuffer, uint8_t pKBlocks[16][16],
 }
 #endif /* USE_JPEG_ENCODER == 1 */
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

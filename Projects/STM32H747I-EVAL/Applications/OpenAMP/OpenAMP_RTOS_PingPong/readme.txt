@@ -9,13 +9,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under Ultimate Liberty license
-  * SLA0044, the "License"; You may not use this file except in compliance with
-  * the License. You may obtain a copy of the License at:
-  *                             www.st.com/SLA0044
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   @endverbatim
@@ -100,14 +99,14 @@ OpenAMP, multiprocessor, HSEM, Inter processor communication, Communication chan
 @par Directory contents
     - OpenAMP/OpenAMP_RTOS_PingPong/CM7/Src/main_cm7.c                     Main CM7 program
     - OpenAMP/OpenAMP_RTOS_PingPong/CM7/Src/stm32h7xx_it.c                 CM7 Interrupt handlers
-    - OpenAMP/OpenAMP_RTOS_PingPong/CM7/Src/stm32h7xx_hal_timebase_tim.c   TIM HAL timebase implmentation
+    - OpenAMP/OpenAMP_RTOS_PingPong/CM7/Src/stm32h7xx_hal_timebase_tim.c   TIM HAL timebase implementation
     - OpenAMP/OpenAMP_RTOS_PingPong/CM4/Src/main_cm4.c                     Main CM4 program
     - OpenAMP/OpenAMP_RTOS_PingPong/CM4/Src/stm32h7xx_it.c                 CM4 Interrupt handlers
 
     - OpenAMP/OpenAMP_RTOS_PingPong/Common/Src/rsc_table.c                 Resource_table for OpenAMP
     - OpenAMP/OpenAMP_RTOS_PingPong/Common/Src/system_stm32h7xx.c          STM32H7xx system configuration file
-    - OpenAMP/OpenAMP_RTOS_PingPong/Common/Src/mbox_hsem.c                 HSEM mailibox inteface implementation
-    - OpenAMP/OpenAMP_RTOS_PingPong/Common/Src/openamp.c                   OpenAMP APi wrapper inteface
+    - OpenAMP/OpenAMP_RTOS_PingPong/Common/Src/mbox_hsem.c                 HSEM mailibox interface implementation
+    - OpenAMP/OpenAMP_RTOS_PingPong/Common/Src/openamp.c                   OpenAMP APi wrapper interface
 
     - OpenAMP/OpenAMP_RTOS_PingPong/CM7/Inc/main.h                         Main CM7 program header file
     - OpenAMP/OpenAMP_RTOS_PingPong/CM7/Inc/FreeRTOS.h                     FreeRTOS configuration file
@@ -119,7 +118,7 @@ OpenAMP, multiprocessor, HSEM, Inter processor communication, Communication chan
 
     - OpenAMP/OpenAMP_RTOS_PingPong/Common/Inc/openamp.h                   User OpenAMP initialization header file
     - OpenAMP/OpenAMP_RTOS_PingPong/Common/Inc/rsc_table.h                 Resource_table for OpenAMP header file
-    - OpenAMP/OpenAMP_RTOS_PingPong/Common/Inc/mbox_hsem.h                 HSEM mailibox inteface header file
+    - OpenAMP/OpenAMP_RTOS_PingPong/Common/Inc/mbox_hsem.h                 HSEM mailibox interface header file
     - OpenAMP/OpenAMP_RTOS_PingPong/Common/Inc/openamp_conf.h              openamp configuration header
 
 
@@ -141,5 +140,5 @@ In order to make the program work, you must do the following :
  - After loading the two images, you have to reset the board in order to boot CPU1 (Cortex-M7) and CPU2 (Cortex-M4) at once.
  - Run the example
 
- * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
+
  */

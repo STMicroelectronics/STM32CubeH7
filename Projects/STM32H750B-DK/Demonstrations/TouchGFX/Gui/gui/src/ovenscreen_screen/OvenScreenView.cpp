@@ -372,7 +372,7 @@ void OvenScreenView::handleDragEvent(const DragEvent& evt)
 
 void OvenScreenView::handleTickEvent()
 {
-    //when a text is set to change color EasingEquation is used to calcualte the new RGB value which is assigned to the text area
+    //when a text is set to change color EasingEquation is used to calculate the new RGB value which is assigned to the text area
     if (changeColorTemp && colorCnt <= OVEN_FADE_DURATION)
     {
         int tempR = EasingEquations::cubicEaseOut(colorCnt, Color::getRedColor(currentColor.getColor32()), -(Color::getRedColor(currentColor.getColor32()) - Color::getRedColor(goalColor.getColor32())), OVEN_FADE_DURATION);

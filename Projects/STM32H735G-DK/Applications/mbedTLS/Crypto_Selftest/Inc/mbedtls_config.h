@@ -2536,7 +2536,7 @@
 /**
  * \def MBEDTLS_PK_C
  *
- * Enable the generic public (asymetric) key layer.
+ * Enable the generic public (asymmetric) key layer.
  *
  * Module:  library/pk.c
  * Caller:  library/ssl_tls.c
@@ -2552,7 +2552,7 @@
 /**
  * \def MBEDTLS_PK_PARSE_C
  *
- * Enable the generic public (asymetric) key parser.
+ * Enable the generic public (asymmetric) key parser.
  *
  * Module:  library/pkparse.c
  * Caller:  library/x509_crt.c
@@ -2567,7 +2567,7 @@
 /**
  * \def MBEDTLS_PK_WRITE_C
  *
- * Enable the generic public (asymetric) key writer.
+ * Enable the generic public (asymmetric) key writer.
  *
  * Module:  library/pkwrite.c
  * Caller:  library/x509write.c

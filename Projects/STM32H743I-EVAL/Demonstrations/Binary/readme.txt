@@ -20,6 +20,6 @@ www.st.com/en/product/stm32h743i-eval.html
 Direct link: 
 https://www.st.com/resource/en/compiled_demos/stm32h743i-eval_demo.zip
 
- * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
+
  */
  

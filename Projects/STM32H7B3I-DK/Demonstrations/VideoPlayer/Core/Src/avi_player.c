@@ -2,17 +2,16 @@
 ******************************************************************************
 * @file    avi_player.c
 * @author  MCD Application Team
-* @brief   avi player allows to decode/play  audio and video chuncks
+* @brief   avi player allows to decode/play  audio and video chunks
 ******************************************************************************
 * @attention
 *
-* <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-* All rights reserved.</center></h2>
+* Copyright (c) 2019 STMicroelectronics.
+* All rights reserved.
 *
-* This software component is licensed by ST under BSD 3-Clause license,
-* the "License"; You may not use this file except in compliance with the
-* License. You may obtain a copy of the License at:
-*                        opensource.org/licenses/BSD-3-Clause
+* This software is licensed under terms that can be found in the LICENSE file
+* in the root directory of this software component.
+* If no LICENSE file comes with this software, it is provided AS-IS.
 *
 ******************************************************************************
 */
@@ -184,7 +183,7 @@ static void audio_play(void const *argument)
       
       if (msg == AUDIO_STOPPED_EVT)
       {      
-        /* either the actual eof is reached or an access error occured*/
+        /* either the actual eof is reached or an access error occurred*/
         player->player_state = PLAYER_EOF_REACHED;
         BSP_AUDIO_OUT_Stop(player->audio_handle->AudioInstance);
       }

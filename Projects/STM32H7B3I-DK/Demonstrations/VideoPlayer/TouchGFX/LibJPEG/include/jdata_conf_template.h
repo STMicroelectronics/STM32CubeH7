@@ -11,13 +11,14 @@
   *              provided based on FatFs)
   *          
   ******************************************************************************
+  * @attention
   *
-  * Copyright (c) 2019 STMicroelectronics. All rights reserved.
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                       opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
 **/
@@ -34,7 +35,7 @@
 /*
   Example of implementation based on FatFS
   
-  If JFREAD/JFWRITE prototypes are complient with the standard FatFS APIs (f_read/f_write) 
+  If JFREAD/JFWRITE prototypes are compliant with the standard FatFS APIs (f_read/f_write) 
   only APIs re-definition is needed and no need to wrapper APIs defined in "jdata_conf_template.c" file
 
    #define JFREAD  f_read

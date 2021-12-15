@@ -9,13 +9,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   @endverbatim
@@ -107,7 +106,7 @@ SD Card, SDRAM
   - JPEG/JPEG_EncodingFromFLASH_DMA/CM7/Inc/ffconf.h                      FAT file system module configuration file
   - JPEG/JPEG_EncodingFromFLASH_DMA/CM7/Inc/encode_dma.h                  Header for encode_dma.c module
   - JPEG/JPEG_EncodingFromFLASH_DMA/CM7/Inc/sd_diskio.h                   Header for sd_diskio.c module    
-  - JPEG/JPEG_EncodingFromFLASH_DMA/CM7/Inc/jpeg_utils_conf.h             JPEG utilties module configuration file
+  - JPEG/JPEG_EncodingFromFLASH_DMA/CM7/Inc/jpeg_utils_conf.h             JPEG utilities module configuration file
   - JPEG/JPEG_EncodingFromFLASH_DMA/CM7/Inc/image_320_240_rgb.h           Specification of RGB image to load in FLASH
   - JPEG/JPEG_EncodingFromFLASH_DMA/CM7/Src/stm32H7xx_it.c                Interrupt handlers for Cortex-M7
   - JPEG/JPEG_EncodingFromFLASH_DMA/CM7/Src/main.c                        Main program for Cortex-M7
@@ -139,11 +138,11 @@ SD Card, SDRAM
 
 In order to make the program work, you must do the following :
  - Open your preferred toolchain 
- - For each target configuartion (STM32H747I_EVAL_CM7 and STM32H747I_EVAL_CM4) : 
+ - For each target configuration (STM32H747I_EVAL_CM7 and STM32H747I_EVAL_CM4) : 
      - Rebuild all files 
      - Load images into target memory
  - After loading the two images, you have to reset the board in order to boot (Cortex-M7) and CPU2 (Cortex-M4) at once.
  - Run the example
 
- * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
+
  */

@@ -122,7 +122,7 @@ void WheelSelector::handleClickEvent(const ClickEvent& evt)
 
                 if (newYPosition == textContainer.getY())
                 {
-                    // TODO selected element pressed
+                    // Selected element pressed
                 }
             }
 

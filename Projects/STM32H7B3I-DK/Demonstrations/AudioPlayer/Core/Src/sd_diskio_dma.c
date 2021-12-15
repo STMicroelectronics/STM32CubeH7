@@ -6,12 +6,12 @@
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2019 STMicroelectronics. All rights reserved.
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                       opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -51,7 +51,7 @@
 #define DISABLE_SD_INIT
 
 /*
-* when using cachable memory region, it may be needed to maintain the cache
+* when using cacheable memory region, it may be needed to maintain the cache
 * validity. Enable the define below to activate a cache maintenance at each
 * read and write operation.
 * Notice: This is applicable only for cortex M7 based platform.
@@ -59,7 +59,7 @@
  #define ENABLE_SD_DMA_CACHE_MAINTENANCE  1
 
 /*
-* Some DMA requires 4-Byte aligned address buffer to correctly read/wite data,
+* Some DMA requires 4-Byte aligned address buffer to correctly read/write data,
 * in FatFs some accesses aren't thus we need a 4-byte aligned scratch buffer to correctly
 * transfer data
 */
@@ -206,7 +206,7 @@ DRESULT SD_read(BYTE lun, BYTE *buff, DWORD sector, UINT count)
       while((ReadStatus == 0) && ((HAL_GetTick() - timeout) < SD_TIMEOUT))
       {
       }
-      /* incase of a timeout return error */
+      /* in case of a timeout return error */
       if (ReadStatus == 0)
       {
         res = RES_ERROR;
@@ -331,7 +331,7 @@ DRESULT SD_write(BYTE lun, const BYTE *buff, DWORD sector, UINT count)
       while((WriteStatus == 0) && ((HAL_GetTick() - timeout) < SD_TIMEOUT))
       {
       }
-      /* incase of a timeout return error */
+      /* in case of a timeout return error */
       if (WriteStatus == 0)
       {
         res = RES_ERROR;
@@ -487,5 +487,4 @@ void BSP_SD_AbortCallback(void)
 {
 }
 */
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
 

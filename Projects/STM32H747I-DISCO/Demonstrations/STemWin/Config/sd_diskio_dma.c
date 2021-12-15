@@ -7,13 +7,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under Ultimate Liberty license
-  * SLA0044, the "License"; You may not use this file except in compliance with
-  * the License. You may obtain a copy of the License at:
-  *                             www.st.com/SLA0044
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -54,7 +53,7 @@
 
 
 /*
- * when using cachable memory region, it may be needed to maintain the cache
+ * when using cacheable memory region, it may be needed to maintain the cache
  * validity. Enable the define below to activate a cache maintenance at each
  * read and write operation.
  * Notice: This is applicable only for cortex M7 based platform.
@@ -66,13 +65,13 @@
 #define CACHE_BYTES             32      /* Cache Line size in bytes */
 #endif /* ENABLE_SD_DMA_CACHE_MAINTENANCE */
 
-/* Private macors ------------------------------------------------------------*/
+/* Private macros ------------------------------------------------------------*/
 #if (ENABLE_SD_DMA_CACHE_MAINTENANCE == 1)
 /* Address Align to Cache Line boundary address */
 #define CACHE_ALIGN_UP_ADDR(_ADDR_)   (((_ADDR_)+(CACHE_BYTES-1)) &~(CACHE_BYTES-1))
 #define CACHE_ALIGN_DOWN_ADDR(_ADDR_) ( (_ADDR_) &~(CACHE_BYTES-1))
 
-/* Size Alignement to Cache Line Size */
+/* Size Alignment to Cache Line Size */
 #define CACHE_ALIGN_SIZE(_SIZE_) ((((_SIZE_) % CACHE_BYTES) == 0)              \
     ? (_SIZE_) : ((_SIZE_) + CACHE_BYTES - ((_SIZE_) % CACHE_BYTES)))
 #endif /* ENABLE_SD_DMA_CACHE_MAINTENANCE */
@@ -256,7 +255,7 @@ DRESULT SD_read(BYTE lun, BYTE *buff, DWORD sector, UINT count)
                     res = RES_OK;
 #if (ENABLE_SD_DMA_CACHE_MAINTENANCE == 1)
                     /*
-                       Invalide Cache Data Lines content so next CPU will ftech data from RAM
+                       Invalid Cache Data Lines content so next CPU will ftech data from RAM
                        not Cache Lines.
                      */
                     SCB_InvalidateDCache_by_Addr(alignedAddr, alignedSize);
@@ -473,4 +472,3 @@ void BSP_SD_AbortCallback(void)
 
   osMessagePut(SDQueueID, RW_ABORT_MSG, osWaitForever);
 }
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
