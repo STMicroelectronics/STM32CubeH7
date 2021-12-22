@@ -166,14 +166,14 @@ SECTIONS
 
   
   .lwip_sec (NOLOAD) : {
-    . = ABSOLUTE(0x30040000);
+    . = ABSOLUTE(0x30000000);
     *(.RxDecripSection) 
     
-    . = ABSOLUTE(0x30040060);
+    . = ABSOLUTE(0x30000200);
     *(.TxDecripSection)
     
-    . = ABSOLUTE(0x30040200);
-    *(.RxArraySection) 
+    . = ABSOLUTE(0x30000400);
+    *(.LwIP_HeapSection) 
   } >RAM_D2 AT> FLASH
 
   /* Remove information from the standard libraries */

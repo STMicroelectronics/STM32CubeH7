@@ -1,12 +1,12 @@
 /**
   ******************************************************************************
-  * @file    LwIP/LwIP_HTTP_Server_Netconn_RTOS/Inc/httpserver-netconn.h 
+  * @file    LwIP/LwIP_HTTP_Server_Netconn_RTOS/Inc/httpserver-netconn.h
   * @author  MCD Application Team
   * @brief   Header for httpserver-netconn.c module
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2019 STMicroelectronics.
+  * Copyright (c) 2017-2021 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -20,7 +20,6 @@
 #define __HTTPSERVER_NETCONN_H__
 
 #include "lwip/api.h"
-
 void http_server_netconn_init(void);
 void DynWebPage(struct netconn *conn);
 

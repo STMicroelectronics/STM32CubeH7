@@ -1,12 +1,12 @@
 /**
   ******************************************************************************
-  * @file    LwIP/LwIP_HTTP_Server_Netconn_RTOS/Inc/app_ethernet.h 
+  * @file    LwIP/LwIP_HTTP_Server_Netconn_RTOS/Inc/app_ethernet.h
   * @author  MCD Application Team
   * @brief   Header for app_ethernet.c module
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2019 STMicroelectronics.
+  * Copyright (c) 2017-2021 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -36,19 +36,20 @@
 #define DHCP_ADDRESS_ASSIGNED      (uint8_t) 3
 #define DHCP_TIMEOUT               (uint8_t) 4
 #define DHCP_LINK_DOWN             (uint8_t) 5
-   
+
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */
 void ethernet_link_status_updated(struct netif *netif);
 #if LWIP_DHCP
 void DHCP_Thread(void* argument);
-#endif  
+#endif
 
 #ifdef __cplusplus
 }
 #endif
 
 #endif /* __APP_ETHERNET_H */
+
 
 
 

@@ -9,7 +9,7 @@
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2017 STMicroelectronics.
+  * Copyright (c) 2017-2021 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -79,7 +79,7 @@ int main(void)
 
   /* Init thread */
   osKernelInitialize();
-  
+
   attr.name = "Start";
   attr.stack_size = 4 * configMINIMAL_STACK_SIZE;
   attr.priority = osPriorityNormal;
@@ -297,10 +297,10 @@ static void SystemClock_Config(void)
 static void MPU_Config(void)
 {
   MPU_Region_InitTypeDef MPU_InitStruct;
-  
+
   /* Disable the MPU */
   HAL_MPU_Disable();
-
+  
   /* Configure the MPU as Strongly ordered for not defined regions */
   MPU_InitStruct.Enable = MPU_REGION_ENABLE;
   MPU_InitStruct.BaseAddress = 0x00;
@@ -313,14 +313,14 @@ static void MPU_Config(void)
   MPU_InitStruct.TypeExtField = MPU_TEX_LEVEL0;
   MPU_InitStruct.SubRegionDisable = 0x87;
   MPU_InitStruct.DisableExec = MPU_INSTRUCTION_ACCESS_DISABLE;
-
+  
   HAL_MPU_ConfigRegion(&MPU_InitStruct);
-
+  
   /* Configure the MPU attributes as Device not cacheable
      for ETH DMA descriptors */
   MPU_InitStruct.Enable = MPU_REGION_ENABLE;
   MPU_InitStruct.BaseAddress = 0x30000000;
-  MPU_InitStruct.Size = MPU_REGION_SIZE_256B;
+  MPU_InitStruct.Size = MPU_REGION_SIZE_1KB;
   MPU_InitStruct.AccessPermission = MPU_REGION_FULL_ACCESS;
   MPU_InitStruct.IsBufferable = MPU_ACCESS_BUFFERABLE;
   MPU_InitStruct.IsCacheable = MPU_ACCESS_NOT_CACHEABLE;
@@ -416,4 +416,5 @@ void assert_failed(uint8_t* file, uint32_t line)
   }
 }
 #endif
+
 

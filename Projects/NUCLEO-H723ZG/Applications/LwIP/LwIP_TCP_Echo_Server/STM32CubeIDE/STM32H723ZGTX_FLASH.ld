@@ -170,12 +170,12 @@ SECTIONS
     . = ABSOLUTE(0x30000000);
     *(.RxDecripSection) 
     
-    . = ABSOLUTE(0x30000060);
+    . = ABSOLUTE(0x30000200);
     *(.TxDecripSection)
     
-    . = ABSOLUTE(0x30000200);
-    *(.RxArraySection) 
-  } >RAM_D2 AT> ROM 
+    . = ABSOLUTE(0x30000400);
+    *(.LwIP_HeapSection) 
+  } >RAM_D2 AT> ROM
   
   /* Remove information from the compiler libraries */
   /DISCARD/ :

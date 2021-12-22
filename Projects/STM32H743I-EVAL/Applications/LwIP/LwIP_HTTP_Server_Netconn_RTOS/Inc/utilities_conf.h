@@ -6,7 +6,7 @@
  ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2019 STMicroelectronics.
+  * Copyright (c) 2017-2021 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -15,7 +15,7 @@
   *
   ******************************************************************************
   */
-
+  
 
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef UTILITIES_CONF_H
@@ -97,4 +97,5 @@ extern "C" {
 #endif
 
 #endif /*UTILITIES_CONF_H */
+
 

@@ -75,6 +75,8 @@ For more details about this application, refer to UM1713 "STM32Cube interfacing 
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
 
+@Note CubeIDE project is not available for this application due to an error in rand.c.
+
 @par Keywords
 
 Connectivity, LwIP, Ethernet, HTTP Server, Netconn, TCP/IP, FreeRTOS, DHCP	
