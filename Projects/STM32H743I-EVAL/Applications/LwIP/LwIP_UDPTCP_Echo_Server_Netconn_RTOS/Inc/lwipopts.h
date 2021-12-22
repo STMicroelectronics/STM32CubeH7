@@ -48,39 +48,25 @@
 
 /* MEM_SIZE: the size of the heap memory. If the application will send
 a lot of data that needs to be copied, this should be set high. */
-#define MEM_SIZE                (10*1024)
+#define MEM_SIZE                (14*1024)
 
 /* Relocate the LwIP RAM heap pointer */
-#define LWIP_RAM_HEAP_POINTER    (0x30044000)
+#define LWIP_RAM_HEAP_POINTER    (0x30004000)
 
-/* MEMP_NUM_PBUF: the number of memp struct pbufs. If the application
-   sends a lot of data out of ROM (or other static memory), this
-   should be set high. */
-#define MEMP_NUM_PBUF           10
-/* MEMP_NUM_UDP_PCB: the number of UDP protocol control blocks. One
-   per active UDP "connection". */
-#define MEMP_NUM_UDP_PCB        6
 /* MEMP_NUM_TCP_PCB: the number of simulatenously active TCP
    connections. */
 #define MEMP_NUM_TCP_PCB        10
-/* MEMP_NUM_TCP_PCB_LISTEN: the number of listening TCP
-   connections. */
-#define MEMP_NUM_TCP_PCB_LISTEN 5
+
 /* MEMP_NUM_TCP_SEG: the number of simultaneously queued TCP
    segments. */
-#define MEMP_NUM_TCP_SEG        8
-/* MEMP_NUM_SYS_TIMEOUT: the number of simulateously active
-   timeouts. */
-#define MEMP_NUM_SYS_TIMEOUT    10
-
+#define MEMP_NUM_TCP_SEG        TCP_SND_QUEUELEN
 
 /* ---------- Pbuf options ---------- */
 /* PBUF_POOL_SIZE: the number of buffers in the pbuf pool.
    @ note: used to allocate Tx pbufs only */
-#define PBUF_POOL_SIZE          8
 
 /* PBUF_POOL_BUFSIZE: the size of each pbuf in the pbuf pool. */
-#define PBUF_POOL_BUFSIZE       1528
+#define PBUF_POOL_BUFSIZE       1536
 
 /* LWIP_SUPPORT_CUSTOM_PBUF == 1: to pass directly MAC Rx buffers to the stack 
    no copy is needed */
@@ -95,7 +81,6 @@ a lot of data that needs to be copied, this should be set high. */
 
 /* Controls if TCP should queue segments that arrive out of
    order. Define to 0 if your device is low on memory. */
-#define TCP_QUEUE_OOSEQ         0
 
 /* TCP Maximum segment size. */
 #define TCP_MSS                 (1500 - 40)	  /* TCP_MSS = (Ethernet MTU - IP header size - TCP header size) */
@@ -103,13 +88,9 @@ a lot of data that needs to be copied, this should be set high. */
 /* TCP sender buffer space (bytes). */
 #define TCP_SND_BUF             (4*TCP_MSS)
 
-/*  TCP_SND_QUEUELEN: TCP sender buffer space (pbufs). This must be at least
-  as much as (2 * TCP_SND_BUF/TCP_MSS) for things to work. */
-
-#define TCP_SND_QUEUELEN        (2* TCP_SND_BUF/TCP_MSS)
 
 /* TCP receive window. */
-#define TCP_WND                 (2*TCP_MSS)
+#define TCP_WND                 (4*TCP_MSS)
 
 
 /* ---------- ICMP options ---------- */
@@ -214,14 +195,14 @@ The STM32H7xx allows computing and verifying the IP, UDP, TCP and ICMP checksums
 */
 
 #define TCPIP_THREAD_NAME              "TCP/IP"
-#define TCPIP_THREAD_STACKSIZE          1000
+#define TCPIP_THREAD_STACKSIZE          2048
 #define TCPIP_MBOX_SIZE                 6
 #define DEFAULT_UDP_RECVMBOX_SIZE       6
 #define DEFAULT_TCP_RECVMBOX_SIZE       6
 #define DEFAULT_ACCEPTMBOX_SIZE         6
-#define DEFAULT_THREAD_STACKSIZE        500
+#define DEFAULT_THREAD_STACKSIZE        1024
 #define TCPIP_THREAD_PRIO               osPriorityHigh
 
 #endif /* __LWIPOPTS_H__ */
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+

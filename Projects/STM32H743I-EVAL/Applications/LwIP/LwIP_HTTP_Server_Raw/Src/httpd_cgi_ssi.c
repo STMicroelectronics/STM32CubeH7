@@ -6,7 +6,7 @@
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2017 STMicroelectronics.
+  * Copyright (c) 2017-2021 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -144,4 +144,5 @@ void http_server_init(void)
   CGI_TAB[0] = LEDS_CGI;
   http_set_cgi_handlers(CGI_TAB, 1);
 }
+
 

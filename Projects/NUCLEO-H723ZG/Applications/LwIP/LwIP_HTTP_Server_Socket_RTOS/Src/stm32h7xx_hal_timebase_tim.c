@@ -9,7 +9,18 @@
   *           + Initializes the TIM peripheral generate a Period elapsed Event each 1ms
   *           + HAL_IncTick is called inside HAL_TIM_PeriodElapsedCallback ie each 1ms
   * 
- @verbatim
+  ******************************************************************************
+  * @attention
+  *
+  * Copyright (c) 2017-2021 STMicroelectronics.
+  * All rights reserved.
+  *
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
+  *
+  ******************************************************************************
+  @verbatim
   ==============================================================================
                         ##### How to use this driver #####
   ==============================================================================
@@ -20,16 +31,6 @@
        HAL_TIM_MODULE_ENABLED define in stm32h7xx_hal_conf.h
 
   @endverbatim
-  ******************************************************************************
-  * @attention
-  *
-  * Copyright (c) 2017 STMicroelectronics.
-  * All rights reserved.
-  *
-  * This software is licensed under terms that can be found in the LICENSE file
-  * in the root directory of this software component.
-  * If no LICENSE file comes with this software, it is provided AS-IS.
-  *
   ******************************************************************************
   */
 
@@ -169,4 +170,5 @@ void TIM6_DAC_IRQHandler(void)
 {
   HAL_TIM_IRQHandler(&TimHandle);
 }
+
 

@@ -6,7 +6,7 @@
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2017 STMicroelectronics.
+  * Copyright (c) 2017-2021 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -34,10 +34,10 @@
 /* Exported constants --------------------------------------------------------*/
 #define USE_LCD
 
-#define DEST_IP_ADDR0   ((uint8_t)192U)
-#define DEST_IP_ADDR1   ((uint8_t)168U)
-#define DEST_IP_ADDR2   ((uint8_t)0U)
-#define DEST_IP_ADDR3   ((uint8_t)11U)
+#define DEST_IP_ADDR0   ((uint8_t)10U)
+#define DEST_IP_ADDR1   ((uint8_t)157U)
+#define DEST_IP_ADDR2   ((uint8_t)5U)
+#define DEST_IP_ADDR3   ((uint8_t)14U)
 
 #define DEST_PORT       ((uint16_t)7U)
 
@@ -67,6 +67,7 @@
 #endif
 
 #endif /* __MAIN_H */
+
 
 
 

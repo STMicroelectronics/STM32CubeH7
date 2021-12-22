@@ -18,10 +18,10 @@ LR_IROM1 0x08000000 0x00100000  {    ; load region size_region
   RW_DMARxDscrTab 0x30000000 0x60 {
   *(.RxDecripSection)
   }
-  RW_DMATxDscrTab 0x30000060 0x140 {
+  RW_DMATxDscrTab 0x30000200 0x140 {
   *(.TxDecripSection)
   }
-  RW_Rx_Buffb 0x30000200 0x1800 {
-  *(.RxArraySection)
-}
+  memory_RX_POOL_base 0x30000400 0x12676 {
+  *(.LwIP_HeapSection)
+  }
 }

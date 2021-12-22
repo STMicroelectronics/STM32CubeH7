@@ -6,7 +6,7 @@
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2017 STMicroelectronics.
+  * Copyright (c) 2017-2021 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -28,5 +28,6 @@
 extern const Diskio_drvTypeDef  SD_Driver;
 
 #endif /* __SD_DISKIO_H */
+
 
 

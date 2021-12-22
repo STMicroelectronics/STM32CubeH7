@@ -6,7 +6,7 @@
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2017 STMicroelectronics.
+  * Copyright (c) 2017-2021 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -40,10 +40,10 @@
 #define UDP_CLIENT_PORT    ((uint16_t)7U)
 
 /*Static DEST IP ADDRESS: DEST_IP_ADDR0.DEST_IP_ADDR1.DEST_IP_ADDR2.DEST_IP_ADDR3 */
-#define DEST_IP_ADDR0   ((uint8_t)192U)
-#define DEST_IP_ADDR1   ((uint8_t)168U)
-#define DEST_IP_ADDR2   ((uint8_t)0U)
-#define DEST_IP_ADDR3   ((uint8_t)11U)
+#define DEST_IP_ADDR0   ((uint8_t)10U)
+#define DEST_IP_ADDR1   ((uint8_t)157U)
+#define DEST_IP_ADDR2   ((uint8_t)5U)
+#define DEST_IP_ADDR3   ((uint8_t)14U)
 
 /*Static IP ADDRESS: IP_ADDR0.IP_ADDR1.IP_ADDR2.IP_ADDR3 */
 #define IP_ADDR0   ((uint8_t) 192U)
@@ -71,6 +71,7 @@
 #endif
 
 #endif /* __MAIN_H */
+
 
 
 
