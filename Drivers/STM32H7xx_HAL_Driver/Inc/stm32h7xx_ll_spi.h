@@ -2414,6 +2414,28 @@ __STATIC_INLINE uint32_t LL_SPI_IsEnabledDMAReq_TX(SPI_TypeDef *SPIx)
 }
 
 /**
+  * @brief  Get the data register address used for DMA transfer
+  * @rmtoll TXDR           TXDR            LL_SPI_DMA_GetTxRegAddr
+  * @param  SPIx SPI Instance
+  * @retval Address of data register
+  */
+__STATIC_INLINE uint32_t LL_SPI_DMA_GetTxRegAddr(SPI_TypeDef *SPIx)
+{
+  return (uint32_t) &(SPIx->TXDR);
+}
+
+/**
+  * @brief  Get the data register address used for DMA transfer
+  * @rmtoll RXDR           RXDR            LL_SPI_DMA_GetRxRegAddr
+  * @param  SPIx SPI Instance
+  * @retval Address of data register
+  */
+__STATIC_INLINE uint32_t LL_SPI_DMA_GetRxRegAddr(SPI_TypeDef *SPIx)
+{
+  return (uint32_t) &(SPIx->RXDR);
+}
+
+/**
   * @}
   */
 
