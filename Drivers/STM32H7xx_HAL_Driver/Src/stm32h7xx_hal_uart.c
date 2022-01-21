@@ -3121,6 +3121,9 @@ HAL_StatusTypeDef UART_SetConfig(UART_HandleTypeDef *huart)
       case UART_CLOCKSOURCE_LSE:
         pclk = (uint32_t) LSE_VALUE;
         break;
+      case UART_CLOCKSOURCE_D2PCLK1:   /* Not available for Low-Power-UART */
+      case UART_CLOCKSOURCE_D2PCLK2:   /* Not available for Low-Power-UART */
+      case UART_CLOCKSOURCE_UNDEFINED:
       default:
         pclk = 0U;
         ret = HAL_ERROR;
@@ -3191,6 +3194,8 @@ HAL_StatusTypeDef UART_SetConfig(UART_HandleTypeDef *huart)
       case UART_CLOCKSOURCE_LSE:
         pclk = (uint32_t) LSE_VALUE;
         break;
+      case UART_CLOCKSOURCE_D3PCLK1:   /* Only available for Low-Power-UART */
+      case UART_CLOCKSOURCE_UNDEFINED:
       default:
         pclk = 0U;
         ret = HAL_ERROR;
@@ -3247,6 +3252,8 @@ HAL_StatusTypeDef UART_SetConfig(UART_HandleTypeDef *huart)
       case UART_CLOCKSOURCE_LSE:
         pclk = (uint32_t) LSE_VALUE;
         break;
+      case UART_CLOCKSOURCE_D3PCLK1:   /* Only available for Low-Power-UART */
+      case UART_CLOCKSOURCE_UNDEFINED:
       default:
         pclk = 0U;
         ret = HAL_ERROR;

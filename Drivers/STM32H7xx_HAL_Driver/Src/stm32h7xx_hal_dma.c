@@ -1611,6 +1611,9 @@ HAL_StatusTypeDef HAL_DMA_RegisterCallback(DMA_HandleTypeDef *hdma, HAL_DMA_Call
       hdma->XferAbortCallback = pCallback;
       break;
 
+    /* Registering the same callback for everything is unlikely to be helpful
+       or desired, thus we treat it as error */
+    case  HAL_DMA_XFER_ALL_CB_ID:
     default:
       status =  HAL_ERROR;
       break;
