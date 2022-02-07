@@ -7,13 +7,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -120,7 +119,7 @@ According to the Ref Manual :
 The LAR address register represents the next Linked list Node address.
 As consequence the Liked list transfer nodes must be 64 bits aligned and must be in the AXI address space.
 */
-/* 32-bytes Alignement is needed for cache maintenance purpose */
+/* 32-bytes Alignment is needed for cache maintenance purpose */
 ALIGN_32BYTES(MDMA_LinkNodeTypeDef Xfer_Node1);
 ALIGN_32BYTES(MDMA_LinkNodeTypeDef Xfer_Node2);
 /*****************************************************/
@@ -213,7 +212,7 @@ int main(void)
 }
 
 /**
-  * @brief  MDMA Liked List transfer configuraion
+  * @brief  MDMA Liked List transfer configuration
   * @note   This function configure the DMA for a linked list transfer.
   *         The linked list contains 3 nodes.
   *         Node 0 transfer parameters are configured within the Handle init parameters.
@@ -501,6 +500,7 @@ static void CPU_CACHE_Enable(void)
   SCB_EnableDCache();
 }
 
+
 #ifdef  USE_FULL_ASSERT
 
 /**
@@ -530,4 +530,3 @@ void assert_failed(uint8_t *file, uint32_t line)
   * @}
   */
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

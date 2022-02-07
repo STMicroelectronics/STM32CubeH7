@@ -2,13 +2,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under Ultimate Liberty license
-  * SLA0044, the "License"; You may not use this file except in compliance with
-  * the License. You may obtain a copy of the License at:
-  *                             www.st.com/SLA0044
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -95,7 +94,7 @@
 static volatile char       TransferInProgress  = 0;
 
 
-/* Choose Layer 0 color conversion depending of the color mode choosed */
+/* Choose Layer 0 color conversion depending of the color mode chosen */
 #if   (COLOR_MODE_0 == CMS_ARGB8888)
   #define COLOR_CONVERSION_0 GUICC_M8888I
 #elif (COLOR_MODE_0 == CMS_RGB888)
@@ -116,7 +115,7 @@ static volatile char       TransferInProgress  = 0;
   #error Illegal color mode 0!
 #endif
 
-/* Choose Choose Layer 0 gui driver depending of the color mode choosed */
+/* Choose Choose Layer 0 gui driver depending of the color mode chosen */
 #if   (COLOR_MODE_0 == CMS_ARGB8888)
   #if   (ORIENTATION_0 == ROTATION_0)
     #define DISPLAY_DRIVER_0   GUIDRV_LIN_32
@@ -163,7 +162,7 @@ static volatile char       TransferInProgress  = 0;
   #endif
 #endif
 
-/* Choose Layer 1 color conversion depending of the color mode//orientation choosed */
+/* Choose Layer 1 color conversion depending of the color mode//orientation chosen */
 #if (GUI_NUM_LAYERS > 1)
 #if   (COLOR_MODE_1 == CMS_ARGB8888)
   #define COLOR_CONVERSION_1 GUICC_M8888I
@@ -185,7 +184,7 @@ static volatile char       TransferInProgress  = 0;
   #error Illegal color mode 0!
 #endif
 
-/* Choose Choose Layer 1 gui driver depending of the color mode/orientation choosed */
+/* Choose Choose Layer 1 gui driver depending of the color mode/orientation chosen */
 #if   (COLOR_MODE_1 == CMS_ARGB8888)
   #if   (ORIENTATION_1 == ROTATION_0)
     #define DISPLAY_DRIVER_1   GUIDRV_LIN_32
@@ -492,7 +491,7 @@ static void LCD_LL_Reset(void)
   
   HAL_Delay(20); /* wait 20 ms */
   
-  /* Desactivate XRES */
+  /* Deactivate XRES */
   HAL_GPIO_WritePin(GPIOG, GPIO_PIN_3, GPIO_PIN_SET);
   
   HAL_Delay(10); /* wait 10 ms */  
@@ -882,7 +881,7 @@ static void _DMA_Fill(int LayerIndex, void * pDst, int xSize, int ySize, int Off
 /**
   * @brief  DMA2D Alpha blending bulk
   * @param  pColorFG : Foregroung color
-  * @param  pColorBG : Backgroung color
+  * @param  pColorBG : Background color
   * @param  pColorDst: Destination color
   * @param  NumItems : Number of lines
   * @retval None
@@ -913,7 +912,7 @@ static void _DMA_AlphaBlendingBulk(LCD_COLOR * pColorFG, LCD_COLOR * pColorBG, L
 /**
   * @brief  Mixing bulk colors
   * @param  pColorFG : Foregroung color
-  * @param  pColorBG : Backgroung color
+  * @param  pColorBG : Background color
   * @param  pColorDst: Destination color
   * @param  Intens   : Color intensity
   * @param  NumItems : Number of lines
@@ -2005,4 +2004,3 @@ void DSI_IRQHandler(void)
   HAL_DSI_IRQHandler(&hdsi);
 }
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

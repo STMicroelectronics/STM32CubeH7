@@ -9,13 +9,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   @endverbatim
@@ -43,7 +42,7 @@ After compiling CM4 target the user is aimed to copy the STM32H745I_CM4.bin file
 exist under PWR_D2ON_D1OFF\Toolchain\STM32H745I_DISCO_CM4\Exe\STM32H745I_CM4.bin
 in the Flash memory at 0x08080000 address by using the STLINK_Utility.
 To do this go to STLINK_Utility->Target->Program then set the start address at 
-0x08080000 and finaly click Start button.
+0x08080000 and finally click Start button.
 
 After a system RESET or a CM7 core debugging the following steps will be done:
   - HAL_Init() function is called to reset all the peripherals, initialize the 
@@ -132,13 +131,13 @@ In order to make the program work, you must do the following :
      - Load the STM32H745I_DISCO_CM4.bin generated file to the Flash memory at 0x08080000 address 
        using the STM32CubeProgrammer.
        Go to Erasing and Programming menu then set the start address at 
-       0x08080000, select the file path for STM32H745I_DISCO_CM4.bin generated file and finaly click Start Programming button.
+       0x08080000, select the file path for STM32H745I_DISCO_CM4.bin generated file and finally click Start Programming button.
 
-  - For CM7 target configuartion (STM32H745I_DISCO_CM7) : 
+  - For CM7 target configuration (STM32H745I_DISCO_CM7) : 
      - Rebuild all files 
      - Load image into target memory
  - Run the example
 
 
- * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
+
  */

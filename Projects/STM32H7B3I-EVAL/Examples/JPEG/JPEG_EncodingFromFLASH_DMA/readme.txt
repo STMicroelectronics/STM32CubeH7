@@ -9,13 +9,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019  STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   @endverbatim
@@ -90,7 +89,7 @@ SD Card, SDRAM
   - JPEG/JPEG_EncodingFromFLASH_DMA/Inc/main.h                        Header for main.c module  
   - JPEG/JPEG_EncodingFromFLASH_DMA/Inc/encode_dma.h                  Header for encode_dma.c module
   - JPEG/JPEG_EncodingFromFLASH_DMA/Inc/sd_diskio.h                   Header for sd_diskio.c module    
-  - JPEG/JPEG_EncodingFromFLASH_DMA/Inc/jpeg_utils_conf.h             JPEG utilties module configuration file
+  - JPEG/JPEG_EncodingFromFLASH_DMA/Inc/jpeg_utils_conf.h             JPEG utilities module configuration file
   - JPEG/JPEG_EncodingFromFLASH_DMA/Inc/image_320_240_rgb.h           Specification of RGB image to load in FLASH
   - JPEG/JPEG_EncodingFromFLASH_DMA/Inc/stm32h7b3i_eval_conf.h     STM32H7B3I-EVAL board configuration file
   - JPEG/JPEG_EncodingFromFLASH_DMA/Inc/ft5336_conf.h                 FT5336 capacitive touch panel configuration file
@@ -126,5 +125,5 @@ In order to make the program work, you must do the following :
  - Rebuild all files and load your image into target memory
  - Run the example
 
- * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
+
  */

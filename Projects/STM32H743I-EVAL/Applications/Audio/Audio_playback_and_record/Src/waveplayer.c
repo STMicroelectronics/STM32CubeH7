@@ -6,13 +6,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2017 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under Ultimate Liberty license
-  * SLA0044, the "License"; You may not use this file except in compliance with
-  * the License. You may obtain a copy of the License at:
-  *                             www.st.com/SLA0044
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -89,7 +88,7 @@ static void AUDIO_AcquireTouchButtons(void);
 AUDIO_ErrorTypeDef AUDIO_PLAYER_Init(void)
 {
 //  (AUDIO_OUT_DEVICE_AUTO, uwVolume, AUDIO_FREQUENCY_44K
-   AudioOutInit.Device = AUDIO_OUT_DEVICE_HEADPHONE;
+   AudioOutInit.Device = AUDIO_OUT_DEVICE_AUTO;
   AudioOutInit.ChannelsNbr = 2;
   AudioOutInit.SampleRate = AUDIO_FREQUENCY_44K;
   AudioOutInit.BitsPerSample = AUDIO_RESOLUTION_16B;
@@ -229,6 +228,7 @@ AUDIO_ErrorTypeDef AUDIO_PLAYER_Process(void)
                      TOUCH_STOP_XMAX - TOUCH_STOP_XMIN,
                      TOUCH_STOP_YMAX - TOUCH_STOP_YMIN,UTIL_LCD_COLOR_RED);
     BSP_AUDIO_OUT_Stop(CODEC_PDWN_SW);
+    BSP_AUDIO_OUT_DeInit(0);
     AudioState = AUDIO_STATE_IDLE;
     audio_error = AUDIO_ERROR_IO;
     break;
@@ -420,7 +420,7 @@ static AUDIO_ErrorTypeDef GetFileInfo(uint16_t file_idx, WAVE_FormatTypeDef *inf
 static uint8_t PlayerInit(uint32_t AudioFreq)
 {
   /* Initialize the Audio codec and all related peripherals (I2S, I2C, IOExpander, IOs...) */
-     AudioOutInit.Device = AUDIO_OUT_DEVICE_AUTO;
+     AudioOutInit.Device = AUDIO_OUT_DEVICE_HEADPHONE;
   AudioOutInit.ChannelsNbr = 2;
   AudioOutInit.SampleRate = AudioFreq;
   AudioOutInit.BitsPerSample = AUDIO_RESOLUTION_16B;
@@ -431,7 +431,6 @@ static uint8_t PlayerInit(uint32_t AudioFreq)
   }
   else
   {
-//    BSP_AUDIO_OUT_SetAudioFrameSlot(CODEC_AUDIOFRAME_SLOT_02);
     return 0;
   }
 }
@@ -537,4 +536,3 @@ static void AUDIO_AcquireTouchButtons(void)
 }
 
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

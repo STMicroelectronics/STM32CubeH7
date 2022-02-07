@@ -9,13 +9,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   @endverbatim
@@ -85,7 +84,7 @@ Memory, Flash, Configure, Program, Copy, Bank, Dual Bank, Execute
 
   - This example runs on STM32H745xx devices.
 
-  - This example has been tested with STM32H745I-Discovery  board with SMPS (SD Convertor) power supply config and can be
+  - This example has been tested with STM32H745I-Discovery  board with SMPS (SD Converter) power supply config and can be
     easily tailored to any other supported device and development board.
   - LED1 toggle when process  is complete.
   - In case of error, LED2 is toggling each 100 ms.
@@ -103,5 +102,5 @@ In order to make the program work, you must do the following :
 
 
 
- * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
+
  */

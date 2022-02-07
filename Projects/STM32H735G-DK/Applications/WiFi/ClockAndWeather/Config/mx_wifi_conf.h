@@ -50,4 +50,3 @@
 #endif
 #endif /* MX_WIFI_CONF_H */
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

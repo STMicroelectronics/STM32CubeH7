@@ -9,13 +9,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under Ultimate Liberty license
-  * SLA0044, the "License"; You may not use this file except in compliance with
-  * the License. You may obtain a copy of the License at:
-  *                             www.st.com/SLA0044
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   @endverbatim
@@ -74,7 +73,7 @@ In this application, two operating modes are available:
        0x2000
 
  2. Run-time application mode:
-    This is the normal run-time activities. A binary of HID interface on the discovery board is
+    This is the normal run-time activities. A binary which toggles LEDs on the discovery board is
     provided in Binary directory.
 
 @note After each device reset, hold down the User button on the evaluation board to enter the DFU mode.
@@ -89,6 +88,7 @@ format is used. For more details refer to the "DfuSe File Format Specification" 
 To generate a DFU image, download "DFUse Demonstration" tool and use DFU File Manager to convert a
 binary image into a DFU image. This tool is for download from www.st.com
 To download a *.dfu image, use "DfuSe Demo" available within "DFUse Demonstration" install directory.
+To download a *.bin or *.hex image, use "STM32CubeProgrammer" available from ST web site.
 
 Please refer to UM0412, DFuSe USB device firmware upgrade STMicroelectronics extension for more details
 on the driver installation and PC host user interface.
@@ -129,7 +129,7 @@ Connectivity, USB_Device, USB, DFU, Firmware upgrade
               - Add a cache maintenance mechanism to ensure the cache coherence between CPU and other masters(DMAs,DMA2D,LTDC,MDMA).
               - The addresses and the size of cacheable buffers (shared between CPU and other masters)
                 must be	properly defined to be aligned to L1-CACHE line size (32 bytes).
- 
+
 @Note It is recommended to enable the cache and maintain its coherence.
       Depending on the use case it is also possible to configure the cache attributes using the MPU.
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
@@ -182,15 +182,22 @@ In order to make the program work, you must do the following :
  - In the workspace toolbar select the project configuration:
    - STM32H745I-DISCO_USBD-FS: to configure the project for stm32h7xx devices using USB OTG FS peripheral
  - To run the application, proceed as follows:
-   - Install "DfuSe Demonstrator"
-   - Install the DFU driver available in "DfuSe Demonstrator" installation directory
-     For Windows 8.1 and later, the STM32 DFU device driver needs to be updated manually from Windows Device Manager.
-     The required device driver is available under "Program Files\STMicroelectronics\Software\DfuSe v3.0.5\Bin\Driver\Win8.1" directory.
-   - Open "DfuSe Demo" and download the "STM32H745I_DISCO_USBD-FS_0x08020000.dfu" Or "STM32H745I_DISCO_USBD-HS_0x08020000.dfu"
-     provided in Binary
-     directory.
-   - To run the downloaded application, execute the command "leave the DFU mode" or simply reset the
-     board.
 
- * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
+   * With "DfuSe Demonstrator":
+    - Install "DfuSe Demonstrator"
+    - Install the DFU driver available in "DfuSe Demonstrator" installation directory
+      For Windows 8.1 and later, the STM32 DFU device driver needs to be updated manually from Windows Device Manager.
+      The required device driver is available under "Program Files\STMicroelectronics\Software\DfuSe v3.0.5\Bin\Driver\Win8.1" directory.
+    - Open "DfuSe Demo" and download the "STM32H745I_DISCO_USBD_0x08020000.dfu" provided in Binary directory.
+    - To run the downloaded application, execute the command "leave the DFU mode" or simply reset the board.
+
+   * With "STM32CubeProgrammer":
+    - Download the appropriate STM32CubeProgrammer from ST web site and install it.
+    - Once you've updated the STM32 DFU device driver with DfuSe Driver you must verify from Windows Device Manager
+      that DFU driver is selected with the STM32CubeProgrammer driver.
+    - Open "STM32CubeProgrammer", select the usb interface and connect to DFU device.
+    - Download the "STM32H745I_DISCO_USBD_0x08020000.bin" provided in Binary directory and set the start address.
+    - To run the downloaded application, reset the board.
+
+
  */

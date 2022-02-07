@@ -9,13 +9,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   @endverbatim
@@ -87,9 +86,9 @@ Board 2: transmit chunks, then receiving and verifying them.
 
 How to run:
   - Compile the program with LOW_POWER_BOARD define, then load it in the first 
-    board (CM7 code : target configuartion STM32H747I_DISCO_CM7 and CM4 code target configuartion STM32H747I_DISCO_CM4).
+    board (CM7 code : target configuration STM32H747I_DISCO_CM7 and CM4 code target configuration STM32H747I_DISCO_CM4).
   - Compile the program without LOW_POWER_BOARD define, then load it in the 
-    second board (CM7 code only : target configuartion STM32H747I_DISCO_CM7).
+    second board (CM7 code only : target configuration STM32H747I_DISCO_CM7).
   - Connect the two boards as shown in the picture and start them.
   - LED1 in the first board will set ON for 5 seconds, then it will turn Off 
     to indicate that the CM7 core is enter low power mode.
@@ -143,7 +142,7 @@ The Domain 3 low power example uses:
 After receiving 5 chunks of data, the BDMA transfer complete interrupt is generated 
 and the CM7 is waking up from Stop mode to send-back the received data if no 
 error occurred.
-Finaly the CM7 will go Back to the STOP mode and restart automatically 
+Finally the CM7 will go Back to the STOP mode and restart automatically 
 the reception process.
 
 The DMAMUX request generator block is configured by using  
@@ -232,12 +231,12 @@ System, Power, PWR, multiprocessor, Stop mode, Domain 3, D3SRAM, BDMA, DMAMUX, I
 
 In order to make the program work, you must do the following :
  - Open your preferred toolchain 
- - For each target configuartion (STM32H747I_DISCO_CM7 and STM32H747I_DISCO_CM4) : 
+ - For each target configuration (STM32H747I_DISCO_CM7 and STM32H747I_DISCO_CM4) : 
      - Rebuild all files 
      - Load images into target memory
  - After loading the two images, you have to reset the board in order to boot (Cortex-M7) and CPU2 (Cortex-M4) at once.
  - Run the example
 
 
- * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
+
  */

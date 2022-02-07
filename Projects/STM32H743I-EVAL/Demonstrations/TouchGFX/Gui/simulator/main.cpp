@@ -20,7 +20,6 @@
 #endif
 #include <stdlib.h>
 
-//TODO remove
 #include <stdio.h>
 
 #include <gui/common/CommonDefinitions.hpp>
@@ -32,7 +31,7 @@ const uint32_t songs = PLAYLIST_LENGTH * (256 * 256 * 3 + 60 * 60 * 4) + 256 * 2
 const uint32_t bmpCacheSize = MAX(movies, songs) + 200000;
 uint8_t bmpCache[bmpCacheSize + 200000];
 
-const uint32_t dynBitmaps = PLAYLIST_LENGTH * 2 + 1; //playlist + audio player //todo
+const uint32_t dynBitmaps = PLAYLIST_LENGTH * 2 + 1; //playlist + audio player
 
 #ifdef WIN32
 extern "C" {

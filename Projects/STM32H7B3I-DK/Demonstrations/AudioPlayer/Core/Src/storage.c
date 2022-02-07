@@ -6,13 +6,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under Ultimate Liberty license
-  * SLA0044, the "License"; You may not use this file except in compliance with
-  * the License. You may obtain a copy of the License at:
-  *                             www.st.com/SLA0044
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -421,7 +420,7 @@ void Storage_DeInit(void)
     StorageThreadId = 0;
   }
 
-  /* Delate Storage Message Queue */
+  /* Delete Storage Message Queue */
   if(StorageEvent)
   {
     osMessageDelete (StorageEvent);
@@ -542,7 +541,7 @@ FRESULT Storage_ParseAudioFiles(char *dirname)
           {
             strncpy((char *)FileList.file[FileList.ptr].name, (char *)fno.fname, FILEMGR_FILE_NAME_SIZE);
             strncat((char *)FileList.file[FileList.ptr].full_name, dirname, strlen(dirname));
-            strncat((char *)FileList.file[FileList.ptr].full_name, "/", 1);
+            strcat((char *)FileList.file[FileList.ptr].full_name, "/");
             strncat((char *)FileList.file[FileList.ptr].full_name, (char *)fno.fname,FILEMGR_FILE_NAME_SIZE - strlen(dirname) - 1);
             FileList.file[FileList.ptr].type = FILETYPE_FILE;
             memset(&AudioInfo,0x00,sizeof(Audio_InfoTypeDef));
@@ -564,7 +563,9 @@ FRESULT Storage_ParseAudioFiles(char *dirname)
 
           int i = strlen(parent_dir);
 
-          sprintf(full_path, "%s/%s", parent_dir, fno.fname);
+          strcpy(full_path, parent_dir);
+          strcat(full_path, "/");
+          strcat(full_path, fno.fname);
 
           sprintf(parent_dir, full_path);
 
@@ -598,4 +599,3 @@ FRESULT Storage_ParseAudioFiles(char *dirname)
   * @}
   */
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

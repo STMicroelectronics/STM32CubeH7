@@ -6,39 +6,12 @@
 ******************************************************************************
 * @attention
 *
-* <h2><center>&copy; Copyright (c) 2018 STMicroelectronics International N.V.
-* All rights reserved.</center></h2>
+* Copyright (c) 2018 STMicroelectronics.
+* All rights reserved.
 *
-* Redistribution and use in source and binary forms, with or without
-* modification, are permitted, provided that the following conditions are met:
-*
-* 1. Redistribution of source code must retain the above copyright notice,
-*    this list of conditions and the following disclaimer.
-* 2. Redistributions in binary form must reproduce the above copyright notice,
-*    this list of conditions and the following disclaimer in the documentation
-*    and/or other materials provided with the distribution.
-* 3. Neither the name of STMicroelectronics nor the names of other
-*    contributors to this software may be used to endorse or promote products
-*    derived from this software without specific written permission.
-* 4. This software, including modifications and/or derivative works of this
-*    software, must execute solely and exclusively on microcontroller or
-*    microprocessor devices manufactured by or for STMicroelectronics.
-* 5. Redistribution and use of this software other than as permitted under
-*    this license is void and will automatically terminate your rights under
-*    this license.
-*
-* THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS"
-* AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT
-* LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
-* PARTICULAR PURPOSE AND NON-INFRINGEMENT OF THIRD PARTY INTELLECTUAL PROPERTY
-* RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT
-* SHALL STMICROELECTRONICS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
-* INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-* LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
-* OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-* LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-* NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
-* EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+* This software is licensed under terms that can be found in the LICENSE file
+* in the root directory of this software component.
+* If no LICENSE file comes with this software, it is provided AS-IS.
 *
 ******************************************************************************
 */
@@ -691,7 +664,7 @@ static void mem_set (void* ptr, int val, int cnt)
 /**
 * @brief  Extract needed Tag (for the application) information from internal parser buffer.
 * @param  song_info: Pointer to internal parser buffer.
-* @param  pIDTAGS: pointer to outbut tag struct.
+* @param  pIDTAGS: pointer to output tag struct.
 * @retval : None.
 */
 void SongUtilities_FillTags_struct(t_SongInfos *song_info, TAGS_TypeDef * pIDTAGS)
@@ -816,15 +789,15 @@ void SongUtilities_FillTags_struct(t_SongInfos *song_info, TAGS_TypeDef * pIDTAG
 }
 
 /**
-* @brief  found ID3 Tag version 2 - exctract info.
+* @brief  found ID3 Tag version 2 - extract info.
 * @param  buffer: temporary buffer.
-* @param  pIDTAGS: pointer to outbut tag struct.
+* @param  pIDTAGS: pointer to output tag struct.
 * @param  file: file handler.
 * @retval 0: if success, <0: if error.
 */
 int8_t SongUtilities_MP3TagParser(uint8_t * buffer,  TAGS_TypeDef * pIDTAGS , FIL * file)
 {
-  /* found ID3 Tag version 2 - exctract info */
+  /* found ID3 Tag version 2 - extract info */
   int32_t               p = 0, n = 0, cnt = 0, chcnt = 0, index = 0, cnt0 = 0;
   int32_t               comment = 0;
   uint16_t              word = 0;  /* pointer inside ID3 tag */
@@ -1464,4 +1437,3 @@ void StrCtrlLength(void* Dst, void* Src, uint32_t MaxLen)
 /**
 * @}
 */
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

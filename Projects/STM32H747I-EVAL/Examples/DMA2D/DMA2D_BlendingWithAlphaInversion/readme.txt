@@ -9,13 +9,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   @endverbatim
@@ -85,7 +84,7 @@ The check could be done using this macro : __HAL_RCC_GET_FLAG(RCC_FLAG_D2CKRDY).
 
 @note The example shows how to use the DMA2D blending with alpha inversion set on the foreground layer.
       Nevertheless the same parameter can be applied on the background DMA2D input layer 
-      or/and at the ouput level depending of the user application requirements.
+      or/and at the output level depending of the user application requirements.
 
 STM32H747I-EVAL board's LEDs can be used to monitor the transfer status:
  - LED4 is ON when the DMA2D transfer is complete.
@@ -156,12 +155,12 @@ Background, RGB565, LTDC, DSI, Pixel
 
 In order to make the program work, you must do the following :
  - Open your preferred toolchain 
- - For each target configuartion (STM32H747I_EVAL_CM7 and STM32H747I_EVAL_CM4) : 
+ - For each target configuration (STM32H747I_EVAL_CM7 and STM32H747I_EVAL_CM4) : 
      - Rebuild all files 
      - Load images into target memory
  - After loading the two images, you have to reset the board in order to boot (Cortex-M7) and CPU2 (Cortex-M4) at once.
  - Run the example
                           
- * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
+
  */
                                    

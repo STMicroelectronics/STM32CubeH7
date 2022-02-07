@@ -120,13 +120,13 @@ typedef unsigned int uintptr_t;
 #define HAVE_STRLEN 1
 #define HAVE__STRREV 1
 #define HAVE__STRUPR 1
-//#define HAVE__STRLWR 1	// TODO, WinRT: consider using _strlwr_s instead
+//#define HAVE__STRLWR 1	// WinRT: consider using _strlwr_s instead
 #define HAVE_STRCHR 1
 #define HAVE_STRRCHR 1
 #define HAVE_STRSTR 1
-//#define HAVE_ITOA 1   // TODO, WinRT: consider using _itoa_s instead
-//#define HAVE__LTOA 1	// TODO, WinRT: consider using _ltoa_s instead
-//#define HAVE__ULTOA 1	// TODO, WinRT: consider using _ultoa_s instead
+//#define HAVE_ITOA 1   // WinRT: consider using _itoa_s instead
+//#define HAVE__LTOA 1	// WinRT: consider using _ltoa_s instead
+//#define HAVE__ULTOA 1	// WinRT: consider using _ultoa_s instead
 #define HAVE_STRTOL 1
 #define HAVE_STRTOUL 1
 //#define HAVE_STRTOLL 1
@@ -138,7 +138,7 @@ typedef unsigned int uintptr_t;
 #define HAVE__STRICMP 1
 #define HAVE__STRNICMP 1
 #define HAVE_VSNPRINTF 1
-//#define HAVE_SSCANF 1	// TODO, WinRT: consider using sscanf_s instead
+//#define HAVE_SSCANF 1	// WinRT: consider using sscanf_s instead
 #define HAVE_M_PI 1
 #define HAVE_ATAN 1
 #define HAVE_ATAN2 1

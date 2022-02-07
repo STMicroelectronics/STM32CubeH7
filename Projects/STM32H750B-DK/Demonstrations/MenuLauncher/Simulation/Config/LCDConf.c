@@ -88,7 +88,7 @@ Purpose     : Display controller configuration (single layer)
 **********************************************************************
 */
 #ifndef   VRAM_ADDR
-  #define VRAM_ADDR 0 // TBD by customer: This has to be the frame buffer start address
+  #define VRAM_ADDR 0 // Should be done by customer: This has to be the frame buffer start address
 #endif
 #ifndef   XSIZE_PHYS
   #error Physical X size of display is not defined!

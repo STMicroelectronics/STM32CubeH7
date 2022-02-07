@@ -6,16 +6,15 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under Ultimate Liberty license
-  * SLA0044, the "License"; You may not use this file except in compliance with
-  * the License. You may obtain a copy of the License at:
-  *                             www.st.com/SLA0044
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
-*/
+  */
 
 
 /* Includes ------------------------------------------------------------------*/
@@ -665,7 +664,7 @@ static void mem_set (void* ptr, int val, int cnt)
 /**
 * @brief  Extract needed Tag (for the application) information from internal parser buffer.
 * @param  song_info: Pointer to internal parser buffer.
-* @param  pIDTAGS: pointer to outbut tag struct.
+* @param  pIDTAGS: pointer to output tag struct.
 * @retval : None.
 */
 void SongUtilities_FillTags_struct(t_SongInfos *song_info, TAGS_TypeDef * pIDTAGS)
@@ -790,15 +789,15 @@ void SongUtilities_FillTags_struct(t_SongInfos *song_info, TAGS_TypeDef * pIDTAG
 }
 
 /**
-* @brief  found ID3 Tag version 2 - exctract info.
+* @brief  found ID3 Tag version 2 - extract info.
 * @param  buffer: temporary buffer.
-* @param  pIDTAGS: pointer to outbut tag struct.
+* @param  pIDTAGS: pointer to output tag struct.
 * @param  file: file handler.
 * @retval 0: if success, <0: if error.
 */
 int8_t SongUtilities_MP3TagParser(uint8_t * buffer,  TAGS_TypeDef * pIDTAGS , FIL * file)
 {
-  /* found ID3 Tag version 2 - exctract info */
+  /* found ID3 Tag version 2 - extract info */
   int32_t               p = 0, n = 0, cnt = 0, chcnt = 0, index = 0, cnt0 = 0;
   int32_t               comment = 0;
   uint16_t              word = 0;  /* pointer inside ID3 tag */
@@ -1438,4 +1437,3 @@ void StrCtrlLength(void* Dst, void* Src, uint32_t MaxLen)
 /**
 * @}
 */
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

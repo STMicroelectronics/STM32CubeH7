@@ -51,7 +51,7 @@ public:
     AudioPlayerPlaylist();
 
     void setSelectedCallback(GenericCallback<int>& callback);
-    void clear(); //todo
+    void clear();
     void addSong(BitmapId cover, char* artist, char* song);
     void setPlaying(int index);
 private:

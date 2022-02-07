@@ -6,13 +6,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2017 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under Ultimate Liberty license
-  * SLA0044, the "License"; You may not use this file except in compliance with
-  * the License. You may obtain a copy of the License at:
-  *                             www.st.com/SLA0044
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -108,7 +107,7 @@ AUDIO_ErrorTypeDef AUDIO_REC_Start(void)
   if(f_open(&WavFile, REC_WAVE_NAME, FA_CREATE_ALWAYS | FA_WRITE) == FR_OK)
   {
     /* Initialize header file */
-    WavProcess_EncInit(AUDIO_FREQUENCY_44K, pHeaderBuff);
+    WavProcess_EncInit(AUDIO_FREQUENCY_16K, pHeaderBuff);
 
     /* Write header file */
     if(f_write(&WavFile, pHeaderBuff, 44, (void*)&byteswritten) == FR_OK)
@@ -122,7 +121,7 @@ AUDIO_ErrorTypeDef AUDIO_REC_Start(void)
       UTIL_LCD_DisplayStringAtLine(4, str);
 
       UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_CYAN);
-      sprintf((char *)str,  "Sample rate : %d Hz", (int)AUDIO_FREQUENCY_44K);
+      sprintf((char *)str,  "Sample rate : %d Hz", (int)AUDIO_FREQUENCY_16K);
       UTIL_LCD_ClearStringLine(6);
       UTIL_LCD_DisplayStringAtLine(6, str);
 
@@ -145,19 +144,13 @@ AUDIO_ErrorTypeDef AUDIO_REC_Start(void)
         if(byteswritten != 0)
         {
           BSP_AUDIO_Init_t  AudioInInit;
-        AudioInInit.Device = AUDIO_IN_DEVICE_DIGITAL_MIC;
-        AudioInInit.ChannelsNbr = 2;
-        AudioInInit.SampleRate = AUDIO_FREQUENCY_16K;
-        AudioInInit.BitsPerSample = AUDIO_RESOLUTION_16B;
-        AudioInInit.Volume = 70;
-        /* Initialize Audio Recorder with 2 channels to be used */
-        BSP_AUDIO_IN_Init(1, &AudioInInit);
-          /* Set audio input interface */
-
-//          BSP_AUDIO_IN_SelectInterface(AUDIO_IN_INTERFACE_DFSDM);
-//          BSP_AUDIO_IN_Init(BSP_AUDIO_FREQUENCY_16K, DEFAULT_AUDIO_IN_BIT_RESOLUTION, 2);/*DEFAULT_AUDIO_IN_CHANNEL_NBR*/
-//          BSP_AUDIO_IN_AllocScratch (Scratch, SCRATCH_BUFF_SIZE);
-//          BSP_AUDIO_IN_Record((uint16_t*)&BufferCtl.pcm_buff[0], AUDIO_IN_PCM_BUFFER_SIZE);
+          AudioInInit.Device = AUDIO_IN_DEVICE_DIGITAL_MIC;
+          AudioInInit.ChannelsNbr = 2;
+          AudioInInit.SampleRate = AUDIO_FREQUENCY_16K;
+          AudioInInit.BitsPerSample = AUDIO_RESOLUTION_16B;
+          AudioInInit.Volume = 70;
+          /* Initialize Audio Recorder with 2 channels to be used */
+          BSP_AUDIO_IN_Init(1, &AudioInInit);
 
           /* Start Recording */
           BSP_AUDIO_IN_Record(1, (uint8_t*)&BufferCtl.pcm_buff[0], AUDIO_IN_PCM_BUFFER_SIZE);
@@ -277,7 +270,7 @@ AUDIO_ErrorTypeDef AUDIO_REC_Process(void)
     }
 
     /* Display elapsed time */
-    elapsed_time = BufferCtl.fptr / (AUDIO_FREQUENCY_44K * 2 * 2);/*DEFAULT_AUDIO_IN_CHANNEL_NBR*/
+    elapsed_time = BufferCtl.fptr / (AUDIO_FREQUENCY_22K * 2 * 2);/*DEFAULT_AUDIO_IN_CHANNEL_NBR*/
     if(prev_elapsed_time != elapsed_time)
     {
       prev_elapsed_time = elapsed_time;
@@ -291,7 +284,7 @@ AUDIO_ErrorTypeDef AUDIO_REC_Process(void)
 
   case AUDIO_STATE_STOP:
     /* Stop recorder */
-    BSP_AUDIO_IN_Stop(0);
+    BSP_AUDIO_IN_Stop(1);
     UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_CYAN);   /* Display blue cyan record circle */
     UTIL_LCD_FillCircle((TOUCH_RECORD_XMAX+TOUCH_RECORD_XMIN)/2,
                        (TOUCH_RECORD_YMAX+TOUCH_RECORD_YMIN)/2,
@@ -611,4 +604,3 @@ static void AUDIO_REC_DisplayButtons(void)
   UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_CYAN);
 }
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

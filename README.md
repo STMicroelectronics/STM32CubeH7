@@ -2,13 +2,13 @@
 
 ![latest tag](https://img.shields.io/github/v/tag/STMicroelectronics/STM32CubeH7.svg?color=brightgreen)
 
-**STM32Cube** is an STMicroelectronics original initiative to ease the developers life by reducing efforts, time and cost.
+**STM32Cube** is an STMicroelectronics original initiative to ease developers' life by reducing efforts, time and cost.
 
 **STM32Cube** covers the overall STM32 products portfolio. It includes a comprehensive embedded software platform delivered for each STM32 series.
    * The CMSIS modules (core and device) corresponding to the ARM(tm) core implemented in this STM32 product.
    * The STM32 HAL-LL drivers, an abstraction layer offering a set of APIs ensuring maximized portability across the STM32 portfolio.
    * The BSP drivers of each evaluation, demonstration or nucleo board provided for this STM32 series.
-   * A consistent set of middleware components such as RTOS, USB, FatFS, graphics, touch sensing library...
+   * A consistent set of middleware libraries such as RTOS, USB, FatFS, graphics, touch sensing library...
    * A full set of software projects (basic examples, applications, and demonstrations) for each board provided for this STM32 series.
 
 The **STM32CubeH7 MCU Package** projects are directly running on the STM32H7 series boards. You can find in each Projects/*Board name* directories a set of software projects (Applications/Demonstration/Examples).

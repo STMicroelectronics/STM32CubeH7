@@ -139,5 +139,5 @@ The following 3rd party software components are used:
 /-------------------------------------------------------------------------*/
 
 
- * <h3><center>&copy; COPYRIGHT TARA Systems GmbH</center></h3>
+
  */

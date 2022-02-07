@@ -9,13 +9,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   @endverbatim
@@ -61,7 +60,7 @@ frame is ready to be displayed, the LEFT and RIGHT areas are refreshed. This is
 to avoid tearing effect issue that may happen when using DSI video mode.
 
 The camera module is initially configured to generate QQVGA (160x120) image resolution.
-Green Led (LED1) will blink during the exmple.
+Green Led (LED1) will blink during the example.
 Press Wakeup button to switch to other resolutions: 320x240, 480x272 and 640x480.
 RED LED (LED3) turns On in case of error.
 
@@ -125,7 +124,7 @@ Display, DCMI, Camera, Capture, Frame Buffer, LCD, ARGB8888, DMA, RGB565, SDRAM,
 
 In order to make the program work, you must do the following :
  - Open your preferred toolchain 
- - For each target configuartion (STM32H747I_DISCO_CM7 and STM32H747I_DISCO_CM4) : 
+ - For each target configuration (STM32H747I_DISCO_CM7 and STM32H747I_DISCO_CM4) : 
      - Rebuild all files 
      - Load images into target memory
  - After loading the two images, you have to reset the board in order to boot (Cortex-M7) and CPU2 (Cortex-M4) at once.
@@ -133,6 +132,6 @@ In order to make the program work, you must do the following :
 
 
 
- * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
+
  */
 

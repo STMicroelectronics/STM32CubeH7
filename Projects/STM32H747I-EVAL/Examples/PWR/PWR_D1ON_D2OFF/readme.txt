@@ -9,13 +9,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   @endverbatim
@@ -45,7 +44,7 @@ macro.
 Two LEDs are used in this program:
   - LED1: Toggle each 100 ms by CM7 core if D2 domain is in Standby mode (test passed).
   - LED3: Set ON by CM7 core if D2 domain is in RUN mode or if a configuration
-          error occured (test failed).
+          error occurred (test failed).
 
 @note This example can not be used in DEBUG mode due to the fact that 
       the Cortex-M7 and Cortex-M4 cores are no longer clocked during 
@@ -114,12 +113,12 @@ Power, STANDBY mode, RUN mode, multiprocessor, Domains
 
 In order to make the program work, you must do the following :
  - Open your preferred toolchain 
- - For each target configuartion (STM32H747I_EVAL_CM7 and STM32H747I_EVAL_CM4) : 
+ - For each target configuration (STM32H747I_EVAL_CM7 and STM32H747I_EVAL_CM4) : 
      - Rebuild all files 
      - Load images into target memory
  - After loading the two images, you have to reset the board in order to boot (Cortex-M7) and CPU2 (Cortex-M4) at once.
  - Run the example
 
 
- * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
+
  */

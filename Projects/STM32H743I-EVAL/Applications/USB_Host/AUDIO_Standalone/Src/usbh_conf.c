@@ -6,13 +6,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2017 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under Ultimate Liberty license
-  * SLA0044, the "License"; You may not use this file except in compliance with
-  * the License. You may obtain a copy of the License at:
-  *                             www.st.com/SLA0044
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -35,6 +34,7 @@ HCD_HandleTypeDef hhcd;
 void HAL_HCD_MspInit(HCD_HandleTypeDef * hhcd)
 {
   GPIO_InitTypeDef GPIO_InitStruct;
+  BSP_IO_Init_t io_init_structure;
 
   if (hhcd->Instance == USB2_OTG_FS)
   {
@@ -55,6 +55,19 @@ void HAL_HCD_MspInit(HCD_HandleTypeDef * hhcd)
     GPIO_InitStruct.Pull = GPIO_PULLUP;
     GPIO_InitStruct.Alternate = GPIO_AF10_OTG2_FS;
     HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+    /* Configure VBUS Pin */
+    GPIO_InitStruct.Pin = GPIO_PIN_9;
+    GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+    GPIO_InitStruct.Pull = GPIO_NOPULL;
+    HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+    /* Initialize the IO */
+    io_init_structure.Pin  =IO_PIN_7;
+    io_init_structure.Pull = IO_PULLUP;
+    io_init_structure.Mode = IO_MODE_OUTPUT_PP;
+
+    BSP_IO_Init(0, &io_init_structure);
 
     /* Enable USB FS Clocks */
     __HAL_RCC_USB2_OTG_FS_CLK_ENABLE();
@@ -476,7 +489,7 @@ USBH_StatusTypeDef USBH_LL_DriverVBUS(USBH_HandleTypeDef * phost, uint8_t state)
 
   /* Drive High Charge pump */
   BSP_IO_WritePin(0, IO_PIN_7,IO_PIN_SET);
-   
+
 #endif
 
   HAL_Delay(200);
@@ -539,4 +552,3 @@ void USBH_Delay(uint32_t Delay)
 #endif
 }
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

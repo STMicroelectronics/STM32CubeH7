@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    rsc_table.c
   * @author  MCD Application Team
-  * @brief   Ressource table
+  * @brief   Resource table
   *
   *   This file provides a default resource table requested by remote proc to
   *  load the elf file. It also allows to add debug trace using a shared buffer.
@@ -10,13 +10,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under Ultimate Liberty license
-  * SLA0044, the "License"; You may not use this file except in compliance with
-  * the License. You may obtain a copy of the License at:
-  *                             www.st.com/SLA0044
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -73,7 +72,7 @@ extern char system_log_buf[];
 #endif
 
 #if defined(__GNUC__)
-#if !defined (__CC_ARM)
+#if !defined (__CC_ARM) && !defined(__clang__)
 /* Since GCC is not initializing the resource_table at startup, it is declared as volatile to avoid compiler optimization
  * for the CM4 (see resource_table_init() below)
  */
@@ -85,7 +84,7 @@ struct shared_resource_table __resource __attribute__((used)) resource_table = {
 __root struct shared_resource_table resource_table @ ".resource_table" = {
 #endif
 
-#if defined(__ICCARM__) || defined (__CC_ARM)
+#if defined(__ICCARM__) || defined (__CC_ARM) || defined(__clang__)
 	.version = 1,
 	.num = 2,
 	.reserved = {0, 0},

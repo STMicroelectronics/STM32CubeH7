@@ -6,13 +6,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -763,7 +762,7 @@ static void CUSTOM_FillRect(int LayerIndex, int x0, int y0, int x1, int y1, U32 
   U32 BufferSize, AddrDst;
   int xSize, ySize;
 
-  /* Data Cahce management */
+  /* Data Cache management */
   if (GUI_GetDrawMode() == GUI_DM_XOR)
   {
     LCD_SetDevFunc(LayerIndex, LCD_DEVFUNC_FILLRECT, NULL);
@@ -802,5 +801,4 @@ void CUSTOM_DrawBitmap32bpp(int LayerIndex, int x, int y, U8 const * p, int xSiz
   OffLineDst = layer_prop[LayerIndex].xSize - xSize;
   DMA2D_CopyBuffer(LayerIndex, (void *)p, (void *)AddrDst, xSize, ySize, OffLineSrc, OffLineDst);
 }
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
 

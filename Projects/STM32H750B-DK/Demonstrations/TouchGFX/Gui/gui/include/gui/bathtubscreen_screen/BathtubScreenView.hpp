@@ -30,7 +30,7 @@ public:
     virtual void tempUnitButtonClicked();
     virtual void jetSpeedOnOffButtonClicked();
 
-    // Creates light effects by adding multiple circles wiht low alpha on top of eachother in different sizes
+    // Creates light effects by adding multiple circles wiht low alpha on top of each other in different sizes
     void setUpLightCircles();
     void fadeLightCircles(uint8_t endAlpha, uint16_t duration, EasingEquation equation, uint16_t delay);
 
@@ -60,10 +60,10 @@ protected:
     void jetSpeedWheelItemSelectedHandler(int16_t item);
     Callback<BathtubScreenView, int16_t> jetSpeedWheelItemSelectedCallback;
 
-    // Calcualtes the distance from the pressed position on the color to the center.
+    // Calculates the distance from the pressed position on the color to the center.
     uint32_t colorDistancesq(uint32_t x, uint32_t y);
 
-    // Retrives the rgb from the color picker and updates the light circles with the rgb value.
+    // Retrieves the rgb from the color picker and updates the light circles with the rgb value.
     void selectColor(uint32_t x, uint32_t y);
 
     // Distances used for calculating the color selected in the color wheel.
@@ -75,7 +75,7 @@ protected:
 
     int32_t color_center_x, color_center_y; // Center of the color picker 
 
-    uint8_t r, g, b; // Holds the rgb values retrived from the color picker bitmap.
+    uint8_t r, g, b; // Holds the rgb values retrieved from the color picker bitmap.
 
     bool isDown; // Used for informing handleDragEvent
 

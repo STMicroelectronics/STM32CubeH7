@@ -3,17 +3,16 @@
   * @file    TIM/TIM_Asymetric/Src/main.c
   * @author  MCD Application Team
   * @brief   This sample code shows how to use STM32H7xx TIM HAL API to generate
-  *          an asymetric signal.
+  *          an asymmetric signal.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics. 
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the 
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -48,6 +47,7 @@ TIM_SlaveConfigTypeDef  sSlaveConfig;
 TIM_MasterConfigTypeDef sMasterConfig;
 
 /* Private function prototypes -----------------------------------------------*/
+static void MPU_Config(void);
 
 static void SystemClock_Config(void);
 static void Error_Handler(void);
@@ -74,6 +74,9 @@ int main(void)
   HAL_Init();
 
   
+  /* Configure the MPU attributes */
+  MPU_Config();
+
   /* Enable the CPU Cache */
   CPU_CACHE_Enable();
 
@@ -85,10 +88,10 @@ int main(void)
 
   /*##-1- Configure the TIM peripheral #######################################*/ 
   /* --------------------------------------------------------------------------- 
-     TIM8 is configured to generate an Asymetric signal with a programmable 
+     TIM8 is configured to generate an asymmetric signal with a programmable 
    Phase-Shifted signal on TIM8_CH2:
    - TIM8 Channel 1 is configured in PWM2 mode
-   - TIM8 Channel 2 is configured in Asymetric PWM2 mode
+   - TIM8 Channel 2 is configured in asymmetric PWM2 mode
    - The counter mode is center aligned mode
    - The pulse length and the phase shift are programmed consecutively in TIM8_CCR2 and TIM8_CCR1.
     
@@ -102,7 +105,7 @@ int main(void)
     TIM1 and TIM8 signals are at frequency of  ((SystemCoreClock/2) / (PWM_FREQUENCY + 1))  
        
     TIM8 is gerating a signal with the following caracteristics:
-    - Pulse lenght = (TIM8_CCR1 + TIM8_CCR2) / TIM8_CLK
+    - Pulse length = (TIM8_CCR1 + TIM8_CCR2) / TIM8_CLK
     - Phase shift = TIM8_CCR1/TIM8_CLK
       with TIM8_CLK = (SystemCoreClock / (Period + 1)), as the prescaler is equal to zero.
   
@@ -329,6 +332,38 @@ static void Error_Handler(void)
   {
   }
 }
+
+/**
+  * @brief  Configure the MPU attributes
+  * @param  None
+  * @retval None
+  */
+static void MPU_Config(void)
+{
+  MPU_Region_InitTypeDef MPU_InitStruct;
+
+  /* Disable the MPU */
+  HAL_MPU_Disable();
+
+  /* Configure the MPU as Strongly ordered for not defined regions */
+  MPU_InitStruct.Enable = MPU_REGION_ENABLE;
+  MPU_InitStruct.BaseAddress = 0x00;
+  MPU_InitStruct.Size = MPU_REGION_SIZE_4GB;
+  MPU_InitStruct.AccessPermission = MPU_REGION_NO_ACCESS;
+  MPU_InitStruct.IsBufferable = MPU_ACCESS_NOT_BUFFERABLE;
+  MPU_InitStruct.IsCacheable = MPU_ACCESS_NOT_CACHEABLE;
+  MPU_InitStruct.IsShareable = MPU_ACCESS_SHAREABLE;
+  MPU_InitStruct.Number = MPU_REGION_NUMBER0;
+  MPU_InitStruct.TypeExtField = MPU_TEX_LEVEL0;
+  MPU_InitStruct.SubRegionDisable = 0x87;
+  MPU_InitStruct.DisableExec = MPU_INSTRUCTION_ACCESS_DISABLE;
+
+  HAL_MPU_ConfigRegion(&MPU_InitStruct);
+
+  /* Enable the MPU */
+  HAL_MPU_Enable(MPU_PRIVILEGED_DEFAULT);
+}
+
 #ifdef  USE_FULL_ASSERT
 
 /**
@@ -359,4 +394,3 @@ void assert_failed(uint8_t *file, uint32_t line)
   * @}
   */
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

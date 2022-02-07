@@ -151,7 +151,7 @@ bool AudioPlayerPresenter::removeFile(uint32_t index)
 
     //if this method was called, we certainly do have an sd card installed.
     //If we have no entries in the playlist when activate is called, no media is shown (This works because we do not store the playlist and repopulate it every time)
-    //todo: verify that we get notified upon sd-card ejection
+    //Verify that we get notified upon sd-card ejection
 
     bool empty = true;
     for (int i = 0; i < PLAYLIST_LENGTH - 1; i++)
@@ -215,7 +215,7 @@ bool AudioPlayerPresenter::addFile(uint32_t index)
     //set to first free place in play list
     playlist[pl_index].used = true;
     playlist[pl_index].filename[0] = 0; //cleared
-    playlist[pl_index].bmpId = BITMAP_COVER_UNKNOWN_ARTIST_ID; //todo
+    playlist[pl_index].bmpId = BITMAP_COVER_UNKNOWN_ARTIST_ID;
     strncpy(playlist[pl_index].filename, filelist[index].name, 50);
 
     char coverFolder[50];
@@ -235,7 +235,6 @@ bool AudioPlayerPresenter::addFile(uint32_t index)
         }
     }
 
-    // todo cleanup
     char* fullname = playlist[index].filename;
 
     fullname++;
@@ -262,7 +261,6 @@ bool AudioPlayerPresenter::addFile(uint32_t index)
         strncpy(unknown, "Unknown", 10);
         artist = unknown;
     }
-    // todo cleanup / copy above
 
     view.addToPlaylist(playlist[pl_index].bmpId, artist, filename);
 
@@ -514,7 +512,6 @@ void AudioPlayerPresenter::refreshPlaylist()
     {
         if (playlist[i].used == true)
         {
-            // todo cleanup
             char* fullname = playlist[i].filename;
 
             fullname++;

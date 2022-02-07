@@ -183,7 +183,9 @@ int getDirectoryList(const char* const dirname, const char* ext, DirEntry* dirli
 
                 int i = strlen(parent_dir);
 
-                 sprintf(full_path, "%s/%s", parent_dir, fno.fname);
+                strcpy(full_path, parent_dir);
+                strcat(full_path, "/");
+                strcat(full_path, fno.fname);
 
                  sprintf(parent_dir, full_path);
 
@@ -207,7 +209,7 @@ int getDirectoryList(const char* const dirname, const char* ext, DirEntry* dirli
                     {
                       strncat(dirlist[num_files].name, parent_dir, strlen(parent_dir));
                     }
-                    strncat(dirlist[num_files].name, "/", 1);
+                    strcat(dirlist[num_files].name, "/");
                     strncat(dirlist[num_files].name, fno.fname, sizeof(dirlist[num_files].name) - strlen(full_path) - 1);
                     num_files++;
                     n++;

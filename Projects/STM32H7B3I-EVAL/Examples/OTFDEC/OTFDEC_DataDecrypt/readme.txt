@@ -9,13 +9,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   @endverbatim
@@ -23,7 +22,7 @@
 @par Example Description
 
 This example describes how to decrypt data located on the OCTOSPI external flash using the OTFDEC peripheral.
-Data used in this example are alredy encrypted with the embedded crypto IP standard AES-128 counter mode.
+Data used in this example are already encrypted with the embedded crypto IP standard AES-128 counter mode.
 You can also use crypto for encrypting any other Data. But it is mandatory to uncomment "#define HAL_CRYP_MODULE_ENABLED", in the stm32h7xx_hal_conf.h.
 You can refer to OTFDEC_ExcutingAESInstructions example to see how to encrypt with the embedded crypto IP.
 The USART1 is used to verify that decryption is done correctly.
@@ -120,5 +119,5 @@ In order to make the program work, you must do the following :
 
 
 
- * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
+
  */

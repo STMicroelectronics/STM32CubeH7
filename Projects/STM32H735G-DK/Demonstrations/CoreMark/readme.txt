@@ -1,4 +1,4 @@
-/**
+﻿/**
   @page CoreMark STM32H735G-DK EEMBC(R) CoreMark(R) Demonstration Firmware
  
   @verbatim
@@ -22,6 +22,10 @@ CM7 L1-Cache ON
 Number of iterations : CM7 35000 
 Compiler: IAR embedded workbench for ARM 7.80
 
+@par Keywords
+
+Demonstration, FreeRTOS, RTOS, Graphics, TouchGFX, Core Mark, EMMBC
+
 This demonstration is provided as binary only (no source code)
 
 The Full demonstration binary files are available from the STM32H735G-DK page in the Binary Delivery section.
@@ -41,6 +45,6 @@ In order program this sub-demo into the STM32H735G-DK board :
  This script will invoke the STM32CubeProgrammer with the correct OSPI flasher (MX25LM51245G_STM32H735G-DK)
  
 
- * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
+
  */
  

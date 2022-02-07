@@ -9,13 +9,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   @endverbatim
@@ -47,7 +46,7 @@ the access will not be safe until “clock ready flag” of such a domain is set
 The check could be done using this macro : __HAL_RCC_GET_FLAG(RCC_FLAG_D2CKRDY).
 
 To reduce power consumption, MCU enters stop mode after starting counting. Each
-time the counter reachs the maximum value (Period/Autoreload), an interruption
+time the counter reaches the maximum value (Period/Autoreload), an interruption
 is generated, the MCU is woke up from stop mode and LED1 toggles the last state.
 
 In this example Period value is set to 1000, so each time the counter counts
@@ -106,7 +105,7 @@ Timer, Low Power, LSI, Pulse Counter, External signal generator, Stop mode, Wake
 
   - This example runs on STM32H745xx devices.
 
-  - This example has been tested with STM32H745I_DISCO  board with SMPS (SD Convertor) power supply config and can be
+  - This example has been tested with STM32H745I_DISCO  board with SMPS (SD Converter) power supply config and can be
     easily tailored to any other supported device and development board.
 
   - Generate pulses on PD12 (pin 10 on CN2 connector). (Connect a square waveform).
@@ -115,10 +114,10 @@ Timer, Low Power, LSI, Pulse Counter, External signal generator, Stop mode, Wake
 
 In order to make the program work, you must do the following :
  - Open your preferred toolchain
- - For each target configuartion (STM32H745I_DISCO_CM7 and STM32H745I_DISCO_CM4) :
+ - For each target configuration (STM32H745I_DISCO_CM7 and STM32H745I_DISCO_CM4) :
      - Rebuild all files
      - Load images into target memory
  - Run the example
 
- * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
+
  */

@@ -183,7 +183,7 @@ uint8_t BspInit(void)
   /* Check if we're in AutoDemo Mode */
   if ( AutoDemoId )
   {
-    /* TBD : Make Auto Demo Timer shorter */
+    /* Make Auto Demo Timer shorter */
   }
 
   return 1;
@@ -254,4 +254,3 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef *huart)
   * @}
   */
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

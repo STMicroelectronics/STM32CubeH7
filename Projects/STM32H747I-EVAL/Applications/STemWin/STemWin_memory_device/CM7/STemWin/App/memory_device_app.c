@@ -6,20 +6,19 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under Ultimate Liberty license
-  * SLA0044, the "License"; You may not use this file except in compliance with
-  * the License. You may obtain a copy of the License at:
-  *                             www.st.com/SLA0044
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
 /* Includes ------------------------------------------------------------------*/
 #include "GUI.h"
 
-/* Bitmap ressources */
+/* Bitmap resources */
 #include "garage.c"
 #include "Wheel2.c"
 #include "Wheel3.c"
@@ -69,7 +68,7 @@ static int _GetImage(IMAGE * pImage)
   pImage->ySize = pImage->pBitmap->YSize;
   /* Allocate the needed memdev pictures */
   pImage->hMem  = GUI_MEMDEV_CreateFixed(0, 0, pImage->xSize, pImage->ySize, GUI_MEMDEV_NOTRANS, GUI_MEMDEV_APILIST_32, GUICC_M8888I);
-  /* Exit if any issue occured on the memdev creation */
+  /* Exit if any issue occurred on the memdev creation */
   if (pImage->hMem == 0) 
   {
     return 1;
@@ -500,7 +499,7 @@ void MainTask(void)
   GUI_SetBkColor(GUI_BLACK);
   GUI_SetColor(GUI_WHITE);
   GUI_Clear();
-  GUI_DispStringHCenterAt("Error occured. Application stopped!", xSize / 2, ySize / 2);
+  GUI_DispStringHCenterAt("Error occurred. Application stopped!", xSize / 2, ySize / 2);
   /* Loop on the error message */
   while (1) 
   {
@@ -508,4 +507,3 @@ void MainTask(void)
   }
 }
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

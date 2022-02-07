@@ -9,13 +9,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   @endverbatim
@@ -113,7 +112,7 @@ The Domain 3 low power example uses:
 
 After receiving 5 chunks of data, the BDMA transfer complete interrupt is generated and the system
 is waking up from Stop mode to send-back the received data if no error occurred.
-Finaly the system will restart automatically the reception process and go Back to the STOP mode.
+Finally the system will restart automatically the reception process and go Back to the STOP mode.
 
 The DMAMUX request generator block is configured using function "HAL_DMAEx_ConfigMuxRequestGenerator"
 with the following parameters :
@@ -198,7 +197,7 @@ System, Power, PWR, Stop mode, multiprocessor, Domain 3, D3SRAM, BDMA, DMAMUX, I
 
 In order to make the program work, you must do the following :
  - Open your preferred toolchain
- - For each target configuartion (STM32H745I_DISCO_CM7 and STM32H745I_DISCO_CM4) :
+ - For each target configuration (STM32H745I_DISCO_CM7 and STM32H745I_DISCO_CM4) :
      - Rebuild all files
      - Load images into target memory
  - After loading the two images, you have to reset the board in order to boot (Cortex-M7)
@@ -206,5 +205,5 @@ In order to make the program work, you must do the following :
  - Run the example
 
 
- * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
+
  */

@@ -14,6 +14,6 @@
 For more details please refer to the Clock and Weather readme.txt file ../readme.txt
 
 
- * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
+
  */
  

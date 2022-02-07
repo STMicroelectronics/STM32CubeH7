@@ -9,13 +9,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2018 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2018 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under Ultimate Liberty license
-  * SLA0044, the "License"; You may not use this file except in compliance with
-  * the License. You may obtain a copy of the License at:
-  *                             www.st.com/SLA0044
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   @endverbatim
@@ -67,7 +66,7 @@ Below you find the sequence to discover the demonstration :
      Pressing User button lets LED2 toggling with a second frequency equal to ~5Hz.
      Pressing User button again, changes LED1 toggling frequency to ~10Hz.
      This is done in an infinite loop.
-     Each Time Cortex-M7 toogles LED1 it releases HW sempahore zero to notify the Cortex-M4.
+     Each Time Cortex-M7 toggles LED1 it releases HW sempahore zero to notify the Cortex-M4.
      The Cortex-M4 ,in a infinite loop, wait for a notification from Cortex-M7 and once received
      toggles LED2 without any delay.
      As result the Cortex-M4 toogls LED2 infintly with the same frequency as Cortex-M7
@@ -131,7 +130,7 @@ access to uSD card to parse bmp images:
 @note The clock setting is configured to have the max product performance (max clock frequency)
       so not optimized in term of power consumption.
 
-@note It is highly recommanded to set the SPI parameter "MasterKeepIOState" to "SPI_MASTER_KEEP_IO_STATE_ENABLE"
+@note It is highly recommended to set the SPI parameter "MasterKeepIOState" to "SPI_MASTER_KEEP_IO_STATE_ENABLE"
       at init time. This configuration allows to avoid glitches on SPI lines especially the clock.
       Glitches that could lead to Master/Slave desynchronization. This config allows SPI Master to keep
       control on output state even if it is disabled.
@@ -203,6 +202,6 @@ In order to make the program work, you must do the following :
      - Load images into target memory
  - Run the demonstration
 
- * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
+
  */
 

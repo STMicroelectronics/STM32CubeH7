@@ -5,13 +5,12 @@
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2018 STMicroelectronics International N.V.
+  * Copyright (c) 2018 STMicroelectronics.
   * All rights reserved.
   *
-  * This software component is licensed by ST under Ultimate Liberty license
-  * SLA0044, the "License"; You may not use this file except in compliance with
-  * the License. You may obtain a copy of the License at:
-  *                             www.st.com/SLA0044
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -116,7 +115,7 @@ extern const uint8_t  __OPENAMP_region_size__;
 #define SHM_START_ADDRESS       ((metal_phys_addr_t)&__OPENAMP_region_start__)
 #define SHM_SIZE        ((size_t)&__OPENAMP_region_size__)
 
-#elif defined(__CC_ARM)
+#elif defined(__CC_ARM) || defined (__clang__)
 /*
  * For MDK-ARM, the scatter file .sct should contain the following line:
  * LR_IROM1 ....  {
@@ -228,4 +227,3 @@ extern int __OPENAMP_region_end__[];
 
 #endif /* __OPENAMP_CONF__H__ */
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

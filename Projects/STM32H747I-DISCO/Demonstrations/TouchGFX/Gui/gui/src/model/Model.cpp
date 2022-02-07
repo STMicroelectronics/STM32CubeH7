@@ -254,7 +254,6 @@ void Model::tick()
         RTC_GetTime(&RTC_Time);
         RTC_GetDate(&RTC_Date);
 
-        // TODO - RTC should be used instead
         modelListener->updateTime(RTC_Time.Hours, RTC_Time.Minutes, RTC_Time.Seconds);
 
         dateYear = RTC_Date.Year - ((DatePicker::START_YEAR)%100);

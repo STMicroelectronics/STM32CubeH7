@@ -8,13 +8,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under Ultimate Liberty license
-  * SLA0044, the "License"; You may not use this file except in compliance with
-  * the License. You may obtain a copy of the License at:
-  *                             www.st.com/SLA0044
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -55,7 +54,7 @@
 
 
 /*
- * when using cachable memory region, it may be needed to maintain the cache
+ * when using cacheable memory region, it may be needed to maintain the cache
  * validity. Enable the define below to activate a cache maintenance at each
  * read and write operation.
  * Notice: This is applicable only for cortex M7 based platform.
@@ -197,7 +196,7 @@ DRESULT SD_read(BYTE lun, BYTE *buff, DWORD sector, UINT count)
                     res = RES_OK;
 #if (ENABLE_SD_DMA_CACHE_MAINTENANCE == 1)
                     /*
-                    * Invalidate the chache before reading into the buffer,  to get actual data
+                    * Invalidate the cache before reading into the buffer,  to get actual data
                     */
                     uint32_t alignedAddr = (uint32_t)buff & ~0x1F;
                     SCB_InvalidateDCache_by_Addr((uint32_t*)alignedAddr, count*BLOCKSIZE + ((uint32_t)buff - alignedAddr));
@@ -261,7 +260,7 @@ DRESULT SD_write(BYTE lun, const BYTE *buff, DWORD sector, UINT count)
   {
 #if (ENABLE_SD_DMA_CACHE_MAINTENANCE == 1)
     /*
-     * Invalidate the chache before writting into the buffer.
+     * Invalidate the cache before writing into the buffer.
      * This is not needed if the memory region is configured as W/T.
      */
     alignedAddr = (uint32_t)buff & ~0x1F;
@@ -409,5 +408,4 @@ void BSP_SD_ReadCpltCallback(uint32_t Instance)
      osMessagePut(SDQueueID, READ_CPLT_MSG, osWaitForever);
   }
 }
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
 

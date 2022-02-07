@@ -9,13 +9,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2018 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2018 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under Ultimate Liberty license
-  * SLA0044, the "License"; You may not use this file except in compliance with
-  * the License. You may obtain a copy of the License at:
-  *                             www.st.com/SLA0044
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   @endverbatim
@@ -94,7 +93,7 @@ Digital Signal Oscilloscope with an external Signal Generator.
       1. Single Mode : Direct transfer data using a circular 16 bits DMA.
       2. Dual Mode   : Master 16 bits results are stocked in the 16 MSB bits of the 32 commun Data register CDR
                        and wait for the slave ADC to provide the other 16 bits. the moment when the register is
-                       filled, the data are transfered using a circular 32 bits DMA mode.
+                       filled, the data are transferred using a circular 32 bits DMA mode.
 
  + Humain Machine Interface
  --------------------------
@@ -152,7 +151,7 @@ Demonstration, Oscilloscope, Analog, ADC,DAC, Firmware Cube, DMA, Timers, UART, 
 
 In order to make the demonstration work, you must do the following :
   - Open your preferred toolchain
-  - Rebuild STMH735G_DISCO project configuartion.
+  - Rebuild STMH735G_DISCO project configuration.
   - Load your  STMH735G_DISCO image.
 
 In order to use the auto-test mode :
@@ -191,5 +190,5 @@ In order program this sub-demo into the STM32H735G-DK board :
  this hex file into the STM32H735G-DK board.
  This script will invoke the STM32CubeProgrammer with the correct OSPI flasher (MX25LM51245G_STM32H735G-DK)
  
- * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
+
  */

@@ -9,13 +9,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   @endverbatim
@@ -95,7 +94,7 @@ STM32H745I-DISCO board LEDs are used to monitor the program execution status:
    status:
     - Turned-off if ADC conversions have just filled up half of the buffer (DMA half-transfer interrupt has been triggered)
     - Turned-on if ADC conversions have filled up the complete buffer (DMA transfer complete interrupt has been triggered)
-   The buffer fill up carries on indefinitively.
+   The buffer fill up carries on indefinitely.
  - Error: In case of error, LED2 is toggling at a frequency of 1Hz.
 
 @note Care must be taken when using HAL_Delay(), this function provides accurate delay (in milliseconds)
@@ -155,11 +154,11 @@ Analog, ADC, Analog to Digital, Dual mode, Interleaved, Continuous conversion, S
 In order to make the program work, you must do the following :
 
  - Open your preferred toolchain
- - For each target configuartion (STM32H745I_DISCO_CM7 and STM32H745I_DISCO_CM4) :
+ - For each target configuration (STM32H745I_DISCO_CM7 and STM32H745I_DISCO_CM4) :
      - Rebuild all files
      - Load images into target memory
  - After loading the two images, you have to reset the board in order to boot (Cortex-M7) and CPU2 (Cortex-M4) at once.
  - Run the example
 
- * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
+
  */

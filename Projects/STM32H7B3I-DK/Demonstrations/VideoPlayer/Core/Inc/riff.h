@@ -173,13 +173,12 @@ int riff_levelParent(struct riff_handle *rh);
 int riff_levelValidate(struct riff_handle *rh);
 
 //return string to error code
-//the current position (h->pos) tells you where in the file the problem occured
+//the current position (h->pos) tells you where in the file the problem occurred
 const char *riff_errorToString(int e);
 
 
 
 
-//TODO:
 
 //validate all, follow LIST chunks
 //check for duplicate chunk id in one evel

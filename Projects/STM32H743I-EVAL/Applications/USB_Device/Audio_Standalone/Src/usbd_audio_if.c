@@ -6,13 +6,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2017 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under Ultimate Liberty license
-  * SLA0044, the "License"; You may not use this file except in compliance with
-  * the License. You may obtain a copy of the License at:
-  *                             www.st.com/SLA0044
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -57,11 +56,12 @@ BSP_AUDIO_Init_t audio_init;
   */
 static int8_t Audio_Init(uint32_t AudioFreq, uint32_t Volume, uint32_t options)
 {
+  audio_init.Device = AUDIO_OUT_DEVICE_HEADPHONE;
+  audio_init.ChannelsNbr = 2;
+  audio_init.SampleRate = AudioFreq;
+  audio_init.BitsPerSample = AUDIO_RESOLUTION_16B;
+  audio_init.Volume = Volume;
   BSP_AUDIO_OUT_Init(0, &audio_init);
-
-  /* Update the Audio frame slot configuration to match the PCM standard
-   * instead of TDM */
-  //BSP_AUDIO_OUT_SetAudioFrameSlot(CODEC_AUDIOFRAME_SLOT_02);
 
   return 0;
 }
@@ -88,12 +88,12 @@ static int8_t Audio_PlaybackCmd(uint8_t * pbuf, uint32_t size, uint8_t cmd)
 {
   switch (cmd)
   {
+  case AUDIO_CMD_PLAY:
   case AUDIO_CMD_START:
     BSP_AUDIO_OUT_Play(0, (uint8_t *) pbuf, 2 * size);
     break;
 
-  case AUDIO_CMD_PLAY:
-    //BSP_AUDIO_OUT_ChangeBuffer(0, (uint16_t *) pbuf, 2 * size);
+  default:
     break;
   }
   return 0;
@@ -165,4 +165,3 @@ void BSP_AUDIO_OUT_HalfTransfer_CallBack(uint32_t Instance)
   USBD_AUDIO_Sync(&USBD_Device, AUDIO_OFFSET_HALF);
 }
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

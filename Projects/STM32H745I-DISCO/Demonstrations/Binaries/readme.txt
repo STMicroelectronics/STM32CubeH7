@@ -20,11 +20,14 @@ www.st.com/en/product/stm32h745i-disco.html
 Direct link:
 https://www.st.com/resource/en/compiled_demos/stm32h745i-disco_demo.zip 
 
+@par Keywords
+
+Demonstration, Binary, multiprocessor, Oscilloscope, Analog, ADC,DAC, DMA, Timers, UART, RAM, signals generation
 
 The EEMBC® CoreMark® sub-demonstration is provided as hex file only (no source code) STM32H7xx_EEMBC.hex
 
 For more details about this demonstration, please refer to the full demonstration readme.txt file ../readme.txt
 
- * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
+
  */
  

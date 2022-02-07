@@ -7,13 +7,14 @@
   * @author  MCD Application Team
   * @brief   Description of the COMP output blanking Example
   ******************************************************************************
+  * @attention
   *
-  * Copyright (c) 2019 STMicroelectronics. All rights reserved.
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                       opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   @endverbatim
@@ -124,7 +125,7 @@ Analog, comparator, output blanking, voltage compare, timer, timer-triggered, PW
       or to the input trigger of a wave generator.
     - connect COMP1 output (PE6 pin 20 in CN9 connector) to an osciloscope to view the COMP1 output signal.
     if you connect TIM1 CH2 to the input trigger of a wave generator :
-    - Connect the wave generator ouput to COMP1 Non Inverting input (PB0 pin 31 in CN11 connector).
+    - Connect the wave generator output to COMP1 Non Inverting input (PB0 pin 31 in CN11 connector).
     - Configure the wave generator to output a pulse at rising edge event with
       high level greater than VREFINT (1.22V) and pulse duration lower 7.1 micro second
       (as an example you can use 10 micro second).
@@ -138,5 +139,5 @@ In order to make the program work, you must do the following :
  - Rebuild all files and load your image into target memory
  - Run the example
 
- * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
+
  */

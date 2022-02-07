@@ -9,13 +9,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   @endverbatim
@@ -53,8 +52,8 @@ The check could be done using this macro : __HAL_RCC_GET_FLAG(RCC_FLAG_D2CKRDY).
 Layer0 is initialized to display a brief description of the example. It will be
 used for images display also.
 
-In this example, the display area is splitted in tow part right and left. When the
-end of refresh event occured, left part of display area is refreshed/displayed while
+In this example, the display area is split in tow part right and left. When the
+end of refresh event occurred, left part of display area is refreshed/displayed while
 the other right part is prepared to be displayed when Line Event occurs.
 
 Partial Refresh with splitting method is based on the following steps:
@@ -127,12 +126,12 @@ Graphics, Display, LCD, DMA2D , DSI, MIPI Alliance, Command mode, Tearing Effect
 
 In order to make the program work, you must do the following :
  - Open your preferred toolchain 
- - For each target configuartion (STM32H747I_DISCO_CM4 first then STM32H747I_DISCO_CM7) : 
+ - For each target configuration (STM32H747I_DISCO_CM4 first then STM32H747I_DISCO_CM7) : 
      - Rebuild all files 
      - Load images into target memory
  - After loading the two images, you have to reset the board in order to boot (Cortex-M7) and CPU2 (Cortex-M4) at once.
  - Run the example
 
 
- * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
+
  */

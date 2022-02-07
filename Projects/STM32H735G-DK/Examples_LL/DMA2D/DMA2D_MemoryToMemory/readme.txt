@@ -7,13 +7,14 @@
   * @author  MCD Application Team
   * @brief   Description of the DMA2D_MemoryToMemory example.
   ******************************************************************************
+  * @attention
   *
-  * Copyright (c) 2019 STMicroelectronics. All rights reserved.
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                       opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   @endverbatim
@@ -46,10 +47,6 @@ data are checked in comparing the source and destination buffers aBufferInput[] 
 STM32H735G-DK board LED1 is used to monitor the transfer status:
 - LED1 is ON in case of successful transfer,
 - LED1 is blinking in case of transfer error.
-
-@par Keywords
-
-Display, Graphics, DMA2D, SRAM, ARGB4444, Memory to Memory
 
 @Note If the  application is using the DTCM/ITCM memories (@0x20000000/ 0x0000000: not cacheable and only accessible
       by the Cortex M7 and the  MDMA), no need for cache maintenance when the Cortex M7 and the MDMA access these RAMs.
@@ -92,5 +89,5 @@ In order to make the program work, you must do the following :
  - Rebuild all files and load your image into target memory
  - Run the example
 
- * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
+
  */

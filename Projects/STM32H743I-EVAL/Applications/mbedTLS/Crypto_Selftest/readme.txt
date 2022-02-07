@@ -184,5 +184,5 @@ licensed under Apache 2.0 license. Respecting the original Apache 2.0 license
 terms obliges us to retain ARM copyright declarations as well as Apache 2.0
 file headers.
 
- * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
+
  */

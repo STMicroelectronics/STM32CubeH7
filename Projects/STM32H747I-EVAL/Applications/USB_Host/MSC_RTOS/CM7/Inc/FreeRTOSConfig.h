@@ -135,7 +135,7 @@ header file. */
 #define vPortSVCHandler    SVC_Handler
 #define xPortPendSVHandler PendSV_Handler
 
-/* IMPORTANT: FreeRTOS is using the SysTick as internal time base, thus make sure the system and peripherials are
+/* IMPORTANT: FreeRTOS is using the SysTick as internal time base, thus make sure the system and peripherals are
               using a different time base (TIM based for example).
  */
 #define xPortSysTickHandler SysTick_Handler

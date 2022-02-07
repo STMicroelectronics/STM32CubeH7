@@ -6,13 +6,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2018 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2018 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under Ultimate Liberty license
-  * SLA0044, the "License"; You may not use this file except in compliance with
-  * the License. You may obtain a copy of the License at:
-  *                             www.st.com/SLA0044
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -24,7 +23,7 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
-/* use the default SD timout as defined in the platform BSP driver*/
+/* use the default SD timeout as defined in the platform BSP driver*/
 #if defined(SDMMC_DATATIMEOUT)
 #define SD_TIMEOUT SDMMC_DATATIMEOUT
 #elif defined(SD_DATATIMEOUT)
@@ -222,5 +221,4 @@ DRESULT SD_ioctl(BYTE lun, BYTE cmd, void *buff)
 }
 #endif /* _USE_IOCTL == 1 */
   
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
 

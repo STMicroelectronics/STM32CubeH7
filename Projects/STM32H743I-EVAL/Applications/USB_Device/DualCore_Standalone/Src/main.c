@@ -6,13 +6,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2017 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under Ultimate Liberty license
-  * SLA0044, the "License"; You may not use this file except in compliance with
-  * the License. You may obtain a copy of the License at:
-  *                             www.st.com/SLA0044
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -31,6 +30,7 @@ uint8_t HID_Buffer[4];
 BSP_IO_Init_t init;
 static uint32_t JoyState = JOY_NONE;
 /* Private function prototypes -----------------------------------------------*/
+static void MPU_Config(void);
 static void SystemClock_Config(void);
 static void Toggle_Leds(void);
 static void GetPointerData(uint8_t *pbuf);
@@ -45,6 +45,9 @@ static void CPU_CACHE_Enable(void);
   */
 int main(void)
 {
+  /* Configure the MPU attributes */
+  MPU_Config();
+
   /* Enable the CPU Cache */
   CPU_CACHE_Enable();
 
@@ -71,16 +74,16 @@ int main(void)
   /* Initialize IO expander */
   BSP_IO_Init(0, &init);
 
-  /* Initialize Joystick 
+  /* Initialize Joystick
   if (BSP_JOY_Init(JOY_MODE_GPIO) == 0)
   {
     JoyButtonInitialized = 1;
   }*/
-  
+
   BSP_JOY_Init(JOY1, JOY_MODE_GPIO, JOY_ALL);
 
   HAL_PWREx_EnableUSBVoltageDetector();
-  
+
   /* Init CDC Application */
   USBD_Init(&USBD_Device_HS, &VCP_Desc, 1);
 
@@ -124,9 +127,9 @@ int main(void)
 static void GetPointerData(uint8_t *pbuf)
 {
     int8_t  x = 0, y = 0 ;
-    
+
     JoyState = BSP_JOY_GetState(JOY1);
-    
+
     switch(JoyState)
     {
     case JOY_LEFT:
@@ -273,6 +276,7 @@ void SystemClock_Config(void)
   HAL_EnableCompensationCell();
 }
 
+
 /**
   * @brief  CPU L1-Cache enable.
   * @param  None
@@ -285,6 +289,53 @@ static void CPU_CACHE_Enable(void)
 
   /* Enable D-Cache */
   SCB_EnableDCache();
+}
+
+
+/**
+  * @brief  Configure the MPU attributes
+  * @param  None
+  * @retval None
+  */
+static void MPU_Config(void)
+{
+  MPU_Region_InitTypeDef MPU_InitStruct;
+
+  /* Disable the MPU */
+  HAL_MPU_Disable();
+
+  /* Configure the MPU as Strongly ordered for not defined regions */
+  MPU_InitStruct.Enable = MPU_REGION_ENABLE;
+  MPU_InitStruct.BaseAddress = 0x00;
+  MPU_InitStruct.Size = MPU_REGION_SIZE_4GB;
+  MPU_InitStruct.AccessPermission = MPU_REGION_NO_ACCESS;
+  MPU_InitStruct.IsBufferable = MPU_ACCESS_NOT_BUFFERABLE;
+  MPU_InitStruct.IsCacheable = MPU_ACCESS_NOT_CACHEABLE;
+  MPU_InitStruct.IsShareable = MPU_ACCESS_SHAREABLE;
+  MPU_InitStruct.Number = MPU_REGION_NUMBER0;
+  MPU_InitStruct.TypeExtField = MPU_TEX_LEVEL0;
+  MPU_InitStruct.SubRegionDisable = 0x87;
+  MPU_InitStruct.DisableExec = MPU_INSTRUCTION_ACCESS_DISABLE;
+
+  HAL_MPU_ConfigRegion(&MPU_InitStruct);
+
+  /* Configure the MPU attributes as Normal Non Cacheable for SRAM1 */
+  MPU_InitStruct.Enable = MPU_REGION_ENABLE;
+  MPU_InitStruct.BaseAddress = 0x24000000;
+  MPU_InitStruct.Size = MPU_REGION_SIZE_512KB;
+  MPU_InitStruct.AccessPermission = MPU_REGION_FULL_ACCESS;
+  MPU_InitStruct.IsBufferable = MPU_ACCESS_NOT_BUFFERABLE;
+  MPU_InitStruct.IsCacheable = MPU_ACCESS_NOT_CACHEABLE;
+  MPU_InitStruct.IsShareable = MPU_ACCESS_NOT_SHAREABLE;
+  MPU_InitStruct.Number = MPU_REGION_NUMBER1;
+  MPU_InitStruct.TypeExtField = MPU_TEX_LEVEL1;
+  MPU_InitStruct.SubRegionDisable = 0x00;
+  MPU_InitStruct.DisableExec = MPU_INSTRUCTION_ACCESS_ENABLE;
+
+  HAL_MPU_ConfigRegion(&MPU_InitStruct);
+
+  /* Enable the MPU */
+  HAL_MPU_Enable(MPU_PRIVILEGED_DEFAULT);
 }
 
 #ifdef  USE_FULL_ASSERT
@@ -307,4 +358,3 @@ void assert_failed(uint8_t* file, uint32_t line)
 }
 #endif
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

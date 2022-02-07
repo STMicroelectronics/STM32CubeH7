@@ -83,13 +83,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -102,7 +101,7 @@
   */
 
 /** @defgroup JPEG JPEG
-* @brief JPEG YCbCr blocks <-> RGB conversion utilties  
+* @brief JPEG YCbCr blocks <-> RGB conversion utilities  
 * @{
 */
 
@@ -935,12 +934,12 @@ static uint32_t JPEG_ARGB_MCU_YCCK_ConvertBlocks(uint8_t *pInBuffer,
 }
 
 /**
-  * @brief  Retrive Encoding RGB to YCbCr color conversion function and block number  
+  * @brief  Retrieve Encoding RGB to YCbCr color conversion function and block number  
   * @param  pJpegInfo  : JPEG_ConfTypeDef that contains the JPEG image informations.
   *                      These info are available in the HAL callback "HAL_JPEG_InfoReadyCallback".
-  * @param  pFunction  : pointer to JPEG_RGBToYCbCr_Convert_Function , used to retrive the color conversion function 
+  * @param  pFunction  : pointer to JPEG_RGBToYCbCr_Convert_Function , used to retrieve the color conversion function 
   *                      depending of the jpeg image color space and chroma sampling info. 
-  * @param ImageNbMCUs : pointer to uint32_t, used to retrive the total number of MCU blocks in the jpeg image.  
+  * @param ImageNbMCUs : pointer to uint32_t, used to retrieve the total number of MCU blocks in the jpeg image.  
   * @retval HAL status : HAL_OK or HAL_ERROR.
   */
 HAL_StatusTypeDef JPEG_GetEncodeColorConvertFunc(JPEG_ConfTypeDef *pJpegInfo, JPEG_RGBToYCbCr_Convert_Function *pFunction, uint32_t *ImageNbMCUs)
@@ -1680,12 +1679,12 @@ static uint32_t JPEG_MCU_YCCK_ARGB_ConvertBlocks(uint8_t *pInBuffer,
 }
 
 /**
-  * @brief  Retrive Decoding YCbCr to RGB color conversion function and block number  
+  * @brief  Retrieve Decoding YCbCr to RGB color conversion function and block number  
   * @param  pJpegInfo  : JPEG_ConfTypeDef that contains the JPEG image informations.
   *                      These info are available in the HAL callback "HAL_JPEG_InfoReadyCallback".
-  * @param  pFunction  : pointer to JPEG_YCbCrToRGB_Convert_Function , used to retrive the color conversion function 
+  * @param  pFunction  : pointer to JPEG_YCbCrToRGB_Convert_Function , used to retrieve the color conversion function 
   *                      depending of the jpeg image color space and chroma sampling info. 
-  * @param ImageNbMCUs : pointer to uint32_t, used to retrive the total number of MCU blocks in the jpeg image.  
+  * @param ImageNbMCUs : pointer to uint32_t, used to retrieve the total number of MCU blocks in the jpeg image.  
   * @retval HAL status : HAL_OK or HAL_ERROR.
   */
 HAL_StatusTypeDef JPEG_GetDecodeColorConvertFunc(JPEG_ConfTypeDef *pJpegInfo, JPEG_YCbCrToRGB_Convert_Function *pFunction, uint32_t *ImageNbMCUs)
@@ -1971,4 +1970,3 @@ static uint8_t *JPEG_Set_K_Blocks(uint8_t *pMCUBuffer, uint8_t pKBlocks[16][16],
 }
 #endif /* USE_JPEG_ENCODER == 1 */
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

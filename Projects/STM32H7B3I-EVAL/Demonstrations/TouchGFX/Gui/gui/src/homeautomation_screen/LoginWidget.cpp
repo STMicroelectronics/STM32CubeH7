@@ -111,7 +111,7 @@ void LoginWidget::handleDragEvent(const touchgfx::DragEvent& evt)
 
 void LoginWidget::handleClickEvent(const touchgfx::ClickEvent& evt)
 {
-    //todo: If moving success to activateSingle() RELEASED will never contain a valid solution
+    //If moving success to activateSingle() RELEASED will never contain a valid solution
     if (evt.getType() == touchgfx::ClickEvent::RELEASED && !success && !tracing)
     {
         if (input.size() > 0)
@@ -158,7 +158,7 @@ void LoginWidget::handleClickEvent(const touchgfx::ClickEvent& evt)
         //Begin tracking
         for (int i = 0; i < NR_OF_MARKERS; i++)
         {
-            if (hitBoxes[i].getRect().intersect(evt.getX(), evt.getY()) && !input.contains(i)) //we havent' already been there: we never will have, since we either failed (clear) or continued (change screen)
+            if (hitBoxes[i].getRect().intersect(evt.getX(), evt.getY()) && !input.contains(i)) //we haven't already been there: we never will have, since we either failed (clear) or continued (change screen)
             {
                 //begin first line
                 line[0].updateStart((hitBoxes[i].getX() + hitBoxes[i].getWidth() / 2), (hitBoxes[i].getY() + hitBoxes[i].getHeight() / 2));
@@ -211,7 +211,7 @@ void LoginWidget::activateNode(uint8_t id, bool completeNext) //should be able t
 
     if (!input.contains(id))
     {
-        hitBoxes[id].setColor(touchgfx::Color::getColorFrom24BitRGB(0, 255, 0)); //todo: invis, so color is unused
+        hitBoxes[id].setColor(touchgfx::Color::getColorFrom24BitRGB(0, 255, 0)); //invis, so color is unused
         hitBoxes[id].invalidate();
 
         images[id].startAnimation(false, true, false);

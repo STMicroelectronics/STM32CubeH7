@@ -6,13 +6,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under Ultimate Liberty license
-  * SLA0044, the "License"; You may not use this file except in compliance with
-  * the License. You may obtain a copy of the License at:
-  *                             www.st.com/SLA0044
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -902,7 +901,7 @@ static void SUBDEMO_Sim(WM_HWIN hWin, const DemoContext_t *pContext)
   {
     /* Calculate estimated programming duration */
     uint32_t file_size = 20 * 1024 * 1024; /* 20 MBytes --> 320 * 64 Kbytes sectors */
-    uint32_t duration_ms = (file_size/(1024 * 64)) *  OCTOSPI_PROG_SECTOR_DURATION_MS; /* TODO : use appropriate value */
+    uint32_t duration_ms = (file_size/(1024 * 64)) *  OCTOSPI_PROG_SECTOR_DURATION_MS; /* use appropriate value */
 
     snprintf(message, sizeof(message), "%s demo resources download\n\n* Expected duration : %d minutes *\nCarry on?", pContext->demo_name, (duration_ms/1000));
     if(!_ShowMessageBox(hWin, "QUESTION", message))
@@ -1291,7 +1290,7 @@ static void SUBDEMO_Start(WM_HWIN hWin, const DemoContext_t *pStaticContext)
   {
     /* Calculate estimated programming duration */
     uint32_t file_size = f_size(&DEMO_resources_file);
-    uint32_t duration_ms = (file_size / (1024 * 64)) *  OCTOSPI_PROG_SECTOR_DURATION_MS; /* TODO : use appropriate value */
+    uint32_t duration_ms = (file_size / (1024 * 64)) *  OCTOSPI_PROG_SECTOR_DURATION_MS; /* use appropriate value */
 
     /* Notify the user that the expected duration */
     snprintf(message, sizeof(message), "%s demo resources download\n\n* Expected duration : %lu minutes *\nCarry on?", pContext->demo_name, (duration_ms/1000));
@@ -2080,4 +2079,3 @@ void MainTask(void)
 }
 #endif /* WIN32 */
 
-/*************************** End of file ****************************/

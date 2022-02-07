@@ -25,6 +25,6 @@ https://www.st.com/resource/en/compiled_demos/stm32h735g-dk_demo.zip
 The EEMBC(R) CoreMark(R) sub-demonstration is provided as hex file only (no source code)
 
 
- * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
+
  */
  

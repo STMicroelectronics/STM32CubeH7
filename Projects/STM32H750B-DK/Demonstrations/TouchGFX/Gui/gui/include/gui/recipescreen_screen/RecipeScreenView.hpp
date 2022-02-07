@@ -25,11 +25,11 @@ public:
 
 protected:
     // Detects when a item in scrollListRecipeSelector is selected.
-    // If it is the top item the screen is cahnged otherwise it moves to the top of the scrollListRecipeSelector
+    // If it is the top item the screen is changed otherwise it moves to the top of the scrollListRecipeSelector
     Callback<RecipeScreenView, int16_t> recipeSelectedCallback;
     void recipeSelectedHandler(int16_t item);
 
-    // Detecs when scrollListRecipeSelector is done animating to an item.
+    // Detects when scrollListRecipeSelector is done animating to an item.
     // If it is item 0 the content starts fading.
     Callback<RecipeScreenView, void> AnimationEndedCallback;
     void AnimationEndedHandler(void);

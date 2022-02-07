@@ -48,7 +48,7 @@ In this application, two operating modes are available:
        0xC000
 
  2. Run-time application mode:
-    This is the normal run-time activities. This is the normal run-time activities. A binary which toggles LED1 on the STM32H7B3I-EVAL  board is provided in Binary directory.
+    This is the normal run-time activities. This is the normal run-time activities. A binary which toggles LEDs on the STM32H7B3I-EVAL  board is provided in Binary directory.
 
 @note After each device reset (unplug the STM32H7B3I-EVAL  board from PC), Plug the STM32H7B3I-EVAL  board with Key Tamper push-button button
 pressed to enter the DFU mode.
@@ -63,11 +63,12 @@ format is used. For more details refer to the "DfuSe File Format Specification" 
 To generate a DFU image, download "DFUse Demonstration" tool and use DFU File Manager to convert a
 binary image into a DFU image. This tool is for download from www.st.com
 To download a *.dfu image, use "DfuSe Demo" available within "DFUse Demonstration" install directory.
+To download a *.bin or *.hex image, use "STM32CubeProgrammer" available from ST web site.
 
 Please refer to UM0412, DFuSe USB device firmware upgrade STMicroelectronics extension for more details
 on the driver installation and PC host user interface.
 
-@note A binary HID_Standalone on the STM32H7B3I-EVAL  board is provided in Binary directory.
+@note A binary which toggles LEDs on the STM32H7B3I-EVAL  board is provided in Binary directory.
 
 @note The application needs to ensure that the SysTick time base is set to 1 millisecond
       to have correct HAL configuration.
@@ -123,7 +124,7 @@ Connectivity, USB_Device, USB, DFU, Firmware upgrade
 
   - This application runs on stm32h7xx devices.
 
-  - This application has been tested with STMicroelectronics STM32H7B3I-EVAL 
+  - This application has been tested with STMicroelectronics STM32H7B3I-EVAL
     board and can be easily tailored to any other supported device
     and development board.
 
@@ -143,17 +144,26 @@ In order to make the program work, you must do the following:
  - Open your preferred toolchain
  - Rebuild all files and load your image into target memory
  - To run the application, proceed as follows:
-   - Install "DfuSe Demonstrator"
-   - Install the DFU driver available in "DfuSe Demonstrator" installation directory
-   - For Windows 8.1 and later : Update STM32 DFU device driver manually from Windows Device Manager.
-     The install of required device driver is available under:
-     "Program Files\STMicroelectronics\Software\DfuSe v3.0.6\Bin\Driver\Win8.1" directory.
-   - Open "DfuSe Demo", choose the "STM32H7B3I-EVAL_LED_Toggle@0x0800C000.dfu" provided in Binary
-     directory, upgrade and verify to check that it is successfully downloaded.
-   - This application allows also to upload a dfu file (either the provided DFU file or by creating a new dfu file).
-     To check that the upload was successfully performed, choose the dfu uploaded file, upgrade and verify.
-   - To run the downloaded application, execute the command "leave the DFU mode" or simply reset the
-     board.
 
- * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
+  * With "DfuSe Demonstrator":
+    - Install "DfuSe Demonstrator"
+    - Install the DFU driver available in "DfuSe Demonstrator" installation directory
+    - For Windows 8.1 and later : Update STM32 DFU device driver manually from Windows Device Manager.
+      The install of required device driver is available under:
+      "Program Files\STMicroelectronics\Software\DfuSe v3.0.6\Bin\Driver\Win8.1" directory.
+    - Open "DfuSe Demo", choose the "STM32H7B3I-EVAL_LED_Toggle@0x0800C000.dfu" provided in Binary
+      directory, upgrade and verify to check that it is successfully downloaded.
+    - This application allows also to upload a dfu file (either the provided DFU file or by creating a new dfu file).
+      To check that the upload was successfully performed, choose the dfu uploaded file, upgrade and verify.
+    - To run the downloaded application, execute the command "leave the DFU mode" or simply reset the board.
+
+   * With "STM32CubeProgrammer":
+    - Download the appropriate STM32CubeProgrammer from ST web site and install it.
+    - Once you've updated the STM32 DFU device driver with DfuSe Driver you must verify from Windows Device Manager
+      that DFU driver is selected with the STM32CubeProgrammer driver.
+    - Open "STM32CubeProgrammer", select the usb interface and connect to DFU device.
+    - Download the "STM32H7B3I-EVAL_LED_Toggle@0x0800C000.bin" provided in Binary directory and set the start address.
+    - To run the downloaded application, reset the board.
+
+
  */

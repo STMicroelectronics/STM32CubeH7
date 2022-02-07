@@ -73,6 +73,10 @@ The demonstration features the following examples:
 Please use STM32CubeProgrammer utility to flash the application's HEX file to
 the STM32 target.
 
+@par Keywords
+
+Demonstration, Embedded Wizard, GUI, Graphics, Connectivity, Clock, Weather 
+
 @par Getting started with Embedded Wizard
 
 In order to get familiar with Embedded Wizard and the GUI development work-flow,
@@ -87,5 +91,5 @@ Embedded Wizard programming aspects. Please visit our community:
 
 Please use this forum to drop your questions, answers and ideas.
 
-* <h3><center>&copy; COPYRIGHT TARA Systems</center></h3>
+
 */

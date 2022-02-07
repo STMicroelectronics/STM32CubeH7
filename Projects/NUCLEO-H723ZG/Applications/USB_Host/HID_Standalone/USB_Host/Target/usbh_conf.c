@@ -7,13 +7,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under Ultimate Liberty license
-  * SLA0044, the "License"; You may not use this file except in compliance with
-  * the License. You may obtain a copy of the License at:
-  *                             www.st.com/SLA0044
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -200,11 +199,6 @@ USBH_StatusTypeDef USBH_LL_Init(USBH_HandleTypeDef * phost)
   /* Link the driver to the stack */
   hhcd_USB_OTG_HS.pData = phost;
   phost->pData = &hhcd_USB_OTG_HS;
-
-  if (hhcd_USB_OTG_HS.Init.dma_enable == 1U)
-  {
-    SCB_DisableDCache();
-  }
 
   /* Initialize LL Driver */
   if (HAL_HCD_Init(&hhcd_USB_OTG_HS) != HAL_OK)
@@ -451,7 +445,7 @@ USBH_StatusTypeDef USBH_LL_DriverVBUS(USBH_HandleTypeDef *phost, uint8_t state)
     if (state == TRUE)
     {
       /* Drive high Charge pump */
-      /* ToDo: Add IOE driver control */
+      /* Add IOE driver control */
       /* USER CODE BEGIN DRIVE_HIGH_CHARGE_FOR_HS */
       HAL_GPIO_WritePin(GPIOD, GPIO_PIN_10, GPIO_PIN_RESET);
       /* USER CODE END DRIVE_HIGH_CHARGE_FOR_HS */
@@ -459,7 +453,7 @@ USBH_StatusTypeDef USBH_LL_DriverVBUS(USBH_HandleTypeDef *phost, uint8_t state)
     else
     {
       /* Drive low Charge pump */
-      /* ToDo: Add IOE driver control */
+      /* Add IOE driver control */
       /* USER CODE BEGIN DRIVE_LOW_CHARGE_FOR_HS */
       HAL_GPIO_WritePin(GPIOD,GPIO_PIN_10, GPIO_PIN_SET);
       /* USER CODE END DRIVE_LOW_CHARGE_FOR_HS */
@@ -555,4 +549,3 @@ USBH_StatusTypeDef USBH_Get_USB_Status(HAL_StatusTypeDef hal_status)
   return usb_status;
 }
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

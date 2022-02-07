@@ -35,7 +35,7 @@ void BathtubScreenView::setupScreen()
         topBarButtonsContainer.setY(TOPBAR_ON);
     }
 
-    // Sets if the toogle button is on C° or F° based on the saved state
+    // Sets if the toggle button is on C° or F° based on the saved state
     // And animates the stored temp value    
     if (presenter->getTempCelcius())
     {
@@ -70,7 +70,7 @@ void BathtubScreenView::setupScreen()
     presenter->getColorCoordinates(x, y);
     selectColor(x, y);
 
-    // Sets if the state of the toogle button based on the saved state
+    // Sets if the state of the toggle button based on the saved state
     // and animates the stored temp value
     if (presenter->getJetOn())
     {

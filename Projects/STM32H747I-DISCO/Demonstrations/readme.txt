@@ -9,13 +9,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under Ultimate Liberty license
-  * SLA0044, the "License"; You may not use this file except in compliance with
-  * the License. You may obtain a copy of the License at:
-  *                             www.st.com/SLA0044
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   @endverbatim
@@ -295,7 +294,7 @@ Upon Paper Cutter demonstration pick up, four options are available:
  ++ Output Format
  -----------------
  This custom allows to choose the size of th paper, different din paper formats are available from A3 to A8 on the right side of the screen,
- On the left side a graphical representation of the paper which user can manualy pick his preferred din paper format. 
+ On the left side a graphical representation of the paper which user can manually pick his preferred din paper format. 
  Once wanted dimension selected, click on the green circular green 'OK' button to save the choice.
  To cancel the choice, on the bottom right size, click on the cancel button.
 
@@ -347,6 +346,10 @@ Please refer to : www.st.com/en/product/stm32h747i-disco.html
 Direct link:
 https://www.st.com/resource/en/compiled_demos/stm32h747i-disco_demo.zip
 
+@par Keywords
+
+Demonstrations, Adafruit, Shield, TFT, Joystick, SD Card, Display, 
+
 @par Hardware and Software environment
 
  1 - The jumpers configuration is as follows:
@@ -369,6 +372,6 @@ https://www.st.com/resource/en/compiled_demos/stm32h747i-disco_demo.zip
   - This application has been tested with STM32H747I-DISCO and can be
     tailored to any other supported device and development board.
 
- * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
+
  */
  

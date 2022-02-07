@@ -9,13 +9,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under Ultimate Liberty license
-  * SLA0044, the "License"; You may not use this file except in compliance with
-  * the License. You may obtain a copy of the License at:
-  *                             www.st.com/SLA0044
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   @endverbatim
@@ -45,14 +44,14 @@ In this application:
     - Each CPU Initializes the CustomIPC module (Inter Processor Communication).
     - Each CPU Initializes the ReourceManager Utility.
     - CPU1(CM7) request the UART1 resource in a loop with pending option (RESMGR_FLAGS_ACCESS_PEND):
-      * If the reource is busy (used by CPU2 (CM4)); it wait untill notification sent by CPU2 
+      * If the reource is busy (used by CPU2 (CM4)); it wait until notification sent by CPU2 
         indicating that this resource is released and assigned to him (CPU1).
       * If the reource is free (Released), the CPU1 can use the UART reource and transmit his message.
       * This request should passes, as parameter, a pointer to the resource driver to be used by CPU2.  
 
     - CPU2(CM4) request the UART1 resource in a loop with pending and inherate options
        (RESMGR_FLAGS_ACCESS_PEND, RESMGR_FLAGS_INHERIT_HANDLE):
-      * If the reource is busy (used by CPU1(CM7)); it wait untill notification sent by CPU2 
+      * If the reource is busy (used by CPU1(CM7)); it wait until notification sent by CPU2 
         indicating that this resource is released and assigned to him (CPU2).
       * If the reource is free (Released), the CPU2 should copy the driver context inherated from the CPU1
          and can use the UART resource and transmit his message.
@@ -68,7 +67,7 @@ STM32H747I_DISCO board's LEDs and Uart messages can be used to monitor the execu
 
 
     
-STM32H747I_DISCO board's USART2 is coonected to USB Vitual Com Port (VCP):
+STM32H747I_DISCO board's USART2 is coonected to USB Virtual Com Port (VCP):
 
 The UART is configured as follows:
     - BaudRate = 115200 baud  
@@ -145,5 +144,5 @@ In order to make the program work, you must do the following :
  - Reset the Board so the 2 CPUs start running their respective code.
 
 
- * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
+
  */
