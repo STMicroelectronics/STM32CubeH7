@@ -360,7 +360,10 @@ static uint8_t AudioPlay_GetTouchPosition(void)
     }
   }
 
-  if (touch == touch_previous) return 0;
+  if (touch == touch_previous)
+  {
+    return 0;
+  }
   touch_previous = touch;
   return touch;
 }
