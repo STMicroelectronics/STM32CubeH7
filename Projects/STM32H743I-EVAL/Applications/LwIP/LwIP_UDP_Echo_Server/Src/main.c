@@ -9,7 +9,7 @@
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2017-2021 STMicroelectronics.
+  * Copyright (c) 2017 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -267,7 +267,7 @@ static void MPU_Config(void)
 
   /* Disable the MPU */
   HAL_MPU_Disable();
- 
+
   /* Configure the MPU as Strongly ordered for not defined regions */
   MPU_InitStruct.Enable = MPU_REGION_ENABLE;
   MPU_InitStruct.BaseAddress = 0x00;
@@ -316,7 +316,7 @@ static void MPU_Config(void)
   HAL_MPU_ConfigRegion(&MPU_InitStruct);
 
 #ifdef USE_LCD
-  /* Configure the MPU attributes as WT for OctoSPI RAM */
+/* Configure the MPU attributes as WT for OctoSPI RAM */
   MPU_InitStruct.Enable = MPU_REGION_ENABLE;
   MPU_InitStruct.BaseAddress = LCD_LAYER_0_ADDRESS;
   MPU_InitStruct.Size = MPU_REGION_SIZE_16MB;

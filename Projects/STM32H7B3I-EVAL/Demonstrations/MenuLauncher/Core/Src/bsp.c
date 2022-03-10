@@ -50,6 +50,7 @@ void BSP_SetSubDemoAddress(uint32_t JumpAddress)
   LTDC_MspDeInit(&hltdc);
   DMA2D_MspDeInit(&hdma2d);
 
+  hltdc.Instance = LTDC;
   HAL_LTDC_DeInit(&hltdc);
   HAL_DMA2D_DeInit(&hdma2d);
   

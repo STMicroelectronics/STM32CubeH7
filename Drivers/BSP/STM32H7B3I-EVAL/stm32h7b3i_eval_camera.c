@@ -7,13 +7,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -202,7 +201,7 @@ static int32_t OV5640_Probe(uint32_t Resolution, uint32_t PixelFormat);
   */
 int32_t BSP_CAMERA_Init(uint32_t Instance, uint32_t Resolution, uint32_t PixelFormat)
 {
-  int32_t ret;
+  int32_t ret = BSP_ERROR_NONE;
 
 #if (USE_BSP_IO_CLASS > 0)
   BSP_IO_Init_t io_init_structure;
@@ -258,13 +257,17 @@ int32_t BSP_CAMERA_Init(uint32_t Instance, uint32_t Resolution, uint32_t PixelFo
         /* Read ID of Camera module via I2C */
 #if (USE_CAMERA_SENSOR_S5K5CAG == 1)
         ret = S5K5CAG_Probe(Resolution, PixelFormat);
-#endif
 #if (USE_CAMERA_SENSOR_OV5640 == 1)
         if(ret != BSP_ERROR_NONE)
         {
           ret = OV5640_Probe(Resolution, PixelFormat);
         }
-#endif
+#endif /* USE_CAMERA_SENSOR_OV5640 */
+#else
+#if (USE_CAMERA_SENSOR_OV5640 == 1)
+        ret = OV5640_Probe(Resolution, PixelFormat);
+#endif /* USE_CAMERA_SENSOR_OV5640 */
+#endif /* USE_CAMERA_SENSOR_S5K5CAG */
 
         if(ret != BSP_ERROR_NONE)
         {
@@ -1858,5 +1861,3 @@ static int32_t OV5640_Probe(uint32_t Resolution, uint32_t PixelFormat)
 /**
   * @}
   */
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

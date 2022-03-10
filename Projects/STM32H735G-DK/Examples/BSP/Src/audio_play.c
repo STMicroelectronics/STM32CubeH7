@@ -316,7 +316,8 @@ static uint8_t AudioPlay_GetTouchPosition(void)
 {
   uint16_t x, y;
   uint8_t touch = 0;
-
+  static uint8_t touch_previous = 0;
+  
   /* Check in polling mode in touch screen the touch status and coordinates */
   /* of touches if touch occurred                                           */
   BSP_TS_GetState(0, &TS_State);
@@ -358,6 +359,13 @@ static uint8_t AudioPlay_GetTouchPosition(void)
       }
     }
   }
+
+  if (touch == touch_previous)
+  {
+    return 0;
+  }
+
+  touch_previous = touch;
 
   return touch;
 }

@@ -565,6 +565,7 @@ static void LCD_LL_LayerInit(U32 LayerIndex)
 static void LCD_LL_Init(void) 
 { 
   /* DeInit */
+  hltdc.Instance = LTDC;
   HAL_LTDC_DeInit(&hltdc);
   
   /* Set LCD Timings */

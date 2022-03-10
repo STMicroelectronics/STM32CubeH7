@@ -383,6 +383,7 @@ static void LCD_LL_Init(void)
   HAL_DMA2D_DeInit(&hdma2d);
 
   hltdc.Instance = LTDC;
+  hltdc.Instance = LTDC;
   HAL_LTDC_DeInit(&hltdc);
 
   /* Set LCD Timings */

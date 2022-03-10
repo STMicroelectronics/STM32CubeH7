@@ -75,13 +75,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -179,7 +178,7 @@ static void TIMx_PWM_Init(TIM_HandleTypeDef *htim);
 /**
   * @brief  Initializes the LCD in default mode.
   * @param  Instance    LCD Instance
-  * @param  Orientation LCD_ORIENTATION_PORTRAIT or LCD_ORIENTATION_LANDSCAPE
+  * @param  Orientation LCD_ORIENTATION_LANDSCAPE
   * @retval BSP status
   */
 int32_t BSP_LCD_Init(uint32_t Instance, uint32_t Orientation)
@@ -190,7 +189,7 @@ int32_t BSP_LCD_Init(uint32_t Instance, uint32_t Orientation)
 /**
   * @brief  Initializes the LCD.
   * @param  Instance    LCD Instance
-  * @param  Orientation LCD_ORIENTATION_PORTRAIT or LCD_ORIENTATION_LANDSCAPE
+  * @param  Orientation LCD_ORIENTATION_LANDSCAPE
   * @param  PixelFormat LCD_PIXEL_FORMAT_RGB565 or LCD_PIXEL_FORMAT_RGB888
   * @param  Width       Display width
   * @param  Height      Display height
@@ -1066,7 +1065,11 @@ int32_t BSP_LCD_FillRGBRect(uint32_t Instance, uint32_t Xpos, uint32_t Ypos, uin
   for(i = 0; i < Height; i++)
   {
     /* Get the line address */
-    Xaddress = hlcd_ltdc.LayerCfg[Lcd_Ctx[Instance].ActiveLayer].FBStartAdress + (Lcd_Ctx[Instance].BppFactor*(((Lcd_Ctx[Instance].XSize + i)*Ypos) + Xpos));
+    Xaddress = hlcd_ltdc.LayerCfg[Lcd_Ctx[Instance].ActiveLayer].FBStartAdress + (Lcd_Ctx[Instance].BppFactor*((Lcd_Ctx[Instance].XSize*(Ypos + i)) + Xpos));
+
+#if (USE_BSP_CPU_CACHE_MAINTENANCE == 1)
+    SCB_CleanDCache_by_Addr((uint32_t *)pdata, Lcd_Ctx[Instance].BppFactor*Lcd_Ctx[Instance].XSize);
+#endif /* USE_BSP_CPU_CACHE_MAINTENANCE */
 
     /* Write line */
     if(Lcd_Ctx[Instance].PixelFormat == LCD_PIXEL_FORMAT_RGB565)
@@ -1581,5 +1584,3 @@ static void TIMx_PWM_DeInit(TIM_HandleTypeDef *htim)
 /**
   * @}
   */
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

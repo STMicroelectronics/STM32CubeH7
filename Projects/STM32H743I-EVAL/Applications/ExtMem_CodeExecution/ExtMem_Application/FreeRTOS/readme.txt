@@ -79,7 +79,7 @@ on STM32Cube with RTOS".
 
 @par Keywords
 
-External Memory, QSPI, code execution, Loader, Boot, XiP, BootROM, Value line, RTOS, Thread 
+External Memory, QSPI, code execution, Loader, Boot, XiP, BootROM, Value line, RTOS, Threading 
 
 @par Directory contents
 

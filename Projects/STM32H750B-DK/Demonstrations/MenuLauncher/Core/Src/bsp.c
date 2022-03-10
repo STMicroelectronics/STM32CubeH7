@@ -284,6 +284,7 @@ void BSP_JumpToSubDemo(uint32_t SubDemoAddress)
   GUI_Delay(200);
 
   HAL_DMA2D_DeInit(&hdma2d);
+  hltdc.Instance = LTDC;
   HAL_LTDC_DeInit(&hltdc);
 
   HAL_Delay(100);

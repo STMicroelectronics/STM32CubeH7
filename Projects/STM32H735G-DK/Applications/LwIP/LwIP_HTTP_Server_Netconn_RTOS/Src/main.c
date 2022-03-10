@@ -9,7 +9,7 @@
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2017-2021 STMicroelectronics.
+  * Copyright (c) 2017 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -137,10 +137,8 @@ static void BSP_Config(void)
 
   LCD_UsrTrace("  State: Ethernet Initialization ...\n");
 #else
-
- BSP_LED_Init(LED1);
- BSP_LED_Init(LED2);
-
+  BSP_LED_Init(LED1);
+  BSP_LED_Init(LED2);
 #endif
 }
 
@@ -300,7 +298,7 @@ static void MPU_Config(void)
 
   /* Disable the MPU */
   HAL_MPU_Disable();
-  
+
   /* Configure the MPU as Strongly ordered for not defined regions */
   MPU_InitStruct.Enable = MPU_REGION_ENABLE;
   MPU_InitStruct.BaseAddress = 0x00;
@@ -315,7 +313,7 @@ static void MPU_Config(void)
   MPU_InitStruct.DisableExec = MPU_INSTRUCTION_ACCESS_DISABLE;
   
   HAL_MPU_ConfigRegion(&MPU_InitStruct);
-  
+
   /* Configure the MPU attributes as Device not cacheable
      for ETH DMA descriptors */
   MPU_InitStruct.Enable = MPU_REGION_ENABLE;

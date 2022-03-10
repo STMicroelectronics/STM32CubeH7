@@ -163,6 +163,7 @@ static void DisplayOn(uint32_t VirtualBufferAddress, uint32_t LtdcPixFormat)
   ltdc.Instance = LTDC;
 
   /* DeInit */
+  ltdc.Instance = LTDC;
   HAL_LTDC_DeInit(&ltdc);
 
   /* The RK070ER9427 800x480 is selected */

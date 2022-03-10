@@ -7,13 +7,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2018 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2018 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -62,7 +61,6 @@
 #define HDMI_FORMAT_720_480              0x00U /* 720_480 format choice of HDMI display */
 #define HDMI_FORMAT_720_576              0x01U /* 720_576 format choice of HDMI display */
 
-#define LCD_ORIENTATION_PORTRAIT         0x00U /* Portrait orientation choice of LCD screen               */
 #define LCD_ORIENTATION_LANDSCAPE        0x01U /* Landscape orientation choice of LCD screen              */
 
 #define LCD_DEFAULT_WIDTH                800
@@ -303,6 +301,16 @@ int32_t BSP_LCD_GetPixelFormat(uint32_t Instance, uint32_t *PixelFormat);
   * @}
   */
 
+/* Private constants --------------------------------------------------------*/
+/** @defgroup STM32H747I_DISCO_LCD_Private_Constants Private Constants
+  * @{
+  */
+/* Legacy defines */
+#define LCD_ORIENTATION_PORTRAIT         0x00U /* Portrait orientation choice of LCD screen               */
+/**
+  * @}
+  */
+
 /**
   * @}
   */
@@ -320,5 +328,3 @@ int32_t BSP_LCD_GetPixelFormat(uint32_t Instance, uint32_t *PixelFormat);
 #endif
 
 #endif /* STM32H747I_DISCO_LCD_H */
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

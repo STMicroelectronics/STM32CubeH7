@@ -153,6 +153,7 @@ static void GoTo_SubDemo(const uint32_t thirdPartyAdress)
   Set_DemoAddress(thirdPartyAdress);
 
   LCD_DeInitSequence();
+  hltdc.Instance = LTDC;
   HAL_LTDC_DeInit(&hltdc);
   HAL_DMA2D_DeInit(&hdma2d);
 

@@ -130,13 +130,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -428,7 +427,22 @@ int32_t BSP_AUDIO_OUT_Init(uint32_t Instance, BSP_AUDIO_Init_t* AudioInit)
           WM8994_Init_t codec_init;
           /* Fill codec_init structure */
           codec_init.InputDevice  = (Audio_In_Ctx[0].State == AUDIO_IN_STATE_RESET) ? WM8994_IN_NONE : WM8994_IN_LINE1;
-          codec_init.OutputDevice = WM8994_OUT_HEADPHONE;
+          switch (AudioInit->Device)
+          {
+          case AUDIO_OUT_DEVICE_SPK_HP:
+            codec_init.OutputDevice = WM8994_OUT_SPEAKER;
+            break;
+          case AUDIO_OUT_DEVICE_AUTO:
+            codec_init.OutputDevice = WM8994_OUT_AUTO;
+            break;
+          case AUDIO_OUT_DEVICE_SPEAKER:
+            codec_init.OutputDevice = WM8994_OUT_SPEAKER;
+            break;
+          case AUDIO_OUT_DEVICE_HEADPHONE:
+          default:
+            codec_init.OutputDevice = WM8994_OUT_HEADPHONE;
+            break;
+          }
           codec_init.Frequency    = AudioInit->SampleRate;
           codec_init.Resolution   = (AudioInit->BitsPerSample == AUDIO_RESOLUTION_32B) ? WM8994_RESOLUTION_32b : WM8994_RESOLUTION_16b;
           /* Convert volume before sending to the codec */
@@ -1927,25 +1941,29 @@ int32_t BSP_AUDIO_IN_Init(uint32_t Instance, BSP_AUDIO_Init_t* AudioInit)
 #if (USE_AUDIO_CODEC_WM8994 == 1)
           if (ret == BSP_ERROR_NONE)
           {
-            WM8994_Init_t codec_init;
-
-            /* Fill codec_init structure */
-            codec_init.OutputDevice = (Audio_Out_Ctx[0].State == AUDIO_OUT_STATE_RESET) ? WM8994_OUT_NONE : WM8994_OUT_HEADPHONE;
-            codec_init.Frequency    = AudioInit->SampleRate;
-            codec_init.Resolution   = (AudioInit->BitsPerSample == AUDIO_RESOLUTION_32B) ? WM8994_RESOLUTION_32b : WM8994_RESOLUTION_16b;
-            codec_init.InputDevice  = (AudioInit->Device == AUDIO_IN_DEVICE_ANALOG_MIC) ? WM8994_IN_LINE1 : WM8994_IN_MIC2;
-
-            /* Convert volume before sending to the codec */
-            codec_init.Volume       = VOLUME_IN_CONVERT(AudioInit->Volume);
             /* Initialize the codec internal registers */
-            if(Audio_Drv->Init(Audio_CompObj, &codec_init) < 0)
+            if (WM8994_Probe() == BSP_ERROR_NONE)
             {
-              ret = BSP_ERROR_COMPONENT_FAILURE;
-            }
-            else
-            {
-              /* Update audio in context state */
-              Audio_In_Ctx[Instance].State = AUDIO_IN_STATE_STOP;
+              WM8994_Init_t codec_init;
+              
+              /* Fill codec_init structure */
+              codec_init.OutputDevice = (Audio_Out_Ctx[0].State == AUDIO_OUT_STATE_RESET) ? WM8994_OUT_NONE : WM8994_OUT_HEADPHONE;
+              codec_init.Frequency    = AudioInit->SampleRate;
+              codec_init.Resolution   = (AudioInit->BitsPerSample == AUDIO_RESOLUTION_32B) ? WM8994_RESOLUTION_32b : WM8994_RESOLUTION_16b;
+              codec_init.InputDevice  = (AudioInit->Device == AUDIO_IN_DEVICE_ANALOG_MIC) ? WM8994_IN_LINE1 : WM8994_IN_MIC2;
+              
+              /* Convert volume before sending to the codec */
+              codec_init.Volume       = VOLUME_IN_CONVERT(AudioInit->Volume);
+              /* Initialize the codec internal registers */
+              if(Audio_Drv->Init(Audio_CompObj, &codec_init) < 0)
+              {
+                ret = BSP_ERROR_COMPONENT_FAILURE;
+              }
+              else
+              {
+                /* Update audio in context state */
+                Audio_In_Ctx[Instance].State = AUDIO_IN_STATE_STOP;
+              }
             }
           }
 #endif  /*USE_AUDIO_CODEC_WM8994 == 1)*/
@@ -4215,5 +4233,3 @@ static void DFSDM_FilterMspDeInit(DFSDM_Filter_HandleTypeDef *hDfsdmFilter)
 /**
   * @}
   */
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

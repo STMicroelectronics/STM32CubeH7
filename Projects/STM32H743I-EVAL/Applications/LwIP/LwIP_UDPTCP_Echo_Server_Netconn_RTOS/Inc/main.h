@@ -1,12 +1,12 @@
 /**
   ******************************************************************************
-  * @file    LwIP/LwIP_UDPTCP_Echo_Server_Netconn_RTOS/Inc/main.h 
+  * @file    LwIP/LwIP_UDPTCP_Echo_Server_Netconn_RTOS/Inc/main.h
   * @author  MCD Application Team
   * @brief   Header for main.c module
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2017-2021 STMicroelectronics.
+  * Copyright (c) 2017 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -27,23 +27,18 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm32h7xx_hal.h"
 #include "stm32h743i_eval.h"
-#include "stm32h743i_eval_lcd.h" 
 #include "stm32h743i_eval_sdram.h"
-//#ifdef USE_LCD
-#include "stm32_lcd.h"
-#include  "lcd_trace.h"
-#include "utilities_conf.h"
-//#endif
+
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
-#define USE_LCD
+#define USE_LCD        /* enable LCD  */
 
 /*Static IP ADDRESS*/
 #define IP_ADDR0   ((uint8_t)192U)
 #define IP_ADDR1   ((uint8_t)168U)
 #define IP_ADDR2   ((uint8_t)0U)
 #define IP_ADDR3   ((uint8_t)10U)
-   
+
 /*NETMASK*/
 #define NETMASK_ADDR0   ((uint8_t)255U)
 #define NETMASK_ADDR1   ((uint8_t)255U)
@@ -57,7 +52,7 @@
 #define GW_ADDR3   ((uint8_t)1U)
 
 /* Exported macro ------------------------------------------------------------*/
-/* Exported functions ------------------------------------------------------- */  
+/* Exported functions ------------------------------------------------------- */
 
 
 #ifdef __cplusplus

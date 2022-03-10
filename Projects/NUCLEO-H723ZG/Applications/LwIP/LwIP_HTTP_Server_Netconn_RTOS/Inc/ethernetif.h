@@ -6,7 +6,7 @@
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2017-2021 STMicroelectronics.
+  * Copyright (c) 2017 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -27,6 +27,6 @@
 /* Exported types ------------------------------------------------------------*/
 /* Structure that include link thread parameters */
 /* Exported functions ------------------------------------------------------- */
-err_t ethernetif_init(struct netif *netif);      
+err_t ethernetif_init(struct netif *netif);
 void ethernet_link_thread( void * argument );
 #endif

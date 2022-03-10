@@ -402,6 +402,7 @@ static uint8_t LCD_Init(void)
 void LTDC_Init(void)
 {
   /* DeInit */
+  hlcd_ltdc.Instance = LTDC;
   HAL_LTDC_DeInit(&hlcd_ltdc);
   
   /* LTDC Config */

@@ -488,6 +488,7 @@ void BSP_LCD_MspInit(void)
 static void LTDC_Init(void)
 {
   /* DeInit */
+  hltdc.Instance = LTDC;
   HAL_LTDC_DeInit(&hltdc);
 
   /* LTDC Config */

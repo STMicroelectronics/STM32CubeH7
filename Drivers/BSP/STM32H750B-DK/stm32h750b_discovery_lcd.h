@@ -7,13 +7,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2018 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2018 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -56,7 +55,6 @@
   */
 #define LCD_INSTANCES_NBR          1U
 
-#define LCD_ORIENTATION_PORTRAIT         0x00U /* Portrait orientation choice of LCD screen               */
 #define LCD_ORIENTATION_LANDSCAPE        0x01U /* Landscape orientation choice of LCD screen              */
 
 #define LCD_DEFAULT_WIDTH                480U
@@ -285,6 +283,16 @@ HAL_StatusTypeDef MX_LTDC_ClockConfig2(LTDC_HandleTypeDef *hltdc);
   * @}
   */
 
+/* Private constants --------------------------------------------------------*/
+/** @defgroup STM32H750B_DK_LCD_Private_Constants Private Constants
+  * @{
+  */
+/* Legacy defines */
+#define LCD_ORIENTATION_PORTRAIT         0x00U /* Portrait orientation choice of LCD screen               */
+/**
+  * @}
+  */
+
 /**
   * @}
   */
@@ -302,5 +310,3 @@ HAL_StatusTypeDef MX_LTDC_ClockConfig2(LTDC_HandleTypeDef *hltdc);
 #endif
 
 #endif /* STM32H750B_DK_LCD_H */
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

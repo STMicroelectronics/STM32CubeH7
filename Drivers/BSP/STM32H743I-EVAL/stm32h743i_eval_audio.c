@@ -135,13 +135,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -3300,18 +3299,9 @@ void HAL_DFSDM_FilterRegConvCpltCallback(DFSDM_Filter_HandleTypeDef *hdfsdm_filt
       DmaRecBuffCplt[POS_VAL(AUDIO_IN_DEVICE_DIGITAL_MIC2)] = 0;
     }
   }
-
-    /* Call Half Transfer Complete callback */
-    if(RecBuffTrigger == (Audio_In_Ctx[1].Size/4U))
-    {
-      if(RecBuffHalf == 0U)
-      {
-        RecBuffHalf = 1;
-        BSP_AUDIO_IN_HalfTransfer_CallBack(2);
-      }
-    }
-    /* Call Transfer Complete callback */
-    if(RecBuffTrigger == Audio_In_Ctx[1].Size/2U)
+  
+      /* Call Transfer Complete callback */
+    if(RecBuffTrigger >= Audio_In_Ctx[1].Size)
     {
       /* Reset Application Buffer Trigger */
       RecBuffTrigger = 0;
@@ -3319,6 +3309,17 @@ void HAL_DFSDM_FilterRegConvCpltCallback(DFSDM_Filter_HandleTypeDef *hdfsdm_filt
       /* Call the record update function to get the next buffer to fill and its size (size is ignored) */
       BSP_AUDIO_IN_TransferComplete_CallBack(1);
     }
+
+    /* Call Half Transfer Complete callback */
+    else if(RecBuffTrigger >= (Audio_In_Ctx[1].Size/2U))
+    {
+      if(RecBuffHalf == 0U)
+      {
+        RecBuffHalf = 1;
+        BSP_AUDIO_IN_HalfTransfer_CallBack(2);
+      }
+    }
+
   }
 }
 
@@ -3384,18 +3385,8 @@ void HAL_DFSDM_FilterRegConvHalfCpltCallback(DFSDM_Filter_HandleTypeDef *hdfsdm_
         DmaRecHalfBuffCplt[POS_VAL(AUDIO_IN_DEVICE_DIGITAL_MIC2)] = 0;
       }
     }
-
-    /* Call Half Transfer Complete callback */
-    if(RecBuffTrigger == (Audio_In_Ctx[1].Size/4U))
-    {
-      if(RecBuffHalf == 0U)
-      {
-        RecBuffHalf = 1;
-        BSP_AUDIO_IN_HalfTransfer_CallBack(1);
-      }
-    }
     /* Call Transfer Complete callback */
-    if(RecBuffTrigger == Audio_In_Ctx[1].Size/2U)
+    if(RecBuffTrigger >= Audio_In_Ctx[1].Size)
     {
       /* Reset Application Buffer Trigger */
       RecBuffTrigger = 0;
@@ -3403,6 +3394,17 @@ void HAL_DFSDM_FilterRegConvHalfCpltCallback(DFSDM_Filter_HandleTypeDef *hdfsdm_
       /* Call the record update function to get the next buffer to fill and its size (size is ignored) */
       BSP_AUDIO_IN_TransferComplete_CallBack(1);
     }
+    
+    /* Call Half Transfer Complete callback */
+    else if(RecBuffTrigger >= (Audio_In_Ctx[1].Size/2U))
+    {
+      if(RecBuffHalf == 0U)
+      {
+        RecBuffHalf = 1;
+        BSP_AUDIO_IN_HalfTransfer_CallBack(1);
+      }
+    }
+
   }
 }
 #endif /* (USE_HAL_DFSDM_REGISTER_CALLBACKS == 0) || !defined (USE_HAL_DFSDM_REGISTER_CALLBACKS) */
@@ -4296,5 +4298,3 @@ static void DFSDM_FilterMspDeInit(DFSDM_Filter_HandleTypeDef *hDfsdmFilter)
 /**
   * @}
   */
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

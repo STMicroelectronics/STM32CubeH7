@@ -5,33 +5,27 @@
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <title>Release Notes for Projects of STM32CubeH7 Firmware Package</title>
-  <style>
-    code{white-space: pre-wrap;}
-    span.smallcaps{font-variant: small-caps;}
-    span.underline{text-decoration: underline;}
-    div.column{display: inline-block; vertical-align: top; width: 50%;}
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    ul.task-list{list-style: none;}
-    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
   </style>
-  <link rel="stylesheet" href="../_htmresc/mini-st.css" />
+  <link rel="stylesheet" href="../_htmresc/mini-st_2020.css" />
   <!--[if lt IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
   <![endif]-->
+  <link rel="icon" type="image/x-icon" href="../_htmresc/favicon.png" />
 </head>
 <body>
 <div class="row">
 <div class="col-sm-12 col-lg-4">
-<div class="card fluid">
-<div class="sectione dark">
 <center>
-<h1 id="release-notes-forprojects-of-stm32cubeh7-firmware-package"><small>Release Notes for</small><mark>Projects of STM32CubeH7 Firmware Package</mark></h1>
+<h1 id="release-notes-for-projects-of-stm32cubeh7-firmware-package">Release Notes for <mark> Projects of STM32CubeH7 Firmware Package </mark></h1>
 <p>Copyright © 2017 STMicroelectronics<br />
 </p>
-<a href="https://www.st.com" class="logo"><img src="../_htmresc/st_logo.png" alt="ST logo" /></a>
+<a href="https://www.st.com" class="logo"><img src="../_htmresc/st_logo_2020.png" alt="ST logo" /></a>
 </center>
-</div>
-</div>
 <h1 id="purpose">Purpose</h1>
 <p>The projects are a set of applicative tasks that aim to explain and provide use cases of the different products features based on the products hardware (Boards, STM32 Core(s) features, interconnections and peripherals) and built around the different firmware components. They can be directly used or adapted by the STM32CubeH7 Firmware Package users. They provide basic functionalities, show main features or demonstrate performance. They are provided with preconfigured projects for the main supported toolchains.</p>
 <p>In the STM32CubeH7 Firmware Package, the projects are organized in a sequential scheme based on the following levels:</p>
@@ -64,11 +58,22 @@
 <li><a href="https://www.st.com/content/ccc/resource/technical/document/user_manual/group1/a1/59/6c/60/d9/49/49/c3/DM00440740/files/DM00440740.pdf/jcr:content/translations/en.DM00440740.pdf">UM2298</a>: STM32Cube BSP drivers development guidelines</li>
 </ul>
 </div>
-<section id="update-history" class="col-sm-12 col-lg-8">
-<h1>Update History</h1>
+<div class="col-sm-12 col-lg-8">
+<h1 id="update-history">Update History</h1>
 <div class="collapse">
-<input type="checkbox" id="collapse-section12" checked aria-hidden="true"> <label for="collapse-section12" aria-hidden="true"><strong>V1.9.1 / 06-December-2021</strong></label>
+<input type="checkbox" id="collapse-section13" checked aria-hidden="true"> <label for="collapse-section13" aria-hidden="true"><strong>V1.10.0 / 11-February-2022</strong></label>
+<div>
 <h2 id="main-changes">Main Changes</h2>
+<h3 id="maintenance-release">Maintenance release</h3>
+<ul>
+<li>General update to align firmware projects with the new HAL ETH driver</li>
+</ul>
+</div>
+</div>
+<div class="collapse">
+<input type="checkbox" id="collapse-section12" aria-hidden="true"> <label for="collapse-section12" aria-hidden="true"><strong>V1.9.1 / 06-December-2021</strong></label>
+<div>
+<h2 id="main-changes-1">Main Changes</h2>
 <h3 id="patch-release">Patch release</h3>
 <ul>
 <li>General updates to fix known defects and implementation enhancements</li>
@@ -110,16 +115,17 @@
 </ul></li>
 </ul>
 </div>
+</div>
 <div class="collapse">
 <input type="checkbox" id="collapse-section11" aria-hidden="true"> <label for="collapse-section11" aria-hidden="true"><strong>V1.9.0 / 12-February-2021</strong></label>
 <div>
-<h2 id="main-changes-1">Main Changes</h2>
-<h3 id="maintenance-release">Maintenance release</h3>
+<h2 id="main-changes-2">Main Changes</h2>
+<h3 id="maintenance-release-1">Maintenance release</h3>
 <ul>
 <li><p>General updates to fix known defects and implementation enhancements</p></li>
 <li><p>Fix minor issues related to English typo in comments</p></li>
 <li><p>Update FreeRTOS based applications for FreeRTOS v10.3.1_20200831</p></li>
-<li><p>Minor Fixes for EWARM, MDK-ARM, SW4STM32 and CubeIDE projects to:</p>
+<li>Minor Fixes for EWARM, MDK-ARM, SW4STM32 and CubeIDE projects to:
 <ul>
 <li>Remove extra path</li>
 <li>Fix wrong case sensitive path</li>
@@ -131,12 +137,12 @@
 <li><p>Update “Dual Core” template projects readme file to add description of Option Bytes configuration using STM32CubeIDE</p></li>
 <li><p>Update STM32H7B3I-DK projects with correct RCC reset value in system_stm32h7xx.c file</p></li>
 <li><p>Template projects migrated to Arm Compiler 6 with MDK-ARM 5.29 (“AC5-like Warnings” mode)</p></li>
-<li><p>Update STM32H743I-EVAL demonstration to add a MenuLauncher</p></li>
-<li><p>Add HDP application to STM32H7B3I-EVAL, STM32H7B3I-DK and STM32H735G-DK boards:</p>
+<li>Update STM32H743I-EVAL demonstration to add a MenuLauncher</li>
+<li>Add HDP application to STM32H7B3I-EVAL, STM32H7B3I-DK and STM32H735G-DK boards:
 <ul>
 <li>This application provides a full description of how to use an RSS service to jump from secure area to non secure area. It shows also how to set, use and remove a single secure area.</li>
 </ul></li>
-<li><p>Update STM32H750B-DK projects to avoid stopping the FMC-SDRAM during the system initialization</p>
+<li>Update STM32H750B-DK projects to avoid stopping the FMC-SDRAM during the system initialization
 <ul>
 <li>Note:
 <ul>
@@ -154,7 +160,6 @@
 <th style="text-align: left;">Board</th>
 <th style="text-align: left;">Project category</th>
 <th style="text-align: left;">Version</th>
-<th style="text-align: center;">License</th>
 <th style="text-align: center;">Path</th>
 </tr>
 </thead>
@@ -163,49 +168,42 @@
 <td style="text-align: left;">NUCLEO-H723ZG</td>
 <td style="text-align: left;"><strong>Applications</strong></td>
 <td style="text-align: left;"><strong>V1.1.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H723ZG/Applications</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">NUCLEO-H723ZG</td>
 <td style="text-align: left;"><strong>Demonstrations</strong></td>
 <td style="text-align: left;"><strong>V1.1.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H723ZG/Demonstrations</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">NUCLEO-H723ZG</td>
 <td style="text-align: left;"><strong>Examples</strong></td>
 <td style="text-align: left;"><strong>V1.1.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H723ZG/Examples</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">NUCLEO-H723ZG</td>
 <td style="text-align: left;"><strong>LL Examples</strong></td>
 <td style="text-align: left;"><strong>V1.1.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H723ZG/Examples_LL</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">NUCLEO-H723ZG</td>
 <td style="text-align: left;"><strong>MIX Examples</strong></td>
 <td style="text-align: left;"><strong>V1.1.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H723ZG/Examples_MIX</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">NUCLEO-H723ZG</td>
 <td style="text-align: left;"><strong>Templates</strong></td>
 <td style="text-align: left;"><strong>V1.1.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H723ZG/Templates</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">NUCLEO-H723ZG</td>
 <td style="text-align: left;"><strong>LL Templates</strong></td>
 <td style="text-align: left;"><strong>V1.1.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H723ZG/Templates_LL</td>
 </tr>
 </tbody>
@@ -217,7 +215,6 @@
 <th style="text-align: left;">Board</th>
 <th style="text-align: left;">Project category</th>
 <th style="text-align: left;">Version</th>
-<th style="text-align: center;">License</th>
 <th style="text-align: center;">Path</th>
 </tr>
 </thead>
@@ -226,49 +223,42 @@
 <td style="text-align: left;">STM32H735G-DK</td>
 <td style="text-align: left;"><strong>Applications</strong></td>
 <td style="text-align: left;"><strong>V1.1.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/STM32H735G-DK/Applications</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H735G-DK</td>
 <td style="text-align: left;"><strong>Demonstrations</strong></td>
 <td style="text-align: left;"><strong>V1.2.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/STM32H735G-DK/Demonstrations</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32H735G-DK</td>
 <td style="text-align: left;"><strong>Examples</strong></td>
 <td style="text-align: left;"><strong>V1.1.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H735G-DK/Examples</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H735G-DK</td>
 <td style="text-align: left;"><strong>LL Examples</strong></td>
 <td style="text-align: left;"><strong>V1.1.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H735G-DK/Examples_LL</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32H735G-DK</td>
 <td style="text-align: left;"><strong>MIX Examples</strong></td>
 <td style="text-align: left;"><strong>V1.1.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H735G-DK/Examples_MIX</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H735G-DK</td>
 <td style="text-align: left;"><strong>Templates</strong></td>
 <td style="text-align: left;"><strong>V1.1.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H735G-DK/Templates</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32H735G-DK</td>
 <td style="text-align: left;"><strong>LL Templates</strong></td>
 <td style="text-align: left;"><strong>V1.1.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H735G-DK/Templates_LL</td>
 </tr>
 </tbody>
@@ -280,7 +270,6 @@
 <th style="text-align: left;">Board</th>
 <th style="text-align: left;">Project category</th>
 <th style="text-align: left;">Version</th>
-<th style="text-align: center;">License</th>
 <th style="text-align: left;">Path</th>
 </tr>
 </thead>
@@ -289,49 +278,42 @@
 <td style="text-align: left;">NUCLEO-H7A3ZI-Q</td>
 <td style="text-align: left;"><strong>Applications</strong></td>
 <td style="text-align: left;"><strong>V1.2.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: left;">Projects/NUCLEO-H7A3ZI-Q/Applications</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">NUCLEO-H7A3ZI-Q</td>
 <td style="text-align: left;"><strong>Demonstrations</strong></td>
 <td style="text-align: left;"><strong>V1.2.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: left;">Projects/NUCLEO-H7A3ZI-Q/Demonstrations</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">NUCLEO-H7A3ZI-Q</td>
 <td style="text-align: left;"><strong>Examples </strong></td>
 <td style="text-align: left;"><strong>V1.2.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: left;">Projects/NUCLEO-H7A3ZI-Q/Examples</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">NUCLEO-H7A3ZI-Q</td>
 <td style="text-align: left;"><strong>LL Examples </strong></td>
 <td style="text-align: left;"><strong>V1.2.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: left;">Projects/NUCLEO-H7A3ZI-Q/Examples_LL</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">NUCLEO-H7A3ZI-Q</td>
 <td style="text-align: left;"><strong>MIX Examples</strong></td>
 <td style="text-align: left;"><strong>V1.2.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: left;">Projects/NUCLEO-H7A3ZI-Q/Examples_MIX</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">NUCLEO-H7A3ZI-Q</td>
 <td style="text-align: left;"><strong>Templates </strong></td>
 <td style="text-align: left;"><strong>V1.2.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: left;">Projects/NUCLEO-H7A3ZI-Q/Templates</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">NUCLEO-H7A3ZI-Q</td>
 <td style="text-align: left;"><strong>LL Templates</strong></td>
 <td style="text-align: left;"><strong>V1.2.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: left;">Projects/NUCLEO-H7A3ZI-Q/Templates_LL</td>
 </tr>
 </tbody>
@@ -343,8 +325,7 @@
 <th style="text-align: left;">Board</th>
 <th style="text-align: left;">Project category</th>
 <th style="text-align: left;">Version</th>
-<th style="text-align: center;">License</th>
-<th style="text-align: left;">Path</th>
+<th style="text-align: center;">Path</th>
 </tr>
 </thead>
 <tbody>
@@ -352,43 +333,37 @@
 <td style="text-align: left;">NUCLEO-H743ZI</td>
 <td style="text-align: left;"><strong>Applications</strong></td>
 <td style="text-align: left;"><strong>V1.7.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
-<td style="text-align: left;">Projects/NUCLEO-H743ZI/Applications</td>
+<td style="text-align: center;">Projects/NUCLEO-H743ZI/Applications</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">NUCLEO-H743ZI</td>
 <td style="text-align: left;"><strong>Demonstrations</strong></td>
 <td style="text-align: left;"><strong>V1.7.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
-<td style="text-align: left;">Projects/NUCLEO-H743ZI/Demonstrations</td>
+<td style="text-align: center;">Projects/NUCLEO-H743ZI/Demonstrations</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">NUCLEO-H743ZI</td>
 <td style="text-align: left;"><strong>Examples</strong></td>
 <td style="text-align: left;"><strong>V1.7.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
-<td style="text-align: left;">Projects/NUCLEO-H743ZI/Examples</td>
+<td style="text-align: center;">Projects/NUCLEO-H743ZI/Examples</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">NUCLEO-H743ZI</td>
 <td style="text-align: left;"><strong>LL Examples</strong></td>
 <td style="text-align: left;"><strong>V1.4.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
-<td style="text-align: left;">Projects/NUCLEO-H743ZI/Examples_LL</td>
+<td style="text-align: center;">Projects/NUCLEO-H743ZI/Examples_LL</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">NUCLEO-H743ZI</td>
 <td style="text-align: left;"><strong>Templates</strong></td>
 <td style="text-align: left;"><strong>V1.7.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
-<td style="text-align: left;">Projects/NUCLEO-H743ZI/Templates</td>
+<td style="text-align: center;">Projects/NUCLEO-H743ZI/Templates</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">NUCLEO-H743ZI</td>
 <td style="text-align: left;"><strong>LL Templates</strong></td>
 <td style="text-align: left;"><strong>V1.4.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
-<td style="text-align: left;">Projects/NUCLEO-H743ZI/Templates_LL</td>
+<td style="text-align: center;">Projects/NUCLEO-H743ZI/Templates_LL</td>
 </tr>
 </tbody>
 </table>
@@ -399,7 +374,6 @@
 <th style="text-align: left;">Board</th>
 <th style="text-align: left;">Project category</th>
 <th style="text-align: left;">Version</th>
-<th style="text-align: center;">License</th>
 <th style="text-align: left;">Path</th>
 </tr>
 </thead>
@@ -408,35 +382,30 @@
 <td style="text-align: left;">NUCLEO-H745ZI-Q</td>
 <td style="text-align: left;"><strong>Applications</strong></td>
 <td style="text-align: left;"><strong>V1.4.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: left;">Projects/NUCLEO-H745ZI-Q/Applications</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">NUCLEO-H745ZI-Q</td>
 <td style="text-align: left;"><strong>Demonstrations</strong></td>
 <td style="text-align: left;"><strong>V1.4.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: left;">Projects/NUCLEO-H745ZI-Q/Demonstrations</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">NUCLEO-H745ZI-Q</td>
 <td style="text-align: left;"><strong>Examples</strong></td>
 <td style="text-align: left;"><strong>V1.4.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: left;">Projects/NUCLEO-H745ZI-Q/Examples</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">NUCLEO-H745ZI-Q</td>
 <td style="text-align: left;"><strong>Templates</strong></td>
 <td style="text-align: left;"><strong>V1.4.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: left;">Projects/NUCLEO-H745ZI-Q/Templates</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">NUCLEO-H745ZI-Q</td>
 <td style="text-align: left;"><strong>LL Templates</strong></td>
 <td style="text-align: left;"><strong>V1.4.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: left;">Projects/NUCLEO-H745ZI-Q/Templates_LL</td>
 </tr>
 </tbody>
@@ -448,8 +417,7 @@
 <th style="text-align: left;">Board</th>
 <th style="text-align: left;">Project category</th>
 <th style="text-align: left;">Version</th>
-<th style="text-align: center;">License</th>
-<th style="text-align: left;">Path</th>
+<th style="text-align: center;">Path</th>
 </tr>
 </thead>
 <tbody>
@@ -457,50 +425,43 @@
 <td style="text-align: left;">STM32H7B3I-DK</td>
 <td style="text-align: left;"><strong>Applications</strong></td>
 <td style="text-align: left;"><strong>v1.2.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
-<td style="text-align: left;">Projects/STM32H7B3I-DK/Applications</td>
+<td style="text-align: center;">Projects/STM32H7B3I-DK/Applications</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H7B3I-DK</td>
 <td style="text-align: left;"><strong>Demonstrations</strong></td>
 <td style="text-align: left;"><strong>v1.3.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
-<td style="text-align: left;">Projects/STM32H7B3I-DK/Demonstrations</td>
+<td style="text-align: center;">Projects/STM32H7B3I-DK/Demonstrations</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32H7B3I-DK</td>
 <td style="text-align: left;"><strong>Examples</strong></td>
 <td style="text-align: left;"><strong>v1.3.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
-<td style="text-align: left;">Projects/STM32H7B3I-DK/Examples</td>
+<td style="text-align: center;">Projects/STM32H7B3I-DK/Examples</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H7B3I-DK</td>
 <td style="text-align: left;"><strong>LL Examples</strong></td>
 <td style="text-align: left;"><strong>v1.3.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
-<td style="text-align: left;">Projects/STM32H7B3I-DK/Examples_LL</td>
+<td style="text-align: center;">Projects/STM32H7B3I-DK/Examples_LL</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32H7B3I-DK</td>
 <td style="text-align: left;"><strong>MIX Examples</strong></td>
 <td style="text-align: left;"><strong>v1.3.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
-<td style="text-align: left;">Projects/STM32H7B3I-DK/Examples_MIX</td>
+<td style="text-align: center;">Projects/STM32H7B3I-DK/Examples_MIX</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H7B3I-DK</td>
 <td style="text-align: left;"><strong>Templates</strong></td>
 <td style="text-align: left;"><strong>v1.3.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
-<td style="text-align: left;">Projects/STM32H7B3I-DK/Templates</td>
+<td style="text-align: center;">Projects/STM32H7B3I-DK/Templates</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32H7B3I-DK</td>
 <td style="text-align: left;"><strong>LL Templates</strong></td>
 <td style="text-align: left;"><strong>v1.3.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
-<td style="text-align: left;">Projects/STM32H7B3I-DK/Templates_LL</td>
+<td style="text-align: center;">Projects/STM32H7B3I-DK/Templates_LL</td>
 </tr>
 </tbody>
 </table>
@@ -511,7 +472,6 @@
 <th style="text-align: left;">Board</th>
 <th style="text-align: left;">Project category</th>
 <th style="text-align: left;">Version</th>
-<th style="text-align: center;">License</th>
 <th style="text-align: left;">Path</th>
 </tr>
 </thead>
@@ -520,49 +480,42 @@
 <td style="text-align: left;">STM32H7B3I-EVAL</td>
 <td style="text-align: left;"><strong>Applications</strong></td>
 <td style="text-align: left;"><strong>v1.3.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: left;">Projects/STM32H7B3I-EVAL/Applications</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H7B3I-EVAL</td>
 <td style="text-align: left;"><strong>Demonstrations</strong></td>
 <td style="text-align: left;"><strong>v1.3.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: left;">Projects/STM32H7B3I-EVAL/Demonstrations</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32H7B3I-EVAL</td>
 <td style="text-align: left;"><strong>Examples</strong></td>
 <td style="text-align: left;"><strong>v1.3.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: left;">Projects/STM32H7B3I-EVAL/Examples</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H7B3I-EVAL</td>
 <td style="text-align: left;"><strong>LL Examples</strong></td>
 <td style="text-align: left;"><strong>v1.2.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: left;">Projects/STM32H7B3I-EVAL/Examples_LL</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32H7B3I-EVAL</td>
 <td style="text-align: left;"><strong>MIX Examples</strong></td>
 <td style="text-align: left;"><strong>v1.2.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: left;">Projects/STM32H7B3I-EVAL/Examples_MIX</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H7B3I-EVAL</td>
 <td style="text-align: left;"><strong>Templates</strong></td>
 <td style="text-align: left;"><strong>v1.2.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: left;">Projects/STM32H7B3I-EVAL/Templates</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32H7B3I-EVAL</td>
 <td style="text-align: left;"><strong>LL Templates</strong></td>
 <td style="text-align: left;"><strong>v1.2.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: left;">Projects/STM32H7B3I-EVAL/Templates_LL</td>
 </tr>
 </tbody>
@@ -574,7 +527,6 @@
 <th style="text-align: left;">Board</th>
 <th style="text-align: left;">Project category</th>
 <th style="text-align: left;">Version</th>
-<th style="text-align: center;">License</th>
 <th style="text-align: left;">Path</th>
 </tr>
 </thead>
@@ -583,35 +535,30 @@
 <td style="text-align: left;">STM32H743I-EVAL</td>
 <td style="text-align: left;"><strong>Applications</strong></td>
 <td style="text-align: left;"><strong>V1.8.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: left;">Projects/STM32H743I-EVAL/Applications</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H743I-EVAL</td>
 <td style="text-align: left;"><strong>Demonstrations</strong></td>
 <td style="text-align: left;"><strong>V1.7.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: left;">Projects/STM32H743I-EVAL/Demonstrations</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32H743I-EVAL</td>
 <td style="text-align: left;"><strong>Examples</strong></td>
 <td style="text-align: left;"><strong>V1.7.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: left;">Projects/STM32H743I-EVAL/Examples</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H743I-EVAL</td>
 <td style="text-align: left;"><strong>Templates</strong></td>
 <td style="text-align: left;"><strong>V1.7.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: left;">Projects/STM32H743I-EVAL/Templates</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32H743I-EVAL</td>
 <td style="text-align: left;"><strong>LL Templates</strong></td>
 <td style="text-align: left;"><strong>V1.4.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: left;">Projects/STM32H743I-EVAL/Templates_LL</td>
 </tr>
 </tbody>
@@ -623,7 +570,6 @@
 <th style="text-align: left;">Board</th>
 <th style="text-align: left;">Project category</th>
 <th style="text-align: left;">Version</th>
-<th style="text-align: center;">License</th>
 <th style="text-align: left;">Path</th>
 </tr>
 </thead>
@@ -632,35 +578,30 @@
 <td style="text-align: left;">STM32H745I-DISCO</td>
 <td style="text-align: left;"><strong>Applications</strong></td>
 <td style="text-align: left;"><strong>V1.4.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: left;">Projects/STM32H745I-DISCO/Applications</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H745I-DISCO</td>
 <td style="text-align: left;"><strong>Demonstrations</strong></td>
 <td style="text-align: left;"><strong>V1.4.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: left;">Projects/STM32H745I-DISCO/Demonstrations</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32H745I-DISCO</td>
 <td style="text-align: left;"><strong>Examples</strong></td>
 <td style="text-align: left;"><strong>V1.4.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: left;">Projects/STM32H745I-DISCO/Examples</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H745I-DISCO</td>
 <td style="text-align: left;"><strong>Templates</strong></td>
 <td style="text-align: left;"><strong>V1.4.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: left;">Projects/STM32H745I-DISCO/Templates</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32H745I-DISCO</td>
 <td style="text-align: left;"><strong>LL Templates</strong></td>
 <td style="text-align: left;"><strong>V1.4.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: left;">Projects/STM32H745I-DISCO/Templates_LL</td>
 </tr>
 </tbody>
@@ -672,7 +613,6 @@
 <th style="text-align: left;">Board</th>
 <th style="text-align: left;">Project category</th>
 <th style="text-align: left;">Version</th>
-<th style="text-align: center;">License</th>
 <th style="text-align: left;">Path</th>
 </tr>
 </thead>
@@ -681,35 +621,30 @@
 <td style="text-align: left;">STM32H747I-DISCO</td>
 <td style="text-align: left;"><strong>Applications</strong></td>
 <td style="text-align: left;"><strong>V1.4.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: left;">Projects/STM32H747I-DISCO/Applications</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H747I-DISCO</td>
 <td style="text-align: left;"><strong>Demonstrations</strong></td>
 <td style="text-align: left;"><strong>V1.4.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: left;">Projects/STM32H747I-DISCO/Demonstrations</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32H747I-DISCO</td>
 <td style="text-align: left;"><strong>Examples</strong></td>
 <td style="text-align: left;"><strong>V1.4.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: left;">Projects/STM32H747I-DISCO/Examples</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H747I-DISCO</td>
 <td style="text-align: left;"><strong>Templates</strong></td>
 <td style="text-align: left;"><strong>V1.4.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: left;">Projects/STM32H747I-DISCO/Templates</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32H747I-DISCO</td>
 <td style="text-align: left;"><strong>LL Templates</strong></td>
 <td style="text-align: left;"><strong>V1.4.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: left;">Projects/STM32H747I-DISCO/Templates_LL</td>
 </tr>
 </tbody>
@@ -721,7 +656,6 @@
 <th style="text-align: left;">Board</th>
 <th style="text-align: left;">Project category</th>
 <th style="text-align: left;">Version</th>
-<th style="text-align: center;">License</th>
 <th style="text-align: left;">Path</th>
 </tr>
 </thead>
@@ -730,35 +664,30 @@
 <td style="text-align: left;">STM32H747I-EVAL</td>
 <td style="text-align: left;"><strong>Applications</strong></td>
 <td style="text-align: left;"><strong>V1.4.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: left;">Projects/STM32H747I-EVAL/Applications</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H747I-EVAL</td>
 <td style="text-align: left;"><strong>Demonstrations</strong></td>
 <td style="text-align: left;"><strong>V1.5.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: left;">Projects/STM32H747I-EVAL/Demonstrations</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32H747I-EVAL</td>
 <td style="text-align: left;"><strong>Examples</strong></td>
 <td style="text-align: left;"><strong>V1.4.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: left;">Projects/STM32H747I-EVAL/Examples</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H747I-EVAL</td>
 <td style="text-align: left;"><strong>Templates</strong></td>
 <td style="text-align: left;"><strong>V1.4.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: left;">Projects/STM32H747I-EVAL/Templates</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32H747I-EVAL</td>
 <td style="text-align: left;"><strong>LL Templates</strong></td>
 <td style="text-align: left;"><strong>V1.4.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: left;">Projects/STM32H747I-EVAL/Templates_LL</td>
 </tr>
 </tbody>
@@ -770,7 +699,6 @@
 <th style="text-align: left;">Board</th>
 <th style="text-align: left;">Project category</th>
 <th style="text-align: left;">Version</th>
-<th style="text-align: center;">License</th>
 <th style="text-align: left;">Path</th>
 </tr>
 </thead>
@@ -779,28 +707,24 @@
 <td style="text-align: left;">STM32H750B-DK</td>
 <td style="text-align: left;"><strong>Applications</strong></td>
 <td style="text-align: left;"><strong>V1.4.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: left;">Projects/STM32H750B-DK/Applications</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H750B-DK</td>
 <td style="text-align: left;"><strong>Demonstrations</strong></td>
 <td style="text-align: left;"><strong>V1.4.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: left;">Projects/STM32H750B-DK/Demonstrations</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32H750B-DK</td>
 <td style="text-align: left;"><strong>Examples</strong></td>
 <td style="text-align: left;"><strong>V1.4.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: left;">Projects/STM32H750B-DK/Examples</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H750B-DK</td>
 <td style="text-align: left;"><strong>Templates</strong></td>
 <td style="text-align: left;"><strong>V1.4.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: left;">Projects/STM32H750B-DK/Templates</td>
 </tr>
 </tbody>
@@ -809,7 +733,7 @@
 <h2 id="known-limitations">Known Limitations</h2>
 <ul>
 <li><p>Only template projects migrated to Arm Compiler 6 with MDK-ARM 5.29 or upper version (“AC5-like Warnings” mode)</p></li>
-<li><p><strong>LwIP</strong>-based applications come with</p>
+<li><strong>LwIP</strong>-based applications come with
 <ul>
 <li>known compilation warning on EWARM V8.30
 <ul>
@@ -818,25 +742,25 @@
 </ul></li>
 <li>Known compilation warning on STM32CubeIDE with GCC compiler v9 (These warnings will be fixed in next release)</li>
 </ul></li>
-<li><p><strong>OpenAMP</strong>-based applications (available on STM32H745I-DISCO, STM32H747I-DISCO and STM32H747I-EVAL) come with known compilation warning</p>
+<li><strong>OpenAMP</strong>-based applications (available on STM32H745I-DISCO, STM32H747I-DISCO and STM32H747I-EVAL) come with known compilation warning
 <ul>
 <li>Related to the OpenAmp third party stack</li>
 <li>Related to ST application implementation For warning details please refer to the corresponding applications readme.txt files</li>
 </ul></li>
-<li><p>STM32H747I-DISCO, STM32H747I-EVAL, STM32H743I-EVAL and STM32H750B-DK TouchGFX demonstrations as well as the Libjpeg applications come with known compilation warnings on SW4STM32 IDE:</p>
+<li>STM32H747I-DISCO, STM32H747I-EVAL, STM32H743I-EVAL and STM32H750B-DK TouchGFX demonstrations as well as the Libjpeg applications come with known compilation warnings on SW4STM32 IDE:
 <ul>
 <li>Warnings related to the Libjpeg third party MW</li>
 </ul></li>
-<li><p><strong>STM32H743I-EVAL</strong></p>
+<li><strong>STM32H743I-EVAL</strong>
 <ul>
 <li>MenuLauncher project is provided for EWARM IDE only (not provided for SW4STM32 and MDK-ARM)</li>
 </ul></li>
-<li><p><strong>STM32H7B3I-DK</strong></p>
+<li><strong>STM32H7B3I-DK</strong>
 <ul>
 <li>MDK-ARM project for <strong>TouchGFX Demonstrations</strong> comes with known compilation warning related to TouchGFX Middleware</li>
 <li>Known compilation warning on STM32CubeIDE with GCC compiler v9 (These warnings will be fixed in next release)</li>
 </ul></li>
-<li><p><strong>STM32H7B3I-EVAL</strong></p>
+<li><strong>STM32H7B3I-EVAL</strong>
 <ul>
 <li>Known compilation warning on STM32CubeIDE with GCC compiler v9 (These warnings will be fixed in next release)</li>
 </ul></li>
@@ -884,7 +808,7 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section10" aria-hidden="true"> <label for="collapse-section10" aria-hidden="true"><strong>V1.8.0 / 29-May-2020</strong></label>
 <div>
-<h2 id="main-changes-2">Main Changes</h2>
+<h2 id="main-changes-3">Main Changes</h2>
 <h3 id="first-official-release-to-support-stm32h723xx33xx25xx35xx30xx30xxq-new-devices-and-boards">First official release to support STM32H723xx/33xx/25xx/35xx/30xx/30xxQ new devices and boards</h3>
 <p>Official release with support of STM32H723xx/33xx/25xx/35xx/30xx/30xxQ new devices</p>
 <p>Add support of NUCLEO-H723ZG and STM32H735G-DK boards with dedicated template HAL/LL projects, examples, applications and demonstrations</p>
@@ -932,7 +856,6 @@
 <th style="text-align: left;">Board</th>
 <th style="text-align: left;">Project category</th>
 <th style="text-align: left;">Version</th>
-<th style="text-align: center;">License</th>
 <th style="text-align: center;">Path</th>
 </tr>
 </thead>
@@ -941,49 +864,42 @@
 <td style="text-align: left;">NUCLEO-H723ZG</td>
 <td style="text-align: left;"><strong>Applications</strong></td>
 <td style="text-align: left;"><strong>V1.0.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H723ZG/Applications</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">NUCLEO-H723ZG</td>
 <td style="text-align: left;"><strong>Demonstrations</strong></td>
 <td style="text-align: left;"><strong>V1.0.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H723ZG/Demonstrations</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">NUCLEO-H723ZG</td>
 <td style="text-align: left;"><strong>Examples</strong></td>
 <td style="text-align: left;"><strong>V1.0.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H723ZG/Examples</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">NUCLEO-H723ZG</td>
 <td style="text-align: left;"><strong>LL Examples</strong></td>
 <td style="text-align: left;"><strong>V1.0.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H723ZG/Examples_LL</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">NUCLEO-H723ZG</td>
 <td style="text-align: left;"><strong>MIX Examples</strong></td>
 <td style="text-align: left;"><strong>V1.0.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H723ZG/Examples_MIX</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">NUCLEO-H723ZG</td>
 <td style="text-align: left;"><strong>Templates</strong></td>
 <td style="text-align: left;"><strong>V1.0.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H723ZG/Templates</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">NUCLEO-H723ZG</td>
 <td style="text-align: left;"><strong>LL Templates</strong></td>
 <td style="text-align: left;"><strong>V1.0.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H723ZG/Templates_LL</td>
 </tr>
 </tbody>
@@ -995,7 +911,6 @@
 <th style="text-align: left;">Board</th>
 <th style="text-align: left;">Project category</th>
 <th style="text-align: left;">Version</th>
-<th style="text-align: center;">License</th>
 <th style="text-align: center;">Path</th>
 </tr>
 </thead>
@@ -1004,49 +919,42 @@
 <td style="text-align: left;">STM32H735G-DK</td>
 <td style="text-align: left;"><strong>Applications</strong></td>
 <td style="text-align: left;"><strong>V1.0.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/STM32H735G-DK/Applications</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H735G-DK</td>
 <td style="text-align: left;"><strong>Demonstrations</strong></td>
 <td style="text-align: left;"><strong>V1.1.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/STM32H735G-DK/Demonstrations</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32H735G-DK</td>
 <td style="text-align: left;"><strong>Examples</strong></td>
 <td style="text-align: left;"><strong>V1.0.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H735G-DK/Examples</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H735G-DK</td>
 <td style="text-align: left;"><strong>LL Examples</strong></td>
 <td style="text-align: left;"><strong>V1.0.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H735G-DK/Examples_LL</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32H735G-DK</td>
 <td style="text-align: left;"><strong>MIX Examples</strong></td>
 <td style="text-align: left;"><strong>V1.0.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H735G-DK/Examples_MIX</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H735G-DK</td>
 <td style="text-align: left;"><strong>Templates</strong></td>
 <td style="text-align: left;"><strong>V1.0.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H735G-DK/Templates</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32H735G-DK</td>
 <td style="text-align: left;"><strong>LL Templates</strong></td>
 <td style="text-align: left;"><strong>V1.0.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H735G-DK/Templates_LL</td>
 </tr>
 </tbody>
@@ -1058,7 +966,6 @@
 <th style="text-align: left;">Board</th>
 <th style="text-align: left;">Project category</th>
 <th style="text-align: left;">Version</th>
-<th style="text-align: center;">License</th>
 <th style="text-align: center;">Path</th>
 </tr>
 </thead>
@@ -1067,49 +974,42 @@
 <td style="text-align: left;">NUCLEO-H7A3ZI-Q</td>
 <td style="text-align: left;">Applications</td>
 <td style="text-align: left;"><strong>V1.1.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H7A3ZI-Q/Applications</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">NUCLEO-H7A3ZI-Q</td>
 <td style="text-align: left;">Demonstrations</td>
 <td style="text-align: left;"><strong>V1.1.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H7A3ZI-Q/Demonstrations</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">NUCLEO-H7A3ZI-Q</td>
 <td style="text-align: left;">Examples</td>
 <td style="text-align: left;"><strong>V1.1.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H7A3ZI-Q/Examples</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">NUCLEO-H7A3ZI-Q</td>
 <td style="text-align: left;">LL Examples</td>
 <td style="text-align: left;"><strong>V1.1.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H7A3ZI-Q/Examples_LL</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">NUCLEO-H7A3ZI-Q</td>
 <td style="text-align: left;">MIX Examples</td>
 <td style="text-align: left;"><strong>V1.1.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H7A3ZI-Q/Examples_MIX</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">NUCLEO-H7A3ZI-Q</td>
 <td style="text-align: left;">Templates</td>
 <td style="text-align: left;"><strong>V1.1.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H7A3ZI-Q/Templates</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">NUCLEO-H7A3ZI-Q</td>
 <td style="text-align: left;">LL Templates</td>
 <td style="text-align: left;"><strong>V1.1.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H7A3ZI-Q/Templates_LL</td>
 </tr>
 </tbody>
@@ -1121,7 +1021,6 @@
 <th style="text-align: left;">Board</th>
 <th style="text-align: left;">Project category</th>
 <th style="text-align: left;">Version</th>
-<th style="text-align: center;">License</th>
 <th style="text-align: center;">Path</th>
 </tr>
 </thead>
@@ -1130,42 +1029,36 @@
 <td style="text-align: left;">NUCLEO-H743ZI</td>
 <td style="text-align: left;">Applications</td>
 <td style="text-align: left;"><strong>V1.6.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H743ZI/Applications</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">NUCLEO-H743ZI</td>
 <td style="text-align: left;">Demonstrations</td>
 <td style="text-align: left;"><strong>V1.6.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H743ZI/Demonstrations</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">NUCLEO-H743ZI</td>
 <td style="text-align: left;">Examples</td>
 <td style="text-align: left;"><strong>V1.6.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H743ZI/Examples</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">NUCLEO-H743ZI</td>
 <td style="text-align: left;">LL Examples</td>
 <td style="text-align: left;"><strong>V1.3.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H743ZI/Examples_LL</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">NUCLEO-H743ZI</td>
 <td style="text-align: left;">Templates</td>
 <td style="text-align: left;"><strong>V1.6.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H743ZI/Templates</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">NUCLEO-H743ZI</td>
 <td style="text-align: left;">LL Templates</td>
 <td style="text-align: left;"><strong>V1.3.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H743ZI/Templates_LL</td>
 </tr>
 </tbody>
@@ -1177,7 +1070,6 @@
 <th style="text-align: left;">Board</th>
 <th style="text-align: left;">Project category</th>
 <th style="text-align: left;">Version</th>
-<th style="text-align: center;">License</th>
 <th style="text-align: center;">Path</th>
 </tr>
 </thead>
@@ -1186,35 +1078,30 @@
 <td style="text-align: left;">NUCLEO-H745ZI-Q</td>
 <td style="text-align: left;">Applications</td>
 <td style="text-align: left;"><strong>V1.3.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H745ZI-Q/Applications</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">NUCLEO-H745ZI-Q</td>
 <td style="text-align: left;">Demonstrations</td>
 <td style="text-align: left;"><strong>V1.3.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H745ZI-Q/Demonstrations</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">NUCLEO-H745ZI-Q</td>
 <td style="text-align: left;">Examples</td>
 <td style="text-align: left;"><strong>V1.3.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H745ZI-Q/Examples</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">NUCLEO-H745ZI-Q</td>
 <td style="text-align: left;">Templates</td>
 <td style="text-align: left;"><strong>V1.3.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H745ZI-Q/Templates</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">NUCLEO-H745ZI-Q</td>
 <td style="text-align: left;">LL Templates</td>
 <td style="text-align: left;"><strong>V1.3.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H745ZI-Q/Templates_LL</td>
 </tr>
 </tbody>
@@ -1226,7 +1113,6 @@
 <th style="text-align: left;">Board</th>
 <th style="text-align: left;">Project category</th>
 <th style="text-align: left;">Version</th>
-<th style="text-align: center;">License</th>
 <th style="text-align: center;">Path</th>
 </tr>
 </thead>
@@ -1235,49 +1121,42 @@
 <td style="text-align: left;">STM32H7B3I-DK</td>
 <td style="text-align: left;">Applications</td>
 <td style="text-align: left;"><strong>v1.1.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/STM32H7B3I-DK/Applications</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H7B3I-DK</td>
 <td style="text-align: left;"><strong>Demonstrations</strong></td>
 <td style="text-align: left;"><strong>v1.2.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/STM32H7B3I-DK/Demonstrations</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32H7B3I-DK</td>
 <td style="text-align: left;">Examples</td>
 <td style="text-align: left;"><strong>v1.1.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H7B3I-DK/Examples</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H7B3I-DK</td>
 <td style="text-align: left;">LL Examples</td>
 <td style="text-align: left;"><strong>v1.1.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H7B3I-DK/Examples_LL</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32H7B3I-DK</td>
 <td style="text-align: left;">MIX Examples</td>
 <td style="text-align: left;"><strong>v1.1.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H7B3I-DK/Examples_MIX</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H7B3I-DK</td>
 <td style="text-align: left;">Templates</td>
 <td style="text-align: left;"><strong>v1.1.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H7B3I-DK/Templates</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32H7B3I-DK</td>
 <td style="text-align: left;">LL Templates</td>
 <td style="text-align: left;"><strong>v1.1.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H7B3I-DK/Templates_LL</td>
 </tr>
 </tbody>
@@ -1289,7 +1168,6 @@
 <th style="text-align: left;">Board</th>
 <th style="text-align: left;">Project category</th>
 <th style="text-align: left;">Version</th>
-<th style="text-align: center;">License</th>
 <th style="text-align: center;">Path</th>
 </tr>
 </thead>
@@ -1298,49 +1176,42 @@
 <td style="text-align: left;">STM32H7B3I-EVAL</td>
 <td style="text-align: left;"><strong>Applications</strong></td>
 <td style="text-align: left;"><strong>v1.2.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/STM32H7B3I-EVAL/Applications</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H7B3I-EVAL</td>
 <td style="text-align: left;"><strong>Demonstrations</strong></td>
 <td style="text-align: left;"><strong>v1.2.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/STM32H7B3I-EVAL/Demonstrations</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32H7B3I-EVAL</td>
 <td style="text-align: left;"><strong>Examples</strong></td>
 <td style="text-align: left;"><strong>v1.2.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H7B3I-EVAL/Examples</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H7B3I-EVAL</td>
 <td style="text-align: left;">LL Examples</td>
 <td style="text-align: left;"><strong>v1.1.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H7B3I-EVAL/Examples_LL</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32H7B3I-EVAL</td>
 <td style="text-align: left;">MIX Examples</td>
 <td style="text-align: left;"><strong>v1.1.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H7B3I-EVAL/Examples_MIX</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H7B3I-EVAL</td>
 <td style="text-align: left;">Templates</td>
 <td style="text-align: left;"><strong>v1.1.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H7B3I-EVAL/Templates</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32H7B3I-EVAL</td>
 <td style="text-align: left;">LL Templates</td>
 <td style="text-align: left;"><strong>v1.1.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H7B3I-EVAL/Templates_LL</td>
 </tr>
 </tbody>
@@ -1352,7 +1223,6 @@
 <th style="text-align: left;">Board</th>
 <th style="text-align: left;">Project category</th>
 <th style="text-align: left;">Version</th>
-<th style="text-align: center;">License</th>
 <th style="text-align: center;">Path</th>
 </tr>
 </thead>
@@ -1361,35 +1231,30 @@
 <td style="text-align: left;">STM32H743I-EVAL</td>
 <td style="text-align: left;">Applications</td>
 <td style="text-align: left;"><strong>V1.7.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/STM32H743I-EVAL/Applications</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H743I-EVAL</td>
 <td style="text-align: left;"><strong>Demonstrations</strong></td>
 <td style="text-align: left;"><strong>V1.6.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/STM32H743I-EVAL/Demonstrations</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32H743I-EVAL</td>
 <td style="text-align: left;">Examples</td>
 <td style="text-align: left;"><strong>V1.6.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H743I-EVAL/Examples</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H743I-EVAL</td>
 <td style="text-align: left;">Templates</td>
 <td style="text-align: left;"><strong>V1.6.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H743I-EVAL/Templates</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32H743I-EVAL</td>
 <td style="text-align: left;">LL Templates</td>
 <td style="text-align: left;"><strong>V1.3.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H743I-EVAL/Templates_LL</td>
 </tr>
 </tbody>
@@ -1401,7 +1266,6 @@
 <th style="text-align: left;">Board</th>
 <th style="text-align: left;">Project category</th>
 <th style="text-align: left;">Version</th>
-<th style="text-align: center;">License</th>
 <th style="text-align: center;">Path</th>
 </tr>
 </thead>
@@ -1410,35 +1274,30 @@
 <td style="text-align: left;">STM32H745I-DISCO</td>
 <td style="text-align: left;">Applications</td>
 <td style="text-align: left;"><strong>V1.3.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/STM32H745I-DISCO/Applications</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H745I-DISCO</td>
 <td style="text-align: left;">Demonstrations</td>
 <td style="text-align: left;"><strong>V1.3.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/STM32H745I-DISCO/Demonstrations</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32H745I-DISCO</td>
 <td style="text-align: left;">Examples</td>
 <td style="text-align: left;"><strong>V1.3.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H745I-DISCO/Examples</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H745I-DISCO</td>
 <td style="text-align: left;">Templates</td>
 <td style="text-align: left;"><strong>V1.3.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H745I-DISCO/Templates</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32H745I-DISCO</td>
 <td style="text-align: left;">LL Templates</td>
 <td style="text-align: left;"><strong>V1.3.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H745I-DISCO/Templates_LL</td>
 </tr>
 </tbody>
@@ -1450,7 +1309,6 @@
 <th style="text-align: left;">Board</th>
 <th style="text-align: left;">Project category</th>
 <th style="text-align: left;">Version</th>
-<th style="text-align: center;">License</th>
 <th style="text-align: center;">Path</th>
 </tr>
 </thead>
@@ -1459,35 +1317,30 @@
 <td style="text-align: left;">STM32H747I-DISCO</td>
 <td style="text-align: left;">Applications</td>
 <td style="text-align: left;"><strong>V1.3.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/STM32H747I-DISCO/Applications</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H747I-DISCO</td>
 <td style="text-align: left;">Demonstrations</td>
 <td style="text-align: left;"><strong>V1.3.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/STM32H747I-DISCO/Demonstrations</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32H747I-DISCO</td>
 <td style="text-align: left;">Examples</td>
 <td style="text-align: left;"><strong>V1.3.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H747I-DISCO/Examples</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H747I-DISCO</td>
 <td style="text-align: left;">Templates</td>
 <td style="text-align: left;"><strong>V1.3.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H747I-DISCO/Templates</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32H747I-DISCO</td>
 <td style="text-align: left;">LL Templates</td>
 <td style="text-align: left;"><strong>V1.3.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H747I-DISCO/Templates_LL</td>
 </tr>
 </tbody>
@@ -1499,7 +1352,6 @@
 <th style="text-align: left;">Board</th>
 <th style="text-align: left;">Project category</th>
 <th style="text-align: left;">Version</th>
-<th style="text-align: center;">License</th>
 <th style="text-align: center;">Path</th>
 </tr>
 </thead>
@@ -1508,35 +1360,30 @@
 <td style="text-align: left;">STM32H747I-EVAL</td>
 <td style="text-align: left;">Applications</td>
 <td style="text-align: left;"><strong>V1.3.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/STM32H747I-EVAL/Applications</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H747I-EVAL</td>
 <td style="text-align: left;"><strong>Demonstrations</strong></td>
 <td style="text-align: left;"><strong>V1.4.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/STM32H747I-EVAL/Demonstrations</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32H747I-EVAL</td>
 <td style="text-align: left;">Examples</td>
 <td style="text-align: left;"><strong>V1.3.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H747I-EVAL/Examples</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H747I-EVAL</td>
 <td style="text-align: left;">Templates</td>
 <td style="text-align: left;"><strong>V1.3.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H747I-EVAL/Templates</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32H747I-EVAL</td>
 <td style="text-align: left;">LL Templates</td>
 <td style="text-align: left;"><strong>V1.3.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H747I-EVAL/Templates_LL</td>
 </tr>
 </tbody>
@@ -1548,7 +1395,6 @@
 <th style="text-align: left;">Board</th>
 <th style="text-align: left;">Project category</th>
 <th style="text-align: left;">Version</th>
-<th style="text-align: center;">License</th>
 <th style="text-align: center;">Path</th>
 </tr>
 </thead>
@@ -1557,28 +1403,24 @@
 <td style="text-align: left;">STM32H750B-DK</td>
 <td style="text-align: left;">Applications</td>
 <td style="text-align: left;"><strong>V1.3.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/STM32H750B-DK/Applications</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H750B-DK</td>
 <td style="text-align: left;">Demonstrations</td>
 <td style="text-align: left;"><strong>V1.3.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/STM32H750B-DK/Demonstrations</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32H750B-DK</td>
 <td style="text-align: left;">Examples</td>
 <td style="text-align: left;"><strong>V1.3.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H750B-DK/Examples</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H750B-DK</td>
 <td style="text-align: left;">Templates</td>
 <td style="text-align: left;"><strong>V1.3.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H750B-DK/Templates</td>
 </tr>
 </tbody>
@@ -1660,8 +1502,8 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section9" aria-hidden="true"> <label for="collapse-section9" aria-hidden="true"><strong>V1.7.0 / 14-February-2020</strong></label>
 <div>
-<h2 id="main-changes-3">Main Changes</h2>
-<h3 id="maintenance-release-1">Maintenance release</h3>
+<h2 id="main-changes-4">Main Changes</h2>
+<h3 id="maintenance-release-2">Maintenance release</h3>
 <p>Add support of the value line STM32H7B0 devices over STM32H7B3I-EVAL board</p>
 <p>Add STM32H7B3I-EVAL, STM32H743I-EVAL and STM32H747I-EVAL demonstrations source code</p>
 <table>
@@ -1702,7 +1544,6 @@
 <th style="text-align: left;">Board</th>
 <th style="text-align: left;">Project category</th>
 <th style="text-align: left;">Version</th>
-<th style="text-align: center;">License</th>
 <th style="text-align: center;">Path</th>
 </tr>
 </thead>
@@ -1711,49 +1552,42 @@
 <td style="text-align: left;">NUCLEO-H7A3ZI-Q</td>
 <td style="text-align: left;">Applications</td>
 <td style="text-align: left;">V1.0.0</td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H7A3ZI-Q/Applications</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">NUCLEO-H7A3ZI-Q</td>
 <td style="text-align: left;">Demonstrations</td>
 <td style="text-align: left;">V1.0.0</td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H7A3ZI-Q/Demonstrations</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">NUCLEO-H7A3ZI-Q</td>
 <td style="text-align: left;">Examples</td>
 <td style="text-align: left;">V1.0.0</td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H7A3ZI-Q/Examples</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">NUCLEO-H7A3ZI-Q</td>
 <td style="text-align: left;">LL Examples</td>
 <td style="text-align: left;">V1.0.0</td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H7A3ZI-Q/Examples_LL</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">NUCLEO-H7A3ZI-Q</td>
 <td style="text-align: left;">MIX Examples</td>
 <td style="text-align: left;">V1.0.0</td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H7A3ZI-Q/Examples_MIX</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">NUCLEO-H7A3ZI-Q</td>
 <td style="text-align: left;">Templates</td>
 <td style="text-align: left;">V1.0.0</td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H7A3ZI-Q/Templates</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">NUCLEO-H7A3ZI-Q</td>
 <td style="text-align: left;">LL Templates</td>
 <td style="text-align: left;">V1.0.0</td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H7A3ZI-Q/Templates_LL</td>
 </tr>
 </tbody>
@@ -1765,7 +1599,6 @@
 <th style="text-align: left;">Board</th>
 <th style="text-align: left;">Project category</th>
 <th style="text-align: left;">Version</th>
-<th style="text-align: center;">License</th>
 <th style="text-align: center;">Path</th>
 </tr>
 </thead>
@@ -1774,42 +1607,36 @@
 <td style="text-align: left;">NUCLEO-H743ZI</td>
 <td style="text-align: left;">Applications</td>
 <td style="text-align: left;">V1.5.0</td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H743ZI/Applications</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">NUCLEO-H743ZI</td>
 <td style="text-align: left;">Demonstrations</td>
 <td style="text-align: left;">V1.5.0</td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H743ZI/Demonstrations</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">NUCLEO-H743ZI</td>
 <td style="text-align: left;">Examples</td>
 <td style="text-align: left;">V1.5.0</td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H743ZI/Examples</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">NUCLEO-H743ZI</td>
 <td style="text-align: left;">LL Examples</td>
 <td style="text-align: left;">V1.2.0</td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H743ZI/Examples_LL</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">NUCLEO-H743ZI</td>
 <td style="text-align: left;">Templates</td>
 <td style="text-align: left;">V1.5.0</td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H743ZI/Templates</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">NUCLEO-H743ZI</td>
 <td style="text-align: left;">LL Templates</td>
 <td style="text-align: left;">V1.2.0</td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H743ZI/Templates_LL</td>
 </tr>
 </tbody>
@@ -1821,7 +1648,6 @@
 <th style="text-align: left;">Board</th>
 <th style="text-align: left;">Project category</th>
 <th style="text-align: left;">Version</th>
-<th style="text-align: center;">License</th>
 <th style="text-align: center;">Path</th>
 </tr>
 </thead>
@@ -1830,35 +1656,30 @@
 <td style="text-align: left;">NUCLEO-H745ZI-Q</td>
 <td style="text-align: left;">Applications</td>
 <td style="text-align: left;">V1.2.0</td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H745ZI-Q/Applications</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">NUCLEO-H745ZI-Q</td>
 <td style="text-align: left;">Demonstrations</td>
 <td style="text-align: left;">V1.2.0</td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H745ZI-Q/Demonstrations</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">NUCLEO-H745ZI-Q</td>
 <td style="text-align: left;">Examples</td>
 <td style="text-align: left;">V1.2.0</td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H745ZI-Q/Examples</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">NUCLEO-H745ZI-Q</td>
 <td style="text-align: left;">Templates</td>
 <td style="text-align: left;">V1.2.0</td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H745ZI-Q/Templates</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">NUCLEO-H745ZI-Q</td>
 <td style="text-align: left;">LL Templates</td>
 <td style="text-align: left;">V1.2.0</td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H745ZI-Q/Templates_LL</td>
 </tr>
 </tbody>
@@ -1870,7 +1691,6 @@
 <th style="text-align: left;">Board</th>
 <th style="text-align: left;">Project category</th>
 <th style="text-align: left;">Version</th>
-<th style="text-align: center;">License</th>
 <th style="text-align: center;">Path</th>
 </tr>
 </thead>
@@ -1879,49 +1699,42 @@
 <td style="text-align: left;">STM32H7B3I-DK</td>
 <td style="text-align: left;">Applications</td>
 <td style="text-align: left;">v1.0.0</td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/STM32H7B3I-DK/Applications</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H7B3I-DK</td>
 <td style="text-align: left;"><strong>Demonstrations</strong></td>
 <td style="text-align: left;"><strong>v1.1.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/STM32H7B3I-DK/Demonstrations</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32H7B3I-DK</td>
 <td style="text-align: left;">Examples</td>
 <td style="text-align: left;">v1.0.0</td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H7B3I-DK/Examples</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H7B3I-DK</td>
 <td style="text-align: left;">LL Examples</td>
 <td style="text-align: left;">v1.0.0</td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H7B3I-DK/Examples_LL</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32H7B3I-DK</td>
 <td style="text-align: left;">MIX Examples</td>
 <td style="text-align: left;">v1.0.0</td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H7B3I-DK/Examples_MIX</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H7B3I-DK</td>
 <td style="text-align: left;">Templates</td>
 <td style="text-align: left;">v1.0.0</td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H7B3I-DK/Templates</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32H7B3I-DK</td>
 <td style="text-align: left;">LL Templates</td>
 <td style="text-align: left;">v1.0.0</td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H7B3I-DK/Templates_LL</td>
 </tr>
 </tbody>
@@ -1933,7 +1746,6 @@
 <th style="text-align: left;">Board</th>
 <th style="text-align: left;">Project category</th>
 <th style="text-align: left;">Version</th>
-<th style="text-align: center;">License</th>
 <th style="text-align: center;">Path</th>
 </tr>
 </thead>
@@ -1942,49 +1754,42 @@
 <td style="text-align: left;">STM32H7B3I-EVAL</td>
 <td style="text-align: left;"><strong>Applications</strong></td>
 <td style="text-align: left;"><strong>v1.1.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/STM32H7B3I-EVAL/Applications</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H7B3I-EVAL</td>
 <td style="text-align: left;"><strong>Demonstrations</strong></td>
 <td style="text-align: left;"><strong>v1.1.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/STM32H7B3I-EVAL/Demonstrations</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32H7B3I-EVAL</td>
 <td style="text-align: left;"><strong>Examples</strong></td>
 <td style="text-align: left;"><strong>v1.1.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H7B3I-EVAL/Examples</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H7B3I-EVAL</td>
 <td style="text-align: left;">LL Examples</td>
 <td style="text-align: left;">v1.0.0</td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H7B3I-EVAL/Examples_LL</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32H7B3I-EVAL</td>
 <td style="text-align: left;">MIX Examples</td>
 <td style="text-align: left;">v1.0.0</td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H7B3I-EVAL/Examples_MIX</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H7B3I-EVAL</td>
 <td style="text-align: left;">Templates</td>
 <td style="text-align: left;">v1.0.0</td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H7B3I-EVAL/Templates</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32H7B3I-EVAL</td>
 <td style="text-align: left;">LL Templates</td>
 <td style="text-align: left;">v1.0.0</td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H7B3I-EVAL/Templates_LL</td>
 </tr>
 </tbody>
@@ -1996,7 +1801,6 @@
 <th style="text-align: left;">Board</th>
 <th style="text-align: left;">Project category</th>
 <th style="text-align: left;">Version</th>
-<th style="text-align: center;">License</th>
 <th style="text-align: center;">Path</th>
 </tr>
 </thead>
@@ -2005,35 +1809,30 @@
 <td style="text-align: left;">STM32H743I-EVAL</td>
 <td style="text-align: left;">Applications</td>
 <td style="text-align: left;">V1.6.0</td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/STM32H743I-EVAL/Applications</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H743I-EVAL</td>
 <td style="text-align: left;"><strong>Demonstrations</strong></td>
 <td style="text-align: left;"><strong>V1.5.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/STM32H743I-EVAL/Demonstrations</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32H743I-EVAL</td>
 <td style="text-align: left;">Examples</td>
 <td style="text-align: left;">V1.5.0</td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H743I-EVAL/Examples</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H743I-EVAL</td>
 <td style="text-align: left;">Templates</td>
 <td style="text-align: left;">V1.5.0</td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H743I-EVAL/Templates</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32H743I-EVAL</td>
 <td style="text-align: left;">LL Templates</td>
 <td style="text-align: left;">V1.2.0</td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H743I-EVAL/Templates_LL</td>
 </tr>
 </tbody>
@@ -2045,7 +1844,6 @@
 <th style="text-align: left;">Board</th>
 <th style="text-align: left;">Project category</th>
 <th style="text-align: left;">Version</th>
-<th style="text-align: center;">License</th>
 <th style="text-align: center;">Path</th>
 </tr>
 </thead>
@@ -2054,35 +1852,30 @@
 <td style="text-align: left;">STM32H745I-DISCO</td>
 <td style="text-align: left;">Applications</td>
 <td style="text-align: left;">V1.2.0</td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/STM32H745I-DISCO/Applications</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H745I-DISCO</td>
 <td style="text-align: left;">Demonstrations</td>
 <td style="text-align: left;">V1.2.0</td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/STM32H745I-DISCO/Demonstrations</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32H745I-DISCO</td>
 <td style="text-align: left;">Examples</td>
 <td style="text-align: left;">V1.2.0</td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H745I-DISCO/Examples</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H745I-DISCO</td>
 <td style="text-align: left;">Templates</td>
 <td style="text-align: left;">V1.2.0</td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H745I-DISCO/Templates</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32H745I-DISCO</td>
 <td style="text-align: left;">LL Templates</td>
 <td style="text-align: left;">V1.2.0</td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H745I-DISCO/Templates_LL</td>
 </tr>
 </tbody>
@@ -2094,7 +1887,6 @@
 <th style="text-align: left;">Board</th>
 <th style="text-align: left;">Project category</th>
 <th style="text-align: left;">Version</th>
-<th style="text-align: center;">License</th>
 <th style="text-align: center;">Path</th>
 </tr>
 </thead>
@@ -2103,35 +1895,30 @@
 <td style="text-align: left;">STM32H747I-DISCO</td>
 <td style="text-align: left;">Applications</td>
 <td style="text-align: left;">V1.2.0</td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/STM32H747I-DISCO/Applications</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H747I-DISCO</td>
 <td style="text-align: left;">Demonstrations</td>
 <td style="text-align: left;">V1.2.0</td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/STM32H747I-DISCO/Demonstrations</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32H747I-DISCO</td>
 <td style="text-align: left;">Examples</td>
 <td style="text-align: left;">V1.2.0</td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H747I-DISCO/Examples</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H747I-DISCO</td>
 <td style="text-align: left;">Templates</td>
 <td style="text-align: left;">V1.2.0</td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H747I-DISCO/Templates</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32H747I-DISCO</td>
 <td style="text-align: left;">LL Templates</td>
 <td style="text-align: left;">V1.2.0</td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H747I-DISCO/Templates_LL</td>
 </tr>
 </tbody>
@@ -2143,7 +1930,6 @@
 <th style="text-align: left;">Board</th>
 <th style="text-align: left;">Project category</th>
 <th style="text-align: left;">Version</th>
-<th style="text-align: center;">License</th>
 <th style="text-align: center;">Path</th>
 </tr>
 </thead>
@@ -2152,35 +1938,30 @@
 <td style="text-align: left;">STM32H747I-EVAL</td>
 <td style="text-align: left;">Applications</td>
 <td style="text-align: left;">V1.2.0</td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/STM32H747I-EVAL/Applications</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H747I-EVAL</td>
 <td style="text-align: left;"><strong>Demonstrations</strong></td>
 <td style="text-align: left;"><strong>V1.3.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/STM32H747I-EVAL/Demonstrations</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32H747I-EVAL</td>
 <td style="text-align: left;">Examples</td>
 <td style="text-align: left;">V1.2.0</td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H747I-EVAL/Examples</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H747I-EVAL</td>
 <td style="text-align: left;">Templates</td>
 <td style="text-align: left;">V1.2.0</td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H747I-EVAL/Templates</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32H747I-EVAL</td>
 <td style="text-align: left;">LL Templates</td>
 <td style="text-align: left;">V1.2.0</td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H747I-EVAL/Templates_LL</td>
 </tr>
 </tbody>
@@ -2192,7 +1973,6 @@
 <th style="text-align: left;">Board</th>
 <th style="text-align: left;">Project category</th>
 <th style="text-align: left;">Version</th>
-<th style="text-align: center;">License</th>
 <th style="text-align: center;">Path</th>
 </tr>
 </thead>
@@ -2201,28 +1981,24 @@
 <td style="text-align: left;">STM32H750B-DK</td>
 <td style="text-align: left;">Applications</td>
 <td style="text-align: left;">V1.2.0</td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/STM32H750B-DK/Applications</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H750B-DK</td>
 <td style="text-align: left;">Demonstrations</td>
 <td style="text-align: left;">V1.2.0</td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/STM32H750B-DK/Demonstrations</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32H750B-DK</td>
 <td style="text-align: left;">Examples</td>
 <td style="text-align: left;">V1.2.0</td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H750B-DK/Examples</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H750B-DK</td>
 <td style="text-align: left;">Templates</td>
 <td style="text-align: left;">V1.2.0</td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H750B-DK/Templates</td>
 </tr>
 </tbody>
@@ -2230,31 +2006,31 @@
 <p>Note: in the tables above, project categories <strong>highlighted</strong> have changed since previous release.</p>
 <h2 id="known-limitations-2">Known Limitations</h2>
 <ul>
-<li><p>OpenAMP-based applications (available on STM32H745I-DISCO, STM32H747I-DISCO and STM32H747I-EVAL) come with known compilation warning</p>
+<li>OpenAMP-based applications (available on STM32H745I-DISCO, STM32H747I-DISCO and STM32H747I-EVAL) come with known compilation warning
 <ul>
 <li>Related to the OpenAmp third party stack</li>
 <li>Related to ST application implementation For warning details please refer to the corresponding applications readme.txt files</li>
 </ul></li>
-<li><p>STM32H747I-DISCO and STM32H750B-DK TouchGFX demonstrations come with known compilation warnings on SW4STM32 IDE:</p>
+<li>STM32H747I-DISCO and STM32H750B-DK TouchGFX demonstrations come with known compilation warnings on SW4STM32 IDE:
 <ul>
 <li>Warnings related to the Libjpeg third party MW</li>
 </ul></li>
-<li><p><strong>LwIP</strong>-based applications (available on NUCLEO-H743ZI and STM32H743I-EVAL) come with known compilation warning on EWARM V8.30</p>
+<li><strong>LwIP</strong>-based applications (available on NUCLEO-H743ZI and STM32H743I-EVAL) come with known compilation warning on EWARM V8.30
 <ul>
 <li>Related to the combination of LWIP third party stack and EWARM V8.30</li>
 </ul></li>
 <li><p>No impact of these warnings on the functional behavior</p></li>
-<li><p><strong>STM32H7B3I-EVAL</strong></p>
+<li><strong>STM32H7B3I-EVAL</strong>
 <ul>
 <li>STM32CubeIDE project is not provided for <strong>AudioPlayer Demonstrations</strong></li>
 <li>STM32CubeIDE project is not provided for <strong>STemWin Demonstrations</strong></li>
 </ul></li>
-<li><p><strong>STM32H7B3I-DK</strong></p>
+<li><strong>STM32H7B3I-DK</strong>
 <ul>
 <li>STM32CubeIDE project is not provided for <strong>AudioPlayer Demonstrations</strong></li>
 <li>STM32CubeIDE project is not provided for <strong>VideoPlayer Demonstrations</strong></li>
 </ul></li>
-<li><p><strong>STM32H743I-EVAL</strong></p>
+<li><strong>STM32H743I-EVAL</strong>
 <ul>
 <li>SW4STM32 project is not provided for <strong>TouchGFX Demonstrations</strong></li>
 <li>Keil project is not provided for <strong>STemWin Demonstrations</strong></li>
@@ -2291,7 +2067,7 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section8" aria-hidden="true"> <label for="collapse-section8" aria-hidden="true"><strong>V1.6.0 / 06-December-2019</strong></label>
 <div>
-<h2 id="main-changes-4">Main Changes</h2>
+<h2 id="main-changes-5">Main Changes</h2>
 <h3 id="first-official-release-to-support-stm32h7a3b3xxb0xx-new-devices-and-boards">First official release to support STM32H7A3/B3xx/B0xx new devices and boards</h3>
 <p>Official release with support of STM32H7A3/B3xx/B0xx new devices</p>
 <p>Add support of NUCLEO-H7A3ZI-Q, STM32H7B3I-DK and STM32H7B3I-EVAL boards with dedicated template HAL/LL projects, examples, applications and demonstrations</p>
@@ -2346,7 +2122,6 @@
 <th style="text-align: left;">Board</th>
 <th style="text-align: left;">Project category</th>
 <th style="text-align: left;">Version</th>
-<th style="text-align: center;">License</th>
 <th style="text-align: center;">Path</th>
 </tr>
 </thead>
@@ -2355,49 +2130,42 @@
 <td style="text-align: left;"><strong>NUCLEO-H7A3ZI-Q</strong></td>
 <td style="text-align: left;"><strong>Applications</strong></td>
 <td style="text-align: left;"><strong>V1.0.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H7A3ZI-Q/Applications</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><strong>NUCLEO-H7A3ZI-Q</strong></td>
 <td style="text-align: left;"><strong>Demonstrations</strong></td>
 <td style="text-align: left;"><strong>V1.0.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H7A3ZI-Q/Demonstrations</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><strong>NUCLEO-H7A3ZI-Q</strong></td>
 <td style="text-align: left;"><strong>Examples</strong></td>
 <td style="text-align: left;"><strong>V1.0.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H7A3ZI-Q/Examples</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><strong>NUCLEO-H7A3ZI-Q</strong></td>
 <td style="text-align: left;"><strong>LL Examples</strong></td>
 <td style="text-align: left;"><strong>V1.0.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H7A3ZI-Q/Examples_LL</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><strong>NUCLEO-H7A3ZI-Q</strong></td>
 <td style="text-align: left;"><strong>MIX Examples</strong></td>
 <td style="text-align: left;"><strong>V1.0.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H7A3ZI-Q/Examples_MIX</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><strong>NUCLEO-H7A3ZI-Q</strong></td>
 <td style="text-align: left;"><strong>Templates</strong></td>
 <td style="text-align: left;"><strong>V1.0.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H7A3ZI-Q/Templates</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><strong>NUCLEO-H7A3ZI-Q</strong></td>
 <td style="text-align: left;"><strong>LL Templates</strong></td>
 <td style="text-align: left;"><strong>V1.0.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H7A3ZI-Q/Templates_LL</td>
 </tr>
 </tbody>
@@ -2409,7 +2177,6 @@
 <th style="text-align: left;">Board</th>
 <th style="text-align: left;">Project category</th>
 <th style="text-align: left;">Version</th>
-<th style="text-align: center;">License</th>
 <th style="text-align: center;">Path</th>
 </tr>
 </thead>
@@ -2418,42 +2185,36 @@
 <td style="text-align: left;">NUCLEO-H743ZI</td>
 <td style="text-align: left;"><strong>Applications</strong></td>
 <td style="text-align: left;"><strong>V1.5.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H743ZI/Applications</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">NUCLEO-H743ZI</td>
 <td style="text-align: left;"><strong>Demonstrations</strong></td>
 <td style="text-align: left;"><strong>V1.5.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H743ZI/Demonstrations</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">NUCLEO-H743ZI</td>
 <td style="text-align: left;"><strong>Examples</strong></td>
 <td style="text-align: left;"><strong>V1.5.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H743ZI/Examples</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">NUCLEO-H743ZI</td>
 <td style="text-align: left;"><strong>LL Examples</strong></td>
 <td style="text-align: left;"><strong>V1.2.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H743ZI/Examples_LL</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">NUCLEO-H743ZI</td>
 <td style="text-align: left;"><strong>Templates</strong></td>
 <td style="text-align: left;"><strong>V1.5.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H743ZI/Templates</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">NUCLEO-H743ZI</td>
 <td style="text-align: left;"><strong>LL Templates</strong></td>
 <td style="text-align: left;"><strong>V1.2.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H743ZI/Templates_LL</td>
 </tr>
 </tbody>
@@ -2465,7 +2226,6 @@
 <th style="text-align: left;">Board</th>
 <th style="text-align: left;">Project category</th>
 <th style="text-align: left;">Version</th>
-<th style="text-align: center;">License</th>
 <th style="text-align: center;">Path</th>
 </tr>
 </thead>
@@ -2474,35 +2234,30 @@
 <td style="text-align: left;">NUCLEO-H745ZI-Q</td>
 <td style="text-align: left;"><strong>Applications</strong></td>
 <td style="text-align: left;"><strong>V1.2.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H745ZI-Q/Applications</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">NUCLEO-H745ZI-Q</td>
 <td style="text-align: left;"><strong>Demonstrations</strong></td>
 <td style="text-align: left;"><strong>V1.2.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H745ZI-Q/Demonstrations</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">NUCLEO-H745ZI-Q</td>
 <td style="text-align: left;"><strong>Examples</strong></td>
 <td style="text-align: left;"><strong>V1.2.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H745ZI-Q/Examples</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">NUCLEO-H745ZI-Q</td>
 <td style="text-align: left;"><strong>Templates</strong></td>
 <td style="text-align: left;"><strong>V1.2.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H745ZI-Q/Templates</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">NUCLEO-H745ZI-Q</td>
 <td style="text-align: left;"><strong>LL Templates</strong></td>
 <td style="text-align: left;"><strong>V1.2.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H745ZI-Q/Templates_LL</td>
 </tr>
 </tbody>
@@ -2514,7 +2269,6 @@
 <th style="text-align: left;">Board</th>
 <th style="text-align: left;">Project category</th>
 <th style="text-align: left;">Version</th>
-<th style="text-align: center;">License</th>
 <th style="text-align: center;">Path</th>
 </tr>
 </thead>
@@ -2523,49 +2277,42 @@
 <td style="text-align: left;"><strong>STM32H7B3I-DK</strong></td>
 <td style="text-align: left;"><strong>Applications</strong></td>
 <td style="text-align: left;"><strong>v1.0.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/STM32H7B3I-DK/Applications</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><strong>STM32H7B3I-DK</strong></td>
 <td style="text-align: left;"><strong>Demonstrations</strong></td>
 <td style="text-align: left;"><strong>v1.0.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/STM32H7B3I-DK/Demonstrations</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><strong>STM32H7B3I-DK</strong></td>
 <td style="text-align: left;"><strong>Examples</strong></td>
 <td style="text-align: left;"><strong>v1.0.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H7B3I-DK/Examples</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><strong>STM32H7B3I-DK</strong></td>
 <td style="text-align: left;"><strong>LL Examples</strong></td>
 <td style="text-align: left;"><strong>v1.0.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H7B3I-DK/Examples_LL</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><strong>STM32H7B3I-DK</strong></td>
 <td style="text-align: left;"><strong>MIX Examples</strong></td>
 <td style="text-align: left;"><strong>v1.0.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H7B3I-DK/Examples_MIX</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><strong>STM32H7B3I-DK</strong></td>
 <td style="text-align: left;"><strong>Templates</strong></td>
 <td style="text-align: left;"><strong>v1.0.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H7B3I-DK/Templates</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><strong>STM32H7B3I-DK</strong></td>
 <td style="text-align: left;"><strong>LL Templates</strong></td>
 <td style="text-align: left;"><strong>v1.0.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H7B3I-DK/Templates_LL</td>
 </tr>
 </tbody>
@@ -2577,7 +2324,6 @@
 <th style="text-align: left;">Board</th>
 <th style="text-align: left;">Project category</th>
 <th style="text-align: left;">Version</th>
-<th style="text-align: center;">License</th>
 <th style="text-align: center;">Path</th>
 </tr>
 </thead>
@@ -2586,49 +2332,42 @@
 <td style="text-align: left;"><strong>STM32H7B3I-EVAL</strong></td>
 <td style="text-align: left;"><strong>Applications</strong></td>
 <td style="text-align: left;"><strong>v1.0.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/STM32H7B3I-EVAL/Applications</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><strong>STM32H7B3I-EVAL</strong></td>
 <td style="text-align: left;"><strong>Demonstrations</strong></td>
 <td style="text-align: left;"><strong>v1.0.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/STM32H7B3I-EVAL/Demonstrations</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><strong>STM32H7B3I-EVAL</strong></td>
 <td style="text-align: left;"><strong>Examples</strong></td>
 <td style="text-align: left;"><strong>v1.0.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H7B3I-EVAL/Examples</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><strong>STM32H7B3I-EVAL</strong></td>
 <td style="text-align: left;"><strong>LL Examples</strong></td>
 <td style="text-align: left;"><strong>v1.0.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H7B3I-EVAL/Examples_LL</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><strong>STM32H7B3I-EVAL</strong></td>
 <td style="text-align: left;"><strong>MIX Examples</strong></td>
 <td style="text-align: left;"><strong>v1.0.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H7B3I-EVAL/Examples_MIX</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><strong>STM32H7B3I-EVAL</strong></td>
 <td style="text-align: left;"><strong>Templates</strong></td>
 <td style="text-align: left;"><strong>v1.0.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H7B3I-EVAL/Templates</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><strong>STM32H7B3I-EVAL</strong></td>
 <td style="text-align: left;"><strong>LL Templates</strong></td>
 <td style="text-align: left;"><strong>v1.0.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H7B3I-EVAL/Templates_LL</td>
 </tr>
 </tbody>
@@ -2640,7 +2379,6 @@
 <th style="text-align: left;">Board</th>
 <th style="text-align: left;">Project category</th>
 <th style="text-align: left;">Version</th>
-<th style="text-align: center;">License</th>
 <th style="text-align: center;">Path</th>
 </tr>
 </thead>
@@ -2649,35 +2387,30 @@
 <td style="text-align: left;">STM32H743I-EVAL</td>
 <td style="text-align: left;"><strong>Applications</strong></td>
 <td style="text-align: left;"><strong>V1.6.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/STM32H743I-EVAL/Applications</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H743I-EVAL</td>
 <td style="text-align: left;"><strong>Demonstrations</strong></td>
 <td style="text-align: left;"><strong>V1.4.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/STM32H743I-EVAL/Demonstrations</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32H743I-EVAL</td>
 <td style="text-align: left;"><strong>Examples</strong></td>
 <td style="text-align: left;"><strong>V1.5.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H743I-EVAL/Examples</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H743I-EVAL</td>
 <td style="text-align: left;"><strong>Templates</strong></td>
 <td style="text-align: left;"><strong>V1.5.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H743I-EVAL/Templates</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32H743I-EVAL</td>
 <td style="text-align: left;"><strong>LL Templates</strong></td>
 <td style="text-align: left;"><strong>V1.2.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H743I-EVAL/Templates_LL</td>
 </tr>
 </tbody>
@@ -2689,7 +2422,6 @@
 <th style="text-align: left;">Board</th>
 <th style="text-align: left;">Project category</th>
 <th style="text-align: left;">Version</th>
-<th style="text-align: center;">License</th>
 <th style="text-align: center;">Path</th>
 </tr>
 </thead>
@@ -2698,35 +2430,30 @@
 <td style="text-align: left;">STM32H745I-DISCO</td>
 <td style="text-align: left;"><strong>Applications</strong></td>
 <td style="text-align: left;"><strong>V1.2.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/STM32H745I-DISCO/Applications</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H745I-DISCO</td>
 <td style="text-align: left;"><strong>Demonstrations</strong></td>
 <td style="text-align: left;"><strong>V1.2.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/STM32H745I-DISCO/Demonstrations</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32H745I-DISCO</td>
 <td style="text-align: left;"><strong>Examples</strong></td>
 <td style="text-align: left;"><strong>V1.2.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H745I-DISCO/Examples</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H745I-DISCO</td>
 <td style="text-align: left;"><strong>Templates</strong></td>
 <td style="text-align: left;"><strong>V1.2.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H745I-DISCO/Templates</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32H745I-DISCO</td>
 <td style="text-align: left;"><strong>LL Templates</strong></td>
 <td style="text-align: left;"><strong>V1.2.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H745I-DISCO/Templates_LL</td>
 </tr>
 </tbody>
@@ -2738,7 +2465,6 @@
 <th style="text-align: left;">Board</th>
 <th style="text-align: left;">Project category</th>
 <th style="text-align: left;">Version</th>
-<th style="text-align: center;">License</th>
 <th style="text-align: center;">Path</th>
 </tr>
 </thead>
@@ -2747,35 +2473,30 @@
 <td style="text-align: left;">STM32H747I-DISCO</td>
 <td style="text-align: left;"><strong>Applications</strong></td>
 <td style="text-align: left;"><strong>V1.2.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/STM32H747I-DISCO/Applications</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H747I-DISCO</td>
 <td style="text-align: left;"><strong>Demonstrations</strong></td>
 <td style="text-align: left;"><strong>V1.2.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/STM32H747I-DISCO/Demonstrations</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32H747I-DISCO</td>
 <td style="text-align: left;"><strong>Examples</strong></td>
 <td style="text-align: left;"><strong>V1.2.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H747I-DISCO/Examples</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H747I-DISCO</td>
 <td style="text-align: left;"><strong>Templates</strong></td>
 <td style="text-align: left;"><strong>V1.2.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H747I-DISCO/Templates</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32H747I-DISCO</td>
 <td style="text-align: left;"><strong>LL Templates</strong></td>
 <td style="text-align: left;"><strong>V1.2.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H747I-DISCO/Templates_LL</td>
 </tr>
 </tbody>
@@ -2787,7 +2508,6 @@
 <th style="text-align: left;">Board</th>
 <th style="text-align: left;">Project category</th>
 <th style="text-align: left;">Version</th>
-<th style="text-align: center;">License</th>
 <th style="text-align: center;">Path</th>
 </tr>
 </thead>
@@ -2796,35 +2516,30 @@
 <td style="text-align: left;">STM32H747I-EVAL</td>
 <td style="text-align: left;"><strong>Applications</strong></td>
 <td style="text-align: left;"><strong>V1.2.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/STM32H747I-EVAL/Applications</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H747I-EVAL</td>
 <td style="text-align: left;"><strong>Demonstrations</strong></td>
 <td style="text-align: left;"><strong>V1.2.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/STM32H747I-EVAL/Demonstrations</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32H747I-EVAL</td>
 <td style="text-align: left;"><strong>Examples</strong></td>
 <td style="text-align: left;"><strong>V1.2.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H747I-EVAL/Examples</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H747I-EVAL</td>
 <td style="text-align: left;"><strong>Templates</strong></td>
 <td style="text-align: left;"><strong>V1.2.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H747I-EVAL/Templates</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32H747I-EVAL</td>
 <td style="text-align: left;"><strong>LL Templates</strong></td>
 <td style="text-align: left;"><strong>V1.2.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H747I-EVAL/Templates_LL</td>
 </tr>
 </tbody>
@@ -2836,7 +2551,6 @@
 <th style="text-align: left;">Board</th>
 <th style="text-align: left;">Project category</th>
 <th style="text-align: left;">Version</th>
-<th style="text-align: center;">License</th>
 <th style="text-align: center;">Path</th>
 </tr>
 </thead>
@@ -2845,28 +2559,24 @@
 <td style="text-align: left;">STM32H750B-DK</td>
 <td style="text-align: left;"><strong>Applications</strong></td>
 <td style="text-align: left;"><strong>V1.2.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/STM32H750B-DK/Applications</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H750B-DK</td>
 <td style="text-align: left;"><strong>Demonstrations</strong></td>
 <td style="text-align: left;"><strong>V1.2.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/STM32H750B-DK/Demonstrations</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32H750B-DK</td>
 <td style="text-align: left;"><strong>Examples</strong></td>
 <td style="text-align: left;"><strong>V1.2.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H750B-DK/Examples</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H750B-DK</td>
 <td style="text-align: left;"><strong>Templates</strong></td>
 <td style="text-align: left;"><strong>V1.2.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H750B-DK/Templates</td>
 </tr>
 </tbody>
@@ -2874,16 +2584,16 @@
 <p>Note: in the tables above, project categories <strong>highlighted</strong> have changed since previous release.</p>
 <h2 id="known-limitations-3">Known Limitations</h2>
 <ul>
-<li><p>OpenAMP-based applications (available on STM32H745I-DISCO, STM32H747I-DISCO and STM32H747I-EVAL) come with known compilation warning</p>
+<li>OpenAMP-based applications (available on STM32H745I-DISCO, STM32H747I-DISCO and STM32H747I-EVAL) come with known compilation warning
 <ul>
 <li>Related to the OpenAmp third party stack</li>
 <li>Related to ST application implementation For warning details please refer to the corresponding applications readme.txt files</li>
 </ul></li>
-<li><p>STM32H747I-DISCO and STM32H750B-DK TouchGFX demonstrations come with known compilation warnings on SW4STM32 IDE:</p>
+<li>STM32H747I-DISCO and STM32H750B-DK TouchGFX demonstrations come with known compilation warnings on SW4STM32 IDE:
 <ul>
 <li>Warnings related to the Libjpeg third party MW</li>
 </ul></li>
-<li><p><strong>LwIP</strong>-based applications (available on NUCLEO-H743ZI and STM32H743I-EVAL) come with known compilation warning on EWARM V8.30</p>
+<li><strong>LwIP</strong>-based applications (available on NUCLEO-H743ZI and STM32H743I-EVAL) come with known compilation warning on EWARM V8.30
 <ul>
 <li>Related to the combination of LWIP third party stack and EWARM V8.30</li>
 </ul></li>
@@ -2929,8 +2639,8 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section7" aria-hidden="true"> <label for="collapse-section7" aria-hidden="true"><strong>V1.5.0 / 28-June-2019</strong></label>
 <div>
-<h2 id="main-changes-5">Main Changes</h2>
-<h3 id="maintenance-release-2">Maintenance release</h3>
+<h2 id="main-changes-6">Main Changes</h2>
+<h3 id="maintenance-release-3">Maintenance release</h3>
 <ul>
 <li>Add <strong>Dual Core</strong> demonstrations source code with preconfigured projects on EWARM, MDK-ARM and SW4STM32 IDEs:
 <ul>
@@ -3228,7 +2938,6 @@
 <th style="text-align: left;">Board</th>
 <th style="text-align: left;">Project category</th>
 <th style="text-align: left;">Version</th>
-<th style="text-align: center;">License</th>
 <th style="text-align: center;">Path</th>
 </tr>
 </thead>
@@ -3237,42 +2946,36 @@
 <td style="text-align: left;">NUCLEO-H743ZI</td>
 <td style="text-align: left;"><strong>Applications</strong></td>
 <td style="text-align: left;"><strong>V1.4.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H743ZI/Applications</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">NUCLEO-H743ZI</td>
 <td style="text-align: left;"><strong>Demonstrations</strong></td>
 <td style="text-align: left;"><strong>V1.4.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H743ZI/Demonstrations</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">NUCLEO-H743ZI</td>
 <td style="text-align: left;"><strong>Examples</strong></td>
 <td style="text-align: left;"><strong>V1.4.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H743ZI/Examples</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">NUCLEO-H743ZI</td>
 <td style="text-align: left;"><strong>LL Examples</strong></td>
 <td style="text-align: left;"><strong>V1.1.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H743ZI/Examples_LL</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">NUCLEO-H743ZI</td>
 <td style="text-align: left;"><strong>Templates</strong></td>
 <td style="text-align: left;"><strong>V1.4.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H743ZI/Templates</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">NUCLEO-H743ZI</td>
 <td style="text-align: left;"><strong>LL Templates</strong></td>
 <td style="text-align: left;"><strong>V1.1.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H743ZI/Templates_LL</td>
 </tr>
 </tbody>
@@ -3284,7 +2987,6 @@
 <th style="text-align: left;">Board</th>
 <th style="text-align: left;">Project category</th>
 <th style="text-align: left;">Version</th>
-<th style="text-align: center;">License</th>
 <th style="text-align: center;">Path</th>
 </tr>
 </thead>
@@ -3293,35 +2995,30 @@
 <td style="text-align: left;">NUCLEO-H745ZI-Q</td>
 <td style="text-align: left;"><strong>Applications</strong></td>
 <td style="text-align: left;"><strong>V1.1.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H745ZI-Q/Applications</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">NUCLEO-H745ZI-Q</td>
 <td style="text-align: left;"><strong>Demonstrations</strong></td>
 <td style="text-align: left;"><strong>V1.1.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H745ZI-Q/Demonstrations</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">NUCLEO-H745ZI-Q</td>
 <td style="text-align: left;"><strong>Examples</strong></td>
 <td style="text-align: left;"><strong>V1.1.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H745ZI-Q/Examples</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">NUCLEO-H745ZI-Q</td>
 <td style="text-align: left;"><strong>Templates</strong></td>
 <td style="text-align: left;"><strong>V1.1.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H745ZI-Q/Templates</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">NUCLEO-H745ZI-Q</td>
 <td style="text-align: left;"><strong>LL Templates</strong></td>
 <td style="text-align: left;"><strong>V1.1.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H745ZI-Q/Templates_LL</td>
 </tr>
 </tbody>
@@ -3333,7 +3030,6 @@
 <th style="text-align: left;">Board</th>
 <th style="text-align: left;">Project category</th>
 <th style="text-align: left;">Version</th>
-<th style="text-align: center;">License</th>
 <th style="text-align: center;">Path</th>
 </tr>
 </thead>
@@ -3342,35 +3038,30 @@
 <td style="text-align: left;">STM32H743I-EVAL</td>
 <td style="text-align: left;"><strong>Applications</strong></td>
 <td style="text-align: left;"><strong>V1.5.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/STM32H743I-EVAL/Applications</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H743I-EVAL</td>
 <td style="text-align: left;">Demonstrations</td>
 <td style="text-align: left;">V1.3.0</td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/STM32H743I-EVAL/Demonstrations</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32H743I-EVAL</td>
 <td style="text-align: left;"><strong>Examples</strong></td>
 <td style="text-align: left;"><strong>V1.4.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H743I-EVAL/Examples</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H743I-EVAL</td>
 <td style="text-align: left;"><strong>Templates</strong></td>
 <td style="text-align: left;"><strong>V1.4.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H743I-EVAL/Templates</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32H743I-EVAL</td>
 <td style="text-align: left;"><strong>LL Templates</strong></td>
 <td style="text-align: left;"><strong>V1.1.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H743I-EVAL/Templates_LL</td>
 </tr>
 </tbody>
@@ -3382,7 +3073,6 @@
 <th style="text-align: left;">Board</th>
 <th style="text-align: left;">Project category</th>
 <th style="text-align: left;">Version</th>
-<th style="text-align: center;">License</th>
 <th style="text-align: center;">Path</th>
 </tr>
 </thead>
@@ -3391,35 +3081,30 @@
 <td style="text-align: left;">STM32H745I-DISCO</td>
 <td style="text-align: left;"><strong>Applications</strong></td>
 <td style="text-align: left;"><strong>V1.1.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/STM32H745I-DISCO/Applications</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H745I-DISCO</td>
 <td style="text-align: left;"><strong>Demonstrations</strong></td>
 <td style="text-align: left;"><strong>V1.1.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/STM32H745I-DISCO/Demonstrations</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32H745I-DISCO</td>
 <td style="text-align: left;"><strong>Examples</strong></td>
 <td style="text-align: left;"><strong>V1.1.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H745I-DISCO/Examples</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H745I-DISCO</td>
 <td style="text-align: left;"><strong>Templates</strong></td>
 <td style="text-align: left;"><strong>V1.1.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H745I-DISCO/Templates</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32H745I-DISCO</td>
 <td style="text-align: left;"><strong>LL Templates</strong></td>
 <td style="text-align: left;"><strong>V1.1.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H745I-DISCO/Templates_LL</td>
 </tr>
 </tbody>
@@ -3431,7 +3116,6 @@
 <th style="text-align: left;">Board</th>
 <th style="text-align: left;">Project category</th>
 <th style="text-align: left;">Version</th>
-<th style="text-align: center;">License</th>
 <th style="text-align: center;">Path</th>
 </tr>
 </thead>
@@ -3440,35 +3124,30 @@
 <td style="text-align: left;">STM32H747I-DISCO</td>
 <td style="text-align: left;"><strong>Applications</strong></td>
 <td style="text-align: left;"><strong>V1.1.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/STM32H747I-DISCO/Applications</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H747I-DISCO</td>
 <td style="text-align: left;"><strong>Demonstrations</strong></td>
 <td style="text-align: left;"><strong>V1.1.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/STM32H747I-DISCO/Demonstrations</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32H747I-DISCO</td>
 <td style="text-align: left;"><strong>Examples</strong></td>
 <td style="text-align: left;"><strong>V1.1.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H747I-DISCO/Examples</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H747I-DISCO</td>
 <td style="text-align: left;"><strong>Templates</strong></td>
 <td style="text-align: left;"><strong>V1.1.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H747I-DISCO/Templates</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32H747I-DISCO</td>
 <td style="text-align: left;"><strong>LL Templates</strong></td>
 <td style="text-align: left;"><strong>V1.1.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H747I-DISCO/Templates_LL</td>
 </tr>
 </tbody>
@@ -3480,7 +3159,6 @@
 <th style="text-align: left;">Board</th>
 <th style="text-align: left;">Project category</th>
 <th style="text-align: left;">Version</th>
-<th style="text-align: center;">License</th>
 <th style="text-align: center;">Path</th>
 </tr>
 </thead>
@@ -3489,35 +3167,30 @@
 <td style="text-align: left;">STM32H747I-EVAL</td>
 <td style="text-align: left;"><strong>Applications</strong></td>
 <td style="text-align: left;"><strong>V1.1.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/STM32H747I-EVAL/Applications</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H747I-EVAL</td>
 <td style="text-align: left;"><strong>Demonstrations</strong></td>
 <td style="text-align: left;"><strong>V1.1.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/STM32H747I-EVAL/Demonstrations</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32H747I-EVAL</td>
 <td style="text-align: left;"><strong>Examples</strong></td>
 <td style="text-align: left;"><strong>V1.1.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H747I-EVAL/Examples</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H747I-EVAL</td>
 <td style="text-align: left;"><strong>Templates</strong></td>
 <td style="text-align: left;"><strong>V1.1.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H747I-EVAL/Templates</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32H747I-EVAL</td>
 <td style="text-align: left;"><strong>LL Templates</strong></td>
 <td style="text-align: left;"><strong>V1.1.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H747I-EVAL/Templates_LL</td>
 </tr>
 </tbody>
@@ -3529,7 +3202,6 @@
 <th style="text-align: left;">Board</th>
 <th style="text-align: left;">Project category</th>
 <th style="text-align: left;">Version</th>
-<th style="text-align: center;">License</th>
 <th style="text-align: center;">Path</th>
 </tr>
 </thead>
@@ -3538,28 +3210,24 @@
 <td style="text-align: left;">STM32H750B-DK</td>
 <td style="text-align: left;"><strong>Applications</strong></td>
 <td style="text-align: left;"><strong>V1.1.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/STM32H750B-DK/Applications</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H750B-DK</td>
 <td style="text-align: left;"><strong>Demonstrations</strong></td>
 <td style="text-align: left;"><strong>V1.1.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/STM32H750B-DK/Demonstrations</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32H750B-DK</td>
 <td style="text-align: left;"><strong>Examples</strong></td>
 <td style="text-align: left;"><strong>V1.1.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H750B-DK/Examples</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H750B-DK</td>
 <td style="text-align: left;"><strong>Templates</strong></td>
 <td style="text-align: left;"><strong>V1.1.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H750B-DK/Templates</td>
 </tr>
 </tbody>
@@ -3567,12 +3235,12 @@
 <p>Note: in the tables above, project categories <strong>highlighted</strong> have changed since previous release.</p>
 <h2 id="known-limitations-4">Known Limitations</h2>
 <ul>
-<li><p>OpenAMP-based applications (available on STM32H745I-DISCO, STM32H747I-DISCO and STM32H747I-EVAL) come with known compilation warning</p>
+<li>OpenAMP-based applications (available on STM32H745I-DISCO, STM32H747I-DISCO and STM32H747I-EVAL) come with known compilation warning
 <ul>
 <li>Related to the OpenAmp third party stack</li>
 <li>Related to ST application implementation For warning details please refer to the corresponding applications readme.txt files</li>
 </ul></li>
-<li><p>STM32H750B-DK TouchGFX demonstration comes with known compilation warnings on MDK-ARM IDE:</p>
+<li>STM32H750B-DK TouchGFX demonstration comes with known compilation warnings on MDK-ARM IDE:
 <ul>
 <li>Warnings related to the TouchGFX MW file RepeatButtonTrigger.hpp :
 <ul>
@@ -3580,12 +3248,12 @@
 </ul></li>
 <li>These warnings will be fixed in th next TouchGFX MW version</li>
 </ul></li>
-<li><p>STM32H747I-EVAL, STM32H747I-DISCO and STM32H750B-DK TouchGFX demonstrations come with known compilation warnings on SW4STM32 IDE:</p>
+<li>STM32H747I-EVAL, STM32H747I-DISCO and STM32H750B-DK TouchGFX demonstrations come with known compilation warnings on SW4STM32 IDE:
 <ul>
 <li>Warnings related to the Libjpeg third party MW</li>
 </ul></li>
 <li><p>No impact of these warnings on the functional behavior</p></li>
-<li><p>STM32H743I-EVAL TouchGFX sub-demonstration is provided as binaries only.</p>
+<li>STM32H743I-EVAL TouchGFX sub-demonstration is provided as binaries only.
 <ul>
 <li>The source code for this demonstration will be available in next STM32CubeH7 releases</li>
 </ul></li>
@@ -3620,9 +3288,9 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section6" aria-hidden="true"> <label for="collapse-section6" aria-hidden="true"><strong>V1.4.0 / 05-April-2019</strong></label>
 <div>
-<h2 id="main-changes-6">Main Changes</h2>
+<h2 id="main-changes-7">Main Changes</h2>
 <ul>
-<li><p>First official release to support STM32H7 <strong>Rev.V</strong> all lines:</p>
+<li>First official release to support STM32H7 <strong>Rev.V</strong> all lines:
 <ul>
 <li><strong>Dual Core</strong> lines: <strong>STM32H745xx/H755xx/H747xx/H757xx</strong></li>
 <li><strong>Value line</strong>: STM32H750xx</li>
@@ -3904,17 +3572,17 @@
 </ul></li>
 <li>Demonstrations
 <ul>
-<li><p>Rename root folder to STM32H743I-EVAL to align with board RPN</p></li>
-<li><p>General updates to fix known defects and enhancements implementation</p></li>
-<li><p>Update startup_stm32h743xx.s (EWARM, MDK-ARM and SW4STM32) to align with the template startup files</p></li>
-<li><p>Update stm32h7xx_hal_conf.h to align with the template</p></li>
-<li><p>Update system_stm32h7xx.c to align with the template</p></li>
-<li><p>Update projects (EWARM, MDK-ARM and SW4STM32) to use new STemWin libraries : v544_20180322_cm7</p></li>
-<li><p>Update projects (EWARM, MDK-ARM and SW4STM32) use new PDM libraries : v3.1.0</p></li>
-<li><p>Add cache maintenance to videoplayer module</p></li>
-<li><p>Align to the latest FreeRTOS version FreeRTOS_v10.0.1</p></li>
+<li>Rename root folder to STM32H743I-EVAL to align with board RPN</li>
+<li>General updates to fix known defects and enhancements implementation</li>
+<li>Update startup_stm32h743xx.s (EWARM, MDK-ARM and SW4STM32) to align with the template startup files</li>
+<li>Update stm32h7xx_hal_conf.h to align with the template</li>
+<li>Update system_stm32h7xx.c to align with the template</li>
+<li>Update projects (EWARM, MDK-ARM and SW4STM32) to use new STemWin libraries : v544_20180322_cm7</li>
+<li>Update projects (EWARM, MDK-ARM and SW4STM32) use new PDM libraries : v3.1.0</li>
+<li>Add cache maintenance to videoplayer module</li>
+<li>Align to the latest FreeRTOS version FreeRTOS_v10.0.1</li>
 <li><p>Binaries files removed from this package, refer to note bellow</p></li>
-<li><p>Note:</p>
+<li>Note:
 <ul>
 <li>The binary and Media demonstration files are available from the STM32H743I-EVAL page in the Binary Delivery section.
 <ul>
@@ -4003,7 +3671,6 @@
 <th style="text-align: left;">Board</th>
 <th style="text-align: left;">Project category</th>
 <th style="text-align: left;">Version</th>
-<th style="text-align: center;">License</th>
 <th style="text-align: center;">Path</th>
 </tr>
 </thead>
@@ -4012,42 +3679,36 @@
 <td style="text-align: left;">NUCLEO-H743ZI</td>
 <td style="text-align: left;"><strong>Applications</strong></td>
 <td style="text-align: left;"><strong>V1.3.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H743ZI/Applications</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">NUCLEO-H743ZI</td>
 <td style="text-align: left;"><strong>Demonstrations</strong></td>
 <td style="text-align: left;"><strong>V1.3.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H743ZI/Demonstrations</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">NUCLEO-H743ZI</td>
 <td style="text-align: left;"><strong>Examples</strong></td>
 <td style="text-align: left;"><strong>V1.3.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H743ZI/Examples</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">NUCLEO-H743ZI</td>
 <td style="text-align: left;"><strong>LL Examples</strong></td>
 <td style="text-align: left;"><strong>V1.0.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H743ZI/Examples_LL</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">NUCLEO-H743ZI</td>
 <td style="text-align: left;"><strong>Templates</strong></td>
 <td style="text-align: left;"><strong>V1.3.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H743ZI/Templates</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">NUCLEO-H743ZI</td>
 <td style="text-align: left;"><strong>LL Templates</strong></td>
 <td style="text-align: left;"><strong>V1.0.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H743ZI/Templates_LL</td>
 </tr>
 </tbody>
@@ -4059,7 +3720,6 @@
 <th style="text-align: left;">Board</th>
 <th style="text-align: left;">Project category</th>
 <th style="text-align: left;">Version</th>
-<th style="text-align: center;">License</th>
 <th style="text-align: center;">Path</th>
 </tr>
 </thead>
@@ -4068,35 +3728,30 @@
 <td style="text-align: left;">NUCLEO-H745ZI-Q</td>
 <td style="text-align: left;"><strong>Applications</strong></td>
 <td style="text-align: left;"><strong>V1.0.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H745ZI-Q/Applications</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">NUCLEO-H745ZI-Q</td>
 <td style="text-align: left;"><strong>Demonstrations</strong></td>
 <td style="text-align: left;"><strong>V1.0.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H745ZI-Q/Demonstrations</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">NUCLEO-H745ZI-Q</td>
 <td style="text-align: left;"><strong>Examples</strong></td>
 <td style="text-align: left;"><strong>V1.0.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H745ZI-Q/Examples</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">NUCLEO-H745ZI-Q</td>
 <td style="text-align: left;"><strong>Templates</strong></td>
 <td style="text-align: left;"><strong>V1.0.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H745ZI-Q/Templates</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">NUCLEO-H745ZI-Q</td>
 <td style="text-align: left;"><strong>LL Templates</strong></td>
 <td style="text-align: left;"><strong>V1.0.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H745ZI-Q/Templates_LL</td>
 </tr>
 </tbody>
@@ -4108,7 +3763,6 @@
 <th style="text-align: left;">Board</th>
 <th style="text-align: left;">Project category</th>
 <th style="text-align: left;">Version</th>
-<th style="text-align: center;">License</th>
 <th style="text-align: center;">Path</th>
 </tr>
 </thead>
@@ -4117,35 +3771,30 @@
 <td style="text-align: left;">STM32H743I-EVAL</td>
 <td style="text-align: left;"><strong>Applications</strong></td>
 <td style="text-align: left;"><strong>V1.4.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/STM32H743I-EVAL/Applications</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H743I-EVAL</td>
 <td style="text-align: left;"><strong>Demonstrations</strong></td>
 <td style="text-align: left;"><strong>V1.3.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/STM32H743I-EVAL/Demonstrations</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32H743I-EVAL</td>
 <td style="text-align: left;"><strong>Examples</strong></td>
 <td style="text-align: left;"><strong>V1.3.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H743I-EVAL/Examples</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H743I-EVAL</td>
 <td style="text-align: left;"><strong>Templates</strong></td>
 <td style="text-align: left;"><strong>V1.3.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H743I-EVAL/Templates</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32H743I-EVAL</td>
 <td style="text-align: left;"><strong>LL Templates</strong></td>
 <td style="text-align: left;"><strong>V1.0.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H743I-EVAL/Templates_LL</td>
 </tr>
 </tbody>
@@ -4157,7 +3806,6 @@
 <th style="text-align: left;">Board</th>
 <th style="text-align: left;">Project category</th>
 <th style="text-align: left;">Version</th>
-<th style="text-align: center;">License</th>
 <th style="text-align: center;">Path</th>
 </tr>
 </thead>
@@ -4166,35 +3814,30 @@
 <td style="text-align: left;">STM32H745I-DISCO</td>
 <td style="text-align: left;"><strong>Applications</strong></td>
 <td style="text-align: left;"><strong>V1.0.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/STM32H745I-DISCO/Applications</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H745I-DISCO</td>
 <td style="text-align: left;"><strong>Demonstrations</strong></td>
 <td style="text-align: left;"><strong>V1.0.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/STM32H745I-DISCO/Demonstrations</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32H745I-DISCO</td>
 <td style="text-align: left;"><strong>Examples</strong></td>
 <td style="text-align: left;"><strong>V1.0.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H745I-DISCO/Examples</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H745I-DISCO</td>
 <td style="text-align: left;"><strong>Templates</strong></td>
 <td style="text-align: left;"><strong>V1.0.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H745I-DISCO/Templates</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32H745I-DISCO</td>
 <td style="text-align: left;"><strong>LL Templates</strong></td>
 <td style="text-align: left;"><strong>V1.0.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H745I-DISCO/Templates_LL</td>
 </tr>
 </tbody>
@@ -4206,7 +3849,6 @@
 <th style="text-align: left;">Board</th>
 <th style="text-align: left;">Project category</th>
 <th style="text-align: left;">Version</th>
-<th style="text-align: center;">License</th>
 <th style="text-align: center;">Path</th>
 </tr>
 </thead>
@@ -4215,35 +3857,30 @@
 <td style="text-align: left;">STM32H747I-DISCO</td>
 <td style="text-align: left;"><strong>Applications</strong></td>
 <td style="text-align: left;"><strong>V1.0.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/STM32H747I-DISCO/Applications</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H747I-DISCO</td>
 <td style="text-align: left;"><strong>Demonstrations</strong></td>
 <td style="text-align: left;"><strong>V1.0.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/STM32H747I-DISCO/Demonstrations</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32H747I-DISCO</td>
 <td style="text-align: left;"><strong>Examples</strong></td>
 <td style="text-align: left;"><strong>V1.0.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H747I-DISCO/Examples</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H747I-DISCO</td>
 <td style="text-align: left;"><strong>Templates</strong></td>
 <td style="text-align: left;"><strong>V1.0.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H747I-DISCO/Templates</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32H747I-DISCO</td>
 <td style="text-align: left;"><strong>LL Templates</strong></td>
 <td style="text-align: left;"><strong>V1.0.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H747I-DISCO/Templates_LL</td>
 </tr>
 </tbody>
@@ -4255,7 +3892,6 @@
 <th style="text-align: left;">Board</th>
 <th style="text-align: left;">Project category</th>
 <th style="text-align: left;">Version</th>
-<th style="text-align: center;">License</th>
 <th style="text-align: center;">Path</th>
 </tr>
 </thead>
@@ -4264,35 +3900,30 @@
 <td style="text-align: left;">STM32H747I-EVAL</td>
 <td style="text-align: left;"><strong>Applications</strong></td>
 <td style="text-align: left;"><strong>V1.0.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/STM32H747I-EVAL/Applications</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H747I-EVAL</td>
 <td style="text-align: left;"><strong>Demonstrations</strong></td>
 <td style="text-align: left;"><strong>V1.0.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/STM32H747I-EVAL/Demonstrations</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32H747I-EVAL</td>
 <td style="text-align: left;"><strong>Examples</strong></td>
 <td style="text-align: left;"><strong>V1.0.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H747I-EVAL/Examples</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H747I-EVAL</td>
 <td style="text-align: left;"><strong>Templates</strong></td>
 <td style="text-align: left;"><strong>V1.0.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H747I-EVAL/Templates</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32H747I-EVAL</td>
 <td style="text-align: left;"><strong>LL Templates</strong></td>
 <td style="text-align: left;"><strong>V1.0.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H747I-EVAL/Templates_LL</td>
 </tr>
 </tbody>
@@ -4304,7 +3935,6 @@
 <th style="text-align: left;">Board</th>
 <th style="text-align: left;">Project category</th>
 <th style="text-align: left;">Version</th>
-<th style="text-align: center;">License</th>
 <th style="text-align: center;">Path</th>
 </tr>
 </thead>
@@ -4313,28 +3943,24 @@
 <td style="text-align: left;">STM32H750B-DK</td>
 <td style="text-align: left;"><strong>Applications</strong></td>
 <td style="text-align: left;"><strong>V1.0.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/STM32H750B-DK/Applications</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H750B-DK</td>
 <td style="text-align: left;"><strong>Demonstrations</strong></td>
 <td style="text-align: left;"><strong>V1.0.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/STM32H750B-DK/Demonstrations</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32H750B-DK</td>
 <td style="text-align: left;"><strong>Examples</strong></td>
 <td style="text-align: left;"><strong>V1.0.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H750B-DK/Examples</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H750B-DK</td>
 <td style="text-align: left;"><strong>Templates</strong></td>
 <td style="text-align: left;"><strong>V1.0.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H750B-DK/Templates</td>
 </tr>
 </tbody>
@@ -4382,11 +4008,11 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section5" aria-hidden="true"> <label for="collapse-section5" aria-hidden="true"><strong>V1.3.2 / 31-January-2019</strong></label>
 <div>
-<h2 id="main-changes-7">Main Changes</h2>
+<h2 id="main-changes-8">Main Changes</h2>
 <h3 id="patch-release-1">Patch release</h3>
 <ul>
 <li><p>Patch release to add definition of UID_BASE (Unique device ID register base address) to the CMSIS STM32H7xx include files.</p></li>
-<li><p><strong>CMSIS</strong></p>
+<li><strong>CMSIS</strong>
 <ul>
 <li>CMSIS STM32H7xx include files : stm32h743xx.h, stm32h750xx.h and stm32h753xx.h.</li>
 </ul></li>
@@ -4401,7 +4027,6 @@
 <th style="text-align: left;">Board</th>
 <th style="text-align: left;">Project category</th>
 <th style="text-align: left;">Version</th>
-<th style="text-align: center;">License</th>
 <th style="text-align: center;">Path</th>
 </tr>
 </thead>
@@ -4410,28 +4035,24 @@
 <td style="text-align: left;">NUCLEO-H743ZI</td>
 <td style="text-align: left;">Applications</td>
 <td style="text-align: left;">V1.2.1</td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H743ZI/Applications</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">NUCLEO-H743ZI</td>
 <td style="text-align: left;">Demonstrations</td>
 <td style="text-align: left;">V1.2.0</td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H743ZI/Demonstrations</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">NUCLEO-H743ZI</td>
 <td style="text-align: left;">Examples</td>
 <td style="text-align: left;">V1.2.0</td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H743ZI/Examples</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">NUCLEO-H743ZI</td>
 <td style="text-align: left;">Templates</td>
 <td style="text-align: left;">V1.2.0</td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H743ZI/Templates</td>
 </tr>
 </tbody>
@@ -4443,7 +4064,6 @@
 <th style="text-align: left;">Board</th>
 <th style="text-align: left;">Project category</th>
 <th style="text-align: left;">Version</th>
-<th style="text-align: center;">License</th>
 <th style="text-align: center;">Path</th>
 </tr>
 </thead>
@@ -4452,28 +4072,24 @@
 <td style="text-align: left;">STM32H743I-EVAL</td>
 <td style="text-align: left;">Applications</td>
 <td style="text-align: left;">V1.3.1</td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/STM32H743I-EVAL/Applications</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H743I-EVAL</td>
 <td style="text-align: left;">Demonstrations</td>
 <td style="text-align: left;">V1.2.0</td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/STM32H743I-EVAL/Demonstrations</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32H743I-EVAL</td>
 <td style="text-align: left;">Examples</td>
 <td style="text-align: left;">V1.2.0</td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H743I-EVAL/Examples</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H743I-EVAL</td>
 <td style="text-align: left;">Templates</td>
 <td style="text-align: left;">V1.2.0</td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H743I-EVAL/Templates</td>
 </tr>
 </tbody>
@@ -4508,11 +4124,11 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section4" aria-hidden="true"> <label for="collapse-section4" aria-hidden="true"><strong>V1.3.1 / 18-January-2019</strong></label>
 <div>
-<h2 id="main-changes-8">Main Changes</h2>
+<h2 id="main-changes-9">Main Changes</h2>
 <h3 id="patch-release-2">Patch release</h3>
 <ul>
 <li><p>Patch release to Fix LwIP and mbedTLS applications : enhance Ethernet zero-copy feature allowing to fix ping behavior.</p></li>
-<li><p><strong>Projects</strong></p>
+<li><strong>Projects</strong>
 <ul>
 <li>STM32H743I_EVAL LwIP and mbedTLS applications : under STM32H743I_EVAL/Applications\LwIP and STM32H743I_EVAL/Applications\mbedTLS
 <ul>
@@ -4558,7 +4174,6 @@
 <th style="text-align: left;">Board</th>
 <th style="text-align: left;">Project category</th>
 <th style="text-align: left;">Version</th>
-<th style="text-align: center;">License</th>
 <th style="text-align: center;">Path</th>
 </tr>
 </thead>
@@ -4567,28 +4182,24 @@
 <td style="text-align: left;">NUCLEO-H743ZI</td>
 <td style="text-align: left;"><strong>Applications</strong></td>
 <td style="text-align: left;"><strong>V1.2.1</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H743ZI/Applications</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">NUCLEO-H743ZI</td>
 <td style="text-align: left;">Demonstrations</td>
 <td style="text-align: left;">V1.2.0</td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H743ZI/Demonstrations</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">NUCLEO-H743ZI</td>
 <td style="text-align: left;">Examples</td>
 <td style="text-align: left;">V1.2.0</td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H743ZI/Examples</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">NUCLEO-H743ZI</td>
 <td style="text-align: left;">Templates</td>
 <td style="text-align: left;">V1.2.0</td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H743ZI/Templates</td>
 </tr>
 </tbody>
@@ -4600,7 +4211,6 @@
 <th style="text-align: left;">Board</th>
 <th style="text-align: left;">Project category</th>
 <th style="text-align: left;">Version</th>
-<th style="text-align: center;">License</th>
 <th style="text-align: center;">Path</th>
 </tr>
 </thead>
@@ -4609,28 +4219,24 @@
 <td style="text-align: left;">STM32H743I-EVAL</td>
 <td style="text-align: left;"><strong>Applications</strong></td>
 <td style="text-align: left;"><strong>V1.3.1</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/STM32H743I-EVAL/Applications</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H743I-EVAL</td>
 <td style="text-align: left;">Demonstrations</td>
 <td style="text-align: left;">V1.2.0</td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/STM32H743I-EVAL/Demonstrations</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32H743I-EVAL</td>
 <td style="text-align: left;">Examples</td>
 <td style="text-align: left;">V1.2.0</td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H743I-EVAL/Examples</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H743I-EVAL</td>
 <td style="text-align: left;">Templates</td>
 <td style="text-align: left;">V1.2.0</td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H743I-EVAL/Templates</td>
 </tr>
 </tbody>
@@ -4665,7 +4271,7 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section3" aria-hidden="true"> <label for="collapse-section3" aria-hidden="true"><strong>V1.3.0 / 29-June-2018</strong></label>
 <div>
-<h2 id="main-changes-9">Main Changes</h2>
+<h2 id="main-changes-10">Main Changes</h2>
 <ul>
 <li><strong>Add support for STM32H750xx value line</strong>
 <ul>
@@ -4724,7 +4330,6 @@
 <th style="text-align: left;">Board</th>
 <th style="text-align: left;">Project category</th>
 <th style="text-align: left;">Version</th>
-<th style="text-align: center;">License</th>
 <th style="text-align: center;">Path</th>
 </tr>
 </thead>
@@ -4733,28 +4338,24 @@
 <td style="text-align: left;">NUCLEO-H743ZI</td>
 <td style="text-align: left;">Applications</td>
 <td style="text-align: left;">V1.2.0</td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H743ZI/Applications</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">NUCLEO-H743ZI</td>
 <td style="text-align: left;">Demonstrations</td>
 <td style="text-align: left;">V1.2.0</td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H743ZI/Demonstrations</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">NUCLEO-H743ZI</td>
 <td style="text-align: left;">Examples**</td>
 <td style="text-align: left;">V1.2.0</td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H743ZI/Examples</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">NUCLEO-H743ZI</td>
 <td style="text-align: left;">Templates**</td>
 <td style="text-align: left;">V1.2.0</td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H743ZI/Templates</td>
 </tr>
 </tbody>
@@ -4766,7 +4367,6 @@
 <th style="text-align: left;">Board</th>
 <th style="text-align: left;">Project category</th>
 <th style="text-align: left;">Version</th>
-<th style="text-align: center;">License</th>
 <th style="text-align: center;">Path</th>
 </tr>
 </thead>
@@ -4775,28 +4375,24 @@
 <td style="text-align: left;">STM32H743I-EVAL</td>
 <td style="text-align: left;"><strong>Applications</strong></td>
 <td style="text-align: left;"><strong>V1.3.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/STM32H743I-EVAL/Applications</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H743I-EVAL</td>
 <td style="text-align: left;">Demonstrations</td>
 <td style="text-align: left;">V1.2.0</td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/STM32H743I-EVAL/Demonstrations</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32H743I-EVAL</td>
 <td style="text-align: left;">Examples</td>
 <td style="text-align: left;">V1.2.0</td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H743I-EVAL/Examples</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H743I-EVAL</td>
 <td style="text-align: left;">Templates</td>
 <td style="text-align: left;">V1.2.0</td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H743I-EVAL/Templates</td>
 </tr>
 </tbody>
@@ -4831,8 +4427,8 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section2" aria-hidden="true"> <label for="collapse-section2" aria-hidden="true"><strong>V1.2.0 / 29-December-2017</strong></label>
 <div>
-<h2 id="main-changes-10">Main Changes</h2>
-<h3 id="maintenance-release-3">Maintenance release</h3>
+<h2 id="main-changes-11">Main Changes</h2>
+<h3 id="maintenance-release-4">Maintenance release</h3>
 <ul>
 <li>Update projects to support new FatFs, MbedTLS and LwIP versions.</li>
 <li>Add new FDCAN_Classic_Frame_Networking example running on STM32H743I_EVAL.</li>
@@ -4873,7 +4469,7 @@
 <li>Demonstrations
 <ul>
 <li><p>Align demonstration to the latest FatFs version R0.12c (ST modified 20171110)</p></li>
-<li><p>Note:</p>
+<li>Note:
 <ul>
 <li>Demonstrations Firmware for STM32H743I_EVAL provided within this package, don’t embed:
 <ul>
@@ -4902,7 +4498,6 @@
 <th style="text-align: left;">Board</th>
 <th style="text-align: left;">Project category</th>
 <th style="text-align: left;">Version</th>
-<th style="text-align: center;">License</th>
 <th style="text-align: center;">Path</th>
 </tr>
 </thead>
@@ -4911,28 +4506,24 @@
 <td style="text-align: left;">NUCLEO-H743ZI</td>
 <td style="text-align: left;"><strong>Applications</strong></td>
 <td style="text-align: left;"><strong>V1.2.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H743ZI/Applications</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">NUCLEO-H743ZI</td>
 <td style="text-align: left;"><strong>Demonstrations</strong></td>
 <td style="text-align: left;"><strong>V1.2.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H743ZI/Demonstrations</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">NUCLEO-H743ZI</td>
 <td style="text-align: left;"><strong>Examples</strong></td>
 <td style="text-align: left;"><strong>V1.2.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H743ZI/Examples</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">NUCLEO-H743ZI</td>
 <td style="text-align: left;"><strong>Templates</strong></td>
 <td style="text-align: left;"><strong>V1.2.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H743ZI/Templates</td>
 </tr>
 </tbody>
@@ -4944,7 +4535,6 @@
 <th style="text-align: left;">Board</th>
 <th style="text-align: left;">Project category</th>
 <th style="text-align: left;">Version</th>
-<th style="text-align: center;">License</th>
 <th style="text-align: center;">Path</th>
 </tr>
 </thead>
@@ -4953,28 +4543,24 @@
 <td style="text-align: left;">STM32H743I-EVAL</td>
 <td style="text-align: left;"><strong>Applications</strong></td>
 <td style="text-align: left;"><strong>V1.2.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/STM32H743I-EVAL/Applications</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H743I-EVAL</td>
 <td style="text-align: left;"><strong>Demonstrations</strong></td>
 <td style="text-align: left;"><strong>V1.2.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/STM32H743I-EVAL/Demonstrations</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32H743I-EVAL</td>
 <td style="text-align: left;"><strong>Examples</strong></td>
 <td style="text-align: left;"><strong>V1.2.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H743I-EVAL/Examples</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H743I-EVAL</td>
 <td style="text-align: left;"><strong>Templates</strong></td>
 <td style="text-align: left;"><strong>V1.2.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H743I-EVAL/Templates</td>
 </tr>
 </tbody>
@@ -5009,14 +4595,14 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section1" aria-hidden="true"> <label for="collapse-section1" aria-hidden="true"><strong>V1.1.0 / 31-August-2017</strong></label>
 <div>
-<h2 id="main-changes-11">Main Changes</h2>
-<h3 id="maintenance-release-4">Maintenance release</h3>
+<h2 id="main-changes-12">Main Changes</h2>
+<h3 id="maintenance-release-5">Maintenance release</h3>
 <ul>
-<li><p>Update projects to support new FatFs and STemWin versions.</p></li>
-<li><p>Add new FreeRTOS MPU application running on STM32H743I_EVAL and STM32H7xx_Nucleo_144, only EWARM Toolchain is supported.</p></li>
-<li><p>Add FWupgrade_Standalone and HID_LPM_Standalone applications running on STM32H743I_EVAL.</p></li>
+<li>Update projects to support new FatFs and STemWin versions.</li>
+<li>Add new FreeRTOS MPU application running on STM32H743I_EVAL and STM32H7xx_Nucleo_144, only EWARM Toolchain is supported.</li>
+<li>Add FWupgrade_Standalone and HID_LPM_Standalone applications running on STM32H743I_EVAL.</li>
 <li><p>Add Demonstration Firmware for STM32H743I_EVAL.</p></li>
-<li><p><strong>Note:</strong></p>
+<li><strong>Note:</strong>
 <ul>
 <li><strong>Demonstrations Firmware for STM32H743I_EVAL provided within this package, don’t embed:</strong></li>
 <li><strong>TouchGFX demonstration module. Free evaluation version of the TouchGFX demonstration, based on Draupner Graphics’ commercial graphic library, is available at <a href="https://www.touchgfx.com/product/supported-stm32-kits">www.touchgfx.com/stmicroelectronics</a></strong></li>
@@ -5036,10 +4622,10 @@
 <p><strong>STM32H743I-EVAL</strong></p>
 <ul>
 <li><p>Applications: Maintenance release</p></li>
-<li><p>Demonstrations</p>
+<li>Demonstrations
 <ul>
 <li><p>Official demonstration firmware release</p></li>
-<li><p>Note:</p>
+<li>Note:
 <ul>
 <li>Demonstrations Firmware for STM32H743I_EVAL provided within this package, don’t embed:
 <ul>
@@ -5048,8 +4634,8 @@
 </ul></li>
 </ul></li>
 </ul></li>
-<li><p>HAL Examples :Maintenance release</p></li>
-<li><p>HAL Templates</p>
+<li>HAL Examples :Maintenance release</li>
+<li>HAL Templates
 <ul>
 <li>Adjust PLL fractional computation</li>
 </ul></li>
@@ -5063,7 +4649,6 @@
 <th style="text-align: left;">Board</th>
 <th style="text-align: left;">Project category</th>
 <th style="text-align: left;">Version</th>
-<th style="text-align: center;">License</th>
 <th style="text-align: center;">Path</th>
 </tr>
 </thead>
@@ -5072,28 +4657,24 @@
 <td style="text-align: left;">NUCLEO-H743ZI</td>
 <td style="text-align: left;"><strong>Applications</strong></td>
 <td style="text-align: left;"><strong>V1.1.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H743ZI/Applications</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">NUCLEO-H743ZI</td>
 <td style="text-align: left;"><strong>Demonstrations</strong></td>
 <td style="text-align: left;"><strong>V1.1.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H743ZI/Demonstrations</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">NUCLEO-H743ZI</td>
 <td style="text-align: left;"><strong>Examples</strong></td>
 <td style="text-align: left;"><strong>V1.1.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H743ZI/Examples</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">NUCLEO-H743ZI</td>
 <td style="text-align: left;"><strong>Templates</strong></td>
 <td style="text-align: left;"><strong>V1.1.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H743ZI/Templates</td>
 </tr>
 </tbody>
@@ -5105,7 +4686,6 @@
 <th style="text-align: left;">Board</th>
 <th style="text-align: left;">Project category</th>
 <th style="text-align: left;">Version</th>
-<th style="text-align: center;">License</th>
 <th style="text-align: center;">Path</th>
 </tr>
 </thead>
@@ -5114,28 +4694,24 @@
 <td style="text-align: left;">STM32H743I-EVAL</td>
 <td style="text-align: left;"><strong>Applications</strong></td>
 <td style="text-align: left;"><strong>V1.1.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/STM32H743I-EVAL/Applications</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H743I-EVAL</td>
 <td style="text-align: left;"><strong>Demonstrations</strong></td>
 <td style="text-align: left;"><strong>V1.1.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/STM32H743I-EVAL/Demonstrations</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32H743I-EVAL</td>
 <td style="text-align: left;"><strong>Examples</strong></td>
 <td style="text-align: left;"><strong>V1.1.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H743I-EVAL/Examples</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H743I-EVAL</td>
 <td style="text-align: left;"><strong>Templates</strong></td>
 <td style="text-align: left;"><strong>V1.1.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H743I-EVAL/Templates</td>
 </tr>
 </tbody>
@@ -5170,7 +4746,7 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section0" aria-hidden="true"> <label for="collapse-section0" aria-hidden="true"><strong>V1.0.0 / 21-April-2017</strong></label>
 <div>
-<h2 id="main-changes-12">Main Changes</h2>
+<h2 id="main-changes-13">Main Changes</h2>
 <p><strong>First official release of STM32CubeH7 (STM32Cube for STM32H7 Series)</strong></p>
 <p><strong>NUCLEO-H743ZI</strong>: First official release</p>
 <p><strong>STM32H743I-EVAL</strong>: First official release</p>
@@ -5183,7 +4759,6 @@
 <th style="text-align: left;">Board</th>
 <th style="text-align: left;">Project category</th>
 <th style="text-align: left;">Version</th>
-<th style="text-align: center;">License</th>
 <th style="text-align: center;">Path</th>
 </tr>
 </thead>
@@ -5192,28 +4767,24 @@
 <td style="text-align: left;">NUCLEO-H743ZI</td>
 <td style="text-align: left;"><strong>Applications</strong></td>
 <td style="text-align: left;"><strong>V1.0.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H743ZI/Applications</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">NUCLEO-H743ZI</td>
 <td style="text-align: left;"><strong>Demonstrations</strong></td>
 <td style="text-align: left;"><strong>V1.0.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H743ZI/Demonstrations</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">NUCLEO-H743ZI</td>
 <td style="text-align: left;"><strong>Examples</strong></td>
 <td style="text-align: left;"><strong>V1.0.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H743ZI/Examples</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">NUCLEO-H743ZI</td>
 <td style="text-align: left;"><strong>Templates</strong></td>
 <td style="text-align: left;"><strong>V1.0.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/NUCLEO-H743ZI/Templates</td>
 </tr>
 </tbody>
@@ -5225,7 +4796,6 @@
 <th style="text-align: left;">Board</th>
 <th style="text-align: left;">Project category</th>
 <th style="text-align: left;">Version</th>
-<th style="text-align: center;">License</th>
 <th style="text-align: center;">Path</th>
 </tr>
 </thead>
@@ -5234,28 +4804,24 @@
 <td style="text-align: left;">STM32H743I-EVAL</td>
 <td style="text-align: left;"><strong>Applications</strong></td>
 <td style="text-align: left;"><strong>V1.0.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/STM32H743I-EVAL/Applications</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H743I-EVAL</td>
 <td style="text-align: left;"><strong>Demonstrations</strong></td>
 <td style="text-align: left;"><strong>V1.0.0</strong></td>
-<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
 <td style="text-align: center;">Projects/STM32H743I-EVAL/Demonstrations</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STM32H743I-EVAL</td>
 <td style="text-align: left;"><strong>Examples</strong></td>
 <td style="text-align: left;"><strong>V1.0.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H743I-EVAL/Examples</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">STM32H743I-EVAL</td>
 <td style="text-align: left;"><strong>Templates</strong></td>
 <td style="text-align: left;"><strong>V1.0.0</strong></td>
-<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
 <td style="text-align: center;">Projects/STM32H743I-EVAL/Templates</td>
 </tr>
 </tbody>
@@ -5287,7 +4853,7 @@
 </ul>
 </div>
 </div>
-</section>
+</div>
 </div>
 <footer class="sticky">
 <p>For complete documentation on STM32H7xx,visit: [<a href="http://www.st.com/stm32h7">www.st.com/stm32h7</a>]</p>

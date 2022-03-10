@@ -6,7 +6,7 @@
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2017-2021 STMicroelectronics.
+  * Copyright (c) 2017 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -36,11 +36,11 @@ __IO uint8_t DHCP_state = DHCP_OFF;
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 /**
-  * @brief  Notify the User about the nework interface config status 
+  * @brief  Notify the User about the network interface config status
   * @param  netif: the network interface
   * @retval None
   */
-void ethernet_link_status_updated(struct netif *netif) 
+void ethernet_link_status_updated(struct netif *netif)
 {
   if (netif_is_up(netif))
  {
@@ -53,15 +53,15 @@ void ethernet_link_status_updated(struct netif *netif)
 #endif /* LWIP_DHCP */
   }
   else
-  {  
+  {
 #if LWIP_DHCP
     /* Update DHCP state machine */
     DHCP_state = DHCP_LINK_DOWN;
-#else    
+#else
     BSP_LED_Off(LED2);
     BSP_LED_On(LED3); 
 #endif /* LWIP_DHCP */
-  } 
+  }
 }
 
 #if LWIP_DHCP
@@ -77,7 +77,7 @@ void DHCP_Thread(void const * argument)
   ip_addr_t netmask;
   ip_addr_t gw;
   struct dhcp *dhcp;
-  
+
   for (;;)
   {
     switch (DHCP_state)
@@ -86,39 +86,39 @@ void DHCP_Thread(void const * argument)
       {
         ip_addr_set_zero_ip4(&netif->ip_addr);
         ip_addr_set_zero_ip4(&netif->netmask);
-        ip_addr_set_zero_ip4(&netif->gw);    
+        ip_addr_set_zero_ip4(&netif->gw);
         DHCP_state = DHCP_WAIT_ADDRESS;
-        
+
         BSP_LED_Off(LED2);
         BSP_LED_Off(LED3);
 
         dhcp_start(netif);
       }
-      break;    
+      break;
     case DHCP_WAIT_ADDRESS:
-      {                
-        if (dhcp_supplied_address(netif)) 
+      {
+        if (dhcp_supplied_address(netif))
         {
-          DHCP_state = DHCP_ADDRESS_ASSIGNED;	
-         
+          DHCP_state = DHCP_ADDRESS_ASSIGNED;
+
           BSP_LED_On(LED2);
           BSP_LED_Off(LED3);
         }
         else
         {
           dhcp = (struct dhcp *)netif_get_client_data(netif, LWIP_NETIF_CLIENT_DATA_INDEX_DHCP);
-    
+
           /* DHCP timeout */
           if (dhcp->tries > MAX_DHCP_TRIES)
           {
             DHCP_state = DHCP_TIMEOUT;
-            
+
             /* Static address used */
             IP_ADDR4(&ipaddr, IP_ADDR0 ,IP_ADDR1 , IP_ADDR2 , IP_ADDR3 );
             IP_ADDR4(&netmask, NETMASK_ADDR0, NETMASK_ADDR1, NETMASK_ADDR2, NETMASK_ADDR3);
             IP_ADDR4(&gw, GW_ADDR0, GW_ADDR1, GW_ADDR2, GW_ADDR3);
             netif_set_addr(netif, ip_2_ip4(&ipaddr), ip_2_ip4(&netmask), ip_2_ip4(&gw));
-             
+
             BSP_LED_On(LED2);
             BSP_LED_Off(LED3);
           }
@@ -135,7 +135,7 @@ void DHCP_Thread(void const * argument)
     break;
     default: break;
     }
-    
+
     /* wait 500 ms */
     osDelay(500);
   }

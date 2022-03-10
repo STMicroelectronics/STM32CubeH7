@@ -174,7 +174,7 @@ SECTIONS
     *(.TxDecripSection)
     
     . = ABSOLUTE(0x30000400);
-    *(.LwIP_HeapSection) 
+    *(.Rx_PoolSection) 
   } >RAM_D2 AT> ROM
 
   /* Remove information from the compiler libraries */

@@ -469,6 +469,7 @@ static void LCD_LL_Init(void)
   static RCC_PeriphCLKInitTypeDef  periph_clk_init_struct;
 
   /* DeInit */
+  hltdc.Instance = LTDC;
   HAL_LTDC_DeInit(&hltdc);
 
   /* Set LCD Timings */

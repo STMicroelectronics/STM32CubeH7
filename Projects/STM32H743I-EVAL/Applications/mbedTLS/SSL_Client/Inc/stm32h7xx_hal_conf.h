@@ -43,7 +43,8 @@
 /* #define HAL_DFSDM_MODULE_ENABLED     */
 #define HAL_DMA_MODULE_ENABLED
 #define HAL_DMA2D_MODULE_ENABLED
-#define HAL_ETH_MODULE_ENABLED
+//#define HAL_ETH_MODULE_ENABLED
+#define HAL_ETH_LEGACY_MODULE_ENABLED   
 #define HAL_EXTI_MODULE_ENABLED
 /* #define HAL_FDCAN_MODULE_ENABLED     */
 #define HAL_FLASH_MODULE_ENABLED
@@ -226,6 +227,10 @@
 #ifdef HAL_ETH_MODULE_ENABLED
   #include "stm32h7xx_hal_eth.h"
 #endif /* HAL_ETH_MODULE_ENABLED */
+ 
+#ifdef HAL_ETH_LEGACY_MODULE_ENABLED
+  #include "stm32h7xx_hal_eth_legacy.h"
+#endif /* HAL_ETH_LEGACY_MODULE_ENABLED */
    
 #ifdef HAL_EXTI_MODULE_ENABLED
   #include "stm32h7xx_hal_exti.h"

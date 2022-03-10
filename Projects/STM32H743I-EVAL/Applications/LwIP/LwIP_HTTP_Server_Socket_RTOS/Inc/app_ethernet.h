@@ -6,7 +6,7 @@
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2017-2021 STMicroelectronics.
+  * Copyright (c) 2017 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -42,7 +42,7 @@
 void ethernet_link_status_updated(struct netif *netif);
 #if LWIP_DHCP
 void DHCP_Thread(void const * argument);
-#endif  
+#endif
 
 #ifdef __cplusplus
 }

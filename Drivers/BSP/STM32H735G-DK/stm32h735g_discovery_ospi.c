@@ -3,14 +3,14 @@
   * @file    stm32h735g_discovery_ospi_nor.c
   * @author  MCD Application Team
   * @brief   This file includes a standard driver for the MX25LM51245G OSPI
-  *          memory mounted on STM32H735G-EVAL board.
+  *          memory mounted on STM32H735G-DK board.
   @verbatim
   ==============================================================================
                      ##### How to use this driver #####
   ==============================================================================
   [..]
    (#) This driver is used to drive the MX25LM51245G Octal NOR and the S70KL1281 HyperRAM
-       external memories mounted on STM32H735G-EVAL evaluation board.
+       external memories mounted on STM32H735G-DK board.
 
    (#) This driver need specific component driver (MX25LM51245G and S70KL1281) to be included with.
 
@@ -36,9 +36,6 @@
             function BSP_OSPI_NOR_DisableMemoryMapped() should be used.
        (++) The erase operation can be suspend and resume with using functions
             BSP_OSPI_NOR_SuspendErase() and BSP_OSPI_NOR_ResumeErase()
-       (++) It is possible to put the memory in deep power-down mode to reduce its consumption.
-            For this, the function BSP_OSPI_NOR_EnterDeepPowerDown() should be called. To leave
-            the deep power-down mode, the function BSP_OSPI_NOR_LeaveDeepPowerDown() should be called.
        (++) The function BSP_OSPI_NOR_ReadID() returns the identifier of the memory
             (see the OSPI memory data sheet)
        (++) The configuration of the interface between peripheral and memory is done by
@@ -62,14 +59,10 @@
        (++) The memory access can be configured in memory-mapped mode with the call of
             function BSP_OSPI_RAM_EnableMemoryMapped(). To go back in indirect mode, the
             function BSP_OSPI_RAM_DisableMemoryMapped() should be used.
-       (++) It is possible to put the memory in deep power-down mode to reduce its consumption.
-            For this, the function BSP_OSPI_RAM_EnterDeepPowerDown() should be called. To leave
-            the deep power-down mode, the function BSP_OSPI_RAM_LeaveDeepPowerDown() should be called.
        (++) The configuration of the interface between peripheral and memory is done by
             the function BSP_OSPI_RAM_ConfigHyperRAM() :
-            - two latency modes are possible :
+            - one latency mode is possible :
               - Fixed latency mode
-              - Variable latency mode
             - five burst configuration are possible :
               - Linear burst access
               - 16-bytes hybrid burst access
@@ -81,13 +74,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -123,7 +115,7 @@ OSPI_NOR_Ctx_t Ospi_Nor_Ctx[OSPI_NOR_INSTANCES_NUMBER] = {{OSPI_ACCESS_NONE,
   */
 OSPI_HandleTypeDef hospi_ram[OSPI_RAM_INSTANCES_NUMBER] = {0};
 OSPI_RAM_Ctx_t Ospi_Ram_Ctx[OSPI_RAM_INSTANCES_NUMBER] = {{OSPI_ACCESS_NONE,
-                                                           BSP_OSPI_RAM_VARIABLE_LATENCY,
+                                                           BSP_OSPI_RAM_FIXED_LATENCY,
                                                            BSP_OSPI_RAM_HYBRID_BURST,
                                                            BSP_OSPI_RAM_BURST_16_BYTES}};
 /**
@@ -555,6 +547,10 @@ int32_t BSP_OSPI_NOR_Erase_Block(uint32_t Instance, uint32_t BlockAddress, BSP_O
     else if(MX25LM51245G_BlockErase(&hospi_nor[Instance], Ospi_Nor_Ctx[Instance].InterfaceMode, Ospi_Nor_Ctx[Instance].TransferRate, MX25LM51245G_4BYTES_SIZE, BlockAddress, BlockSize) != MX25LM51245G_OK)
     {
       ret = BSP_ERROR_COMPONENT_FAILURE;
+    }/* Check Flash busy ? */
+    else if(MX25LM51245G_AutoPollingMemReady(&hospi_nor[Instance], Ospi_Nor_Ctx[Instance].InterfaceMode, Ospi_Nor_Ctx[Instance].TransferRate) != MX25LM51245G_OK)
+    {
+      ret = BSP_ERROR_COMPONENT_FAILURE;
     }
     else
     {
@@ -952,7 +948,7 @@ int32_t BSP_OSPI_NOR_ResumeErase(uint32_t Instance)
   * @}
   */
 
-/** @addtogroup STM32L552E_EVAL_OSPI_RAM_Exported_Functions
+/** @addtogroup STM32H735G_DK_OSPI_RAM_Exported_Functions
   * @{
   */
 
@@ -1470,21 +1466,13 @@ int32_t BSP_OSPI_RAM_ConfigHyperRAM(uint32_t Instance, BSP_OSPI_RAM_Latency_t La
         }
         else
         {
-          initial_latency = (uint32_t) ((Ospi_Ram_Ctx[Instance].LatencyType == BSP_OSPI_RAM_FIXED_LATENCY) ? \
-                             OPTIMAL_FIXED_INITIAL_LATENCY : OPTIMAL_VARIABLE_INITIAL_LATENCY);
-          latency_mode = (uint32_t) Ospi_Ram_Ctx[Instance].LatencyType;
+          ret = BSP_ERROR_WRONG_PARAM;
         }
 
-        /* Latency Type */
-        if (Latency == BSP_OSPI_RAM_FIXED_LATENCY)
+        /* check Latency Type */
+        if (Latency != BSP_OSPI_RAM_FIXED_LATENCY)
         {
-          SET_BIT(reg, S70KL1281_CR0_FLE);
-          MODIFY_REG(reg, (uint16_t) S70KL1281_CR0_IL, (uint16_t) OPTIMAL_FIXED_INITIAL_LATENCY_REG_VAL);
-        }
-        else
-        {
-          CLEAR_BIT(reg, S70KL1281_CR0_FLE);
-          MODIFY_REG(reg, (uint16_t) S70KL1281_CR0_IL, (uint16_t) OPTIMAL_VARIABLE_INITIAL_LATENCY_REG_VAL);
+          ret = BSP_ERROR_WRONG_PARAM;
         }
 
         /* Burst type */
@@ -1538,10 +1526,9 @@ int32_t BSP_OSPI_RAM_ConfigHyperRAM(uint32_t Instance, BSP_OSPI_RAM_Latency_t La
           else
           {
             sHyperbusCfg.RWRecoveryTime   = RW_RECOVERY_TIME;
-            sHyperbusCfg.AccessTime       = (uint32_t) ((Latency == BSP_OSPI_RAM_FIXED_LATENCY) ? \
-                                             OPTIMAL_FIXED_INITIAL_LATENCY : OPTIMAL_VARIABLE_INITIAL_LATENCY);
+            sHyperbusCfg.AccessTime       = DEFAULT_INITIAL_LATENCY;
             sHyperbusCfg.WriteZeroLatency = HAL_OSPI_LATENCY_ON_WRITE;
-            sHyperbusCfg.LatencyMode      = (uint32_t) Latency;
+            sHyperbusCfg.LatencyMode      = HAL_OSPI_FIXED_LATENCY;
 
             if (HAL_OSPI_HyperbusCfg(&hospi_ram[Instance], &sHyperbusCfg, HAL_OSPI_TIMEOUT_DEFAULT_VALUE) != HAL_OK)
             {
@@ -1556,7 +1543,7 @@ int32_t BSP_OSPI_RAM_ConfigHyperRAM(uint32_t Instance, BSP_OSPI_RAM_Latency_t La
       {
         /* Update current status parameter *****************************************/
         Ospi_Ram_Ctx[Instance].IsInitialized = OSPI_ACCESS_INDIRECT;
-        Ospi_Ram_Ctx[Instance].LatencyType   = Latency;
+        Ospi_Ram_Ctx[Instance].LatencyType   = BSP_OSPI_RAM_FIXED_LATENCY;
         Ospi_Ram_Ctx[Instance].BurstType     = BurstType;
         Ospi_Ram_Ctx[Instance].BurstLength   = BurstLength;
       }
@@ -1565,71 +1552,6 @@ int32_t BSP_OSPI_RAM_ConfigHyperRAM(uint32_t Instance, BSP_OSPI_RAM_Latency_t La
     {
       /* Nothing to do */
     }
-  }
-
-  /* Return BSP status */
-  return ret;
-}
-
-/**
-  * @brief  This function enter the HyperRAM memory in deep power down mode.
-  * @param  Instance  QSPI instance
-  * @retval BSP status
-  */
-int32_t BSP_OSPI_RAM_EnterDeepPowerDown(uint32_t Instance)
-{
-  int32_t ret;
-
-  /* Check if the instance is supported */
-  if(Instance >= OSPI_RAM_INSTANCES_NUMBER)
-  {
-    ret = BSP_ERROR_WRONG_PARAM;
-  }
-  else
-  {
-    if(S70KL1281_EnterPowerDown(&hospi_ram[Instance], (uint32_t) Ospi_Ram_Ctx[Instance].LatencyType,
-                                  (uint32_t) ((Ospi_Ram_Ctx[Instance].LatencyType == BSP_OSPI_RAM_FIXED_LATENCY) ? \
-                                   OPTIMAL_FIXED_INITIAL_LATENCY : OPTIMAL_VARIABLE_INITIAL_LATENCY)) != S70KL1281_OK)
-    {
-      ret = BSP_ERROR_COMPONENT_FAILURE;
-    }
-    else
-    {
-      /* ---        Memory takes 10us min to enter deep power down        --- */
-      /* - At least 30us should be respected before leaving deep power down - */
-
-      ret = BSP_ERROR_NONE;
-    }
-  }
-
-  /* Return BSP status */
-  return ret;
-}
-
-/**
-  * @brief  This function leave the HyperRAM memory from deep power down mode.
-  * @param  Instance  QSPI instance
-  * @retval BSP status
-  */
-int32_t BSP_OSPI_RAM_LeaveDeepPowerDown(uint32_t Instance)
-{
-  int32_t ret;
-
-  /* Check if the instance is supported */
-  if(Instance >= OSPI_RAM_INSTANCES_NUMBER)
-  {
-    ret = BSP_ERROR_WRONG_PARAM;
-  }
-  else if(S70KL1281_LeavePowerDown(&hospi_ram[Instance]) != S70KL1281_OK)
-  {
-    ret = BSP_ERROR_COMPONENT_FAILURE;
-  }
-  else
-  {
-    /* --- A dummy command is sent to the memory, as the nCS should be low for at least 200 ns --- */
-    /* ---                  Memory takes 150us max to leave deep power down                    --- */
-
-    ret = BSP_ERROR_NONE;
   }
 
   /* Return BSP status */
@@ -2224,6 +2146,3 @@ static void OSPI_RAM_MspDeInit(OSPI_HandleTypeDef *hospi)
 /**
   * @}
   */
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
-

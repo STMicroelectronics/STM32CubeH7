@@ -37,13 +37,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -524,7 +523,6 @@ static void NOR_MspInit(NOR_HandleTypeDef *hnor)
   /* Enable FMC clock */
   __HAL_RCC_FMC_CLK_ENABLE();
   /* Enable GPIOs clock */
-  __HAL_RCC_GPIOC_CLK_ENABLE();
   __HAL_RCC_GPIOD_CLK_ENABLE();
   __HAL_RCC_GPIOE_CLK_ENABLE();
   __HAL_RCC_GPIOF_CLK_ENABLE();
@@ -535,20 +533,15 @@ static void NOR_MspInit(NOR_HandleTypeDef *hnor)
   gpio_init_structure.Pull      = GPIO_PULLUP;
   gpio_init_structure.Speed     = GPIO_SPEED_FREQ_VERY_HIGH;
 
-  /* GPIOC configuration */
-  gpio_init_structure.Alternate = GPIO_AF9_FMC;
-  gpio_init_structure.Pin   = GPIO_PIN_6 | GPIO_PIN_7;
-  HAL_GPIO_Init(GPIOC, &gpio_init_structure);
-
   /* GPIOD configuration */
-  gpio_init_structure.Alternate = GPIO_AF12_FMC;  //add GPIO_PIN_7
-  gpio_init_structure.Pin   = GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_4 | GPIO_PIN_5|GPIO_PIN_7|\
+  gpio_init_structure.Alternate = GPIO_AF12_FMC;
+  gpio_init_structure.Pin   = GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_4 | GPIO_PIN_5| GPIO_PIN_6 | GPIO_PIN_7|\
                               GPIO_PIN_8 | GPIO_PIN_9 | GPIO_PIN_10 | GPIO_PIN_11 |\
                               GPIO_PIN_12 | GPIO_PIN_13 | GPIO_PIN_14 | GPIO_PIN_15;
   HAL_GPIO_Init(GPIOD, &gpio_init_structure);
 
   /* GPIOE configuration */
-  gpio_init_structure.Alternate = GPIO_AF12_FMC;  //add GPIO_PIN_6
+  gpio_init_structure.Alternate = GPIO_AF12_FMC;
   gpio_init_structure.Pin   = GPIO_PIN_2 | GPIO_PIN_3 | GPIO_PIN_4 | GPIO_PIN_5 |GPIO_PIN_6| GPIO_PIN_7 | GPIO_PIN_8 | GPIO_PIN_9 |\
                               GPIO_PIN_10 | GPIO_PIN_11 | GPIO_PIN_12 | GPIO_PIN_13 |\
                               GPIO_PIN_14 | GPIO_PIN_15;
@@ -681,5 +674,3 @@ static int32_t NOR_GetStatus(uint32_t Instance, uint32_t Address, uint32_t Timeo
 /**
   * @}
   */
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

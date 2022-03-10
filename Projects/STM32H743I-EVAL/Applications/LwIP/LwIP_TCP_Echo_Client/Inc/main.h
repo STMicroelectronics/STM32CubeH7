@@ -6,7 +6,7 @@
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2017-2021 STMicroelectronics.
+  * Copyright (c) 2017 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -28,11 +28,10 @@
 #include "stm32h743i_eval.h"
 #include "stm32h743i_eval_lcd.h"
 #include "stm32h743i_eval_sdram.h"
-#include "stm32_lcd.h"
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
-#define USE_LCD
+#define USE_LCD        /* enable LCD  */
 
 #define DEST_IP_ADDR0   ((uint8_t)10U)
 #define DEST_IP_ADDR1   ((uint8_t)157U)

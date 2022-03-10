@@ -205,6 +205,7 @@ void BSP_SetSubDemoAddress(uint32_t JumpAddress)
   HAL_Delay(200);
   
   HAL_DMA2D_DeInit(&hdma2d);
+  hltdc.Instance = LTDC;
   HAL_LTDC_DeInit(&hltdc);  
   
   /* Disable the MPU */

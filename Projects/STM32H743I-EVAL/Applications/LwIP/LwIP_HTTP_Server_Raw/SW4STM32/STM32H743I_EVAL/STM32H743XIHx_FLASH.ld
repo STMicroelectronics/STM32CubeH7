@@ -169,7 +169,7 @@ SECTIONS
     *(.TxDecripSection)
     
     . = ABSOLUTE(0x30000400);
-    *(.LwIP_HeapSection) 
+    *(.Rx_PoolSection) 
   } >RAM_D2 AT> FLASH
 
   /* Remove information from the standard libraries */

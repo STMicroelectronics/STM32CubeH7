@@ -53,13 +53,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2018 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2018 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -144,12 +143,21 @@ static void SD_EXTI_Callback(void);
 int32_t BSP_SD_Init(uint32_t Instance)
 {
   int32_t ret = BSP_ERROR_NONE;
+  GPIO_InitTypeDef gpio_init_structure;
+
   if(Instance >= SD_INSTANCES_NBR)
   {
     ret = BSP_ERROR_WRONG_PARAM;
   }
   else
   {
+    /* Configure Input mode for SD detection pin */
+    SD_DETECT_GPIO_CLK_ENABLE();
+    gpio_init_structure.Pin = SD_DETECT_PIN;
+    gpio_init_structure.Pull = GPIO_PULLUP;
+    gpio_init_structure.Speed = GPIO_SPEED_FREQ_HIGH;
+    gpio_init_structure.Mode = GPIO_MODE_INPUT;
+    HAL_GPIO_Init(SD_DETECT_GPIO_PORT, &gpio_init_structure);
 
     if(BSP_SD_IsDetected(Instance) != SD_PRESENT)
     {
@@ -229,6 +237,8 @@ int32_t BSP_SD_Init(uint32_t Instance)
 int32_t BSP_SD_DeInit(uint32_t Instance)
 {
   int32_t ret = BSP_ERROR_NONE;
+  GPIO_InitTypeDef gpio_init_structure;
+
   if(Instance >= SD_INSTANCES_NBR)
   {
     ret = BSP_ERROR_WRONG_PARAM;
@@ -241,6 +251,9 @@ int32_t BSP_SD_DeInit(uint32_t Instance)
     }
     else
     {
+      /* SD detection pin configuration */
+      gpio_init_structure.Pin  = SD_DETECT_PIN;
+      HAL_GPIO_DeInit(SD_DETECT_GPIO_PORT, gpio_init_structure.Pin);
       /* Msp SD de-initialization */
 #if (USE_HAL_SD_REGISTER_CALLBACKS == 0)
       SD_MspDeInit(&hsd_sdmmc[Instance]);
@@ -376,26 +389,26 @@ int32_t BSP_SD_DetectITConfig(uint32_t Instance)
   }
   else
   {
-  gpio_init_structure.Pin = PinDetect[Instance];
-  gpio_init_structure.Pull = GPIO_PULLUP;
-  gpio_init_structure.Speed = GPIO_SPEED_FREQ_HIGH;
-  gpio_init_structure.Mode = GPIO_MODE_IT_RISING_FALLING;
-  HAL_GPIO_Init(SD_DETECT_GPIO_PORT, &gpio_init_structure);
+    gpio_init_structure.Pin = PinDetect[Instance];
+    gpio_init_structure.Pull = GPIO_PULLUP;
+    gpio_init_structure.Speed = GPIO_SPEED_FREQ_HIGH;
+    gpio_init_structure.Mode = GPIO_MODE_IT_RISING_FALLING;
+    HAL_GPIO_Init(SD_DETECT_GPIO_PORT, &gpio_init_structure);
 
-  /* Enable and set SD detect EXTI Interrupt to the lowest priority */
-  HAL_NVIC_SetPriority((IRQn_Type)(SD_DETECT_EXTI_IRQn), 0x0F, 0x00);
-  HAL_NVIC_EnableIRQ((IRQn_Type)(SD_DETECT_EXTI_IRQn));
-  HAL_EXTI_GetHandle(&hsd_exti[Instance], SD_EXTI_LINE[Instance]);
+    /* Enable and set SD detect EXTI Interrupt to the lowest priority */
+    HAL_NVIC_SetPriority((IRQn_Type)(SD_DETECT_EXTI_IRQn), 0x0F, 0x00);
+    HAL_NVIC_EnableIRQ((IRQn_Type)(SD_DETECT_EXTI_IRQn));
+    HAL_EXTI_GetHandle(&hsd_exti[Instance], SD_EXTI_LINE[Instance]);
 
-  if(HAL_EXTI_RegisterCallback(&hsd_exti[Instance],  HAL_EXTI_COMMON_CB_ID, SdCallback[Instance]) != HAL_OK)
-  {
-    ret = BSP_ERROR_PERIPH_FAILURE;
+    if(HAL_EXTI_RegisterCallback(&hsd_exti[Instance],  HAL_EXTI_COMMON_CB_ID, SdCallback[Instance]) != HAL_OK)
+    {
+      ret = BSP_ERROR_PERIPH_FAILURE;
+    }
+    else
+    {
+      ret = BSP_ERROR_NONE;
+    }
   }
-  else
-  {
-    ret = BSP_ERROR_NONE;
-  }
-}
   /* Return BSP status */
   return ret;
 }
@@ -849,68 +862,59 @@ static void SD_MspInit(SD_HandleTypeDef *hsd)
   if(hsd == &hsd_sdmmc[0])
   {
 #if (USE_SD_BUS_WIDE_4B > 0)
-/* SD pins are in conflict with Camera pins on the Disco board
-	   therefore Camera must be power down before using the BSP SD
-	   To power down the camera , Set GPIOJ pin 14 to high
-	*/
+    /* SD pins are in conflict with Camera pins on the Disco board
+    therefore Camera must be power down before using the BSP SD
+    To power down the camera , Set GPIOJ pin 14 to high
+    */
 
-  /* Enable GPIO J clock */
-  __HAL_RCC_GPIOJ_CLK_ENABLE();
+    /* Enable GPIO J clock */
+    __HAL_RCC_GPIOJ_CLK_ENABLE();
 
-  gpio_init_structure.Pin       = GPIO_PIN_14;
-  gpio_init_structure.Mode      = GPIO_MODE_OUTPUT_PP;
-  gpio_init_structure.Pull      = GPIO_NOPULL;
-  gpio_init_structure.Speed     = GPIO_SPEED_FREQ_VERY_HIGH;
-  HAL_GPIO_Init(GPIOJ, &gpio_init_structure);
+    gpio_init_structure.Pin       = GPIO_PIN_14;
+    gpio_init_structure.Mode      = GPIO_MODE_OUTPUT_PP;
+    gpio_init_structure.Pull      = GPIO_NOPULL;
+    gpio_init_structure.Speed     = GPIO_SPEED_FREQ_VERY_HIGH;
+    HAL_GPIO_Init(GPIOJ, &gpio_init_structure);
 
-  /* Set the camera POWER_DOWN pin (active high) */
-  HAL_GPIO_WritePin(GPIOJ, GPIO_PIN_14, GPIO_PIN_SET);
+    /* Set the camera POWER_DOWN pin (active high) */
+    HAL_GPIO_WritePin(GPIOJ, GPIO_PIN_14, GPIO_PIN_SET);
 #endif
 
-  /* Enable SDIO clock */
-  __HAL_RCC_SDMMC1_CLK_ENABLE();
+    /* Enable SDIO clock */
+    __HAL_RCC_SDMMC1_CLK_ENABLE();
 
 
-  /* Enable GPIOs clock */
-  __HAL_RCC_GPIOB_CLK_ENABLE();
-  __HAL_RCC_GPIOC_CLK_ENABLE();
-  __HAL_RCC_GPIOD_CLK_ENABLE();
+    /* Enable GPIOs clock */
+    __HAL_RCC_GPIOB_CLK_ENABLE();
+    __HAL_RCC_GPIOC_CLK_ENABLE();
+    __HAL_RCC_GPIOD_CLK_ENABLE();
 
 
-  /* Common GPIO configuration */
-  gpio_init_structure.Mode      = GPIO_MODE_AF_PP;
-  gpio_init_structure.Pull      = GPIO_PULLUP;
-  gpio_init_structure.Speed     = GPIO_SPEED_FREQ_VERY_HIGH;
-  gpio_init_structure.Alternate = GPIO_AF12_SDIO1;
+    /* Common GPIO configuration */
+    gpio_init_structure.Mode      = GPIO_MODE_AF_PP;
+    gpio_init_structure.Pull      = GPIO_PULLUP;
+    gpio_init_structure.Speed     = GPIO_SPEED_FREQ_VERY_HIGH;
+    gpio_init_structure.Alternate = GPIO_AF12_SDIO1;
 
 #if (USE_SD_BUS_WIDE_4B > 0)
-  /* SDMMC GPIO CLKIN PB8, D0 PC8, D1 PC9, D2 PC10, D3 PC11, CK PC12, CMD PD2 */
-  /* GPIOC configuration */
-  gpio_init_structure.Pin = GPIO_PIN_8 | GPIO_PIN_9 | GPIO_PIN_10 | GPIO_PIN_11 | GPIO_PIN_12;
+    /* SDMMC GPIO CLKIN PB8, D0 PC8, D1 PC9, D2 PC10, D3 PC11, CK PC12, CMD PD2 */
+    /* GPIOC configuration */
+    gpio_init_structure.Pin = GPIO_PIN_8 | GPIO_PIN_9 | GPIO_PIN_10 | GPIO_PIN_11 | GPIO_PIN_12;
 #else
-/* SDMMC GPIO CLKIN PB8, D0 PC8, CK PC12, CMD PD2 */
-  /* GPIOC configuration */
-  gpio_init_structure.Pin = GPIO_PIN_8 | GPIO_PIN_12;
+    /* SDMMC GPIO CLKIN PB8, D0 PC8, CK PC12, CMD PD2 */
+    /* GPIOC configuration */
+    gpio_init_structure.Pin = GPIO_PIN_8 | GPIO_PIN_12;
 #endif
 
-  HAL_GPIO_Init(GPIOC, &gpio_init_structure);
+    HAL_GPIO_Init(GPIOC, &gpio_init_structure);
 
-  /* GPIOD configuration */
-  gpio_init_structure.Pin = GPIO_PIN_2;
-  HAL_GPIO_Init(GPIOD, &gpio_init_structure);
-
-  /* Configure Input mode for SD detection pin */
-  SD_DETECT_GPIO_CLK_ENABLE();
-  gpio_init_structure.Pin = SD_DETECT_PIN;
-  gpio_init_structure.Pull = GPIO_PULLUP;
-  gpio_init_structure.Speed = GPIO_SPEED_FREQ_HIGH;
-  gpio_init_structure.Mode = GPIO_MODE_INPUT;
-  HAL_GPIO_Init(SD_DETECT_GPIO_PORT, &gpio_init_structure);
+    /* GPIOD configuration */
+    gpio_init_structure.Pin = GPIO_PIN_2;
+    HAL_GPIO_Init(GPIOD, &gpio_init_structure);
 
     /* NVIC configuration for SDIO interrupts */
     HAL_NVIC_SetPriority(SDMMC1_IRQn, BSP_SD_IT_PRIORITY, 0);
     HAL_NVIC_EnableIRQ(SDMMC1_IRQn);
-
   }
 }
 
@@ -948,7 +952,6 @@ static void SD_MspDeInit(SD_HandleTypeDef *hsd)
     /* GPIOD configuration */
     gpio_init_structure.Pin = GPIO_PIN_2;
     HAL_GPIO_DeInit(GPIOD, gpio_init_structure.Pin);
-
   }
 }
 
@@ -967,4 +970,3 @@ static void SD_MspDeInit(SD_HandleTypeDef *hsd)
 /**
   * @}
   */
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE***  */

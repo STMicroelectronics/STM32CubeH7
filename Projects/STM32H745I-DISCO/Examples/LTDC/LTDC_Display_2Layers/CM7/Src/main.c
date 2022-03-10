@@ -305,6 +305,7 @@ static void LCD_Config(void)
  
   /* LTDC Initialization -------------------------------------------------------*/
   /* DeInit */
+  LtdcHandle.Instance = LTDC;
   HAL_LTDC_DeInit(&LtdcHandle);
   
   /* Polarity configuration */

@@ -10,13 +10,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2018 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2018 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -171,11 +170,11 @@ typedef enum
  #define USE_STM32H747I_DISCO
 #endif
 /**
- * @brief STM32H747I Discovery BSP Driver version number V3.5.0
+ * @brief STM32H747I Discovery BSP Driver version number V3.5.1
  */
 #define STM32H747I_DISCO_BSP_VERSION_MAIN   (0x03) /*!< [31:24] main version */
 #define STM32H747I_DISCO_BSP_VERSION_SUB1   (0x05) /*!< [23:16] sub1 version */
-#define STM32H747I_DISCO_BSP_VERSION_SUB2   (0x00) /*!< [15:8]  sub2 version */
+#define STM32H747I_DISCO_BSP_VERSION_SUB2   (0x01) /*!< [15:8]  sub2 version */
 #define STM32H747I_DISCO_BSP_VERSION_RC     (0x00) /*!< [7:0]  release candidate */
 #define STM32H747I_DISCO_BSP_VERSION        ((STM32H747I_DISCO_BSP_VERSION_MAIN << 24)\
                                             |(STM32H747I_DISCO_BSP_VERSION_SUB1 << 16)\
@@ -376,5 +375,3 @@ void BSP_PB_IRQHandler(Button_TypeDef Button);
 #endif
 
 #endif /* STM32H747I_DISCO_H */
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
