@@ -30,8 +30,8 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
-/* The time to block waiting for input. */
-#define TIME_WAITING_FOR_INPUT                 ( osWaitForever )
+/* The time in ms to block waiting for input. */
+#define TIME_WAITING_FOR_INPUT                 ( 10000 )
 /* Stack size of the interface thread */
 #define INTERFACE_THREAD_STACK_SIZE            ( 512 )
 
@@ -119,7 +119,10 @@ static uint8_t RxAllocStatus;
 osSemaphoreId RxPktSemaphore = NULL; /* Semaphore to signal incoming packets */
 
 TaskHandle_t EthIfThread;       /* Handle of the interface thread */
-osSemaphoreId TxPktSemaphore = NULL;   /* Semaphore to signal transmit packet complete */
+static osMessageQId TxPktSemaphoreQ = NULL;   /* Semaphore to signal transmit packet complete together with result status */
+
+static osMutexDef_t RxTxMutex_buffer;
+static osMutexId RxTxMutex;
 
 /* Global Ethernet handle */
 ETH_HandleTypeDef EthHandle;
@@ -134,6 +137,8 @@ int32_t ETH_PHY_IO_DeInit (void);
 int32_t ETH_PHY_IO_ReadReg(uint32_t DevAddr, uint32_t RegAddr, uint32_t *pRegVal);
 int32_t ETH_PHY_IO_WriteReg(uint32_t DevAddr, uint32_t RegAddr, uint32_t RegVal);
 int32_t ETH_PHY_IO_GetTick(void);
+static void ETH_critical_enter();
+static void ETH_critical_exit();
 
 lan8742_Object_t LAN8742;
 lan8742_IOCtx_t  LAN8742_IOCtx = {ETH_PHY_IO_Init,
@@ -202,8 +207,14 @@ static void low_level_init(struct netif *netif)
   /* create a binary semaphore used for informing ethernetif of frame reception */
   RxPktSemaphore = xSemaphoreCreateBinary();
 
-  /* create a binary semaphore used for informing ethernetif of frame transmission */
-  TxPktSemaphore = xSemaphoreCreateBinary();
+  /* create a binary semaphore/queue with results used for informing ethernetif of frame transmission */
+  {
+  osMessageQDef_t txq = {0};
+  txq.item_sz = sizeof(uint32_t);
+  txq.queue_sz = 1;
+  TxPktSemaphoreQ = osMessageCreate (&txq, 0 /* thread id, not in use */);
+  }
+  RxTxMutex = osMutexCreate (&RxTxMutex_buffer);
 
   /* create the task that handles the ETH_MAC */
   osThreadDef(EthIf, ethernetif_input, osPriorityRealtime, 0, INTERFACE_THREAD_STACK_SIZE);
@@ -278,6 +289,19 @@ static err_t low_level_output(struct netif *netif, struct pbuf *p)
   struct pbuf *q = NULL;
   err_t errval = ERR_OK;
   ETH_BufferTypeDef Txbuffer[ETH_TX_DESC_CNT];
+  osEvent osev;
+
+  if(uxQueueMessagesWaiting(TxPktSemaphoreQ)){
+  	  /* pop notifications intended for previous tx
+  	   * waiting on this TxPktSemaphoreQ
+  	   * TODO:
+  	   * check if we need to return ERR_IF here
+  	   * to help LWIP recover from error
+  	   */
+  	  osMessageGet(TxPktSemaphoreQ, 0);
+  	  return ERR_IF;
+  }
+
 
   memset(Txbuffer, 0 , ETH_TX_DESC_CNT*sizeof(ETH_BufferTypeDef));
 
@@ -308,14 +332,27 @@ static err_t low_level_output(struct netif *netif, struct pbuf *p)
 
   pbuf_ref(p);
 
+  osMutexWait (RxTxMutex, osWaitForever);
+  ETH_critical_enter();
   HAL_ETH_Transmit_IT(&EthHandle, &TxConfig);
-
-  while(osSemaphoreWait(TxPktSemaphore, TIME_WAITING_FOR_INPUT)!=osOK)
+  ETH_critical_exit();
+  osMutexRelease (RxTxMutex);
+  osev = osMessageGet(TxPktSemaphoreQ, TIME_WAITING_FOR_INPUT);
+  if ((osev.status == osEventMessage) && (osev.value.v == ERR_OK))
   {
+	  errval = ERR_OK;
   }
-
+  else {
+	  /* error -  either timeout or transmission error
+	   * does not matter witch one as we are allowed to return only ERR_IF
+	   */
+	  errval = ERR_IF;
+  }
+  osMutexWait (RxTxMutex, osWaitForever);
+  ETH_critical_enter();
   HAL_ETH_ReleaseTxPacket(&EthHandle);
-
+  ETH_critical_exit();
+  osMutexRelease (RxTxMutex);
   return errval;
 }
 
@@ -331,10 +368,14 @@ static struct pbuf * low_level_input(struct netif *netif)
 {
   struct pbuf *p = NULL;
 
+  osMutexWait (RxTxMutex, osWaitForever);
+  ETH_critical_enter();
   if(RxAllocStatus == RX_ALLOC_OK)
   {
     HAL_ETH_ReadData(&EthHandle, (void **)&p);
   }
+  ETH_critical_exit();
+  osMutexRelease(RxTxMutex);
 
   return p;
 }
@@ -422,11 +463,18 @@ err_t ethernetif_init(struct netif *netif)
 void pbuf_free_custom(struct pbuf *p)
 {
   struct pbuf_custom* custom_pbuf = (struct pbuf_custom*)p;
+  int notify = 0;
+  osMutexWait (RxTxMutex, osWaitForever);
+  ETH_critical_enter();
   LWIP_MEMPOOL_FREE(RX_POOL, custom_pbuf);
-
   if (RxAllocStatus == RX_ALLOC_ERROR)
   {
     RxAllocStatus = RX_ALLOC_OK;
+    notify = 1;
+  }
+  ETH_critical_exit();
+  osMutexRelease (RxTxMutex);
+  if(notify){
     osSemaphoreRelease(RxPktSemaphore);
   }
 }
@@ -523,7 +571,7 @@ void HAL_ETH_RxCpltCallback(ETH_HandleTypeDef *heth)
   */
 void HAL_ETH_TxCpltCallback(ETH_HandleTypeDef *heth)
 {
-  osSemaphoreRelease(TxPktSemaphore);
+  osMessagePut(TxPktSemaphoreQ,ERR_OK,0);
 }
 
 /**
@@ -536,6 +584,10 @@ void HAL_ETH_ErrorCallback(ETH_HandleTypeDef *heth)
   if((HAL_ETH_GetDMAError(heth) & ETH_DMACSR_RBU) == ETH_DMACSR_RBU)
   {
      osSemaphoreRelease(RxPktSemaphore);
+  }
+  if((HAL_ETH_GetDMAError(heth) & ETH_DMACSR_TBU) == ETH_DMACSR_TBU)
+  {
+	  osMessagePut(TxPktSemaphoreQ,ERR_IF,0);
   }
 }
 
@@ -621,58 +673,80 @@ void ethernet_link_thread( void const * argument )
 {
   ETH_MACConfigTypeDef MACConf = {0};
   int32_t PHYLinkState = 0U;
-  uint32_t linkchanged = 0U, speed = 0U, duplex = 0U;
+  int32_t PHYLinkState_prev = 0U;
+  uint32_t link_ok = 0U, speed = 0U, duplex = 0U;
   struct netif *netif = (struct netif *) argument;
 
   for(;;)
   {
-
+    PHYLinkState_prev = PHYLinkState;
     PHYLinkState = LAN8742_GetLinkState(&LAN8742);
-
-    if(netif_is_link_up(netif) && (PHYLinkState <= LAN8742_STATUS_LINK_DOWN))
+    switch (PHYLinkState)
     {
-      HAL_ETH_Stop_IT(&EthHandle);
-      netif_set_down(netif);
-      netif_set_link_down(netif);
+    case LAN8742_STATUS_100MBITS_FULLDUPLEX:
+      duplex = ETH_FULLDUPLEX_MODE;
+      speed = ETH_SPEED_100M;
+      link_ok = 1;
+      break;
+    case LAN8742_STATUS_100MBITS_HALFDUPLEX:
+      duplex = ETH_HALFDUPLEX_MODE;
+      speed = ETH_SPEED_100M;
+      link_ok = 1;
+      break;
+    case LAN8742_STATUS_10MBITS_FULLDUPLEX:
+      duplex = ETH_FULLDUPLEX_MODE;
+      speed = ETH_SPEED_10M;
+      link_ok = 1;
+      break;
+    case LAN8742_STATUS_10MBITS_HALFDUPLEX:
+      duplex = ETH_HALFDUPLEX_MODE;
+      speed = ETH_SPEED_10M;
+      link_ok = 1;
+      break;
+    default:
+  	  link_ok = 0;
+      break;
     }
-    else if(!netif_is_link_up(netif) && (PHYLinkState > LAN8742_STATUS_LINK_DOWN))
-    {
-      switch (PHYLinkState)
-      {
-      case LAN8742_STATUS_100MBITS_FULLDUPLEX:
-        duplex = ETH_FULLDUPLEX_MODE;
-        speed = ETH_SPEED_100M;
-        linkchanged = 1;
-        break;
-      case LAN8742_STATUS_100MBITS_HALFDUPLEX:
-        duplex = ETH_HALFDUPLEX_MODE;
-        speed = ETH_SPEED_100M;
-        linkchanged = 1;
-        break;
-      case LAN8742_STATUS_10MBITS_FULLDUPLEX:
-        duplex = ETH_FULLDUPLEX_MODE;
-        speed = ETH_SPEED_10M;
-        linkchanged = 1;
-        break;
-      case LAN8742_STATUS_10MBITS_HALFDUPLEX:
-        duplex = ETH_HALFDUPLEX_MODE;
-        speed = ETH_SPEED_10M;
-        linkchanged = 1;
-        break;
-      default:
-        break;
-      }
 
-      if(linkchanged)
+    if(!link_ok){
+      if(netif_is_link_up(netif)){
+        link_ok = 0;
+        LOCK_TCPIP_CORE(); /* required by netif_set_down */
+        osMutexWait (RxTxMutex, osWaitForever);
+        ETH_critical_enter();
+        HAL_ETH_Stop_IT(&EthHandle);
+        ETH_critical_exit();
+        netif_set_down(netif);
+        netif_set_link_down(netif);
+        osMutexRelease (RxTxMutex);
+        UNLOCK_TCPIP_CORE();
+        /* unblock blocking waits to be on safe side */
+        osSemaphoreRelease(RxPktSemaphore);
+        osMessagePut(TxPktSemaphoreQ,ERR_IF,0);
+      }
+    }
+    else {
+      /* link ok */
+      if(!netif_is_link_up(netif) || (PHYLinkState_prev != PHYLinkState))
       {
-        /* Get MAC Config MAC */
+    	/* we need to update mac also when PHYLinkState changes */
+   	    LOCK_TCPIP_CORE();
+   	    osMutexWait (RxTxMutex, osWaitForever);
+   	    ETH_critical_enter();
+   	    HAL_ETH_Stop_IT(&EthHandle);
         HAL_ETH_GetMACConfig(&EthHandle, &MACConf);
         MACConf.DuplexMode = duplex;
         MACConf.Speed = speed;
         HAL_ETH_SetMACConfig(&EthHandle, &MACConf);
         HAL_ETH_Start_IT(&EthHandle);
+        ETH_critical_exit();
         netif_set_up(netif);
         netif_set_link_up(netif);
+        osMutexRelease (RxTxMutex);
+        UNLOCK_TCPIP_CORE();
+        /* unblock blocking waits to be on safe side */
+        osSemaphoreRelease(RxPktSemaphore);
+        osMessagePut(TxPktSemaphoreQ,ERR_IF,0);
       }
     }
 
@@ -739,5 +813,21 @@ void HAL_ETH_RxLinkCallback(void **pStart, void **pEnd, uint8_t *buff, uint16_t 
 void HAL_ETH_TxFreeCallback(uint32_t * buff)
 {
   pbuf_free((struct pbuf *)buff);
+}
+
+static volatile int ETH_critical_enter_cnt;
+static void ETH_critical_enter(){
+  HAL_NVIC_DisableIRQ(ETH_IRQn);
+  // this function supports recursive reentrance, but it should not happen
+  LWIP_ASSERT("ETH_critical_enter_cnt < 1" , ETH_critical_enter_cnt < 1 );
+  ETH_critical_enter_cnt+=1;
+}
+
+static void ETH_critical_exit(){
+  LWIP_ASSERT("ETH_critical_enter_cnt >= 1" , ETH_critical_enter_cnt >= 1);
+  ETH_critical_enter_cnt -= 1;
+  if(ETH_critical_enter_cnt == 0){
+    HAL_NVIC_EnableIRQ(ETH_IRQn);
+  }
 }
 

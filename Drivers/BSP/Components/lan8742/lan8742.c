@@ -316,12 +316,6 @@ int32_t LAN8742_GetLinkState(lan8742_Object_t *pObj)
     return LAN8742_STATUS_READ_ERROR;
   }
   
-  /* Read Status register again */
-  if(pObj->IO.ReadReg(pObj->DevAddr, LAN8742_BSR, &readval) < 0)
-  {
-    return LAN8742_STATUS_READ_ERROR;
-  }
-  
   if((readval & LAN8742_BSR_LINK_STATUS) == 0)
   {
     /* Return Link Down status */

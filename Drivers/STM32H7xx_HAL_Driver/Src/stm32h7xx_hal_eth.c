@@ -1890,13 +1890,18 @@ void HAL_ETH_IRQHandler(ETH_HandleTypeDef *heth)
       }
       else
       {
+      	const uint32_t emask =  ETH_DMACSR_CDE
+      			              | ETH_DMACSR_ETI
+  							  | ETH_DMACSR_ERI
+  							  | ETH_DMACSR_RWT
+  							  | ETH_DMACSR_RBU
+  							  | ETH_DMACSR_AIS
+  							  | ETH_DMACSR_TBU;
         /* Get DMA error status  */
-        heth->DMAErrorCode = READ_BIT(heth->Instance->DMACSR, (ETH_DMACSR_CDE | ETH_DMACSR_ETI | ETH_DMACSR_RWT |
-                                                               ETH_DMACSR_RBU | ETH_DMACSR_AIS));
+        heth->DMAErrorCode = READ_BIT(heth->Instance->DMACSR, emask);
 
         /* Clear the interrupt summary flag */
-        __HAL_ETH_DMA_CLEAR_IT(heth, (ETH_DMACSR_CDE | ETH_DMACSR_ETI | ETH_DMACSR_RWT |
-                                      ETH_DMACSR_RBU | ETH_DMACSR_AIS));
+        __HAL_ETH_DMA_CLEAR_IT(heth, heth->DMAErrorCode);
       }
 #if (USE_HAL_ETH_REGISTER_CALLBACKS == 1)
       /* Call registered Error callback*/
