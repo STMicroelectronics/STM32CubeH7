@@ -122,7 +122,7 @@ static void _MakeString(int value, int NumDecs, int Shift,  char * acBuffer) {
 /**
   * @brief  Function to display the performance results
   * @param  xSize        : Plan horizontal size
-  * @param  ySize        : Plan vartical size
+  * @param  ySize        : Plan vertical size
   * @param  ResultDrawing: Drawing performance result
   * @param  ResultFading : Fading performance result
   * @param  ResultTotal  : Total = (Drawing and Fading) performance result

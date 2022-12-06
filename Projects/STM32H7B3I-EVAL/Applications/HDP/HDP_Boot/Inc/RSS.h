@@ -61,7 +61,7 @@ typedef struct
 }RSS_FWKey_t;
 
 /** Firmware license.
-* Contains information for RSS to unwrap license and retrive FW key(s).
+* Contains information for RSS to unwrap license and retrieve FW key(s).
 */
 typedef struct
 {

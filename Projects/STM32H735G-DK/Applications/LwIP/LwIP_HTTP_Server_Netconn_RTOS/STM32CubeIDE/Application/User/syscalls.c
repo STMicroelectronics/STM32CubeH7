@@ -10,13 +10,12 @@
  ******************************************************************************
  * @attention
  *
- * <h2><center>&copy; Copyright (c) 2020 STMicroelectronics.
- * All rights reserved.</center></h2>
+ * Copyright (c) 2020-2022 STMicroelectronics.
+ * All rights reserved.
  *
- * This software component is licensed by ST under BSD 3-Clause license,
- * the "License"; You may not use this file except in compliance with the
- * License. You may obtain a copy of the License at:
- *                        opensource.org/licenses/BSD-3-Clause
+ * This software is licensed under terms that can be found in the LICENSE file
+ * in the root directory of this software component.
+ * If no LICENSE file comes with this software, it is provided AS-IS.
  *
  ******************************************************************************
  */
@@ -33,12 +32,9 @@
 
 
 /* Variables */
-//#undef errno
-extern int errno;
 extern int __io_putchar(int ch) __attribute__((weak));
 extern int __io_getchar(void) __attribute__((weak));
 
-register char * stack_ptr asm("sp");
 
 char *__env[1] = { 0 };
 char **environ = __env;
@@ -51,109 +47,130 @@ void initialise_monitor_handles()
 
 int _getpid(void)
 {
-	return 1;
+  return 1;
 }
 
 int _kill(int pid, int sig)
 {
-	errno = EINVAL;
-	return -1;
+  (void)pid;
+  (void)sig;
+  errno = EINVAL;
+  return -1;
 }
 
 void _exit (int status)
 {
-	_kill(status, -1);
-	while (1) {}		/* Make sure we hang here */
+  _kill(status, -1);
+  while (1) {}    /* Make sure we hang here */
 }
 
 __attribute__((weak)) int _read(int file, char *ptr, int len)
 {
-	int DataIdx;
+  (void)file;
+  int DataIdx;
 
-	for (DataIdx = 0; DataIdx < len; DataIdx++)
-	{
-		*ptr++ = __io_getchar();
-	}
+  for (DataIdx = 0; DataIdx < len; DataIdx++)
+  {
+    *ptr++ = __io_getchar();
+  }
 
-return len;
+  return len;
 }
 
 __attribute__((weak)) int _write(int file, char *ptr, int len)
 {
-	int DataIdx;
+  (void)file;
+  int DataIdx;
 
-	for (DataIdx = 0; DataIdx < len; DataIdx++)
-	{
-		__io_putchar(*ptr++);
-	}
-	return len;
+  for (DataIdx = 0; DataIdx < len; DataIdx++)
+  {
+    __io_putchar(*ptr++);
+  }
+  return len;
 }
 
 int _close(int file)
 {
-	return -1;
+  (void)file;
+  return -1;
 }
 
 
 int _fstat(int file, struct stat *st)
 {
-	st->st_mode = S_IFCHR;
-	return 0;
+  (void)file;
+  st->st_mode = S_IFCHR;
+  return 0;
 }
 
 int _isatty(int file)
 {
-	return 1;
+  (void)file;
+  return 1;
 }
 
 int _lseek(int file, int ptr, int dir)
 {
-	return 0;
+  (void)file;
+  (void)ptr;
+  (void)dir;
+  return 0;
 }
 
 int _open(char *path, int flags, ...)
 {
-	/* Pretend like we always fail */
-	return -1;
+  (void)path;
+  (void)flags;
+  /* Pretend like we always fail */
+  return -1;
 }
 
 int _wait(int *status)
 {
-	errno = ECHILD;
-	return -1;
+  (void)status;
+  errno = ECHILD;
+  return -1;
 }
 
 int _unlink(char *name)
 {
-	errno = ENOENT;
-	return -1;
+  (void)name;
+  errno = ENOENT;
+  return -1;
 }
 
 int _times(struct tms *buf)
 {
-	return -1;
+  (void)buf;
+  return -1;
 }
 
 int _stat(char *file, struct stat *st)
 {
-	st->st_mode = S_IFCHR;
-	return 0;
+  (void)file;
+  st->st_mode = S_IFCHR;
+  return 0;
 }
 
 int _link(char *old, char *new)
 {
-	errno = EMLINK;
-	return -1;
+  (void)old;
+  (void)new;
+  errno = EMLINK;
+  return -1;
 }
 
 int _fork(void)
 {
-	errno = EAGAIN;
-	return -1;
+  errno = EAGAIN;
+  return -1;
 }
 
 int _execve(char *name, char **argv, char **env)
 {
-	errno = ENOMEM;
-	return -1;
+  (void)name;
+  (void)argv;
+  (void)env;
+  errno = ENOMEM;
+  return -1;
 }

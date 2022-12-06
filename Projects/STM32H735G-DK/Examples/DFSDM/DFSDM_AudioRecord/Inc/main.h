@@ -153,7 +153,7 @@ typedef struct
   uint32_t                    Volume;              /* Audio IN volume                */
   uint32_t                    State;               /* Audio IN State                 */
   uint32_t                    IsMultiBuff;         /* Audio IN multi-buffer usage    */
-  uint32_t                    IsMspCallbacksValid; /* Is Msp Callbacks registred     */
+  uint32_t                    IsMspCallbacksValid; /* Is Msp Callbacks registered     */
 }AUDIO_IN_Ctx_t;
 
 typedef struct

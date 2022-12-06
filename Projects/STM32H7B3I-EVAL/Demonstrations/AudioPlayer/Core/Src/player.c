@@ -814,7 +814,7 @@ void PLAYER_GetTimeInfo(uint32_t* Length, uint32_t* Elapsed)
   }
 }
 /**
-* @brief  Get File informations.
+* @brief  Get File information.
 * @param  file_name: File name
 * @param  AudioInfoData: pointer to audio data info to fill
 * @retval player error

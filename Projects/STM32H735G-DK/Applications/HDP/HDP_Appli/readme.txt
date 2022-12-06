@@ -58,7 +58,7 @@ to be executed in this area. All the possible execution locks must be treated.
 
 @note User should follow carefully every step displayed on LCD screen to set and remove a secure area since in some explained cases the device can be locked and can’t be retrieved.
 
-STM32H735G-DK LEDs behavior is diplayed on LCD screen.
+STM32H735G-DK LEDs behavior is displayed on LCD screen.
 
 @note In this example the start address of the second flash area has been chosen.
       It has just to be insured that the firmwares HDP_Boot and HDP_Appli have non overlapping

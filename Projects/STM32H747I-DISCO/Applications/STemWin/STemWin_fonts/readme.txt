@@ -74,7 +74,7 @@ for this, we have to save the text file (containing the text to be displayed) in
 Font generation
 ---------------
  - Opens font converter tool (available under "Middlewares/ST/STemWin/Software")
- - choose the adequate font (depending on the choosen language)
+ - choose the adequate font (depending on the chosen language)
  - disable all characters ranges (Edit/Disable all characters)
  - load the generated pattern (text.txt saved as "unicode" format)
  - save the font

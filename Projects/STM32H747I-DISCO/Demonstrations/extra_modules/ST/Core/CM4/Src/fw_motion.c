@@ -84,7 +84,7 @@ static void motion_mainloop(void)
             && msg.m.command == IPC_CAMERA_SHUTDOWN)
             break; /* exit main_loop */
 
-        /* wait for a frame to be aquired */
+        /* wait for a frame to be acquired */
         xQueueReceive(frames_q, &msg, portMAX_DELAY);
 
         /* msg.MotionX and msg.MotionY will return the motion vector */

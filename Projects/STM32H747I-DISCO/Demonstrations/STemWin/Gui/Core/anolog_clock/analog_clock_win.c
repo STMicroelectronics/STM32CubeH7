@@ -1424,7 +1424,7 @@ static void SetAlarmOnRTC(void)
 }
 
 /**
-  * @brief  Get the rigth alarm to set
+  * @brief  Get the right alarm to set
   * @param  none 
   * @retval int
   */
@@ -2048,7 +2048,7 @@ static void Startup(WM_HWIN hWin, uint16_t xpos, uint16_t ypos)
   k_GetTime(&Time);
   k_GetDate(&Date);
 
-  /* Initialise the alarmOnRTC stucture */
+  /* Initialise the alarmOnRTC structure */
   AlarmOnRTC.IndexAlarmOnRTC = (-1);
   AlarmOnRTC.Alarm_A_IsSet = 0;
   AlarmOnRTC.Alarm_B_IsSet = 0; 

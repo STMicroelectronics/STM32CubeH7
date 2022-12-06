@@ -89,10 +89,10 @@ The RTC is configured as follow:
             
 Two LEDs are used in this program:
   - LED1: To indicate the CM7 status. LED1 is ON when CM7 is in RUN mode
-          or when a CM7 configuration error occured during program execution.
+          or when a CM7 configuration error occurred during program execution.
           LED1 is OFF when CM7 enters STOP mode.       
   - LED2: To indicate the CM4 status. LED2 is ON when CM4 is in RUN mode 
-          or when a CM4 configuration error occured during program execution
+          or when a CM4 configuration error occurred during program execution
           LED2 is OFF when CM4 enters STOP mode. 
 
 After RESET LED1 is turned ON during 5 seconds to indicate that CM7 core is in RUN 

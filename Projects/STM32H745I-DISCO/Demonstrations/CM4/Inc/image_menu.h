@@ -3,7 +3,7 @@
   * @file    images_menu.h
   * @author  MCD Application Team
   * @brief   This file contains definitions applications binary images 
-  *          and graphical resouces
+  *          and graphical resources
   ******************************************************************************
   * @attention
   *

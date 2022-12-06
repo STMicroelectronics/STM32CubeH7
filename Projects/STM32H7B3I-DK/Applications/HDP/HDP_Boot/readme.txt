@@ -39,7 +39,7 @@ The user can run this application in "Standard mode" or in "Secure access mode" 
 
 The HDP application consists in two distinct projects: the HDP_Boot and HDP_Appli.
 Both HDP_Boot and HDP_Appli needs to be flashed separately.
-HDP_Boot code is executed starting at Flash address 0x08000000 correspending to the first flash bank. 
+HDP_Boot code is executed starting at Flash address 0x08000000 corresponding to the first flash bank. 
 
 @note that the STLogo is stored in the first flash bank area that will be later set as secure
 The HDP_Boot will jump to the defined address (0x08100000) where the firmware HDP_Appli will be

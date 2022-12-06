@@ -286,7 +286,7 @@ AVISTATUS __AVI_Init( AVI_CONTEXT * pavi, uint8_t *buf, uint16_t size)
   * @brief  parse AVI file header
   * @param  pavi: AVI context
   * @param  AVI_FileAddress:   AVI file address 
-  * @retval AVI status (0 : no Error, 1: Error occured)
+  * @retval AVI status (0 : no Error, 1: Error occurred)
   */
 uint32_t AVI_ParserInit(AVI_CONTEXT * pavi, uint32_t AVI_FileAddress)
 {

@@ -90,7 +90,7 @@ Memory, QSPI, Erase, Read, Write, Mapped, Dual
 
 In order to make the program work, you must do the following :
  - Open your preferred toolchain 
- - For each target configuartion (STM32H750B_DISCO) : 
+ - For each target configuration (STM32H750B_DISCO) : 
      - Rebuild all files 
      - Load images into target memory
  - Run the example

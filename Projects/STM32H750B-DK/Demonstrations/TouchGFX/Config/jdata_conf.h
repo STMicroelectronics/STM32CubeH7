@@ -34,7 +34,7 @@
 /*
   Example of implementation based on FatFS
   
-  If JFREAD/JFWRITE prototypes are complient with the standard FatFS APIs (f_read/f_write) 
+  If JFREAD/JFWRITE prototypes are compliant with the standard FatFS APIs (f_read/f_write) 
   only APIs re-definition is needed and no need to wrapper APIs defined in "jdata_conf_template.c" file
 
    #define JFREAD  f_read

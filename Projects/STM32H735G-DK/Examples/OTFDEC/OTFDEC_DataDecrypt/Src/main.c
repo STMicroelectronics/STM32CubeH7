@@ -137,7 +137,7 @@ int main(void)
   /* Erase the Flash Memory   */
   OSPI_Erase();
 
-  /* Preload external HyperRAM with ciphred data issued from crypto into dedicated adress*/
+  /* Preload external HyperRAM with ciphred data issued from crypto into dedicated address*/
   CRYP_Cipher(OTFDEC_REGION1,(uint32_t*)Region1_Range,START_ADRESS_WRITING_REGION);
   OSPI_Write( Cipher,START_ADRESS_OTFDEC1_REGION1- START_ADRESS_OCOTOSPI1, PLAIN_SIZE);
 

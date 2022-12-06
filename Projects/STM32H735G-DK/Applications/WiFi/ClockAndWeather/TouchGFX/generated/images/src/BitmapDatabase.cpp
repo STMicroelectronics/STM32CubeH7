@@ -13,7 +13,7 @@ extern const unsigned char _clear_sky_icon_24[]; // BITMAP_CLEAR_SKY_ICON_24_ID 
 extern const unsigned char _clear_sky_icon_64[]; // BITMAP_CLEAR_SKY_ICON_64_ID = 6, Size: 64x64 pixels
 extern const unsigned char _clear_sky_night_icon_24[]; // BITMAP_CLEAR_SKY_NIGHT_ICON_24_ID = 7, Size: 32x32 pixels
 extern const unsigned char _clear_sky_night_icon_64[]; // BITMAP_CLEAR_SKY_NIGHT_ICON_64_ID = 8, Size: 64x64 pixels
-extern const unsigned char _close[]; // BITMAP_CLOSE_ID = 9, Size: 24x24 pixels
+extern const unsigned char _close_[]; // BITMAP_CLOSE_ID = 9, Size: 24x24 pixels
 extern const unsigned char _error_box[]; // BITMAP_ERROR_BOX_ID = 10, Size: 300x198 pixels
 extern const unsigned char _errorbutton[]; // BITMAP_ERRORBUTTON_ID = 11, Size: 160x40 pixels
 extern const unsigned char _few_clouds_icon_24[]; // BITMAP_FEW_CLOUDS_ICON_24_ID = 12, Size: 32x32 pixels
@@ -102,7 +102,7 @@ const touchgfx::Bitmap::BitmapData bitmap_database[] =
     { _clear_sky_icon_64, 0, 64, 64, 45, 28, 3, (uint8_t)(touchgfx::Bitmap::ARGB8888) >> 3, 8, (uint8_t)(touchgfx::Bitmap::ARGB8888) & 0x7 },
     { _clear_sky_night_icon_24, 0, 32, 32, 11, 28, 10, (uint8_t)(touchgfx::Bitmap::ARGB8888) >> 3, 1, (uint8_t)(touchgfx::Bitmap::ARGB8888) & 0x7 },
     { _clear_sky_night_icon_64, 0, 64, 64, 25, 56, 15, (uint8_t)(touchgfx::Bitmap::ARGB8888) >> 3, 3, (uint8_t)(touchgfx::Bitmap::ARGB8888) & 0x7 },
-    { _close, 0, 24, 24, 10, 10, 4, (uint8_t)(touchgfx::Bitmap::ARGB8888) >> 3, 4, (uint8_t)(touchgfx::Bitmap::ARGB8888) & 0x7 },
+    { _close_, 0, 24, 24, 10, 10, 4, (uint8_t)(touchgfx::Bitmap::ARGB8888) >> 3, 4, (uint8_t)(touchgfx::Bitmap::ARGB8888) & 0x7 },
     { _error_box, 0, 300, 198, 0, 0, 0, (uint8_t)(touchgfx::Bitmap::ARGB8888) >> 3, 0, (uint8_t)(touchgfx::Bitmap::ARGB8888) & 0x7 },
     { _errorbutton, 0, 160, 40, 0, 0, 0, (uint8_t)(touchgfx::Bitmap::ARGB8888) >> 3, 0, (uint8_t)(touchgfx::Bitmap::ARGB8888) & 0x7 },
     { _few_clouds_icon_24, 0, 32, 32, 8, 25, 16, (uint8_t)(touchgfx::Bitmap::ARGB8888) >> 3, 2, (uint8_t)(touchgfx::Bitmap::ARGB8888) & 0x7 },

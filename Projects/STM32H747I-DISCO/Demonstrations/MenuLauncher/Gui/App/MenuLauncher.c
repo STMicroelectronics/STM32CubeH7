@@ -1323,7 +1323,7 @@ static void SUBDEMO_Start(WM_HWIN hWin, const DemoContext_t *pStaticContext)
       || ( pResDemoHeader->demo_id != SdResDemoHeader.demo_id) )
     {
       /* Display error message */
-      snprintf(message, sizeof(message), "Ressources Update failed\nfor %s demo", pContext->demo_name);
+      snprintf(message, sizeof(message), "Resources Update failed\nfor %s demo", pContext->demo_name);
       _ShowDialogBox(hWin, "FAILED", message);
       /* Close Firmware file */
       if (f_size(&DEMO_firmware_file) > 0)
@@ -2041,7 +2041,7 @@ void LauncherStartUp(const uint8_t SoftwareReset)
     osMessagePut ( AutoDemoEvent, AUTO_DEMO_ENABLE, 0);
   }
 
-  /* Save the calibration values in bakup registers */
+  /* Save the calibration values in backup registers */
   HAL_PWR_EnableBkUpAccess();
   WRITE_REG(BKP_REG_CALIB_DR0, SubDemo[0].data1.d32);
   WRITE_REG(BKP_REG_CALIB_DR1, SubDemo[0].data2.d32);

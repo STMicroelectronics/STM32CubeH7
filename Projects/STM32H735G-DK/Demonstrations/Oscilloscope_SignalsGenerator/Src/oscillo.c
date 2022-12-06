@@ -101,7 +101,7 @@ void OscilloThread( void *pvParameters )
   osThreadDef(ADC_Thread, ADC_CONV_Thread, osPriorityNormal, 0, configMINIMAL_STACK_SIZE*2); 
   osThreadCreate(osThread(ADC_Thread), 0);
 
-  /*  Oscilloscope initialzation, Default configurations and starting */
+  /*  Oscilloscope initialization, Default configurations and starting */
   Oscilloscope_Start();
 
   while (1)
@@ -227,7 +227,7 @@ void TIM_Reconfig()
   switch (Conversion_Frequency)
   {
     
-    /*** Differents configurations set by the user from the windows application, each
+    /*** Different configurations set by the user from the windows application, each
   case of those represent a way to configure a fixed ADC conversion frequency   **/
     
   case 5:    {Period = 399;    Prescalar =1249;}        // Timer update rate = ADC conversion Frequency = 500 Hz 
@@ -442,7 +442,7 @@ static void Oscilloscope_Start(void)
   /*  Configure the TIM (Clock source APB(TIM clock = 200 Mhz)) */
   TIM_Config();
 
-  /*  Configure the ADC to work with DMA (Max Conversion frequency in this exemple is 8 Msamples/s) */
+  /*  Configure the ADC to work with DMA (Max Conversion frequency in this example is 8 Msamples/s) */
 
   ADC_Config();
   /* Configure the DMA to manage data in both conversion mode of ADC(Single + Dual)*/

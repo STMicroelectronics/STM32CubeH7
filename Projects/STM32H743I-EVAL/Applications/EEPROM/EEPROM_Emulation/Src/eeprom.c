@@ -175,7 +175,7 @@ uint16_t EE_Init(void)
       else if (PageStatus1 == ERASED) /* Page0 receive, Page1 erased */
       {
         pEraseInit.Sector = PAGE1_ID;
-        pEraseInit.Banks = FLASH_BANK_1 ;
+        pEraseInit.Banks = FLASH_BANK_2 ;
         pEraseInit.NbSectors = 1;
         pEraseInit.VoltageRange = VOLTAGE_RANGE;
         /* Erase Page1 */
@@ -313,11 +313,15 @@ uint16_t EE_Init(void)
   */
 uint16_t EE_VerifyPageFullyErased(uint32_t Address)
 {
+  uint32_t EndAddress;
   uint32_t ReadStatus = 1;
   uint16_t AddressValue = 0x5555;
-    
+   
+  /* Compute page end-address */
+  EndAddress = (uint32_t)(Address + (PAGE_SIZE - 4U));
+  
   /* Check each active page address starting from end */
-  while (Address <= PAGE0_END_ADDRESS)
+  while (Address <= EndAddress)
   {
     /* Get the current location content to be compared with virtual address */
     AddressValue = (*(__IO uint16_t*)Address);

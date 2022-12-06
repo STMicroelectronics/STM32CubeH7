@@ -319,7 +319,7 @@ int main(void)
       Error_Handler();
     }
 
-    /* If a DMA transfer ERROR occured then goto Error_Handler (LED2 will turn on) */
+    /* If a DMA transfer ERROR occurred then goto Error_Handler (LED2 will turn on) */
     if(DMA_TransferErrorFlag != 0)
     {
       Error_Handler();

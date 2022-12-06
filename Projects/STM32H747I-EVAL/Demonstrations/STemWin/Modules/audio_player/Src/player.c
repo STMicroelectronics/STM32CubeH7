@@ -453,7 +453,7 @@ static AUDIO_ErrorTypeDef PLAYER_SRC_Init(PLAYER_Instance_t *Instance)
 #ifndef PLAYER_DISABLE_SRC
   uint32_t src_scratch_mem_size = 0;
 
-  /* Allocat mem for SRC236 and SRC411 */
+  /* Allocate mem for SRC236 and SRC411 */
   Instance->SrcInfo.pSrc236PersistentMem = PLAYER_MALLOC(src236_persistent_mem_size);  /* 0x1EC: 492  */
   Instance->SrcInfo.pSrc441PersistentMem = PLAYER_MALLOC(src441_persistent_mem_size);  /* 0x0E8: 232 */
   if ((Instance->SrcInfo.pSrc236PersistentMem == NULL) || (Instance->SrcInfo.pSrc441PersistentMem == NULL))
@@ -1044,7 +1044,7 @@ AUDIO_ErrorTypeDef PLAYER_DeInit(PLAYER_HANDLE_h pHandle)
 }
 
 /**
-* @brief  Get File informations.
+* @brief  Get File information.
 * @param  pHandle: Audio Player handle
 * @param  file_name: File name
 * @param  AudioInfoData: pointer to audio data info to fill

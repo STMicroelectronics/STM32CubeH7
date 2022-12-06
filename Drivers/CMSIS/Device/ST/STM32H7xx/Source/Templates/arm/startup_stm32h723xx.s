@@ -236,8 +236,8 @@ __Vectors       DCD     __initial_sp                      ; Top of Stack
                 DCD     I2C5_ER_IRQHandler                ; I2C5 Error Interrupt
                 DCD     FDCAN3_IT0_IRQHandler             ; FDCAN3 interrupt line 0
                 DCD     FDCAN3_IT1_IRQHandler             ; FDCAN3 interrupt line 1
-                DCD     TIM23_IRQHandler                  ; TIM23 global interrup
-                DCD     TIM24_IRQHandler                  ; TIM24 global interrup
+                DCD     TIM23_IRQHandler                  ; TIM23 global interrupt
+                DCD     TIM24_IRQHandler                  ; TIM24 global interrupt
 
 __Vectors_End
 

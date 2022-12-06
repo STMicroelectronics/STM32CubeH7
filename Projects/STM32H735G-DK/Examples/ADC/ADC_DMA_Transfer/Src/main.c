@@ -131,7 +131,7 @@ int main(void)
   sConfig.SingleDiff   = ADC_SINGLE_ENDED;            /* Single-ended input channel */
   sConfig.OffsetNumber = ADC_OFFSET_NONE;             /* No offset subtraction */ 
   sConfig.Offset = 0;                                 /* Parameter discarded because offset correction is disabled */
-  sConfig.OffsetSaturation = DISABLE;                 /* Offset saturation is disbaled */
+  sConfig.OffsetSaturation = DISABLE;                 /* Offset saturation is disabled */
   sConfig.OffsetSign = ADC3_OFFSET_SIGN_POSITIVE;     /* Offset sign is positive */
   
   if (HAL_ADC_ConfigChannel(&AdcHandle, &sConfig) != HAL_OK)

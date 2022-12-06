@@ -52,7 +52,7 @@ enum tcp_echoserver_states
   ES_CLOSING
 };
 
-/* structure for maintaing connection infos to be passed as argument 
+/* structure for maintaining connection infos to be passed as argument 
    to LwIP callbacks*/
 struct tcp_echoserver_struct
 {
@@ -123,7 +123,7 @@ static err_t tcp_echoserver_accept(void *arg, struct tcp_pcb *newpcb, err_t err)
   /* set priority for the newly accepted tcp connection newpcb */
   tcp_setprio(newpcb, TCP_PRIO_MIN);
 
-  /* allocate structure es to maintain tcp connection informations */
+  /* allocate structure es to maintain tcp connection information */
   es = (struct tcp_echoserver_struct *)mem_malloc(sizeof(struct tcp_echoserver_struct));
   if (es != NULL)
   {
@@ -252,7 +252,7 @@ static err_t tcp_echoserver_recv(void *arg, struct tcp_pcb *tpcb, struct pbuf *p
   }
   else
   {
-    /* unkown es->state, trash data  */
+    /* unknown es->state, trash data  */
     tcp_recved(tpcb, p->tot_len);
     es->p = NULL;
     pbuf_free(p);

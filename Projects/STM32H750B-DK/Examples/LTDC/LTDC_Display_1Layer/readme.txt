@@ -60,9 +60,9 @@ The SystemClock_Config() function is used to set the Flash latency and  to confi
           |     /|\     |         | / / / / / / / / / / / / / / / / / / / |    |
           |      |      |         |/ / / / / / / / / / / / / / / / / / / /|    |
  Total    |      |      |         |/ / / / / / / / / / / / / / / / / / / /|    |
- Heigh    |      |      |         |/ / / / / / / / / / / / / / / / / / / /|    |
+ Height    |      |      |         |/ / / / / / / / / / / / / / / / / / / /|    |
           |Active|      |         |/ / / / / / / / / / / / / / / / / / / /|    |
-          |Heigh |      |         |/ / / / / / Active Display Area / / / /|    |
+          |Height |      |         |/ / / / / / Active Display Area / / / /|    |
           |      |      |         |/ / / / / / / / / / / / / / / / / / / /|    |
           |      |      |         |/ / / / / / / / / / / / / / / / / / / /|    |
           |      |      |         |/ / / / / / / / / / / / / / / / / / / /|    |
@@ -85,7 +85,7 @@ The SystemClock_Config() function is used to set the Flash latency and  to confi
 
       Vertical Synchronization (Vsync)   = 10
       Vertical Back Porch (VBP)          = 2
-      Active Heigh                       = 272
+      Active Height                       = 272
       Vertical Front Porch (VFP)         = 2
   
   LCD_TFT windowing configuration :

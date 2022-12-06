@@ -39,7 +39,7 @@ This application provide different configuration with linker files which allows 
     - XiP From OSPI, Data on Internal   SRAM
     - XiP From OSPI, Data on External   OSPI RAM
     - BootROM : Execution From External OSPI RAM , Data on Internal SRAM
-  Make sure that choosen config matches ExtMem_Boot config in memory.h file.
+  Make sure that chosen config matches ExtMem_Boot config in memory.h file.
 
 @note Care must be taken when using HAL_Delay(), this function provides accurate delay (in milliseconds)
       based on variable incremented in HAL time base ISR. This implies that if HAL_Delay() is called from

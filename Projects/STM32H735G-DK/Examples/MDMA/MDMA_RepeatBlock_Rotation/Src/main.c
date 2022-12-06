@@ -337,7 +337,7 @@ static void MDMA_Config(uint32_t Config)
    /* Destination Block address offset is set in order to place the image in the center of the LCD frame buffer
       the destination blocks are not contiguous. The LCD_Offset is = to LCD X size - image width
       Knowing that the destination address is set to the last pixel address in the first line
-      of the destination image, the destination block offset takes also into acount that
+      of the destination image, the destination block offset takes also into account that
       the destination address is decrementing*/
     MDMA_Handle.Init.DestBlockAddressOffset    = (int32_t)(LCD_Offset + (2 * (RGB565_BYTES_PER_PIXEL * IMAGE_WIDTH)));
   }
@@ -373,7 +373,7 @@ static void MDMA_Config(uint32_t Config)
     /* Destination Block address offset is set in order to place the image in the center of the LCD frame buffer
       the destination blocks are not contiguous. The LCD_Offset is = to LCD X size - image width
       Knowing that the destination address is set to  the last pixel address of
-      the destination image, the destination block offset takes also into acount that the destination address is decrementing*/
+      the destination image, the destination block offset takes also into account that the destination address is decrementing*/
     MDMA_Handle.Init.DestBlockAddressOffset    = (int32_t)((-1) * LCD_Offset);
   }
   else if(Config == 4)

@@ -377,7 +377,7 @@ void SystemInit_ExtMemCtl(void)
 {
   __IO uint32_t tmp = 0;
 
-  register uint32_t tmpreg = 0, timeout = 0xFFFF;
+  register uint32_t tmpreg = 0;
   register __IO uint32_t index;
 
   /* Enable GPIOD, GPIOE, GPIOF, GPIOG, GPIOH and GPIOI interface 
@@ -477,36 +477,15 @@ void SystemInit_ExtMemCtl(void)
   /* SDRAM initialization sequence */
   /* Clock enable command */ 
   FMC_Bank5_6_R->SDCMR = 0x00000009; 
-  tmpreg = FMC_Bank5_6_R->SDSR & 0x00000020; 
-  while((tmpreg != 0) && (timeout-- > 0))
-  {
-    tmpreg = FMC_Bank5_6_R->SDSR & 0x00000020; 
-  }
 
   /* Delay */
-  for (index = 0; index<1000; index++);
+  for (index = 0; index<5000; index++);
   
   /* PALL command */ 
-    FMC_Bank5_6_R->SDCMR = 0x0000000A; 	
-  timeout = 0xFFFF;
-  while((tmpreg != 0) && (timeout-- > 0))
-  {
-    tmpreg = FMC_Bank5_6_R->SDSR & 0x00000020; 
-  }
-  
+  FMC_Bank5_6_R->SDCMR = 0x0000000A;
   FMC_Bank5_6_R->SDCMR = 0x000000EB;
-  timeout = 0xFFFF;
-  while((tmpreg != 0) && (timeout-- > 0))
-  {
-    tmpreg = FMC_Bank5_6_R->SDSR & 0x00000020; 
-  }
-
   FMC_Bank5_6_R->SDCMR = 0x0004400C;
-  timeout = 0xFFFF;
-  while((tmpreg != 0) && (timeout-- > 0))
-  {
-    tmpreg = FMC_Bank5_6_R->SDSR & 0x00000020; 
-  } 
+
   /* Set refresh count */
   tmpreg = FMC_Bank5_6_R->SDRTR;
   FMC_Bank5_6_R->SDRTR = (tmpreg | (0x00000603<<1));

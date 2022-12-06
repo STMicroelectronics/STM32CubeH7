@@ -92,7 +92,7 @@ USBD_StatusTypeDef  USBD_RegisterClassComposite(USBD_HandleTypeDef *pdev, USBD_C
                                                 USBD_CompositeClassTypeDef classtype, uint8_t *EpAddr);
 
 USBD_StatusTypeDef  USBD_UnRegisterClassComposite(USBD_HandleTypeDef *pdev);
-uint8_t USBD_CoreGetEPAdd(USBD_HandleTypeDef *pdev, uint8_t ep_dir, uint8_t ep_type);
+uint8_t USBD_CoreGetEPAdd(USBD_HandleTypeDef *pdev, uint8_t ep_dir, uint8_t ep_type, uint8_t ClassId);
 #endif /* USE_USBD_COMPOSITE */
 
 uint8_t USBD_CoreFindIF(USBD_HandleTypeDef *pdev, uint8_t index);

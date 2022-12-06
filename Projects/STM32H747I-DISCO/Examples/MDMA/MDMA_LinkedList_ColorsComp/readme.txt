@@ -136,7 +136,7 @@ System, MDMA, Linked List, Display, LCD, SW Request, Image, Colors, Extract, Res
 
   - This example runs on STM32H747xx device.
   
-  - This example has been tested with STM32H747I-DISCO  board with SMPS (SD Convertor) power supply config and can be
+  - This example has been tested with STM32H747I-DISCO  board with SMPS (SD Converter) power supply config and can be
     easily tailored to any other supported device and development board.    
 
 @par How to use it ?

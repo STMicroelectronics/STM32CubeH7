@@ -179,7 +179,7 @@ static void FS_FileOperations(void)
   }
 
   LOCK_HSEM(UART_HSEM_ID);
-  printf("[CM7]:\topening '%s' for writting...\n", CM7_FILE);
+  printf("[CM7]:\topening '%s' for writing...\n", CM7_FILE);
   UNLOCK_HSEM(UART_HSEM_ID);
 
   /* Write data to the text file */

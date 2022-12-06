@@ -114,7 +114,7 @@ int main(void)
   
   
   /* ### - 2 - Start calibration ############################################ */
-  if (HAL_ADCEx_Calibration_Start(&AdcHandle, ADC_CALIB_OFFSET, ADC_DIFFERENTIAL_ENDED) != HAL_OK)
+  if (HAL_ADCEx_Calibration_Start(&AdcHandle, ADC_CALIB_OFFSET_LINEARITY, ADC_DIFFERENTIAL_ENDED) != HAL_OK)
   {
     Error_Handler();
   }

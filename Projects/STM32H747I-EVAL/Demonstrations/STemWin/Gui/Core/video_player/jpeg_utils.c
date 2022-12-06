@@ -73,7 +73,7 @@
   *        conversion tables. This function needs to be called only one time at the beginning of the 
   *        program whatever the number of jpeg files to be encoded or decoded.
   *    
-  *      - First Use the utility function "JPEG_GetEncodeColorConvertFunc" with the input image informations 
+  *      - First Use the utility function "JPEG_GetEncodeColorConvertFunc" with the input image information 
   *        to retrieve the corresponding color conversion function and number of MCUs.
   *    
   *        Then each time an RGB input buffer is available, user can call the retrieved function to convert 
@@ -934,12 +934,12 @@ static uint32_t JPEG_ARGB_MCU_YCCK_ConvertBlocks(uint8_t *pInBuffer,
 }
 
 /**
-  * @brief  Retrive Encoding RGB to YCbCr color conversion function and block number  
-  * @param  pJpegInfo  : JPEG_ConfTypeDef that contains the JPEG image informations.
+  * @brief  Retrieve Encoding RGB to YCbCr color conversion function and block number  
+  * @param  pJpegInfo  : JPEG_ConfTypeDef that contains the JPEG image information.
   *                      These info are available in the HAL callback "HAL_JPEG_InfoReadyCallback".
-  * @param  pFunction  : pointer to JPEG_RGBToYCbCr_Convert_Function , used to retrive the color conversion function 
+  * @param  pFunction  : pointer to JPEG_RGBToYCbCr_Convert_Function , used to retrieve the color conversion function 
   *                      depending of the jpeg image color space and chroma sampling info. 
-  * @param ImageNbMCUs : pointer to uint32_t, used to retrive the total number of MCU blocks in the jpeg image.  
+  * @param ImageNbMCUs : pointer to uint32_t, used to retrieve the total number of MCU blocks in the jpeg image.  
   * @retval HAL status : HAL_OK or HAL_ERROR.
   */
 HAL_StatusTypeDef JPEG_GetEncodeColorConvertFunc(JPEG_ConfTypeDef *pJpegInfo, JPEG_RGBToYCbCr_Convert_Function *pFunction, uint32_t *ImageNbMCUs)
@@ -1679,12 +1679,12 @@ static uint32_t JPEG_MCU_YCCK_ARGB_ConvertBlocks(uint8_t *pInBuffer,
 }
 
 /**
-  * @brief  Retrive Decoding YCbCr to RGB color conversion function and block number  
-  * @param  pJpegInfo  : JPEG_ConfTypeDef that contains the JPEG image informations.
+  * @brief  Retrieve Decoding YCbCr to RGB color conversion function and block number  
+  * @param  pJpegInfo  : JPEG_ConfTypeDef that contains the JPEG image information.
   *                      These info are available in the HAL callback "HAL_JPEG_InfoReadyCallback".
-  * @param  pFunction  : pointer to JPEG_YCbCrToRGB_Convert_Function , used to retrive the color conversion function 
+  * @param  pFunction  : pointer to JPEG_YCbCrToRGB_Convert_Function , used to retrieve the color conversion function 
   *                      depending of the jpeg image color space and chroma sampling info. 
-  * @param ImageNbMCUs : pointer to uint32_t, used to retrive the total number of MCU blocks in the jpeg image.  
+  * @param ImageNbMCUs : pointer to uint32_t, used to retrieve the total number of MCU blocks in the jpeg image.  
   * @retval HAL status : HAL_OK or HAL_ERROR.
   */
 HAL_StatusTypeDef JPEG_GetDecodeColorConvertFunc(JPEG_ConfTypeDef *pJpegInfo, JPEG_YCbCrToRGB_Convert_Function *pFunction, uint32_t *ImageNbMCUs)

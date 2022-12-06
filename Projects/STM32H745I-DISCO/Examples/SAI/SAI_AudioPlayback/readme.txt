@@ -44,7 +44,7 @@ configure the system clock :
 Plug a headphone to hear the sound  /!\ Take care of yours ears. Default volume is 70%.
  
 Once started, LED1 is on during playback. 
-If an error occured LED2 is turned ON.
+If an error occurred LED2 is turned ON.
 
 @note Note the BDMA and the DMA run in circular buffer mode and never stop. If you break  
       with the debugger, they will keep running and a noise will be heard.

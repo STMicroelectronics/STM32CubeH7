@@ -149,7 +149,7 @@ int main(void)
   MMCHandle.Init.ClockEdge           = SDMMC_CLOCK_EDGE_RISING;
   MMCHandle.Init.ClockPowerSave      = SDMMC_CLOCK_POWER_SAVE_DISABLE;
   MMCHandle.Init.BusWide             = SDMMC_BUS_WIDE_8B;
-  MMCHandle.Init.HardwareFlowControl = SDMMC_HARDWARE_FLOW_CONTROL_DISABLE;
+  MMCHandle.Init.HardwareFlowControl = SDMMC_HARDWARE_FLOW_CONTROL_ENABLE;
   MMCHandle.Init.ClockDiv            = 2;
   
 

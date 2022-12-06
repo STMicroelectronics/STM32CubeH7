@@ -303,7 +303,7 @@ static void QueueSendThread(void *argument)
     /* Send to the queue - causing the queue receive thread to flash its LED.
        It should not be necessary to block on the queue send because the Rx
        thread will already have removed the last queued item. */
-    osMessageQueuePut(osqueueHandle, &Queue_value, 100, NULL);
+    osMessageQueuePut(osqueueHandle, &Queue_value, 100, 0U);
   }
   /* USER CODE END 5 */
 }

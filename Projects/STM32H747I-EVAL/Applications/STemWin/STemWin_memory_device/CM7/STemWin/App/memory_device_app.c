@@ -114,7 +114,7 @@ static int _RotateAndZoomImage(void)
   /* Clean up LCD context, draw a given background */  
   GUI_DrawBitmap(&bmgarage, 0, 0);
   
-  /* Create the LCD memory devices if not existant */
+  /* Create the LCD memory devices if not existent */
   if (hLCD == 0) 
   {
     hLCD = GUI_MEMDEV_CreateFixed(0, 0, xSize, ySize, GUI_MEMDEV_NOTRANS, GUI_MEMDEV_APILIST_32, GUICC_M8888I);
@@ -126,7 +126,7 @@ static int _RotateAndZoomImage(void)
     /* Initialise the memdev with what's displayed */
     GUI_MEMDEV_CopyFromLCD(hLCD);
   }  
-  /* Create the Destination memory devices if not existant */
+  /* Create the Destination memory devices if not existent */
   if (hDst == 0)
   {
     /* Exit if any issue when creating the memdev */
@@ -309,7 +309,7 @@ static int _ShiftRotateAndZoomImage(void)
       return 1;
     }
   }
-  /* Create the zoom detination memory device if not existing */
+  /* Create the zoom destination memory device if not existing */
   if (hDstEnlarge == 0) 
   {
     hDstEnlarge = GUI_MEMDEV_CreateFixed(xSize / 6, TITLE_SIZE, (xSize * 2) / 3, ySize, GUI_MEMDEV_NOTRANS, GUI_MEMDEV_APILIST_32, GUICC_M8888I);

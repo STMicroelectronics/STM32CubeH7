@@ -414,7 +414,7 @@ static uint8_t USBD_VIDEO_Init(USBD_HandleTypeDef *pdev, uint8_t cfgidx)
 
 #ifdef USE_USBD_COMPOSITE
   /* Get the Endpoints addresses allocated for this class instance */
-  VIDEOinEpAdd  = USBD_CoreGetEPAdd(pdev, USBD_EP_IN, USBD_EP_TYPE_ISOC);
+  VIDEOinEpAdd = USBD_CoreGetEPAdd(pdev, USBD_EP_IN, USBD_EP_TYPE_ISOC, (uint8_t)pdev->classId);
 #endif /* USE_USBD_COMPOSITE */
 
   /* Open EP IN */
@@ -466,7 +466,7 @@ static uint8_t USBD_VIDEO_DeInit(USBD_HandleTypeDef *pdev, uint8_t cfgidx)
 
 #ifdef USE_USBD_COMPOSITE
   /* Get the Endpoints addresses allocated for this class instance */
-  VIDEOinEpAdd  = USBD_CoreGetEPAdd(pdev, USBD_EP_IN, USBD_EP_TYPE_ISOC);
+  VIDEOinEpAdd = USBD_CoreGetEPAdd(pdev, USBD_EP_IN, USBD_EP_TYPE_ISOC, (uint8_t)pdev->classId);
 #endif /* USE_USBD_COMPOSITE */
 
   /* Close EP IN */
@@ -640,7 +640,8 @@ static uint8_t  USBD_VIDEO_DataIn(USBD_HandleTypeDef *pdev, uint8_t epnum)
   static uint16_t PcktSze = UVC_PACKET_SIZE;
   static uint8_t  payload_header[2] = {0x02U, 0x00U};
   uint8_t i = 0U;
-  uint32_t RemainData, DataOffset = 0U;
+  uint32_t RemainData = 0U;
+  uint32_t DataOffset = 0U;
 
   /* Check if the Streaming has already been started */
   if (hVIDEO->uvc_state == UVC_PLAY_STATUS_STREAMING)
@@ -836,19 +837,18 @@ static void VIDEO_REQ_GetCurrent(USBD_HandleTypeDef *pdev, USBD_SetupReqTypedef 
   */
 static void VIDEO_REQ_SetCurrent(USBD_HandleTypeDef *pdev, USBD_SetupReqTypedef *req)
 {
-  USBD_VIDEO_HandleTypeDef *hVIDEO = (USBD_VIDEO_HandleTypeDef *)(pdev->pClassDataCmsit[pdev->classId]);
 
   /* Check that the request has control data */
   if (req->wLength > 0U)
   {
     /* Prepare the reception of the buffer over EP0 */
-    if (LOBYTE(req->wValue) == (uint8_t)VS_PROBE_CONTROL)
+    if (req->wValue == (uint16_t)VS_PROBE_CONTROL)
     {
       /* Probe Request */
       (void) USBD_CtlPrepareRx(pdev, (uint8_t *)&video_Probe_Control,
                                MIN(req->wLength, sizeof(USBD_VideoControlTypeDef)));
     }
-    else if (LOBYTE(req->wValue) == (uint8_t)VS_COMMIT_CONTROL)
+    else if (req->wValue == (uint16_t)VS_COMMIT_CONTROL)
     {
       /* Commit Request */
       (void) USBD_CtlPrepareRx(pdev, (uint8_t *)&video_Commit_Control,
@@ -856,9 +856,7 @@ static void VIDEO_REQ_SetCurrent(USBD_HandleTypeDef *pdev, USBD_SetupReqTypedef 
     }
     else
     {
-      /* Prepare the reception of the buffer over EP0 */
-      (void) USBD_CtlPrepareRx(pdev, hVIDEO->control.data,
-                               MIN(req->wLength, USB_MAX_EP0_SIZE));
+      (void)USBD_LL_StallEP(pdev, 0x80U);
     }
   }
 }

@@ -218,7 +218,7 @@ int main(void)
 }
 
 /**
-  * @brief  MDMA Liked List transfer configuraion
+  * @brief  MDMA Liked List transfer configuration
   * @note   This function configure the DMA for a Repeat BLock transfer.
   *
   * @retval None

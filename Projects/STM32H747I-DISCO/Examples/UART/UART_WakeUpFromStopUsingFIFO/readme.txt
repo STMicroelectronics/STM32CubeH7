@@ -44,8 +44,8 @@ at the 16th recieved byte, the UART FIFO will be full which will generate an int
 
 
 Board: STM32H747I-DISCO
-Tx Pin: PB.14
-Rx Pin: PB.15
+Tx Pin: PA.9
+Rx Pin: PA.10
    _________________________
   |           ______________|                       _______________
   |          |USART         |                      | HyperTerminal |

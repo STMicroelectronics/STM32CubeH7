@@ -193,7 +193,7 @@ int main(void)
   *          - Foreground image is loaded from FLASH memory (L8_Image1)
   *          - CLUT (256 color index table )loaded from FLASH memory (L8_CLUT_1)
   *          - color mode as L8 pixel format
-  *          1-3) Load the L8_CLUT_1 CLUT (color index table for image L8_Image1) to DMA2D Forground CLUT
+  *          1-3) Load the L8_CLUT_1 CLUT (color index table for image L8_Image1) to DMA2D Foreground CLUT
   *  
   *        2) Config 1 :  the Transfer mode as memory to memory with PFC.
   *          2-1) Configure the output color mode as ARGB8888 pixel format.
@@ -201,17 +201,17 @@ int main(void)
   *          - Foreground image is loaded from FLASH memory (L8_Image0)
   *          - CLUT (256 color index table )loaded from FLASH memory (L8_CLUT_0)
   *          - color mode as L8 pixel format
-  *          2-3) Load the L8_CLUT_0 CLUT (color index table for image L8_Image0) to DMA2D Forground CLUT
+  *          2-3) Load the L8_CLUT_0 CLUT (color index table for image L8_Image0) to DMA2D Foreground CLUT
   *  
   *        3) Config 2 :  the Transfer mode as memory to memory with Blending.
   *          3-1) Configure the output color mode as ARGB8888 pixel format.
   *          3-2) Configure the Foreground and Background layers (layer 1 and layer 0)
   *          - Foreground image is loaded from FLASH memory (L8_Image1)
   *          - Background image is loaded from FLASH memory (L8_Image0)
-  *          - Forground CLUT (256 color index table )loaded from FLASH memory (L8_CLUT_1)
+  *          - Foreground CLUT (256 color index table )loaded from FLASH memory (L8_CLUT_1)
   *          - Background CLUT (256 color index table )loaded from FLASH memory (L8_CLUT_0)
   *          - color mode as L8 pixel format
-  *          3-3) Load the L8_CLUT_1 foreground CLUT (color index table for image L8_Image1) to DMA2D Forground CLUT
+  *          3-3) Load the L8_CLUT_1 foreground CLUT (color index table for image L8_Image1) to DMA2D Foreground CLUT
   *          3-4) Load the L8_CLUT_0 background CLUT (color index table for image L8_Image0) to DMA2D Background CLUT 
   * @retval
   *  None

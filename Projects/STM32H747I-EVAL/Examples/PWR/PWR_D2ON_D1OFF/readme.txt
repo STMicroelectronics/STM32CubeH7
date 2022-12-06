@@ -42,7 +42,7 @@ After compiling CM4 target the user is aimed to copy the STM32H747I_CM4.bin file
 exist under PWR_D2ON_D1OFF\Toolchain\STM32H747I_EVAL_CM4\Exe\STM32H747I_CM4.bin
 in the Flash memory at 0x08080000 address by using the STLINK_Utility.
 To do this go to STLINK_Utility->Target->Program then set the start address at
-0x08080000 and finaly click Start button.
+0x08080000 and finally click Start button.
 
 After a system RESET or a CM7 core debugging the following steps will be done:
   - HAL_Init() function is called to reset all the peripherals, initialize the
@@ -127,7 +127,7 @@ Power, STANDBY mode, RUN mode, multiprocessor, Domains
 
   - This example runs on STM32H747xx/STM32H757xx devices.
 
-  - This example has been tested with STM32H747I-EVAL  board with SMPS (SD Convertor) power supply config and can be
+  - This example has been tested with STM32H747I-EVAL  board with SMPS (SD Converter) power supply config and can be
     easily tailored to any other supported device and development board.
 
 @par How to use it ?
@@ -143,7 +143,7 @@ In order to make the program work, you must do the following :
      - Load the STM32H747I_EVAL_CM4.bin generated file to the Flash memory at 0x08080000 address
        using the STM32CubeProgrammer.
      - Go to STM32CubeProgrammer->Erasing & Programming->File Programming then set the start address at
-       0x08080000,and finaly click Start Programming button.
+       0x08080000,and finally click Start Programming button.
 
   - For CM7 target configuration (STM32H747I_EVAL_CM7) :
      - Rebuild all files

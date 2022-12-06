@@ -71,7 +71,7 @@ This configuration is done by the Cortex-M7 in the function "SystemClock_Config"
 @note For Cortex-M7, Some code parts (for instance ISR routines, vector table, critical routines )
       can be executed from the ITCM-RAM (64 KB) allowing zero wait state access.
       Which decreases critical task execution time compared to code execution from internal Flash memory. 
-      This configuratuion can be done using '#pragma location = ".itcmram"' to be placed above function declaration, 
+      This configuration can be done using '#pragma location = ".itcmram"' to be placed above function declaration, 
       or using the toolchain GUI (file options) to execute a whole source file in the ITCM-RAM.
       For fast data access, critical variables, application RAM, heap, stack could be put as well in the DTCM-RAM (128 KB).
 
@@ -134,7 +134,7 @@ Connectivity, USB_Device, USB, SDMMC, HID, Full Speed, FS, High Speed, HS, Mouse
 
   - This example runs on STM32H747xx devices.
     
-  - This example has been tested with STM32H747I-EVAL  board with SMPS (SD Convertor) power supply config and can be
+  - This example has been tested with STM32H747I-EVAL  board with SMPS (SD Converter) power supply config and can be
     easily tailored to any other supported device and development board.
 
   - STM32H747I_EVAL Set-up

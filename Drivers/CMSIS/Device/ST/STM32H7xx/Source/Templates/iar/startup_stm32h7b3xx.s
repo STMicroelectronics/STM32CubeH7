@@ -1,7 +1,7 @@
-;/****************************************************************************** 
-; * @file    startup_stm32h7b3xx.s
-; * @author  MCD Application Team
-; * @brief   STM32H7B3xx devices vector table for EWARM toolchain.
+;/******************************************************************************
+;* @file    startup_stm32h7b3xx.s
+;* @author  MCD Application Team
+;* @brief   STM32H7B3xx devices vector table for EWARM toolchain.
 ;*           This module performs:
 ;*           - Set the initial SP
 ;*           - Set the initial PC == _iar_program_start,

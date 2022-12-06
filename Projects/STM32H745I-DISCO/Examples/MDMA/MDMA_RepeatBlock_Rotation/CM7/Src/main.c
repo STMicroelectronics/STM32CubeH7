@@ -200,7 +200,7 @@ int main(void)
 }
 
 /**
-  * @brief  MDMA Repeat blocks ransfer configuraion
+  * @brief  MDMA Repeat blocks ransfer configuration
   * @note   This function configure the DMA for a Repeat BLock transfer.
   * @retval None
   */

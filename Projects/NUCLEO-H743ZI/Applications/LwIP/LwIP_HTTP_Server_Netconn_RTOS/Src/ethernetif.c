@@ -535,7 +535,12 @@ void HAL_ETH_ErrorCallback(ETH_HandleTypeDef *heth)
 {
   if((HAL_ETH_GetDMAError(heth) & ETH_DMACSR_RBU) == ETH_DMACSR_RBU)
   {
-     osSemaphoreRelease(RxPktSemaphore);
+    osSemaphoreRelease(RxPktSemaphore);
+  }
+
+  if((HAL_ETH_GetDMAError(heth) & ETH_DMACSR_TBU) == ETH_DMACSR_TBU)
+  {
+    osSemaphoreRelease(TxPktSemaphore);
   }
 }
 

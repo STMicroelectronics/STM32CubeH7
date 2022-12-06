@@ -31,7 +31,7 @@
 /** @addtogroup BSP
   * @{
   */
-#define CONF_OSPI_ODS             MX25LM51245G_CR_ODS_24   /* MX25LM51245G Output Driver Strenght         */
+#define CONF_OSPI_ODS             MX25LM51245G_CR_ODS_24   /* MX25LM51245G Output Driver Strength         */
 #define CONF_OSPI_DUMMY_CYCLES    MX25LM51245G_CR2_DC_6_CYCLES
 
 #define DUMMY_CYCLES_READ            8U

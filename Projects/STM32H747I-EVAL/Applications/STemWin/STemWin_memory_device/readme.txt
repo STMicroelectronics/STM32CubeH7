@@ -98,7 +98,7 @@ Graphics, Display, STemWin, LTDC, Memory, Operations, Rotation, Shift, Zoom.
     - STemWin/STemWin_memory_device/CM7/STemWin/App/generated/Wheel4.c	Wheel4 picture
     - STemWin/STemWin_memory_device/CM7/STemWin/App/generated/Wheel5.c	Wheel5 picture
     - STemWin/STemWin_memory_device/CM7/STemWin/App/generated/garage.c 	garage picture
-    - STemWin/STemWin_memory_device/CM7/STemWin/App/memory_device_app.c memory devce application
+    - STemWin/STemWin_memory_device/CM7/STemWin/App/memory_device_app.c memory device application
     - STemWin/STemWin_memory_device/CM7/STemWin/Target/GUIConf.c		Display controller initialization
     - STemWin/STemWin_memory_device/CM7/STemWin/Target/GUIConf.h		Header for GUIConf.c
     - STemWin/STemWin_memory_device/CM7/STemWin/Target/LCDConf.c		Configuration file for the GUI library

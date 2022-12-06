@@ -52,7 +52,7 @@ void MMC_GetCardInfo(HAL_MMC_CardInfoTypeDef *);
 
 /**
   * @brief  Initialize the SDCARD through the FATFS, copy binary to its execution
-  *         area and finaly free no more needed resources.
+  *         area and finally free no more needed resources.
   * @param  None
   * @retval None
   */
@@ -66,7 +66,7 @@ uint32_t MMC_Startup(void)
   uSdHandle.Init.ClockDiv            = 4;
   uSdHandle.Init.ClockPowerSave      = SDMMC_CLOCK_POWER_SAVE_DISABLE;
   uSdHandle.Init.ClockEdge           = SDMMC_CLOCK_EDGE_RISING;
-  uSdHandle.Init.HardwareFlowControl = SDMMC_HARDWARE_FLOW_CONTROL_DISABLE;
+  uSdHandle.Init.HardwareFlowControl = SDMMC_HARDWARE_FLOW_CONTROL_ENABLE;
   uSdHandle.Init.BusWide             = SDMMC_BUS_WIDE_8B;
   
   /* Msp MMC initialization */

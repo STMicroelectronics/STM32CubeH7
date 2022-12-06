@@ -69,7 +69,7 @@ Plug a headphone to to CN10 to ear the sound
 
  ** AUDIO LOOPBACK SINGLE-BUFFERING **
 This example shows how to record and play in loopback an audio stream using DFSDM
-for recording and SAI for playing. The data are processed internaly within BSP
+for recording and SAI for playing. The data are processed internally within BSP
 audio drivers and returned to user in PCM filtered format.
 The DMA is configured in circular mode to play audio stream.
 

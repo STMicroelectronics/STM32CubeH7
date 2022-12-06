@@ -54,7 +54,7 @@ May not work for RIFF files larger than 2GB.
 //non critical
 #define RIFF_ERROR_NONE   0  //no error
 #define RIFF_ERROR_EOC    1  //end of current chunk, when trying to read/seek beyond end of current chunk data
-#define RIFF_ERROR_EOCL   2  //end of chunk list, if you are already at the last chunk in the current list level, occures when trying to seek the next chunk
+#define RIFF_ERROR_EOCL   2  //end of chunk list, if you are already at the last chunk in the current list level, occurs when trying to seek the next chunk
 #define RIFF_ERROR_EXDAT  3  //excess bytes at end of chunk list level, not critical, the rest is simply ignored (1-7 bytes inside list, otherwise a following chunk is expected - more at file level possible), should never occur
 
 //critical errors

@@ -52,7 +52,7 @@ After LCD initialization, LCD layer 1 and color keying configuration, an image
  Color Keying :
  --------------
  If the Color Keying is enabled, all pixels of the image are compared to that color key pixel value
- (0xFFFFFF), pratically only the white zone of the slogan correspond to that color key in the image.
+ (0xFFFFFF), practically only the white zone of the slogan correspond to that color key in the image.
  For the pixels that match the color key RGB value, all channels (ARGB) of those pixels
  are set to 0 (those pixels are then becoming transparent and does not appear on LCD screen, the background
  of image : black is seen instead).

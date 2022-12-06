@@ -209,7 +209,7 @@ int main(void)
 
   /* Next, the input and output data inversion features are disabled and
      it is verified that the input data CRC16_DATA32_CHECK[] which is defined with 
-     a different endianess scheme yields the same CRC.
+     a different endianness scheme yields the same CRC.
      
      As explained above, CRC16_DATA32_CHECK is obtained from CRC16_DATA32
      by a bit-reversal operation carried out on full word and vice versa. */

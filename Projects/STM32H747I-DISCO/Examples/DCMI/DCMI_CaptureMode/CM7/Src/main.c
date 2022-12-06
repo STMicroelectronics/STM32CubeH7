@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    DCMI/DCMI_CaptureMode/CM7/Src/main.c
   * @author  MCD Application Team
-  * @brief   This example discribe how to configure the camera in continuous mode
+  * @brief   This example describe how to configure the camera in continuous mode
   *          and QVGA resolution.
   *          This is the main program for Cortex-M7.  
   ******************************************************************************

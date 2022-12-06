@@ -259,7 +259,7 @@ is a scrolling list.
 
  ++ Temperature
  ---------------
- This option allows to fix temperature fo the washing, it goes between cold and 95 degree.
+ This option allows to fix temperature for the washing, it goes between cold and 95 degree.
 
  ++ Finish
  -----------

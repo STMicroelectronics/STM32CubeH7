@@ -41,7 +41,7 @@ The SystemClock_Config() function is used to configure the system clock for STM3
 Plug a headphone to hear the sound  /!\ Take care of yours ears. Default volume is 60%.
  
 Once started, LED1 is on during playback. 
-If an error occured LED3 is turned ON.
+If an error occurred LED3 is turned ON.
 
 @note Note the BDMA and the DMA run in circular buffer mode and never stop. If you break  
       with the debugger, they will keep running and a noise will be heard.

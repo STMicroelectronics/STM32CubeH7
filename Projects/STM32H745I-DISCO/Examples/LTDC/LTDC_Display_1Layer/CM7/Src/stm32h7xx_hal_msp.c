@@ -81,7 +81,7 @@ void HAL_LTDC_MspInit(LTDC_HandleTypeDef *hltdc)
 
   /* GPIOK configuration */
   gpio_init_structure.Pin       = GPIO_PIN_2 | GPIO_PIN_3 | \
-                                  GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_6 ;
+                                  GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_6 | GPIO_PIN_7;
   gpio_init_structure.Mode      = GPIO_MODE_AF_PP;
   gpio_init_structure.Pull      = GPIO_NOPULL;
   gpio_init_structure.Speed     = GPIO_SPEED_FREQ_HIGH;
@@ -89,7 +89,7 @@ void HAL_LTDC_MspInit(LTDC_HandleTypeDef *hltdc)
   HAL_GPIO_Init(GPIOK, &gpio_init_structure);
   
   /* GPIOH configuration */
-  gpio_init_structure.Pin       =  GPIO_PIN_9 | GPIO_PIN_1;
+  gpio_init_structure.Pin       = GPIO_PIN_9;
   gpio_init_structure.Mode      = GPIO_MODE_AF_PP;
   gpio_init_structure.Pull      = GPIO_NOPULL;
   gpio_init_structure.Speed     = GPIO_SPEED_FREQ_HIGH;

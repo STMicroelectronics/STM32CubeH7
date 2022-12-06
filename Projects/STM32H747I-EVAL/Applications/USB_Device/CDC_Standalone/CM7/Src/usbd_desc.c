@@ -70,8 +70,8 @@ __ALIGN_BEGIN uint8_t USBD_DeviceDesc[USB_LEN_DEV_DESC] __ALIGN_END = {
   USB_DESC_TYPE_DEVICE,         /* bDescriptorType */
   0x00,                         /* bcdUSB */
   0x02,
-  0x00,                         /* bDeviceClass */
-  0x00,                         /* bDeviceSubClass */
+  0x02,                         /* bDeviceClass */
+  0x02,                         /* bDeviceSubClass */
   0x00,                         /* bDeviceProtocol */
   USB_MAX_EP0_SIZE,             /* bMaxPacketSize */
   LOBYTE(USBD_VID),             /* idVendor */
@@ -221,7 +221,7 @@ uint8_t *USBD_VCP_ConfigStrDescriptor(USBD_SpeedTypeDef speed,
 uint8_t *USBD_VCP_InterfaceStrDescriptor(USBD_SpeedTypeDef speed,
                                          uint16_t * length)
 {
-  if (speed == 0)
+  if (speed == USBD_SPEED_HIGH)
   {
     USBD_GetString((uint8_t *) USBD_INTERFACE_HS_STRING, USBD_StrDesc, length);
   }

@@ -37,8 +37,8 @@ RIFF                RIFF HEADER
   |-hdrl            MAIN AVI HEADER
   | |-avih          AVI HEADER
   | |-strl          STREAM LIST[One per stream]
-  | | |-strh            STREAM HEADER[Requiered after above]
-  | | |-strf            STREAM FORAMT
+  | | |-strh            STREAM HEADER[Required after above]
+  | | |-strf            STREAM FORMAT
   | | |-strd            OPTIONAL -- STREAM DATA
   | | |-strn            OPTIONAL -- STREAM NAME
   |-movi            MOVIE DATA

@@ -194,7 +194,7 @@ __weak HAL_StatusTypeDef MX_MMC_SD_Init(MMC_HandleTypeDef *hmmc)
   hmmc->Init.ClockDiv            = 2;
   hmmc->Init.ClockPowerSave      = SDMMC_CLOCK_POWER_SAVE_DISABLE;
   hmmc->Init.ClockEdge           = SDMMC_CLOCK_EDGE_RISING;
-  hmmc->Init.HardwareFlowControl = SDMMC_HARDWARE_FLOW_CONTROL_DISABLE;
+  hmmc->Init.HardwareFlowControl = SDMMC_HARDWARE_FLOW_CONTROL_ENABLE;
   hmmc->Init.BusWide             = SDMMC_BUS_WIDE_8B;
 
   /* HAL SD initialization */

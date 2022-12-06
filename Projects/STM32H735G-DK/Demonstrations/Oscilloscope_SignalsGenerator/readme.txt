@@ -55,7 +55,7 @@ Digital Signal Oscilloscope with an external Signal Generator.
       1. In purpose to reach up the maximum possible conversion frequency, three specific factors
       have been considered (Sampling time, Register of Successive Approximation (SAR) Time, ADC's Clock).
 
- In this exemple to reach up the maximum ADC conversion frequency, Sampling time was configured
+ In this example to reach up the maximum ADC conversion frequency, Sampling time was configured
  as minimum (1.5 ADC's clock) and ADC's Clock was configured as maximum possible (80MHz/2=40 MHz) throw
  an external clock source provided by PLL2. SAR Time was selected as 7.5 ADC's Clock refering
  to the conversion resolution which is fixed on 14 bits to ensure a better conversion quality.

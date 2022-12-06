@@ -46,6 +46,8 @@ LEDs will inform user about ethernet cable status:
 If a DHCP server is available, a dynamic IP address can be allocated by enabling
 the DHCP process (#define LWIP_DHCP to 1 in lwipopts.h), in this case the allocated
 address could be read from "gnetif.ip_addr" field:
+While the application is executing, using the live watch feature, the value of "gnetif.ip_addr.addr" is displayed in hex format.
+The previous hex value should be converted to ip address (using any hex to ip address converter tool available online).
 For example if gnetif.ip_addr.addr = 0x0200A8C0, so the the IPv4 address is "192.168.0.2"
 
 At the beginning of the main program the HAL_Init() function is called to reset

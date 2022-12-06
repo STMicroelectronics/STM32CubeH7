@@ -243,7 +243,7 @@ int32_t FWK_MEMPOOL_GetState (FWK_MEMPOOL_t *pMemPool)
     if((MemPoolFreeSpc > pMemPool->buffSze)
          && (pMemPool->readPtr >= pMemPool->writePtr))
     {
-      /* It might happen that we continue reading while no more data are writen!
+      /* It might happen that we continue reading while no more data are written!
        * This would be giving a MemPoolFreeSpc value greater than the MemPool
        * Buffer Size. This is why the check is for value equal or greater than
        * the MemPool buffer size here below.

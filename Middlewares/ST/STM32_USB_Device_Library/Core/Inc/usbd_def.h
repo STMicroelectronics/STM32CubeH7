@@ -416,7 +416,9 @@ typedef enum
   */
 __STATIC_INLINE uint16_t SWAPBYTE(uint8_t *addr)
 {
-  uint16_t _SwapVal, _Byte1, _Byte2;
+  uint16_t _SwapVal;
+  uint16_t _Byte1;
+  uint16_t _Byte2;
   uint8_t *_pbuff = addr;
 
   _Byte1 = *(uint8_t *)_pbuff;

@@ -28,7 +28,8 @@
 #include "memory.h"
 #include "memory_msp.h"
 #include "ff_gen_drv.h"
-#include "../Components/mfxstm32l152/mfxstm32l152.h"
+#include "stm32h743i_eval_io.h"
+#include "stm32h743i_eval_sd.h"
 
 
 /* Private typedef -----------------------------------------------------------*/
@@ -42,31 +43,20 @@
 #define SD_TIMEOUT 30 * 1000
 #endif
 
-#define SD_DEFAULT_BLOCK_SIZE 512
-
-/* Defined related to stm32h743i eval board */
-#define SD_LDO_SEL_PIN          ((uint32_t)0x2000)
-#define IO_PIN_ALL              ((uint32_t)0xFFFFFF)
-#define SD_DETECT_PIN           ((uint32_t)0x8000)   
-#define SD_TRANCEIVER_PIN       ((uint32_t)0x2000)   
-#define IO_I2C_ADDRESS          ((uint16_t)0x84)  /*mfx MFX_I2C_ADDR 0*/
 
 /* Private variables ---------------------------------------------------------*/
-I2C_HandleTypeDef hI2C;
 #if (BINARY_AREA == USE_SDCARD)
 
 /* Private variables ---------------------------------------------------------*/
 /* Disk status */
 static volatile DSTATUS Stat = STA_NOINIT;
 SD_HandleTypeDef uSdHandle;
-static IO_DrvTypeDef *IoDrv = NULL;
 
 /* Private function prototypes -----------------------------------------------*/
 static DSTATUS SD_CheckStatus(BYTE lun);
 DSTATUS SD_initialize (BYTE);
 DSTATUS SD_status (BYTE);
 DRESULT SD_read (BYTE, BYTE*, DWORD, UINT);
-void SDCARD_DriveTransciver_1_8V_Callback(FlagStatus status);
 
 const Diskio_drvTypeDef  SD_Driver =
 {
@@ -152,7 +142,7 @@ static DSTATUS SD_CheckStatus(BYTE lun)
 DSTATUS SD_initialize(BYTE lun)
 {
   Stat = STA_NOINIT;
-  uint8_t mfxstm32l152Identifier;
+  BSP_IO_Init_t            IO_Init;
   
   /* uSD device interface configuration */
   uSdHandle.Instance = SDMMC1;
@@ -166,28 +156,32 @@ DSTATUS SD_initialize(BYTE lun)
   /* Initialize all required GPIO PINs */
   SDCARD_MspInit();
   
-  if (IoDrv == NULL)  /* Checks if MFX initialization never done */
+  /* Initialize the BSP IO driver and configure the SD Detect and SD Transceiver pins */
+  if (BSP_IOEXPANDER_Init(0, IOEXPANDER_IO_MODE) != BSP_ERROR_NONE)
   {
-    /* Read ID and verify the MFX is ready */
-    mfxstm32l152Identifier = mfxstm32l152_io_drv.ReadID(IO_I2C_ADDRESS);
-    if((mfxstm32l152Identifier == MFXSTM32L152_ID_1) || (mfxstm32l152Identifier == MFXSTM32L152_ID_2))
+    return RES_ERROR;
+  }
+  else
+  {
+    IO_Init.Pin  = SD_DETECT_PIN;
+    IO_Init.Mode = IO_MODE_INPUT;
+    IO_Init.Pull = IO_PULLUP;
+    if (BSP_IO_Init(0, &IO_Init) != BSP_ERROR_NONE)
     {
-      mfxstm32l152_io_drv.Init(IO_I2C_ADDRESS);
-      mfxstm32l152_io_drv.Start(IO_I2C_ADDRESS, IO_PIN_ALL);
-      mfxstm32l152_io_drv.Config(IO_I2C_ADDRESS, SD_DETECT_PIN, IO_MODE_INPUT_PU); 
-      mfxstm32l152_io_drv.Config(IO_I2C_ADDRESS, SD_TRANCEIVER_PIN , IO_MODE_OUTPUT_PP_PU); 
+      return RES_ERROR;
     }
-    else
+
+    IO_Init.Pin  = SD_LDO_SEL_PIN;
+    IO_Init.Mode = IO_MODE_OUTPUT_PP;
+    IO_Init.Pull = IO_PULLUP;
+    if (BSP_IO_Init(0, &IO_Init) != BSP_ERROR_NONE)
     {
       return RES_ERROR;
     }
   }
-  else
-  {
-    /* MFX initialization already done : do nothing */
-  }
 
-    if((mfxstm32l152_io_drv.ReadPin(IO_I2C_ADDRESS, SD_DETECT_PIN)&SD_DETECT_PIN) == SD_DETECT_PIN)
+  /* Read the status joystick pins   */
+  if(((uint32_t)BSP_IO_ReadPin(0, SD_DETECT_PIN)&SD_DETECT_PIN) == SD_DETECT_PIN)
   {
     return RES_ERROR;
   }
@@ -240,146 +234,4 @@ DRESULT SD_read(BYTE lun, BYTE *buff, DWORD sector, UINT count)
   return res;
 }
 
-void SDCARD_DriveTransciver_1_8V_Callback(FlagStatus status)
-{
-  if(status == SET)
-  {
-    /* Set the Pin state */
-    mfxstm32l152_io_drv.WritePin(IO_I2C_ADDRESS, SD_TRANCEIVER_PIN, 1);
-  }
-  else
-  {
-    /* Set the Pin state */
-    mfxstm32l152_io_drv.WritePin(IO_I2C_ADDRESS, SD_TRANCEIVER_PIN, 0);
-  }
-}
-
-/**
-  * @brief  Enable the SD Transceiver 1.8V Mode Callback.
-  */
-void HAL_SD_DriveTransciver_1_8V_Callback(FlagStatus status)
-{
-    SDCARD_DriveTransciver_1_8V_Callback(status);
-}
-
 #endif /* (BINARY_AREA == USE_SDCARD) */
-
-/********************************* LINK MFX ***********************************/
-/**
-  * @brief  Initializes MFX low level.
-  * @retval None
-  */
-//void MFX_IO_Init(void)
-//{
-//  
-//  hI2C.Instance              = I2C1;
-//  hI2C.Init.Timing           = ((uint32_t)0x40912732);
-//  hI2C.Init.OwnAddress1      = 0x72;
-//  hI2C.Init.AddressingMode   = I2C_ADDRESSINGMODE_7BIT;
-//  hI2C.Init.DualAddressMode  = I2C_DUALADDRESS_ENABLE;
-//  hI2C.Init.OwnAddress2      = 0;
-//  hI2C.Init.OwnAddress2Masks = I2C_OA2_NOMASK;
-//  hI2C.Init.GeneralCallMode  = I2C_GENERALCALL_ENABLE;
-//  hI2C.Init.NoStretchMode    = I2C_NOSTRETCH_DISABLE;
-//  
-//  /* Init the I2C */
-//  HAL_I2C_Init(&hI2C);  
-//}
-//
-///**
-//  * @brief  DeInitializes MFX low level.
-//  * @retval None
-//  */
-//void MFX_IO_DeInit(void)
-//{
-//}
-//
-///**
-//  * @brief  Configures MFX low level interrupt.
-//  * @retval None
-//  */
-//void MFX_IO_ITConfig(void)
-//{
-//}
-//
-///**
-//  * @brief  MFX writes single data.
-//  * @param  Addr: I2C address
-//  * @param  Reg: Register address 
-//  * @param  Value: Data to be written
-//  * @retval None
-//  */
-//void MFX_IO_Write(uint16_t Addr, uint8_t Reg, uint8_t Value)
-//{
-//  HAL_StatusTypeDef status = HAL_OK;
-//
-//  status = HAL_I2C_Mem_Write(&hI2C, (uint8_t)Addr, (uint16_t)Reg, I2C_MEMADD_SIZE_8BIT, &Value, 1, 100); 
-//
-//  /* Check the communication status */
-//  if(status != HAL_OK)
-//  {
-//    return;
-//  }
-//}
-//
-///**
-//  * @brief  MFX reads single data.
-//  * @param  Addr: I2C address
-//  * @param  Reg: Register address 
-//  * @retval Read data
-//  */
-//uint8_t MFX_IO_Read(uint16_t Addr, uint8_t Reg)
-//{
-//  HAL_StatusTypeDef status = HAL_OK;
-//  uint8_t Value = 0;
-//  
-//  status = HAL_I2C_Mem_Read(&hI2C, (uint8_t)Addr, Reg, I2C_MEMADD_SIZE_8BIT, &Value, 1, 1000);
-//  
-//  /* Check the communication status */
-//  if(status != HAL_OK)
-//  {
-//    return 0;
-//  }
-//  return Value;   
-//}
-//
-///**
-//  * @brief  MFX reads multiple data.
-//  * @param  Addr: I2C address
-//  * @param  Reg: Register address 
-//  * @param  Buffer: Pointer to data buffer
-//  * @param  Length: Length of the data
-//  * @retval Number of read data
-//  */
-//uint16_t MFX_IO_ReadMultiple(uint16_t Addr, uint8_t Reg, uint8_t *Buffer, uint16_t Length)
-//{
-//  return 0;
-//}
-//
-///**
-//  * @brief  MFX delay 
-//  * @param  Delay: Delay in ms
-//  * @retval None
-//  */
-//void MFX_IO_Delay(uint32_t Delay)
-//{
-//  HAL_Delay(Delay);
-//}
-//
-///**
-//  * @brief  Used by Lx family but requested for MFX component compatibility.
-//  * @retval None
-//  */
-//void MFX_IO_Wakeup(void) 
-//{
-//}
-//
-///**
-//  * @brief  Used by Lx family but requested for MXF component compatibility.
-//  * @retval None
-//  */
-//void MFX_IO_EnableWakeupPin(void) 
-//{
-//}
-
-

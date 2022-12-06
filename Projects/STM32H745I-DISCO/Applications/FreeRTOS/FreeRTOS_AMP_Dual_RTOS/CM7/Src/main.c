@@ -219,7 +219,7 @@ static BaseType_t xAreMessageBufferAMPTasksStillRunning( void )
   return xDemoStatus;
 }
 
-/* Check task fonction 
+/* Check task function 
    */
 static void prvCheckTask( void *pvParameters )
 {

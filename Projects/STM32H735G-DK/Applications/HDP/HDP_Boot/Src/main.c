@@ -514,7 +514,7 @@ AA: Level 0, CC: Level 2, else Level 1 */
   HAL_DeInit();
 
   /*  The RSS service to jump out of the secure area code execution will now be executed
-  The developper has to take care to clear all the RAMs and register containing sensitive datas
+  The developer has to take care to clear all the RAMs and register containing sensitive data
   The data cache needs also to be cleared, a cache DeInit will not be sufficient, the data need to be unvalidated
   */
   RSS->exitSecureArea((uint32_t) 0x08040000, RSS_ENABLE_JTAG_AT_EXIT);

@@ -37,8 +37,8 @@ RIFF                RIFF HEADER
   |-hdrl            MAIN AVI HEADER
   | |-avih          AVI HEADER
   | |-strl          STREAM LIST[One per stream]
-  | | |-strh            STREAM HEADER[Requiered after above]
-  | | |-strf            STREAM FORAMT
+  | | |-strh            STREAM HEADER[Required after above]
+  | | |-strf            STREAM FORMAT
   | | |-strd            OPTIONAL -- STREAM DATA
   | | |-strn            OPTIONAL -- STREAM NAME
   |-movi            MOVIE DATA
@@ -450,7 +450,7 @@ static void avi_add_movi(AVI_FormatTypeDef *h,  int level,
 #endif /* AUDIO_CODEC_AVI_STATIC_ALLOC */
     if (0 == h->movi_cnt % 16)
     {
-      /* realloc implementaion */
+      /* realloc implementation */
       void *p = NULL;
       p = MEM_MALLOC(sizeof(struct movi_range)*(h->movi_cnt+16));
       if (p)

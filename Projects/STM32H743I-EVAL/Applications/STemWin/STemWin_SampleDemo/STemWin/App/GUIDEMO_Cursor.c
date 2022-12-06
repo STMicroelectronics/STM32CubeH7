@@ -74,46 +74,50 @@ typedef struct {
 */
 
 static const CURSORTYPE_INFO _CursorArrow = {
-  &GUI_CursorArrowS, 'S',
-  &GUI_CursorArrowM, 'M',
+  {{&GUI_CursorArrowS, 'S'},
   #if (NUM_CURSORS == 3)
-    &GUI_CursorArrowL, 'L',
+    {&GUI_CursorArrowM, 'M'},
+    {&GUI_CursorArrowL, 'L'}},
     "arrow cursors"
   #else
-    "arrow\ncursors"
+   {&GUI_CursorArrowM, 'M'}},
+   "arrow\ncursors"
   #endif
 };
 
 
 static const CURSORTYPE_INFO _CursorArrowI = {
-  &GUI_CursorArrowSI, 'S',
-  &GUI_CursorArrowMI, 'M',
+{{ &GUI_CursorArrowSI, 'S'},
   #if (NUM_CURSORS == 3)
-    &GUI_CursorArrowLI, 'L',
+    { &GUI_CursorArrowMI, 'M'},
+    {&GUI_CursorArrowLI, 'L'}},
     "inverted arrow cursors"
   #else
-    "inverted\narrow cursors"
+     { &GUI_CursorArrowMI, 'M'}},
+     "inverted\narrow cursors"
   #endif
 };
 
 static const CURSORTYPE_INFO _CursorCross = {
-  &GUI_CursorCrossS, 'S',
-  &GUI_CursorCrossM, 'M',
+  {{&GUI_CursorCrossS, 'S'},
   #if (NUM_CURSORS == 3)
-    &GUI_CursorCrossL, 'L',
+    {&GUI_CursorCrossM, 'M'},
+    {&GUI_CursorCrossL, 'L'}},
     "cross cursors"
   #else
+    {&GUI_CursorCrossM, 'M'}},
     "cross\ncursors"
   #endif
 };
 
 static const CURSORTYPE_INFO _CursorCrossI = {
-  &GUI_CursorCrossSI, 'S',
-  &GUI_CursorCrossMI, 'M',
+  {{&GUI_CursorCrossSI, 'S'},
   #if (NUM_CURSORS == 3)
-    &GUI_CursorCrossLI, 'L',
+   {&GUI_CursorCrossMI, 'M'},
+   {&GUI_CursorCrossLI, 'L'}},
     "inverted cross cursors"
   #else
+    {&GUI_CursorCrossMI, 'M'}},
     "inverted\ncross cursors"
   #endif
 };

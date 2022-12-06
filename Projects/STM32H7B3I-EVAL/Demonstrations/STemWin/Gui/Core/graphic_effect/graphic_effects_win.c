@@ -916,7 +916,7 @@ static void Startup(WM_HWIN hWin, uint16_t xpos, uint16_t ypos)
   {
     
   hWinInfo = GUI_CreateDialogBox(_aDialogInfo, GUI_COUNTOF(_aDialogInfo), _cbDialog_info, hWin, 0, 0);
-          sprintf(dialog_msg, "Cheking BMP files from media storage ...");
+          sprintf(dialog_msg, "Checking BMP files from media storage ...");
           hItem = WM_GetDialogItem(hWinInfo, ID_TEXT_FILENAME);
           TEXT_SetText(hItem, dialog_msg);
           WM_InvalidateWindow(hItem);

@@ -173,7 +173,7 @@ AUDIO_EQUALIZER_ErrorTypDef  AUDIOEQ_Init(uint8_t use_graphic_eq, uint8_t use_lo
   {
     /* Effect Initialization and configuration */
     /*-----------------------------------------*/
-    /* Allocat mem for GrEq */
+    /* Allocate mem for GrEq */
     pGreqPersistentMem = EQ_MEM_Malloc(greq_persistent_mem_size); /* greq_persistent_mem_size  0x224 */
     pGreqScratchMem = EQ_MEM_Malloc(greq_scratch_mem_size);       /* greq_scratch_mem_size  0xF00 */
  
@@ -231,7 +231,7 @@ AUDIO_EQUALIZER_ErrorTypDef  AUDIOEQ_Init(uint8_t use_graphic_eq, uint8_t use_lo
   {
     int32_t k=0;
 
-    /* Allocat mem for Biq */
+    /* Allocate mem for Biq */
     pBIQPersistentMem = EQ_MEM_Malloc(biquad_df1_cascade_persistent_mem_size); /* biquad_df1_cascade_persistent_mem_size  0x025C */ 
     pBIQScratchMem = EQ_MEM_Malloc(biquad_df1_cascade_scratch_mem_size);       /* biquad_df1_cascade_scratch_mem_size  0x04 */
 

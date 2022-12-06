@@ -251,7 +251,7 @@ static void MessageQueueProducer(void *argument)
   /* Infinite loop */
   for (;;)
   {
-    if (osMessageQueuePut(osQueueHandle, &ProducerValue, 100, NULL) != osOK)
+    if (osMessageQueuePut(osQueueHandle, &ProducerValue, 100, 0U) != osOK)
     {
       ++ProducerErrors;
        

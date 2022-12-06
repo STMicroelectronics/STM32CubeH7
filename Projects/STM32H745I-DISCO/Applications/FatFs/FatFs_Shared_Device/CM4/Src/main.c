@@ -139,7 +139,7 @@ static void FS_FileOperations(void)
   }
 
   LOCK_HSEM(UART_HSEM_ID);
-  printf("[CM4]:\topening '%s' for writting...\n", CM4_FILE);
+  printf("[CM4]:\topening '%s' for writing...\n", CM4_FILE);
   UNLOCK_HSEM(UART_HSEM_ID);
 
   /* Create and Open a new text file object with write access */

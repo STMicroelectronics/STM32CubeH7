@@ -524,7 +524,7 @@ uint32_t WavProcess_EncodeData(int8_t *pBufIn, int8_t *pBufOut, uint32_t* nEnc, 
 {
   if (WavEncInited)
   {
-    /* Retrun the same buffer without processing */
+    /* Return the same buffer without processing */
     *(uint32_t*)pBufOut = (uint32_t)pBufIn;
 
     /* Update the total audio data size */

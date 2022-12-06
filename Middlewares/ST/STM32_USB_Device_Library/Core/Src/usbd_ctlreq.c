@@ -895,7 +895,7 @@ static void USBD_SetFeature(USBD_HandleTypeDef *pdev, USBD_SetupReqTypedef *req)
   }
   else if (req->wValue == USB_FEATURE_TEST_MODE)
   {
-    pdev->dev_test_mode = req->wIndex >> 8;
+    pdev->dev_test_mode = (uint8_t)(req->wIndex >> 8);
     (void)USBD_CtlSendStatus(pdev);
   }
   else

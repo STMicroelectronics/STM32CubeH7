@@ -38,6 +38,8 @@ LEDs will inform user about ethernet cable status:
 If a DHCP server is available, a dynamic IP address can be allocated by enabling
 the DHCP process (#define LWIP_DHCP to 1 in lwipopts.h), in this case the allocated
 address could be read from "gnetif.ip_addr" field:
+While the application is executing, using the live watch feature, the value of "gnetif.ip_addr.addr" is displayed in hex format.
+The previous hex value should be converted to ip address (using any hex to ip address converter tool available online).
 For example if gnetif.ip_addr.addr = 0x0200A8C0, so the the IPv4 address is "192.168.0.2"
 
 At the beginning of the main program the HAL_Init() function is called to reset
@@ -75,6 +77,8 @@ For more details about this application, refer to UM1713 "STM32Cube interfacing 
       Depending on the use case it is also possible to configure the cache attributes using the MPU.
       Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
       Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
+
+@Note CubeIDE project is not available for this application due to an error in rand.c.
 
 @par Keywords
 

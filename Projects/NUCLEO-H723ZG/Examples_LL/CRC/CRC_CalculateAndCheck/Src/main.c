@@ -50,7 +50,7 @@ static const uint8_t aDataBuffer[BUFFER_SIZE] =
 };
 
 /* Expected CRC Value */
-uint32_t uwExpectedCRCValue = 0xA9866043;
+uint32_t uwExpectedCRCValue = 0xB553F395;
 
 /* Private function prototypes -----------------------------------------------*/
 static void     SystemClock_Config(void);
@@ -146,7 +146,7 @@ uint32_t Calculate_CRC(uint32_t BufferSize)
   /* Compute the CRC of Data Buffer array*/
   for (index = 0; index < (BufferSize / 4); index++)
   {
-    data = (uint32_t)((aDataBuffer[4 * index + 3] << 24) | (aDataBuffer[4 * index + 2] << 16) | (aDataBuffer[4 * index + 1] << 8) | aDataBuffer[4 * index]);
+    data = (uint32_t)((aDataBuffer[4 * index] << 24) | (aDataBuffer[4 * index + 1] << 16) | (aDataBuffer[4 * index + 2] << 8) | aDataBuffer[4 * index + 3]);
     LL_CRC_FeedData32(CRC, data);
   }
   
@@ -159,11 +159,11 @@ uint32_t Calculate_CRC(uint32_t BufferSize)
     }
     if  (BUFFER_SIZE % 4 == 2)
     {
-      LL_CRC_FeedData16(CRC, (uint16_t)((aDataBuffer[4 * index + 1]<<8) | aDataBuffer[4 * index]));
+      LL_CRC_FeedData16(CRC, (uint16_t)((aDataBuffer[4 * index]<<8) | aDataBuffer[4 * index + 1]));
     }
     if  (BUFFER_SIZE % 4 == 3)
     {
-      LL_CRC_FeedData16(CRC, (uint16_t)((aDataBuffer[4 * index + 1]<<8) | aDataBuffer[4 * index]));
+      LL_CRC_FeedData16(CRC, (uint16_t)((aDataBuffer[4 * index]<<8) | aDataBuffer[4 * index + 1]));
       LL_CRC_FeedData8(CRC, aDataBuffer[4 * index + 2]);
     }
   }

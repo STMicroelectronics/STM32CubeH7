@@ -3,7 +3,7 @@
   * @file    Demonstration/STM32H745-Discovery_Demo/CM7/Inc/signals.h
   * @author  MCD Application Team
   * @brief   This file contains definitions applications binary images 
-  *          and graphical resouces
+  *          and graphical resources
   ******************************************************************************
   * @attention
   *

@@ -289,7 +289,7 @@ static int8_t CDC_Itf_Receive(uint8_t * Buf, uint32_t * Len)
 
 /**
   * @brief  CDC_TransmitCplt
-  *         Data transmited callback
+  *         Data transmitted callback
   *
   *         @note
   *         This function is IN transfer complete callback used to inform user that

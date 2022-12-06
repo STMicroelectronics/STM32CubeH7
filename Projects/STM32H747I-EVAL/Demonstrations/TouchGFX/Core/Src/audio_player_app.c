@@ -96,7 +96,7 @@ BSP_AUDIO_Init_t AudioPlayInit;
   AudioPlayInit.SampleRate = I2S_AUDIOFREQ_48K;
   AudioPlayInit.BitsPerSample = AUDIO_RESOLUTION_16B;
   AudioPlayInit.Volume = volume;
-   /* Try to Init Audio interface in diffrent config in case of failure */
+   /* Try to Init Audio interface in different config in case of failure */
   BSP_AUDIO_OUT_Init (0, &AudioPlayInit);
 
 

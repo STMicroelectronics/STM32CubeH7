@@ -41,7 +41,7 @@ The LTDC is reading continuously the LCD Frame buffer from SDRAM, sent it to DSI
 via the DSI DPHY to the KoD display that decodes DSI packets and refresh its internal Graphic RAM to display on glass.
 
 The Frame number display is managed by Line Event callback in which the Frame number is incremented
-each time a line event occurs. When entering to ULPM, The Frame number is unchanged untill the
+each time a line event occurs. When entering to ULPM, The Frame number is unchanged until the
 exit from this mode.
 
 LED4 ON: DSI PHY Data lane in ULPM mode
@@ -120,7 +120,7 @@ LTDC, DMA2D , WVGA, ARGB8888, SDRAM, Burst mode
 
   - This example runs on STM32H747xx/STM32H757xx devices.
 
-  - This example has been tested with STM32H747I-EVAL  board with SMPS (SD Convertor) power supply config and can be
+  - This example has been tested with STM32H747I-EVAL  board with SMPS (SD Converter) power supply config and can be
     easily tailored to any other supported device and development board.
 
 @par How to use it ?

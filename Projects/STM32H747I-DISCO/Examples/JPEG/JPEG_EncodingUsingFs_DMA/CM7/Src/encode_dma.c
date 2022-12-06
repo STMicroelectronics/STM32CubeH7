@@ -262,7 +262,7 @@ void HAL_JPEG_EncodeCpltCallback(JPEG_HandleTypeDef *hjpeg)
 /*
   * @brief Read and reorder MAX_INPUT_LINES lines from BMP file and fill data buffer
   * @param file: pointer to the source file name
-  * @param file: pointer to the Data Buffer Adress
+  * @param file: pointer to the Data Buffer Address
   * @param file: pointer to the Data Buffer Size
   * @retval None
   */

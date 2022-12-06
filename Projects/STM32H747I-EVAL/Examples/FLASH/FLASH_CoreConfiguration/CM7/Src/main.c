@@ -110,7 +110,7 @@ int main(void)
   /* Program CM4 code */
   cm4_buffer_size = (sizeof(acCM4_Code)/(sizeof(*acCM4_Code)));
   
-  /* Initialize Address to Bank2 start adress 0x08100000*/
+  /* Initialize Address to Bank2 start address 0x08100000*/
   Address = FLASH_BANK2_BASE;
   i=(cm4_buffer_size/32)+1;
 

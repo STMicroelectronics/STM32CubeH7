@@ -28,8 +28,8 @@
 #define USBD_PID                      0x5750
 #define USBD_LANGID_STRING            0x409
 #define USBD_MANUFACTURER_STRING      "STMicroelectronics"
-#define USBD_PRODUCT_HS_STRING        "Custome HID in HS Mode"
-#define USBD_PRODUCT_FS_STRING        "Custome HID in FS Mode"
+#define USBD_PRODUCT_HS_STRING        "Custom HID in HS Mode"
+#define USBD_PRODUCT_FS_STRING        "Custom HID in FS Mode"
 #define USBD_CONFIGURATION_HS_STRING  "HID Config"
 #define USBD_INTERFACE_HS_STRING      "HID Interface"
 #define USBD_CONFIGURATION_FS_STRING  "HID Config"

@@ -90,7 +90,7 @@ uint8_t MSC_File_Operations(void)
       /* Compare read data with the expected data */
       if((bytesread == bytesWritten))
       {
-        LCD_UsrTrace("INFO : FatFs data compare SUCCES");
+        LCD_UsrTrace("INFO : FatFs data compare SUCCESS");
         LCD_UsrTrace("\n");
       }
       else

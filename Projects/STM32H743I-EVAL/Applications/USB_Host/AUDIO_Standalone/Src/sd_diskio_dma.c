@@ -43,7 +43,7 @@
 #endif
 
 /*
-* when using cachable memory region, it may be needed to maintain the cache
+* when using cacheable memory region, it may be needed to maintain the cache
 * validity. Enable the define below to activate a cache maintenance at each
 * read and write operation.
 * Notice: This is applicable only for cortex M7 based platform.
@@ -52,7 +52,7 @@
 
 /* Private variables --------------------------------------------------------- */
 /*
-* Some DMA requires 4-Byte aligned address buffer to correctly read/wite data,
+* Some DMA requires 4-Byte aligned address buffer to correctly read/write data,
 * in FatFs some accesses aren't thus we need a 4-byte aligned scratch buffer to correctly
 * transfer data
 */
@@ -183,7 +183,7 @@ DRESULT SD_read(BYTE lun, BYTE * buff, DWORD sector, UINT count)
       while((ReadStatus == 0) && ((HAL_GetTick() - timeout) < SD_TIMEOUT))
       {
       }
-      /* incase of a timeout return error */
+      /* in case of a timeout return error */
       if (ReadStatus == 0)
       {
         res = RES_ERROR;
@@ -308,7 +308,7 @@ DRESULT SD_write(BYTE lun, const BYTE * buff, DWORD sector, UINT count)
       while((WriteStatus == 0) && ((HAL_GetTick() - timeout) < SD_TIMEOUT))
       {
       }
-      /* incase of a timeout return error */
+      /* in case of a timeout return error */
       if (WriteStatus == 0)
       {
         res = RES_ERROR;

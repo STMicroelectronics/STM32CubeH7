@@ -122,7 +122,7 @@ void JPEG_Decode_DeInit(JPEG_HandleTypeDef *hjpeg)
 /**
   * @brief  Decode_DMA
   * @param hjpeg: JPEG handle pointer
-  * @param  FrameSourceAddress    : video buffer adress.
+  * @param  FrameSourceAddress    : video buffer address.
   * @param  DestAddress : YCbCr destination Frame Buffer Address.
   * @retval None
   */
