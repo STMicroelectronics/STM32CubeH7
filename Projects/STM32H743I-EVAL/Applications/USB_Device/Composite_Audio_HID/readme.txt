@@ -28,7 +28,7 @@ This application is a part of the USB Device Library package using STM32Cube fir
 use USB device application based on the Audio HID composite device on the STM32L496xx devices.
 
 
-This is a typical application on how to use the STM32L496xx USB OTG Device peripheral where the STM32 MCU is
+This is a typical application on how to use the STM32H743xx USB OTG Device peripheral where the STM32 MCU is
 enumerated as a composite device containing 2 functions:
     1 Audio functions: This application is a part of the USB Device Library package using STM32Cube firmware. It describes how to
                        use USB device application based on the AUDIO Class implementation of an audio streaming
@@ -116,24 +116,24 @@ compiler preprocessor (already done in the preconfigured projects provided with 
       - "USE_USB_FS" when using USB Full Speed (FS) Core
 
 It is possible to fine tune needed USB Device features by modifying defines values in USBD configuration
-file “usbd_conf.h” available under the project includes directory, in a way to fit the application
+file â€œusbd_conf.hâ€ available under the project includes directory, in a way to fit the application
 requirements, such as:
  - USBD_AUDIO_FREQ, specifying the sampling rate conversion from original audio file sampling rate to the
    sampling rate supported by the device.
 
 
 @Note If the  application is using the DTCM/ITCM memories (@0x20000000/ 0x0000000: not cacheable and only accessible
-      by the Cortex M7 and the  MDMA), no need for cache maintenance when the Cortex M7 and the MDMA access these RAMs.
-      If the application needs to use DMA(or other masters) based access or requires more RAM, then  the user has to:
-              - Use a non TCM SRAM. (example : D1 AXI-SRAM @ 0x24000000)
-              - Add a cache maintenance mechanism to ensure the cache coherence between CPU and other masters(DMAs,DMA2D,LTDC,MDMA).
-              - The addresses and the size of cacheable buffers (shared between CPU and other masters)
-                must be	properly defined to be aligned to L1-CACHE line size (32 bytes).
+      by the Cortex M7 and the Â MDMA), no need for cache maintenance when the Cortex M7 and the MDMA access these RAMs.
+Â Â Â Â Â  If the application needs to use DMA(or other masters) based access or requires more RAM, then Â the user has to:
+Â Â Â Â Â Â Â Â Â Â Â  Â  - Use a non TCM SRAM. (example : D1 AXI-SRAM @ 0x24000000)
+Â Â Â Â Â Â Â Â Â Â Â  Â  - Add a cache maintenance mechanism to ensure the cache coherence between CPU and other masters(DMAs,DMA2D,LTDC,MDMA).
+Â Â Â Â Â Â Â        - The addresses and the size of cacheable buffers (shared between CPU and other masters)
+                must be	properlyÂ defined to be aligned to L1-CACHE line size (32 bytes).
 
 @Note It is recommended to enable the cache and maintain its coherence.
       Depending on the use case it is also possible to configure the cache attributes using the MPU.
-      Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
-      Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
+Â Â Â Â Â Â Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
+Â Â Â Â Â Â Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
 
 @par Keywords
 
