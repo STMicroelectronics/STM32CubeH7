@@ -1,8 +1,0 @@
-#include <touchgfx/hal/Types.hpp>
-
-FONT_GLYPH_LOCATION_FLASH_PRAGMA
-KEEP extern const uint8_t unicodes_RobotoCondensed_Regular_20_4bpp_4[] FONT_GLYPH_LOCATION_FLASH_ATTRIBUTE =
-{
-    // Unicode: [0x2017, underscoredbl]
-    0xFC, 0xFF, 0xFF, 0xDF, 0x86, 0x88, 0x88, 0x68, 0x86, 0x88, 0x88, 0x68, 0xFC, 0xFF, 0xFF, 0xDF
-};
