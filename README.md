@@ -13,7 +13,14 @@
 
 The **STM32CubeH7 MCU Package** projects are directly running on the STM32H7 series boards. You can find in each Projects/*Board name* directories a set of software projects (Applications/Demonstration/Examples).
 
-In this FW Package, the modules **Middlewares/ST/TouchGFX**, **Middlewares/ST/STemWin**, and **Middlewares/ST/STM32_Audio** are not directly accessible. They must be downloaded from a ST server. The respective URL are available in a readme.txt file inside each module.
+## Some middleware libraries are unavailable in this repository
+
+In this repository, the middleware libraries listed below **along with** the projects (demos, applications, and examples) using them, are **not available** as they (the middleware libraries) are subject to some restrictive license terms requiring the user's approval via a "click thru" procedure.
+* `./Middlewares/ST/STM32_Audio`
+* `./Middlewares/ST/STemWin`
+* `./Middlewares/ST/TouchGFX`
+
+If needed, they can be found inside the full firmware package available on our website `st.com` and downloadable from [here](https://www.st.com/content/st_com/en/products/embedded-software/mcu-mpu-embedded-software/stm32-embedded-software/stm32cube-mcu-mpu-packages/stm32cubeh7.html#get-software). You will be prompted to login or to register in case you have no account.
 
 ## Release note
 
@@ -46,6 +53,4 @@ Details about the content of this release are available in the release note [her
 
 ## Troubleshooting
 
-**Caution** : The issues and the pull-requests are **strictly limited** to submit problems or suggestions related to the software delivered in this repository.
-
-**For any other question** related to the product, the hardware performance or characteristics, the tools, the environment, you can submit it to the **ST Community** on the STM32 MCUs related [page](https://community.st.com/s/group/0F90X000000AXsASAW/stm32-mcus).
+Please refer to the [CONTRIBUTING.md](CONTRIBUTING.md) guide.

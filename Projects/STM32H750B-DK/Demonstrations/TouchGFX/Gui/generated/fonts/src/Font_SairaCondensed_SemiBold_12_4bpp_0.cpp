@@ -1,8 +1,0 @@
-#include <touchgfx/hal/Types.hpp>
-
-FONT_GLYPH_LOCATION_FLASH_PRAGMA
-KEEP extern const uint8_t unicodes_SairaCondensed_SemiBold_12_4bpp_0[] FONT_GLYPH_LOCATION_FLASH_ATTRIBUTE =
-{
-    // Unicode: [0x003F, question]
-    0xE8, 0x7E, 0x33, 0xF9, 0x00, 0xF6, 0x60, 0x9E, 0xC0, 0x08, 0x80, 0x03, 0x50, 0x03, 0xE0, 0x08
-};
