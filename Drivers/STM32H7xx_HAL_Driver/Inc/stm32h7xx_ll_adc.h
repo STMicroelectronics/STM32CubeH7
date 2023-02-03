@@ -385,9 +385,10 @@ extern "C" {
 #define TEMPSENSOR_CAL2_ADDR               ((uint16_t*) (0x1FF1E840UL)) /* Internal temperature sensor, address of parameter TS_CAL2: On STM32H7, temperature sensor ADC raw data acquired at temperature 110 DegC (tolerance: +-5 DegC), Vref+ = 3.3 V (tolerance: +-10 mV). */
 #endif /* ADC_VER_V5_3 */
 
-#define TEMPSENSOR_CAL1_TEMP               (30L)                        /* Internal temperature sensor, temperature at which temperature sensor has been calibrated in production for data into TEMPSENSOR_CAL1_ADDR (tolerance: +-5 DegC) (unit: DegC). */
-#define TEMPSENSOR_CAL2_TEMP               (110L)                       /* Internal temperature sensor, temperature at which temperature sensor has been calibrated in production for data into TEMPSENSOR_CAL2_ADDR (tolerance: +-5 DegC) (unit: DegC). */
-#define TEMPSENSOR_CAL_VREFANALOG          (3300UL)                     /* Analog voltage reference (Vref+) voltage with which temperature sensor has been calibrated in production (+-10 mV) (unit: mV). */
+#define TEMPSENSOR_CAL1_TEMP               (30L)                                          /* Internal temperature sensor, temperature at which temperature sensor has been calibrated in production for data into TEMPSENSOR_CAL1_ADDR (tolerance: +-5 DegC) (unit: DegC). */
+#define TEMPSENSOR_CAL2_TEMP               ((HAL_GetREVID() <= REV_ID_Y) ? 110L : 130L)   /* Internal temperature sensor, temperature at which temperature sensor has been calibrated in production for data into TEMPSENSOR_CAL2_ADDR (tolerance: +-5 DegC) (unit: DegC). */
+#define TEMPSENSOR_CAL_VREFANALOG          (3300UL)                                       /* Analog voltage reference (Vref+) voltage with which temperature sensor has been calibrated in production (+-10 mV) (unit: mV). */
+
 
 /* Registers addresses with ADC linearity calibration content (programmed during device production, specific to each device) */
 #define ADC_LINEAR_CALIB_REG_1_ADDR ((uint32_t*) (0x1FF1EC00UL))
