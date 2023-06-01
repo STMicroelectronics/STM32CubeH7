@@ -38,6 +38,7 @@ Below is the list of the BSP *component* drivers to be used with this BSP *board
 * [stm32-ov9655](https://github.com/STMicroelectronics/stm32-ov9655)
 * [stm32-ov5640](https://github.com/STMicroelectronics/stm32-ov5640)
 * [stm32-wm8994](https://github.com/STMicroelectronics/stm32-wm8994)
+* [stm32-nt35510](https://github.com/STMicroelectronics/stm32-nt35510)
 
 ## Troubleshooting
 

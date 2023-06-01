@@ -30,15 +30,21 @@
 #include "stm32h747i_discovery_errno.h"
 #include "lcd.h"
 
+#if (USE_LCD_CTRL_NT35510 == 1)
+/* Include NT35510 LCD Driver IC driver code */
+#include "../Components/nt35510/nt35510.h"
+#endif /* USE_LCD_CTRL_NT35510 */
+
 #if (USE_LCD_CTRL_OTM8009A == 1)
 /* Include OTM8009A LCD Driver IC driver code */
 #include "../Components/otm8009a/otm8009a.h"
-#endif
+#endif /* USE_LCD_CTRL_OTM8009A */
 
 #if (USE_LCD_CTRL_ADV7533 == 1)
 /* Include ADV7533 HDMI Driver IC driver code */
 #include "../Components/adv7533/adv7533.h"
-#endif
+#endif /* USE_LCD_CTRL_ADV7533 */
+
 /** @addtogroup BSP
   * @{
   */

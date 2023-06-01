@@ -19,6 +19,10 @@
   *
   ******************************************************************************
   */
+/* IMPORTANT: One of the following flags must be enabled in stm32h747i_discovery_conf.h file */
+/* options in order to select the target daughter board revision connected on STM32H747I DISCOVERY : !!!!!!!!!! */
+/* USE_LCD_CTRL_OTM8009A */     /* Applicable for all LCD daughter boards (MB1166) execept for Rev -A09 */
+/* USE_LCD_CTRL_NT35510  */     /* Applicable only for LCD daughter boards (MB1166) Rev -A09 */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef STM32H747I_DISCO_H

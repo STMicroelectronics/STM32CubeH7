@@ -31,6 +31,7 @@
 #define USE_COM_LOG                         0U
 #define USE_BSP_COM_FEATURE                 0U
 /* LCD controllers defines */
+#define USE_LCD_CTRL_NT35510                0U
 #define USE_LCD_CTRL_OTM8009A               1U
 #define USE_LCD_CTRL_ADV7533                0U
 
