@@ -1,6 +1,6 @@
 # Middleware USB Host MCU Component
 
-![latest tag](https://img.shields.io/github/v/tag/STMicroelectronics/stm32_mw_usb_host.svg?color=brightgreen)
+![supported tag](https://img.shields.io/badge/tag-v3.5.0-brightgreen.svg)
 
 ## Overview
 
@@ -29,7 +29,7 @@ It includes two main modules:
 
 ## Release note
 
-Details about the content of this release are available in the release note [here](https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32_mw_usb_host/blob/master/Release_Notes.html).
+Details about the content of this release are available in the release note [here](https://htmlpreview.github.io/?https://github.com/STMicroelectronics/STM32CubeH7/blob/master/Middlewares/ST/STM32_USB_Host_Library/Release_Notes.html).
 
 ## Troubleshooting
 

@@ -1,6 +1,6 @@
 # Middleware USB Device MCU Component
 
-![latest tag](https://img.shields.io/github/v/tag/STMicroelectronics/stm32_mw_usb_device.svg?color=brightgreen)
+![supported tag](https://img.shields.io/badge/tag-v2.11.1-brightgreen.svg)
 
 ## Overview
 
@@ -29,7 +29,7 @@ These files’ APIs will be called within every USB device application regardles
 
 ## Release note
 
-Details about the content of this release are available in the release note [here](https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32_mw_usb_device/blob/master/Release_Notes.html).
+Details about the content of this release are available in the release note [here](https://htmlpreview.github.io/?https://github.com/STMicroelectronics/STM32CubeH7/blob/master/Middlewares/ST/STM32_USB_Device_Library/Release_Notes.html).
 
 ## Troubleshooting
 
