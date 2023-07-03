@@ -1423,17 +1423,29 @@ HAL_StatusTypeDef HAL_ETH_ReleaseTxPacket(ETH_HandleTypeDef *heth)
         /* Disable Ptp transmission */
         CLEAR_BIT(heth->Init.TxDesc[idx].DESC3, (0x40000000U));
 
-        /* Get timestamp low */
-        timestamp->TimeStampLow = heth->Init.TxDesc[idx].DESC0;
-        /* Get timestamp high */
-        timestamp->TimeStampHigh = heth->Init.TxDesc[idx].DESC1;
+        if ((heth->Init.TxDesc[idx].DESC3 & ETH_DMATXNDESCWBF_LD )
+          && (heth->Init.TxDesc[idx].DESC3 & ETH_DMATXNDESCWBF_TTSS))
+        {
+          /* Get timestamp low */
+          timestamp->TimeStampLow = heth->Init.TxDesc[idx].DESC0;
+          /* Get timestamp high */
+          timestamp->TimeStampHigh = heth->Init.TxDesc[idx].DESC1;
+        }
+        else
+        {
+          timestamp->TimeStampHigh = timestamp->TimeStampLow = UINT32_MAX;
+        }
+
 #endif /* HAL_ETH_USE_PTP */
 
 #if (USE_HAL_ETH_REGISTER_CALLBACKS == 1)
         /*Call registered callbacks*/
 #ifdef HAL_ETH_USE_PTP
         /* Handle Ptp  */
-        heth->txPtpCallback(dmatxdesclist->PacketAddress[idx], timestamp);
+        if (timestamp->TimeStampHigh != UINT32_MAX && timestamp->TimeStampLow != UINT32_MAX)
+        {
+          heth->txPtpCallback(dmatxdesclist->PacketAddress[idx], timestamp);
+        }
 #endif  /* HAL_ETH_USE_PTP */
         /* Release the packet.  */
         heth->txFreeCallback(dmatxdesclist->PacketAddress[idx]);
@@ -1441,7 +1453,10 @@ HAL_StatusTypeDef HAL_ETH_ReleaseTxPacket(ETH_HandleTypeDef *heth)
         /* Call callbacks */
 #ifdef HAL_ETH_USE_PTP
         /* Handle Ptp  */
-        HAL_ETH_TxPtpCallback(dmatxdesclist->PacketAddress[idx], timestamp);
+        if (timestamp->TimeStampHigh != UINT32_MAX && timestamp->TimeStampLow != UINT32_MAX)
+        {
+          HAL_ETH_TxPtpCallback(dmatxdesclist->PacketAddress[idx], timestamp);
+        }
 #endif  /* HAL_ETH_USE_PTP */
         /* Release the packet.  */
         HAL_ETH_TxFreeCallback(dmatxdesclist->PacketAddress[idx]);
