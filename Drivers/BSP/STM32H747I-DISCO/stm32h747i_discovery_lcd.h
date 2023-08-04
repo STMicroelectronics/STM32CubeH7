@@ -267,7 +267,7 @@ int32_t BSP_LCD_RegisterMspCallbacks (uint32_t Instance, BSP_LCD_Cb_t *CallBacks
 #endif /*(USE_HAL_DSI_REGISTER_CALLBACKS == 1) */
 
 /* LCD specific APIs: Layer control & LCD HW reset */
-int32_t BSP_LCD_Relaod(uint32_t Instance, uint32_t ReloadType);
+int32_t BSP_LCD_Reload(uint32_t Instance, uint32_t ReloadType);
 int32_t BSP_LCD_ConfigLayer(uint32_t Instance, uint32_t LayerIndex, BSP_LCD_LayerConfig_t *Config);
 int32_t BSP_LCD_SetLayerVisible(uint32_t Instance, uint32_t LayerIndex, FunctionalState State);
 int32_t BSP_LCD_SetTransparency(uint32_t Instance, uint32_t LayerIndex, uint8_t Transparency);
@@ -313,6 +313,7 @@ int32_t BSP_LCD_GetPixelFormat(uint32_t Instance, uint32_t *PixelFormat);
   */
 /* Legacy defines */
 #define LCD_ORIENTATION_PORTRAIT         0x00U /* Portrait orientation choice of LCD screen               */
+#define BSP_LCD_Relaod   BSP_LCD_Reload
 /**
   * @}
   */

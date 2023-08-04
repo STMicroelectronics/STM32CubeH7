@@ -177,8 +177,8 @@ typedef enum
  * @brief STM32H747I Discovery BSP Driver version number V3.5.1
  */
 #define STM32H747I_DISCO_BSP_VERSION_MAIN   (0x03) /*!< [31:24] main version */
-#define STM32H747I_DISCO_BSP_VERSION_SUB1   (0x05) /*!< [23:16] sub1 version */
-#define STM32H747I_DISCO_BSP_VERSION_SUB2   (0x01) /*!< [15:8]  sub2 version */
+#define STM32H747I_DISCO_BSP_VERSION_SUB1   (0x06) /*!< [23:16] sub1 version */
+#define STM32H747I_DISCO_BSP_VERSION_SUB2   (0x00) /*!< [15:8]  sub2 version */
 #define STM32H747I_DISCO_BSP_VERSION_RC     (0x00) /*!< [7:0]  release candidate */
 #define STM32H747I_DISCO_BSP_VERSION        ((STM32H747I_DISCO_BSP_VERSION_MAIN << 24)\
                                             |(STM32H747I_DISCO_BSP_VERSION_SUB1 << 16)\

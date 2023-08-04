@@ -7,7 +7,7 @@
   *          to start refreshing the LCD Display Graphic RAM (GRAM).
   *          The complete screen size is WVGA and oriented in mode Portrait (480x800) in this example.
   *          It uses the STM32H7xx HAL API and discovery BSP.
-  *          This is the main program for Cortex-M7.   
+  *          This is the main program for Cortex-M7.
   ******************************************************************************
   * @attention
   *
@@ -64,7 +64,6 @@ static RCC_PeriphCLKInitTypeDef  PeriphClkInitStruct;
 #define __DSI_UNMASK_TE() (GPIOJ->AFR[0] |= ((uint32_t)(GPIO_AF13_DSI) << 8)) /* UnMask DSI TearingEffect Pin*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-
 static int32_t pending_buffer = -1;
 static int32_t active_area = 0;
 static uint32_t ImageIndex = 0;
@@ -146,13 +145,13 @@ int main(void)
        - Low Level Initialization
   */
   HAL_Init();
-  
+
   /* Configure the system clock to 400 MHz */
   SystemClock_Config();
 
   /* When system initialization is finished, Cortex-M7 could wakeup (when needed) the Cortex-M4  by means of 
-     HSEM notification or by any D2 wakeup source (SEV,EXTI..)   */   
-  
+     HSEM notification or by any D2 wakeup source (SEV,EXTI..)   */
+
   /* Initialize the SDRAM */
   BSP_SDRAM_Init(0);
   
@@ -185,9 +184,9 @@ int main(void)
 
   /* Enable DSI Wrapper so DSI IP will drive the LTDC */
   __HAL_DSI_WRAPPER_ENABLE(&hlcd_dsi);  
-  
-  HAL_DSI_LongWrite(&hlcd_dsi, 0, DSI_DCS_LONG_PKT_WRITE, 4, OTM8009A_CMD_CASET, pColLeft);
-  HAL_DSI_LongWrite(&hlcd_dsi, 0, DSI_DCS_LONG_PKT_WRITE, 4, OTM8009A_CMD_PASET, pPage);
+    
+  HAL_DSI_LongWrite(&hlcd_dsi, 0, DSI_DCS_LONG_PKT_WRITE, 4, LCD_CMD_CASET, pColLeft);
+  HAL_DSI_LongWrite(&hlcd_dsi, 0, DSI_DCS_LONG_PKT_WRITE, 4, LCD_CMD_PASET, pPage);
  
   /* Display example brief   */
   LCD_BriefDisplay();
@@ -198,15 +197,16 @@ int main(void)
   pending_buffer = 0;
   active_area = LEFT_AREA;
   
-  HAL_DSI_LongWrite(&hlcd_dsi, 0, DSI_DCS_LONG_PKT_WRITE, 2, OTM8009A_CMD_WRTESCN, pScanCol);
-
+  HAL_DSI_LongWrite(&hlcd_dsi, 0, DSI_DCS_LONG_PKT_WRITE, 2, LCD_CMD_WRTESCN, pScanCol);
+  
   /* Send Display On DCS Command to display */
   HAL_DSI_ShortWrite(&(hlcd_dsi),
                      0,
                      DSI_DCS_SHORT_PKT_WRITE_P1,
-                     OTM8009A_CMD_DISPON,
-                     0x00);
-  
+                     LCD_CMD_DISPON,
+                     0x00);  
+  HAL_DSI_Refresh(&hlcd_dsi);
+
   /* Infinite loop */
   while (1)
   {
@@ -221,7 +221,8 @@ int main(void)
       pending_buffer = 1;
       
       /* UnMask the TE */
-      __DSI_UNMASK_TE(); 
+      __DSI_UNMASK_TE();
+      HAL_DSI_Refresh(&hlcd_dsi);
     }
     /* Wait some time before switching to next image */
     HAL_Delay(2000);
@@ -253,7 +254,6 @@ int32_t LCD_GetYSize(uint32_t Instance, uint32_t *YSize)
  
   return BSP_ERROR_NONE;
 }
-
 
 /**
   * @brief  Tearing Effect DSI callback.
@@ -290,7 +290,7 @@ void HAL_DSI_EndOfRefreshCallback(DSI_HandleTypeDef *hdsi)
       /* Enable DSI Wrapper */
       __HAL_DSI_WRAPPER_ENABLE(hdsi);
       
-      HAL_DSI_LongWrite(hdsi, 0, DSI_DCS_LONG_PKT_WRITE, 4, OTM8009A_CMD_CASET, pColRight);
+      HAL_DSI_LongWrite(hdsi, 0, DSI_DCS_LONG_PKT_WRITE, 4, LCD_CMD_CASET, pColRight);
       /* Refresh the right part of the display */
       HAL_DSI_Refresh(hdsi);    
       
@@ -306,7 +306,7 @@ void HAL_DSI_EndOfRefreshCallback(DSI_HandleTypeDef *hdsi)
       /* Enable DSI Wrapper */
       __HAL_DSI_WRAPPER_ENABLE(&hlcd_dsi);
       
-      HAL_DSI_LongWrite(hdsi, 0, DSI_DCS_LONG_PKT_WRITE, 4, OTM8009A_CMD_CASET, pColLeft); 
+      HAL_DSI_LongWrite(hdsi, 0, DSI_DCS_LONG_PKT_WRITE, 4, LCD_CMD_CASET, pColLeft); 
       pending_buffer = -1;     
     }
   }
@@ -416,17 +416,17 @@ static void SystemClock_Config(void)
   *     - DSI PLL ititialization
   *     - DSI ititialization
   *     - LTDC ititialization
-  *     - OTM8009A LCD Display IC Driver ititialization
+  *     - LCD component Display IC Driver ititialization
   * @param  None
   * @retval LCD state
   */
-static uint8_t LCD_Init(void){
-  
+static uint8_t LCD_Init(void)
+{
   GPIO_InitTypeDef GPIO_Init_Structure;
-  DSI_PHY_TimerTypeDef  PhyTimings;  
-  OTM8009A_IO_t              IOCtx;
-  static OTM8009A_Object_t   OTM8009AObj;
-  static void                *Lcd_CompObj = NULL;  
+  DSI_PHY_TimerTypeDef  PhyTimings;
+  LCD_COMP_IO                IOCtx;
+  static LCD_COMP_OBJ        LCD_Obj;
+  static void                *Lcd_CompObj = NULL;
   
   /* Toggle Hardware Reset of the DSI LCD using
      its XRES signal (active low) */
@@ -512,16 +512,16 @@ static uint8_t LCD_Init(void){
   PhyTimings.DataLaneLP2HSTime = 35;
   PhyTimings.DataLaneMaxReadTime = 0;
   PhyTimings.StopWaitTime = 10;
-  HAL_DSI_ConfigPhyTimer(&hlcd_dsi, &PhyTimings);   
-    
-  /* Initialize the OTM8009A LCD Display IC Driver (KoD LCD IC Driver) */
+  HAL_DSI_ConfigPhyTimer(&hlcd_dsi, &PhyTimings);
+  
+  /* Initialize the LCD Component Display IC Driver (KoD LCD IC Driver) */
   IOCtx.Address     = 0;
   IOCtx.GetTick     = BSP_GetTick;
   IOCtx.WriteReg    = DSI_IO_Write;
   IOCtx.ReadReg     = DSI_IO_Read;
-  OTM8009A_RegisterBusIO(&OTM8009AObj, &IOCtx);
-  Lcd_CompObj=(&OTM8009AObj);
-  OTM8009A_Init(Lcd_CompObj, OTM8009A_COLMOD_RGB888, LCD_ORIENTATION_LANDSCAPE);
+  LCD_COMP_RegisterBusIO(&LCD_Obj, &IOCtx);
+  Lcd_CompObj=(&LCD_Obj);
+  LCD_COMP_Init(Lcd_CompObj, LCD_COMP_COLMOD_RGB888, LCD_ORIENTATION_LANDSCAPE);
   
   LPCmd.LPGenShortWriteNoP    = DSI_LP_GSW0P_DISABLE;
   LPCmd.LPGenShortWriteOneP   = DSI_LP_GSW1P_DISABLE;
@@ -600,11 +600,11 @@ static void LTDC_Init(void)
   */
 static void LCD_LayertInit(uint16_t LayerIndex, uint32_t Address)
 {
-    LTDC_LayerCfgTypeDef  layercfg;
+  LTDC_LayerCfgTypeDef  layercfg;
 
   /* Layer Init */
   layercfg.WindowX0 = 0;
-  layercfg.WindowX1 = Lcd_Ctx[0].XSize/2 ;
+  layercfg.WindowX1 = Lcd_Ctx[0].XSize/2;
   layercfg.WindowY0 = 0;
   layercfg.WindowY1 = Lcd_Ctx[0].YSize; 
   layercfg.PixelFormat = LTDC_PIXEL_FORMAT_ARGB8888;
@@ -674,7 +674,6 @@ static int32_t DSI_IO_Read(uint16_t ChannelNbr, uint16_t Reg, uint8_t *pData, ui
 
 void LCD_MspInit(void)
 {
-
   /** @brief Enable the LTDC clock */
   __HAL_RCC_LTDC_CLK_ENABLE();
 
@@ -718,7 +717,7 @@ static void LCD_BriefDisplay(void)
 {
   UTIL_LCD_SetFont(&Font24);  
   UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_BLUE); 
-  UTIL_LCD_FillRect(0, 0, Lcd_Ctx[0].XSize, 112,UTIL_LCD_COLOR_BLUE);  
+  UTIL_LCD_FillRect(0, 0, Lcd_Ctx[0].XSize, 112,UTIL_LCD_COLOR_BLUE);
   UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
   UTIL_LCD_FillRect(0, 112, Lcd_Ctx[0].XSize, 368, UTIL_LCD_COLOR_WHITE);
   UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_BLUE);
@@ -726,7 +725,6 @@ static void LCD_BriefDisplay(void)
   UTIL_LCD_SetFont(&Font16);
   UTIL_LCD_DisplayStringAtLine(4, (uint8_t *)"This example shows how to display images on LCD DSI and prevent");
   UTIL_LCD_DisplayStringAtLine(5, (uint8_t *)"Tearing Effect using DSI_TE pin ");
-  
 }
 
 /**
@@ -739,7 +737,6 @@ static void LCD_BriefDisplay(void)
   */
 static void CopyPicture(uint32_t *pSrc, uint32_t *pDst, uint16_t x, uint16_t y, uint16_t xsize, uint16_t ysize)
 {   
-  
   uint32_t destination = (uint32_t)pDst + (y * 800 + x) * 4;
   uint32_t source      = (uint32_t)pSrc;
   
@@ -845,7 +842,6 @@ static void MPU_Config(void)
   */
 static void Error_Handler(void)
 {
-  
   BSP_LED_On(LED3);
   while(1) { ; } /* Blocking on error */
 }

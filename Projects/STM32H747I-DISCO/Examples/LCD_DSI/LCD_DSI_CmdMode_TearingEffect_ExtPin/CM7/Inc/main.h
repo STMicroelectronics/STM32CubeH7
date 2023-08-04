@@ -32,6 +32,31 @@
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
 #define LCD_FRAME_BUFFER        0xD0000000
+
+#if (USE_LCD_CTRL_NT35510 > 0)
+#define LCD_CMD_CASET                           NT35510_CMD_CASET
+#define LCD_CMD_PASET                           NT35510_CMD_RASET
+#define LCD_CMD_WRTESCN                         NT35510_CMD_STESL
+#define LCD_CMD_DISPON                          NT35510_CMD_DISPON
+#define LCD_CMD_TEOFF                           NT35510_CMD_TEOFF
+#define LCD_COMP_IO                             NT35510_IO_t
+#define LCD_COMP_OBJ                            NT35510_Object_t
+#define LCD_COMP_RegisterBusIO                  NT35510_RegisterBusIO
+#define LCD_COMP_Init                           NT35510_Init
+#define LCD_COMP_COLMOD_RGB888                  NT35510_COLMOD_RGB888
+#else
+#define LCD_CMD_CASET                           OTM8009A_CMD_CASET
+#define LCD_CMD_PASET                           OTM8009A_CMD_PASET
+#define LCD_CMD_WRTESCN                         OTM8009A_CMD_WRTESCN
+#define LCD_CMD_DISPON                          OTM8009A_CMD_DISPON
+#define LCD_CMD_TEOFF                           OTM8009A_CMD_TEOFF
+#define LCD_COMP_IO                             OTM8009A_IO_t
+#define LCD_COMP_OBJ                            OTM8009A_Object_t
+#define LCD_COMP_RegisterBusIO                  OTM8009A_RegisterBusIO
+#define LCD_COMP_Init                           OTM8009A_Init
+#define LCD_COMP_COLMOD_RGB888                  OTM8009A_COLMOD_RGB888
+#endif /* USE_LCD_CTRL_NT35510 */
+
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */
 
