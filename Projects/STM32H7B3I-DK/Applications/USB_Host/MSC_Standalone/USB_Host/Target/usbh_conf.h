@@ -88,5 +88,9 @@
 
 /* Exported functions ------------------------------------------------------- */
 
+#ifdef __cplusplus
+}
+#endif
+
 #endif /* __USBH_CONF_H */
 
