@@ -111,7 +111,7 @@ typedef struct
 #define NT35510_ERROR             (-1)
 
 /* NT35510 ID */
-#define NT35510_ID                 0x04U
+#define NT35510_ID                 0x80U
 
 /**
  *  @brief LCD_OrientationTypeDef

@@ -304,7 +304,7 @@ int32_t NT35510_ReadID(NT35510_Object_t *pObj, uint32_t *Id)
 { 
   int32_t ret;
 
-  if(nt35510_read_reg(&pObj->Ctx, NT35510_CMD_RDID1, (uint8_t *)Id, 0)!= NT35510_OK)
+  if(nt35510_read_reg(&pObj->Ctx, NT35510_CMD_RDID2, (uint8_t *)Id, 1)!= NT35510_OK)
   {
     ret = NT35510_ERROR;
   }

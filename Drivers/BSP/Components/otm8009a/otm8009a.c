@@ -470,7 +470,7 @@ int32_t OTM8009A_ReadID(OTM8009A_Object_t *pObj, uint32_t *Id)
 { 
   int32_t ret;
   
-  if(otm8009a_read_reg(&pObj->Ctx, OTM8009A_CMD_ID1, (uint8_t *)Id, 0)!= OTM8009A_OK)
+  if(otm8009a_read_reg(&pObj->Ctx, OTM8009A_CMD_ID1, (uint8_t *)Id, 1)!= OTM8009A_OK)
   {
     ret = OTM8009A_ERROR;
   }
