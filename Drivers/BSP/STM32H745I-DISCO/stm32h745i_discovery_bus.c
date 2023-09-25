@@ -200,8 +200,13 @@ int32_t BSP_I2C4_Init(void)
       if(BspI2cSemaphore == NULL)
       {
         /* Create semaphore to prevent multiple I2C access */
+#if osCMSIS < 0x20000U
         osSemaphoreDef(BSP_I2C_SEM);
         BspI2cSemaphore = osSemaphoreCreate(osSemaphore(BSP_I2C_SEM), 1);
+#else
+        const osSemaphoreAttr_t bspI2cSemaphoreAttr = { .name = "BSP_I2C_SEM" };
+        BspI2cSemaphore = osSemaphoreNew(1, 1, &bspI2cSemaphoreAttr);
+#endif
       }
 #endif
 #if (USE_HAL_I2C_REGISTER_CALLBACKS == 0)
@@ -314,7 +319,11 @@ int32_t BSP_I2C4_WriteReg(uint16_t DevAddr, uint16_t Reg, uint8_t *pData, uint16
   int32_t ret;
 #if defined(BSP_USE_CMSIS_OS)
   /* Get semaphore to prevent multiple I2C access */
+#if osCMSIS < 0x20000U
   osSemaphoreWait(BspI2cSemaphore, osWaitForever);
+#else
+  osSemaphoreAcquire(BspI2cSemaphore, osWaitForever);
+#endif
 #endif
   if(I2C4_WriteReg(DevAddr, Reg, I2C_MEMADD_SIZE_8BIT, pData, Length) == 0)
   {
@@ -351,7 +360,11 @@ int32_t BSP_I2C4_ReadReg(uint16_t DevAddr, uint16_t Reg, uint8_t *pData, uint16_
   int32_t ret;
 #if defined(BSP_USE_CMSIS_OS)
   /* Get semaphore to prevent multiple I2C access */
+#if osCMSIS < 0x20000U
   osSemaphoreWait(BspI2cSemaphore, osWaitForever);
+#else
+  osSemaphoreAcquire(BspI2cSemaphore, osWaitForever);
+#endif
 #endif
   if(I2C4_ReadReg(DevAddr, Reg, I2C_MEMADD_SIZE_8BIT, pData, Length) == 0)
   {
@@ -388,7 +401,11 @@ int32_t BSP_I2C4_WriteReg16(uint16_t DevAddr, uint16_t Reg, uint8_t *pData, uint
   int32_t ret;
  #if defined(BSP_USE_CMSIS_OS)
   /* Get semaphore to prevent multiple I2C access */
+#if osCMSIS < 0x20000U
   osSemaphoreWait(BspI2cSemaphore, osWaitForever);
+#else
+  osSemaphoreAcquire(BspI2cSemaphore, osWaitForever);
+#endif
 #endif
   if(I2C4_WriteReg(DevAddr, Reg, I2C_MEMADD_SIZE_16BIT, pData, Length) == 0)
   {
@@ -425,7 +442,11 @@ int32_t BSP_I2C4_ReadReg16(uint16_t DevAddr, uint16_t Reg, uint8_t *pData, uint1
   int32_t ret;
 #if defined(BSP_USE_CMSIS_OS)
   /* Get semaphore to prevent multiple I2C access */
+#if osCMSIS < 0x20000U
   osSemaphoreWait(BspI2cSemaphore, osWaitForever);
+#else
+  osSemaphoreAcquire(BspI2cSemaphore, osWaitForever);
+#endif
 #endif
   if(I2C4_ReadReg(DevAddr, Reg, I2C_MEMADD_SIZE_16BIT, pData, Length) == 0)
   {
@@ -461,7 +482,11 @@ int32_t BSP_I2C4_IsReady(uint16_t DevAddr, uint32_t Trials)
   int32_t ret = BSP_ERROR_NONE;
 #if defined(BSP_USE_CMSIS_OS)
   /* Get semaphore to prevent multiple I2C access */
+#if osCMSIS < 0x20000U
   osSemaphoreWait(BspI2cSemaphore, osWaitForever);
+#else
+  osSemaphoreAcquire(BspI2cSemaphore, osWaitForever);
+#endif
 #endif
   if(HAL_I2C_IsDeviceReady(&hbus_i2c4, DevAddr, Trials, 1000) != HAL_OK)
   {
@@ -493,7 +518,11 @@ int32_t BSP_I2C4_RegisterDefaultMspCallbacks (void)
   int32_t ret = BSP_ERROR_NONE;
 #if defined(BSP_USE_CMSIS_OS)
   /* Get semaphore to prevent multiple I2C access */
+#if osCMSIS < 0x20000U
   osSemaphoreWait(BspI2cSemaphore, osWaitForever);
+#else
+  osSemaphoreAcquire(BspI2cSemaphore, osWaitForever);
+#endif
 #endif
   __HAL_I2C_RESET_HANDLE_STATE(&hbus_i2c4);
 
@@ -528,7 +557,11 @@ int32_t BSP_I2C4_RegisterMspCallbacks (BSP_I2C_Cb_t *Callback)
   int32_t ret = BSP_ERROR_NONE;
 #if defined(BSP_USE_CMSIS_OS)
   /* Get semaphore to prevent multiple I2C access */
+#if osCMSIS < 0x20000U
   osSemaphoreWait(BspI2cSemaphore, osWaitForever);
+#else
+  osSemaphoreAcquire(BspI2cSemaphore, osWaitForever);
+#endif
 #endif
   __HAL_I2C_RESET_HANDLE_STATE(&hbus_i2c4);
 
