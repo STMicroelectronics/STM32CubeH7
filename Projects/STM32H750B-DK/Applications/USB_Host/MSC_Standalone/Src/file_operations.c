@@ -40,7 +40,7 @@ uint8_t wtext[] = "USB Host Library : Mass Storage application";
 */
 uint8_t MSC_File_Operations(void)
 {
-  uint16_t bytesread;
+  uint32_t bytesread;
   uint8_t retvalue = 0;
 
   LCD_UsrTrace("INFO : FatFs Initialized \n");

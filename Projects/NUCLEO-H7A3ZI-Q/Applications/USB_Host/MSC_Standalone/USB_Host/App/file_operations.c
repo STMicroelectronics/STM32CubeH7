@@ -38,7 +38,7 @@ uint8_t wtext[] = "USB Host Library : Mass Storage Example";
 */
 uint8_t msc_file_operations(void)
 {
-  uint16_t bytesread;
+  uint32_t bytesread;
   uint8_t retvalue = 0;
 
   USBH_UsrLog("INFO : FatFs Initialized\n");
