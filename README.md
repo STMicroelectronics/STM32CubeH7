@@ -34,7 +34,7 @@ Details about the content of this release are available in the release note [her
 
 ## How to use
 
-This repository has been created using the `git submodule` command. Please check the instructions below for a proper use. Please check also the [notes](README.md#notes) at the end of this section for further information.
+This repository has been created using the `git submodule` command. Please check the instructions below for proper use. Please check also the [notes](README.md#notes) at the end of this section for further information.
 
 1. To **clone** this repository along with the linked submodules, option `--recursive` has to be specified as shown below.
 
@@ -42,20 +42,20 @@ This repository has been created using the `git submodule` command. Please check
 git clone --recursive https://github.com/STMicroelectronics/STM32CubeH7.git
 ```
 
-2. To get the **latest updates**, in case this repository is **alreay** on your local machine, issue the following **two** commands (with this repository as the **current working directory**).
+2. To get the **latest updates**, in case this repository is **already** on your local machine, issue the following **two** commands (with this repository as the **current working directory**).
 
 ```bash
 git pull
 git submodule update --init --recursive
 ```
 
-3. To use the **same firmwmare version** as the one available on [st.com](https://www.st.com/en/microcontrollers-microprocessors/stm32-32-bit-arm-cortex-mcus.html), issue the command below **after** specifying the targeted `vX.Y.Z` version. This should be done **after** the command(s) indicated in instruction (1) or in instruction (2) above have been successfully executed.
+3. To use the **same firmware version** as the one available on [st.com](https://www.st.com/en/microcontrollers-microprocessors/stm32-32-bit-arm-cortex-mcus.html), issue the command below **after** specifying the targeted `vX.Y.Z` version. This should be done **after** the command(s) indicated in instruction (1) or in instruction (2) above have been successfully executed.
 
 ```bash
 git checkout vX.Y.Z # Specify the targeted vX.Y.Z version
 ```
 
-4. To **avoid** going through the above instructions and **directly** clone the same firmwmare version as the one available on [st.com](https://www.st.com/en/microcontrollers-microprocessors/stm32-32-bit-arm-cortex-mcus.html), issue the command below **after** specifying the targeted `vX.Y.Z` version.
+4. To **avoid** going through the above instructions and **directly** clone the same firmware version as the one available on [st.com](https://www.st.com/en/microcontrollers-microprocessors/stm32-32-bit-arm-cortex-mcus.html), issue the command below **after** specifying the targeted `vX.Y.Z` version.
 
 ```bash
 git clone --recursive  --depth 1 --branch vX.Y.Z https://github.com/STMicroelectronics/STM32CubeH7.git
@@ -63,7 +63,7 @@ git clone --recursive  --depth 1 --branch vX.Y.Z https://github.com/STMicroelect
 
 #### Notes
 
-* The latest version of this firmare available on GitHub may be **ahead** of the one available on [st.com](https://www.st.com/en/microcontrollers-microprocessors/stm32-32-bit-arm-cortex-mcus.html) or via [STM32CubeMX](https://www.st.com/en/development-tools/stm32cubemx.html). This is due to the **rolling release** process deployed on GitHub. Please refer to [this](https://github.com/STMicroelectronics/STM32Cube_MCU_Overall_Offer/discussions/21) post for more details.
+* The latest version of this firmware available on GitHub may be **ahead** of the one available on [st.com](https://www.st.com/en/microcontrollers-microprocessors/stm32-32-bit-arm-cortex-mcus.html) or via [STM32CubeMX](https://www.st.com/en/development-tools/stm32cubemx.html). This is due to the **rolling release** process deployed on GitHub. Please refer to [this](https://github.com/STMicroelectronics/STM32Cube_MCU_Overall_Offer/discussions/21) post for more details.
 * Option `--depth 1` specified in instruction (4) above is **not** mandatory. It may be useful to skip downloading all previous commits up to the one corresponding to the targeted version.
 * If GitHub "Download ZIP" option is used instead of the `git clone` command, then the different submodules have to be collected and added **manually**.
 
