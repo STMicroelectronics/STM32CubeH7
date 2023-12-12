@@ -200,7 +200,7 @@ int main(void)
   /* Start ADCx and ADCy multimode conversion on regular group with transfer by DMA */
   if (HAL_ADCEx_MultiModeStart_DMA(&AdcHandle_master,
                                    (uint32_t *)aADCDualConvertedValues,
-                                    ADCCONVERTEDVALUES_BUFFER_SIZE
+                                    ADCCONVERTEDVALUES_BUFFER_SIZE/2 /* size in words */
                                   ) != HAL_OK)
   {
     /* Start Error */
