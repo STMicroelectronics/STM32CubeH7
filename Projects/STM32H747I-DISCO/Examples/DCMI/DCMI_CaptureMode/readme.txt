@@ -124,6 +124,17 @@ Display, DCMI, Camera, Capture, Frame Buffer, LCD, ARGB8888, DMA, RGB565, SDRAM,
 
 In order to make the program work, you must do the following :
  - Open your preferred toolchain 
+ - One of the following flags must be enabled in stm32h747i_discovery_conf.h file options in order
+ to select the target daughter board revision connected on STM32H747I DISCOVERY : 
+ 
+         - USE_LCD_CTRL_OTM8009A :   Applicable for all LCD daughter boards (MB1166) execept for Rev -A09 , it is defined as follows :
+              #define USE_LCD_CTRL_OTM8009A               1U
+              #define USE_LCD_CTRL_NT35510                0U
+              
+         - USE_LCD_CTRL_NT35510  :   Applicable only for LCD daughter boards (MB1166) Rev -A09 , it is defined as follows :
+              #define USE_LCD_CTRL_OTM8009A               0U
+              #define USE_LCD_CTRL_NT35510                1U
+              
  - For each target configuration (STM32H747I_DISCO_CM7 and STM32H747I_DISCO_CM4) : 
      - Rebuild all files 
      - Load images into target memory

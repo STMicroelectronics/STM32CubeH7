@@ -94,8 +94,12 @@ static RCC_PeriphCLKInitTypeDef  PeriphClkInitStruct;
 uint8_t pColLeft[]    = {0x00, 0x00, 0x01, 0x8F}; /*   0 -> 399 */
 uint8_t pColRight[]   = {0x01, 0x90, 0x03, 0x1F}; /* 400 -> 799 */
 uint8_t pPage[]       = {0x00, 0x00, 0x01, 0xDF}; /*   0 -> 479 */
+#if (USE_LCD_CTRL_OTM8009A > 0)
 uint8_t pScanCol[]    = {0x02, 0x15};             /* Scan @ 533 */
-
+#endif /* USE_LCD_CTRL_OTM8009A */
+#if (USE_LCD_CTRL_NT35510 > 0)
+uint8_t pScanCol[]  = {0x01, 0x60};
+#endif /* USE_LCD_CTRL_NT35510 */
 /* Private function prototypes -----------------------------------------------*/
 static void SystemClock_Config(void);
 static void DMA2D_ConvertFrameToARGB8888(void *pSrc, void *pDst, uint32_t xsize, uint32_t ysize);
@@ -177,12 +181,17 @@ int main(void)
 
   /* Enable DSI Wrapper so DSI IP will drive the LTDC */
   __HAL_DSI_WRAPPER_ENABLE(&hlcd_dsi);  
-  
+#if (USE_LCD_CTRL_OTM8009A > 0)
   HAL_DSI_LongWrite(&hlcd_dsi, 0, DSI_DCS_LONG_PKT_WRITE, 4, OTM8009A_CMD_CASET, pColLeft);
   HAL_DSI_LongWrite(&hlcd_dsi, 0, DSI_DCS_LONG_PKT_WRITE, 4, OTM8009A_CMD_PASET, pPage);
-  
   HAL_DSI_LongWrite(&hlcd_dsi, 0, DSI_DCS_LONG_PKT_WRITE, 2, OTM8009A_CMD_WRTESCN, pScanCol);
+#endif /* USE_LCD_CTRL_OTM8009A */
 
+#if (USE_LCD_CTRL_NT35510 > 0)
+  HAL_DSI_LongWrite(&hlcd_dsi, 0, DSI_DCS_LONG_PKT_WRITE, 4, NT35510_CMD_CASET, pColLeft);
+  HAL_DSI_LongWrite(&hlcd_dsi, 0, DSI_DCS_LONG_PKT_WRITE, 4, NT35510_CMD_RASET, pPage);
+  HAL_DSI_LongWrite(&hlcd_dsi, 0, DSI_DCS_LONG_PKT_WRITE, 2, NT35510_CMD_TEEON, pScanCol);
+#endif /* USE_LCD_CTRL_NT35510 */
   
   /* Configure TAMPER Button */
   BSP_PB_Init(BUTTON_WAKEUP, BUTTON_MODE_GPIO);
@@ -399,10 +408,16 @@ static uint8_t LCD_Init(void){
   GPIO_InitTypeDef GPIO_Init_Structure;
   DSI_PHY_TimerTypeDef  PhyTimings;
 
+#if (USE_LCD_CTRL_NT35510 > 0)
+  NT35510_IO_t              IOCtx;
+  static NT35510_Object_t   NT35510Obj;
+  static void                *Lcd_CompObj = NULL;  
+#endif /* USE_LCD_CTRL_NT35510 */
+#if (USE_LCD_CTRL_OTM8009A > 0)
   OTM8009A_IO_t              IOCtx;
   static OTM8009A_Object_t   OTM8009AObj;
   static void                *Lcd_CompObj = NULL;  
-  
+#endif /* USE_LCD_CTRL_OTM8009A */  
   /* Toggle Hardware Reset of the DSI LCD using
      its XRES signal (active low) */
   BSP_LCD_Reset(0);
@@ -488,7 +503,19 @@ static uint8_t LCD_Init(void){
   PhyTimings.DataLaneMaxReadTime = 0;
   PhyTimings.StopWaitTime = 10;
   HAL_DSI_ConfigPhyTimer(&hlcd_dsi, &PhyTimings);   
-    
+
+#if (USE_LCD_CTRL_NT35510 > 0)
+ /* Initialize the NT35510 LCD Display IC Driver (KoD LCD IC Driver) */
+  IOCtx.Address     = 0;
+  IOCtx.GetTick     = BSP_GetTick;
+  IOCtx.WriteReg    = DSI_IO_Write;
+  IOCtx.ReadReg     = DSI_IO_Read;
+  NT35510_RegisterBusIO(&NT35510Obj, &IOCtx);
+  Lcd_CompObj=(&NT35510Obj);
+  NT35510_Init(Lcd_CompObj, NT35510_COLMOD_RGB888, LCD_ORIENTATION_LANDSCAPE);
+#endif /* USE_LCD_CTRL_NT35510 */
+
+#if (USE_LCD_CTRL_OTM8009A > 0)
   /* Initialize the OTM8009A LCD Display IC Driver (KoD LCD IC Driver) */
   IOCtx.Address     = 0;
   IOCtx.GetTick     = BSP_GetTick;
@@ -497,7 +524,7 @@ static uint8_t LCD_Init(void){
   OTM8009A_RegisterBusIO(&OTM8009AObj, &IOCtx);
   Lcd_CompObj=(&OTM8009AObj);
   OTM8009A_Init(Lcd_CompObj, OTM8009A_COLMOD_RGB888, LCD_ORIENTATION_LANDSCAPE);
-  
+#endif /* USE_LCD_CTRL_OTM8009A */
   LPCmd.LPGenShortWriteNoP    = DSI_LP_GSW0P_DISABLE;
   LPCmd.LPGenShortWriteOneP   = DSI_LP_GSW1P_DISABLE;
   LPCmd.LPGenShortWriteTwoP   = DSI_LP_GSW2P_DISABLE;
@@ -717,8 +744,12 @@ void HAL_DSI_EndOfRefreshCallback(DSI_HandleTypeDef *hdsi)
       __HAL_LTDC_RELOAD_CONFIG(&hlcd_ltdc);
       /* Enable DSI Wrapper */
       __HAL_DSI_WRAPPER_ENABLE(hdsi);
-      
+#if (USE_LCD_CTRL_OTM8009A > 0)
       HAL_DSI_LongWrite(hdsi, 0, DSI_DCS_LONG_PKT_WRITE, 4, OTM8009A_CMD_CASET, pColRight);
+#endif /* USE_LCD_CTRL_OTM8009A */
+#if (USE_LCD_CTRL_NT35510 > 0)
+      HAL_DSI_LongWrite(hdsi, 0, DSI_DCS_LONG_PKT_WRITE, 4, NT35510_CMD_CASET, pColRight);
+#endif /* USE_LCD_CTRL_NT35510 */
       /* Refresh the right part of the display */
       HAL_DSI_Refresh(hdsi);    
       
@@ -732,9 +763,13 @@ void HAL_DSI_EndOfRefreshCallback(DSI_HandleTypeDef *hdsi)
       __HAL_LTDC_RELOAD_CONFIG(&hlcd_ltdc);
       /* Enable DSI Wrapper */
       __HAL_DSI_WRAPPER_ENABLE(&hlcd_dsi);
-      
+#if (USE_LCD_CTRL_OTM8009A > 0)
       HAL_DSI_LongWrite(hdsi, 0, DSI_DCS_LONG_PKT_WRITE, 4, OTM8009A_CMD_CASET, pColLeft); 
- 
+#endif /* USE_LCD_CTRL_OTM8009A */
+#if (USE_LCD_CTRL_NT35510 > 0)
+      HAL_DSI_LongWrite(hdsi, 0, DSI_DCS_LONG_PKT_WRITE, 4, NT35510_CMD_CASET, pColLeft);
+#endif /* USE_LCD_CTRL_NT35510 */
+
       if(cameraState == CAMERA_STATE_DISPLAY_ONGOING)
       {
         cameraState = CAMERA_STATE_CAPTURE_ONGOING;
