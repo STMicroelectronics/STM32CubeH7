@@ -57,9 +57,9 @@
           |     /|\     |         | / / / / / / / / / / / / / / / / / / / |    |
           |      |      |         |/ / / / / / / / / / / / / / / / / / / /|    |
  Total    |      |      |         |/ / / / / / / / / / / / / / / / / / / /|    |
- Heigh    |      |      |         |/ / / / / / / / / / / / / / / / / / / /|    |
+ Height    |      |      |         |/ / / / / / / / / / / / / / / / / / / /|    |
           |Active|      |         |/ / / / / / / / / / / / / / / / / / / /|    |
-          |Heigh |      |         |/ / / / / / Active Display Area / / / /|    |
+          |Height |      |         |/ / / / / / Active Display Area / / / /|    |
           |      |      |         |/ / / / / / / / / / / / / / / / / / / /|    |
           |      |      |         |/ / / / / / / / / / / / / / / / / / / /|    |
           |      |      |         |/ / / / / / / / / / / / / / / / / / / /|    |
@@ -82,7 +82,7 @@
 
       Vertical Synchronization (Vsync)   = 3
       Vertical Back Porch (VBP)          = 32
-      Active Heigh                       = 480
+      Active Height                       = 480
       Vertical Front Porch (VFP)         = 10
 	  
   It can also use the TFT LCD 4.3 inch Ampire 480x272 (MB1046 B-01)
@@ -94,7 +94,7 @@
 
       Vertical Synchronization (Vsync)   = 10
       Vertical Back Porch (VBP)          = 2
-      Active Heigh                       = 272
+      Active Height                       = 272
       Vertical Front Porch (VFP)         = 2
   
   LCD_TFT windowing configuration :
@@ -106,7 +106,7 @@
   HorizontalStart = (Offset_X + Hsync + HBP);
   HorizontalStop  = (Offset_X + Hsync + HBP + Window_Width - 1); 
   VarticalStart   = (Offset_Y + Vsync + VBP);
-  VerticalStop    = (Offset_Y + Vsync + VBP + Window_Heigh - 1);
+  VerticalStop    = (Offset_Y + Vsync + VBP + Window_Height - 1);
   
   Window_width and Window_heigh should be in line with the image size to be 
   displayed.

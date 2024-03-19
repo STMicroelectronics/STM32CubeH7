@@ -93,7 +93,7 @@ void HAL_JPEG_InfoReadyCallback(JPEG_HandleTypeDef *hjpeg, JPEG_ConfTypeDef *pIn
 /**
   * @brief  JPEG Get Data callback
   * @param hjpeg: JPEG handle pointer
-  * @param NbDecodedData: Number of decoded (consummed) bytes from input buffer
+  * @param NbDecodedData: Number of decoded (consumed) bytes from input buffer
   * @retval None
   */
 void HAL_JPEG_GetDataCallback(JPEG_HandleTypeDef *hjpeg, uint32_t NbDecodedData)

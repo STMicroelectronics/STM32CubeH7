@@ -202,7 +202,7 @@ void JPEG_EncodeInputHandler(JPEG_HandleTypeDef *hjpeg)
 /**
   * @brief JPEG Get Data callback
   * @param hjpeg: JPEG handle pointer
-  * @param NbEncodedData: Number of encoded (consummed) bytes from input buffer
+  * @param NbEncodedData: Number of encoded (consumed) bytes from input buffer
   * @retval None
   */
 void HAL_JPEG_GetDataCallback(JPEG_HandleTypeDef *hjpeg, uint32_t NbEncodedData)

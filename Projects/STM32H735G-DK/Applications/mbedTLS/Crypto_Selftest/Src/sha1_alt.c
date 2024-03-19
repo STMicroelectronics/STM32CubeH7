@@ -249,7 +249,7 @@ exit :
 }
 
 int mbedtls_sha1_finish_ret( mbedtls_sha1_context *ctx,
-                             unsigned char output[32] )
+                             unsigned char output[20] )
 {
     int ret = 0;
 

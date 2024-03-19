@@ -106,7 +106,7 @@ The BDMA channel 7 is configured in peripheral to memory mode to ensure data tra
 data register to the D3SRAM (@0x38000000). 
 After receiving 5 chunks of data, the BDMA transfer complete interrupt is generated and the system
 is waking up from Stop mode to send-back the received data if no error occurred.
-Finaly the system will restart automatically the reception process and re-enter STOP mode again.
+Finally the system will restart automatically the reception process and re-enter STOP mode again.
 
 The DMAMUX request generator block is configured using function "HAL_DMAEx_ConfigMuxRequestGenerator" 
 with the following parameters :
@@ -117,7 +117,7 @@ with the following parameters :
 The DMA request generator is then enabled using the function “HAL_DMAEx_EnableMuxRequestGenerator”.
 
 The CPU is only used to intercept a DMA transfer error if any and sets the LED3 (Red LED) to ON in this case
-or to tramsmit the received data if no error occurred.
+or to transmit the received data if no error occurred.
 
 @note The BDMA has access to  D3 Domain SRAMs and peripherals only, thus aRxBuffer buffer
       has been placed to the D3SRAM (@0x38000000)

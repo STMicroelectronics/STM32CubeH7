@@ -95,8 +95,8 @@ RTOS, FreeRTOS, multiprocessor, Threading, HSEM, Semaphore, Software Semaphore, 
 
 @par Directory contents
 
-    - FreeRTOS/FreeRTOS_HwSemaphoreCoreSync/Commmon/Src/system_stm32h7xx.c  STM32H7xx system configuration source file
-    - FreeRTOS/FreeRTOS_HwSemaphoreCoreSync/Commmon/Inc/FreeRTOSConfig.h    FreeRTOS Configuration file
+    - FreeRTOS/FreeRTOS_HwSemaphoreCoreSync/Common/Src/system_stm32h7xx.c  STM32H7xx system configuration source file
+    - FreeRTOS/FreeRTOS_HwSemaphoreCoreSync/Common/Inc/FreeRTOSConfig.h    FreeRTOS Configuration file
 	
     - FreeRTOS/FreeRTOS_HwSemaphoreCoreSync/CM7/Inc/stm32h7xx_hal_conf.h    HAL configuration file for Cortex-M7
     - FreeRTOS/FreeRTOS_HwSemaphoreCoreSync/CM7/Inc/stm32h7xx_it.h          Interrupt handlers header file for Cortex-M7

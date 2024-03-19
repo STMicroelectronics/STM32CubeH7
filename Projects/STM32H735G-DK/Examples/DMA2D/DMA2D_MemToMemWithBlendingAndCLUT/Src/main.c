@@ -197,7 +197,7 @@ int main(void)
   *          - Foreground CLUT (256 color index table )loaded from FLASH memory (L8_CLUT_1)
   *          - Background CLUT (256 color index table )loaded from FLASH memory (L8_CLUT_0)
   *          - color mode as L8 pixel format
-  *          3-3) Load the L8_CLUT_1 Foreground CLUT (color index table for image L8_Image1) to DMA2D Forground CLUT
+  *          3-3) Load the L8_CLUT_1 Foreground CLUT (color index table for image L8_Image1) to DMA2D Foreground CLUT
   *          3-4) Load the L8_CLUT_0 background CLUT (color index table for image L8_Image0) to DMA2D Background CLUT 
   * @retval
   *  None

@@ -87,6 +87,9 @@ int main(void)
   BSP_LED_Init(LED1);
   BSP_LED_Init(LED2);
 
+  /* Disable instruction cache prior to internal cacheable memory update */
+  SCB_DisableICache();
+
   /* Unlock the Flash to enable the flash control register access *************/
   HAL_FLASH_Unlock();
 
@@ -146,6 +149,9 @@ int main(void)
   /* Lock the Flash to disable the flash control register access (recommended
      to protect the FLASH memory against possible unwanted operation) *********/
   HAL_FLASH_Lock();
+
+  /* Enable instruction cache prior to internal cacheable memory update */
+  SCB_EnableICache();
 
   /* Check if the programmed data is OK
       MemoryProgramStatus = 0: data programmed correctly

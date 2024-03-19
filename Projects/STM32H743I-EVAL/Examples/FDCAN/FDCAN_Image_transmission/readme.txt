@@ -71,7 +71,7 @@ First step (No BRS):
   Board 2 to inform that it is ready to receive data.
   Then, Board 2 sends first 32 blocks (messages) of image data and waits for
   acknowledgment of receipt to send next 32 blocks.
-  On the Board 1 side, every time 32 messages are received and payload retrived,
+  On the Board 1 side, every time 32 messages are received and payload retrieved,
   the acknowledgment is automatically sent to Board 2.
   This process ends when the full image is transferred. It is then displayed on the
   LDC via DMA2D as well as the whole measured communication time.

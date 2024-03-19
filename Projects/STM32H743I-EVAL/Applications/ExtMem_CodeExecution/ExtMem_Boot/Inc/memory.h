@@ -68,7 +68,7 @@
                      ##### How to use this Config #####
   ==============================================================================
     [..]
-      The configuration bellow allows simple selection switch between configuration
+      The configuration below allows simple selection switch between configuration
 
       The configuration is composed mainly by two area:
       (#) CODE_AREA: Used to specify external memory used for code execution
@@ -93,7 +93,7 @@
              (+++) BINARY_SIZE        : Size of the binary image
          (##) USE_SDCARD  : SDCard is used for binary storage
              (+++) BINARY_FILENAME : Name of the binary file to be executed
-      Bellow an automatic update APPLICATION_ADDRESS to default value based on
+      Below an automatic update APPLICATION_ADDRESS to default value based on
       user configuration, which can be tailored as required
 
       Finally a set of check allows to avoid unsupported combined configuration.

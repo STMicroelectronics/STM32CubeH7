@@ -32,6 +32,16 @@
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
+
+/* Macro to get variable aligned on 32-bytes,needed for cache maintenance purpose */
+
+#if defined   (__GNUC__)        /* GNU Compiler */
+#define ALIGN_32BYTES(buf)  buf __attribute__ ((aligned (32)))
+#elif defined (__ICCARM__)    /* IAR Compiler */
+#define ALIGN_32BYTES(buf) _Pragma("data_alignment=32") buf
+#elif defined   (__CC_ARM)      /* ARM Compiler */
+#define ALIGN_32BYTES(buf) __align(32) buf
+#endif
 /* Private variables ---------------------------------------------------------*/
 /* DMA Handle declaration */
 DMA_HandleTypeDef     DmaHandle;
@@ -48,7 +58,7 @@ static const uint32_t aSRC_Const_Buffer[BUFFER_SIZE] =
   0x71727374, 0x75767778, 0x797A7B7C, 0x7D7E7F80
 };
 
-static uint32_t aDST_Buffer[BUFFER_SIZE];
+ALIGN_32BYTES(static uint32_t aDST_Buffer[BUFFER_SIZE]);
 
 static __IO uint32_t transferErrorDetected = 0;    /* Set to 1 if an error transfer is detected */
 static __IO uint32_t transferCompleteDetected = 0; /* Set to 1 if the DMA transfer complete is detected */

@@ -121,7 +121,7 @@ void resource_table_init(int RPMsgRole, void **table_ptr, int *length)
      * Currently the GCC linker doesn't initialize the resource_table global variable at startup
      * it is done here by the CM7 application.
      */
-	memset(&resource_table, '\0', sizeof(struct shared_resource_table));
+	memset((void *)&resource_table, '\0', sizeof(struct shared_resource_table));
 	resource_table.num = 1;
 	resource_table.version = 1;
 	resource_table.offset[0] = offsetof(struct shared_resource_table, vdev);
@@ -152,5 +152,5 @@ void resource_table_init(int RPMsgRole, void **table_ptr, int *length)
 
   (void)RPMsgRole;
   *length = sizeof(resource_table);
-  *table_ptr = &resource_table;
+  *table_ptr = (void *)&resource_table;
 }

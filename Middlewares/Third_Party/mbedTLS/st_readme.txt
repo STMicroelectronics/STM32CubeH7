@@ -2,10 +2,10 @@
   @verbatim
   ******************************************************************************
   *
-  *         Portions COPYRIGHT 2016-2018 STMicroelectronics, All Rights Reserved
-  *         Copyright (C) 2006-2015, ARM Limited, All Rights Reserved
+  *         Portions COPYRIGHT 2016-2023 STMicroelectronics, All Rights Reserved
+  *         Copyright (C) 2006-2018, ARM Limited, All Rights Reserved
   *
-  * @file    st_readme.txt 
+  * @file    st_readme.txt
   * @author  MCD Application Team
   * @brief   This file lists the main modification done by STMicroelectronics on
   *          mbedTLS for integration with STM32Cube solution.
@@ -16,6 +16,19 @@
   *
   ******************************************************************************
   @endverbatim
+### 24-October-2023 ###
+   + Align function prototype and implementation :
+    - ssl_calc_verify_tls
+    - ssl_calc_verify_tls_sha256
+    - ssl_calc_verify_tls_sha384
+   + Increase padbuf size in ssl_calc_finished_tls_sha384 for sha512 use
+
+### 24-July-2023 ###
+   +Improve mbedtls_hardware_poll :
+    - Set return error value to mbedtls error value.
+    - Replace memset function by loop function to avoid data corruption during memory copy.
+
+   + Use variable ret in mbedtls_pk_parse_key function to avoid IAR warning.
 
 ### 25-August-2020 ###
 ========================

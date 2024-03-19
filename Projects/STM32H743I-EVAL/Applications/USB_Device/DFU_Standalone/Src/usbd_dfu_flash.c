@@ -95,7 +95,9 @@ uint16_t Flash_If_Erase(uint32_t Add)
   eraseinitstruct.Sector = startsector;
   eraseinitstruct.NbSectors = 1;
 
+  SCB_DisableICache();
   status = HAL_FLASHEx_Erase(&eraseinitstruct, &sectorerror);
+  SCB_EnableICache();
 
   if (status != HAL_OK)
   {
@@ -115,7 +117,7 @@ uint16_t Flash_If_Erase(uint32_t Add)
 uint16_t Flash_If_Write(uint8_t * src, uint8_t * dest, uint32_t Len)
 {
   uint32_t i = 0;
-
+  SCB_DisableICache();
   for (i = 0; i < Len; i += 32)
   {
     /* Device voltage range supposed to be [2.7V to 3.6V], the operation will
@@ -137,6 +139,7 @@ uint16_t Flash_If_Write(uint8_t * src, uint8_t * dest, uint32_t Len)
       return 1;
     }
   }
+  SCB_EnableICache();
   return 0;
 }
 

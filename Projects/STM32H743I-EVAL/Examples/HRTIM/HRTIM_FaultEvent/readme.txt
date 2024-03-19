@@ -47,7 +47,7 @@ The PWM waveforms can be displayed using an oscilloscope.
     HRTIM1 TIMA TA2 duty cycle = (HRTIM1_TIMA_CMP2/ HRTIM1_TIMA_PER)* 100 = 75%
 
 The PWM waveforms can be displayed using an oscilloscope, when the level of Fault2 pin(PC.11) 
-is low( connected to GND) the PWM signals are generated, if the level of the Fault pin switchs to High
+is low( connected to GND) the PWM signals are generated, if the level of the Fault pin switches to High
 (3.3V) the PWM signals will be cleared.
 
 @note Care must be taken when using HAL_Delay(), this function provides accurate delay (in milliseconds)

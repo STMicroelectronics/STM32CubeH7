@@ -33,7 +33,7 @@
  The HCLK for D1 Domain AXI and AHB3 peripherals , D2 Domain AHB1/AHB2 peripherals and D3 Domain AHB4  peripherals at 200MHz.
  The APB clock dividers for D1 Domain APB3 peripherals, D2 Domain APB1 and APB2 peripherals and D3 Domain APB4 peripherals to  run at 100MHz.  
 
- Application check if Tamper button is pressed, than it open an USART session throught
+ Application check if Tamper button is pressed, than it open an USART session through
  USART1 (CN2), present a menu for user to choose next operation. Else will check if
  an application is already loaded at the APPLICATION_ADDRESS and jump to it.
 

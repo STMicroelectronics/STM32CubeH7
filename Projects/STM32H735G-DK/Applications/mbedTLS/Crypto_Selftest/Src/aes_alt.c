@@ -599,7 +599,7 @@ int mbedtls_aes_crypt_xts( mbedtls_aes_xts_context *ctx,
         unsigned char *prev_output = output - 16;
 
         /* Copy ciphertext bytes from the previous block to our output for each
-         * byte of cyphertext we won't steal. At the same time, copy the
+         * byte of ciphertext we won't steal. At the same time, copy the
          * remainder of the input for this final round (since the loop bounds
          * are the same). */
         for( i = 0; i < leftover; i++ )

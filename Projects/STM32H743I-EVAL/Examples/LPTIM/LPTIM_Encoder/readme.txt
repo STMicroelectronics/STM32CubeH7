@@ -33,7 +33,7 @@ The APB clock dividers for D1 Domain APB3 peripherals, D2 Domain APB1 and APB2 p
 In this example, the LPTIM encoder is configured to generate up or down counting
 according to the phase between the two inputs of LPTIM1.
 
-In this exemple :
+In this example :
         - At the first there is no change of state , LED1 & LED3 are Off .
         - If LED3 On and LED1 Off , the LPTIM encoder mode is in up counting   .
         - If LED1 On and LED3 Off , the LPTIM encoder is mode in down counting .

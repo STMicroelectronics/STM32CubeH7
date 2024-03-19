@@ -41,7 +41,7 @@ Below are the steps to run this example:
 2- Choose the FLASH_SwapBank_Bank1 project and run it, this project will be loaded
    in the bank1 of the flash: at the address 0x08000000
    
-3- Click the BUTTON_TAMPER button to swap between the two banks,
+3- Click the BUTTON_TAMPER button and then the RESET button to swap between the two banks,
 
 - If program is executing from bank1 is selected, LED1 toggles,
 
@@ -63,17 +63,17 @@ Below are the steps to run this example:
 
 
 @Note If the  application is using the DTCM/ITCM memories (@0x20000000/ 0x0000000: not cacheable and only accessible
-      by the Cortex M7 and the  MDMA), no need for cache maintenance when the Cortex M7 and the MDMA access these RAMs.
-      If the application needs to use DMA(or other masters) based access or requires more RAM, then  the user has to:
-              - Use a non TCM SRAM. (example : D1 AXI-SRAM @ 0x24000000)
-              - Add a cache maintenance mechanism to ensure the cache coherence between CPU and other masters(DMAs,DMA2D,LTDC,MDMA).
-              - The addresses and the size of cacheable buffers (shared between CPU and other masters)
-                must be	properly defined to be aligned to L1-CACHE line size (32 bytes). 
- 
+      by the Cortex M7 and the ï¿½MDMA), no need for cache maintenance when the Cortex M7 and the MDMA access these RAMs.
+ï¿½ï¿½ï¿½ï¿½ï¿½ If the application needs to use DMA(or other masters) based access or requires more RAM, then ï¿½the user has to:
+ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ - Use a non TCM SRAM. (example : D1 AXI-SRAM @ 0x24000000)
+ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ - Add a cache maintenance mechanism to ensure the cache coherence between CPU and other masters(DMAs,DMA2D,LTDC,MDMA).
+ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½       - The addresses and the size of cacheable buffers (shared between CPU and other masters)
+                must be	properlyï¿½defined to be aligned to L1-CACHE line size (32 bytes). 
+ï¿½
 @Note It is recommended to enable the cache and maintain its coherence.
       Depending on the use case it is also possible to configure the cache attributes using the MPU.
-      Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
-      Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
+ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Please refer to the AN4838 "Managing memory protection unit (MPU) in STM32 MCUs"
+ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Please refer to the AN4839 "Level 1 cache on STM32F7 Series"
 
 @par Keywords
 
@@ -101,7 +101,16 @@ In order to make the program work, you must do the following :
  - Open your preferred toolchain
  - Rebuild all files and load your image into target memory
  - Run the example
-
-
-
+@ For STM32CubeIDE:
+ One linker script is needed for this example where the FLASH shall be defined at origin: 0x8000000
+	This is because The CPU expects all code to be executed from this address.
+	The SWAP_BANK bit simply â€œtogglesâ€ which bank is located at @0x8000000.
+	To actually load one of the binaries into 0x8100000 you have to setup the debug config to load one bin-file with 0x100000:
+	select "Debug configuration" or "Run configuration" in function of the active build FLASH_SwapBanks_Bank1 configuration
+   - Double click on â€œSTM32 Cortex-M C/C++ Applicationâ€
+   - Select  â€œStartupâ€ >  â€œAddâ€ > 
+   - Select the FLASH_SwapBanks_Bank2 project 
+   - Uncheck Perform build option
+   - Add 0x100000 to Use download offset hex
+   - Click Debug/Run to debug/run the example
  */

@@ -550,6 +550,12 @@ USBH_StatusTypeDef USBH_HID_GetHIDReportDescriptor(USBH_HandleTypeDef *phost,
 
   USBH_StatusTypeDef status;
 
+  if (length > sizeof(phost->device.Data))
+  {
+    USBH_ErrLog("Control error: Get HID Report Descriptor failed, data buffer size issue");
+    return USBH_NOT_SUPPORTED;
+  }
+
   status = USBH_GetDescriptor(phost,
                               USB_REQ_RECIPIENT_INTERFACE | USB_REQ_TYPE_STANDARD,
                               USB_DESC_HID_REPORT,
@@ -578,6 +584,12 @@ USBH_StatusTypeDef USBH_HID_GetHIDDescriptor(USBH_HandleTypeDef *phost,
                                              uint16_t length)
 {
   USBH_StatusTypeDef status;
+
+  if (length > sizeof(phost->device.Data))
+  {
+    USBH_ErrLog("Control error: Get HID Descriptor failed, data buffer size issue");
+    return USBH_NOT_SUPPORTED;
+  }
 
   status = USBH_GetDescriptor(phost,
                               USB_REQ_RECIPIENT_INTERFACE | USB_REQ_TYPE_STANDARD,

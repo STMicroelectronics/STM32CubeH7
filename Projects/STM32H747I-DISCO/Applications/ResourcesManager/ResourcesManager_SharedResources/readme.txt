@@ -100,7 +100,7 @@ ResourcesManager, multiprocessor, Resource share, Dual
 
 @par Directory contents
 
-    - ResourcesManager/ResourcesManager_SharedResources/Commmon/Src/system_stm32h7xx.c  STM32H7xx system configuration source file
+    - ResourcesManager/ResourcesManager_SharedResources/Common/Src/system_stm32h7xx.c  STM32H7xx system configuration source file
 	
     - ResourcesManager/ResourcesManager_SharedResources/CM7/Inc/stm32h7xx_hal_conf.h    HAL configuration file for Cortex-M7
     - ResourcesManager/ResourcesManager_SharedResources/CM7/Inc/stm32h7xx_it.h          Interrupt handlers header file for Cortex-M7

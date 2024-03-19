@@ -41,7 +41,7 @@
  inside the working rectangle.
  
  Clear the working window by pressing the clear icon or/and save the picture 
- in USB Mass Stroage by pressing the save icon.
+ in USB Mass Storage by pressing the save icon.
 
                                           LCD Menu
                ____________________________________________________________

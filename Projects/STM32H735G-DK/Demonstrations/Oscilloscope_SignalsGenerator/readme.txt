@@ -49,7 +49,7 @@ Digital Signal Oscilloscope with an external Signal Generator.
  frequency which depends basically on their powerful Analog to Digital Converters (ADC).
  STM32H7 include three ADCs, able to work separately or in interleaved mode depending on our
  purpose.
- In purpose to prouve their performaces to acheive the best oscilloscope results, four
+ In purpose to prouve their performaces to achieve the best oscilloscope results, four
  improuvments have been implemented with success:
 
       1. In purpose to reach up the maximum possible conversion frequency, three specific factors
@@ -57,7 +57,7 @@ Digital Signal Oscilloscope with an external Signal Generator.
 
  In this example to reach up the maximum ADC conversion frequency, Sampling time was configured
  as minimum (1.5 ADC's clock) and ADC's Clock was configured as maximum possible (80MHz/2=40 MHz) throw
- an external clock source provided by PLL2. SAR Time was selected as 7.5 ADC's Clock refering
+ an external clock source provided by PLL2. SAR Time was selected as 7.5 ADC's Clock referring
  to the conversion resolution which is fixed on 14 bits to ensure a better conversion quality.
   * Timing configuration:
   In this demonstration, the system clock is 520 MHz,ADC clock source is configured as external throw PLL2:
@@ -71,34 +71,34 @@ Digital Signal Oscilloscope with an external Signal Generator.
      slow frequency. An algorithm based on Timer triggering was implemented to modify from the HMI
      the conversion frequency in the range of [500 Samples/S, 4 M Samples/S].
 
- TIM3, as a General-purpose 16 bits Timers was configured to make a hardware continous triggering to
+ TIM3, as a General-purpose 16 bits Timers was configured to make a hardware continuous triggering to
  our ADC, the counting cycle from 0 to 65 536 finish with a hardware configured interrupt called
  update IT restarting the conversion cycle.
- The counting frequency, which depends on the two factors (Prescalar and Period) is the responsable
+ The counting frequency, which depends on the two factors (Prescalar and Period) is the responsible
  to modify the conversion rate.
 
      3. In purpose to improuve the maximum conversion rate from 4 M Samples/S to 8 M Samples/S,
      an Interleaved conversion mode configured by ADC1 and ADC2 was made with success.
 
  ADC1 configured on the best possible performance (4 M Samlpes/S) is gone to convert the first part of
- the signal and trig the second slave ADC (ADC2) to finish the conversion. This mecanism which use a
- specific timing is descibed on ADC 8 M Samples/S conversion example.
+ the signal and trig the second slave ADC (ADC2) to finish the conversion. This mechanism which use a
+ specific timing is described on ADC 8 M Samples/S conversion example.
 
 
  + Data manipulation process
  ---------------------------
  In order to minimize the power consumption of our DSO, Data manipulation from ADC's to the RAM was
- ensured by Direct Memory Acces (DMA). Two differents methods of data management are created depending
+ ensured by Direct Memory Access (DMA). Two different methods of data management are created depending
  on the conversion mode.
       1. Single Mode : Direct transfer data using a circular 16 bits DMA.
-      2. Dual Mode   : Master 16 bits results are stocked in the 16 MSB bits of the 32 commun Data register CDR
+      2. Dual Mode   : Master 16 bits results are stocked in the 16 MSB bits of the 32 common Data register CDR
                        and wait for the slave ADC to provide the other 16 bits. the moment when the register is
                        filled, the data are transferred using a circular 32 bits DMA mode.
 
  + Humain Machine Interface
  --------------------------
  A DSO need A graphical unit interface to display signals, A GUI made using Visual Studio with C# are created to
-display continously signals coming from the MCU.
+display continuously signals coming from the MCU.
 
 
  + Communication between the GUI and the MCU
@@ -108,7 +108,7 @@ display continously signals coming from the MCU.
 
  + Signal Frequency detection
  -------------------------------------------
- In purpose to caracterise the externals signals displayed in the digital signal oscilloscope, A simple mecanism based
+ In purpose to caracterise the externals signals displayed in the digital signal oscilloscope, A simple mechanism based
  on the time between samples information was made on the GUI to detect the frequency of the signal.
 
     - Signal Period = Number of samples per period * time between two successive samples.
@@ -119,15 +119,15 @@ display continously signals coming from the MCU.
 
 ++ Signals Generator Application (Task 2 )
  This Task t uses the DAC capabilities  to generate different waves forms 
- with the possibilty to configure the frequency
+ with the possibility to configure the frequency
  and the amplitude of the generated signal.
 
  + Signals Generations Configuration:
    A User graphical inaterface is used to control the application configuration
    and shows the current output status:
-    - Signal Type buttoms: to select the type of output signal (DC,Square,Sinus,Triangle,Escalator or Noise).
-    - Signal Frequency buttoms: to configure the frequency of output signal (5.000Khz -> 130.000Khz).
-    - Signal Amplitude buttoms: to configure the amplitude of output signal (0.100 V -> 3.300 V).
+    - Signal Type buttons: to select the type of output signal (DC,Square,Sinus,Triangle,Escalator or Noise).
+    - Signal Frequency buttons: to configure the frequency of output signal (5.000Khz -> 130.000Khz).
+    - Signal Amplitude buttons: to configure the amplitude of output signal (0.100 V -> 3.300 V).
 
  + Signals Generations Status:
     - Shows the graphic of  current output signal.
@@ -163,7 +163,7 @@ On PC side, you must do the following :
   - Run the "Serial Oscilloscope" application on your PC
   - Configure your UART communication in the GUI by selecting the Serial Port and Baude rate(115200),
   - Connect a (Type A to Micro-B) USB cable from the STM32H735G-DK board (Connector CN15) to the PC 
-  - Start the connexion between the Board and the PC GUI using the dedicated PC GUI button 
+  - Start the connection between the Board and the PC GUI using the dedicated PC GUI button 
   - Configure the desired sampling rate frequency.
   - Put an external signal with amplitude less than 3.3 V to the input (PA0,CN9 Connector pin A2 of the STM32H735G-DK board)..
   - Click on Start Scope button.

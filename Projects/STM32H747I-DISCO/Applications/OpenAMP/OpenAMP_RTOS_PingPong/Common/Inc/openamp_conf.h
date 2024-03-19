@@ -38,7 +38,7 @@
 
  /* Includes ------------------------------------------------------------------*/
  /**
-   * @brief Include Maibox interface  header file
+   * @brief Include Mailbox interface  header file
    */
 
 #ifdef MAILBOX_IPCC_IF_ENABLED

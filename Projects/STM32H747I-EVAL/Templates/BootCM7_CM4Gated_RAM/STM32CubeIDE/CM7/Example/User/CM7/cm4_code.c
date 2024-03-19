@@ -21,9 +21,13 @@
 /* Includes ------------------------------------------------------------------*/
 #include "string.h"
 
-#if defined (__GNUC__)
+#if defined (__GNUC__)&& defined (DEBUG)
 asm(".section .cm4_code,\"a\";"
                              ".incbin \"../../CM4/Debug/BootCM7_CM4Gated_RAM_CM4.bin\";"
+);
+#elif defined (__GNUC__)
+asm(".section .cm4_code,\"a\";"
+                             ".incbin \"../../CM4/Release/BootCM7_CM4Gated_RAM_CM4.bin\";"
 );
 #endif 
 

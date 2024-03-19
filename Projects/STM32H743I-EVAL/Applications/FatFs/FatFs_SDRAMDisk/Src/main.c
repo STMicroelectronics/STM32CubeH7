@@ -91,7 +91,7 @@ static void FS_FileOperations(void)
   /* Register the file system object to the FatFs module */
   if(f_mount(&SDRAMFatFs, (TCHAR const*)SDRAMPath, 0) == FR_OK)
   {
-    /*reate a FAT file system (format) on the logical drive */
+    /*Create a FAT file system (format) on the logical drive */
     if(f_mkfs((TCHAR const*)SDRAMPath, FM_ANY, 0, workBuffer, sizeof(workBuffer)) == FR_OK)
     {
       /* Create and Open a new text file object with write access */

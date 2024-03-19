@@ -157,7 +157,7 @@ The DMA request generator is then enabled by using the function
 "HAL_DMAEx_EnableMuxRequestGenerator"
 
 The CPU is only used to intercept a DMA transfer error if any and sets the 
-LED3 (Red LED) to ON in this case or to tramsmit the received data if no error occurred.
+LED3 (Red LED) to ON in this case or to transmit the received data if no error occurred.
 
 @note The BDMA has access to D3 Domain SRAMs and peripherals only, thus aRxBuffer buffer
       has been placed to the D3SRAM (@0x38000000).

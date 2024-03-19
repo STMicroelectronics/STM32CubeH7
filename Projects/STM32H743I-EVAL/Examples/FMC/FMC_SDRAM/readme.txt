@@ -1,5 +1,5 @@
 /**
-  @page FMC_SDRAM SDRAM memory functionnalities example
+  @page FMC_SDRAM SDRAM memory functionalities example
   
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************

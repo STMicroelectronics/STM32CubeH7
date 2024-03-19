@@ -145,6 +145,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
       {
         HAL_ResumeTick();
         SystemClockConfig_Resume();
+        __HAL_PCD_UNGATE_PHYCLOCK(&hpcd_USB_HS);
       }
       /* Activate Remote wakeup */
       HAL_PCD_ActivateRemoteWakeup((&hpcd_USB_HS));

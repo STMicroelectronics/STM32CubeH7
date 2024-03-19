@@ -96,7 +96,7 @@ FatFS, File system, SD Card, SDRAM
   - JPEG/JPEG_EncodingUsingFs_DMA/Inc/main.h                        Header for main.c module  
   - JPEG/JPEG_EncodingUsingFs_DMA/Inc/encode_dma.h                  Header for encode_dma.c module
   - JPEG/JPEG_EncodingUsingFs_DMA/Inc/sd_diskio.h                   Header for sd_diskio.c module  
-  - JPEG/JPEG_EncodingUsingFs_DMA/Inc/jpeg_utils_conf.h             JPEG utilties module configuration file
+  - JPEG/JPEG_EncodingUsingFs_DMA/Inc/jpeg_utils_conf.h             JPEG utilities module configuration file
 
   - JPEG/JPEG_EncodingUsingFs_DMA/Src/stm32h7xx_it.c                Interrupt handlers
   - JPEG/JPEG_EncodingUsingFs_DMA/Src/main.c                        Main program

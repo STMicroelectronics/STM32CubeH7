@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    SPI/SPI_FullDuplex_ComDMA/CM4/Src/stm32h7xx_it.c
+  * @file    UART/UART_WakeUpFromStopUsingFIFO/CM4/Src/stm32h7xx_it.c
   * @author  MCD Application Team
   * @brief   Main Interrupt Service Routines for Cortex-M4.
   ******************************************************************************

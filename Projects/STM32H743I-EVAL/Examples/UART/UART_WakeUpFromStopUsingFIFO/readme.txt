@@ -34,13 +34,13 @@ The APB clock dividers for D1 Domain APB3 peripherals, D2 Domain APB1 and APB2 p
 In the first part of the example the UART is configured for reception with Rx FIFO thhreshold 
 set to one 1 QUARTER and enter the CPU to Stop Mode. 
 The UART FIFO threshold interruption is enabled and ,by default, the UART FIFO full is disabled.
-The user has to send 4 bytes from the HyperTerminal. at the 4th recieved byte
+The user has to send 4 bytes from the HyperTerminal. at the 4th received byte
 the UART FIFO will reach the quarter level which will generate an interruption and wake-up the CPU.
 
 In the second part of the example, the UART is configured for reception with 
 FIFO threshold interruption disabled and FIFO full enabled. then the CPU goes to stop mode.
 The user has to send 16 bytes (size of the UART FIFO) from the HyperTerminal. 
-at the 16th recieved byte, the UART FIFO will be full which will generate an interruption and wake-up the CPU.
+at the 16th received byte, the UART FIFO will be full which will generate an interruption and wake-up the CPU.
 
 
 Board: STM32H743I-EVAL

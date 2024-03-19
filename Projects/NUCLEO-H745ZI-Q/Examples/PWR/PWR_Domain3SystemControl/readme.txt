@@ -102,7 +102,7 @@ How to run:
     low power modes therefore the user can start the transmission of LPUART data
     by pressing on the Tamper button in the second board.
   => If the test passed, then LED1 on the second board will toggle to indicate 
-     that the transmission and reception processs are in progress and no error 
+     that the transmission and reception processes are in progress and no error 
      occurred.
      If an error occurred during the communication LED3 (Red LED) of the second 
      board will turn On.
@@ -151,7 +151,7 @@ with the following parameters :
 The DMA request generator is then enabled using the function “HAL_DMAEx_EnableMuxRequestGenerator”.
 
 The CPU is only used to intercept a DMA transfer error if any and sets the LED3 (Red LED) to ON in this case
-or to tramsmit the received data if no error occurred.
+or to transmit the received data if no error occurred.
 
 @note The BDMA has access to  D3 Domain SRAMs and peripherals only, thus aRxBuffer buffer
       has been placed to the D3SRAM (@0x38000000)
@@ -218,14 +218,14 @@ System, Power, multiprocessor, PWR, Stop mode, Domain 3, D3SRAM, BDMA, DMAMUX, L
 In order to make the program work, you must do the following :
  - Open your preferred toolchain 
  - For each target configuration (STM32H745ZI_Nucleo_CM7 and STM32H745ZI_Nucleo_CM4) : 
-     - Rebuild all files with LOW_POWER_BOARD compile swicth (in common.h file)
+     - Rebuild all files with LOW_POWER_BOARD compile switch (in common.h file)
      - Load images into target memory in 1st board.
-     - Rebuild all files without LOW_POWER_BOARD swicth (in common.h file)
+     - Rebuild all files without LOW_POWER_BOARD switch (in common.h file)
      - Load images into target memory in 2nd board.
      - Power off/On both boards.
      - wait for LED1 and LED2 to turn Off on 1st board.
      - Press Tamper button on 2nd board --> LED1 should start toggling indicating 
-        that transmission and reception processs are in progress.
+        that transmission and reception processes are in progress.
      
 
 

@@ -262,10 +262,14 @@ static uint32_t waveFrequency = DAC_MIN_FREQUENCY;
 static uint32_t waveAmplitude = DAC_MAX_AMPLITUDE;
 static uint8_t  frequencyName[16];
 static uint8_t  amplitudeName[10];
-extern  const char * cm4_code;
 extern uint32_t AutoMode ;
 static uint32_t count = 0;
-
+#if defined (__ICCARM__) /* IAR Compiler */
+extern const char * cm4_code; /* section containing CM4 Code */
+#else /* GNU & ARM Compilers */
+extern const uint32_t cm4_code; /* section containing CM4 Code */
+extern const uint32_t cm4_code_end;
+#endif /* __ICCARM__ */
 
 /* Private functions ---------------------------------------------------------*/
 
@@ -309,9 +313,12 @@ int main(void)
     __HAL_RCC_HSEM_CLK_ENABLE();
   
     __HAL_RCC_C1_D2SRAM1_CLK_ENABLE(); 
-
     /* Copy CM4 code from Flash to D2_SRAM memory */
+  #if defined (__ICCARM__) /* IAR Compiler */
     memcpy((void *)D2_AXISRAM_BASE,  &cm4_code, 0x20000);
+  #else /* GNU & ARM Compilers */
+    memcpy((void *)D2_AXISRAM_BASE, &cm4_code, (uint32_t)&cm4_code_end - (uint32_t)&cm4_code);
+  #endif /* __ICCARM__ */
 
     HAL_SYSCFG_CM4BootAddConfig(SYSCFG_BOOT_ADDR0, D2_AXISRAM_BASE); /*0x1000000*/
 

@@ -49,7 +49,7 @@ The BSP examples detects the presence of Adafruit 1.8" TFT shield with joystick 
 
 If the Adafruit shield is NOT connected, then:
  - YELLOW led (led2) blinks waiting the user button is pushed.
- - Then YELLOW led swithces off and green & red leds start blinking at high frequency.
+ - Then YELLOW led switches off and green & red leds start blinking at high frequency.
  - Pushing user button again and again blinking frequency decreases until looping 
    to high frequency.
 

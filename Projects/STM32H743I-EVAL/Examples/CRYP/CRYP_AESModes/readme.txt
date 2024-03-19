@@ -70,7 +70,7 @@ STM32H743I-EVAL LEDs are used to monitor the encryption/decryption  status:
  - LED1(GREEN) is ON when encryption/decryption  are right.
  - LED3(RED) is ON when encryption or decryption are wrong.
  
-@note No CPU Data Cache maintenance is performe in this example, you can adress to
+@note No CPU Data Cache maintenance is performed in this example, you can address to
       CRYP_AESModes_DMA example to see how to manage CPU Data Cache.
             
 @note The application needs to ensure that the SysTick time base is always set to 1 millisecond

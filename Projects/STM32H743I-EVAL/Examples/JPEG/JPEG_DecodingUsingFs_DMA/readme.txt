@@ -120,7 +120,7 @@ FatFS, File system, SD Card, SDRAM
       The image must have the following properties:
         - named as "image.jpg"
         - dimensions : less or equal to the display screen:
-               - Witdh  : <= 640
+               - Width  : <= 640
                - Height : <= 480
   - Connect the uSD Card to the Micro SD connector (CN13).
     

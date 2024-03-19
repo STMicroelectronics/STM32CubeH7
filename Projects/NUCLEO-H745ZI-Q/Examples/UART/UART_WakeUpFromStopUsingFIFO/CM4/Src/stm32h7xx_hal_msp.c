@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    SPI/SPI_FullDuplex_ComDMA/CM4/Src/stm32h7xx_hal_msp.c
+  * @file    UART/UART_WakeUpFromStopUsingFIFO/CM4/Src/stm32h7xx_hal_msp.c
   * @author  MCD Application Team
   * @brief   HAL MSP module for Cortex-M4.
   ******************************************************************************

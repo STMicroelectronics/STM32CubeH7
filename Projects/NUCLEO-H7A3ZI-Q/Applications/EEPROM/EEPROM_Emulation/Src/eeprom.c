@@ -81,7 +81,9 @@ uint16_t EE_Init(void)
           /* Erase Page0 */
         if(!EE_VerifyPageFullyErased(PAGE0_BASE_ADDRESS))
         {
+          SCB_DisableICache();
           FlashStatus = HAL_FLASHEx_Erase(&pEraseInit, &SectorError);
+          SCB_EnableICache();
           /* If erase operation was failed, a Flash error code is returned */
           if (FlashStatus != HAL_OK)
           {
@@ -94,7 +96,9 @@ uint16_t EE_Init(void)
         /* Erase Page0 */
         if(!EE_VerifyPageFullyErased(PAGE0_BASE_ADDRESS))
         {
+          SCB_DisableICache();
           FlashStatus = HAL_FLASHEx_Erase(&pEraseInit, &SectorError);
+          SCB_EnableICache();
           /* If erase operation was failed, a Flash error code is returned */
           if (FlashStatus != HAL_OK)
           {
@@ -102,7 +106,9 @@ uint16_t EE_Init(void)
           }
         }
         /* Mark Page1 as valid */
+        SCB_DisableICache();
         FlashStatus = HAL_FLASH_Program(FLASH_TYPEPROGRAM_FLASHWORD, PAGE1_BASE_ADDRESS, ((uint32_t)valid));
+        SCB_EnableICache();
 
         /* If program operation was failed, a Flash error code is returned */
         if (FlashStatus != HAL_OK)
@@ -150,7 +156,9 @@ uint16_t EE_Init(void)
           }
         }
         /* Mark Page0 as valid */
+        SCB_DisableICache();
         FlashStatus = HAL_FLASH_Program(FLASH_TYPEPROGRAM_FLASHWORD, PAGE0_BASE_ADDRESS, ((uint32_t)valid));
+        SCB_EnableICache();
 
         /* If program operation was failed, a Flash error code is returned */
         if (FlashStatus != HAL_OK)
@@ -164,7 +172,9 @@ uint16_t EE_Init(void)
         /* Erase Page1 */
         if(!EE_VerifyPageFullyErased(PAGE1_BASE_ADDRESS))
         {
+          SCB_DisableICache();
           FlashStatus = HAL_FLASHEx_Erase(&pEraseInit, &SectorError);
+          SCB_EnableICache();
           /* If erase operation was failed, a Flash error code is returned */
           if (FlashStatus != HAL_OK)
           {
@@ -181,7 +191,9 @@ uint16_t EE_Init(void)
         /* Erase Page1 */
         if(!EE_VerifyPageFullyErased(PAGE1_BASE_ADDRESS))
         {
+          SCB_DisableICache();
           FlashStatus = HAL_FLASHEx_Erase(&pEraseInit, &SectorError);
+          SCB_EnableICache();
           /* If erase operation was failed, a Flash error code is returned */
           if (FlashStatus != HAL_OK)
           {
@@ -189,7 +201,9 @@ uint16_t EE_Init(void)
           }
         }
         /* Mark Page0 as valid */
+        SCB_DisableICache();
         FlashStatus = HAL_FLASH_Program(FLASH_TYPEPROGRAM_FLASHWORD, PAGE0_BASE_ADDRESS, ((uint32_t)valid));
+        SCB_EnableICache();
         /* If program operation was failed, a Flash error code is returned */
         if (FlashStatus != HAL_OK)
         {
@@ -228,7 +242,9 @@ uint16_t EE_Init(void)
         /* Erase Page1 */
         if(!EE_VerifyPageFullyErased(PAGE1_BASE_ADDRESS))
         {
+          SCB_DisableICache();
           FlashStatus = HAL_FLASHEx_Erase(&pEraseInit, &SectorError);
+          SCB_EnableICache();
           /* If erase operation was failed, a Flash error code is returned */
           if (FlashStatus != HAL_OK)
           {
@@ -263,7 +279,9 @@ uint16_t EE_Init(void)
           }
         }
         /* Mark Page1 as valid */
+        SCB_DisableICache();
         FlashStatus = HAL_FLASH_Program(FLASH_TYPEPROGRAM_FLASHWORD, PAGE1_BASE_ADDRESS, ((uint32_t)valid));
+        SCB_EnableICache();
 
         /* If program operation was failed, a Flash error code is returned */
         if (FlashStatus != HAL_OK)
@@ -277,7 +295,9 @@ uint16_t EE_Init(void)
         /* Erase Page0 */
         if(!EE_VerifyPageFullyErased(PAGE0_BASE_ADDRESS))
         {
+          SCB_DisableICache();
           FlashStatus = HAL_FLASHEx_Erase(&pEraseInit, &SectorError);
+          SCB_EnableICache();
           /* If erase operation was failed, a Flash error code is returned */
           if (FlashStatus != HAL_OK)
           {
@@ -451,7 +471,9 @@ static HAL_StatusTypeDef EE_Format(void)
   /* Erase Page0 */
   if(!EE_VerifyPageFullyErased(PAGE0_BASE_ADDRESS))
   {
+    SCB_DisableICache();
     FlashStatus = HAL_FLASHEx_Erase(&pEraseInit, &SectorError);
+    SCB_EnableICache();
     /* If erase operation was failed, a Flash error code is returned */
     if (FlashStatus != HAL_OK)
     {
@@ -460,7 +482,9 @@ static HAL_StatusTypeDef EE_Format(void)
   }
 
   /* Set Page0 as valid page: Write VALID_PAGE at Page0 base address */
+  SCB_DisableICache();
   FlashStatus = HAL_FLASH_Program(FLASH_TYPEPROGRAM_FLASHWORD, PAGE0_BASE_ADDRESS,((uint32_t)valid));
+  SCB_EnableICache();
 
   /* If program operation was failed, a Flash error code is returned */
   if (FlashStatus != HAL_OK)
@@ -472,7 +496,9 @@ static HAL_StatusTypeDef EE_Format(void)
   /* Erase Page1 */
   if(!EE_VerifyPageFullyErased(PAGE1_BASE_ADDRESS))
   {
+    SCB_DisableICache();
     FlashStatus = HAL_FLASHEx_Erase(&pEraseInit, &SectorError);
+    SCB_EnableICache();
     /* If erase operation was failed, a Flash error code is returned */
     if (FlashStatus != HAL_OK)
     {
@@ -588,6 +614,7 @@ static uint16_t EE_VerifyPageFullWriteVariable(uint16_t VirtAddress, uint16_t Da
   PageEndAddress = (uint32_t)((EEPROM_START_ADDRESS - 1) + (uint32_t)((ValidPage + 1) * PAGE_SIZE));
 
   /* Check each active page address starting from beginning */
+  SCB_DisableICache();
   while (Address < PageEndAddress)
   {
     /* Verify if Address and Address+2 contents are 0xFFFFFFFF */
@@ -613,6 +640,7 @@ static uint16_t EE_VerifyPageFullWriteVariable(uint16_t VirtAddress, uint16_t Da
       Address = Address + 32;
     }
   }
+  SCB_EnableICache();
 
   /* Return PAGE_FULL in case the valid page is full */
   return PAGE_FULL;
@@ -665,8 +693,9 @@ static uint16_t EE_PageTransfer(uint16_t VirtAddress, uint16_t Data)
   }
 
   /* Set the new Page status to RECEIVE_DATA status */
-
+  SCB_DisableICache();
   FlashStatus = HAL_FLASH_Program(FLASH_TYPEPROGRAM_FLASHWORD, NewPageAddress, ((uint32_t)receive));
+  SCB_EnableICache();
 
   /* If program operation was failed, a Flash error code is returned */
   if (FlashStatus != HAL_OK)
@@ -714,7 +743,9 @@ static uint16_t EE_PageTransfer(uint16_t VirtAddress, uint16_t Data)
   pEraseInit.NbSectors = 1;
 
   /* Erase the old Page: Set old Page status to ERASED status */
+  SCB_DisableICache();
   FlashStatus = HAL_FLASHEx_Erase(&pEraseInit, &SectorError);
+  SCB_EnableICache();
   /* If erase operation was failed, a Flash error code is returned */
   if (FlashStatus != HAL_OK)
   {
@@ -722,7 +753,9 @@ static uint16_t EE_PageTransfer(uint16_t VirtAddress, uint16_t Data)
   }
 
   /* Set new Page status to VALID_PAGE status */
+  SCB_DisableICache();
   FlashStatus = HAL_FLASH_Program(FLASH_TYPEPROGRAM_FLASHWORD, NewPageAddress, ((uint32_t)valid));
+  SCB_EnableICache();
   /* If program operation was failed, a Flash error code is returned */
   if (FlashStatus != HAL_OK)
   {

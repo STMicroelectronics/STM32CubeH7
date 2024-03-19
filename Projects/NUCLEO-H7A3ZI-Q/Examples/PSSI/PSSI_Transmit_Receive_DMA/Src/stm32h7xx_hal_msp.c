@@ -136,7 +136,7 @@ void HAL_PSSI_MspInit(PSSI_HandleTypeDef *hpssi)
   hdma_handler_tx.Init.MemDataAlignment    = DMA_MDATAALIGN_WORD;
   hdma_handler_tx.Init.Mode                = DMA_NORMAL;
   hdma_handler_tx.Init.Priority            = DMA_PRIORITY_HIGH;
-  hdma_handler_tx.Init.FIFOMode            = DMA_FIFOMODE_DISABLE;
+  hdma_handler_tx.Init.FIFOMode            = DMA_FIFOMODE_ENABLE;
   hdma_handler_tx.Init.FIFOThreshold       = DMA_FIFO_THRESHOLD_FULL;
   hdma_handler_tx.Init.MemBurst            = DMA_MBURST_SINGLE;
   hdma_handler_tx.Init.PeriphBurst         = DMA_PBURST_SINGLE; 
@@ -163,7 +163,7 @@ void HAL_PSSI_MspInit(PSSI_HandleTypeDef *hpssi)
   hdma_handler_rx.Init.MemDataAlignment    = DMA_MDATAALIGN_WORD;
   hdma_handler_rx.Init.Mode                = DMA_NORMAL;
   hdma_handler_rx.Init.Priority            = DMA_PRIORITY_HIGH;
-  hdma_handler_rx.Init.FIFOMode            = DMA_FIFOMODE_DISABLE;
+  hdma_handler_rx.Init.FIFOMode            = DMA_FIFOMODE_ENABLE;
   hdma_handler_rx.Init.FIFOThreshold       = DMA_FIFO_THRESHOLD_FULL;
   hdma_handler_rx.Init.MemBurst            = DMA_MBURST_SINGLE;
   hdma_handler_rx.Init.PeriphBurst         = DMA_PBURST_SINGLE; 

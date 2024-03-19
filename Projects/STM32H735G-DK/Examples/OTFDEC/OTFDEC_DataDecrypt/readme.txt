@@ -21,7 +21,7 @@
 
 @par Example Description
 
-This example describes how to decrypt data (crypted with CRYPT peripheral) located on the OCTOSPI external flash  using the OTFDEC peripheral
+This example describes how to decrypt data (encrypted with CRYPT peripheral) located on the OCTOSPI external flash  using the OTFDEC peripheral
 
 
 This projects is configured for STM32H735xx devices.

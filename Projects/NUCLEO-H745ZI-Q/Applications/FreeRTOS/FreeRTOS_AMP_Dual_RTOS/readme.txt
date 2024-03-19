@@ -79,8 +79,8 @@ RTOS, FreeRTOS, multiprocessor, Threading, AMP, Asymmetric Multi Processing, Dua
 @par Directory contents
 
 
-    - FreeRTOS/FreeRTOS_AMP_Dual_RTOS/Commmon/Src/system_stm32h7xx.c  STM32H7xx system configuration source file
-    - FreeRTOS/FreeRTOS_AMP_Dual_RTOS/Commmon/Inc/MessageBufferAMP.h  AMP application header
+    - FreeRTOS/FreeRTOS_AMP_Dual_RTOS/Common/Src/system_stm32h7xx.c  STM32H7xx system configuration source file
+    - FreeRTOS/FreeRTOS_AMP_Dual_RTOS/Common/Inc/MessageBufferAMP.h  AMP application header
 
     - FreeRTOS/FreeRTOS_AMP_Dual_RTOS/CM7/Inc/stm32h7xx_hal_conf.h    HAL configuration file for Cortex-M7
     - FreeRTOS/FreeRTOS_AMP_Dual_RTOS/CM7/Inc/FreeRTOSConfig.h        FreeRTOS Configuration file

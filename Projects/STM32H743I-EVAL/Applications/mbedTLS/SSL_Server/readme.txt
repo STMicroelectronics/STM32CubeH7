@@ -46,15 +46,15 @@ Scenario 2:
 ===========
 In this second scenario, 2 boards can be used to test the application
 - connects to local network either through DHCP or static IP address.
-- a second STM32H743I-EVAL borad running the "SSL_Server" application
+- a second STM32H743I-EVAL board running the "SSL_Server" application
   connects to the the url https://<Server_Board_Ipadress>:4433
 - the  client sends an encrypted message to the server.
 - the server board responds with the suitable message.
-- the recieved message is displayed on the LCD.
+- the received message is displayed on the LCD.
 
 Application logs are displayed on the LCD.
 
-In case of sucess the green led is on.
+In case of success the green led is on.
 In case of errors the red led is on.
 
 @note Care must be taken when using HAL_Delay(), this function provides accurate delay (in milliseconds)
@@ -126,12 +126,12 @@ AES 192, AES 256, Triple DES, MD5, SHA-1
       - Using a Windows PC equipped with a web browser as a client.
      - using two stm32h743_eval boards the first as server, the second as client.
 
-  - Senario 1:
+  - Scenario 1:
       - Remote PC Set-up
 	  - Make sure that the PC is in the same local network as the baord.
           - The Pc has a web browser that supports TLS and secure connections (IE > 10, Chrome > 52, FireFox > 41)
 
-  - Senario 2:
+  - Scenario 2:
       - a second STM32H743I-EVAL running the "mdedTLS/SSL_Server" application
 
   - STM32H743I-EVAL Set-up

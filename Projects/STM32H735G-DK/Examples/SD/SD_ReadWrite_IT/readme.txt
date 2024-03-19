@@ -20,8 +20,8 @@
   @endverbatim
 
 @par Example Description
-This example performs some write and read transfers to SD Card with SDMMC IP internal
-DMA mode and calculate write and read transfer speed.
+This example performs some write and read transfers to SD Card with SDMMC IP IT
+mode and calculate write and read transfer speed.
 
 
 At the beginning of the main program the HAL_Init() function is called to reset

@@ -66,7 +66,7 @@ Below you find the sequence to discover the demonstration :
      Pressing User button lets LED2 toggling with a second frequency equal to ~5Hz.
      Pressing User button again, changes LED1 toggling frequency to ~10Hz.
      This is done in an infinite loop.
-     Each Time Cortex-M7 toggles LED1 it releases HW sempahore zero to notify the Cortex-M4.
+     Each Time Cortex-M7 toggles LED1 it releases HW semaphore zero to notify the Cortex-M4.
      The Cortex-M4 ,in a infinite loop, wait for a notification from Cortex-M7 and once received
      toggles LED2 without any delay.
      As result the Cortex-M4 toogls LED2 infintly with the same frequency as Cortex-M7
@@ -88,7 +88,7 @@ Below you find the sequence to discover the demonstration :
        - Automatic Mode selected:
          Images available on SD Card are displayed sequentially in a forever loop.
 
-       - Each time an new image is displayed the Cortex-M7 releases HW sempahore zero to notify the Cortex-M4.*
+       - Each time an new image is displayed the Cortex-M7 releases HW semaphore zero to notify the Cortex-M4.*
 
    Cortex-M4 Process :
    -------------------

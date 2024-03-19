@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    SPI/SPI_FullDuplex_ComDMA/CM4/Inc/main.h
+  * @file    UART/UART_WakeUpFromStopUsingFIFO/CM4/Inc/main.h
   * @author  MCD Application Team
   * @brief   Header for main.c module for Cortex-M4.
   ******************************************************************************

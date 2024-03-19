@@ -206,7 +206,7 @@ static uint32_t DAC_NoiseWaveConfig(uint16_t outputAmplitude)
 
   /* DAC channel1 Configuration */
   sConfig.DAC_Trigger = DACx_TRIGGER;
-  sConfig.DAC_OutputBuffer = DAC_OUTPUTBUFFER_ENABLE;  /* DAC_OUTPUTBUFFER_DISABLE Needed for Internal Connexion*/
+  sConfig.DAC_OutputBuffer = DAC_OUTPUTBUFFER_ENABLE;  /* DAC_OUTPUTBUFFER_DISABLE Needed for Internal Connection*/
   sConfig.DAC_ConnectOnChipPeripheral = DAC_CHIPCONNECT_EXTERNAL;
 
   /* Start DAC Channel1 */
@@ -258,7 +258,7 @@ static uint32_t DAC_DCWaveConfig(uint16_t outputAmplitude)
 
   /*##-1- DAC channel1 Configuration #########################################*/
   sConfig.DAC_Trigger = DACx_TRIGGER;
-  sConfig.DAC_OutputBuffer = DAC_OUTPUTBUFFER_ENABLE;  /* DAC_OUTPUTBUFFER_DISABLE Needed for Internal Connexion*/
+  sConfig.DAC_OutputBuffer = DAC_OUTPUTBUFFER_ENABLE;  /* DAC_OUTPUTBUFFER_DISABLE Needed for Internal Connection*/
   sConfig.DAC_ConnectOnChipPeripheral = DAC_CHIPCONNECT_EXTERNAL;
 
   if (HAL_DAC_ConfigChannel(&DacHandle, &sConfig, DACx_CHANNEL) != HAL_OK)
@@ -307,7 +307,7 @@ static uint32_t DAC_SquareWaveConfig(uint16_t outputAmplitude)
 
   /*##-1- DAC channel1 Configuration #########################################*/
   sConfig.DAC_Trigger = DACx_TRIGGER;
-  sConfig.DAC_OutputBuffer = DAC_OUTPUTBUFFER_ENABLE;  /* DAC_OUTPUTBUFFER_DISABLE Needed for Internal Connexion*/
+  sConfig.DAC_OutputBuffer = DAC_OUTPUTBUFFER_ENABLE;  /* DAC_OUTPUTBUFFER_DISABLE Needed for Internal Connection*/
   sConfig.DAC_ConnectOnChipPeripheral = DAC_CHIPCONNECT_EXTERNAL;
   if (HAL_DAC_ConfigChannel(&DacHandle, &sConfig, DACx_CHANNEL) != HAL_OK)
   {
@@ -352,7 +352,7 @@ static uint32_t DAC_EscalatorWaveConfig(uint16_t outputAmplitude)
 
   /*##-1- DAC channel1 Configuration #########################################*/
   sConfig.DAC_Trigger = DACx_TRIGGER;
-  sConfig.DAC_OutputBuffer = DAC_OUTPUTBUFFER_ENABLE;  /* DAC_OUTPUTBUFFER_DISABLE Needed for Internal Connexion*/
+  sConfig.DAC_OutputBuffer = DAC_OUTPUTBUFFER_ENABLE;  /* DAC_OUTPUTBUFFER_DISABLE Needed for Internal Connection*/
   sConfig.DAC_ConnectOnChipPeripheral = DAC_CHIPCONNECT_EXTERNAL;
 
   if (HAL_DAC_ConfigChannel(&DacHandle, &sConfig, DACx_CHANNEL) != HAL_OK)
@@ -398,7 +398,7 @@ static uint32_t DAC_SineWaveConfig(uint16_t outputAmplitude)
 
   /*##-1- DAC channel1 Configuration #########################################*/
   sConfig.DAC_Trigger = DACx_TRIGGER;
-  sConfig.DAC_OutputBuffer = DAC_OUTPUTBUFFER_ENABLE;  /* DAC_OUTPUTBUFFER_DISABLE Needed for Internal Connexion*/
+  sConfig.DAC_OutputBuffer = DAC_OUTPUTBUFFER_ENABLE;  /* DAC_OUTPUTBUFFER_DISABLE Needed for Internal Connection*/
   sConfig.DAC_ConnectOnChipPeripheral = DAC_CHIPCONNECT_EXTERNAL;
 
   if (HAL_DAC_ConfigChannel(&DacHandle, &sConfig, DACx_CHANNEL) != HAL_OK)
@@ -444,7 +444,7 @@ static uint32_t DAC_TrianglarWaveConfig(uint16_t outputAmplitude)
 
   /*##-1- DAC channel1 Configuration #########################################*/
   sConfig.DAC_Trigger = DACx_TRIGGER;
-  sConfig.DAC_OutputBuffer = DAC_OUTPUTBUFFER_ENABLE;  /* DAC_OUTPUTBUFFER_DISABLE Needed for Internal Connexion*/
+  sConfig.DAC_OutputBuffer = DAC_OUTPUTBUFFER_ENABLE;  /* DAC_OUTPUTBUFFER_DISABLE Needed for Internal Connection*/
   sConfig.DAC_ConnectOnChipPeripheral = DAC_CHIPCONNECT_EXTERNAL;
 
   if (HAL_DAC_ConfigChannel(&DacHandle, &sConfig, DACx_CHANNEL) != HAL_OK)

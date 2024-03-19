@@ -93,7 +93,7 @@
 uint8_t memory_buf[MAX_MEM_SIZE];
 #endif
 
-static int test_snprintf( size_t n, const char ref_buf[10], int ref_ret )
+static int test_snprintf( size_t n, const char *ref_buf, int ref_ret )
 {
     int ret;
     char buf[10] = "xxxxxxxxx";

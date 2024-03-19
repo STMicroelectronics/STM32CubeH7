@@ -747,8 +747,8 @@ void SystemInit_ExtMemCtl(void)
   GPIOG->OTYPER  = 0x00000000;
   /* Configure PGx pins in Pull-up */ 
   GPIOG->PUPDR   = 0x00100555;
-  
-/*-- FMC/FSMC Configuration --------------------------------------------------*/                                                                               
+
+/*-- FMC/FSMC Configuration --------------------------------------------------*/
   /* Enable the FMC/FSMC interface clock */
   (RCC->AHB3ENR |= (RCC_AHB3ENR_FMCEN));
 

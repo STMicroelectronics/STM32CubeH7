@@ -72,30 +72,36 @@ uint32_t FLASH_If_Erase(uint32_t StartSector)
   if (APPLICATION_ADDRESS < ADDR_FLASH_SECTOR_0_BANK2)
   {
     pEraseInit.Banks = FLASH_BANK_1;
+	SCB_DisableICache();
     if (HAL_FLASHEx_Erase(&pEraseInit, &SectorError) != HAL_OK)
     {
       /* Error occurred while sector erase */
       return (1);
     }
+	SCB_EnableICache();
     
     /* Mass erase of second bank */
     pEraseInit.TypeErase = FLASH_TYPEERASE_MASSERASE;
     pEraseInit.Banks = FLASH_BANK_2;
+	SCB_DisableICache();
     if (HAL_FLASHEx_Erase(&pEraseInit, &SectorError) != HAL_OK)
     {
       /* Error occurred while sector erase */
       return (1);
     }
+	SCB_EnableICache();
   }
   else
   {
     pEraseInit.TypeErase = FLASH_TYPEERASE_SECTORS;
     pEraseInit.Banks = FLASH_BANK_2;
+	SCB_DisableICache();
     if (HAL_FLASHEx_Erase(&pEraseInit, &SectorError) != HAL_OK)
     {
       /* Error occurred while sector erase */
       return (1);
     }
+	SCB_EnableICache();
   }
   HAL_FLASH_Lock(); 
   return (0);
@@ -116,7 +122,7 @@ uint32_t FLASH_If_Write(uint32_t FlashAddress, uint32_t* Data ,uint32_t DataLeng
   uint32_t i = 0;
  /* Unlock the Flash to enable the flash control register access *************/ 
   HAL_FLASH_Unlock();
-
+  SCB_DisableICache();
   for (i = 0; (i < DataLength) && (FlashAddress <= (USER_FLASH_END_ADDRESS-32)); i+=8)
   {
     /* Device voltage range supposed to be [2.7V to 3.6V], the operation will
@@ -138,7 +144,7 @@ uint32_t FLASH_If_Write(uint32_t FlashAddress, uint32_t* Data ,uint32_t DataLeng
       return (FLASHIF_WRITING_ERROR);
     }
   }
-
+  SCB_EnableICache();
   HAL_FLASH_Lock();
 
   return (FLASHIF_OK);

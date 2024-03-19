@@ -53,7 +53,7 @@ a lot of data that needs to be copied, this should be set high. */
 /* Relocate the LwIP RAM heap pointer */
 #define LWIP_RAM_HEAP_POINTER    (0x30004000)
 
-/* MEMP_NUM_TCP_PCB: the number of simulatenously active TCP
+/* MEMP_NUM_TCP_PCB: the number of simultaneously active TCP
    connections. */
 #define MEMP_NUM_TCP_PCB        10
 
@@ -187,6 +187,16 @@ The STM32H7xx allows computing and verifying the IP, UDP, TCP and ICMP checksums
  * LWIP_SOCKET==1: Enable Socket API (require to use sockets.c)
  */
 #define LWIP_SOCKET                     0
+
+/*
+   ------------------------------------
+   ---------- LWIP_NETIF_API options ----------
+   ------------------------------------
+*/
+/**
+ * LWIP_NETIF_API==1: Enable NETIF API
+ */
+#define LWIP_NETIF_API                     1
 
 /*
    ------------------------------------

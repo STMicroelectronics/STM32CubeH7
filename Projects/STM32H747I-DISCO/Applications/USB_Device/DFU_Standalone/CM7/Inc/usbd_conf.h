@@ -31,7 +31,7 @@
 /* Common Config */
 #define USBD_MAX_NUM_INTERFACES               1
 #define USBD_MAX_NUM_CONFIGURATION            1
-#define USBD_MAX_STR_DESC_SIZ                 64
+#define USBD_MAX_STR_DESC_SIZ                 100
 #define USBD_SUPPORT_USER_STRING_DESC         1
 #define USBD_SELF_POWERED                     1
 #define USBD_DEBUG_LEVEL                      0

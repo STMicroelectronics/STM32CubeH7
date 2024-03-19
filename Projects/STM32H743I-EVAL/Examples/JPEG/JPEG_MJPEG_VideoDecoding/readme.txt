@@ -36,7 +36,7 @@ The example performs the following actions :
   - Register the file system object (mount) to the FatFs module for the uSD drive.
   - Open the mjpeg file "video.avi" in read access.
     
-  - Function "AVI_ParserInit" is called to intialize the AVI parser, then In the video decoding loop and for each iteration 
+  - Function "AVI_ParserInit" is called to initialize the AVI parser, then In the video decoding loop and for each iteration 
     function "AVI_GetFrame" is called to read one frame from the AVI file. If the frame corresponds to a video frame 
     then start the decoding using the function "JPEG_Decode_DMA" (Non blocking method).
     Function "JPEG_Decode_DMA" is implemented in a separate module decode_dma.c.

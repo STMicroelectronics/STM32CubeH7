@@ -82,7 +82,7 @@ requirements, such as:
 
 @Note  When running Audio demo, Tamper button should be pressed to stop the audio
        player and return to the main menu
-       Whe running HID demo, In case of using an AZERTY keyboard, user should add
+       When running HID demo, In case of using an AZERTY keyboard, user should add
        "AZERTY_KEYBOARD" define to ensure correct displaying taped characters.
 
 

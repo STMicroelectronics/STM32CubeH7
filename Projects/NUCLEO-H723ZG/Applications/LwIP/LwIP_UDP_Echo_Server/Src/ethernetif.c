@@ -42,7 +42,7 @@
 /* Private variables ---------------------------------------------------------*/
 /*
 @Note: This interface is implemented to operate in zero-copy mode only:
-        - Rx Buffers will be allocated from LwIP stack memory heap,
+        - Rx Buffers will be allocated from LwIP stack Rx memory pool,
           then passed to ETH HAL driver.
         - Tx Buffers will be allocated from LwIP stack memory heap,
           then passed to ETH HAL driver.
@@ -75,19 +75,19 @@ typedef struct
 
 #pragma location=0x30000000
 ETH_DMADescTypeDef  DMARxDscrTab[ETH_RX_DESC_CNT]; /* Ethernet Rx DMA Descriptors */
-#pragma location=0x30000200
+#pragma location=0x30000080
 ETH_DMADescTypeDef  DMATxDscrTab[ETH_TX_DESC_CNT]; /* Ethernet Tx DMA Descriptors */
 
 
 #elif defined ( __CC_ARM )  /* MDK ARM Compiler */
 
-__attribute__((section(".RxDecripSection"))) ETH_DMADescTypeDef  DMARxDscrTab[ETH_RX_DESC_CNT]; /* Ethernet Rx DMA Descriptors */
-__attribute__((section(".TxDecripSection"))) ETH_DMADescTypeDef  DMATxDscrTab[ETH_TX_DESC_CNT]; /* Ethernet Tx DMA Descriptors */
+__attribute__((section(".RxDescripSection"))) ETH_DMADescTypeDef  DMARxDscrTab[ETH_RX_DESC_CNT]; /* Ethernet Rx DMA Descriptors */
+__attribute__((section(".TxDescripSection"))) ETH_DMADescTypeDef  DMATxDscrTab[ETH_TX_DESC_CNT]; /* Ethernet Tx DMA Descriptors */
 
 #elif defined ( __GNUC__ ) /* GNU Compiler */
 
-ETH_DMADescTypeDef DMARxDscrTab[ETH_RX_DESC_CNT] __attribute__((section(".RxDecripSection"))); /* Ethernet Rx DMA Descriptors */
-ETH_DMADescTypeDef DMATxDscrTab[ETH_TX_DESC_CNT] __attribute__((section(".TxDecripSection")));   /* Ethernet Tx DMA Descriptors */
+ETH_DMADescTypeDef DMARxDscrTab[ETH_RX_DESC_CNT] __attribute__((section(".RxDescripSection"))); /* Ethernet Rx DMA Descriptors */
+ETH_DMADescTypeDef DMATxDscrTab[ETH_TX_DESC_CNT] __attribute__((section(".TxDescripSection")));   /* Ethernet Tx DMA Descriptors */
 
 #endif
 
@@ -95,7 +95,7 @@ ETH_DMADescTypeDef DMATxDscrTab[ETH_TX_DESC_CNT] __attribute__((section(".TxDecr
 LWIP_MEMPOOL_DECLARE(RX_POOL, ETH_RX_BUFFER_CNT, sizeof(RxBuff_t), "Zero-copy RX PBUF pool");
 
 #if defined ( __ICCARM__ ) /*!< IAR Compiler */
-#pragma location = 0x30000400
+#pragma location = 0x30000100
 extern u8_t memp_memory_RX_POOL_base[];
 
 #elif defined ( __CC_ARM )  /* MDK ARM Compiler */

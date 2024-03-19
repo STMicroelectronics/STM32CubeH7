@@ -178,7 +178,7 @@
 /* ########################## SD Transceiver Enable ############################## */
 /**
   * @brief Uncomment the line below when a Transceiver is connected between the SD connector and STM32H7 Chip.
-  *        This allow to enable 1.8V mode and actiavte High speed mode > 25Mhz
+  *        This allow to enable 1.8V mode and activate High speed mode > 25Mhz
   */
 #define USE_SD_TRANSCEIVER    1
 /* ################## SPI peripheral configuration ########################## */

@@ -76,6 +76,7 @@ UART_HandleTypeDef UartHandle;
 __IO uint8_t step = 0;
 uint32_t start_time = 0;
 uint32_t stop_time = 0;
+uint32_t loop_index = 0;
 
 /* Private function prototypes -----------------------------------------------*/
 static void MPU_Config(void);
@@ -192,7 +193,7 @@ int main(void)
         }
         TxCplt = 0;
         /*##- 5 - Start Transmission buffer #####################*/
-        if(HAL_SD_WriteBlocks_IT(&SDHandle, aTxBuffer, ADDRESS, NB_BLOCK_BUFFER) != HAL_OK)
+        if(HAL_SD_WriteBlocks_IT(&SDHandle, aTxBuffer, ADDRESS + (loop_index * NB_BLOCK_BUFFER), NB_BLOCK_BUFFER) != HAL_OK)
         {
           Error_Handler();
         }
@@ -210,7 +211,7 @@ int main(void)
           index++;
           if(index<NB_BUFFER)
           {
-            /* More data need to be trasnfered */
+            /* More data need to be transferred */
             step--;
           }
           else
@@ -245,7 +246,7 @@ int main(void)
         }
         /*##- 7 - Start Reception buffer #####################*/
         RxCplt = 0;
-        if(HAL_SD_ReadBlocks_IT(&SDHandle, aRxBuffer, ADDRESS, NB_BLOCK_BUFFER) != HAL_OK)
+        if(HAL_SD_ReadBlocks_IT(&SDHandle, aRxBuffer, ADDRESS + (loop_index * NB_BLOCK_BUFFER), NB_BLOCK_BUFFER) != HAL_OK)
         {
           Error_Handler();
         }
@@ -262,7 +263,7 @@ int main(void)
           index++;
           if(index<NB_BUFFER)
           {
-            /* More data need to be trasnfered */
+            /* More data need to be transferred */
             step--;
           }
           else
@@ -294,6 +295,7 @@ int main(void)
         /* Toggle LED1, Check Transfer OK */
         BSP_LED_Toggle(LED1);
         step = 0;
+        loop_index ++;
       }
       break;
       default :

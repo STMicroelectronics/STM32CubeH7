@@ -95,7 +95,7 @@ STM32H743I-EVAL board LEDs are used to monitor the program execution status:
    status:
     - Turned-off if ADC conversions have just filled up half of the buffer (DMA half-transfer interrupt has been triggered)
     - Turned-on if ADC conversions have filled up the complete buffer (DMA transfer complete interrupt has been triggered)
-   The buffer fill up carries on indefinitively.
+   The buffer fill up carries on indefinitely.
  - Error: In case of error, LED4 is toggling at a frequency of 1Hz.
 
 @note LED3 is ON during test because it is connected to PA4 (DAC channel1).

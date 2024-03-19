@@ -216,6 +216,18 @@ void OTG_HS_IRQHandler(void)
   /* USER CODE END OTG_HS_IRQHandler 1 */
 }
 
+void OTG_HS_WKUP_IRQHandler(void)
+{
+  if (hpcd_USB_HS.Init.low_power_enable)
+  {
+    HAL_ResumeTick();
+    SystemClockConfig_Resume();
+    __HAL_PCD_UNGATE_PHYCLOCK(&hpcd_USB_HS);
+    CLEAR_BIT (SCB->SCR, SCB_SCR_SLEEPDEEP_Msk);
+    HAL_PWR_DisableSleepOnExit();
+  }
+}
+
 /* USER CODE BEGIN 1 */
 /**
   * @brief  This function handles External lines interrupt request.

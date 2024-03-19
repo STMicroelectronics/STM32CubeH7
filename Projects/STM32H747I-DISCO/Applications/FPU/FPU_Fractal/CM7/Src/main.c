@@ -207,7 +207,7 @@ int main(void)
 
   InitCLUT(L8_CLUT);
   
-  /* Clean Data Cache to update the content of the SRAM to be used bu the DAMA2D */ 
+  /* Clean Data Cache to update the content of the SRAM to be used by the DAMA2D */ 
   SCB_CleanDCache_by_Addr( (uint32_t*)L8_CLUT, sizeof(L8_CLUT));
   
  /*##-1- LCD Configuration ##################################################*/ 
@@ -300,7 +300,7 @@ int main(void)
       /* Get elapsed time */
       score_fpu = (uint32_t)(HAL_GetTick() - tickstart);
 
-      /* Clean Data Cache to update the content of the SRAM to be used bu the DAMA2D */ 
+      /* Clean Data Cache to update the content of the SRAM to be used by the DAMA2D */ 
       SCB_CleanDCache_by_Addr( (uint32_t*)buffer, sizeof(buffer));      
 
       BSP_LED_Off(LED4);
@@ -1203,7 +1203,7 @@ void HAL_DSI_EndOfRefreshCallback(DSI_HandleTypeDef *hdsi)
     {     
       /* Disable DSI Wrapper */
       __HAL_DSI_WRAPPER_DISABLE(hdsi);
-      /* Update LTDC configuaration */
+      /* Update LTDC configuration */
       LTDC_LAYER(&hlcd_ltdc, 0)->CFBAR = LCD_FRAME_BUFFER + 400 * 4;
       __HAL_LTDC_RELOAD_CONFIG(&hlcd_ltdc);
       /* Enable DSI Wrapper */
@@ -1219,7 +1219,7 @@ void HAL_DSI_EndOfRefreshCallback(DSI_HandleTypeDef *hdsi)
 
       /* Disable DSI Wrapper */
       __HAL_DSI_WRAPPER_DISABLE(&hlcd_dsi);
-      /* Update LTDC configuaration */
+      /* Update LTDC configuration */
       LTDC_LAYER(&hlcd_ltdc, 0)->CFBAR = LCD_FRAME_BUFFER;
       __HAL_LTDC_RELOAD_CONFIG(&hlcd_ltdc);
       /* Enable DSI Wrapper */

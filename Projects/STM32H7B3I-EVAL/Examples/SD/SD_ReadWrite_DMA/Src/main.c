@@ -204,7 +204,7 @@ int main(void)
           index++;
           if(index<NB_BUFFER)
           {
-            /* More data need to be trasnfered */
+            /* More data need to be transferred */
             step--;
           }
           else
@@ -253,7 +253,7 @@ int main(void)
           index++;
           if(index<NB_BUFFER)
           {
-            /* More data need to be trasnfered */
+            /* More data need to be transferred */
             step--;
           }
           else

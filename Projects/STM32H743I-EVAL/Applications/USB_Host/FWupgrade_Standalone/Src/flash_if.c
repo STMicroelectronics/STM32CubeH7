@@ -101,6 +101,8 @@ uint32_t FLASH_If_EraseSectors(uint32_t Address)
     if (APPLICATION_ADDRESS < ADDR_FLASH_SECTOR_0_BANK2)
     {
       FLASH_EraseInitStruct.Banks = FLASH_BANK_1;
+      SCB_DisableICache();
+     
       if (HAL_FLASHEx_Erase(&FLASH_EraseInitStruct, &SectorError) != HAL_OK)
       {
         /* Error occurred while sector erase */
@@ -115,9 +117,11 @@ uint32_t FLASH_If_EraseSectors(uint32_t Address)
         /* Error occurred while sector erase */
         return (1);
       }
+      SCB_EnableICache();
     }
     else
     {
+      SCB_DisableICache();
       FLASH_EraseInitStruct.TypeErase = FLASH_TYPEERASE_SECTORS;
       FLASH_EraseInitStruct.Banks = FLASH_BANK_2;
       if (HAL_FLASHEx_Erase(&FLASH_EraseInitStruct, &SectorError) != HAL_OK)
@@ -125,6 +129,7 @@ uint32_t FLASH_If_EraseSectors(uint32_t Address)
         /* Error occurred while sector erase */
         return (1);
       }
+      SCB_EnableICache(); 
     }
   }
   else
@@ -148,7 +153,7 @@ uint32_t FLASH_If_EraseSectors(uint32_t Address)
 uint32_t FLASH_If_Write(uint32_t FlashAddress, uint32_t* Data ,uint32_t DataLength)
 {
   uint32_t i = 0;
-
+  SCB_DisableICache();
   for (i = 0; (i < DataLength) && (FlashAddress <= (USER_FLASH_LAST_PAGE_ADDRESS-32)); i+=8)
   {
     /* Device voltage range supposed to be [2.7V to 3.6V], the operation will
@@ -170,6 +175,7 @@ uint32_t FLASH_If_Write(uint32_t FlashAddress, uint32_t* Data ,uint32_t DataLeng
       return (1);
     }
   }
+  SCB_EnableICache();
 
   return (0);
 }

@@ -42,7 +42,7 @@
  Color Keying :
  --------------
  If the Color Keying is enabled, all pixels of the image are compared to that color key pixel value
- (0xFFFF), pratically only the background of the logo correspond to that color key in the image. 
+ (0xFFFF), practically only the background of the logo correspond to that color key in the image. 
  For the pixels that match the color key RGB value, all channels (ARGB) of those pixels 
  are set to 0 (those pixels are then becoming transparent and does not appear on LCD screen, the background
  of image : black is seen instead).

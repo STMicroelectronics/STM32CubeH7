@@ -100,7 +100,7 @@ The Demo purpose is to promote the analog peripherals of the STM32H7xx devices
        - Run the "Serial Oscilloscope" application on your PC
        - Configure your UART communication in the GUI by selecting the Serial Port and Baude rate(115200),
        - Connect a (Type A to Micro-B) USB cable from the STM32H735G-DK board (Connector CN15) to the PC 
-       - Start the connexion between the Board and the PC GUI using the dedicated PC GUI button 
+       - Start the connection between the Board and the PC GUI using the dedicated PC GUI button 
        - Configure the desired sampling rate frequency.
        - Put an external signal with amplitude less than 3.3 V to the input (PA0,CN9 Connector pin A2 of the STM32H735G-DK board)..
        - Click on Start Scope button.

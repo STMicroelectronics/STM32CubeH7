@@ -142,7 +142,7 @@ int main(void)
   BSP_LED_Init(LED3);
 
   InitCLUT(L8_CLUT);
-  /* Clean Data Cache to update the content of the SRAM to be used bu the DAMA2D */
+  /* Clean Data Cache to update the content of the SRAM to be used by the DAMA2D */
   SCB_CleanDCache_by_Addr( (uint32_t*)L8_CLUT, sizeof(L8_CLUT));
 
  /*##-1- LCD Configuration ##################################################*/
@@ -201,7 +201,7 @@ int main(void)
 
       /* Get elapsed time */
       score_fpu = (uint32_t)(HAL_GetTick() - tickstart);
-      /* Clean Data Cache to update the content of the SRAM to be used bu the DAMA2D */
+      /* Clean Data Cache to update the content of the SRAM to be used by the DAMA2D */
       SCB_CleanDCache_by_Addr( (uint32_t*)buffer, sizeof(buffer));
 
       BSP_LED_Off(LED1);

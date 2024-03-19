@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    SPI/SPI_FullDuplex_ComDMA/CM4/Inc/stm32h7xx_it.h
+  * @file    UART/UART_WakeUpFromStopUsingFIFO/CM4/Inc/stm32h7xx_it.h
   * @author  MCD Application Team
   * @brief   This file contains the headers of the interrupt handlers for Cortex-M4.
   ******************************************************************************

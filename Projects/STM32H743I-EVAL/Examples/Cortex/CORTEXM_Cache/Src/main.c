@@ -151,7 +151,7 @@ int main(void)
   /*## -1- DMA Transfer 1: aSRC_Const_Buffer1 (FLASH) --> aDST_Buffer1 (AXI-SRAM) #######*/
   /*#####################################################################################*/
   
-  /* Read the Destination Buffer to ensure that it will be put in D-Cache */
+  /* Read the Destination Buffer to ensure that it will be put in DCACHE */
   for (i=0; i<BUFFER_SIZE; i++)
   {
     tempValue += aDST_Buffer1[i];
@@ -174,7 +174,7 @@ int main(void)
   /*## -2- DMA Transfer 2: aSRC_Buffer2 (AXI-SRAM) --> aDST_NonCacheable_Buffer2 (SRAM4) */
   /*#####################################################################################*/
   
-  /* Fill the Source Buffer: it will be automatically put in D-Cache */
+  /* Fill the Source Buffer: it will be compared with the destination buffer */
   for (i=0; i<BUFFER_SIZE; i++)
   {
     aSRC_Buffer2[i] = i;    
@@ -218,14 +218,13 @@ int main(void)
   
   /*
   CPU Data Cache maintenance:  
-  It is recommended to clean and invalidate the destination buffer in CPU Data cache after 
-  the DMA transfer. As the destination buffer may be used by the CPU, this guarantees 
-  up-to-date data when CPU access to the destination buffer located in the AXI-SRAM 
-  (which is cacheable).
+  It is recommended to invalidate the destination buffer in Data cache after a DMA transfer.
+  This guarantees up-to-date data when CPU access to the destination buffer located in the
+  AXI-SRAM (which is cacheable).
   */
   
-  /* Clean and Invalidate aDST_Buffer1 in D-Cache: (BUFFER_SIZE * 4) bytes */ 
-  SCB_CleanInvalidateDCache_by_Addr(aDST_Buffer1, BUFFER_SIZE * 4); 
+  /* Invalidate aDST_Buffer1 in DCACHE: (BUFFER_SIZE * 4) bytes */ 
+  SCB_InvalidateDCache_by_Addr(aDST_Buffer1, BUFFER_SIZE * 4); 
   
   /* Compare Source and Destination buffers */
   if(memcmp(aSRC_Const_Buffer1, aDST_Buffer1, BUFFER_SIZE * 4) != 0)
@@ -246,11 +245,11 @@ int main(void)
   CPU Data Cache maintenance:  
   It is recommended to clean the source buffer in CPU Data cache before starting 
   the DMA transfer. As the source buffer may be used by the CPU and modified 
-  locally in D-Cache. The cache clean guarantees Up-to-date data when DMA accesses 
+  locally in DCACHE. The cache clean guarantees up-to-date data when DMA accesses 
   to the source buffer located in the AXI-SRAM (which is cacheable).
   */
   
-  /* Clean aSRC_Buffer2 in D-Cache: (BUFFER_SIZE * 4) bytes */ 
+  /* Clean aSRC_Buffer2 in DCACHE: (BUFFER_SIZE * 4) bytes */ 
   SCB_CleanDCache_by_Addr(aSRC_Buffer2, BUFFER_SIZE * 4);
   
   /* Re-Start the DMA transfer, and compare source and destination buffers */

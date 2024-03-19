@@ -120,7 +120,7 @@ HRTIM, Timer, PWM, Duty cycle, Waveforms, Oscilloscope
         - HRTIM1_TIMA_TA1 : PC.06 (pin 04 in CN12 connector)
         - HRTIM1_TIMB_TB1 : PC.08 (pin 02 in CN12 connector) OR D43 ZIO CONNECTOR
         - HRTIM1_TIMC_TC1 : PA.09 (pin 21 in CN12 connector)
-        - HRTIM1_TIMD_TD1 : PA.11 (pin 14 in CN12 connector) AFTER SB22 CONNEXION
+        - HRTIM1_TIMD_TD1 : PA.11 (pin 14 in CN12 connector) AFTER SB22 CONNECTION
         - HRTIM1_TIME_TE1 : PG.06 (pin 70 in CN12 connector)
   -User has to connect the solder bridge number 20 and 22 in order to view the signal on pin PC.08 and PA.11
 @par How to use it ?

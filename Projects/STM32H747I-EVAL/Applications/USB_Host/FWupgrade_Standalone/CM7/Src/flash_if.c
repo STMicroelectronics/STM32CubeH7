@@ -87,6 +87,7 @@ uint32_t FLASH_If_EraseSectors(uint32_t Address)
   
   if(Address <= (uint32_t) USER_FLASH_LAST_PAGE_ADDRESS)
   {
+	SCB_DisableICache();  
     /* Get the 1st sector to erase */
     FirstSector = FLASH_If_GetSectorNumber(Address);
     
@@ -126,6 +127,7 @@ uint32_t FLASH_If_EraseSectors(uint32_t Address)
         return (1);
       }
     }
+    SCB_EnableICache();
   }
   else
   {
@@ -148,6 +150,7 @@ uint32_t FLASH_If_EraseSectors(uint32_t Address)
 uint32_t FLASH_If_Write(uint32_t FlashAddress, uint32_t* Data ,uint32_t DataLength)
 {
   uint32_t i = 0;
+  SCB_DisableICache();
 
   for (i = 0; (i < DataLength) && (FlashAddress <= (USER_FLASH_LAST_PAGE_ADDRESS-32)); i+=8)
   {
@@ -170,6 +173,7 @@ uint32_t FLASH_If_Write(uint32_t FlashAddress, uint32_t* Data ,uint32_t DataLeng
       return (1);
     }
   }
+  SCB_EnableICache();
 
   return (0);
 }

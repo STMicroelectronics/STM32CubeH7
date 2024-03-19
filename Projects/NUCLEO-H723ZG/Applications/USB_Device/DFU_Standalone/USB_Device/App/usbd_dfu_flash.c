@@ -195,8 +195,10 @@ uint16_t FLASH_If_Erase(uint32_t Add)
   eraseinitstruct.Banks = FLASH_BANK_1;
   eraseinitstruct.Sector = startsector;
   eraseinitstruct.NbSectors = 1;
-
+  
+  SCB_DisableICache();
   status = HAL_FLASHEx_Erase(&eraseinitstruct, &sectorerror);
+  SCB_EnableICache();
 
   if (status != HAL_OK)
   {
@@ -217,6 +219,7 @@ uint16_t FLASH_If_Write(uint8_t *src, uint8_t *dest, uint32_t Len)
 {
   /* USER CODE BEGIN 3 */
   uint32_t i = 0;
+  SCB_DisableICache();
 
   for (i = 0; i < Len; i += 32)
   {
@@ -239,6 +242,7 @@ uint16_t FLASH_If_Write(uint8_t *src, uint8_t *dest, uint32_t Len)
       return 1;
     }
   }
+  SCB_EnableICache();
   return 0;
   /* USER CODE END 3 */
 }

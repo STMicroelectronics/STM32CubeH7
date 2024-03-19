@@ -185,7 +185,7 @@ int main(void)
     } 
 
     /* Check if the EEPROM is ready for a new operation */  
-    while (HAL_I2C_IsDeviceReady(&I2cHandle, EEPROM_ADDRESS, 10, 300) == HAL_TIMEOUT);
+    while (HAL_I2C_IsDeviceReady(&I2cHandle, EEPROM_ADDRESS, 10, 300) != HAL_OK);
 
     /* Wait for the end of the transfer */  
     while (HAL_I2C_GetState(&I2cHandle) != HAL_I2C_STATE_READY)

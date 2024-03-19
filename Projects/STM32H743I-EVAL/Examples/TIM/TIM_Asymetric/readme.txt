@@ -41,7 +41,7 @@ TIM8 is configured to generate an Asymetric signal with a programmable Phase-Shi
 TIM1 is configured to generating the reference signal on Channel1 used by TIM8:
    - TIM1 is generating a PWM signal with frequency equal to 4.54 KHz.
    - TIM1 is used as master for TIM8, the update event of TIM1 genarates the Reset counter
-     of TIM8 to synchronize the two signals: the refernce signal (TIM1_CH1) and the shifted signal (TIM8_CH2). 
+     of TIM8 to synchronize the two signals: the reference signal (TIM1_CH1) and the shifted signal (TIM8_CH2). 
 
 In this example TIM1 and TIM8 input clock (TIM8CLK) is set to APB2 clock (2*PCLK2)     
 TIM1 and TIM8 signals are at frequency of  ((SystemCoreClock/2) / (Period + 1))  

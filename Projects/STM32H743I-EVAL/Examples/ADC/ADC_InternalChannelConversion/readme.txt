@@ -32,7 +32,7 @@ The APB clock dividers for D1 Domain APB3 peripherals, D2 Domain APB1 and APB2 p
 
 The ADC is configured to convert continuously from ADC_CHANNEL_VBAT (DIV4).
 
-User can check batery level but must ensure its fits in 0.9V to 3.6V as allowed
+User can check battery level but must ensure its fits in 0.9V to 3.6V as allowed
 range.
 
 uwConvertedValue variable contains the 32-bit conversion result and 

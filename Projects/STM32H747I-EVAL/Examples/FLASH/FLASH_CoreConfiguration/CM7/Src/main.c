@@ -92,6 +92,7 @@ int main(void)
   EraseInitStruct.VoltageRange  = FLASH_VOLTAGE_RANGE_4;
   EraseInitStruct.Banks         = FLASH_BANK_2;
   
+  SCB_DisableICache();
   if (HAL_FLASHEx_Erase(&EraseInitStruct, &EraseError) != HAL_OK)
   {
     /*
@@ -106,6 +107,7 @@ int main(void)
       BSP_LED_On(LED3);
     }
   }
+  SCB_EnableICache();
   
   /* Program CM4 code */
   cm4_buffer_size = (sizeof(acCM4_Code)/(sizeof(*acCM4_Code)));
@@ -114,6 +116,7 @@ int main(void)
   Address = FLASH_BANK2_BASE;
   i=(cm4_buffer_size/32)+1;
 
+  SCB_DisableICache();
   while (i!=0)
   {
     /* Program Flash Word (size 256 bits) */
@@ -134,6 +137,7 @@ int main(void)
       }
     }
   }
+  SCB_EnableICache();
 
   /* Check programed code before starting the CPU2 (Cortex-M4) */
   BSP_LED_Toggle(LED1);

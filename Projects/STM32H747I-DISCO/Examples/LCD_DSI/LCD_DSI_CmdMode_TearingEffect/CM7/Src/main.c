@@ -281,7 +281,7 @@ void HAL_DSI_EndOfRefreshCallback(DSI_HandleTypeDef *hdsi)
     {     
       /* Disable DSI Wrapper */
       __HAL_DSI_WRAPPER_DISABLE(hdsi);
-      /* Update LTDC configuaration */
+      /* Update LTDC configuration */
       LTDC_LAYER(&hlcd_ltdc, 0)->CFBAR = LCD_FRAME_BUFFER + 400 * 4;
       __HAL_LTDC_RELOAD_CONFIG(&hlcd_ltdc);
       /* Enable DSI Wrapper */
@@ -297,7 +297,7 @@ void HAL_DSI_EndOfRefreshCallback(DSI_HandleTypeDef *hdsi)
 
       /* Disable DSI Wrapper */
       __HAL_DSI_WRAPPER_DISABLE(&hlcd_dsi);
-      /* Update LTDC configuaration */
+      /* Update LTDC configuration */
       LTDC_LAYER(&hlcd_ltdc, 0)->CFBAR = LCD_FRAME_BUFFER;
       __HAL_LTDC_RELOAD_CONFIG(&hlcd_ltdc);
       /* Enable DSI Wrapper */

@@ -27,7 +27,7 @@ After unplagging and plugging device, all internal RAMs content are not retained
 After activating RAMECC monitor and reading the content of RAMs, the hardware 
 will check hamming bits injected and generate an error notification.
 
-This is a false alert due to the fact that the RAM isn't initilized by the 
+This is a false alert due to the fact that the RAM isn't initialized by the 
 toolchain(as not used). But this behavior is used to demonstrate how to use the 
 HAL RAMECC driver, as it is not easy to provoke a RAMECC failure.
 

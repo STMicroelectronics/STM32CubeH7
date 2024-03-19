@@ -133,7 +133,7 @@
  *
  * Comment if your system does not support time functions
  */
-#define MBEDTLS_HAVE_TIME
+//#define MBEDTLS_HAVE_TIME
 
 /**
  * \def MBEDTLS_HAVE_TIME_DATE
@@ -154,7 +154,7 @@
  * mbedtls_platform_gmtime_r() at compile-time by using the macro
  * MBEDTLS_PLATFORM_GMTIME_R_ALT.
  */
-#define MBEDTLS_HAVE_TIME_DATE
+//#define MBEDTLS_HAVE_TIME_DATE
 
 /**
  * \def MBEDTLS_PLATFORM_MEMORY
@@ -373,7 +373,7 @@
 //#define MBEDTLS_XTEA_ALT
 
 /*
- * When replacing the elliptic curve module, pleace consider, that it is
+ * When replacing the elliptic curve module, please consider, that it is
  * implemented with two .c files:
  *      - ecp.c
  *      - ecp_curves.c

@@ -111,10 +111,10 @@ ResourcesManager, multiprocessor, Resource share, Dual, Request, Pending mode, I
 
 @par Directory contents
 
-    - ResourcesManager/ResourcesManager_UsageWithNotification/Commmon/Src/system_stm32h7xx.c  STM32H7xx system configuration source file
-    - ResourcesManager/ResourcesManager_UsageWithNotification/Commmon/Src/stm32h7xx_hal_msp.c        Header for custom ipc module.
-    - ResourcesManager/ResourcesManager_UsageWithNotification/Commmon/Src/custom_ipc.c        Basic Inter Processor communication module.
-    - ResourcesManager/ResourcesManager_UsageWithNotification/Commmon/Inc/custom_ipc.h        Header for custom ipc module.
+    - ResourcesManager/ResourcesManager_UsageWithNotification/Common/Src/system_stm32h7xx.c  STM32H7xx system configuration source file
+    - ResourcesManager/ResourcesManager_UsageWithNotification/Common/Src/stm32h7xx_hal_msp.c        Header for custom ipc module.
+    - ResourcesManager/ResourcesManager_UsageWithNotification/Common/Src/custom_ipc.c        Basic Inter Processor communication module.
+    - ResourcesManager/ResourcesManager_UsageWithNotification/Common/Inc/custom_ipc.h        Header for custom ipc module.
 
     - ResourcesManager/ResourcesManager_UsageWithNotification/CM7/Inc/stm32h7xx_hal_conf.h    HAL configuration file for Cortex-M7
     - ResourcesManager/ResourcesManager_UsageWithNotification/CM7/Inc/stm32h7xx_it.h          Interrupt handlers header file for Cortex-M7

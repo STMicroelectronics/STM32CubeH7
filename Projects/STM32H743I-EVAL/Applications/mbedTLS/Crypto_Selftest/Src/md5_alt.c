@@ -248,7 +248,7 @@ exit :
     return( ret );
 }
 
-int mbedtls_md5_finish_ret( mbedtls_md5_context *ctx, unsigned char output[32] )
+int mbedtls_md5_finish_ret( mbedtls_md5_context *ctx, unsigned char output[16] )
 {
     int ret = 0;
 

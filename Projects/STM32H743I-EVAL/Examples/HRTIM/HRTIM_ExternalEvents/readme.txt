@@ -70,7 +70,7 @@ The PWM waveforms can be displayed using an oscilloscope.
 
 @par Keywords
 
-HRTIM, Timer, Externel event, EEV8, Source, Signal generator, Waveforms, PWM, Oscilloscope
+HRTIM, Timer, External event, EEV8, Source, Signal generator, Waveforms, PWM, Oscilloscope
 
 @par Directory contents 
 

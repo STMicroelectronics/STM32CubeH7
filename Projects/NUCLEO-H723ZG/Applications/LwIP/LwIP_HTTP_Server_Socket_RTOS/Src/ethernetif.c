@@ -27,11 +27,14 @@
 #include "ethernetif.h"
 #include "../Components/lan8742/lan8742.h"
 #include <string.h>
+#include "lwip/netifapi.h"
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* The time to block waiting for input. */
 #define TIME_WAITING_FOR_INPUT                 ( osWaitForever )
+/* Time to block waiting for transmissions to finish */
+#define ETHIF_TX_TIMEOUT                       (2000U)
 /* Stack size of the interface thread */
 #define INTERFACE_THREAD_STACK_SIZE            ( 512 )
 
@@ -49,7 +52,7 @@
 /* Private variables ---------------------------------------------------------*/
 /*
 @Note: This interface is implemented to operate in zero-copy mode only:
-        - Rx Buffers will be allocated from LwIP stack memory heap,
+        - Rx Buffers will be allocated from LwIP stack Rx memory pool,
           then passed to ETH HAL driver.
         - Tx Buffers will be allocated from LwIP stack memory heap,
           then passed to ETH HAL driver.
@@ -82,19 +85,19 @@ typedef struct
 
 #pragma location=0x30000000
 ETH_DMADescTypeDef  DMARxDscrTab[ETH_RX_DESC_CNT]; /* Ethernet Rx DMA Descriptors */
-#pragma location=0x30000200
+#pragma location=0x30000080
 ETH_DMADescTypeDef  DMATxDscrTab[ETH_TX_DESC_CNT]; /* Ethernet Tx DMA Descriptors */
 
 
 #elif defined ( __CC_ARM )  /* MDK ARM Compiler */
 
-__attribute__((section(".RxDecripSection"))) ETH_DMADescTypeDef  DMARxDscrTab[ETH_RX_DESC_CNT]; /* Ethernet Rx DMA Descriptors */
-__attribute__((section(".TxDecripSection"))) ETH_DMADescTypeDef  DMATxDscrTab[ETH_TX_DESC_CNT]; /* Ethernet Tx DMA Descriptors */
+__attribute__((section(".RxDescripSection"))) ETH_DMADescTypeDef  DMARxDscrTab[ETH_RX_DESC_CNT]; /* Ethernet Rx DMA Descriptors */
+__attribute__((section(".TxDescripSection"))) ETH_DMADescTypeDef  DMATxDscrTab[ETH_TX_DESC_CNT]; /* Ethernet Tx DMA Descriptors */
 
 #elif defined ( __GNUC__ ) /* GNU Compiler */
 
-ETH_DMADescTypeDef DMARxDscrTab[ETH_RX_DESC_CNT] __attribute__((section(".RxDecripSection"))); /* Ethernet Rx DMA Descriptors */
-ETH_DMADescTypeDef DMATxDscrTab[ETH_TX_DESC_CNT] __attribute__((section(".TxDecripSection")));   /* Ethernet Tx DMA Descriptors */
+ETH_DMADescTypeDef DMARxDscrTab[ETH_RX_DESC_CNT] __attribute__((section(".RxDescripSection"))); /* Ethernet Rx DMA Descriptors */
+ETH_DMADescTypeDef DMATxDscrTab[ETH_TX_DESC_CNT] __attribute__((section(".TxDescripSection")));   /* Ethernet Tx DMA Descriptors */
 
 #endif
 
@@ -102,7 +105,7 @@ ETH_DMADescTypeDef DMATxDscrTab[ETH_TX_DESC_CNT] __attribute__((section(".TxDecr
 LWIP_MEMPOOL_DECLARE(RX_POOL, ETH_RX_BUFFER_CNT, sizeof(RxBuff_t), "Zero-copy RX PBUF pool");
 
 #if defined ( __ICCARM__ ) /*!< IAR Compiler */
-#pragma location = 0x30000400
+#pragma location = 0x30000100
 extern u8_t memp_memory_RX_POOL_base[];
 
 #elif defined ( __CC_ARM )  /* MDK ARM Compiler */
@@ -200,9 +203,9 @@ static void low_level_init(struct netif *netif)
   TxConfig.CRCPadCtrl = ETH_CRC_PAD_INSERT;
 
   /* create a binary semaphore used for informing ethernetif of frame reception */
-  RxPktSemaphore = osSemaphoreNew(1, 1, NULL);
+  RxPktSemaphore = osSemaphoreNew(1, 0, NULL);
   /* create a binary semaphore used for informing ethernetif of frame transmission */
-  TxPktSemaphore =  osSemaphoreNew(1, 1, NULL);
+  TxPktSemaphore =  osSemaphoreNew(1, 0, NULL);
 
   /* create the task that handles the ETH_MAC */
   memset(&attributes,0x0,sizeof(osThreadAttr_t));
@@ -315,13 +318,30 @@ static err_t low_level_output(struct netif *netif, struct pbuf *p)
 
   pbuf_ref(p);
 
-  HAL_ETH_Transmit_IT(&EthHandle, &TxConfig);
-
-  while(osSemaphoreAcquire( TxPktSemaphore, TIME_WAITING_FOR_INPUT)!=osOK)
+  do
   {
-  }
+    if(HAL_ETH_Transmit_IT(&EthHandle, &TxConfig) == HAL_OK)
+    {
+      errval = ERR_OK;
+    }
+    else
+    {
 
-  HAL_ETH_ReleaseTxPacket(&EthHandle);
+      if(HAL_ETH_GetError(&EthHandle) & HAL_ETH_ERROR_BUSY)
+      {
+        /* Wait for descriptors to become available */
+        osSemaphoreAcquire( TxPktSemaphore, ETHIF_TX_TIMEOUT);
+        HAL_ETH_ReleaseTxPacket(&EthHandle);
+        errval = ERR_BUF;
+      }
+      else
+      {
+        /* Other error */
+        pbuf_free(p);
+        errval =  ERR_IF;
+      }
+    }
+  }while(errval == ERR_BUF);
 
   return errval;
 }
@@ -486,23 +506,23 @@ void HAL_ETH_MspInit(ETH_HandleTypeDef *heth)
   /* Configure PA1, PA2 and PA7 */
   GPIO_InitStructure.Speed = GPIO_SPEED_FREQ_HIGH;
   GPIO_InitStructure.Mode = GPIO_MODE_AF_PP;
-  GPIO_InitStructure.Pull = GPIO_NOPULL; 
+  GPIO_InitStructure.Pull = GPIO_NOPULL;
   GPIO_InitStructure.Alternate = GPIO_AF11_ETH;
   GPIO_InitStructure.Pin = GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_7;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStructure);
-  
+
   /* Configure PB13 */
   GPIO_InitStructure.Pin = GPIO_PIN_13;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStructure);
-  
+
   /* Configure PC1, PC4 and PC5 */
   GPIO_InitStructure.Pin = GPIO_PIN_1 | GPIO_PIN_4 | GPIO_PIN_5;
   HAL_GPIO_Init(GPIOC, &GPIO_InitStructure);
 
   /* Configure PG2, PG11, PG13 and PG14 */
   GPIO_InitStructure.Pin =  GPIO_PIN_2 | GPIO_PIN_11 | GPIO_PIN_13;
-  HAL_GPIO_Init(GPIOG, &GPIO_InitStructure);	
-  
+  HAL_GPIO_Init(GPIOG, &GPIO_InitStructure);
+
   /* Enable the Ethernet global Interrupt */
   HAL_NVIC_SetPriority(ETH_IRQn, 0x7, 0);
   HAL_NVIC_EnableIRQ(ETH_IRQn);
@@ -644,8 +664,8 @@ void ethernet_link_thread( void* argument )
     if(netif_is_link_up(netif) && (PHYLinkState <= LAN8742_STATUS_LINK_DOWN))
     {
       HAL_ETH_Stop_IT(&EthHandle);
-      netif_set_down(netif);
-      netif_set_link_down(netif);
+      netifapi_netif_set_down(netif);
+      netifapi_netif_set_link_down(netif);
     }
     else if(!netif_is_link_up(netif) && (PHYLinkState > LAN8742_STATUS_LINK_DOWN))
     {
@@ -683,8 +703,8 @@ void ethernet_link_thread( void* argument )
         MACConf.Speed = speed;
         HAL_ETH_SetMACConfig(&EthHandle, &MACConf);
         HAL_ETH_Start_IT(&EthHandle);
-        netif_set_up(netif);
-        netif_set_link_up(netif);
+        netifapi_netif_set_up(netif);
+        netifapi_netif_set_link_up(netif);
       }
     }
 

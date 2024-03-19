@@ -154,6 +154,7 @@ void SystemClock_Config(void)
      clocked below the maximum system frequency, to update the voltage scaling value
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE0);
+  HAL_PWREx_ControlStopModeVoltageScaling(PWR_REGULATOR_SVOS_SCALE5);
 
   while(!__HAL_PWR_GET_FLAG(PWR_FLAG_VOSRDY)) {}
 
@@ -198,7 +199,6 @@ void SystemClock_Config(void)
     /* Initialization Error */
     while(1);
   }
-
 }
 
 /**

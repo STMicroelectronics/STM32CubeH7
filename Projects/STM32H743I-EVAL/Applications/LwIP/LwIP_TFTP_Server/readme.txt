@@ -36,7 +36,7 @@ will be ensured by LEDs:
 If a DHCP server is available, a dynamic IP address can be allocated by enabling 
 the DHCP process (#define LWIP_DHCP in lwipopts.h) 
 
-The maximum length of filename used to send or to recieve to/from uSD is set to 8 bytes 
+The maximum length of filename used to send or to receive to/from uSD is set to 8 bytes 
 and 3 bytes for file type
 
 The maximum transfer block size is set 512 Bytes

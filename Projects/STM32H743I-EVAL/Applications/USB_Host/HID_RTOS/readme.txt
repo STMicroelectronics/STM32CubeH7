@@ -113,7 +113,7 @@ Connectivity, USB_Host, USB, HID, Full Speed, High Speed, Arduino, TFT, Shield, 
   - USB_Host/HID_RTOS/Src/menu.c                  HID State Machine
   - USB_Host/HID_RTOS/Src/usbh_conf.c             General low level driver configuration
   - USB_Host/HID_RTOS/Src/mouse.c                 HID mouse functions file
-  - USB_Host/HID_RTOS/Src/keybaord.c              HID keyboard functions file
+  - USB_Host/HID_RTOS/Src/keyboard.c              HID keyboard functions file
   - USB_Host/HID_RTOS/Inc/main.h                  Main program header file
   - USB_Host/HID_RTOS/Inc/stm32h7xx_it.h          Interrupt handlers header file
   - USB_Host/HID_RTOS/Inc/stm32h7xx_hal_conf.h    HAL configuration file

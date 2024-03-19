@@ -60,9 +60,8 @@ Page</a> : STM32Cube USB Wiki Page</li>
 <section id="update-history" class="col-sm-12 col-lg-8">
 <h1>Update History</h1>
 <div class="collapse">
-<input type="checkbox" id="collapse-section16" checked aria-hidden="true">
-<label for="collapse-section16" aria-hidden="true">V3.5.0 /
-05-August-2022</label>
+<input type="checkbox" id="collapse-section19" checked aria-hidden="true"><label for="collapse-section19" aria-hidden="true">V3.5.2 / 11-December-2023</label>
+<div>
 <h2 id="main-changes">Main Changes</h2>
 <table>
 <thead>
@@ -75,7 +74,79 @@ Page</a> : STM32Cube USB Wiki Page</li>
 <td style="text-align: left;"><strong>Core</strong></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">fix potential corruption of Endpoints MaxPacketSize</td>
+<td style="text-align: left;">minor enhancement; Avoid infinite loop in case device descriptor length is wrongly set to zero</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>MSC Class</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Add support of multi-LUN storage devices</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Report error for non-ready media</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Audio Class</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Report error for unsupported audio sample rate</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>CDC Class</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Ensure that only short packet or ZLP can stop receiving</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="collapse">
+<input type="checkbox" id="collapse-section18" aria-hidden="true"><label for="collapse-section18" aria-hidden="true">V3.5.1 / 10-January-2023</label>
+<div>
+<h2 id="main-changes">Main Changes</h2>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Headline</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Core</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Ensure the number of endpoints parsed does not exceed defined USBH_MAX_NUM_ENDPOINTS</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Use correct endpoint length for audio midi subclass devices</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>HID Class</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Prevent buffer overflow during HID get descriptors</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="collapse">
+<input type="checkbox" id="collapse-section17" aria-hidden="true"><label for="collapse-section17" aria-hidden="true">V3.5.0 / 05-August-2022</label>
+<div>
+<h2 id="main-changes">Main Changes</h2>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Headline</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Core</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Fix potential corruption of Endpoints MaxPacketSize</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><strong>HID Class</strong></td>
@@ -86,11 +157,10 @@ Page</a> : STM32Cube USB Wiki Page</li>
 </tbody>
 </table>
 </div>
-
+</div>
 <div class="collapse">
-<input type="checkbox" id="collapse-section16" checked aria-hidden="true">
-<label for="collapse-section16" aria-hidden="true">V3.4.1 /
-04-April-2022</label>
+<input type="checkbox" id="collapse-section16" aria-hidden="true"><label for="collapse-section16" aria-hidden="true">V3.4.1 / 04-April-2022</label>
+<div>
 <h2 id="main-changes">Main Changes</h2>
 <table>
 <thead>
@@ -116,10 +186,10 @@ duplication versus device for HID class</td>
 </tbody>
 </table>
 </div>
+</div>
 <div class="collapse">
-<input type="checkbox" id="collapse-section15" checked aria-hidden="true">
-<label for="collapse-section15" aria-hidden="true">V3.4.0 /
-23-Apr-2021</label>
+<input type="checkbox" id="collapse-section15" aria-hidden="true"><label for="collapse-section15" aria-hidden="true">V3.4.0 / 23-April-2021</label>
+<div>
 <h2 id="main-changes-1">Main Changes</h2>
 <table>
 <thead>
@@ -153,10 +223,10 @@ USB host DeInit</td>
 </tbody>
 </table>
 </div>
+</div>
 <div class="collapse">
-<input type="checkbox" id="collapse-section14" checked aria-hidden="true">
-<label for="collapse-section14" aria-hidden="true">V3.3.5 /
-26-Jan-2021</label>
+<input type="checkbox" id="collapse-section14" aria-hidden="true"><label for="collapse-section14" aria-hidden="true">V3.3.5 / 26-January-2021</label>
+<div>
 <h2 id="main-changes-2">Main Changes</h2>
 <table>
 <thead>
@@ -192,10 +262,10 @@ OUT pipes construction.</td>
 </tbody>
 </table>
 </div>
+</div>
 <div class="collapse">
-<input type="checkbox" id="collapse-section13" aria-hidden="true">
-<label for="collapse-section13" aria-hidden="true">V3.3.4 /
-08-Jan-2020</label>
+<input type="checkbox" id="collapse-section13" aria-hidden="true"><label for="collapse-section13" aria-hidden="true">V3.3.4 / 08-January-2020</label>
+<div>
 <h2 id="main-changes-3">Main Changes</h2>
 <table>
 <thead>
@@ -233,10 +303,10 @@ Stall host Get HID descriptor request.</td>
 </tbody>
 </table>
 </div>
+</div>
 <div class="collapse">
-<input type="checkbox" id="collapse-section12" aria-hidden="true">
-<label for="collapse-section12" aria-hidden="true">V3.3.3 /
-29-April-2019</label>
+<input type="checkbox" id="collapse-section12" aria-hidden="true"><label for="collapse-section12" aria-hidden="true">V3.3.3 / 29-April-2019</label>
+<div>
 <h2 id="main-changes-4">Main Changes</h2>
 <table>
 <thead>
@@ -278,10 +348,10 @@ that could have report size greater than 4bytes</td>
 </tbody>
 </table>
 </div>
+</div>
 <div class="collapse">
-<input type="checkbox" id="collapse-section11" aria-hidden="true">
-<label for="collapse-section11" aria-hidden="true">V3.3.2 /
-24-Jan-2019</label>
+<input type="checkbox" id="collapse-section11" aria-hidden="true"><label for="collapse-section11" aria-hidden="true">V3.3.2 / 24-January-2019</label>
+<div>
 <h2 id="main-changes-5">Main Changes</h2>
 <table>
 <thead>
@@ -301,10 +371,10 @@ is manged by the Class drivers.</td>
 </tbody>
 </table>
 </div>
+</div>
 <div class="collapse">
-<input type="checkbox" id="collapse-section10" aria-hidden="true">
-<label for="collapse-section10" aria-hidden="true">V3.3.1 /
-09-July-2018</label>
+<input type="checkbox" id="collapse-section10" aria-hidden="true"><label for="collapse-section10" aria-hidden="true">V3.3.1 / 09-July-2018</label>
+<div>
 <h2 id="main-changes-6">Main Changes</h2>
 <table>
 <thead>
@@ -328,10 +398,10 @@ copy of ST Ultimate Liberty license SLA0044</td>
 </tbody>
 </table>
 </div>
+</div>
 <div class="collapse">
-<input type="checkbox" id="collapse-section9" aria-hidden="true">
-<label for="collapse-section9" aria-hidden="true">V3.3.0 /
-23-Jan-2018</label>
+<input type="checkbox" id="collapse-section9" aria-hidden="true"><label for="collapse-section9" aria-hidden="true">V3.3.0 / 23-January-2018</label>
+<div>
 <h2 id="main-changes-7">Main Changes</h2>
 <table>
 <thead>
@@ -374,10 +444,10 @@ LUN number exceeds max supported value</td>
 </tbody>
 </table>
 </div>
+</div>
 <div class="collapse">
-<input type="checkbox" id="collapse-section8" aria-hidden="true">
-<label for="collapse-section8" aria-hidden="true">V3.2.2 /
-07-July-2015</label>
+<input type="checkbox" id="collapse-section8" aria-hidden="true"><label for="collapse-section8" aria-hidden="true">V3.2.2 / 07-July-2015</label>
+<div>
 <h2 id="main-changes-8">Main Changes</h2>
 <table>
 <thead>
@@ -396,10 +466,10 @@ issue</td>
 </tbody>
 </table>
 </div>
+</div>
 <div class="collapse">
-<input type="checkbox" id="collapse-section7" aria-hidden="true">
-<label for="collapse-section7" aria-hidden="true">V3.2.1 /
-26-June-2015</label>
+<input type="checkbox" id="collapse-section7" aria-hidden="true"><label for="collapse-section7" aria-hidden="true">V3.2.1 / 26-June-2015</label>
+<div>
 <h2 id="main-changes-9">Main Changes</h2>
 <table>
 <thead>
@@ -455,10 +525,10 @@ issue</td>
 </tbody>
 </table>
 </div>
+</div>
 <div class="collapse">
-<input type="checkbox" id="collapse-section6" aria-hidden="true">
-<label for="collapse-section6" aria-hidden="true">V3.2.0 /
-04-November-2014</label>
+<input type="checkbox" id="collapse-section6" aria-hidden="true"><label for="collapse-section6" aria-hidden="true">V3.2.0 / 04-November-2014</label>
+<div>
 <h2 id="main-changes-10">Main Changes</h2>
 <table>
 <thead>
@@ -492,10 +562,10 @@ that do not support GetMaxLun request</td>
 </tbody>
 </table>
 </div>
+</div>
 <div class="collapse">
-<input type="checkbox" id="collapse-section5" aria-hidden="true">
-<label for="collapse-section5" aria-hidden="true">V3.1.0 /
-19-June-2014</label>
+<input type="checkbox" id="collapse-section5" aria-hidden="true"><label for="collapse-section5" aria-hidden="true">V3.1.0 / 19-June-2014</label>
+<div>
 <h2 id="main-changes-11">Main Changes</h2>
 <table>
 <thead>
@@ -562,10 +632,10 @@ Bytes in the user log message instead of MBytes</td>
 </tbody>
 </table>
 </div>
+</div>
 <div class="collapse">
-<input type="checkbox" id="collapse-section4" aria-hidden="true">
-<label for="collapse-section4" aria-hidden="true">V3.0.0 /
-18-February-2014</label>
+<input type="checkbox" id="collapse-section4" aria-hidden="true"><label for="collapse-section4" aria-hidden="true">V3.0.0 / 18-February-2014</label>
+<div>
 <h2 id="main-changes-12">Main Changes</h2>
 <table>
 <thead>
@@ -586,10 +656,10 @@ with STM32Cube based development</strong></td>
 </tbody>
 </table>
 </div>
+</div>
 <div class="collapse">
-<input type="checkbox" id="collapse-section3" aria-hidden="true">
-<label for="collapse-section3" aria-hidden="true">V2.1.0 /
-19-March-2012</label>
+<input type="checkbox" id="collapse-section3" aria-hidden="true"><label for="collapse-section3" aria-hidden="true">V2.1.0 / 19-March-2012</label>
+<div>
 <h2 id="main-changes-13">Main Changes</h2>
 <table>
 <thead>
@@ -641,10 +711,10 @@ FS interface</td>
 </tbody>
 </table>
 </div>
+</div>
 <div class="collapse">
-<input type="checkbox" id="collapse-section2" aria-hidden="true">
-<label for="collapse-section2" aria-hidden="true">V2.0.0 /
-22-July-2011</label>
+<input type="checkbox" id="collapse-section2" aria-hidden="true"><label for="collapse-section2" aria-hidden="true">V2.0.0 / 22-July-2011</label>
+<div>
 <h2 id="main-changes-14">Main Changes</h2>
 <table>
 <thead>
@@ -683,14 +753,15 @@ layer to customize some user parameters</td>
 </tbody>
 </table>
 </div>
+</div>
 <div class="collapse">
-<input type="checkbox" id="collapse-section1" aria-hidden="true">
-<label for="collapse-section1" aria-hidden="true">V1.0.0 /
-29-November-2010</label>
+<input type="checkbox" id="collapse-section1" aria-hidden="true"><label for="collapse-section1" aria-hidden="true">V1.0.0 / 29-November-2010</label>
+<div>
 <h2 id="main-changes-15">Main Changes</h2>
 <p>Created</p>
 </div>
 </section>
+</div>
 </div>
 <footer class="sticky">
 <div class="columns">

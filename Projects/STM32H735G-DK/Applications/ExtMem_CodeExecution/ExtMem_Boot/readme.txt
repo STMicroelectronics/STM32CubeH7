@@ -43,7 +43,7 @@ Define "CODE_AREA" , "DATA_AREA" and "BINARY_AREA" in file memory.h are used res
 to select the Code execution area, the application data area and the binary storage area.
 The ExtMem_Boot program is located at 0x08000000 (Internal flash).  
  
-Please Refer to the bellow "Table 1. IAP implementation on STM32H735_DISCO" for different configurations and corresponding settings.
+Please Refer to the below "Table 1. IAP implementation on STM32H735_DISCO" for different configurations and corresponding settings.
                                   
 At the beginning of the main program the HAL_Init() function is called to reset
 all the peripherals, initialize the Flash interface and the systick.

@@ -212,10 +212,12 @@ static void MSC_DEMO_ProbeKey(uint32_t state)
   if ((state == JOY_UP) && (msc_demo.select > 0))
   {
     msc_demo.select--;
+    HAL_Delay(500);
   }
   else if ((state == JOY_DOWN) && (msc_demo.select < 2))
   {
     msc_demo.select++;
+    HAL_Delay(500);
   }
   else if (state == JOY_SEL)
   {

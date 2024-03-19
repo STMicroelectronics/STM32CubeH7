@@ -42,9 +42,9 @@ In the High Speed (HS) mode the USB clock (60 MHz) is driven by the ULPI.
 When the application is started, the connected USB flash disk device is detected in MSC mode and gets
 initialized. The STM32 MCU behaves as a MSC Host, it enumerates the device and extracts VID, PID,
 manufacturer name, Serial no and product name information and displays it on the UART Hyperterminal.
-This application is based on read/write file and explore the USB flash disk content trough a MSC routine.
+This application is based on read/write file and explore the USB flash disk content through a MSC routine.
 
-Debug messages are desplayed along with each new step of the application :
+Debug messages are displayed along with each new step of the application :
  - "File Operations" operation writes a small text file (less to 1 KB) on the USB flash disk.
  - "Explorer Disk" operation explores the USB flash disk content and displays it on the uart terminal.
     Display the whole USB flash disk content (recursion level 2).

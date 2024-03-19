@@ -156,8 +156,8 @@ int main(void)
   SDHandle.Init.ClockEdge           = SDMMC_CLOCK_EDGE_FALLING;
   SDHandle.Init.ClockPowerSave      = SDMMC_CLOCK_POWER_SAVE_DISABLE;
   SDHandle.Init.BusWide             = SDMMC_BUS_WIDE_4B;
-  SDHandle.Init.HardwareFlowControl = SDMMC_HARDWARE_FLOW_CONTROL_DISABLE;
-  SDHandle.Init.ClockDiv            = 1;
+  SDHandle.Init.HardwareFlowControl = SDMMC_HARDWARE_FLOW_CONTROL_ENABLE;
+  SDHandle.Init.ClockDiv            = 2;
   
   if(HAL_SD_Init(&SDHandle) != HAL_OK)
   {
@@ -226,7 +226,7 @@ int main(void)
           
           if(index < NB_LOOP)
           {
-            /* More data need to be trasnfered */
+            /* More data need to be transferred */
             step--;
           }
           else
@@ -284,7 +284,7 @@ int main(void)
           index++;
           if(index<NB_LOOP)
           {
-            /* More data need to be trasnfered */
+            /* More data need to be transferred */
             step--;
           }
           else
@@ -421,7 +421,7 @@ static void SystemClock_Config(void)
   * @param  None
   * @retval None
   */
-void HAL_SD_DriveTransciver_1_8V_Callback(FlagStatus status)
+void HAL_SD_DriveTransceiver_1_8V_Callback(FlagStatus status)
 {
   if(status == SET)
   {

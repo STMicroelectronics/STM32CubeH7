@@ -1,5 +1,5 @@
 /**
-  @page FMC_NOR NOR memory functionnalities example
+  @page FMC_NOR NOR memory functionalities example
 
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************

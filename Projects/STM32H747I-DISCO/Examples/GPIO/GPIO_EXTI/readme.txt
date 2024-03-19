@@ -62,7 +62,7 @@ The SystemClock_Config() function is used to set the Flash latency and  to confi
 @note For Cortex-M7, Some code parts (for instance ISR routines, vector table, critical routines )
       can be executed from the ITCM-RAM (64 KB) allowing zero wait state access.
       Which decreases critical task execution time compared to code execution from internal Flash memory. 
-      This configuratuion can be done using '#pragma location = ".itcmram"' to be placed above function declaration, 
+      This configuration can be done using '#pragma location = ".itcmram"' to be placed above function declaration, 
       or using the toolchain GUI (file options) to execute a whole source file in the ITCM-RAM.
       For fast data access, critical variables, application RAM, heap, stack could be put as well in the DTCM-RAM (128 KB).
 

@@ -90,6 +90,9 @@ int main(void)
   /* -2- Unlock the Flash to enable the flash control register access *************/
   HAL_FLASH_Unlock();
 
+  /* Disable instruction cache prior to internal cacheable memory update */
+  SCB_DisableICache();
+
   /* -3- Erase the user Flash area
     (area defined by FLASH_USER_START_ADDR and FLASH_USER_END_ADDR) ***********/
 
@@ -145,6 +148,9 @@ int main(void)
   /* -5- Lock the Flash to disable the flash control register access (recommended
      to protect the FLASH memory against possible unwanted operation) *********/
   HAL_FLASH_Lock();
+
+  /* Enable instruction cache prior to internal cacheable memory update */
+  SCB_EnableICache();
 
   /* -6- Check if the programmed data is OK
       MemoryProgramStatus = 0: data programmed correctly

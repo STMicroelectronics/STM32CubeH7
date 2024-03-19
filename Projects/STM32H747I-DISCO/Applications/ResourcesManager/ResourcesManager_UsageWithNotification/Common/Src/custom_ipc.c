@@ -149,7 +149,7 @@ void Custom_IPC_Send(uint32_t id,uint32_t msg)
 }
 
 /**
-* @brief  HSEM Callback,overwride weak HSEM  Callback
+* @brief  HSEM Callback,overwrite weak HSEM  Callback
 * @param  SemMask : Semaphore Mask 
 * @retval None
 */

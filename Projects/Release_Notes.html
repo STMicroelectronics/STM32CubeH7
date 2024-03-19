@@ -61,10 +61,68 @@
 <div class="col-sm-12 col-lg-8">
 <h1 id="update-history">Update History</h1>
 <div class="collapse">
-<input type="checkbox" id="collapse-section15" checked aria-hidden="true"> <label for="collapse-section15" aria-hidden="true"><strong>V1.11.1 / 14-July-2023</strong></label>
+<input type="checkbox" id="collapse-section16" checked aria-hidden="true"> <label for="collapse-section16" aria-hidden="true"><strong>V1.11.2 / 15-March-2024</strong></label>
 <div>
 <h2 id="main-changes">Main Changes</h2>
 <h3 id="maintenance-release">Maintenance release</h3>
+<ul>
+<li>General fixes to support GCC11 and GCC12 in all STM32CubeIDE projects.</li>
+<li>Update STM32CubeIDE projects to fix the location of .size directive in startup code to allow proper size information of vector table.</li>
+<li>Adding ICACHE Disable before any flash Prog/Erase.</li>
+<li><strong>DMA Examples</strong>
+<ul>
+<li>Memory alignment of aDST_Buffer destination buffer.</li>
+</ul></li>
+<li><strong>CRC Examples</strong>
+<ul>
+<li>Update to fix STM32CubeIDE warning: Accessing 4 bytes in a region of size x [-Wstringop-overflow=].</li>
+</ul></li>
+<li><strong>DCMI Examples</strong>
+<ul>
+<li>Update ‘DCMI Capture Mode’ example of STM32H747I-DISCO to support the NT35510 LCD driver.</li>
+</ul></li>
+<li><strong>SDMMC Examples</strong>
+<ul>
+<li>Modification of the address in the transmission and the reception to avoid lose of data.</li>
+</ul></li>
+<li><strong>CORTEX Examples</strong>
+<ul>
+<li>Update the expected behavior in readme.txt file.</li>
+</ul></li>
+<li><strong>LwIP Applications</strong>
+<ul>
+<li>Fix ‘RAM_D2’ size in *.ld files of LwIP applications for NUCLEO-H723ZG and STM32H735G-DK boards.</li>
+<li>Fix Wrong use of DHCP API in application code &amp; ethernet_link_thread</li>
+<li>Handle the case of error code returned by LAN8742_init() when called from low_level_init() in ‘mbedTLS’ and ‘LwIP’ applications.</li>
+<li>Fix DeadLock in the transmit output</li>
+<li>Fix Confusing comment in ethernet_if</li>
+<li>Fix Ethernet LwIP and FreeRTOS issue when using CMSIS v2</li>
+</ul></li>
+<li><strong>MbedTLS Applications</strong>
+<ul>
+<li>Change the size and the argument from static to dynamic table.</li>
+<li>Align SSL calc/verif functions prototypes with their implementations.</li>
+</ul></li>
+<li><strong>STemWin Applications</strong>
+<ul>
+<li>Update to fix STM32CubeIDE error: ‘LITTLE_ENDIAN’ and ‘BIG_ENDIAN’ undeclared.</li>
+</ul></li>
+<li><strong>USB Applications</strong>
+<ul>
+<li>Appli USB HID: adding support of STOP mode entry during USB suspend.</li>
+<li>Improve USB transmit data throughput.</li>
+<li>USB Device Fix first byte missing transmission issue.</li>
+<li>USB_Host: MSC applications: fix Stack corruption due to inconsistent type of local variable in MSC_File_Operations().</li>
+<li>Add the missing closing brace of #ifdef __cplusplus in the usbh_conf.h of the USB_Host/HID_Standalone example.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div class="collapse">
+<input type="checkbox" id="collapse-section15" aria-hidden="true"> <label for="collapse-section15" aria-hidden="true"><strong>V1.11.1 / 14-July-2023</strong></label>
+<div>
+<h2 id="main-changes-1">Main Changes</h2>
+<h3 id="maintenance-release-1">Maintenance release</h3>
 <ul>
 <li>STM32H747I-DISCO :
 <ul>
@@ -76,8 +134,8 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section14" aria-hidden="true"> <label for="collapse-section14" aria-hidden="true"><strong>V1.11.0 / 04-November-2022</strong></label>
 <div>
-<h2 id="main-changes-1">Main Changes</h2>
-<h3 id="maintenance-release-1">Maintenance release</h3>
+<h2 id="main-changes-2">Main Changes</h2>
+<h3 id="maintenance-release-2">Maintenance release</h3>
 <ul>
 <li>General updates to fix known defects and implementation enhancements</li>
 <li>Deploy the support of STM32CubeIDE toolchain on all projects
@@ -130,8 +188,8 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section13" aria-hidden="true"> <label for="collapse-section13" aria-hidden="true"><strong>V1.10.0 / 11-February-2022</strong></label>
 <div>
-<h2 id="main-changes-2">Main Changes</h2>
-<h3 id="maintenance-release-2">Maintenance release</h3>
+<h2 id="main-changes-3">Main Changes</h2>
+<h3 id="maintenance-release-3">Maintenance release</h3>
 <ul>
 <li>General update to align firmware projects with the new HAL ETH driver</li>
 </ul>
@@ -140,7 +198,7 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section12" aria-hidden="true"> <label for="collapse-section12" aria-hidden="true"><strong>V1.9.1 / 06-December-2021</strong></label>
 <div>
-<h2 id="main-changes-3">Main Changes</h2>
+<h2 id="main-changes-4">Main Changes</h2>
 <h3 id="patch-release">Patch release</h3>
 <ul>
 <li>General updates to fix known defects and implementation enhancements</li>
@@ -186,8 +244,8 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section11" aria-hidden="true"> <label for="collapse-section11" aria-hidden="true"><strong>V1.9.0 / 12-February-2021</strong></label>
 <div>
-<h2 id="main-changes-4">Main Changes</h2>
-<h3 id="maintenance-release-3">Maintenance release</h3>
+<h2 id="main-changes-5">Main Changes</h2>
+<h3 id="maintenance-release-4">Maintenance release</h3>
 <ul>
 <li><p>General updates to fix known defects and implementation enhancements</p></li>
 <li><p>Fix minor issues related to English typo in comments</p></li>
@@ -875,7 +933,7 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section10" aria-hidden="true"> <label for="collapse-section10" aria-hidden="true"><strong>V1.8.0 / 29-May-2020</strong></label>
 <div>
-<h2 id="main-changes-5">Main Changes</h2>
+<h2 id="main-changes-6">Main Changes</h2>
 <h3 id="first-official-release-to-support-stm32h723xx33xx25xx35xx30xx30xxq-new-devices-and-boards">First official release to support STM32H723xx/33xx/25xx/35xx/30xx/30xxQ new devices and boards</h3>
 <p>Official release with support of STM32H723xx/33xx/25xx/35xx/30xx/30xxQ new devices</p>
 <p>Add support of NUCLEO-H723ZG and STM32H735G-DK boards with dedicated template HAL/LL projects, examples, applications and demonstrations</p>
@@ -1569,8 +1627,8 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section9" aria-hidden="true"> <label for="collapse-section9" aria-hidden="true"><strong>V1.7.0 / 14-February-2020</strong></label>
 <div>
-<h2 id="main-changes-6">Main Changes</h2>
-<h3 id="maintenance-release-4">Maintenance release</h3>
+<h2 id="main-changes-7">Main Changes</h2>
+<h3 id="maintenance-release-5">Maintenance release</h3>
 <p>Add support of the value line STM32H7B0 devices over STM32H7B3I-EVAL board</p>
 <p>Add STM32H7B3I-EVAL, STM32H743I-EVAL and STM32H747I-EVAL demonstrations source code</p>
 <table>
@@ -2134,7 +2192,7 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section8" aria-hidden="true"> <label for="collapse-section8" aria-hidden="true"><strong>V1.6.0 / 06-December-2019</strong></label>
 <div>
-<h2 id="main-changes-7">Main Changes</h2>
+<h2 id="main-changes-8">Main Changes</h2>
 <h3 id="first-official-release-to-support-stm32h7a3b3xxb0xx-new-devices-and-boards">First official release to support STM32H7A3/B3xx/B0xx new devices and boards</h3>
 <p>Official release with support of STM32H7A3/B3xx/B0xx new devices</p>
 <p>Add support of NUCLEO-H7A3ZI-Q, STM32H7B3I-DK and STM32H7B3I-EVAL boards with dedicated template HAL/LL projects, examples, applications and demonstrations</p>
@@ -2706,8 +2764,8 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section7" aria-hidden="true"> <label for="collapse-section7" aria-hidden="true"><strong>V1.5.0 / 28-June-2019</strong></label>
 <div>
-<h2 id="main-changes-8">Main Changes</h2>
-<h3 id="maintenance-release-5">Maintenance release</h3>
+<h2 id="main-changes-9">Main Changes</h2>
+<h3 id="maintenance-release-6">Maintenance release</h3>
 <ul>
 <li>Add <strong>Dual Core</strong> demonstrations source code with preconfigured projects on EWARM, MDK-ARM and SW4STM32 IDEs:
 <ul>
@@ -3355,7 +3413,7 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section6" aria-hidden="true"> <label for="collapse-section6" aria-hidden="true"><strong>V1.4.0 / 05-April-2019</strong></label>
 <div>
-<h2 id="main-changes-9">Main Changes</h2>
+<h2 id="main-changes-10">Main Changes</h2>
 <ul>
 <li>First official release to support STM32H7 <strong>Rev.V</strong> all lines:
 <ul>
@@ -4075,7 +4133,7 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section5" aria-hidden="true"> <label for="collapse-section5" aria-hidden="true"><strong>V1.3.2 / 31-January-2019</strong></label>
 <div>
-<h2 id="main-changes-10">Main Changes</h2>
+<h2 id="main-changes-11">Main Changes</h2>
 <h3 id="patch-release-1">Patch release</h3>
 <ul>
 <li><p>Patch release to add definition of UID_BASE (Unique device ID register base address) to the CMSIS STM32H7xx include files.</p></li>
@@ -4191,7 +4249,7 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section4" aria-hidden="true"> <label for="collapse-section4" aria-hidden="true"><strong>V1.3.1 / 18-January-2019</strong></label>
 <div>
-<h2 id="main-changes-11">Main Changes</h2>
+<h2 id="main-changes-12">Main Changes</h2>
 <h3 id="patch-release-2">Patch release</h3>
 <ul>
 <li><p>Patch release to Fix LwIP and mbedTLS applications : enhance Ethernet zero-copy feature allowing to fix ping behavior.</p></li>
@@ -4338,7 +4396,7 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section3" aria-hidden="true"> <label for="collapse-section3" aria-hidden="true"><strong>V1.3.0 / 29-June-2018</strong></label>
 <div>
-<h2 id="main-changes-12">Main Changes</h2>
+<h2 id="main-changes-13">Main Changes</h2>
 <ul>
 <li><strong>Add support for STM32H750xx value line</strong>
 <ul>
@@ -4494,8 +4552,8 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section2" aria-hidden="true"> <label for="collapse-section2" aria-hidden="true"><strong>V1.2.0 / 29-December-2017</strong></label>
 <div>
-<h2 id="main-changes-13">Main Changes</h2>
-<h3 id="maintenance-release-6">Maintenance release</h3>
+<h2 id="main-changes-14">Main Changes</h2>
+<h3 id="maintenance-release-7">Maintenance release</h3>
 <ul>
 <li>Update projects to support new FatFs, MbedTLS and LwIP versions.</li>
 <li>Add new FDCAN_Classic_Frame_Networking example running on STM32H743I_EVAL.</li>
@@ -4662,8 +4720,8 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section1" aria-hidden="true"> <label for="collapse-section1" aria-hidden="true"><strong>V1.1.0 / 31-August-2017</strong></label>
 <div>
-<h2 id="main-changes-14">Main Changes</h2>
-<h3 id="maintenance-release-7">Maintenance release</h3>
+<h2 id="main-changes-15">Main Changes</h2>
+<h3 id="maintenance-release-8">Maintenance release</h3>
 <ul>
 <li>Update projects to support new FatFs and STemWin versions.</li>
 <li>Add new FreeRTOS MPU application running on STM32H743I_EVAL and STM32H7xx_Nucleo_144, only EWARM Toolchain is supported.</li>
@@ -4813,7 +4871,7 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section0" aria-hidden="true"> <label for="collapse-section0" aria-hidden="true"><strong>V1.0.0 / 21-April-2017</strong></label>
 <div>
-<h2 id="main-changes-15">Main Changes</h2>
+<h2 id="main-changes-16">Main Changes</h2>
 <p><strong>First official release of STM32CubeH7 (STM32Cube for STM32H7 Series)</strong></p>
 <p><strong>NUCLEO-H743ZI</strong>: First official release</p>
 <p><strong>STM32H743I-EVAL</strong>: First official release</p>

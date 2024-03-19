@@ -76,6 +76,7 @@ UART_HandleTypeDef UartHandle;
 __IO uint8_t step = 0;
 uint32_t start_time = 0;
 uint32_t stop_time = 0;
+uint32_t loop_index = 0;
 
 /* Private function prototypes -----------------------------------------------*/
 static void MPU_Config(void);
@@ -149,7 +150,7 @@ int main(void)
   SDHandle.Init.ClockEdge           = SDMMC_CLOCK_EDGE_RISING;
   SDHandle.Init.ClockPowerSave      = SDMMC_CLOCK_POWER_SAVE_DISABLE;
   SDHandle.Init.BusWide             = SDMMC_BUS_WIDE_4B;
-  SDHandle.Init.HardwareFlowControl = SDMMC_HARDWARE_FLOW_CONTROL_DISABLE;
+  SDHandle.Init.HardwareFlowControl = SDMMC_HARDWARE_FLOW_CONTROL_ENABLE;
   SDHandle.Init.ClockDiv            = 2;
   
   if(HAL_SD_Init(&SDHandle) != HAL_OK)
@@ -196,7 +197,7 @@ int main(void)
           Error_Handler();
         }
         /*##- 5 - Start Transmission buffer #####################*/
-        if(HAL_SD_WriteBlocks_IT(&SDHandle, aTxBuffer, ADDRESS, NB_BLOCK_BUFFER) != HAL_OK)
+        if(HAL_SD_WriteBlocks_IT(&SDHandle, aTxBuffer, ADDRESS + (loop_index * NB_BLOCK_BUFFER), NB_BLOCK_BUFFER) != HAL_OK)
         {
           Error_Handler();
         }
@@ -214,7 +215,7 @@ int main(void)
           index++;
           if(index<NB_BUFFER)
           {
-            /* More data need to be trasnfered */
+            /* More data need to be transferred */
             step--;
           }
           else
@@ -247,9 +248,9 @@ int main(void)
         {
           Error_Handler();
         }
-        /*##- 7 - Initialize Reception buffer #####################*/
+        /*##- 7 - Start Reception buffer #####################*/
         RxCplt = 0;
-        if(HAL_SD_ReadBlocks_IT(&SDHandle, aRxBuffer, ADDRESS, NB_BLOCK_BUFFER) != HAL_OK)
+        if(HAL_SD_ReadBlocks_IT(&SDHandle, aRxBuffer, ADDRESS + (loop_index * NB_BLOCK_BUFFER), NB_BLOCK_BUFFER) != HAL_OK)
         {
           Error_Handler();
         }
@@ -266,7 +267,7 @@ int main(void)
           index++;
           if(index<NB_BUFFER)
           {
-            /* More data need to be trasnfered */
+            /* More data need to be transferred */
             step--;
           }
           else
@@ -298,6 +299,7 @@ int main(void)
         /* Toggle Green LED, Check Transfer OK */
         BSP_LED_Toggle(LED_GREEN);
         step = 0;
+        loop_index ++;
       }
       break;
       default :
@@ -404,7 +406,7 @@ static void SystemClock_Config(void)
   * @param  None
   * @retval None
   */
-void HAL_SD_DriveTransciver_1_8V_Callback(FlagStatus status)
+void HAL_SD_DriveTransceiver_1_8V_Callback(FlagStatus status)
 {
   if(status == SET)
   {

@@ -77,7 +77,7 @@ Three LEDs are used in this program:
           and LED2 is OFF when CM4 enters STOP mode. 
   - LED3: To indicate if a configuration error occurred during program execution.
 
-After RESET LED1 is turned ON during 5 seconds to indicate that CM7 core is in RUN mdoe
+After RESET LED1 is turned ON during 5 seconds to indicate that CM7 core is in RUN mode
 and LED2 is turned ON during 3 seconds to indicate that CM4 core is in RUN mode.
 Then the system will automatically enters STOP mode when:
   - D1 Domain enters DSTOP mode after calling the HAL_PWREx_EnterSTOPMode function 

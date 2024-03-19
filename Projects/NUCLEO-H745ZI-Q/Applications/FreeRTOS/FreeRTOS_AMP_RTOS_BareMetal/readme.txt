@@ -34,7 +34,7 @@ to be at an address known to both cores within shared memory (D3_SRAM is used as
 
 The Core 2 will check the received message from Core 1 and notify the user by the following:
   - Toggle LED1 if the received message is correct
-  - Turn On LED2 if the received message is wrong and enter an empty infinte loop
+  - Turn On LED2 if the received message is wrong and enter an empty infinite loop
 
 The SystemClock_Config() function is used to set the Flash latency and  to configure the system clock :
   - The Cortex-M7 at 400MHz
@@ -81,7 +81,7 @@ RTOS, FreeRTOS, multiprocessor, Threading, AMP, Asymmetric Multi Processing, Bar
 @par Directory contents
 
 
-    - FreeRTOS/FreeRTOS_AMP_RTOS_BareMetal/Commmon/Src/system_stm32h7xx.c  STM32H7xx system configuration source file
+    - FreeRTOS/FreeRTOS_AMP_RTOS_BareMetal/Common/Src/system_stm32h7xx.c  STM32H7xx system configuration source file
 
     - FreeRTOS/FreeRTOS_AMP_RTOS_BareMetal/CM7/Inc/stm32h7xx_hal_conf.h    HAL configuration file for Cortex-M7
     - FreeRTOS/FreeRTOS_AMP_RTOS_BareMetal/CM7/Inc/FreeRTOSConfig.h        FreeRTOS Configuration file

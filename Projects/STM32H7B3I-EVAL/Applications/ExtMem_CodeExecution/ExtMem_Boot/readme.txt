@@ -44,7 +44,7 @@ Define "CODE_AREA" , "DATA_AREA" and "BINARY_AREA" in file memory.h are used res
 to select the Code execution area, the application data area and the binary storage area.
 The ExtMem_Boot program is located at 0x08000000 (Internal flash).
 
-Please Refer to the bellow "Table 1. IAP implementation on STM32H7B3I-EVAL" for different configurations and corresponding settings.
+Please Refer to the below "Table 1. IAP implementation on STM32H7B3I-EVAL" for different configurations and corresponding settings.
 
 At the beginning of the main program the HAL_Init() function is called to reset
 all the peripherals, initialize the Flash interface and the systick.
@@ -63,7 +63,7 @@ to enhance the performance in case of use of AXI interface with several masters.
       placed above function declaration, or using the toolchain GUI (file options) to execute a whole source file in
 	  the ITCM-RAM.
 
-@note For the chosen configuration check the approriate JP positions 
+@note For the chosen configuration check the appropriate JP positions 
 - Make sure JP4 and JP23 are in OCTOSPI1 position.
 - Make sure JP2 is in SRAM position.
 - Make sure JP32 and JP35 are in NOR position 

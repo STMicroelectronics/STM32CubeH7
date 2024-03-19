@@ -49,11 +49,16 @@ In this examples, two DMA transfers are configured using DMA1_Stream0:
 Then, these 2 DMA transfers are started, then source and destination buffers are compared.
 Leds colors will indicate the buffer comparison results.
 In the first step, only one or two transfer comparison results could be wrong, depending
-on the chosen MPU configuration.
+on the chosen MPU configuration:
+1/ MPU Write back Allocate or MPU Write through: 
+   - both transfers are wrong.
+2/ MPU Write back no allocate:
+   - the first transfer is wrong.
 Then, User has to press on Tamper button to do a Cache maintenance, in order to
 ensure the cache coherency between CPU and DMA.
 Thereafter, a new buffer comparison is done to indicate transfer status after Cache maintenance,
-and leds colors should indicate the correct comparison status for the 2 transfers.
+and leds colors should indicate the correct comparison status for the 2 transfers whatever the MPU
+configuration.
 
 STM32H7B3I-EVAL board's LEDs can be used to monitor the transfer status:
  - Green LED is ON when the first transfer is completed and buffers comparison is correct.
@@ -81,10 +86,6 @@ Cache Maintenance:
       Moreover, a padding of 8 words (1 cache line) may be needed at the beginning
       and at the end of the buffer, especilally when accesses to the shared buffer
       content is not linear.
-
-    - When User can’t ensure the Buffer Length Alignment, there are two possible solutions:
-        * Use the SCB_CleanInvalidateDCache_by_Addr() instead of SCB_InvalidateDCache_by_Addr()
-        * Use a Write-Through MPU configuration, so there is no need to make a Cache clean
 
     - Be careful before using the Invalidate all data cache in Write-Back policy:
         * Risk to lose all the modification which are not yet evicted

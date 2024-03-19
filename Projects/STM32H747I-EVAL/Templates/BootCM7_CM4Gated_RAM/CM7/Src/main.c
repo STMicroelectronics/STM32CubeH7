@@ -37,8 +37,16 @@ static void MPU_Config(void);
 static void CPU_CACHE_Enable(void);
 static void SystemClock_Config(void);
 static void Error_Handler(void);
-/* Imported variables */
-extern  const char * cm4_code; /* section containing CM4 Code */
+
+/* Imported variables --------------------------------------------------------*/
+extern const uint32_t cm4_code; /* section containing CM4 Code */
+#if defined (__ICCARM__) /* IAR Compiler */
+#pragma section="cm4_section"
+extern const void* cm4_section$$Limit;
+const uint32_t cm4_code_end = (uint32_t)&cm4_section$$Limit; /* End of section containing CM4 Code */
+#else /* GNU & ARM Compilers */
+extern const uint32_t cm4_code_end; /* End of section containing CM4 Code */
+#endif /* __ICCARM__ */
 
 /**
   * @brief  Main program
@@ -47,8 +55,6 @@ extern  const char * cm4_code; /* section containing CM4 Code */
   */
 int main(void)
 {
-
- 
  /*System clock, voltage scaling configuration done only once by Cortex-M7*/
 
   /* Configure the MPU attributes */
@@ -72,7 +78,11 @@ int main(void)
   SystemClock_Config();
 
   /* Copy CM4 code from Flash to D2_SRAM memory */
-  memcpy((void *)D2_AXISRAM_BASE,  &cm4_code, 0x20000);
+#if defined (__ICCARM__) /* IAR Compiler */
+  memcpy((void *)D2_AXISRAM_BASE, &cm4_code, (uint32_t)cm4_code_end - (uint32_t)&cm4_code);
+#else /* GNU & ARM Compilers */
+  memcpy((void *)D2_AXISRAM_BASE, &cm4_code, (uint32_t)&cm4_code_end - (uint32_t)&cm4_code);
+#endif /* __ICCARM__ */
 
   /* Configure the boot address for CPU2 (Cortex-M4) */
   HAL_SYSCFG_CM4BootAddConfig(SYSCFG_BOOT_ADDR0, D2_AXISRAM_BASE);

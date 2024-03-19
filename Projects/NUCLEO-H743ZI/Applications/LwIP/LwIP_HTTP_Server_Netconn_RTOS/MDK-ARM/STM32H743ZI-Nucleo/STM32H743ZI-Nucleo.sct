@@ -11,13 +11,13 @@ LR_IROM1 0x08000000 0x00200000  {    ; load region size_region
   RW_IRAM2 0x24000000 0x00080000  {  ; RW data
    .ANY (+RW +ZI)
   }
-  RW_DMARxDscrTab 0x30000000 0x60 {
-  *(.RxDecripSection)
+  RW_DMARxDscrTab 0x30000000 0x80 {
+  *(.RxDescripSection)
   }
-  RW_DMATxDscrTab 0x30000200 0x140 {
-  *(.TxDecripSection)
+  RW_DMATxDscrTab 0x30000080 0x80 {
+  *(.TxDescripSection)
   }
-  memory_RX_POOL_base 0x30000400 0x12676 {
+  memory_RX_POOL_base 0x30000100 0x3F00 {
   *(.Rx_PoolSection)
   }
 }

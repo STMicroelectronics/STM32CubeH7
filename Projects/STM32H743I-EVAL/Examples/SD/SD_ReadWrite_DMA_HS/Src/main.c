@@ -274,7 +274,7 @@ int main(void)
           index++;
           if(index<NB_BUFFER)
           {
-            /* More data need to be trasnfered */
+            /* More data need to be transferred */
             step--;
           }
           else
@@ -429,7 +429,7 @@ static void SystemClock_Config(void)
   * @param  None
   * @retval None
   */
-void HAL_SD_DriveTransciver_1_8V_Callback(FlagStatus status)
+void HAL_SD_DriveTransceiver_1_8V_Callback(FlagStatus status)
 {
   if(status == SET)
   {

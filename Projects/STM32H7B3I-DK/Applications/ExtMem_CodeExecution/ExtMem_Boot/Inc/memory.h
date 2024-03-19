@@ -69,7 +69,7 @@
                      ##### How to use this Config #####
   ==============================================================================
     [..]
-      The configuration bellow allows simple selection switch between configuration
+      The configuration below allows simple selection switch between configuration
 
       The configuration is composed mainly by two area:
       (#) CODE_AREA: Used to specify external memory used for code execution
@@ -90,7 +90,7 @@
              (+++) BINARY_BASE_OFFSET : Offset of the binary within SPI NOR Flash
              (+++) BINARY_SIZE        : Size of the binary image
          (##) USE_SDMMC  : Micro SD is used for binary storage
-      Bellow an automatic update APPLICATION_ADDRESS to default value based on
+      Below an automatic update APPLICATION_ADDRESS to default value based on
       user configuration, which can be tailored as required
 
       Finally a set of check allows to avoid unsupported combined configuration.

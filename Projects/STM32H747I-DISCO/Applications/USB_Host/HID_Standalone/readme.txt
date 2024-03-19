@@ -55,7 +55,7 @@ The check could be done using this macro : __HAL_RCC_GET_FLAG(RCC_FLAG_D2CKRDY).
 In the High Speed (HS) mode the USB clock (60 MHz) is driven by the ULPI.
 
 When the application is started, the connected HID device (Mouse/Keyboard) is detected in HID mode and
-gets initialized. This application is based on interacting with a HID device (Mouse/Keyboard) trough a HID routine.
+gets initialized. This application is based on interacting with a HID device (Mouse/Keyboard) through a HID routine.
 
 The STM32 MCU behaves as a HID Host, it enumerates the device and extracts VID, PID,
 manufacturer name, Serial number and product name information and displays it on The IO Terminal of IAR.
@@ -120,7 +120,7 @@ Connectivity, USB_Host, USB, HID, Human Interface, Full Speed, High Speed, Mouse
   - USB_Host/HID_Standalone/CM7/Src/menu.c                  HID State Machine
   - USB_Host/HID_Standalone/CM7/Src/usbh_conf.c             General low level driver configuration
   - USB_Host/HID_Standalone/CM7/Src/mouse.c                 HID mouse functions file
-  - USB_Host/HID_Standalone/CM7/Src/keybaord.c              HID keyboard functions file
+  - USB_Host/HID_Standalone/CM7/Src/keyboard.c              HID keyboard functions file
   - USB_Host/HID_Standalone/CM7/Inc/main.h                  Main program header file
   - USB_Host/HID_Standalone/CM7/Inc/stm32h7xx_it.h          Interrupt handlers header file
   - USB_Host/HID_Standalone/CM7/Inc/stm32h7xx_hal_conf.h    HAL configuration file

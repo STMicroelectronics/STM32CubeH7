@@ -82,7 +82,7 @@ Analog, OPAMP, follower, DAC, Signals generation, Waveform, Amplitude
 
   - STM32H743I-EVAL Set-up
     
-      - Inject Volatge in COMP1 non inverting input( PB2 pin 24 in CN6)  
+      - Inject Voltage in COMP1 non inverting input( PB2 pin 24 in CN6)  
       - Connect an oscilloscope to (COMP1_OUT, PA8 pin52 in CN7)
       
 @par How to use it ? 

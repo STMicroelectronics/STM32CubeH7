@@ -1,11 +1,11 @@
 /**
-  @page HRTIM_Arbitrary_Waveform HRTIM Arbitary Waveform example
+  @page HRTIM_Arbitrary_Waveform HRTIM Arbitrary Waveform example
   
   @verbatim
   ********************* COPYRIGHT(c) 2017 STMicroelectronics *******************
   * @file    HRTIM/HRTIM_Arbitrary_Waveform/readme.txt 
   * @author  MCD Application Team
-  * @brief   Description of the HRTIM1 Arbitary waveform generation
+  * @brief   Description of the HRTIM1 Arbitrary waveform generation
   ******************************************************************************
   * @attention
   *
@@ -81,13 +81,13 @@ HRTIM, Timer, Logical operation, Set source, Reset source, Arbitrary, Waveforms,
 
 @par Directory contents 
 
-  - HRTIM/HRTIM_Arbitary_Waveform/Inc/stm32h7xx_hal_conf.h    HAL configuration file
-  - HRTIM/HRTIM_Arbitary_Waveform/Inc/stm32h7xx_it.h          Interrupt handlers header file
-  - HRTIM/HRTIM_Arbitary_Waveform/Inc/main.h                  Header for main.c module  
-  - HRTIM/HRTIM_Arbitary_Waveform/Src/stm32h7xx_it.c          Interrupt handlers
-  - HRTIM/HRTIM_Arbitary_Waveform/Src/main.c                  Main program
-  - HRTIM/HRTIM_Arbitary_Waveform/Src/stm32h7xx_hal_msp.c     HAL MSP file
-  - HRTIM/HRTIM_Arbitary_Waveform/Src/system_stm32h7xx.c      STM32H7xx system source file
+  - HRTIM/HRTIM_Arbitrary_Waveform/Inc/stm32h7xx_hal_conf.h    HAL configuration file
+  - HRTIM/HRTIM_Arbitrary_Waveform/Inc/stm32h7xx_it.h          Interrupt handlers header file
+  - HRTIM/HRTIM_Arbitrary_Waveform/Inc/main.h                  Header for main.c module  
+  - HRTIM/HRTIM_Arbitrary_Waveform/Src/stm32h7xx_it.c          Interrupt handlers
+  - HRTIM/HRTIM_Arbitrary_Waveform/Src/main.c                  Main program
+  - HRTIM/HRTIM_Arbitrary_Waveform/Src/stm32h7xx_hal_msp.c     HAL MSP file
+  - HRTIM/HRTIM_Arbitrary_Waveform/Src/system_stm32h7xx.c      STM32H7xx system source file
 
 
 @par Hardware and Software environment

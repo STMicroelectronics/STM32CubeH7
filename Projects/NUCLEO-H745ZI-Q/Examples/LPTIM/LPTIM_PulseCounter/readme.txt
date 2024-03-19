@@ -46,7 +46,7 @@ the access will not be safe until “clock ready flag” of such a domain is set (by
 The check could be done using this macro : __HAL_RCC_GET_FLAG(RCC_FLAG_D2CKRDY).
 
 To reduce power consumption, MCU enters stop mode after starting counting. Each
-time the counter reachs the maximum value (Period/Autoreload), an interruption
+time the counter reaches the maximum value (Period/Autoreload), an interruption
 is generated, the MCU is woke up from stop mode and LED1 toggles the last state.
   
 In this example Period value is set to 1000, so each time the counter counts

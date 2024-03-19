@@ -125,7 +125,7 @@ Hardware semaphore, Semaphore, HSEM, EXTI, Synchronize, Lock, Unlock, Take, Rele
     - Flow control: None
 
 @note  LED3 is on in case of error 
-       LED1 blink every 100 ms when the process is complet.
+       LED1 blink every 100 ms when the process is complete.
 
 @par How to use it ? 
 

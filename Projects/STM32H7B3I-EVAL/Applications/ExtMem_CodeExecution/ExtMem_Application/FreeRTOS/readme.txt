@@ -47,7 +47,7 @@ This application provide different configuration with linker files which allows 
 @note In BootROM configuration , application code is initially stored on sdcard or SPI nor then loaded to the SDRAM or SRAM after boot.
 @note Make sure that chosen configuration matches ExtMem_Boot configuration in memory.h file.
 
-@note For the chosen configuration check the approriate JP positions 
+@note For the chosen configuration check the appropriate JP positions 
 - Make sure JP4 and JP23 are in OCTOSPI1 position.
 - Make sure JP2 is in SRAM position.
 - Make sure JP32 and JP35 are in NOR position 

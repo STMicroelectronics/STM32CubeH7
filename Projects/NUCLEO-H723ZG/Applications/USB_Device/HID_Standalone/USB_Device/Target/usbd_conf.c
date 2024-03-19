@@ -72,20 +72,20 @@ void HAL_PCD_MspInit(PCD_HandleTypeDef* pcdHandle)
 #endif /* USE_HAL_PCD_REGISTER_CALLBACK */
 {
   GPIO_InitTypeDef GPIO_InitStruct = {0};
-      __HAL_RCC_GPIOA_CLK_ENABLE();
-    /**USB GPIO Configuration
-    PA11     ------> USB_DM
-    PA12     ------> USB_DP
-    */
-    GPIO_InitStruct.Pin = GPIO_PIN_11|GPIO_PIN_12;
-    GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
-    GPIO_InitStruct.Pull = GPIO_NOPULL;
-    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
-    GPIO_InitStruct.Alternate  = GPIO_AF10_OTG1_FS;
-    HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+  __HAL_RCC_GPIOA_CLK_ENABLE();
+  /**USB GPIO Configuration
+  PA11     ------> USB_DM
+  PA12     ------> USB_DP
+  */
+  GPIO_InitStruct.Pin = GPIO_PIN_11|GPIO_PIN_12;
+  GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+  GPIO_InitStruct.Alternate  = GPIO_AF10_OTG1_FS;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-    /* Peripheral clock enable */
-    __HAL_RCC_USB1_OTG_HS_CLK_ENABLE();
+  /* Peripheral clock enable */
+  __HAL_RCC_USB1_OTG_HS_CLK_ENABLE();
 
   /* Set USB FS Interrupt priority */
   HAL_NVIC_SetPriority(OTG_HS_IRQn, 6, 0);
@@ -93,7 +93,16 @@ void HAL_PCD_MspInit(PCD_HandleTypeDef* pcdHandle)
   /* Enable USB FS Interrupt */
   HAL_NVIC_EnableIRQ(OTG_HS_IRQn);
   /* USER CODE BEGIN USB_MspInit 1 */
+  if (hpcd_USB_HS.Init.low_power_enable)
+  {
+    __HAL_USB_OTG_HS_WAKEUP_EXTI_ENABLE_IT();
 
+    /* Set EXTI Wakeup Interrupt priority */
+    HAL_NVIC_SetPriority(OTG_HS_WKUP_IRQn, 15, 0);
+
+    /* Enable EXTI Interrupt */
+    HAL_NVIC_EnableIRQ(OTG_HS_WKUP_IRQn);
+  }
   /* USER CODE END USB_MspInit 1 */
 }
 
@@ -268,13 +277,16 @@ void HAL_PCD_SuspendCallback(PCD_HandleTypeDef *hpcd)
   if (hpcd->Init.low_power_enable)
   {
     HAL_SuspendTick();
-
+    /* Gate OTG PHY CLK. */
+    __HAL_PCD_GATE_PHYCLOCK(&hpcd_USB_HS);
     /* Stop 1 mode with Main Regulator */
     PWR->CR1 |= PWR_CR1_LPDS;
     /* Keep DSTOP mode when D1 domain enters Deepsleep */
     CLEAR_BIT(PWR->CPUCR, PWR_CPUCR_PDDS_D1);
     /* Set SLEEPDEEP bit of Cortex System Control Register. */
     SCB->SCR |= (uint32_t)(SCB_SCR_SLEEPDEEP_Msk);
+    /* Enable Sleep on Exit. */
+    HAL_PWR_EnableSleepOnExit();
   }
   /* USER CODE END 2 */
   /* USER CODE BEGIN HAL_PCD_SuspendCallback_PostTreatment */
@@ -302,8 +314,12 @@ void HAL_PCD_ResumeCallback(PCD_HandleTypeDef *hpcd)
   if (hpcd->Init.low_power_enable)
   {
     HAL_ResumeTick();
-    /* Reset SLEEPDEEP bit of Cortex System Control Register. */
+    /* Resume System Clk & USB Clk. */
+    SystemClockConfig_Resume();
+    /* Reset SLEEPDEEP & SLEEPONEXIT bits of Cortex System Control Register. */
     SCB->SCR &= (uint32_t)~((uint32_t)(SCB_SCR_SLEEPDEEP_Msk | SCB_SCR_SLEEPONEXIT_Msk));
+    /* UnGate OTG PHY CLK. */
+    __HAL_PCD_UNGATE_PHYCLOCK(&hpcd_USB_HS);
 
   }
   /* USER CODE END 3 */

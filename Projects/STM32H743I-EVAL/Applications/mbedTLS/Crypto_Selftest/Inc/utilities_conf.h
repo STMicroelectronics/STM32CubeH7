@@ -73,7 +73,7 @@ extern "C" {
 /******************************************************************************
  * trace\advanced
  * the define option
- *    UTIL_ADV_TRACE_CONDITIONNAL shall be defined if you want use conditionnal function
+ *    UTIL_ADV_TRACE_CONDITIONNAL shall be defined if you want use conditional function
  *    UTIL_ADV_TRACE_UNCHUNK_MODE shall be defined if you want use the unchunk mode
  *
  ******************************************************************************/

@@ -405,13 +405,13 @@ static USBH_StatusTypeDef USBH_ParseDevDesc(USBH_HandleTypeDef *phost, uint8_t *
   {
     /* For 1st time after device connection, Host may issue only 8 bytes for
     Device Descriptor Length  */
-    dev_desc->idVendor           = LE16(buf +  8);
-    dev_desc->idProduct          = LE16(buf + 10);
-    dev_desc->bcdDevice          = LE16(buf + 12);
-    dev_desc->iManufacturer      = *(uint8_t *)(buf + 14);
-    dev_desc->iProduct           = *(uint8_t *)(buf + 15);
-    dev_desc->iSerialNumber      = *(uint8_t *)(buf + 16);
-    dev_desc->bNumConfigurations = *(uint8_t *)(buf + 17);
+    dev_desc->idVendor           = LE16(buf +  8U);
+    dev_desc->idProduct          = LE16(buf + 10U);
+    dev_desc->bcdDevice          = LE16(buf + 12U);
+    dev_desc->iManufacturer      = *(uint8_t *)(buf + 14U);
+    dev_desc->iProduct           = *(uint8_t *)(buf + 15U);
+    dev_desc->iSerialNumber      = *(uint8_t *)(buf + 16U);
+    dev_desc->bNumConfigurations = *(uint8_t *)(buf + 17U);
   }
 
   return status;
@@ -444,21 +444,21 @@ static USBH_StatusTypeDef USBH_ParseCfgDesc(USBH_HandleTypeDef *phost, uint8_t *
 
   pdesc = (USBH_DescHeader_t *)(void *)buf;
 
-  /* Parse configuration descriptor */
-  cfg_desc->bLength             = *(uint8_t *)(buf + 0);
-  cfg_desc->bDescriptorType     = *(uint8_t *)(buf + 1);
-  cfg_desc->wTotalLength        = MIN(((uint16_t) LE16(buf + 2)), ((uint16_t)USBH_MAX_SIZE_CONFIGURATION));
-  cfg_desc->bNumInterfaces      = *(uint8_t *)(buf + 4);
-  cfg_desc->bConfigurationValue = *(uint8_t *)(buf + 5);
-  cfg_desc->iConfiguration      = *(uint8_t *)(buf + 6);
-  cfg_desc->bmAttributes        = *(uint8_t *)(buf + 7);
-  cfg_desc->bMaxPower           = *(uint8_t *)(buf + 8);
-
   /* Make sure that the Configuration descriptor's bLength is equal to USB_CONFIGURATION_DESC_SIZE */
-  if (cfg_desc->bLength != USB_CONFIGURATION_DESC_SIZE)
+  if (pdesc->bLength != USB_CONFIGURATION_DESC_SIZE)
   {
-    cfg_desc->bLength = USB_CONFIGURATION_DESC_SIZE;
+    pdesc->bLength = USB_CONFIGURATION_DESC_SIZE;
   }
+
+  /* Parse configuration descriptor */
+  cfg_desc->bLength             = *(uint8_t *)(buf + 0U);
+  cfg_desc->bDescriptorType     = *(uint8_t *)(buf + 1U);
+  cfg_desc->wTotalLength        = MIN(((uint16_t) LE16(buf + 2U)), ((uint16_t)USBH_MAX_SIZE_CONFIGURATION));
+  cfg_desc->bNumInterfaces      = *(uint8_t *)(buf + 4U);
+  cfg_desc->bConfigurationValue = *(uint8_t *)(buf + 5U);
+  cfg_desc->iConfiguration      = *(uint8_t *)(buf + 6U);
+  cfg_desc->bmAttributes        = *(uint8_t *)(buf + 7U);
+  cfg_desc->bMaxPower           = *(uint8_t *)(buf + 8U);
 
   if (length > USB_CONFIGURATION_DESC_SIZE)
   {
@@ -489,7 +489,8 @@ static USBH_StatusTypeDef USBH_ParseCfgDesc(USBH_HandleTypeDef *phost, uint8_t *
           if (pdesc->bDescriptorType == USB_DESC_TYPE_ENDPOINT)
           {
             /* Check if the endpoint is appartening to an audio streaming interface */
-            if ((pif->bInterfaceClass == 0x01U) && (pif->bInterfaceSubClass == 0x02U))
+            if ((pif->bInterfaceClass == 0x01U) &&
+                ((pif->bInterfaceSubClass == 0x02U) || (pif->bInterfaceSubClass == 0x03U)))
             {
               /* Check if it is supporting the USB AUDIO 01 class specification */
               if ((pif->bInterfaceProtocol == 0x00U) && (pdesc->bLength != 0x09U))
@@ -546,7 +547,7 @@ static void USBH_ParseInterfaceDesc(USBH_InterfaceDescTypeDef *if_descriptor, ui
   if_descriptor->bDescriptorType    = *(uint8_t *)(buf + 1U);
   if_descriptor->bInterfaceNumber   = *(uint8_t *)(buf + 2U);
   if_descriptor->bAlternateSetting  = *(uint8_t *)(buf + 3U);
-  if_descriptor->bNumEndpoints      = *(uint8_t *)(buf + 4U);
+  if_descriptor->bNumEndpoints      = MIN(*(uint8_t *)(buf + 4U), USBH_MAX_NUM_ENDPOINTS);
   if_descriptor->bInterfaceClass    = *(uint8_t *)(buf + 5U);
   if_descriptor->bInterfaceSubClass = *(uint8_t *)(buf + 6U);
   if_descriptor->bInterfaceProtocol = *(uint8_t *)(buf + 7U);

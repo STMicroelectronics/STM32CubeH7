@@ -100,7 +100,7 @@ static void FS_FileOperations(void)
   if(f_mount(&RAMDISKFatFs, (TCHAR const*)RAMDISKPath, 0) == FR_OK)
   {
     
-    /*reate a FAT file system (format) on the logical drive */
+    /*Create a FAT file system (format) on the logical drive */
     if(f_mkfs((TCHAR const*)RAMDISKPath, FM_ANY, 0, work, sizeof work) == FR_OK)
     {      
       /* Create and Open a new text file object with write access */

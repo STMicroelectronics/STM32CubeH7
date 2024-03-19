@@ -34,13 +34,13 @@
 /* RAMECC handler declaration */
 RAMECC_HandleTypeDef hramecc;
 
-__IO uint32_t RAMECC_Error_Detected = 0;
+__IO uint32_t RAMECCSingleErrorDetected = 0U;
+__IO uint32_t RAMECCDoubleErrorDetected = 0U;
 
 /* Private function prototypes -----------------------------------------------*/
 static void CPU_CACHE_Enable(void);
 static void SystemClock_Config(void);
 static void Error_Handler(void);
-static void RAMECC_DetectErrorCallback(RAMECC_HandleTypeDef *hramecc);
 __IO uint32_t CurrentData =0 ;
 /* Private functions ---------------------------------------------------------*/
 
@@ -52,7 +52,6 @@ __IO uint32_t CurrentData =0 ;
 int main(void)
 {
   int32_t timeout, Count = 0;
-
 
   /* System Init, System clock, voltage scaling and L1-Cache configuration are done by CPU1 (Cortex-M7)
      in the meantime Domain D2 is put in STOP mode(Cortex-M4 in deep-sleep)
@@ -113,12 +112,6 @@ int main(void)
 
   /* Initialize the RAMECC peripheral */
   if (HAL_RAMECC_Init(&hramecc) != HAL_OK)
-  {
-    Error_Handler();
-  }
-
-  /* Select Callbacks functions called after single or double error detection */
-  if (HAL_RAMECC_RegisterCallback(&hramecc, RAMECC_DetectErrorCallback) != HAL_OK)
   {
     Error_Handler();
   }
@@ -265,9 +258,19 @@ static void SystemClock_Config(void)
   * @param  hramecc : RAMECC handle
   * @retval None
   */
-static void RAMECC_DetectErrorCallback(RAMECC_HandleTypeDef *hramecc)
+void HAL_RAMECC_DetectErrorCallback(RAMECC_HandleTypeDef *hramecc)
 {
-  RAMECC_Error_Detected++;
+  if ((HAL_RAMECC_GetRAMECCError(hramecc) & HAL_RAMECC_SINGLEERROR_DETECTED)  != 0U)
+  {
+    RAMECCSingleErrorDetected ++;
+  }
+ 
+  if ((HAL_RAMECC_GetRAMECCError(hramecc) & HAL_RAMECC_DOUBLEERROR_DETECTED)  != 0U)
+  {
+    RAMECCDoubleErrorDetected ++;
+  }
+  
+  hramecc->RAMECCErrorCode = HAL_RAMECC_NO_ERROR;
   BSP_LED_On(LED2);
 }
 

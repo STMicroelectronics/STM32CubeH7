@@ -21,9 +21,9 @@
   @endverbatim
 
 @par Application Description
-This application provides sample LED toogling program with execution from external memory.
+This application provides sample LED toggling program with execution from external memory.
 
-This application toggle trun on the LED_RED for 1 second after boot. Then
+This application toggle turn on the LED_RED for 1 second after boot. Then
 toggle the LED_GREEN each 200ms for 20 times and finally reset the microcontroller.
 
 This application provide different configuration with linker files which allows different eXecution schemas

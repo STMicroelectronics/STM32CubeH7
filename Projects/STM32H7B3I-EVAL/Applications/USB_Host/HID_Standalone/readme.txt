@@ -39,7 +39,7 @@ internally a 48-MHz clock which is coming from PLL3.
 In the High Speed (HS) mode the USB clock (60 MHz) is driven by the ULPI.
 
 When the application is started, the connected HID device (Mouse/Keyboard) is detected in HID mode and 
-gets initialized. This application is based on interacting with a HID device (Mouse/Keyboard) trough a HID routine.
+gets initialized. This application is based on interacting with a HID device (Mouse/Keyboard) through a HID routine.
 
 The STM32 MCU behaves as a HID Host, it enumerates the device and extracts VID, PID, 
 manufacturer name, Serial number and product name information and displays it on The UART Hyperterminal.
@@ -126,7 +126,7 @@ Connectivity, USB_Host, USB, HID, Human Interface, Full Speed, High Speed, Mouse
     and development board.
 
   - STM32H7B3I-EVAL Set-up
-    - Plug the USB key into the STM32H7B3I-EVAL board through 'USB micro A-Male
+    - Plug the Mouse/Keyboard into the STM32H7B3I-EVAL board through 'USB micro A-Male
       to A-Female' cable to the connector:
       - CN8 : to use USB High speed (HS), Make sure that JP9, JP11 and JP19 are fitted in USBHS position and that JP10 and JP16 are fitted.
       - CN27: to use USB High speed OTG IP in full speed (HS_IN_FS)

@@ -48,9 +48,9 @@ uint32_t uhPrescalerValue = 0;
 uint32_t Request_received = 0 ;
 uint32_t data_cmp = 0 ;
 uint32_t i;
-uint32_t PSSI_HAL_PSSI_TransmitComplete_count = 0;
-uint32_t PSSI_HAL_PSSI_ReceiveComplete_count = 0;
-uint32_t PSSI_HAL_PSSI_ErrorCallback_count = 0;
+__IO uint32_t PSSI_HAL_PSSI_TransmitComplete_count = 0;
+__IO uint32_t PSSI_HAL_PSSI_ReceiveComplete_count = 0;
+__IO uint32_t PSSI_HAL_PSSI_ErrorCallback_count = 0;
 
 #ifndef MASTER_BOARD
 ALIGN_32BYTES (char     pData8_S_TRSMT[64] ="Hello from Slave");  /* Data to transmit from Slave */

@@ -110,7 +110,7 @@ In order to load this example to the external memory:
       - Run & debug the program:
       - For an XiP configuration (eXecute in Place from QSPI):
           - Using EWARM or MDK-ARM : Load project image from the IDE: Project->Debug
-          - Using SW4STM32 :
+          - Using STM32CubeIDE  :
             - Open the STM32CubeProgrammer tool
             - Select the QSPI external flash loader "MT25TL01G_STM32H750B-DISCO" in case of XiP from QSPI
             - From Erasing & Programming menu, browse and open the output binary file relative to your application
