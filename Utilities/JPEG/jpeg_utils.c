@@ -1134,7 +1134,8 @@ static uint32_t JPEG_MCU_YCbCr420_ARGB_ConvertBlocks(uint8_t *pInBuffer,
   
   numberMCU = DataCount / YCBCR_420_BLOCK_SIZE;
   currentMCU = BlockIndex;
-  
+
+  *ConvertedDataCount = numberMCU * JPEG_ConvertorParams.BlockSize;
 
   while(currentMCU < (numberMCU + BlockIndex))
   {
@@ -1319,6 +1320,7 @@ static uint32_t JPEG_MCU_YCbCr422_ARGB_ConvertBlocks(uint8_t *pInBuffer,
   numberMCU = DataCount / YCBCR_422_BLOCK_SIZE;
   currentMCU = BlockIndex;
   
+  *ConvertedDataCount = numberMCU * JPEG_ConvertorParams.BlockSize;
 
   while(currentMCU < (numberMCU + BlockIndex))
   {
@@ -1450,6 +1452,7 @@ static uint32_t JPEG_MCU_YCbCr444_ARGB_ConvertBlocks(uint8_t *pInBuffer,
   numberMCU = DataCount / YCBCR_444_BLOCK_SIZE;
   currentMCU = BlockIndex;
   
+  *ConvertedDataCount = numberMCU * JPEG_ConvertorParams.BlockSize;
 
   while(currentMCU < (numberMCU + BlockIndex))
   {
@@ -1553,6 +1556,8 @@ static uint32_t JPEG_MCU_Gray_ARGB_ConvertBlocks(uint8_t *pInBuffer,
   numberMCU = DataCount / GRAY_444_BLOCK_SIZE;
   currentMCU = BlockIndex;
   
+  *ConvertedDataCount = numberMCU * JPEG_ConvertorParams.BlockSize;
+  
   while(currentMCU < (numberMCU + BlockIndex))
   {
     xRef = ((currentMCU *8) / JPEG_ConvertorParams.WidthExtend)*8;
@@ -1631,6 +1636,7 @@ static uint32_t JPEG_MCU_YCCK_ARGB_ConvertBlocks(uint8_t *pInBuffer,
   numberMCU = DataCount / CMYK_444_BLOCK_SIZE;
   currentMCU = BlockIndex;
   
+  *ConvertedDataCount = numberMCU * JPEG_ConvertorParams.BlockSize;
 
   while(currentMCU < (numberMCU + BlockIndex))
   {
