@@ -2,7 +2,7 @@
   @page LwIP_TCP_Echo_Client LwIP TCP Echo Client Application
 
   @verbatim
-  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  ******************************************************************************
   * @file    LwIP/LwIP_TCP_Echo_Client/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the LwIP TCP Echo Client Application.

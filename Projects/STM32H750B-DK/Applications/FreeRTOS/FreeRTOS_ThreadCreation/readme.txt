@@ -2,7 +2,7 @@
   @page FreeRTOS_ThreadCreation FreeRTOS Thread Creation application
 
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    FreeRTOS/FreeRTOS_ThreadCreation/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the FreeRTOS Thread Creation application with execution from external memory

@@ -2,7 +2,7 @@
   @page TIM_Combined TIM combined example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  ******************************************************************************
   * @file    TIM/TIM_Combined/readme.txt 
   * @author  MCD Application Team
   * @brief   TIM Combined Example Description.

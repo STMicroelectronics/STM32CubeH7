@@ -2,7 +2,7 @@
   @page OTFDEC_ExecutingCryptedInstruction Description of OTFDEC Executing Crypetd Instruction example
 
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    OTFDEC_ExecutingCryptedInstruction/readme.txt
   * @author  MCD Application Team
   * @brief   This example describes how to execute an encrypted instruction located on the OCTOSPI external flash using the OTFDEC peripheral.

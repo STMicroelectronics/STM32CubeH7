@@ -2,7 +2,7 @@
   @page Crypto_Selftest Selftest Application
 
   @verbatim
-  ******************** (C) COPYRIGHT 2020 STMicroelectronics *******************
+  ******************************************************************************
   * @file    mbedTLS/Crypto_Selftest/readme.txt
   * @author  MCD Application Team
   * @brief   This application runs crypto through mbed TLS selftest functions.

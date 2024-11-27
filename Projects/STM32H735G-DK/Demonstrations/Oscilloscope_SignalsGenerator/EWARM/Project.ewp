@@ -78,7 +78,7 @@
                 </option>
                 <option>
                     <name>OGChipSelectEditMenu</name>
-                    <state>STM32H735IG	ST STM32H735IG</state>
+                    <state>STM32H735G-DK	ST STM32H735G-DK</state>
                 </option>
                 <option>
                     <name>GenLowLevelInterface</name>
@@ -138,7 +138,7 @@
                 </option>
                 <option>
                     <name>GFPUDeviceSlave</name>
-                    <state>STM32H735IG	ST STM32H735IG</state>
+                    <state>STM32H735G-DK	ST STM32H735G-DK</state>
                 </option>
                 <option>
                     <name>FPU2</name>
@@ -224,6 +224,7 @@
                 </option>
                 <option>
                     <name>CCDefines</name>
+                    <state>USE_PWR_DIRECT_SMPS_SUPPLY</state>
                     <state>USE_HAL_DRIVER</state>
                     <state>STM32H735xx</state>
                     <state>CORE_CM7</state>
@@ -660,7 +661,7 @@
                 </option>
                 <option>
                     <name>OOCOutputFile</name>
-                    <state>$PROJ_DIR$\..\Binary\Oscilloscope_SignalsGenerator-STM32H735G-DK_OoB_V1.0.0.hex</state>
+                    <state>$PROJ_DIR$\..\Binary\Oscilloscope_SignalsGenerator-STM32H735G-DK_OoB_V1.1.0.hex</state>
                 </option>
                 <option>
                     <name>OOCCommandLineProducer</name>
@@ -1099,6 +1100,12 @@
                 </file>
                 <file>
                     <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\Components\ft5336\ft5336_reg.c</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\Components\gt911\gt911.c</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\Components\gt911\gt911_reg.c</name>
                 </file>
                 <file>
                     <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\Components\mx25lm51245g\mx25lm51245g.c</name>

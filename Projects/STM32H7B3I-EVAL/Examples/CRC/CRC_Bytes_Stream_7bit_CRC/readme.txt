@@ -2,7 +2,7 @@
   @page CRC_Bytes_Stream_7bit_CRC  Bytes Buffers 7-bit CRC Computation Example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    CRC/CRC_Bytes_Stream_7bit_CRC/readme.txt 
   * @author  MCD Application Team
   * @brief   7-bit long CRC computation from bytes (8-bit data) buffers.

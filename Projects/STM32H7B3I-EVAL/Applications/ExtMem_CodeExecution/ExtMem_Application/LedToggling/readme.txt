@@ -2,7 +2,7 @@
   @page LedToggling Led toggling Application
 
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    ExtMem_CodeExecution/ExtMem_Application/LedToggling/readme.txt
   * @author  MCD Application Team
   * @brief   Description of Led Toggling application with execution from external memory

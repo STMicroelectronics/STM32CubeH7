@@ -2,7 +2,7 @@
   @page Demo   STM32H743I-EVAL SplashScreen Demonstration Firmware
  
   @verbatim
-  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  ******************************************************************************
   * @file    Demonstration/readme.txt 
   * @author  MCD Application Team 
   * @brief   Description of STM32H743I-EVAL SplashScreen Demonstration Binary

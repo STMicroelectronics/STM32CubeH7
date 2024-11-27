@@ -2,7 +2,7 @@
   @page RAMECC_ErrorCount RAMECC Error Count Example 
   
   @verbatim
-  ******************** (C) COPYRIGHT 2018 STMicroelectronics *******************
+  ******************************************************************************
   * @file    RAMECC/RAMECC_ErrorCount/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the RAMECC AXI-SRAM Error Count example.

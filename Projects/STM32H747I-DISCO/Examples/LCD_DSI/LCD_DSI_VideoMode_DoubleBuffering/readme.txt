@@ -2,7 +2,7 @@
   @page LCD_DSI_VideoMode_DoubleBuffering : LCD DSI examples in DSI mode Video Burst
 
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    LCD_DSI/LCD_DSI_VideoMode_DoubleBuffering/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the LCD DSI in mode video burst example.
@@ -81,6 +81,10 @@ while 'front_buffer' pointer is used to select image to display in front buffer.
 
 @note The application need to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
+
+@Note: The STM32H747I-DISCO board uses an LCD display in landscape mode with a 45° tearing effect
+       limitation during the transition between the first and second images. To avoid this limitation,
+       we suggest using an adapted DSI command mode with a left/right refresh technique
 
 @par Keywords
 

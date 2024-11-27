@@ -2,7 +2,7 @@
   @page LTDC_Paint LTDC Paint application
   
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    Display/LTDC_Paint/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the LTDC Paint application.

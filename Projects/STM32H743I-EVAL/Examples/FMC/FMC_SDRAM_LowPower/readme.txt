@@ -2,7 +2,7 @@
   @page FMC_SDRAM_LowPower SDRAM memory functionalities example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  ******************************************************************************
   * @file    FMC/FMC_SDRAM_LowPower/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the FMC_SDRAM_LowPower example.

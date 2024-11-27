@@ -313,7 +313,6 @@ USBH_StatusTypeDef USBH_MSC_SCSI_RequestSense(USBH_HandleTypeDef *phost,
           USBH_UsrLog("MSC Device MEDIUM not present");
           error = USBH_UNRECOVERED_ERROR;
         }
-
       }
       break;
 

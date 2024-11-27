@@ -2,7 +2,7 @@
   @page ADC_DMA_Transfer ADC DMA Transfer example
 
   @verbatim
-  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  ******************************************************************************
   * @file    ADC/ADC_DMA_Transfer/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the ADC DMA Transfer example.

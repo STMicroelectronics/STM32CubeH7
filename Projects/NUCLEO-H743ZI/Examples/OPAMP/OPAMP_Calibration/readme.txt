@@ -1,7 +1,7 @@
 /**
   @page OPAMP_Calibration example
   @verbatim
-  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  ******************************************************************************
   * @file    OPAMP/OPAMP_CALIBRATION/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the OPAMP calibration example.

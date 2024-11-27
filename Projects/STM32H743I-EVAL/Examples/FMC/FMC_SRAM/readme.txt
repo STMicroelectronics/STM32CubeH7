@@ -2,7 +2,7 @@
   @page FMC_SRAM FMC SRAM memory basic functionalities use example
 
   @verbatim
-  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  ******************************************************************************
   * @file    FMC/FMC_SRAM/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the FMC SRAM example.

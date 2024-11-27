@@ -2,7 +2,7 @@
   @page FatFs_SDRAMDisk   FatFs with SDRAM disk drive application
   
   @verbatim
-  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  ******************************************************************************
   * @file    FatFs/FatFs_SDRAMDisk/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the FatFs with SDRAM disk drive application

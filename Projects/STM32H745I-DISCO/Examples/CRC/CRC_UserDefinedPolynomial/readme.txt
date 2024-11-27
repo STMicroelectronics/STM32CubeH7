@@ -2,7 +2,7 @@
   @page CRC_UserDefinedPolynomial User-defined generating polynomial CRC Example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    CRC/CRC_UserDefinedPolynomial/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of CRC Example with user-defined generating polynomial.

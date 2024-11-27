@@ -2,7 +2,7 @@
   @page AUDIO_Standalone USB Host AUDIO application
 
   @verbatim
-  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  ******************************************************************************
   * @file    USB_Host/AUDIO_Standalone/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the USB Host AUDIO application.

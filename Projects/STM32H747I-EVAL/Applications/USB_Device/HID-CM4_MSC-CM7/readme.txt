@@ -2,7 +2,7 @@
   @page HID-CM4_MSC-CM7  Dual USBD instances using USBD FS on CM4 and USBD HS on CM7
   
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    Applications/USB_Device/HID-CM4_MSC-CM7
   * @author  MCD Application Team
   * @brief   Description of the HID-CM4_MSC-CM7 application.

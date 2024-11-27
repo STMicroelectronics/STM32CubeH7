@@ -2,7 +2,7 @@
   @page LedToggling Led Toggling Application
   
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    LedToggling/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the GPIO IO Toggle example.

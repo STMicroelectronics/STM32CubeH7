@@ -2,7 +2,7 @@
   @page PWR_STOP_RTC Power Stop Mode Example 
   
   @verbatim
-  ******************** (C) COPYRIGHT 2018 STMicroelectronics *******************
+  ******************************************************************************
   * @file    PWR/PWR_STOP_RTC/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the Power Stop Mode using RTC example.

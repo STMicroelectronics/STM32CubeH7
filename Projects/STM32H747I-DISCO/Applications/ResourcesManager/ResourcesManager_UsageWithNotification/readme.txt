@@ -2,7 +2,7 @@
   @page ResourcesManager_UsageWithNotification ResourcesManager SharedResources application
   
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    ResourcesManager/ResourcesManager_UsageWithNotification/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the ResourcesManager UsagewithNotification application application.

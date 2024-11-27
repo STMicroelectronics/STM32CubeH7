@@ -2,7 +2,7 @@
   @page LPTIM_PWM_LSE LPTIM PWM Low Power example with LSE clock source
 
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    LPTIM/LPTIM_PWM_LSE/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the LPTIM PWM LSE example

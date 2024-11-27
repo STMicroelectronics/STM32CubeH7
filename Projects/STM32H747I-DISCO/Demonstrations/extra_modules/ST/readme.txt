@@ -2,7 +2,7 @@
   @page ST
   
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    STM32H747I-DISCO/Demonstrations/extra_modules/ST/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the extra_modules.

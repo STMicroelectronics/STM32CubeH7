@@ -2,7 +2,7 @@
   @page FreeRTOS_AMP_RTOS_BareMetal FreeRTOS Baremetal Multicore processing application
 
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    FreeRTOS/FreeRTOS_AMP_RTOS_BareMetal/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the FreeRTOS AMP RTOS BareMetal application.

@@ -2,7 +2,7 @@
   @page UART_WakeUpFromStopUsingFIFO  wake up from STOP mode using UART FIFO level example
 
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    UART/UART_WakeUpFromStopUsingFIFO/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the wake up from STOP mode using UART FIFO level example.

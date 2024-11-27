@@ -2,7 +2,7 @@
   @page LPUART_WakeUpFromStop LPUART Wake up from Stop mode example
 
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    UART/LPUART_WakeUpFromStop/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the LPUART-triggered MCU wake-up from STOP mode.

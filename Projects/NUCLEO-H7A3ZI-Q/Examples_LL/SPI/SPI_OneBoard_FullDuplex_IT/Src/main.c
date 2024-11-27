@@ -470,8 +470,6 @@ uint8_t Buffercmp8(uint8_t* pBuffer1, uint8_t* pBuffer2, uint8_t BufferLength)
   */
 static void SystemClock_Config(void)
 {
-  /* Power Configuration */
-  LL_PWR_ConfigSupply(LL_PWR_DIRECT_SMPS_SUPPLY);
   LL_PWR_SetRegulVoltageScaling(LL_PWR_REGU_VOLTAGE_SCALE0);
   while (LL_PWR_IsActiveFlag_VOS() == 0)
   {

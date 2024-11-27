@@ -2,7 +2,7 @@
   @page PWR_STOP_DataRetain example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  ******************************************************************************
   * @file    PWR/PWR_STOP_DataRetain/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the SRAM Data retain in STOP mode example.

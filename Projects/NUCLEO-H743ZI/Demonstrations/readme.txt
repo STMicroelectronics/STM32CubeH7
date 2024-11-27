@@ -2,7 +2,7 @@
   @page Demonstrations Demonstrations NUCLEO-H743ZI
 
   @verbatim
-  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  ******************************************************************************
   * @file    Demonstrations/readme.txt
   * @author  MCD Application Team
   * @brief   Description of STM32H7xx-Nucleo Demo

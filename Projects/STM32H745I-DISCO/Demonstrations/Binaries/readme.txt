@@ -2,7 +2,7 @@
   @page Demo   STM32H745I-DISCO Demonstration Firmware
  
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    Demonstrations/Binary/readme.txt 
   * @author  MCD Application Team 
   * @brief   Description of STM32H745I-DISCO Demonstration Binary

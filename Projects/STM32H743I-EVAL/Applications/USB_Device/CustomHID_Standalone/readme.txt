@@ -2,7 +2,7 @@
   @page CustomHID_Standalone USB Device Custom HID application
   
   @verbatim
-  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  ******************************************************************************
   * @file    USB_Device/CustomHID_Standalone/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the USB Custom HID application.

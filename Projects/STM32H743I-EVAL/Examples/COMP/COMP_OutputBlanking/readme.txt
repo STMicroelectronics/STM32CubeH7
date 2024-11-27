@@ -2,7 +2,7 @@
   @page COMP_OutputBlanking COMP output blanking example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  ******************************************************************************
   * @file    COMP/COMP_OutputBlanking/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the COMP output blanking Example

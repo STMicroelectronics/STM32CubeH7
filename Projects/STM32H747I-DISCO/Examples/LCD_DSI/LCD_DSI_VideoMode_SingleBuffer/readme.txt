@@ -2,7 +2,7 @@
   @page LCD_DSI_VideoMode_SingleBuffer : LCD DSI examples in DSI mode Video Burst
 
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    LCD_DSI/LCD_DSI_VideoMode_SingleBuffer/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the LCD DSI in mode video burst example.

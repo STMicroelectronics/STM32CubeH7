@@ -2,7 +2,7 @@
   @page LTDC_Display_1Layer LTDC Display Layer 1 example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  ******************************************************************************
   * @file    LTDC/LTDC_Display_1Layer/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the LTDC Display 1 layer example.

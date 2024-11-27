@@ -2,7 +2,7 @@
   @page CRYP_TDESModes  TDES ECB/CBC Example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  ******************************************************************************
   * @file    CRYP/CRYP_TDESModes/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the CRYP TDES encryption/decryption mode

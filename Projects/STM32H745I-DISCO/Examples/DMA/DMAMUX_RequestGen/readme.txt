@@ -2,7 +2,7 @@
   @page DMAMUX_RequestGen DMA & DMAMUX request generator Example
 
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    DMA/DMAMUX_RequestGen/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the DMA & DMAMUX request generator Example.

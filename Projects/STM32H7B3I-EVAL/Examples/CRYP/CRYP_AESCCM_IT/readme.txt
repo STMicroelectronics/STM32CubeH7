@@ -2,7 +2,7 @@
   @page CRYP_AESCCM_IT  AES CCM  Example using IT
   
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    CRYP/CRYP_AES_CCM_IT/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the CRYP AES CCM encryption/decryption and TAG 

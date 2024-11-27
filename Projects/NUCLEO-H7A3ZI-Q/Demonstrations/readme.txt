@@ -2,7 +2,7 @@
   @page Demonstrations   Demonstrations NUCLEO-H7A3ZI-Q
 
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    Demonstrations/readme.txt
   * @author  MCD Application Team
   * @brief   Description of STM32H7xx-Nucleo Demo

@@ -2,7 +2,7 @@
   @page FreeRTOS_HwSemaphoreCoreSync HSEM Core Notification application
   
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    FreeRTOS/FreeRTOS_HwSemaphoreCoreSync/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the FreeRTOS HwSemaphore CoreSync application.

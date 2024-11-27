@@ -2,7 +2,7 @@
   @page FLASH_SwapBank  FLASH Swap Bank example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  ******************************************************************************
   * @file    FLASH/FLASH_SwapBank/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the FLASH Swap Bank example.

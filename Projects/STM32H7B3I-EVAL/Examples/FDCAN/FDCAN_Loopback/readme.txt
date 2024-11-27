@@ -2,7 +2,7 @@
   @page FDCAN_Loopback FDCAN Loopback example
 
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    FDCAN/FDCAN_Loopback/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the FDCAN_Loopback example.

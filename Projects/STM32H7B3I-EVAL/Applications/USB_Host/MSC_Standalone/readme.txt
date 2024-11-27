@@ -2,7 +2,7 @@
   @page MSC_Standalone USB Host Mass Storage (MSC) application
 
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    USB_Host/MSC_Standalone/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the USB Host MSC application.

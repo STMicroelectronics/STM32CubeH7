@@ -2,7 +2,7 @@
   @page UART_HyperTerminal_IT UART Hyperterminal IT example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  ******************************************************************************
   * @file    UART/UART_HyperTerminal_IT/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the UART Hyperterminal IT example.

@@ -1,7 +1,7 @@
 /**
   @page BSP Description of the BSP example
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    Examples/BSP/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the BSP example.

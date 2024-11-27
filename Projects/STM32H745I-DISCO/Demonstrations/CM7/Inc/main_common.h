@@ -57,10 +57,10 @@
 
    Note that the Board HW configuration must match with the FW config
    if not will face a deadlock (can't connect the board any more)
-   the FW PWR configuration correspond in the main_menu.c to the following :
-   Function SystemClock_Config :
-     - case of LDO config : HAL_PWREx_ConfigSupply(PWR_LDO_SUPPLY);
-     - case of Direct SMPS config : HAL_PWREx_ConfigSupply(PWR_DIRECT_SMPS_SUPPLY);
+   The FW PWR configuration corresponds to the following:
+   Compilation switch: :
+     - In the case of LDO config: Add "USE_PWR_LDO_SUPPLY" define in the toolchain preprocessor settings.
+     - In the case of Direct SMPS config: Add "USE_PWR_DIRECT_SMPS_SUPPLY" define in the toolchain preprocessor settings.
 
    BOARD_HW_CONFIG_IS_LDO and BOARD_HW_CONFIG_IS_DIRECT_SMPS defines are used to confirm the
    board HW settings :

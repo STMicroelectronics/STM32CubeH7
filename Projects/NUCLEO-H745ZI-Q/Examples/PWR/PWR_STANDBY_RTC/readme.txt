@@ -2,7 +2,7 @@
   @page PWR_STANDBY_RTC Power STANDBY Mode wakeup on RTC event Example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2018 STMicroelectronics *******************
+  ******************************************************************************
   * @file    PWR/PWR_STANDBY_RTC/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the Power Standby Mode wakeup on RTC event example.

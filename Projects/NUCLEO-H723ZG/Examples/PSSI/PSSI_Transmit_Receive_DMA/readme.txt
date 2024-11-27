@@ -2,7 +2,7 @@
   @page PSSI_Transmit_Receive_DMA example
 
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    PSSI/PSSI_Transmit_Receive_DMA/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the PSSI_Transmit_Receive_DMA example.
@@ -35,7 +35,7 @@ D2  Pin: PC8 (CN12 PIN2)
 D3  Pin: PC9 (CN12 PIN1)
 D4  Pin: PC11 (CN11 PIN2)
 D5  Pin: PD3 (CN11 PIN40)
-D6  Pin: PB8 (CN12 PIN10)
+D6  Pin: PB8 (CN12 PIN3)
 D7  Pin: PB9 (CN12 PIN5)
 Clk Pin: PA6 (CN12 PIN13)
 DE  Pin: PA4 (CN7 PIN17)

@@ -2,7 +2,7 @@
   @page IWDG_WindowMode IWDG Reset with window mode
 
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    IWDG/IWDG_WindowMode/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the IWDG reset with window mode.

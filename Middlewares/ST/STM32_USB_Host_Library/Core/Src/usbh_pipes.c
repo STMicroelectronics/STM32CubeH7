@@ -90,6 +90,21 @@ USBH_StatusTypeDef USBH_OpenPipe(USBH_HandleTypeDef *phost, uint8_t pipe_num,
   return USBH_OK;
 }
 
+#if defined (USBH_IN_NAK_PROCESS) && (USBH_IN_NAK_PROCESS == 1U)
+/**
+  * @brief  USBH_ActivatePipe
+  *         Activate a pipe
+  * @param  phost: Host Handle
+  * @param  pipe_num: Pipe Number
+  * @retval USBH Status
+  */
+USBH_StatusTypeDef USBH_ActivatePipe(USBH_HandleTypeDef *phost, uint8_t pipe_num)
+{
+  USBH_LL_ActivatePipe(phost, pipe_num);
+
+  return USBH_OK;
+}
+#endif /* defined (USBH_IN_NAK_PROCESS) && (USBH_IN_NAK_PROCESS == 1U) */
 
 /**
   * @brief  USBH_ClosePipe

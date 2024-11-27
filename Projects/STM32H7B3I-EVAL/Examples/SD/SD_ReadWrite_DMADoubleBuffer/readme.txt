@@ -2,7 +2,7 @@
   @page SD_ReadWrite_DMADoubleBuffer Description of the SD_ReadWrite_DMADoubleBuffer example
 
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    SD/SD_ReadWrite_SD_ReadWrite_DMADoubleBuffer/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the SD read and write multi buffer with internal DMA example.

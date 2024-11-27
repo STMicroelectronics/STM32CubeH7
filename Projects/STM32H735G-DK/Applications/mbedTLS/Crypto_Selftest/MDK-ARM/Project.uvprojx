@@ -336,7 +336,7 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define>USE_HAL_DRIVER,STM32H735xx,MBEDTLS_CONFIG_FILE=&lt;mbedtls_config.h&gt;,USE_LCD</Define>
+              <Define>USE_HAL_DRIVER,USE_PWR_DIRECT_SMPS_SUPPLY,STM32H735xx,MBEDTLS_CONFIG_FILE=&lt;mbedtls_config.h&gt;,USE_LCD</Define>
               <Undefine></Undefine>
               <IncludePath>../Inc;../../../../../../Drivers/BSP/STM32H735G-DK;../../../../../../Drivers/CMSIS/Include;../../../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../../../../../../Drivers/STM32H7xx_HAL_Driver/Inc;../../../../../../Drivers/BSP/Components/Common;../../../../../../Utilities/Fonts;../../../../../../Utilities/CPU;../../../../../../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F;../../../../../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS;../../../../../../Middlewares/Third_Party/FreeRTOS/Source/include;../../../../../../Middlewares/Third_Party/FreeRTOS/Source;../../../../../../Middlewares/Third_Party/mbedTLS/include;../../../../../../Middlewares/Third_Party/mbedTLS/include;../../../../../../Drivers/BSP/Components;../../../../../../Drivers/BSP/Components/Common;../../../../../../Utilities;../../../../../../Utilities/Lcd_Trace;../../../../../../Drivers/CMSIS/Include</IncludePath>
             </VariousControls>
@@ -486,6 +486,21 @@
               <FileName>ft5336_reg.c</FileName>
               <FileType>1</FileType>
               <FilePath>../../../../../../Drivers/BSP/Components/ft5336/ft5336_reg.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Drivers/BSP/Components/GT911</GroupName>
+          <Files>
+            <File>
+              <FileName>gt911.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../../../../../../Drivers/BSP/Components/gt911/gt911.c</FilePath>
+            </File>
+            <File>
+              <FileName>gt911_reg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../../../../../../Drivers/BSP/Components/gt911/gt911_reg.c</FilePath>
             </File>
           </Files>
         </Group>

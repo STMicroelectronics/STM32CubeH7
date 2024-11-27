@@ -2,7 +2,7 @@
   @page EmbeddedWizard STM32H7B3I-DK Embedded Wizard GUI Demonstration Firmware
  
   @verbatim
-  *********************** (C) COPYRIGHT 2019 TARA Systems **********************
+  ******************************************************************************
   * @file    readme.txt 
   * @author  TARA Systems
   * @brief   Description of STM32H7B3I-DK GUI Demonstration

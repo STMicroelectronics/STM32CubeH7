@@ -2,7 +2,7 @@
   @page FWupgrade_Standalone Description of the binary file
   
   @verbatim
-  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  ******************************************************************************
   * @file    USB_Host/FWupgrade_Standalone/Binary/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the binary file.

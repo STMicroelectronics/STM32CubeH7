@@ -2,7 +2,7 @@
   @page TIM_Asymetric TIM Asymetric example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  ******************************************************************************
   * @file    TIM/TIM_Asymetric/readme.txt 
   * @author  MCD Application Team
   * @brief   TIM Asymetric Example Description.

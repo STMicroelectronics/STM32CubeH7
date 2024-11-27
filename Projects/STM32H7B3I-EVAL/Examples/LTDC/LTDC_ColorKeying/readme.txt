@@ -2,7 +2,7 @@
   @page LTDC_ColorKeying LTDC Color Keying example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2018 STMicroelectronics *******************
+  ******************************************************************************
   * @file    LTDC/LTDC_ColorKeying/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the LTDC Color Keying example.

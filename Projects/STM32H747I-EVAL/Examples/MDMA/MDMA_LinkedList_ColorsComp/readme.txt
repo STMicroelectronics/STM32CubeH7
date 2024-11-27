@@ -2,7 +2,7 @@
   @page MDMA_LinkedList_ColorsComp MDMA linked list for colors decomposing example description
   
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    MDMA/MDMA_LinkedList_ColorsComp/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the MDMA Linked List Colors Comp example.

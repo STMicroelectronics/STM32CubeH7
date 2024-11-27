@@ -2,7 +2,7 @@
   @page BSP Example on how to use the BSP drivers
   
   @verbatim
-  ******************** (C) COPYRIGHT 2018 STMicroelectronics *******************
+  ******************************************************************************
   * @file    Examples/BSP/readme.txt 
   * @author  MCD Application Team
   * @brief   Description NUCLEO-H745ZI-Q BSP example.

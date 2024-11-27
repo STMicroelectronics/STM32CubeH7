@@ -534,8 +534,6 @@ void Handle_I2C_Master(void)
   */
 static void SystemClock_Config(void)
 {
-  /* Power Configuration */
-  LL_PWR_ConfigSupply(LL_PWR_LDO_SUPPLY);
   LL_PWR_SetRegulVoltageScaling(LL_PWR_REGU_VOLTAGE_SCALE0);
   while (LL_PWR_IsActiveFlag_VOS() == 0)
   {

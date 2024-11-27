@@ -2,7 +2,7 @@
   @page MDMA_LinkedList MDMA linked list transfer Example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  ******************************************************************************
   * @file    MDMA/ MDMA_LinkedList /readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the MDMA linked list transfer Example.

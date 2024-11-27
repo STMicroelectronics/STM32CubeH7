@@ -2,7 +2,7 @@
   @page FreeRTOS_SemaphoreFromISR FreeRTOS semaphore from ISR application
  
   @verbatim
-  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  ******************************************************************************
   * @file    FreeRTOS/FreeRTOS_SemaphoreFromISR/readme.txt
   * @author  MCD Application Team 
   * @brief   Description of the FreeRTOS semaphore from ISR application.

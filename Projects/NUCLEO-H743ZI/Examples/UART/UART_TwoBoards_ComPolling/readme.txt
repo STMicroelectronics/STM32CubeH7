@@ -2,7 +2,7 @@
   @page UART_TwoBoards_ComPolling UART TwoBoards Communication Polling example
 
   @verbatim
-  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  ******************************************************************************
   * @file    UART/UART_TwoBoards_ComPolling/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the UART Two Boards Communication Polling example.

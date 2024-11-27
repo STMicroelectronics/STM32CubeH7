@@ -2,7 +2,7 @@
   @page OTFDEC_DataDecrypt OTFDEC Data Decryption example
 
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    OTFDEC/OTFDEC_DataDecrypt/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the Templates example.

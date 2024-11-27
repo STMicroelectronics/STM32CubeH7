@@ -2,7 +2,7 @@
   @page FreeRTOS_Mail FreeRTOS Mail Application
  
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    FreeRTOS/FreeRTOS_Mail/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the FreeRTOS Mail example.

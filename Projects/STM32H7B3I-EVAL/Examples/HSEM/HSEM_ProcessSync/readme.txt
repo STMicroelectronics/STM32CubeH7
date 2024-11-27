@@ -2,7 +2,7 @@
   @page HSEM_ProcessSync HSEM process Sync example
 
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    HSEM/HSEM_ProcessSync/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the HSEM Process Sync example.

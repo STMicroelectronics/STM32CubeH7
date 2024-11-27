@@ -1,11 +1,17 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html><head></head>
-<body><font color="blue"><b><u>STM32CubeH7 Firmware Package V1.11.0 / 04-November-2022</u></b></font><br>
+<body><font color="blue"><b><u>STM32CubeH7 Firmware Package V1.12.0 / 30-October-2024</u></b></font><br>
 <br>
 <b><u>Main Changes</u></b><br>
 
 
 
-<ul style="font-family: Verdana;"><li class="MsoNormal" style="margin-top: 4.5pt; margin-bottom: 4.5pt; color: black;"><small>Maintenance release</small></li><li class="MsoNormal" style="margin-top: 4.5pt; margin-bottom: 4.5pt; color: black;"><small>General updates to fix known defects and implementation enhancements</small></li><li class="MsoNormal" style="margin-top: 4.5pt; margin-bottom: 4.5pt; color: black;"><small>Deploy the support of STM32CubeIDE toolchain on all projects</small></li><ul><li class="MsoNormal" style="margin-top: 4.5pt; margin-bottom: 4.5pt; color: black;"><small>SW4STM32 toolchain support is discontinued<br></small></li></ul><li class="MsoNormal" style="margin-top: 4.5pt; margin-bottom: 4.5pt; color: black;"><small>Update to support USB Device V2.11.1, and USB Host v3.5.0</small><span style="font-size: 12pt; font-family: &quot;Times New Roman&quot;,&quot;serif&quot;; color: black;"><o:p></o:p></span></li></ul>
-<p class="MsoNormal" style="margin: 4.5pt 0cm 4.5pt 67.65pt; text-indent: -18pt; line-height: normal;"><span style="font-size: 12pt; font-family: &quot;Times New Roman&quot;,&quot;serif&quot;; color: black;"><o:p></o:p></span></p>
-</body></html>
+<ul><li>General updates to fix known defects and enhancements implementation.</li><li>Add new <strong>HAL SDIO driver</strong>.</li><li>Update <strong>USB Host</strong> library to new version <strong>V3.5.3</strong></li><li>Update <strong>mbedTLS</strong> library to new version <strong>v2.16.2 (ST modified 20241010)</strong></li><li><strong>One change done on the CMSIS Device may require an update on the application code based on CMSIS Device V1.10.5</strong>
+<ul><li>Update to enhance <strong>RAM(DTCM) reliability</strong>. Below the update to be done on user application:
+<ul><li>Refer to the new startup and system_stm32h7xx.c template files from 
+CMSIS device (Drivers/CMSIS/Device/ST/STM32H7xx/Source/Templates).</li><li>Define your system power supply configuration in the toolchain compiler preprocessor:
+<ul><li><strong>USE_PWR_DIRECT_SMPS_SUPPLY</strong> : The SMPS supplies the Vcore Power Domains. The LDO is Bypassed.</li><li><strong>USE_PWR_SMPS_1V8_SUPPLIES_LDO</strong> : The SMPS 1.8V output supplies the LDO. The Vcore Power Domain are supplied from the LDO.</li><li><strong>USE_PWR_SMPS_2V5_SUPPLIES_LDO</strong> : The SMPS 2.5V output supplies the LDO. The Vcore Power Domain are supplied from the LDO.</li><li><strong>USE_PWR_SMPS_1V8_SUPPLIES_EXT_AND_LDO</strong> : The SMPS 1.8V output supplies external circuits and the LDO. The Vcore Power Domains are supplied from the LDO.</li><li><strong>USE_PWR_SMPS_2V5_SUPPLIES_EXT_AND_LDO</strong> : The SMPS 2.5V output supplies external circuits and the LDO. The Vcore Power Domains are supplied from the LDO.</li><li><strong>USE_PWR_SMPS_1V8_SUPPLIES_EXT</strong> : The SMPS 1.8V 
+output supplies external circuits. The LDO is Bypassed. The Vcore Power 
+Domains are supplied from external source.</li><li><strong>USE_PWR_SMPS_2V5_SUPPLIES_EXT</strong> : The SMPS 2.5V 
+output supplies external circuits. The LDO is Bypassed. The Vcore Power 
+Domains are supplied from external source.</li><li><strong>USE_PWR_LDO_SUPPLY</strong> : The LDO regulator supplies the Vcore Power Domains. The SMPS regulator is Bypassed.</li><li><strong>USE_PWR_EXTERNAL_SOURCE_SUPPLY</strong> : The SMPS and the LDO are Bypassed. The Vcore Power Domains are supplied from external source.</li></ul></li></ul></li></ul></li></ul></body></html>

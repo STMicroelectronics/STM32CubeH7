@@ -2,7 +2,7 @@
   @page LCD_DSI_CmdMode_TearingEffect_ExtPin : LCD DSI examples in DSI command mode
 
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    LCD_DSI/LCD_DSI_CmdMode_TearingEffect_ExtPin/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the LCD DSI in command mode example.

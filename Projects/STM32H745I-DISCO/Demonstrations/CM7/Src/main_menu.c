@@ -285,6 +285,8 @@ static void InitMainMenu(void)
 
   uint32_t x_size;
   uint32_t y_size;
+  int32_t probeStatus;
+  uint32_t Instance = 0;
   
   /* Init the Display */  
   InitMenuDisplay();
@@ -296,7 +298,19 @@ static void InitMainMenu(void)
   /* Touchscreen initialization */
   hTS.Width = x_size;
   hTS.Height = y_size;
-  hTS.Orientation =TS_SWAP_XY ;
+  probeStatus = GT911_Probe(Instance);
+  if (probeStatus == BSP_ERROR_NONE)
+  {
+    hTS.Orientation = TS_SWAP_NONE;
+  }
+  else
+  {
+    probeStatus = FT5336_Probe(Instance);
+    if (probeStatus == BSP_ERROR_NONE)
+    {
+      hTS.Orientation = TS_SWAP_XY;
+    }
+  }
   hTS.Accuracy = 5;
 
   BSP_TS_Init(0, &hTS);
@@ -454,26 +468,6 @@ static void SystemClock_Config(void)
   HAL_StatusTypeDef ret = HAL_OK;
   RCC_PeriphCLKInitTypeDef PeriphClkInitStruct;
   
-#if (USE_VOS0_480MHZ_OVERCLOCK == 1)
-
-#if (BOARD_HW_CONFIG_IS_LDO == 1) && (BOARD_HW_CONFIG_IS_DIRECT_SMPS == 0)
-  /*!< Supply configuration update enable */
-  HAL_PWREx_ConfigSupply(PWR_LDO_SUPPLY);   
-#else
-  #error "Please make sure that the STM32H745I-DISCO Board has been modified to match the LDO configuration then set the define BOARD_HW_CONFIG_IS_LDO to 1 and BOARD_HW_CONFIG_IS_DIRECT_SMPS set to 0 to confirm the HW config"
-#endif  /* (BOARD_HW_CONFIG_IS_LDO == 1) && (BOARD_HW_CONFIG_IS_DIRECT_SMPS == 0) */
-
-#else
-
-#if (BOARD_HW_CONFIG_IS_LDO == 0) && (BOARD_HW_CONFIG_IS_DIRECT_SMPS == 1)
-  /*!< Supply configuration update enable */
-  HAL_PWREx_ConfigSupply(PWR_DIRECT_SMPS_SUPPLY);
-#else
-  #error "Please make sure that the STM32H745I-DISCO Board has been modified to match the Direct SMPS configuration then set the define BOARD_HW_CONFIG_IS_LDO to 0 and BOARD_HW_CONFIG_IS_DIRECT_SMPS set to 1 to confirm the HW config"
-#endif  /* (BOARD_HW_CONFIG_IS_LDO == 0) && (BOARD_HW_CONFIG_IS_DIRECT_SMPS == 1) */  
-
-#endif /* USE_VOS0_480MHZ_OVERCLOCK */
-
   /* The voltage scaling allows optimizing the power consumption when the device is 
      clocked below the maximum system frequency, to update the voltage scaling value 
      regarding system frequency refer to product datasheet.  */

@@ -2,7 +2,7 @@
   @page LPTIM_Timeout LPTIM Timeout example with LSE clock source
   
   @verbatim
-  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  ******************************************************************************
   * @file    LPTIM/LPTIM_Timeout/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the LPTIM Timeout example.

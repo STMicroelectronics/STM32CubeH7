@@ -232,5 +232,3 @@ The STM32H7xx allows computing and verifying the IP, UDP, TCP and ICMP checksums
 #define TCPIP_THREAD_PRIO               osPriorityHigh
 
 #endif /* __LWIPOPTS_H__ */
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

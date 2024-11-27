@@ -97,9 +97,9 @@ void HAL_JPEG_MspInit(JPEG_HandleTypeDef *hjpeg)
   hmdmaOut.Init.Priority        = MDMA_PRIORITY_VERY_HIGH;
   hmdmaOut.Init.Endianness      = MDMA_LITTLE_ENDIANNESS_PRESERVE;
   hmdmaOut.Init.SourceInc       = MDMA_SRC_INC_DISABLE;
-  hmdmaOut.Init.DestinationInc  = MDMA_DEST_INC_BYTE;
+  hmdmaOut.Init.DestinationInc  = MDMA_DEST_INC_WORD;
   hmdmaOut.Init.SourceDataSize  = MDMA_SRC_DATASIZE_WORD;
-  hmdmaOut.Init.DestDataSize    = MDMA_DEST_DATASIZE_BYTE;
+  hmdmaOut.Init.DestDataSize    = MDMA_DEST_DATASIZE_WORD;
   hmdmaOut.Init.DataAlignment   = MDMA_DATAALIGN_PACKENABLE;
   hmdmaOut.Init.SourceBurst     = MDMA_SOURCE_BURST_32BEATS;
   hmdmaOut.Init.DestBurst       = MDMA_DEST_BURST_32BEATS;  

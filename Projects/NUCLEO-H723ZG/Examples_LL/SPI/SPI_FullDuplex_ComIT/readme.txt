@@ -2,7 +2,7 @@
   @page SPI_FullDuplex_ComIT SPI Full Duplex IT LL example
 
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    SPI_FullDuplex_ComIT/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the  SPI Full Duplex IT LL example.

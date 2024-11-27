@@ -103,9 +103,12 @@ LoopFillZerobss:
 Reset_Handler:
   ldr   sp, =_estack      /* set stack pointer */
 
+/* Call the ExitRun0Mode function to configure the power supply */
+  bl  ExitRun0Mode
 /* Copy the data segment initializers from flash to SRAM */  
   INIT_DATA _sdata, _edata, _sidata
   INIT_DATA _sRAM_D3, _eRAM_D3, _siRAM_D3
+
 
 /* Zero fill the bss segment. */  
   INIT_BSS _sbss, _ebss

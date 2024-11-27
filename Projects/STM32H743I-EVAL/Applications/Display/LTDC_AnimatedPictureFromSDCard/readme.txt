@@ -2,7 +2,7 @@
   @page LTDC_AnimatedPictureFromSDCard LTDC animated picture from SD card application
   
   @verbatim
-  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  ******************************************************************************
   * @file    Display/LTDC_AnimatedPictureFromSDCard/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the LTDC animated picture from SD card application.

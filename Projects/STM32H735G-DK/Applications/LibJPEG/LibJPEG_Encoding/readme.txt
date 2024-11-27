@@ -2,7 +2,7 @@
   @page LibJPEG_Encoding LibJPEG encoding application
 
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    LibJPEG/LibJPEG_Encoding/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the LibJPEG Encoding application.

@@ -2,7 +2,7 @@
   @page DMAMUX_SYNC DMA & DMAMUX Synchronization Example
 
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    DMA/DMAMUX_SYNC/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the DMA & DMAMUX Synchronization Example.

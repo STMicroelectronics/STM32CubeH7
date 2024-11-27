@@ -2,7 +2,7 @@
   @page OTFDEC_ExecutingAesInstruction Description of OTFDEC Executing AES Instruction example
 
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    OTFDEC_ExecutingAesInstruction/readme.txt
   * @author  MCD Application Team
   * @brief   This example describes how to encrypt a binary image with standard AES-128 counter mode IP,

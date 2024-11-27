@@ -16,6 +16,12 @@
   *
   ******************************************************************************
   @endverbatim
+
+### 10-October-2024 ###
+   + Provide a solution to avoid cleaning the mutex used by other tasks :
+    - Update alternative AES template : library/templates/aes_alt_template.c
+    - Update alternative SHA256 template : library/templates/sha256_alt_template.c
+
 ### 24-October-2023 ###
    + Align function prototype and implementation :
     - ssl_calc_verify_tls

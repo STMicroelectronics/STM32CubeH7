@@ -2,7 +2,7 @@
   @page LedToggling GPIO IO Toggle example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    GPIO/LedToggling/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the GPIO IO Toggle example.

@@ -2,7 +2,7 @@
   @page FatFs_Dual_Instance   Dual FatFs instances using uSD card drive on CM7 and USB Host on CM4
 
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    FatFs/FatFs_Dual_Instance/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the FatFs Dual instance application

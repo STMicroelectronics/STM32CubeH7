@@ -2,7 +2,7 @@
   @page HRTIM_MultiplePWM HRTIM Multiple PWM example
 
   @verbatim
-  ******************** (C) COPYRIGHT 2018 STMicroelectronics *******************
+  ******************************************************************************
   * @file    HRTIM/HRTIM_MultiplePWM/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the PWM signals generation using HRTIM1.

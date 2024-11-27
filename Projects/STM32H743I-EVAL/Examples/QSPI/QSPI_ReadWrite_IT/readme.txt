@@ -2,7 +2,7 @@
   @page QSPI_ReadWrite_IT QSPI Read/Write in interrupt mode example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  ******************************************************************************
   * @file    QSPI/QSPI_ReadWrite_IT/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the QSPI Read/Write in interrupt mode example.

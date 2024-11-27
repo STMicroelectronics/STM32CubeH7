@@ -738,8 +738,6 @@ static void SystemClock_Config(void)
   RCC_ClkInitTypeDef RCC_ClkInitStruct;
   HAL_StatusTypeDef ret = HAL_OK;
 
-  HAL_PWREx_ConfigSupply(PWR_LDO_SUPPLY);
-
   /* The voltage scaling allows optimizing the power consumption when the device is
      clocked below the maximum system frequency, to update the voltage scaling value
      regarding system frequency refer to product datasheet.  */

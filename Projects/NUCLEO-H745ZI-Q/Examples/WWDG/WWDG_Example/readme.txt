@@ -2,7 +2,7 @@
   @page WWDG_Example Window Watchdog example
 
   @verbatim
-  ******************** (C) COPYRIGHT 2018 STMicroelectronics *******************
+  ******************************************************************************
   * @file    WWDG/WWDG_Example/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the Window Watchdog example.

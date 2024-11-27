@@ -2,7 +2,7 @@
   @page CORTEXM_Cache Cortex-M7 Cache example
 
   @verbatim
-  ******************** (C) COPYRIGHT 2018 STMicroelectronics *******************
+  ******************************************************************************
   * @file    Cortex/CORTEXM_Cache/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the CORTEXM_Cache example.

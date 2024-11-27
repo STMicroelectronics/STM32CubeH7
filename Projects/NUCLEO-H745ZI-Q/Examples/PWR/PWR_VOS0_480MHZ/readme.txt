@@ -2,7 +2,7 @@
   @page PWR_VOS0_480MHZ PWR VOS0 480MHZ example
 
   @verbatim
-  ******************** (C) COPYRIGHT 2018 STMicroelectronics *******************
+  ******************************************************************************
   * @file    PWR/PWR_VOS0_480MHZ/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the PWR VOS0 480MHZ example.

@@ -2,7 +2,7 @@
   @page DFSDM_AudioRecord  Description of the DFSDM audio record example
 
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    DFSDM/DFSDM_AudioRecord/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the DFSDM audio record example.

@@ -2,7 +2,7 @@
   @page JPEG_MJPEG_VideoDecodingFromQSPI : MJPEG video decoding from QSPI Flash example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    JPEG/JPEG_MJPEG_VideoDecodingFromQSPI/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the MJPEG video decoding from QSPI Flash example.

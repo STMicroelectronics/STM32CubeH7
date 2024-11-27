@@ -2,7 +2,7 @@
   @page FDCAN_Classic_Frame_Networking FDCAN Classic Frame Networking example
 
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    FDCAN/FDCAN_Classic_Frame_Networking/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the FDCAN_Classic_Frame_Networking example.

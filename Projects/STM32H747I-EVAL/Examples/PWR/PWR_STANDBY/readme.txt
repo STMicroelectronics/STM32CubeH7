@@ -2,7 +2,7 @@
   @page PWR_STANDBY PWR STANDBY Example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    PWR/PWR_STANDBY/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the PWR STANDBY example.

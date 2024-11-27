@@ -92,6 +92,8 @@ void Touchscreen_demo1(void)
 {
   uint16_t x1, y1;
   uint8_t state = 0;
+  int32_t probeStatus;
+  uint32_t Instance = 0;
   uint32_t ts_status = BSP_ERROR_NONE;
   uint32_t x_size, y_size;
 
@@ -101,7 +103,19 @@ void Touchscreen_demo1(void)
 
   hTS.Width = x_size;
   hTS.Height = y_size;
-  hTS.Orientation = TS_SWAP_Y;
+  probeStatus = GT911_Probe(Instance);
+  if (probeStatus == BSP_ERROR_NONE)
+  {
+    hTS.Orientation = TS_SWAP_NONE;
+  }
+  else
+  {
+    probeStatus = FT5336_Probe(Instance);
+    if (probeStatus == BSP_ERROR_NONE)
+    {
+      hTS.Orientation = TS_SWAP_Y;
+    }
+  }
   hTS.Accuracy = 0;
 
   /* Touchscreen initialization */
@@ -199,13 +213,27 @@ void Touchscreen_demo2(void)
 {
   uint32_t ts_status = BSP_ERROR_NONE;
   uint32_t x_size, y_size;
+  int32_t probeStatus;
+  uint32_t Instance = 0;
   ButtonState = 0;
   BSP_LCD_GetXSize(0, &x_size);
   BSP_LCD_GetYSize(0, &y_size);
 
   hTS.Width = x_size;
   hTS.Height = y_size;
-  hTS.Orientation = TS_SWAP_Y;
+  probeStatus = GT911_Probe(Instance);
+  if (probeStatus == BSP_ERROR_NONE)
+  {
+    hTS.Orientation = TS_SWAP_NONE;
+  }
+  else
+  {
+    probeStatus = FT5336_Probe(Instance);
+    if (probeStatus == BSP_ERROR_NONE)
+    {
+      hTS.Orientation = TS_SWAP_Y;
+    }
+  }
   hTS.Accuracy = 0;
 
   GestureConf.Radian = 0x0A;
@@ -217,7 +245,6 @@ void Touchscreen_demo2(void)
 
   /* Touchscreen initialization */
   ts_status = BSP_TS_Init(0, &hTS);
-  ts_status = BSP_TS_GestureConfig(0, &GestureConf);
 
   if(ts_status == BSP_ERROR_NONE)
   {
@@ -248,6 +275,8 @@ void Touchscreen_demo3(void)
   uint16_t k, l;
   ButtonState = 0;
   TSInterruptTest = 1;
+  int32_t probeStatus;
+  uint32_t Instance = 0;
   uint32_t x_size, y_size;
 
   BSP_LCD_GetXSize(0, &x_size);
@@ -255,7 +284,19 @@ void Touchscreen_demo3(void)
 
   hTS.Width = x_size;
   hTS.Height = y_size;
-  hTS.Orientation = TS_SWAP_Y;
+  probeStatus = GT911_Probe(Instance);
+  if (probeStatus == BSP_ERROR_NONE)
+  {
+    hTS.Orientation = TS_SWAP_NONE;
+  }
+  else
+  {
+    probeStatus = FT5336_Probe(Instance);
+    if (probeStatus == BSP_ERROR_NONE)
+    {
+      hTS.Orientation = TS_SWAP_Y;
+    }
+  }
   hTS.Accuracy = 0;
 
   /* Touchscreen initialization */

@@ -2,7 +2,7 @@
   @page DFU_Standalone USB Device Firmware Upgrade (DFU) application
 
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    USB_Device/DFU_Standalone/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the USB DFU application.

@@ -2,7 +2,7 @@
   @page JPEG_MJPEG_VideoDecodingFromOSPI add here description
 
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    JPEG/JPEG_MJPEG_VideoDecodingFromOSPI/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the MJPEG video decoding from OSPI Flash example.

@@ -2,7 +2,7 @@
   @page FWupgrade_Standalone USB Host Firmware Upgrade application
 
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    USB_Host/FWupgrade_Standalone/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the USB Host Firmware Upgrade application

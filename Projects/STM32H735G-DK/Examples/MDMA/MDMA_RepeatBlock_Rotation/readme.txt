@@ -2,7 +2,7 @@
   @page MDMA_RepeatBlock_Rotation MDMA Repeat BLock Transfer Rotation example
 
   @verbatim
-  ******************** (C) COPYRIGHT 2019  STMicroelectronics *******************
+  ******************************************************************************
   * @file    MDMA/MDMA_RepeatBlock_Rotation/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the MDMA Repeat BLock Rotation Transfer example.

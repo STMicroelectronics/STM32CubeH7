@@ -260,8 +260,6 @@ void LED_Off(void)
   */
 static void SystemClock_Config(void)
 {
-  /* Power configuration */
-  LL_PWR_ConfigSupply(LL_PWR_LDO_SUPPLY);
   LL_PWR_SetRegulVoltageScaling(LL_PWR_REGU_VOLTAGE_SCALE1);
   while(LL_PWR_IsActiveFlag_VOS() == 0) {}
   

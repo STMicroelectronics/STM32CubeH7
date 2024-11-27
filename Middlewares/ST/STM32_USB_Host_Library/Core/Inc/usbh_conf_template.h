@@ -52,6 +52,7 @@ extern "C" {
 #define USBH_MAX_DATA_BUFFER                  0x200U
 #define USBH_DEBUG_LEVEL                      2U
 #define USBH_USE_OS                           1U
+#define USBH_IN_NAK_PROCESS                   0
 
 /** @defgroup USBH_Exported_Macros
   * @{

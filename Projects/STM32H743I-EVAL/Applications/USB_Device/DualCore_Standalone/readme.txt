@@ -2,7 +2,7 @@
   @page DualCore_Standalone USB Device Dual Core application
   
   @verbatim
-  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  ******************************************************************************
   * @file    USB_Device/DualCore_Standalone/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the USB Device Dual Core application.

@@ -4,7 +4,7 @@
    by user button, LED, and optionally by potentiometer (RV1).
 
   @verbatim
-  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  ******************************************************************************
   * @file    ADC/ADC_AnalogWatchdog/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the ADC conversion example

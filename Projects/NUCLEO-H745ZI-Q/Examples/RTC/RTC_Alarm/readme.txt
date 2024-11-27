@@ -2,7 +2,7 @@
   @page RTC_Alarm RTC Alarm Example
 
   @verbatim
-  ******************** (C) COPYRIGHT 2018 STMicroelectronics *******************
+  ******************************************************************************
   * @file    RTC/RTC_Alarm/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the RTC Alarm example.

@@ -2,7 +2,7 @@
   @page OTFDEC_EncryptionDecryption Description of OTFDEC Encryption Decryption example
 
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    OTFDEC_EncryptionDecryption/readme.txt
   * @author  MCD Application Team
   * @brief   This example describes how to encrypt a binary image with the OTFDEC proprietary protection layer over the standard AES in counter mode,

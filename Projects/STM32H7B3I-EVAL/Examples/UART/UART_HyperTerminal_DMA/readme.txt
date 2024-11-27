@@ -2,7 +2,7 @@
   @page UART_HyperTerminal_DMA UART Hyperterminal DMA Example
 
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    UART/UART_HyperTerminal_DMA/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the UART Hyperterminal DMA example.

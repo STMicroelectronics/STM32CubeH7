@@ -2,7 +2,7 @@
   @page DAC_GenerateWaveform_TriggerHW DAC example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2018 STMicroelectronics *******************
+  ******************************************************************************
   * @file    Examples_LL/DAC/DAC_GenerateWaveform_TriggerHW/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the DAC_GenerateWaveform_TriggerHW example.

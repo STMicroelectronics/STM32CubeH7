@@ -2,7 +2,7 @@
   @page DAC_SimpleConversion DAC Simple Conversion example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    DAC/DAC_SimpleConversion/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the DAC Simple Conversion example.

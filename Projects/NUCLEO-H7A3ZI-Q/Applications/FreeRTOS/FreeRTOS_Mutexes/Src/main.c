@@ -206,9 +206,6 @@ static void SystemClock_Config(void)
   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
 
-  /*!< Supply configuration update enable */
-  HAL_PWREx_ConfigSupply(PWR_DIRECT_SMPS_SUPPLY);
-
   /* The voltage scaling allows optimizing the power consumption when the device is
   clocked below the maximum system frequency, to update the voltage scaling value
   regarding system frequency refer to product datasheet.
@@ -278,10 +275,10 @@ static void MutexHighPriorityThread(void *argument)
   /* Infinite loop */
   for (;;)
   {
-    /* The first time through the mutex will be immediately available, on
-    subsequent times through the mutex will be held by the low priority thread
-    at this point and this Take will cause the low priority thread to inherit
-    the priority of this tadhr.  In this case the block time must be
+    /* The first time through, the mutex will be immediately available. On
+    subsequent times through, the mutex will be held by the low priority thread
+    at this point and this will cause the low priority thread to inherit
+    the priority of this thread. In this case the block time must be
     long enough to ensure the low priority thread will execute again before the
     block time expires.  If the block time does expire then the error
     flag will be set here */

@@ -2,7 +2,7 @@
   @page PWR_STANDBY_RTC example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  ******************************************************************************
   * @file    PWR/PWR_STANDBY_RTC/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the PWR STANDBY RTC example.

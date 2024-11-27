@@ -2,7 +2,7 @@
   @page DMA_FLASHToRAM DMA FLASH To RAM Example
 
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    DMA/DMA_FLASHToRAM/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the DMA FLASH to RAM example.

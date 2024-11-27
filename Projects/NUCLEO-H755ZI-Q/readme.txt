@@ -1,0 +1,2 @@
++ All projects available under Projects\NUCLEO-H745ZI-Q are fully compatible with NUCLEO-H755ZI-Q board.
++ For crypto feature available on NUCLEO-H755ZI-Q board, examples under Projects\STM32H743I-EVAL\Examples\CRYP can be used as reference.

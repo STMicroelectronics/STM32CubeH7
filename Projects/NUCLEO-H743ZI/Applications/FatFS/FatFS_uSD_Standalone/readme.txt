@@ -2,7 +2,7 @@
   @page FatFS_uSD_Standalone   FatFs with uSD card drive application
   
   @verbatim
-  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  ******************************************************************************
   * @file    FatFs/FatFs_uSD_Standalone/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the FatFs with uSD card drive application.

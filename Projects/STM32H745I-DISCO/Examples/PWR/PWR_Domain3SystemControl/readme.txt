@@ -2,7 +2,7 @@
   @page PWR_Domain3SystemControl example
 
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    PWR/PWR_Domain3SystemControl/readme.txt
   * @author  MCD Application Team
   * @brief   Description of D3 Domain system control in low power mode Example.

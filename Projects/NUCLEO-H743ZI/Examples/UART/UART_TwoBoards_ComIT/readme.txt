@@ -2,7 +2,7 @@
   @page UART_TwoBoards_ComIT UART Two Boards Communication IT example
 
   @verbatim
-  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  ******************************************************************************
   * @file    UART/UART_TwoBoards_ComIT/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the UART Two Boards Communication IT example.

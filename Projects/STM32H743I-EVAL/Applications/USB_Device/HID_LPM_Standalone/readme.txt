@@ -2,7 +2,7 @@
   @page HID_LPM_Standalone USB Device Human Interface (HID) application with LPM
   
   @verbatim
-  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  ******************************************************************************
   * @file    USB_Device/HID_LPM_Standalone/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the USB HID_LPM application.

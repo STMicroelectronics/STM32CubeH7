@@ -2,7 +2,7 @@
   @page QSPI_ExecuteInPlace QSPI execute in place example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  ******************************************************************************
   * @file    QSPI/QSPI_ExecuteInPlace/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the code execution from QSPI memory example.

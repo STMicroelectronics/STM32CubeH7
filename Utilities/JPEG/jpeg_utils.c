@@ -2,114 +2,95 @@
   ******************************************************************************
   * @file    jpeg_utils.c 
   * @author  MCD Application Team
-  * @version V2.0.0
-  * @date    3-June-2016
   * @brief   This driver provides JPEG MCU (Minimum Coded Unit) blocks to RGB and RGB to JPEG MCU conversion functions.
-  *
-  *    The STM32 HW JPEG decoder/encoder peripheral allows to decode/encode jpeg images.
-  *    In decoding, the STM32 HW JPEG data output are organized in blocks called MCU (Minimum Coded Unit)
-  *    as specified in the jpeg standard. 
-  *    In encoding, the STM32 HW JPEG data input must be organized in MCU blocks.
-  *    Depending of the image color space and chrominance sampling, an MCU is generally organized in :
-  *    N luminance (Y) blocks + a Blue chrominance (Cb) block + a Red chrominance (Cr) block.
-  *    Each block size is 8x8 samples.
-  *
-  *    The STM32 HW JPEG supports 3 possible color space :
-  *      - YCbCr : an MCU is composed of 3 color components : Y , Cb and Cr 
-  *      - GrayScale : an MCU is composed of 1 single color component : Y
-  *      - CMYK : an MCU is composed of 4 color components : Cyan, Magenta, Yellow, and Key (blacK)
-  *                    
-  *    This utility file should be used on top of the STM32 HAL JPEG driver. 
-  *    In decoding, it allows to convert MCU blocks to RGB888 or ARGB8888 pixels stored to a destination 
-  *    frame buffer that can be displayed.
-  *    In encoding, it allows to convert RGB888 or ARGB8888 pixels  to MCU blocks.
-  *
-  *    This utility supports following MCU Chroma sampling format and color space :
-  *      - YCbCr 4:2:0 : Each MCU is composed of 4 Y 8x8 blocks + 1 Cb 8x8 block + Cr 8x8 block
-  *      - YCbCr 4:2:2 : Each MCU is composed of 2 Y 8x8 blocks + 1 Cb 8x8 block + Cr 8x8 block
-  *      - YCbCr 4:4:4 : Each MCU is composed of 1 Y 8x8 block + 1 Cb 8x8 block + Cr 8x8 block
-  *      - GrayScale   : Each MCU is composed of 1 Y 8x8 block
-  *      - CMYK        : Each MCU is composed of 1 Cyan 8x8  block + 1 Magenta 8x8 block + 1 Yellow 8x8 block + 1 Key 8x8 block.
-  *
-  *
-  * @How to use this driver
-  *
-  *      - The configuration file "jpeg_utils_conf_template.h" is used to configure this utility
-  *        providing some useful flexibilities.
-  *        This file should be copied to the application folder and modified as follows:
-  *          - Rename it to "jpeg_utils_conf.h".
-  *          - Update the name of the JPEG driver's header file, depending on the EVAL board you are using.
-  *    
-  *        Example if using the STM32F769I-EVAL board :
-  *          - Copy the file "jpeg_utils_conf_template.h" to the application folder and rename it to "jpeg_utils_conf.h"
-  *          - Edit the "jpeg_utils_conf.h" and change lines 51 and 52 as follow :
-  *             #include "stm32f7xx_hal.h"
-  *             #include "stm32f7xx_hal_jpeg.h"
-  *    
-  *        Using this configuration file, user can change the following settings:
-  *          - Use RGB888 or ARGB8888 or RGB565 by setting the constant JPEG_RGB_FORMAT respectively to JPEG_RGB888, JPEG_ARGB8888 JPEG_RGB565.
-  *          - Swap RED, and Blue offsets if user needs to change the color order to BGR (instead of RGB) by setting:
-  *             #define JPEG_SWAP_RB     1
-  *          - Enable or disable the decoding post-processing functions (YCbCr to RGB conversion functions) by setting the define USE_JPEG_DECODER 
-  *            respectively to 0 or 1.
-  *          - Enable or disable the encoding pre-processing functions (RGB to YCbCr conversion functions) by setting the define USE_JPEG_ENCODER 
-  *            respectively to 0 or 1.
-  *
-  *  * For Decoding:
-  *      - First, function "JPEG_InitColorTables" should be called to initialize the YCbCr to RGB color
-  *        conversion tables. This function needs to be called only one time at the beginning of the 
-  *        program whatever the number of jpeg files to be decoded.
-  *    
-  *      - As soon as the JPEG HW peripheral finished parsing the header of the JPEG input file,
-  *        the HAL JPEG callback "HAL_JPEG_InfoReadyCallback" is launched providing the jpeg file
-  *        characteristics found in its header.
-  *        User can then call the utility function "JPEG_GetDecodeColorConvertFunc" with these
-  *        information and retrieve the corresponding color conversion function and number of MCUs.
-  *    
-  *        Then each time an integer number of MCUs are available (from the HW JPEG output), user 
-  *        can call the retrieved function to convert these HW JPEG output data to RGB888 or
-  *        ARGB8888 pixel stored to the specified destination buffer.
-  *    
-  *  * For Encoding:
-  *      - First, function "JPEG_InitColorTables" should be called to initialize the YCbCr/RGB color
-  *        conversion tables. This function needs to be called only one time at the beginning of the 
-  *        program whatever the number of jpeg files to be encoded or decoded.
-  *    
-  *      - First Use the utility function "JPEG_GetEncodeColorConvertFunc" with the input image informations 
-  *        to retrieve the corresponding color conversion function and number of MCUs.
-  *    
-  *        Then each time an RGB input buffer is available, user can call the retrieved function to convert 
-  *        RGB data to MCU blocks stored to the specified destination buffer.
-  *
-  *
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * Copyright (c) 2016 STMicroelectronics.
+  * All rights reserved.
   *
-  * Redistribution and use in source and binary forms, with or without modification,
-  * are permitted provided that the following conditions are met:
-  *   1. Redistributions of source code must retain the above copyright notice,
-  *      this list of conditions and the following disclaimer.
-  *   2. Redistributions in binary form must reproduce the above copyright notice,
-  *      this list of conditions and the following disclaimer in the documentation
-  *      and/or other materials provided with the distribution.
-  *   3. Neither the name of STMicroelectronics nor the names of its contributors
-  *      may be used to endorse or promote products derived from this software
-  *      without specific prior written permission.
-  *
-  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-  * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
-  * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-  * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-  * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-  * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
+  @verbatim
+    [..]  
+      The STM32 HW JPEG decoder/encoder peripheral allows to decode/encode jpeg images.
+      In decoding, the STM32 HW JPEG data output are organized in blocks called MCU (Minimum Coded Unit)
+      as specified in the jpeg standard. 
+      In encoding, the STM32 HW JPEG data input must be organized in MCU blocks.
+      Depending of the image color space and chrominance sampling, an MCU is generally organized in :
+      N luminance (Y) blocks + a Blue chrominance (Cb) block + a Red chrominance (Cr) block.
+      Each block size is 8x8 samples.
+      
+      The STM32 HW JPEG supports 3 possible color space :
+        - YCbCr : an MCU is composed of 3 color components : Y , Cb and Cr 
+        - GrayScale : an MCU is composed of 1 single color component : Y
+        - CMYK : an MCU is composed of 4 color components : Cyan, Magenta, Yellow, and Key (blacK)
+                      
+      This utility file should be used on top of the STM32 HAL JPEG driver. 
+      In decoding, it allows to convert MCU blocks to RGB888 or ARGB8888 pixels stored to a destination 
+      frame buffer that can be displayed.
+      In encoding, it allows to convert RGB888 or ARGB8888 pixels  to MCU blocks.
+      
+      This utility supports following MCU Chroma sampling format and color space :
+        - YCbCr 4:2:0 : Each MCU is composed of 4 Y 8x8 blocks + 1 Cb 8x8 block + Cr 8x8 block
+        - YCbCr 4:2:2 : Each MCU is composed of 2 Y 8x8 blocks + 1 Cb 8x8 block + Cr 8x8 block
+        - YCbCr 4:4:4 : Each MCU is composed of 1 Y 8x8 block + 1 Cb 8x8 block + Cr 8x8 block
+        - GrayScale   : Each MCU is composed of 1 Y 8x8 block
+        - CMYK        : Each MCU is composed of 1 Cyan 8x8  block + 1 Magenta 8x8 block + 1 Yellow 8x8 block + 1 Key 8x8 block.
+  ==============================================================================
+                     ##### How to use this driver #####                         
+  ==============================================================================
+    [..]
+      - The configuration file "jpeg_utils_conf_template.h" is used to configure this utility
+        providing some useful flexibilities.
+        This file should be copied to the application folder and modified as follows:
+          - Rename it to "jpeg_utils_conf.h".
+          - Update the name of the JPEG driver's header file, depending on the EVAL board you are using.
+    
+      Example if using the STM32F769I-EVAL board :
+        - Copy the file "jpeg_utils_conf_template.h" to the application folder and rename it to "jpeg_utils_conf.h"
+        - Edit the "jpeg_utils_conf.h" and change lines 51 and 52 as follow :
+           #include "stm32f7xx_hal.h"
+           #include "stm32f7xx_hal_jpeg.h"
+    
+      Using this configuration file, user can change the following settings:
+          - Use RGB888 or ARGB8888 or RGB565 by setting the constant JPEG_RGB_FORMAT respectively to JPEG_RGB888, JPEG_ARGB8888 JPEG_RGB565.
+          - Swap RED, and Blue offsets if user needs to change the color order to BGR (instead of RGB) by setting:
+             #define JPEG_SWAP_RB     1
+          - Enable or disable the decoding post-processing functions (YCbCr to RGB conversion functions) by setting the define USE_JPEG_DECODER 
+            respectively to 0 or 1.
+          - Enable or disable the encoding pre-processing functions (RGB to YCbCr conversion functions) by setting the define USE_JPEG_ENCODER 
+            respectively to 0 or 1.
+ 
+    [..]For Decoding:
+      - First, function "JPEG_InitColorTables" should be called to initialize the YCbCr to RGB color
+        conversion tables. This function needs to be called only one time at the beginning of the
+        program whatever the number of jpeg files to be decoded.
+    
+      - As soon as the JPEG HW peripheral finished parsing the header of the JPEG input file,
+        the HAL JPEG callback "HAL_JPEG_InfoReadyCallback" is launched providing the jpeg file
+        characteristics found in its header.
+        User can then call the utility function "JPEG_GetDecodeColorConvertFunc" with these
+        information and retrieve the corresponding color conversion function and number of MCUs.
+    
+        Then each time an integer number of MCUs are available (from the HW JPEG output), user
+        can call the retrieved function to convert these HW JPEG output data to RGB888 or
+        ARGB8888 pixel stored to the specified destination buffer.
+    
+    [..]For Encoding:
+      - First, function "JPEG_InitColorTables" should be called to initialize the YCbCr/RGB color
+        conversion tables. This function needs to be called only one time at the beginning of the
+        program whatever the number of jpeg files to be encoded or decoded.
+    
+      - First Use the utility function "JPEG_GetEncodeColorConvertFunc" with the input image information
+        to retrieve the corresponding color conversion function and number of MCUs.
+    
+        Then each time an RGB input buffer is available, user can call the retrieved function to convert 
+        RGB data to MCU blocks stored to the specified destination buffer.
+  @endverbatim
   */
 
 /* Includes ------------------------------------------------------------------*/
@@ -120,7 +101,7 @@
   */
 
 /** @defgroup JPEG JPEG
-* @brief JPEG YCbCr blocks <-> RGB conversion utilties  
+* @brief JPEG YCbCr blocks <-> RGB conversion utilities  
 * @{
 */
 
@@ -226,7 +207,7 @@ typedef struct __JPEG_MCU_RGB_ConvertorTypeDef
 */ 
 /* Private macro -------------------------------------------------------------*/
 #if (USE_JPEG_DECODER == 1)
-#define CLAMP(value) CLAMP_LUT[(value) + 0x100] /* Range limitting macro */
+#define CLAMP(value) CLAMP_LUT[(value) + 0x100] /* Range limiting macro */
 #endif
 #if (USE_JPEG_ENCODER == 1)
 #define MAX(val1,val2) ((val1 > val2) ? val1 : val2)
@@ -280,7 +261,7 @@ uint8_t kBlocks[16][16];
 #endif /* USE_JPEG_ENCODER == 1 */
 
 #if (USE_JPEG_DECODER == 1)
-/*  color clamp table : used for range limitting */
+/*  color clamp table : used for range limiting */
 static const uint8_t CLAMP_LUT[] = {
 /* clamp range 0xffffffff to 0xffffff00 */
 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -431,7 +412,7 @@ static void JPEG_InitPostProcColorTables(void);
   * @param  BlockIndex : index of the input buffer first block in the final image.
   * @param  DataCount  : number of bytes in the input buffer .
   * @param  ConvertedDataCount  : number of converted bytes from input buffer.  
-  * @retval Number of blcoks converted from RGB to YCbCr
+  * @retval Number of blocks converted from RGB to YCbCr
   */
 static uint32_t JPEG_ARGB_MCU_YCbCr420_ConvertBlocks (uint8_t *pInBuffer, 
                                       uint8_t *pOutBuffer, 
@@ -576,7 +557,7 @@ static uint32_t JPEG_ARGB_MCU_YCbCr420_ConvertBlocks (uint8_t *pInBuffer,
   * @param  BlockIndex : index of the input buffer first block in the final image.
   * @param  DataCount  : number of bytes in the input buffer .
   * @param  ConvertedDataCount  : number of converted bytes from input buffer.  
-  * @retval Number of blcoks converted from RGB to YCbCr
+  * @retval Number of blocks converted from RGB to YCbCr
   */
 static uint32_t JPEG_ARGB_MCU_YCbCr422_ConvertBlocks (uint8_t *pInBuffer, 
                                       uint8_t *pOutBuffer, 
@@ -689,7 +670,7 @@ static uint32_t JPEG_ARGB_MCU_YCbCr422_ConvertBlocks (uint8_t *pInBuffer,
   * @param  BlockIndex : index of the input buffer first block in the final image.
   * @param  DataCount  : number of bytes in the input buffer .
   * @param  ConvertedDataCount  : number of converted bytes from input buffer.  
-  * @retval Number of blcoks converted from RGB to YCbCr
+  * @retval Number of blocks converted from RGB to YCbCr
   */
 static uint32_t JPEG_ARGB_MCU_YCbCr444_ConvertBlocks (uint8_t *pInBuffer, 
                                       uint8_t *pOutBuffer, 
@@ -780,7 +761,7 @@ static uint32_t JPEG_ARGB_MCU_YCbCr444_ConvertBlocks (uint8_t *pInBuffer,
   * @param  BlockIndex : index of the input buffer first block in the final image.
   * @param  DataCount  : number of bytes in the input buffer .
   * @param  ConvertedDataCount  : number of converted bytes from input buffer.  
-  * @retval Number of blcoks converted from RGB to Gray
+  * @retval Number of blocks converted from RGB to Gray
   */
 static uint32_t JPEG_ARGB_MCU_Gray_ConvertBlocks(uint8_t *pInBuffer, 
                                       uint8_t *pOutBuffer, 
@@ -868,7 +849,7 @@ static uint32_t JPEG_ARGB_MCU_Gray_ConvertBlocks(uint8_t *pInBuffer,
   * @param  BlockIndex : index of the input buffer first block in the final image.
   * @param  DataCount  : number of bytes in the input buffer .
   * @param  ConvertedDataCount  : number of converted bytes from input buffer.  
-  * @retval Number of blcoks converted from RGB to YCCK
+  * @retval Number of blocks converted from RGB to YCCK
   */
 static uint32_t JPEG_ARGB_MCU_YCCK_ConvertBlocks(uint8_t *pInBuffer, 
                                       uint8_t *pOutBuffer, 
@@ -952,12 +933,12 @@ static uint32_t JPEG_ARGB_MCU_YCCK_ConvertBlocks(uint8_t *pInBuffer,
 }
 
 /**
-  * @brief  Retrive Encoding RGB to YCbCr color conversion function and block number  
-  * @param  pJpegInfo  : JPEG_ConfTypeDef that contains the JPEG image informations.
+  * @brief  Retrieve Encoding RGB to YCbCr color conversion function and block number  
+  * @param  pJpegInfo  : JPEG_ConfTypeDef that contains the JPEG image information.
   *                      These info are available in the HAL callback "HAL_JPEG_InfoReadyCallback".
-  * @param  pFunction  : pointer to JPEG_RGBToYCbCr_Convert_Function , used to retrive the color conversion function 
+  * @param  pFunction  : pointer to JPEG_RGBToYCbCr_Convert_Function , used to Retrieve the color conversion function 
   *                      depending of the jpeg image color space and chroma sampling info. 
-  * @param ImageNbMCUs : pointer to uint32_t, used to retrive the total number of MCU blocks in the jpeg image.  
+  * @param ImageNbMCUs : pointer to uint32_t, used to Retrieve the total number of MCU blocks in the jpeg image.  
   * @retval HAL status : HAL_OK or HAL_ERROR.
   */
 HAL_StatusTypeDef JPEG_GetEncodeColorConvertFunc(JPEG_ConfTypeDef *pJpegInfo, JPEG_RGBToYCbCr_Convert_Function *pFunction, uint32_t *ImageNbMCUs)
@@ -1112,7 +1093,7 @@ HAL_StatusTypeDef JPEG_GetEncodeColorConvertFunc(JPEG_ConfTypeDef *pJpegInfo, JP
   * @param  BlockIndex : index of the input buffer first block in the final image.
   * @param  DataCount  : number of bytes in the input buffer .
   * @param  ConvertedDataCount  : number of converted bytes from input buffer.  
-  * @retval Number of blcoks converted from YCbCr to RGB 
+  * @retval Number of blocks converted from YCbCr to RGB 
   */
 
 static uint32_t JPEG_MCU_YCbCr420_ARGB_ConvertBlocks(uint8_t *pInBuffer, 
@@ -1134,8 +1115,7 @@ static uint32_t JPEG_MCU_YCbCr420_ARGB_ConvertBlocks(uint8_t *pInBuffer,
   
   numberMCU = DataCount / YCBCR_420_BLOCK_SIZE;
   currentMCU = BlockIndex;
-
-  *ConvertedDataCount = numberMCU * JPEG_ConvertorParams.BlockSize;
+  
 
   while(currentMCU < (numberMCU + BlockIndex))
   {
@@ -1298,7 +1278,7 @@ static uint32_t JPEG_MCU_YCbCr420_ARGB_ConvertBlocks(uint8_t *pInBuffer,
   * @param  BlockIndex : index of the input buffer first block in the final image.
   * @param  DataCount  : number of bytes in the input buffer .
   * @param  ConvertedDataCount  : number of converted bytes from input buffer.  
-  * @retval Number of blcoks converted from YCbCr to RGB 
+  * @retval Number of blocks converted from YCbCr to RGB 
   */
 static uint32_t JPEG_MCU_YCbCr422_ARGB_ConvertBlocks(uint8_t *pInBuffer, 
                                       uint8_t *pOutBuffer,
@@ -1320,7 +1300,6 @@ static uint32_t JPEG_MCU_YCbCr422_ARGB_ConvertBlocks(uint8_t *pInBuffer,
   numberMCU = DataCount / YCBCR_422_BLOCK_SIZE;
   currentMCU = BlockIndex;
   
-  *ConvertedDataCount = numberMCU * JPEG_ConvertorParams.BlockSize;
 
   while(currentMCU < (numberMCU + BlockIndex))
   {
@@ -1430,7 +1409,7 @@ static uint32_t JPEG_MCU_YCbCr422_ARGB_ConvertBlocks(uint8_t *pInBuffer,
   * @param  BlockIndex : index of the input buffer first block in the final image.
   * @param  DataCount  : number of bytes in the input buffer .
   * @param  ConvertedDataCount  : number of converted bytes from input buffer.  
-  * @retval Number of blcoks converted from YCbCr to RGB 
+  * @retval Number of blocks converted from YCbCr to RGB 
   */
 static uint32_t JPEG_MCU_YCbCr444_ARGB_ConvertBlocks(uint8_t *pInBuffer, 
                                       uint8_t *pOutBuffer,
@@ -1452,7 +1431,6 @@ static uint32_t JPEG_MCU_YCbCr444_ARGB_ConvertBlocks(uint8_t *pInBuffer,
   numberMCU = DataCount / YCBCR_444_BLOCK_SIZE;
   currentMCU = BlockIndex;
   
-  *ConvertedDataCount = numberMCU * JPEG_ConvertorParams.BlockSize;
 
   while(currentMCU < (numberMCU + BlockIndex))
   {
@@ -1536,7 +1514,7 @@ static uint32_t JPEG_MCU_YCbCr444_ARGB_ConvertBlocks(uint8_t *pInBuffer,
   * @param  BlockIndex : index of the input buffer first block in the final image.
   * @param  DataCount  : number of bytes in the input buffer .
   * @param  ConvertedDataCount  : number of converted bytes from input buffer.  
-  * @retval Number of blcoks converted from YCbCr to RGB 
+  * @retval Number of blocks converted from YCbCr to RGB 
   */
 static uint32_t JPEG_MCU_Gray_ARGB_ConvertBlocks(uint8_t *pInBuffer, 
                                       uint8_t *pOutBuffer,
@@ -1555,8 +1533,6 @@ static uint32_t JPEG_MCU_Gray_ARGB_ConvertBlocks(uint8_t *pInBuffer,
   
   numberMCU = DataCount / GRAY_444_BLOCK_SIZE;
   currentMCU = BlockIndex;
-  
-  *ConvertedDataCount = numberMCU * JPEG_ConvertorParams.BlockSize;
   
   while(currentMCU < (numberMCU + BlockIndex))
   {
@@ -1615,7 +1591,7 @@ static uint32_t JPEG_MCU_Gray_ARGB_ConvertBlocks(uint8_t *pInBuffer,
   * @param  BlockIndex : index of the input buffer first block in the final image.
   * @param  DataCount  : number of bytes in the input buffer .
   * @param  ConvertedDataCount  : number of converted bytes from input buffer.  
-  * @retval Number of blcoks converted from CMYK to RGB 
+  * @retval Number of blocks converted from CMYK to RGB 
   */
 static uint32_t JPEG_MCU_YCCK_ARGB_ConvertBlocks(uint8_t *pInBuffer, 
                                       uint8_t *pOutBuffer, 
@@ -1636,7 +1612,6 @@ static uint32_t JPEG_MCU_YCCK_ARGB_ConvertBlocks(uint8_t *pInBuffer,
   numberMCU = DataCount / CMYK_444_BLOCK_SIZE;
   currentMCU = BlockIndex;
   
-  *ConvertedDataCount = numberMCU * JPEG_ConvertorParams.BlockSize;
 
   while(currentMCU < (numberMCU + BlockIndex))
   {
@@ -1703,12 +1678,12 @@ static uint32_t JPEG_MCU_YCCK_ARGB_ConvertBlocks(uint8_t *pInBuffer,
 }
 
 /**
-  * @brief  Retrive Decoding YCbCr to RGB color conversion function and block number  
-  * @param  pJpegInfo  : JPEG_ConfTypeDef that contains the JPEG image informations.
+  * @brief  Retrieve Decoding YCbCr to RGB color conversion function and block number  
+  * @param  pJpegInfo  : JPEG_ConfTypeDef that contains the JPEG image information.
   *                      These info are available in the HAL callback "HAL_JPEG_InfoReadyCallback".
-  * @param  pFunction  : pointer to JPEG_YCbCrToRGB_Convert_Function , used to retrive the color conversion function 
+  * @param  pFunction  : pointer to JPEG_YCbCrToRGB_Convert_Function , used to Retrieve the color conversion function 
   *                      depending of the jpeg image color space and chroma sampling info. 
-  * @param ImageNbMCUs : pointer to uint32_t, used to retrive the total number of MCU blocks in the jpeg image.  
+  * @param ImageNbMCUs : pointer to uint32_t, used to Retrieve the total number of MCU blocks in the jpeg image.  
   * @retval HAL status : HAL_OK or HAL_ERROR.
   */
 HAL_StatusTypeDef JPEG_GetDecodeColorConvertFunc(JPEG_ConfTypeDef *pJpegInfo, JPEG_YCbCrToRGB_Convert_Function *pFunction, uint32_t *ImageNbMCUs)
@@ -1994,5 +1969,3 @@ static uint8_t *JPEG_Set_K_Blocks(uint8_t *pMCUBuffer, uint8_t pKBlocks[16][16],
   return pMCUBuffer;
 }
 #endif /* USE_JPEG_ENCODER == 1 */
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

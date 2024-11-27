@@ -2,7 +2,7 @@
   @page HSEM_CoreSync HSEM CoreSync example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    HSEM/HSEM_CoreSync/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the HSEM CoreSync example.

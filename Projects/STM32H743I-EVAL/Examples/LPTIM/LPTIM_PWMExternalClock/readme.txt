@@ -2,7 +2,7 @@
   @page LPTIM_PWMExternalClock LPTIM PWM External clock example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  ******************************************************************************
   * @file    LPTIM/LPTIM_PWMExternalClock/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the LPTIM PWM with an External clock example.

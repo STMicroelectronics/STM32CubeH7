@@ -2,7 +2,7 @@
   @page RTC_TimeStamp RTC time stamp Example
 
   @verbatim
-  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  ******************************************************************************
   * @file    RTC/RTC_TimeStamp/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the RTC time stamp example.

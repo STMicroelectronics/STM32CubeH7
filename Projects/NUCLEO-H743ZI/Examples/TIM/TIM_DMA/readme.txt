@@ -2,7 +2,7 @@
   @page TIM_DMA TIM DMA example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  ******************************************************************************
   * @file    TIM/TIM_DMA/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the TIM DMA example.

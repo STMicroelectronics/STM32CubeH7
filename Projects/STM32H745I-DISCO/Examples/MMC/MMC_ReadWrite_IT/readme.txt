@@ -2,7 +2,7 @@
   @page MMC_ReadWrite_IT  Description of the MMC_ReadWrite_IT example
 
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    MMC/MMC_ReadWrite_IT/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the MMC read and write buffer in interrupt mode example.

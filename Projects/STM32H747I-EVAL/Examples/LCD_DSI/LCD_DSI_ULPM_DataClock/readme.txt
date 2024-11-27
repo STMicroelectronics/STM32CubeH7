@@ -4,7 +4,7 @@
   in landscape mode in DSI mode Video Burst on LCD screen.
 
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    LCD_DSI/LCD_DSI_ULPM_DataClock/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the LCD DSI enter and exit DSI ULPM Mode on data lane 

@@ -2,7 +2,7 @@
   @page DTS_GetTemperature DTS Get Temperature example
 
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    DTS/DTS_GetTemperature/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the DTS Get Temperature example.

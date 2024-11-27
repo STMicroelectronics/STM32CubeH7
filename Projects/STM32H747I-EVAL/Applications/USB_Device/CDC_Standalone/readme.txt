@@ -2,7 +2,7 @@
   @page CDC_Standalone USB Device Communication (CDC) application
 
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    USB_Device/CDC_Standalone/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the USB Device CDC application.

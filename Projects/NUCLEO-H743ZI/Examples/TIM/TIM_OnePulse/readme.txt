@@ -2,7 +2,7 @@
   @page TIM_OnePulse TIM One Pulse example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  ******************************************************************************
   * @file    TIM/TIM_OnePulse/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the TIM One Pulse example.      

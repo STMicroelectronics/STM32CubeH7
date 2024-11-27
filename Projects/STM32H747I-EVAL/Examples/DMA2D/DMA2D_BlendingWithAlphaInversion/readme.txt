@@ -2,7 +2,7 @@
   @page DMA2D_BlendingWithAlphaInversion DMA2D blending with alpha inversion example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    DMA2D/DMA2D_BlendingWithAlphaInversion/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the STM32H7xx DMA2D blending with alpha inversion example.

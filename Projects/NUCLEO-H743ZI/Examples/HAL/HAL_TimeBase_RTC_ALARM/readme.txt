@@ -2,7 +2,7 @@
   @page HAL_TimeBase_RTC_ALARM HAL TimeBase RTC Alarm example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
+  ******************************************************************************
   * @file    HAL/HAL_TimeBase_RTC_ALARM/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the HAL TimeBase RTC Alarm example.

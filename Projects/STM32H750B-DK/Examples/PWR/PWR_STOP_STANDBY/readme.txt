@@ -2,7 +2,7 @@
   @page PWR_STOP_STANDBY PWR standby example
 
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    PWR/PWR_STOP_STANDBY/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the PWR STOP/STANDBY example.

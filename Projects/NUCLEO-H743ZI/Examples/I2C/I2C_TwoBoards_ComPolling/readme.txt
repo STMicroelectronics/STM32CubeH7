@@ -2,7 +2,7 @@
   @page I2C_TwoBoards_ComPolling I2C Two Boards Communication Polling Example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  ******************************************************************************
   * @file    I2C/I2C_TwoBoards_ComPolling/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the I2C Two Boards Communication Polling example.

@@ -2,7 +2,7 @@
   @page TIM_TimeBase Time Base example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  ******************************************************************************
   * @file    TIM/TIM_TimeBase/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the TIM Time Base example

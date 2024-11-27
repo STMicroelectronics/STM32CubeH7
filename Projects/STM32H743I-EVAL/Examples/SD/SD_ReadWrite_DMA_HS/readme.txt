@@ -2,7 +2,7 @@
   @page SD_ReadWrite_DMA_HS  Description of the SD_ReadWrite_DMA_HS example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  ******************************************************************************
   * @file    SD/SD_ReadWrite_DMA_HS/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the SD read and write buffer with internal DMA example.

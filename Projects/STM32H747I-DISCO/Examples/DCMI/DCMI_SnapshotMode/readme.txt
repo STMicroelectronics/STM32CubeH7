@@ -2,7 +2,7 @@
   @page DCMI_SnapshotMode DCMI Snapshot Mode example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    DCMI/DCMI_SnapshotMode/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the STM32H7xx DCMI_SnapshotMode example.

@@ -2,7 +2,7 @@
   @page FDCAN_Com_polling FDCAN Communication polling example
 
   @verbatim
-  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  ******************************************************************************
   * @file    FDCAN/FDCAN_Com_polling/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the FDCAN_Com_polling ewample.

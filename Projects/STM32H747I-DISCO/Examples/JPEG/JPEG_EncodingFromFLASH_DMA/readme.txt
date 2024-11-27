@@ -2,7 +2,7 @@
   @page JPEG_EncodingFromFLASH_DMA : JPEG example : JPEG encoding with DMA of an image stored in FLASH example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    JPEG/JPEG_EncodingFromFLASH_DMA/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the JPEG encoding from FLASH and with DMA example.

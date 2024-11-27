@@ -154,7 +154,7 @@ void mbedtls_aes_free( mbedtls_aes_context *ctx )
         cryp_context_count--;
 
 #if defined(MBEDTLS_THREADING_C)
-    if ( cryp_mutex_started )
+    if ( cryp_context_count == 0 )
     {
         mbedtls_mutex_free( &cryp_mutex );
         cryp_mutex_started = 0;

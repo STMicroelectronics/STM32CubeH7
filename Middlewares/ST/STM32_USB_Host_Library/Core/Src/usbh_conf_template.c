@@ -125,7 +125,7 @@ uint32_t USBH_LL_GetLastXferSize(USBH_HandleTypeDef *phost, uint8_t pipe)
   * @brief  USBH_LL_OpenPipe
   *         Open a pipe of the Low Level Driver.
   * @param  phost: Host handle
-  * @param  pipe_num: Pipe index
+  * @param  pipe: Pipe index
   * @param  epnum: Endpoint Number
   * @param  dev_address: Device USB address
   * @param  speed: Device Speed
@@ -134,7 +134,7 @@ uint32_t USBH_LL_GetLastXferSize(USBH_HandleTypeDef *phost, uint8_t pipe)
   * @retval USBH Status
   */
 USBH_StatusTypeDef USBH_LL_OpenPipe(USBH_HandleTypeDef *phost,
-                                    uint8_t pipe_num,
+                                    uint8_t pipe,
                                     uint8_t epnum,
                                     uint8_t dev_address,
                                     uint8_t speed,
@@ -143,7 +143,7 @@ USBH_StatusTypeDef USBH_LL_OpenPipe(USBH_HandleTypeDef *phost,
 {
   /* Prevent unused argument(s) compilation warning */
   UNUSED(phost);
-  UNUSED(pipe_num);
+  UNUSED(pipe);
   UNUSED(epnum);
   UNUSED(dev_address);
   UNUSED(speed);
@@ -157,10 +157,26 @@ USBH_StatusTypeDef USBH_LL_OpenPipe(USBH_HandleTypeDef *phost,
   * @brief  USBH_LL_ClosePipe
   *         Close a pipe of the Low Level Driver.
   * @param  phost: Host handle
-  * @param  pipe_num: Pipe index
+  * @param  pipe: Pipe index
   * @retval USBH Status
   */
 USBH_StatusTypeDef USBH_LL_ClosePipe(USBH_HandleTypeDef *phost, uint8_t pipe)
+{
+  /* Prevent unused argument(s) compilation warning */
+  UNUSED(phost);
+  UNUSED(pipe);
+
+  return USBH_OK;
+}
+
+/**
+  * @brief  USBH_LL_ActivatePipe
+  *         Activate a pipe of the Low Level Driver.
+  * @param  phost: Host handle
+  * @param  pipe: Pipe index
+  * @retval USBH Status
+  */
+USBH_StatusTypeDef USBH_LL_ActivatePipe(USBH_HandleTypeDef *phost, uint8_t pipe)
 {
   /* Prevent unused argument(s) compilation warning */
   UNUSED(phost);

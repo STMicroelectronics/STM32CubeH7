@@ -2,7 +2,7 @@
   @page I2C_TwoBoards_ComDMA I2C Two Boards Communication DMA example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  ******************************************************************************
   * @file    I2C/I2C_TwoBoards_ComDMA/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the I2C Two Boards Communication DMA example.

@@ -2,7 +2,7 @@
   @page ADC_OverSampler ADC OverSampler example
 
   @verbatim
-  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  ******************************************************************************
   * @file    ADC/ADC_OverSampler/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the ADC Oversampler example.

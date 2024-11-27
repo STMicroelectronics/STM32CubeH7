@@ -2,7 +2,7 @@
   @page HASH_SHA224SHA256_DMA  HASH digest calculation using SHA224 and SHA256 example with DMA transfer.
   
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    HASH/HASH_SHA224SHA256_DMA/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the HASH digest calculation using SHA224 and SHA256 example with DMA transfer.

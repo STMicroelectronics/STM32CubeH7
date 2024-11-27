@@ -2,7 +2,7 @@
   @page OTFDEC_ExecutingCryptedInstruction OTFDEC Executing Crypetd Instruction example
 
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    OTFDEC/OTFDEC_ExecutingCryptedInstruction/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the Templates example.

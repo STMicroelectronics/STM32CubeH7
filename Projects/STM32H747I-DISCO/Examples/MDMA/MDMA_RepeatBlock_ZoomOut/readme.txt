@@ -2,7 +2,7 @@
   @page MDMA_RepeatBlock_ZoomOut MDMA RepeatBlock ZoomOut example descreption
   
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    MDMA/MDMA_RepeatBlock_ZoomOut/readme.txt
   * @author  MCD Application Team
   * @brief   MDMA RepeatBlock ZoomOut example.

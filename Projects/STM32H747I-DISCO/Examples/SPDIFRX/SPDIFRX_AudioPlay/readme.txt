@@ -2,7 +2,7 @@
   @page SPDIFRX_AudioPlay SPDIFRX Audio Play example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    SPDIFRX/SPDIFRX_AudioPlay/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the SPDIFRX Audio Play example.

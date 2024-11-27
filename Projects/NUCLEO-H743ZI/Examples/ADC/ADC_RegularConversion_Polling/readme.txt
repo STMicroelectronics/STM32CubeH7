@@ -2,7 +2,7 @@
   @page ADC_RegularConversion_Polling conversion using Polling
 
   @verbatim
-  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  ******************************************************************************
   * @file    ADC/ADC_RegularConversion_Polling/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the ADC RegularConversion Polling example.

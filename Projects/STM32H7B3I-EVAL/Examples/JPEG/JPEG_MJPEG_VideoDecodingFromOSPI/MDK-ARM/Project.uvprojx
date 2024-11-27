@@ -335,7 +335,7 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define>USE_HAL_DRIVER,STM32H7B3xxQ,USE_STM32H7B3I_EVAL</Define>
+              <Define>USE_HAL_DRIVER,USE_PWR_DIRECT_SMPS_SUPPLY,STM32H7B3xxQ,USE_STM32H7B3I_EVAL</Define>
               <Undefine></Undefine>
               <IncludePath>../Inc;../../../../../../Drivers/BSP/STM32H7B3I-EVAL;../../../../../../Drivers/CMSIS/Include;../../../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../../../../../../Drivers/STM32H7xx_HAL_Driver/Inc;../../../../../../Drivers/BSP/Components/Common;../../../../../../Drivers/BSP/Components;../../../../../../Utilities/Log;../../../../../../Utilities/Fonts;../../../../../../Utilities/CPU;../../../../../../Utilities/LCD;../../../../../../Middlewares/ST/STM32_Audio/Addons/PDM/Inc</IncludePath>
             </VariousControls>
@@ -400,6 +400,16 @@
               <FileName>ft5336_reg.c</FileName>
               <FileType>1</FileType>
               <FilePath>../../../../../../Drivers/BSP/Components/ft5336/ft5336_reg.c</FilePath>
+            </File>
+            <File>
+              <FileName>gt911.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../../../../../../Drivers/BSP/Components/gt911/gt911.c</FilePath>
+            </File>
+            <File>
+              <FileName>gt911_reg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../../../../../../Drivers/BSP/Components/gt911/gt911_reg.c</FilePath>
             </File>
             <File>
               <FileName>is42s32800j.c</FileName>

@@ -2,7 +2,7 @@
   @page IAP_Binary_Template AN4657 IAP Binary Template Readme file
   
   @verbatim
-  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  ******************************************************************************
   * @file    IAP/IAP_Binary_Template/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the IAP_Binary_Template directory.

@@ -2,7 +2,7 @@
   @page FatFs_USBDisk_RTOS  FatFs with USB disk drive and FreeRTOS application
  
   @verbatim
-  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  ******************************************************************************
   * @file    FatFs/FatFs_USBDisk_RTOS/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the FatFs with USB disk drive application

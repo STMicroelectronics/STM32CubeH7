@@ -2,7 +2,7 @@
   @page DAC_SignalsGeneration DAC Signals generation example
 
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    DAC/DAC_SignalsGeneration/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the DAC Signals generation example.

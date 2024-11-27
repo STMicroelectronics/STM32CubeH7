@@ -2,7 +2,7 @@
   @page LwIP_UDPTCP_Echo_Server_Netconn_RTOS LwIP UDP/TCP Echo Server Netconn Application
   
   @verbatim
-  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  ******************************************************************************
   * @file    LwIP/LwIP_UDPTCP_Echo_Server_Netconn_RTOS/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the LwIP UDP/TCP Echo Server Netconn API Application

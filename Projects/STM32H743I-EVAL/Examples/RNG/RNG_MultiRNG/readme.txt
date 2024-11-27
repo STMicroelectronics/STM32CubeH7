@@ -2,7 +2,7 @@
   @page RNG_MultiRNG example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  ******************************************************************************
   * @file    RNG/RNG_MultiRNG/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of multiple random numbers generation example.

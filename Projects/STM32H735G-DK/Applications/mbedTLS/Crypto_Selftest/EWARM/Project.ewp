@@ -224,6 +224,7 @@
                 </option>
                 <option>
                     <name>CCDefines</name>
+                    <state>USE_PWR_DIRECT_SMPS_SUPPLY</state>
                     <state>USE_HAL_DRIVER</state>
                     <state>STM32H735xx</state>
                     <state>MBEDTLS_CONFIG_FILE=&lt;mbedtls_config.h&gt;</state>
@@ -1123,6 +1124,15 @@ $PROJ_DIR$\..\Inc</state>
                     </file>
                     <file>
                         <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\Components\ft5336\ft5336_reg.c</name>
+                    </file>
+                </group>
+                <group>
+                    <name>GT911</name>
+                    <file>
+                        <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\Components\gt911\gt911.c</name>
+                    </file>
+                    <file>
+                        <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\Components\gt911\gt911_reg.c</name>
                     </file>
                 </group>
                 <group>

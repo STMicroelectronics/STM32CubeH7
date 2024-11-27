@@ -2,7 +2,7 @@
   @page Demonstrations   STM32H743I-EVAL Demonstration Firmware
  
   @verbatim
-  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  ******************************************************************************
   * @file    Demonstration/Binary/readme.txt 
   * @author  MCD Application Team 
   * @brief   Description of STM32H743I-EVAL Demonstration Binary

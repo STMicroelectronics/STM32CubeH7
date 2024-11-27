@@ -2,7 +2,7 @@
   @page PSSI_Transmit_Receive_DMA example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    PSSI/PSSI_Transmit_Receive_DMA/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the PSSI_Transmit_Receive_DMA example.

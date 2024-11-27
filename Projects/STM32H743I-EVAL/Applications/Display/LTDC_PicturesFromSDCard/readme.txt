@@ -2,7 +2,7 @@
   @page LTDC_PicturesFromSDCard LTDC pictures from SD card application
   
   @verbatim
-  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  ******************************************************************************
   * @file    Display/LTDC_PicturesFromSDCard/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the LTDC pictures from SD card application.

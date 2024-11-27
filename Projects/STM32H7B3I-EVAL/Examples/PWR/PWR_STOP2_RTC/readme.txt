@@ -2,7 +2,7 @@
   @page PWR_STOP2_RTC example
 
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    PWR/PWR_STOP2_RTC/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the PWR STOP2 RTC example.

@@ -2,7 +2,7 @@
   @page HID_Standalone USB Device Humain Interface (HID) application
   
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    USB_Device/HID_Standalone/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the USB HID application.

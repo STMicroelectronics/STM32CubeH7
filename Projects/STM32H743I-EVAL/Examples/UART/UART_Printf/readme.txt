@@ -2,7 +2,7 @@
   @page UART_Printf UART Printf example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  ******************************************************************************
   * @file    UART/UART_Printf/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the UART Printf example.

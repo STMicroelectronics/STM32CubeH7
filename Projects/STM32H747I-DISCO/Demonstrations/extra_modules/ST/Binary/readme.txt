@@ -2,7 +2,7 @@
   @page Demo   STM32H747I-DISCO ST Extra Modules Demonstration Firmware
  
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    Demonstration/readme.txt 
   * @author  MCD Application Team 
   * @brief   Description of STM32H747I-DISCO ST Extra Modules Demonstration Binary

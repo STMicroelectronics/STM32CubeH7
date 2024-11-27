@@ -2,7 +2,7 @@
   @page HAL_TimeBase_TIM HAL Time base example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  ******************************************************************************
   * @file    HAL/HAL_TimeBase_TIM/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the HAL time base example.

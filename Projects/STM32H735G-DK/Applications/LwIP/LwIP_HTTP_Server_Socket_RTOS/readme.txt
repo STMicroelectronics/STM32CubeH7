@@ -2,7 +2,7 @@
   @page LwIP_HTTP_Server_Socket_RTOS LwIP HTTP Server Socket Application
   
   @verbatim
-  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  ******************************************************************************
   * @file    LwIP/LwIP_HTTP_Server_Socket_RTOS/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the LwIP http server Socket API Application.

@@ -2,7 +2,7 @@
   @page LwIP_TCP_Echo_Server LwIP TCP Echo Server Application
   
   @verbatim
-  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  ******************************************************************************
   * @file    LwIP/LwIP_TCP_Echo_Server/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the LwIP TCP Echo server Application.

@@ -2,7 +2,7 @@
   @page GFXMMU_DisplayCircularShape GFXMMU Display Circular Shape example
 
   @verbatim
-  ******************** (C) COPYRIGHT 2018 STMicroelectronics *******************
+  ******************************************************************************
   * @file    GFXMMU/GFXMMU_DisplayCircularShape/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the GFXMMU_DisplayCircularShape example.

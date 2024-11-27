@@ -2,7 +2,7 @@
   @page CEC_DataExchange CEC_DataExchange example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  ******************************************************************************
   * @file    CEC/CEC_DataExchange/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the CEC Data Exchange example.

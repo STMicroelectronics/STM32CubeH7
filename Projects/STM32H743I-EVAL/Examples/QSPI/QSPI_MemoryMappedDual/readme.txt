@@ -2,7 +2,7 @@
   @page QSPI_MemoryMappedDual QSPI memory mapped dual mode example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  ******************************************************************************
   * @file    QSPI/QSPI_MemoryMapped/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the QSPI memory mapped dual mode example.

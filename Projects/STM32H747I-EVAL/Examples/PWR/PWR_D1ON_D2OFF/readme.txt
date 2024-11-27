@@ -2,7 +2,7 @@
   @page PWR_D1ON_D2OFF Power D1 domain ON and D2 domain OFF Example 
   
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    PWR/PWR_D1ON_D2OFF/readme.txt
   * @author  MCD Application Team
   * @brief   Description of PWR_D1ON_D2OFF example.

@@ -2,7 +2,7 @@
   @page HASH_SHA1MD5  HASH digest calculation using SHA1 and MD5 example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  ******************************************************************************
   * @file    HASH/HASH_SHA1MD5/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the digest calculation using SHA1 and MD5 example.

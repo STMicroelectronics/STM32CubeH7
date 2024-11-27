@@ -2,7 +2,7 @@
   @page TIM_Synchronization Timers Synchronization example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  ******************************************************************************
   * @file    TIM/TIM_Synchronization/readme.txt 
   * @author  MCD Application Team
   * @brief   How to command 2 Timers as slaves (TIM3 & TIM4) using a Timer

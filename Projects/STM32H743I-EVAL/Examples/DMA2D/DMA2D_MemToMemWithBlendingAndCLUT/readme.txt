@@ -2,7 +2,7 @@
   @page DMA2D_MemToMemWithBlendingAndCLUT DMA2D Memory to Memory with blending and CLUT example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  ******************************************************************************
   * @file    DMA2D/DMA2D_MemToMemWithBlendingAndCLUT/readme.txt 
   * @author  MCD Application Team  
   * @brief   Description of the STM32H7xx DMA2D Memory to Memory with blending and CLUT example.

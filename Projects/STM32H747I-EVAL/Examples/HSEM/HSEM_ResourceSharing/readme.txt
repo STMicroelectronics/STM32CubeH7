@@ -2,7 +2,7 @@
   @page HSEM_ResourceSharing HSEM ResourceSharing example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    HSEM/HSEM_ResourceSharing/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the HSEM CoreSync example.

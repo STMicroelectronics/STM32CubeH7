@@ -2,7 +2,7 @@
   @page ExtMem_Boot Boot application for External memory execution Readme file
 
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    ExtMem_CodeExecution/ExtMem_Boot/readme.txt
   * @author  MCD Application Team
   * @brief   Description of External memory boot

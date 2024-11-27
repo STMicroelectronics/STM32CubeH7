@@ -75,7 +75,7 @@ void mbedtls_sha256_free( mbedtls_sha256_context *ctx )
         hash_context_count--;
 
 #if defined(MBEDTLS_THREADING_C)
-    if ( hash_mutex_started )
+    if ( hash_context_count == 0 )
     {
         mbedtls_mutex_free( &hash_mutex );
         hash_mutex_started = 0;

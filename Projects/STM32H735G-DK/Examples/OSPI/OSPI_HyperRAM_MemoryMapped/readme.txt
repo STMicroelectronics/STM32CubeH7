@@ -2,7 +2,7 @@
   @page OSPI_HyperRAM_MemoryMapped OSPI HyperRAM Memory Mapped example
 
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    OSPI/OSPI_HyperRAM_MemoryMapped/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the OSPI HyperRAM memory mapped mode example.

@@ -2,7 +2,7 @@
   @page ResourcesManager_SharedResources ResourcesManager SharedResources application
   
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    ResourcesManager/ResourcesManager_SharedResources/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the ResourcesManager SharedResources application application.

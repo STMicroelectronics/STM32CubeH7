@@ -2,7 +2,7 @@
   @page QSPI_ReadWriteDual_DMA QSPI Read/Write in DMA mode example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  ******************************************************************************
   * @file    QSPI/QSPI_ReadWriteDual_DMA/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the QSPI Read/Write in DMA mode example.

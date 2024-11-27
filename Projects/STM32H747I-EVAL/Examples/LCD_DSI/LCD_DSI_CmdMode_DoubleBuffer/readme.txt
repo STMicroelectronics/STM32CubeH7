@@ -2,7 +2,7 @@
   @page LCD_DSI_CmdMode_DoubleBuffer : LCD DSI example : LCD DSI example in DSI Command mode.
 
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    LCD_DSI/LCD_DSI_CmdMode_DoubleBuffer/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the LCD DSI in command mode example.

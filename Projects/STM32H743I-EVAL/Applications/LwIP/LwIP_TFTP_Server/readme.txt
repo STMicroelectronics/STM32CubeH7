@@ -2,7 +2,7 @@
   @page LwIP_TFTP_Server LwIP_TFTP_Server application
  
   @verbatim
-  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  ******************************************************************************
   * @file    LwIP/LwIP_TFTP_Server/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the TFTP server Application.

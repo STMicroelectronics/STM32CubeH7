@@ -2,7 +2,7 @@
   @page FDCAN_Clock_calibration FDCAN Clock Calibration example
 
   @verbatim
-  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  ******************************************************************************
   * @file    FDCAN/FDCAN_Clock_calibration/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the FDCAN_Clock_calibration example.

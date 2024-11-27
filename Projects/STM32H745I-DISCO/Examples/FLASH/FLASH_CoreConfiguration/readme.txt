@@ -2,7 +2,7 @@
   @page FLASH_CoreConfiguration  Description of the FLASH_CoreConfiguration example
 
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    FLASH/FLASH_CoreConfiguration/readme.txt
   * @author  MCD Application Team
   * @brief   Description the FLASH CoreConfiguration example.

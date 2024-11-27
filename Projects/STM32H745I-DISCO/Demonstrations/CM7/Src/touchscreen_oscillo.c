@@ -52,6 +52,8 @@ uint32_t AutoChangeDelay = 0;
 uint32_t SG_InitTouchScreen(void)
 {  
   uint32_t ret = DEMO_OK;
+  int32_t probeStatus;
+  uint32_t Instance = 0;
   uint32_t x_size, y_size;
 
   BSP_LCD_GetXSize(0, &x_size);
@@ -59,7 +61,19 @@ uint32_t SG_InitTouchScreen(void)
 
   hTS.Width = x_size;
   hTS.Height = y_size;
-  hTS.Orientation =TS_SWAP_XY ;
+  probeStatus = GT911_Probe(Instance);
+  if (probeStatus == BSP_ERROR_NONE)
+  {
+    hTS.Orientation = TS_SWAP_NONE;
+  }
+  else
+  {
+    probeStatus = FT5336_Probe(Instance);
+    if (probeStatus == BSP_ERROR_NONE)
+    {
+      hTS.Orientation = TS_SWAP_XY;
+    }
+  }
   hTS.Accuracy = 5;
 
   /* Touchscreen initialization */

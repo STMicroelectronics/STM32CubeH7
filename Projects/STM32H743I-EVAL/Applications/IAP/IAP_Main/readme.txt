@@ -2,7 +2,7 @@
   @page IAP_Main AN4657 STM32H7xx In-Application Programming using the USART Readme file
   
   @verbatim
-  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  ******************************************************************************
   * @file    IAP_Main/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of implementation of the AN4657 (in-application programming

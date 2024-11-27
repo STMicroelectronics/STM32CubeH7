@@ -2,7 +2,7 @@
   @page JPEG_MJPEG_VideoDecoding : MJPEG video decoding example
 
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    JPEG/JPEG_MJPEG_VideoDecoding/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the MJPEG video decoding example.

@@ -2,7 +2,7 @@
   @page TIM_OCToggle TIM_OCToggle example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  ******************************************************************************
   * @file    TIM/TIM_OCToggle/readme.txt 
   * @author  MCD Application Team
   * @brief   This example shows how to configure the Timer to generate four different 

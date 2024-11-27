@@ -2,7 +2,7 @@
   @page MDMA_LTDC_Triggering MDMA with LTDC Line Interrupt Flag used as MDMA trigger Example
 
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    MDMA/MDMA_LTDC_Triggering/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the MDMA with LTDC Line Interrupt Flag used as MDMA trigger Example

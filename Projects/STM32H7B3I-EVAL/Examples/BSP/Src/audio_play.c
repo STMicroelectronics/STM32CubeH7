@@ -102,6 +102,8 @@ void AudioPlay_demo (void)
   uint32_t *AudioFreq_ptr;
   uint32_t y_size;
   uint8_t ts_status = BSP_ERROR_NONE;
+  int32_t probeStatus;
+  uint32_t Instance = 0;
 
   BSP_LCD_GetYSize(0, &y_size);
   AudioFreq_ptr = &AudioFreq[1]; /* 48K*/
@@ -117,7 +119,19 @@ void AudioPlay_demo (void)
   Audio_SetHint(0);
   UTIL_LCD_SetFont(&Font20);
 
-  hTS.Orientation = TS_SWAP_Y;
+  probeStatus = GT911_Probe(Instance);
+  if (probeStatus == BSP_ERROR_NONE)
+  {
+    hTS.Orientation = TS_SWAP_NONE;
+  }
+  else
+  {
+    probeStatus = FT5336_Probe(Instance);
+    if (probeStatus == BSP_ERROR_NONE)
+    {
+      hTS.Orientation = TS_SWAP_Y;
+    }
+  }
   hTS.Accuracy = 0;
   hTS.Width = 800;
   hTS.Height = 480;

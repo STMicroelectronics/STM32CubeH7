@@ -2,7 +2,7 @@
   @page DCMI_CaptureMode DCMI Capture Mode example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    DCMI/DCMI_CaptureMode/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the STM32H7xx DCMI_CaptureMode example.

@@ -2,7 +2,7 @@
   @page Templates  Description of the Templates example
 
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    Templates/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the Templates example.

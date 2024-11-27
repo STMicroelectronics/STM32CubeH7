@@ -2,7 +2,7 @@
   @page FPU_Fractal Floating Point Unit application.
 
   @verbatim
-  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  ******************************************************************************
   * @file    readme.txt
   * @author  MCD Application Team
   * @brief   Description of the FPU Fractal application.

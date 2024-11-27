@@ -2,7 +2,7 @@
   @page OTFDEC_DataDecrypt Description of OTFDEC Data Decryption example
 
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    OTFDEC_DataDecrypt/readme.txt
   * @author  MCD Application Team
   * @brief   This example describes how to decrypt data located on the OCTOSPI external flash.

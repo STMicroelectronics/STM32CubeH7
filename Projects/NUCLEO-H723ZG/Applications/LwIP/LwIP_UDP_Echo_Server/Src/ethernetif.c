@@ -107,7 +107,7 @@ __attribute__((section(".Rx_PoolSection"))) extern u8_t memp_memory_RX_POOL_base
 #endif
 
 /* Variable Definitions */
-static uint8_t RxAllocStatus;
+static RxAllocStatusTypeDef RxAllocStatus;
 
 /* Global Ethernet handle*/
 ETH_HandleTypeDef EthHandle;

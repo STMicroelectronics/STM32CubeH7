@@ -2,7 +2,7 @@
   @page CRC_Example Cyclic Redundancy Check Example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    CRC/CRC_Example/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of Cyclic Redundancy Check Example.

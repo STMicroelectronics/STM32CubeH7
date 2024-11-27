@@ -2,7 +2,7 @@
   @page I2C_EEPROM_fast_mode_plus  example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  ******************************************************************************
   * @file    I2C/I2C_EEPROM_fast_mode_plus/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the I2C EEPROM DMA example.

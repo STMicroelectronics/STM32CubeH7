@@ -2,7 +2,7 @@
   @page CRYP_AESGCM  AES GCM  Example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    CRYP/CRYP_AES_CCM/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the CRYP AES Galois/counter mode (GCM)encryption

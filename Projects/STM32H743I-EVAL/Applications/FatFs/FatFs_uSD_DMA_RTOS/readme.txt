@@ -2,7 +2,7 @@
   @page FatFs_uSD_DMA_RTOS   FatFs with uSD card drive in RTOS mode application
  
   @verbatim
-  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  ******************************************************************************
   * @file    FatFs/FatFs_uSD_DMA_RTOS/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the FatFs with uSD/DMA card drive in RTOS mode application

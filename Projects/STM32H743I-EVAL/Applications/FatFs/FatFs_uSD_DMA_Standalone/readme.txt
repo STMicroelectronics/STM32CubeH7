@@ -2,7 +2,7 @@
   @page FatFs_uSD_DMA_Standalone   FatFs with uSD card drive application using the DMA
   
   @verbatim
-  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  ******************************************************************************
   * @file    FatFs/FatFs_uSD_DMA_Standalone/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the FatFs with uSD/DMA card drive application.

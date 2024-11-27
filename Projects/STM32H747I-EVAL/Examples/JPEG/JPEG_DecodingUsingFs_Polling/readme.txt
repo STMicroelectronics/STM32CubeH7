@@ -2,7 +2,7 @@
   @page JPEG_DecodingUsingFs_Polling : JPEG example : JPEG decoding using Fatfs and with Polling example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    JPEG/JPEG_DecodingUsingFs_Polling/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the JPEG decoding using Fatfs and with Polling example.

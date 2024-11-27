@@ -2,7 +2,7 @@
   @page SD_ReadWrite_IT  Description of the SD_ReadWrite_IT example
 
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    SD/SD_ReadWrite_IT/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the SD read and write buffer with IT mode example.

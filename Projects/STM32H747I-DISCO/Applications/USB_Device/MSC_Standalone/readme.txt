@@ -2,7 +2,7 @@
   @page MSC_Standalone USB Device Mass Storage (MSC) application
   
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    USB_Device/MSC_Standalone/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the USB Device MSC application.

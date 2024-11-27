@@ -2,7 +2,7 @@
   @page FatFs_uSD_RTOS    FatFs with uSD disk drive application
 
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    FatFs/FatFs_uSD_RTOS/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the FatFs with uSD disk drive application

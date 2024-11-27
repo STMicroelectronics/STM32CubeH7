@@ -2,7 +2,7 @@
   @page COMP_Interrupt COMP Interrupt example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  ******************************************************************************
   * @file    COMP/COMP_Interrupt/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the COMP Interrupt example.

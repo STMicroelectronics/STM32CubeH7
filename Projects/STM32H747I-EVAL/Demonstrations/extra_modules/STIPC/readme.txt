@@ -2,7 +2,7 @@
   @page extra_modules/STIPC
   
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    STM32H747I-EVAL/Demonstrations/extra_modules/STIPC/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the extra_modules.

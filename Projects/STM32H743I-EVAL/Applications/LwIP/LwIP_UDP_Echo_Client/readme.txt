@@ -2,7 +2,7 @@
   @page LwIP_UDP_Echo_Client LwIP UDP Echo Client Application
   
   @verbatim
-  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  ******************************************************************************
   * @file    LwIP/LwIP_UDP_Echo_Client/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the LwIP UDP Echo Client Application.

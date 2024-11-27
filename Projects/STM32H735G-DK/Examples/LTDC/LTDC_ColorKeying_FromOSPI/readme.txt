@@ -2,7 +2,7 @@
   @page LTDC_ColorKeying_FromOSPI LTDC Color Keying From OSPI example
 
   @verbatim
-  ******************** (C) COPYRIGHT 2018 STMicroelectronics *******************
+  ******************************************************************************
   * @file    LTDC/LTDC_ColorKeying_FromOSPI/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the LTDC Color Keying from OSPI example.

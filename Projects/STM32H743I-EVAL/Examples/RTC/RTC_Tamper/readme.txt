@@ -2,7 +2,7 @@
   @page RTC_Tamper RTC Tamper Example
 
   @verbatim
-  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  ******************************************************************************
   * @file    RTC/RTC_Tamper/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the RTC Tamper example.

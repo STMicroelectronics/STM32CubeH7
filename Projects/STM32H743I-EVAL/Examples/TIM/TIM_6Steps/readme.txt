@@ -2,7 +2,7 @@
   @page TIM_6Steps Timers Synchronization example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  ******************************************************************************
   * @file    TIM/TIM_6Steps/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the TIM 6 Steps example.

@@ -59,7 +59,7 @@
 /* TS defines */
 #define USE_TS_GESTURE                      1U
 #define USE_TS_MULTI_TOUCH                  1U
-#define TS_TOUCH_NBR                        2U
+#define TS_TOUCH_NBR                        GT911_MAX_NB_TOUCH
 
 /* Default EEPROM max trials */
 #define EEPROM_MAX_TRIALS                   3000U

@@ -2,7 +2,7 @@
   @page DualCore_Standalone USB Host Dual Core application
   
   @verbatim
-  ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
+  ******************************************************************************
   * @file    USB_Host/DualCore_Standalone/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the USB Host Dual Core HID and MSC application.

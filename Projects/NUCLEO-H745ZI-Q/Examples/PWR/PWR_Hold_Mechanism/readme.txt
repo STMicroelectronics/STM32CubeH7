@@ -2,7 +2,7 @@
   @page PWR_Hold_Mechanism PWR Hold Mechanism Example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2018 STMicroelectronics *******************
+  ******************************************************************************
   * @file    PWR/PWR_Hold_Mechanism/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the PWR Hold Mechanism example.

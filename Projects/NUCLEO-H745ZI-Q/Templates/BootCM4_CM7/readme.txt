@@ -2,7 +2,7 @@
   @page Templates  Description of the Template BootCM4_CM7 example
 
   @verbatim
-  ******************** (C) COPYRIGHT 2018 STMicroelectronics *******************
+  ******************************************************************************
   * @file    Templates/BootCM4_CM7/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the Template example.

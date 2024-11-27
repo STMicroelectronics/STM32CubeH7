@@ -2,7 +2,7 @@
   @page FDCAN_Image_transmission Description of the FDCAN Image transmission example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    FDCAN/FDCAN_Image_transmission/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the FDCAN_Image_transmission example.

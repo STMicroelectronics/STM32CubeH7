@@ -2,7 +2,7 @@
   @page TIM_PWMOutput TIM PWM Output example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2018 STMicroelectronics *******************
+  ******************************************************************************
   * @file    TIM/TIM_PWMOutput/readme.txt  
   * @author  MCD Application Team
   * @brief   Description of the PWM signals generation using TIM1.

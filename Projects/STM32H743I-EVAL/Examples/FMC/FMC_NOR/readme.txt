@@ -2,7 +2,7 @@
   @page FMC_NOR NOR memory functionalities example
 
   @verbatim
-  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  ******************************************************************************
   * @file    FMC/FMC_NOR/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the FMC NOR example.

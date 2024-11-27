@@ -236,9 +236,12 @@ __Vectors_Size  EQU  __Vectors_End - __Vectors
 ; Reset handler
 Reset_Handler    PROC
                  EXPORT  Reset_Handler                    [WEAK]
+        IMPORT  ExitRun0Mode
         IMPORT  SystemInit
         IMPORT  __main
 
+                 LDR     R0, =ExitRun0Mode
+                 BLX     R0
                  LDR     R0, =SystemInit
                  BLX     R0
                  LDR     R0, =__main

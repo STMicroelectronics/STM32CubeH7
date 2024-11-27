@@ -2,7 +2,7 @@
   @page USART_SlaveMode USART Slave Mode example
 
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    USART/USART_SlaveMode/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the USART Slave Mode example.

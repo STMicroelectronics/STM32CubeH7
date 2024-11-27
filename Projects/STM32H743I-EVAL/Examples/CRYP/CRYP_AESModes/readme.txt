@@ -2,7 +2,7 @@
   @page CRYP_AESModes  AES ECB/CBC & CTR  Example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  ******************************************************************************
   * @file    CRYP/CRYP_AES_CCM/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the CRYP AES encryption/decryption mode

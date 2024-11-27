@@ -2,7 +2,7 @@
   @page JPEG_DecodingFromFLASH_DMA : JPEG example : JPEG decoding with DMA of an image stored in FLASH example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  ******************************************************************************
   * @file    JPEG/JPEG_DecodingFromFLASH_DMA/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the JPEG decoding from FLASH with DMA example.

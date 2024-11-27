@@ -2,7 +2,7 @@
   @page DMA2D_RegToMemWithLCD DMA2D Register to Memory with LCD example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    DMA2D/DMA2D_RegToMemWithLCD/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the DMA2D Register to Memory with LCD example.

@@ -2,7 +2,7 @@
   @page FatFs_MultiDrives   FatFs with multi drives application
  
   @verbatim
-  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  ******************************************************************************
   * @file    FatFs/FatFs_MultiDrives/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the FatFs with multi drives application

@@ -2,7 +2,7 @@
   @page HID_RTOS USB Host Human Interface (HID) application
 
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    USB_Host/HID_RTOS/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the USB Host HID application.

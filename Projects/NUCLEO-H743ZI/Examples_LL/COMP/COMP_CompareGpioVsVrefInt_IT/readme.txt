@@ -2,7 +2,7 @@
   @page COMP_CompareGpioVsVrefInt_IT COMP example
 
   @verbatim
-  ******************** (C) COPYRIGHT 2018 STMicroelectronics *******************
+  ******************************************************************************
   * @file    Examples_LL/COMP/COMP_CompareGpioVsVrefInt_IT/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the COMP_CompareGpioVsVrefInt_IT example.

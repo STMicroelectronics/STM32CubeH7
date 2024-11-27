@@ -1,7 +1,7 @@
 /**
   @page FatFs_Shared_Device   Concurrent FatFs apps accessing the same eMMC card in read and write access from CM4 and CM7
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    FatFs/FatFs_Shared_Device/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the FatFs Dual instance application

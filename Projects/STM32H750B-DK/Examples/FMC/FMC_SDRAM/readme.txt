@@ -2,7 +2,7 @@
   @page FMC_SDRAM SDRAM memory functionnalities example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    FMC/FMC_SDRAM/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the FMC_SDRAM example.

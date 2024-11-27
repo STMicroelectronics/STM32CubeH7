@@ -2,7 +2,7 @@
   @page MDMA_GPDMA_Triggering MDMA with GPDMA triggering Example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  ******************************************************************************
   * @file    MDMA/MDMA_GPDMA_Triggering/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the MDMA with GPDMA triggering Example.

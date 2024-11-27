@@ -2,7 +2,7 @@
   @page BSP Example on how to use the BSP drivers
   
   @verbatim
-  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  ******************************************************************************
   * @file    Examples/BSP/readme.txt 
   * @author  MCD Application Team
   * @brief   Description STM32H7xx_Nucleo_144 BSP example.

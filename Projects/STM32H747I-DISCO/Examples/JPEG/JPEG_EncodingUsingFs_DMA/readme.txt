@@ -2,7 +2,7 @@
   @page JPEG_EncodingUsingFs_DMA : JPEG example : JPEG encoding using Fatfs and with DMA example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    JPEG/JPEG_EncodingUsingFs_DMA/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the JPEG encoding using Fatfs and with DMA example.

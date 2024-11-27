@@ -2,7 +2,7 @@
   @page GPIO_EXTI GPIO EXTI example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    GPIO/GPIO_EXTI/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the GPIO EXTI example.

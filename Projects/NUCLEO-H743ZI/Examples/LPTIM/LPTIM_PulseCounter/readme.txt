@@ -2,7 +2,7 @@
   @page LPTIM_PulseCounter Low power timer pulse counter example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  ******************************************************************************
   * @file    LPTIM/LPTIM_PulseCounter/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the LPTIM Pulse counter example

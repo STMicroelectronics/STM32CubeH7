@@ -2,7 +2,7 @@
   @page LwIP_UDP_Echo_Server LwIP UDP Echo Server Application
   
   @verbatim
-  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  ******************************************************************************
   * @file    LwIP/LwIP_UDP_Echo_Server/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the LwIP UDP Echo server Application.

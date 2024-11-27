@@ -2,7 +2,7 @@
   @page ADC_DualModeInterleaved Two ADC in interleaved dual-mode, data transfer by DMA
 
   @verbatim
-  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  ******************************************************************************
   * @file    ADC/ADC_DualModeInterleaved/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the Dual interleaved mode example

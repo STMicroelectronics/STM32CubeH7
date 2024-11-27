@@ -2,7 +2,7 @@
   @page HSEM_ReadLock HSEM ReadLock example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  ******************************************************************************
   * @file    HSEM/HSEM_ReadLock/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the HSEM ReadLock example.

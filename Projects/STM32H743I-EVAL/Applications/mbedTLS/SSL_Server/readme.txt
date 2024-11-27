@@ -2,7 +2,7 @@
   @page SSL_Server SSL Server application
 
   @verbatim
-  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  ******************************************************************************
   * @file    mbedTLS/SSL_Server/readme.txt
   * @author  MCD Application Team
   * @brief   Description of SSL Server application.

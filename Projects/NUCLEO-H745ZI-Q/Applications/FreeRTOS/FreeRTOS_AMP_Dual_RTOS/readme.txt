@@ -2,7 +2,7 @@
   @page FreeRTOS_AMP_Dual_RTOS FreeRTOS Multicore Processing application
 
   @verbatim
-  ******************** (C) COPYRIGHT 2018 STMicroelectronics *******************
+  ******************************************************************************
   * @file    FreeRTOS/FreeRTOS_AMP_Dual_RTOS/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the FreeRTOS Message Buffer AMP application.

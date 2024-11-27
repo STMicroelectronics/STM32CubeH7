@@ -2,7 +2,7 @@
   @page LibJPEG_Decoding LibJPEG decoding application
   
   @verbatim
-  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  ******************************************************************************
   * @file    LibJPEG/LibJPEG_Decoding/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the LibJPEG decoding application.

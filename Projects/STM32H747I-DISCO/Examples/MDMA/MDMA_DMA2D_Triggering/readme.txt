@@ -2,7 +2,7 @@
   @page MDMA_DMA2D_Triggering MDMA with DMA2D Transfer complete flag used as MDMA trigger Example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    MDMA/MDMA_DMA2D_Triggering/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the MDMA with DMA2D Transfer complete flag 

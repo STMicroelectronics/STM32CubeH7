@@ -2,7 +2,7 @@
   @page EEPROM_Emulation application to show an eeprom emulation
 
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    EEPROM_Emulation/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the EEPROM_Emulation application.

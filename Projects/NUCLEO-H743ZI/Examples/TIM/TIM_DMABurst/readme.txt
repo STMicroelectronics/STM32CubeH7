@@ -2,7 +2,7 @@
   @page TIM_DMABurst TIM_DMABurst example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  ******************************************************************************
   * @file    TIM/TIM_DMABurst/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the TIM DMA Burst example.

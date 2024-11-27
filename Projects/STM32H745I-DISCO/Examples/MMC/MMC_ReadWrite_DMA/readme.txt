@@ -2,7 +2,7 @@
   @page MMC_ReadWrite_DMA  Description of the MMC_ReadWrite_DMA example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    MMC/MMC_ReadWrite_DMA/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the MMC read and write buffer with internal DMA example.

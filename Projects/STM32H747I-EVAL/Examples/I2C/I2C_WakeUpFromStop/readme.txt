@@ -2,7 +2,7 @@
   @page I2C_WakeUpFromStop I2C Two Instances Communication IT Example on Stop Mode
 
   @verbatim
-  ******************** (C) COPYRIGHT 2019 STMicroelectronics *******************
+  ******************************************************************************
   * @file    I2C/I2C_WakeUpFromStop/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the Wake Up from Stop mode example
