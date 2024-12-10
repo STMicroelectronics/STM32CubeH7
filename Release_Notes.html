@@ -63,9 +63,95 @@
 <div class="col-sm-12 col-lg-8">
 <h2 id="update-history"><strong>Update History</strong></h2>
 <div class="collapse">
-<input type="checkbox" id="collapse-section18" checked aria-hidden="true"> <label for="collapse-section18" aria-hidden="true"><strong>V1.12.0 / 30-October-2024</strong></label>
+<input type="checkbox" id="collapse-section19" checked aria-hidden="true"> <label for="collapse-section19" aria-hidden="true"><strong>V1.12.1 / 06-December-2024</strong></label>
 <div>
 <h2 id="main-changes">Main Changes</h2>
+<ul>
+<li>General updates to fix known defects and enhancements implementation.</li>
+<li><p>Fix wrong computed clock frequencies in HAL RCC driver.</p></li>
+<li><strong>CMSIS</strong> updates
+<ul>
+<li><strong>system_stm32h7xx.c template files</strong>
+<ul>
+<li>Fix computed frequencies returned by the HAL_RCC_GetHCLKFreq(), HAL_RCC_GetPCLK1Freq(), and HAL_RCC_GetPCLK2Freq() APIs.</li>
+<li>Enable FMC clock to ensure effective write access to FMC Bank1 registers in the SystemInit() API.</li>
+</ul></li>
+<li><strong>STM32H723/H725/H730/H733/H735 devices header files</strong>
+<ul>
+<li>Align the RTC TAMPER register and bitfields naming with the terminology used in the Reference Manual (RM0468).</li>
+</ul></li>
+<li><strong>STM32H742/H743/H745/H747/H750/H753/H755/H757/H7A3/H7B0/H7B3 device header files</strong>
+<ul>
+<li>Define new RTC macros to manage specific supported Tamper features:
+<ul>
+<li>RTC_TAMPER2_SUPPORT to manage Tamper 2 support</li>
+<li>RTC_TAMPMASKFLAG_SUPPORT to manage Tamper Event Masking support</li>
+<li>RTC_TAMPNOERASE_SUPPORT to manage Backup Registers erasure upon Tamper Event support</li>
+<li>RTC_TAMPxIE_SUPPORT to manage selective TAMPERx interrupt enable support.</li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li><strong>HAL</strong> updates
+<ul>
+<li><strong>HAL PWR</strong>
+<ul>
+<li>Add a note to the HAL_PWREx_ConfigSupply() API documentation to clarify that this API comes obsolete after deploying "how to exit from Run* recommended sequence.</li>
+</ul></li>
+<li><strong>HAL QSPI</strong>
+<ul>
+<li>Fix possible race condition with QSPI data transfer when using DMA.</li>
+</ul></li>
+<li><strong>HAL/LL RTC</strong>
+<ul>
+<li>Alignment with new RTC TAMPER register and bitfields naming in the CMSIS.</li>
+<li>Add new restrictions to manage specific Tamper features.</li>
+</ul></li>
+<li><strong>HAL HSEM</strong>
+<ul>
+<li>Update __HAL_HSEM_ENABLE_IT(), __HAL_HSEM_DISABLE_IT(), __HAL_HSEM_GET_IT(), __HAL_HSEM_GET_FLAG() and __HAL_HSEM_CLEAR_FLAG() macros to be aligned with registers’ names in the CMSIS.</li>
+</ul></li>
+</ul></li>
+<li><strong>Project</strong> updates
+<ul>
+<li>Update all projects to be aligned with CMSIS system_stm32h7xx.c template files:
+<ul>
+<li>Fix computed frequencies returned by the HAL_RCC_GetHCLKFreq(), HAL_RCC_GetPCLK1Freq(), and HAL_RCC_GetPCLK2Freq() APIs.</li>
+</ul></li>
+</ul></li>
+</ul>
+<h2 id="contents">Contents</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: left;">Release notes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Projects</strong></td>
+<td style="text-align: left;"><strong>v1.12.1</strong></td>
+<td style="text-align: left;"><a href="Projects/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td><strong>STM32H7xx CMSIS</strong></td>
+<td style="text-align: left;"><strong>v1.10.6</strong></td>
+<td style="text-align: left;"><a href="Drivers/CMSIS/Device/ST/STM32H7xx/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td><strong>STM32H7xx HAL</strong></td>
+<td style="text-align: left;"><strong>v1.11.5</strong></td>
+<td style="text-align: left;"><a href="Drivers/STM32H7xx_HAL_Driver/Release_Notes.html">release notes</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="collapse">
+<input type="checkbox" id="collapse-section18" aria-hidden="true"> <label for="collapse-section18" aria-hidden="true"><strong>V1.12.0 / 30-October-2024</strong></label>
+<div>
+<h2 id="main-changes-1">Main Changes</h2>
 <ul>
 <li>General updates to fix known defects and enhancements implementation.</li>
 <li>Add new <strong>HAL SDIO driver</strong>.</li>
@@ -118,10 +204,6 @@
 <li><strong>HAL DAC</strong>
 <ul>
 <li>Fix HAL DAC calibration procedure (HAL_DACEx_SelfCalibrate() API) to manage case of calibration factor equal to range maximum value (previously, in this case calibration factor was reset, leading to voltage accuracy not optimal).</li>
-</ul></li>
-<li><strong>HAL PWR</strong>
-<ul>
-<li>Add a note to the HAL_PWREx_ConfigSupply() API documentation to clarify that this API comes obsolete after deploying "how to exit from Run* recommended sequence.</li>
 </ul></li>
 <li><strong>LL DMA</strong>
 <ul>
@@ -203,7 +285,6 @@
 <li><strong>HAL QSPI</strong>
 <ul>
 <li>Clear AR register after CCR to avoid new transfer when address is not needed.</li>
-<li>Fix possible race condition with QSPI data transfer (DMA).</li>
 </ul></li>
 <li><strong>HAL USB</strong>
 <ul>
@@ -285,7 +366,7 @@
 </ul></li>
 </ul></li>
 </ul>
-<h2 id="contents">Contents</h2>
+<h2 id="contents-1">Contents</h2>
 <h3 id="projects">Projects :</h3>
 <ul>
 <li>The STM32CubeH7 Firmware package comes with a rich set of examples running on STMicroelectronics boards, organized by board and provided with pre-configured projects for the main supported toolchains. The exhaustive list of projects is provided in this table <a href="Projects/STM32CubeProjectsList.html">STM32CubeProjectsList.html</a>.</li>
@@ -728,7 +809,7 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section17" aria-hidden="true"> <label for="collapse-section17" aria-hidden="true"><strong>V1.11.2 / 15-March-2024</strong></label>
 <div>
-<h2 id="main-changes-1">Main Changes</h2>
+<h2 id="main-changes-2">Main Changes</h2>
 <ul>
 <li>General updates to fix known defects and implementation enhancements.</li>
 <li>General fixes to support GCC11 and GCC12 in all STM32CubeIDE projects.</li>
@@ -1032,7 +1113,7 @@
 </ul></li>
 </ul></li>
 </ul>
-<h2 id="contents-1">Contents</h2>
+<h2 id="contents-2">Contents</h2>
 <h3 id="projects-1">Projects :</h3>
 <ul>
 <li>The STM32CubeH7 Firmware package comes with a rich set of examples running on STMicroelectronics boards, organized by board and provided with pre-configured projects for the main supported toolchains. The exhaustive list of projects is provided in this table <a href="Projects/STM32CubeProjectsList.html">STM32CubeProjectsList.html</a>.</li>
@@ -1465,7 +1546,7 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section16" aria-hidden="true"> <label for="collapse-section16" aria-hidden="true"><strong>V1.11.1 / 14-July-2023</strong></label>
 <div>
-<h2 id="main-changes-2">Main Changes</h2>
+<h2 id="main-changes-3">Main Changes</h2>
 <ul>
 <li>Deploy support of new LCD component NT35510.
 <ul>
@@ -1494,7 +1575,7 @@
 </ul></li>
 </ul></li>
 </ul>
-<h2 id="contents-2">Contents</h2>
+<h2 id="contents-3">Contents</h2>
 <h3 id="projects-2">Projects :</h3>
 <ul>
 <li>The STM32CubeH7 Firmware package comes with a rich set of examples running on STMicroelectronics boards, organized by board and provided with pre-configured projects for the main supported toolchains. The exhaustive list of projects is provided in this table <a href="Projects/STM32CubeProjectsList.html">STM32CubeProjectsList.html</a>.</li>
@@ -1544,7 +1625,7 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section15" aria-hidden="true"> <label for="collapse-section15" aria-hidden="true"><strong>V1.11.0 / 04-November-2022</strong></label>
 <div>
-<h2 id="main-changes-3">Main Changes</h2>
+<h2 id="main-changes-4">Main Changes</h2>
 <h1 id="maintenance-release">Maintenance release</h1>
 <ul>
 <li>General updates to fix known defects and implementation enhancements.</li>
@@ -1591,7 +1672,7 @@
 </ul></li>
 </ul></li>
 </ul>
-<h2 id="contents-3">Contents</h2>
+<h2 id="contents-4">Contents</h2>
 <table>
 <caption>Drivers</caption>
 <thead>
@@ -2008,7 +2089,7 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section14" aria-hidden="true"> <label for="collapse-section14" aria-hidden="true"><strong>V1.10.0 / 11-February-2022</strong></label>
 <div>
-<h2 id="main-changes-4">Main Changes</h2>
+<h2 id="main-changes-5">Main Changes</h2>
 <h1 id="maintenance-release-1">Maintenance release</h1>
 <ul>
 <li>General updates to fix known defects and implementation enhancements.</li>
@@ -2048,7 +2129,7 @@
 <li>General update to align firmware projects with the new HAL ETH driver</li>
 </ul></li>
 </ul>
-<h2 id="contents-4">Contents</h2>
+<h2 id="contents-5">Contents</h2>
 <table>
 <caption>Drivers</caption>
 <thead>
@@ -2466,7 +2547,7 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section13" aria-hidden="true"> <label for="collapse-section13" aria-hidden="true"><strong>V1.9.1 / 06-December-2021</strong></label>
 <div>
-<h2 id="main-changes-5">Main Changes</h2>
+<h2 id="main-changes-6">Main Changes</h2>
 <ul>
 <li>General updates to fix known defects and implementation enhancements</li>
 <li>All source files: update disclaimer to add reference to the new license agreement.</li>
@@ -2694,7 +2775,7 @@
 </ul></li>
 </ul></li>
 </ul>
-<h2 id="contents-5">Contents</h2>
+<h2 id="contents-6">Contents</h2>
 <table>
 <thead>
 <tr class="header">
@@ -2788,7 +2869,7 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section12" aria-hidden="true"> <label for="collapse-section12" aria-hidden="true"><strong>V1.9.0 / 12-February-2021</strong></label>
 <div>
-<h2 id="main-changes-6">Main Changes</h2>
+<h2 id="main-changes-7">Main Changes</h2>
 <ul>
 <li><p>Maintenance release</p></li>
 <li><p>General updates to fix known defects and implementation enhancements</p></li>
@@ -2864,7 +2945,7 @@
 </ul></li>
 </ul></li>
 </ul>
-<h2 id="contents-6">Contents</h2>
+<h2 id="contents-7">Contents</h2>
 <table>
 <caption>Drivers</caption>
 <thead>
@@ -3311,7 +3392,7 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section11" aria-hidden="true"> <label for="collapse-section11" aria-hidden="true"><strong>V1.8.0 / 29-May-2020</strong></label>
 <div>
-<h2 id="main-changes-7">Main Changes</h2>
+<h2 id="main-changes-8">Main Changes</h2>
 <ul>
 <li><p>Official release to support <strong>STM32H723xx/33xx/25xx/35xx/30xx/30xxQ</strong> new devices</p></li>
 <li><p>Add support of the <strong>STM32H735G-DK</strong> and <strong>NUCLEO-H723ZG</strong> boards. Several examples applications and demonstrations are available on EWARM, MDK-ARM and <strong>STM32CubeIDE</strong> IDEs</p></li>
@@ -3432,7 +3513,7 @@
 <li><p>Enrich STM32H7B3I-DK examples with FMC_SDRAM example, Two OSPI examples and three OTFDEC examples</p></li>
 </ul></li>
 </ul>
-<h2 id="contents-7">Contents</h2>
+<h2 id="contents-8">Contents</h2>
 <table>
 <caption>Drivers</caption>
 <thead>
@@ -3851,7 +3932,7 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section10" aria-hidden="true"> <label for="collapse-section10" aria-hidden="true"><strong>V1.7.0 / 14-February-2020</strong></label>
 <div>
-<h2 id="main-changes-8">Main Changes</h2>
+<h2 id="main-changes-9">Main Changes</h2>
 <ul>
 <li><p>Maintenance release</p></li>
 <li><p>Add support of the value line STM32H7B0 devices over STM32H7B3I-EVAL board. Two examples, with several configurations, are available to show how to boot from internal flash, configure the external memories and jump to user application (located on an external memory)</p></li>
@@ -3978,7 +4059,7 @@
 </ul></li>
 </ul></li>
 </ul>
-<h2 id="contents-8">Contents</h2>
+<h2 id="contents-9">Contents</h2>
 <h3 id="projects-3">Projects</h3>
 <ul>
 <li><p>The STM32CubeH7 Firmware package comes with a rich set of examples running on STMicroelectronics boards, organized by board and provided with preconfigured projects for the main supported toolchains. The exhaustive list of projects is provided in this table <a href="Projects/STM32CubeProjectsList.html">STM32CubeProjectsList.html</a>.</p></li>
@@ -4396,7 +4477,7 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section9" aria-hidden="true"> <label for="collapse-section9" aria-hidden="true"><strong>V1.6.0 / 02-December-2019</strong></label>
 <div>
-<h2 id="main-changes-9">Main Changes</h2>
+<h2 id="main-changes-10">Main Changes</h2>
 <ul>
 <li><p>Official release to support STM32H7A3xx, STM32H7A3xxQ, STM32H7B3xx, STM32H7B3xxQ, STM32H7B0xx and STM32H7B0xxQ new devices</p></li>
 <li><p>Add support of the STM32H7B3I-DK, STM32H7B3I-EVAL and NUCLEO-H7A3ZI-Q boards. Several examples applications and demonstrations are available on EWARM, Keil and <strong>STM32CubeIDE</strong> IDEs</p></li>
@@ -4543,7 +4624,7 @@
 </ul></li>
 </ul></li>
 </ul>
-<h2 id="contents-9">Contents</h2>
+<h2 id="contents-10">Contents</h2>
 <h3 id="projects-4">Projects</h3>
 <ul>
 <li><p>The STM32CubeH7 Firmware package comes with a rich set of examples running on STMicroelectronics boards, organized by board and provided with preconfigured projects for the main supported toolchains. The exhaustive list of projects is provided in this table <a href="Projects/STM32CubeProjectsList.html">STM32CubeProjectsList.html</a>.</p></li>
@@ -4973,7 +5054,7 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section8" aria-hidden="true"> <label for="collapse-section8" aria-hidden="true"><strong>V1.5.0 / 28-June-2019</strong></label>
 <div>
-<h2 id="main-changes-10">Main Changes</h2>
+<h2 id="main-changes-11">Main Changes</h2>
 <ul>
 <li><p>Maintenance release.</p></li>
 <li>Add <strong>Dual Core</strong> demonstrations source code with preconfigured projects on EWARM, MDK-ARM and SW4STM32 IDEs:
@@ -5047,7 +5128,7 @@
 <li>Update all template projects to add “USE_SPI_CRC” definition to “stm32h7xx_hal_conf.h”. This define is set to 1 by default and customizable by the HAL user</li>
 </ul></li>
 </ul>
-<h2 id="contents-10">Contents</h2>
+<h2 id="contents-11">Contents</h2>
 <h3 id="projects-5">Projects</h3>
 <p>The STM32CubeH7 Firmware package comes with a rich set of examples running on STMicroelectronics boards, organized by board and provided with preconfigured projects for the main supported toolchains. The exhaustive list of projects is provided in this table <a href="Projects/STM32CubeProjectsList.html">STM32CubeProjectsList.html</a>.</p>
 <p>NUCLEO-H743ZI</p>
@@ -5430,7 +5511,7 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section7" aria-hidden="true"> <label for="collapse-section7" aria-hidden="true"><strong>V1.4.0 / 05-April-2019</strong></label>
 <div>
-<h2 id="main-changes-11">Main Changes</h2>
+<h2 id="main-changes-12">Main Changes</h2>
 <ul>
 <li>First official release to support STM32H7 <strong>Rev.V</strong> all lines:
 <ul>
@@ -5649,7 +5730,7 @@
 </ul></li>
 </ul></li>
 </ul>
-<h2 id="contents-11">Contents</h2>
+<h2 id="contents-12">Contents</h2>
 <h3 id="projects-6">Projects</h3>
 <p>The STM32CubeH7 Firmware package comes with a rich set of examples running on STMicroelectronics boards, organized by board and provided with preconfigured projects for the main supported toolchains. The exhaustive list of projects is provided in this table <a href="Projects/STM32CubeProjectsList.html">STM32CubeProjectsList.html</a>.</p>
 <p>NUCLEO-H743ZI</p>
@@ -6052,7 +6133,7 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section6" aria-hidden="true"> <label for="collapse-section6" aria-hidden="true"><strong>V1.3.2 / 31-January-2019</strong></label>
 <div>
-<h2 id="main-changes-12">Main Changes</h2>
+<h2 id="main-changes-13">Main Changes</h2>
 <ul>
 <li><p>Patch release to add definition of UID_BASE (Unique device ID register base address) to the CMSIS STM32H7xx include files.</p></li>
 <li><strong>CMSIS</strong>
@@ -6065,7 +6146,7 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section5" aria-hidden="true"> <label for="collapse-section5" aria-hidden="true"><strong>V1.3.1 / 18-January-2019</strong></label>
 <div>
-<h2 id="main-changes-13">Main Changes</h2>
+<h2 id="main-changes-14">Main Changes</h2>
 <ul>
 <li><p>Patch release to Fix LwIP and mbedTLS applications : enhance Ethernet zero-copy feature allowing to fix ping behavior.</p></li>
 <li><strong>Projects</strong>
@@ -6086,7 +6167,7 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section4" aria-hidden="true"> <label for="collapse-section4" aria-hidden="true"><strong>V1.3.0 / 29-June-2018</strong></label>
 <div>
-<h2 id="main-changes-14">Main Changes</h2>
+<h2 id="main-changes-15">Main Changes</h2>
 <ul>
 <li><strong>Add support for STM32H750xx value line</strong>
 <ul>
@@ -6134,7 +6215,7 @@
 </ul></li>
 </ul></li>
 </ul>
-<h2 id="contents-12">Contents</h2>
+<h2 id="contents-13">Contents</h2>
 <h3 id="projects-7">Projects</h3>
 <p>The STM32CubeH7 Firmware package comes with a rich set of examples running on STMicroelectronics boards, organized by board and provided with preconfigured projects for the main supported toolchains. The exhaustive list of projects is provided in this table <a href="Projects/STM32CubeProjectsList.html">STM32CubeProjectsList.html</a>.</p>
 <p>NUCLEO-H743ZI</p>
@@ -6397,7 +6478,7 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section3" aria-hidden="true"> <label for="collapse-section3" aria-hidden="true"><strong>V1.2.0 / 29-December-2017</strong></label>
 <div>
-<h2 id="main-changes-15">Main Changes</h2>
+<h2 id="main-changes-16">Main Changes</h2>
 <ul>
 <li><strong>Maintenance release.</strong></li>
 <li>General update to fix known defects and several implementations enhancement</li>
@@ -6423,7 +6504,7 @@
 <li>Update cache management for all examples and applications.</li>
 </ul></li>
 </ul>
-<h2 id="contents-13">Contents</h2>
+<h2 id="contents-14">Contents</h2>
 <h3 id="projects-8">Projects</h3>
 <p>The STM32CubeH7 Firmware package comes with a rich set of examples running on STMicroelectronics boards, organized by board and provided with preconfigured projects for the main supported toolchains. The exhaustive list of projects is provided in this table <a href="Projects/STM32CubeProjectsList.html">STM32CubeProjectsList.html</a>.</p>
 <p>NUCLEO-H743ZI</p>
@@ -6668,7 +6749,7 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section2" aria-hidden="true"> <label for="collapse-section2" aria-hidden="true"><strong>V1.1.0 / 31-August-2017</strong></label>
 <div>
-<h2 id="main-changes-16">Main Changes</h2>
+<h2 id="main-changes-17">Main Changes</h2>
 <ul>
 <li><strong>Official release to add Demonstration Firmware for STM32H743I_EVAL.</strong></li>
 <li>General update to fix known defects and several implementations enhancement</li>
@@ -6716,7 +6797,7 @@
 </ul></li>
 </ul></li>
 </ul>
-<h2 id="contents-14">Contents</h2>
+<h2 id="contents-15">Contents</h2>
 <h3 id="projects-9">Projects</h3>
 <p>The STM32CubeH7 Firmware package comes with a rich set of examples running on STMicroelectronics boards, organized by board and provided with preconfigured projects for the main supported toolchains. The exhaustive list of projects is provided in this table <a href="Projects/STM32CubeProjectsList.html">STM32CubeProjectsList.html</a>.</p>
 <p>NUCLEO-H743ZI</p>
@@ -6961,11 +7042,11 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section1" aria-hidden="true"> <label for="collapse-section1" aria-hidden="true"><strong>V1.0.0 / 21-April-2017</strong></label>
 <div>
-<h2 id="main-changes-17">Main Changes</h2>
+<h2 id="main-changes-18">Main Changes</h2>
 <ul>
 <li><strong>First official release of STM32CubeH7 (STM32Cube for STM32H7 Series)</strong></li>
 </ul>
-<h2 id="contents-15">Contents</h2>
+<h2 id="contents-16">Contents</h2>
 <h3 id="projects-10">Projects</h3>
 <p>The STM32CubeH7 Firmware package comes with a rich set of examples running on STMicroelectronics boards, organized by board and provided with preconfigured projects for the main supported toolchains. The exhaustive list of projects is provided in this table <a href="Projects/STM32CubeProjectsList.html">STM32CubeProjectsList.html</a>.</p>
 <p>NUCLEO-H743ZI</p>

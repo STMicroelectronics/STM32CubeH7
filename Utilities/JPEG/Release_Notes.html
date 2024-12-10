@@ -1,29 +1,15 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
-
 <head>
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <title>Release Notes for JPEG Utilities Drivers</title>
   <style type="text/css">
-    code {
-      white-space: pre-wrap;
-    }
-
-    span.smallcaps {
-      font-variant: small-caps;
-    }
-
-    span.underline {
-      text-decoration: underline;
-    }
-
-    div.column {
-      display: inline-block;
-      vertical-align: top;
-      width: 50%;
-    }
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
   </style>
   <link rel="stylesheet" href="_htmresc/mini-st_2020.css" />
   <!--[if lt IE 9]>
@@ -31,184 +17,123 @@
   <![endif]-->
   <link rel="icon" type="image/x-icon" href="_htmresc/favicon.png" />
 </head>
-
 <body>
-  <div class="row">
-    <div class="col-sm-12 col-lg-4">
-      <center>
-        <h1 id="release-notes-for">Release Notes for</h1>
-        <h1 id="stm32cube-jpeg-utilities-drivers"><mark>STM32Cube JPEG Utilities Drivers</mark></h1>
-        <p>Copyright © 2016-2023 STMicroelectronics<br />
-        </p>
-        <a href="https://www.st.com" class="logo"><img src="_htmresc/st_logo_2020.png" alt="ST logo" /></a>
-      </center>
-      <h1 id="purpose">Purpose</h1>
-      <p>This driver provides a set of basic functions to convert JPEG “Minimum Coded Units” blocks (MCU) into/from
-        standard RGB, Grayscale or CMYK pixels. It can be used on top of the HAL JPEG driver. The following APIs are
-        available:</p>
-      <ul>
-        <li>JPEG_GetDecodeColorConvertFunc</li>
-        <li>JPEG_GetEncodeColorConvertFun</li>
-      </ul>
-    </div>
-    <div class="col-sm-12 col-lg-8">
-      <h1 id="update-history">Update History</h1>
-	  <div class="collapse">
-        <input type="checkbox" id="collapse-section6" checked aria-hidden="true"> <label for="collapse-section6"
-          aria-hidden="true">V2.0.5 / 13-November-2024</label>
-        <div>
-          <h2 id="main-changes">Main Changes</h2>
-          <h3 id="component-release">Component release</h3>
-          <p><strong>Module changes</strong></p>
-          <ul>
-            <li>- Resolve overflow issue in color conversion functions for pure red or blue colors.
-            </li>
-          </ul>
-          <h2 id="known-limitations">Known Limitations</h2>
-          <ul>
-            <li>None</li>
-          </ul>
-          <h2 id="backward-compatibility">Backward Compatibility</h2>
-          <ul>
-            <li>This version is backward compatible with previous version.</li>
-          </ul>
-        </div>
-      </div>
-      <div class="collapse">
-        <input type="checkbox" id="collapse-section5" aria-hidden="true"> <label for="collapse-section5"
-          aria-hidden="true">V2.0.4 / 23-July-2024</label>
-        <div>
-          <h2 id="main-changes">Main Changes</h2>
-          <h3 id="component-release">Component release</h3>
-          <p><strong>Module changes</strong></p>
-          <ul>
-            <li>- The `ConvertedDataCount` parameter is now properly updated in the following block conversion APIs: 
-                  <ul> - `JPEG_MCU_YCCK_ARGB_ConvertBlocks` </ul>
-                  <ul> - `JPEG_MCU_Gray_ARGB_ConvertBlocks` </ul>
-                  <ul> - `JPEG_MCU_YCbCr444_ARGB_ConvertBlocks` </ul>
-                  <ul> - `JPEG_MCU_YCbCr422_ARGB_ConvertBlocks` </ul>
-                  <ul> - `JPEG_MCU_YCbCr420_ARGB_ConvertBlocks`</ul>
-            </li>
-
-          </ul>
-          <h2 id="known-limitations">Known Limitations</h2>
-          <ul>
-            <li>None</li>
-          </ul>
-          <h2 id="backward-compatibility">Backward Compatibility</h2>
-          <ul>
-            <li>This version is backward compatible with previous version.</li>
-          </ul>
-        </div>
-      </div>
-      <div class="collapse">
-        <input type="checkbox" id="collapse-section5" aria-hidden="true"> <label for="collapse-section5"
-          aria-hidden="true">V2.0.3 / 11-July-2023</label>
-        <div>
-          <h2 id="main-changes">Main Changes</h2>
-          <h3 id="component-release">Component release</h3>
-          <p><strong>Module changes</strong></p>
-          <ul>
-            <li>[Licensing] Add license.* files and update license header</li>
-          </ul>
-          <h2 id="known-limitations">Known Limitations</h2>
-          <ul>
-            <li>None</li>
-          </ul>
-          <h2 id="backward-compatibility">Backward Compatibility</h2>
-          <ul>
-            <li>This version is backward compatible with previous version.</li>
-          </ul>
-        </div>
-      </div>
-      <div class="collapse">
-        <input type="checkbox" id="collapse-section4" aria-hidden="true"> <label for="collapse-section4"
-          aria-hidden="true">V2.0.2 / 18-May-2023</label>
-        <div>
-          <h2 id="main-changes-1">Main Changes</h2>
-          <h3 id="component-release-1">Component release</h3>
-          <p><strong>Module changes</strong></p>
-          <ul>
-            <li>Fix English typos in comments</li>
-          </ul>
-          <h2 id="known-limitations-1">Known Limitations</h2>
-          <ul>
-            <li>None</li>
-          </ul>
-          <h2 id="backward-compatibility-1">Backward Compatibility</h2>
-          <ul>
-            <li>This version is backward compatible with previous version.</li>
-          </ul>
-        </div>
-      </div>
-      <div class="collapse">
-        <input type="checkbox" id="collapse-section3" aria-hidden="true"> <label for="collapse-section3"
-          aria-hidden="true">V2.0.1 / 19-April-2021</label>
-        <div>
-          <h2 id="main-changes-2">Main Changes</h2>
-          <h3 id="component-release-2">Component release</h3>
-          <p><strong>Module changes</strong></p>
-          <ul>
-            <li>Fix English typos in comments</li>
-          </ul>
-          <h2 id="known-limitations-2">Known Limitations</h2>
-          <ul>
-            <li>None</li>
-          </ul>
-          <h2 id="backward-compatibility-2">Backward Compatibility</h2>
-          <ul>
-            <li>This version is backward compatible with previous version.</li>
-          </ul>
-        </div>
-      </div>
-      <div class="collapse">
-        <input type="checkbox" id="collapse-section2" aria-hidden="true"> <label for="collapse-section2"
-          aria-hidden="true">V2.0.0 / 03-June-2016</label>
-        <div>
-          <h2 id="main-changes-3">Main Changes</h2>
-          <h3 id="component-release-3">Component release</h3>
-          <p><strong>Module changes</strong></p>
-          <ul>
-            <li>Add the support of JPEG preprocessing for color spaces: YCbCr, Gray scale and CMYK</li>
-            <li>The following updates made on the jpeg_utils_conf_template require update on the application code based
-              on JPEG Utility drivers V1.0.0:
-              <ul>
-                <li>Add specific defines for color format support RGB565, RGB888, ARGB8888</li>
-                <li>Add specific define JPEG_SWAP_RB to manage RGB Red and Blue swap</li>
-                <li>Remove the following defines: JPEG_RED_OFFSET, JPEG_GREEN_OFFSET, JPEG_BLUE_OFFSET,
-                  JPEG_ALPHA_OFFSET and JPEG_BYTES_PER_PIXEL</li>
-              </ul>
-            </li>
-          </ul>
-          <h2 id="known-limitations-3">Known Limitations</h2>
-          <ul>
-            <li>None</li>
-          </ul>
-          <h2 id="backward-compatibility-3">Backward Compatibility</h2>
-          <ul>
-            <li>This version breaks the compatibility with the previous version</li>
-          </ul>
-        </div>
-      </div>
-      <div class="collapse">
-        <input type="checkbox" id="collapse-section1" aria-hidden="true"> <label for="collapse-section1"
-          aria-hidden="true">V1.0.0 / 22-April-2016</label>
-        <div>
-          <h2 id="main-changes-4">Main Changes</h2>
-          <h3 id="component-release-4">Component release</h3>
-          <p><strong>Module changes</strong></p>
-          <ul>
-            <li>First official release</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-  <footer class="sticky">
-    <p>For complete documentation on STM32,visit: [<a href="http://www.st.com">www.st.com/stm32</a>]</p>
-    This release note uses up to date web standards and, for this reason, should not be opened with Internet Explorer
-    but preferably with popular browsers such as Google Chrome, Mozilla Firefox, Opera or Microsoft Edge.
-  </footer>
+<div class="row">
+<div class="col-sm-12 col-lg-4">
+<center>
+<h1 id="release-notes-for">Release Notes for</h1>
+<h1 id="stm32cube-jpeg-utilities-drivers"><mark>STM32Cube JPEG Utilities Drivers</mark></h1>
+<p>Copyright © 2016-2023 STMicroelectronics<br />
+</p>
+<a href="https://www.st.com" class="logo"><img src="_htmresc/st_logo_2020.png" alt="ST logo" /></a>
+</center>
+<h1 id="purpose">Purpose</h1>
+<p>This driver provides a set of basic functions to convert JPEG “Minimum Coded Units” blocks (MCU) into/from standard RGB, Grayscale or CMYK pixels. It can be used on top of the HAL JPEG driver. The following APIs are available:</p>
+<ul>
+<li>JPEG_GetDecodeColorConvertFunc</li>
+<li>JPEG_GetEncodeColorConvertFun</li>
+</ul>
+</div>
+<div class="col-sm-12 col-lg-8">
+<h1 id="update-history">Update History</h1>
+<div class="collapse">
+<input type="checkbox" id="collapse-section5" checked aria-hidden="true"> <label for="collapse-section5" aria-hidden="true">V2.0.3 / 11-July-2023</label>
+<div>
+<h2 id="main-changes">Main Changes</h2>
+<h3 id="component-release">Component release</h3>
+<p><strong>Module changes</strong></p>
+<ul>
+<li>[Licensing] Add license.* files and update license header</li>
+</ul>
+<h2 id="known-limitations">Known Limitations</h2>
+<ul>
+<li>None</li>
+</ul>
+<h2 id="backward-compatibility">Backward Compatibility</h2>
+<ul>
+<li>This version is backward compatible with previous version.</li>
+</ul>
+</div>
+</div>
+<div class="collapse">
+<input type="checkbox" id="collapse-section4" aria-hidden="true"> <label for="collapse-section4" aria-hidden="true">V2.0.2 / 18-May-2023</label>
+<div>
+<h2 id="main-changes-1">Main Changes</h2>
+<h3 id="component-release-1">Component release</h3>
+<p><strong>Module changes</strong></p>
+<ul>
+<li>Fix English typos in comments</li>
+</ul>
+<h2 id="known-limitations-1">Known Limitations</h2>
+<ul>
+<li>None</li>
+</ul>
+<h2 id="backward-compatibility-1">Backward Compatibility</h2>
+<ul>
+<li>This version is backward compatible with previous version.</li>
+</ul>
+</div>
+</div>
+<div class="collapse">
+<input type="checkbox" id="collapse-section3" aria-hidden="true"> <label for="collapse-section3" aria-hidden="true">V2.0.1 / 19-April-2021</label>
+<div>
+<h2 id="main-changes-2">Main Changes</h2>
+<h3 id="component-release-2">Component release</h3>
+<p><strong>Module changes</strong></p>
+<ul>
+<li>Fix English typos in comments</li>
+</ul>
+<h2 id="known-limitations-2">Known Limitations</h2>
+<ul>
+<li>None</li>
+</ul>
+<h2 id="backward-compatibility-2">Backward Compatibility</h2>
+<ul>
+<li>This version is backward compatible with previous version.</li>
+</ul>
+</div>
+</div>
+<div class="collapse">
+<input type="checkbox" id="collapse-section2" aria-hidden="true"> <label for="collapse-section2" aria-hidden="true">V2.0.0 / 03-June-2016</label>
+<div>
+<h2 id="main-changes-3">Main Changes</h2>
+<h3 id="component-release-3">Component release</h3>
+<p><strong>Module changes</strong></p>
+<ul>
+<li>Add the support of JPEG preprocessing for color spaces: YCbCr, Gray scale and CMYK</li>
+<li>The following updates made on the jpeg_utils_conf_template require update on the application code based on JPEG Utility drivers V1.0.0:
+<ul>
+<li>Add specific defines for color format support RGB565, RGB888, ARGB8888</li>
+<li>Add specific define JPEG_SWAP_RB to manage RGB Red and Blue swap</li>
+<li>Remove the following defines: JPEG_RED_OFFSET, JPEG_GREEN_OFFSET, JPEG_BLUE_OFFSET, JPEG_ALPHA_OFFSET and JPEG_BYTES_PER_PIXEL</li>
+</ul></li>
+</ul>
+<h2 id="known-limitations-3">Known Limitations</h2>
+<ul>
+<li>None</li>
+</ul>
+<h2 id="backward-compatibility-3">Backward Compatibility</h2>
+<ul>
+<li>This version breaks the compatibility with the previous version</li>
+</ul>
+</div>
+</div>
+<div class="collapse">
+<input type="checkbox" id="collapse-section1" aria-hidden="true"> <label for="collapse-section1" aria-hidden="true">V1.0.0 / 22-April-2016</label>
+<div>
+<h2 id="main-changes-4">Main Changes</h2>
+<h3 id="component-release-4">Component release</h3>
+<p><strong>Module changes</strong></p>
+<ul>
+<li>First official release</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<footer class="sticky">
+<p>For complete documentation on STM32,visit: [<a href="http://www.st.com">www.st.com/stm32</a>]</p>
+This release note uses up to date web standards and, for this reason, should not be opened with Internet Explorer but preferably with popular browsers such as Google Chrome, Mozilla Firefox, Opera or Microsoft Edge.
+</footer>
 </body>
-
 </html>
