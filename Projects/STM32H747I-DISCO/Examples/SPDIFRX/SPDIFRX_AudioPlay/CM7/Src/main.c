@@ -308,21 +308,33 @@ static void Playback_Init(void)
   IOCtx.ReadReg     = BSP_I2C4_ReadReg16;
   IOCtx.WriteReg    = BSP_I2C4_WriteReg16;
   IOCtx.GetTick     = BSP_GetTick;
-  
-    /* Initialize audio driver */
-  if(WM8994_ReadID(&WM8994Obj, &id) != WM8994_OK)
-  {
-    Error_Handler();
-  }
-  else if(id != WM8994_ID)
+
+  if(WM8994_RegisterBusIO(&WM8994Obj, &IOCtx) != WM8994_OK)
   {
     Error_Handler();
   }
   else
   {
-    Audio_Drv = (AUDIO_Drv_t *) &WM8994_Driver;
-    Audio_CompObj = &WM8994Obj;
+    /* Reset the codec */
+    if(WM8994_Reset(&WM8994Obj) != WM8994_OK)
+    {
+      Error_Handler();
+    }
+    else if(WM8994_ReadID(&WM8994Obj, &id) != WM8994_OK)
+    {
+      Error_Handler();
+    }
+    else if(id != WM8994_ID)
+    {
+      Error_Handler();
+    }
+    else
+    {
+      Audio_Drv = (AUDIO_Drv_t *) &WM8994_Driver;
+      Audio_CompObj = &WM8994Obj;
+    }
   }
+
   codec_init.Resolution  =0;
   /* Fill codec_init structure */
   codec_init.Frequency    = AUDIO_FREQUENCY;
