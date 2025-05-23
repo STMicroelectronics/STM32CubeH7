@@ -1,0 +1,28 @@
+{
+  "version": 10,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 31,
+    "patch": 6
+  },
+  "configurePresets": [
+    {
+      "name": "stm32h7-gcc",
+      "description": "Builds the CMake test with ARM GCC.",
+      "generator": "Ninja",
+      "toolchainFile": "${sourceDir}/toolchain_files/arm_gcc.cmake",
+      "binaryDir": "${sourceDir}/cmake-build-debug",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "gcc-debug",
+      "description": "A build preset that uses ARM GCC to compile the listed targets.",
+      "configurePreset": "stm32h7-gcc",
+      "targets": [ "test_app_gcc" ]
+    }
+  ]
+}

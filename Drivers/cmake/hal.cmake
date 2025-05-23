@@ -1,14 +1,22 @@
 set(STM32H7_HAL_DIR ${STM32H7_DRIVERS_DIR}/STM32H7xx_HAL_Driver)
 
 set(STM32H7_HAL_COMPONENTS
-    adc adc_ex cec comp cortex cordic crc crc_ex cryp cryp_ex dac dac_ex dcmi dfsdm dfsdm_ex dma dma2d dma_ex dsi dts
-    eth eth_ex exti fdcan flash flash_ex fmac gfxmmu gpio hash hash_ex hcd hrtim hsem i2c i2c_ex i2s i2s_ex irda iwdg
-    jpeg lptim ltdc ltdc_ex mdios mdma mmc mmc_ex nand nor opamp opamp_ex ospi otfdec pcd pcd_ex pssi pwr pwr_ex qspi
-    ramecc rcc rcc_ex rng rng_ex rtc rtc_ex sai sai_ex sd sd_ex sdio sdram smartcard smartcard_ex smbus smbus_ex spdifrx
-    spi spi_ex sram swpmi tim tim_ex uart uart_ex usart usart_ex wwdg eth_leg eth_ex_leg
+    adc bdma cec comp cordic cortex crc crs cryp dac dcmi delayblock dfsdm dma dma2d dsi dts
+    eth exti fdcan flash fmac fmc gfxmmu gpio hash hcd hrtim hsem i2c i2s irda iwdg
+    jpeg lptim lpuart ltdc mdios mdma mmc nand nor opamp ospi otfdec pcd pssi pwr qspi
+    ramecc rcc rng rtc sai sd sdio sdmmc sdram smartcard smbus spdifrx
+    spi sram swpmi tim uart usart usb utils wwdg
 )
 
 set(STM32H7_HAL_LEGACY_COMPONENTS eth_leg eth_ex_leg)
+
+set(only_ll_components bdma crs delayblock fmc lpuart sdmmc usb utils)
+
+set(ll_components adc comp cordic crc dac dma dma2d exti fmac gpio hrtim
+    i2c lptim mdma opamp pwr rcc rng rtc spi swpmi tim usart ${only_ll_components})
+
+set(ex_components adc crc cryp dac dfsdm dma eth flash hash i2c i2s ltdc mmc opamp pcd pwr rcc rng rtc sai sd
+    smartcard smbus spi tim uart usart)
 
 list(APPEND STM32H7_COMPONENTS ${STM32H7_HAL_COMPONENTS} ${STM32H7_HAL_LEGACY_COMPONENTS})
 
@@ -29,19 +37,34 @@ endforeach ()
 foreach (comp ${STM32H7_HAL_COMPONENTS})
     set(STM32H7_${comp}_SEARCH_PATHS ${STM32H7_HAL_DIR}/Src ${STM32H7_HAL_DIR}/Inc)
 
-    set(STM32H7_${comp}_SOURCES stm32h7xx_hal.c stm32h7xx_hal_${comp}.c)
+    set(STM32H7_${comp}_SOURCES stm32h7xx_hal.c)
 
-    set(STM32H7_${comp}_HEADERS stm32h7xx_hal.h stm32h7xx_hal_${comp}.h)
+    set(STM32H7_${comp}_HEADERS stm32h7xx_hal.h)
+
+    if (${comp} IN_LIST ll_components)
+        list(APPEND STM32H7_${comp}_SOURCES stm32h7xx_ll_${comp}.c)
+        list(APPEND STM32H7_${comp}_HEADERS stm32h7xx_ll_${comp}.h)
+    endif ()
+
+    if (${comp} IN_LIST ex_components)
+        list(APPEND STM32H7_${comp}_SOURCES stm32h7xx_hal_${comp}_ex.c)
+        list(APPEND STM32H7_${comp}_HEADERS stm32h7xx_hal_${comp}_ex.h)
+    endif ()
+
+    if (NOT ${comp} IN_LIST only_ll_components)
+        list(APPEND STM32H7_${comp}_SOURCES stm32h7xx_hal_${comp}.c)
+        list(APPEND STM32H7_${comp}_HEADERS stm32h7xx_hal_${comp}.h)
+    endif ()
 endforeach ()
 
 foreach (comp ${STM32H7_HAL_LEGACY_COMPONENTS})
     set(STM32H7_${comp}_SEARCH_PATHS ${STM32H7_HAL_DIR}/Src/Legacy ${STM32H7_HAL_DIR}/Inc/Legacy)
 
-    if(${comp} STREQUAL eth_leg)
+    if(${comp} STREQUAL "eth_leg")
         set(STM32H7_${comp}_SOURCES stm32h7xx_hal.c stm32h7xx_hal_eth.c)
 
         set(STM32H7_${comp}_HEADERS stm32h7xx_hal_legacy.h stm32h7xx_hal_eth_legacy.h)
-    elseif (${comp} STREQUAL eth_ex_leg)
+    elseif (${comp} STREQUAL "eth_ex_leg")
         set(STM32H7_${comp}_SOURCES stm32h7xx_hal.c stm32h7xx_hal_eth_ex.c)
 
         set(STM32H7_${comp}_HEADERS stm32h7xx_hal_legacy.h stm32h7xx_hal_eth_ex_legacy.h)
