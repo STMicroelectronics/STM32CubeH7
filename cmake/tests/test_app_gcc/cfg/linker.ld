@@ -7,7 +7,7 @@ MEMORY
 
 ENTRY(Reset_Handler)
 
-_estack = 0x20020000;    /* end of RAM */
+_estack = ORIGIN(RAM) + LENGTH(RAM);
 
 SECTIONS
 {
