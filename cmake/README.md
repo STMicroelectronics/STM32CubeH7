@@ -130,6 +130,22 @@ available options:
 | `STM32H7XX_DUALCORE_BOOTCM7_CM4GATED` | For use with dualcore devices. Boots the CM7 core, but does not boot the CM4 core. |
 | `STM32H7XX_SINGLECORE`                | For use with single core devices.                                                  |
 
+### Linking
+
+After the consuming project has specified the required components, the last step is to link the generated library with
+the consuming project's target. For example:
+
+```cmake
+set(TARGET stm32h750b_dk_test_app_gcc)
+
+add_executable(${TARGET})
+
+target_link_libraries(
+    ${TARGET}
+        stm32cubeh7
+)
+```
+
 ## CMake Tests
 
 CMake-based tests are available to verify functionality, and the project uses CMake presets to simplify configuration
