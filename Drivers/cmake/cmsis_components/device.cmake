@@ -44,18 +44,24 @@ set(STM32H7_STARTUP_SUPPORTED_COMPILERS
     IAR
 )
 
+# Helper: build a clean printable list of valid devices
+set(CLEAN_TARGET_DEVICE_LIST "\n")
+foreach (device ${STM32H7_DEVICE_COMPONENTS})
+    string(APPEND CLEAN_TARGET_DEVICE_LIST "   ${device}\n")
+endforeach ()
+
 foreach (comp ${STM32H7_DEVICE_COMPONENTS})
     # This will be used later when creating the target library
-    if (${comp} IN_LIST STM32CubeH7_FIND_COMPONENTS AND NOT DEFINED STM32H7_TARGET_DEVICE)
-        # If a target device component was passed, then save this information for later.
-        set(STM32H7_TARGET_DEVICE ${comp})
-    elseif (DEFINED STM32H7_TARGET_DEVICE)
-        # If this variable was already set, then either more than one target device was passed or it was set by
-        # the consuming project. Check to make sure it's a valid option.
-        if (NOT ${STM32H7_TARGET_DEVICE} IN_LIST STM32CubeH7_FIND_COMPONENTS)
-            message(FATAL_ERROR "'STM32H7_TARGET_DEVICE' has been set to '${STM32H7_TARGET_DEVICE}'."
-            "This is not a valid option."
-            "Please check to ensure this is not defined improperly in your project settings.")
+    if (${comp} IN_LIST STM32CubeH7_FIND_COMPONENTS)
+        if (NOT DEFINED STM32H7_TARGET_DEVICE)
+            # If a target device component was passed, then save this information for later.
+            set(STM32H7_TARGET_DEVICE ${comp})
+        else ()
+            # More than one device was specified.
+            message(FATAL_ERROR
+                "Only one device can be specified. "
+                "The device `${STM32H7_TARGET_DEVICE}` has already been specified. "
+                "CMake detected that the device `${comp}` was also specified. ")
         endif ()
     endif ()
 
@@ -86,15 +92,22 @@ foreach (comp ${STM32H7_DEVICE_COMPONENTS})
     set(STM32H7_${comp}_HEADERS ${comp}.h)
 endforeach ()
 
+# Validate that STM32H7_TARGET_DEVICE was set and is valid
 if (NOT DEFINED STM32H7_TARGET_DEVICE)
-    set(CLEAN_TARGET_DEVICE_LIST "\n")
-    foreach (device ${STM32H7_DEVICE_COMPONENTS})
-        string(CONCAT CLEAN_TARGET_DEVICE_LIST ${CLEAN_TARGET_DEVICE_LIST} "   ${device}\n")
-    endforeach ()
-
-    message(FATAL_ERROR "No target device was specified as a component for the STM32CubeH7 package. "
+    message(FATAL_ERROR
+        "No target device was specified as a component for the STM32CubeH7 package. "
         "To resolve this, pass the target device name as a component to the STM32CubeH7 package. "
         "You may choose from the following valid options: ${CLEAN_TARGET_DEVICE_LIST}")
+elseif (NOT ${STM32H7_TARGET_DEVICE} IN_LIST STM32H7_DEVICE_COMPONENTS)
+    message(FATAL_ERROR
+        "'STM32H7_TARGET_DEVICE' has been set to '${STM32H7_TARGET_DEVICE}'. "
+        "This is not a valid option. "
+        "Please check to ensure this is not defined improperly in your project settings. "
+        "You may choose from the following valid options: ${CLEAN_TARGET_DEVICE_LIST}")
+endif ()
+
+if (NOT ${STM32H7_TARGET_DEVICE} IN_LIST STM32CubeH7_FIND_COMPONENTS)
+    list(APPEND STM32CubeH7_FIND_COMPONENTS ${STM32H7_TARGET_DEVICE})
 endif ()
 
 # Remove `startup` from components since it's not needed anymore. The above `foreach()` loop took care of it.

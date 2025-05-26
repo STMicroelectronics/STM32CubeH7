@@ -7,4 +7,4 @@ project(STM32CubeH7_CMake_Tests)
 include(dependencies.cmake)
 
 # Add relevant tests
-add_subdirectory(test_app_gcc)
+add_subdirectory(stm32h750b-dk-test-app-gcc)

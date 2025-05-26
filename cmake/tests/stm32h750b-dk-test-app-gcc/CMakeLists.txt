@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.31.6)
 set(CMAKE_EXECUTABLE_SUFFIX ".elf")
 
 project(
-    test_app_gcc
+    stm32h750b_dk_test_app_gcc
     LANGUAGES
         C
         ASM
@@ -19,7 +19,7 @@ find_package(
     REQUIRED
 )
 
-set(TARGET test_app_gcc)
+set(TARGET stm32h750b_dk_test_app_gcc)
 
 add_executable(${TARGET})
 
