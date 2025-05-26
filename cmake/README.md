@@ -21,6 +21,7 @@ FetchContent_Declare(
     stm32cubeh7
     GIT_REPOSITORY git@github.com:STMicroelectronics/STM32CubeH7.git
     GIT_TAG master
+    GIT_SUBMODULES_RECURSE
 )
 
 # Fetch and make the dependency available
@@ -30,7 +31,7 @@ FetchContent_MakeAvailable(stm32cubeh7)
 list(APPEND CMAKE_MODULE_PATH ${stm32cubeh7_SOURCE_DIR}/cmake)
 ```
 
-When processed, this will automatically clone the master branch of the STM32CubeH7 repository.
+When processed, this will automatically clone the master branch of the STM32CubeH7 repository and any submodules.
 
 ### Finding the Package
 
@@ -149,6 +150,7 @@ Currently, the following CMake presets are defined:
 ### Running the Tests
 
 1. Download the required toolchains by running this command from the `cmake/tests/scripts` directory:
+
 ```cmake
 cmake -P download_toolchains.cmake
 ```
@@ -161,5 +163,13 @@ This will download toolchains into `cmake/tests/scripts/.cmake`.
 cmake --preset stm32h7-gcc
 cmake --build --preset gcc-debug
 ```
+
+The will generate an `.elf` file that can be programmed into the STM32H750B-DK board. The program will blink the RED
+and GREEN LEDs.
+
+Programming the `.elf` file is outside the scope of this test, since the main purpose of this test is to ensure CMake
+support is functioning as expected. However, if desired, the `.elf` file will be located in the directory
+`cmake/tests/cmake-build-debug/stm32h750b-dk-test-app-gcc`. Users are welcome to program their own STM32H750B-DK board
+using this file if they choose.
 
 More tests and presets will be added in the future as development continues.

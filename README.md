@@ -34,6 +34,8 @@ Details about the content of this release are available in the release note [her
 
 ## How to use
 
+### Manual
+
 This repository has been created using the `git submodule` command. Please check the instructions below for proper use. Please check also **the notes at the end of this section** for further information.
 
 1. To **clone** this repository along with the linked submodules, option `--recursive` has to be specified as shown below.
@@ -65,6 +67,13 @@ git clone --recursive  --depth 1 --branch vX.Y.Z https://github.com/STMicroelect
 > * The latest version of this firmware available on GitHub may be **ahead** of the one available on [st.com](https://www.st.com/en/microcontrollers-microprocessors/stm32-32-bit-arm-cortex-mcus.html) or via [STM32CubeMX](https://www.st.com/en/development-tools/stm32cubemx.html). This is due to the **rolling release** process deployed on GitHub. Please refer to [this](https://github.com/STMicroelectronics/STM32Cube_MCU_Overall_Offer/discussions/21) post for more details.
 > * Option `--depth 1` specified in instruction (4) above is **not** mandatory. It may be useful to skip downloading all previous commits up to the one corresponding to the targeted version.
 > * If GitHub "Download ZIP" option is used instead of the `git clone` command, then the different submodules have to be collected and added **manually**.
+
+### CMake
+
+CMake support has been added. 
+
+To learn more about how to use this package with a CMake based consuming project,
+please refer to [cmake/README.md](cmake/README.md).
 
 ## Boards available
 
