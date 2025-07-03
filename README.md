@@ -26,7 +26,7 @@ The **STM32CubeH7 MCU Package** projects are directly running on the STM32H7 ser
 > * `./Middlewares/ST/STemWin`
 > * `./Middlewares/ST/TouchGFX`
 > 
-> If needed, they can be found inside the full firmware package available on our website `st.com` and downloadable from [here](https://www.st.com/content/st_com/en/products/embedded-software/mcu-mpu-embedded-software/stm32-embedded-software/stm32cube-mcu-mpu-packages/stm32cubeh7.html#get-software). You will be prompted to login or to register in case you have no account.
+> If needed, they can be found inside the full firmware package available on our website `st.com` and downloadable from [here](https://www.st.com/en/embedded-software/stm32cubeh7.html#get-software). You will be prompted to login or to register in case you have no account.
 
 ## Release note
 
