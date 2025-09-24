@@ -380,11 +380,11 @@ void HAL_ETH_MspInit(ETH_HandleTypeDef *heth)
   /* Ethernett MSP init: RMII Mode
 
   RX_CLK  --------------> PA1
-  TXD0    --------------> PB12
-  TXD1    --------------> PB13
+  TXD0    --------------> PG13
+  TXD1    --------------> PG12
   RXD0    --------------> PC4
   RXD1    --------------> PC5
-  TX_EN   --------------> PB11
+  TX_EN   --------------> PG11
   RX_DV   --------------> PA7
 
   MDC     --------------> PC1
