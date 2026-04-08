@@ -292,7 +292,7 @@ int main(void)
     /* -20- Set LED1 Off and enter Stop mode */
     BSP_LED_Off(LED1);
 
-    /* Enter the system in STOP mdoe */
+    /* Enter the system in STOP mode */
     HAL_PWR_EnterSTOPMode(PWR_MAINREGULATOR_ON, PWR_STOPENTRY_WFI);
 
     /* -21- Check the results after wake-up */
